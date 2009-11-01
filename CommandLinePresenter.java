@@ -52,7 +52,7 @@ public class CommandLinePresenter
                 new SentenceUnit("", "", -1));
         String displayName = sentence.getDisplayName();
 
-        view.setText(displayName);
+        view.setText(displayName+" ");
     }
 
     public Sentence getSentence() {

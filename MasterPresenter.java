@@ -24,8 +24,6 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.ListenerWrapper;
-import com.google.gwt.user.client.ui.LoadListener;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.event.dom.client.LoadEvent;
 import com.google.gwt.event.dom.client.LoadHandler;

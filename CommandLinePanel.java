@@ -11,6 +11,7 @@ public class CommandLinePanel extends Label {
         DOM.setStyleAttribute(
                 this.getElement(), "color",
                 "Blue");
+        this.setText(" ");
     }
 	
 }
