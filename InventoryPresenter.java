@@ -1,0 +1,63 @@
+package com.github.a2g.core;
+
+
+import java.util.TreeMap;
+
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.event.shared.EventBus;
+
+
+public class InventoryPresenter {
+
+    private Inventory theInventory;
+    private InventoryPanel view;
+    EventBus eventBus;
+    IAmHostingTheMasterPanel parent;
+    private TreeMap<Integer, InventoryItem> theInventoryItemMap;
+	  
+    public InventoryPresenter(final AcceptsOneWidget panel, EventBus bus, IAmHostingTheMasterPanel parent) {
+        this.eventBus = bus;
+        this.parent = parent;
+        this.theInventory = new Inventory();
+        this.view = new InventoryPanel();
+        panel.setWidget(view);
+        this.theInventoryItemMap = new TreeMap<Integer, InventoryItem>();
+    }
+
+    public Inventory getInventory() {
+        return theInventory;
+    }
+
+    public boolean addInventory(String objectKeyword, int objectCode, com.google.gwt.user.client.ui.Image image) {
+        boolean isCarrying = parent.getValue(
+                "CARRYING_"
+                        + objectKeyword.toUpperCase())
+                                > 0;
+
+        InventoryItem item = new InventoryItem(
+                this.eventBus, objectKeyword,
+                image, objectCode, isCarrying);
+
+        this.theInventoryItemMap.put(
+                objectCode, item);
+        this.theInventory.items().add(item);
+
+        return true;
+    } 
+	
+    public InventoryItem getInventoryItem(int i) {
+        InventoryItem inv = this.theInventoryItemMap.get(
+                i);
+
+        return inv;
+    }
+
+    public void updateInventory() {
+        this.view.updateInventory(
+                this.getInventory());
+    }
+
+    public void setVisible(boolean isVisible) {
+        view.setVisible(isVisible);
+    }
+}
