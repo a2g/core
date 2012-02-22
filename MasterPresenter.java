@@ -42,13 +42,13 @@ public class MasterPresenter
     private TreeMap<Integer, Animation> theAnimationMap;
   
     private EventBus bus;
-    private IAmHostingTheMasterPanel parent;
+    private IAmHostingTheMasterPresenter parent;
     private int noImagesAreGreaterThanThis;
     private Timer timer;
     private Room room;
     private MasterPanel masterPanel;
 
-    public MasterPresenter(final AcceptsOneWidget panel, EventBus bus, IAmHostingTheMasterPanel parent) {
+    public MasterPresenter(final AcceptsOneWidget panel, EventBus bus, IAmHostingTheMasterPresenter parent) {
         this.bus = bus;
         this.timer = null;
         this.parent = parent;

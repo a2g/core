@@ -5,7 +5,7 @@
 package com.github.a2g.core;
 
 
-public interface IAmHostingTheMasterPanel {
+public interface IAmHostingTheMasterPresenter {
 
     /**
      * Is there to persist state data at the time the state data change occurs.
