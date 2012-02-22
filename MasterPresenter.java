@@ -13,6 +13,7 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChoicesBaseAction;
 import com.github.a2g.core.authoredroom.IAmARoom;
 import com.github.a2g.core.authoredroom.IAmTheMainAPI;
+import com.github.a2g.core.authoredroom.Point;
 import com.github.a2g.core.authoredroom.RoomBase;
 import com.github.a2g.core.event.SaySpeechCallChoiceEvent;
 import com.github.a2g.core.event.SaySpeechCallChoiceEventHandler;
@@ -20,13 +21,9 @@ import com.github.a2g.core.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.mouse.InventoryItemMouseOverHandler;
 import com.github.a2g.core.mouse.RoomObjectMouseOverHandler;
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.event.shared.EventBus;
 
@@ -51,7 +48,7 @@ public class MasterPresenter
     private Room room;
     private MasterPanel masterPanel;
 
-    public MasterPresenter(/* final AcceptsOneWidget panel*/EventBus bus, IAmHostingTheMasterPanel parent) {
+    public MasterPresenter(final AcceptsOneWidget panel, EventBus bus, IAmHostingTheMasterPanel parent) {
         this.bus = bus;
         this.timer = null;
         this.parent = parent;
@@ -62,54 +59,26 @@ public class MasterPresenter
         bus.addHandler(
                 SaySpeechCallChoiceEvent.TYPE,
                 this);
-       
-        AbsolutePanel stackedGuiItems = new AbsolutePanel(); 
 
-        DOM.setStyleAttribute(
-                stackedGuiItems.getElement(),
-                "backgroundColor", "Black");
-        
-        SimplePanel hostForCommandLine = new SimplePanel();
-        SimplePanel hostForInventory = new SimplePanel();
-        SimplePanel hostForVerbs = new SimplePanel();
-        SimplePanel hostForRoom = new SimplePanel();
-        SimplePanel hostForChoices = new SimplePanel(); {
-
-            HorizontalPanel verbsAndInventory = new HorizontalPanel();
-
-            verbsAndInventory.add(hostForVerbs);
-            verbsAndInventory.add(
-                    hostForInventory);
-
-            VerticalPanel commandLineAndVerbsAndInventory = new VerticalPanel();
-
-            commandLineAndVerbsAndInventory.add(
-                    hostForCommandLine);
-            commandLineAndVerbsAndInventory.add(
-                    verbsAndInventory);
-            stackedGuiItems.add(
-                    commandLineAndVerbsAndInventory);
-        } {
-            stackedGuiItems.add(hostForChoices);
-        }
         
         this.masterPanel = new MasterPanel();
-        masterPanel.add(hostForRoom);
-        masterPanel.add(stackedGuiItems);
+        panel.setWidget(this.masterPanel);
+	
         
-        this.commandLinePresenter = new CommandLinePresenter(
-                hostForCommandLine, bus, this);
-        this.inventoryPresenter = new InventoryPresenter(
-                hostForInventory, bus, parent);
-        this.verbsPresenter = new VerbsPresenter(
-                hostForVerbs, bus, parent);
-        this.roomPresenter = new RoomPresenter(
-                hostForRoom, bus, parent);
 
         this.choicesPresenter = new ChoicesPresenter(
-                hostForChoices, bus, this);
+                masterPanel.getHostForChoices(), bus, this);
+        this.commandLinePresenter = new CommandLinePresenter(
+                masterPanel.getHostForCommandLine(), bus, this);
+        this.inventoryPresenter = new InventoryPresenter(
+                masterPanel.getHostForInventory(), bus, parent);
+        this.verbsPresenter = new VerbsPresenter(
+                masterPanel.getHostForVerbs(), bus, parent);
+        this.roomPresenter = new RoomPresenter(
+                masterPanel.getHostForRoom(), bus, parent);
+
         
-        roomPresenter.setWorldViewSize(
+        this.roomPresenter.setWorldViewSize(
                 roomPresenter.getWidth(),
                 roomPresenter.getHeight());
         
@@ -133,13 +102,14 @@ public class MasterPresenter
         this.room = new Room();
     }
 
-    public boolean addInventory(int numberPrefix, int x, int y, String objectKeyword, String animationKeyword, int objectCode, int objPlusAnimCode, ImageResource imageResource) {
+    @Override
+    public boolean addImageForAnInventoryItem(String objectTextualId, int objectCode, ImageResource imageResource) {
 
         if (this.callbacks == null) {
             return true;
         }
         InventoryItem item = this.inventoryPresenter.getInventory().items().at(
-                objectKeyword);
+                objectTextualId);
         boolean result = true;
 
         if (item == null) {
@@ -149,7 +119,7 @@ public class MasterPresenter
             image.addMouseMoveHandler(
                     new InventoryItemMouseOverHandler(
                             bus, this,
-                            objectKeyword,
+                            objectTextualId,
                             objectCode));
             image.addClickHandler(
                     new ImageMouseClickHandler(
@@ -157,37 +127,26 @@ public class MasterPresenter
                             this.roomPresenter.getView()));
             
             result = inventoryPresenter.addInventory(
-                    objectKeyword, objectCode,
+                    objectTextualId, objectCode,
                     image);
         }
         
         return result;
     } 
 
-    public boolean insertObjectsAndAnimation(int numberPrefix, int x, int y, String objectKeyword, String animationKeyword, int objectCode, int objPlusAnimCode, ImageResource imageResource) {
-        // RemoveAllImagesFromPanelGreaterThan(numberPrefix);
-        boolean result = addObjectsAndAnimation(
-                numberPrefix, x, y,
-                objectKeyword,
-                animationKeyword, objectCode,
-                objPlusAnimCode, imageResource);
-
-        // AddAllImagesToPanelGreaterThan(numberPrefix);
-        return result;
-    }
-
-    public boolean addObjectsAndAnimation(int numberPrefix, int x, int y, String objectKeyword, String animationKeyword, int objectCode, int objPlusAnimCode, ImageResource imageResource) {
+    @Override
+    public boolean addImageForARoomObject(int numberPrefix, int x, int y, String objectTextualId, String animationTextualId, int objectCode, int objPlusAnimCode, ImageResource imageResource) {
         if (this.callbacks == null) {
             return true;
         }
 
         // objects and animations
         RoomObject roomObject = this.room.objectCollection().at(
-                objectKeyword);
+                objectTextualId);
 
         if (roomObject == null) {
             roomObject = new RoomObject(
-                    objectKeyword,
+                    objectTextualId,
                     roomPresenter.getWidth(),
                     roomPresenter.getHeight());
             roomObject.setNumberPrefix(
@@ -199,9 +158,9 @@ public class MasterPresenter
             if (code == -1) {
                 Window.alert(
                         "Missing initial image for "
-                                + objectKeyword
+                                + objectTextualId
                                 + " "
-                                + animationKeyword);
+                                + animationTextualId);
                 return true;
             }
             ;
@@ -220,7 +179,7 @@ public class MasterPresenter
         if (animation == null) {
             // much simpler if not in the animation map. 
             animation = new Animation(
-                    animationKeyword,
+                    animationTextualId,
                     roomObject);
             this.theAnimationMap.put(
                     objPlusAnimCode, animation);
@@ -229,14 +188,14 @@ public class MasterPresenter
         } else // ... it already exists but isn't in the roomObjectList...
         {
             Animation animation2 = roomObject.animations().at(
-                    animationKeyword);
+                    animationTextualId);
 
             if (animation2 == null) {
 
                 animation.setRoomObject(
                         roomObject);
-                animation.setKeyword(
-                        animationKeyword);
+                animation.setTextualId(
+                        animationTextualId);
                 roomObject.animations().add(
                         animation);
                 // then update all properties that could have already been set on the anim
@@ -262,20 +221,19 @@ public class MasterPresenter
                 imageResource);
         Image imageAndPos = new Image(image,
                 this.roomPresenter.getView(),
-                x, y);
+                new Point(x, y));
 
         animation.getImageAndPosCollection().add(
                 imageAndPos);
         int before = getIndexOfFirstElementHigherThan(
                 numberPrefix);
 
-        imageAndPos.addImageToPanel(0, 0,
-                before);
+        imageAndPos.addImageToPanel( before );
 
         image.addMouseMoveHandler(
                 new RoomObjectMouseOverHandler(
                         bus, this,
-                        objectKeyword,
+                        objectTextualId,
                         roomObject.getObjectCode()));
         image.addClickHandler(
                 new ImageMouseClickHandler(bus,
@@ -330,7 +288,7 @@ public class MasterPresenter
         while (it.hasNext()) {
             RoomObject o = it.next();
 
-            if (o.getNumberPrefix()
+            if (o.getCodePrefix()
                     > numberPrefix) {
                 return numberOfImages;
             }
@@ -427,7 +385,7 @@ public class MasterPresenter
         InventoryItemCollection items = this.inventoryPresenter.getInventory().items();
 
         for (int i = 0; i < items.getCount(); i++) {
-            String name = items.at(i).getKeyword();
+            String name = items.at(i).getTextualId();
 
             int isCarrying = items.at(i).isVisible()
                     ? 1
@@ -533,7 +491,7 @@ public class MasterPresenter
                 actionChain);
     }
 		
-    @Override
+  
     public void saySpeechAndThenCallChoiceWithSpecifiedInteger(String speech, int place) {
         this.choicesPresenter.clear();
 		

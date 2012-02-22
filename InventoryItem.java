@@ -13,31 +13,31 @@ import com.google.gwt.user.client.ui.Image;
 public class InventoryItem {
 
     private final Image image;
-    private final String keyword;
+    private final String textualId;
     private String displayName;
     private boolean visible;
     private EventBus bus;
     private int code;
     
-    public InventoryItem(EventBus bus, final String keyword, final Image image, int code, boolean isVisible) {
+    public InventoryItem(EventBus bus, final String textualId, final Image image, int code, boolean isVisible) {
         assert(bus != null);
         this.code = code;
         this.image = image;
-        this.keyword = keyword;
+        this.textualId = textualId;
         this.visible = isVisible;
-        this.displayName = keyword;
+        this.displayName = textualId;
         this.bus = bus;
     }
 
-    public String getKeyword() {
-        return keyword;
+    public String getTextualId() {
+        return textualId;
     }
 
     public void setVisible(boolean visible) {	
         this.visible = visible;
         bus.fireEvent(
                 new PropertyChangeEvent(
-                        "CARRYING_" + keyword,
+                        "CARRYING_" + textualId,
                         code, visible ? 1 : 0));
     }
 

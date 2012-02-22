@@ -24,7 +24,7 @@ public class Sentence {
 
     void setVerb(SentenceUnit snc) {
         this.string = snc.getDisplayName(); 
-        int i = Integer.parseInt(snc.getKeyword());
+        int i = Integer.parseInt(snc.getTextualId());
 
         this.verbAsNumber = i;
     }
@@ -60,7 +60,7 @@ public class Sentence {
     }
 
     boolean isLookingForSecondObject() {
-        boolean isLookingForSecondObject = this.AAA.getKeyword().length() > 0;
+        boolean isLookingForSecondObject = this.AAA.getTextualId().length() > 0;
 
         return isLookingForSecondObject;
     }

@@ -8,12 +8,12 @@ package com.github.a2g.core;
 import com.github.a2g.core.authoredroom.RoomBase;
 
 
-public class FrameAndAnimationKeyword {
+public class FrameAndAnimation {
     private int currentFrame;
-    private String currentAnimationKeyword;
-    public FrameAndAnimationKeyword(String owner) {
+    private String currentAnimationTextualId;
+    public FrameAndAnimation(String owner) {
         this.currentFrame = 0;
-        this.currentAnimationKeyword = RoomBase.INITIAL;
+        this.currentAnimationTextualId = RoomBase.INITIAL;
     }
 
     public void setCurrentFrame(int frame) {
@@ -24,12 +24,12 @@ public class FrameAndAnimationKeyword {
         return currentFrame;
     }
 
-    public void setCurrentAnimationKeyword(String animationKeyword) {
-        this.currentAnimationKeyword = animationKeyword;
+    public void setCurrentAnimationTextualId(String animationTextualId) {
+        this.currentAnimationTextualId = animationTextualId;
     }
 
-    public String getCurrentAnimationKeyword() {
-        return this.currentAnimationKeyword;
+    public String getCurrentAnimationTextualId() {
+        return this.currentAnimationTextualId;
     }
 
 }

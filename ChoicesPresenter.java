@@ -23,7 +23,7 @@ public class ChoicesPresenter {
         this.api = api;
         this.theChoices = new Choices();
         this.view = new ChoicesPanel();
-        
+        panel.setWidget(view);
         this.choiceTalker = 0;
         
         this.api = api;

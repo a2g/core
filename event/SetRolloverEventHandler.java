@@ -9,6 +9,6 @@ import com.google.gwt.event.shared.EventHandler;
 
 
 public interface SetRolloverEventHandler extends EventHandler {
-    void onSetRollover(String displayName, String keyword, int code);
+    void onSetRollover(String displayName, String textualId, int code);
   
 }

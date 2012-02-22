@@ -34,7 +34,7 @@ public class PlayAnimationAction extends BaseAction {
         int duration = (this.anim.getLength()
                 + 1)
                         * (40 + this.delay);
-        String s = this.anim.getKeyword();
+        String s = this.anim.getTextualId();
 
         if (animsParent != null) {
             animsParent.setCurrentAnimation(s);

@@ -34,8 +34,8 @@ public class RoomObjectCollection {
                 new Comparator<RoomObject>() {
             @Override
             public int compare(RoomObject o1, RoomObject o2) {
-                return o1.getNumberPrefix()
-                        - o2.getNumberPrefix();
+                return o1.getCodePrefix()
+                        - o2.getCodePrefix();
             }
         });
 
@@ -43,15 +43,15 @@ public class RoomObjectCollection {
 
     }
 
-    public RoomObject at(String keyword) {
+    public RoomObject at(String textualId) {
         try {
-            return theMap.get(keyword);
+            return theMap.get(textualId);
         } catch (Exception e) {}
         return null;
     }
 
     public void add(RoomObject roomObject) {
-        theMap.put(roomObject.keyword(),
+        theMap.put(roomObject.textualId(),
                 roomObject);
     }
 

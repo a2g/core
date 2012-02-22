@@ -17,8 +17,8 @@ public class AnimationCollection {
         theMap = new TreeMap<String, Animation>();
     }
 
-    public Animation at(String keyword) {
-        String key = keyword.toUpperCase();
+    public Animation at(String textualId) {
+        String key = textualId.toUpperCase();
 
         if (theMap.containsKey(key)) {
             return theMap.get(key);
@@ -28,7 +28,7 @@ public class AnimationCollection {
 
     public void add(Animation animation) {
         theMap.put(
-                animation.getKeyword().toUpperCase(),
+                animation.getTextualId().toUpperCase(),
                 animation);
     }
 

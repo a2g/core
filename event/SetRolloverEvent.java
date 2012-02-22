@@ -12,24 +12,24 @@ public class SetRolloverEvent extends GwtEvent<SetRolloverEventHandler> {
     public static Type<SetRolloverEventHandler> TYPE = new Type<SetRolloverEventHandler>();
     // private final FriendSummaryDTO friend;
     private final String displayName;
-    private final String keyword;
+    private final String textualId;
     private final int code;
     
     public String getDisplayName() {
         return displayName;
     }
 
-    public String getKeyword() {
-        return keyword;
+    public String getTextualId() {
+        return textualId;
     }
 
     public int getCode() {
         return code;
     }
 
-    public SetRolloverEvent(String displayName, String keyword, int code) {
+    public SetRolloverEvent(String displayName, String textualId, int code) {
         this.displayName = displayName;
-        this.keyword = keyword;
+        this.textualId = textualId;
         this.code = code;
     }
 
@@ -41,6 +41,6 @@ public class SetRolloverEvent extends GwtEvent<SetRolloverEventHandler> {
     @Override
     protected void dispatch(SetRolloverEventHandler handler) {
         handler.onSetRollover(displayName,
-                keyword, code);
+                textualId, code);
     }
 }

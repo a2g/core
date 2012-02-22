@@ -9,7 +9,7 @@ import com.github.a2g.core.authoredroom.RoomBase;
 
 
 public class Animation {
-    private String keyword;
+    private String textualId;
     private com.github.a2g.core.ImageCollection imageAndPosCollection;
     private RoomObject parent;
     private boolean wasSetAsHomeAnimation;
@@ -17,9 +17,9 @@ public class Animation {
     private boolean wasSetAsCurrentAnimation;
     private RoomBase.Special specialAnimationThisWasSetTo;
 
-    public Animation(String keyword, RoomObject owningRoomObject) {
+    public Animation(String textualId, RoomObject owningRoomObject) {
         this.parent = owningRoomObject;
-        this.keyword = keyword;
+        this.textualId = textualId;
         imageAndPosCollection = new com.github.a2g.core.ImageCollection();
         wasSetAsHomeAnimation = false;
         wasSetAsTalkingAnimation = false;
@@ -31,16 +31,16 @@ public class Animation {
         return imageAndPosCollection;
     }
 
-    public String getKeyword() {
-        return keyword;
+    public String getTextualId() {
+        return textualId;
     }
 
     public RoomObject	getObject() {
         return parent;
     }
 
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
+    public void setTextualId(String textualId) {
+        this.textualId = textualId;
     }
 
     public com.github.a2g.core.ImageCollection getImageAndPosCollection() {
@@ -102,19 +102,19 @@ public class Animation {
         specialAnimationThisWasSetTo = special;
         if (parent != null) {
             parent.setSpecialAnimation(special,
-                    keyword);
+                    textualId);
         }
     }
 
     public void setAsCurrentAnimationAndSetFrame(int i) {
         parent.setCurrentFrame(i);
-        parent.setCurrentAnimation(keyword);
+        parent.setCurrentAnimation(textualId);
     }
 
     public void setAsCurrentAnimation() {
         this.wasSetAsCurrentAnimation = true;
         if (parent != null) {
-            parent.setCurrentAnimation(keyword);
+            parent.setCurrentAnimation(textualId);
         }
     }
 
@@ -122,7 +122,7 @@ public class Animation {
         this.wasSetAsTalkingAnimation = true;
         if (parent != null) {
             parent.setTalkingAnimation(
-                    this.keyword);
+                    this.textualId);
         }
     }
 
@@ -130,7 +130,7 @@ public class Animation {
         this.wasSetAsHomeAnimation = true;
         if (parent != null) {
             parent.setHomeAnimation(
-                    this.keyword);
+                    this.textualId);
         }
     }
 

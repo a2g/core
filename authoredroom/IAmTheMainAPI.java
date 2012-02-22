@@ -14,10 +14,10 @@ import com.github.a2g.core.RoomObject;
 import com.github.a2g.core.RoomPresenter;
 import com.github.a2g.core.VerbsPresenter;
 import com.github.a2g.core.action.BaseAction;
-import com.google.gwt.resources.client.ImageResource;
 
 
-public interface IAmTheMainAPI {
+public interface IAmTheMainAPI 
+extends IAmTheResourceAPI{
     // get by ID
     public RoomObject getObject(int code);
     public Animation getAnimation(int a);
@@ -38,11 +38,6 @@ public interface IAmTheMainAPI {
     // nearly a gui method
     public IAmARoom getCurrentRoom();
 
-    // resources
-    public boolean addInventory(int numberPrefix, int x, int y, String objectKeyword, String animationKeyword, int objectCode, int objPlusAnimCode, ImageResource imageResource);
-    public boolean insertObjectsAndAnimation(int numberPrefix, int x, int y, String objectKeyword, String animationKeyword, int objectCode, int objPlusAnimCode, ImageResource imageResource);
-    public boolean addObjectsAndAnimation(int numberPrefix, int x, int y, String objectKeyword, String animationKeyword, int objectCode, int objPlusAnimCode, ImageResource imageResource);
-
     // helpful for game
     public void switchToRoom(String room);
     public String getLastRoom();
@@ -51,6 +46,7 @@ public interface IAmTheMainAPI {
     public void setLastCommand(double x, double y, int v, String a, String b);
 
     // choice methods
-    public void saySpeechAndThenCallChoiceWithSpecifiedInteger(String speech, int place);
     public void executeChoiceOnCurrentRoom(int place);
 }
+
+

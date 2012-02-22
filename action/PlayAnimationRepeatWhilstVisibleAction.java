@@ -24,7 +24,7 @@ public class PlayAnimationRepeatWhilstVisibleAction extends BaseAction {
                 + 1)
                         * 40
                         * 10;
-        String s = this.anim.getKeyword();
+        String s = this.anim.getTextualId();
 
         this.anim.getObject().setCurrentAnimation(
                 s);

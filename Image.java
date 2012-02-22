@@ -5,6 +5,7 @@
 package com.github.a2g.core;
 
 
+import com.github.a2g.core.authoredroom.Point;
 import com.github.a2g.core.authoredroom.Rect;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -13,12 +14,10 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 public class Image {
     private final AbsolutePanel panel;
     private final com.google.gwt.user.client.ui.Image image;
-    private final int finalX;
-    private final int finalY;
+    private final Point offset;
 
-    public Image(final com.google.gwt.user.client.ui.Image image, AbsolutePanel panel, int finalX, int finalY) {
-        this.finalX = finalX;
-        this.finalY = finalY;
+    public Image(final com.google.gwt.user.client.ui.Image image, AbsolutePanel panel, Point offset) {
+        this.offset = offset;
 
         this.image = image;
         this.panel = panel;
@@ -26,13 +25,13 @@ public class Image {
         image.setVisible(false);
     }
 
-    public void addImageToPanel(int x, int y, int before) {
+    public void addImageToPanel(int before) {
         if (before == -1) {
-            panel.add(image, this.finalX,
-                    this.finalY);
+            panel.add(image, this.offset.getX(),
+            		this.offset.getY());
         } else {
-            panel.insert(image, this.finalX,
-                    this.finalY, before);
+            panel.insert(image, this.offset.getX(),
+            		this.offset.getY(), before);
         }
     }
 
@@ -40,31 +39,34 @@ public class Image {
         panel.remove(image);
     }
 
-    public void setXY(int x, int y) {
+    public void setTopLeft(Point topLeft) {
 
-        update(x, y);
+        update(topLeft);
     }
 
-    public void setVisible(boolean visible, int x, int y) {
+    public void setVisible(boolean visible, Point position) {
         image.setVisible(visible);
-        update(x, y);
+        update(position);
     }
 
     public Rect getBoundingRect() {
-        return new Rect(finalX, finalY,
+        return new Rect(this.offset.getX(),
+        		this.offset.getY(),
                 image.getWidth(),
                 image.getHeight());
     }
 
-    private void update(int x, int y) {
+    private void update(Point topLeft) {
         // if(image.getParent() != panel)
         // {
         // panel.add(image, x+this.finalX, y+this.finalY);
         // }
         panel.getElement().getStyle().setPosition(
                 Position.RELATIVE);
+        int x = this.offset.getX();
+        int y = this.offset.getY();
         panel.setWidgetPosition(image,
-                x + finalX, y + finalY);
+                x + topLeft.getX(), y + topLeft.getY());
     }
 
 }

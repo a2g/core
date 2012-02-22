@@ -34,10 +34,10 @@ public class SayAction extends BaseAction {
         this.object = api.getObject(this.objId);
 
         if (object != null) {
-            String talkingAnimKeyword = object.getTalkingAnimation();
+            String talkingAnimTextualId = object.getTalkingAnimation();
 
             anim = object.animations().at(
-                    talkingAnimKeyword);
+                    talkingAnimTextualId);
         }
 
     }
@@ -72,7 +72,7 @@ public class SayAction extends BaseAction {
         
         if (this.anim != null) {
             this.anim.getObject().setCurrentAnimation(
-                    this.anim.getKeyword());
+                    this.anim.getTextualId());
             this.anim.getObject().setVisible(
                     true);
         }

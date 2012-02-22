@@ -8,13 +8,13 @@ package com.github.a2g.core;
 public class SentenceUnit {
 
     private String displayName;
-    private String keyword;
-    private int number;
+    private String textualId;
+    private int code;
 
-    public SentenceUnit(String displayName, String keyword, int number) {
+    public SentenceUnit(String displayName, String textualId, int code) {
         this.displayName = displayName;
-        this.keyword = keyword;
-        this.number = number;
+        this.textualId = textualId;
+        this.code = code;
     }
 
     public int getLength() {
@@ -29,12 +29,12 @@ public class SentenceUnit {
             return new SentenceUnit(
                     this.displayName.substring(
                             i),
-                            this.keyword,
-                            this.number);
+                            this.textualId,
+                            this.code);
         }
         return  new SentenceUnit(
-                this.displayName, this.keyword,
-                this.number);
+                this.displayName, this.textualId,
+                this.code);
     	
     }
 
@@ -46,24 +46,24 @@ public class SentenceUnit {
             return new SentenceUnit(
                     this.displayName.substring(
                             0, i + 1),
-                            this.keyword,
-                            this.number);
+                            this.textualId,
+                            this.code);
         }
         return  new SentenceUnit(
-                this.displayName, this.keyword,
-                this.number);
+                this.displayName, this.textualId,
+                this.code);
     }
 
     public final String getDisplayName() {
         return this.displayName;
     }
 
-    public final String getKeyword() {
-        return this.keyword;
+    public final String getTextualId() {
+        return this.textualId;
     }
 
-    public final int getNumber() {
-        return this.number;
+    public final int getCode() {
+        return this.code;
     }
 }
 

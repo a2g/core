@@ -28,14 +28,14 @@ public class InventoryPresenter {
         return theInventory;
     }
 
-    public boolean addInventory(String objectKeyword, int objectCode, com.google.gwt.user.client.ui.Image image) {
+    public boolean addInventory(String objectTextualId, int objectCode, com.google.gwt.user.client.ui.Image image) {
         boolean isCarrying = parent.getValue(
                 "CARRYING_"
-                        + objectKeyword.toUpperCase())
+                        + objectTextualId.toUpperCase())
                                 > 0;
 
         InventoryItem item = new InventoryItem(
-                this.eventBus, objectKeyword,
+                this.eventBus, objectTextualId,
                 image, objectCode, isCarrying);
 
         this.theInventoryItemMap.put(

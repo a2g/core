@@ -84,8 +84,8 @@ public class CommandLinePresenter
                     a);
             api.setLastCommand(x, y,
                     getSentence().getVerbAsVerbEnumeration(),
-                    sentenceA.getKeyword(),
-                    sentenceB.getKeyword());
+                    sentenceA.getTextualId(),
+                    sentenceB.getTextualId());
         }
 
         clear();
@@ -119,11 +119,11 @@ public class CommandLinePresenter
     }
 
     @Override
-    public void onSetRollover(String displayName, String keyword, int code) {
+    public void onSetRollover(String displayName, String textualId, int code) {
         if (api.getChoicesGui().isInChoicesMode()) {
             return;
         }
-        model.setRollover(displayName, keyword,
+        model.setRollover(displayName, textualId,
                 code);
 
         updateImage();

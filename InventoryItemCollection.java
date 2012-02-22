@@ -18,15 +18,15 @@ public class InventoryItemCollection {
         theMap = new TreeMap<String, InventoryItem>();
     }
 
-    public InventoryItem at(String keyword) {
+    public InventoryItem at(String textualId) {
         try {
-            return theMap.get(keyword);
+            return theMap.get(textualId);
         } catch (Exception e) {}
         return null;
     }
 
     public void add(InventoryItem item) {
-        theMap.put(item.getKeyword(), item);
+        theMap.put(item.getTextualId(), item);
     }
 
     public InventoryItem at(int index) throws NoSuchElementException {

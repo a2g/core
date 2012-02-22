@@ -14,13 +14,13 @@ import com.github.a2g.core.event.SetRolloverEvent;
 public class VerbMouseOverHandler implements MouseMoveHandler {
     private final EventBus bus;
     ;
-    private final String keyword;
+    private final String textualId;
     private final int code;
     private final String displayName;
 
-    public VerbMouseOverHandler(EventBus bus, String displayName, String keyword, int code) {
+    public VerbMouseOverHandler(EventBus bus, String displayName, String textualId, int code) {
         this.bus = bus;
-        this.keyword = keyword;
+        this.textualId = textualId;
         this.code = code;
         this.displayName = displayName;
 
@@ -31,7 +31,7 @@ public class VerbMouseOverHandler implements MouseMoveHandler {
         bus.fireEvent(
                 new SetRolloverEvent(
                         displayName,
-                        this.keyword,
+                        this.textualId,
                         this.code));
     }
 }

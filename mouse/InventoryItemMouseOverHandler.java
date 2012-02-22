@@ -15,13 +15,13 @@ import com.github.a2g.core.event.SetRolloverEvent;
 
 public class InventoryItemMouseOverHandler implements MouseMoveHandler {
     private final EventBus bus;
-    private final String keyword;
+    private final String textualId;
     private final int code;
     private final IAmTheMainAPI api;
 
-    public InventoryItemMouseOverHandler(EventBus bus, IAmTheMainAPI api, String keyword, int code) {
+    public InventoryItemMouseOverHandler(EventBus bus, IAmTheMainAPI api, String textualId, int code) {
         this.bus = bus;
-        this.keyword = keyword;
+        this.textualId = textualId;
         this.code = code;
         this.api = api;
 
@@ -38,7 +38,7 @@ public class InventoryItemMouseOverHandler implements MouseMoveHandler {
         bus.fireEvent(
                 new SetRolloverEvent(
                         displayName,
-                        this.keyword,
+                        this.textualId,
                         this.code));
     }
 

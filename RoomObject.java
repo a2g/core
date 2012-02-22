@@ -20,10 +20,10 @@ public class RoomObject {
     private static final int MAX_INT = 2147483647;
     private String homeAnimation;
     private Map<RoomBase.Special, String> mapOfSpecialAnimations;
-    private final String keyword;
+    private final String textualId;
     private String displayName;
     private AnimationCollection animationCollection;
-    private FrameAndAnimationKeyword fak;
+    private FrameAndAnimation fak;
     private com.github.a2g.core.Image currentImage;
     private boolean visible;
     private double width;
@@ -36,13 +36,13 @@ public class RoomObject {
     private int objectCode;
     private ColorEnum talkingColor;
 
-    public RoomObject(String keyword, int width, int height) {
+    public RoomObject(String textualId, int width, int height) {
         this.currentImage = null;
-        this.keyword = keyword;
-        this.displayName = keyword;
+        this.textualId = textualId;
+        this.displayName = textualId;
         this.animationCollection = new AnimationCollection();
-        this.fak = new FrameAndAnimationKeyword(
-                this.keyword);
+        this.fak = new FrameAndAnimation(
+                this.textualId);
         this.visible = true;
         this.width = width;
         this.height = height;
@@ -61,12 +61,12 @@ public class RoomObject {
         this.numberPrefix = number;
     }
 
-    public int getNumberPrefix() {
+    public int getCodePrefix() {
         return this.numberPrefix;
     }
 
-    public String keyword() {
-        return this.keyword;
+    public String textualId() {
+        return this.textualId;
     }
 
     public AnimationCollection animations() {
@@ -91,7 +91,7 @@ public class RoomObject {
         }
 
         Animation anim = animations().at(
-                this.fak.getCurrentAnimationKeyword());
+                this.fak.getCurrentAnimationTextualId());
         // Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg( this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
 
         int i = this.fak.getCurrentFrame() + 1;
@@ -106,7 +106,7 @@ public class RoomObject {
 
     public void decrementFrameWithWraparound() {
         Animation anim = animations().at(
-                this.fak.getCurrentAnimationKeyword());
+                this.fak.getCurrentAnimationTextualId());
         // Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg( this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
 
         int i = this.fak.getCurrentFrame() - 1;
@@ -124,7 +124,7 @@ public class RoomObject {
     public void updateImage() {
         // 1. do this only when the this.currentImage != img
         Animation anim = this.animationCollection.at(
-                fak.getCurrentAnimationKeyword());
+                fak.getCurrentAnimationTextualId());
 
         if (anim != null) {
             if (fak.getCurrentFrame()
@@ -141,8 +141,7 @@ public class RoomObject {
                     && !current.equals(this)) {
                 if (this.currentImage != null) {
                     this.currentImage.setVisible(
-                            false, this.left,
-                            this.top);
+                            false, new Point(this.left,this.top));
                 }
                 this.currentImage = current;
             }
@@ -150,39 +149,39 @@ public class RoomObject {
         // 2, but do this always
         if (this.currentImage != null) {
             this.currentImage.setVisible(
-                    this.visible, this.left,
-                    this.top);
+                    this.visible, new Point(this.left,
+                    this.top));
         }
 
     }
 
-    public void playAnimation(String animationKeyword, int delay) {}
+    public void playAnimation(String animationTextualId, int delay) {}
     ;
-    public void playAnimation(String animationKeyword) {}
+    public void playAnimation(String animationTextualId) {}
     ;
-    public void playAnimationWithoutBlocking(String animationKeyword, int delay) {}
+    public void playAnimationWithoutBlocking(String animationTextualId, int delay) {}
     ;
-    public void playAnimationWithoutBlocking(String animationKeyword) {}
+    public void playAnimationWithoutBlocking(String animationTextualId) {}
     ;
-    public void playAnimationHoldLastFrame(String animationKeyword, int delay) {}
+    public void playAnimationHoldLastFrame(String animationTextualId, int delay) {}
     ;
-    public void playAnimationHoldLastFrame(String animationKeyword) {}
+    public void playAnimationHoldLastFrame(String animationTextualId) {}
     ;
-    public void playAnimationHoldLastFrameNonBlocking(String animationKeyword, int delay) {}
+    public void playAnimationHoldLastFrameNonBlocking(String animationTextualId, int delay) {}
     ;
-    public void playAnimationHoldLastFrameNonBlocking(String animationKeyword) {}
+    public void playAnimationHoldLastFrameNonBlocking(String animationTextualId) {}
     ;
-    public void playAnimationRepeatWhilstVisible(String animationKeyword, int delay) {}
+    public void playAnimationRepeatWhilstVisible(String animationTextualId, int delay) {}
     ;
-    public void playAnimationRepeatWhilstVisible(String animationKeyword) {}
+    public void playAnimationRepeatWhilstVisible(String animationTextualId) {}
     ;
-    public void playAnimationBackwards(String animationKeyword, int delay) {}
+    public void playAnimationBackwards(String animationTextualId, int delay) {}
     ;
-    public void playAnimationBackwards(String animationKeyword) {}
+    public void playAnimationBackwards(String animationTextualId) {}
     ;
-    public void playAnimationBackwardsHoldLastFrame(String animationKeyword, int delay) {}
+    public void playAnimationBackwardsHoldLastFrame(String animationTextualId, int delay) {}
     ;
-    public void playAnimationBackwardsHoldLastFrame(String animationKeyword) {}
+    public void playAnimationBackwardsHoldLastFrame(String animationTextualId) {}
     ;
 
     public void say(String s) {}
@@ -234,8 +233,7 @@ public class RoomObject {
         int isolatedX = abs - this.leftOffset;
 
         this.left = isolatedX;
-        this.currentImage.setXY(this.left,
-                this.top);
+        this.currentImage.setTopLeft(new Point(this.left,this.top));
     }
 
     public void setBaseMiddleY(double y) { 
@@ -246,8 +244,8 @@ public class RoomObject {
         int isolatedY = abs - this.topOffset;
 
         this.top = isolatedY;
-        this.currentImage.setXY(this.left,
-                this.top);
+        this.currentImage.setTopLeft(new Point(this.left,
+                this.top));
     }
 
     public double getBaseMiddleX() { 
@@ -293,12 +291,12 @@ public class RoomObject {
         this.topOffset = p.getY(); // maxBottom;
     }
 
-    Point getMiddleOfBaseAbsolute(String animKeyword) {
+    Point getMiddleOfBaseAbsolute(String animTextualId) {
         int minLeft = 1000;
         int maxRight = 0;
         int maxBottom = 0;
         Animation xanim = this.animationCollection.at(
-                animKeyword);
+                animTextualId);
 
         if (xanim != null) {
             for (int i = 0; i
@@ -327,9 +325,9 @@ public class RoomObject {
         return p;
     }
 
-    void setSpecialAnimation(Special type, String keyword) {
+    void setSpecialAnimation(Special type, String textualId) {
         this.mapOfSpecialAnimations.put(type,
-                keyword);
+                textualId);
     }
 
     public String getSpecialAnimation(Special type) {
@@ -337,9 +335,9 @@ public class RoomObject {
                 type);
     }
 
-    public void setTalkingAnimation(String keyword) {
+    public void setTalkingAnimation(String textualId) {
         this.mapOfSpecialAnimations.put(
-                Special.Talking, keyword);
+                Special.Talking, textualId);
     }
 
     public String getTalkingAnimation() {
@@ -354,14 +352,14 @@ public class RoomObject {
     }
 
     public String currentAnimation() {
-        String keyword = this.fak.getCurrentAnimationKeyword();
+        String textualId = this.fak.getCurrentAnimationTextualId();
 
-        return keyword;
+        return textualId;
     }
 
-    public void setCurrentAnimation(String keyword2) {
-        this.fak.setCurrentAnimationKeyword(
-                keyword2);
+    public void setCurrentAnimation(String textualId2) {
+        this.fak.setCurrentAnimationTextualId(
+                textualId2);
         updateImage();
     }
 
