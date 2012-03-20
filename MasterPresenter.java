@@ -24,18 +24,24 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.client.ui.ListenerWrapper;
+import com.google.gwt.user.client.ui.LoadListener;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.event.dom.client.LoadEvent;
+import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
 
 
 public class MasterPresenter  
-        implements IAmTheMainAPI, SaySpeechCallChoiceEventHandler {
+        implements IAmTheMainAPI, SaySpeechCallChoiceEventHandler, LoadHandler
+ {
     
     private CommandLinePresenter commandLinePresenter;
     private InventoryPresenter inventoryPresenter;
     private VerbsPresenter verbsPresenter;
     private RoomPresenter roomPresenter;
     private ChoicesPresenter choicesPresenter;
+    private LoadingPresenter loadingPresenter;
     
     private IAmARoom callbacks;
     private TreeMap<Integer, RoomObject> theObjectMap;
@@ -44,21 +50,26 @@ public class MasterPresenter
     private EventBus bus;
     private IAmHostingTheMasterPresenter parent;
     private int noImagesAreGreaterThanThis;
+    private int numberOfImagesToLoad;
+    private int numberOfLoadedImages;
     private Timer timer;
     private Room room;
     private MasterPanel masterPanel;
+    
 
     public MasterPresenter(final AcceptsOneWidget panel, EventBus bus, IAmHostingTheMasterPresenter parent) {
         this.bus = bus;
         this.timer = null;
         this.parent = parent;
         this.noImagesAreGreaterThanThis = 0;
+        this.numberOfLoadedImages = 0;
         this.theObjectMap = new TreeMap<Integer, RoomObject>();
         this.theAnimationMap = new TreeMap<Integer, Animation>();
      
         bus.addHandler(
                 SaySpeechCallChoiceEvent.TYPE,
                 this);
+        
 
         
         this.masterPanel = new MasterPanel();
@@ -76,11 +87,15 @@ public class MasterPresenter
                 masterPanel.getHostForVerbs(), bus, parent);
         this.roomPresenter = new RoomPresenter(
                 masterPanel.getHostForRoom(), bus, parent);
+        this.loadingPresenter =  new LoadingPresenter(
+        		masterPanel.getHostForLoading(), bus, this);
 
         
         this.roomPresenter.setWorldViewSize(
                 roomPresenter.getWidth(),
                 roomPresenter.getHeight());
+        
+        masterPanel.setLoadingActive();
         
     }
     
@@ -97,8 +112,8 @@ public class MasterPresenter
     public void initRoom() {
         this.theObjectMap.clear();
         this.theAnimationMap.clear();
-        noImagesAreGreaterThanThis = 0;
-
+        this.noImagesAreGreaterThanThis = 0;
+        this.numberOfLoadedImages = 0;
         this.room = new Room();
     }
 
@@ -216,12 +231,16 @@ public class MasterPresenter
             }
         }
 
+        this.numberOfImagesToLoad++;
         assert (imageResource != null);
         final com.google.gwt.user.client.ui.Image image = new com.google.gwt.user.client.ui.Image(
                 imageResource);
+        image.addLoadHandler(this);
+        
         Image imageAndPos = new Image(image,
                 this.roomPresenter.getView(),
                 new Point(x, y));
+       
 
         animation.getImageAndPosCollection().add(
                 imageAndPos);
@@ -367,6 +386,11 @@ public class MasterPresenter
         setCallbacks(roomCallbacks);
         initRoom();
         loadVitalResources();
+    }
+    
+    public void showEverythingThenEnterRoom()
+    {
+
         showEverything();
         prepareRoomForFocus();
         loadInventoryFromAPI();
@@ -374,7 +398,6 @@ public class MasterPresenter
                 false);
         startEveryFrameCallbacks();
         onEnterRoom();
-
     }
 
     public void loadInventoryFromAPI() {
@@ -536,5 +559,32 @@ public class MasterPresenter
     public Widget getPanel() {
         return masterPanel;
     }
+
+	@Override
+	public void onLoad(LoadEvent event) {
+		this.numberOfLoadedImages++;
+		
+		if(numberOfImagesToLoad == numberOfLoadedImages)
+		{
+			setGameActive();
+			showEverythingThenEnterRoom();
+		}
+		
+	}
+	
+	void setChoicesActive()
+	{
+		masterPanel.setChoicesActive();
+	}
+	
+	void setLoadingActive()
+	{
+		masterPanel.setLoadingActive();
+	}
+	
+	void setGameActive()
+	{
+		masterPanel.setGameActive();
+	}
 }
 

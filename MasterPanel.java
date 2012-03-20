@@ -14,6 +14,7 @@ public class MasterPanel extends VerticalPanel {
     SimplePanel hostForVerbs;
     SimplePanel hostForRoom;
     SimplePanel hostForChoices;
+    SimplePanel hostForLoading;
     
     MasterPanel() {
         
@@ -27,7 +28,12 @@ public class MasterPanel extends VerticalPanel {
         hostForInventory = new SimplePanel();
         hostForVerbs = new SimplePanel();
         hostForRoom = new SimplePanel();
-        hostForChoices = new SimplePanel(); 
+        hostForChoices = new SimplePanel();
+        hostForLoading = new LoadingPanel();
+        {
+        	stackedGuiItems.add(hostForLoading);
+            stackedGuiItems.add(hostForChoices);
+        }
         {
 
             HorizontalPanel verbsAndInventory = new HorizontalPanel();
@@ -45,9 +51,7 @@ public class MasterPanel extends VerticalPanel {
             stackedGuiItems.add(
                     commandLineAndVerbsAndInventory);
         } 
-        {
-            stackedGuiItems.add(hostForChoices);
-        }
+
         this.add(hostForRoom);
         this.add(stackedGuiItems);
     	
@@ -75,6 +79,29 @@ public class MasterPanel extends VerticalPanel {
 	public SimplePanel getHostForChoices() {
 		return hostForChoices;
 	}
-
+	
+	public SimplePanel getHostForLoading() {
+		return hostForLoading;
+	}
+	
+	void setChoicesActive()
+	{
+		hostForChoices.setVisible(true);
+		hostForLoading.setVisible(false);
+	}
+	
+	void setLoadingActive()
+	{
+		hostForChoices.setVisible(false);
+		hostForLoading.setVisible(true);
+	}
+	
+	void setGameActive()
+	{
+		hostForChoices.setVisible(false);
+		hostForLoading.setVisible(false);
+	
+	}
+	
 	
 }	
