@@ -155,37 +155,6 @@ public class RoomObject {
 
     }
 
-    public void playAnimation(String animationTextualId, int delay) {}
-    ;
-    public void playAnimation(String animationTextualId) {}
-    ;
-    public void playAnimationWithoutBlocking(String animationTextualId, int delay) {}
-    ;
-    public void playAnimationWithoutBlocking(String animationTextualId) {}
-    ;
-    public void playAnimationHoldLastFrame(String animationTextualId, int delay) {}
-    ;
-    public void playAnimationHoldLastFrame(String animationTextualId) {}
-    ;
-    public void playAnimationHoldLastFrameNonBlocking(String animationTextualId, int delay) {}
-    ;
-    public void playAnimationHoldLastFrameNonBlocking(String animationTextualId) {}
-    ;
-    public void playAnimationRepeatWhilstVisible(String animationTextualId, int delay) {}
-    ;
-    public void playAnimationRepeatWhilstVisible(String animationTextualId) {}
-    ;
-    public void playAnimationBackwards(String animationTextualId, int delay) {}
-    ;
-    public void playAnimationBackwards(String animationTextualId) {}
-    ;
-    public void playAnimationBackwardsHoldLastFrame(String animationTextualId, int delay) {}
-    ;
-    public void playAnimationBackwardsHoldLastFrame(String animationTextualId) {}
-    ;
-
-    public void say(String s) {}
-
     public void setTalkingAnimationDelay(int delay) {}
 
     public void walkTo(Point point) {
