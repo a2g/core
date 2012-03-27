@@ -4,7 +4,7 @@ package com.github.a2g.core;
 import com.github.a2g.core.mouse.ChoiceMouseClickHandler;
 import com.github.a2g.core.mouse.ChoiceMouseOutHandler;
 import com.github.a2g.core.mouse.ChoiceMouseOverHandler;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 

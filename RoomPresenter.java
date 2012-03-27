@@ -2,7 +2,7 @@ package com.github.a2g.core;
 
 
 import com.github.a2g.core.authoredroom.Point;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 

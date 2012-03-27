@@ -7,7 +7,7 @@ package com.github.a2g.core.mouse;
 
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.github.a2g.core.RoomObject;
 import com.github.a2g.core.authoredroom.IAmTheMainAPI;
 import com.github.a2g.core.event.SetRolloverEvent;

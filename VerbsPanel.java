@@ -7,7 +7,7 @@ package com.github.a2g.core;
 
 import com.github.a2g.core.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.mouse.VerbMouseOverHandler;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;

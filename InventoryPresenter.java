@@ -4,7 +4,7 @@ package com.github.a2g.core;
 import java.util.TreeMap;
 
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 
 
 public class InventoryPresenter {
