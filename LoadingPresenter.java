@@ -27,7 +27,7 @@ public class LoadingPresenter {
         this.total = 0;
     }
     
-    void setCurrent(int total)
+    void setCurrent(int current)
     {
     	this.current = current;
     	view.update(current,total);

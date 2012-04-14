@@ -561,7 +561,7 @@ public class MasterPresenter
 	@Override
 	public void onLoad(LoadEvent event) {
 		this.numberOfLoadedImages++;
-		
+		this.loadingPresenter.setCurrent(numberOfLoadedImages);
 		if(numberOfImagesToLoad == numberOfLoadedImages)
 		{
 			setGameActive();
