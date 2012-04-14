@@ -28,7 +28,7 @@ public class SentenceUnit {
         if (i != -1) {
             return new SentenceUnit(
                     this.displayName.substring(
-                            i),
+                            i+1),
                             this.textualId,
                             this.code);
         }
@@ -45,7 +45,7 @@ public class SentenceUnit {
         if (i != -1) {
             return new SentenceUnit(
                     this.displayName.substring(
-                            0, i + 1),
+                            0, i),
                             this.textualId,
                             this.code);
         }
