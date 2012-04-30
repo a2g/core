@@ -27,15 +27,17 @@ public class LoadingPresenter {
         this.total = 0;
     }
     
-    void setCurrent(int current)
+    void incrementProgress()
     {
-    	this.current = current;
-    	view.update(current,total);
+    	current = current +1;
+    	view.update(current, total);
     }
 
     void setTotal(int total)
     {
     	this.total = total;
-    	view.update(current,total);
+    	this.current = 0;
+    	view.update(current, total);
     }
+
 }

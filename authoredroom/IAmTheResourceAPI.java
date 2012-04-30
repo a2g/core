@@ -4,6 +4,7 @@
  */
 package com.github.a2g.core.authoredroom;
 
+import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.resources.client.ImageResource;
 
 
@@ -182,7 +183,7 @@ public interface IAmTheResourceAPI {
 
 	@return true on success, otherwise false.
      */
-    public boolean addImageForAnInventoryItem(String textualIdForInventory, int codeForInventory, ImageResource imageResource);
+    public boolean addImageForAnInventoryItem(LoadHandler lh, String textualIdForInventory, int codeForInventory, ImageResource imageResource);
     
     /*!
 	If the same textualIds have already been used in a previous call to this method method, then the ImageResource is added to the
@@ -198,7 +199,7 @@ public interface IAmTheResourceAPI {
 
 	@return true on success, otherwise false.
      */
-    public boolean addImageForARoomObject(int numberPrefix, int x, int y, String textualIdForObject, String textualIdForAnimation, int codeForObject, int codeForAnimation, ImageResource imageResource);
+    public boolean addImageForARoomObject(LoadHandler lh, int numberPrefix, int x, int y, String textualIdForObject, String textualIdForAnimation, int codeForObject, int codeForAnimation, ImageResource imageResource);
     
 };
 

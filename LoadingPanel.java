@@ -9,6 +9,9 @@ public class LoadingPanel extends SimplePanel {
     LoadingPanel() {
 
         progress = new Label();
+        DOM.setStyleAttribute(
+                progress.getElement(), "color",
+                "Red");
         progress.setText("Loading...");
         this.add(progress);
     }
@@ -17,3 +20,6 @@ public class LoadingPanel extends SimplePanel {
     	progress.setText(" "+current+"/"+total);
     }
 }
+    
+    
+

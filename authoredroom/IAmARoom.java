@@ -9,10 +9,9 @@ import com.github.a2g.core.SentenceUnit;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChoicesBaseAction;
 
-
 public interface IAmARoom {
     public void onReceiveGameAPIObject(IAmTheMainAPI api);
-    public void onLoadResources();
+    public void onSpecifyResources(IAmTheLoaderAPI api);
     public void onPrepareRoomForFocus();
     public void onEveryFrame();
     public BaseAction onEnterRoom();

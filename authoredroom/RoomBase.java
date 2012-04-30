@@ -14,6 +14,9 @@ import com.github.a2g.core.SentenceUnit;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ICallbacksFromGameAction;
 import com.github.a2g.core.action.NullParentAction;
+import com.github.a2g.core.action.SetHomeAnimationAction;
+import com.github.a2g.core.loader.ILoadImageBundle;
+import com.github.a2g.core.loader.ImageBundleLoader;
 
 
 public class RoomBase extends NullParentAction implements ICallbacksFromGameAction {
@@ -181,4 +184,5 @@ public class RoomBase extends NullParentAction implements ICallbacksFromGameActi
         getApi().getChoicesGui().setChoiceTalker(
                 objid);
     }
+  
 }
