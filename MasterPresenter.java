@@ -23,6 +23,7 @@ import com.github.a2g.core.action.ChoicesBaseAction;
 import com.github.a2g.core.authoredroom.IAmARoom;
 import com.github.a2g.core.authoredroom.IAmTheLoaderAPI;
 import com.github.a2g.core.authoredroom.IAmTheMainAPI;
+import com.github.a2g.core.authoredroom.LoaderAPI;
 import com.github.a2g.core.authoredroom.Point;
 import com.github.a2g.core.authoredroom.RoomBase;
 import com.github.a2g.core.event.SaySpeechCallChoiceEvent;
@@ -421,8 +422,8 @@ SaySpeechCallChoiceEventHandler
 	public void showEverythingThenEnterRoom()
 	{
 
-		showEverything();
 		prepareRoomForFocus();
+		showEverything();
 		loadInventoryFromAPI();
 		this.choicesPresenter.setInChoicesMode(
 				false);
@@ -653,12 +654,12 @@ SaySpeechCallChoiceEventHandler
 	public void loadVitalResources() 
 	{
 
-		this.callbacks.onSpecifyResources(this);
+		this.callbacks.onSpecifyResourcesAndKickStart(new LoaderAPI(this));
 		// now we wait onLoadresources to call do it.
 	}
 
 	@Override
-	public void doIt() 
+	public void kickStartLoading() 
 	{
 		Collections.sort(mapOfNonEssentialLoaders);
 		Collections.sort(mapOfEssentialLoaders);
@@ -757,5 +758,13 @@ SaySpeechCallChoiceEventHandler
 		this.roomPresenter.setWorldViewSize(width, height);
 		
 	}
-}
+};
+
+
+class LoadKickStarter
+{
+	LoadKickStarter() {
+	}
+
+};
 
