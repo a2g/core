@@ -202,6 +202,10 @@ public class RoomObject {
         int isolatedX = abs - this.leftOffset;
 
         this.left = isolatedX;
+        if(currentImage==null)
+        {
+        	updateImage();
+        }
         this.currentImage.setTopLeft(new Point(this.left,this.top));
     }
 
