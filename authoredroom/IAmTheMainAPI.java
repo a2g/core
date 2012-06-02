@@ -47,6 +47,7 @@ extends IAmTheResourceAPI{
 
     // choice methods
     public void executeChoiceOnCurrentRoom(int place);
+	public int getPopupDelay();
  
 }
 

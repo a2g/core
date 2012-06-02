@@ -121,8 +121,7 @@ public class Animation {
     public void setAsTalkingAnimation() {
         this.wasSetAsTalkingAnimation = true;
         if (parent != null) {
-            parent.setTalkingAnimation(
-                    this.textualId);
+            parent.setTalkingAnimation( this.textualId);
         }
     }
 

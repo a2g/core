@@ -19,7 +19,7 @@ import com.github.a2g.core.loader.ILoadImageBundle;
 import com.github.a2g.core.loader.ImageBundleLoader;
 
 
-public class RoomBase extends NullParentAction implements ICallbacksFromGameAction {
+public class RoomBase extends NullParentAction  {
     public static final int MAX_OBJS = 32; // if you want a large range of consecutive odd numbers that produce unique products, then the lower bound of that range odd number needs to be sufficiently high
     public static final int STARTING_ODD = 1787;
 
@@ -57,14 +57,9 @@ public class RoomBase extends NullParentAction implements ICallbacksFromGameActi
         North, East, South, West, Talking
     }
 
-    private ArrayList<BaseAction> list;
-    private ArrayList<BaseAction> parallelActionsToWaitFor;
-    private int numberOfParallelActionsToWaitFor;
-
+  
     public RoomBase() {
-        list = new ArrayList<BaseAction>();
-        parallelActionsToWaitFor = new ArrayList<BaseAction>();
-        numberOfParallelActionsToWaitFor = 0;
+   
     }
 
     public RoomObject getObject(int code) {
@@ -88,69 +83,6 @@ public class RoomBase extends NullParentAction implements ICallbacksFromGameActi
         return toReturn;
     }
 
-    void executeParallelActions() {
-        this.numberOfParallelActionsToWaitFor = this.parallelActionsToWaitFor.size();
-        for (int i = 0; i
-                < this.parallelActionsToWaitFor.size(); i++) {
-            BaseAction a = this.parallelActionsToWaitFor.get(
-                    i);
-
-            a.setCallbacks(this);
-            a.runGameAction();
-        }
-    }
-
-    void processNextListOfParallelActions() {
-        this.parallelActionsToWaitFor.clear();
-        if (!this.list.isEmpty()) {
-            // add next batch of contigous parallel actions
-            while (!this.list.isEmpty()
-                    && this.list.get(0).isParallel()) {
-                BaseAction theAction = this.list.get(
-                        0);
-
-                this.list.remove(0);
-                this.parallelActionsToWaitFor.add(
-                        theAction);
-            }
-
-            // if there was no parallel actions then add the non parallel one 
-            if (this.parallelActionsToWaitFor.isEmpty()) {
-                BaseAction theAction = this.list.get(
-                        0);
-
-                this.list.remove(0);
-                this.parallelActionsToWaitFor.add(
-                        theAction);
-            }
-
-            // execute them	
-            executeParallelActions();
-        }
-    }
-
-    public int execute(BaseAction grandChildOfActionChain) {
-        this.list = new ArrayList<BaseAction>();
-        BaseAction a = grandChildOfActionChain;
-
-        while (a.getParent() != null) {
-            this.list.add(0, a);
-            a = a.getParent();
-        }
-
-        processNextListOfParallelActions();
-
-        return 0;
-    }
-
-    @Override
-    public void onGameActionComplete(BaseAction a) {
-        this.numberOfParallelActionsToWaitFor--;
-        if (this.numberOfParallelActionsToWaitFor
-                == 0) {
-            processNextListOfParallelActions();
-        }
-    }
 
     public SentenceUnit codify(int a) {
         return new SentenceUnit("blah", "blah",

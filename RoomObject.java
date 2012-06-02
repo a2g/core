@@ -35,6 +35,7 @@ public class RoomObject {
     private int numberPrefix;
     private int objectCode;
     private ColorEnum talkingColor;
+    private int talkingAnimationDelay;
 
     public RoomObject(String textualId, int width, int height) {
         this.currentImage = null;
@@ -51,6 +52,7 @@ public class RoomObject {
         this.mapOfSpecialAnimations = new TreeMap<Special, String>();
         this.numberPrefix = 0;
         this.homeAnimation = RoomBase.INITIAL;
+        this.talkingAnimationDelay = 0;
        
         // talkingColro deliberately null, so the 
         // default color can be in one spot: the sayaction 
@@ -155,7 +157,15 @@ public class RoomObject {
 
     }
 
-    public void setTalkingAnimationDelay(int delay) {}
+    public void setTalkingAnimationDelay(int delay) 
+    {
+    	this.talkingAnimationDelay = delay;
+    }
+    
+    public int getTalkingAnimationDelay() 
+    {
+    	return this.talkingAnimationDelay;
+    }
 
     public void walkTo(Point point) {
         walkTo(point.getX(), point.getY());
@@ -307,10 +317,9 @@ public class RoomObject {
         return this.mapOfSpecialAnimations.get(
                 type);
     }
-
-    public void setTalkingAnimation(String textualId) {
-        this.mapOfSpecialAnimations.put(
-                Special.Talking, textualId);
+    public void setTalkingAnimation(String talkingAnimation)
+    {
+    	this.mapOfSpecialAnimations.put(Special.Talking, talkingAnimation);
     }
 
     public String getTalkingAnimation() {
@@ -336,8 +345,7 @@ public class RoomObject {
         updateImage();
     }
 
-    public void setTalkingAnimation(int harryTalkBound) {}
-
+    
     public String getHomeAnimation() {
         return homeAnimation;
     }

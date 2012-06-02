@@ -5,7 +5,9 @@
 package com.github.a2g.core.action;
 
 
+import com.github.a2g.core.Animation;
 import com.github.a2g.core.action.BaseAction;
+import com.resource._00_Animations.a;
 
 
 public class SetTalkingAnimationAction extends BaseAction {
@@ -18,6 +20,8 @@ public class SetTalkingAnimationAction extends BaseAction {
 
     @Override
     public void runGameAction() {
+    	Animation a = getApi().getAnimation(this.animId);
+    	a.setAsTalkingAnimation();
         super.run(1);
     }
 
@@ -26,7 +30,8 @@ public class SetTalkingAnimationAction extends BaseAction {
 
     @Override
     protected void onCompleteGameAction() {
-        getApi().getAnimation(this.animId).setAsTalkingAnimation();
+    	Animation a = getApi().getAnimation(this.animId);
+    	a.setAsTalkingAnimation();
     }
 
     @Override

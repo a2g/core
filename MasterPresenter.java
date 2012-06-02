@@ -15,6 +15,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 
+import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.loader.ICallbacksFromLoader;
 import com.github.a2g.core.loader.ILoadImageBundle;
@@ -71,6 +72,8 @@ SaySpeechCallChoiceEventHandler
 	private List<ImageBundleLoader> mapOfNonEssentialLoaders;
 	private int m_imagesYetToLoad;
 	private boolean isOkToWaitForImages;
+	private ActionRunner actionRunner;
+	private int textSpeedDelay;
 
 	private Logger logger = Logger.getLogger("com.mycompany.level");
 
@@ -81,11 +84,13 @@ SaySpeechCallChoiceEventHandler
 		this.isOkToWaitForImages = true;
 		this.noImagesAreGreaterThanThis = 0;
 		this.numberOfLoadedImages = 0;
+		this.textSpeedDelay = 10;
 		this.theObjectMap = new TreeMap<Integer, RoomObject>();
 		this.theAnimationMap = new TreeMap<Integer, Animation>();
 		this.mapOfEssentialLoaders = new LinkedList<ImageBundleLoader>();
 		this.mapOfNonEssentialLoaders = new LinkedList <ImageBundleLoader>();
 		this.m_imagesYetToLoad = 0;
+		this.actionRunner = new ActionRunner();
 
 		bus.addHandler(
 				SaySpeechCallChoiceEvent.TYPE,
@@ -371,11 +376,26 @@ SaySpeechCallChoiceEventHandler
 	}
 
 	public void executeActionBaseOrChoiceActionBaseAndProcessReturnedInteger(BaseAction a) {
-		RoomBase b = new RoomBase();
-		int result = b.execute(a);
-
+		int result = actionRunner.runAction(a);
+		
 		result++;
 	}
+	
+	public void skip()
+	{
+		actionRunner.skip();
+	}
+	
+	public void decrementTextSpeed()
+	{
+		textSpeedDelay++;
+	}
+	
+	public void incrementTextSpeed()
+	{
+		textSpeedDelay--;
+	}
+	
 
 	public void showEverything() {
 		for (int i = 0; i
@@ -758,13 +778,10 @@ SaySpeechCallChoiceEventHandler
 		this.roomPresenter.setWorldViewSize(width, height);
 		
 	}
-};
 
-
-class LoadKickStarter
-{
-	LoadKickStarter() {
+	@Override
+	public int getPopupDelay() {
+		return textSpeedDelay;
 	}
-
 };
 
