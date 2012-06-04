@@ -9,7 +9,7 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.authoredroom.IAmTheMainAPI;
 
 
-public class NullParentAction extends BaseAction {
+public class NullParentAction extends ChoicesBaseAction {
     public NullParentAction() {
         super(null, null);
     }

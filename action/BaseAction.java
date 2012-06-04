@@ -73,7 +73,7 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
         return a.subroutine(b);
     }
 
-    public BaseAction doNothing() {
+    public ChoicesBaseAction doNothing() {
         return new NullParentAction();
     }
 
