@@ -127,7 +127,21 @@ public class RoomObject {
         // 1. do this only when the this.currentImage != img
         Animation anim = this.animationCollection.at(
                 fak.getCurrentAnimationTextualId());
-
+        
+        // if animation is set to something bad, then set it to back to initial
+        if(anim==null)
+        {
+        	fak.setCurrentAnimationTextualId(RoomBase.INITIAL);
+        	anim = this.animationCollection.at(
+                    fak.getCurrentAnimationTextualId());
+        }
+        
+        if(anim==null)
+        {
+        	anim = this.animationCollection.at(0);
+        	fak.setCurrentAnimationTextualId(anim.getTextualId());
+        }
+        
         if (anim != null) {
             if (fak.getCurrentFrame()
                     >= anim.getLength()) {

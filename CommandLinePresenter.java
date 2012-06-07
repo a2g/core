@@ -76,6 +76,11 @@ public class CommandLinePresenter
             int verbAsCode = model.getSentence().getVerbAsCode();
             SentenceUnit sentenceA = model.getSentence().getAAA();
             SentenceUnit sentenceB = model.getSentence().getBBB();
+            // clamp the mouse pointer to within the viewport coords
+            if(x>1.0) x=1.0;
+            if(x<0.0) x=0.0;
+            if(y>1.0) y=1.0;
+            if(y<0.0) y=0.0;
             BaseAction a = this.callbacks.onCommandLineExecute(
                     verbAsCode, sentenceA,
                     sentenceB, x, y);

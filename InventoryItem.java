@@ -42,7 +42,7 @@ public class InventoryItem {
     }
 
     public boolean isVisible() {
-        return visible;
+        return true;//visible;
     }
 
     public final Image getImage() {

@@ -18,6 +18,8 @@ public class AnimationCollection {
     }
 
     public Animation at(String textualId) {
+    	if(textualId==null)
+    		return null;
         String key = textualId.toUpperCase();
 
         if (theMap.containsKey(key)) {

@@ -143,8 +143,20 @@ SaySpeechCallChoiceEventHandler
 		this.room = new Room();
 	}
 
+	final com.google.gwt.user.client.ui.Image getImageFromResource(ImageResource imageResource, LoadHandler lh)
+	{
+		this.numberOfImagesToLoad++;
+		assert (imageResource != null);
+		final com.google.gwt.user.client.ui.Image image = new com.google.gwt.user.client.ui.Image(
+				imageResource);
+		if(lh!=null)
+		{
+			image.addLoadHandler(lh);
+		}
+		return image;
+	}
 	@Override
-	public boolean addImageForAnInventoryItem(final LoadHandler lh, String objectTextualId, int objectCode, ImageResource imageResource) {
+	public boolean addImageForAnInventoryItem(LoadHandler lh, String objectTextualId, int objectCode, ImageResource imageResource) {
 
 		if (this.callbacks == null) {
 			return true;
@@ -153,16 +165,8 @@ SaySpeechCallChoiceEventHandler
 				objectTextualId);
 		boolean result = true;
 
-		this.numberOfImagesToLoad++;
-		assert (imageResource != null);
-		final com.google.gwt.user.client.ui.Image image = new com.google.gwt.user.client.ui.Image(
-				imageResource);
-		if(lh!=null)
-		{
-			image.addLoadHandler(lh);	
-		}
-
-
+		com.google.gwt.user.client.ui.Image image = getImageFromResource(imageResource,lh);
+		//Image imageAndPos = new Image(image,this.roomPresenter.getView(),new Point(x, y));
 
 		if (item == null) {
 
@@ -179,6 +183,8 @@ SaySpeechCallChoiceEventHandler
 			result = inventoryPresenter.addInventory(
 					objectTextualId, objectCode,
 					image);
+			// I think this is the key to having the loadHandler called();
+			this.inventoryPresenter.updateInventory();
 		}
 
 		return result;
@@ -266,14 +272,8 @@ SaySpeechCallChoiceEventHandler
 			}
 		}
 
-		this.numberOfImagesToLoad++;
-		assert (imageResource != null);
-		final com.google.gwt.user.client.ui.Image image = new com.google.gwt.user.client.ui.Image(
-				imageResource);
-		if(lh!=null)
-		{
-			image.addLoadHandler(lh);
-		}
+		com.google.gwt.user.client.ui.Image image = getImageFromResource(imageResource,lh);
+
 
 		Image imageAndPos = new Image(image,
 				this.roomPresenter.getView(),
@@ -521,8 +521,12 @@ SaySpeechCallChoiceEventHandler
 		this.timer.scheduleRepeating(40);
 	}
 
-	public void cancelTimer() {
-		this.timer.cancel();
+	public void cancelTimer() 
+	{
+		if(this.timer!=null)
+		{
+			this.timer.cancel();
+		}
 
 	}
 
@@ -553,7 +557,7 @@ SaySpeechCallChoiceEventHandler
 
 	@Override
 	public IAmARoom getCurrentRoom() {
-		return this.getCurrentRoom();
+		return this.callbacks;
 	}
 
 	@Override
