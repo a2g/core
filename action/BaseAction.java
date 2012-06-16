@@ -24,12 +24,12 @@ import com.github.a2g.core.action.SetVisibleAction;
 import com.github.a2g.core.action.SleepAction;
 import com.github.a2g.core.action.SwapPropertyAction;
 import com.github.a2g.core.action.SwitchToAction;
-import com.github.a2g.core.action.ChoiceDisplayAction;
-import com.github.a2g.core.action.ChoiceEndAction;
-import com.github.a2g.core.action.ChoiceGoToAction;
+import com.github.a2g.core.action.DialogTreeDisplayAction;
+import com.github.a2g.core.action.DialogTreeEndAction;
+import com.github.a2g.core.action.DialogTreeGoToAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
-import com.github.a2g.core.action.ChoicesBaseAction;
+import com.github.a2g.core.action.DialogTreeBaseAction;
 import com.github.a2g.core.authoredroom.IAmTheMainAPI;
 import com.github.a2g.core.authoredroom.PointF;
 
@@ -64,8 +64,8 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
     }
     ;
 
-    public ChoicesBaseAction choice(int place, String text) {
-        return new ChoiceDisplayAction(this,
+    public DialogTreeBaseAction choice(int place, String text) {
+        return new DialogTreeDisplayAction(this,
                 text, place);
     }
 
@@ -73,12 +73,12 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
         return a.subroutine(b);
     }
 
-    public ChoicesBaseAction doNothing() {
+    public DialogTreeBaseAction doNothing() {
         return new NullParentAction();
     }
 
-    public ChoicesBaseAction endTalkie() {
-        return new ChoiceEndAction(this);
+    public DialogTreeBaseAction endTalkie() {
+        return new DialogTreeEndAction(this);
     }
 
     public IAmTheMainAPI getApi() {
@@ -89,8 +89,8 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
         return this.parent;
     }
 
-    public ChoicesBaseAction gotoChoice(int place) {
-        return new ChoiceGoToAction(this,
+    public DialogTreeBaseAction gotoChoice(int place) {
+        return new DialogTreeGoToAction(this,
                 place);
     }
 
@@ -365,7 +365,7 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
                 objId1, objId2, type);
     }
 
-    public ChoicesBaseAction  switchTo(String roomName) {
+    public DialogTreeBaseAction  switchTo(String roomName) {
         return new SwitchToAction(this,
                 roomName);
         // return toReturn;

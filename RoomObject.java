@@ -9,17 +9,18 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.github.a2g.core.authoredroom.ColorEnum;
+import com.github.a2g.core.authoredroom.IAmARoom;
 import com.github.a2g.core.authoredroom.Point;
 import com.github.a2g.core.authoredroom.PointF;
 import com.github.a2g.core.authoredroom.Rect;
-import com.github.a2g.core.authoredroom.RoomBase;
-import com.github.a2g.core.authoredroom.RoomBase.Special;
+
+import com.github.a2g.core.authoredroom.IAmARoom.Special;
 
 
 public class RoomObject {
     private static final int MAX_INT = 2147483647;
     private String homeAnimation;
-    private Map<RoomBase.Special, String> mapOfSpecialAnimations;
+    private Map<IAmARoom.Special, String> mapOfSpecialAnimations;
     private final String textualId;
     private String displayName;
     private AnimationCollection animationCollection;
@@ -51,7 +52,7 @@ public class RoomObject {
         this.topOffset = MAX_INT;
         this.mapOfSpecialAnimations = new TreeMap<Special, String>();
         this.numberPrefix = 0;
-        this.homeAnimation = RoomBase.INITIAL;
+        this.homeAnimation = IAmARoom.INITIAL;
         this.talkingAnimationDelay = 0;
        
         // talkingColro deliberately null, so the 
@@ -131,7 +132,7 @@ public class RoomObject {
         // if animation is set to something bad, then set it to back to initial
         if(anim==null)
         {
-        	fak.setCurrentAnimationTextualId(RoomBase.INITIAL);
+        	fak.setCurrentAnimationTextualId(IAmARoom.INITIAL);
         	anim = this.animationCollection.at(
                     fak.getCurrentAnimationTextualId());
         }
@@ -282,7 +283,7 @@ public class RoomObject {
 
     void calculateOffsets() {
         Point p = getMiddleOfBaseAbsolute(
-                RoomBase.INITIAL);
+                IAmARoom.INITIAL);
 
         this.leftOffset = p.getX(); // (minLeft +maxRight)/2, 
         this.topOffset = p.getY(); // maxBottom;

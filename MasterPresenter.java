@@ -17,16 +17,17 @@ import java.util.logging.Logger;
 
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.loader.ICallbacksFromLoader;
 import com.github.a2g.core.loader.ILoadImageBundle;
 import com.github.a2g.core.loader.ImageBundleLoader;
-import com.github.a2g.core.action.ChoicesBaseAction;
+import com.github.a2g.core.action.DialogTreeBaseAction;
 import com.github.a2g.core.authoredroom.IAmARoom;
 import com.github.a2g.core.authoredroom.IAmTheLoaderAPI;
 import com.github.a2g.core.authoredroom.IAmTheMainAPI;
 import com.github.a2g.core.authoredroom.LoaderAPI;
 import com.github.a2g.core.authoredroom.Point;
-import com.github.a2g.core.authoredroom.RoomBase;
+
 import com.github.a2g.core.event.SaySpeechCallChoiceEvent;
 import com.github.a2g.core.event.SaySpeechCallChoiceEventHandler;
 import com.github.a2g.core.mouse.ImageMouseClickHandler;
@@ -369,10 +370,11 @@ SaySpeechCallChoiceEventHandler
 	}
 
 	public void onEnterRoom() {
-		BaseAction a = this.callbacks.onEnterRoom();
+		NullParentAction npa = new NullParentAction();
+		npa.setApi(this);
+		BaseAction a = this.callbacks.onEntry(this,npa);
 
-		executeActionBaseOrChoiceActionBaseAndProcessReturnedInteger(
-				a);
+		executeActionBaseOrChoiceActionBaseAndProcessReturnedInteger(a);
 	}
 
 	public void executeActionBaseOrChoiceActionBaseAndProcessReturnedInteger(BaseAction a) {
@@ -405,9 +407,9 @@ SaySpeechCallChoiceEventHandler
 
 			if (roomObject != null) {
 				if (roomObject.animations().at(
-						RoomBase.INITIAL)
+						IAmARoom.INITIAL)
 						!= null) {
-					roomObject.animations().at(RoomBase.INITIAL).setAsCurrentAnimation();
+					roomObject.animations().at(IAmARoom.INITIAL).setAsCurrentAnimation();
 				} else {
 					boolean b = true;
 
@@ -422,20 +424,16 @@ SaySpeechCallChoiceEventHandler
 
 
 	public void prepareRoomForFocus() {
-		this.callbacks.onPrepareRoomForFocus();
+		this.callbacks.onPreEntry(this);
 	}	
 
 	public void doEveryFrame() {
-		this.callbacks.onEveryFrame();
+		this.callbacks.onEveryFrame(this);
 	}
 
 	public void setRoom(IAmARoom roomCallbacks) {
-		;
-		roomCallbacks.onReceiveGameAPIObject(
-				this);
 		setCallbacks(roomCallbacks);
 		initRoom();
-		;
 		loadVitalResources();
 	}
 
@@ -493,6 +491,7 @@ SaySpeechCallChoiceEventHandler
 	}
 
 	public void switchToRoom(String room) {
+		cancelTimer();
 		this.parent.instantiateRoomThenCreateNewMasterPanelInitializedToIt(
 				room);
 
@@ -562,8 +561,9 @@ SaySpeechCallChoiceEventHandler
 
 	@Override
 	public void executeChoiceOnCurrentRoom(int place) {
-		ChoicesBaseAction actionChain = this.callbacks.onChoice(
-				place);
+		NullParentAction npa = new NullParentAction();
+		npa.setApi(this);
+		DialogTreeBaseAction actionChain = this.callbacks.onDialogTree(this, npa, place);
 
 		executeActionBaseOrChoiceActionBaseAndProcessReturnedInteger(
 				actionChain);
@@ -576,18 +576,13 @@ SaySpeechCallChoiceEventHandler
 		// this code is dodgey because it doesn't use the current room to execute..
 		// it uses a dynamically created room to execute it. This seems ok, if it has the same api pointer.
 		int objId = getChoicesGui().getChoiceTalker();
-		ChoicesBaseAction actionChain = this.callbacks.onChoice(
-				place);
+		
+		NullParentAction npa = new NullParentAction();
+		npa.setApi(this);
+		BaseAction say = npa.say(objId, speech);
+		DialogTreeBaseAction actionChain = callbacks.onDialogTree(this, say, place);
 
-		RoomBase a = new RoomBase();
-
-		a.setApi(this);
-		BaseAction  executeMe = a.say(objId, speech).subroutine(
-				actionChain);
-
-		executeActionBaseOrChoiceActionBaseAndProcessReturnedInteger(
-				executeMe);
-
+		executeActionBaseOrChoiceActionBaseAndProcessReturnedInteger(actionChain);
 	}
 
 	@Override
@@ -678,7 +673,7 @@ SaySpeechCallChoiceEventHandler
 	public void loadVitalResources() 
 	{
 
-		this.callbacks.onSpecifyResourcesAndKickStart(new LoaderAPI(this));
+		this.callbacks.onSpecifyBundlesToLoad(new LoaderAPI(this));
 		// now we wait onLoadresources to call do it.
 	}
 

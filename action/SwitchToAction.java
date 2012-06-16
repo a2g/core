@@ -6,14 +6,14 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChoicesBaseAction;
+import com.github.a2g.core.action.DialogTreeBaseAction;
 
 
-/* ! This inherits from ChoicesBaseAction because it is valid to be used as 
+/* ! This inherits from DialogTreeBaseAction because it is valid to be used as 
  *  the last action in a chain that is returned from onChoice().
  *  You can use it in all places where you would use a GameAction
  */
-public class SwitchToAction extends ChoicesBaseAction {
+public class SwitchToAction extends DialogTreeBaseAction {
     private String room;
 
     public SwitchToAction(BaseAction parent, String e) {

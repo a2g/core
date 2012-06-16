@@ -4,8 +4,10 @@
  */
 package com.github.a2g.core;
 
+import com.github.a2g.core.authoredroom.IAmARoom;
 
-import com.github.a2g.core.authoredroom.RoomBase;
+
+
 
 
 public class FrameAndAnimation {
@@ -13,7 +15,7 @@ public class FrameAndAnimation {
     private String currentAnimationTextualId;
     public FrameAndAnimation(String owner) {
         this.currentFrame = 0;
-        this.currentAnimationTextualId = RoomBase.INITIAL;
+        this.currentAnimationTextualId = IAmARoom.INITIAL;
     }
 
     public void setCurrentFrame(int frame) {

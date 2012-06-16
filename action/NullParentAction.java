@@ -9,13 +9,13 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.authoredroom.IAmTheMainAPI;
 
 
-public class NullParentAction extends ChoicesBaseAction {
+public class NullParentAction extends DialogTreeBaseAction {
     public NullParentAction() {
         super(null, null);
     }
 
     public void setApi(IAmTheMainAPI api) {
-        super.setApi(api);
+        
     }
 
     @Override

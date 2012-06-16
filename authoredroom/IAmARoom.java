@@ -7,48 +7,63 @@ package com.github.a2g.core.authoredroom;
 
 import com.github.a2g.core.SentenceUnit;
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChoicesBaseAction;
+import com.github.a2g.core.action.DialogTreeBaseAction;
 import com.github.a2g.core.authoredroom.LoaderAPI.LoadKickStarter;
 
 public interface IAmARoom {
-  /**
-     * You don't need to implement this. This one is implemented for you by @ref RoomBase.
-     */
-    public void onReceiveGameAPIObject(IAmTheMainAPI api);
-  /**
-     * Is there to load resources. You're probably wondering why we don't just make it jso  
-     * this method just returns an array or list of resources. Or maybe you're thinking why it
-     * doesn't just allow the returning of a chained series of commands like in OnEnterRoom.
-     * The reason is because classes that implement this interface (ie Rooms) generally 
-     * benefit from @ref CodeSplitting. And any calls to methods on code-split classes will
-     * just return null and keep processing. And the code inside the method will get executed
-     * during a free cycle, and any return value will be be lost.
-     * So instead of all that, we provide all possibe commands you can call on the 
-     * IAmTheLoaderAPI interface, and we @a require the implementor to call to
-     * createLoadKickStarter when it's done. Pretty messy.	
-     */
-    public LoadKickStarter onSpecifyResourcesAndKickStart(LoaderAPI api);
-  /** Next up is our last chance to change things before the lights are turned on and
-     * everything is displayed. So here you should hide the things you don't want to be
-     * seen. And set the display names of all the objects.
-     */
-    public void onPrepareRoomForFocus();
-    /** This is called just after the lights go on, and then 25 times per second for the rest
-        * of the duration of the @ref Room. It is the place where you perform animation.  
-        */
-    public void onEveryFrame();
-    /** onEnterRoom is for the cut-scenes to be performed at the start of the scene.
-        * There isn't really a provision for cut scenes, in the middle of the scene. So
-        * this is as good as it gets.
-        */ 
-    public BaseAction onEnterRoom();
-    /** onCommandLineExecute is executed when the user constructs a @ref Sentence and 
-        * executes it.
-        */
-    public BaseAction onCommandLineExecute(int verb, SentenceUnit objA, SentenceUnit objB, double x, double y);  
-    /** In A2g, conversation trees are called @ref Choices. This method is ths special 
-         * method that is called whenever one of the subclasses of @ref ChoicesBaseAction
-        *  are called.
-        */
-    public ChoicesBaseAction onChoice(int i);
+	 public static final int MAX_OBJS = 32; // if you want a large range of consecutive odd numbers that produce unique products, then the lower bound of that range odd number needs to be sufficiently high
+	    public static final int STARTING_ODD = 1787;
+
+	    public static final int VERB_MULTIPLIER = (MAX_OBJS
+	            * 2
+	                    + STARTING_ODD)
+	                            * (MAX_OBJS * 2
+	                                    + STARTING_ODD);
+
+	    public static final int WALK = 0
+	            * VERB_MULTIPLIER;
+	    public static final int TALK = 1
+	            * VERB_MULTIPLIER;
+	    public static final int EXAMINE = 2
+	            * VERB_MULTIPLIER;
+	    public static final int GRAB = 3
+	            * VERB_MULTIPLIER;
+	    public static final int CUT = 4
+	            * VERB_MULTIPLIER;
+	    public static final int SWING = 5
+	            * VERB_MULTIPLIER;
+	    public static final int GIVE = 6
+	            * VERB_MULTIPLIER;
+	    public static final int USE = 7
+	            * VERB_MULTIPLIER;
+	    public static final int PUSH = 8
+	            * VERB_MULTIPLIER;
+	    public static final int PULL = 9
+	            * VERB_MULTIPLIER;
+	    public static final int THROW = 10
+	            * VERB_MULTIPLIER;
+	    public static final String INITIAL = "INITIAL";
+
+	    public static enum Special {
+	        North, East, South, West, Talking
+	    }
+
+    /*! @copydoc OnSpecifyBundlesToLoad */
+    public LoadKickStarter onSpecifyBundlesToLoad(LoaderAPI api);
+
+     /*! @copydoc OnPreEntry */
+    public void onPreEntry(IAmTheMainAPI api);
+    
+	/*! @copydoc OnEntry */
+    public BaseAction onEntry(IAmTheMainAPI api, BaseAction ba);
+ 
+    /*! @copydoc OnEveryFrame */
+    public void onEveryFrame(IAmTheMainAPI api);
+    
+    /*! @copydoc OnDoCommand */
+    public BaseAction onDoCommand(IAmTheMainAPI api, BaseAction ba, int verb, SentenceUnit objectA, SentenceUnit objectB, double x, double y);  
+    
+    /*! @copydoc OnDialogTree */
+    public DialogTreeBaseAction onDialogTree(IAmTheMainAPI api, BaseAction ba, int branch);
+    
 }

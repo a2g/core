@@ -2,9 +2,9 @@ package com.github.a2g.core.action;
 
 import java.util.ArrayList;
 
-import com.github.a2g.core.authoredroom.RoomBase;
+import com.github.a2g.core.authoredroom.IAmARoom;
 
-public class ActionRunner extends RoomBase implements ICallbacksFromGameAction
+public class ActionRunner implements ICallbacksFromGameAction
 {
 	protected ArrayList<BaseAction> list;
 	private ArrayList<BaseAction> parallelActionsToWaitFor;

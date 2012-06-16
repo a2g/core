@@ -6,6 +6,7 @@ package com.github.a2g.core;
 
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.authoredroom.IAmARoom;
 import com.github.a2g.core.authoredroom.IAmTheMainAPI;
 import com.github.a2g.core.event.ExecuteCommandEvent;
@@ -81,7 +82,11 @@ public class CommandLinePresenter
             if(x<0.0) x=0.0;
             if(y>1.0) y=1.0;
             if(y<0.0) y=0.0;
-            BaseAction a = this.callbacks.onCommandLineExecute(
+            NullParentAction npa = new NullParentAction() ;
+            npa.setApi(api);
+            
+            BaseAction a = this.callbacks.onDoCommand(
+            		api,npa,
                     verbAsCode, sentenceA,
                     sentenceB, x, y);
 

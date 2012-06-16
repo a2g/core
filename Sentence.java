@@ -4,8 +4,10 @@
  */
 package com.github.a2g.core;
 
+import com.github.a2g.core.authoredroom.IAmARoom;
 
-import com.github.a2g.core.authoredroom.RoomBase;
+
+
 
 
 public class Sentence {
@@ -56,7 +58,7 @@ public class Sentence {
     }
 
     final int getVerbAsCode() {
-        return this.verbAsNumber * RoomBase.VERB_MULTIPLIER;
+        return this.verbAsNumber * IAmARoom.VERB_MULTIPLIER;
     }
 
     boolean isLookingForSecondObject() {
