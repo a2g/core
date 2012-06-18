@@ -51,6 +51,11 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
     	numberOfImagesLeftToLoad = origNumberOfImagesLeftToLoad = bundle.getNumberOfImagesInBundle(bundleNumber);
     	bundle.loadImageBundle(getLoadHandler(), api, bundleNumber, 1,1);
     }
+    
+    public void runLoaderAfterItsBeenLoaded() {
+    	numberOfImagesLeftToLoad = origNumberOfImagesLeftToLoad = bundle.getNumberOfImagesInBundle(bundleNumber);
+    	bundle.loadImageBundle(getLoadHandler(), api, bundleNumber, origNumberOfImagesLeftToLoad,1);
+    }
 
 	
 	private void fireCompletedIfZeroImagesRemaining() 

@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.SortedSet;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Logger;
@@ -44,6 +44,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.event.dom.client.LoadEvent;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.web.bindery.event.shared.EventBus;
@@ -73,6 +74,7 @@ SaySpeechCallChoiceEventHandler
 	private RoomAPI callbacks;
 	private TreeMap<Integer, RoomObject> theObjectMap;
 	private TreeMap<Integer, Animation> theAnimationMap;
+	private Set<String> setOfCompletedLoaders;
 
 	private EventBus bus;
 	private IAmHostingTheMasterPresenter parent;
@@ -103,6 +105,7 @@ SaySpeechCallChoiceEventHandler
 		this.theAnimationMap = new TreeMap<Integer, Animation>();
 		this.mapOfEssentialLoaders = new LinkedList<ImageBundleLoader>();
 		this.mapOfNonEssentialLoaders = new LinkedList <ImageBundleLoader>();
+		this.setOfCompletedLoaders = new TreeSet<String>();
 		this.m_imagesYetToLoad = 0;
 		this.actionRunner = new ActionRunner();
 
@@ -737,7 +740,15 @@ SaySpeechCallChoiceEventHandler
 		{
 			ImageBundleLoader l = this.mapOfEssentialLoaders.get(0);
 			l.setCallbacks(this);
-			l.runLoader();
+			String s = l.toString();
+			if(this.setOfCompletedLoaders.contains(s))
+			{
+				l.runLoaderAfterItsBeenLoaded();
+			}else
+			{
+				l.runLoader();
+			}
+			
 			// we remove it from the list of essentials when it completes
 		}
 	}
@@ -745,6 +756,9 @@ SaySpeechCallChoiceEventHandler
 	@Override
 	public void onLoaderComplete(ImageBundleLoader a) 
 	{
+		String loaderName = a.toString();
+		setOfCompletedLoaders.add(loaderName);
+		
 		// both essential and non essential trigger a this event.
 		// but we only care for when essential calls it.
 		if(!mapOfEssentialLoaders.isEmpty())
@@ -781,13 +795,13 @@ SaySpeechCallChoiceEventHandler
 			
 			if(total==0)
 			{
-				startGame();	
+				Window.alert("startGame();");	
 			}
 		}
 		else
 		{
 			// kick off delay loads
-			startGame();
+			Window.alert("startGame();");
 		}
 	}
 
