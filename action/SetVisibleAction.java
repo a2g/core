@@ -7,7 +7,7 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.RoomObject;
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.authoredroom.IAmTheMainAPI;
+import com.github.a2g.core.authoredroom.InternalAPI;
 
 
 public class SetVisibleAction extends BaseAction {
@@ -31,7 +31,7 @@ public class SetVisibleAction extends BaseAction {
 
     @Override
     protected void onCompleteGameAction() {
-        IAmTheMainAPI i = getApi();
+        InternalAPI i = getApi();
         RoomObject o = i.getObject(this.objId);
 
         if (o != null) {

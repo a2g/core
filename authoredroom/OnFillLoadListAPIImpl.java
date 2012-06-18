@@ -2,10 +2,10 @@ package com.github.a2g.core.authoredroom;
 
 import com.github.a2g.core.loader.ILoadImageBundle;
 
-public class LoaderAPI 
+public class OnFillLoadListAPIImpl 
 {
-	IAmTheLoaderAPI implementation;
-	public LoaderAPI(IAmTheLoaderAPI impl)
+	OnFillLoadListAPI implementation;
+	public OnFillLoadListAPIImpl(OnFillLoadListAPI impl)
 	{
 		this.implementation = impl;
 	}

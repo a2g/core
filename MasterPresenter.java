@@ -22,10 +22,16 @@ import com.github.a2g.core.loader.ICallbacksFromLoader;
 import com.github.a2g.core.loader.ILoadImageBundle;
 import com.github.a2g.core.loader.ImageBundleLoader;
 import com.github.a2g.core.action.DialogTreeBaseAction;
-import com.github.a2g.core.authoredroom.IAmARoom;
-import com.github.a2g.core.authoredroom.IAmTheLoaderAPI;
-import com.github.a2g.core.authoredroom.IAmTheMainAPI;
-import com.github.a2g.core.authoredroom.LoaderAPI;
+import com.github.a2g.core.authoredroom.ImageAddAPI;
+import com.github.a2g.core.authoredroom.RoomAPI;
+import com.github.a2g.core.authoredroom.OnDialogTreeAPI;
+import com.github.a2g.core.authoredroom.OnDoCommandAPI;
+import com.github.a2g.core.authoredroom.OnEntryAPI;
+import com.github.a2g.core.authoredroom.OnEveryFrameAPI;
+import com.github.a2g.core.authoredroom.OnFillLoadListAPI;
+import com.github.a2g.core.authoredroom.OnPreEntryAPI;
+import com.github.a2g.core.authoredroom.InternalAPI;
+import com.github.a2g.core.authoredroom.OnFillLoadListAPIImpl;
 import com.github.a2g.core.authoredroom.Point;
 
 import com.github.a2g.core.event.SaySpeechCallChoiceEvent;
@@ -44,10 +50,17 @@ import com.google.web.bindery.event.shared.EventBus;
 
 
 public class MasterPresenter  
-implements IAmTheMainAPI, 
+implements InternalAPI, 
 SaySpeechCallChoiceEventHandler
 , ICallbacksFromLoader
-, IAmTheLoaderAPI
+, ImageAddAPI
+, OnFillLoadListAPI
+, OnEntryAPI
+, OnPreEntryAPI
+, OnEveryFrameAPI
+, OnDoCommandAPI
+, OnDialogTreeAPI
+
 {
 
 	private CommandLinePresenter commandLinePresenter;
@@ -57,7 +70,7 @@ SaySpeechCallChoiceEventHandler
 	private ChoicesPresenter choicesPresenter;
 	private LoadingPresenter loadingPresenter;
 
-	private IAmARoom callbacks;
+	private RoomAPI callbacks;
 	private TreeMap<Integer, RoomObject> theObjectMap;
 	private TreeMap<Integer, Animation> theAnimationMap;
 
@@ -126,7 +139,8 @@ SaySpeechCallChoiceEventHandler
 
 	}
 
-	public void setCallbacks(IAmARoom callbacks) {
+	public void setCallbacks(RoomAPI callbacks) {
+		this.loadingPresenter.setName(callbacks.toString());
 		this.callbacks = callbacks;
 		this.getCommandLineGui().setCallbacks(
 				callbacks);
@@ -400,17 +414,18 @@ SaySpeechCallChoiceEventHandler
 	
 
 	public void showEverything() {
-		for (int i = 0; i
-		< this.room.objectCollection().count(); i++) {
-			RoomObject roomObject = this.room.objectCollection().at(
-					i);
+		int count = this.room.objectCollection().count();
+		for (int i = 0; i<count; i++) 
+		{
+			RoomObject roomObject = this.room.objectCollection().at(i);
 
 			if (roomObject != null) {
-				if (roomObject.animations().at(
-						IAmARoom.INITIAL)
-						!= null) {
-					roomObject.animations().at(IAmARoom.INITIAL).setAsCurrentAnimation();
-				} else {
+				if (roomObject.animations().at(RoomAPI.INITIAL)!= null) 
+				{
+					roomObject.animations().at(RoomAPI.INITIAL).setAsCurrentAnimation();
+				} 
+				else 
+				{
 					boolean b = true;
 
 					b = (b) ? true : false;
@@ -428,10 +443,25 @@ SaySpeechCallChoiceEventHandler
 	}	
 
 	public void doEveryFrame() {
-		this.callbacks.onEveryFrame(this);
+		if(timer!=null)
+		{
+			this.callbacks.onEveryFrame(this);
+		}
 	}
 
-	public void setRoom(IAmARoom roomCallbacks) {
+	public void setRoom(RoomAPI roomCallbacks) {
+		roomPresenter.clear();
+		loadingPresenter.clear();
+		commandLinePresenter.clear();
+		inventoryPresenter.clear();
+		verbsPresenter.clear();
+		roomPresenter.clear();
+		
+		theObjectMap.clear();
+		theAnimationMap.clear();
+		
+		
+		
 		setCallbacks(roomCallbacks);
 		initRoom();
 		loadVitalResources();
@@ -525,6 +555,7 @@ SaySpeechCallChoiceEventHandler
 		if(this.timer!=null)
 		{
 			this.timer.cancel();
+			timer = null;
 		}
 
 	}
@@ -555,7 +586,7 @@ SaySpeechCallChoiceEventHandler
 	}
 
 	@Override
-	public IAmARoom getCurrentRoom() {
+	public RoomAPI getCurrentRoom() {
 		return this.callbacks;
 	}
 
@@ -673,7 +704,7 @@ SaySpeechCallChoiceEventHandler
 	public void loadVitalResources() 
 	{
 
-		this.callbacks.onSpecifyBundlesToLoad(new LoaderAPI(this));
+		this.callbacks.onFillLoadList(new OnFillLoadListAPIImpl(this));
 		// now we wait onLoadresources to call do it.
 	}
 

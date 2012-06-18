@@ -16,8 +16,8 @@ public class LoadingPanel extends SimplePanel {
         this.add(progress);
     }
 
-    public void update(int current, int total) {
-    	progress.setText(" "+current+"/"+total);
+    public void update(int current, int total, String name) {
+    	progress.setText(" "+current+"/"+total+ " " + name);
     }
 }
     

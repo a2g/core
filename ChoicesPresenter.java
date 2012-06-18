@@ -5,20 +5,20 @@
 package com.github.a2g.core;
 
 
-import com.github.a2g.core.authoredroom.IAmTheMainAPI;
+import com.github.a2g.core.authoredroom.InternalAPI;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 
 public class ChoicesPresenter {
     private EventBus bus;
-    private IAmTheMainAPI api;
+    private InternalAPI api;
     private Choices theChoices;
     private ChoicesPanel view;
     private boolean isInChoicesMode;
     private int choiceTalker;
 		
-    public ChoicesPresenter(final AcceptsOneWidget panel, EventBus bus, IAmTheMainAPI api) {
+    public ChoicesPresenter(final AcceptsOneWidget panel, EventBus bus, InternalAPI api) {
         this.bus = bus;
         this.api = api;
         this.theChoices = new Choices();

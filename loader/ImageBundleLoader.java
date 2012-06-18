@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.authoredroom.IAmTheMainAPI;
+import com.github.a2g.core.authoredroom.InternalAPI;
 import com.github.mystuff.client.activity.PlayWithoutSavingActivity;
 
 import com.google.gwt.event.dom.client.LoadEvent;
@@ -25,11 +25,11 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
     int bundleNumber;
     int numberOfImagesLeftToLoad;
     int origNumberOfImagesLeftToLoad;
-    IAmTheMainAPI api;
+    InternalAPI api;
     
     //private Logger logger = Logger.getLogger("com.mycompany.level");
     
-    public ImageBundleLoader(IAmTheMainAPI api, ILoadImageBundle bundleToCallLoadOn, int bundleNumber) 
+    public ImageBundleLoader(InternalAPI api, ILoadImageBundle bundleToCallLoadOn, int bundleNumber) 
     {
     	this.api = api;
         this.bundle = bundleToCallLoadOn;

@@ -30,7 +30,7 @@ import com.github.a2g.core.action.DialogTreeGoToAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.DialogTreeBaseAction;
-import com.github.a2g.core.authoredroom.IAmTheMainAPI;
+import com.github.a2g.core.authoredroom.InternalAPI;
 import com.github.a2g.core.authoredroom.PointF;
 
 
@@ -41,7 +41,7 @@ import com.github.a2g.core.authoredroom.PointF;
 public abstract class BaseAction extends com.google.gwt.animation.client.Animation {	
     private ICallbacksFromGameAction callbacks;
     protected BaseAction parent;
-    private IAmTheMainAPI api;
+    private InternalAPI api;
 
     public enum SwapType {
         Visibility
@@ -57,7 +57,7 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
 
     abstract public void runGameAction();
 
-    protected BaseAction(BaseAction parent, IAmTheMainAPI api) {
+    protected BaseAction(BaseAction parent, InternalAPI api) {
         this.parent = parent;
         this.callbacks = null;
         this.api = api;
@@ -81,7 +81,7 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
         return new DialogTreeEndAction(this);
     }
 
-    public IAmTheMainAPI getApi() {
+    public InternalAPI getApi() {
         return this.api;
     }
 
@@ -290,7 +290,7 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
                 objId, frame);
     }
 
-    protected void setApi(IAmTheMainAPI api) {
+    protected void setApi(InternalAPI api) {
         this.api = api;
     }
 

@@ -66,6 +66,11 @@ public class RoomPresenter {
         return height;
     }
     // end go in panel.
+
+	public void clear() {
+		// not much to do here
+		
+	}
     
 }
 

@@ -78,18 +78,18 @@ public class WalkToAction extends BaseAction {
                         * (diffY * height)) {
             if (this.endX < this.startX) {
                 anim = this.obj.getSpecialAnimation(
-                        com.github.a2g.core.authoredroom.IAmARoom.Special.West);
+                        com.github.a2g.core.authoredroom.RoomAPI.Special.West);
             } else {
                 anim = this.obj.getSpecialAnimation(
-                        com.github.a2g.core.authoredroom.IAmARoom.Special.East);
+                        com.github.a2g.core.authoredroom.RoomAPI.Special.East);
             }
         } else {
             if (this.endY < this.startY) {
                 anim = this.obj.getSpecialAnimation(
-                        com.github.a2g.core.authoredroom.IAmARoom.Special.North);
+                        com.github.a2g.core.authoredroom.RoomAPI.Special.North);
             } else {
                 anim = this.obj.getSpecialAnimation(
-                        com.github.a2g.core.authoredroom.IAmARoom.Special.South);
+                        com.github.a2g.core.authoredroom.RoomAPI.Special.South);
             }
         }
         this.obj.setCurrentAnimation(anim);
@@ -108,7 +108,7 @@ public class WalkToAction extends BaseAction {
     protected void onCompleteGameAction() {
 
         String anim = this.obj.getSpecialAnimation(
-                com.github.a2g.core.authoredroom.IAmARoom.Special.South);
+                com.github.a2g.core.authoredroom.RoomAPI.Special.South);
 
         this.obj.setCurrentAnimation(anim);
         this.obj.setCurrentFrame(0);

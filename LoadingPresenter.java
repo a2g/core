@@ -5,19 +5,20 @@
 package com.github.a2g.core;
 
 
-import com.github.a2g.core.authoredroom.IAmTheMainAPI;
+import com.github.a2g.core.authoredroom.InternalAPI;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 
 public class LoadingPresenter {
     private EventBus bus;
-    private IAmTheMainAPI api;
+    private InternalAPI api;
     private LoadingPanel view;
     int current;
     int total;
-    	
-    public LoadingPresenter(final AcceptsOneWidget panel, EventBus bus, IAmTheMainAPI api) {
+    private String name;	
+    public LoadingPresenter(final AcceptsOneWidget panel, EventBus bus, InternalAPI api) {
+    	this.name = "";
         this.bus = bus;
         this.api = api;
         this.view = new LoadingPanel();
@@ -30,14 +31,25 @@ public class LoadingPresenter {
     void incrementProgress()
     {
     	current = current +1;
-    	view.update(current, total);
+    	view.update(current, total, name);
     }
 
     void setTotal(int total)
     {
     	this.total = total;
     	this.current = 0;
-    	view.update(current, total);
+    	view.update(current, total, name);
     }
+
+	public void setName(String string) {
+		name = string;
+	}
+
+	public void clear() {
+		name = "";
+		total = 1;
+		current =1;
+		
+	}
 
 }

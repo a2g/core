@@ -22,4 +22,9 @@ public class VerbsPresenter {
         view.setVisible(isVisible);
 		
     }
+
+	public void clear() {
+		// doesn't change.
+		
+	}
 }

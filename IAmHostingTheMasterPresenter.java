@@ -12,7 +12,7 @@ public interface IAmHostingTheMasterPresenter {
      * The setting of most types of state data is ultimately done by this method.
      * It is needed for the inventory to remember it contains an object
      * when moving from one room to the next. It is also called in reponse
-     * to calls of @ref com.github.a2g.core.authoredroom.IAmTheMainAPI::setValue(String name, int value);	
+     * to calls of @ref com.github.a2g.core.authoredroom.InternalAPI::setValue(String name, int value);	
      */
     public void setValue(String name, int value);
 
@@ -20,7 +20,7 @@ public interface IAmHostingTheMasterPresenter {
      * The retrieval of most types of state data is ultimately done by this method.
      * It is needed by the inventory to remember it contains an object when moving from
      * one room to the next. It is also called in response
-     * to calls of @ref com.github.a2g.core.authoredroom.IAmTheMainAPI::getValue(String name);	
+     * to calls of @ref com.github.a2g.core.authoredroom.InternalAPI::getValue(String name);	
      */
     public int getValue(String name);
 

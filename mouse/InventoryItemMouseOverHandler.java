@@ -9,7 +9,7 @@ import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.web.bindery.event.shared.EventBus;
 import com.github.a2g.core.InventoryItem;
-import com.github.a2g.core.authoredroom.IAmTheMainAPI;
+import com.github.a2g.core.authoredroom.InternalAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 
 
@@ -17,9 +17,9 @@ public class InventoryItemMouseOverHandler implements MouseMoveHandler {
     private final EventBus bus;
     private final String textualId;
     private final int code;
-    private final IAmTheMainAPI api;
+    private final InternalAPI api;
 
-    public InventoryItemMouseOverHandler(EventBus bus, IAmTheMainAPI api, String textualId, int code) {
+    public InventoryItemMouseOverHandler(EventBus bus, InternalAPI api, String textualId, int code) {
         this.bus = bus;
         this.textualId = textualId;
         this.code = code;

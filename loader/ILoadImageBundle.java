@@ -4,7 +4,7 @@
  */
 package com.github.a2g.core.loader;
 
-import com.github.a2g.core.authoredroom.IAmTheMainAPI;
+import com.github.a2g.core.authoredroom.InternalAPI;
 import com.google.gwt.event.dom.client.LoadHandler;
 
 
@@ -12,6 +12,6 @@ public interface ILoadImageBundle
 {
 	public int getNumberOfBundles();
 	public int getNumberOfImagesInBundle(int bundleNumber);
-	public int loadImageBundle(final LoadHandler individualImageCallback, final IAmTheMainAPI api, final int bundleNumber, final int CHUNK, final int milliseconds);
+	public int loadImageBundle(final LoadHandler individualImageCallback, final InternalAPI api, final int bundleNumber, final int CHUNK, final int milliseconds);
 	
 }

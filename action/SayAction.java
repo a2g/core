@@ -11,7 +11,7 @@ import com.github.a2g.core.Animation;
 import com.github.a2g.core.RoomObject;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.authoredroom.ColorEnum;
-import com.github.a2g.core.authoredroom.IAmTheMainAPI;
+import com.github.a2g.core.authoredroom.InternalAPI;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Label;
@@ -58,7 +58,7 @@ public class SayAction extends BaseAction {
         }
         
         
-        IAmTheMainAPI api = getApi();
+        InternalAPI api = getApi();
         this.object = api.getObject(this.objId);
 
         

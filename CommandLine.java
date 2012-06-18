@@ -1,7 +1,7 @@
 package com.github.a2g.core;
 
 
-import com.github.a2g.core.authoredroom.IAmTheMainAPI;
+import com.github.a2g.core.authoredroom.InternalAPI;
 
 
 public class CommandLine {
@@ -16,7 +16,7 @@ public class CommandLine {
     private boolean isMouseable; // whether rolling over the verbs will update the commandline
     private boolean isVisible;
     
-    public CommandLine(IAmTheMainAPI api) {
+    public CommandLine(InternalAPI api) {
         this.defaultVerb = new SentenceUnit(
                 "Walk to AAA", "0", -1);
         this.lockedInVerb = new SentenceUnit(

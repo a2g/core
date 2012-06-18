@@ -60,4 +60,10 @@ public class InventoryPresenter {
     public void setVisible(boolean isVisible) {
         view.setVisible(isVisible);
     }
+
+	public void clear() {
+		theInventoryItemMap.clear();
+		theInventory = new Inventory();
+		
+	}
 }

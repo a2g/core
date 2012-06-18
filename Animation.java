@@ -4,7 +4,7 @@
  */
 package com.github.a2g.core;
 
-import com.github.a2g.core.authoredroom.IAmARoom;
+import com.github.a2g.core.authoredroom.RoomAPI;
 
 
 
@@ -16,7 +16,7 @@ public class Animation {
     private boolean wasSetAsHomeAnimation;
     private boolean wasSetAsTalkingAnimation;
     private boolean wasSetAsCurrentAnimation;
-    private IAmARoom.Special specialAnimationThisWasSetTo;
+    private RoomAPI.Special specialAnimationThisWasSetTo;
 
     public Animation(String textualId, RoomObject owningRoomObject) {
         this.parent = owningRoomObject;
@@ -99,7 +99,7 @@ public class Animation {
 
     public void playAnimationBackwardsHoldLastFrame() {}
 
-    public void setAsSpecialAnimation(IAmARoom.Special special) {
+    public void setAsSpecialAnimation(RoomAPI.Special special) {
         specialAnimationThisWasSetTo = special;
         if (parent != null) {
             parent.setSpecialAnimation(special,
@@ -161,7 +161,7 @@ public class Animation {
         return wasSet;
     }
 
-    public IAmARoom.Special getDesignatedSpecialAnimation() {
+    public RoomAPI.Special getDesignatedSpecialAnimation() {
         return specialAnimationThisWasSetTo;
     }
 }

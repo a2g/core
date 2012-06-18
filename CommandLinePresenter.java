@@ -7,8 +7,8 @@ package com.github.a2g.core;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.NullParentAction;
-import com.github.a2g.core.authoredroom.IAmARoom;
-import com.github.a2g.core.authoredroom.IAmTheMainAPI;
+import com.github.a2g.core.authoredroom.RoomAPI;
+import com.github.a2g.core.authoredroom.InternalAPI;
 import com.github.a2g.core.event.ExecuteCommandEvent;
 import com.github.a2g.core.event.ExecuteCommandEventHandler;
 import com.github.a2g.core.event.SetRolloverEvent;
@@ -21,12 +21,12 @@ import com.google.gwt.user.client.ui.UIObject;
 public class CommandLinePresenter 
         implements ExecuteCommandEventHandler, SetRolloverEventHandler {
 
-    private IAmARoom callbacks;
-    private IAmTheMainAPI api;
+    private RoomAPI callbacks;
+    private InternalAPI api;
     private CommandLinePanel view;
     private CommandLine model;
     
-    public CommandLinePresenter(final AcceptsOneWidget panel, EventBus bus, IAmTheMainAPI api) {
+    public CommandLinePresenter(final AcceptsOneWidget panel, EventBus bus, InternalAPI api) {
         this.model = new CommandLine(api);
         this.callbacks = null;
        
@@ -40,7 +40,7 @@ public class CommandLinePresenter
                 this);
     }
 
-    public void setCallbacks(IAmARoom callback) {
+    public void setCallbacks(RoomAPI callback) {
         this.callbacks = callback;
     }
 
