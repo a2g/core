@@ -96,4 +96,17 @@ public class ActionRunner implements ICallbacksFromGameAction
 			processNextListOfParallelActions();
 		}
 	}
+
+	public void cancel() {
+		// first clear the list, just incase cancelling the animation
+		// triggers ongameactioncomplete (above)
+		list.clear();
+		numberOfParallelActionsToWaitFor=0;
+		
+		// now cancel the action(s) that are running
+		for(int i=0;i<parallelActionsToWaitFor.size();i++)
+		{
+			parallelActionsToWaitFor.get(i).cancel();
+		}
+	}
 }

@@ -68,8 +68,7 @@ public class RoomPresenter {
     // end go in panel.
 
 	public void clear() {
-		// not much to do here
-		
+		view.clear();
 	}
     
 }

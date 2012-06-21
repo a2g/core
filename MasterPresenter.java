@@ -74,6 +74,7 @@ SaySpeechCallChoiceEventHandler
 	private RoomAPI callbacks;
 	private TreeMap<Integer, RoomObject> theObjectMap;
 	private TreeMap<Integer, Animation> theAnimationMap;
+	private TreeMap<String, com.google.gwt.user.client.ui.Image> theLoadedImageMap;
 	private Set<String> setOfCompletedLoaders;
 
 	private EventBus bus;
@@ -105,6 +106,7 @@ SaySpeechCallChoiceEventHandler
 		this.theAnimationMap = new TreeMap<Integer, Animation>();
 		this.mapOfEssentialLoaders = new LinkedList<ImageBundleLoader>();
 		this.mapOfNonEssentialLoaders = new LinkedList <ImageBundleLoader>();
+		this.theLoadedImageMap = new TreeMap<String, com.google.gwt.user.client.ui.Image>();
 		this.setOfCompletedLoaders = new TreeSet<String>();
 		this.m_imagesYetToLoad = 0;
 		this.actionRunner = new ActionRunner();
@@ -165,13 +167,23 @@ SaySpeechCallChoiceEventHandler
 	{
 		this.numberOfImagesToLoad++;
 		assert (imageResource != null);
-		final com.google.gwt.user.client.ui.Image image = new com.google.gwt.user.client.ui.Image(
-				imageResource);
-		if(lh!=null)
+		if(theLoadedImageMap.containsKey(imageResource.toString()))
 		{
-			image.addLoadHandler(lh);
+			final com.google.gwt.user.client.ui.Image image = theLoadedImageMap.get(imageResource.toString());
+			lh.onLoad(null);
+			return image;
 		}
-		return image;
+		else
+		{
+			final com.google.gwt.user.client.ui.Image image = new com.google.gwt.user.client.ui.Image(
+				imageResource);
+			theLoadedImageMap.put(imageResource.toString(), image);
+			if(lh!=null)
+			{
+				image.addLoadHandler(lh);
+			}
+			return image;
+		}
 	}
 	@Override
 	public boolean addImageForAnInventoryItem(LoadHandler lh, String objectTextualId, int objectCode, ImageResource imageResource) {
@@ -453,6 +465,25 @@ SaySpeechCallChoiceEventHandler
 	}
 
 	public void setRoom(RoomAPI roomCallbacks) {
+		/*
+		 if we do infact need to remove the images from the panel,
+		 then we do it before we clear the room, roompanel (which deletes widgets anyway). 
+		 
+		if(room!=null)
+		{
+			for(int i=0;i<this.room.objectCollection().count();i++)
+			{
+				for(int j=0;j<this.room.objectCollection().at(i).animations().getCount();j++)
+				{
+					for(int k=room.objectCollection().at(i).animations().at(j).getLength()-1;k>0;k--)
+					{
+						this.room.objectCollection().at(i).animations().at(j).getFrames().at(k).removeImageFromPanel();
+					}
+				}
+			}
+		}
+		*/
+		setLoadingActive();
 		roomPresenter.clear();
 		loadingPresenter.clear();
 		commandLinePresenter.clear();
@@ -460,6 +491,7 @@ SaySpeechCallChoiceEventHandler
 		verbsPresenter.clear();
 		roomPresenter.clear();
 		
+
 		theObjectMap.clear();
 		theAnimationMap.clear();
 		
@@ -525,6 +557,7 @@ SaySpeechCallChoiceEventHandler
 
 	public void switchToRoom(String room) {
 		cancelTimer();
+		this.actionRunner.cancel();
 		this.parent.instantiateRoomThenCreateNewMasterPanelInitializedToIt(
 				room);
 

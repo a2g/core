@@ -76,12 +76,6 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
 	@Override
 	public void onLoad(LoadEvent event) 
 	{
-		if(event==null)
-		{
-			fireCompleted();//don't even wait for the load image command.
-			return;
-		}
-
 		numberOfImagesLeftToLoad --;
 		fireProgress();
 		fireCompletedIfZeroImagesRemaining();
