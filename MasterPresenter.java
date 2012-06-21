@@ -213,8 +213,6 @@ SaySpeechCallChoiceEventHandler
 			result = inventoryPresenter.addInventory(
 					objectTextualId, objectCode,
 					image);
-			// I think this is the key to having the loadHandler called();
-			this.inventoryPresenter.updateInventory();
 		}
 
 		return result;
