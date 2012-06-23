@@ -538,11 +538,9 @@ SaySpeechCallChoiceEventHandler
 	}
 
 	public void switchToRoom(String room) {
-		this.parent.instantiateRoomThenCreateNewMasterPanelInitializedToIt(	room);
 		cancelTimer();
 		this.actionRunner.cancel();
-	
-
+		this.parent.instantiateRoomThenCreateNewMasterPanelInitializedToIt(	room);
 	}
 
 	@Override
