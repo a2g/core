@@ -93,6 +93,7 @@ SaySpeechCallChoiceEventHandler
 	private int textSpeedDelay;
 
 	private Logger logger = Logger.getLogger("com.mycompany.level");
+	private String inventoryResourceAsString;
 
 	public MasterPresenter(final AcceptsOneWidget panel, EventBus bus, IAmHostingTheMasterPresenter parent) {
 		this.bus = bus;
@@ -155,14 +156,7 @@ SaySpeechCallChoiceEventHandler
 		return this;
 	}
 
-	public void initRoom() {
-		this.theObjectMap.clear();
-		this.theAnimationMap.clear();
-		this.noImagesAreGreaterThanThis = 0;
-		this.numberOfLoadedImages = 0;
-		this.room = new Room();
-	}
-
+	
 	final com.google.gwt.user.client.ui.Image getImageFromResource(ImageResource imageResource, LoadHandler lh)
 	{
 		this.numberOfImagesToLoad++;
@@ -213,6 +207,10 @@ SaySpeechCallChoiceEventHandler
 			result = inventoryPresenter.addInventory(
 					objectTextualId, objectCode,
 					image);
+			
+			// if we don't start the image loading, the series of events leading
+			// to the progress bar increasing will fail, and we'll come to a halt.
+			this.roomPresenter.inititateLoadingOfImage(image);
 		}
 
 		return result;
@@ -481,22 +479,8 @@ SaySpeechCallChoiceEventHandler
 			}
 		}
 		*/
-		setLoadingActive();
-		roomPresenter.clear();
-		loadingPresenter.clear();
-		commandLinePresenter.clear();
-		inventoryPresenter.clear();
-		verbsPresenter.clear();
-		roomPresenter.clear();
-		
-
-		theObjectMap.clear();
-		theAnimationMap.clear();
-		
-		
 		
 		setCallbacks(roomCallbacks);
-		initRoom();
 		loadVitalResources();
 	}
 
@@ -554,10 +538,10 @@ SaySpeechCallChoiceEventHandler
 	}
 
 	public void switchToRoom(String room) {
+		this.parent.instantiateRoomThenCreateNewMasterPanelInitializedToIt(	room);
 		cancelTimer();
 		this.actionRunner.cancel();
-		this.parent.instantiateRoomThenCreateNewMasterPanelInitializedToIt(
-				room);
+	
 
 	}
 
@@ -748,15 +732,57 @@ SaySpeechCallChoiceEventHandler
 		Collections.sort(mapOfNonEssentialLoaders);
 		Collections.sort(mapOfEssentialLoaders);
 		int total = 0;
-		
+		boolean isSameInventory = false;
 		// get totals
-		for(int i=0;i<mapOfEssentialLoaders.size();i++)
+		Iterator<ImageBundleLoader> iter = mapOfEssentialLoaders.iterator();
+		while(iter.hasNext())
 		{
-			total+=mapOfEssentialLoaders.get(i).getNumberOfImages();
+			ImageBundleLoader loader = iter.next();
+		
+			//ImageBundleLoader loader = mapOfEssentialLoaders.get(i);
+			if(loader.isInventory())
+			{
+				String name = loader.getName();
+				int len = name.indexOf("@");
+				String loaderName = loader.getName().substring(0,len);
+				if(loaderName.equalsIgnoreCase(this.inventoryResourceAsString))
+				{
+					iter.remove();
+					isSameInventory = true;
+					continue;
+				}
+				else
+				{
+					this.inventoryResourceAsString = loaderName;
+				}
+			}
+				 
+			total+=loader.getNumberOfImages();
 		}
 		for(int i=0;i<mapOfNonEssentialLoaders.size();i++)
 		{
 			total+=mapOfNonEssentialLoaders.get(i).getNumberOfImages();
+		}
+		
+		setLoadingActive();
+		theObjectMap.clear();
+		theAnimationMap.clear();
+		this.theObjectMap.clear();
+		this.theAnimationMap.clear();
+		this.noImagesAreGreaterThanThis = 0;
+		this.numberOfLoadedImages = 0;
+		this.room = new Room();
+
+		roomPresenter.clear();
+		loadingPresenter.clear();
+		commandLinePresenter.clear();
+		verbsPresenter.clear();
+		roomPresenter.clear();
+
+		if(!isSameInventory)
+		{
+			inventoryPresenter.clear();
+			
 		}
 		
 		loadingPresenter.setTotal(total);
@@ -826,13 +852,13 @@ SaySpeechCallChoiceEventHandler
 			
 			if(total==0)
 			{
-				Window.alert("startGame();");	
+				//Window.alert("startGame();");	
 			}
 		}
 		else
 		{
 			// kick off delay loads
-			Window.alert("startGame();");
+			//Window.alert("startGame();");
 		}
 	}
 

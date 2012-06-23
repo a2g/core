@@ -10,4 +10,6 @@ public class RoomPanel extends AbsolutePanel {
                 "cwAbsolutePanel");
         this.addStyleName("absolutePanel");
     }
+    
+    
 }

@@ -70,6 +70,10 @@ public class RoomPresenter {
 	public void clear() {
 		view.clear();
 	}
+	
+	public void inititateLoadingOfImage(com.google.gwt.user.client.ui.Image image) {
+		view.add(image);
+	}
     
 }
 

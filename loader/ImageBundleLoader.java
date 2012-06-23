@@ -38,6 +38,10 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
         origNumberOfImagesLeftToLoad = 0;
     }
 
+    public String getName()
+    {
+    	return bundle.toString();
+    }
     
 	public void setCallbacks(ICallbacksFromLoader callbacks)
 	{
@@ -102,6 +106,12 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
 	public int compareTo(ImageBundleLoader o) {
 		int result = this.bundleNumber - o.bundleNumber;
 		return result;
+	}
+
+	public boolean isInventory() {
+		boolean isInventory = bundle.isInventory();
+		return isInventory;
+		
 	}
 
 }
