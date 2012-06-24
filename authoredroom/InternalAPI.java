@@ -48,6 +48,7 @@ extends ImageAddAPI, OnDoCommandAPI {
     // choice methods
     public void executeChoiceOnCurrentRoom(int place);
 	public int getPopupDelay();
+	public void restartReloading();
  
 }
 

@@ -17,43 +17,52 @@ public class MasterPanel extends VerticalPanel {
     SimplePanel hostForLoading;
     
     MasterPanel() {
-        
-        AbsolutePanel stackedGuiItems = new AbsolutePanel(); 
 
-        DOM.setStyleAttribute(
-                stackedGuiItems.getElement(),
-                "backgroundColor", "Black");
-        
+    	// create all the host panels, that we want to arrange.
         hostForCommandLine = new SimplePanel();
         hostForInventory = new SimplePanel();
         hostForVerbs = new SimplePanel();
         hostForRoom = new SimplePanel();
         hostForChoices = new SimplePanel();
-        hostForLoading = new LoadingPanel();
+        hostForLoading = new SimplePanel();
+    	
+
+        // will be constructed from two vertical stacks.
+    	AbsolutePanel stackForRoomAndLoading = new AbsolutePanel();
+    	AbsolutePanel stackForChoicesInvAndCommand = new AbsolutePanel();
+ 
+        DOM.setStyleAttribute(
+        		stackForChoicesInvAndCommand.getElement(),
+                "backgroundColor", "Black");
+        DOM.setStyleAttribute(
+        		stackForRoomAndLoading.getElement(),
+                "backgroundColor", "Black");
+     
+
+
         {
-        	stackedGuiItems.add(hostForLoading);
-            stackedGuiItems.add(hostForChoices);
+        	HorizontalPanel verbsAndInventory = new HorizontalPanel();
+
+        	verbsAndInventory.add(hostForVerbs);
+        	verbsAndInventory.add(
+        			hostForInventory);
+
+        	VerticalPanel commandLineAndVerbsAndInventory = new VerticalPanel();
+
+        	commandLineAndVerbsAndInventory.add(
+        			hostForCommandLine);
+        	commandLineAndVerbsAndInventory.add(
+        			verbsAndInventory);
+        	stackForChoicesInvAndCommand.add(commandLineAndVerbsAndInventory);
+        	stackForChoicesInvAndCommand.add(hostForChoices);
         }
         {
-
-            HorizontalPanel verbsAndInventory = new HorizontalPanel();
-
-            verbsAndInventory.add(hostForVerbs);
-            verbsAndInventory.add(
-                    hostForInventory);
-
-            VerticalPanel commandLineAndVerbsAndInventory = new VerticalPanel();
-
-            commandLineAndVerbsAndInventory.add(
-                    hostForCommandLine);
-            commandLineAndVerbsAndInventory.add(
-                    verbsAndInventory);
-            stackedGuiItems.add(
-                    commandLineAndVerbsAndInventory);
-        } 
-
-        this.add(hostForRoom);
-        this.add(stackedGuiItems);
+        	stackForRoomAndLoading.add(hostForRoom);
+        	stackForRoomAndLoading.add(hostForLoading,0,0);
+        }
+        
+        this.add(stackForRoomAndLoading);
+        this.add(stackForChoicesInvAndCommand);
     	
     }
 

@@ -460,29 +460,7 @@ SaySpeechCallChoiceEventHandler
 		}
 	}
 
-	public void setRoom(RoomAPI roomCallbacks) {
-		/*
-		 if we do infact need to remove the images from the panel,
-		 then we do it before we clear the room, roompanel (which deletes widgets anyway). 
-		 
-		if(room!=null)
-		{
-			for(int i=0;i<this.room.objectCollection().count();i++)
-			{
-				for(int j=0;j<this.room.objectCollection().at(i).animations().getCount();j++)
-				{
-					for(int k=room.objectCollection().at(i).animations().at(j).getLength()-1;k>0;k--)
-					{
-						this.room.objectCollection().at(i).animations().at(j).getFrames().at(k).removeImageFromPanel();
-					}
-				}
-			}
-		}
-		*/
-		
-		setCallbacks(roomCallbacks);
-		loadVitalResources();
-	}
+
 
 	public void showEverythingThenEnterRoom()
 	{
@@ -497,6 +475,7 @@ SaySpeechCallChoiceEventHandler
 	}
 
 	public void loadInventoryFromAPI() {
+		
 		inventoryPresenter.updateInventory();
 	}
 
@@ -538,6 +517,9 @@ SaySpeechCallChoiceEventHandler
 	}
 
 	public void switchToRoom(String room) {
+		// since instantiateRoom..ToIt does some assynchronous stuff,
+		// I thought maybe I could do it, then cancel the timers.
+		// but I've put it off til I need the microseconds.
 		cancelTimer();
 		this.actionRunner.cancel();
 		this.parent.instantiateRoomThenCreateNewMasterPanelInitializedToIt(	room);
@@ -717,12 +699,6 @@ SaySpeechCallChoiceEventHandler
 
 	}
 
-	public void loadVitalResources() 
-	{
-
-		this.callbacks.onFillLoadList(new OnFillLoadListAPIImpl(this));
-		// now we wait onLoadresources to call do it.
-	}
 
 	@Override
 	public void kickStartLoading() 
@@ -881,6 +857,34 @@ SaySpeechCallChoiceEventHandler
 	@Override
 	public int getPopupDelay() {
 		return textSpeedDelay;
+	}
+
+	public void setRoom(RoomAPI roomCallbacks) {
+		
+		setCallbacks(roomCallbacks);
+
+		this.callbacks.onFillLoadList(new OnFillLoadListAPIImpl(this));
+	}
+	
+	@Override
+	public void restartReloading() 
+	{
+		Iterator<ImageBundleLoader> iter = mapOfEssentialLoaders.iterator();
+		while(iter.hasNext())
+		{
+			ImageBundleLoader loader = iter.next();
+			//loader.fireCompleted();
+		}
+		for(int i=0;i<mapOfNonEssentialLoaders.size();i++)
+		{
+			//mapOfNonEssentialLoaders.get(i).fireCompleted();	
+		}
+		
+		mapOfNonEssentialLoaders.clear();
+		mapOfEssentialLoaders.clear();
+		
+		this.callbacks.onFillLoadList(new OnFillLoadListAPIImpl(this));
+		
 	}
 };
 

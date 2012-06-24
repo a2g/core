@@ -21,7 +21,7 @@ public class LoadingPresenter {
     	this.name = "";
         this.bus = bus;
         this.api = api;
-        this.view = new LoadingPanel();
+        this.view = new LoadingPanel(api);
         panel.setWidget(view);
         this.api = api;
         this.current = 0;
