@@ -24,7 +24,7 @@ public class DialogTreeGoToAction extends DialogTreeBaseAction {
     @Override
     public void runGameAction() {
         super.run(1);
-        getApi().getChoicesGui().setInChoicesMode(
+        getApi().getDialogTreeGui().setInDialogTreeMode(
                 true);
     }
 

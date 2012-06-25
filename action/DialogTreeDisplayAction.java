@@ -26,7 +26,7 @@ public class DialogTreeDisplayAction extends DialogTreeBaseAction {
     @Override
     public void runGameAction() {
         super.run(1);
-        getApi().getChoicesGui().setInChoicesMode(
+        getApi().getDialogTreeGui().setInDialogTreeMode(
                 true);
     }
 
@@ -35,7 +35,7 @@ public class DialogTreeDisplayAction extends DialogTreeBaseAction {
 
     @Override
     protected void onCompleteGameAction() {
-        getApi().getChoicesGui().addChoice(
+        getApi().getDialogTreeGui().addChoice(
                 place, text);
     }
 

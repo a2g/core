@@ -5,23 +5,14 @@
 package com.github.a2g.core.loader;
 
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.authoredroom.InternalAPI;
-import com.github.mystuff.client.activity.PlayWithoutSavingActivity;
-
 import com.google.gwt.event.dom.client.LoadEvent;
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.PopupPanel;
 
 
 public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoader>{
-	private ICallbacksFromLoader callbacks;
-    ILoadImageBundle  bundle;
+	private ImageBundleLoaderCallbackAPI callbacks;
+    ImageBundleLoaderAPI  bundle;
     int bundleNumber;
     int numberOfImagesLeftToLoad;
     int origNumberOfImagesLeftToLoad;
@@ -29,7 +20,7 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
     
     //private Logger logger = Logger.getLogger("com.mycompany.level");
     
-    public ImageBundleLoader(InternalAPI api, ILoadImageBundle bundleToCallLoadOn, int bundleNumber) 
+    public ImageBundleLoader(InternalAPI api, ImageBundleLoaderAPI bundleToCallLoadOn, int bundleNumber) 
     {
     	this.api = api;
         this.bundle = bundleToCallLoadOn;
@@ -43,7 +34,7 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
     	return bundle.toString();
     }
     
-	public void setCallbacks(ICallbacksFromLoader callbacks)
+	public void setCallbacks(ImageBundleLoaderCallbackAPI callbacks)
 	{
 		this.callbacks = callbacks;
 	}

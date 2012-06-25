@@ -11,19 +11,14 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 
 public class LoadingPresenter {
-    private EventBus bus;
-    private InternalAPI api;
     private LoadingPanel view;
     int current;
     int total;
     private String name;	
     public LoadingPresenter(final AcceptsOneWidget panel, EventBus bus, InternalAPI api) {
     	this.name = "";
-        this.bus = bus;
-        this.api = api;
         this.view = new LoadingPanel(api);
         panel.setWidget(view);
-        this.api = api;
         this.current = 0;
         this.total = 0;
     }

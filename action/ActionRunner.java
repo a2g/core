@@ -2,8 +2,6 @@ package com.github.a2g.core.action;
 
 import java.util.ArrayList;
 
-import com.github.a2g.core.authoredroom.RoomAPI;
-
 public class ActionRunner implements ICallbacksFromGameAction
 {
 	protected ArrayList<BaseAction> list;

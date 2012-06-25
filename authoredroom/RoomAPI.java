@@ -10,6 +10,7 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.DialogTreeBaseAction;
 import com.github.a2g.core.authoredroom.OnFillLoadListAPIImpl.LoadKickStarter;
 
+/*! @copydoc RoomAPI */
 public interface RoomAPI {
 	 public static final int MAX_OBJS = 32; // if you want a large range of consecutive odd numbers that produce unique products, then the lower bound of that range odd number needs to be sufficiently high
 	    public static final int STARTING_ODD = 1787;
@@ -48,7 +49,7 @@ public interface RoomAPI {
 	        North, East, South, West, Talking
 	    }
 
-    /*! @copydoc OnSpecifyBundlesToLoad */
+    /*! @copydoc OnFillLoadList */
     public LoadKickStarter onFillLoadList(OnFillLoadListAPIImpl api);
 
      /*! @copydoc OnPreEntry */

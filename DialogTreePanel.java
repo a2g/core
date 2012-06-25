@@ -9,9 +9,9 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
 
-public class ChoicesPanel extends Grid {
+public class DialogTreePanel extends Grid {
 
-    ChoicesPanel() {
+    DialogTreePanel() {
         super(4, 1);
         for (int i = 0; i < getRowCount(); i++) {
             Label widget = new Label("");
@@ -20,7 +20,7 @@ public class ChoicesPanel extends Grid {
         }
     }
 
-    public void update(Choices choices, final EventBus bus) {
+    public void update(DialogTree dialogTree, final EventBus bus) {
         // destroy old
         for (int i = 0; i < getRowCount(); i++) {
             this.setWidget(i, 0, null);
@@ -28,11 +28,11 @@ public class ChoicesPanel extends Grid {
 
         for (int i = 0; i < getRowCount()
                 && i
-                        < choices.getPlaces().size(); i++) {
-            int place = choices.getPlaces().get(i).intValue();
-            String buttonText = choices.getTexts().get(
+                        < dialogTree.getSubBranchIds().size(); i++) {
+            int subBranchId = dialogTree.getSubBranchIds().get(i).intValue();
+            String lineOfDialog = dialogTree.getLinesOfDialog().get(
                     i);
-            Label label = new Label(buttonText);
+            Label label = new Label(lineOfDialog);
 
             this.setWidget(i, 0, label);
 
@@ -44,7 +44,7 @@ public class ChoicesPanel extends Grid {
                             label));
             label.addClickHandler(
                     new ChoiceMouseClickHandler(
-                            bus, label, place));
+                            bus, label, subBranchId));
 
         }	
     }

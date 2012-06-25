@@ -10,51 +10,51 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 
-public class ChoicesPresenter {
+public class DialogTreePresenter {
     private EventBus bus;
     private InternalAPI api;
-    private Choices theChoices;
-    private ChoicesPanel view;
-    private boolean isInChoicesMode;
+    private DialogTree theDialogTree;
+    private DialogTreePanel view;
+    private boolean isInDialogTreeMode;
     private int choiceTalker;
 		
-    public ChoicesPresenter(final AcceptsOneWidget panel, EventBus bus, InternalAPI api) {
+    public DialogTreePresenter(final AcceptsOneWidget panel, EventBus bus, InternalAPI api) {
         this.bus = bus;
         this.api = api;
-        this.theChoices = new Choices();
-        this.view = new ChoicesPanel();
+        this.theDialogTree = new DialogTree();
+        this.view = new DialogTreePanel();
         panel.setWidget(view);
         this.choiceTalker = 0;
         
         this.api = api;
        
-        this.isInChoicesMode = false;
+        this.isInDialogTreeMode = false;
     }
 	  
     public void clear() {
-        theChoices.clear();
-        view.update(theChoices, bus);
+        theDialogTree.clear();
+        view.update(theDialogTree, bus);
     }
 
-    public void setInChoicesMode(boolean isInChoices) {
-        this.isInChoicesMode = isInChoices;
-        view.setVisible(isInChoicesMode);
+    public void setInDialogTreeMode(boolean isInDialogTree) {
+        this.isInDialogTreeMode = isInDialogTree;
+        view.setVisible(isInDialogTreeMode);
         api.getVerbsGui().setVisible(
-                !isInChoicesMode);
+                !isInDialogTreeMode);
         api.getInventoryGui().setVisible(
-                !isInChoicesMode);
+                !isInDialogTreeMode);
         api.getCommandLineGui().setVisible(
-                !isInChoicesMode);
+                !isInDialogTreeMode);
     }
     
-    public void addChoice(int place, String text) {
-        setInChoicesMode(true);
-        theChoices.addChoice(place, text);
-        view.update(theChoices, bus);
+    public void addChoice(int subBranchId, String lineOfDialog) {
+        setInDialogTreeMode(true);
+        theDialogTree.addSubBranch(subBranchId, lineOfDialog);
+        view.update(theDialogTree, bus);
     }
 
-    public boolean isInChoicesMode() {
-        return this.isInChoicesMode;
+    public boolean isInDialogTreeMode() {
+        return this.isInDialogTreeMode;
     }
 	
     public void setChoiceTalker(int personWhoSpeaksTheChosenChoice) {

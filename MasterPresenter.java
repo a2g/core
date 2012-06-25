@@ -18,8 +18,8 @@ import java.util.logging.Logger;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.NullParentAction;
-import com.github.a2g.core.loader.ICallbacksFromLoader;
-import com.github.a2g.core.loader.ILoadImageBundle;
+import com.github.a2g.core.loader.ImageBundleLoaderCallbackAPI;
+import com.github.a2g.core.loader.ImageBundleLoaderAPI;
 import com.github.a2g.core.loader.ImageBundleLoader;
 import com.github.a2g.core.action.DialogTreeBaseAction;
 import com.github.a2g.core.authoredroom.ImageAddAPI;
@@ -44,8 +44,6 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.dev.util.collect.HashSet;
-import com.google.gwt.event.dom.client.LoadEvent;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.web.bindery.event.shared.EventBus;
 
@@ -53,7 +51,7 @@ import com.google.web.bindery.event.shared.EventBus;
 public class MasterPresenter  
 implements InternalAPI, 
 SaySpeechCallChoiceEventHandler
-, ICallbacksFromLoader
+, ImageBundleLoaderCallbackAPI
 , ImageAddAPI
 , OnFillLoadListAPI
 , OnEntryAPI
@@ -68,7 +66,7 @@ SaySpeechCallChoiceEventHandler
 	private InventoryPresenter inventoryPresenter;
 	private VerbsPresenter verbsPresenter;
 	private RoomPresenter roomPresenter;
-	private ChoicesPresenter choicesPresenter;
+	private DialogTreePresenter choicesPresenter;
 	private LoadingPresenter loadingPresenter;
 
 	private RoomAPI callbacks;
@@ -78,10 +76,9 @@ SaySpeechCallChoiceEventHandler
 	private Set<String> setOfCompletedLoaders;
 
 	private EventBus bus;
-	private IAmHostingTheMasterPresenter parent;
+	private MasterPresenterHostAPI parent;
 	private int noImagesAreGreaterThanThis;
 	private int numberOfImagesToLoad;
-	private int numberOfLoadedImages;
 	private Timer timer;
 	private Room room;
 	private MasterPanel masterPanel;
@@ -95,13 +92,12 @@ SaySpeechCallChoiceEventHandler
 	private Logger logger = Logger.getLogger("com.mycompany.level");
 	private String inventoryResourceAsString;
 
-	public MasterPresenter(final AcceptsOneWidget panel, EventBus bus, IAmHostingTheMasterPresenter parent) {
+	public MasterPresenter(final AcceptsOneWidget panel, EventBus bus, MasterPresenterHostAPI parent) {
 		this.bus = bus;
 		this.timer = null;
 		this.parent = parent;
 		this.isOkToWaitForImages = true;
 		this.noImagesAreGreaterThanThis = 0;
-		this.numberOfLoadedImages = 0;
 		this.textSpeedDelay = 10;
 		this.theObjectMap = new TreeMap<Integer, RoomObject>();
 		this.theAnimationMap = new TreeMap<Integer, Animation>();
@@ -123,8 +119,8 @@ SaySpeechCallChoiceEventHandler
 
 
 
-		this.choicesPresenter = new ChoicesPresenter(
-				masterPanel.getHostForChoices(), bus, this);
+		this.choicesPresenter = new DialogTreePresenter(
+				masterPanel.getHostForDialogTree(), bus, this);
 		this.commandLinePresenter = new CommandLinePresenter(
 				masterPanel.getHostForCommandLine(), bus, this);
 		this.inventoryPresenter = new InventoryPresenter(
@@ -468,7 +464,7 @@ SaySpeechCallChoiceEventHandler
 		prepareRoomForFocus();
 		showEverything();
 		loadInventoryFromAPI();
-		this.choicesPresenter.setInChoicesMode(
+		this.choicesPresenter.setInDialogTreeMode(
 				false);
 		startEveryFrameCallbacks();
 		onEnterRoom();
@@ -604,7 +600,7 @@ SaySpeechCallChoiceEventHandler
 
 		// this code is dodgey because it doesn't use the current room to execute..
 		// it uses a dynamically created room to execute it. This seems ok, if it has the same api pointer.
-		int objId = getChoicesGui().getChoiceTalker();
+		int objId = getDialogTreeGui().getChoiceTalker();
 		
 		NullParentAction npa = new NullParentAction();
 		npa.setApi(this);
@@ -620,7 +616,7 @@ SaySpeechCallChoiceEventHandler
 	}
 
 	@Override
-	public ChoicesPresenter getChoicesGui() {
+	public DialogTreePresenter getDialogTreeGui() {
 		return this.choicesPresenter;
 	}
 
@@ -640,9 +636,9 @@ SaySpeechCallChoiceEventHandler
 	}
 
 
-	void setChoicesActive()
+	void setDialogTreeActive()
 	{
-		masterPanel.setChoicesActive();
+		masterPanel.setDialogTreeActive();
 	}
 
 	void setLoadingActive()
@@ -676,7 +672,7 @@ SaySpeechCallChoiceEventHandler
 
 
 	@Override
-	public void addEssential(ILoadImageBundle blah)
+	public void addEssential(ImageBundleLoaderAPI blah)
 	{
 
 		for(int i=0;i<blah.getNumberOfBundles();i++)
@@ -688,7 +684,7 @@ SaySpeechCallChoiceEventHandler
 	}
 
 	@Override
-	public void addNonEssential(ILoadImageBundle blah) {
+	public void addNonEssential(ImageBundleLoaderAPI blah) {
 
 		for(int i=0;i<blah.getNumberOfBundles();i++)
 		{
@@ -744,7 +740,6 @@ SaySpeechCallChoiceEventHandler
 		this.theObjectMap.clear();
 		this.theAnimationMap.clear();
 		this.noImagesAreGreaterThanThis = 0;
-		this.numberOfLoadedImages = 0;
 		this.room = new Room();
 
 		roomPresenter.clear();
@@ -872,8 +867,7 @@ SaySpeechCallChoiceEventHandler
 		Iterator<ImageBundleLoader> iter = mapOfEssentialLoaders.iterator();
 		while(iter.hasNext())
 		{
-			ImageBundleLoader loader = iter.next();
-			//loader.fireCompleted();
+			iter.next();
 		}
 		for(int i=0;i<mapOfNonEssentialLoaders.size();i++)
 		{

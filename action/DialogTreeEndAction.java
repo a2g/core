@@ -28,7 +28,7 @@ public class DialogTreeEndAction extends DialogTreeBaseAction {
 
     @Override
     protected void onCompleteGameAction() {
-        getApi().getChoicesGui().setInChoicesMode(
+        getApi().getDialogTreeGui().setInDialogTreeMode(
                 false);
     }
 

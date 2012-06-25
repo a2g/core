@@ -12,10 +12,10 @@ public class InventoryPresenter {
     private Inventory theInventory;
     private InventoryPanel view;
     EventBus eventBus;
-    IAmHostingTheMasterPresenter parent;
+    MasterPresenterHostAPI parent;
     private TreeMap<Integer, InventoryItem> theInventoryItemMap;
 	  
-    public InventoryPresenter(final AcceptsOneWidget panel, EventBus bus, IAmHostingTheMasterPresenter parent) {
+    public InventoryPresenter(final AcceptsOneWidget panel, EventBus bus, MasterPresenterHostAPI parent) {
         this.eventBus = bus;
         this.parent = parent;
         this.theInventory = new Inventory();

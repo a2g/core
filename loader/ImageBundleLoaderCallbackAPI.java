@@ -6,7 +6,7 @@ package com.github.a2g.core.loader;
 
 
 
-public interface ICallbacksFromLoader {
+public interface ImageBundleLoaderCallbackAPI {
     public void onLoaderComplete(ImageBundleLoader a);
     public void onImageLoaded();
 }

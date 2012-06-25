@@ -130,7 +130,7 @@ public class CommandLinePresenter
 
     @Override
     public void onSetRollover(String displayName, String textualId, int code) {
-        if (api.getChoicesGui().isInChoicesMode()) {
+        if (api.getDialogTreeGui().isInDialogTreeMode()) {
             return;
         }
         model.setRollover(displayName, textualId,

@@ -21,9 +21,9 @@ public class RoomPresenter {
     }
 
     EventBus eventBus;
-    IAmHostingTheMasterPresenter parent;
+    MasterPresenterHostAPI parent;
 	  
-    public RoomPresenter(final AcceptsOneWidget panel, EventBus bus, IAmHostingTheMasterPresenter parent) {
+    public RoomPresenter(final AcceptsOneWidget panel, EventBus bus, MasterPresenterHostAPI parent) {
         this.setWidth(320);
         this.setHeight(180);
 

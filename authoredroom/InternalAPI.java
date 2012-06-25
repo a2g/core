@@ -6,7 +6,7 @@ package com.github.a2g.core.authoredroom;
 
 
 import com.github.a2g.core.Animation;
-import com.github.a2g.core.ChoicesPresenter;
+import com.github.a2g.core.DialogTreePresenter;
 import com.github.a2g.core.CommandLinePresenter;
 import com.github.a2g.core.InventoryItem;
 import com.github.a2g.core.InventoryPresenter;
@@ -29,7 +29,7 @@ extends ImageAddAPI, OnDoCommandAPI {
     public boolean isTrue(String name);
     
     // gui methods
-    public ChoicesPresenter getChoicesGui();
+    public DialogTreePresenter getDialogTreeGui();
     public VerbsPresenter getVerbsGui();
     public InventoryPresenter getInventoryGui();
     public CommandLinePresenter getCommandLineGui();

@@ -8,7 +8,7 @@ import com.github.a2g.core.authoredroom.InternalAPI;
 import com.google.gwt.event.dom.client.LoadHandler;
 
 
-public interface ILoadImageBundle
+public interface ImageBundleLoaderAPI
 {
 	public int getNumberOfBundles();
 	public int getNumberOfImagesInBundle(int bundleNumber);

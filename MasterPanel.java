@@ -13,7 +13,7 @@ public class MasterPanel extends VerticalPanel {
     SimplePanel hostForInventory;
     SimplePanel hostForVerbs;
     SimplePanel hostForRoom;
-    SimplePanel hostForChoices;
+    SimplePanel hostForDialogTree;
     SimplePanel hostForLoading;
     
     MasterPanel() {
@@ -23,16 +23,16 @@ public class MasterPanel extends VerticalPanel {
         hostForInventory = new SimplePanel();
         hostForVerbs = new SimplePanel();
         hostForRoom = new SimplePanel();
-        hostForChoices = new SimplePanel();
+        hostForDialogTree = new SimplePanel();
         hostForLoading = new SimplePanel();
     	
 
         // will be constructed from two vertical stacks.
     	AbsolutePanel stackForRoomAndLoading = new AbsolutePanel();
-    	AbsolutePanel stackForChoicesInvAndCommand = new AbsolutePanel();
+    	AbsolutePanel stackForDialogTreeInvAndCommand = new AbsolutePanel();
  
         DOM.setStyleAttribute(
-        		stackForChoicesInvAndCommand.getElement(),
+        		stackForDialogTreeInvAndCommand.getElement(),
                 "backgroundColor", "Black");
         DOM.setStyleAttribute(
         		stackForRoomAndLoading.getElement(),
@@ -53,8 +53,8 @@ public class MasterPanel extends VerticalPanel {
         			hostForCommandLine);
         	commandLineAndVerbsAndInventory.add(
         			verbsAndInventory);
-        	stackForChoicesInvAndCommand.add(commandLineAndVerbsAndInventory);
-        	stackForChoicesInvAndCommand.add(hostForChoices);
+        	stackForDialogTreeInvAndCommand.add(commandLineAndVerbsAndInventory);
+        	stackForDialogTreeInvAndCommand.add(hostForDialogTree);
         }
         {
         	stackForRoomAndLoading.add(hostForRoom);
@@ -62,7 +62,7 @@ public class MasterPanel extends VerticalPanel {
         }
         
         this.add(stackForRoomAndLoading);
-        this.add(stackForChoicesInvAndCommand);
+        this.add(stackForDialogTreeInvAndCommand);
     	
     }
 
@@ -85,29 +85,29 @@ public class MasterPanel extends VerticalPanel {
 	}
 
 
-	public SimplePanel getHostForChoices() {
-		return hostForChoices;
+	public SimplePanel getHostForDialogTree() {
+		return hostForDialogTree;
 	}
 	
 	public SimplePanel getHostForLoading() {
 		return hostForLoading;
 	}
 	
-	void setChoicesActive()
+	void setDialogTreeActive()
 	{
-		hostForChoices.setVisible(true);
+		hostForDialogTree.setVisible(true);
 		hostForLoading.setVisible(false);
 	}
 	
 	void setLoadingActive()
 	{
-		hostForChoices.setVisible(false);
+		hostForDialogTree.setVisible(false);
 		hostForLoading.setVisible(true);
 	}
 	
 	void setGameActive()
 	{
-		hostForChoices.setVisible(false);
+		hostForDialogTree.setVisible(false);
 		hostForLoading.setVisible(false);
 	
 	}

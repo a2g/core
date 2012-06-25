@@ -4,8 +4,11 @@
  */
 package com.github.a2g.core;
 
-
-public interface IAmHostingTheMasterPresenter {
+/**
+* These are the methods a class needs to implement to be able to host 
+* the @ref MasterPresenter class
+*/
+public interface MasterPresenterHostAPI {
 
     /**
      * Is there to persist state data at the time the state data change occurs.
