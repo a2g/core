@@ -8,7 +8,7 @@ package com.github.a2g.core.event;
 import com.google.gwt.event.shared.EventHandler;
 
 
-public interface SetRolloverEventHandler extends EventHandler {
-    void onSetRollover(String displayName, String textualId, int code);
+public interface SaySpeechCallDialogTreeEventHandlerAPI extends EventHandler {
+    void onSaySpeechCallChoice(String speech, int choice);
   
 }

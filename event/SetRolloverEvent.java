@@ -8,8 +8,8 @@ package com.github.a2g.core.event;
 import com.google.gwt.event.shared.GwtEvent;
 
 
-public class SetRolloverEvent extends GwtEvent<SetRolloverEventHandler> {
-    public static Type<SetRolloverEventHandler> TYPE = new Type<SetRolloverEventHandler>();
+public class SetRolloverEvent extends GwtEvent<SetRolloverEventHandlerAPI> {
+    public static Type<SetRolloverEventHandlerAPI> TYPE = new Type<SetRolloverEventHandlerAPI>();
     // private final FriendSummaryDTO friend;
     private final String displayName;
     private final String textualId;
@@ -34,12 +34,12 @@ public class SetRolloverEvent extends GwtEvent<SetRolloverEventHandler> {
     }
 
     @Override
-    public Type<SetRolloverEventHandler> getAssociatedType() {
+    public Type<SetRolloverEventHandlerAPI> getAssociatedType() {
         return TYPE;
     }
 
     @Override
-    protected void dispatch(SetRolloverEventHandler handler) {
+    protected void dispatch(SetRolloverEventHandlerAPI handler) {
         handler.onSetRollover(displayName,
                 textualId, code);
     }

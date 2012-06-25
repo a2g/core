@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.logging.Logger;
+//import java.util.logging.Logger;
 
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
@@ -34,8 +34,8 @@ import com.github.a2g.core.authoredroom.InternalAPI;
 import com.github.a2g.core.authoredroom.OnFillLoadListAPIImpl;
 import com.github.a2g.core.authoredroom.Point;
 
-import com.github.a2g.core.event.SaySpeechCallChoiceEvent;
-import com.github.a2g.core.event.SaySpeechCallChoiceEventHandler;
+import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
+import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
 import com.github.a2g.core.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.mouse.InventoryItemMouseOverHandler;
 import com.github.a2g.core.mouse.RoomObjectMouseOverHandler;
@@ -50,7 +50,7 @@ import com.google.web.bindery.event.shared.EventBus;
 
 public class MasterPresenter  
 implements InternalAPI, 
-SaySpeechCallChoiceEventHandler
+SaySpeechCallDialogTreeEventHandlerAPI
 , ImageBundleLoaderCallbackAPI
 , ImageAddAPI
 , OnFillLoadListAPI
@@ -89,7 +89,7 @@ SaySpeechCallChoiceEventHandler
 	private ActionRunner actionRunner;
 	private int textSpeedDelay;
 
-	private Logger logger = Logger.getLogger("com.mycompany.level");
+	//private Logger logger = Logger.getLogger("com.mycompany.level");
 	private String inventoryResourceAsString;
 
 	public MasterPresenter(final AcceptsOneWidget panel, EventBus bus, MasterPresenterHostAPI parent) {
@@ -109,7 +109,7 @@ SaySpeechCallChoiceEventHandler
 		this.actionRunner = new ActionRunner();
 
 		bus.addHandler(
-				SaySpeechCallChoiceEvent.TYPE,
+				SaySpeechCallDialogTreeEvent.TYPE,
 				this);
 
 
@@ -518,7 +518,7 @@ SaySpeechCallChoiceEventHandler
 		// but I've put it off til I need the microseconds.
 		cancelTimer();
 		this.actionRunner.cancel();
-		this.parent.instantiateRoomThenCreateNewMasterPanelInitializedToIt(	room);
+		this.parent.instantiateRoomAndCallSetRoomBackOnTheMasterPresenter(	room);
 	}
 
 	@Override

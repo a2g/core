@@ -10,16 +10,16 @@ import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.authoredroom.RoomAPI;
 import com.github.a2g.core.authoredroom.InternalAPI;
 import com.github.a2g.core.event.ExecuteCommandEvent;
-import com.github.a2g.core.event.ExecuteCommandEventHandler;
+import com.github.a2g.core.event.ExecuteCommandEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
-import com.github.a2g.core.event.SetRolloverEventHandler;
+import com.github.a2g.core.event.SetRolloverEventHandlerAPI;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.UIObject;
 
 
 public class CommandLinePresenter 
-        implements ExecuteCommandEventHandler, SetRolloverEventHandler {
+        implements ExecuteCommandEventHandlerAPI, SetRolloverEventHandlerAPI {
 
     private RoomAPI callbacks;
     private InternalAPI api;

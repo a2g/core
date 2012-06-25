@@ -8,8 +8,8 @@ package com.github.a2g.core.event;
 import com.google.gwt.event.shared.GwtEvent;
 
 
-public class PropertyChangeEvent extends GwtEvent<PropertyChangeEventHandler> {
-    public static Type<PropertyChangeEventHandler> TYPE = new Type<PropertyChangeEventHandler>();
+public class PropertyChangeEvent extends GwtEvent<PropertyChangeEventHandlerAPI> {
+    public static Type<PropertyChangeEventHandlerAPI> TYPE = new Type<PropertyChangeEventHandlerAPI>();
     // private final FriendSummaryDTO friend;
     private final String name;
     private final int id;
@@ -22,12 +22,12 @@ public class PropertyChangeEvent extends GwtEvent<PropertyChangeEventHandler> {
     }
 
     @Override
-    public Type<PropertyChangeEventHandler> getAssociatedType() {
+    public Type<PropertyChangeEventHandlerAPI> getAssociatedType() {
         return TYPE;
     }
 
     @Override
-    protected void dispatch(PropertyChangeEventHandler handler) {
+    protected void dispatch(PropertyChangeEventHandlerAPI handler) {
         handler.onPropertyChange(this);
     }
 

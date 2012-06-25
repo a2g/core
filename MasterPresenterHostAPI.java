@@ -28,10 +28,16 @@ public interface MasterPresenterHostAPI {
     public int getValue(String name);
 
     /**
-     * Is there to switchRooms.
+     * Is there to switchRooms. The room loading isn't managed
+     * by the core package, and there is no progress bar for it. So instead, it is
+     * passed back to the host. Whilst you load the room you can do whatever you like, 
+     * and put up a splash screen or something. There is no progress bar because there 
+     * is no way to split a room up in to the discreet chunks needed for progress bar 
+     * style loading. Perhaps each doCommand handler could be a discreet package, that 
+     * can be arbitrarily bundled and loaded via a progress bar..hmmmm.
      * 
      */
-    public void instantiateRoomThenCreateNewMasterPanelInitializedToIt(String room);
+    public void instantiateRoomAndCallSetRoomBackOnTheMasterPresenter(String room);
 
     /**
      * Is there merely to export analytical data so it may be analyzed, and perhaps used to

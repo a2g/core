@@ -89,7 +89,7 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
         return this.parent;
     }
 
-    public DialogTreeBaseAction gotoChoice(int place) {
+    public DialogTreeBaseAction gotoBranch(int place) {
         return new DialogTreeGoToAction(this,
                 place);
     }

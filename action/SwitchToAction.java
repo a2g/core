@@ -10,7 +10,7 @@ import com.github.a2g.core.action.DialogTreeBaseAction;
 
 
 /* ! This inherits from DialogTreeBaseAction because it is valid to be used as 
- *  the last action in a chain that is returned from onChoice().
+ *  the last action in a chain that is returned from RoomAPI.onDialogTree().
  *  You can use it in all places where you would use a GameAction
  */
 public class SwitchToAction extends DialogTreeBaseAction {

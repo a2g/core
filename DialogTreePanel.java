@@ -1,9 +1,9 @@
 package com.github.a2g.core;
 
 
-import com.github.a2g.core.mouse.ChoiceMouseClickHandler;
-import com.github.a2g.core.mouse.ChoiceMouseOutHandler;
-import com.github.a2g.core.mouse.ChoiceMouseOverHandler;
+import com.github.a2g.core.mouse.DialogTreeMouseClickHandler;
+import com.github.a2g.core.mouse.DialogTreeMouseOutHandler;
+import com.github.a2g.core.mouse.DialogTreeMouseOverHandler;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
@@ -37,13 +37,13 @@ public class DialogTreePanel extends Grid {
             this.setWidget(i, 0, label);
 
             label.addMouseOverHandler(
-                    new ChoiceMouseOverHandler(
+                    new DialogTreeMouseOverHandler(
                             label));
             label.addMouseOutHandler(
-                    new ChoiceMouseOutHandler(
+                    new DialogTreeMouseOutHandler(
                             label));
             label.addClickHandler(
-                    new ChoiceMouseClickHandler(
+                    new DialogTreeMouseClickHandler(
                             bus, label, subBranchId));
 
         }	

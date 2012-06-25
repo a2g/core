@@ -8,7 +8,7 @@ package com.github.a2g.core.event;
 import com.google.gwt.event.shared.EventHandler;
 
 
-public interface ExecuteCommandEventHandler extends EventHandler {
+public interface ExecuteCommandEventHandlerAPI extends EventHandler {
     void onExecuteCommand(double x, double y);
   
 }

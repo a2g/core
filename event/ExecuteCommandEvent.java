@@ -8,8 +8,8 @@ package com.github.a2g.core.event;
 import com.google.gwt.event.shared.GwtEvent;
 
 
-public class ExecuteCommandEvent extends GwtEvent<ExecuteCommandEventHandler> {
-    public static Type<ExecuteCommandEventHandler> TYPE = new Type<ExecuteCommandEventHandler>();
+public class ExecuteCommandEvent extends GwtEvent<ExecuteCommandEventHandlerAPI> {
+    public static Type<ExecuteCommandEventHandlerAPI> TYPE = new Type<ExecuteCommandEventHandlerAPI>();
     // private final FriendSummaryDTO friend;
     private final double x;
     private final double y;
@@ -20,12 +20,12 @@ public class ExecuteCommandEvent extends GwtEvent<ExecuteCommandEventHandler> {
     }
 
     @Override
-    public Type<ExecuteCommandEventHandler> getAssociatedType() {
+    public Type<ExecuteCommandEventHandlerAPI> getAssociatedType() {
         return TYPE;
     }
 
     @Override
-    protected void dispatch(ExecuteCommandEventHandler handler) {
+    protected void dispatch(ExecuteCommandEventHandlerAPI handler) {
         handler.onExecuteCommand(x, y);
     }
   
