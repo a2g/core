@@ -66,7 +66,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private InventoryPresenter inventoryPresenter;
 	private VerbsPresenter verbsPresenter;
 	private RoomPresenter roomPresenter;
-	private DialogTreePresenter choicesPresenter;
+	private DialogTreePresenter dialogTreePresenter;
 	private LoadingPresenter loadingPresenter;
 
 	private RoomAPI callbacks;
@@ -119,7 +119,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 
 
-		this.choicesPresenter = new DialogTreePresenter(
+		this.dialogTreePresenter = new DialogTreePresenter(
 				masterPanel.getHostForDialogTree(), bus, this);
 		this.commandLinePresenter = new CommandLinePresenter(
 				masterPanel.getHostForCommandLine(), bus, this);
@@ -395,10 +395,10 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		npa.setApi(this);
 		BaseAction a = this.callbacks.onEntry(this,npa);
 
-		executeActionBaseOrChoiceActionBaseAndProcessReturnedInteger(a);
+		executeBaseActionAndProcessReturnedInteger(a);
 	}
 
-	public void executeActionBaseOrChoiceActionBaseAndProcessReturnedInteger(BaseAction a) {
+	public void executeBaseActionAndProcessReturnedInteger(BaseAction a) {
 		int result = actionRunner.runAction(a);
 		
 		result++;
@@ -464,7 +464,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		prepareRoomForFocus();
 		showEverything();
 		loadInventoryFromAPI();
-		this.choicesPresenter.setInDialogTreeMode(
+		this.dialogTreePresenter.setInDialogTreeMode(
 				false);
 		startEveryFrameCallbacks();
 		onEnterRoom();
@@ -585,29 +585,29 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	}
 
 	@Override
-	public void executeChoiceOnCurrentRoom(int place) {
+	public void executeBranchOnCurrentRoom(int branchId) {
 		NullParentAction npa = new NullParentAction();
 		npa.setApi(this);
-		DialogTreeBaseAction actionChain = this.callbacks.onDialogTree(this, npa, place);
+		DialogTreeBaseAction actionChain = this.callbacks.onDialogTree(this, npa, branchId);
 
-		executeActionBaseOrChoiceActionBaseAndProcessReturnedInteger(
+		executeBaseActionAndProcessReturnedInteger(
 				actionChain);
 	}
 
 
-	public void saySpeechAndThenCallChoiceWithSpecifiedInteger(String speech, int place) {
-		this.choicesPresenter.clear();
+	public void saySpeechAndThenExecuteBranchWithBranchId(String speech, int branchId) {
+		this.dialogTreePresenter.clear();
 
 		// this code is dodgey because it doesn't use the current room to execute..
 		// it uses a dynamically created room to execute it. This seems ok, if it has the same api pointer.
-		int objId = getDialogTreeGui().getChoiceTalker();
+		int objId = getDialogTreeGui().getDialogTreeTalker();
 		
 		NullParentAction npa = new NullParentAction();
 		npa.setApi(this);
 		BaseAction say = npa.say(objId, speech);
-		DialogTreeBaseAction actionChain = callbacks.onDialogTree(this, say, place);
+		DialogTreeBaseAction actionChain = callbacks.onDialogTree(this, say, branchId);
 
-		executeActionBaseOrChoiceActionBaseAndProcessReturnedInteger(actionChain);
+		executeBaseActionAndProcessReturnedInteger(actionChain);
 	}
 
 	@Override
@@ -617,7 +617,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 	@Override
 	public DialogTreePresenter getDialogTreeGui() {
-		return this.choicesPresenter;
+		return this.dialogTreePresenter;
 	}
 
 	@Override
@@ -626,9 +626,9 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	}
 
 	@Override
-	public void onSaySpeechCallChoice(String speech, int choice) {
-		saySpeechAndThenCallChoiceWithSpecifiedInteger(
-				speech, choice);
+	public void onSaySpeechCallBranch(String speech, int branchId) {
+		saySpeechAndThenExecuteBranchWithBranchId(
+				speech, branchId);
 	}
 
 	public Widget getPanel() {

@@ -16,7 +16,7 @@ public class DialogTreePresenter {
     private DialogTree theDialogTree;
     private DialogTreePanel view;
     private boolean isInDialogTreeMode;
-    private int choiceTalker;
+    private int dialogTreeTalker;
 		
     public DialogTreePresenter(final AcceptsOneWidget panel, EventBus bus, InternalAPI api) {
         this.bus = bus;
@@ -24,7 +24,7 @@ public class DialogTreePresenter {
         this.theDialogTree = new DialogTree();
         this.view = new DialogTreePanel();
         panel.setWidget(view);
-        this.choiceTalker = 0;
+        this.dialogTreeTalker = 0;
         
         this.api = api;
        
@@ -47,7 +47,7 @@ public class DialogTreePresenter {
                 !isInDialogTreeMode);
     }
     
-    public void addChoice(int subBranchId, String lineOfDialog) {
+    public void addBranch(int subBranchId, String lineOfDialog) {
         setInDialogTreeMode(true);
         theDialogTree.addSubBranch(subBranchId, lineOfDialog);
         view.update(theDialogTree, bus);
@@ -57,13 +57,13 @@ public class DialogTreePresenter {
         return this.isInDialogTreeMode;
     }
 	
-    public void setChoiceTalker(int personWhoSpeaksTheChosenChoice) {
-        this.choiceTalker = personWhoSpeaksTheChosenChoice;
+    public void setDialogTreeTalker(int personWhoSpeaksTheChosenDialog) {
+        this.dialogTreeTalker = personWhoSpeaksTheChosenDialog;
 
     }
 
-    public int getChoiceTalker() {
-        return this.choiceTalker;
+    public int getDialogTreeTalker() {
+        return this.dialogTreeTalker;
     }
 
 }

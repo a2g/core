@@ -12,11 +12,11 @@ import com.github.a2g.core.action.DialogTreeBaseAction;
 public class DialogTreeDisplayAction extends DialogTreeBaseAction {
 
     private String text;
-    private int place;
+    private int branchId;
 
-    public DialogTreeDisplayAction(BaseAction parent, String text, int place) {
+    public DialogTreeDisplayAction(BaseAction parent, String text, int branchId) {
         super(parent, parent.getApi());
-        this.setPlace(place);
+        this.setBranchId(branchId);
         this.setText(text);
     }
 
@@ -35,8 +35,8 @@ public class DialogTreeDisplayAction extends DialogTreeBaseAction {
 
     @Override
     protected void onCompleteGameAction() {
-        getApi().getDialogTreeGui().addChoice(
-                place, text);
+        getApi().getDialogTreeGui().addBranch(
+                branchId, text);
     }
 
     @Override
@@ -45,12 +45,12 @@ public class DialogTreeDisplayAction extends DialogTreeBaseAction {
         return false;
     }
 
-    public void setPlace(int place) {
-        this.place = place;
+    public void setBranchId(int branchId) {
+        this.branchId = branchId;
     }
 
-    public int getPlace() {
-        return place;
+    public int getBranchId() {
+        return branchId;
     }
 
     public void setText(String text) {

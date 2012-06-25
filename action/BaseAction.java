@@ -64,9 +64,9 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
     }
     ;
 
-    public DialogTreeBaseAction choice(int place, String text) {
+    public DialogTreeBaseAction branch(int branchId, String text) {
         return new DialogTreeDisplayAction(this,
-                text, place);
+                text, branchId);
     }
 
     public BaseAction doBoth(BaseAction a, BaseAction b) {
@@ -89,9 +89,9 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
         return this.parent;
     }
 
-    public DialogTreeBaseAction gotoBranch(int place) {
+    public DialogTreeBaseAction gotoBranch(int branchId) {
         return new DialogTreeGoToAction(this,
-                place);
+                branchId);
     }
 
     @Override // method in animation

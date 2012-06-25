@@ -42,11 +42,11 @@ extends ImageAddAPI, OnDoCommandAPI {
     public void switchToRoom(String room);
     public String getLastRoom();
     public boolean isInDebugMode();
-    public void executeActionBaseOrChoiceActionBaseAndProcessReturnedInteger(BaseAction a);
+    public void executeBaseActionAndProcessReturnedInteger(BaseAction a);
     public void setLastCommand(double x, double y, int v, String a, String b);
 
-    // choice methods
-    public void executeChoiceOnCurrentRoom(int place);
+    // dialog tree methods
+    public void executeBranchOnCurrentRoom(int place);
 	public int getPopupDelay();
 	public void restartReloading();
  

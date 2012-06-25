@@ -90,7 +90,7 @@ public class CommandLinePresenter
                     verbAsCode, sentenceA,
                     sentenceB, x, y);
 
-            api.executeActionBaseOrChoiceActionBaseAndProcessReturnedInteger(
+            api.executeBaseActionAndProcessReturnedInteger(
                     a);
             api.setLastCommand(x, y,
                     getSentence().getVerbAsVerbEnumeration(),

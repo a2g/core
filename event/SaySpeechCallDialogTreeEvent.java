@@ -12,11 +12,11 @@ public class SaySpeechCallDialogTreeEvent extends GwtEvent<SaySpeechCallDialogTr
     public static Type<SaySpeechCallDialogTreeEventHandlerAPI> TYPE = new Type<SaySpeechCallDialogTreeEventHandlerAPI>();
     // private final FriendSummaryDTO friend;
     private final String speech;
-    private final int choice;
+    private final int branchId;
     
-    public SaySpeechCallDialogTreeEvent(String speech, int choice) {
+    public SaySpeechCallDialogTreeEvent(String speech, int branchId) {
         this.speech = speech;
-        this.choice = choice;
+        this.branchId = branchId;
     }
 
     @Override
@@ -26,8 +26,8 @@ public class SaySpeechCallDialogTreeEvent extends GwtEvent<SaySpeechCallDialogTr
 
     @Override
     protected void dispatch(SaySpeechCallDialogTreeEventHandlerAPI handler) {
-        handler.onSaySpeechCallChoice(speech,
-                choice);
+        handler.onSaySpeechCallBranch(speech,
+                branchId);
         		
     }
 }

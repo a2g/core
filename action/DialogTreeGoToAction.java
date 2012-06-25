@@ -11,11 +11,11 @@ import com.github.a2g.core.action.DialogTreeBaseAction;
 
 public class DialogTreeGoToAction extends DialogTreeBaseAction {
 
-    private int place;
+    private int branchId;
 
-    public DialogTreeGoToAction(BaseAction parent, int place) {
+    public DialogTreeGoToAction(BaseAction parent, int branchId) {
         super(parent, parent.getApi());
-        this.setPlace(place);
+        this.setPlace(branchId);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class DialogTreeGoToAction extends DialogTreeBaseAction {
 
     @Override
     protected void onCompleteGameAction() {
-        getApi().executeChoiceOnCurrentRoom(
+        getApi().executeBranchOnCurrentRoom(
                 getPlace());
     }
 
@@ -43,12 +43,12 @@ public class DialogTreeGoToAction extends DialogTreeBaseAction {
         return false;
     }
 
-    public void setPlace(int place) {
-        this.place = place;
+    public void setPlace(int branchId) {
+        this.branchId = branchId;
     }
 
     public int getPlace() {
-        return place;
+        return branchId;
     }
 
 }
