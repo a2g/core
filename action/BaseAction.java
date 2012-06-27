@@ -5,7 +5,7 @@
 package com.github.a2g.core.action;
 
 
-import com.github.a2g.core.action.ICallbacksFromGameAction;
+import com.github.a2g.core.action.ActionCallbackAPI;
 import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.action.PlayAnimationAction;
 import com.github.a2g.core.action.PlayAnimationRepeatWhilstVisibleAction;
@@ -39,7 +39,7 @@ import com.github.a2g.core.authoredroom.PointF;
 
 
 public abstract class BaseAction extends com.google.gwt.animation.client.Animation {	
-    private ICallbacksFromGameAction callbacks;
+    private ActionCallbackAPI callbacks;
     protected BaseAction parent;
     private InternalAPI api;
 
@@ -305,7 +305,7 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
         // return toReturn;
     }
 
-    public void setCallbacks(ICallbacksFromGameAction callbacks) {
+    public void setCallbacks(ActionCallbackAPI callbacks) {
         this.callbacks = callbacks;
     }
 

@@ -2,7 +2,7 @@ package com.github.a2g.core.action;
 
 import java.util.ArrayList;
 
-public class ActionRunner implements ICallbacksFromGameAction
+public class ActionRunner implements ActionCallbackAPI
 {
 	protected ArrayList<BaseAction> list;
 	private ArrayList<BaseAction> parallelActionsToWaitFor;
