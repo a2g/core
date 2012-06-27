@@ -49,22 +49,16 @@ public interface RoomAPI {
 	        North, East, South, West, Talking
 	    }
 
-    /*! @copydoc OnFillLoadList */
     public LoadKickStarter onFillLoadList(OnFillLoadListAPIImpl api);
 
-     /*! @copydoc OnPreEntry */
     public void onPreEntry(OnPreEntryAPI api);
     
-	/*! @copydoc OnEntry */
     public BaseAction onEntry(OnEntryAPI api, BaseAction ba);
  
-    /*! @copydoc OnEveryFrame */
     public void onEveryFrame(OnEveryFrameAPI api);
     
-    /*! @copydoc OnDoCommand */
     public BaseAction onDoCommand(OnDoCommandAPI api, BaseAction ba, int verb, SentenceUnit objectA, SentenceUnit objectB, double x, double y);  
     
-    /*! @copydoc OnDialogTree */
     public DialogTreeBaseAction onDialogTree(OnDialogTreeAPI api, BaseAction ba, int branch);
     
 }
