@@ -4,12 +4,6 @@
  */
 package com.github.a2g.core.authoredroom;
 
-
-import com.github.a2g.core.SentenceUnit;
-import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.BaseDialogTreeAction;
-import com.github.a2g.core.authoredroom.OnFillLoadListAPIImpl.LoadKickStarter;
-
 public interface ConstantsForAPI {
 	 public static final int MAX_OBJS = 32; // if you want a large range of consecutive odd numbers that produce unique products, then the lower bound of that range odd number needs to be sufficiently high
 	    public static final int STARTING_ODD = 1787;
