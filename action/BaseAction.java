@@ -29,7 +29,7 @@ import com.github.a2g.core.action.DialogTreeEndAction;
 import com.github.a2g.core.action.DialogTreeGoToAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
-import com.github.a2g.core.action.DialogTreeBaseAction;
+import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.authoredroom.InternalAPI;
 import com.github.a2g.core.authoredroom.PointF;
 
@@ -64,7 +64,7 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
     }
     ;
 
-    public DialogTreeBaseAction branch(int branchId, String text) {
+    public BaseDialogTreeAction branch(int branchId, String text) {
         return new DialogTreeDisplayAction(this,
                 text, branchId);
     }
@@ -73,11 +73,11 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
         return a.subroutine(b);
     }
 
-    public DialogTreeBaseAction doNothing() {
+    public BaseDialogTreeAction doNothing() {
         return new NullParentAction();
     }
 
-    public DialogTreeBaseAction endTalkie() {
+    public BaseDialogTreeAction endTalkie() {
         return new DialogTreeEndAction(this);
     }
 
@@ -89,7 +89,7 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
         return this.parent;
     }
 
-    public DialogTreeBaseAction gotoBranch(int branchId) {
+    public BaseDialogTreeAction gotoBranch(int branchId) {
         return new DialogTreeGoToAction(this,
                 branchId);
     }
@@ -365,7 +365,7 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
                 objId1, objId2, type);
     }
 
-    public DialogTreeBaseAction  switchTo(String roomName) {
+    public BaseDialogTreeAction  switchTo(String roomName) {
         return new SwitchToAction(this,
                 roomName);
         // return toReturn;

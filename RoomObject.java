@@ -14,7 +14,7 @@ import com.github.a2g.core.authoredroom.Point;
 import com.github.a2g.core.authoredroom.PointF;
 import com.github.a2g.core.authoredroom.Rect;
 
-import com.github.a2g.core.authoredroom.RoomAPI.Special;
+import com.github.a2g.core.authoredroom.ConstantsForAPI.Special;
 
 
 public class RoomObject {

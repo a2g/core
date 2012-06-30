@@ -6,10 +6,10 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.DialogTreeBaseAction;
+import com.github.a2g.core.action.BaseDialogTreeAction;
 
 
-public class DialogTreeEndAction extends DialogTreeBaseAction {
+public class DialogTreeEndAction extends BaseDialogTreeAction {
 
     public DialogTreeEndAction(BaseAction parent) {
         super(parent, parent.getApi());

@@ -21,7 +21,7 @@ import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.loader.ImageBundleLoaderCallbackAPI;
 import com.github.a2g.core.loader.ImageBundleLoaderAPI;
 import com.github.a2g.core.loader.ImageBundleLoader;
-import com.github.a2g.core.action.DialogTreeBaseAction;
+import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.authoredroom.ImageAddAPI;
 import com.github.a2g.core.authoredroom.RoomAPI;
 import com.github.a2g.core.authoredroom.OnDialogTreeAPI;
@@ -588,7 +588,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	public void executeBranchOnCurrentRoom(int branchId) {
 		NullParentAction npa = new NullParentAction();
 		npa.setApi(this);
-		DialogTreeBaseAction actionChain = this.callbacks.onDialogTree(this, npa, branchId);
+		BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, npa, branchId);
 
 		executeBaseActionAndProcessReturnedInteger(
 				actionChain);
@@ -605,7 +605,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		NullParentAction npa = new NullParentAction();
 		npa.setApi(this);
 		BaseAction say = npa.say(objId, speech);
-		DialogTreeBaseAction actionChain = callbacks.onDialogTree(this, say, branchId);
+		BaseDialogTreeAction actionChain = callbacks.onDialogTree(this, say, branchId);
 
 		executeBaseActionAndProcessReturnedInteger(actionChain);
 	}

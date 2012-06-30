@@ -7,7 +7,7 @@ package com.github.a2g.core.authoredroom;
 
 import com.github.a2g.core.SentenceUnit;
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.DialogTreeBaseAction;
+import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.authoredroom.OnFillLoadListAPIImpl.LoadKickStarter;
 
 public interface RoomAPI  extends ConstantsForAPI
@@ -22,6 +22,6 @@ public interface RoomAPI  extends ConstantsForAPI
     
     public BaseAction onDoCommand(OnDoCommandAPI api, BaseAction ba, int verb, SentenceUnit objectA, SentenceUnit objectB, double x, double y);  
     
-    public DialogTreeBaseAction onDialogTree(OnDialogTreeAPI api, BaseAction ba, int branch);
+    public BaseDialogTreeAction onDialogTree(OnDialogTreeAPI api, BaseAction ba, int branch);
     
 }

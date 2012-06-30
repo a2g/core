@@ -9,9 +9,9 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.authoredroom.InternalAPI;
 
 
-public abstract class DialogTreeBaseAction extends BaseAction {
+public abstract class BaseDialogTreeAction extends BaseAction {
 
-    protected DialogTreeBaseAction(BaseAction parent, InternalAPI api) {
+    protected BaseDialogTreeAction(BaseAction parent, InternalAPI api) {
         super(parent, api);
 
     }	

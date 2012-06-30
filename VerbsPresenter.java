@@ -27,4 +27,10 @@ public class VerbsPresenter {
 		// doesn't change.
 		
 	}
+	
+	public Verbs getVerbsModel()
+	{
+		return theVerbs;
+	}
+	
 }

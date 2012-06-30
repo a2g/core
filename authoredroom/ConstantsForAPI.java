@@ -7,7 +7,7 @@ package com.github.a2g.core.authoredroom;
 
 import com.github.a2g.core.SentenceUnit;
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.DialogTreeBaseAction;
+import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.authoredroom.OnFillLoadListAPIImpl.LoadKickStarter;
 
 public interface ConstantsForAPI {

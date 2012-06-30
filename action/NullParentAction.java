@@ -9,7 +9,7 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.authoredroom.InternalAPI;
 
 
-public class NullParentAction extends DialogTreeBaseAction {
+public class NullParentAction extends BaseDialogTreeAction {
     public NullParentAction() {
         super(null, null);
     }
