@@ -11,7 +11,7 @@ import com.github.a2g.core.VerbsPresenter;
 
 public interface OnEntryAPI {
 	   // get by ID
-    public RoomObject getObject(int code);
+    public RoomObject getObject(short code);
     public Animation getAnimation(int a);
     public InventoryItem getInventoryItem(int i);
 

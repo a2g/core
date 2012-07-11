@@ -11,11 +11,11 @@ import com.github.a2g.core.action.BaseAction;
 
 public class SwapPropertyAction extends BaseAction {
 
-    private int objId1;
-    private int objId2;
+    private short objId1;
+    private short objId2;
     private SwapType type;
 
-    public SwapPropertyAction(BaseAction parent, int objId1, int objId2, SwapType type) {
+    public SwapPropertyAction(BaseAction parent, short objId1, short objId2, SwapType type) {
         super(parent, parent.getApi());
         this.objId1 = objId1;
         ;

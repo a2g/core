@@ -34,7 +34,7 @@ public interface ImageAddAPI {
 
 	@return true on success, otherwise false.
      */
-    public boolean addImageForARoomObject(LoadHandler lh, int numberPrefix, int x, int y, String textualIdForObject, String textualIdForAnimation, int codeForObject, int codeForAnimation, ImageResource imageResource);
+    public boolean addImageForARoomObject(LoadHandler lh, int numberPrefix, int x, int y, String textualIdForObject, String textualIdForAnimation, short codeForObject, int codeForAnimation, ImageResource imageResource);
     
 };
 

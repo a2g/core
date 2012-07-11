@@ -9,10 +9,10 @@ import com.github.a2g.core.action.BaseAction;
 
 
 public class SetDisplayNameAction extends BaseAction {
-    private int objId;
+    private short objId;
     private String displayName;
 
-    public SetDisplayNameAction(BaseAction parent, int objId, String displayName) {
+    public SetDisplayNameAction(BaseAction parent, short objId, String displayName) {
         super(parent, parent.getApi());
         this.displayName = displayName;
         this.objId = objId;

@@ -269,13 +269,13 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
                 this, animId);
     }
 
-    public BaseAction say(int objId, String speech) {
+    public BaseAction say(short objId, String speech) {
         return new SayAction(this, objId,
                 speech);
         // return toReturn;
     }
 
-    public BaseAction sayWithoutAnimation(int objId, String speed) {
+    public BaseAction sayWithoutAnimation(short objId, String speed) {
         return new SayWithoutAnimationAction(
                 this, objId, speed);
     }
@@ -285,7 +285,7 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
                 this, animId);
     }
 
-    public BaseAction setActiveFrame(int objId, int frame) {
+    public BaseAction setActiveFrame(short objId, int frame) {
         return new SetActiveFrameAction(this,
                 objId, frame);
     }
@@ -294,12 +294,12 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
         this.api = api;
     }
 
-    public BaseAction setBaseMiddleX(int objId, double x) {
+    public BaseAction setBaseMiddleX(short objId, double x) {
         return new SetBaseMiddleXAction(this,
                 objId, x);
     }
 
-    public BaseAction setBaseMiddleY(int objId, double y) {
+    public BaseAction setBaseMiddleY(short objId, double y) {
         return new SetBaseMiddleYAction(this,
                 objId, y);
         // return toReturn;
@@ -309,7 +309,7 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
         this.callbacks = callbacks;
     }
 
-    public BaseAction setDisplayName(int objId, String displayName) {
+    public BaseAction setDisplayName(short objId, String displayName) {
         return new SetDisplayNameAction(this,
                 objId, displayName);
     }
@@ -329,7 +329,7 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
         // return toReturn;
     }
 
-    public BaseAction setTalkingAnimationDelay(int objId, int delay) {
+    public BaseAction setTalkingAnimationDelay(short objId, int delay) {
         return new SetTalkingAnimationDelayAction(
                 this, objId, delay);
         // return toReturn;
@@ -359,7 +359,7 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
         return orig;
     }
 
-    public BaseAction swapProperty(int objId1, int objId2,
+    public BaseAction swapProperty(short objId1, short objId2,
             SwapType type) {
         return new SwapPropertyAction(this,
                 objId1, objId2, type);
@@ -371,17 +371,17 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
         // return toReturn;
     }
 
-    public BaseAction waitForFrame(int objId, int frame) {
+    public BaseAction waitForFrame(short objId, int frame) {
         return new WaitForFrameAction(this,
                 objId, frame);
     }
 
-    public BaseAction walkTo(int objId, double x, double y) {
+    public BaseAction walkTo(short objId, double x, double y) {
         return new WalkToAction(this, objId, x,
                 y);
     }
 
-    public BaseAction walkTo(int objId, PointF point) {
+    public BaseAction walkTo(short objId, PointF point) {
         return new WalkToAction(this, objId,
                 point.getX(), point.getY());
     }

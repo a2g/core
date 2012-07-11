@@ -9,10 +9,10 @@ import com.github.a2g.core.action.BaseAction;
 
 
 public class SetActiveFrameAction extends BaseAction {
-    private int objId;
+    private short objId;
     private int frame;
 
-    public SetActiveFrameAction(BaseAction parent, int objId,
+    public SetActiveFrameAction(BaseAction parent, short objId,
             int frame) {
         super(parent, parent.getApi());
         this.objId = objId;

@@ -34,7 +34,7 @@ public class RoomObject {
     private int topOffset;
     private int leftOffset;
     private int numberPrefix;
-    private int objectCode;
+    private short objectCode;
     private ColorEnum talkingColor;
     private int talkingAnimationDelay;
 
@@ -369,11 +369,11 @@ public class RoomObject {
         this.homeAnimation = homeAnimation;
     }
 
-    public void setObjectCode(int objectCode) {
+    public void setObjectCode(short objectCode) {
         this.objectCode = objectCode;
     }
 
-    public int getObjectCode() {
+    public short getObjectCode() {
         return objectCode;
 
     }

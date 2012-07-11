@@ -9,9 +9,9 @@ import com.github.a2g.core.action.BaseAction;
 
 
 public class SetTalkingAnimationDelayAction extends BaseAction {
-    private int objId;
+    private short objId;
     private int delay;
-    public SetTalkingAnimationDelayAction(BaseAction parent, int objId, int delay) {
+    public SetTalkingAnimationDelayAction(BaseAction parent, short objId, int delay) {
         super(parent, parent.getApi());
         this.objId = objId;
         this.delay = delay;

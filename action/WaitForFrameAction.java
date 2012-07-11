@@ -13,7 +13,7 @@ public class WaitForFrameAction extends BaseAction {
     private int frame;
     private RoomObject object;
 
-    public WaitForFrameAction(BaseAction parent, int objectId, int frame) {
+    public WaitForFrameAction(BaseAction parent, short objectId, int frame) {
         super(parent, parent.getApi());
         this.frame = frame;
         this.object = getApi().getObject(

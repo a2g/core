@@ -20,7 +20,7 @@ public class WalkToAction extends BaseAction {
     private int framesInAnim;
     private int framesPlayedDuringWalk;
 
-    public WalkToAction(BaseAction parent, int objId, double x, double y) {
+    public WalkToAction(BaseAction parent, short objId, double x, double y) {
         super(parent, parent.getApi());
         this.obj = getApi().getObject(objId);
         this.endX = x;

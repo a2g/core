@@ -16,10 +16,10 @@ import com.github.a2g.core.event.SetRolloverEvent;
 public class RoomObjectMouseOverHandler implements MouseMoveHandler {
     private final EventBus bus;
     private final String textualId;
-    private final int code;
+    private final short code;
     private final InternalAPI api;
 
-    public RoomObjectMouseOverHandler(EventBus bus, InternalAPI api, String textualId, int code) {
+    public RoomObjectMouseOverHandler(EventBus bus, InternalAPI api, String textualId, short code) {
         this.bus = bus;
         this.textualId = textualId;
         this.code = code;

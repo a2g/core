@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-//import java.util.logging.Logger;
+import java.util.logging.Logger;
 
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
@@ -89,7 +89,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private ActionRunner actionRunner;
 	private int textSpeedDelay;
 
-	//private Logger logger = Logger.getLogger("com.mycompany.level");
+	private Logger logger = Logger.getLogger("com.mycompany.level");
 	private String inventoryResourceAsString;
 
 	public MasterPresenter(final AcceptsOneWidget panel, EventBus bus, MasterPresenterHostAPI parent) {
@@ -213,7 +213,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	} 
 
 	@Override
-	public boolean addImageForARoomObject(LoadHandler lh, int numberPrefix, int x, int y, String objectTextualId, String animationTextualId, int objectCode, int objPlusAnimCode, ImageResource imageResource) {
+	public boolean addImageForARoomObject(LoadHandler lh, int numberPrefix, int x, int y, String objectTextualId, String animationTextualId, short objectCode, int objPlusAnimCode, ImageResource imageResource) {
 		if (this.callbacks == null) {
 			return true;
 		}
@@ -326,7 +326,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		return true;
 	}
 
-	public RoomObject getObject(int code) {
+	public RoomObject getObject(short code) {
 		RoomObject ob = this.theObjectMap.get(
 				code);
 
@@ -600,7 +600,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 		// this code is dodgey because it doesn't use the current room to execute..
 		// it uses a dynamically created room to execute it. This seems ok, if it has the same api pointer.
-		int objId = getDialogTreeGui().getDialogTreeTalker();
+		short objId = getDialogTreeGui().getDialogTreeTalker();
 		
 		NullParentAction npa = new NullParentAction();
 		npa.setApi(this);

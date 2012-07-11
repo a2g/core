@@ -9,10 +9,10 @@ import com.github.a2g.core.action.BaseAction;
 
 
 public class SetBaseMiddleYAction extends BaseAction {
-    private int objId;
+    private short objId;
     private double y;
 
-    public SetBaseMiddleYAction(BaseAction parent, int objId, double y) {
+    public SetBaseMiddleYAction(BaseAction parent, short objId, double y) {
         super(parent, parent.getApi());
         this.objId = objId;
         this.y = y;

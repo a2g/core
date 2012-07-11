@@ -16,7 +16,7 @@ public class DialogTreePresenter {
     private DialogTree theDialogTree;
     private DialogTreePanel view;
     private boolean isInDialogTreeMode;
-    private int dialogTreeTalker;
+    private short dialogTreeTalker;
 		
     public DialogTreePresenter(final AcceptsOneWidget panel, EventBus bus, InternalAPI api) {
         this.bus = bus;
@@ -57,12 +57,12 @@ public class DialogTreePresenter {
         return this.isInDialogTreeMode;
     }
 	
-    public void setDialogTreeTalker(int personWhoSpeaksTheChosenDialog) {
+    public void setDialogTreeTalker(short personWhoSpeaksTheChosenDialog) {
         this.dialogTreeTalker = personWhoSpeaksTheChosenDialog;
 
     }
 
-    public int getDialogTreeTalker() {
+    public short getDialogTreeTalker() {
         return this.dialogTreeTalker;
     }
 

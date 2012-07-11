@@ -9,9 +9,9 @@ import com.github.a2g.core.action.BaseAction;
 
 
 public class SetBaseMiddleXAction extends BaseAction {
-    private int objId;
+    private short objId;
     private double x;
-    public SetBaseMiddleXAction(BaseAction parent, int objId, double x) {
+    public SetBaseMiddleXAction(BaseAction parent, short objId, double x) {
         super(parent, parent.getApi());
         this.objId = objId;
         this.x = x;

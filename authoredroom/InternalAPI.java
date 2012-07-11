@@ -19,7 +19,7 @@ import com.github.a2g.core.action.BaseAction;
 public interface InternalAPI 
 extends ImageAddAPI, OnDoCommandAPI {
     // get by ID
-    public RoomObject getObject(int code);
+    public RoomObject getObject(short code);
     public Animation getAnimation(int a);
     public InventoryItem getInventoryItem(int i);
 
