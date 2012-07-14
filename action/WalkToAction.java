@@ -19,13 +19,14 @@ public class WalkToAction extends BaseAction {
     private Animation anim;
     private int framesInAnim;
     private int framesPlayedDuringWalk;
+    private int delay;
 
-    public WalkToAction(BaseAction parent, short objId, double x, double y) {
+    public WalkToAction(BaseAction parent, short objId, double x, double y, int delay) {
         super(parent, parent.getApi());
         this.obj = getApi().getObject(objId);
         this.endX = x;
         this.endY = y;
-        // this.delay = delay;
+        this.delay = delay;
         // TODO Auto-generated constructor stub
     }
 
@@ -101,7 +102,7 @@ public class WalkToAction extends BaseAction {
             this.framesInAnim = 0;
         }
 
-        this.run((int) (dist * 10000));
+        this.run((int) (dist * (10+delay) * 1000));
     }
 
     @Override // method in animation

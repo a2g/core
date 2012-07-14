@@ -378,14 +378,24 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
 
     public BaseAction walkTo(short objId, double x, double y) {
         return new WalkToAction(this, objId, x,
-                y);
+                y,0);
     }
 
     public BaseAction walkTo(short objId, PointF point) {
         return new WalkToAction(this, objId,
-                point.getX(), point.getY());
+                point.getX(), point.getY(),0);
     }
 
+    public BaseAction walkTo(short objId, double x, double y, int delay) {
+        return new WalkToAction(this, objId, x,
+                y, delay);
+    }
+
+    public BaseAction walkTo(short objId, PointF point, int delay) {
+        return new WalkToAction(this, objId,
+                point.getX(), point.getY(), delay);
+    }
+    
     public BaseAction setHomeAnimation(int animId) {
         return new SetHomeAnimationAction(this,
                 animId);

@@ -70,7 +70,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private LoadingPresenter loadingPresenter;
 
 	private RoomAPI callbacks;
-	private TreeMap<Integer, RoomObject> theObjectMap;
+	private TreeMap<Short, RoomObject> theObjectMap;
 	private TreeMap<Integer, Animation> theAnimationMap;
 	private TreeMap<String, com.google.gwt.user.client.ui.Image> theLoadedImageMap;
 	private Set<String> setOfCompletedLoaders;
@@ -99,7 +99,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.isOkToWaitForImages = true;
 		this.noImagesAreGreaterThanThis = 0;
 		this.textSpeedDelay = 10;
-		this.theObjectMap = new TreeMap<Integer, RoomObject>();
+		this.theObjectMap = new TreeMap<Short, RoomObject>();
 		this.theAnimationMap = new TreeMap<Integer, Animation>();
 		this.mapOfEssentialLoaders = new LinkedList<ImageBundleLoader>();
 		this.mapOfNonEssentialLoaders = new LinkedList <ImageBundleLoader>();
@@ -231,7 +231,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 					numberPrefix);
 			roomObject.setObjectCode(
 					objectCode);
-			int code = objectCode;
+			short code = objectCode;
 
 			if (code == -1) {
 				Window.alert(
