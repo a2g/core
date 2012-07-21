@@ -108,8 +108,8 @@ public class Animation {
     }
 
     public void setAsCurrentAnimationAndSetFrame(int i) {
-        parent.setCurrentFrame(i);
         parent.setCurrentAnimation(textualId);
+        parent.setCurrentFrame(i);
     }
 
     public void setAsCurrentAnimation() {

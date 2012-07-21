@@ -20,13 +20,15 @@ public class WalkToAction extends BaseAction {
     private int framesInAnim;
     private int framesPlayedDuringWalk;
     private int delay;
+    private boolean isParallel;
 
-    public WalkToAction(BaseAction parent, short objId, double x, double y, int delay) {
+    public WalkToAction(BaseAction parent, short objId, double x, double y, int delay, boolean isParallel) {
         super(parent, parent.getApi());
         this.obj = getApi().getObject(objId);
         this.endX = x;
         this.endY = y;
         this.delay = delay;
+        this.isParallel = isParallel;
         // TODO Auto-generated constructor stub
     }
 
@@ -118,7 +120,7 @@ public class WalkToAction extends BaseAction {
     @Override
     public boolean isParallel() {
 
-        return false;
+        return isParallel;
     }
 
 }

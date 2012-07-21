@@ -277,7 +277,7 @@ public class RoomObject {
         return this.left;
     }
 
-    int getY() { 
+    public int getY() { 
         return this.top;
     }
 
