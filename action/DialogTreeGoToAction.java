@@ -33,7 +33,7 @@ public class DialogTreeGoToAction extends BaseDialogTreeAction {
 
     @Override
     protected void onCompleteGameAction() {
-        getApi().executeBranchOnCurrentRoom(
+        getApi().executeBranchOnCurrentScene(
                 getPlace());
     }
 

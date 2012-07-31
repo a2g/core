@@ -5,13 +5,13 @@
 package com.github.a2g.core.action;
 
 
-import com.github.a2g.core.RoomObject;
+import com.github.a2g.core.SceneObject;
 import com.github.a2g.core.action.BaseAction;
 
 
 public class WaitForFrameAction extends BaseAction {
     private int frame;
-    private RoomObject object;
+    private SceneObject object;
 
     public WaitForFrameAction(BaseAction parent, short objectId, int frame) {
         super(parent, parent.getApi());

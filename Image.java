@@ -5,8 +5,8 @@
 package com.github.a2g.core;
 
 
-import com.github.a2g.core.authoredroom.Point;
-import com.github.a2g.core.authoredroom.Rect;
+import com.github.a2g.core.authoredscene.Point;
+import com.github.a2g.core.authoredscene.Rect;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 

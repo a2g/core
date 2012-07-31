@@ -2,7 +2,7 @@
  * Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
  *  DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.
  */
-package com.github.a2g.core.authoredroom;
+package com.github.a2g.core.authoredscene;
 
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.resources.client.ImageResource;
@@ -34,7 +34,7 @@ public interface ImageAddAPI {
 
 	@return true on success, otherwise false.
      */
-    public boolean addImageForARoomObject(LoadHandler lh, int numberPrefix, int x, int y, String textualIdForObject, String textualIdForAnimation, short codeForObject, int codeForAnimation, ImageResource imageResource);
+    public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String textualIdForObject, String textualIdForAnimation, short codeForObject, int codeForAnimation, ImageResource imageResource);
     
 };
 

@@ -22,23 +22,23 @@ import com.github.a2g.core.loader.ImageBundleLoaderCallbackAPI;
 import com.github.a2g.core.loader.ImageBundleLoaderAPI;
 import com.github.a2g.core.loader.ImageBundleLoader;
 import com.github.a2g.core.action.BaseDialogTreeAction;
-import com.github.a2g.core.authoredroom.ImageAddAPI;
-import com.github.a2g.core.authoredroom.RoomAPI;
-import com.github.a2g.core.authoredroom.OnDialogTreeAPI;
-import com.github.a2g.core.authoredroom.OnDoCommandAPI;
-import com.github.a2g.core.authoredroom.OnEntryAPI;
-import com.github.a2g.core.authoredroom.OnEveryFrameAPI;
-import com.github.a2g.core.authoredroom.OnFillLoadListAPI;
-import com.github.a2g.core.authoredroom.OnPreEntryAPI;
-import com.github.a2g.core.authoredroom.InternalAPI;
-import com.github.a2g.core.authoredroom.OnFillLoadListAPIImpl;
-import com.github.a2g.core.authoredroom.Point;
+import com.github.a2g.core.authoredscene.ImageAddAPI;
+import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.authoredscene.OnDialogTreeAPI;
+import com.github.a2g.core.authoredscene.OnDoCommandAPI;
+import com.github.a2g.core.authoredscene.OnEntryAPI;
+import com.github.a2g.core.authoredscene.OnEveryFrameAPI;
+import com.github.a2g.core.authoredscene.OnFillLoadListAPI;
+import com.github.a2g.core.authoredscene.OnFillLoadListAPIImpl;
+import com.github.a2g.core.authoredscene.OnPreEntryAPI;
+import com.github.a2g.core.authoredscene.Point;
+import com.github.a2g.core.authoredscene.SceneAPI;
 
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
 import com.github.a2g.core.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.mouse.InventoryItemMouseOverHandler;
-import com.github.a2g.core.mouse.RoomObjectMouseOverHandler;
+import com.github.a2g.core.mouse.SceneObjectMouseOverHandler;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
@@ -65,12 +65,12 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private CommandLinePresenter commandLinePresenter;
 	private InventoryPresenter inventoryPresenter;
 	private VerbsPresenter verbsPresenter;
-	private RoomPresenter roomPresenter;
+	private ScenePresenter scenePresenter;
 	private DialogTreePresenter dialogTreePresenter;
 	private LoadingPresenter loadingPresenter;
 
-	private RoomAPI callbacks;
-	private TreeMap<Short, RoomObject> theObjectMap;
+	private SceneAPI callbacks;
+	private TreeMap<Short, SceneObject> theObjectMap;
 	private TreeMap<Integer, Animation> theAnimationMap;
 	private TreeMap<String, com.google.gwt.user.client.ui.Image> theLoadedImageMap;
 	private Set<String> setOfCompletedLoaders;
@@ -80,7 +80,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private int noImagesAreGreaterThanThis;
 	private int numberOfImagesToLoad;
 	private Timer timer;
-	private Room room;
+	private Scene scene;
 	private MasterPanel masterPanel;
 	private List<ImageBundleLoader> mapOfEssentialLoaders;
 	private List<ImageBundleLoader> mapOfNonEssentialLoaders;
@@ -99,7 +99,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.isOkToWaitForImages = true;
 		this.noImagesAreGreaterThanThis = 0;
 		this.textSpeedDelay = 10;
-		this.theObjectMap = new TreeMap<Short, RoomObject>();
+		this.theObjectMap = new TreeMap<Short, SceneObject>();
 		this.theAnimationMap = new TreeMap<Integer, Animation>();
 		this.mapOfEssentialLoaders = new LinkedList<ImageBundleLoader>();
 		this.mapOfNonEssentialLoaders = new LinkedList <ImageBundleLoader>();
@@ -127,21 +127,21 @@ SaySpeechCallDialogTreeEventHandlerAPI
 				masterPanel.getHostForInventory(), bus, parent);
 		this.verbsPresenter = new VerbsPresenter(
 				masterPanel.getHostForVerbs(), bus, parent);
-		this.roomPresenter = new RoomPresenter(
-				masterPanel.getHostForRoom(), bus, parent);
+		this.scenePresenter = new ScenePresenter(
+				masterPanel.getHostForScene(), bus, parent);
 		this.loadingPresenter =  new LoadingPresenter(
 				masterPanel.getHostForLoading(), bus, this);
 
 
-		this.roomPresenter.setWorldViewSize(
-				roomPresenter.getWidth(),
-				roomPresenter.getHeight());
+		this.scenePresenter.setWorldViewSize(
+				scenePresenter.getWidth(),
+				scenePresenter.getHeight());
 
 		masterPanel.setLoadingActive();
 
 	}
 
-	public void setCallbacks(RoomAPI callbacks) {
+	public void setCallbacks(SceneAPI callbacks) {
 		this.loadingPresenter.setName(callbacks.toString());
 		this.callbacks = callbacks;
 		this.getCommandLineGui().setCallbacks(
@@ -186,7 +186,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		boolean result = true;
 
 		com.google.gwt.user.client.ui.Image image = getImageFromResource(imageResource,lh);
-		//Image imageAndPos = new Image(image,this.roomPresenter.getView(),new Point(x, y));
+		//Image imageAndPos = new Image(image,this.scenePresenter.getView(),new Point(x, y));
 
 		if (item == null) {
 
@@ -198,7 +198,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 			image.addClickHandler(
 					new ImageMouseClickHandler(
 							bus,
-							this.roomPresenter.getView()));
+							this.scenePresenter.getView()));
 
 			result = inventoryPresenter.addInventory(
 					objectTextualId, objectCode,
@@ -206,30 +206,30 @@ SaySpeechCallDialogTreeEventHandlerAPI
 			
 			// if we don't start the image loading, the series of events leading
 			// to the progress bar increasing will fail, and we'll come to a halt.
-			this.roomPresenter.inititateLoadingOfImage(image);
+			this.scenePresenter.inititateLoadingOfImage(image);
 		}
 
 		return result;
 	} 
 
 	@Override
-	public boolean addImageForARoomObject(LoadHandler lh, int numberPrefix, int x, int y, String objectTextualId, String animationTextualId, short objectCode, int objPlusAnimCode, ImageResource imageResource) {
+	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String objectTextualId, String animationTextualId, short objectCode, int objPlusAnimCode, ImageResource imageResource) {
 		if (this.callbacks == null) {
 			return true;
 		}
 
 		// objects and animations
-		RoomObject roomObject = this.room.objectCollection().at(
+		SceneObject sceneObject = this.scene.objectCollection().at(
 				objectTextualId);
 
-		if (roomObject == null) {
-			roomObject = new RoomObject(
+		if (sceneObject == null) {
+			sceneObject = new SceneObject(
 					objectTextualId,
-					roomPresenter.getWidth(),
-					roomPresenter.getHeight());
-			roomObject.setNumberPrefix(
+					scenePresenter.getWidth(),
+					scenePresenter.getHeight());
+			sceneObject.setNumberPrefix(
 					numberPrefix);
-			roomObject.setObjectCode(
+			sceneObject.setObjectCode(
 					objectCode);
 			short code = objectCode;
 
@@ -244,9 +244,9 @@ SaySpeechCallDialogTreeEventHandlerAPI
 			;
 
 			this.theObjectMap.put(code,
-					roomObject);
-			this.room.objectCollection().add(
-					roomObject);
+					sceneObject);
+			this.scene.objectCollection().add(
+					sceneObject);
 		}
 
 		// if its in the animation map already then we need to be careful 
@@ -258,23 +258,23 @@ SaySpeechCallDialogTreeEventHandlerAPI
 			// much simpler if not in the animation map. 
 			animation = new Animation(
 					animationTextualId,
-					roomObject);
+					sceneObject);
 			this.theAnimationMap.put(
 					objPlusAnimCode, animation);
-			roomObject.animations().add(
+			sceneObject.animations().add(
 					animation);
-		} else // ... it already exists but isn't in the roomObjectList...
+		} else // ... it already exists but isn't in the sceneObjectList...
 		{
-			Animation animation2 = roomObject.animations().at(
+			Animation animation2 = sceneObject.animations().at(
 					animationTextualId);
 
 			if (animation2 == null) {
 
-				animation.setRoomObject(
-						roomObject);
+				animation.setSceneObject(
+						sceneObject);
 				animation.setTextualId(
 						animationTextualId);
-				roomObject.animations().add(
+				sceneObject.animations().add(
 						animation);
 				// then update all properties that could have already been set on the anim
 				if (animation.getWasSetAsHomeAnimation()) {
@@ -298,7 +298,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 
 		Image imageAndPos = new Image(image,
-				this.roomPresenter.getView(),
+				this.scenePresenter.getView(),
 				new Point(x, y));
 
 
@@ -310,13 +310,13 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		imageAndPos.addImageToPanel( before );
 
 		image.addMouseMoveHandler(
-				new RoomObjectMouseOverHandler(
+				new SceneObjectMouseOverHandler(
 						bus, this,
 						objectTextualId,
-						roomObject.getObjectCode()));
+						sceneObject.getObjectCode()));
 		image.addClickHandler(
 				new ImageMouseClickHandler(bus,
-						this.roomPresenter.getView()));
+						this.scenePresenter.getView()));
 
 		if (numberPrefix
 				> noImagesAreGreaterThanThis) {
@@ -326,8 +326,8 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		return true;
 	}
 
-	public RoomObject getObject(short code) {
-		RoomObject ob = this.theObjectMap.get(
+	public SceneObject getObject(short code) {
+		SceneObject ob = this.theObjectMap.get(
 				code);
 
 		if (ob == null) {
@@ -360,12 +360,12 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 	public int getIndexOfFirstElementHigherThan(int numberPrefix) {
 		int numberOfImages = -1;
-		ArrayList<RoomObject> list = this.room.objectCollection().getSortedList();
+		ArrayList<SceneObject> list = this.scene.objectCollection().getSortedList();
 
-		Iterator<RoomObject> it = list.iterator();
+		Iterator<SceneObject> it = list.iterator();
 
 		while (it.hasNext()) {
-			RoomObject o = it.next();
+			SceneObject o = it.next();
 
 			if (o.getCodePrefix()
 					> numberPrefix) {
@@ -390,7 +390,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		return numberOfImages;
 	}
 
-	public void onEnterRoom() {
+	public void onEnterScene() {
 		NullParentAction npa = new NullParentAction();
 		npa.setApi(this);
 		BaseAction a = this.callbacks.onEntry(this,npa);
@@ -421,15 +421,15 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	
 
 	public void showEverything() {
-		int count = this.room.objectCollection().count();
+		int count = this.scene.objectCollection().count();
 		for (int i = 0; i<count; i++) 
 		{
-			RoomObject roomObject = this.room.objectCollection().at(i);
+			SceneObject sceneObject = this.scene.objectCollection().at(i);
 
-			if (roomObject != null) {
-				if (roomObject.animations().at(RoomAPI.INITIAL)!= null) 
+			if (sceneObject != null) {
+				if (sceneObject.animations().at(SceneAPI.INITIAL)!= null) 
 				{
-					roomObject.animations().at(RoomAPI.INITIAL).setAsCurrentAnimation();
+					sceneObject.animations().at(SceneAPI.INITIAL).setAsCurrentAnimation();
 				} 
 				else 
 				{
@@ -445,7 +445,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 
 
-	public void prepareRoomForFocus() {
+	public void prepareSceneForFocus() {
 		this.callbacks.onPreEntry(this);
 	}	
 
@@ -458,16 +458,16 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 
 
-	public void showEverythingThenEnterRoom()
+	public void showEverythingThenEnterScene()
 	{
 
-		prepareRoomForFocus();
+		prepareSceneForFocus();
 		showEverything();
 		loadInventoryFromAPI();
 		this.dialogTreePresenter.setInDialogTreeMode(
 				false);
 		startEveryFrameCallbacks();
-		onEnterRoom();
+		onEnterScene();
 	}
 
 	public void loadInventoryFromAPI() {
@@ -512,17 +512,17 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		return property != 0;
 	}
 
-	public void switchToRoom(String room) {
-		// since instantiateRoom..ToIt does some assynchronous stuff,
+	public void switchToScene(String scene) {
+		// since instantiateScene..ToIt does some assynchronous stuff,
 		// I thought maybe I could do it, then cancel the timers.
 		// but I've put it off til I need the microseconds.
 		cancelTimer();
 		this.actionRunner.cancel();
-		this.parent.instantiateRoomAndCallSetRoomBackOnTheMasterPresenter(	room);
+		this.parent.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(	scene);
 	}
 
 	@Override
-	public String getLastRoom() {
+	public String getLastScene() {
 
 		return null;
 	}
@@ -580,12 +580,12 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	}
 
 	@Override
-	public RoomAPI getCurrentRoom() {
+	public SceneAPI getCurrentScene() {
 		return this.callbacks;
 	}
 
 	@Override
-	public void executeBranchOnCurrentRoom(int branchId) {
+	public void executeBranchOnCurrentScene(int branchId) {
 		NullParentAction npa = new NullParentAction();
 		npa.setApi(this);
 		BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, npa, branchId);
@@ -598,8 +598,8 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	public void saySpeechAndThenExecuteBranchWithBranchId(String speech, int branchId) {
 		this.dialogTreePresenter.clear();
 
-		// this code is dodgey because it doesn't use the current room to execute..
-		// it uses a dynamically created room to execute it. This seems ok, if it has the same api pointer.
+		// this code is dodgey because it doesn't use the current scene to execute..
+		// it uses a dynamically created scene to execute it. This seems ok, if it has the same api pointer.
 		short objId = getDialogTreeGui().getDialogTreeTalker();
 		
 		NullParentAction npa = new NullParentAction();
@@ -621,8 +621,8 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	}
 
 	@Override
-	public RoomPresenter getRoomGui() {
-		return this.roomPresenter;
+	public ScenePresenter getSceneGui() {
+		return this.scenePresenter;
 	}
 
 	@Override
@@ -667,7 +667,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	void startGame()
 	{
 		setGameActive();
-		showEverythingThenEnterRoom();
+		showEverythingThenEnterScene();
 	}
 
 
@@ -740,13 +740,13 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.theObjectMap.clear();
 		this.theAnimationMap.clear();
 		this.noImagesAreGreaterThanThis = 0;
-		this.room = new Room();
+		this.scene = new Scene();
 
-		roomPresenter.clear();
+		scenePresenter.clear();
 		loadingPresenter.clear();
 		commandLinePresenter.clear();
 		verbsPresenter.clear();
-		roomPresenter.clear();
+		scenePresenter.clear();
 
 		if(!isSameInventory)
 		{
@@ -845,7 +845,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 	@Override
 	public void setWorldViewSize(int width, int height) {
-		this.roomPresenter.setWorldViewSize(width, height);
+		this.scenePresenter.setWorldViewSize(width, height);
 		
 	}
 
@@ -854,9 +854,9 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		return textSpeedDelay;
 	}
 
-	public void setRoom(RoomAPI roomCallbacks) {
+	public void setScene(SceneAPI sceneCallbacks) {
 		
-		setCallbacks(roomCallbacks);
+		setCallbacks(sceneCallbacks);
 
 		this.callbacks.onFillLoadList(new OnFillLoadListAPIImpl(this));
 	}

@@ -12,7 +12,7 @@ public class MasterPanel extends VerticalPanel {
     SimplePanel hostForCommandLine;
     SimplePanel hostForInventory;
     SimplePanel hostForVerbs;
-    SimplePanel hostForRoom;
+    SimplePanel hostForScene;
     SimplePanel hostForDialogTree;
     SimplePanel hostForLoading;
     
@@ -22,20 +22,20 @@ public class MasterPanel extends VerticalPanel {
         hostForCommandLine = new SimplePanel();
         hostForInventory = new SimplePanel();
         hostForVerbs = new SimplePanel();
-        hostForRoom = new SimplePanel();
+        hostForScene = new SimplePanel();
         hostForDialogTree = new SimplePanel();
         hostForLoading = new SimplePanel();
     	
 
         // will be constructed from two vertical stacks.
-    	AbsolutePanel stackForRoomAndLoading = new AbsolutePanel();
+    	AbsolutePanel stackForSceneAndLoading = new AbsolutePanel();
     	AbsolutePanel stackForDialogTreeInvAndCommand = new AbsolutePanel();
  
         DOM.setStyleAttribute(
         		stackForDialogTreeInvAndCommand.getElement(),
                 "backgroundColor", "Black");
         DOM.setStyleAttribute(
-        		stackForRoomAndLoading.getElement(),
+        		stackForSceneAndLoading.getElement(),
                 "backgroundColor", "Black");
      
 
@@ -57,11 +57,11 @@ public class MasterPanel extends VerticalPanel {
         	stackForDialogTreeInvAndCommand.add(hostForDialogTree);
         }
         {
-        	stackForRoomAndLoading.add(hostForRoom);
-        	stackForRoomAndLoading.add(hostForLoading,0,0);
+        	stackForSceneAndLoading.add(hostForScene);
+        	stackForSceneAndLoading.add(hostForLoading,0,0);
         }
         
-        this.add(stackForRoomAndLoading);
+        this.add(stackForSceneAndLoading);
         this.add(stackForDialogTreeInvAndCommand);
     	
     }
@@ -80,8 +80,8 @@ public class MasterPanel extends VerticalPanel {
 	}
 
 
-	public SimplePanel getHostForRoom() {
-		return hostForRoom;
+	public SimplePanel getHostForScene() {
+		return hostForScene;
 	}
 
 

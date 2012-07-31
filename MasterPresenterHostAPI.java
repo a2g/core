@@ -14,30 +14,30 @@ public interface MasterPresenterHostAPI {
      * Is there to persist state data at the time the state data change occurs.
      * The setting of most types of state data is ultimately done by this method.
      * It is needed for the inventory to remember it contains an object
-     * when moving from one room to the next. It is also called in reponse
-     * to calls of @ref com.github.a2g.core.authoredroom.InternalAPI::setValue(String name, int value);	
+     * when moving from one scene to the next. It is also called in reponse
+     * to calls of @ref com.github.a2g.core.authoredscene.InternalAPI::setValue(String name, int value);	
      */
     public void setValue(String name, int value);
 
     /**
      * The retrieval of most types of state data is ultimately done by this method.
      * It is needed by the inventory to remember it contains an object when moving from
-     * one room to the next. It is also called in response
-     * to calls of @ref com.github.a2g.core.authoredroom.InternalAPI::getValue(String name);	
+     * one scene to the next. It is also called in response
+     * to calls of @ref com.github.a2g.core.authoredscene.InternalAPI::getValue(String name);	
      */
     public int getValue(String name);
 
     /**
-     * Is there to switchRooms. The room loading isn't managed
+     * Is there to switchScenes. The scene loading isn't managed
      * by the core package, and there is no progress bar for it. So instead, it is
-     * passed back to the host. Whilst you load the room you can do whatever you like, 
+     * passed back to the host. Whilst you load the scene you can do whatever you like, 
      * and put up a splash screen or something. There is no progress bar because there 
-     * is no way to split a room up in to the discreet chunks needed for progress bar 
+     * is no way to split a scene up in to the discreet chunks needed for progress bar 
      * style loading. Perhaps each doCommand handler could be a discreet package, that 
      * can be arbitrarily bundled and loaded via a progress bar..hmmmm.
      * 
      */
-    public void instantiateRoomAndCallSetRoomBackOnTheMasterPresenter(String room);
+    public void instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(String scene);
 
     /**
      * Is there merely to export analytical data so it may be analyzed, and perhaps used to

@@ -1,6 +1,6 @@
 package com.github.a2g.core;
 
-import com.github.a2g.core.authoredroom.InternalAPI;
+import com.github.a2g.core.authoredscene.InternalAPI;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;

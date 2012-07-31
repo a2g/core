@@ -6,12 +6,12 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.Animation;
-import com.github.a2g.core.RoomObject;
+import com.github.a2g.core.SceneObject;
 import com.github.a2g.core.action.BaseAction;
 
 
 public class WalkToAction extends BaseAction {
-    private RoomObject obj;
+    private SceneObject obj;
     private double startX;
     private double startY;
     private double endX;
@@ -73,26 +73,26 @@ public class WalkToAction extends BaseAction {
 
         // anim
         String anim = "";
-        int width = getApi().getRoomGui().getWidth();
-        int height = getApi().getRoomGui().getHeight();
+        int width = getApi().getSceneGui().getWidth();
+        int height = getApi().getSceneGui().getHeight();
 
         if ((diffX * width) * (diffX * width)
                 > (diffY * height)
                         * (diffY * height)) {
             if (this.endX < this.startX) {
                 anim = this.obj.getSpecialAnimation(
-                        com.github.a2g.core.authoredroom.RoomAPI.Special.West);
+                        com.github.a2g.core.authoredscene.SceneAPI.Special.West);
             } else {
                 anim = this.obj.getSpecialAnimation(
-                        com.github.a2g.core.authoredroom.RoomAPI.Special.East);
+                        com.github.a2g.core.authoredscene.SceneAPI.Special.East);
             }
         } else {
             if (this.endY < this.startY) {
                 anim = this.obj.getSpecialAnimation(
-                        com.github.a2g.core.authoredroom.RoomAPI.Special.North);
+                        com.github.a2g.core.authoredscene.SceneAPI.Special.North);
             } else {
                 anim = this.obj.getSpecialAnimation(
-                        com.github.a2g.core.authoredroom.RoomAPI.Special.South);
+                        com.github.a2g.core.authoredscene.SceneAPI.Special.South);
             }
         }
         this.obj.setCurrentAnimation(anim);
@@ -111,7 +111,7 @@ public class WalkToAction extends BaseAction {
     protected void onCompleteGameAction() {
 
         String anim = this.obj.getSpecialAnimation(
-                com.github.a2g.core.authoredroom.RoomAPI.Special.South);
+                com.github.a2g.core.authoredscene.SceneAPI.Special.South);
 
         this.obj.setCurrentAnimation(anim);
         this.obj.setCurrentFrame(0);

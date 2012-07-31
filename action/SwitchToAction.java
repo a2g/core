@@ -10,15 +10,15 @@ import com.github.a2g.core.action.BaseDialogTreeAction;
 
 
 /* ! This inherits from BaseDialogTreeAction because it is valid to be used as 
- *  the last action in a chain that is returned from RoomAPI.onDialogTree().
+ *  the last action in a chain that is returned from SceneAPI.onDialogTree().
  *  You can use it in all places where you would use a GameAction
  */
 public class SwitchToAction extends BaseDialogTreeAction {
-    private String room;
+    private String scene;
 
     public SwitchToAction(BaseAction parent, String e) {
         super(parent, parent.getApi());
-        this.room = e;
+        this.scene = e;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class SwitchToAction extends BaseDialogTreeAction {
     @Override
     protected void onCompleteGameAction() {
 
-        getApi().switchToRoom(this.room);
+        getApi().switchToScene(this.scene);
 
     }
 

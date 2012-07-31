@@ -6,14 +6,14 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.Animation;
-import com.github.a2g.core.RoomObject;
+import com.github.a2g.core.SceneObject;
 import com.github.a2g.core.action.BaseAction;
 
 
 public class PlayAnimationAction extends BaseAction {
     private int delay;
     private Animation anim;
-    private RoomObject animsParent;
+    private SceneObject animsParent;
     private boolean isBackwards;
     private boolean holdLastFrame;
     private boolean isNonBlocking;
@@ -61,7 +61,7 @@ public class PlayAnimationAction extends BaseAction {
         
         if (!this.holdLastFrame) {
             if (this.anim != null) {
-                RoomObject o = anim.getObject();
+                SceneObject o = anim.getObject();
 
                 if (o != null) {
                     String s = o.getHomeAnimation();

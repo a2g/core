@@ -2,7 +2,7 @@
  * Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
  *  DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.
  */
-package com.github.a2g.core.authoredroom;
+package com.github.a2g.core.authoredscene;
 
 public interface ConstantsForAPI {
 	 public static final int MAX_OBJS = 32; // if you want a large range of consecutive odd numbers that produce unique products, then the lower bound of that range odd number needs to be sufficiently high

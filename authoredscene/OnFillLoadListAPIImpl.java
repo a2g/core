@@ -1,4 +1,4 @@
-package com.github.a2g.core.authoredroom;
+package com.github.a2g.core.authoredscene;
 
 import com.github.a2g.core.loader.ImageBundleLoaderAPI;
 

@@ -1,7 +1,7 @@
 package com.github.a2g.core;
 
 
-import com.github.a2g.core.authoredroom.InternalAPI;
+import com.github.a2g.core.authoredscene.InternalAPI;
 
 
 public class CommandLine {

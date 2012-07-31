@@ -4,7 +4,7 @@
  */
 package com.github.a2g.core;
 
-import com.github.a2g.core.authoredroom.RoomAPI;
+import com.github.a2g.core.authoredscene.SceneAPI;
 
 
 
@@ -15,7 +15,7 @@ public class FrameAndAnimation {
     private String currentAnimationTextualId;
     public FrameAndAnimation(String owner) {
         this.currentFrame = 0;
-        this.currentAnimationTextualId = RoomAPI.INITIAL;
+        this.currentAnimationTextualId = SceneAPI.INITIAL;
     }
 
     public void setCurrentFrame(int frame) {

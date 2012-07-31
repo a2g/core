@@ -1,17 +1,17 @@
-package com.github.a2g.core.authoredroom;
+package com.github.a2g.core.authoredscene;
 
 import com.github.a2g.core.Animation;
 import com.github.a2g.core.DialogTreePresenter;
 import com.github.a2g.core.CommandLinePresenter;
 import com.github.a2g.core.InventoryItem;
 import com.github.a2g.core.InventoryPresenter;
-import com.github.a2g.core.RoomObject;
-import com.github.a2g.core.RoomPresenter;
+import com.github.a2g.core.SceneObject;
+import com.github.a2g.core.ScenePresenter;
 import com.github.a2g.core.VerbsPresenter;
 
-public interface OnPreEntryAPI {
+public interface OnEveryFrameAPI {
 	   // get by ID
-    public RoomObject getObject(short code);
+    public SceneObject getObject(short code);
     public Animation getAnimation(int a);
     public InventoryItem getInventoryItem(int i);
 
@@ -25,13 +25,14 @@ public interface OnPreEntryAPI {
     public VerbsPresenter getVerbsGui();
     public InventoryPresenter getInventoryGui();
     public CommandLinePresenter getCommandLineGui();
-    public RoomPresenter getRoomGui();
+    public ScenePresenter getSceneGui();
 
     // nearly a gui method
-    public RoomAPI getCurrentRoom();
+    public SceneAPI getCurrentScene();
 
     // helpful for game
-    public void switchToRoom(String room);
-    public String getLastRoom();
+    public void switchToScene(String scene);
+    public String getLastScene();
     public boolean isInDebugMode();
+ 
 }

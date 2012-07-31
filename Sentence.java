@@ -4,7 +4,7 @@
  */
 package com.github.a2g.core;
 
-import com.github.a2g.core.authoredroom.RoomAPI;
+import com.github.a2g.core.authoredscene.SceneAPI;
 
 
 
@@ -58,7 +58,7 @@ public class Sentence {
     }
 
     final int getVerbAsCode() {
-        return this.verbAsNumber * RoomAPI.VERB_MULTIPLIER;
+        return this.verbAsNumber * SceneAPI.VERB_MULTIPLIER;
     }
 
     boolean isLookingForSecondObject() {

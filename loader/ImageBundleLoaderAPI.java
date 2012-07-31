@@ -4,7 +4,7 @@
  */
 package com.github.a2g.core.loader;
 
-import com.github.a2g.core.authoredroom.InternalAPI;
+import com.github.a2g.core.authoredscene.InternalAPI;
 import com.google.gwt.event.dom.client.LoadHandler;
 
 

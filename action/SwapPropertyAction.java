@@ -5,7 +5,7 @@
 package com.github.a2g.core.action;
 
 
-import com.github.a2g.core.RoomObject;
+import com.github.a2g.core.SceneObject;
 import com.github.a2g.core.action.BaseAction;
 
 
@@ -33,9 +33,9 @@ public class SwapPropertyAction extends BaseAction {
 
     @Override
     protected void onCompleteGameAction() {
-        RoomObject a = getApi().getObject(
+        SceneObject a = getApi().getObject(
                 this.objId1);
-        RoomObject b = getApi().getObject(
+        SceneObject b = getApi().getObject(
                 this.objId2);
 
         switch (this.type) {

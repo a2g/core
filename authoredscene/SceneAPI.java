@@ -2,15 +2,15 @@
  * Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
  *  DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.
  */
-package com.github.a2g.core.authoredroom;
+package com.github.a2g.core.authoredscene;
 
 
 import com.github.a2g.core.SentenceUnit;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
-import com.github.a2g.core.authoredroom.OnFillLoadListAPIImpl.LoadKickStarter;
+import com.github.a2g.core.authoredscene.OnFillLoadListAPIImpl.LoadKickStarter;
 
-public interface RoomAPI  extends ConstantsForAPI
+public interface SceneAPI  extends ConstantsForAPI
 {
     public LoadKickStarter onFillLoadList(OnFillLoadListAPIImpl api);
 

@@ -30,8 +30,8 @@ import com.github.a2g.core.action.DialogTreeGoToAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
-import com.github.a2g.core.authoredroom.InternalAPI;
-import com.github.a2g.core.authoredroom.PointF;
+import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.authoredscene.PointF;
 
 
 // import com.google.gwt.animation.client.Animation;
@@ -365,9 +365,9 @@ public abstract class BaseAction extends com.google.gwt.animation.client.Animati
                 objId1, objId2, type);
     }
 
-    public BaseDialogTreeAction  switchTo(String roomName) {
+    public BaseDialogTreeAction  switchTo(String sceneName) {
         return new SwitchToAction(this,
-                roomName);
+                sceneName);
         // return toReturn;
     }
 

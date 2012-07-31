@@ -4,7 +4,7 @@
  */
 package com.github.a2g.core;
 
-import com.github.a2g.core.authoredroom.RoomAPI;
+import com.github.a2g.core.authoredscene.SceneAPI;
 
 
 
@@ -12,14 +12,14 @@ import com.github.a2g.core.authoredroom.RoomAPI;
 public class Animation {
     private String textualId;
     private com.github.a2g.core.ImageCollection imageAndPosCollection;
-    private RoomObject parent;
+    private SceneObject parent;
     private boolean wasSetAsHomeAnimation;
     private boolean wasSetAsTalkingAnimation;
     private boolean wasSetAsCurrentAnimation;
-    private RoomAPI.Special specialAnimationThisWasSetTo;
+    private SceneAPI.Special specialAnimationThisWasSetTo;
 
-    public Animation(String textualId, RoomObject owningRoomObject) {
-        this.parent = owningRoomObject;
+    public Animation(String textualId, SceneObject owningSceneObject) {
+        this.parent = owningSceneObject;
         this.textualId = textualId;
         imageAndPosCollection = new com.github.a2g.core.ImageCollection();
         wasSetAsHomeAnimation = false;
@@ -36,7 +36,7 @@ public class Animation {
         return textualId;
     }
 
-    public RoomObject	getObject() {
+    public SceneObject	getObject() {
         return parent;
     }
 
@@ -99,7 +99,7 @@ public class Animation {
 
     public void playAnimationBackwardsHoldLastFrame() {}
 
-    public void setAsSpecialAnimation(RoomAPI.Special special) {
+    public void setAsSpecialAnimation(SceneAPI.Special special) {
         specialAnimationThisWasSetTo = special;
         if (parent != null) {
             parent.setSpecialAnimation(special,
@@ -134,11 +134,11 @@ public class Animation {
         }
     }
 
-    public void setRoomObject(RoomObject parent) {
+    public void setSceneObject(SceneObject parent) {
         this.parent = parent;
     }
 
-    public RoomObject getRoomObject() {
+    public SceneObject getSceneObject() {
         return parent;
     }
 
@@ -161,7 +161,7 @@ public class Animation {
         return wasSet;
     }
 
-    public RoomAPI.Special getDesignatedSpecialAnimation() {
+    public SceneAPI.Special getDesignatedSpecialAnimation() {
         return specialAnimationThisWasSetTo;
     }
 }
