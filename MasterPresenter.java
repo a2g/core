@@ -98,7 +98,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.parent = parent;
 		this.isOkToWaitForImages = true;
 		this.noImagesAreGreaterThanThis = 0;
-		this.textSpeedDelay = 10;
+		this.textSpeedDelay = 20;
 		this.theObjectMap = new TreeMap<Short, SceneObject>();
 		this.theAnimationMap = new TreeMap<Integer, Animation>();
 		this.mapOfEssentialLoaders = new LinkedList<ImageBundleLoader>();
@@ -853,6 +853,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	public int getPopupDelay() {
 		return textSpeedDelay;
 	}
+
 
 	public void setScene(SceneAPI sceneCallbacks) {
 		
