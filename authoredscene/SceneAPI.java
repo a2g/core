@@ -5,10 +5,10 @@
 package com.github.a2g.core.authoredscene;
 
 
-import com.github.a2g.core.SentenceUnit;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.authoredscene.OnFillLoadListAPIImpl.LoadKickStarter;
+import com.github.a2g.core.objectmodel.SentenceUnit;
 
 public interface SceneAPI  extends ConstantsForAPI
 {

@@ -6,11 +6,11 @@ package com.github.a2g.core.action;
 
 import java.util.ArrayList;
 
-import com.github.a2g.core.Animation;
-import com.github.a2g.core.SceneObject;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.authoredscene.ColorEnum;
 import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.objectmodel.Animation;
+import com.github.a2g.core.objectmodel.SceneObject;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Label;

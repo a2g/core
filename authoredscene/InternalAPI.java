@@ -5,15 +5,15 @@
 package com.github.a2g.core.authoredscene;
 
 
-import com.github.a2g.core.Animation;
-import com.github.a2g.core.DialogTreePresenter;
-import com.github.a2g.core.CommandLinePresenter;
-import com.github.a2g.core.InventoryItem;
-import com.github.a2g.core.InventoryPresenter;
-import com.github.a2g.core.SceneObject;
-import com.github.a2g.core.ScenePresenter;
-import com.github.a2g.core.VerbsPresenter;
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.objectmodel.Animation;
+import com.github.a2g.core.objectmodel.CommandLinePresenter;
+import com.github.a2g.core.objectmodel.DialogTreePresenter;
+import com.github.a2g.core.objectmodel.InventoryItem;
+import com.github.a2g.core.objectmodel.InventoryPresenter;
+import com.github.a2g.core.objectmodel.SceneObject;
+import com.github.a2g.core.objectmodel.ScenePresenter;
+import com.github.a2g.core.objectmodel.VerbsPresenter;
 
 
 public interface InternalAPI 
