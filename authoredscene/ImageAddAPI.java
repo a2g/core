@@ -4,8 +4,8 @@
  */
 package com.github.a2g.core.authoredscene;
 
-import com.google.gwt.event.dom.client.LoadHandler;
-import com.google.gwt.resources.client.ImageResource;
+import com.github.a2g.core.bridge.LoadHandler;
+import com.github.a2g.core.bridge.ImageResource;
 
 
 public interface ImageAddAPI {

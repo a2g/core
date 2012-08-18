@@ -5,7 +5,7 @@
 package com.github.a2g.core.event;
 
 
-import com.google.gwt.event.shared.GwtEvent;
+import com.github.a2g.core.bridge.GwtEvent;
 
 
 public class PropertyChangeEvent extends GwtEvent<PropertyChangeEventHandlerAPI> {

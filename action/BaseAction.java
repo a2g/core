@@ -34,11 +34,7 @@ import com.github.a2g.core.authoredscene.InternalAPI;
 import com.github.a2g.core.authoredscene.PointF;
 
 
-// import com.google.gwt.animation.client.Animation;
-
-
-
-public abstract class BaseAction extends com.google.gwt.animation.client.Animation {	
+public abstract class BaseAction extends com.github.a2g.core.bridge.Animation {	
     private ActionCallbackAPI callbacks;
     protected BaseAction parent;
     private InternalAPI api;

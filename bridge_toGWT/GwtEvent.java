@@ -1,12 +1,12 @@
 package com.github.a2g.core.bridge;
 
-import com.github.a2g.core.bridge.Event;
 import com.github.a2g.core.bridge.EventHandler;
+import com.google.web.bindery.event.shared.Event;
 
 public abstract class GwtEvent<H extends EventHandler> extends Event<H> 
 {
 
-  public static class Type<H> extends com.github.a2g.core.bridge.Event.Type<H> {
+  public static class Type<H> extends Event.Type<H> {
   }
 
   private boolean dead;

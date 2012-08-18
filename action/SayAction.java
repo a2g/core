@@ -9,18 +9,16 @@ import java.util.ArrayList;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.authoredscene.ColorEnum;
 import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.bridge.PopupPanelWithLabel;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.SceneObject;
 
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.PopupPanel;
+
 
 public class SayAction extends BaseAction {
 	private ArrayList<String> speech;
 	private ArrayList<Double> ceilings;
-	private PopupPanel popup;
-	private Label labelInPopup;
+	private PopupPanelWithLabel popup;
 	private short objId;
 	private double totalDuration;
 	private Animation anim;
@@ -60,21 +58,14 @@ public class SayAction extends BaseAction {
 	@Override
 	public void runGameAction() {
 
-		this.popup = new PopupPanel();
-		this.popup.setTitle(speech.get(0));
-		this.labelInPopup = new Label(speech.get(0));
-
-		this.popup.setWidget(labelInPopup);
-
 		ColorEnum color = ColorEnum.Blue;
 
 		if (object != null && object.getTalkingColor() != null) {
 			color = object.getTalkingColor();
 		}
-		DOM.setStyleAttribute(labelInPopup.getElement(), "color",
-				color.toString());
-		DOM.setStyleAttribute(popup.getElement(), "borderColor",
-				color.toString());
+		this.popup = new PopupPanelWithLabel(speech.get(0), color);
+				
+	
 
 		if (object != null) {
 			String talkingAnimTextualId = object.getTalkingAnimation();
@@ -111,7 +102,7 @@ public class SayAction extends BaseAction {
 		// update text bubble
 		for (int i = 0; i < ceilings.size(); i++) {
 			if (progress < ceilings.get(i)) {
-				popup.setWidget(new Label(speech.get(i)));
+				popup.updateText(speech.get(i));
 				break;
 			}
 		}

@@ -39,12 +39,12 @@ import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
 import com.github.a2g.core.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.mouse.InventoryItemMouseOverHandler;
 import com.github.a2g.core.mouse.SceneObjectMouseOverHandler;
-import com.google.gwt.resources.client.ImageResource;
+import com.github.a2g.core.bridge.ImageResource;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.event.dom.client.LoadHandler;
+import com.github.a2g.core.bridge.LoadHandler;
 import com.google.web.bindery.event.shared.EventBus;
 
 
@@ -176,8 +176,8 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		}
 	}
 	@Override
-	public boolean addImageForAnInventoryItem(LoadHandler lh, String objectTextualId, int objectCode, ImageResource imageResource) {
-
+	public boolean addImageForAnInventoryItem(LoadHandler lh, String objectTextualId, int objectCode, ImageResource imageResource)
+	{
 		if (this.callbacks == null) {
 			return true;
 		}

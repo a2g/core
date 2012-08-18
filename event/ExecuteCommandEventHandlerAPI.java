@@ -5,7 +5,7 @@
 package com.github.a2g.core.event;
 
 
-import com.google.gwt.event.shared.EventHandler;
+import com.github.a2g.core.bridge.EventHandler;
 
 
 public interface ExecuteCommandEventHandlerAPI extends EventHandler {
