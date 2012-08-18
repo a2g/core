@@ -4,7 +4,7 @@ package com.github.a2g.core.objectmodel;
 import com.github.a2g.core.mouse.DialogTreeMouseClickHandler;
 import com.github.a2g.core.mouse.DialogTreeMouseOutHandler;
 import com.github.a2g.core.mouse.DialogTreeMouseOverHandler;
-import com.google.web.bindery.event.shared.EventBus;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 

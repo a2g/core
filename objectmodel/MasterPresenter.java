@@ -45,7 +45,10 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.github.a2g.core.bridge.LoadHandler;
-import com.google.web.bindery.event.shared.EventBus;
+import com.google.gwt.event.shared.EventBus;
+
+
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 
 public class MasterPresenter  
