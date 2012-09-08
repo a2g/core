@@ -5,9 +5,10 @@
 package com.github.a2g.core.objectmodel;
 
 
+import com.github.a2g.bridge.Image;
 import com.github.a2g.core.event.PropertyChangeEvent;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.ui.Image;
+
 
 
 public class InventoryItem {

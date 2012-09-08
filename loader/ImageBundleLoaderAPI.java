@@ -5,7 +5,7 @@
 package com.github.a2g.core.loader;
 
 import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.core.bridge.LoadHandler;
+import com.github.a2g.bridge.LoadHandler;
 
 
 public interface ImageBundleLoaderAPI

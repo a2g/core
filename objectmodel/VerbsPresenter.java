@@ -1,6 +1,7 @@
 package com.github.a2g.core.objectmodel;
 
 
+import com.github.a2g.bridge.panel.VerbsPanel;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 

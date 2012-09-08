@@ -5,6 +5,7 @@
 package com.github.a2g.core.objectmodel;
 
 
+import com.github.a2g.bridge.panel.DialogTreePanel;
 import com.github.a2g.core.authoredscene.InternalAPI;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;

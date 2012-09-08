@@ -5,7 +5,7 @@
 package com.github.a2g.core.event;
 
 
-import com.github.a2g.core.bridge.GwtEvent;
+import com.github.a2g.bridge.GwtEvent;
 
 
 public class SaySpeechCallDialogTreeEvent extends GwtEvent<SaySpeechCallDialogTreeEventHandlerAPI> {

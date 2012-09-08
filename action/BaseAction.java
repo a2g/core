@@ -31,10 +31,10 @@ import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.core.authoredscene.PointF;
+import com.github.a2g.bridge.PointF;
 
 
-public abstract class BaseAction extends com.github.a2g.core.bridge.Animation {	
+public abstract class BaseAction extends com.github.a2g.bridge.Animation {	
     private ActionCallbackAPI callbacks;
     protected BaseAction parent;
     private InternalAPI api;

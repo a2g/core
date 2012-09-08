@@ -3,6 +3,8 @@ package com.github.a2g.core.objectmodel;
 
 import java.util.TreeMap;
 
+import com.github.a2g.bridge.Image;
+import com.github.a2g.bridge.panel.InventoryPanel;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.event.shared.EventBus;
 
@@ -28,7 +30,7 @@ public class InventoryPresenter {
         return theInventory;
     }
 
-    public boolean addInventory(String objectTextualId, int objectCode, com.google.gwt.user.client.ui.Image image) {
+    public boolean addInventory(String objectTextualId, int objectCode, Image image) {
         boolean isCarrying = parent.getValue(
                 "CARRYING_"
                         + objectTextualId.toUpperCase())

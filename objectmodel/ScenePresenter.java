@@ -1,7 +1,9 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.authoredscene.Point;
+import com.github.a2g.bridge.Image;
+import com.github.a2g.bridge.Point;
+import com.github.a2g.bridge.panel.ScenePanel;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
@@ -71,7 +73,7 @@ public class ScenePresenter {
 		view.clear();
 	}
 	
-	public void inititateLoadingOfImage(com.google.gwt.user.client.ui.Image image) {
+	public void inititateLoadingOfImage(Image image) {
 		view.add(image);
 	}
     

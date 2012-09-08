@@ -31,20 +31,22 @@ import com.github.a2g.core.authoredscene.OnEveryFrameAPI;
 import com.github.a2g.core.authoredscene.OnFillLoadListAPI;
 import com.github.a2g.core.authoredscene.OnFillLoadListAPIImpl;
 import com.github.a2g.core.authoredscene.OnPreEntryAPI;
-import com.github.a2g.core.authoredscene.Point;
+import com.github.a2g.bridge.Point;
 import com.github.a2g.core.authoredscene.SceneAPI;
+import com.github.a2g.bridge.handler.ImageMouseClickHandler;
+import com.github.a2g.bridge.handler.InventoryItemMouseOverHandler;
+import com.github.a2g.bridge.handler.SceneObjectMouseOverHandler;
+import com.github.a2g.bridge.panel.MasterPanel;
 
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
-import com.github.a2g.core.mouse.ImageMouseClickHandler;
-import com.github.a2g.core.mouse.InventoryItemMouseOverHandler;
-import com.github.a2g.core.mouse.SceneObjectMouseOverHandler;
-import com.github.a2g.core.bridge.ImageResource;
+import com.github.a2g.bridge.Image;
+import com.github.a2g.bridge.ImageResource;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Widget;
-import com.github.a2g.core.bridge.LoadHandler;
+import com.github.a2g.bridge.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
 
 
@@ -75,13 +77,12 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private SceneAPI callbacks;
 	private TreeMap<Short, SceneObject> theObjectMap;
 	private TreeMap<Integer, Animation> theAnimationMap;
-	private TreeMap<String, com.google.gwt.user.client.ui.Image> theLoadedImageMap;
 	private Set<String> setOfCompletedLoaders;
 
 	private EventBus bus;
 	private MasterPresenterHostAPI parent;
 	private int noImagesAreGreaterThanThis;
-	private int numberOfImagesToLoad;
+	
 	private Timer timer;
 	private Scene scene;
 	private MasterPanel masterPanel;
@@ -106,7 +107,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.theAnimationMap = new TreeMap<Integer, Animation>();
 		this.mapOfEssentialLoaders = new LinkedList<ImageBundleLoader>();
 		this.mapOfNonEssentialLoaders = new LinkedList <ImageBundleLoader>();
-		this.theLoadedImageMap = new TreeMap<String, com.google.gwt.user.client.ui.Image>();
 		this.setOfCompletedLoaders = new TreeSet<String>();
 		this.m_imagesYetToLoad = 0;
 		this.actionRunner = new ActionRunner();
@@ -156,28 +156,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	}
 
 	
-	final com.google.gwt.user.client.ui.Image getImageFromResource(ImageResource imageResource, LoadHandler lh)
-	{
-		this.numberOfImagesToLoad++;
-		assert (imageResource != null);
-		if(theLoadedImageMap.containsKey(imageResource.toString()))
-		{
-			final com.google.gwt.user.client.ui.Image image = theLoadedImageMap.get(imageResource.toString());
-			lh.onLoad(null);
-			return image;
-		}
-		else
-		{
-			final com.google.gwt.user.client.ui.Image image = new com.google.gwt.user.client.ui.Image(
-				imageResource);
-			theLoadedImageMap.put(imageResource.toString(), image);
-			if(lh!=null)
-			{
-				image.addLoadHandler(lh);
-			}
-			return image;
-		}
-	}
+	
 	@Override
 	public boolean addImageForAnInventoryItem(LoadHandler lh, String objectTextualId, int objectCode, ImageResource imageResource)
 	{
@@ -188,20 +167,24 @@ SaySpeechCallDialogTreeEventHandlerAPI
 				objectTextualId);
 		boolean result = true;
 
-		com.google.gwt.user.client.ui.Image image = getImageFromResource(imageResource,lh);
-		//Image imageAndPos = new Image(image,this.scenePresenter.getView(),new Point(x, y));
+		
+		if (item == null) 
+		{
 
-		if (item == null) {
-
+			Image image = scenePresenter.getView().createNewInventoryImage(
+					imageResource,lh, bus, objectTextualId, objectCode, 0,0);
+			
 			image.addMouseMoveHandler(
 					new InventoryItemMouseOverHandler(
-							bus, this,
+							bus, 
+							this,
 							objectTextualId,
 							objectCode));
 			image.addClickHandler(
 					new ImageMouseClickHandler(
 							bus,
-							this.scenePresenter.getView()));
+							this.getSceneGui().getView()));
+			
 
 			result = inventoryPresenter.addInventory(
 					objectTextualId, objectCode,
@@ -297,29 +280,26 @@ SaySpeechCallDialogTreeEventHandlerAPI
 			}
 		}
 
-		com.google.gwt.user.client.ui.Image image = getImageFromResource(imageResource,lh);
 
-
-		Image imageAndPos = new Image(image,
-				this.scenePresenter.getView(),
-				new Point(x, y));
-
-
-		animation.getImageAndPosCollection().add(
-				imageAndPos);
 		int before = getIndexOfFirstElementHigherThan(
 				numberPrefix);
-
+		
+		Image imageAndPos = this.scenePresenter.getView().createNewImageAndAddToPanel(lh, imageResource, bus, before, x,y, animationTextualId);
 		imageAndPos.addImageToPanel( before );
 
-		image.addMouseMoveHandler(
+		imageAndPos.addMouseMoveHandler(
 				new SceneObjectMouseOverHandler(
 						bus, this,
 						objectTextualId,
-						sceneObject.getObjectCode()));
-		image.addClickHandler(
-				new ImageMouseClickHandler(bus,
-						this.scenePresenter.getView()));
+						objectCode));
+		
+		imageAndPos.addClickHandler(	new ImageMouseClickHandler(bus,	this.getSceneGui().getView()));
+
+		
+		animation.getImageAndPosCollection().add(
+				imageAndPos);
+
+
 
 		if (numberPrefix
 				> noImagesAreGreaterThanThis) {
