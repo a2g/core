@@ -281,10 +281,14 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		}
 
 
+
+		
+		Image imageAndPos = this.scenePresenter.getView().createNewImageAndAddToPanel(lh, imageResource, bus, x,y, animationTextualId);
+		
+		animation.getImageAndPosCollection().add(
+				imageAndPos);
 		int before = getIndexOfFirstElementHigherThan(
 				numberPrefix);
-		
-		Image imageAndPos = this.scenePresenter.getView().createNewImageAndAddToPanel(lh, imageResource, bus, before, x,y, animationTextualId);
 		imageAndPos.addImageToPanel( before );
 
 		imageAndPos.addMouseMoveHandler(
@@ -294,12 +298,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 						objectCode));
 		
 		imageAndPos.addClickHandler(	new ImageMouseClickHandler(bus,	this.getSceneGui().getView()));
-
-		
-		animation.getImageAndPosCollection().add(
-				imageAndPos);
-
-
 
 		if (numberPrefix
 				> noImagesAreGreaterThanThis) {
