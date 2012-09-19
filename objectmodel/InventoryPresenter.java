@@ -5,7 +5,7 @@ import java.util.TreeMap;
 
 import com.github.a2g.bridge.Image;
 import com.github.a2g.bridge.panel.InventoryPanel;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.github.a2g.bridge.AcceptsOneThing;
 import com.google.gwt.event.shared.EventBus;
 
 
@@ -17,12 +17,12 @@ public class InventoryPresenter {
     MasterPresenterHostAPI parent;
     private TreeMap<Integer, InventoryItem> theInventoryItemMap;
 	  
-    public InventoryPresenter(final AcceptsOneWidget panel, EventBus bus, MasterPresenterHostAPI parent) {
+    public InventoryPresenter(final AcceptsOneThing panel, EventBus bus, MasterPresenterHostAPI parent) {
         this.eventBus = bus;
         this.parent = parent;
         this.theInventory = new Inventory();
         this.view = new InventoryPanel();
-        panel.setWidget(view);
+        panel.setThing(view);
         this.theInventoryItemMap = new TreeMap<Integer, InventoryItem>();
     }
 

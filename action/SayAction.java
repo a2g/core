@@ -111,7 +111,7 @@ public class SayAction extends BaseAction {
 			int numberOfFramesSoFar = (int) (progress * numberOfFramesTotal);
 			int frame = numberOfFramesSoFar % anim.getFrames().count();
 
-			this.object.setCurrentFrame((int) frame);
+			this.object.setCurrentFrame(frame);
 		}
 	}
 

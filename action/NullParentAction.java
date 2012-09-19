@@ -14,7 +14,8 @@ public class NullParentAction extends BaseDialogTreeAction {
         super(null, null);
     }
 
-    public void setApi(InternalAPI api) {
+    @Override
+	public void setApi(InternalAPI api) {
         super.setApi(api);
     }
 
@@ -29,7 +30,8 @@ public class NullParentAction extends BaseDialogTreeAction {
     @Override
     protected void onUpdateGameAction(double progress) {}
 
-    public void setParent(BaseAction parent) {
+    @Override
+	public void setParent(BaseAction parent) {
         this.parent = parent;
     }
 

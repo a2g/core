@@ -5,6 +5,7 @@
 package com.github.a2g.core.objectmodel;
 
 
+
 import com.github.a2g.bridge.panel.CommandLinePanel;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.NullParentAction;
@@ -15,8 +16,8 @@ import com.github.a2g.core.event.ExecuteCommandEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.event.SetRolloverEventHandlerAPI;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.UIObject;
+import com.github.a2g.bridge.AcceptsOneThing;
+
 
 
 public class CommandLinePresenter 
@@ -27,13 +28,13 @@ public class CommandLinePresenter
     private CommandLinePanel view;
     private CommandLine model;
     
-    public CommandLinePresenter(final AcceptsOneWidget panel, EventBus bus, InternalAPI api) {
+    public CommandLinePresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api) {
         this.model = new CommandLine(api);
         this.callbacks = null;
        
         this.api = api;
         this.view = new CommandLinePanel();
-        panel.setWidget(view);
+        panel.setThing(view);
         
         bus.addHandler(
                 ExecuteCommandEvent.TYPE, this);
@@ -104,8 +105,7 @@ public class CommandLinePresenter
     
     public void setVisible(boolean isVisible) {
         model.setVisible(isVisible);
-        UIObject.setVisible(view.getElement(),
-                isVisible);
+        view.setVisible(isVisible);
     }
     
     public void doNextBestThingToExecute() {

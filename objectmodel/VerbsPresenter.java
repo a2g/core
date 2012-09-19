@@ -3,7 +3,7 @@ package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.bridge.panel.VerbsPanel;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.github.a2g.bridge.AcceptsOneThing;
 
 
 public class VerbsPresenter {
@@ -11,12 +11,12 @@ public class VerbsPresenter {
     private Verbs theVerbs;
     private VerbsPanel view;
 
-    public VerbsPresenter(final AcceptsOneWidget panel, EventBus bus, MasterPresenterHostAPI parent) {
+    public VerbsPresenter(final AcceptsOneThing panel, EventBus bus, MasterPresenterHostAPI parent) {
         this.theVerbs = new Verbs();
         this.view = new VerbsPanel(theVerbs,
                 bus);
         
-        panel.setWidget(view);
+        panel.setThing(view);
     }
 
     public void setVisible(boolean isVisible) {

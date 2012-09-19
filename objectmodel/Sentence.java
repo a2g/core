@@ -4,9 +4,7 @@
  */
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.authoredscene.SceneAPI;
-
-
+import com.github.a2g.core.authoredscene.ConstantsForAPI;
 
 
 
@@ -58,7 +56,7 @@ public class Sentence {
     }
 
     final int getVerbAsCode() {
-        return this.verbAsNumber * SceneAPI.VERB_MULTIPLIER;
+        return this.verbAsNumber * ConstantsForAPI.VERB_MULTIPLIER;
     }
 
     boolean isLookingForSecondObject() {

@@ -8,7 +8,7 @@ package com.github.a2g.core.objectmodel;
 import com.github.a2g.bridge.panel.DialogTreePanel;
 import com.github.a2g.core.authoredscene.InternalAPI;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.github.a2g.bridge.AcceptsOneThing;
 
 
 public class DialogTreePresenter {
@@ -19,12 +19,12 @@ public class DialogTreePresenter {
     private boolean isInDialogTreeMode;
     private short dialogTreeTalker;
 		
-    public DialogTreePresenter(final AcceptsOneWidget panel, EventBus bus, InternalAPI api) {
+    public DialogTreePresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api) {
         this.bus = bus;
         this.api = api;
         this.theDialogTree = new DialogTree();
         this.view = new DialogTreePanel();
-        panel.setWidget(view);
+        panel.setThing(view);
         this.dialogTreeTalker = 0;
         
         this.api = api;

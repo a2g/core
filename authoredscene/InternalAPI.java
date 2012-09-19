@@ -19,29 +19,44 @@ import com.github.a2g.core.objectmodel.VerbsPresenter;
 public interface InternalAPI 
 extends ImageAddAPI, OnDoCommandAPI {
     // get by ID
-    public SceneObject getObject(short code);
-    public Animation getAnimation(int a);
-    public InventoryItem getInventoryItem(int i);
+    @Override
+	public SceneObject getObject(short code);
+    @Override
+	public Animation getAnimation(int a);
+    @Override
+	public InventoryItem getInventoryItem(int i);
 
     // property access methods
-    public void setValue(String name, int value);
-    public int getValue(String name);
-    public boolean isTrue(String name);
+    @Override
+	public void setValue(String name, int value);
+    @Override
+	public int getValue(String name);
+    @Override
+	public boolean isTrue(String name);
     
     // gui methods
-    public DialogTreePresenter getDialogTreeGui();
-    public VerbsPresenter getVerbsGui();
-    public InventoryPresenter getInventoryGui();
-    public CommandLinePresenter getCommandLineGui();
-    public ScenePresenter getSceneGui();
+    @Override
+	public DialogTreePresenter getDialogTreeGui();
+    @Override
+	public VerbsPresenter getVerbsGui();
+    @Override
+	public InventoryPresenter getInventoryGui();
+    @Override
+	public CommandLinePresenter getCommandLineGui();
+    @Override
+	public ScenePresenter getSceneGui();
 
     // nearly a gui method
-    public SceneAPI getCurrentScene();
+    @Override
+	public SceneAPI getCurrentScene();
 
     // helpful for game
-    public void switchToScene(String scene);
-    public String getLastScene();
-    public boolean isInDebugMode();
+    @Override
+	public void switchToScene(String scene);
+    @Override
+	public String getLastScene();
+    @Override
+	public boolean isInDebugMode();
     public void executeBaseActionAndProcessReturnedInteger(BaseAction a);
     public void setLastCommand(double x, double y, int v, String a, String b);
 

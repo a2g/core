@@ -4,7 +4,7 @@
  */
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.authoredscene.SceneAPI;
+import com.github.a2g.core.authoredscene.ConstantsForAPI;
 
 
 
@@ -15,7 +15,7 @@ public class FrameAndAnimation {
     private String currentAnimationTextualId;
     public FrameAndAnimation(String owner) {
         this.currentFrame = 0;
-        this.currentAnimationTextualId = SceneAPI.INITIAL;
+        this.currentAnimationTextualId = ConstantsForAPI.INITIAL;
     }
 
     public void setCurrentFrame(int frame) {

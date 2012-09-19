@@ -8,7 +8,7 @@ package com.github.a2g.core.objectmodel;
 import com.github.a2g.bridge.panel.LoadingPanel;
 import com.github.a2g.core.authoredscene.InternalAPI;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.github.a2g.bridge.AcceptsOneThing;
 
 
 public class LoadingPresenter {
@@ -16,10 +16,10 @@ public class LoadingPresenter {
     int current;
     int total;
     private String name;	
-    public LoadingPresenter(final AcceptsOneWidget panel, EventBus bus, InternalAPI api) {
+    public LoadingPresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api) {
     	this.name = "";
         this.view = new LoadingPanel(api);
-        panel.setWidget(view);
+        panel.setThing(view);
         this.current = 0;
         this.total = 0;
     }

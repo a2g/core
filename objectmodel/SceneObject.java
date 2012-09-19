@@ -9,10 +9,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 
-import com.github.a2g.bridge.ColorEnum;
 import com.github.a2g.bridge.Point;
 import com.github.a2g.bridge.PointF;
 import com.github.a2g.bridge.Rect;
+import com.github.a2g.core.authoredscene.ConstantsForAPI;
 import com.github.a2g.core.authoredscene.SceneAPI;
 import com.github.a2g.core.authoredscene.ConstantsForAPI.Special;
 
@@ -52,7 +52,7 @@ public class SceneObject {
         this.topOffset = MAX_INT;
         this.mapOfSpecialAnimations = new TreeMap<Special, String>();
         this.numberPrefix = 0;
-        this.homeAnimation = SceneAPI.INITIAL;
+        this.homeAnimation = ConstantsForAPI.INITIAL;
         this.talkingAnimationDelay = 0;
        
         // talkingColro deliberately null, so the 
@@ -132,7 +132,7 @@ public class SceneObject {
         // if animation is set to something bad, then set it to back to initial
         if(anim==null)
         {
-        	fak.setCurrentAnimationTextualId(SceneAPI.INITIAL);
+        	fak.setCurrentAnimationTextualId(ConstantsForAPI.INITIAL);
         	anim = this.animationCollection.at(
                     fak.getCurrentAnimationTextualId());
         }
@@ -283,7 +283,7 @@ public class SceneObject {
 
     void calculateOffsets() {
         Point p = getMiddleOfBaseAbsolute(
-                SceneAPI.INITIAL);
+                ConstantsForAPI.INITIAL);
 
         this.leftOffset = p.getX(); // (minLeft +maxRight)/2, 
         this.topOffset = p.getY(); // maxBottom;

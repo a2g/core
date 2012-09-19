@@ -22,6 +22,7 @@ import com.github.a2g.core.loader.ImageBundleLoaderCallbackAPI;
 import com.github.a2g.core.loader.ImageBundleLoaderAPI;
 import com.github.a2g.core.loader.ImageBundleLoader;
 import com.github.a2g.core.action.BaseDialogTreeAction;
+import com.github.a2g.core.authoredscene.ConstantsForAPI;
 import com.github.a2g.core.authoredscene.ImageAddAPI;
 import com.github.a2g.core.authoredscene.InternalAPI;
 import com.github.a2g.core.authoredscene.OnDialogTreeAPI;
@@ -31,7 +32,6 @@ import com.github.a2g.core.authoredscene.OnEveryFrameAPI;
 import com.github.a2g.core.authoredscene.OnFillLoadListAPI;
 import com.github.a2g.core.authoredscene.OnFillLoadListAPIImpl;
 import com.github.a2g.core.authoredscene.OnPreEntryAPI;
-import com.github.a2g.bridge.Point;
 import com.github.a2g.core.authoredscene.SceneAPI;
 import com.github.a2g.bridge.handler.ImageMouseClickHandler;
 import com.github.a2g.bridge.handler.InventoryItemMouseOverHandler;
@@ -44,13 +44,9 @@ import com.github.a2g.bridge.Image;
 import com.github.a2g.bridge.ImageResource;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.Widget;
+import com.github.a2g.bridge.AcceptsOneThing;
 import com.github.a2g.bridge.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
-
-
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
 
 
 public class MasterPresenter  
@@ -96,7 +92,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private Logger logger = Logger.getLogger("com.mycompany.level");
 	private String inventoryResourceAsString;
 
-	public MasterPresenter(final AcceptsOneWidget panel, EventBus bus, MasterPresenterHostAPI parent) {
+	public MasterPresenter(final AcceptsOneThing panel, EventBus bus, MasterPresenterHostAPI parent) {
 		this.bus = bus;
 		this.timer = null;
 		this.parent = parent;
@@ -118,7 +114,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 
 		this.masterPanel = new MasterPanel();
-		panel.setWidget(this.masterPanel);
+		panel.setThing(this.masterPanel);
 
 
 
@@ -307,6 +303,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		return true;
 	}
 
+	@Override
 	public SceneObject getObject(short code) {
 		SceneObject ob = this.theObjectMap.get(
 				code);
@@ -319,6 +316,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		return ob;
 	}
 
+	@Override
 	public Animation getAnimation(int code) {
 		Animation anim = this.theAnimationMap.get(
 				code);
@@ -332,6 +330,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		return anim;
 	}
 
+	@Override
 	public InventoryItem getInventoryItem(int i) {
 		InventoryItem inv = inventoryPresenter.getInventoryItem(
 				i);
@@ -379,6 +378,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		executeBaseActionAndProcessReturnedInteger(a);
 	}
 
+	@Override
 	public void executeBaseActionAndProcessReturnedInteger(BaseAction a) {
 		int result = actionRunner.runAction(a);
 		
@@ -408,9 +408,9 @@ SaySpeechCallDialogTreeEventHandlerAPI
 			SceneObject sceneObject = this.scene.objectCollection().at(i);
 
 			if (sceneObject != null) {
-				if (sceneObject.animations().at(SceneAPI.INITIAL)!= null) 
+				if (sceneObject.animations().at(ConstantsForAPI.INITIAL)!= null) 
 				{
-					sceneObject.animations().at(SceneAPI.INITIAL).setAsCurrentAnimation();
+					sceneObject.animations().at(ConstantsForAPI.INITIAL).setAsCurrentAnimation();
 				} 
 				else 
 				{
@@ -493,6 +493,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		return property != 0;
 	}
 
+	@Override
 	public void switchToScene(String scene) {
 		// since instantiateScene..ToIt does some assynchronous stuff,
 		// I thought maybe I could do it, then cancel the timers.
@@ -612,7 +613,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 				speech, branchId);
 	}
 
-	public Widget getPanel() {
+	public MasterPanel getMasterPanel() {
 		return masterPanel;
 	}
 

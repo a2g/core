@@ -5,7 +5,7 @@ import com.github.a2g.bridge.Image;
 import com.github.a2g.bridge.Point;
 import com.github.a2g.bridge.panel.ScenePanel;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.github.a2g.bridge.AcceptsOneThing;
 
 
 public class ScenePresenter {
@@ -25,7 +25,7 @@ public class ScenePresenter {
     EventBus eventBus;
     MasterPresenterHostAPI parent;
 	  
-    public ScenePresenter(final AcceptsOneWidget panel, EventBus bus, MasterPresenterHostAPI parent) {
+    public ScenePresenter(final AcceptsOneThing panel, EventBus bus, MasterPresenterHostAPI parent) {
         this.setWidth(320);
         this.setHeight(180);
 
@@ -33,7 +33,7 @@ public class ScenePresenter {
         this.parent = parent;
         // this.theScene= new Scene();
         this.view = new ScenePanel();
-        panel.setWidget(view);
+        panel.setThing(view);
         // this.theInventoryItemMap = new TreeMap<Integer, InventoryItem>();
     }
 
