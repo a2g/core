@@ -31,9 +31,11 @@ public class ScenePresenter {
 
         this.eventBus = bus;
         this.parent = parent;
-        // this.theScene= new Scene();
+        // this.theScene = new Scene();
         this.view = new ScenePanel();
         panel.setThing(view);
+        view.setVisible(true);
+       
         // this.theInventoryItemMap = new TreeMap<Integer, InventoryItem>();
     }
 
