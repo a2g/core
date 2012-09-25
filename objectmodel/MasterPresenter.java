@@ -42,12 +42,12 @@ import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
 import com.github.a2g.bridge.Image;
 import com.github.a2g.bridge.ImageResource;
-import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
+import com.github.a2g.bridge.BridgeTimer;
+import com.github.a2g.bridge.TimerCallback;
 import com.github.a2g.bridge.AcceptsOneThing;
 import com.github.a2g.bridge.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
-
+import com.github.a2g.bridge.Window;
 
 public class MasterPresenter  
 implements InternalAPI, 
@@ -60,7 +60,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 , OnEveryFrameAPI
 , OnDoCommandAPI
 , OnDialogTreeAPI
-
+, TimerCallback
 {
 
 	private CommandLinePresenter commandLinePresenter;
@@ -79,7 +79,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private MasterPresenterHostAPI parent;
 	private int noImagesAreGreaterThanThis;
 	
-	private Timer timer;
+	private BridgeTimer timer;
 	private Scene scene;
 	private MasterPanel masterPanel;
 	private List<ImageBundleLoader> mapOfEssentialLoaders;
@@ -514,16 +514,15 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		return true;
 	}
 
-	public void startEveryFrameCallbacks() {
-		this.timer = new Timer() {
-			@Override
-			public void run() {
-				doEveryFrame();
-			}
-		};
-
-		// Schedule the timer to run once in 5 seconds.
-		this.timer.scheduleRepeating(40);
+	@Override
+	public void onTimerCallback()
+	{
+		doEveryFrame();
+	}
+	
+	public void startEveryFrameCallbacks() 
+	{
+		timer = new BridgeTimer(40, this);
 	}
 
 	public void cancelTimer() 
@@ -863,5 +862,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.callbacks.onFillLoadList(new OnFillLoadListAPIImpl(this));
 		
 	}
+
+
 };
 
