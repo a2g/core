@@ -4,8 +4,8 @@
  */
 package com.github.a2g.core.authoredscene;
 
-import com.github.a2g.bridge.LoadHandler;
 import com.github.a2g.bridge.ImageResource;
+import com.github.a2g.bridge.LoadHandler;
 
 
 public interface ImageAddAPI {

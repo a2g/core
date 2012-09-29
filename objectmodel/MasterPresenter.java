@@ -15,6 +15,17 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 
+import com.github.a2g.bridge.AcceptsOneThing;
+import com.github.a2g.bridge.BridgeTimer;
+import com.github.a2g.bridge.Image;
+import com.github.a2g.bridge.ImageResource;
+import com.github.a2g.bridge.LoadHandler;
+import com.github.a2g.bridge.TimerCallback;
+import com.github.a2g.bridge.Window;
+import com.github.a2g.bridge.handler.ImageMouseClickHandler;
+import com.github.a2g.bridge.handler.InventoryItemMouseOverHandler;
+import com.github.a2g.bridge.handler.SceneObjectMouseOverHandler;
+import com.github.a2g.bridge.panel.MasterPanel;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.NullParentAction;
@@ -33,21 +44,10 @@ import com.github.a2g.core.authoredscene.OnFillLoadListAPI;
 import com.github.a2g.core.authoredscene.OnFillLoadListAPIImpl;
 import com.github.a2g.core.authoredscene.OnPreEntryAPI;
 import com.github.a2g.core.authoredscene.SceneAPI;
-import com.github.a2g.bridge.handler.ImageMouseClickHandler;
-import com.github.a2g.bridge.handler.InventoryItemMouseOverHandler;
-import com.github.a2g.bridge.handler.SceneObjectMouseOverHandler;
-import com.github.a2g.bridge.panel.MasterPanel;
 
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
-import com.github.a2g.bridge.Image;
-import com.github.a2g.bridge.ImageResource;
-import com.github.a2g.bridge.BridgeTimer;
-import com.github.a2g.bridge.TimerCallback;
-import com.github.a2g.bridge.AcceptsOneThing;
-import com.github.a2g.bridge.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
-import com.github.a2g.bridge.Window;
 
 public class MasterPresenter  
 implements InternalAPI, 

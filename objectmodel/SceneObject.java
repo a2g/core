@@ -4,11 +4,11 @@
  */
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.bridge.ColorEnum;
 import java.util.Map;
 import java.util.TreeMap;
 
 
+import com.github.a2g.bridge.ColorEnum;
 import com.github.a2g.bridge.Point;
 import com.github.a2g.bridge.PointF;
 import com.github.a2g.bridge.Rect;

@@ -5,6 +5,7 @@
 package com.github.a2g.core.action;
 
 
+import com.github.a2g.bridge.PointF;
 import com.github.a2g.core.action.ActionCallbackAPI;
 
 
@@ -35,7 +36,6 @@ import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.bridge.PointF;
 
 
 

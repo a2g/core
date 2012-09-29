@@ -1,9 +1,9 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.bridge.panel.VerbsPanel;
 import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.bridge.AcceptsOneThing;
+import com.github.a2g.bridge.panel.VerbsPanel;
 
 
 public class VerbsPresenter {

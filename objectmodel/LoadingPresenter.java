@@ -5,10 +5,10 @@
 package com.github.a2g.core.objectmodel;
 
 
+import com.github.a2g.bridge.AcceptsOneThing;
 import com.github.a2g.bridge.panel.LoadingPanel;
 import com.github.a2g.core.authoredscene.InternalAPI;
 import com.google.gwt.event.shared.EventBus;
-import com.github.a2g.bridge.AcceptsOneThing;
 
 
 public class LoadingPresenter {

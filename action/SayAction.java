@@ -5,10 +5,11 @@
 package com.github.a2g.core.action;
 
 import java.util.ArrayList;
+
 import com.github.a2g.bridge.ColorEnum;
+import com.github.a2g.bridge.PopupPanelWithLabel;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.bridge.PopupPanelWithLabel;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.SceneObject;
 
