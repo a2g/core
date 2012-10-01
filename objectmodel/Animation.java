@@ -48,13 +48,13 @@ public class Animation {
         return imageAndPosCollection;
     }
 
-    public com.github.a2g.bridge.Image getDefaultFrame() {
+    public com.github.a2g.bridge.image.Image getDefaultFrame() {
         assert(imageAndPosCollection.count()
                 != 0);
         if (imageAndPosCollection.count() == 0) {
             return null;
         }
-        com.github.a2g.bridge.Image frame = imageAndPosCollection.at(
+        com.github.a2g.bridge.image.Image frame = imageAndPosCollection.at(
                 0);
 
         return frame;

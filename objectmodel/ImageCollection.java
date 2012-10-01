@@ -5,7 +5,7 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.bridge.Image;
+import com.github.a2g.bridge.image.Image;
 
 import java.util.Vector;
 
@@ -17,7 +17,7 @@ public class ImageCollection {
         theVector = new Vector<Image>();
     }
 
-    public com.github.a2g.bridge.Image at(int index) {
+    public com.github.a2g.bridge.image.Image at(int index) {
         if (index < 0
                 || index >= theVector.size()) {
             return null;

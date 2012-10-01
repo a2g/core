@@ -25,7 +25,7 @@ public class SceneObject {
     private String displayName;
     private AnimationCollection animationCollection;
     private FrameAndAnimation fak;
-    private com.github.a2g.bridge.Image currentImage;
+    private com.github.a2g.bridge.image.Image currentImage;
     private boolean visible;
     private double width;
     private double height;
@@ -150,7 +150,7 @@ public class SceneObject {
                         anim.getLength() - 1);
             }
 
-            com.github.a2g.bridge.Image current = anim.getImageAndPosCollection().at(
+            com.github.a2g.bridge.image.Image current = anim.getImageAndPosCollection().at(
                     fak.getCurrentFrame());
 
             // yes current can equal null in some weird cases where I place breakpoints...
@@ -299,7 +299,7 @@ public class SceneObject {
         if (xanim != null) {
             for (int i = 0; i
                     < xanim.getLength(); i++) {
-                com.github.a2g.bridge.Image img = xanim.getFrames().at(
+                com.github.a2g.bridge.image.Image img = xanim.getFrames().at(
                         i);
                 Rect rect = img.getBoundingRect();
 

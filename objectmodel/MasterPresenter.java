@@ -13,17 +13,15 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Logger;
-
-import com.github.a2g.bridge.BridgeTimer;
-import com.github.a2g.bridge.Image;
-import com.github.a2g.bridge.ImageResource;
-import com.github.a2g.bridge.LoadHandler;
-import com.github.a2g.bridge.TimerCallback;
-import com.github.a2g.bridge.Window;
+import com.github.a2g.bridge.animation.Timer;
 import com.github.a2g.bridge.handler.ImageMouseClickHandler;
 import com.github.a2g.bridge.handler.InventoryItemMouseOverHandler;
 import com.github.a2g.bridge.handler.SceneObjectMouseOverHandler;
+import com.github.a2g.bridge.image.Image;
+import com.github.a2g.bridge.image.ImageResource;
+import com.github.a2g.bridge.image.LoadHandler;
 import com.github.a2g.bridge.panel.MasterPanel;
+import com.github.a2g.bridge.panel.Window;
 import com.github.a2g.bridge.thing.AcceptsOneThing;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
@@ -59,7 +57,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 , OnEveryFrameAPI
 , OnDoCommandAPI
 , OnDialogTreeAPI
-, TimerCallback
 {
 
 	private CommandLinePresenter commandLinePresenter;
@@ -77,7 +74,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private EventBus bus;
 	private MasterPresenterHostAPI parent;
 	
-	private BridgeTimer timer;
+	private Timer timer;
 	private Scene scene;
 	private MasterPanel masterPanel;
 	private List<ImageBundleLoader> mapOfEssentialLoaders;
@@ -492,15 +489,17 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		return true;
 	}
 
-	@Override
-	public void onTimerCallback()
-	{
-		doEveryFrame();
-	}
-	
 	public void startEveryFrameCallbacks() 
 	{
-		timer = new BridgeTimer(40, this);
+		timer = new Timer()
+		{
+
+			@Override
+			public void run() {
+				doEveryFrame();
+			}
+		};
+		timer.scheduleRepeating(40);
 	}
 
 	public void cancelTimer() 
