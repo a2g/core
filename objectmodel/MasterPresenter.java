@@ -5,7 +5,6 @@
 package com.github.a2g.core.objectmodel;
 
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -15,7 +14,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 
-import com.github.a2g.bridge.AcceptsOneThing;
 import com.github.a2g.bridge.BridgeTimer;
 import com.github.a2g.bridge.Image;
 import com.github.a2g.bridge.ImageResource;
@@ -26,6 +24,7 @@ import com.github.a2g.bridge.handler.ImageMouseClickHandler;
 import com.github.a2g.bridge.handler.InventoryItemMouseOverHandler;
 import com.github.a2g.bridge.handler.SceneObjectMouseOverHandler;
 import com.github.a2g.bridge.panel.MasterPanel;
+import com.github.a2g.bridge.thing.AcceptsOneThing;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.NullParentAction;
@@ -77,7 +76,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 	private EventBus bus;
 	private MasterPresenterHostAPI parent;
-	private int noImagesAreGreaterThanThis;
 	
 	private BridgeTimer timer;
 	private Scene scene;
@@ -88,6 +86,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private boolean isOkToWaitForImages;
 	private ActionRunner actionRunner;
 	private int textSpeedDelay;
+	private Integer[] theListOfIndexesToInsertAt;
 
 	private Logger logger = Logger.getLogger("com.mycompany.level");
 	private String inventoryResourceAsString;
@@ -97,7 +96,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.timer = null;
 		this.parent = parent;
 		this.isOkToWaitForImages = true;
-		this.noImagesAreGreaterThanThis = 0;
 		this.textSpeedDelay = 20;
 		this.theObjectMap = new TreeMap<Short, SceneObject>();
 		this.theAnimationMap = new TreeMap<Integer, Animation>();
@@ -106,6 +104,9 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.setOfCompletedLoaders = new TreeSet<String>();
 		this.m_imagesYetToLoad = 0;
 		this.actionRunner = new ActionRunner();
+		this.theListOfIndexesToInsertAt= new Integer[100];
+		for(int i=0;i<100;i++)
+			theListOfIndexesToInsertAt[i] = new Integer(0);
 
 		bus.addHandler(
 				SaySpeechCallDialogTreeEvent.TYPE,
@@ -283,8 +284,8 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		
 		animation.getImageAndPosCollection().add(
 				imageAndPos);
-		int before = getIndexOfFirstElementHigherThan(
-				numberPrefix);
+		int before = getIndexToInsertAt(numberPrefix);
+		updateTheListOfIndexesToInsertAt(numberPrefix);
 		imageAndPos.addImageToPanel( before );
 
 		imageAndPos.addMouseMoveHandler(
@@ -295,10 +296,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		
 		imageAndPos.addClickHandler(	new ImageMouseClickHandler(bus,	this.getSceneGui().getView()));
 
-		if (numberPrefix
-				> noImagesAreGreaterThanThis) {
-			noImagesAreGreaterThanThis = numberPrefix;
-		}		
 
 		return true;
 	}
@@ -338,38 +335,19 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		return inv;
 	}
 
-	public int getIndexOfFirstElementHigherThan(int numberPrefix) {
-		int numberOfImages = -1;
-		ArrayList<SceneObject> list = this.scene.objectCollection().getSortedList();
-
-		Iterator<SceneObject> it = list.iterator();
-
-		while (it.hasNext()) {
-			SceneObject o = it.next();
-
-			if (o.getCodePrefix()
-					> numberPrefix) {
-				return numberOfImages;
-			}
-
-			for (int i = 0; i
-			< o.animations().getCount(); i++) {
-				Animation a = o.animations().at(
-						i);
-				ImageCollection frames = a.getFrames();
-
-				for (int j = 0; j
-				< frames.count(); j++) {
-					Image image = frames.at(j);
-
-					assert(image != null);
-					numberOfImages++;
-				}
-			}
-		}
-		return numberOfImages;
+	public int getIndexToInsertAt(int numberPrefix) {
+		int i = theListOfIndexesToInsertAt[numberPrefix];
+		return i;
 	}
 
+	void updateTheListOfIndexesToInsertAt(int numberPrefix)
+	{
+		for(int i=numberPrefix;i<=99;i++)
+		{
+			theListOfIndexesToInsertAt[i]++;
+		}
+	}
+	
 	public void onEnterScene() {
 		NullParentAction npa = new NullParentAction();
 		npa.setApi(this);
@@ -720,14 +698,13 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		theAnimationMap.clear();
 		this.theObjectMap.clear();
 		this.theAnimationMap.clear();
-		this.noImagesAreGreaterThanThis = 0;
 		this.scene = new Scene();
 
-		scenePresenter.clear();
+		//scenePresenter.clear();
 		loadingPresenter.clear();
 		commandLinePresenter.clear();
 		verbsPresenter.clear();
-		scenePresenter.clear();
+		
 
 		if(!isSameInventory)
 		{

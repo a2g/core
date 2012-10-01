@@ -5,7 +5,6 @@
 package com.github.a2g.core.action;
 
 
-import com.github.a2g.bridge.PointF;
 import com.github.a2g.core.action.ActionCallbackAPI;
 
 
@@ -36,10 +35,11 @@ import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.primitive.PointF;
 
 
 
-public abstract class BaseAction extends com.github.a2g.bridge.Animation {	
+public abstract class BaseAction extends com.github.a2g.bridge.animation.Animation {	
     private ActionCallbackAPI callbacks;
     protected BaseAction parent;
     private InternalAPI api;

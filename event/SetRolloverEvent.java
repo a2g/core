@@ -4,8 +4,10 @@
  */
 package com.github.a2g.core.event;
 
+import com.google.gwt.event.shared.GwtEvent;
 
-import com.github.a2g.bridge.GwtEvent;
+
+
 
 
 public class SetRolloverEvent extends GwtEvent<SetRolloverEventHandlerAPI> {

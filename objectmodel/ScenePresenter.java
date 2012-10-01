@@ -2,10 +2,10 @@ package com.github.a2g.core.objectmodel;
 
 
 import com.google.gwt.event.shared.EventBus;
-import com.github.a2g.bridge.AcceptsOneThing;
 import com.github.a2g.bridge.Image;
-import com.github.a2g.bridge.Point;
 import com.github.a2g.bridge.panel.ScenePanel;
+import com.github.a2g.bridge.thing.AcceptsOneThing;
+import com.github.a2g.core.primitive.Point;
 
 
 public class ScenePresenter {

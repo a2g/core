@@ -3,9 +3,9 @@ package com.github.a2g.core.objectmodel;
 
 import java.util.TreeMap;
 
-import com.github.a2g.bridge.AcceptsOneThing;
 import com.github.a2g.bridge.Image;
 import com.github.a2g.bridge.panel.InventoryPanel;
+import com.github.a2g.bridge.thing.AcceptsOneThing;
 import com.google.gwt.event.shared.EventBus;
 
 

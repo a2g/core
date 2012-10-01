@@ -6,8 +6,8 @@ package com.github.a2g.core.objectmodel;
 
 
 
-import com.github.a2g.bridge.AcceptsOneThing;
 import com.github.a2g.bridge.panel.CommandLinePanel;
+import com.github.a2g.bridge.thing.AcceptsOneThing;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.authoredscene.InternalAPI;
