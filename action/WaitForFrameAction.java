@@ -6,7 +6,7 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.objectmodel.SceneObject;
+import com.github.a2g.core.sceneobject.SceneObject;
 
 
 public class WaitForFrameAction extends BaseAction {
@@ -23,8 +23,8 @@ public class WaitForFrameAction extends BaseAction {
     @Override	
     public void runGameAction() {
         // we achieve the variable execution time, by using a max value here..
-        String name = object.currentAnimation();
-        int count = object.animations().at(name).getFrames().count();
+        String name = object.getCurrentAnimation();
+        int count = object.getAnimations().at(name).getFrames().getCount();
         int milliseconds = count * 150;
 
         this.run(milliseconds);

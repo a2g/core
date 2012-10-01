@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -29,6 +30,11 @@ import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.loader.ImageBundleLoaderCallbackAPI;
 import com.github.a2g.core.loader.ImageBundleLoaderAPI;
 import com.github.a2g.core.loader.ImageBundleLoader;
+import com.github.a2g.core.sceneobject.Animation;
+import com.github.a2g.core.sceneobject.Scene;
+import com.github.a2g.core.sceneobject.SceneObject;
+import com.github.a2g.core.sceneobject.SceneObjectCache;
+import com.github.a2g.core.sceneobject.SceneObjectCollection;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.authoredscene.ConstantsForAPI;
 import com.github.a2g.core.authoredscene.ImageAddAPI;
@@ -77,16 +83,19 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private Timer timer;
 	private Scene scene;
 	private MasterPanel masterPanel;
-	private List<ImageBundleLoader> mapOfEssentialLoaders;
-	private List<ImageBundleLoader> mapOfNonEssentialLoaders;
+	private List<ImageBundleLoader> listOfEssentialLoaders;
+	private List<ImageBundleLoader> listOfNonEssentialLoaders;
 	private int m_imagesYetToLoad;
 	private boolean isOkToWaitForImages;
 	private ActionRunner actionRunner;
 	private int textSpeedDelay;
 	private Integer[] theListOfIndexesToInsertAt;
+	private Map<String, SceneObjectCache>  objectCache;
 
 	private Logger logger = Logger.getLogger("com.mycompany.level");
 	private String inventoryResourceAsString;
+	
+	private ImageBundleLoader theCurrentLoader;
 
 	public MasterPresenter(final AcceptsOneThing panel, EventBus bus, MasterPresenterHostAPI parent) {
 		this.bus = bus;
@@ -94,11 +103,13 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.parent = parent;
 		this.isOkToWaitForImages = true;
 		this.textSpeedDelay = 20;
+		this.scene = new Scene();
 		this.theObjectMap = new TreeMap<Short, SceneObject>();
 		this.theAnimationMap = new TreeMap<Integer, Animation>();
-		this.mapOfEssentialLoaders = new LinkedList<ImageBundleLoader>();
-		this.mapOfNonEssentialLoaders = new LinkedList <ImageBundleLoader>();
+		this.listOfEssentialLoaders = new LinkedList<ImageBundleLoader>();
+		this.listOfNonEssentialLoaders = new LinkedList <ImageBundleLoader>();
 		this.setOfCompletedLoaders = new TreeSet<String>();
+		this.objectCache = new TreeMap<String,SceneObjectCache>();
 		this.m_imagesYetToLoad = 0;
 		this.actionRunner = new ActionRunner();
 		this.theListOfIndexesToInsertAt= new Integer[100];
@@ -198,89 +209,12 @@ SaySpeechCallDialogTreeEventHandlerAPI
 			return true;
 		}
 
-		// objects and animations
-		SceneObject sceneObject = this.scene.objectCollection().at(
-				objectTextualId);
-
-		if (sceneObject == null) {
-			sceneObject = new SceneObject(
-					objectTextualId,
-					scenePresenter.getWidth(),
-					scenePresenter.getHeight());
-			sceneObject.setNumberPrefix(
-					numberPrefix);
-			sceneObject.setObjectCode(
-					objectCode);
-			short code = objectCode;
-
-			if (code == -1) {
-				Window.alert(
-						"Missing initial image for "
-						+ objectTextualId
-						+ " "
-						+ animationTextualId);
-				return true;
-			}
-			;
-
-			this.theObjectMap.put(code,
-					sceneObject);
-			this.scene.objectCollection().add(
-					sceneObject);
-		}
-
-		// if its in the animation map already then we need to be careful 
-		// because we might have run in to a prematurely added animation.
-		Animation animation = this.theAnimationMap.get(
-				objPlusAnimCode);
-
-		if (animation == null) {
-			// much simpler if not in the animation map. 
-			animation = new Animation(
-					animationTextualId,
-					sceneObject);
-			this.theAnimationMap.put(
-					objPlusAnimCode, animation);
-			sceneObject.animations().add(
-					animation);
-		} else // ... it already exists but isn't in the sceneObjectList...
-		{
-			Animation animation2 = sceneObject.animations().at(
-					animationTextualId);
-
-			if (animation2 == null) {
-
-				animation.setSceneObject(
-						sceneObject);
-				animation.setTextualId(
-						animationTextualId);
-				sceneObject.animations().add(
-						animation);
-				// then update all properties that could have already been set on the anim
-				if (animation.getWasSetAsHomeAnimation()) {
-					animation.setAsHomeAnimation();
-				}
-				if (animation.getWasSetAsTalkingAnimation()) {
-					animation.setAsTalkingAnimation();
-				}
-				if (animation.getWasSetAsSpecialAnimation()) {
-					animation.setAsSpecialAnimation(
-							animation.getDesignatedSpecialAnimation());
-				}
-				if (animation.getWasSetAsCurrentAnimation()) {
-					animation.setAsCurrentAnimation();
-				}
-
-			}
-		}
-
-
-
-		
+				
 		Image imageAndPos = this.scenePresenter.getView().createNewImageAndAddToPanel(lh, imageResource, bus, x,y, animationTextualId);
 		
-		animation.getImageAndPosCollection().add(
-				imageAndPos);
+		theCurrentLoader.addToAppropriateAnimation(imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode, scenePresenter.getWidth(), scenePresenter.getHeight());
+			
+		
 		int before = getIndexToInsertAt(numberPrefix);
 		updateTheListOfIndexesToInsertAt(numberPrefix);
 		imageAndPos.addImageToPanel( before );
@@ -292,7 +226,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 						objectCode));
 		
 		imageAndPos.addClickHandler(	new ImageMouseClickHandler(bus,	this.getSceneGui().getView()));
-
 
 		return true;
 	}
@@ -383,9 +316,9 @@ SaySpeechCallDialogTreeEventHandlerAPI
 			SceneObject sceneObject = this.scene.objectCollection().at(i);
 
 			if (sceneObject != null) {
-				if (sceneObject.animations().at(ConstantsForAPI.INITIAL)!= null) 
+				if (sceneObject.getAnimations().at(ConstantsForAPI.INITIAL)!= null) 
 				{
-					sceneObject.animations().at(ConstantsForAPI.INITIAL).setAsCurrentAnimation();
+					sceneObject.getAnimations().at(ConstantsForAPI.INITIAL).setAsCurrentAnimation();
 				} 
 				else 
 				{
@@ -635,7 +568,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 		for(int i=0;i<blah.getNumberOfBundles();i++)
 		{
-			mapOfEssentialLoaders.add( new ImageBundleLoader(this,blah,i));
+			listOfEssentialLoaders.add( new ImageBundleLoader(this,blah,i));
 		}
 
 
@@ -647,7 +580,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		for(int i=0;i<blah.getNumberOfBundles();i++)
 		{
 
-			mapOfNonEssentialLoaders.add( new ImageBundleLoader(this,blah,i));
+			listOfNonEssentialLoaders.add( new ImageBundleLoader(this,blah,i));
 			
 		}
 
@@ -657,22 +590,22 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	@Override
 	public void kickStartLoading() 
 	{
-		Collections.sort(mapOfNonEssentialLoaders);
-		Collections.sort(mapOfEssentialLoaders);
+		Collections.sort(listOfNonEssentialLoaders);
+		Collections.sort(listOfEssentialLoaders);
 		int total = 0;
 		boolean isSameInventory = false;
 		// get totals
-		Iterator<ImageBundleLoader> iter = mapOfEssentialLoaders.iterator();
+		Iterator<ImageBundleLoader> iter = listOfEssentialLoaders.iterator();
 		while(iter.hasNext())
 		{
 			ImageBundleLoader loader = iter.next();
 		
-			//ImageBundleLoader loader = mapOfEssentialLoaders.get(i);
+			//ImageBundleLoader loader = listOfEssentialLoaders.get(i);
 			if(loader.isInventory())
 			{
-				String name = loader.getName();
+				String name = loader.getCombinedClassAndNumber();
 				int len = name.indexOf("@");
-				String loaderName = loader.getName().substring(0,len);
+				String loaderName = name.substring(0,len);
 				if(loaderName.equalsIgnoreCase(this.inventoryResourceAsString))
 				{
 					iter.remove();
@@ -687,22 +620,32 @@ SaySpeechCallDialogTreeEventHandlerAPI
 				 
 			total+=loader.getNumberOfImages();
 		}
-		for(int i=0;i<mapOfNonEssentialLoaders.size();i++)
+		for(int i=0;i<listOfNonEssentialLoaders.size();i++)
 		{
-			total+=mapOfNonEssentialLoaders.get(i).getNumberOfImages();
+			total+=listOfNonEssentialLoaders.get(i).getNumberOfImages();
 		}
-		
-		setLoadingActive();
+
+		// hide all visible images.
+		// (using scene's data is quicker than using scenePanel data)
+		for(int i=0;i<scene.objectCollection().count();i++)
+		{
+			scene.objectCollection().at(i).setVisible(false);
+		}
+
 		theObjectMap.clear();
 		theAnimationMap.clear();
 		this.theObjectMap.clear();
 		this.theAnimationMap.clear();
-		this.scene = new Scene();
-
-		//scenePresenter.clear();
+		
+		
+		// set gui to blank
+		setLoadingActive();
+		//scenePresenter.clear(); don't clear, all its images are switched off anyhow.
 		loadingPresenter.clear();
 		commandLinePresenter.clear();
 		verbsPresenter.clear();
+		
+	
 		
 
 		if(!isSameInventory)
@@ -714,63 +657,141 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		loadingPresenter.setTotal(total);
 		m_imagesYetToLoad = total;
 		
-		loadNextEssential();
+		loadNext();
 	}
 
-	void loadNextEssential()
+	void loadNext()
 	{
-		if(!mapOfEssentialLoaders.isEmpty())
+		if(!listOfEssentialLoaders.isEmpty())
 		{
-			ImageBundleLoader l = this.mapOfEssentialLoaders.get(0);
-			l.setCallbacks(this);
-			String s = l.toString();
-			if(this.setOfCompletedLoaders.contains(s))
-			{
-				l.runLoaderAfterItsBeenLoaded();
-			}else
-			{
-				l.runLoader();
-			}
-			
-			// we remove it from the list of essentials when it completes
+			theCurrentLoader = this.listOfEssentialLoaders.get(0);
 		}
-	}
-
-	@Override
-	public void onLoaderComplete(ImageBundleLoader a) 
-	{
-		String loaderName = a.toString();
-		setOfCompletedLoaders.add(loaderName);
-		
-		// both essential and non essential trigger a this event.
-		// but we only care for when essential calls it.
-		if(!mapOfEssentialLoaders.isEmpty())
+		else if(!listOfNonEssentialLoaders.isEmpty())
 		{
-			this.mapOfEssentialLoaders.remove(0);
-			if(mapOfEssentialLoaders.isEmpty())
-			{
-				startNonEssential();
-			}else
-			{
-				loadNextEssential();
-			}
+			theCurrentLoader = this.listOfNonEssentialLoaders.get(0);
 		}
 		else
 		{
-			loadNextNonEssential();
+			return;
 		}
+		
+		String nameAndNum = theCurrentLoader.getCombinedClassAndNumber();
+		if(objectCache.containsKey(nameAndNum))
+		{
+			mergeWithScene(objectCache.get(nameAndNum));
+			
+			//remove from processing straight away.
+			this.listOfEssentialLoaders.remove(0);
+			loadNext();
+		}
+		else
+		{
+			theCurrentLoader.setCallbacks(this);
+			String s = theCurrentLoader.toString();
+			if(this.setOfCompletedLoaders.contains(s))
+			{
+				theCurrentLoader.runLoaderAfterItsBeenLoaded();
+			}else
+			{
+				theCurrentLoader.runLoader();
+			}
+			// only when it completes will it
+			// a) be removed from the list
+			// b) loadNext
+		}
+		
+		
+			
+	}
+
+	@Override
+	public void onLoaderComplete(ImageBundleLoader loader) 
+	{
+		String loaderName = loader.toString();
+		setOfCompletedLoaders.add(loaderName);
+		SceneObjectCache cachedCollection = loader.getSceneObjectCollection();
+		objectCache.put(loader.getCombinedClassAndNumber(), cachedCollection);
+		mergeWithScene(cachedCollection);
+		// now we need to remove the loader from the list.
+		// and since we only load non-ess after ess
+		// then we try ess first.
+		if(!listOfEssentialLoaders.isEmpty())
+		{
+			this.listOfEssentialLoaders.remove(0);
+		}
+		else
+		{
+			this.listOfNonEssentialLoaders.remove(0);
+		}
+		loadNext();
 	}
 
 
+
+	private void mergeWithScene(SceneObjectCache s) 
+	{
+		
+		
+		String name = s.getName();
+		logger.fine(name);
+		System.out.println("dumping " +  name);
+		SceneObjectCollection theirs = s.getSceneObjectCollection();
+		SceneObjectCollection ours = this.scene.objectCollection();
+		
+		for(int i=0;i<theirs.count();i++)
+		{
+			SceneObject srcObject = theirs.at(i);
+			String objTextualId = srcObject.getTextualId();
+			SceneObject destObject = ours.at(objTextualId);
+			if(destObject==null)
+			{
+				destObject = new SceneObject(objTextualId, scenePresenter.getWidth(), scenePresenter.getHeight());
+				ours.add(destObject);
+				
+				short objectCode = srcObject.getCode();
+				if (objectCode == -1) {
+					Window.alert(
+							"Missing initial image for "
+							+ objTextualId
+							+ " ");
+					return;
+				}
+
+				this.theObjectMap.put(objectCode,destObject);
+			}
+			
+			for(int j=0;j<srcObject.getAnimations().getCount();j++)
+			{
+				Animation srcAnimation = srcObject.getAnimations().at(j);
+				String animTextualId = srcAnimation.getTextualId();
+				Animation destAnimation = destObject.getAnimations().at(animTextualId);
+				if(destAnimation==null)
+				{
+					destAnimation = new Animation(animTextualId, destObject);
+					destObject.getAnimations().add(destAnimation);
+					this.theAnimationMap.put(destAnimation.getCode(), destAnimation);
+				}
+				
+				for(int k=0;k<srcAnimation.getFrames().getCount();k++)
+				{
+					Image srcImage = srcAnimation.getFrames().at(k);
+					destAnimation.getFrames().add(srcImage);
+				}
+				
+			}
+			
+			
+		}
+	}
 
 	void startNonEssential() 
 	{
 		if(isOkToWaitForImages)
 		{
 			int total = 0;
-			for(int i=0;i<mapOfNonEssentialLoaders.size();i++)
+			for(int i=0;i<listOfNonEssentialLoaders.size();i++)
 			{
-				total+=mapOfNonEssentialLoaders.get(i).getNumberOfImages();
+				total+=listOfNonEssentialLoaders.get(i).getNumberOfImages();
 			}
 			loadingPresenter.setTotal(total);
 			m_imagesYetToLoad = total;
@@ -790,10 +811,10 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 	void loadNextNonEssential()
 	{
-		if(!mapOfNonEssentialLoaders.isEmpty())
+		if(!listOfNonEssentialLoaders.isEmpty())
 		{
-			ImageBundleLoader l = this.mapOfNonEssentialLoaders.get(0);
-			this.mapOfNonEssentialLoaders.remove(0);
+			ImageBundleLoader l = this.listOfNonEssentialLoaders.get(0);
+			this.listOfNonEssentialLoaders.remove(0);
 			l.setCallbacks(this);
 			l.runLoader();
 			// we remove it from the list of essentials when it completes
@@ -822,18 +843,18 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	@Override
 	public void restartReloading() 
 	{
-		Iterator<ImageBundleLoader> iter = mapOfEssentialLoaders.iterator();
+		Iterator<ImageBundleLoader> iter = listOfEssentialLoaders.iterator();
 		while(iter.hasNext())
 		{
 			iter.next();
 		}
-		for(int i=0;i<mapOfNonEssentialLoaders.size();i++)
+		for(int i=0;i<listOfNonEssentialLoaders.size();i++)
 		{
-			//mapOfNonEssentialLoaders.get(i).fireCompleted();	
+			//listOfNonEssentialLoaders.get(i).fireCompleted();	
 		}
 		
-		mapOfNonEssentialLoaders.clear();
-		mapOfEssentialLoaders.clear();
+		listOfNonEssentialLoaders.clear();
+		listOfEssentialLoaders.clear();
 		
 		this.callbacks.onFillLoadList(new OnFillLoadListAPIImpl(this));
 		

@@ -2,7 +2,7 @@
  * Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
  *  DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.
  */
-package com.github.a2g.core.objectmodel;
+package com.github.a2g.core.sceneobject;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -11,6 +11,7 @@ import java.util.TreeMap;
 import com.github.a2g.core.authoredscene.ConstantsForAPI;
 import com.github.a2g.core.authoredscene.SceneAPI;
 import com.github.a2g.core.authoredscene.ConstantsForAPI.Special;
+import com.github.a2g.core.objectmodel.FrameAndAnimation;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;
@@ -68,11 +69,11 @@ public class SceneObject {
         return this.numberPrefix;
     }
 
-    public String textualId() {
+    public String getTextualId() {
         return this.textualId;
     }
 
-    public AnimationCollection animations() {
+    public AnimationCollection getAnimations() {
         return this.animationCollection;
     }
 
@@ -88,18 +89,18 @@ public class SceneObject {
     }
 
     public void incrementFrameWithWraparound() {
-        if (animations().getCount() == 0) {
+        if (getAnimations().getCount() == 0) {
             // Log::NoSingleImage(QString("Here in IncrementFrame"));
             return;
         }
 
-        Animation anim = animations().at(
+        Animation anim = getAnimations().at(
                 this.fak.getCurrentAnimationTextualId());
         // Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg( this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
 
         int i = this.fak.getCurrentFrame() + 1;
 
-        if (i >= anim.getFrames().count()) {
+        if (i >= anim.getFrames().getCount()) {
             this.fak.setCurrentFrame(0);
         } else {
             this.fak.setCurrentFrame(i);
@@ -108,7 +109,7 @@ public class SceneObject {
     }
 
     public void decrementFrameWithWraparound() {
-        Animation anim = animations().at(
+        Animation anim = getAnimations().at(
                 this.fak.getCurrentAnimationTextualId());
         // Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg( this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
 
@@ -116,7 +117,7 @@ public class SceneObject {
 
         if (i < 0) {
             this.fak.setCurrentFrame(
-                    anim.getFrames().count()
+                    anim.getFrames().getCount()
                             - 1);
         } else {
             this.fak.setCurrentFrame(i);
@@ -211,7 +212,7 @@ public class SceneObject {
         return this.visible;
     }
 
-    public String displayName() {
+    public String getDisplayName() {
         return this.displayName;
     }
 
@@ -348,7 +349,7 @@ public class SceneObject {
         return "";
     }
 
-    public String currentAnimation() {
+    public String getCurrentAnimation() {
         String textualId = this.fak.getCurrentAnimationTextualId();
 
         return textualId;
@@ -369,17 +370,13 @@ public class SceneObject {
         this.homeAnimation = homeAnimation;
     }
 
-    public void setObjectCode(short objectCode) {
+    public void setCode(short objectCode) {
         this.objectCode = objectCode;
     }
 
-    public short getObjectCode() {
+    public short getCode() {
         return objectCode;
 
-    }
-
-    public String getDisplayName() {
-        return this.displayName;
     }
 
     public void setTalkingColor(ColorEnum color) {

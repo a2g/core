@@ -2,7 +2,7 @@
  * Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
  *  DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.
  */
-package com.github.a2g.core.objectmodel;
+package com.github.a2g.core.sceneobject;
 
 import com.github.a2g.core.authoredscene.SceneAPI;
 
@@ -11,24 +11,25 @@ import com.github.a2g.core.authoredscene.SceneAPI;
 
 public class Animation {
     private String textualId;
-    private com.github.a2g.core.objectmodel.ImageCollection imageAndPosCollection;
+    private com.github.a2g.core.sceneobject.ImageCollection imageAndPosCollection;
     private SceneObject parent;
     private boolean wasSetAsHomeAnimation;
     private boolean wasSetAsTalkingAnimation;
     private boolean wasSetAsCurrentAnimation;
     private SceneAPI.Special specialAnimationThisWasSetTo;
+	private int code;
 
     public Animation(String textualId, SceneObject owningSceneObject) {
         this.parent = owningSceneObject;
         this.textualId = textualId;
-        imageAndPosCollection = new com.github.a2g.core.objectmodel.ImageCollection();
+        imageAndPosCollection = new com.github.a2g.core.sceneobject.ImageCollection();
         wasSetAsHomeAnimation = false;
         wasSetAsTalkingAnimation = false;
         wasSetAsCurrentAnimation = false;
         specialAnimationThisWasSetTo = null;
     }
 
-    public com.github.a2g.core.objectmodel.ImageCollection getFrames() {
+    public com.github.a2g.core.sceneobject.ImageCollection getFrames() {
         return imageAndPosCollection;
     }
 
@@ -43,15 +44,25 @@ public class Animation {
     public void setTextualId(String textualId) {
         this.textualId = textualId;
     }
+    
+    public void setCode(int code)
+    {
+    	this.code = code;
+    }
+    
+    public int getCode()
+    {
+    	return code;
+    }
 
-    public com.github.a2g.core.objectmodel.ImageCollection getImageAndPosCollection() {
+    public com.github.a2g.core.sceneobject.ImageCollection getImageAndPosCollection() {
         return imageAndPosCollection;
     }
 
     public com.github.a2g.bridge.image.Image getDefaultFrame() {
-        assert(imageAndPosCollection.count()
+        assert(imageAndPosCollection.getCount()
                 != 0);
-        if (imageAndPosCollection.count() == 0) {
+        if (imageAndPosCollection.getCount() == 0) {
             return null;
         }
         com.github.a2g.bridge.image.Image frame = imageAndPosCollection.at(
@@ -61,11 +72,11 @@ public class Animation {
     }
 
     public int getLength() { 
-        return imageAndPosCollection.count(); 
+        return imageAndPosCollection.getCount(); 
     }
 
     public int getLastFrame() {
-        return imageAndPosCollection.count()
+        return imageAndPosCollection.getCount()
                 - 1;
     }
 
@@ -164,7 +175,5 @@ public class Animation {
     public SceneAPI.Special getDesignatedSpecialAnimation() {
         return specialAnimationThisWasSetTo;
     }
-}
 
-
-;
+};

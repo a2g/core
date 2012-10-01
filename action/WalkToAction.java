@@ -6,8 +6,8 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.objectmodel.Animation;
-import com.github.a2g.core.objectmodel.SceneObject;
+import com.github.a2g.core.sceneobject.Animation;
+import com.github.a2g.core.sceneobject.SceneObject;
 
 
 public class WalkToAction extends BaseAction {
@@ -96,7 +96,7 @@ public class WalkToAction extends BaseAction {
             }
         }
         this.obj.setCurrentAnimation(anim);
-        this.anim = this.obj.animations().at(
+        this.anim = this.obj.getAnimations().at(
                 anim);
         if (this.anim != null) {
             this.framesInAnim = this.anim.getLength();

@@ -6,7 +6,7 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.objectmodel.Animation;
+import com.github.a2g.core.sceneobject.Animation;
 
 
 public class SetTalkingAnimationAction extends BaseAction {

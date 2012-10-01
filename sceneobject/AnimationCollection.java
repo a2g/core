@@ -2,7 +2,7 @@
  * Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
  *  DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.
  */
-package com.github.a2g.core.objectmodel;
+package com.github.a2g.core.sceneobject;
 
 
 import java.util.Iterator;
@@ -10,7 +10,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 
-public class AnimationCollection {
+public class AnimationCollection 
+{
     private Map<String, Animation> theMap;
 
     AnimationCollection() {

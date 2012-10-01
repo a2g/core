@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import com.github.a2g.bridge.panel.PopupPanelWithLabel;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.core.objectmodel.Animation;
-import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.sceneobject.Animation;
+import com.github.a2g.core.sceneobject.SceneObject;
 
 
 
@@ -69,15 +69,15 @@ public class SayAction extends BaseAction {
 
 		if (object != null) {
 			String talkingAnimTextualId = object.getTalkingAnimation();
-			anim = object.animations().at(talkingAnimTextualId);
+			anim = object.getAnimations().at(talkingAnimTextualId);
 			if (anim!=null) {
-				int durationOfSingleAnimation = anim.getFrames().count()
+				int durationOfSingleAnimation = anim.getFrames().getCount()
 						* (40 * object.getTalkingAnimationDelay());
 
 				double numberOfTimesAnimRepeats = totalDuration
 						/ durationOfSingleAnimation;
 				numberOfFramesTotal = (int) (numberOfTimesAnimRepeats * anim
-						.getFrames().count());
+						.getFrames().getCount());
 			} else {
 				double framesPerSecond = 40;
 				numberOfFramesTotal = (int) (totalDuration * framesPerSecond);
@@ -110,7 +110,7 @@ public class SayAction extends BaseAction {
 		// if theres an associated animation, then use it
 		if (this.anim != null) {
 			int numberOfFramesSoFar = (int) (progress * numberOfFramesTotal);
-			int frame = numberOfFramesSoFar % anim.getFrames().count();
+			int frame = numberOfFramesSoFar % anim.getFrames().getCount();
 
 			this.object.setCurrentFrame(frame);
 		}

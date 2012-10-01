@@ -78,6 +78,8 @@ public class ScenePresenter {
 	public void inititateLoadingOfImage(Image image) {
 		view.inititateLoadingOfImage(image);
 	}
+
+	
     
 }
 

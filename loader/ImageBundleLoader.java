@@ -5,8 +5,10 @@
 package com.github.a2g.core.loader;
 
 
+import com.github.a2g.bridge.image.Image;
 import com.github.a2g.bridge.image.LoadHandler;
 import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.sceneobject.SceneObjectCache;
 import com.google.gwt.event.dom.client.LoadEvent;
 
 
@@ -17,6 +19,7 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
     int numberOfImagesLeftToLoad;
     int origNumberOfImagesLeftToLoad;
     InternalAPI api;
+    private SceneObjectCache theCurrentCacheObject;
     
     //private Logger logger = Logger.getLogger("com.mycompany.level");
     
@@ -27,9 +30,10 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
         this.bundleNumber = bundleNumber;
         numberOfImagesLeftToLoad = 0;
         origNumberOfImagesLeftToLoad = 0;
+        theCurrentCacheObject = new SceneObjectCache( this.getCombinedClassAndNumber());
     }
 
-    public String getName()
+    String getName()
     {
     	return bundle.toString();
     }
@@ -60,6 +64,7 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
 	        // then call the object that ran the action
 	       fireCompleted();
 		}
+		
 		
 	}
 
@@ -104,5 +109,24 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
 		return isInventory;
 		
 	}
+
+	public int getBundleNumber()
+	{
+		return bundleNumber;
+	}
+	public SceneObjectCache getSceneObjectCollection() {
+		return theCurrentCacheObject;//.getSceneObjectCollection();
+	}
+
+	public String getCombinedClassAndNumber() {
+		// TODO Auto-generated method stub
+		return bundle.toString() + bundleNumber;
+	}
+	
+	public void addToAppropriateAnimation(Image imageAndPos, String objectTextualId, String animationTextualId, short objectCode, int objPlusAnimCode, int width, int height)
+	{
+		this.theCurrentCacheObject.addToAppropriateAnimation(imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode, width, height);
+	}
+	
 
 }
