@@ -15,4 +15,6 @@ public class Scene {
     public SceneObjectCollection objectCollection() {
         return sceneObjectCollection;
     }
+
+	
 }

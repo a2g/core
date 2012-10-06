@@ -32,7 +32,7 @@ public class CommandLine {
         this.isVisible = true;
     }
     
-    public void setRollover(String displayName, String textualId, int code) {
+    public void setMouseOver(String displayName, String textualId, int code) {
         this.rolledOver = new SentenceUnit(
                 displayName, textualId, code); 
     }

@@ -15,9 +15,10 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 import com.github.a2g.bridge.animation.Timer;
-import com.github.a2g.bridge.handler.ImageMouseClickHandler;
-import com.github.a2g.bridge.handler.InventoryItemMouseOverHandler;
-import com.github.a2g.bridge.handler.SceneObjectMouseOverHandler;
+import com.github.a2g.bridge.handler.InventoryMouseClickHandler;
+import com.github.a2g.bridge.handler.InventoryMouseOverHandler;
+import com.github.a2g.bridge.handler.SceneMouseClickHandler;
+import com.github.a2g.bridge.handler.SceneMouseOverHandler;
 import com.github.a2g.bridge.image.Image;
 import com.github.a2g.bridge.image.ImageResource;
 import com.github.a2g.bridge.image.LoadHandler;
@@ -31,7 +32,6 @@ import com.github.a2g.core.loader.ImageBundleLoaderCallbackAPI;
 import com.github.a2g.core.loader.ImageBundleLoaderAPI;
 import com.github.a2g.core.loader.ImageBundleLoader;
 import com.github.a2g.core.sceneobject.Animation;
-import com.github.a2g.core.sceneobject.Scene;
 import com.github.a2g.core.sceneobject.SceneObject;
 import com.github.a2g.core.sceneobject.SceneObjectCache;
 import com.github.a2g.core.sceneobject.SceneObjectCollection;
@@ -81,12 +81,9 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private MasterPresenterHostAPI parent;
 	
 	private Timer timer;
-	private Scene scene;
 	private MasterPanel masterPanel;
 	private List<ImageBundleLoader> listOfEssentialLoaders;
 	private List<ImageBundleLoader> listOfNonEssentialLoaders;
-	private int m_imagesYetToLoad;
-	private boolean isOkToWaitForImages;
 	private ActionRunner actionRunner;
 	private int textSpeedDelay;
 	private Integer[] theListOfIndexesToInsertAt;
@@ -101,16 +98,14 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.bus = bus;
 		this.timer = null;
 		this.parent = parent;
-		this.isOkToWaitForImages = true;
 		this.textSpeedDelay = 20;
-		this.scene = new Scene();
+		
 		this.theObjectMap = new TreeMap<Short, SceneObject>();
 		this.theAnimationMap = new TreeMap<Integer, Animation>();
 		this.listOfEssentialLoaders = new LinkedList<ImageBundleLoader>();
 		this.listOfNonEssentialLoaders = new LinkedList <ImageBundleLoader>();
 		this.setOfCompletedLoaders = new TreeSet<String>();
 		this.objectCache = new TreeMap<String,SceneObjectCache>();
-		this.m_imagesYetToLoad = 0;
 		this.actionRunner = new ActionRunner();
 		this.theListOfIndexesToInsertAt= new Integer[100];
 		for(int i=0;i<100;i++)
@@ -126,15 +121,16 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		panel.setThing(this.masterPanel);
 
 
-
+		//masterPanel.getHostForCommandLine().setSize(320, 50);
 		this.dialogTreePresenter = new DialogTreePresenter(
 				masterPanel.getHostForDialogTree(), bus, this);
 		this.commandLinePresenter = new CommandLinePresenter(
 				masterPanel.getHostForCommandLine(), bus, this);
+		
 		this.inventoryPresenter = new InventoryPresenter(
 				masterPanel.getHostForInventory(), bus, parent);
 		this.verbsPresenter = new VerbsPresenter(
-				masterPanel.getHostForVerbs(), bus, parent);
+				masterPanel.getHostForVerbs(), bus, parent, this);
 		this.scenePresenter = new ScenePresenter(
 				masterPanel.getHostForScene(), bus, parent);
 		this.loadingPresenter =  new LoadingPresenter(
@@ -179,16 +175,18 @@ SaySpeechCallDialogTreeEventHandlerAPI
 			Image image = scenePresenter.getView().createNewInventoryImage(
 					imageResource,lh, bus, objectTextualId, objectCode, 0,0);
 			
-			image.addMouseMoveHandler(
-					new InventoryItemMouseOverHandler(
+			image.addInventoryMouseOverHandler(
+					new InventoryMouseOverHandler(
 							bus, 
 							this,
 							objectTextualId,
 							objectCode));
-			image.addClickHandler(
-					new ImageMouseClickHandler(
-							bus,
-							this.getSceneGui().getView()));
+			image.addInventoryMouseClickHandler(
+					new InventoryMouseClickHandler(
+							bus, 
+							this
+							)
+					);
 			
 
 			result = inventoryPresenter.addInventory(
@@ -197,7 +195,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 			
 			// if we don't start the image loading, the series of events leading
 			// to the progress bar increasing will fail, and we'll come to a halt.
-			this.scenePresenter.inititateLoadingOfImage(image);
+			this.scenePresenter.inititateLoadingOfImage(lh, image);
 		}
 
 		return result;
@@ -210,23 +208,28 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		}
 
 				
-		Image imageAndPos = this.scenePresenter.getView().createNewImageAndAddToPanel(lh, imageResource, bus, x,y, animationTextualId);
+		Image imageAndPos = this.scenePresenter.getView().createNewImageAndAddToPanel(lh, imageResource, bus, x,y, objectTextualId);
 		
-		theCurrentLoader.addToAppropriateAnimation(imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode, scenePresenter.getWidth(), scenePresenter.getHeight());
-			
+		theCurrentLoader.addToAppropriateAnimation(numberPrefix, imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode, scenePresenter.getWidth(), scenePresenter.getHeight());
+				
 		
 		int before = getIndexToInsertAt(numberPrefix);
 		updateTheListOfIndexesToInsertAt(numberPrefix);
 		imageAndPos.addImageToPanel( before );
 
-		imageAndPos.addMouseMoveHandler(
-				new SceneObjectMouseOverHandler(
+		imageAndPos.addSceneMouseOverHandler(
+				new SceneMouseOverHandler(
+						this.scenePresenter.getView(),
 						bus, this,
 						objectTextualId,
 						objectCode));
 		
-		imageAndPos.addClickHandler(	new ImageMouseClickHandler(bus,	this.getSceneGui().getView()));
+		imageAndPos.addSceneMouseClickHandler(	new SceneMouseClickHandler(bus, this));
 
+		// if we don't start the image loading, the series of events leading
+		// to the progress bar increasing will fail, and we'll come to a halt.
+		this.scenePresenter.inititateLoadingOfImage(lh, imageAndPos);
+		
 		return true;
 	}
 
@@ -236,9 +239,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 				code);
 
 		if (ob == null) {
-			int placeBreakpointHere = 0;
-
-			placeBreakpointHere++;
 		}
 		return ob;
 	}
@@ -288,9 +288,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 	@Override
 	public void executeBaseActionAndProcessReturnedInteger(BaseAction a) {
-		int result = actionRunner.runAction(a);
-		
-		result++;
+		actionRunner.runAction(a);
 	}
 	
 	public void skip()
@@ -310,10 +308,10 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	
 
 	public void showEverything() {
-		int count = this.scene.objectCollection().count();
+		int count = this.scenePresenter.getModel().objectCollection().count();
 		for (int i = 0; i<count; i++) 
 		{
-			SceneObject sceneObject = this.scene.objectCollection().at(i);
+			SceneObject sceneObject = this.scenePresenter.getModel().objectCollection().at(i);
 
 			if (sceneObject != null) {
 				if (sceneObject.getAnimations().at(ConstantsForAPI.INITIAL)!= null) 
@@ -544,13 +542,8 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 
 	@Override
-	public void onImageLoaded() {
-		m_imagesYetToLoad--;
-		if(m_imagesYetToLoad==0)
-		{
-			startGame();
-		}
-
+	public void onImageLoaded() 
+	{
 		loadingPresenter.incrementProgress();
 
 	}
@@ -603,9 +596,8 @@ SaySpeechCallDialogTreeEventHandlerAPI
 			//ImageBundleLoader loader = listOfEssentialLoaders.get(i);
 			if(loader.isInventory())
 			{
-				String name = loader.getCombinedClassAndNumber();
-				int len = name.indexOf("@");
-				String loaderName = name.substring(0,len);
+				String loaderName = loader.getCombinedClassAndNumber();
+				
 				if(loaderName.equalsIgnoreCase(this.inventoryResourceAsString))
 				{
 					iter.remove();
@@ -627,15 +619,16 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 		// hide all visible images.
 		// (using scene's data is quicker than using scenePanel data)
-		for(int i=0;i<scene.objectCollection().count();i++)
+		for(int i=0;i<scenePresenter.getModel().objectCollection().count();i++)
 		{
-			scene.objectCollection().at(i).setVisible(false);
+			scenePresenter.getModel().objectCollection().at(i).setVisible(false);
 		}
 
 		theObjectMap.clear();
 		theAnimationMap.clear();
 		this.theObjectMap.clear();
 		this.theAnimationMap.clear();
+		scenePresenter.reset();
 		
 		
 		// set gui to blank
@@ -655,8 +648,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		}
 		
 		loadingPresenter.setTotal(total);
-		m_imagesYetToLoad = total;
-		
 		loadNext();
 	}
 
@@ -672,6 +663,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		}
 		else
 		{
+			startGame();
 			return;
 		}
 		
@@ -710,7 +702,8 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		String loaderName = loader.toString();
 		setOfCompletedLoaders.add(loaderName);
 		SceneObjectCache cachedCollection = loader.getSceneObjectCollection();
-		objectCache.put(loader.getCombinedClassAndNumber(), cachedCollection);
+		String combinedName = loader.getCombinedClassAndNumber();
+		objectCache.put(combinedName, cachedCollection);
 		mergeWithScene(cachedCollection);
 		// now we need to remove the loader from the list.
 		// and since we only load non-ess after ess
@@ -726,100 +719,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		loadNext();
 	}
 
-
-
-	private void mergeWithScene(SceneObjectCache s) 
-	{
-		
-		
-		String name = s.getName();
-		logger.fine(name);
-		System.out.println("dumping " +  name);
-		SceneObjectCollection theirs = s.getSceneObjectCollection();
-		SceneObjectCollection ours = this.scene.objectCollection();
-		
-		for(int i=0;i<theirs.count();i++)
-		{
-			SceneObject srcObject = theirs.at(i);
-			String objTextualId = srcObject.getTextualId();
-			SceneObject destObject = ours.at(objTextualId);
-			if(destObject==null)
-			{
-				destObject = new SceneObject(objTextualId, scenePresenter.getWidth(), scenePresenter.getHeight());
-				ours.add(destObject);
-				
-				short objectCode = srcObject.getCode();
-				if (objectCode == -1) {
-					Window.alert(
-							"Missing initial image for "
-							+ objTextualId
-							+ " ");
-					return;
-				}
-
-				this.theObjectMap.put(objectCode,destObject);
-			}
-			
-			for(int j=0;j<srcObject.getAnimations().getCount();j++)
-			{
-				Animation srcAnimation = srcObject.getAnimations().at(j);
-				String animTextualId = srcAnimation.getTextualId();
-				Animation destAnimation = destObject.getAnimations().at(animTextualId);
-				if(destAnimation==null)
-				{
-					destAnimation = new Animation(animTextualId, destObject);
-					destObject.getAnimations().add(destAnimation);
-					this.theAnimationMap.put(destAnimation.getCode(), destAnimation);
-				}
-				
-				for(int k=0;k<srcAnimation.getFrames().getCount();k++)
-				{
-					Image srcImage = srcAnimation.getFrames().at(k);
-					destAnimation.getFrames().add(srcImage);
-				}
-				
-			}
-			
-			
-		}
-	}
-
-	void startNonEssential() 
-	{
-		if(isOkToWaitForImages)
-		{
-			int total = 0;
-			for(int i=0;i<listOfNonEssentialLoaders.size();i++)
-			{
-				total+=listOfNonEssentialLoaders.get(i).getNumberOfImages();
-			}
-			loadingPresenter.setTotal(total);
-			m_imagesYetToLoad = total;
-			loadNextNonEssential();	
-			
-			if(total==0)
-			{
-				//Window.alert("startGame();");	
-			}
-		}
-		else
-		{
-			// kick off delay loads
-			//Window.alert("startGame();");
-		}
-	}
-
-	void loadNextNonEssential()
-	{
-		if(!listOfNonEssentialLoaders.isEmpty())
-		{
-			ImageBundleLoader l = this.listOfNonEssentialLoaders.get(0);
-			this.listOfNonEssentialLoaders.remove(0);
-			l.setCallbacks(this);
-			l.runLoader();
-			// we remove it from the list of essentials when it completes
-		}
-	}
 
 	@Override
 	public void setWorldViewSize(int width, int height) {
@@ -839,7 +738,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 		this.callbacks.onFillLoadList(new OnFillLoadListAPIImpl(this));
 	}
-	
+
 	@Override
 	public void restartReloading() 
 	{
@@ -852,14 +751,83 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		{
 			//listOfNonEssentialLoaders.get(i).fireCompleted();	
 		}
-		
+
 		listOfNonEssentialLoaders.clear();
 		listOfEssentialLoaders.clear();
-		
+
 		this.callbacks.onFillLoadList(new OnFillLoadListAPIImpl(this));
-		
+
 	}
 
 
-};
+
+
+
+
+	private void mergeWithScene(SceneObjectCache s) 
+	{
+
+		
+		String name = s.getName();
+		logger.fine(name);
+		System.out.println("dumping " +  name);
+		SceneObjectCollection theirs = s.getSceneObjectCollection();
+		SceneObjectCollection ours = this.scenePresenter.getModel().objectCollection();
+
+		for(int i=0;i<theirs.count();i++)
+		{
+			SceneObject srcObject = theirs.at(i);
+			String objTextualId = srcObject.getTextualId();
+			int prefix = srcObject.getNumberPrefix();
+			short objectCode = srcObject.getCode();
+			SceneObject destObject = ours.at(objTextualId);
+			if(destObject==null)
+			{
+				destObject = new SceneObject(objTextualId, scenePresenter.getWidth(), scenePresenter.getHeight());
+				destObject.setNumberPrefix(prefix);
+				destObject.setCode(objectCode);
+
+				if (objectCode == -1) {
+					Window.alert(
+							"Missing initial image for "
+									+ objTextualId
+									+ " ");
+					return;
+				}
+
+				ours.add(destObject);
+				this.theObjectMap.put(objectCode,destObject);
+				System.out.println("object " + objTextualId + " " + objectCode);
+				
+			}
+
+			for(int j=0;j<srcObject.getAnimations().getCount();j++)
+			{
+				Animation srcAnimation = srcObject.getAnimations().at(j);
+				int animationCode = srcAnimation.getCode();
+				String animTextualId = srcAnimation.getTextualId();
+				
+				Animation destAnimation = destObject.getAnimations().at(animTextualId);
+				if(destAnimation==null)
+				{
+					destAnimation = new Animation(animTextualId, destObject);
+					destObject.getAnimations().add(destAnimation);
+					destAnimation.setCode(animationCode);
+					this.theAnimationMap.put(animationCode, destAnimation);
+				}
+
+				System.out.println("new anim " + objTextualId + " " + animTextualId+" = "+animationCode);
+				
+				for(int k=0;k<srcAnimation.getFrames().getCount();k++)
+				{
+					Image srcImage = srcAnimation.getFrames().at(k);
+					destAnimation.getFrames().add(srcImage);
+				}
+
+			}
+
+
+		}
+	}
+}
 

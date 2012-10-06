@@ -65,7 +65,7 @@ public class SceneObject {
         this.numberPrefix = number;
     }
 
-    public int getCodePrefix() {
+    public int getNumberPrefix() {
         return this.numberPrefix;
     }
 

@@ -29,6 +29,19 @@ public class Rect {
         this.right = x + width;
         this.bottom = y + height;
     }
+    
+    public boolean contains(int x, int y)
+    {
+    	if( x>=left && x<=right)
+    	{
+    		if( y >=top && y <= bottom)
+    		{
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
 
     public int getLeft() {
         return left;
@@ -45,5 +58,13 @@ public class Rect {
     public int getTop() {
         return top;
     }
+
+	public int getWidth() {
+		return right -left;
+	}
+
+	public int getHeight() {
+		return top-bottom;
+	}
 
 }

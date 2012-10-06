@@ -3,9 +3,11 @@ package com.github.a2g.core.objectmodel;
 
 import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.bridge.image.Image;
+import com.github.a2g.bridge.image.LoadHandler;
 import com.github.a2g.bridge.panel.ScenePanel;
 import com.github.a2g.bridge.thing.AcceptsOneThing;
 import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.sceneobject.Scene;
 
 
 public class ScenePresenter {
@@ -24,11 +26,12 @@ public class ScenePresenter {
 
     EventBus eventBus;
     MasterPresenterHostAPI parent;
+	private Scene scene;
 	  
     public ScenePresenter(final AcceptsOneThing panel, EventBus bus, MasterPresenterHostAPI parent) {
         this.setWidth(320);
         this.setHeight(180);
-
+        this.scene = new Scene();
         this.eventBus = bus;
         this.parent = parent;
         // this.theScene = new Scene();
@@ -75,10 +78,19 @@ public class ScenePresenter {
 		view.clear();
 	}
 	
-	public void inititateLoadingOfImage(Image image) {
-		view.inititateLoadingOfImage(image);
+	public void inititateLoadingOfImage(LoadHandler lh, Image image) {
+		view.inititateLoadingOfImage(lh, image);
 	}
 
+	public Scene getModel() {
+		// TODO Auto-generated method stub
+		return scene;
+	}
+
+	public void reset()
+	{
+		this.scene = new Scene();
+	}
 	
     
 }

@@ -120,12 +120,15 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
 
 	public String getCombinedClassAndNumber() {
 		// TODO Auto-generated method stub
-		return bundle.toString() + bundleNumber;
+		String name = bundle.toString();
+		int len = name.indexOf("@");
+		String loaderName = name.substring(0,len);
+		return  loaderName + bundleNumber;
 	}
 	
-	public void addToAppropriateAnimation(Image imageAndPos, String objectTextualId, String animationTextualId, short objectCode, int objPlusAnimCode, int width, int height)
+	public void addToAppropriateAnimation(int prefix, Image imageAndPos, String objectTextualId, String animationTextualId, short objectCode, int objPlusAnimCode, int width, int height)
 	{
-		this.theCurrentCacheObject.addToAppropriateAnimation(imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode, width, height);
+		this.theCurrentCacheObject.addToAppropriateAnimation(prefix, imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode, width, height);
 	}
 	
 

@@ -5,7 +5,6 @@
 package com.github.a2g.core.sceneobject;
 
 import com.github.a2g.bridge.image.Image;
-import com.github.a2g.bridge.panel.Window;
 
 
 public class SceneObjectCache {	
@@ -17,7 +16,7 @@ public class SceneObjectCache {
         this.sceneObjectCollection = new SceneObjectCollection();
     }
 
-	public void addToAppropriateAnimation(Image imageAndPos, String objectTextualId, String animationTextualId, short objectCode, int objPlusAnimCode, int width, int height)
+	public void addToAppropriateAnimation(int prefix, Image imageAndPos, String objectTextualId, String animationTextualId, short objectCode, int objPlusAnimCode, int width, int height)
 	{
 		// objects and animations
 		SceneObject sceneObject = this.getSceneObjectCollection().at(
@@ -28,8 +27,9 @@ public class SceneObjectCache {
 					objectTextualId,
 					width,
 					height);
-			//sceneObject.setNumberPrefix(numberPrefix);
+			sceneObject.setNumberPrefix(prefix);
 			sceneObject.setCode(objectCode);
+			
 	
 			this.getSceneObjectCollection().add(	sceneObject);
 		}
@@ -54,8 +54,6 @@ public class SceneObjectCache {
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
+	
 	
 }

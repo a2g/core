@@ -108,7 +108,7 @@ public class CommandLinePresenter
         view.setVisible(isVisible);
     }
     
-    public void doNextBestThingToExecute() {
+    public void doNextBestThingToExecute() {	
         model.doNextBestThingToExecute();
         updateImage();
     }
@@ -130,11 +130,11 @@ public class CommandLinePresenter
     }
 
     @Override
-    public void onSetRollover(String displayName, String textualId, int code) {
+    public void onSetMouseOver(String displayName, String textualId, int code) {
         if (api.getDialogTreeGui().isInDialogTreeMode()) {
             return;
         }
-        model.setRollover(displayName, textualId,
+        model.setMouseOver(displayName, textualId,
                 code);
 
         updateImage();

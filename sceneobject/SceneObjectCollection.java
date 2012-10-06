@@ -34,8 +34,8 @@ public class SceneObjectCollection {
                 new Comparator<SceneObject>() {
             @Override
             public int compare(SceneObject o1, SceneObject o2) {
-                return o1.getCodePrefix()
-                        - o2.getCodePrefix();
+                return o1.getNumberPrefix()
+                        - o2.getNumberPrefix();
             }
         });
 
