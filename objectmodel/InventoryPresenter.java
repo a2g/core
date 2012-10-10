@@ -68,4 +68,8 @@ public class InventoryPresenter {
 		theInventory = new Inventory();
 		
 	}
+
+	public InventoryPanel getView() {
+		return view;
+	}
 }

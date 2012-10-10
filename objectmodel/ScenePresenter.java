@@ -6,6 +6,7 @@ import com.github.a2g.bridge.image.Image;
 import com.github.a2g.bridge.image.LoadHandler;
 import com.github.a2g.bridge.panel.ScenePanel;
 import com.github.a2g.bridge.thing.AcceptsOneThing;
+import com.github.a2g.core.authoredscene.InternalAPI;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.sceneobject.Scene;
 
@@ -25,17 +26,15 @@ public class ScenePresenter {
     }
 
     EventBus eventBus;
-    MasterPresenterHostAPI parent;
 	private Scene scene;
 	  
-    public ScenePresenter(final AcceptsOneThing panel, EventBus bus, MasterPresenterHostAPI parent) {
+    public ScenePresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api) {
         this.setWidth(320);
         this.setHeight(180);
         this.scene = new Scene();
         this.eventBus = bus;
-        this.parent = parent;
         // this.theScene = new Scene();
-        this.view = new ScenePanel();
+        this.view = new ScenePanel(bus,api);
         panel.setThing(view);
         view.setVisible(true);
        
@@ -79,7 +78,7 @@ public class ScenePresenter {
 	}
 	
 	public void inititateLoadingOfImage(LoadHandler lh, Image image) {
-		view.inititateLoadingOfImage(lh, image);
+		view.inititateLoadingOfImage(image,lh);
 	}
 
 	public Scene getModel() {

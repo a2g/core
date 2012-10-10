@@ -20,7 +20,7 @@ import com.github.a2g.bridge.handler.InventoryMouseOverHandler;
 import com.github.a2g.bridge.handler.SceneMouseClickHandler;
 import com.github.a2g.bridge.handler.SceneMouseOverHandler;
 import com.github.a2g.bridge.image.Image;
-import com.github.a2g.bridge.image.ImageResource;
+import com.github.a2g.bridge.image.PackagedImage;
 import com.github.a2g.bridge.image.LoadHandler;
 import com.github.a2g.bridge.panel.MasterPanel;
 import com.github.a2g.bridge.panel.Window;
@@ -132,7 +132,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.verbsPresenter = new VerbsPresenter(
 				masterPanel.getHostForVerbs(), bus, parent, this);
 		this.scenePresenter = new ScenePresenter(
-				masterPanel.getHostForScene(), bus, parent);
+				masterPanel.getHostForScene(), bus, this);
 		this.loadingPresenter =  new LoadingPresenter(
 				masterPanel.getHostForLoading(), bus, this);
 
@@ -159,7 +159,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	
 	
 	@Override
-	public boolean addImageForAnInventoryItem(LoadHandler lh, String objectTextualId, int objectCode, ImageResource imageResource)
+	public boolean addImageForAnInventoryItem(LoadHandler lh, String objectTextualId, int objectCode, PackagedImage imageResource)
 	{
 		if (this.callbacks == null) {
 			return true;
@@ -172,21 +172,8 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		if (item == null) 
 		{
 
-			Image image = scenePresenter.getView().createNewInventoryImage(
+			Image image = inventoryPresenter.getView().createNewInventoryImage(
 					imageResource,lh, bus, objectTextualId, objectCode, 0,0);
-			
-			image.addInventoryMouseOverHandler(
-					new InventoryMouseOverHandler(
-							bus, 
-							this,
-							objectTextualId,
-							objectCode));
-			image.addInventoryMouseClickHandler(
-					new InventoryMouseClickHandler(
-							bus, 
-							this
-							)
-					);
 			
 
 			result = inventoryPresenter.addInventory(
@@ -202,7 +189,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	} 
 
 	@Override
-	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String objectTextualId, String animationTextualId, short objectCode, int objPlusAnimCode, ImageResource imageResource) {
+	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String objectTextualId, String animationTextualId, short objectCode, int objPlusAnimCode, PackagedImage imageResource) {
 		if (this.callbacks == null) {
 			return true;
 		}
@@ -217,15 +204,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		updateTheListOfIndexesToInsertAt(numberPrefix);
 		imageAndPos.addImageToPanel( before );
 
-		imageAndPos.addSceneMouseOverHandler(
-				new SceneMouseOverHandler(
-						this.scenePresenter.getView(),
-						bus, this,
-						objectTextualId,
-						objectCode));
 		
-		imageAndPos.addSceneMouseClickHandler(	new SceneMouseClickHandler(bus, this));
-
 		// if we don't start the image loading, the series of events leading
 		// to the progress bar increasing will fail, and we'll come to a halt.
 		this.scenePresenter.inititateLoadingOfImage(lh, imageAndPos);

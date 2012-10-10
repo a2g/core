@@ -4,7 +4,7 @@
  */
 package com.github.a2g.core.authoredscene;
 
-import com.github.a2g.bridge.image.ImageResource;
+import com.github.a2g.bridge.image.PackagedImage;
 import com.github.a2g.bridge.image.LoadHandler;
 
 
@@ -18,7 +18,7 @@ public interface ImageAddAPI {
 
 	@return true on success, otherwise false.
      */
-    public boolean addImageForAnInventoryItem(LoadHandler lh, String textualIdForInventory, int codeForInventory, ImageResource imageResource);
+    public boolean addImageForAnInventoryItem(LoadHandler lh, String textualIdForInventory, int codeForInventory, PackagedImage imageResource);
     
     /*!
 	If the same textualIds have already been used in a previous call to this method method, then the ImageResource is added to the
@@ -34,7 +34,7 @@ public interface ImageAddAPI {
 
 	@return true on success, otherwise false.
      */
-    public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String textualIdForObject, String textualIdForAnimation, short codeForObject, int codeForAnimation, ImageResource imageResource);
+    public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String textualIdForObject, String textualIdForAnimation, short codeForObject, int codeForAnimation, PackagedImage imageResource);
     
 };
 
