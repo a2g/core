@@ -34,7 +34,7 @@ public class ScenePresenter {
         this.scene = new Scene();
         this.eventBus = bus;
         // this.theScene = new Scene();
-        this.view = new ScenePanel(bus,api);
+        this.view = new ScenePanel();
         panel.setThing(view);
         view.setVisible(true);
        
@@ -77,9 +77,6 @@ public class ScenePresenter {
 		view.clear();
 	}
 	
-	public void inititateLoadingOfImage(LoadHandler lh, Image image) {
-		view.inititateLoadingOfImage(image,lh);
-	}
 
 	public Scene getModel() {
 		// TODO Auto-generated method stub

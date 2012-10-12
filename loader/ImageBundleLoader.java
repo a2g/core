@@ -76,6 +76,7 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
 	@Override
 	public void onLoad(LoadEvent event) 
 	{
+		System.out.println(event.toDebugString());
 		numberOfImagesLeftToLoad --;
 		fireProgress();
 		fireCompletedIfZeroImagesRemaining();

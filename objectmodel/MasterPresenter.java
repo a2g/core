@@ -15,10 +15,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.Logger;
 import com.github.a2g.bridge.animation.Timer;
-import com.github.a2g.bridge.handler.InventoryMouseClickHandler;
-import com.github.a2g.bridge.handler.InventoryMouseOverHandler;
-import com.github.a2g.bridge.handler.SceneMouseClickHandler;
-import com.github.a2g.bridge.handler.SceneMouseOverHandler;
 import com.github.a2g.bridge.image.Image;
 import com.github.a2g.bridge.image.PackagedImage;
 import com.github.a2g.bridge.image.LoadHandler;
@@ -128,7 +124,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 				masterPanel.getHostForCommandLine(), bus, this);
 		
 		this.inventoryPresenter = new InventoryPresenter(
-				masterPanel.getHostForInventory(), bus, parent);
+				masterPanel.getHostForInventory(), bus, parent, this);
 		this.verbsPresenter = new VerbsPresenter(
 				masterPanel.getHostForVerbs(), bus, parent, this);
 		this.scenePresenter = new ScenePresenter(
@@ -172,18 +168,17 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		if (item == null) 
 		{
 
-			Image image = inventoryPresenter.getView().createNewInventoryImage(
+			Image imageAndPos = inventoryPresenter.getView().createNewImageAndAdddHandlers(
 					imageResource,lh, bus, objectTextualId, objectCode, 0,0);
 			
 
 			result = inventoryPresenter.addInventory(
 					objectTextualId, objectCode,
-					image);
+					imageAndPos);
+		
+			imageAndPos.addImageToPanel( 0 );
 			
-			// if we don't start the image loading, the series of events leading
-			// to the progress bar increasing will fail, and we'll come to a halt.
-			this.scenePresenter.inititateLoadingOfImage(lh, image);
-		}
+	    }
 
 		return result;
 	} 
@@ -195,19 +190,17 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		}
 
 				
-		Image imageAndPos = this.scenePresenter.getView().createNewImageAndAddToPanel(lh, imageResource, bus, x,y, objectTextualId);
+		Image imageAndPos = this.scenePresenter.getView().createNewImageAndAdddHandlers(lh, imageResource, this, bus, x,y, objectTextualId, objectCode);
 		
 		theCurrentLoader.addToAppropriateAnimation(numberPrefix, imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode, scenePresenter.getWidth(), scenePresenter.getHeight());
 				
 		
 		int before = getIndexToInsertAt(numberPrefix);
 		updateTheListOfIndexesToInsertAt(numberPrefix);
-		imageAndPos.addImageToPanel( before );
-
 		
-		// if we don't start the image loading, the series of events leading
-		// to the progress bar increasing will fail, and we'll come to a halt.
-		this.scenePresenter.inititateLoadingOfImage(lh, imageAndPos);
+		// this triggers the loading
+		imageAndPos.addImageToPanel( before );
+	
 		
 		return true;
 	}
@@ -572,7 +565,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		{
 			ImageBundleLoader loader = iter.next();
 		
-			//ImageBundleLoader loader = listOfEssentialLoaders.get(i);
 			if(loader.isInventory())
 			{
 				String loaderName = loader.getCombinedClassAndNumber();
@@ -671,8 +663,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 			// b) loadNext
 		}
 		
-		
-			
 	}
 
 	@Override
