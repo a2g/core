@@ -2,8 +2,6 @@ package com.github.a2g.core.objectmodel;
 
 
 import com.google.gwt.event.shared.EventBus;
-import com.github.a2g.bridge.image.Image;
-import com.github.a2g.bridge.image.LoadHandler;
 import com.github.a2g.bridge.panel.ScenePanel;
 import com.github.a2g.bridge.thing.AcceptsOneThing;
 import com.github.a2g.core.authoredscene.InternalAPI;
@@ -14,9 +12,10 @@ import com.github.a2g.core.sceneobject.Scene;
 public class ScenePresenter {
     private int width;
     private int height;
-   
-    // private Scene theScene;
+    //private EventBus eventBus;
+	private Scene scene;
     private ScenePanel view;
+
     public ScenePanel getView() {
         return view;
     }
@@ -25,16 +24,13 @@ public class ScenePresenter {
         this.view = view;
     }
 
-    EventBus eventBus;
-	private Scene scene;
-	  
-    public ScenePresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api) {
+    public ScenePresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api) 
+    {
         this.setWidth(320);
         this.setHeight(180);
         this.scene = new Scene();
-        this.eventBus = bus;
-        // this.theScene = new Scene();
-        this.view = new ScenePanel();
+      //  this.eventBus = bus;
+        this.view = new ScenePanel(bus,api);
         panel.setThing(view);
         view.setVisible(true);
        
