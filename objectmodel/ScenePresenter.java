@@ -6,7 +6,6 @@ import com.github.a2g.bridge.panel.ScenePanel;
 import com.github.a2g.bridge.thing.AcceptsOneThing;
 import com.github.a2g.core.authoredscene.InternalAPI;
 import com.github.a2g.core.primitive.Point;
-import com.github.a2g.core.sceneobject.Scene;
 
 
 public class ScenePresenter {

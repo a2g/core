@@ -2,7 +2,7 @@
  * Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
  *  DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.
  */
-package com.github.a2g.core.sceneobject;
+package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.authoredscene.SceneAPI;
 
@@ -11,7 +11,7 @@ import com.github.a2g.core.authoredscene.SceneAPI;
 
 public class Animation {
     private String textualId;
-    private com.github.a2g.core.sceneobject.ImageCollection imageAndPosCollection;
+    private com.github.a2g.core.objectmodel.ImageCollection imageAndPosCollection;
     private SceneObject parent;
     private boolean wasSetAsHomeAnimation;
     private boolean wasSetAsTalkingAnimation;
@@ -22,14 +22,14 @@ public class Animation {
     public Animation(String textualId, SceneObject owningSceneObject) {
         this.parent = owningSceneObject;
         this.textualId = textualId;
-        imageAndPosCollection = new com.github.a2g.core.sceneobject.ImageCollection();
+        imageAndPosCollection = new com.github.a2g.core.objectmodel.ImageCollection();
         wasSetAsHomeAnimation = false;
         wasSetAsTalkingAnimation = false;
         wasSetAsCurrentAnimation = false;
         specialAnimationThisWasSetTo = null;
     }
 
-    public com.github.a2g.core.sceneobject.ImageCollection getFrames() {
+    public com.github.a2g.core.objectmodel.ImageCollection getFrames() {
         return imageAndPosCollection;
     }
 
@@ -55,17 +55,17 @@ public class Animation {
     	return code;
     }
 
-    public com.github.a2g.core.sceneobject.ImageCollection getImageAndPosCollection() {
+    public com.github.a2g.core.objectmodel.ImageCollection getImageAndPosCollection() {
         return imageAndPosCollection;
     }
 
-    public com.github.a2g.bridge.image.Image getDefaultFrame() {
+    public com.github.a2g.core.objectmodel.Image getDefaultFrame() {
         assert(imageAndPosCollection.getCount()
                 != 0);
         if (imageAndPosCollection.getCount() == 0) {
             return null;
         }
-        com.github.a2g.bridge.image.Image frame = imageAndPosCollection.at(
+        com.github.a2g.core.objectmodel.Image frame = imageAndPosCollection.at(
                 0);
 
         return frame;

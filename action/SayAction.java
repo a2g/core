@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import com.github.a2g.bridge.panel.PopupPanelWithLabel;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.objectmodel.Animation;
+import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.sceneobject.Animation;
-import com.github.a2g.core.sceneobject.SceneObject;
 
 
 

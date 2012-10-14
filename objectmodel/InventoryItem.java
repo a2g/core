@@ -5,7 +5,6 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.bridge.image.Image;
 import com.github.a2g.core.event.PropertyChangeEvent;
 import com.google.gwt.event.shared.EventBus;
 

@@ -2,7 +2,7 @@
  * Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
  *  DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.
  */
-package com.github.a2g.core.sceneobject;
+package com.github.a2g.core.objectmodel;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -11,7 +11,6 @@ import java.util.TreeMap;
 import com.github.a2g.core.authoredscene.ConstantsForAPI;
 import com.github.a2g.core.authoredscene.SceneAPI;
 import com.github.a2g.core.authoredscene.ConstantsForAPI.Special;
-import com.github.a2g.core.objectmodel.FrameAndAnimation;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;
@@ -26,7 +25,7 @@ public class SceneObject {
     private String displayName;
     private AnimationCollection animationCollection;
     private FrameAndAnimation fak;
-    private com.github.a2g.bridge.image.Image currentImage;
+    private com.github.a2g.core.objectmodel.Image currentImage;
     private boolean visible;
     private double width;
     private double height;
@@ -151,7 +150,7 @@ public class SceneObject {
                         anim.getLength() - 1);
             }
 
-            com.github.a2g.bridge.image.Image current = anim.getImageAndPosCollection().at(
+            com.github.a2g.core.objectmodel.Image current = anim.getImageAndPosCollection().at(
                     fak.getCurrentFrame());
 
             // yes current can equal null in some weird cases where I place breakpoints...
@@ -300,7 +299,7 @@ public class SceneObject {
         if (xanim != null) {
             for (int i = 0; i
                     < xanim.getLength(); i++) {
-                com.github.a2g.bridge.image.Image img = xanim.getFrames().at(
+                com.github.a2g.core.objectmodel.Image img = xanim.getFrames().at(
                         i);
                 Rect rect = img.getBoundingRect();
 

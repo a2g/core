@@ -7,7 +7,7 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.core.sceneobject.SceneObject;
+import com.github.a2g.core.objectmodel.SceneObject;
 
 
 public class SetVisibleAction extends BaseAction {
