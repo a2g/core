@@ -35,6 +35,7 @@ import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointF;
 
 
@@ -420,6 +421,11 @@ public abstract class BaseAction extends com.github.a2g.bridge.animation.Animati
         return new WalkToAction(this, objId,
                 point.getX(), point.getY(), delay, true);
     }    
+    
+    public BaseAction showCueCard(String text, ColorEnum color)
+    {
+    	return new CueCardAction(this, text, color);
+    }
   
 }
 

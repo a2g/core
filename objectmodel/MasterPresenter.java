@@ -16,7 +16,7 @@ import java.util.TreeSet;
 import java.util.logging.Logger;
 import com.github.a2g.bridge.animation.Timer;
 import com.github.a2g.bridge.image.PackagedImage;
-import com.github.a2g.bridge.image.LoadHandler;
+import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.bridge.panel.MasterPanel;
 import com.github.a2g.bridge.panel.Window;
 import com.github.a2g.bridge.thing.AcceptsOneThing;
@@ -26,6 +26,7 @@ import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.loader.ImageBundleLoaderCallbackAPI;
 import com.github.a2g.core.loader.ImageBundleLoaderAPI;
 import com.github.a2g.core.loader.ImageBundleLoader;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.authoredscene.ConstantsForAPI;
 import com.github.a2g.core.authoredscene.ImageAddAPI;
@@ -62,6 +63,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private ScenePresenter scenePresenter;
 	private DialogTreePresenter dialogTreePresenter;
 	private LoadingPresenter loadingPresenter;
+	private CueCardPresenter cueCardPresenter;
 
 	private SceneAPI callbacks;
 	private TreeMap<Short, SceneObject> theObjectMap;
@@ -84,6 +86,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private String inventoryResourceAsString;
 	
 	private ImageBundleLoader theCurrentLoader;
+	
 
 	public MasterPresenter(final AcceptsOneThing panel, EventBus bus, MasterPresenterHostAPI parent) {
 		this.bus = bus;
@@ -126,13 +129,15 @@ SaySpeechCallDialogTreeEventHandlerAPI
 				masterPanel.getHostForScene(), bus, this);
 		this.loadingPresenter =  new LoadingPresenter(
 				masterPanel.getHostForLoading(), bus, this);
+		this.cueCardPresenter =  new CueCardPresenter(
+				masterPanel.getHostForCueCard(), bus, this);
 
 
 		this.scenePresenter.setWorldViewSize(
 				scenePresenter.getWidth(),
 				scenePresenter.getHeight());
 
-		masterPanel.setLoadingActive();
+		this.setLoadingActive();
 
 	}
 
@@ -492,22 +497,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	}
 
 
-	void setDialogTreeActive()
-	{
-		masterPanel.setDialogTreeActive();
-	}
-
-	void setLoadingActive()
-	{
-		masterPanel.setLoadingActive();
-	}
-
-	void setGameActive()
-	{
-		masterPanel.setGameActive();
-	}
-
-
 	@Override
 	public void onImageLoaded() 
 	{
@@ -517,7 +506,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	
 	void startGame()
 	{
-		setGameActive();
+		setSceneActive();
 		showEverythingThenEnterScene();
 	}
 
@@ -792,6 +781,53 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 
 		}
+	}
+
+	@Override
+	public void displayCueCard(String text, ColorEnum color) 
+	{
+		if(text.length()>0)
+		{
+			
+			cueCardPresenter.setText(text);
+			cueCardPresenter.setColor(color);
+			this.setCueCardActive();
+			
+			
+		}
+		else
+		{
+			this.setSceneActive();
+		}
+	}
+	
+	public void setDialogTreeActive()
+	{
+		masterPanel.getHostForDialogTree().setVisible(true);
+		masterPanel.getHostForLoading().setVisible(false);
+		masterPanel.getHostForCueCard().setVisible(false);
+	}
+	
+	public void setLoadingActive()
+	{
+		masterPanel.getHostForDialogTree().setVisible(false);
+		masterPanel.getHostForLoading().setVisible(true);
+		masterPanel.getHostForCueCard().setVisible(false);
+	}
+	
+	public void setCueCardActive()
+	{
+		masterPanel.getHostForDialogTree().setVisible(false);
+		masterPanel.getHostForLoading().setVisible(false);
+		masterPanel.getHostForCueCard().setVisible(true);
+	}
+	
+	
+	public void setSceneActive()
+	{
+		masterPanel.getHostForDialogTree().setVisible(false);
+		masterPanel.getHostForLoading().setVisible(false);
+		masterPanel.getHostForCueCard().setVisible(true);
 	}
 }
 

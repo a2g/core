@@ -14,6 +14,7 @@ import com.github.a2g.core.objectmodel.InventoryPresenter;
 import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.VerbsPresenter;
+import com.github.a2g.core.primitive.ColorEnum;
 
 
 public interface InternalAPI 
@@ -64,6 +65,8 @@ extends ImageAddAPI, OnDoCommandAPI {
     public void executeBranchOnCurrentScene(int place);
 	public int getPopupDelay();
 	public void restartReloading();
+	
+	public void displayCueCard(String text, ColorEnum color);
  
 }
 
