@@ -792,8 +792,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 			cueCardPresenter.setText(text);
 			cueCardPresenter.setColor(color);
 			this.setCueCardActive();
-			
-			
 		}
 		else
 		{
@@ -803,6 +801,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	
 	public void setDialogTreeActive()
 	{
+		masterPanel.getHostForScene().setVisible(false);
 		masterPanel.getHostForDialogTree().setVisible(true);
 		masterPanel.getHostForLoading().setVisible(false);
 		masterPanel.getHostForCueCard().setVisible(false);
@@ -810,6 +809,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	
 	public void setLoadingActive()
 	{
+		masterPanel.getHostForScene().setVisible(false);
 		masterPanel.getHostForDialogTree().setVisible(false);
 		masterPanel.getHostForLoading().setVisible(true);
 		masterPanel.getHostForCueCard().setVisible(false);
@@ -817,6 +817,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	
 	public void setCueCardActive()
 	{
+		masterPanel.getHostForScene().setVisible(false);
 		masterPanel.getHostForDialogTree().setVisible(false);
 		masterPanel.getHostForLoading().setVisible(false);
 		masterPanel.getHostForCueCard().setVisible(true);
@@ -825,9 +826,11 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	
 	public void setSceneActive()
 	{
+		masterPanel.getHostForScene().setVisible(true);
 		masterPanel.getHostForDialogTree().setVisible(false);
 		masterPanel.getHostForLoading().setVisible(false);
-		masterPanel.getHostForCueCard().setVisible(true);
+		masterPanel.getHostForCueCard().setVisible(false);
+		
 	}
 }
 

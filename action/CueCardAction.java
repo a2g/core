@@ -22,7 +22,7 @@ public class CueCardAction extends BaseAction {
 	@Override
 	public void runGameAction() {
 
-		int totalDuration = getApi().getPopupDelay();
+		int totalDuration = getApi().getPopupDelay()*50;
 		
 		getApi().displayCueCard(text, color);
 		this.run((int) totalDuration);
