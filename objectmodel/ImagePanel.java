@@ -16,8 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.google.gwt.user.client.ui.AbsolutePanel;
-
 /* this can be moved back in to core
  * it can be called image requirements.
  * eventhough image is in bridge.

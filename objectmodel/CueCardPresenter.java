@@ -33,7 +33,7 @@ public class CueCardPresenter {
 
 	public void setColor(ColorEnum color) {
 		this.color = color;
-		view.setColor(color);
+		view.setColor(this.color);
 		
 	}
 
