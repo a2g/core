@@ -16,12 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-/* this can be moved back in to core
- * it can be called image requirements.
- * eventhough image is in bridge.
- * Perhaps one day I'll split image so half is in core.
- */
-
 public interface  ImagePanel 
 {
 
