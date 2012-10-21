@@ -560,10 +560,10 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		while(iter.hasNext())
 		{
 			ImageBundleLoader loader = iter.next();
-		
+			String loaderName = loader.getCombinedClassAndNumber();
+			
 			if(loader.isInventory())
 			{
-				String loaderName = loader.getCombinedClassAndNumber();
 				
 				if(loaderName.equalsIgnoreCase(this.inventoryResourceAsString))
 				{
@@ -577,11 +577,20 @@ SaySpeechCallDialogTreeEventHandlerAPI
 				}
 			}
 				 
-			total+=loader.getNumberOfImages();
+			if(!setOfCompletedLoaders.contains(loaderName))
+			{
+				total+=loader.getNumberOfImages();
+			}
 		}
 		for(int i=0;i<listOfNonEssentialLoaders.size();i++)
 		{
-			total+=listOfNonEssentialLoaders.get(i).getNumberOfImages();
+			ImageBundleLoader loader = listOfNonEssentialLoaders.get(i);
+			String loaderName = loader.getCombinedClassAndNumber();
+			
+			if(!setOfCompletedLoaders.contains(loaderName))
+			{
+				total+=loader.getNumberOfImages();
+			}
 		}
 
 		// hide all visible images.
@@ -646,7 +655,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		else
 		{
 			theCurrentLoader.setCallbacks(this);
-			String s = theCurrentLoader.toString();
+			String s = theCurrentLoader.getCombinedClassAndNumber();
 			if(this.setOfCompletedLoaders.contains(s))
 			{
 				theCurrentLoader.runLoaderAfterItsBeenLoaded();

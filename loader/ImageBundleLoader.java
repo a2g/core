@@ -130,8 +130,12 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
 		return theCurrentCacheObject;//.getSceneObjectCollection();
 	}
 
-	public String getCombinedClassAndNumber() {
-		// TODO Auto-generated method stub
+	public String toString()
+	{
+		return getCombinedClassAndNumber();
+	}
+	public String getCombinedClassAndNumber() 
+	{
 		String name = bundle.toString();
 		int len = name.indexOf("@");
 		String loaderName = name.substring(0,len);
