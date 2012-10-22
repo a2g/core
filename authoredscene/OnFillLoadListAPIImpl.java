@@ -36,9 +36,9 @@ public class OnFillLoadListAPIImpl
 		this.implementation.addNonEssential(imageBundle);
 	}
 	
-	public void setWorldViewSize(int width, int height)
+	public void setScenePixelSize(int width, int height)
 	{
-		this.implementation.setWorldViewSize(width,height);
+		this.implementation.setScenePixelSize(width,height);
 	}
 	public LoadKickStarter createLoadKickStarter()
 	{

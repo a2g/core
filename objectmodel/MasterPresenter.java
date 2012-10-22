@@ -98,6 +98,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private String inventoryResourceAsString;
 	
 	private ImageBundleLoader theCurrentLoader;
+	private String lastSceneAsString;
 	
 
 	public MasterPresenter(final AcceptsOneThing panel, EventBus bus, MasterPresenterHostAPI parent) {
@@ -144,16 +145,20 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.cueCardPresenter =  new CueCardPresenter(
 				masterPanel.getHostForCueCard(), bus, this);
 
-
-		this.scenePresenter.setWorldViewSize(
-				scenePresenter.getWidth(),
-				scenePresenter.getHeight());
+		int width = scenePresenter.getWidth();
+		int height = scenePresenter.getHeight();
+		this.scenePresenter.setPixelSize(width, height);
+		this.cueCardPresenter.setPixelSize(width, height);
 
 		this.setLoadingActive();
 
 	}
 
 	public void setCallbacks(SceneAPI callbacks) {
+		if(this.callbacks!=null)
+		{
+			lastSceneAsString = this.callbacks.toString();
+		}
 		this.loadingPresenter.setName(callbacks.toString());
 		this.callbacks = callbacks;
 		this.getCommandLineGui().setCallbacks(
@@ -390,13 +395,14 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		// but I've put it off til I need the microseconds.
 		cancelTimer();
 		this.actionRunner.cancel();
+	
 		this.parent.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(	scene);
 	}
 
 	@Override
 	public String getLastScene() {
 
-		return null;
+		return lastSceneAsString;
 	}
 
 	@Override
@@ -695,8 +701,10 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 
 	@Override
-	public void setWorldViewSize(int width, int height) {
-		this.scenePresenter.setWorldViewSize(width, height);
+	public void setScenePixelSize(int width, int height) {
+		this.scenePresenter.setPixelSize(width, height);
+		this.cueCardPresenter.setPixelSize(width, height);
+		this.loadingPresenter.setPixelSize(width, height);
 		
 	}
 
@@ -707,6 +715,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 
 	public void setScene(SceneAPI sceneCallbacks) {
+		
 		
 		setCallbacks(sceneCallbacks);
 

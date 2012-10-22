@@ -54,11 +54,9 @@ public class ScenePresenter {
 
     // start go in panel
      
-    public void setWorldViewSize(int width, int height) {
-        this.setWidth(width);
-        this.setHeight(height);
-        this.view.setSize("" + width + "px",
-                "" + height + "px");
+    public void setPixelSize(int width, int height) {
+        
+        this.view.setSize(width,height);
     }
 
     public Point getSizeOfSceneArea() {

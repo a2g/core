@@ -49,4 +49,10 @@ public class CueCardPresenter {
 		
 	}
 
+	public void setPixelSize(int width, int height) 
+	{
+		this.view.setSize(width , height);
+
+	}
+
 }

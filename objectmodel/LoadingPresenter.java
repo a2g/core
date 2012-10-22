@@ -24,30 +24,30 @@ import com.google.gwt.event.shared.EventBus;
 
 
 public class LoadingPresenter {
-    private LoadingPanel view;
-    int current;
-    int total;
-    private String name;	
-    public LoadingPresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api) {
-    	this.name = "";
-        this.view = new LoadingPanel(api);
-        panel.setThing(view);
-        this.current = 0;
-        this.total = 0;
-    }
-    
-    void incrementProgress()
-    {
-    	current = current +1;
-    	view.update(current, total, name);
-    }
+	private LoadingPanel view;
+	int current;
+	int total;
+	private String name;	
+	public LoadingPresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api) {
+		this.name = "";
+		this.view = new LoadingPanel(api);
+		panel.setThing(view);
+		this.current = 0;
+		this.total = 0;
+	}
 
-    void setTotal(int total)
-    {
-    	this.total = total;
-    	this.current = 0;
-    	view.update(current, total, name);
-    }
+	void incrementProgress()
+	{
+		current = current +1;
+		view.update(current, total, name);
+	}
+
+	void setTotal(int total)
+	{
+		this.total = total;
+		this.current = 0;
+		view.update(current, total, name);
+	}
 
 	public void setName(String string) {
 		name = string;
@@ -57,7 +57,13 @@ public class LoadingPresenter {
 		name = "";
 		total = 1;
 		current =1;
-		
+
+	}
+
+	public void setPixelSize(int width, int height) 
+	{
+		this.view.setSize(width , height);
+
 	}
 
 }
