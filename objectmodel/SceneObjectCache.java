@@ -18,7 +18,8 @@ package com.github.a2g.core.objectmodel;
 
 
 
-public class SceneObjectCache {	
+public class SceneObjectCache 
+{	
     private SceneObjectCollection sceneObjectCollection;
     private String name;
 
