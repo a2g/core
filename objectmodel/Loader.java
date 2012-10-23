@@ -14,17 +14,17 @@
  * the License.
  */
 
-package com.github.a2g.core.loader;
+package com.github.a2g.core.objectmodel;
 
 
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.core.objectmodel.Image;
-import com.github.a2g.core.objectmodel.SceneObjectCache;
+import com.github.a2g.core.loader.ImageBundleLoaderAPI;
+import com.github.a2g.core.loader.ImageBundleLoaderCallbackAPI;
 import com.google.gwt.event.dom.client.LoadEvent;
 
 
-public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoader>{
+public class Loader implements LoadHandler, Comparable<Loader>{
 	private ImageBundleLoaderCallbackAPI callbacks;
     ImageBundleLoaderAPI  bundle;
     int bundleNumber;
@@ -35,7 +35,7 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
     
     //private Logger logger = Logger.getLogger("com.mycompany.level");
     
-    public ImageBundleLoader(InternalAPI api, ImageBundleLoaderAPI bundleToCallLoadOn, int bundleNumber) 
+    public Loader(InternalAPI api, ImageBundleLoaderAPI bundleToCallLoadOn, int bundleNumber) 
     {
     	this.api = api;
         this.bundle = bundleToCallLoadOn;
@@ -111,7 +111,7 @@ public class ImageBundleLoader implements LoadHandler, Comparable<ImageBundleLoa
 
 
 	@Override
-	public int compareTo(ImageBundleLoader o) {
+	public int compareTo(Loader o) {
 		int result = this.bundleNumber - o.bundleNumber;
 		return result;
 	}

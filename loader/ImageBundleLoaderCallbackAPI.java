@@ -16,9 +16,11 @@
 
 package com.github.a2g.core.loader;
 
+import com.github.a2g.core.objectmodel.Loader;
+
 
 
 public interface ImageBundleLoaderCallbackAPI {
-    public void onLoaderComplete(ImageBundleLoader a);
+    public void onLoaderComplete(Loader a);
     public void onImageLoaded();
 }

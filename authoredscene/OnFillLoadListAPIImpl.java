@@ -31,11 +31,7 @@ public class OnFillLoadListAPIImpl
 		this.implementation.addEssential(imageBundle);
 	}
 	
-	public void addNonEssential(ImageBundleLoaderAPI imageBundle)
-	{
-		this.implementation.addNonEssential(imageBundle);
-	}
-	
+
 	public void setScenePixelSize(int width, int height)
 	{
 		this.implementation.setScenePixelSize(width,height);

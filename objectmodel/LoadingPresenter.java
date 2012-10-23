@@ -30,7 +30,6 @@ import com.github.a2g.bridge.panel.LoadingPanel;
 import com.github.a2g.bridge.thing.AcceptsOneThing;
 import com.github.a2g.core.authoredscene.InternalAPI;
 import com.github.a2g.core.authoredscene.MergeSceneAndStartAPI;
-import com.github.a2g.core.loader.ImageBundleLoader;
 import com.github.a2g.core.loader.ImageBundleLoaderAPI;
 import com.github.a2g.core.loader.ImageBundleLoaderCallbackAPI;
 import com.google.gwt.event.shared.EventBus;
@@ -39,9 +38,8 @@ import com.google.gwt.event.shared.EventBus;
 public class LoadingPresenter 
 implements ImageBundleLoaderCallbackAPI
 {
-	private ImageBundleLoader theCurrentLoader;
-	private List<ImageBundleLoader> listOfEssentialLoaders;
-	private List<ImageBundleLoader> listOfNonEssentialLoaders;
+	private Loader theCurrentLoader;
+	private List<Loader> listOfEssentialLoaders;
 	private Set<String> setOfCompletedLoaders;
 	private Map<String, SceneObjectCache>  objectCache;
 	private String inventoryResourceAsString;
@@ -54,8 +52,7 @@ implements ImageBundleLoaderCallbackAPI
 	private MergeSceneAndStartAPI master;
 	public LoadingPresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api, MergeSceneAndStartAPI master) 
 	{
-		this.listOfEssentialLoaders = new LinkedList<ImageBundleLoader>();
-		this.listOfNonEssentialLoaders = new LinkedList <ImageBundleLoader>();
+		this.listOfEssentialLoaders = new LinkedList<Loader>();
 		this.setOfCompletedLoaders = new TreeSet<String>();
 		this.objectCache = new TreeMap<String,SceneObjectCache>();
 	
@@ -97,7 +94,7 @@ implements ImageBundleLoaderCallbackAPI
 	}
 
 	@Override
-	public void onLoaderComplete(ImageBundleLoader loader) 
+	public void onLoaderComplete(Loader loader) 
 	{
 		String loaderName = loader.toString();
 		setOfCompletedLoaders.add(loaderName);
@@ -112,10 +109,7 @@ implements ImageBundleLoaderCallbackAPI
 		{
 			this.listOfEssentialLoaders.remove(0);
 		}
-		else
-		{
-			this.listOfNonEssentialLoaders.remove(0);
-		}
+		
 		loadNext();
 	}
 
@@ -125,10 +119,6 @@ implements ImageBundleLoaderCallbackAPI
 		if(!listOfEssentialLoaders.isEmpty())
 		{
 			theCurrentLoader = this.listOfEssentialLoaders.get(0);
-		}
-		else if(!listOfNonEssentialLoaders.isEmpty())
-		{
-			theCurrentLoader = this.listOfNonEssentialLoaders.get(0);
 		}
 		else
 		{
@@ -182,20 +172,11 @@ implements ImageBundleLoaderCallbackAPI
 		
 		for(int i=0;i<blah.getNumberOfBundles();i++)
 		{
-			listOfEssentialLoaders.add( new ImageBundleLoader(api,blah,i));
+			listOfEssentialLoaders.add( new Loader(api,blah,i));
 		}
 	}
 
 
-	public void addNonEssential(ImageBundleLoaderAPI blah, InternalAPI api) {
-
-		for(int i=0;i<blah.getNumberOfBundles();i++)
-		{
-
-			listOfNonEssentialLoaders.add( new ImageBundleLoader(api,blah,i));
-			
-		}
-	}
 	public boolean isSameInventoryAsLastTime()
 	{
 		return isSameInventoryAsLastTime;
@@ -208,13 +189,12 @@ implements ImageBundleLoaderCallbackAPI
 	{
 		imagesToLoad =0;
 		// get totals
-		Collections.sort(listOfNonEssentialLoaders);
 		Collections.sort(listOfEssentialLoaders);
 		
-		Iterator<ImageBundleLoader> iter = listOfEssentialLoaders.iterator();
+		Iterator<Loader> iter = listOfEssentialLoaders.iterator();
 		while(iter.hasNext())
 		{
-			ImageBundleLoader loader = iter.next();
+			Loader loader = iter.next();
 			String loaderName = loader.getCombinedClassAndNumber();
 			
 			if(loader.isInventory())
@@ -237,33 +217,17 @@ implements ImageBundleLoaderCallbackAPI
 				imagesToLoad+=loader.getNumberOfImages();
 			}
 		}
-		for(int i=0;i<listOfNonEssentialLoaders.size();i++)
-		{
-			ImageBundleLoader loader = listOfNonEssentialLoaders.get(i);
-			String loaderName = loader.getCombinedClassAndNumber();
-			
-			if(!setOfCompletedLoaders.contains(loaderName))
-			{
-				imagesToLoad+=loader.getNumberOfImages();
-			}
-		}
 	}
 
-	public void clearEssentialAndNonEssentialLists() 
+	public void clearLoaders() 
 	{
-		Iterator<ImageBundleLoader> iter = listOfEssentialLoaders.iterator();
+		Iterator<Loader> iter = listOfEssentialLoaders.iterator();
 		while(iter.hasNext())
 		{
 			iter.next();
 		}
-		for(int i=0;i<listOfNonEssentialLoaders.size();i++)
-		{
-			//listOfNonEssentialLoaders.get(i).fireCompleted();	
-		}
 
-		listOfNonEssentialLoaders.clear();
 		listOfEssentialLoaders.clear();
-		
 	}
 	
 }

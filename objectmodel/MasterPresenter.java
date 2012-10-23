@@ -17,7 +17,6 @@
 package com.github.a2g.core.objectmodel;
 
 
-
 import java.util.TreeMap;
 import java.util.logging.Logger;
 import com.github.a2g.bridge.animation.Timer;
@@ -517,11 +516,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		loadingPresenter.addEssential(blah, this);
 	}
 
-	@Override
-	public void addNonEssential(ImageBundleLoaderAPI blah) 
-	{
-		loadingPresenter.addNonEssential(blah, this);
-	}
 
 	@Override
 	public void kickStartLoading() 
@@ -591,7 +585,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	@Override
 	public void restartReloading() 
 	{
-		loadingPresenter.clearEssentialAndNonEssentialLists();
+		loadingPresenter.clearLoaders();
 
 		this.callbacks.onFillLoadList(new OnFillLoadListAPIImpl(this));
 
