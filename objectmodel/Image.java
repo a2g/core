@@ -18,16 +18,17 @@
 package com.github.a2g.core.objectmodel;
 
 
+import com.github.a2g.core.authoredscene.ImagePanelAPI;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
 
 public abstract class Image {
 	
-	private final ImagePanel panel;
+	private final ImagePanelAPI panel;
 	private final Point offset;
 	
 
-	public Image(ImagePanel panel, Point offset) 
+	public Image(ImagePanelAPI panel, Point offset) 
 	{
 		this.offset = offset;
 		this.panel = panel;

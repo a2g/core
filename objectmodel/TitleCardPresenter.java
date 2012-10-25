@@ -17,20 +17,20 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.bridge.panel.CueCardPanel;
+import com.github.a2g.bridge.panel.TitleCardPanel;
 import com.github.a2g.bridge.thing.AcceptsOneThing;
 import com.github.a2g.core.authoredscene.InternalAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
 
-public class CueCardPresenter {
-    private CueCardPanel view;
+public class TitleCardPresenter {
+    private TitleCardPanel view;
     private String text;
 	private ColorEnum color;	
-    public CueCardPresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api) {
+    public TitleCardPresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api) {
     	this.text = "";
-        this.view = new CueCardPanel(api);
+        this.view = new TitleCardPanel(api);
         panel.setThing(view);
     }
 

@@ -13,14 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.github.a2g.core.authoredscene;
 
-import com.github.a2g.core.objectmodel.SceneObjectCache;
+package com.github.a2g.core.objectmodel;
 
 
-public interface MergeSceneAndStartAPI
-{
-	void mergeWithScene(SceneObjectCache s) ;
-	void startGame();
-	void incrementProgress();
+public class TitleCard {
+   public String text;
+
 }

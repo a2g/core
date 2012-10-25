@@ -23,7 +23,7 @@ import com.github.a2g.core.authoredscene.SceneAPI;
 
 public class Animation {
     private String textualId;
-    private com.github.a2g.core.objectmodel.ImageCollection imageAndPosCollection;
+    private ImageCollection imageAndPosCollection;
     private SceneObject parent;
     private boolean wasSetAsHomeAnimation;
     private boolean wasSetAsTalkingAnimation;
@@ -41,7 +41,7 @@ public class Animation {
         specialAnimationThisWasSetTo = null;
     }
 
-    public com.github.a2g.core.objectmodel.ImageCollection getFrames() {
+    public ImageCollection getFrames() {
         return imageAndPosCollection;
     }
 
@@ -67,11 +67,11 @@ public class Animation {
     	return code;
     }
 
-    public com.github.a2g.core.objectmodel.ImageCollection getImageAndPosCollection() {
+    public ImageCollection getImageAndPosCollection() {
         return imageAndPosCollection;
     }
 
-    public com.github.a2g.core.objectmodel.Image getDefaultFrame() {
+    public Image getDefaultFrame() {
         assert(imageAndPosCollection.getCount()
                 != 0);
         if (imageAndPosCollection.getCount() == 0) {

@@ -66,8 +66,8 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private VerbsPresenter verbsPresenter;
 	private ScenePresenter scenePresenter;
 	private DialogTreePresenter dialogTreePresenter;
-	private LoadingPresenter loadingPresenter;
-	private CueCardPresenter cueCardPresenter;
+	private LoaderPresenter loadingPresenter;
+	private TitleCardPresenter cueCardPresenter;
 
 	private SceneAPI callbacks;
 	private TreeMap<Short, SceneObject> theObjectMap;
@@ -126,9 +126,9 @@ SaySpeechCallDialogTreeEventHandlerAPI
 				masterPanel.getHostForVerbs(), bus, parent, this);
 		this.scenePresenter = new ScenePresenter(
 				masterPanel.getHostForScene(), bus, this);
-		this.loadingPresenter =  new LoadingPresenter(
+		this.loadingPresenter =  new LoaderPresenter(
 				masterPanel.getHostForLoading(), bus, this, this);
-		this.cueCardPresenter =  new CueCardPresenter(
+		this.cueCardPresenter =  new TitleCardPresenter(
 				masterPanel.getHostForCueCard(), bus, this);
 
 		int width = scenePresenter.getWidth();
@@ -195,7 +195,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 				
 		Image imageAndPos = this.scenePresenter.getView().createNewImageAndAdddHandlers(lh, imageResource, this, bus, x,y, objectTextualId, objectCode);
 		
-		loadingPresenter.addToAppropriateAnimation(numberPrefix, imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode, scenePresenter.getWidth(), scenePresenter.getHeight());
+		loadingPresenter.getLoaders().addToAppropriateAnimation(numberPrefix, imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode, scenePresenter.getWidth(), scenePresenter.getHeight());
 				
 		
 		int before = getIndexToInsertAt(numberPrefix);
@@ -513,17 +513,17 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	@Override
 	public void addEssential(ImageBundleLoaderAPI blah)
 	{
-		loadingPresenter.addEssential(blah, this);
+		loadingPresenter.getLoaders().addEssential(blah, this);
 	}
 
 
 	@Override
 	public void kickStartLoading() 
 	{
-		loadingPresenter.calculateImagesToLoadAndIsSameInventory();
+		loadingPresenter.getLoaders().calculateImagesToLoadAndIsSameInventory();
 		
-		int total = loadingPresenter.imagesToLoad();
-		boolean isSameInventory = loadingPresenter.isSameInventoryAsLastTime();
+		int total = loadingPresenter.getLoaders().imagesToLoad();
+		boolean isSameInventory = loadingPresenter.getLoaders().isSameInventoryAsLastTime();
 	
 		// hide all visible images.
 		// (using scene's data is quicker than using scenePanel data)
@@ -553,7 +553,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		}
 		
 		loadingPresenter.setTotal(total);
-		loadingPresenter.loadNext();
+		loadingPresenter.getLoaders().loadNext();
 	}
 
 
@@ -585,10 +585,9 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	@Override
 	public void restartReloading() 
 	{
-		loadingPresenter.clearLoaders();
+		loadingPresenter.getLoaders().clearLoaders();
 
 		this.callbacks.onFillLoadList(new OnFillLoadListAPIImpl(this));
-
 	}
 
 
@@ -710,6 +709,11 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		masterPanel.getHostForLoading().setVisible(false);
 		masterPanel.getHostForCueCard().setVisible(false);
 		
+	}
+
+	@Override
+	public void incrementProgress() {
+		loadingPresenter.incrementProgress();
 	}
 }
 

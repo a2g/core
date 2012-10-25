@@ -16,18 +16,11 @@
 
 package com.github.a2g.core.objectmodel;
 
-public interface  ImagePanel 
+
+import java.util.LinkedList;
+
+public class LoaderCollection extends LinkedList<Loader>
 {
-
-	public void setImageVisible(Image image, boolean visible);
-
-	public void add(Image image, int x, int y);
-	public void insert(Image image, int x, int y, int before);
-
-	public void remove(Image image);
-
-	public void setThingPosition(Image image, int left, int top);
-	public int getImageHeight(Image image) ;
-
-	public int getImageWidth(Image image) ;
+    
+	 
 }
