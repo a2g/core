@@ -52,7 +52,7 @@ import com.github.a2g.core.primitive.PointF;
 
 
 
-public abstract class BaseAction extends com.github.a2g.bridge.animation.Animation {	
+public abstract class BaseAction extends com.github.a2g.core.gwt.Animation {	
     private ActionCallbackAPI callbacks;
     protected BaseAction parent;
     private InternalAPI api;

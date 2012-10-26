@@ -14,7 +14,10 @@
  * the License.
  */
 
-package com.github.a2g.core.objectmodel;
+package com.github.a2g.core.authoredscene;
+
+import com.github.a2g.core.primitive.ColorEnum;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
 * These are the methods a class needs to implement to be able to host 
@@ -57,4 +60,19 @@ public interface MasterPresenterHostAPI {
      */	
     public void setLastCommand(double x, double y, int v, String a, String b);
   
+    
+    CommandLinePanelAPI createCommandLinePanel();
+    DialogTreePanelAPI createDialogTreePanel();
+    InventoryPanelAPI createInventoryPanel();
+    LoaderPanelAPI createLoaderPanel();
+    MasterPanelAPI createMasterPanel();
+    ScenePanelAPI createScenePanel();
+    TitleCardPanelAPI createTitleCardPanel();
+    VerbsPanelAPI createVerbsPanel();
+   	public PopupPanelAPI createPopupPanel(String string, ColorEnum color);
+
+	public void alert(String string);
+
+	
+    
 }

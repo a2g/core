@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.authoredscene;
 
-import com.github.a2g.bridge.image.PackagedImage;
+import com.github.a2g.core.gwt.image.PackagedImage;
 import com.google.gwt.event.dom.client.LoadHandler;
 
 

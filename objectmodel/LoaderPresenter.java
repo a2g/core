@@ -17,9 +17,10 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.bridge.panel.LoadingPanel;
-import com.github.a2g.bridge.thing.AcceptsOneThing;
+import com.github.a2g.core.authoredscene.HostingPanelAPI;
 import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.authoredscene.LoaderPanelAPI;
+import com.github.a2g.core.authoredscene.MasterPresenterHostAPI;
 import com.github.a2g.core.authoredscene.MergeSceneAndStartAPI;
 import com.google.gwt.event.shared.EventBus;
 
@@ -27,16 +28,16 @@ import com.google.gwt.event.shared.EventBus;
 public class LoaderPresenter 
 {
 	private Loaders loaders;
-	private LoadingPanel view;
+	private LoaderPanelAPI view;
 	int current;
 	int total;
 	private String name;
 
-	public LoaderPresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api, MergeSceneAndStartAPI master) 
+	public LoaderPresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api, MergeSceneAndStartAPI master, MasterPresenterHostAPI parent) 
 	{
-		
+		this.loaders = new Loaders(master);
 		this.name = "";
-		this.view = new LoadingPanel(api);
+		this.view = parent.createLoaderPanel();
 		panel.setThing(view);
 		this.current = 0;
 		this.total = 0;

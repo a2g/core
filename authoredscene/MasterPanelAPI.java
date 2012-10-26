@@ -13,18 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 package com.github.a2g.core.authoredscene;
 
-import com.github.a2g.core.objectmodel.Image;
 
-public interface  ImagePanelAPI 
+public interface MasterPanelAPI
 {
-	public void setImageVisible(Image image, boolean visible);
-	public void add(Image image, int x, int y);
-	public void insert(Image image, int x, int y, int before);
-	public void remove(Image image);
-	public void setThingPosition(Image image, int left, int top);
-	public int getImageHeight(Image image) ;
-	public int getImageWidth(Image image) ;
+
+	HostingPanelAPI getHostForDialogTree();
+
+	HostingPanelAPI getHostForLoading();
+
+	HostingPanelAPI getHostForCommandLine();
+
+	HostingPanelAPI getHostForInventory();
+
+	HostingPanelAPI getHostForTitleCard();
+
+	HostingPanelAPI getHostForVerbs();
+
+	HostingPanelAPI getHostForScene();
 }

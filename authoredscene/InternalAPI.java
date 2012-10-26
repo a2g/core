@@ -79,6 +79,8 @@ extends ImageAddAPI, OnDoCommandAPI {
 	public void restartReloading();
 	
 	public void displayCueCard(String text, ColorEnum color);
+	
+	public MasterPresenterHostAPI getMasterHostAPI();
  
 }
 

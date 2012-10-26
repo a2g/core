@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2012 Anthony Cassidy
  *
@@ -13,18 +14,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 package com.github.a2g.core.authoredscene;
 
+import com.github.a2g.core.gwt.image.PackagedImage;
 import com.github.a2g.core.objectmodel.Image;
+import com.google.gwt.event.dom.client.LoadHandler;
+import com.google.gwt.event.shared.EventBus;
 
-public interface  ImagePanelAPI 
+public interface ScenePanelAPI
 {
-	public void setImageVisible(Image image, boolean visible);
-	public void add(Image image, int x, int y);
-	public void insert(Image image, int x, int y, int before);
-	public void remove(Image image);
-	public void setThingPosition(Image image, int left, int top);
-	public int getImageHeight(Image image) ;
-	public int getImageWidth(Image image) ;
+
+	void clear();
+
+	Image createNewImageAndAddHandlers(LoadHandler lh,
+			PackagedImage imageResource, InternalAPI api,
+			EventBus bus, int x, int y, String objectTextualId, short objectCode);
+
+	void setSize(int width, int height);
+
+	void setVisible(boolean b);
 }

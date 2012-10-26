@@ -17,14 +17,14 @@
 package com.github.a2g.core.action;
 
 
-import com.github.a2g.bridge.panel.PopupPanelWithLabel;
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.authoredscene.PopupPanelAPI;
 
 
 
 public class SayWithoutAnimationAction extends BaseAction {
     private String speech;
-    private PopupPanelWithLabel popup;
+    private PopupPanelAPI popup;
 
     public SayWithoutAnimationAction(BaseAction parent, int objId, String speech) {
         super(parent, parent.getApi());
@@ -40,7 +40,7 @@ public class SayWithoutAnimationAction extends BaseAction {
                 * (2 + delay))
                         * 40;
 
-        this.popup = new PopupPanelWithLabel(this.speech, null);
+        this.popup = this.getApi().getMasterHostAPI().createPopupPanel(this.speech, null);
         this.popup.setPopupPosition(20, 20);
         this.popup.show();
 

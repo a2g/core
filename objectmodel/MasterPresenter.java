@@ -19,12 +19,7 @@ package com.github.a2g.core.objectmodel;
 
 import java.util.TreeMap;
 import java.util.logging.Logger;
-import com.github.a2g.bridge.animation.Timer;
-import com.github.a2g.bridge.image.PackagedImage;
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.bridge.panel.MasterPanel;
-import com.github.a2g.bridge.panel.Window;
-import com.github.a2g.bridge.thing.AcceptsOneThing;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.NullParentAction;
@@ -32,8 +27,11 @@ import com.github.a2g.core.loader.ImageBundleLoaderAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.authoredscene.ConstantsForAPI;
+import com.github.a2g.core.authoredscene.HostingPanelAPI;
 import com.github.a2g.core.authoredscene.ImageAddAPI;
 import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.authoredscene.MasterPanelAPI;
+import com.github.a2g.core.authoredscene.MasterPresenterHostAPI;
 import com.github.a2g.core.authoredscene.MergeSceneAndStartAPI;
 import com.github.a2g.core.authoredscene.OnDialogTreeAPI;
 import com.github.a2g.core.authoredscene.OnDoCommandAPI;
@@ -46,6 +44,8 @@ import com.github.a2g.core.authoredscene.SceneAPI;
 
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
+import com.github.a2g.core.gwt.Timer;
+import com.github.a2g.core.gwt.image.PackagedImage;
 import com.google.gwt.event.shared.EventBus;
 
 public class MasterPresenter  
@@ -78,7 +78,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private MasterPresenterHostAPI parent;
 	
 	private Timer timer;
-	private MasterPanel masterPanel;
+	private MasterPanelAPI masterPanel;
 		private ActionRunner actionRunner;
 	private int textSpeedDelay;
 	private Integer[] theListOfIndexesToInsertAt;
@@ -90,7 +90,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private String lastSceneAsString;
 	
 
-	public MasterPresenter(final AcceptsOneThing panel, EventBus bus, MasterPresenterHostAPI parent) {
+	public MasterPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent) {
 		this.bus = bus;
 		this.timer = null;
 		this.parent = parent;
@@ -110,7 +110,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 
 
-		this.masterPanel = new MasterPanel();
+		this.masterPanel = parent.createMasterPanel();
 		panel.setThing(this.masterPanel);
 
 
@@ -127,9 +127,9 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.scenePresenter = new ScenePresenter(
 				masterPanel.getHostForScene(), bus, this);
 		this.loadingPresenter =  new LoaderPresenter(
-				masterPanel.getHostForLoading(), bus, this, this);
+				masterPanel.getHostForLoading(), bus, this, this, parent);
 		this.cueCardPresenter =  new TitleCardPresenter(
-				masterPanel.getHostForCueCard(), bus, this);
+				masterPanel.getHostForTitleCard(), bus, this, parent);
 
 		int width = scenePresenter.getWidth();
 		int height = scenePresenter.getHeight();
@@ -193,7 +193,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		}
 
 				
-		Image imageAndPos = this.scenePresenter.getView().createNewImageAndAdddHandlers(lh, imageResource, this, bus, x,y, objectTextualId, objectCode);
+		Image imageAndPos = this.scenePresenter.getView().createNewImageAndAddHandlers(lh, imageResource, this, bus, x,y, objectTextualId, objectCode);
 		
 		loadingPresenter.getLoaders().addToAppropriateAnimation(numberPrefix, imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode, scenePresenter.getWidth(), scenePresenter.getHeight());
 				
@@ -496,7 +496,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 				speech, branchId);
 	}
 
-	public MasterPanel getMasterPanel() {
+	public MasterPanelAPI getMasterPanel() {
 		return masterPanel;
 	}
 
@@ -513,6 +513,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	@Override
 	public void addEssential(ImageBundleLoaderAPI blah)
 	{
+		
 		loadingPresenter.getLoaders().addEssential(blah, this);
 	}
 
@@ -619,7 +620,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 				destObject.setCode(objectCode);
 
 				if (objectCode == -1) {
-					Window.alert(
+					parent.alert(
 							"Missing initial image for "
 									+ objTextualId
 									+ " ");
@@ -682,7 +683,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		masterPanel.getHostForScene().setVisible(false);
 		masterPanel.getHostForDialogTree().setVisible(true);
 		masterPanel.getHostForLoading().setVisible(false);
-		masterPanel.getHostForCueCard().setVisible(false);
+		masterPanel.getHostForTitleCard().setVisible(false);
 	}
 	
 	public void setLoadingActive()
@@ -690,7 +691,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		masterPanel.getHostForScene().setVisible(false);
 		masterPanel.getHostForDialogTree().setVisible(false);
 		masterPanel.getHostForLoading().setVisible(true);
-		masterPanel.getHostForCueCard().setVisible(false);
+		masterPanel.getHostForTitleCard().setVisible(false);
 	}
 	
 	public void setCueCardActive()
@@ -698,7 +699,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		masterPanel.getHostForScene().setVisible(false);
 		masterPanel.getHostForDialogTree().setVisible(false);
 		masterPanel.getHostForLoading().setVisible(false);
-		masterPanel.getHostForCueCard().setVisible(true);
+		masterPanel.getHostForTitleCard().setVisible(true);
 	}
 	
 	
@@ -707,13 +708,18 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		masterPanel.getHostForScene().setVisible(true);
 		masterPanel.getHostForDialogTree().setVisible(false);
 		masterPanel.getHostForLoading().setVisible(false);
-		masterPanel.getHostForCueCard().setVisible(false);
+		masterPanel.getHostForTitleCard().setVisible(false);
 		
 	}
 
 	@Override
 	public void incrementProgress() {
 		loadingPresenter.incrementProgress();
+	}
+
+	@Override
+	public MasterPresenterHostAPI getMasterHostAPI() {
+		return parent;
 	}
 }
 

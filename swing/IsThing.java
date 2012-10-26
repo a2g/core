@@ -14,17 +14,11 @@
  * the License.
  */
 
-package com.github.a2g.core.authoredscene;
+package com.github.a2g.core.swing;
 
-import com.github.a2g.core.objectmodel.Image;
+import java.awt.Component;
 
-public interface  ImagePanelAPI 
+public interface IsThing 
 {
-	public void setImageVisible(Image image, boolean visible);
-	public void add(Image image, int x, int y);
-	public void insert(Image image, int x, int y, int before);
-	public void remove(Image image);
-	public void setThingPosition(Image image, int left, int top);
-	public int getImageHeight(Image image) ;
-	public int getImageWidth(Image image) ;
+	Component asThing();
 }

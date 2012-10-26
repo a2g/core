@@ -18,10 +18,10 @@ package com.github.a2g.core.objectmodel;
 
 
 
-import com.github.a2g.bridge.panel.CommandLinePanel;
-import com.github.a2g.bridge.thing.AcceptsOneThing;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.NullParentAction;
+import com.github.a2g.core.authoredscene.CommandLinePanelAPI;
+import com.github.a2g.core.authoredscene.HostingPanelAPI;
 import com.github.a2g.core.authoredscene.InternalAPI;
 import com.github.a2g.core.authoredscene.SceneAPI;
 import com.github.a2g.core.event.ExecuteCommandEvent;
@@ -37,10 +37,10 @@ public class CommandLinePresenter
 
     private SceneAPI callbacks;
     private InternalAPI api;
-    private CommandLinePanel view;
+    private CommandLinePanelAPI view;
     private CommandLine model;
     
-    public CommandLinePresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api) {
+    public CommandLinePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api) {
         this.model = new CommandLine(api);
         this.callbacks = null;
        

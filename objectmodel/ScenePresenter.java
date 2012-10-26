@@ -18,9 +18,9 @@ package com.github.a2g.core.objectmodel;
 
 
 import com.google.gwt.event.shared.EventBus;
-import com.github.a2g.bridge.panel.ScenePanel;
-import com.github.a2g.bridge.thing.AcceptsOneThing;
+import com.github.a2g.core.authoredscene.HostingPanelAPI;
 import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.authoredscene.ScenePanelAPI;
 import com.github.a2g.core.primitive.Point;
 
 
@@ -29,17 +29,17 @@ public class ScenePresenter {
     private int height;
     //private EventBus eventBus;
 	private Scene scene;
-    private ScenePanel view;
+    private ScenePanelAPI view;
 
-    public ScenePanel getView() {
+    public ScenePanelAPI getView() {
         return view;
     }
 
-    public void setView(ScenePanel view) {
+    public void setView(ScenePanelAPI view) {
         this.view = view;
     }
 
-    public ScenePresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api) 
+    public ScenePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api) 
     {
         this.setWidth(320);
         this.setHeight(180);

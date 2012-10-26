@@ -17,8 +17,8 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.bridge.panel.DialogTreePanel;
-import com.github.a2g.bridge.thing.AcceptsOneThing;
+import com.github.a2g.core.authoredscene.DialogTreePanelAPI;
+import com.github.a2g.core.authoredscene.HostingPanelAPI;
 import com.github.a2g.core.authoredscene.InternalAPI;
 import com.google.gwt.event.shared.EventBus;
 
@@ -27,11 +27,11 @@ public class DialogTreePresenter {
     private EventBus bus;
     private InternalAPI api;
     private DialogTree theDialogTree;
-    private DialogTreePanel view;
+    private DialogTreePanelAPI view;
     private boolean isInDialogTreeMode;
     private short dialogTreeTalker;
 		
-    public DialogTreePresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api) {
+    public DialogTreePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api) {
         this.bus = bus;
         this.api = api;
         this.theDialogTree = new DialogTree();

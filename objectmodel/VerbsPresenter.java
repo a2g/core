@@ -18,30 +18,32 @@ package com.github.a2g.core.objectmodel;
 
 
 import com.google.gwt.event.shared.EventBus;
-import com.github.a2g.bridge.panel.VerbsPanel;
-import com.github.a2g.bridge.thing.AcceptsOneThing;
+import com.github.a2g.core.authoredscene.HostingPanelAPI;
 import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.authoredscene.MasterPresenterHostAPI;
+import com.github.a2g.core.authoredscene.VerbsPanelAPI;
 
 
-public class VerbsPresenter {
-
+public class VerbsPresenter 
+{
     private Verbs theVerbs;
-    private VerbsPanel view;
+    private VerbsPanelAPI view;
 
-    public VerbsPresenter(final AcceptsOneThing panel, EventBus bus, MasterPresenterHostAPI parent, InternalAPI api) {
+    public VerbsPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent, InternalAPI api) 
+    {
         this.theVerbs = new Verbs();
-        this.view = new VerbsPanel(theVerbs,
-                bus, api);
+        this.view = parent.createVerbsPanel();
         
         panel.setThing(view);
     }
 
-    public void setVisible(boolean isVisible) {
+    public void setVisible(boolean isVisible) 
+    {
         view.setVisible(isVisible);
-		
     }
 
-	public void clear() {
+	public void clear() 
+	{
 		// doesn't change.
 		
 	}

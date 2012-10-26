@@ -17,20 +17,22 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.bridge.panel.TitleCardPanel;
-import com.github.a2g.bridge.thing.AcceptsOneThing;
+import com.github.a2g.core.authoredscene.HostingPanelAPI;
 import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.authoredscene.MasterPresenterHostAPI;
+import com.github.a2g.core.authoredscene.TitleCardPanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
 
 public class TitleCardPresenter {
-    private TitleCardPanel view;
+    private TitleCardPanelAPI view;
     private String text;
 	private ColorEnum color;	
-    public TitleCardPresenter(final AcceptsOneThing panel, EventBus bus, InternalAPI api) {
+	
+    public TitleCardPresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api, MasterPresenterHostAPI parent) {
     	this.text = "";
-        this.view = new TitleCardPanel(api);
+        this.view = parent.createTitleCardPanel();
         panel.setThing(view);
     }
 
