@@ -17,11 +17,11 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.authoredscene.HostingPanelAPI;
-import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.core.authoredscene.LoaderPanelAPI;
-import com.github.a2g.core.authoredscene.MasterPresenterHostAPI;
-import com.github.a2g.core.authoredscene.MergeSceneAndStartAPI;
+import com.github.a2g.core.interfaces.HostingPanelAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.LoaderPanelAPI;
+import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
+import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
 import com.google.gwt.event.shared.EventBus;
 
 
@@ -37,7 +37,7 @@ public class LoaderPresenter
 	{
 		this.loaders = new Loaders(master);
 		this.name = "";
-		this.view = parent.createLoaderPanel();
+		this.view = parent.getFactory().createLoaderPanel();
 		panel.setThing(view);
 		this.current = 0;
 		this.total = 0;

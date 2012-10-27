@@ -17,10 +17,10 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.authoredscene.DialogTreePanelAPI;
 import com.github.a2g.core.gwt.mouse.DialogTreeMouseClickHandler;
 import com.github.a2g.core.gwt.mouse.DialogTreeMouseOutHandler;
 import com.github.a2g.core.gwt.mouse.DialogTreeMouseOverHandler;
+import com.github.a2g.core.interfaces.DialogTreePanelAPI;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;

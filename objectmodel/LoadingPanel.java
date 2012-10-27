@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.core.authoredscene.LoaderPanelAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.LoaderPanelAPI;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;

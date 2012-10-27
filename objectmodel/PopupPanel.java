@@ -18,7 +18,7 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.authoredscene.PopupPanelAPI;
+import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Label;

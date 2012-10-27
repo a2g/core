@@ -17,10 +17,10 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.core.authoredscene.VerbsPanelAPI;
 import com.github.a2g.core.gwt.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.gwt.mouse.VerbMouseOverHandler;
+import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.VerbsPanelAPI;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Grid;

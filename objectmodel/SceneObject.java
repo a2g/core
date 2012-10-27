@@ -20,9 +20,9 @@ import java.util.Map;
 import java.util.TreeMap;
 
 
-import com.github.a2g.core.authoredscene.ConstantsForAPI;
-import com.github.a2g.core.authoredscene.SceneAPI;
-import com.github.a2g.core.authoredscene.ConstantsForAPI.Special;
+import com.github.a2g.core.interfaces.ConstantsForAPI;
+import com.github.a2g.core.interfaces.SceneAPI;
+import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;

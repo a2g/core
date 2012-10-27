@@ -17,13 +17,13 @@ package com.github.a2g.core.objectmodel;
 
 
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.authoredscene.ImagePanelAPI;
-import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.core.authoredscene.InventoryPanelAPI;
 import com.github.a2g.core.gwt.image.GwtImage;
 import com.github.a2g.core.gwt.image.PackagedImage;
 import com.github.a2g.core.gwt.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.gwt.mouse.InventoryItemMouseOverHandler;
+import com.github.a2g.core.interfaces.ImagePanelAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.InventoryPanelAPI;
 import com.github.a2g.core.primitive.Point;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;

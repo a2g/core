@@ -18,7 +18,7 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.authoredscene.ImagePanelAPI;
+import com.github.a2g.core.interfaces.ImagePanelAPI;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
 

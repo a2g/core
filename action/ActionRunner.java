@@ -18,6 +18,8 @@ package com.github.a2g.core.action;
 
 import java.util.ArrayList;
 
+import com.github.a2g.core.interfaces.SystemAnimationAPI;
+
 public class ActionRunner implements ActionCallbackAPI
 {
 	protected ArrayList<BaseAction> list;

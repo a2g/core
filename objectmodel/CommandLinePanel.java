@@ -17,7 +17,7 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.authoredscene.CommandLinePanelAPI;
+import com.github.a2g.core.interfaces.CommandLinePanelAPI;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.UIObject;

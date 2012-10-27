@@ -17,7 +17,7 @@
 package com.github.a2g.core.loader;
 
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
 
 
 public interface ImageBundleLoaderAPI

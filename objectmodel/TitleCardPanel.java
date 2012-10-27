@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.core.authoredscene.TitleCardPanelAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.TitleCardPanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Label;

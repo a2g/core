@@ -18,10 +18,10 @@ package com.github.a2g.core.objectmodel;
 
 import java.util.TreeMap;
 
-import com.github.a2g.core.authoredscene.HostingPanelAPI;
-import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.core.authoredscene.InventoryPanelAPI;
-import com.github.a2g.core.authoredscene.MasterPresenterHostAPI;
+import com.github.a2g.core.interfaces.HostingPanelAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.InventoryPanelAPI;
+import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
 import com.google.gwt.event.shared.EventBus;
 
 
@@ -37,7 +37,7 @@ public class InventoryPresenter {
         this.eventBus = bus;
         this.parent = parent;
         this.theInventory = new Inventory();
-        this.view = parent.createInventoryPanel();
+        this.view = parent.getFactory().createInventoryPanel();
         panel.setThing(view);
         this.theInventoryItemMap = new TreeMap<Integer, InventoryItem>();
     }

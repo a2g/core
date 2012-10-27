@@ -18,12 +18,13 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
 
 
-public abstract class BaseDialogTreeAction extends BaseAction {
+public abstract class BaseDialogTreeAction 
+extends BaseAction {
 
-    protected BaseDialogTreeAction(BaseAction parent, InternalAPI api) {
+    BaseDialogTreeAction(BaseAction parent, InternalAPI api) {
         super(parent, api);
 
     }	

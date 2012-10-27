@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
 
 
 public class CommandLine {

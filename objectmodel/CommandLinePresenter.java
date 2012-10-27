@@ -20,14 +20,14 @@ package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.NullParentAction;
-import com.github.a2g.core.authoredscene.CommandLinePanelAPI;
-import com.github.a2g.core.authoredscene.HostingPanelAPI;
-import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.core.authoredscene.SceneAPI;
 import com.github.a2g.core.event.ExecuteCommandEvent;
 import com.github.a2g.core.event.ExecuteCommandEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.event.SetRolloverEventHandlerAPI;
+import com.github.a2g.core.interfaces.CommandLinePanelAPI;
+import com.github.a2g.core.interfaces.HostingPanelAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.SceneAPI;
 import com.google.gwt.event.shared.EventBus;
 
 

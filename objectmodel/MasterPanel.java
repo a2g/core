@@ -15,10 +15,10 @@
  */
 
 package com.github.a2g.core.objectmodel;
-import com.github.a2g.core.authoredscene.HostingPanelAPI;
-import com.github.a2g.core.authoredscene.MasterPanelAPI;
-import com.github.a2g.core.authoredscene.MasterPresenterHostAPI;
-import com.github.a2g.core.gwt.GWTHostingPanel;
+import com.github.a2g.core.gwt.factory.GWTHostingPanel;
+import com.github.a2g.core.interfaces.HostingPanelAPI;
+import com.github.a2g.core.interfaces.MasterPanelAPI;
+import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;

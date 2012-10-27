@@ -17,9 +17,9 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.authoredscene.DialogTreePanelAPI;
-import com.github.a2g.core.authoredscene.HostingPanelAPI;
-import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.interfaces.DialogTreePanelAPI;
+import com.github.a2g.core.interfaces.HostingPanelAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
 import com.google.gwt.event.shared.EventBus;
 
 

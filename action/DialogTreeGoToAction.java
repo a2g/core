@@ -31,7 +31,7 @@ public class DialogTreeGoToAction extends BaseDialogTreeAction {
     }
 
     @Override
-    protected void onUpdate(double progress) {}
+    public void onUpdate(double progress) {}
 
     @Override
     public void runGameAction() {

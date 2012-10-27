@@ -18,10 +18,10 @@ package com.github.a2g.core.objectmodel;
 
 
 import com.google.gwt.event.shared.EventBus;
-import com.github.a2g.core.authoredscene.HostingPanelAPI;
-import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.core.authoredscene.MasterPresenterHostAPI;
-import com.github.a2g.core.authoredscene.VerbsPanelAPI;
+import com.github.a2g.core.interfaces.HostingPanelAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
+import com.github.a2g.core.interfaces.VerbsPanelAPI;
 
 
 public class VerbsPresenter 
@@ -32,7 +32,7 @@ public class VerbsPresenter
     public VerbsPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent, InternalAPI api) 
     {
         this.theVerbs = new Verbs();
-        this.view = parent.createVerbsPanel();
+        this.view = parent.getFactory().createVerbsPanel();
         
         panel.setThing(view);
     }

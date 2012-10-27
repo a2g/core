@@ -18,7 +18,7 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.authoredscene.PopupPanelAPI;
+import com.github.a2g.core.interfaces.PopupPanelAPI;
 
 
 
@@ -40,7 +40,7 @@ public class SayWithoutAnimationAction extends BaseAction {
                 * (2 + delay))
                         * 40;
 
-        this.popup = this.getApi().getMasterHostAPI().createPopupPanel(this.speech, null);
+        this.popup = this.getApi().getMasterHostAPI().getFactory().createPopupPanel(this.speech, null);
         this.popup.setPopupPosition(20, 20);
         this.popup.show();
 

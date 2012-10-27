@@ -26,31 +26,34 @@ import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.loader.ImageBundleLoaderAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.action.BaseDialogTreeAction;
-import com.github.a2g.core.authoredscene.ConstantsForAPI;
-import com.github.a2g.core.authoredscene.HostingPanelAPI;
-import com.github.a2g.core.authoredscene.ImageAddAPI;
-import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.core.authoredscene.MasterPanelAPI;
-import com.github.a2g.core.authoredscene.MasterPresenterHostAPI;
-import com.github.a2g.core.authoredscene.MergeSceneAndStartAPI;
-import com.github.a2g.core.authoredscene.OnDialogTreeAPI;
-import com.github.a2g.core.authoredscene.OnDoCommandAPI;
-import com.github.a2g.core.authoredscene.OnEntryAPI;
-import com.github.a2g.core.authoredscene.OnEveryFrameAPI;
-import com.github.a2g.core.authoredscene.OnFillLoadListAPI;
-import com.github.a2g.core.authoredscene.OnFillLoadListAPIImpl;
-import com.github.a2g.core.authoredscene.OnPreEntryAPI;
-import com.github.a2g.core.authoredscene.SceneAPI;
 
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
-import com.github.a2g.core.gwt.Timer;
 import com.github.a2g.core.gwt.image.PackagedImage;
+import com.github.a2g.core.interfaces.ConstantsForAPI;
+import com.github.a2g.core.interfaces.FactoryAPI;
+import com.github.a2g.core.interfaces.HostingPanelAPI;
+import com.github.a2g.core.interfaces.ImageAddAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.MasterPanelAPI;
+import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
+import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
+import com.github.a2g.core.interfaces.OnDialogTreeAPI;
+import com.github.a2g.core.interfaces.OnDoCommandAPI;
+import com.github.a2g.core.interfaces.OnEntryAPI;
+import com.github.a2g.core.interfaces.OnEveryFrameAPI;
+import com.github.a2g.core.interfaces.OnFillLoadListAPI;
+import com.github.a2g.core.interfaces.OnFillLoadListAPIImpl;
+import com.github.a2g.core.interfaces.OnPreEntryAPI;
+import com.github.a2g.core.interfaces.SceneAPI;
+import com.github.a2g.core.interfaces.SystemTimerAPI;
+import com.github.a2g.core.interfaces.SystemTimerCallbackAPI;
 import com.google.gwt.event.shared.EventBus;
 
 public class MasterPresenter  
 implements InternalAPI, 
 SaySpeechCallDialogTreeEventHandlerAPI
+, SystemTimerCallbackAPI
 , ImageAddAPI
 , MergeSceneAndStartAPI
 , OnFillLoadListAPI
@@ -77,7 +80,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private EventBus bus;
 	private MasterPresenterHostAPI parent;
 	
-	private Timer timer;
+	private SystemTimerAPI timer;
 	private MasterPanelAPI masterPanel;
 		private ActionRunner actionRunner;
 	private int textSpeedDelay;
@@ -90,7 +93,8 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private String lastSceneAsString;
 	
 
-	public MasterPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent) {
+	public MasterPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent) 
+	{
 		this.bus = bus;
 		this.timer = null;
 		this.parent = parent;
@@ -110,7 +114,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 
 
-		this.masterPanel = parent.createMasterPanel();
+		this.masterPanel = parent.getFactory().createMasterPanel();
 		panel.setThing(this.masterPanel);
 
 
@@ -311,6 +315,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.callbacks.onPreEntry(this);
 	}	
 
+	@Override
 	public void doEveryFrame() {
 		if(timer!=null)
 		{
@@ -398,14 +403,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 	public void startEveryFrameCallbacks() 
 	{
-		timer = new Timer()
-		{
-
-			@Override
-			public void run() {
-				doEveryFrame();
-			}
-		};
+		timer = parent.getFactory().createSystemTimer(this);
 		timer.scheduleRepeating(40);
 	}
 
@@ -720,6 +718,11 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	@Override
 	public MasterPresenterHostAPI getMasterHostAPI() {
 		return parent;
+	}
+
+	@Override
+	public FactoryAPI getFactory() {
+		return parent.getFactory();
 	}
 }
 

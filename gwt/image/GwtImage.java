@@ -1,6 +1,6 @@
 package com.github.a2g.core.gwt.image;
 
-import com.github.a2g.core.authoredscene.ImagePanelAPI;
+import com.github.a2g.core.interfaces.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.primitive.Point;
 

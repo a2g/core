@@ -18,7 +18,8 @@ package com.github.a2g.core.swing;
 
 import java.awt.Component;
 import javax.swing.JPanel;
-import com.github.a2g.core.authoredscene.HostingPanelAPI;
+
+import com.github.a2g.core.interfaces.HostingPanelAPI;
 
 public class SwingHostingPanel 
 extends JPanel 

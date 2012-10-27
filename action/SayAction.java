@@ -19,8 +19,8 @@ package com.github.a2g.core.action;
 import java.util.ArrayList;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.authoredscene.InternalAPI;
-import com.github.a2g.core.authoredscene.PopupPanelAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -75,7 +75,7 @@ public class SayAction extends BaseAction {
 		if (object != null && object.getTalkingColor() != null) {
 			color = object.getTalkingColor();
 		}
-		this.popup = getApi().getMasterHostAPI().createPopupPanel(speech.get(0), color);
+		this.popup = getApi().getMasterHostAPI().getFactory().createPopupPanel(speech.get(0), color);
 				
 	
 

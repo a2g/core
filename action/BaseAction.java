@@ -46,14 +46,18 @@ import com.github.a2g.core.action.DialogTreeGoToAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
-import com.github.a2g.core.authoredscene.InternalAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.SystemAnimationAPI;
+import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointF;
 
 
 
-public abstract class BaseAction extends com.github.a2g.core.gwt.Animation {	
-    private ActionCallbackAPI callbacks;
+public abstract class BaseAction implements SystemAnimationCallbackAPI
+{
+	private SystemAnimationAPI systemAnimation;
+	private ActionCallbackAPI callbacks;
     protected BaseAction parent;
     private InternalAPI api;
 
@@ -75,6 +79,7 @@ public abstract class BaseAction extends com.github.a2g.core.gwt.Animation {
         this.parent = parent;
         this.callbacks = null;
         this.api = api;
+        this.systemAnimation = api.getFactory().createSystemAnimation(this);
     }
     ;
 
@@ -109,7 +114,7 @@ public abstract class BaseAction extends com.github.a2g.core.gwt.Animation {
     }
 
     @Override // method in animation
-    protected void onComplete() {
+    public void onComplete() {
         // do game action specific first e.g hide popup
         onCompleteGameAction();
 
@@ -121,7 +126,8 @@ public abstract class BaseAction extends com.github.a2g.core.gwt.Animation {
     }
 
     @Override
-    protected void onUpdate(double progress) {
+    public void onUpdate(double progress) 
+    {
         onUpdateGameAction(progress);
     }
 
@@ -438,6 +444,16 @@ public abstract class BaseAction extends com.github.a2g.core.gwt.Animation {
     {
     	return new CueCardAction(this, text, color);
     }
+
+	public void cancel() {
+		systemAnimation.cancel();
+		
+	}
+
+	public void run(int i) {
+		systemAnimation.run(i);
+		
+	}
   
 }
 
