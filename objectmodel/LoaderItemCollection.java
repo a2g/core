@@ -19,7 +19,7 @@ package com.github.a2g.core.objectmodel;
 
 import java.util.LinkedList;
 
-public class LoaderCollection extends LinkedList<Loader>
+public class LoaderItemCollection extends LinkedList<LoaderItem>
 {
     
 	 

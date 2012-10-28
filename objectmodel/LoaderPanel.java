@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class LoadingPanel 
+public class LoaderPanel 
 extends SimplePanel 
 implements LoaderPanelAPI
 {
@@ -36,7 +36,7 @@ implements LoaderPanelAPI
 	Button reload;
 	InternalAPI api;
 	
-    public LoadingPanel(final InternalAPI api) {
+    public LoaderPanel(final InternalAPI api) {
     	this.api = api;
     	VerticalPanel layout = new VerticalPanel();
     	{

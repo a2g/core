@@ -20,7 +20,7 @@ import com.github.a2g.core.interfaces.VerbsPanelAPI;
 import com.github.a2g.core.objectmodel.CommandLinePanel;
 import com.github.a2g.core.objectmodel.DialogTreePanel;
 import com.github.a2g.core.objectmodel.InventoryPanel;
-import com.github.a2g.core.objectmodel.LoadingPanel;
+import com.github.a2g.core.objectmodel.LoaderPanel;
 import com.github.a2g.core.objectmodel.MasterPanel;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.objectmodel.PopupPanel;
@@ -62,7 +62,7 @@ implements FactoryAPI
 
 	@Override
 	public LoaderPanelAPI createLoaderPanel() {
-		return new LoadingPanel(master);
+		return new LoaderPanel(master);
 	}
 
 	@Override

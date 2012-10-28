@@ -16,11 +16,11 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.objectmodel.Loader;
+import com.github.a2g.core.objectmodel.LoaderItem;
 
 
 
 public interface ImageBundleLoaderCallbackAPI {
-    public void onLoaderComplete(Loader a);
+    public void onLoaderComplete(LoaderItem a);
     public void onImageLoaded();
 }
