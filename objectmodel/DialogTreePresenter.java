@@ -35,7 +35,7 @@ public class DialogTreePresenter {
         this.bus = bus;
         this.api = api;
         this.theDialogTree = new DialogTree();
-        this.view = new DialogTreePanel();
+        this.view = api.getFactory().createDialogTreePanel();
         panel.setThing(view);
         this.dialogTreeTalker = 0;
         

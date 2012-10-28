@@ -16,11 +16,14 @@
 
 package com.github.a2g.core.interfaces;
 
+import com.google.gwt.event.dom.client.LoadHandler;
 
-public interface CommandLinePanelAPI
+
+public interface ImageBundleLoaderAPI
 {
-
-	void setText(String string);
-
-	void setVisible(boolean isVisible);
+	public int getNumberOfBundles();
+	public int getNumberOfImagesInBundle(int bundleNumber);
+	public int loadImageBundle(final LoadHandler individualImageCallback, final InternalAPI api, final int bundleNumber, final int CHUNK, final int milliseconds);
+	public boolean isInventory();
+	
 }

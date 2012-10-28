@@ -14,13 +14,26 @@
  * the License.
  */
 
-package com.github.a2g.core.loader;
+package com.github.a2g.core.gwt.factory;
 
-import com.github.a2g.core.objectmodel.Loader;
+import com.github.a2g.core.interfaces.TimerAPI;
+import com.github.a2g.core.interfaces.TimerCallbackAPI;
 
 
-
-public interface ImageBundleLoaderCallbackAPI {
-    public void onLoaderComplete(Loader a);
-    public void onImageLoaded();
+public class GWTTimer 
+extends com.google.gwt.user.client.Timer
+implements TimerAPI
+{
+	private TimerCallbackAPI callback;
+	
+	public GWTTimer(TimerCallbackAPI callback)
+	{
+		this.callback = callback;
+	}
+	
+	@Override
+	public void run() {
+		callback.doEveryFrame();
+	}
 }
+

@@ -76,12 +76,15 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
     abstract public void runGameAction();
 
     protected BaseAction(BaseAction parent, InternalAPI api) {
-        this.parent = parent;
-        this.callbacks = null;
-        this.api = api;
-        this.systemAnimation = api.getFactory().createSystemAnimation(this);
+    	this.parent = parent;
+    	this.callbacks = null;
+    	this.api = api;
+    	if(api!=null)
+    	{
+    		this.systemAnimation = api.getFactory().createSystemAnimation(this);
+    	}
     }
-    ;
+    
 
     public BaseDialogTreeAction branch(int branchId, String text) {
         return new DialogTreeDisplayAction(this,

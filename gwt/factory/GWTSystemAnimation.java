@@ -14,13 +14,31 @@
  * the License.
  */
 
-package com.github.a2g.core.interfaces;
+package com.github.a2g.core.gwt.factory;
 
+import com.github.a2g.core.interfaces.SystemAnimationAPI;
+import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
 
-public interface CommandLinePanelAPI
+public class GWTSystemAnimation 
+extends com.google.gwt.animation.client.Animation
+implements SystemAnimationAPI
 {
-
-	void setText(String string);
-
-	void setVisible(boolean isVisible);
+	SystemAnimationCallbackAPI callbacks;
+	public GWTSystemAnimation(SystemAnimationCallbackAPI callbacks)
+	{
+		this.callbacks = callbacks;
+	}
+	
+	@Override
+	protected void onUpdate(double progress) {
+		callbacks.onUpdate(progress);
+		
+	}
+	
+	@Override
+	protected void onComplete()
+	{
+	callbacks.onComplete();
+	}
+	
 }

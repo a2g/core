@@ -14,26 +14,23 @@
  * the License.
  */
 
-package com.github.a2g.core.gwt.image;
+package com.github.a2g.core.swing.factory;
 
-public class PackagedImage 
+import java.awt.Component;
+
+import javax.swing.JPanel;
+
+import com.github.a2g.core.interfaces.HostingPanelAPI;
+import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.Widget;
+
+public class SwingHostingPanel 
+extends JPanel
+implements HostingPanelAPI
 {
-	com.google.gwt.resources.client.ImageResource img;
-	
-	public PackagedImage(com.google.gwt.resources.client.ImageResource img)
-	{
-		this.img = img;
-	}
-	
-	public com.google.gwt.resources.client.ImageResource getNative()
-	{
-		return img;
-	}
-
-	public com.google.gwt.user.client.ui.Image unpack() 
-	{
+	@Override
+	public void setThing(Object w) {
+		this.add((Component)w);
 		
-		return new com.google.gwt.user.client.ui.Image(this.img);
-		//new com.google.gwt.user.client.ui.Image(imageResource.getNative().getSafeUri());
 	}
 }

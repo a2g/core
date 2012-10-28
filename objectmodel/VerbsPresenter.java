@@ -32,7 +32,8 @@ public class VerbsPresenter
     public VerbsPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent, InternalAPI api) 
     {
         this.theVerbs = new Verbs();
-        this.view = parent.getFactory().createVerbsPanel();
+        this.view = api.getFactory().createVerbsPanel();
+        this.view.setVerbs(theVerbs);
         
         panel.setThing(view);
     }

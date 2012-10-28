@@ -37,7 +37,7 @@ public class InventoryPresenter {
         this.eventBus = bus;
         this.parent = parent;
         this.theInventory = new Inventory();
-        this.view = parent.getFactory().createInventoryPanel();
+        this.view = api.getFactory().createInventoryPanel();
         panel.setThing(view);
         this.theInventoryItemMap = new TreeMap<Integer, InventoryItem>();
     }

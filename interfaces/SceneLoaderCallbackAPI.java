@@ -14,8 +14,9 @@
  * the License.
  */
 
-package com.github.a2g.core.loader;
+package com.github.a2g.core.interfaces;
 
-public interface SceneLoaderAPI {
-	void returnScene(Object sceneToLoad );
+
+public interface SceneLoaderCallbackAPI {
+	void returnScene(SceneAPI sceneToLoad );
 }

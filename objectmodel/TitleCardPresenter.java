@@ -32,7 +32,7 @@ public class TitleCardPresenter {
 	
     public TitleCardPresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api, MasterPresenterHostAPI parent) {
     	this.text = "";
-        this.view = parent.getFactory().createTitleCardPanel();
+        this.view = api.getFactory().createTitleCardPanel();
         panel.setThing(view);
     }
 

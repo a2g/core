@@ -45,7 +45,7 @@ public class CommandLinePresenter
         this.callbacks = null;
        
         this.api = api;
-        this.view = new CommandLinePanel();
+        this.view = api.getFactory().createCommandLinePanel();
         panel.setThing(view);
         
         bus.addHandler(

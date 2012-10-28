@@ -13,18 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+package com.github.a2g.core.swing.mouse;
 
-package com.github.a2g.core.loader;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.interfaces.InternalAPI;
 
 
-public interface ImageBundleLoaderAPI
-{
-	public int getNumberOfBundles();
-	public int getNumberOfImagesInBundle(int bundleNumber);
-	public int loadImageBundle(final LoadHandler individualImageCallback, final InternalAPI api, final int bundleNumber, final int CHUNK, final int milliseconds);
-	public boolean isInventory();
-	
+public class DialogTreeMouseOutHandler extends MouseAdapter {
+    private final java.awt.Label label;
+
+    public DialogTreeMouseOutHandler(java.awt.Label label) {
+        this.label = label;
+    }	
+
+    @Override
+    public void mouseExited(MouseEvent event) {
+        this.label.setBackground(new Color(123));
+    }
 }

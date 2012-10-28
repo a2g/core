@@ -37,7 +37,7 @@ public class LoaderPresenter
 	{
 		this.loaders = new Loaders(master);
 		this.name = "";
-		this.view = parent.getFactory().createLoaderPanel();
+		this.view = api.getFactory().createLoaderPanel();
 		panel.setThing(view);
 		this.current = 0;
 		this.total = 0;

@@ -13,32 +13,43 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
-package com.github.a2g.core.swing;
+package com.github.a2g.core.swing.panel;
 
 import java.awt.Component;
-import javax.swing.JPanel;
+import java.awt.Dimension;
 
-import com.github.a2g.core.interfaces.HostingPanelAPI;
+import com.github.a2g.core.interfaces.CommandLinePanelAPI;
 
-public class SwingHostingPanel 
-extends JPanel 
-implements	HostingPanelAPI, IsThing 
+
+@SuppressWarnings("serial")
+public class CommandLinePanel 
+extends java.awt.Label 
+implements CommandLinePanelAPI
 {
 
-
+    public CommandLinePanel() {
+        this.setText("command line panel command line panel");
+        //this.setSize(320, 50);
+    }
+    
 
 	@Override
-	public Component asThing() {return this;}// is JPanel
-
+	public Dimension	getPreferredSize(){
+		return new Dimension(400,50);
+	}
+			
 	@Override
-	public void setThing(Object w) 
-	{
-		this.add((Component)w);
+	public void setText(String text) {
+		super.setText(text);
 		
 	}
 
-	
+	@Override
+	public void setVisible(boolean isVisible) {
+		super.setVisible(isVisible);
+		
+	}
+
 
 	
 }

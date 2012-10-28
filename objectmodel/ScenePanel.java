@@ -17,14 +17,14 @@
 package com.github.a2g.core.objectmodel;
 
 
-
+import com.github.a2g.core.gwt.factory.GWTImage;
+import com.github.a2g.core.gwt.factory.GWTPackagedImage;
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.gwt.image.GwtImage;
-import com.github.a2g.core.gwt.image.PackagedImage;
 import com.github.a2g.core.gwt.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.gwt.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.PackagedImageAPI;
 import com.github.a2g.core.interfaces.ScenePanelAPI;
 import com.github.a2g.core.primitive.Point;
 import com.google.gwt.event.shared.EventBus;
@@ -47,7 +47,7 @@ extends AbsolutePanel
  
     }
 
-    final com.google.gwt.user.client.ui.Image getImageFromResource(PackagedImage imageResource, LoadHandler lh)
+    final com.google.gwt.user.client.ui.Image getImageFromResource(GWTPackagedImage imageResource, LoadHandler lh)
 	{
 		
 		//assert (imageResource != null);
@@ -73,7 +73,7 @@ extends AbsolutePanel
 	public Image createNewImageAndAddHandlers
 	(
 			LoadHandler lh, 
-			PackagedImage imageResource,
+			PackagedImageAPI imageResource,
 			InternalAPI api,
 			EventBus bus,
 			int x, 
@@ -81,12 +81,10 @@ extends AbsolutePanel
 			String objectTextualId,
 			short objectCode)
 	{
-		// TODO Auto-generated method stub
+		com.google.gwt.user.client.ui.Image image = getImageFromResource((GWTPackagedImage)imageResource,lh);
+	
 
-		com.google.gwt.user.client.ui.Image image = getImageFromResource(imageResource,lh);
-		
-
-		GwtImage imageAndPos = new GwtImage(image, this, new Point(x, y));
+		GWTImage imageAndPos = new GWTImage(image, this, new Point(x, y));
 		
 			
 		
@@ -108,43 +106,43 @@ extends AbsolutePanel
 	public void setImageVisible(Image image, boolean visible)
 	{
 		
-		super.setVisible(((GwtImage)image).getNativeImage().getElement(), visible);
+		super.setVisible(((GWTImage)image).getNativeImage().getElement(), visible);
 	}
 
 	@Override
 	public void add(Image image, int x, int y)
 	{
-		super.add(((GwtImage)image).getNativeImage(),x,y);
+		super.add(((GWTImage)image).getNativeImage(),x,y);
 	}
 
 	@Override
 	public void insert(Image image, int x, int y, int before)
 	{
-		super.insert(((GwtImage)image).getNativeImage(),x,y,before);
+		super.insert(((GWTImage)image).getNativeImage(),x,y,before);
 	}
 
 	@Override
 	public void remove(Image image)
 	{
-		super.remove(((GwtImage)image).getNativeImage());
+		super.remove(((GWTImage)image).getNativeImage());
 	}
 
 	@Override
 	public void setThingPosition(Image image, int left, int top)
 	{
-		super.setWidgetPosition(((GwtImage)image).getNativeImage(), left, top);
+		super.setWidgetPosition(((GWTImage)image).getNativeImage(), left, top);
 	}
 
 	@Override
 	public int getImageHeight(Image image) 
 	{
-		return ((GwtImage)image).getNativeImage().getHeight();
+		return ((GWTImage)image).getNativeImage().getHeight();
 	}
 
 	@Override
 	public int getImageWidth(Image image) 
 	{
-		return ((GwtImage)image).getNativeImage().getWidth();
+		return ((GWTImage)image).getNativeImage().getWidth();
 	}
 	
 	public void setSize(int width, int height)

@@ -14,13 +14,31 @@
  * the License.
  */
 
-package com.github.a2g.core.interfaces;
+package com.github.a2g.core.swing.factory;
 
+import com.github.a2g.core.interfaces.SystemAnimationAPI;
+import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
 
-public interface CommandLinePanelAPI
+public class SwingSystemAnimation 
+extends com.github.a2g.core.swing.animation.Animation
+implements SystemAnimationAPI
 {
-
-	void setText(String string);
-
-	void setVisible(boolean isVisible);
+	SystemAnimationCallbackAPI callbacks;
+	public SwingSystemAnimation(SystemAnimationCallbackAPI callbacks)
+	{
+		this.callbacks = callbacks;
+	}
+	
+	@Override
+	protected void onUpdate(double progress) {
+		callbacks.onUpdate(progress);
+		
+	}
+	
+	@Override
+	protected void onComplete()
+	{
+	callbacks.onComplete();
+	}
+	
 }

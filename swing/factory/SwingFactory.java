@@ -1,4 +1,6 @@
-package com.github.a2g.core.gwt.factory;
+package com.github.a2g.core.swing.factory;
+
+import javax.swing.JOptionPane;
 
 import com.github.a2g.core.interfaces.CommandLinePanelAPI;
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
@@ -12,26 +14,27 @@ import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.interfaces.ScenePanelAPI;
 import com.github.a2g.core.interfaces.SystemAnimationAPI;
 import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
-import com.github.a2g.core.gwt.factory.GWTTimer;
+import com.github.a2g.core.swing.factory.SwingSystemAnimation;
+import com.github.a2g.core.swing.factory.SwingTimer;
 import com.github.a2g.core.interfaces.TimerAPI;
 import com.github.a2g.core.interfaces.TimerCallbackAPI;
 import com.github.a2g.core.interfaces.TitleCardPanelAPI;
 import com.github.a2g.core.interfaces.VerbsPanelAPI;
-import com.github.a2g.core.objectmodel.CommandLinePanel;
-import com.github.a2g.core.objectmodel.DialogTreePanel;
-import com.github.a2g.core.objectmodel.InventoryPanel;
-import com.github.a2g.core.objectmodel.LoadingPanel;
-import com.github.a2g.core.objectmodel.MasterPanel;
+import com.github.a2g.core.swing.panel.CommandLinePanel;
+import com.github.a2g.core.swing.panel.DialogTreePanel;
+import com.github.a2g.core.swing.panel.InventoryPanel;
+import com.github.a2g.core.swing.panel.LoadingPanel;
+import com.github.a2g.core.swing.panel.MasterPanel;
+import com.github.a2g.core.swing.panel.PopupPanel;
+import com.github.a2g.core.swing.panel.ScenePanel;
+import com.github.a2g.core.swing.panel.TitleCardPanel;
+import com.github.a2g.core.swing.panel.VerbsPanel;
 import com.github.a2g.core.objectmodel.MasterPresenter;
-import com.github.a2g.core.objectmodel.PopupPanel;
-import com.github.a2g.core.objectmodel.ScenePanel;
-import com.github.a2g.core.objectmodel.TitleCardPanel;
-import com.github.a2g.core.objectmodel.VerbsPanel;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 
-public class GWTFactory 
+public class SwingFactory 
 implements FactoryAPI
 {
 
@@ -39,7 +42,7 @@ implements FactoryAPI
 	private MasterPresenter master;
 	private MasterPresenterHostAPI host;
 
-	public GWTFactory(EventBus bus, MasterPresenter master, MasterPresenterHostAPI host)
+	public SwingFactory(EventBus bus, MasterPresenter master, MasterPresenterHostAPI host)
 	{
 	 this.bus = bus;
 	 this.master = master;
@@ -67,7 +70,7 @@ implements FactoryAPI
 
 	@Override
 	public MasterPanelAPI createMasterPanel() {
-		return new MasterPanel(host);
+		return new MasterPanel();
 	}
 
 	@Override
@@ -97,17 +100,18 @@ implements FactoryAPI
 		return new VerbsPanel(bus, master);
 	}
 	@Override
-	public SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI callbacks) {
-		return new GWTSystemAnimation(callbacks);
+	public SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI callbacks)
+	{
+		return new SwingSystemAnimation(callbacks);
 	}
 	@Override
 	public TimerAPI createSystemTimer(TimerCallbackAPI cbs) {
-		return new GWTTimer(cbs);
+		return new SwingTimer(cbs);
 	}
 	
-	public void alert(String text)
+	void alert(String text)
 	{
-		Window.alert(text);
+		JOptionPane.showMessageDialog(null, "alert", text,JOptionPane.ERROR_MESSAGE);
 	}
 	
 }

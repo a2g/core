@@ -16,11 +16,11 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.gwt.image.PackagedImage;
 import com.google.gwt.event.dom.client.LoadHandler;
 
 
-public interface ImageAddAPI {
+public interface ImageAddAPI 
+{
        
     /*!
 	If the same textualId had already been used in a previous call to this method method, then the call will fail, and return false.
@@ -30,7 +30,7 @@ public interface ImageAddAPI {
 
 	@return true on success, otherwise false.
      */
-    public boolean addImageForAnInventoryItem(LoadHandler lh, String textualIdForInventory, int codeForInventory, PackagedImage imageResource);
+    public boolean addImageForAnInventoryItem(LoadHandler lh, String textualIdForInventory, int codeForInventory, PackagedImageAPI imageResource);
     
     /*!
 	If the same textualIds have already been used in a previous call to this method method, then the ImageResource is added to the
@@ -46,7 +46,7 @@ public interface ImageAddAPI {
 
 	@return true on success, otherwise false.
      */
-    public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String textualIdForObject, String textualIdForAnimation, short codeForObject, int codeForAnimation, PackagedImage imageResource);
+    public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String textualIdForObject, String textualIdForAnimation, short codeForObject, int codeForAnimation, PackagedImageAPI imageResource);
     
 };
 

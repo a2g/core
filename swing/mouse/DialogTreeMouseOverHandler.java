@@ -13,32 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+package com.github.a2g.core.swing.mouse;
 
-package com.github.a2g.core.gwt.factory;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import com.github.a2g.core.interfaces.SystemAnimationAPI;
-import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
 
-public class SystemAnimation 
-extends com.google.gwt.animation.client.Animation
-implements SystemAnimationAPI
-{
-	SystemAnimationCallbackAPI callbacks;
-	public SystemAnimation(SystemAnimationCallbackAPI callbacks)
-	{
-		this.callbacks = callbacks;
-	}
-	
-	@Override
-	protected void onUpdate(double progress) {
-		callbacks.onUpdate(progress);
-		
-	}
-	
-	@Override
-	protected void onComplete()
-	{
-	callbacks.onComplete();
-	}
-	
+
+public class DialogTreeMouseOverHandler extends MouseAdapter {
+    private final java.awt.Label label;
+
+    public DialogTreeMouseOverHandler(java.awt.Label label) {
+        this.label = label;
+    }	
+
+    @Override
+    public void mouseEntered(MouseEvent event) {
+        this.label.setBackground(new Color(123));
+    }
 }

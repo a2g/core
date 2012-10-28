@@ -45,7 +45,7 @@ public class ScenePresenter {
         this.setHeight(180);
         this.scene = new Scene();
       //  this.eventBus = bus;
-        this.view = new ScenePanel(bus,api);
+        this.view = api.getFactory().createScenePanel();
         panel.setThing(view);
         view.setVisible(true);
        

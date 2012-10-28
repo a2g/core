@@ -32,34 +32,41 @@ public class VerbsPanel
 extends Grid 
 implements VerbsPanelAPI
 {
+	EventBus bus;
     public VerbsPanel(EventBus bus, InternalAPI api) {
         super(4, 3);
+        this.bus = bus;
+
+    }
+
+	@Override
+	public void setVerbs(Verbs verbs) {
         for (int i = 0; i
                 < (getColumnCount()
                         * getRowCount()); i++) {
             int row = i / getColumnCount();
             int column = i % getColumnCount();
 
-//            Verbs verbs = api.getVerbsGui().getVerbsModel();
-//            String sentenceText = verbs.items().get(i).getSentenceText();
-//            String buttonText = verbs.items().get(i).getButtonText();
-//            String code = "" + i;
-//            Label widget = new Label(
-//                    buttonText);
-//
-//            this.setWidget(row, column, widget);
-//            widget.addMouseMoveHandler(
-//                    new VerbMouseOverHandler(
-//                            bus, sentenceText,
-//                            code, i));
-//            widget.addClickHandler(
-//                    new ImageMouseClickHandler(
-//                            bus, null));
-//            
-//            DOM.setStyleAttribute(
-//                    this.getElement(), "color",
-//                    "Purple");
+            String sentenceText = verbs.items().get(i).getSentenceText();
+            String buttonText = verbs.items().get(i).getButtonText();
+            String code = "" + i;
+            Label widget = new Label(
+                    buttonText);
+
+            this.setWidget(row, column, widget);
+            widget.addMouseMoveHandler(
+                    new VerbMouseOverHandler(
+                            bus, sentenceText,
+                            code, i));
+            widget.addClickHandler(
+                    new ImageMouseClickHandler(
+                            bus, null));
+            
+            DOM.setStyleAttribute(
+                    this.getElement(), "color",
+                    "Purple");
         }
-    }
+		
+	}
 
 }

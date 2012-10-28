@@ -16,7 +16,6 @@
  */
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.gwt.image.PackagedImage;
 import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -27,7 +26,7 @@ public interface ScenePanelAPI
 	void clear();
 
 	Image createNewImageAndAddHandlers(LoadHandler lh,
-			PackagedImage imageResource, InternalAPI api,
+			PackagedImageAPI imageResource, InternalAPI api,
 			EventBus bus, int x, int y, String objectTextualId, short objectCode);
 
 	void setSize(int width, int height);

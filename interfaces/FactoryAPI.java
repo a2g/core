@@ -13,7 +13,7 @@ public interface FactoryAPI {
 	VerbsPanelAPI createVerbsPanel();
 	PopupPanelAPI createPopupPanel(String string, ColorEnum color);
 	SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI cbs);
-	SystemTimerAPI createSystemTimer(SystemTimerCallbackAPI cbs);
+	TimerAPI createSystemTimer(TimerCallbackAPI cbs);
 
 
 }

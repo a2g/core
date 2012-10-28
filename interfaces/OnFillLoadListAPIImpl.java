@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.loader.ImageBundleLoaderAPI;
 
 public class OnFillLoadListAPIImpl 
 {

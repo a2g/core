@@ -23,17 +23,16 @@ import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.NullParentAction;
-import com.github.a2g.core.loader.ImageBundleLoaderAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
-import com.github.a2g.core.gwt.image.PackagedImage;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.ImageAddAPI;
+import com.github.a2g.core.interfaces.ImageBundleLoaderAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
@@ -45,15 +44,16 @@ import com.github.a2g.core.interfaces.OnEveryFrameAPI;
 import com.github.a2g.core.interfaces.OnFillLoadListAPI;
 import com.github.a2g.core.interfaces.OnFillLoadListAPIImpl;
 import com.github.a2g.core.interfaces.OnPreEntryAPI;
+import com.github.a2g.core.interfaces.PackagedImageAPI;
 import com.github.a2g.core.interfaces.SceneAPI;
-import com.github.a2g.core.interfaces.SystemTimerAPI;
-import com.github.a2g.core.interfaces.SystemTimerCallbackAPI;
+import com.github.a2g.core.interfaces.TimerAPI;
+import com.github.a2g.core.interfaces.TimerCallbackAPI;
 import com.google.gwt.event.shared.EventBus;
 
 public class MasterPresenter  
 implements InternalAPI, 
 SaySpeechCallDialogTreeEventHandlerAPI
-, SystemTimerCallbackAPI
+, TimerCallbackAPI
 , ImageAddAPI
 , MergeSceneAndStartAPI
 , OnFillLoadListAPI
@@ -80,7 +80,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	private EventBus bus;
 	private MasterPresenterHostAPI parent;
 	
-	private SystemTimerAPI timer;
+	private TimerAPI timer;
 	private MasterPanelAPI masterPanel;
 		private ActionRunner actionRunner;
 	private int textSpeedDelay;
@@ -114,11 +114,11 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 
 
-		this.masterPanel = parent.getFactory().createMasterPanel();
+		this.masterPanel = getFactory().createMasterPanel();
 		panel.setThing(this.masterPanel);
 
 
-		//masterPanel.getHostForCommandLine().setSize(320, 50);
+
 		this.dialogTreePresenter = new DialogTreePresenter(
 				masterPanel.getHostForDialogTree(), bus, this);
 		this.commandLinePresenter = new CommandLinePresenter(
@@ -162,7 +162,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	
 	
 	@Override
-	public boolean addImageForAnInventoryItem(LoadHandler lh, String objectTextualId, int objectCode, PackagedImage imageResource)
+	public boolean addImageForAnInventoryItem(LoadHandler lh, String objectTextualId, int objectCode, PackagedImageAPI imageResource)
 	{
 		if (this.callbacks == null) {
 			return true;
@@ -191,7 +191,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	} 
 
 	@Override
-	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String objectTextualId, String animationTextualId, short objectCode, int objPlusAnimCode, PackagedImage imageResource) {
+	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String objectTextualId, String animationTextualId, short objectCode, int objPlusAnimCode, PackagedImageAPI imageResource) {
 		if (this.callbacks == null) {
 			return true;
 		}
@@ -403,7 +403,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 	public void startEveryFrameCallbacks() 
 	{
-		timer = parent.getFactory().createSystemTimer(this);
+		timer = getFactory().createSystemTimer(this);
 		timer.scheduleRepeating(40);
 	}
 
@@ -722,7 +722,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 	@Override
 	public FactoryAPI getFactory() {
-		return parent.getFactory();
+		return parent.getFactory(bus, this);
 	}
 }
 

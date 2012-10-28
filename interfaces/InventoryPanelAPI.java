@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.gwt.image.PackagedImage;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.google.gwt.event.dom.client.LoadHandler;
@@ -29,7 +28,7 @@ public interface InventoryPanelAPI
 
 	void updateInventory(Inventory inventory);
 
-	Image createNewImageAndAdddHandlers(PackagedImage imageResource,
+	Image createNewImageAndAdddHandlers(PackagedImageAPI imageResource,
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int i, int j);
 }

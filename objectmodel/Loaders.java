@@ -7,10 +7,10 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import com.github.a2g.core.interfaces.ImageBundleLoaderAPI;
+import com.github.a2g.core.interfaces.ImageBundleLoaderCallbackAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
-import com.github.a2g.core.loader.ImageBundleLoaderAPI;
-import com.github.a2g.core.loader.ImageBundleLoaderCallbackAPI;
 
 public class Loaders 
 implements ImageBundleLoaderCallbackAPI

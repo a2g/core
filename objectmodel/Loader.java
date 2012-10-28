@@ -18,9 +18,9 @@ package com.github.a2g.core.objectmodel;
 
 
 import com.google.gwt.event.dom.client.LoadHandler;
+import com.github.a2g.core.interfaces.ImageBundleLoaderAPI;
+import com.github.a2g.core.interfaces.ImageBundleLoaderCallbackAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.loader.ImageBundleLoaderAPI;
-import com.github.a2g.core.loader.ImageBundleLoaderCallbackAPI;
 import com.google.gwt.event.dom.client.LoadEvent;
 
 

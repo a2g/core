@@ -16,11 +16,6 @@
 
 package com.github.a2g.core.interfaces;
 
-
-public interface CommandLinePanelAPI
-{
-
-	void setText(String string);
-
-	void setVisible(boolean isVisible);
+public interface SceneLoaderAPI {
+	void returnScene(Object sceneToLoad );
 }

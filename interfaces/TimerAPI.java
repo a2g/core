@@ -1,6 +1,6 @@
 package com.github.a2g.core.interfaces;
 
-public interface SystemTimerAPI {
+public interface TimerAPI {
 
 	void cancel();
 

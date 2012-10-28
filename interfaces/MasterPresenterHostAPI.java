@@ -16,7 +16,9 @@
 
 package com.github.a2g.core.interfaces;
 
+import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -30,7 +32,7 @@ public interface MasterPresenterHostAPI {
      * The setting of most types of state data is ultimately done by this method.
      * It is needed for the inventory to remember it contains an object
      * when moving from one scene to the next. It is also called in reponse
-     * to calls of @ref com.github.a2g.core.authoredscene.InternalAPI::setValue(String name, int value);	
+     * to calls of @ref com.github.a2g.core.interfaces.InternalAPI::setValue(String name, int value);	
      */
     public void setValue(String name, int value);
 
@@ -38,7 +40,7 @@ public interface MasterPresenterHostAPI {
      * The retrieval of most types of state data is ultimately done by this method.
      * It is needed by the inventory to remember it contains an object when moving from
      * one scene to the next. It is also called in response
-     * to calls of @ref com.github.a2g.core.authoredscene.InternalAPI::getValue(String name);	
+     * to calls of @ref com.github.a2g.core.interfaces.InternalAPI::getValue(String name);	
      */
     public int getValue(String name);
 
@@ -64,7 +66,8 @@ public interface MasterPresenterHostAPI {
  
 	void alert(String string);
 
-	FactoryAPI getFactory();
+
+	FactoryAPI getFactory(EventBus bus, MasterPresenter mp);
 
     
 }

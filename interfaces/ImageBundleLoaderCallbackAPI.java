@@ -14,10 +14,13 @@
  * the License.
  */
 
-package com.github.a2g.core.loader;
+package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.interfaces.SceneAPI;
+import com.github.a2g.core.objectmodel.Loader;
 
-public interface SceneLoaderCallbackAPI {
-	void returnScene(SceneAPI sceneToLoad );
+
+
+public interface ImageBundleLoaderCallbackAPI {
+    public void onLoaderComplete(Loader a);
+    public void onImageLoaded();
 }

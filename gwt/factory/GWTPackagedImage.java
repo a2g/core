@@ -16,24 +16,27 @@
 
 package com.github.a2g.core.gwt.factory;
 
-import com.github.a2g.core.interfaces.SystemTimerAPI;
-import com.github.a2g.core.interfaces.SystemTimerCallbackAPI;
+import com.github.a2g.core.interfaces.PackagedImageAPI;
 
-
-public class SystemTimer 
-extends com.google.gwt.user.client.Timer
-implements SystemTimerAPI
+public class GWTPackagedImage
+implements PackagedImageAPI
 {
-	private SystemTimerCallbackAPI callback;
+	com.google.gwt.resources.client.ImageResource img;
 	
-	public SystemTimer(SystemTimerCallbackAPI callback)
+	public GWTPackagedImage(com.google.gwt.resources.client.ImageResource img)
 	{
-		this.callback = callback;
+		this.img = img;
 	}
 	
-	@Override
-	public void run() {
-		callback.doEveryFrame();
+	public com.google.gwt.resources.client.ImageResource getNative()
+	{
+		return img;
+	}
+
+	public com.google.gwt.user.client.ui.Image unpack() 
+	{
+		
+		return new com.google.gwt.user.client.ui.Image(this.img);
+		//new com.google.gwt.user.client.ui.Image(imageResource.getNative().getSafeUri());
 	}
 }
-

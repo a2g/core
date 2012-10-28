@@ -22,11 +22,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class GWTHostingPanel 
 extends com.google.gwt.user.client.ui.SimplePanel
-implements HostingPanelAPI, IsThing 
+implements HostingPanelAPI
 {
-	@Override
-	public Widget asThing() {return this;}// is SimplePanel
-
 	@Override
 	public void setThing(Object w) {
 		this.add((IsWidget)w);
