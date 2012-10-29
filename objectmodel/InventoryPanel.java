@@ -27,7 +27,6 @@ import com.github.a2g.core.interfaces.PackagedImageAPI;
 import com.github.a2g.core.primitive.Point;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class InventoryPanel extends AbsolutePanel implements ImagePanelAPI,
 		InventoryPanelAPI {
@@ -38,6 +37,7 @@ public class InventoryPanel extends AbsolutePanel implements ImagePanelAPI,
 		this.api = api;
 	}
 
+	@Override
 	public void updateInventory(Inventory inventory) {
 		/*
 		 * double ratioOfWidthToHeight = 2; int count =
@@ -86,6 +86,7 @@ public class InventoryPanel extends AbsolutePanel implements ImagePanelAPI,
 		}
 	}
 
+	@Override
 	public Image createNewImageAndAdddHandlers(PackagedImageAPI imageResource,
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int i, int j) {

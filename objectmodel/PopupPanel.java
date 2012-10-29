@@ -46,19 +46,23 @@ implements PopupPanelAPI
 				color.toString());
 		}
 	}
+	@Override
 	public void show()
 	{
 		popup.show();
 	}
 	
+	@Override
 	public void setPopupPosition(int x, int y)
 	{
 		popup.setPopupPosition(x,y);
 	}
+	@Override
 	public void updateText(String string)
 	{
 		popup.setWidget(new Label(string));
 	}
+	@Override
 	public void hide()
 	{
 		popup.hide();

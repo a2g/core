@@ -78,10 +78,12 @@ implements LoaderPanelAPI
 		);
     }
 
-    public void update(int current, int total, String name) {
+    @Override
+	public void update(int current, int total, String name) {
     	progress.setText(" "+current+"/"+total+ " " + name);
     }
     
+	@Override
 	public void setSize(int width, int height)
 	{
 		this.width = width;

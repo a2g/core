@@ -61,7 +61,8 @@ implements ImageObserver, com.github.a2g.core.interfaces.ImagePanelAPI, Inventor
     
     }
 
-    public void updateInventory(Inventory inventory) {
+    @Override
+	public void updateInventory(Inventory inventory) {
     
         // destroy old
     	gridLayout = new GridLayout();

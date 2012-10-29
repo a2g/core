@@ -29,7 +29,6 @@ import com.github.a2g.core.interfaces.ScenePanelAPI;
 import com.github.a2g.core.primitive.Point;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.Widget;
 
 
 public class ScenePanel 
@@ -145,6 +144,7 @@ extends AbsolutePanel
 		return ((GWTImage)image).getNativeImage().getWidth();
 	}
 	
+	@Override
 	public void setSize(int width, int height)
 	{
 		this.setSize("" + width + "px",

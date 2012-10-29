@@ -26,7 +26,6 @@ import javax.swing.JPanel;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.VerbsPanelAPI;
 import com.github.a2g.core.objectmodel.Verbs;
-import com.github.a2g.core.objectmodel.VerbsPresenter;
 import com.google.gwt.event.shared.EventBus;
 
 
@@ -51,7 +50,8 @@ label.addMouseListener(
 		 */
     }
     
-    public void setVerbs(Verbs v)
+    @Override
+	public void setVerbs(Verbs v)
     {
     	GridLayout grid = new GridLayout();
     	this.setLayout(grid);

@@ -21,8 +21,6 @@ import java.awt.Component;
 import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.HostingPanelAPI;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Widget;
 
 public class SwingHostingPanel 
 extends JPanel

@@ -24,7 +24,6 @@ import com.github.a2g.core.interfaces.DialogTreePanelAPI;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Widget;
 
 
 public class DialogTreePanel 
@@ -41,7 +40,8 @@ implements DialogTreePanelAPI
         }
     }
 
-    public void update(DialogTree dialogTree, final EventBus bus) {
+    @Override
+	public void update(DialogTree dialogTree, final EventBus bus) {
         // destroy old
         for (int i = 0; i < getRowCount(); i++) {
             this.setWidget(i, 0, null);

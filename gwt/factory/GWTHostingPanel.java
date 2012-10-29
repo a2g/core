@@ -18,7 +18,6 @@ package com.github.a2g.core.gwt.factory;
 
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Widget;
 
 public class GWTHostingPanel 
 extends com.google.gwt.user.client.ui.SimplePanel

@@ -23,7 +23,6 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class TitleCardPanel 
 extends SimplePanel 
@@ -49,6 +48,7 @@ implements TitleCardPanelAPI
     	this.add(layout);
     }
       
+	@Override
 	public void setColor(ColorEnum color) {
 		if(color!=null)
 		{
@@ -60,11 +60,13 @@ implements TitleCardPanelAPI
 		
 	}
 
+	@Override
 	public void setText(String text) {
 		label.setText(text);
 		
 	}
 	
+	@Override
 	public void setSize(int width, int height)
 	{
 		this.setSize("" + width + "px",

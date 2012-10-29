@@ -19,7 +19,6 @@
 package com.github.a2g.core.swing.panel;
 
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -119,6 +118,7 @@ implements ScenePanelAPI, ImageAddAPI, ImagePanelAPI, ActionListener
 	}
 
 
+	@Override
 	public void setSize(int width, int height)
 	{
 		this.width = width;
@@ -182,6 +182,7 @@ implements ScenePanelAPI, ImageAddAPI, ImagePanelAPI, ActionListener
 		triggerPaint();
 	}
 
+	@Override
 	public void clear() {
 		listOfAllVisibleImages.clear();
 		mapOfPointsByImage.clear();

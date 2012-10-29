@@ -23,7 +23,6 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 
 public class MasterPanel 
@@ -81,7 +80,7 @@ implements MasterPanelAPI
         {
         	stackForSceneAndLoading.add(hostForScene);
         	stackForSceneAndLoading.add(hostForLoading);
-        	stackForSceneAndLoading.add((Widget)hostForTitleCard);
+        	stackForSceneAndLoading.add(hostForTitleCard);
         }
         
         this.add(stackForSceneAndLoading);
@@ -89,35 +88,42 @@ implements MasterPanelAPI
     	
     }
 
+	@Override
 	public HostingPanelAPI getHostForCommandLine() {
 		return hostForCommandLine;
 	}
 
 
+	@Override
 	public HostingPanelAPI getHostForInventory() {
 		return hostForInventory;
 	}
 
+	@Override
 	public HostingPanelAPI getHostForVerbs() {
 		return hostForVerbs;
 	}
 
 
+	@Override
 	public HostingPanelAPI getHostForScene() {
 		return hostForScene;
 	}
 
 
+	@Override
 	public HostingPanelAPI getHostForDialogTree() {
 		return hostForDialogTree;
 	}
 	
+	@Override
 	public HostingPanelAPI getHostForLoading() {
 		return hostForLoading;
 	}
 	
 
 
+	@Override
 	public HostingPanelAPI getHostForTitleCard() {
 		return hostForTitleCard;
 	}

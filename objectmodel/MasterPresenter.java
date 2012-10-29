@@ -501,6 +501,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 	
 	
+	@Override
 	public void startGame()
 	{
 		setSceneActive();

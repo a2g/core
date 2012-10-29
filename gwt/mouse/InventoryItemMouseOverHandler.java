@@ -38,7 +38,8 @@ public class InventoryItemMouseOverHandler implements MouseMoveHandler {
 
     }
 
-    public void onMouseMove(MouseMoveEvent event) {
+    @Override
+	public void onMouseMove(MouseMoveEvent event) {
         com.github.a2g.core.objectmodel.InventoryItem ob = api.getInventoryItem(
                 this.code);
         String displayName = "";

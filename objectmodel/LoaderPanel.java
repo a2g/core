@@ -25,7 +25,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class LoaderPanel 
 extends SimplePanel 
@@ -70,10 +69,12 @@ implements LoaderPanelAPI
 		);
     }
 
-    public void update(int current, int total, String name) {
+    @Override
+	public void update(int current, int total, String name) {
     	progress.setText(" "+current+"/"+total+ " " + name);
     }
 
+	@Override
 	public void setSize(int width, int height)
 	{
 		this.setSize("" + width + "px",

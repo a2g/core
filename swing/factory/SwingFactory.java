@@ -5,11 +5,9 @@ import javax.swing.JOptionPane;
 import com.github.a2g.core.interfaces.CommandLinePanelAPI;
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.InventoryPanelAPI;
 import com.github.a2g.core.interfaces.LoaderPanelAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
-import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
 import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.interfaces.ScenePanelAPI;
 import com.github.a2g.core.interfaces.SystemAnimationAPI;
@@ -32,7 +30,6 @@ import com.github.a2g.core.swing.panel.VerbsPanel;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.Window;
 
 public class SwingFactory 
 implements FactoryAPI
@@ -40,13 +37,11 @@ implements FactoryAPI
 
 	private EventBus bus;
 	private MasterPresenter master;
-	private MasterPresenterHostAPI host;
 
-	public SwingFactory(EventBus bus, MasterPresenter master, MasterPresenterHostAPI host)
+	public SwingFactory(EventBus bus, MasterPresenter master)
 	{
 	 this.bus = bus;
 	 this.master = master;
-	 this.host = host;
 	}
 	@Override
 	public CommandLinePanelAPI createCommandLinePanel() {

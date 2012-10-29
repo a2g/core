@@ -3,7 +3,6 @@ package com.github.a2g.core.gwt.factory;
 import com.github.a2g.core.interfaces.CommandLinePanelAPI;
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.InventoryPanelAPI;
 import com.github.a2g.core.interfaces.LoaderPanelAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;

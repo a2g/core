@@ -45,7 +45,8 @@ implements DialogTreePanelAPI
     
     }
 
-    public void update(DialogTree dialogTree, final EventBus bus) {
+    @Override
+	public void update(DialogTree dialogTree, final EventBus bus) {
         // destroy old
     	gridLayout = new GridLayout();
     	setLayout(gridLayout);

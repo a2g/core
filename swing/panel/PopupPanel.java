@@ -47,20 +47,24 @@ implements PopupPanelAPI
 		
 	}
 	
+	@Override
 	public void show()
 	{
 		popup.setVisible(true);
 		
 	}
 	
+	@Override
 	public void setPopupPosition(int x, int y)
 	{
 		popup.setLocation(x, y);
 	}
+	@Override
 	public void updateText(String string)
 	{
 		labelInPopup.setText(string);
 	}
+	@Override
 	public void hide()
 	{
 		popup.setVisible(false);

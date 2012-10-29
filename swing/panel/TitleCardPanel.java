@@ -48,6 +48,7 @@ extends JPanel implements TitleCardPanelAPI
 		}
 	}
 
+	@Override
 	public void setText(String text) 
 	{
 
@@ -55,12 +56,14 @@ extends JPanel implements TitleCardPanelAPI
 
 	}
 
+	@Override
 	public void setColor(ColorEnum colorEnum) 
 	{
 		Color color = new java.awt.Color(255,1,1);
 		panel.setForeground(color);
 	}
 	
+	@Override
 	public void setSize(int width, int height)
 	{
 		this.width = width;

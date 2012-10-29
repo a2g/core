@@ -21,7 +21,6 @@ import com.github.a2g.core.interfaces.CommandLinePanelAPI;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.UIObject;
-import com.google.gwt.user.client.ui.Widget;
 
 
 public class CommandLinePanel 
@@ -37,12 +36,14 @@ implements CommandLinePanelAPI
     }
     
     
-    	public void setVisible(boolean isVisible) {
+    	@Override
+		public void setVisible(boolean isVisible) {
 		UIObject.setVisible(this.getElement(),
                 isVisible);
 		
 	}
 	
+	@Override
 	public void setText(String string) {
 		super.setText(string);
 		

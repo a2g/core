@@ -15,7 +15,6 @@
  */
 package com.github.a2g.core.swing.panel;
 
-import java.awt.Component;
 import java.awt.Dimension;
 
 import com.github.a2g.core.interfaces.CommandLinePanelAPI;

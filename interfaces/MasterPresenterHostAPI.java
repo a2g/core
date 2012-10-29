@@ -17,9 +17,7 @@
 package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.objectmodel.MasterPresenter;
-import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
 * These are the methods a class needs to implement to be able to host 

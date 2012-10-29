@@ -17,7 +17,6 @@
 package com.github.a2g.core.swing.panel;
 
 import java.awt.CardLayout;
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
@@ -68,7 +67,7 @@ implements MasterPanelAPI
         	CardLayout card = new CardLayout();
         	stackForDialogTreeInvAndCommandF.setLayout(card);
         	stackForDialogTreeInvAndCommandF.add(commandLineAndVerbsAndInventoryF, "commandLineAndVerbsAndInventory");
-        	stackForDialogTreeInvAndCommandF.add((Component)hostForDialogTreeF, "hostForDialogTree");
+        	stackForDialogTreeInvAndCommandF.add(hostForDialogTreeF, "hostForDialogTree");
 
         	{
         		// layout the command line and the panel below it - vertically.
@@ -107,30 +106,36 @@ implements MasterPanelAPI
         this.setVisible(true);
     }
 
+	@Override
 	public HostingPanelAPI getHostForCommandLine() {
 		return hostForCommandLineF;
 	}
 
 
+	@Override
 	public HostingPanelAPI getHostForInventory() {
 		return hostForInventoryF;
 	}
 
+	@Override
 	public HostingPanelAPI getHostForVerbs() 
 	{
 		return hostForVerbsF;
 	}
 
 
+	@Override
 	public HostingPanelAPI getHostForScene() {
 		return hostForSceneF;
 	}
 
 
+	@Override
 	public HostingPanelAPI getHostForDialogTree() {
 		return hostForDialogTreeF;
 	}
 	
+	@Override
 	public HostingPanelAPI getHostForLoading() {
 		return hostForLoadingF;
 	}
@@ -151,6 +156,7 @@ implements MasterPanelAPI
 		sceneStack.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
 	}
 
+	@Override
 	public HostingPanelAPI getHostForTitleCard()
 	{
 		return this.hostForTitleCardF;
