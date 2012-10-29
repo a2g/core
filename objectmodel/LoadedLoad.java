@@ -18,12 +18,12 @@ package com.github.a2g.core.objectmodel;
 
 
 
-public class SceneObjectCache 
+public class LoadedLoad 
 {	
     private SceneObjectCollection sceneObjectCollection;
     private String name;
 
-    public SceneObjectCache(String name) {
+    public LoadedLoad(String name) {
     	this.name = name;
         this.sceneObjectCollection = new SceneObjectCollection();
     }

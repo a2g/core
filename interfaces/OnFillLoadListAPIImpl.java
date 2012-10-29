@@ -25,7 +25,7 @@ public class OnFillLoadListAPIImpl
 		this.implementation = impl;
 	}
 			
-	public void addEssential(ImageBundleLoaderAPI imageBundle)
+	public void addEssential(LoadAPI imageBundle)
 	{
 		this.implementation.addEssential(imageBundle);
 	}

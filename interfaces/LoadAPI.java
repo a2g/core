@@ -19,7 +19,7 @@ package com.github.a2g.core.interfaces;
 import com.google.gwt.event.dom.client.LoadHandler;
 
 
-public interface ImageBundleLoaderAPI
+public interface LoadAPI
 {
 	public int getNumberOfBundles();
 	public int getNumberOfImagesInBundle(int bundleNumber);

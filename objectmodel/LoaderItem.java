@@ -18,7 +18,7 @@ package com.github.a2g.core.objectmodel;
 
 
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.interfaces.ImageBundleLoaderAPI;
+import com.github.a2g.core.interfaces.LoadAPI;
 import com.github.a2g.core.interfaces.ImageBundleLoaderCallbackAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.google.gwt.event.dom.client.LoadEvent;
@@ -26,23 +26,23 @@ import com.google.gwt.event.dom.client.LoadEvent;
 
 public class LoaderItem implements LoadHandler, Comparable<LoaderItem>{
 	private ImageBundleLoaderCallbackAPI callbacks;
-    ImageBundleLoaderAPI  bundle;
+    LoadAPI  bundle;
     int bundleNumber;
     int numberOfImagesLeftToLoad;
     int origNumberOfImagesLeftToLoad;
     InternalAPI api;
-    private SceneObjectCache theCurrentCacheObject;
+    private LoadedLoad theCurrentCacheObject;
     
     //private Logger logger = Logger.getLogger("com.mycompany.level");
     
-    public LoaderItem(InternalAPI api, ImageBundleLoaderAPI bundleToCallLoadOn, int bundleNumber) 
+    public LoaderItem(InternalAPI api, LoadAPI bundleToCallLoadOn, int bundleNumber) 
     {
     	this.api = api;
         this.bundle = bundleToCallLoadOn;
         this.bundleNumber = bundleNumber;
         numberOfImagesLeftToLoad = 0;
         origNumberOfImagesLeftToLoad = 0;
-        theCurrentCacheObject = new SceneObjectCache( this.getCombinedClassAndNumber());
+        theCurrentCacheObject = new LoadedLoad( this.getCombinedClassAndNumber());
     }
 
     String getName()
@@ -126,7 +126,7 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem>{
 	{
 		return bundleNumber;
 	}
-	public SceneObjectCache getSceneObjectCollection() {
+	public LoadedLoad getSceneObjectCollection() {
 		return theCurrentCacheObject;//.getSceneObjectCollection();
 	}
 

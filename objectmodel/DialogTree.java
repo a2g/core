@@ -20,11 +20,7 @@ package com.github.a2g.core.objectmodel;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Represents a single branch in the dialog tree - the current branch.
- * This contains sub branches, which are lines of dialog with the 
- * associated subBranchId these take you to.
- */
+
 public class DialogTree {
     private List<Integer> subBranches;
     private List<String> linesOfDialog;

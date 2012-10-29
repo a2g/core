@@ -80,7 +80,6 @@ function constructDoxygenEntry(theClassName){
 	s+="/*! @class com.github.a2g.core.objectmodel." + theClassName + "\r\n";
 	//s+="@brief \r\n";
 	s+="*/ \r\n";
-	s+="\r\n";
 	return s;
 }
   

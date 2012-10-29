@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import com.github.a2g.core.interfaces.ImageBundleLoaderAPI;
+import com.github.a2g.core.interfaces.LoadAPI;
 import com.github.a2g.core.interfaces.ImageBundleLoaderCallbackAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
@@ -18,7 +18,7 @@ implements ImageBundleLoaderCallbackAPI
 	private LoaderItem theCurrentLoader;
 	private LoaderItemCollection listOfEssentialLoaders;
 	private Set<String> setOfCompletedLoaders;
-	private Map<String, SceneObjectCache>  objectCache;
+	private Map<String, LoadedLoad>  objectCache;
 	private MergeSceneAndStartAPI master;
 	private String inventoryResourceAsString;
 	private boolean isSameInventoryAsLastTime;
@@ -29,7 +29,7 @@ implements ImageBundleLoaderCallbackAPI
 		this.theCurrentLoader = null;
 		this.listOfEssentialLoaders = new LoaderItemCollection();
 		this.setOfCompletedLoaders = new TreeSet<String>();
-		this.objectCache = new TreeMap<String,SceneObjectCache>();
+		this.objectCache = new TreeMap<String,LoadedLoad>();
 		this.master = callbacks; 
 	}
 	
@@ -39,7 +39,7 @@ implements ImageBundleLoaderCallbackAPI
 	{
 		String loaderName = loader.toString();
 		setOfCompletedLoaders.add(loaderName);
-		SceneObjectCache cachedCollection = loader.getSceneObjectCollection();
+		LoadedLoad cachedCollection = loader.getSceneObjectCollection();
 		String combinedName = loader.getCombinedClassAndNumber();
 		objectCache.put(combinedName, cachedCollection);
 		master.mergeWithScene(cachedCollection);
@@ -108,7 +108,7 @@ implements ImageBundleLoaderCallbackAPI
 		
 	}
 
-	public void addEssential(ImageBundleLoaderAPI blah, InternalAPI api)
+	public void addEssential(LoadAPI blah, InternalAPI api)
 	{
 		
 		for(int i=0;i<blah.getNumberOfBundles();i++)

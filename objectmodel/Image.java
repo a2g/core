@@ -32,7 +32,6 @@ public abstract class Image {
 	{
 		this.offset = offset;
 		this.panel = panel;
-		//panel.setImageVisible(this, false);
 	};
 
 	public void addImageToPanel(int before) {

@@ -15,12 +15,12 @@
  */
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.objectmodel.SceneObjectCache;
+import com.github.a2g.core.objectmodel.LoadedLoad;
 
 
 public interface MergeSceneAndStartAPI
 {
-	void mergeWithScene(SceneObjectCache s) ;
+	void mergeWithScene(LoadedLoad s) ;
 	void startGame();
 	void incrementProgress();
 }

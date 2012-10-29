@@ -32,7 +32,7 @@ import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.ImageAddAPI;
-import com.github.a2g.core.interfaces.ImageBundleLoaderAPI;
+import com.github.a2g.core.interfaces.LoadAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
@@ -509,7 +509,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 
 	@Override
-	public void addEssential(ImageBundleLoaderAPI blah)
+	public void addEssential(LoadAPI blah)
 	{
 		
 		loadingPresenter.getLoaders().addEssential(blah, this);
@@ -594,7 +594,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 
 	@Override
-	public void mergeWithScene(SceneObjectCache s) 
+	public void mergeWithScene(LoadedLoad s) 
 	{
 
 		

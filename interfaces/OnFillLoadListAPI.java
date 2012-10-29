@@ -19,7 +19,7 @@ package com.github.a2g.core.interfaces;
 
 public interface OnFillLoadListAPI 
 {
-	void addEssential(ImageBundleLoaderAPI blah);
+	void addEssential(LoadAPI blah);
 	void setScenePixelSize(int width, int height);
 	void kickStartLoading();
 }
