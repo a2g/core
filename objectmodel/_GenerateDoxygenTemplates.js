@@ -18,24 +18,28 @@ var folderspec = WshShell.CurrentDirectory; //Start and pass in current director
   for (; !fc.atEnd(); fc.moveNext()){
 	  
 	var fullPath = fc.item().name;
-	var filename = fullPath.replace(/^.*[\\\/]/, '');
+	if(fullPath.indexOf(".java") !=-1){
+		
+	var filename = fullPath.replace(/^.*[\\\/]/, '');  
+	var classname = filename.substr(0,filename.length-5);
 	  
-	if(filename.indexOf("Presenter") != -1){
+	if(classname.indexOf("Presenter") != -1){
 		
-		presenters.push(filename);
+		presenters.push(classname);
 	}
-	else if(filename.indexOf("Panel") != -1){
+	else if(classname.indexOf("Panel") != -1){
 		
-		panels.push(filename);
+		panels.push(classname);
 	}
-	else if(filename.indexOf("Collection")!= -1){
+	else if(classname.indexOf("Collection")!= -1){
 		
-		collections.push(filename);
+		collections.push(classname);
 	}
 	else{
 		
-		theRest.push(filename);
+		theRest.push(classname);
 	}
+}
   }
   presenters.sort();
   panels.sort();
@@ -73,9 +77,9 @@ function writeDoxygenFileFromList(theArray, theNameOfCSFile){
 function constructDoxygenEntry(theClassName){
 	
 	var s="";
-	s+="/*! @package com.github.a2g.core.objectmodel." + theClassName + "\r\n";
-	s+="@brief \r\n";
-	s+="@image */ \r\n";
+	s+="/*! @class com.github.a2g.core.objectmodel." + theClassName + "\r\n";
+	//s+="@brief \r\n";
+	s+="*/ \r\n";
 	s+="\r\n";
 	return s;
 }
