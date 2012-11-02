@@ -19,10 +19,7 @@ package com.github.a2g.core.interfaces;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.google.gwt.event.shared.EventBus;
 
-/**
-* These are the methods a class needs to implement to be able to host 
-* the @ref MasterPresenter class
-*/
+
 public interface MasterPresenterHostAPI {
 
     public void setValue(String name, int value);

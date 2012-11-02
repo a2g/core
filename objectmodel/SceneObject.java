@@ -46,7 +46,7 @@ public class SceneObject {
     private int topOffset;
     private int leftOffset;
     private int numberPrefix;
-    private short objectCode;
+    private short code;
     private ColorEnum talkingColor;
     private int talkingAnimationDelay;
 
@@ -382,11 +382,11 @@ public class SceneObject {
     }
 
     public void setCode(short objectCode) {
-        this.objectCode = objectCode;
+        this.code = objectCode;
     }
 
     public short getCode() {
-        return objectCode;
+        return code;
 
     }
 

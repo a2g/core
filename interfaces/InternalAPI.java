@@ -35,9 +35,9 @@ extends ImageAddAPI, OnDoCommandAPI {
     @Override
 	public SceneObject getObject(short code);
     @Override
-	public Animation getAnimation(int a);
+	public Animation getAnimation(int code);
     @Override
-	public InventoryItem getInventoryItem(int i);
+	public InventoryItem getInventoryItem(int code);
 
     // property access methods
     @Override
