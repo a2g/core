@@ -53,7 +53,7 @@ var folderspec = WshShell.CurrentDirectory; //Start and pass in current director
   // Give the filenames similar name they have in the core.docs repository
   // so when you copy them in to the core.docs repository, they'll sit next 
   // to their corresponding .cs file, so you can diff them and such.
-  var prefix = "objectmodel_";
+  var prefix = "classes_";
   writeDoxygenFileFromList(presenters  , prefix+"presenters" +ext);
   writeDoxygenFileFromList(panels        , prefix+"panels" + ext);
   writeDoxygenFileFromList(collections   , prefix+"collections" + ext);
