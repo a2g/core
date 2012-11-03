@@ -43,19 +43,18 @@ import java.util.TreeMap;
  * environment.
  * 
  * <p>
- * To schedule a timer, simply create a subclass of it (overriding {@link #run})
- * and call {@link #schedule} or {@link #scheduleRepeating}.
+ * To schedule a timer, simply create a subclass of it (overriding {#run})
+ * and call {#schedule} or {#scheduleRepeating}.
  * </p>
  * 
  * <p>
  * NOTE: If you are using a timer to schedule a UI animation, use
- * {@link com.google.gwt.animation.client.AnimationScheduler} instead. The
+ * {@link com.github.a2g.core.swing.animation.AnimationScheduler} instead. The
  * browser can optimize your animation for maximum performance.
  * </p>
  * 
  * <p>
  * <h3>Example</h3>
- * {@example com.google.gwt.examples.TimerExample}
  * </p>
  */
 public abstract class Timer implements ActionListener

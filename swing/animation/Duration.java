@@ -40,7 +40,7 @@ import java.util.Date;
 public class Duration {
 
   /**
-   * Returns the same result as {@link System#currentTimeMillis()}, but as a
+   * Returns the same result as System.currentTimeMillis() but as a
    * double. Because emulated long math is significantly slower than doubles in
    * Production Mode, this method is to be preferred.
    */

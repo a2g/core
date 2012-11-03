@@ -443,7 +443,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
                 point.getX(), point.getY(), delay, true);
     }    
     
-    public BaseAction showCueCard(String text, ColorEnum color)
+    public BaseAction showTitleCard(String text, ColorEnum color)
     {
     	return new CueCardAction(this, text, color);
     }

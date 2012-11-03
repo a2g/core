@@ -36,7 +36,7 @@ import com.github.a2g.core.swing.animation.Element;
 /**
  * This class provides task scheduling for animations. Any exceptions thrown by
  * the command objects executed by the scheduler will be passed to the
- * {@link com.google.gwt.core.client.GWT.UncaughtExceptionHandler} if one is
+ * com.google.gwt.core.client.GWT.UncaughtExceptionHandler if one is
  * installed.
  */
 public abstract class AnimationScheduler {
@@ -55,7 +55,7 @@ public abstract class AnimationScheduler {
 
   /**
    * A handle to the requested animation frame created by
-   * {@link #requestAnimationFrame(AnimationCallback, Element)}.
+   * requestAnimationFrame(AnimationCallback, Element)
    */
   public abstract static class AnimationHandle {
     /**
@@ -78,7 +78,7 @@ public abstract class AnimationScheduler {
    * 
    * <p>
    * NOTE: If you are animating an element, use
-   * {@link #requestAnimationFrame(AnimationCallback, Element)} instead so the
+   * requestAnimationFrame(AnimationCallback, Element) instead so the
    * browser can optimize for the specified element.
    * </p>
    * 
@@ -92,7 +92,6 @@ public abstract class AnimationScheduler {
    * 
    * @param callback the callback to fire
    * @return a handle to the requested animation frame
-   * @see #requestAnimationFrame(AnimationCallback, Element)
    */
   public AnimationHandle requestAnimationFrame(AnimationCallback callback) {
     return requestAnimationFrame(callback, null);
