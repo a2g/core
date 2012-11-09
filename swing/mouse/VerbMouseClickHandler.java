@@ -19,6 +19,7 @@ package com.github.a2g.core.swing.mouse;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import com.google.gwt.event.shared.EventBus;
+import com.github.a2g.core.event.ExecuteCommandEvent;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.swing.panel.ScenePanel;
 
@@ -26,10 +27,12 @@ import com.github.a2g.core.swing.panel.ScenePanel;
 public class VerbMouseClickHandler implements MouseListener
 {
     private InternalAPI api;
+    private EventBus bus;
     static boolean isAddedAlready;
 
     public VerbMouseClickHandler(EventBus bus, InternalAPI api) {
         this.api = api;
+        this.bus = bus;
         
         ScenePanel scenePanel = (ScenePanel)api.getSceneGui().getView();
         scenePanel.addMouseListener(this);
@@ -44,38 +47,15 @@ public class VerbMouseClickHandler implements MouseListener
     @Override
     public void mouseClicked(MouseEvent event) 
     {
-    	int x = event.getX();
-    	int y = event.getY();
-    	api.getCommandLineGui().execute(x, y);
-    	/*
-    	int x = event.getX();
-    	int y  = event.getY();
-    	String objectId = scenePanel.getObjectUnderMouse(x,y);
-    	if(objectId!="")
-    	{
-    		String textualAnim = api.getSceneGui().getModel().objectCollection().at(objectId).getCurrentAnimation();
-    		Rect r = api.getSceneGui().getModel().objectCollection().at(objectId).getAnimations().at(textualAnim).getFrames().at(0).getBoundingRect();
-    		SceneObject ob = api.getSceneGui().getModel().objectCollection().at(objectId);
-    		String displayName = "";
-    		String textualId = "";
-    		short code = 0;
-    		if (ob != null) {
-    			displayName = "" + x + "," + y + ") " +ob.getDisplayName() + "(" + r.getLeft()+","+r.getTop()+ ")to" + "(" + r.getRight()+","+r.getBottom() +")"; 
-    			textualId = ob.getTextualId(); 
-    			code = ob.getCode(); 
-    		}
-    		bus.fireEvent(
-    				new SetRolloverEvent(
-    						displayName,
-    						textualId,
-    						code));
-    	}*/
+        double x = -1;
+        double y = -1;
+    	 
+        bus.fireEvent( new ExecuteCommandEvent(x, y));
     }
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

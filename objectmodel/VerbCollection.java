@@ -39,7 +39,9 @@ public class VerbCollection {
             new Verb("Throw",
             "Throw AAA|Throw AAA at BBB"),
             new Verb("Eat", "Eat AAA"));
-    VerbCollection() {}
+    VerbCollection() 
+    {
+    }
 	 
     public Verb get(int i) {
         return VERBS.get(i);

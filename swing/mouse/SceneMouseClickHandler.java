@@ -19,16 +19,19 @@ package com.github.a2g.core.swing.mouse;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import com.google.gwt.event.shared.EventBus;
+import com.github.a2g.core.event.ExecuteCommandEvent;
 import com.github.a2g.core.interfaces.InternalAPI;
 
 
 public class SceneMouseClickHandler implements MouseListener
 {
     private InternalAPI api;
+    private EventBus bus;
 
     public SceneMouseClickHandler(EventBus bus, InternalAPI api) 
     {
         this.api = api;      
+        this.bus = bus;
     }
     
     public InternalAPI getAPI()
@@ -40,39 +43,17 @@ public class SceneMouseClickHandler implements MouseListener
     @Override
     public void mouseClicked(MouseEvent event) 
     {
-    	double width = api.getSceneGui().getWidth();
-    	double height = api.getSceneGui().getHeight();
-    	double x = event.getX()/width;
-    	double y = event.getY()/height;
-    	api.getCommandLineGui().execute(x, y);
-    	/*
-    	int x = event.getX();
-    	int y  = event.getY();
-    	String objectId = scenePanel.getObjectUnderMouse(x,y);
-    	if(objectId!="")
-    	{
-    		String textualAnim = api.getSceneGui().getModel().objectCollection().at(objectId).getCurrentAnimation();
-    		Rect r = api.getSceneGui().getModel().objectCollection().at(objectId).getAnimations().at(textualAnim).getFrames().at(0).getBoundingRect();
-    		SceneObject ob = api.getSceneGui().getModel().objectCollection().at(objectId);
-    		String displayName = "";
-    		String textualId = "";
-    		short code = 0;
-    		if (ob != null) {
-    			displayName = "" + x + "," + y + ") " +ob.getDisplayName() + "(" + r.getLeft()+","+r.getTop()+ ")to" + "(" + r.getRight()+","+r.getBottom() +")"; 
-    			textualId = ob.getTextualId(); 
-    			code = ob.getCode(); 
-    		}
-    		bus.fireEvent(
-    				new SetRolloverEvent(
-    						displayName,
-    						textualId,
-    						code));
-    	}*/
+   
     }
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+	public void mousePressed(MouseEvent event) {
+	 	double width = api.getSceneGui().getWidth();
+    	double height = api.getSceneGui().getHeight();
+    	double x = event.getX()/width;
+    	double y = event.getY()/height;
+        bus.fireEvent(
+                new ExecuteCommandEvent(x, y));
 		
 	}
 

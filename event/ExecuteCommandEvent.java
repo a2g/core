@@ -38,7 +38,7 @@ public class ExecuteCommandEvent extends GwtEvent<ExecuteCommandEventHandlerAPI>
 
     @Override
     protected void dispatch(ExecuteCommandEventHandlerAPI handler) {
-        handler.onExecuteCommand(x, y);
+        handler.onClick(x, y);
     }
   
 }

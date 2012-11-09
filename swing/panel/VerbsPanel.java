@@ -18,6 +18,8 @@
 package com.github.a2g.core.swing.panel;
 
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
 
@@ -25,7 +27,10 @@ import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.VerbsPanelAPI;
+import com.github.a2g.core.objectmodel.Verb;
 import com.github.a2g.core.objectmodel.Verbs;
+import com.github.a2g.core.swing.mouse.VerbMouseClickHandler;
+import com.github.a2g.core.swing.mouse.VerbMouseOverHandler;
 import com.google.gwt.event.shared.EventBus;
 
 
@@ -34,28 +39,29 @@ import com.google.gwt.event.shared.EventBus;
 public class VerbsPanel 
 extends JPanel implements VerbsPanelAPI
 {
+	EventBus bus;
 	InternalAPI api;
     public VerbsPanel(EventBus bus, InternalAPI api) 
     {
+    	this.bus = bus;
     	this.api =  api;
-    	   
-    	
-  		/* label.addMouseListener(
-        new VerbMouseOverHandler(
-                bus, sentenceText,
-                code, i));
-label.addMouseListener(
-        new VerbMouseClickHandler(bus, api));
-
-		 */
+    	this.setForeground(new Color(0,255,0));
+    	this.setBackground(new Color(0,0,255));
+  		
     }
     
+	@Override
+	public Dimension	getPreferredSize()
+	{	
+		return new Dimension(160,80);
+	}
+    
     @Override
-	public void setVerbs(Verbs v)
+	public void setVerbs(Verbs verbs)
     {
     	GridLayout grid = new GridLayout();
     	this.setLayout(grid);
-    	this.add(new Label("Verbs"));
+    	//this.add(new Label("Verbs"));
     	
     	grid.setRows(4);
     	grid.setColumns(3); 
@@ -63,11 +69,20 @@ label.addMouseListener(
     	for (int i = 0; i < (grid.getColumns()
     			* grid.getRows()); i++) 
     	{
-    		String buttonText = v.items().get(i).getButtonText();
-    		Label label = new Label(
-    				buttonText);
+    		Verb v = verbs.items().get(i);
+    		String code = "" + i;
+    		Label label = new Label(v.getButtonText());
 
-    		grid.addLayoutComponent("label"+i, label);
+    		label.addMouseListener
+    		(
+    				new VerbMouseOverHandler( bus, v.getSentenceText(), code, i)
+            );
+    		label.addMouseListener
+    		(
+    				new VerbMouseClickHandler(bus, api)
+    		);
+
+    		this.add(label);
     	}
     }
 

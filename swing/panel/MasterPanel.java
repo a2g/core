@@ -17,6 +17,7 @@
 package com.github.a2g.core.swing.panel;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
@@ -57,6 +58,9 @@ implements MasterPanelAPI
         hostForLoadingF = new SwingHostingPanel();
         hostForTitleCardF = new SwingHostingPanel();
         sceneStack =null;
+        
+        hostForCommandLineF.setForeground(new Color(255,0,0));
+        hostForCommandLineF.setBackground(new Color(0,255,0));
 
         // will be constructed from two vertical stacks.
         JPanel stackForDialogTreeInvAndCommandF = new JPanel();
@@ -71,15 +75,15 @@ implements MasterPanelAPI
 
         	{
         		// layout the command line and the panel below it - vertically.
-        		GridLayout topToBottom = new GridLayout(2,1);
         		JPanel verbsAndInventoryF = new JPanel();
-        		commandLineAndVerbsAndInventoryF.setLayout(topToBottom);
-        		commandLineAndVerbsAndInventoryF.add(hostForCommandLineF, "hostForCommandLine" );
-        		commandLineAndVerbsAndInventoryF.add(verbsAndInventoryF, "verbsAndInventory" );
+        		commandLineAndVerbsAndInventoryF.add(hostForCommandLineF);
+        		commandLineAndVerbsAndInventoryF.add(verbsAndInventoryF);
 
         		{
         			// layout the verbs and inventory - from left to right
         			FlowLayout leftToRight = new FlowLayout();
+        			leftToRight.setHgap(0);
+        			leftToRight.setVgap(0);
         			verbsAndInventoryF.setLayout(leftToRight);
         			verbsAndInventoryF.add(hostForVerbsF, "hostForVerbs");
         			verbsAndInventoryF.add(hostForInventoryF, "hostForInventory");

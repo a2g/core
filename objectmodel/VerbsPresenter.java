@@ -33,9 +33,8 @@ public class VerbsPresenter
     {
         this.theVerbs = new Verbs();
         this.view = api.getFactory().createVerbsPanel();
-        this.view.setVerbs(theVerbs);
-        
         panel.setThing(view);
+        this.view.setVerbs(theVerbs);
     }
 
     public void setVisible(boolean isVisible) 

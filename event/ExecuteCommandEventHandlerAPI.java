@@ -20,6 +20,6 @@ import com.google.gwt.event.shared.EventHandler;
 
 
 public interface ExecuteCommandEventHandlerAPI extends EventHandler {
-    void onExecuteCommand(double x, double y);
+    boolean onClick(double x, double y);
   
 }

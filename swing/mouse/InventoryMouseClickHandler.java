@@ -46,30 +46,7 @@ public class InventoryMouseClickHandler implements MouseListener
     {
     	int x = event.getX();
     	int y = event.getY();
-    	api.getCommandLineGui().execute(x, y);
-    	/*
-    	int x = event.getX();
-    	int y  = event.getY();
-    	String objectId = scenePanel.getObjectUnderMouse(x,y);
-    	if(objectId!="")
-    	{
-    		String textualAnim = api.getSceneGui().getModel().objectCollection().at(objectId).getCurrentAnimation();
-    		Rect r = api.getSceneGui().getModel().objectCollection().at(objectId).getAnimations().at(textualAnim).getFrames().at(0).getBoundingRect();
-    		SceneObject ob = api.getSceneGui().getModel().objectCollection().at(objectId);
-    		String displayName = "";
-    		String textualId = "";
-    		short code = 0;
-    		if (ob != null) {
-    			displayName = "" + x + "," + y + ") " +ob.getDisplayName() + "(" + r.getLeft()+","+r.getTop()+ ")to" + "(" + r.getRight()+","+r.getBottom() +")"; 
-    			textualId = ob.getTextualId(); 
-    			code = ob.getCode(); 
-    		}
-    		bus.fireEvent(
-    				new SetRolloverEvent(
-    						displayName,
-    						textualId,
-    						code));
-    	}*/
+    	api.getCommandLineGui().onClick(x, y);
     }
 
 	@Override

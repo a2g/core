@@ -17,7 +17,6 @@
 package com.github.a2g.core.swing.factory;
 
 import java.awt.Component;
-
 import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.HostingPanelAPI;
@@ -29,6 +28,6 @@ implements HostingPanelAPI
 	@Override
 	public void setThing(Object w) {
 		this.add((Component)w);
-		
+
 	}
 }

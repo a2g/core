@@ -18,15 +18,13 @@ package com.github.a2g.core.objectmodel;
 
 
 
-import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.event.ExecuteCommandEvent;
 import com.github.a2g.core.event.ExecuteCommandEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.event.SetRolloverEventHandlerAPI;
+import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
 import com.github.a2g.core.interfaces.CommandLinePanelAPI;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.SceneAPI;
 import com.google.gwt.event.shared.EventBus;
 
@@ -36,11 +34,11 @@ public class CommandLinePresenter
         implements ExecuteCommandEventHandlerAPI, SetRolloverEventHandlerAPI {
 
     private SceneAPI callbacks;
-    private InternalAPI api;
+    private CommandLineCallbackAPI api;
     private CommandLinePanelAPI view;
     private CommandLine model;
     
-    public CommandLinePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api) {
+    public CommandLinePresenter(final HostingPanelAPI panel, EventBus bus, CommandLineCallbackAPI api) {
         this.model = new CommandLine(api);
         this.callbacks = null;
        
@@ -58,7 +56,70 @@ public class CommandLinePresenter
         this.callbacks = callback;
     }
 
-    public void updateImage() {
+   
+    public void setVisible(boolean isVisible) {
+        model.setVisible(isVisible);
+        view.setVisible(isVisible);
+    }
+    
+    public void setMouseable(boolean mouseable) {
+        model.setMouseable(mouseable);
+        updateImage();
+    }
+
+    @Override
+    public void onSetMouseOver(String displayName, String textualId, int code) {
+        if (api.isInDialogTreeMode()) {
+            return;
+        }
+        model.setMouseOver(displayName, textualId,
+                code);
+
+        updateImage();
+
+    }
+
+    @Override
+    public boolean onClick(double x, double y) {
+    	
+        if (isOkToExecute()) {
+        	System.out.println("ONEXECUTECOMMAND::execute  " + model.getSentence().getDisplayName());
+            this.execute(x, y);
+            return true;
+        }
+        
+        System.out.println("ONEXECUTECOMMAND::nextbestthing  " + model.getSentence().getDisplayName());
+        this.doNextBestThingToExecute();
+        
+        return false;
+    }
+    
+    //
+    //
+    //
+    //
+    //
+    
+    
+    private void clear() {
+        model.clear();
+        updateImage();
+    }
+    
+    
+    private void doNextBestThingToExecute() {	
+        model.doNextBestThingToExecute();
+        updateImage();
+    }
+    
+    private boolean isOkToExecute() {
+        boolean isOkToExecute = model.isOkToExecute();
+
+        return isOkToExecute;
+    }
+
+
+    private void updateImage() {
         Sentence sentence = getSentence();
 
         sentence.setBBB(
@@ -69,18 +130,13 @@ public class CommandLinePresenter
 
         view.setText(displayName+" ");
     }
-
-    public Sentence getSentence() {
+    
+    private  Sentence getSentence() {
         Sentence sentence = model.getSentence();
 
         return sentence;
     }
-
-    public void onRightClick() {
-        clear();
-    }
-
-    public void execute(double x, double y) {
+    private void execute(double x, double y) {
         // if its incomplete, the clear everything..
         if (!model.isOkToExecute()) {
             clear();
@@ -96,70 +152,13 @@ public class CommandLinePresenter
             if(x<0.0) x=0.0;
             if(y>1.0) y=1.0;
             if(y<0.0) y=0.0;
-            NullParentAction npa = new NullParentAction() ;
-            npa.setApi(api);
             
-            BaseAction a = this.callbacks.onDoCommand(
-            		api,npa,
-                    verbAsCode, sentenceA,
+            api.doCommand( verbAsCode, getSentence().getVerbAsVerbEnumeration(), sentenceA,
                     sentenceB, x, y);
-
-            api.executeBaseActionAndProcessReturnedInteger(
-                    a);
-            api.setLastCommand(x, y,
-                    getSentence().getVerbAsVerbEnumeration(),
-                    sentenceA.getTextualId(),
-                    sentenceB.getTextualId());
+           
         }
 
         clear();
     }
     
-    public void setVisible(boolean isVisible) {
-        model.setVisible(isVisible);
-        view.setVisible(isVisible);
-    }
-    
-    public void doNextBestThingToExecute() {	
-        model.doNextBestThingToExecute();
-        updateImage();
-    }
-    
-    public boolean isOkToExecute() {
-        boolean isOkToExecute = model.isOkToExecute();
-
-        return isOkToExecute;
-    }
-  
-    public void clear() {
-        model.clear();
-        updateImage();
-    }
-    
-    public void setMouseable(boolean mouseable) {
-        model.setMouseable(mouseable);
-        updateImage();
-    }
-
-    @Override
-    public void onSetMouseOver(String displayName, String textualId, int code) {
-        if (api.getDialogTreeGui().isInDialogTreeMode()) {
-            return;
-        }
-        model.setMouseOver(displayName, textualId,
-                code);
-
-        updateImage();
-
-    }
-
-    @Override
-    public void onExecuteCommand(double x, double y) {
-        if (isOkToExecute()) {
-            this.execute(x, y);
-        } else {
-            this.doNextBestThingToExecute();
-        }
-    }
-
 }

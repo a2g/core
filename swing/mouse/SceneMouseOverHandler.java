@@ -64,7 +64,8 @@ public class SceneMouseOverHandler implements MouseMotionListener {
     		String textualId = "";
     		short code = 0;
     		if (ob != null) {
-    			displayName = "" + x + "," + y + ") " +ob.getDisplayName() + "(" + r.getLeft()+","+r.getTop()+ ")to" + "(" + r.getRight()+","+r.getBottom() +")"; 
+    			//displayName = "" + x + "," + y + ") " +ob.getDisplayName() + "(" + r.getLeft()+","+r.getTop()+ ")to" + "(" + r.getRight()+","+r.getBottom() +")"; 
+    			displayName = ob.getDisplayName();
     			textualId = ob.getTextualId(); 
     			code = ob.getCode(); 
     		}

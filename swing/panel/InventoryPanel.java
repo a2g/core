@@ -18,7 +18,9 @@
 package com.github.a2g.core.swing.panel;
 
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.image.ImageObserver;
@@ -53,6 +55,8 @@ implements ImageObserver, com.github.a2g.core.interfaces.ImagePanelAPI, Inventor
     public InventoryPanel(InternalAPI api) 
     {
     	this.api = api;
+    	this.setForeground(new Color(0,255,0));
+    	this.setBackground(new Color(255,0,0));
     	this.add(new Label("Inventory"));
     	gridLayout = new GridLayout();
     	gridLayout.setColumns(4);
@@ -169,7 +173,11 @@ implements ImageObserver, com.github.a2g.core.interfaces.ImagePanelAPI, Inventor
 	}
 
 	
-
+	@Override
+	public Dimension	getPreferredSize()
+	{	
+		return new Dimension(160,80);
+	}
 	
 
 }

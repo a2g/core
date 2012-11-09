@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
 
 
 public class CommandLine {
@@ -31,11 +31,10 @@ public class CommandLine {
     private boolean isMouseable; // whether rolling over the verbs will update the commandline
     private boolean isVisible;
     
-    public CommandLine(InternalAPI api) {
+    public CommandLine(CommandLineCallbackAPI api) {
         this.defaultVerb = new SentenceUnit(
                 "Walk to AAA", "0", -1);
-        this.lockedInVerb = new SentenceUnit(
-                "", "", -1);
+        this.lockedInVerb = defaultVerb;
         this.lockedInObject1 = new SentenceUnit(
                 "", "", -1);
         this.lockedInObject2 = new SentenceUnit(
@@ -180,11 +179,12 @@ public class CommandLine {
         if (!this.isMouseable) { 
             return false;
         }
-
-        String command = getSentence().getDisplayName();
-
-        return !command.contains("AAA")
-                && !command.contains("BBB");
+        if(lockedInVerb.getDisplayName().contains("AAA") && this.lockedInObject1.getCode()==-1)
+        	return false;
+        if(lockedInVerb.getDisplayName().contains("BBB") && this.lockedInObject2.getCode()==-1) 
+        	return false;
+        	
+        return true;
     }
 
     public void setVisible(boolean isVisible) {
@@ -204,5 +204,4 @@ public class CommandLine {
     public void setMouseable(boolean mouseable) {
         this.isMouseable = mouseable;
     }
-
 }

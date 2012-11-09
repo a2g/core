@@ -31,7 +31,6 @@
  * the License.
  */
 package com.github.a2g.core.swing.animation;
-import com.github.a2g.core.swing.animation.Element;
 
 /**
  * This class provides task scheduling for animations. Any exceptions thrown by

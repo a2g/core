@@ -88,7 +88,6 @@ public class ScenePresenter {
 	
 
 	public Scene getModel() {
-		// TODO Auto-generated method stub
 		return scene;
 	}
 

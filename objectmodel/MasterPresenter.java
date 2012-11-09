@@ -28,6 +28,7 @@ import com.github.a2g.core.action.BaseDialogTreeAction;
 
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
+import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
@@ -62,6 +63,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 , OnEveryFrameAPI
 , OnDoCommandAPI
 , OnDialogTreeAPI
+, CommandLineCallbackAPI
 {
 
 	private CommandLinePresenter commandLinePresenter;
@@ -126,10 +128,10 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		
 		this.inventoryPresenter = new InventoryPresenter(
 				masterPanel.getHostForInventory(), bus, parent, this);
-		this.verbsPresenter = new VerbsPresenter(
-				masterPanel.getHostForVerbs(), bus, parent, this);
 		this.scenePresenter = new ScenePresenter(
 				masterPanel.getHostForScene(), bus, this);
+		this.verbsPresenter = new VerbsPresenter(
+				masterPanel.getHostForVerbs(), bus, parent, this);
 		this.loadingPresenter =  new LoaderPresenter(
 				masterPanel.getHostForLoading(), bus, this, this, parent);
 		this.cueCardPresenter =  new TitleCardPresenter(
@@ -543,7 +545,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		setLoadingActive();
 		//scenePresenter.clear(); don't clear, all its images are switched off anyhow.
 		loadingPresenter.clear();
-		commandLinePresenter.clear();
+		//commandLinePresenter.clear();
 		verbsPresenter.clear();
 			
 
@@ -574,10 +576,10 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	}
 
 
-	public void setScene(SceneAPI sceneCallbacks) {
+	public void setScene(SceneAPI scene) {
 		
 		
-		setCallbacks(sceneCallbacks);
+		setCallbacks(scene);
 
 		this.callbacks.onFillLoadList(new OnFillLoadListAPIImpl(this));
 	}
@@ -724,6 +726,35 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	@Override
 	public FactoryAPI getFactory() {
 		return parent.getFactory(bus, this);
+	}
+
+	@Override
+	public boolean isInDialogTreeMode() {
+		boolean isInMode = this.getDialogTreeGui().isInDialogTreeMode();
+		return isInMode;
+	}
+
+	@Override
+	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,
+			SentenceUnit sentenceA, SentenceUnit sentenceB, double x, double y) {
+		 NullParentAction npa = new NullParentAction() ;
+         npa.setApi(this);
+         
+         BaseAction a = this.callbacks.onDoCommand(
+         		this,npa,
+                 verbAsCode, 
+                 sentenceA,
+                 sentenceB, 
+                 x, 
+                 y);
+
+         executeBaseActionAndProcessReturnedInteger(a);
+         
+         setLastCommand(x, y,
+                 verbAsVerbEnumeration,
+                 sentenceA.getTextualId(),
+                 sentenceB.getTextualId());
+		
 	}
 }
 

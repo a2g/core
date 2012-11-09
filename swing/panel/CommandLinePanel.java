@@ -28,13 +28,14 @@ implements CommandLinePanelAPI
 
     public CommandLinePanel() {
         this.setText("command line panel command line panel");
-        //this.setSize(320, 50);
+        this.setSize(320, 20);
     }
     
 
 	@Override
-	public Dimension	getPreferredSize(){
-		return new Dimension(400,50);
+	public Dimension	getPreferredSize()
+	{	
+		return new Dimension(320,20);
 	}
 			
 	@Override
