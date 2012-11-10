@@ -87,17 +87,19 @@ public class CommandLinePresenter
         return false;
     }
     
-    //
-    //
-    //
-    //
-    //
-    
-    
-    private void clear() {
+    public void clear() 
+    {
         model.clear();
         updateImage();
     }
+    
+    
+    //
+    //
+    //
+    //
+    //
+    
     
     
     private void doNextBestThingToExecute() {	

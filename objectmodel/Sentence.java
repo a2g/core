@@ -30,8 +30,8 @@ public class Sentence {
     public Sentence() {
         this.string = "";
         this.verbAsNumber = 0; 
-        this.AAA = new SentenceUnit("", "", -1);
-        this.BBB = new SentenceUnit("", "", -1);
+        this.AAA = new SentenceUnit();
+        this.BBB = new SentenceUnit();
     }
 
     void setVerb(SentenceUnit snc) {

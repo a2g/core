@@ -16,6 +16,8 @@
 
 package com.github.a2g.core.objectmodel;
 
+import com.github.a2g.core.primitive.CodesForVerbs;
+
 
 public class SentenceUnit {
 
@@ -32,7 +34,7 @@ public class SentenceUnit {
     public SentenceUnit() {
     	   this.displayName = "";
            this.textualId = "";
-           this.code = -1;
+           this.code = 1;
 	}
 
 	public int getLength() {
@@ -83,6 +85,15 @@ public class SentenceUnit {
     public final int getCode() {
         return this.code;
     }
+
+	public boolean isObjectOrInv() 
+	{
+		boolean isVerb = CodesForVerbs.isAVerb(code);
+		
+		if(code>1 && !isVerb)
+			return true;
+		return false;
+	}
 }
 
 

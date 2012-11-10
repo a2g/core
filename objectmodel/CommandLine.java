@@ -35,7 +35,7 @@ public class CommandLine {
     public CommandLine(CommandLineCallbackAPI api) {
         this.defaultVerb = new SentenceUnit( "Walk to AAA", 
         		"Walk", CodesForVerbs.getCodeForVerb(0));
-        this.lockedInVerb = new SentenceUnit();
+        this.lockedInVerb = defaultVerb;
         this.lockedInObject1 = new SentenceUnit();
         this.lockedInObject2 = new SentenceUnit();
         this.rolledOver = new SentenceUnit();
@@ -148,7 +148,7 @@ public class CommandLine {
     public void clear() {
         this.lockedInObject1 = new SentenceUnit();
         this.lockedInObject2 = new SentenceUnit();
-        this.lockedInVerb = new SentenceUnit();
+        this.lockedInVerb = defaultVerb;
         this.rolledOver = new SentenceUnit();
         this.typeOfRollover = "";
     }
@@ -173,14 +173,13 @@ public class CommandLine {
         if (!this.isMouseable) { 
             return false;
         }
-        if(lockedInVerb.getDisplayName().length()==0)
-        	return false;
-        if(lockedInVerb.getDisplayName().contains("AAA") && this.rolledOver.getCode()==-1)
-        	return false;
-        if(lockedInVerb.getDisplayName().contains("BBB") && this.rolledOver.getCode()==-1) 
-        	return false;
+        boolean isObjectOrInv = this.rolledOver.isObjectOrInv();
+        if(lockedInVerb.getDisplayName().contains("AAA") && isObjectOrInv)
+        	return true;
+        if(lockedInVerb.getDisplayName().contains("BBB") && isObjectOrInv) 
+        	return true;
         	
-        return true;
+        return false;
     }
 
     public void setVisible(boolean isVisible) {

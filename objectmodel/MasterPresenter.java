@@ -752,7 +752,8 @@ SaySpeechCallDialogTreeEventHandlerAPI
                  verbAsVerbEnumeration,
                  sentenceA.getTextualId(),
                  sentenceB.getTextualId());
-		
+         
+		this.commandLinePresenter.clear();
 	}
 }
 
