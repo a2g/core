@@ -20,25 +20,27 @@ package com.github.a2g.core.objectmodel;
 import java.util.Arrays;
 import java.util.List;
 
+import com.github.a2g.core.primitive.CodesForVerbs;
+
 
 public class VerbCollection {
     private static final List<Verb> VERBS = Arrays.asList(
-            new Verb("Walk", "Walk to AAA"),
-            new Verb("Talk", "Talk to AAA"),
-            new Verb("Examine", "Examine AAA"),
-            new Verb("Grab", "Grab AAA"),
+            new Verb("Walk", "Walk to AAA", CodesForVerbs.getCodeForVerb(0)),
+            new Verb("Talk", "Talk to AAA", CodesForVerbs.getCodeForVerb(1)),
+            new Verb("Examine", "Examine AAA", CodesForVerbs.getCodeForVerb(2)),
+            new Verb("Grab", "Grab AAA", CodesForVerbs.getCodeForVerb(3)),
             new Verb("Cut",
-            "Cut AAA|Cut AAA with BBB"),
-            new Verb("Swing", "Swing AAA"),
+            "Cut AAA|Cut AAA with BBB", CodesForVerbs.getCodeForVerb(4)),
+            new Verb("Swing", "Swing AAA", CodesForVerbs.getCodeForVerb(5)),
             new Verb("Give",
-            "Give AAA|Give AAA to BBB"),
+            "Give AAA|Give AAA to BBB", CodesForVerbs.getCodeForVerb(6)),
             new Verb("Use",
-            "Use AAA|Use AAA with BBB"),
-            new Verb("Push", "Push AAA"),
-            new Verb("Pull", "Pull AAA"),
+            "Use AAA|Use AAA with BBB", CodesForVerbs.getCodeForVerb(7)),
+            new Verb("Push", "Push AAA", CodesForVerbs.getCodeForVerb(8)),
+            new Verb("Pull", "Pull AAA", CodesForVerbs.getCodeForVerb(9)),
             new Verb("Throw",
-            "Throw AAA|Throw AAA at BBB"),
-            new Verb("Eat", "Eat AAA"));
+            "Throw AAA|Throw AAA at BBB", CodesForVerbs.getCodeForVerb(10)),
+            new Verb("Eat", "Eat AAA", CodesForVerbs.getCodeForVerb(11)));
     VerbCollection() 
     {
     }

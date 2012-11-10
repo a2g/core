@@ -46,17 +46,17 @@ implements VerbsPanelAPI
             int row = i / getColumnCount();
             int column = i % getColumnCount();
 
-            String sentenceText = verbs.items().get(i).getSentenceText();
-            String buttonText = verbs.items().get(i).getButtonText();
-            String code = "" + i;
+            Verb verb = verbs.items().get(i);
+            String textualId = verb.gettextualId();
+            String displayText = verb.getdisplayText();
+            int code = verb.getCode();
             Label widget = new Label(
-                    buttonText);
+                    textualId);
 
             this.setWidget(row, column, widget);
             widget.addMouseMoveHandler(
                     new VerbMouseOverHandler(
-                            bus, sentenceText,
-                            code, i));
+                            bus, textualId, displayText,code));
             widget.addClickHandler(
                     new ImageMouseClickHandler(
                             bus, null));

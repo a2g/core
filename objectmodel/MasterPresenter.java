@@ -153,8 +153,6 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		}
 		this.loadingPresenter.setName(callbacks.toString());
 		this.callbacks = callbacks;
-		this.getCommandLineGui().setCallbacks(
-				callbacks);
 	}
 
 	public MasterPresenter getHeaderPanel() {

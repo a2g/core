@@ -30,14 +30,13 @@ public class Sentence {
     public Sentence() {
         this.string = "";
         this.verbAsNumber = 0; 
-        this.AAA = new SentenceUnit("", "", 1);
-        this.BBB = new SentenceUnit("", "", 1);
+        this.AAA = new SentenceUnit("", "", -1);
+        this.BBB = new SentenceUnit("", "", -1);
     }
 
     void setVerb(SentenceUnit snc) {
         this.string = snc.getDisplayName(); 
-        int i = Integer.parseInt(snc.getTextualId());
-
+        int i = snc.getCode()/ConstantsForAPI.VERB_MULTIPLIER;;
         this.verbAsNumber = i;
     }
 

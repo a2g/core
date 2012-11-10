@@ -40,8 +40,6 @@ public class CommandLinePresenter
     
     public CommandLinePresenter(final HostingPanelAPI panel, EventBus bus, CommandLineCallbackAPI api) {
         this.model = new CommandLine(api);
-        this.callbacks = null;
-       
         this.api = api;
         this.view = api.getFactory().createCommandLinePanel();
         panel.setThing(view);
@@ -51,11 +49,6 @@ public class CommandLinePresenter
         bus.addHandler(SetRolloverEvent.TYPE,
                 this);
     }
-
-    public void setCallbacks(SceneAPI callback) {
-        this.callbacks = callback;
-    }
-
    
     public void setVisible(boolean isVisible) {
         model.setVisible(isVisible);
@@ -143,7 +136,7 @@ public class CommandLinePresenter
             return;
         }
 
-        if (this.callbacks != null) {
+        if (this.api != null) {
             int verbAsCode = model.getSentence().getVerbAsCode();
             SentenceUnit sentenceA = model.getSentence().getAAA();
             SentenceUnit sentenceB = model.getSentence().getBBB();

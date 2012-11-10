@@ -42,7 +42,7 @@ public class VerbMouseOverHandler implements MouseMoveHandler {
     public void onMouseMove(MouseMoveEvent event) {
         bus.fireEvent(
                 new SetRolloverEvent(
-                        displayName,
+                        this.displayName,
                         this.textualId,
                         this.code));
     }

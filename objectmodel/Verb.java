@@ -18,19 +18,26 @@ package com.github.a2g.core.objectmodel;
 
 
 public class Verb {
-    private final String sentenceText;
-    private final String buttonText;
+    private final String displayText;
+    private final String textualId;
+    private final int code;
 
-    public Verb(String buttonText, String sentenceText) {
-        this.sentenceText = sentenceText;
-        this.buttonText = buttonText;
+    public Verb(String textualId, String displayText, int code) {
+        this.displayText = displayText;
+        this.textualId = textualId;
+        this.code = code;
     }
 
-    public String getButtonText() {
-        return buttonText;
+    public String gettextualId() {
+        return textualId;
     }
 
-    public String getSentenceText() {
-        return sentenceText;
+    public String getdisplayText() {
+        return displayText;
+    }
+    
+    public int getCode()
+    {
+    	return code;
     }
 }

@@ -70,12 +70,13 @@ extends JPanel implements VerbsPanelAPI
     			* grid.getRows()); i++) 
     	{
     		Verb v = verbs.items().get(i);
-    		String code = "" + i;
-    		Label label = new Label(v.getButtonText());
+    		int code = v.getCode();
+    		String textualId = v.gettextualId();
+    		Label label = new Label(textualId);
 
     		label.addMouseListener
     		(
-    				new VerbMouseOverHandler( bus, v.getSentenceText(), code, i)
+    				new VerbMouseOverHandler( bus, v.getdisplayText(), textualId, code)
             );
     		label.addMouseListener
     		(

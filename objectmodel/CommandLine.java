@@ -17,6 +17,7 @@
 package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
+import com.github.a2g.core.primitive.CodesForVerbs;
 
 
 public class CommandLine {
@@ -34,7 +35,8 @@ public class CommandLine {
     public CommandLine(CommandLineCallbackAPI api) {
         this.defaultVerb = new SentenceUnit(
                 "Walk to AAA", "0", -1);
-        this.lockedInVerb = defaultVerb;
+        this.lockedInVerb = new SentenceUnit(
+                "", "", -1);
         this.lockedInObject1 = new SentenceUnit(
                 "", "", -1);
         this.lockedInObject2 = new SentenceUnit(
@@ -61,10 +63,12 @@ public class CommandLine {
     public Sentence getSentence() {
         Sentence text = new Sentence();
 
-        // choose Verb: one or two object form	
-        if (!isAVerb(this.rolledOver)) {
-            if (this.lockedInVerb.getLength()
-                    > 0) {
+        // choose Verb: one or two object form
+        int rolloverCode = this.rolledOver.getCode();
+        if (!CodesForVerbs.isAVerb(rolloverCode)) 
+        {
+            if (this.lockedInVerb.getLength() > 0) 
+            {
                 // if contains 2 forms, then refine the appearance
                 // bool isFirstObjectLockedIn = this.lockedInObject1.length();
                 // text.SetVerb(isFirstObjectLockedIn? this.lockedInVerb.mid(i+1) : this.lockedInVerb.left(i));
@@ -115,7 +119,8 @@ public class CommandLine {
                 text.setVerb(this.defaultVerb);
                 text.setAAA(this.rolledOver);
             }
-        } else {
+        } else 
+        {
             this.typeOfRollover = "V";
 
             boolean isFirstObjectLockedIn = this.lockedInObject1.getLength()
@@ -179,9 +184,11 @@ public class CommandLine {
         if (!this.isMouseable) { 
             return false;
         }
-        if(lockedInVerb.getDisplayName().contains("AAA") && this.lockedInObject1.getCode()==-1)
+        if(lockedInVerb.getDisplayName().length()==0)
         	return false;
-        if(lockedInVerb.getDisplayName().contains("BBB") && this.lockedInObject2.getCode()==-1) 
+        if(lockedInVerb.getDisplayName().contains("AAA") && this.rolledOver.getCode()==-1)
+        	return false;
+        if(lockedInVerb.getDisplayName().contains("BBB") && this.rolledOver.getCode()==-1) 
         	return false;
         	
         return true;
