@@ -33,24 +33,20 @@ public class CommandLine {
     private boolean isVisible;
     
     public CommandLine(CommandLineCallbackAPI api) {
-        this.defaultVerb = new SentenceUnit(
-                "Walk to AAA", "0", -1);
-        this.lockedInVerb = new SentenceUnit(
-                "", "", -1);
-        this.lockedInObject1 = new SentenceUnit(
-                "", "", -1);
-        this.lockedInObject2 = new SentenceUnit(
-                "", "", -1);
-        this.rolledOver = new SentenceUnit("",
-                "", -1);
+        this.defaultVerb = new SentenceUnit( "Walk to AAA", 
+        		"Walk", CodesForVerbs.getCodeForVerb(0));
+        this.lockedInVerb = new SentenceUnit();
+        this.lockedInObject1 = new SentenceUnit();
+        this.lockedInObject2 = new SentenceUnit();
+        this.rolledOver = new SentenceUnit();
         this.typeOfRollover = "";
         this.isMouseable = true;
         this.isVisible = true;
     }
     
     public void setMouseOver(String displayName, String textualId, int code) {
-        this.rolledOver = new SentenceUnit(
-                displayName, textualId, code); 
+        this.rolledOver = new SentenceUnit( displayName, 
+        		textualId, code); 
     }
 
     static boolean isAVerb(SentenceUnit snc) {
@@ -150,32 +146,25 @@ public class CommandLine {
     }
     
     public void clear() {
-        this.lockedInObject1 = new SentenceUnit(
-                "", "", -1);
-        this.lockedInObject2 = new SentenceUnit(
-                "", "", -1);
-        this.lockedInVerb = new SentenceUnit(
-                "", "", -1);
-        this.rolledOver = new SentenceUnit("",
-                "", -1);
+        this.lockedInObject1 = new SentenceUnit();
+        this.lockedInObject2 = new SentenceUnit();
+        this.lockedInVerb = new SentenceUnit();
+        this.rolledOver = new SentenceUnit();
         this.typeOfRollover = "";
     }
 
     public void doNextBestThingToExecute() {
         if (this.typeOfRollover == "A") {
             this.lockedInObject1 = this.rolledOver;
-            this.rolledOver = new SentenceUnit(
-                    "", "", -1);
+            this.rolledOver = new SentenceUnit();
             this.typeOfRollover = "";
         } else if (this.typeOfRollover == "B") {
             this.lockedInObject2 = this.rolledOver;
-            this.rolledOver = new SentenceUnit(
-                    "", "", -1);
+            this.rolledOver = new SentenceUnit();
             this.typeOfRollover = "";
         } else if (this.typeOfRollover == "V") {
             this.lockedInVerb = this.rolledOver;
-            this.rolledOver = new SentenceUnit(
-                    "", "", -1);
+            this.rolledOver = new SentenceUnit();
             this.typeOfRollover = "";
         }
     }

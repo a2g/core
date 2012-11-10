@@ -116,9 +116,9 @@ public class CommandLinePresenter
         Sentence sentence = getSentence();
 
         sentence.setBBB(
-                new SentenceUnit("", "", -1));
+                new SentenceUnit());
         sentence.setAAA(
-                new SentenceUnit("", "", -1));
+                new SentenceUnit());
         String displayName = sentence.getDisplayName();
 
         view.setText(displayName+" ");

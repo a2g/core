@@ -29,7 +29,13 @@ public class SentenceUnit {
         this.code = code;
     }
 
-    public int getLength() {
+    public SentenceUnit() {
+    	   this.displayName = "";
+           this.textualId = "";
+           this.code = -1;
+	}
+
+	public int getLength() {
         return this.displayName.length();
     }
 
