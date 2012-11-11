@@ -28,7 +28,9 @@ import com.github.a2g.core.primitive.Point;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
-public class InventoryPanel extends AbsolutePanel implements ImagePanelAPI,
+public class InventoryPanel 
+extends AbsolutePanel 
+implements ImagePanelAPI,
 		InventoryPanelAPI {
 	InternalAPI api;
 

@@ -21,147 +21,223 @@ package com.github.a2g.core.swing.panel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.ImageObserver;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.InventoryPanelAPI;
 import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
+import com.github.a2g.core.interfaces.ImageAddAPI;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.PackagedImageAPI;
+import com.github.a2g.core.interfaces.ScenePanelAPI;
 import com.github.a2g.core.objectmodel.DialogTree;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.github.a2g.core.objectmodel.InventoryItem;
+import com.github.a2g.core.objectmodel.SceneObject;
+import com.github.a2g.core.objectmodel.SceneObjectCollection;
 import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.swing.factory.SwingImage;
 import com.github.a2g.core.swing.factory.SwingPackagedImage;
 import com.github.a2g.core.swing.mouse.DialogTreeMouseClickHandler;
 import com.github.a2g.core.swing.mouse.DialogTreeMouseOutHandler;
 import com.github.a2g.core.swing.mouse.DialogTreeMouseOverHandler;
+import com.github.a2g.core.swing.mouse.InventoryMouseClickHandler;
+import com.github.a2g.core.swing.mouse.InventoryMouseOverHandler;
+import com.github.a2g.core.swing.mouse.SceneMouseClickHandler;
+import com.github.a2g.core.swing.mouse.SceneMouseOverHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Grid;
 
-@SuppressWarnings({ "unused", "serial" })
+@SuppressWarnings("serial")
 public class InventoryPanel 
 extends JPanel 
-implements ImageObserver, com.github.a2g.core.interfaces.ImagePanelAPI, InventoryPanelAPI
+implements ImageAddAPI 
+, ImagePanelAPI
+, InventoryPanelAPI 
+, ActionListener  
 {
-	GridLayout gridLayout;
+	class Structure
+	{
+		public Image image;
+		int x;
+		int y;
+		boolean visible;
+	}
+	int width;
+	int height;
+	int tally;
 	InternalAPI api;
 	
-    public InventoryPanel(InternalAPI api) 
+	private Map<Integer,Point> mapOfPointsByImage;
+	private LinkedList<Integer> listOfVisibleHashCodes;
+	private LinkedList<Image> listOfAllVisibleImages;
+	
+    public InventoryPanel(EventBus bus, InternalAPI api) 
     {
     	this.api = api;
-    	this.setForeground(new Color(0,255,0));
-    	this.setBackground(new Color(255,0,0));
-    	this.add(new Label("Inventory"));
-    	gridLayout = new GridLayout();
-    	gridLayout.setColumns(4);
-    	gridLayout.setRows(1);
-    	setLayout(gridLayout);
-    
+        this.mapOfPointsByImage = new TreeMap<Integer, Point>();
+        this.listOfVisibleHashCodes = new LinkedList<Integer>();
+        this.listOfAllVisibleImages = new LinkedList<Image>();
+		//this.width = 200;
+		//this.height = 200;
+		//this.setDoubleBuffered(true);
+		tally++;
+		
+		super.addMouseListener
+		(
+				new InventoryMouseClickHandler(bus,api)
+		);
+		
+		super.addMouseMotionListener
+		(
+				new InventoryMouseOverHandler(this, bus,api)
+		);
     }
-
-    @Override
-	public void updateInventory(Inventory inventory) {
-    
-        // destroy old
-    	gridLayout = new GridLayout();
-    	gridLayout.setColumns(4);
-    	gridLayout.setRows(1);
-    	setLayout(gridLayout);
-    
-    	double ratioOfWidthToHeight = 2;
-    	int count = inventory.items().getCount();
-    	double halfCount = (count
-    			/ ratioOfWidthToHeight);
-    	double height = Math.sqrt(halfCount);
-    	double width = height
-    			* ratioOfWidthToHeight; // make it square
-
-    	int integerForColumns = (int) (height + .5);
-    	int integerForRows = (int) (width + .5);
-    	if(integerForColumns>0 && integerForRows>0)
-    	{
-    		gridLayout.setColumns(integerForColumns);
-    		gridLayout.setRows(integerForRows);
-
-
-    		int j = 0;
-
-    		for (int i = 0; i < inventory.items().getCount() && j < count; i++) 
-    		{
-    			InventoryItem item = inventory.items().at(
-    					i);
-
-    			if (item.isVisible()) {
-    				int row = j / gridLayout.getColumns();
-    				int column = j
-    						% gridLayout.getColumns();
-
-    				if (row < gridLayout.getRows()
-    						&& column < gridLayout.getColumns()) 
-    				{
-    					item.getDisplayName();
-
-    					//this.setThing(row, column, item.getImage().getNativeImage());
-    				}
-    				j++;
-    			}
-    		}
-    	}
-    }
-
-    @Override
-	public Image createNewImageAndAdddHandlers(
-			com.github.a2g.core.interfaces.PackagedImageAPI imageResource,
-			LoadHandler lh, EventBus bus, String objectTextualId,
-			int objectCode, int i, int j)
-    {
-		java.awt.Image img = ((SwingPackagedImage)imageResource).unpack();
-		
-		Image imageAndPos = new SwingImage(img, objectTextualId, this, new Point(-1, -1));
-		
-		// to fire image loading done.
-		lh.onLoad(null);
-		
-		return imageAndPos;
-	}
 
 	@Override
-	public void setThingPosition(Image image, int i, int j) {
-		// TODO Auto-generated method stub
+	public void setSize(int width, int height)
+	{
+		this.width = width;
+		this.height = height;
+		super.setSize(width, height);
+	}
+
+
+	@Override
+	public Dimension getPreferredSize() 
+	{
+		return new Dimension(this.width,this.height);
+	}
+
+
+	@Override
+	public void setThingPosition(Image image, int x, int y) {
+		if(mapOfPointsByImage.containsKey(((SwingImage)image).getNativeImage().hashCode()))
+		{
+			mapOfPointsByImage.put(((SwingImage)image).getNativeImage().hashCode(), new Point(x,y));
+			triggerPaint();
+		}
 		
 	}
 
 	@Override
-	public void setImageVisible(Image image, boolean visible) {
-		// TODO Auto-generated method stub
-		
+	public void setImageVisible(Image image, boolean visible) 
+	{
+		boolean isIn = listOfVisibleHashCodes.contains(((SwingImage)image).getNativeImage().hashCode());
+		if(visible && !isIn)
+		{
+			listOfVisibleHashCodes.add(((SwingImage)image).getNativeImage().hashCode());
+			triggerPaint(); 
+		}
+		else if(!visible & isIn)
+		{
+			listOfVisibleHashCodes.remove(new Integer(((SwingImage)image).getNativeImage().hashCode()));
+			triggerPaint();
+		}
 	}
 
 	@Override
 	public void insert(Image image, int x, int y, int before) {
-		// TODO Auto-generated method stub
-		
+		listOfAllVisibleImages.add(before,image);
+		mapOfPointsByImage.put(((SwingImage)image).getNativeImage().hashCode(), new Point(x,y));
+		triggerPaint();
 	}
 
 	@Override
 	public void remove(Image image) {
-		// TODO Auto-generated method stub
-		
+		listOfAllVisibleImages.remove(((SwingImage)image).getNativeImage());
+		mapOfPointsByImage.remove(((SwingImage)image).getNativeImage().hashCode());
+		setImageVisible(image, false);
+		triggerPaint();
 	}
 
 	@Override
 	public void add(Image image, int x, int y) {
-		// TODO Auto-generated method stub
+		listOfAllVisibleImages.add(image);
+		mapOfPointsByImage.put(((SwingImage)image).getNativeImage().hashCode(), new Point(x,y));
+		triggerPaint();
+	}
+
+	@Override
+	public void clear() {
+		listOfAllVisibleImages.clear();
+		mapOfPointsByImage.clear();
+		listOfVisibleHashCodes.clear();
+	}
+	
+	public void triggerPaint()
+	{
+		repaint();
+		tally++;
+	}
+	
+	@Override
+	public void paint(Graphics g)
+	{
+		Iterator<Image> iter = listOfAllVisibleImages.iterator();
+		while(iter.hasNext())
+		{
+			Image image = iter.next();
+			if(listOfVisibleHashCodes.contains(((SwingImage)image).getNativeImage().hashCode()))
+			{
+				Point p = mapOfPointsByImage.get(((SwingImage)image).getNativeImage().hashCode());
+				g.drawImage(((SwingImage)image).getNativeImage(),p.getX(),p.getY(),this);
+			}
+		}
+		//System.out.println("printed with tally " + tally +" draws "+ draws);
+		tally=0;
 		
 	}
 
-	
+	public String getObjectUnderMouse(int x, int y) 
+	{
+		System.out.println("----------------");
+		String textualId = "";
+		SceneObjectCollection coll = api.getSceneGui().getModel().objectCollection();
+		ArrayList<SceneObject> list = coll.getSortedList();
+		for(int i = 0;i<list.size();i++)
+		{
+			SceneObject ob = list.get(i);
+			if(ob.isVisible())
+			{
+				System.out.println(ob.getTextualId() + ob.getNumberPrefix());
+				int frame = ob.getCurrentFrame();
+				String anim = ob.getCurrentAnimation();
+				if(ob.getAnimations().at(anim)!=null)
+				{
+					Image img = ob.getAnimations().at(anim).getFrames().at(frame);
+					if(img!=null)
+					{
+						Rect rect = img.getBoundingRect();
+						int adjX = x - ob.getX();
+						int adjY = y - ob.getY();
+
+						if(rect.contains(adjX, adjY))
+						{
+							textualId = ob.getTextualId();
+						}
+					}
+				}
+			}
+		}
+
+		return textualId;
+	}
+
 	@Override
 	public int getImageWidth(Image image) {
 		return ((SwingImage)image).getNativeImage().getWidth(this);
@@ -172,13 +248,65 @@ implements ImageObserver, com.github.a2g.core.interfaces.ImagePanelAPI, Inventor
 		return ((SwingImage)image).getNativeImage().getHeight(this);
 	}
 
-	
-	@Override
-	public Dimension	getPreferredSize()
-	{	
-		return new Dimension(160,80);
-	}
-	
 
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	@Override
+	public boolean addImageForAnInventoryItem(LoadHandler lh,
+			String textualIdForInventory, int codeForInventory,
+			PackagedImageAPI imageResource) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+
+	@Override
+	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix,
+			int x, int y, String textualIdForObject,
+			String textualIdForAnimation, short codeForObject,
+			int codeForAnimation, PackagedImageAPI imageResource) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+
+	@Override
+	public Image createNewImageAndAdddHandlers(PackagedImageAPI imageResource,
+			LoadHandler lh, EventBus bus, String objectTextualId,
+			int objectCode, int x, int y) {
+	
+		java.awt.Image img = ((SwingPackagedImage)imageResource).unpack();
+		
+		SwingImage imageAndPos = new SwingImage(img, objectTextualId, this, new Point(0,0));
+		
+		// to fire image loading done.
+		lh.onLoad(null);
+		
+		return imageAndPos;
+	}
+
+
+
+
+	@Override
+	public void updateInventory(Inventory inventory) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
 }
-    

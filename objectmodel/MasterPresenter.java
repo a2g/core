@@ -28,6 +28,7 @@ import com.github.a2g.core.action.BaseDialogTreeAction;
 
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
+import com.github.a2g.core.interfaces.ActionRunnerCallbackAPI;
 import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
@@ -63,7 +64,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 , OnEveryFrameAPI
 , OnDoCommandAPI
 , OnDialogTreeAPI
-, CommandLineCallbackAPI
+, CommandLineCallbackAPI, ActionRunnerCallbackAPI
 {
 
 	private CommandLinePresenter commandLinePresenter;
@@ -105,7 +106,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.theObjectMap = new TreeMap<Short, SceneObject>();
 		this.theAnimationMap = new TreeMap<Integer, Animation>();
 
-		this.actionRunner = new ActionRunner();
+		this.actionRunner = new ActionRunner(this);
 		this.theListOfIndexesToInsertAt= new Integer[100];
 		for(int i=0;i<100;i++)
 			theListOfIndexesToInsertAt[i] = new Integer(0);
@@ -745,15 +746,25 @@ SaySpeechCallDialogTreeEventHandlerAPI
                  sentenceB, 
                  x, 
                  y);
-
-         executeBaseActionAndProcessReturnedInteger(a);
+         if(a!=null)
+         {
+        	 
+        	 commandLinePresenter.setMouseable(false);
+        	 executeBaseActionAndProcessReturnedInteger(a);
+         }
          
          setLastCommand(x, y,
                  verbAsVerbEnumeration,
                  sentenceA.getTextualId(),
                  sentenceB.getTextualId());
-         
+
+	}
+
+	@Override
+	public void actionFinished() 
+	{
 		this.commandLinePresenter.clear();
+		this.commandLinePresenter.setMouseable(true);
 	}
 }
 

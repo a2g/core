@@ -153,7 +153,6 @@ public class CommandLinePresenter
            
         }
 
-        clear();
     }
     
 }

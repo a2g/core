@@ -27,7 +27,9 @@ public interface InventoryPanelAPI
 	void setVisible(boolean isVisible);
 
 	void updateInventory(Inventory inventory);
-
+	
+	void clear();
+	
 	Image createNewImageAndAdddHandlers(PackagedImageAPI imageResource,
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int i, int j);

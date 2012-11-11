@@ -53,7 +53,10 @@ import com.google.gwt.event.shared.EventBus;
 @SuppressWarnings("serial")
 public class ScenePanel 
 extends JPanel 
-implements ScenePanelAPI, ImageAddAPI, ImagePanelAPI, ActionListener  
+implements ScenePanelAPI 
+, ImageAddAPI 
+, ImagePanelAPI 
+, ActionListener  
 {
 	class Structure
 	{

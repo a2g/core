@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.action;
+package com.github.a2g.core.interfaces;
 
 
 import com.github.a2g.core.action.BaseAction;

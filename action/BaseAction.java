@@ -17,7 +17,6 @@
 package com.github.a2g.core.action;
 
 
-import com.github.a2g.core.action.ActionCallbackAPI;
 
 
 
@@ -46,6 +45,7 @@ import com.github.a2g.core.action.DialogTreeGoToAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
+import com.github.a2g.core.interfaces.ActionCallbackAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.SystemAnimationAPI;
 import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;

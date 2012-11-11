@@ -17,42 +17,71 @@
 package com.github.a2g.core.swing.mouse;
 
 
-import com.google.gwt.event.dom.client.MouseMoveEvent;
-import com.google.gwt.event.dom.client.MouseMoveHandler;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+
 import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
-import com.github.a2g.core.objectmodel.InventoryItem;
+import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.swing.panel.InventoryPanel;
+import com.github.a2g.core.swing.panel.ScenePanel;
+import com.github.a2g.core.objectmodel.SceneObject;
 
 
-public class InventoryMouseOverHandler implements MouseMoveHandler {
+public class InventoryMouseOverHandler implements MouseMotionListener {
     private final EventBus bus;
-    private final String textualId;
-    private final int code;
-    private final InternalAPI api;
+    private InternalAPI api;
+    private final InventoryPanel inventoryPanel;
+    static boolean isAddedAlready;
 
-    public InventoryMouseOverHandler(EventBus bus, InternalAPI api, String textualId, int code) {
+    public InventoryMouseOverHandler(InventoryPanel inventoryPanel, EventBus bus, InternalAPI api) {
         this.bus = bus;
-        this.textualId = textualId;
-        this.code = code;
         this.api = api;
-
+        this.inventoryPanel = inventoryPanel;
+        if(!isAddedAlready)
+        {
+        	inventoryPanel.addMouseMotionListener(this);
+        	isAddedAlready = true;
+        }
     }
+    
+    public InternalAPI getAPI()
+    {
+    	return api;
+    }
+
 
     @Override
-	public void onMouseMove(MouseMoveEvent event) {
-        InventoryItem ob = api.getInventoryItem(
-                this.code);
-        String displayName = "";
-
-        if (ob != null) {
-            displayName = ob.getDisplayName(); 
-        }
-        bus.fireEvent(
-                new SetRolloverEvent(
-                        displayName,
-                        this.textualId,
-                        this.code));
+    public void mouseMoved(MouseEvent event) {
+    	int x = event.getX();
+    	int y  = event.getY();
+    	String objectId = inventoryPanel.getObjectUnderMouse(x,y);
+    	if(objectId!="")
+    	{
+    		String textualAnim = api.getSceneGui().getModel().objectCollection().at(objectId).getCurrentAnimation();
+    		Rect r = api.getSceneGui().getModel().objectCollection().at(objectId).getAnimations().at(textualAnim).getFrames().at(0).getBoundingRect();
+    		SceneObject ob = api.getSceneGui().getModel().objectCollection().at(objectId);
+    		String displayName = "";
+    		String textualId = "";
+    		short code = 0;
+    		if (ob != null) {
+    			//displayName = "" + x + "," + y + ") " +ob.getDisplayName() + "(" + r.getLeft()+","+r.getTop()+ ")to" + "(" + r.getRight()+","+r.getBottom() +")"; 
+    			displayName = ob.getDisplayName();
+    			textualId = ob.getTextualId(); 
+    			code = ob.getCode(); 
+    		}
+    		api.getCommandLineGui().onSetMouseOver(displayName, textualId, code);
+    		bus.fireEvent(
+    				new SetRolloverEvent(
+    						displayName,
+    						textualId,
+    						code));
+    	}
     }
 
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		
+	}
 }

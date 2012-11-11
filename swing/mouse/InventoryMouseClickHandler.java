@@ -20,6 +20,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.swing.panel.InventoryPanel;
 import com.github.a2g.core.swing.panel.ScenePanel;
 
 
@@ -30,9 +31,8 @@ public class InventoryMouseClickHandler implements MouseListener
 
     public InventoryMouseClickHandler(EventBus bus, InternalAPI api) {
         this.api = api;
-        
-        ScenePanel scenePanel = (ScenePanel)api.getSceneGui().getView();
-        scenePanel.addMouseListener(this);
+        InventoryPanel inventoryPanel = (InventoryPanel)api.getInventoryGui().getView();
+        inventoryPanel.addMouseListener(this);
     }
     
     public InternalAPI getAPI()

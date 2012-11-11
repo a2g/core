@@ -55,7 +55,7 @@ implements FactoryAPI
 
 	@Override
 	public InventoryPanelAPI createInventoryPanel() {
-		return new InventoryPanel(master);
+		return new InventoryPanel(bus, master);
 	}
 
 	@Override

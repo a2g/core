@@ -18,13 +18,18 @@ package com.github.a2g.core.action;
 
 import java.util.ArrayList;
 
+import com.github.a2g.core.interfaces.ActionCallbackAPI;
+import com.github.a2g.core.interfaces.ActionRunnerCallbackAPI;
+
 public class ActionRunner implements ActionCallbackAPI
 {
 	protected ArrayList<BaseAction> list;
 	private ArrayList<BaseAction> parallelActionsToWaitFor;
 	private int numberOfParallelActionsToWaitFor;
-	public ActionRunner()
+	private ActionRunnerCallbackAPI api;
+	public ActionRunner(ActionRunnerCallbackAPI api)
 	{
+		this.api=api;
 		list = new ArrayList<BaseAction>();
 		parallelActionsToWaitFor = new ArrayList<BaseAction>();
 		numberOfParallelActionsToWaitFor = 0;
@@ -84,6 +89,10 @@ public class ActionRunner implements ActionCallbackAPI
 
 			// execute them	
 			executeParallelActions();
+		}
+		else
+		{
+			api.actionFinished();
 		}
 	}
 
