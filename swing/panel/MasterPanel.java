@@ -47,18 +47,20 @@ implements MasterPanelAPI
     static final String CUECARD_WIDGET = "cueCardWidget";
     
     CardLayout sceneStack;
-    public MasterPanel() {
+    public MasterPanel(int width, int height) {
 
     	// create all the host panels, that we want to arrange.
         hostForCommandLineF = new SwingHostingPanel();
         hostForInventoryF = new SwingHostingPanel();
+        hostForInventoryF.setSize(width/2, height/3);
         hostForVerbsF = new SwingHostingPanel();
+        hostForVerbsF.setSize(width/2, height/3);
         hostForSceneF = new SwingHostingPanel();
         hostForDialogTreeF = new SwingHostingPanel();
         hostForLoadingF = new SwingHostingPanel();
         hostForTitleCardF = new SwingHostingPanel();
         sceneStack =null;
-        
+         
         hostForCommandLineF.setForeground(new Color(255,0,0));
         hostForCommandLineF.setBackground(new Color(0,255,0));
 

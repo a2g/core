@@ -31,8 +31,6 @@ public class InventoryMouseClickHandler implements MouseListener
 
     public InventoryMouseClickHandler(EventBus bus, InternalAPI api) {
         this.api = api;
-        InventoryPanel inventoryPanel = (InventoryPanel)api.getInventoryGui().getView();
-        inventoryPanel.addMouseListener(this);
     }
     
     public InternalAPI getAPI()

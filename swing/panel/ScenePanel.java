@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.TreeMap;
 
 import javax.swing.JPanel;
@@ -297,7 +299,7 @@ implements ScenePanelAPI
 
 
 	@Override
-	public Image createNewImageAndAddHandlers(LoadHandler lh,
+	public Image createNewImageAndAddHandlers(final LoadHandler lh,
 			PackagedImageAPI imageResource, InternalAPI api, EventBus bus,
 			int x, int y, String objectTextualId, short objectCode) 
 	{
@@ -306,7 +308,19 @@ implements ScenePanelAPI
 		SwingImage imageAndPos = new SwingImage(img, objectTextualId, this, new Point(x, y));
 		
 		// to fire image loading done.
-		lh.onLoad(null);
+		// only gwt is asynch, we are swing which synchronous
+		Timer timer = new Timer();
+		TimerTask task = new TimerTask()
+		{
+
+			@Override
+			public void run() {
+				lh.onLoad(null);
+			}
+			
+		};
+		timer.schedule(task, 1);
+			
 		
 		return imageAndPos;
 	}

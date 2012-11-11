@@ -64,8 +64,8 @@ implements FactoryAPI
 	}
 
 	@Override
-	public MasterPanelAPI createMasterPanel() {
-		return new MasterPanel();
+	public MasterPanelAPI createMasterPanel(int width,int height) {
+		return new MasterPanel(width,height);
 	}
 
 	@Override

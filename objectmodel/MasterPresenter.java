@@ -117,7 +117,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 
 
-		this.masterPanel = getFactory().createMasterPanel();
+		this.masterPanel = getFactory().createMasterPanel(320,240);
 		panel.setThing(this.masterPanel);
 
 
@@ -215,10 +215,13 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 	@Override
 	public SceneObject getObject(short code) {
+		int debug = theObjectMap.size();
 		SceneObject ob = this.theObjectMap.get(
 				code);
 
-		if (ob == null) {
+		if (ob == null) 
+		{
+			ob = null;
 		}
 		return ob;
 	}

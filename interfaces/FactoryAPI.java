@@ -7,13 +7,13 @@ public interface FactoryAPI {
 	DialogTreePanelAPI createDialogTreePanel();
 	InventoryPanelAPI createInventoryPanel();
 	LoaderPanelAPI createLoaderPanel();
-	MasterPanelAPI createMasterPanel();
 	ScenePanelAPI createScenePanel();
 	TitleCardPanelAPI createTitleCardPanel();
 	VerbsPanelAPI createVerbsPanel();
 	PopupPanelAPI createPopupPanel(String string, ColorEnum color);
 	SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI cbs);
 	TimerAPI createSystemTimer(TimerCallbackAPI cbs);
+	MasterPanelAPI createMasterPanel(int width, int height);
 
 
 }

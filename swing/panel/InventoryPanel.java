@@ -264,7 +264,7 @@ implements ImageAddAPI
 	public boolean addImageForAnInventoryItem(LoadHandler lh,
 			String textualIdForInventory, int codeForInventory,
 			PackagedImageAPI imageResource) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
@@ -276,23 +276,25 @@ implements ImageAddAPI
 			int x, int y, String textualIdForObject,
 			String textualIdForAnimation, short codeForObject,
 			int codeForAnimation, PackagedImageAPI imageResource) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 
 
 
+	// this is the one that gets called.
 	@Override
 	public Image createNewImageAndAdddHandlers(PackagedImageAPI imageResource,
 			LoadHandler lh, EventBus bus, String objectTextualId,
-			int objectCode, int x, int y) {
-	
+			int objectCode, int x, int y) 
+	{
 		java.awt.Image img = ((SwingPackagedImage)imageResource).unpack();
 		
 		SwingImage imageAndPos = new SwingImage(img, objectTextualId, this, new Point(0,0));
 		
 		// to fire image loading done.
+		// only gwt is asynch, we are swing which synchronous
 		lh.onLoad(null);
 		
 		return imageAndPos;
@@ -303,7 +305,7 @@ implements ImageAddAPI
 
 	@Override
 	public void updateInventory(Inventory inventory) {
-		// TODO Auto-generated method stub
+		// this gets visited every startScene
 		
 	}
 
