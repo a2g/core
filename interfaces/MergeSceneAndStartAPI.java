@@ -21,6 +21,6 @@ import com.github.a2g.core.objectmodel.LoadedLoad;
 public interface MergeSceneAndStartAPI
 {
 	void mergeWithScene(LoadedLoad s) ;
-	void startGame();
+	void startScene();
 	void incrementProgress();
 }

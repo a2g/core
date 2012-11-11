@@ -63,7 +63,7 @@ implements ImageBundleLoaderCallbackAPI
 		}
 		else
 		{
-			master.startGame();
+			master.startScene();
 			return;
 		}
 		
