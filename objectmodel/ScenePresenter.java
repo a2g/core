@@ -56,7 +56,7 @@ public class ScenePresenter {
      
     public void setPixelSize(int width, int height) {
         
-        this.view.setSize(width,height);
+        this.view.setScenePixelSize(width,height);
     }
 
     public Point getSizeOfSceneArea() {

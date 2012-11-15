@@ -41,37 +41,27 @@ public class SentenceUnit {
         return this.displayName.length();
     }
 
-    public SentenceUnit getDisplayNameAfterDivider() {
-        int i = this.getDisplayName().lastIndexOf(
+    public String getDisplayNameAfterDivider() {
+        int i = this.displayName.lastIndexOf(
                 "|");
 
         if (i != -1) {
-            return new SentenceUnit(
-                    this.displayName.substring(
-                            i+1),
-                            this.textualId,
-                            this.code);
+            return this.displayName.substring(i+1);
         }
-        return  new SentenceUnit(
-                this.displayName, this.textualId,
-                this.code);
+        
+        return  this.displayName;
     	
     }
 
-    public SentenceUnit getDisplayNameBeforeDivider() {
-        int i = this.getDisplayName().lastIndexOf(
+    public String getDisplayNameBeforeDivider() {
+        int i = this.displayName.lastIndexOf(
                 "|");
 
         if (i != -1) {
-            return new SentenceUnit(
-                    this.displayName.substring(
-                            0, i),
-                            this.textualId,
-                            this.code);
+            return this.displayName.substring(0,i);
         }
-        return  new SentenceUnit(
-                this.displayName, this.textualId,
-                this.code);
+        
+        return  this.displayName;
     }
 
     public final String getDisplayName() {

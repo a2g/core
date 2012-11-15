@@ -23,6 +23,7 @@ import com.github.a2g.core.gwt.mouse.InventoryItemMouseOverHandler;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.InventoryPanelAPI;
+import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
 import com.github.a2g.core.interfaces.PackagedImageAPI;
 import com.github.a2g.core.primitive.Point;
 import com.google.gwt.event.shared.EventBus;
@@ -30,11 +31,12 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 
 public class InventoryPanel 
 extends AbsolutePanel 
-implements ImagePanelAPI,
-		InventoryPanelAPI {
+implements 
+ImagePanelAPI
+, InventoryPanelAPI 
+{
 	InternalAPI api;
-
-	public InventoryPanel(InternalAPI api) {
+	public InventoryPanel(InternalAPI api, MouseToInventoryPresenterAPI api2) {
 		// super(1, 1);
 		this.api = api;
 	}
@@ -143,6 +145,12 @@ implements ImagePanelAPI,
 	@Override
 	public int getImageWidth(Image image) {
 		return ((GWTImage) image).getNativeImage().getWidth();
+	}
+
+	
+	public void setSize(int width, int height)
+	{
+		super.setPixelSize(width, height);
 	}
 
 }

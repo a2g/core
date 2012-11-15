@@ -7,6 +7,7 @@ import com.github.a2g.core.interfaces.InventoryPanelAPI;
 import com.github.a2g.core.interfaces.LoaderPanelAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
+import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
 import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.interfaces.ScenePanelAPI;
 import com.github.a2g.core.interfaces.SystemAnimationAPI;
@@ -55,8 +56,8 @@ implements FactoryAPI
 	}
 
 	@Override
-	public InventoryPanelAPI createInventoryPanel() {
-		return new InventoryPanel(master);
+	public InventoryPanelAPI createInventoryPanel(MouseToInventoryPresenterAPI api) {
+		return new InventoryPanel(master, api);
 	}
 
 	@Override

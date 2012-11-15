@@ -145,7 +145,7 @@ extends AbsolutePanel
 	}
 	
 	@Override
-	public void setSize(int width, int height)
+	public void setScenePixelSize(int width, int height)
 	{
 		this.setSize("" + width + "px",
 			"" + height + "px");

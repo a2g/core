@@ -19,7 +19,7 @@
 public interface LoaderPanelAPI
 {
 
-	void setSize(int width, int height);
+	void setScenePixelSize(int width, int height);
 
 	void update(int current, int total, String name);
 }

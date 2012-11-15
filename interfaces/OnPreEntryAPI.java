@@ -50,4 +50,5 @@ public interface OnPreEntryAPI {
     public void switchToScene(String scene);
     public String getLastScene();
     public boolean isInDebugMode();
+	public void setInventoryPixelSize(int width, int height);
 }

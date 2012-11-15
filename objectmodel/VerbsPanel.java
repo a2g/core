@@ -56,7 +56,7 @@ implements VerbsPanelAPI
             this.setWidget(row, column, widget);
             widget.addMouseMoveHandler(
                     new VerbMouseOverHandler(
-                            bus, textualId, displayText,code));
+                            bus, displayText,textualId, code));
             widget.addClickHandler(
                     new ImageMouseClickHandler(
                             bus, null));

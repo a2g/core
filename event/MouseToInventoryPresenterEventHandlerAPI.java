@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2012 Anthony Cassidy
  *
@@ -14,22 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.objectmodel.Image;
-import com.google.gwt.event.dom.client.LoadHandler;
-import com.google.gwt.event.shared.EventBus;
+package com.github.a2g.core.event;
 
-public interface ScenePanelAPI
-{
+import com.google.gwt.event.shared.EventHandler;
 
-	void clear();
 
-	Image createNewImageAndAddHandlers(LoadHandler lh,
-			PackagedImageAPI imageResource, InternalAPI api,
-			EventBus bus, int x, int y, String objectTextualId, short objectCode);
-
-	void setScenePixelSize(int width, int height);
-
-	void setVisible(boolean b);
+public interface MouseToInventoryPresenterEventHandlerAPI extends EventHandler {
+    boolean onClick(double x, double y);
+  
 }

@@ -26,14 +26,18 @@ import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 
+import com.github.a2g.core.event.PropertyChangeEvent;
+import com.github.a2g.core.event.PropertyChangeEventHandlerAPI;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
+import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ActionRunnerCallbackAPI;
 import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.ImageAddAPI;
+import com.github.a2g.core.interfaces.InventoryPresenterCallbackAPI;
 import com.github.a2g.core.interfaces.LoadAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
@@ -53,8 +57,9 @@ import com.github.a2g.core.interfaces.TimerCallbackAPI;
 import com.google.gwt.event.shared.EventBus;
 
 public class MasterPresenter  
-implements InternalAPI, 
-SaySpeechCallDialogTreeEventHandlerAPI
+implements InternalAPI
+, SaySpeechCallDialogTreeEventHandlerAPI
+, PropertyChangeEventHandlerAPI
 , TimerCallbackAPI
 , ImageAddAPI
 , MergeSceneAndStartAPI
@@ -64,7 +69,9 @@ SaySpeechCallDialogTreeEventHandlerAPI
 , OnEveryFrameAPI
 , OnDoCommandAPI
 , OnDialogTreeAPI
-, CommandLineCallbackAPI, ActionRunnerCallbackAPI
+, CommandLineCallbackAPI
+, ActionRunnerCallbackAPI
+, InventoryPresenterCallbackAPI
 {
 
 	private CommandLinePresenter commandLinePresenter;
@@ -85,7 +92,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	
 	private TimerAPI timer;
 	private MasterPanelAPI masterPanel;
-		private ActionRunner actionRunner;
+	private ActionRunner actionRunner;
 	private int textSpeedDelay;
 	private Integer[] theListOfIndexesToInsertAt;
 	
@@ -115,7 +122,9 @@ SaySpeechCallDialogTreeEventHandlerAPI
 				SaySpeechCallDialogTreeEvent.TYPE,
 				this);
 
-
+		bus.addHandler(
+				PropertyChangeEvent.TYPE,
+				this);
 
 		this.masterPanel = getFactory().createMasterPanel(320,240);
 		panel.setThing(this.masterPanel);
@@ -128,7 +137,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 				masterPanel.getHostForCommandLine(), bus, this);
 		
 		this.inventoryPresenter = new InventoryPresenter(
-				masterPanel.getHostForInventory(), bus, parent, this);
+				masterPanel.getHostForInventory(), bus, this);
 		this.scenePresenter = new ScenePresenter(
 				masterPanel.getHostForScene(), bus, this);
 		this.verbsPresenter = new VerbsPresenter(
@@ -179,12 +188,17 @@ SaySpeechCallDialogTreeEventHandlerAPI
 			Image imageAndPos = inventoryPresenter.getView().createNewImageAndAdddHandlers(
 					imageResource,lh, bus, objectTextualId, objectCode, 0,0);
 			
-
-			result = inventoryPresenter.addInventory(
-					objectTextualId, objectCode,
-					imageAndPos);
-		
 			imageAndPos.addImageToPanel( 0 );
+			
+			boolean initiallyVisible = false;
+			result = inventoryPresenter.addInventory(
+					objectTextualId
+					, objectCode
+					, initiallyVisible
+					, imageAndPos
+					);
+		
+			
 			
 	    }
 
@@ -215,7 +229,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 
 	@Override
 	public SceneObject getObject(short code) {
-		int debug = theObjectMap.size();
+		theObjectMap.size();
 		SceneObject ob = this.theObjectMap.get(
 				code);
 
@@ -506,7 +520,7 @@ SaySpeechCallDialogTreeEventHandlerAPI
 	
 	
 	@Override
-	public void startGame()
+	public void startScene()
 	{
 		setSceneActive();
 		showEverythingThenEnterScene();
@@ -769,5 +783,40 @@ SaySpeechCallDialogTreeEventHandlerAPI
 		this.commandLinePresenter.clear();
 		this.commandLinePresenter.setMouseable(true);
 	}
+
+	@Override
+	public void setInventoryPixelSize(int width, int height) {
+		this.inventoryPresenter.setSizeOfSingleInventoryImage(width,height);
+		
+	}
+
+	@Override
+	public void onClickInventory() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMouseOverInventory
+	(String displayName, String textualId, int code) 
+	{
+		getCommandLineGui().onSetMouseOver(displayName, textualId, code);
+		bus.fireEvent(
+				new SetRolloverEvent(
+						displayName,
+						textualId,
+						code));
+	}
+
+	@Override
+	public void onPropertyChange(PropertyChangeEvent inventoryEvent) 
+	{
+		
+		//if(
+		this.inventoryPresenter.updateInventory();
+		
+	}
+
+
 }
 

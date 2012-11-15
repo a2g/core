@@ -55,89 +55,47 @@ public class CommandLine {
                         || snc.getDisplayName().contains(
                                 "BBB");
     }
-
+    
+	
     public Sentence getSentence() {
         Sentence text = new Sentence();
 
-        // choose Verb: one or two object form
         int rolloverCode = this.rolledOver.getCode();
-        if (!CodesForVerbs.isAVerb(rolloverCode)) 
+    	boolean isRolledOverAVerb = CodesForVerbs.isAVerb(rolloverCode);
+    	boolean isLockedInVerb = this.lockedInVerb.getLength() >0;
+    	boolean isLockedInVerbATwoForm = this.lockedInVerb.getDisplayName().contains("BBB");
+//    	boolean isDefaultVerbATwoForm = this.defaultVerb.getDisplayName().contains("BBB");
+    	boolean isObjectALockedIn = !this.lockedInObject1.getDisplayName().isEmpty();
+  //  	boolean isObjectBLockedIn = !this.lockedInObject2.getDisplayName().isEmpty();
+    
+    	
+    	if (isRolledOverAVerb) 
         {
-            if (this.lockedInVerb.getLength() > 0) 
-            {
-                // if contains 2 forms, then refine the appearance
-                // bool isFirstObjectLockedIn = this.lockedInObject1.length();
-                // text.SetVerb(isFirstObjectLockedIn? this.lockedInVerb.mid(i+1) : this.lockedInVerb.left(i));
-                // if its a 2-form verb, then show extended form no matter what
-                text.setVerb(
-                        this.lockedInVerb.getDisplayNameAfterDivider());
-                
-                if (this.lockedInVerb.getDisplayName().contains(
-                        "BBB")) {
-                    if (this.lockedInObject2.getDisplayName().isEmpty()) {
-                        if (this.lockedInObject1.getDisplayName().isEmpty()) {
-                            this.typeOfRollover = "A";
-                            text.setAAA(
-                                    this.rolledOver);
-                            // text.SetBBB("");
-                        } else {
-                            this.typeOfRollover = "B";
-                            text.setAAA(
-                                    this.lockedInObject1);
-                            text.setBBB(
-                                    this.rolledOver);
-                        }
-                    } else {
-                        text.setAAA(
-                                this.lockedInObject1);
-                        text.setBBB(
-                                this.lockedInObject2);
-                    }
-                } else {
-                    if (this.lockedInObject1.getLength()
-                            > 0) {
-                        text.setAAA(
-                                this.lockedInObject1);
-                    } else {
-                        this.typeOfRollover = "A";
-                        text.setAAA(
-                                this.rolledOver);
-                    }
-                }
-            } else if (this.lockedInObject1.getLength()
-                    > 0) {
-                this.typeOfRollover = "";
-                text.setVerb(this.defaultVerb);
-                text.setAAA(
-                        this.lockedInObject1);
-            } else {
-                this.typeOfRollover = "A";
-                text.setVerb(this.defaultVerb);
-                text.setAAA(this.rolledOver);
-            }
-        } else 
+        	text.setVerb( rolledOver, false);
+        	text.setAAA(lockedInObject1);
+        	typeOfRollover="V";
+        }
+        else if(isLockedInVerb)
         {
-            this.typeOfRollover = "V";
-
-            boolean isFirstObjectLockedIn = this.lockedInObject1.getLength()
-                    > 0;
-            boolean isSecondObjectLockedIn = this.lockedInObject2.getLength()
-                    > 0;
-
-            // if obj1, set obj1
-            if (isFirstObjectLockedIn) {
-                text.setVerb(
-                        this.rolledOver.getDisplayNameAfterDivider());
-                text.setAAA(
-                        this.lockedInObject1);
-                if (isSecondObjectLockedIn) {
-                    text.setBBB(
-                            this.lockedInObject2);
-                }   
-            } else {
-                text.setVerb(
-                        this.rolledOver.getDisplayNameBeforeDivider());
-            }
+        	if(isLockedInVerbATwoForm && isObjectALockedIn)
+        	{
+        		text.setVerb(lockedInVerb, true);
+        		text.setAAA(lockedInObject1);
+        		text.setBBB(rolledOver);
+        		typeOfRollover="B";
+        	}
+        	else
+        	{
+        		text.setVerb(lockedInVerb, false); 
+        		text.setAAA(rolledOver);
+        		typeOfRollover="A";
+        	}
+        }
+        else
+        {
+        	text.setVerb( this.defaultVerb, false); 
+        	text.setAAA(rolledOver);
+        	typeOfRollover="A";
         }
 
         // text += "Verb "+ this.lockedInVerb + "obj1 " + this.lockedInObject1 + "obj2 " + this.lockedInObject2;

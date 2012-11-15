@@ -22,4 +22,5 @@ public interface OnFillLoadListAPI
 	void addEssential(LoadAPI blah);
 	void setScenePixelSize(int width, int height);
 	void kickStartLoading();
+	void setInventoryPixelSize(int width, int height);
 }

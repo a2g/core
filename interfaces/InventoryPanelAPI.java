@@ -33,4 +33,8 @@ public interface InventoryPanelAPI
 	Image createNewImageAndAdddHandlers(PackagedImageAPI imageResource,
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int i, int j);
+
+	void setSize(int width, int height);
+
+
 }

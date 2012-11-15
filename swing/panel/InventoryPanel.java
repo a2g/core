@@ -19,15 +19,10 @@ package com.github.a2g.core.swing.panel;
 
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -38,35 +33,22 @@ import javax.swing.JPanel;
 import com.github.a2g.core.interfaces.InventoryPanelAPI;
 import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.interfaces.ImageAddAPI;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
 import com.github.a2g.core.interfaces.PackagedImageAPI;
-import com.github.a2g.core.interfaces.ScenePanelAPI;
-import com.github.a2g.core.objectmodel.DialogTree;
 import com.github.a2g.core.objectmodel.Inventory;
-import com.github.a2g.core.objectmodel.InventoryItem;
-import com.github.a2g.core.objectmodel.SceneObject;
-import com.github.a2g.core.objectmodel.SceneObjectCollection;
 import com.github.a2g.core.primitive.Point;
-import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.swing.factory.SwingImage;
 import com.github.a2g.core.swing.factory.SwingPackagedImage;
-import com.github.a2g.core.swing.mouse.DialogTreeMouseClickHandler;
-import com.github.a2g.core.swing.mouse.DialogTreeMouseOutHandler;
-import com.github.a2g.core.swing.mouse.DialogTreeMouseOverHandler;
 import com.github.a2g.core.swing.mouse.InventoryMouseClickHandler;
 import com.github.a2g.core.swing.mouse.InventoryMouseOverHandler;
-import com.github.a2g.core.swing.mouse.SceneMouseClickHandler;
-import com.github.a2g.core.swing.mouse.SceneMouseOverHandler;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.ui.Grid;
 
 @SuppressWarnings("serial")
 public class InventoryPanel 
 extends JPanel 
-implements ImageAddAPI 
-, ImagePanelAPI
+implements ImagePanelAPI
 , InventoryPanelAPI 
 , ActionListener  
 {
@@ -77,50 +59,48 @@ implements ImageAddAPI
 		int y;
 		boolean visible;
 	}
-	int width;
-	int height;
+	
 	int tally;
 	InternalAPI api;
-	
+	int width;
+	int height;
+		
 	private Map<Integer,Point> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages;
 	
-    public InventoryPanel(EventBus bus, InternalAPI api) 
+    public InventoryPanel(EventBus bus, InternalAPI api, MouseToInventoryPresenterAPI api2) 
     {
-    	this.api = api;
+	this.api = api;
         this.mapOfPointsByImage = new TreeMap<Integer, Point>();
         this.listOfVisibleHashCodes = new LinkedList<Integer>();
         this.listOfAllVisibleImages = new LinkedList<Image>();
-		//this.width = 200;
-		//this.height = 200;
-		//this.setDoubleBuffered(true);
+		this.width = 200;
+		this.height = 200;
+		this.setDoubleBuffered(true);
 		tally++;
+		
+    	this.setBackground(new Color(0,255,0));
+    	this.setForeground(new Color(0,0,255));
 		
 		super.addMouseListener
 		(
-				new InventoryMouseClickHandler(bus,api)
+				new InventoryMouseClickHandler(this, api2)
 		);
 		
 		super.addMouseMotionListener
 		(
-				new InventoryMouseOverHandler(this, bus,api)
+				new InventoryMouseOverHandler(this, api2)
 		);
     }
 
-	@Override
-	public void setSize(int width, int height)
-	{
-		this.width = width;
-		this.height = height;
-		super.setSize(width, height);
-	}
+	
 
 
 	@Override
 	public Dimension getPreferredSize() 
 	{
-		return new Dimension(this.width,this.height);
+		return new Dimension(width,height);
 	}
 
 
@@ -131,7 +111,6 @@ implements ImageAddAPI
 			mapOfPointsByImage.put(((SwingImage)image).getNativeImage().hashCode(), new Point(x,y));
 			triggerPaint();
 		}
-		
 	}
 
 	@Override
@@ -167,7 +146,7 @@ implements ImageAddAPI
 
 	@Override
 	public void add(Image image, int x, int y) {
-		listOfAllVisibleImages.add(image);
+				listOfAllVisibleImages.add(image);
 		mapOfPointsByImage.put(((SwingImage)image).getNativeImage().hashCode(), new Point(x,y));
 		triggerPaint();
 	}
@@ -200,43 +179,8 @@ implements ImageAddAPI
 		}
 		//System.out.println("printed with tally " + tally +" draws "+ draws);
 		tally=0;
-		
 	}
-
-	public String getObjectUnderMouse(int x, int y) 
-	{
-		System.out.println("----------------");
-		String textualId = "";
-		SceneObjectCollection coll = api.getSceneGui().getModel().objectCollection();
-		ArrayList<SceneObject> list = coll.getSortedList();
-		for(int i = 0;i<list.size();i++)
-		{
-			SceneObject ob = list.get(i);
-			if(ob.isVisible())
-			{
-				System.out.println(ob.getTextualId() + ob.getNumberPrefix());
-				int frame = ob.getCurrentFrame();
-				String anim = ob.getCurrentAnimation();
-				if(ob.getAnimations().at(anim)!=null)
-				{
-					Image img = ob.getAnimations().at(anim).getFrames().at(frame);
-					if(img!=null)
-					{
-						Rect rect = img.getBoundingRect();
-						int adjX = x - ob.getX();
-						int adjY = y - ob.getY();
-
-						if(rect.contains(adjX, adjY))
-						{
-							textualId = ob.getTextualId();
-						}
-					}
-				}
-			}
-		}
-
-		return textualId;
-	}
+	
 
 	@Override
 	public int getImageWidth(Image image) {
@@ -256,31 +200,6 @@ implements ImageAddAPI
 		// TODO Auto-generated method stub
 		
 	}
-
-
-
-
-	@Override
-	public boolean addImageForAnInventoryItem(LoadHandler lh,
-			String textualIdForInventory, int codeForInventory,
-			PackagedImageAPI imageResource) {
-		
-		return false;
-	}
-
-
-
-
-	@Override
-	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix,
-			int x, int y, String textualIdForObject,
-			String textualIdForAnimation, short codeForObject,
-			int codeForAnimation, PackagedImageAPI imageResource) {
-		
-		return false;
-	}
-
-
 
 
 	// this is the one that gets called.
@@ -306,9 +225,17 @@ implements ImageAddAPI
 	@Override
 	public void updateInventory(Inventory inventory) {
 		// this gets visited every startScene
-		
+		triggerPaint();
+
 	}
 
+	@Override
+	public void setSize(int width, int height)
+	{
+		this.width = width;
+		this.height = height;
+		super.setSize(width, height);
+	}
 
 	
 }

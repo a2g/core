@@ -30,10 +30,13 @@ import com.google.gwt.event.shared.EventBus;
 
 
 
+@SuppressWarnings("unused")
 public class CommandLinePresenter 
-        implements ExecuteCommandEventHandlerAPI, SetRolloverEventHandlerAPI {
+implements 
+ExecuteCommandEventHandlerAPI 
+, SetRolloverEventHandlerAPI 
+{
 
-    private SceneAPI callbacks;
     private CommandLineCallbackAPI api;
     private CommandLinePanelAPI view;
     private CommandLine model;

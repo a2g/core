@@ -37,7 +37,6 @@ import javax.swing.JPanel;
 import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
-import com.github.a2g.core.interfaces.ImageAddAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.PackagedImageAPI;
 import com.github.a2g.core.interfaces.ScenePanelAPI;
@@ -56,7 +55,6 @@ import com.google.gwt.event.shared.EventBus;
 public class ScenePanel 
 extends JPanel 
 implements ScenePanelAPI 
-, ImageAddAPI 
 , ImagePanelAPI 
 , ActionListener  
 {
@@ -124,7 +122,7 @@ implements ScenePanelAPI
 
 
 	@Override
-	public void setSize(int width, int height)
+	public void setScenePixelSize(int width, int height)
 	{
 		this.width = width;
 		this.height = height;
@@ -271,30 +269,6 @@ implements ScenePanelAPI
 		// TODO Auto-generated method stub
 		
 	}
-
-
-
-
-	@Override
-	public boolean addImageForAnInventoryItem(LoadHandler lh,
-			String textualIdForInventory, int codeForInventory,
-			PackagedImageAPI imageResource) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-
-
-	@Override
-	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix,
-			int x, int y, String textualIdForObject,
-			String textualIdForAnimation, short codeForObject,
-			int codeForAnimation, PackagedImageAPI imageResource) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 
 
 

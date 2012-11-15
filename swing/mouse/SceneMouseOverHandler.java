@@ -27,6 +27,7 @@ import com.github.a2g.core.swing.panel.ScenePanel;
 import com.github.a2g.core.objectmodel.SceneObject;
 
 
+@SuppressWarnings("unused")
 public class SceneMouseOverHandler implements MouseMotionListener {
     private final EventBus bus;
     private InternalAPI api;
@@ -58,7 +59,7 @@ public class SceneMouseOverHandler implements MouseMotionListener {
     	if(objectId!="")
     	{
     		String textualAnim = api.getSceneGui().getModel().objectCollection().at(objectId).getCurrentAnimation();
-    		Rect r = api.getSceneGui().getModel().objectCollection().at(objectId).getAnimations().at(textualAnim).getFrames().at(0).getBoundingRect();
+    		api.getSceneGui().getModel().objectCollection().at(objectId).getAnimations().at(textualAnim).getFrames().at(0).getBoundingRect();
     		SceneObject ob = api.getSceneGui().getModel().objectCollection().at(objectId);
     		String displayName = "";
     		String textualId = "";

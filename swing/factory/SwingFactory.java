@@ -6,6 +6,7 @@ import com.github.a2g.core.interfaces.CommandLinePanelAPI;
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
 import com.github.a2g.core.interfaces.InventoryPanelAPI;
+import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
 import com.github.a2g.core.interfaces.LoaderPanelAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
 import com.github.a2g.core.interfaces.PopupPanelAPI;
@@ -53,10 +54,6 @@ implements FactoryAPI
 		return new DialogTreePanel();
 	}
 
-	@Override
-	public InventoryPanelAPI createInventoryPanel() {
-		return new InventoryPanel(bus, master);
-	}
 
 	@Override
 	public LoaderPanelAPI createLoaderPanel() {
@@ -107,6 +104,12 @@ implements FactoryAPI
 	void alert(String text)
 	{
 		JOptionPane.showMessageDialog(null, "alert", text,JOptionPane.ERROR_MESSAGE);
+	}
+	@Override
+	public InventoryPanelAPI createInventoryPanel(
+			MouseToInventoryPresenterAPI api) 
+	{
+		return new InventoryPanel(bus, master, api);	
 	}
 	
 }

@@ -52,9 +52,7 @@ implements MasterPanelAPI
     	// create all the host panels, that we want to arrange.
         hostForCommandLineF = new SwingHostingPanel();
         hostForInventoryF = new SwingHostingPanel();
-        hostForInventoryF.setSize(width/2, height/3);
         hostForVerbsF = new SwingHostingPanel();
-        hostForVerbsF.setSize(width/2, height/3);
         hostForSceneF = new SwingHostingPanel();
         hostForDialogTreeF = new SwingHostingPanel();
         hostForLoadingF = new SwingHostingPanel();

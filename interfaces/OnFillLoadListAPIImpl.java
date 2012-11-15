@@ -45,6 +45,11 @@ public class OnFillLoadListAPIImpl
 	{
 		private LoadKickStarter(){};
 	}
+
+	public void setInventoryPixelSize(int x, int y) {
+		this.implementation.setInventoryPixelSize(x, y);
+	
+	}
 }
 
 

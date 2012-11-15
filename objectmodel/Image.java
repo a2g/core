@@ -42,9 +42,9 @@ public abstract class Image {
 		panel.remove(this);
 	}
 
-	public void setTopLeft(Point topLeft) 
+	public void setLeftTop(Point leftTop) 
 	{
-		update(topLeft);
+		update(leftTop);
 	}
 
 	public void setVisible(boolean visible, Point position) 
@@ -61,14 +61,14 @@ public abstract class Image {
 				panel.getImageHeight(this));
 	}
 
-	private void update(Point topLeft) {
+	private void update(Point leftTop) {
 
 		int x = this.offset.getX();
 		int y = this.offset.getY();
 		panel.setThingPosition(
 				this, 
-				x + topLeft.getX(), 
-				y + topLeft.getY()
+				x + leftTop.getX(), 
+				y + leftTop.getY()
 		);
 	}
 

@@ -45,7 +45,7 @@ public class InventoryItem {
         return textualId;
     }
 
-    public void setVisible(boolean visible) {	
+    public void setVisible(boolean visible) {
         this.visible = visible;
         bus.fireEvent(
                 new PropertyChangeEvent(
@@ -68,5 +68,10 @@ public class InventoryItem {
     public String getDisplayName() {
         return this.displayName;
     }
+
+	public int getCode() 
+	{
+		return code;
+	}
 
 }

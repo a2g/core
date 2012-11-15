@@ -243,7 +243,7 @@ public class SceneObject {
         {
         	updateImage();
         }
-        this.currentImage.setTopLeft(new Point(this.left,this.top));
+        this.currentImage.setLeftTop(new Point(this.left,this.top));
     }
 
     public void setBaseMiddleY(double y) { 
@@ -254,7 +254,7 @@ public class SceneObject {
         int isolatedY = abs - this.topOffset;
 
         this.top = isolatedY;
-        this.currentImage.setTopLeft(new Point(this.left,
+        this.currentImage.setLeftTop(new Point(this.left,
                 this.top));
     }
 

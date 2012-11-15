@@ -34,8 +34,9 @@ public class Sentence {
         this.BBB = new SentenceUnit();
     }
 
-    void setVerb(SentenceUnit snc) {
-        this.string = snc.getDisplayName(); 
+    void setVerb(SentenceUnit snc, boolean useTwoObjectForm) 
+    {
+        this.string = useTwoObjectForm? snc.getDisplayNameAfterDivider():snc.getDisplayNameBeforeDivider();
         int i = snc.getCode()/ConstantsForAPI.VERB_MULTIPLIER;;
         this.verbAsNumber = i;
     }
