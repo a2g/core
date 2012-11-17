@@ -21,11 +21,11 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 
 
-public class DialogTreeGoToAction extends BaseDialogTreeAction {
+public class DialogTreeDoBranchAction extends BaseDialogTreeAction {
 
     private int branchId;
 
-    public DialogTreeGoToAction(BaseAction parent, int branchId) {
+    public DialogTreeDoBranchAction(BaseAction parent, int branchId) {
         super(parent, parent.getApi());
         this.setPlace(branchId);
     }

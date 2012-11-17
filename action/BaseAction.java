@@ -16,11 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
-
-
-
-
 import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.action.PlayAnimationAction;
 import com.github.a2g.core.action.PlayAnimationRepeatWhilstVisibleAction;
@@ -41,7 +36,7 @@ import com.github.a2g.core.action.SwapPropertyAction;
 import com.github.a2g.core.action.SwitchToAction;
 import com.github.a2g.core.action.DialogTreeDisplayAction;
 import com.github.a2g.core.action.DialogTreeEndAction;
-import com.github.a2g.core.action.DialogTreeGoToAction;
+import com.github.a2g.core.action.DialogTreeDoBranchAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
@@ -111,8 +106,8 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
         return this.parent;
     }
 
-    public BaseDialogTreeAction gotoBranch(int branchId) {
-        return new DialogTreeGoToAction(this,
+    public BaseDialogTreeAction doDialogBranch(int branchId) {
+        return new DialogTreeDoBranchAction(this,
                 branchId);
     }
 
