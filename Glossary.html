@@ -67,7 +67,7 @@
 <div class="contents">
 <div class="textblock"><h2><a class="anchor" id="game-engine"></a>
 game-engine</h2>
-<p>The game engine part of the project is not very complicated. HTML already `provides images, text manipulation, click mouse handlers. The slow nature of the adventure game also lends itself to the web.</p>
+<p>The game engine part of the project is not very complicated. HTML/js already provides images, text manipulation, mouse handlers. The slow nature of the adventure game also lends itself to the web, making an adventure game one of the easier web games to write.</p>
 <h2><a class="anchor" id="lots-of-static-checking"></a>
 lots-of-static-checking</h2>
 <p>Static checking is a way of picking up errors in <a class="el" href="Glossary.html#game-code">game-code</a>, without needing to run the game. In a2g, this is provided by compiling the *.java files. There are two areas of an adventure <a class="el" href="Glossary.html#game-code">game-code</a> that can benefit greatly from static checking:</p>
@@ -242,7 +242,7 @@ loading-of-scene-files</h2>
 <p>The loading of scene files is not done in a2g but since all the info needed to run a <a class="el" href="QuickLinks.html#Scene">Scene</a> is factored in to a single class, then this class can use a GWT Technology called code splitting to ensure that a particular <a class="el" href="QuickLinks.html#Scene">Scene</a> is only loaded when it is needed.</p>
 <h2><a class="anchor" id="easy-debugging"></a>
 easy-debugging</h2>
-<p>Even javascript programmers agree that it's easier debugging a java desktop application, or applet that it is debugging javascript. <br/>
+<p>Even javascript programmers agree that it's easier debugging a java desktop application, or applet than it is debugging javascript. <br/>
  A2g offers the ability to test in Swing, and so most of your debugging can be done in a java desktop application. <br/>
  GWT's debugging ability is, in fact, very good. Google have done a great job in bringing the convenience of desktop debugging to web development. <br/>
  Testing and debugging a full adventure game on the web does take much longer than on a desktop, since the images take much longer to download from the server, than straight from the local disk. So main development is best done in <a class="el" href="Glossary.html#Swing">Swing</a>. <br/>
@@ -318,7 +318,7 @@ how-to-write-a-swing-host</h2>
   <div id="nav-path" class="navpath">
     <ul>
 
-    <li class="footer">Generated on Sun Nov 18 2012 03:14:51 for a2g.Core by
+    <li class="footer">Generated on Sun Nov 18 2012 11:54:14 for a2g.Core by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>
