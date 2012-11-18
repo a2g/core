@@ -98,12 +98,53 @@ api.addEssential(<span class="keyword">new</span> com.resource.slideshow._01_Sli
 <h2><a class="anchor" id="how-to-implement-onDialogTree"></a>
 ..</h2>
 <h2>onDialogTree</h2>
-</div></div>
+<div class="fragment"><pre class="fragment">        <span class="keyword">public</span> DialogTreeBaseAction onDialogTree(<span class="keywordtype">int</span> place) 
+        {
+                <span class="keywordflow">switch</span> (place) 
+                {
+                <span class="keywordflow">case</span> 1:
+                        <span class="keywordflow">if</span> (getInventoryItem(i.IDOL).isVisible()) 
+                        {
+                                <span class="keywordflow">return</span> 
+                                say(o.BOUNCER, <span class="stringliteral">&quot;The buyer will be waiting for us at the docks in Gibraltar&quot;</span>)
+                                .choice(3, <span class="stringliteral">&quot;Thanks for sorting that out Mitch. So what next for us?&quot;</span>);
+                        } <span class="keywordflow">else</span> {
+                                <span class="keywordflow">return</span> 
+                                say(o.BOUNCER,  <span class="stringliteral">&quot;So what happened to that being a sure thing?&quot;</span>)
+                                .choice(2, <span class="stringliteral">&quot;Sorry Mitch, looks like I can&#39;t pay you this month&quot;</span>);
+                        }
+                <span class="keywordflow">case</span> 2:
+                        <span class="keywordflow">return</span> say(o.BOUNCER,  <span class="stringliteral">&quot;Don&#39;t sweat it. I know you&#39;re good for it&quot;</span>)
+                                .gotoChoice(3);
+                <span class="keywordflow">case</span> 3:
+                        <span class="keywordflow">return</span> say(o.BOUNCER, <span class="stringliteral">&quot;Well, I&#39;m off to Barcelona.&quot;</span>)
+                                        .say(o.BOUNCER, <span class="stringliteral">&quot;I&#39;m going diving for Atlantis again&quot;</span>)
+                                        .say(o.BOUNCER, <span class="stringliteral">&quot;How about you Harry, anything planned?&quot;</span>)
+                                        .choice(4, <span class="stringliteral">&quot;In my home town there&#39;s a wishing well. I&#39;m going to finally get to the bottom of it&quot;</span>)
+                                        .choice(4, <span class="stringliteral">&quot;I&#39;m going to change careers. Instead of a Fortune Hunter, I&#39;m going to be a Fortune Teller&quot;</span>)
+                                        .choice(4, <span class="stringliteral">&quot;I&#39;m going to hit the library. Books are the source of true adventure.&quot;</span>);
+
+                <span class="keywordflow">default</span>:
+                        <span class="keywordflow">return</span> say(o.BOUNCER, <span class="stringliteral">&quot;Well, if you&#39;re hard up..&quot;</span>)
+                                        .say(o.BOUNCER, <span class="stringliteral">&quot;..there&#39;s talk of an expedition.&quot;</span>)
+                                        .say(o.BOUNCER, <span class="stringliteral">&quot;Did you ever hear of a guy called Ratsinger?&quot;</span>)
+                                        .say(o.BOUNCER, <span class="stringliteral">&quot;He was an archaeologist..&quot;</span>)
+                                        .say(o.BOUNCER, <span class="stringliteral">&quot;.. desk tied mostly..&quot;</span>)
+                                        .say(o.BOUNCER, <span class="stringliteral">&quot;..but he occasionally did some field work...&quot;</span>)
+                                        .say(o.BOUNCER, <span class="stringliteral">&quot;..like uncovering the Tomb of Rahnemen&quot;</span>)
+                                        .say(o.BOUNCER, <span class="stringliteral">&quot;Anyway, he&#39;s dead now.&quot;</span>)
+                                        .say(o.BOUNCER, <span class="stringliteral">&quot;He died last month.&quot;</span>)
+                                        .say(o.BOUNCER, <span class="stringliteral">&quot;But I got word that his daughter is hunting around for an expedition party...&quot;</span>)
+                                        .say(o.BOUNCER, <span class="stringliteral">&quot;Or so I heard before we left..&quot;</span>)
+                                        .switchTo(RoomEnum._10_Fire.toString());
+                }
+        }
+</pre></div> </div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
 
-    <li class="footer">Generated on Sun Nov 18 2012 11:54:08 for a2g.Core by
+    <li class="footer">Generated on Sun Nov 18 2012 14:22:48 for a2g.Core by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.5.1 </li>
    </ul>
