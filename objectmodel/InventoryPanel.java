@@ -147,10 +147,5 @@ ImagePanelAPI
 		return ((GWTImage) image).getNativeImage().getWidth();
 	}
 
-	
-	public void setSize(int width, int height)
-	{
-		super.setPixelSize(width, height);
-	}
 
 }

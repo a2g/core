@@ -198,7 +198,7 @@ implements MouseToInventoryPresenterAPI
 		leftArrowRect = new  Rect(0     ,0 ,l, h*2);
 		rightArrowRect = new Rect(l+2*w ,0 ,r, h*2);
 	
-		view.setSize(width, height);
+		view.setPixelSize(width, height);
 	}
 
 	InventoryItem getItemForRect(int i)

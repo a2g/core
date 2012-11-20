@@ -45,8 +45,8 @@ extends JPanel implements VerbsPanelAPI
     {
     	this.bus = bus;
     	this.api =  api;
-    	this.setForeground(new Color(0,255,0));
-    	this.setBackground(new Color(0,0,255));
+    	this.setForeground(new Color(0,0,0));
+    	this.setBackground(new Color(255,0,0));
   		
     }
     

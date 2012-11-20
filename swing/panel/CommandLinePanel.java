@@ -15,6 +15,7 @@
  */
 package com.github.a2g.core.swing.panel;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import com.github.a2g.core.interfaces.CommandLinePanelAPI;
@@ -29,6 +30,9 @@ implements CommandLinePanelAPI
     public CommandLinePanel() {
         this.setText("command line panel command line panel");
         this.setSize(320, 20);
+        this.setForeground(new Color(255,0,0));
+        this.setBackground(new Color(0,0,0));
+
     }
     
 

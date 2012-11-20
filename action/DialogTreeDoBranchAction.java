@@ -27,7 +27,7 @@ public class DialogTreeDoBranchAction extends BaseDialogTreeAction {
 
     public DialogTreeDoBranchAction(BaseAction parent, int branchId) {
         super(parent, parent.getApi());
-        this.setPlace(branchId);
+        this.setBranchId(branchId);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class DialogTreeDoBranchAction extends BaseDialogTreeAction {
     @Override
     protected void onCompleteGameAction() {
         getApi().executeBranchOnCurrentScene(
-                getPlace());
+                getBranchId());
     }
 
     @Override
@@ -55,11 +55,11 @@ public class DialogTreeDoBranchAction extends BaseDialogTreeAction {
         return false;
     }
 
-    public void setPlace(int branchId) {
+    public void setBranchId(int branchId) {
         this.branchId = branchId;
     }
 
-    public int getPlace() {
+    public int getBranchId() {
         return branchId;
     }
 

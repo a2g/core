@@ -147,10 +147,6 @@ implements InternalAPI
 		this.cueCardPresenter =  new TitleCardPresenter(
 				masterPanel.getHostForTitleCard(), bus, this, parent);
 
-		int width = scenePresenter.getWidth();
-		int height = scenePresenter.getHeight();
-		this.scenePresenter.setPixelSize(width, height);
-		this.cueCardPresenter.setPixelSize(width, height);
 
 		this.setLoadingActive();
 
@@ -467,8 +463,10 @@ implements InternalAPI
 
 	@Override
 	public void executeBranchOnCurrentScene(int branchId) {
+		this.setDialogTreeActive();
 		NullParentAction npa = new NullParentAction();
 		npa.setApi(this);
+		
 		BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, npa, branchId);
 
 		executeBaseActionAndProcessReturnedInteger(
@@ -583,6 +581,7 @@ implements InternalAPI
 		this.scenePresenter.setPixelSize(width, height);
 		this.cueCardPresenter.setPixelSize(width, height);
 		this.loadingPresenter.setPixelSize(width, height);
+		this.dialogTreePresenter.setPixelSize(width, height>>1);
 		
 	}
 

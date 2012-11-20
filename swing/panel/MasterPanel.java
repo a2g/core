@@ -59,9 +59,7 @@ implements MasterPanelAPI
         hostForTitleCardF = new SwingHostingPanel();
         sceneStack =null;
          
-        hostForCommandLineF.setForeground(new Color(255,0,0));
-        hostForCommandLineF.setBackground(new Color(0,255,0));
-
+    
         // will be constructed from two vertical stacks.
         JPanel stackForDialogTreeInvAndCommandF = new JPanel();
 
@@ -115,7 +113,6 @@ implements MasterPanelAPI
 		return hostForCommandLineF;
 	}
 
-
 	@Override
 	public HostingPanelAPI getHostForInventory() {
 		return hostForInventoryF;
@@ -127,12 +124,10 @@ implements MasterPanelAPI
 		return hostForVerbsF;
 	}
 
-
 	@Override
 	public HostingPanelAPI getHostForScene() {
 		return hostForSceneF;
 	}
-
 
 	@Override
 	public HostingPanelAPI getHostForDialogTree() {
@@ -144,25 +139,8 @@ implements MasterPanelAPI
 		return hostForLoadingF;
 	}
 	
-	public void setDialogTreeActive()
-	{
-		hostForDialogTreeF.setVisible(true);
-		hostForLoadingF.setVisible(false);
-	}
-	
-	public void setLoadingActive()
-	{
-		sceneStack.show(panelForSceneStack, MasterPanel.LOADING_WIDGET);
-	}
-	
-	public void setSceneActive()
-	{
-		sceneStack.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
-	}
-
 	@Override
-	public HostingPanelAPI getHostForTitleCard()
-	{
+	public HostingPanelAPI getHostForTitleCard(){
 		return this.hostForTitleCardF;
 	}
 	

@@ -34,7 +34,7 @@ public interface InventoryPanelAPI
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int i, int j);
 
-	void setSize(int width, int height);
+	void setPixelSize(int width, int height);
 
 
 }

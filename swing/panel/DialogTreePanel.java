@@ -17,6 +17,8 @@
 package com.github.a2g.core.swing.panel;
 
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
@@ -34,33 +36,48 @@ public class DialogTreePanel
 extends JPanel 
 implements DialogTreePanelAPI
 {
-
-	java.awt.GridLayout gridLayout;
-    public DialogTreePanel() {
+	private int width;
+	private int height;
+	public DialogTreePanel() {
+		GridLayout grid = new GridLayout();
+    	this.setLayout(grid);
+    	grid.setRows(4);
+    	grid.setColumns(1); 
+    	
     	this.add(new Label("DialogTreePanel"));
-    	gridLayout = new GridLayout();
-    	gridLayout.setColumns(4);
-    	gridLayout.setRows(1);
-    	setLayout(gridLayout);
-    
+	   	this.setBackground(new Color(255,255,0));
+    	this.setForeground(new Color(0,0,255));
     }
 
     @Override
+	public Dimension getPreferredSize()
+    {
+    	return new Dimension(width,height);
+    }
+    
+    @Override
+	public void setPixelSize(int width,int height)
+    {
+    	this.width = width;
+    	this.height = height;
+    	super.setSize(width, height);
+    }
+    
+    @Override
 	public void update(DialogTree dialogTree, final EventBus bus) {
         // destroy old
-    	gridLayout = new GridLayout();
-    	setLayout(gridLayout);
-    	gridLayout.setColumns(4);
-    	gridLayout.setRows(1);
+    	//gridLayout = new GridLayout();
+    	//setLayout(gridLayout);
+    	//gridLayout.setColumns(4);
+    	//gridLayout.setRows(1);
     
         for (int i = 0; i < dialogTree.getSubBranchIds().size(); i++) 
         {
             int subBranchId = dialogTree.getSubBranchIds().get(i).intValue();
-            String lineOfDialog = dialogTree.getLinesOfDialog().get(
-                    i);
+            String lineOfDialog = dialogTree.getLinesOfDialog().get(i);
             
             Label label =  new java.awt.Label(lineOfDialog);
-            gridLayout.addLayoutComponent("item"+i, label);
+            this.add(label);
 
             
             label.addMouseListener(

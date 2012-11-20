@@ -30,7 +30,6 @@ public class DialogTreePanel
 extends Grid 
 implements DialogTreePanelAPI
 {
-
     public DialogTreePanel() {
         super(4, 1);
         for (int i = 0; i < getRowCount(); i++) {
@@ -69,4 +68,10 @@ implements DialogTreePanelAPI
 
         }	
     }
+
+	@Override
+	public void setPixelSize(int width, int height) 
+	{
+	
+	}
 }

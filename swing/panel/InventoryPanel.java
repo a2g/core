@@ -80,8 +80,8 @@ implements ImagePanelAPI
 		this.setDoubleBuffered(true);
 		tally++;
 		
-    	this.setBackground(new Color(0,255,0));
-    	this.setForeground(new Color(0,0,255));
+    	this.setBackground(new Color(0,0,0));
+    	this.setForeground(new Color(255,255,0));
 		
 		super.addMouseListener
 		(
@@ -230,7 +230,7 @@ implements ImagePanelAPI
 	}
 
 	@Override
-	public void setSize(int width, int height)
+	public void setPixelSize(int width, int height)
 	{
 		this.width = width;
 		this.height = height;

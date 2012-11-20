@@ -79,4 +79,8 @@ public class DialogTreePresenter {
         return this.dialogTreeTalker;
     }
 
+	public void setPixelSize(int width, int height) {
+		view.setPixelSize(width,height);
+	}
+
 }

@@ -25,4 +25,6 @@ public interface DialogTreePanelAPI
 	void setVisible(boolean isInDialogTreeMode);
 
 	void update(DialogTree theDialogTree, EventBus bus);
+
+	void setPixelSize(int width, int height);
 }
