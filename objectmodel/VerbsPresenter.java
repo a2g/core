@@ -37,11 +37,6 @@ public class VerbsPresenter
         this.view.setVerbs(theVerbs);
     }
 
-    public void setVisible(boolean isVisible) 
-    {
-        view.setVisible(isVisible);
-    }
-
 	public void clear() 
 	{
 		// doesn't change.
@@ -51,6 +46,10 @@ public class VerbsPresenter
 	public Verbs getVerbsModel()
 	{
 		return theVerbs;
+	}
+
+	public VerbsPanelAPI getView() {
+		return view;
 	}
 	
 }

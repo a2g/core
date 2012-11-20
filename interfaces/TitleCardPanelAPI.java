@@ -25,4 +25,6 @@ public interface TitleCardPanelAPI
 	void setColor(ColorEnum color);
 
 	void setScenePixelSize(int width, int height);
+
+	void setVisible(boolean b);
 }

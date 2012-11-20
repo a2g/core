@@ -32,4 +32,14 @@ public interface MasterPanelAPI
 	HostingPanelAPI getHostForVerbs();
 
 	HostingPanelAPI getHostForScene();
+
+	void setDialogTreeActive(boolean isInDialogTreeMode);
+
+	void setLoadingActive();
+
+	void setPlaySceneActive();
+
+	void setCutSceneActive();
+
+	void setTitleCardActive();
 }

@@ -157,5 +157,9 @@ ExecuteCommandEventHandlerAPI
         }
 
     }
+
+	public CommandLinePanelAPI getView() {
+		return view;
+	}
     
 }

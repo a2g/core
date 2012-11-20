@@ -127,5 +127,35 @@ implements MasterPanelAPI
 	public HostingPanelAPI getHostForTitleCard() {
 		return hostForTitleCard;
 	}
+
+	@Override
+	public void setDialogTreeActive(boolean isInDialogTreeMode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setLoadingActive() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setPlaySceneActive() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setCutSceneActive() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTitleCardActive() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }	

@@ -39,16 +39,22 @@ implements DialogTreePanelAPI
 	private int width;
 	private int height;
 	public DialogTreePanel() {
-		GridLayout grid = new GridLayout();
-    	this.setLayout(grid);
-    	grid.setRows(4);
-    	grid.setColumns(1); 
+		//GridLayout grid = new GridLayout();
+    	//this.setLayout(grid);
+    	//grid.setRows(4);
+    	//grid.setColumns(1); 
     	
-    	this.add(new Label("DialogTreePanel"));
+    	this.add(new Label("Dialog Tree Panel"));
 	   	this.setBackground(new Color(255,255,0));
     	this.setForeground(new Color(0,0,255));
     }
 
+	 @Override
+	 public void setVisible(boolean isVisible)
+	 {
+		 super.setVisible(isVisible);
+	 }
+	 
     @Override
 	public Dimension getPreferredSize()
     {
@@ -66,10 +72,10 @@ implements DialogTreePanelAPI
     @Override
 	public void update(DialogTree dialogTree, final EventBus bus) {
         // destroy old
-    	//gridLayout = new GridLayout();
-    	//setLayout(gridLayout);
-    	//gridLayout.setColumns(4);
-    	//gridLayout.setRows(1);
+    	GridLayout gridLayout = new GridLayout();
+    	setLayout(gridLayout);
+    	gridLayout.setColumns(1);
+    	gridLayout.setRows(4);
     
         for (int i = 0; i < dialogTree.getSubBranchIds().size(); i++) 
         {
@@ -90,6 +96,7 @@ implements DialogTreePanelAPI
                             bus, label, subBranchId));
 
         }	
+    
     }
 
 

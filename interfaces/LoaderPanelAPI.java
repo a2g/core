@@ -22,4 +22,6 @@ public interface LoaderPanelAPI
 	void setScenePixelSize(int width, int height);
 
 	void update(int current, int total, String name);
+
+	void setVisible(boolean b);
 }

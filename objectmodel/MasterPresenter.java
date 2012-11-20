@@ -80,7 +80,7 @@ implements InternalAPI
 	private ScenePresenter scenePresenter;
 	private DialogTreePresenter dialogTreePresenter;
 	private LoaderPresenter loadingPresenter;
-	private TitleCardPresenter cueCardPresenter;
+	private TitleCardPresenter titleCardPresenter;
 
 	private SceneAPI callbacks;
 	private TreeMap<Short, SceneObject> theObjectMap;
@@ -144,7 +144,7 @@ implements InternalAPI
 				masterPanel.getHostForVerbs(), bus, parent, this);
 		this.loadingPresenter =  new LoaderPresenter(
 				masterPanel.getHostForLoading(), bus, this, this, parent);
-		this.cueCardPresenter =  new TitleCardPresenter(
+		this.titleCardPresenter =  new TitleCardPresenter(
 				masterPanel.getHostForTitleCard(), bus, this, parent);
 
 
@@ -271,7 +271,9 @@ implements InternalAPI
 		}
 	}
 	
-	public void onEnterScene() {
+	public void onEnterScene() 
+	{
+		setPlaySceneActive();
 		NullParentAction npa = new NullParentAction();
 		npa.setApi(this);
 		BaseAction a = this.callbacks.onEntry(this,npa);
@@ -345,8 +347,7 @@ implements InternalAPI
 		prepareSceneForFocus();
 		showEverything();
 		loadInventoryFromAPI();
-		this.dialogTreePresenter.setInDialogTreeMode(
-				false);
+		setDialogTreeActive(false);
 		startEveryFrameCallbacks();
 		onEnterScene();
 	}
@@ -463,7 +464,7 @@ implements InternalAPI
 
 	@Override
 	public void executeBranchOnCurrentScene(int branchId) {
-		this.setDialogTreeActive();
+		this.setDialogTreeActive(true);
 		NullParentAction npa = new NullParentAction();
 		npa.setApi(this);
 		
@@ -520,7 +521,7 @@ implements InternalAPI
 	@Override
 	public void startScene()
 	{
-		setSceneActive();
+		setCutSceneActive();
 		showEverythingThenEnterScene();
 	}
 
@@ -579,7 +580,7 @@ implements InternalAPI
 	@Override
 	public void setScenePixelSize(int width, int height) {
 		this.scenePresenter.setPixelSize(width, height);
-		this.cueCardPresenter.setPixelSize(width, height);
+		this.titleCardPresenter.setPixelSize(width, height);
 		this.loadingPresenter.setPixelSize(width, height);
 		this.dialogTreePresenter.setPixelSize(width, height>>1);
 		
@@ -684,48 +685,41 @@ implements InternalAPI
 		if(text.length()>0)
 		{
 			
-			cueCardPresenter.setText(text);
-			cueCardPresenter.setColor(color);
-			this.setCueCardActive();
+			titleCardPresenter.setText(text);
+			titleCardPresenter.setColor(color);
+			this.setTitleCardActive();
 		}
 		else
 		{
-			this.setSceneActive();
+			this.setCutSceneActive();
 		}
 	}
 	
-	public void setDialogTreeActive()
-	{
-		masterPanel.getHostForScene().setVisible(false);
-		masterPanel.getHostForDialogTree().setVisible(true);
-		masterPanel.getHostForLoading().setVisible(false);
-		masterPanel.getHostForTitleCard().setVisible(false);
+	public void setDialogTreeActive(boolean isInDialogTreeMode)
+	{ 
+		masterPanel.setDialogTreeActive(isInDialogTreeMode);
+		dialogTreePresenter.setInDialogTreeMode(isInDialogTreeMode);
 	}
 	
 	public void setLoadingActive()
 	{
-		masterPanel.getHostForScene().setVisible(false);
-		masterPanel.getHostForDialogTree().setVisible(false);
-		masterPanel.getHostForLoading().setVisible(true);
-		masterPanel.getHostForTitleCard().setVisible(false);
+		masterPanel.setLoadingActive();
 	}
 	
-	public void setCueCardActive()
+	public void setTitleCardActive()
 	{
-		masterPanel.getHostForScene().setVisible(false);
-		masterPanel.getHostForDialogTree().setVisible(false);
-		masterPanel.getHostForLoading().setVisible(false);
-		masterPanel.getHostForTitleCard().setVisible(true);
+		masterPanel.setTitleCardActive();
 	}
 	
 	
-	public void setSceneActive()
+	public void setCutSceneActive()
 	{
-		masterPanel.getHostForScene().setVisible(true);
-		masterPanel.getHostForDialogTree().setVisible(false);
-		masterPanel.getHostForLoading().setVisible(false);
-		masterPanel.getHostForTitleCard().setVisible(false);
-		
+		masterPanel.setCutSceneActive();
+	}
+	
+	public void setPlaySceneActive()
+	{
+		masterPanel.setPlaySceneActive();
 	}
 
 	@Override

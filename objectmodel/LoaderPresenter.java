@@ -78,4 +78,9 @@ public class LoaderPresenter
 		return loaders;
 	}
 	
+	public LoaderPanelAPI getView() {
+		return view;
+	}
+	
+	
 }

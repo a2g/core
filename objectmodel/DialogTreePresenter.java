@@ -52,12 +52,7 @@ public class DialogTreePresenter {
     public void setInDialogTreeMode(boolean isInDialogTree) {
         this.isInDialogTreeMode = isInDialogTree;
         view.setVisible(isInDialogTreeMode);
-        api.getVerbsGui().setVisible(
-                !isInDialogTreeMode);
-        api.getInventoryGui().setVisible(
-                !isInDialogTreeMode);
-        api.getCommandLineGui().setVisible(
-                !isInDialogTreeMode);
+       
     }
     
     public void addBranch(int subBranchId, String lineOfDialog) {
@@ -82,5 +77,9 @@ public class DialogTreePresenter {
 	public void setPixelSize(int width, int height) {
 		view.setPixelSize(width,height);
 	}
-
+	
+	public DialogTreePanelAPI getView()
+	{
+		return view;
+	}
 }

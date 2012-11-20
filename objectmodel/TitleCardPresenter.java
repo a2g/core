@@ -56,5 +56,10 @@ public class TitleCardPresenter {
 		this.view.setScenePixelSize(width , height);
 
 	}
+	
+	public TitleCardPanelAPI getView()
+	{
+		return view;
+	}
 
 }

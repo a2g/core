@@ -40,13 +40,19 @@ implements MasterPanelAPI
     SwingHostingPanel hostForDialogTreeF;
     SwingHostingPanel hostForLoadingF;
     SwingHostingPanel hostForTitleCardF;
+  
+    
+    static final String LOADING_WIDGET = "LOADING_WIDGET";
+    static final String SCENE_WIDGET = "SCENE_WIDGET";
+    static final String TITLECARD_WIDGET = "TITLECARD_WIDGET";
+    static final String DIALOGTREE_WIDGET = "TITLECARD_WIDGET";
+    static final String COMMANDLINEVERBSINVENTORY_WIDGET = "COMMANDLINEVERBSINVENTORY_WIDGET";
+    
+    CardLayout sceneCardLayout;
+    CardLayout dialogTreeCardLayout;
     JPanel panelForSceneStack;
+    JPanel panelForDialogTreeStack;
     
-    static final String LOADING_WIDGET = "loadingWidget";
-    static final String SCENE_WIDGET = "sceneWidget";
-    static final String CUECARD_WIDGET = "cueCardWidget";
-    
-    CardLayout sceneStack;
     public MasterPanel(int width, int height) {
 
     	// create all the host panels, that we want to arrange.
@@ -57,20 +63,20 @@ implements MasterPanelAPI
         hostForDialogTreeF = new SwingHostingPanel();
         hostForLoadingF = new SwingHostingPanel();
         hostForTitleCardF = new SwingHostingPanel();
-        sceneStack =null;
+        sceneCardLayout =null;
          
     
         // will be constructed from two vertical stacks.
-        JPanel stackForDialogTreeInvAndCommandF = new JPanel();
+        panelForDialogTreeStack = new JPanel();
 
         {
         	// lay the CL/V/I panel and dialog tree - on top of each other
         	JPanel commandLineAndVerbsAndInventoryF = new JPanel();
-        	CardLayout card = new CardLayout();
-        	stackForDialogTreeInvAndCommandF.setLayout(card);
-        	stackForDialogTreeInvAndCommandF.add(commandLineAndVerbsAndInventoryF, "commandLineAndVerbsAndInventory");
-        	stackForDialogTreeInvAndCommandF.add(hostForDialogTreeF, "hostForDialogTree");
-
+        	dialogTreeCardLayout = new CardLayout();
+        	panelForDialogTreeStack.setLayout(dialogTreeCardLayout);
+        	panelForDialogTreeStack.add(hostForDialogTreeF, this.DIALOGTREE_WIDGET);   
+        	panelForDialogTreeStack.add(commandLineAndVerbsAndInventoryF, this.COMMANDLINEVERBSINVENTORY_WIDGET);
+         	
         	{
         		// layout the command line and the panel below it - vertically.
         		JPanel verbsAndInventoryF = new JPanel();
@@ -91,18 +97,18 @@ implements MasterPanelAPI
 
         panelForSceneStack = new JPanel();
         {
-        	sceneStack = new CardLayout();
-        	panelForSceneStack.setLayout(sceneStack);
+        	sceneCardLayout = new CardLayout();
+        	panelForSceneStack.setLayout(sceneCardLayout);
         	panelForSceneStack.add(hostForSceneF, SCENE_WIDGET);
         	panelForSceneStack.add(hostForLoadingF, LOADING_WIDGET);  
-        	panelForSceneStack.add(hostForTitleCardF, CUECARD_WIDGET);  
+        	panelForSceneStack.add(hostForTitleCardF, TITLECARD_WIDGET);  
         }
         
         // layout the scene at the top, and the rest at te bottom.
         GridLayout topToBottom = new GridLayout(2,1);
 		this.setLayout(topToBottom);
         this.add(panelForSceneStack);
-        this.add(stackForDialogTreeInvAndCommandF);
+        this.add(panelForDialogTreeStack);
         
         
         this.setVisible(true);
@@ -144,5 +150,76 @@ implements MasterPanelAPI
 		return this.hostForTitleCardF;
 	}
 	
+	@Override
+	public void setDialogTreeActive(boolean isInDialogTreeMode)
+	{
+		this.hostForCommandLineF.setVisible(!isInDialogTreeMode);
+		this.hostForDialogTreeF.setVisible(isInDialogTreeMode);
+		this.hostForInventoryF.setVisible(!isInDialogTreeMode);
+		this.hostForLoadingF.setVisible(!isInDialogTreeMode);
+		this.hostForSceneF.setVisible(isInDialogTreeMode);
+		this.hostForTitleCardF.setVisible(!isInDialogTreeMode);
+		this.hostForVerbsF.setVisible(!isInDialogTreeMode);
+		sceneCardLayout.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
+		dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.DIALOGTREE_WIDGET);
+	}
+			
+	@Override
+	public void setLoadingActive()
+	{
+		this.hostForCommandLineF.setVisible(false);
+		this.hostForDialogTreeF.setVisible(false);
+		this.hostForInventoryF.setVisible(false);
+		this.hostForLoadingF.setVisible(true);
+		this.hostForSceneF.setVisible(false);
+		this.hostForTitleCardF.setVisible(false);
+		this.hostForVerbsF.setVisible(false);
+		sceneCardLayout.show(panelForSceneStack, MasterPanel.LOADING_WIDGET);
+	}
+	
+	@Override
+	public void setTitleCardActive()
+	{
+		this.hostForCommandLineF.setVisible(false);
+		this.hostForDialogTreeF.setVisible(false);
+		this.hostForInventoryF.setVisible(false);
+		this.hostForLoadingF.setVisible(false);
+		this.hostForSceneF.setVisible(false);
+		this.hostForTitleCardF.setVisible(true);
+		this.hostForVerbsF.setVisible(false);
+		dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
+		
+	}
+	
+	@Override
+	public void setCutSceneActive()
+	{
+		this.hostForCommandLineF.setVisible(false);
+		this.hostForDialogTreeF.setVisible(false);
+		this.hostForInventoryF.setVisible(false);
+		this.hostForLoadingF.setVisible(false);
+		this.hostForSceneF.setVisible(true);
+		this.hostForTitleCardF.setVisible(false);
+		this.hostForVerbsF.setVisible(false);
+		sceneCardLayout.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
+		dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
+		
+	}
+	
+	@Override
+	public void setPlaySceneActive()
+	{
+		this.hostForCommandLineF.setVisible(true);
+		this.hostForDialogTreeF.setVisible(false);
+		this.hostForInventoryF.setVisible(true);
+		this.hostForLoadingF.setVisible(false);
+		this.hostForSceneF.setVisible(true);
+		this.hostForTitleCardF.setVisible(false);
+		this.hostForVerbsF.setVisible(true);
+		sceneCardLayout.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
+		dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
+		
+
+	}
 	
 }	
