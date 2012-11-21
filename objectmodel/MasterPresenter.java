@@ -702,7 +702,6 @@ implements InternalAPI
 	public void setDialogTreeActive(boolean isInDialogTreeMode)
 	{ 
 		masterPanel.setDialogTreeActive(isInDialogTreeMode);
-		dialogTreePresenter.setInDialogTreeMode(isInDialogTreeMode);
 	}
 	
 	public void setLoadingActive()
@@ -741,11 +740,6 @@ implements InternalAPI
 		return parent.getFactory(bus, this);
 	}
 
-	@Override
-	public boolean isInDialogTreeMode() {
-		boolean isInMode = this.getDialogTreeGui().isInDialogTreeMode();
-		return isInMode;
-	}
 
 	@Override
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,

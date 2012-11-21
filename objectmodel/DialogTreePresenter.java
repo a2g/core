@@ -28,7 +28,6 @@ public class DialogTreePresenter {
     private InternalAPI api;
     private DialogTree theDialogTree;
     private DialogTreePanelAPI view;
-    private boolean isInDialogTreeMode;
     private short dialogTreeTalker;
 		
     public DialogTreePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api) {
@@ -40,8 +39,6 @@ public class DialogTreePresenter {
         this.dialogTreeTalker = 0;
         
         this.api = api;
-       
-        this.isInDialogTreeMode = false;
     }
 	  
     public void clear() {
@@ -49,22 +46,13 @@ public class DialogTreePresenter {
         view.update(theDialogTree, bus);
     }
 
-    public void setInDialogTreeMode(boolean isInDialogTree) {
-        this.isInDialogTreeMode = isInDialogTree;
-        view.setVisible(isInDialogTreeMode);
-       
-    }
-    
+
     public void addBranch(int subBranchId, String lineOfDialog) {
-        setInDialogTreeMode(true);
         theDialogTree.addSubBranch(subBranchId, lineOfDialog);
         view.update(theDialogTree, bus);
     }
 
-    public boolean isInDialogTreeMode() {
-        return this.isInDialogTreeMode;
-    }
-	
+
     public void setDialogTreeTalker(short personWhoSpeaksTheChosenDialog) {
         this.dialogTreeTalker = personWhoSpeaksTheChosenDialog;
 

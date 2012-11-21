@@ -21,13 +21,15 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 
 
-public class DialogTreeDoBranchAction extends BaseDialogTreeAction {
+public class DialogTreeBranchAction extends BaseDialogTreeAction {
 
+    private String text;
     private int branchId;
 
-    public DialogTreeDoBranchAction(BaseAction parent, int branchId) {
+    public DialogTreeBranchAction(BaseAction parent, String text, int branchId) {
         super(parent, parent.getApi());
         this.setBranchId(branchId);
+        this.setText(text);
     }
 
     @Override
@@ -36,17 +38,15 @@ public class DialogTreeDoBranchAction extends BaseDialogTreeAction {
     @Override
     public void runGameAction() {
         super.run(1);
-        getApi().getDialogTreeGui().setInDialogTreeMode(
-                true);
     }
 
     @Override
     protected void onUpdateGameAction(double progress) {}
 
     @Override
-    protected void onCompleteGameAction() {
-        getApi().executeBranchOnCurrentScene(
-                getBranchId());
+    protected void onCompleteGameAction() 
+    {
+        getApi().getDialogTreeGui().addBranch( branchId, text);
     }
 
     @Override
@@ -61,6 +61,14 @@ public class DialogTreeDoBranchAction extends BaseDialogTreeAction {
 
     public int getBranchId() {
         return branchId;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getText() {
+        return text;
     }
 
 }

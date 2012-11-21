@@ -40,8 +40,7 @@ public class DialogTreeEndAction extends BaseDialogTreeAction {
 
     @Override
     protected void onCompleteGameAction() {
-        getApi().getDialogTreeGui().setInDialogTreeMode(
-                false);
+    	getApi().setDialogTreeActive(false);
     }
 
     @Override

@@ -161,7 +161,7 @@ implements MasterPanelAPI
 		this.hostForTitleCardF.setVisible(!isInDialogTreeMode);
 		this.hostForVerbsF.setVisible(!isInDialogTreeMode);
 		sceneCardLayout.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
-		dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.DIALOGTREE_WIDGET);
+		dialogTreeCardLayout.show(panelForDialogTreeStack, isInDialogTreeMode? MasterPanel.DIALOGTREE_WIDGET : MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
 	}
 			
 	@Override

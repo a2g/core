@@ -34,9 +34,9 @@ import com.github.a2g.core.action.SetVisibleAction;
 import com.github.a2g.core.action.SleepAction;
 import com.github.a2g.core.action.SwapPropertyAction;
 import com.github.a2g.core.action.SwitchToAction;
-import com.github.a2g.core.action.DialogTreeDisplayAction;
+import com.github.a2g.core.action.DialogTreeBranchAction;
 import com.github.a2g.core.action.DialogTreeEndAction;
-import com.github.a2g.core.action.DialogTreeDoBranchAction;
+import com.github.a2g.core.action.DialogTreeDoDialogBranchAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
@@ -82,7 +82,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
     
 
     public BaseDialogTreeAction branch(int branchId, String text) {
-        return new DialogTreeDisplayAction(this,
+        return new DialogTreeBranchAction(this,
                 text, branchId);
     }
 
@@ -94,7 +94,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
         return new NullParentAction();
     }
 
-    public BaseDialogTreeAction endTalkie() {
+    public BaseDialogTreeAction endDialogTree() {
         return new DialogTreeEndAction(this);
     }
 
@@ -107,7 +107,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
     }
 
     public BaseDialogTreeAction doDialogBranch(int branchId) {
-        return new DialogTreeDoBranchAction(this,
+        return new DialogTreeDoDialogBranchAction(this,
                 branchId);
     }
 

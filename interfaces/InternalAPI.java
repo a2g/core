@@ -82,6 +82,9 @@ extends ImageAddAPI, OnDoCommandAPI {
 	
 	public MasterPresenterHostAPI getMasterHostAPI();
 	public FactoryAPI getFactory();
+
+	public void setDialogTreeActive(boolean isInDialogTreeMode);
+	
  
 }
 

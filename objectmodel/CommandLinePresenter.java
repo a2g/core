@@ -65,9 +65,9 @@ ExecuteCommandEventHandlerAPI
 
     @Override
     public void onSetMouseOver(String displayName, String textualId, int code) {
-        if (api.isInDialogTreeMode()) {
-            return;
-        }
+ //       if (api.isInDialogTreeMode()) {
+   //         return;
+     //   }
         model.setMouseOver(displayName, textualId,
                 code);
 
