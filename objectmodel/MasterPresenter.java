@@ -478,9 +478,13 @@ implements InternalAPI
 	public void saySpeechAndThenExecuteBranchWithBranchId(String speech, int branchId) {
 		this.dialogTreePresenter.clear();
 
-		// this code is dodgey because it doesn't use the current scene to execute..
-		// it uses a dynamically created scene to execute it. This seems ok, if it has the same api pointer.
 		short objId = getDialogTreeGui().getDialogTreeTalker();
+		// This is a bit sneaky:
+		// 1. we construct a BaseAction that sas the speech
+		// 2. we pass this to onDialogTree
+		// 3. where the user appends other actions to it
+		// 4. Then we execute it
+		// Thus it will say the text, and do what the user prescribes.
 		
 		NullParentAction npa = new NullParentAction();
 		npa.setApi(this);
@@ -506,9 +510,9 @@ implements InternalAPI
 	}
 
 	@Override
-	public void onSaySpeechCallBranch(String speech, int branchId) {
-		saySpeechAndThenExecuteBranchWithBranchId(
-				speech, branchId);
+	public void onSaySpeechCallBranch(String speech, int branchId) 
+	{
+		saySpeechAndThenExecuteBranchWithBranchId(speech, branchId);
 	}
 
 	public MasterPanelAPI getMasterPanel() {

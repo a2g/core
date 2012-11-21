@@ -43,23 +43,7 @@ implements DialogTreePanelAPI
     	this.setLayout(grid);
     	grid.setRows(4);
     	grid.setColumns(1); 
-    	Color mouseOut = new Color(255,255,0);
-    	Color mouseOver = new Color(0,255,0);
-    	
-		for(int i=0;i<4;i++)
-		{
-			Label label = new Label("label" + i);
-			label.addMouseListener(
-                    new DialogTreeMouseOverHandler(label, mouseOver)
-                    );
-            label.addMouseListener(
-                    new DialogTreeMouseOutHandler(label, mouseOut)
-                    );
-            label.addMouseListener(
-                    new DialogTreeMouseClickHandler(
-                            bus, label, i));
-            this.add(label);
-		}
+
 	   	this.setBackground(new Color(255,255,0));
     	this.setForeground(new Color(0,0,255));
     }
@@ -87,21 +71,32 @@ implements DialogTreePanelAPI
     @Override
 	public void update(DialogTree dialogTree, final EventBus bus) {
     	// destroy old
+    	this.removeAll();
+    	Color mouseOut = new Color(255,255,0);
+    	Color mouseOver = new Color(0,255,0);
 
-
-    	for (int i = 0; i < 4; i++) 
+    	for (int i = 0; i < dialogTree.getSubBranchIds().size(); i++) 
     	{
-    		String lineOfDialog = "";
-    		if(i<dialogTree.getSubBranchIds().size())
-    		{
-    			int subBranchId = dialogTree.getSubBranchIds().get(i).intValue();
-    			lineOfDialog = dialogTree.getLinesOfDialog().get(i);
-    		}
+    		int subBranchId = dialogTree.getSubBranchIds().get(i).intValue();
+    		String lineOfDialog = dialogTree.getLinesOfDialog().get(i);
+    		
+    		Label label = new Label(lineOfDialog);
+    		label.addMouseListener(
+					new DialogTreeMouseOverHandler(label, mouseOver)
+					);
+			label.addMouseListener(
+					new DialogTreeMouseOutHandler(label, mouseOut)
+					);
 
-			Label a = (Label)getComponent(i);
-			a.setText(lineOfDialog);
-    	}	
+			label.addMouseListener(
+					new DialogTreeMouseClickHandler(
+							bus, label, subBranchId));
+
+    		add(label);
+		}	
     
+    	validate();
+    	repaint();
     }
 
 
