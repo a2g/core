@@ -132,9 +132,13 @@ public class CommandLine {
             return false;
         }
         boolean isObjectOrInv = this.rolledOver.isObjectOrInv();
-        if(lockedInVerb.getDisplayName().contains("AAA") && isObjectOrInv)
+        if(!isObjectOrInv)
+        	return false;
+        
+        boolean isObjectALockedIn = !this.lockedInObject1.getDisplayName().isEmpty();  
+        if(!isObjectALockedIn && !lockedInVerb.getDisplayName().contains("BBB"))
         	return true;
-        if(lockedInVerb.getDisplayName().contains("BBB") && isObjectOrInv) 
+        if(isObjectALockedIn && lockedInVerb.getDisplayName().contains("BBB")) 
         	return true;
         	
         return false;

@@ -64,7 +64,8 @@ ExecuteCommandEventHandlerAPI
     }
 
     @Override
-    public void onSetMouseOver(String displayName, String textualId, int code) {
+    public void onSetMouseOver(String displayName, String textualId, int code) 
+    {
  //       if (api.isInDialogTreeMode()) {
    //         return;
      //   }
@@ -118,14 +119,19 @@ ExecuteCommandEventHandlerAPI
 
 
     private void updateImage() {
-        Sentence sentence = getSentence();
 
-        sentence.setBBB(
-                new SentenceUnit());
-        sentence.setAAA(
-                new SentenceUnit());
+    	// get sentence gets the sentence template filled out
+    	// as much as it can.
+    	Sentence sentence = getSentence();
+
+    	// so we should fill in remaining AAA and BBB with blank
+        sentence.setBBB( new SentenceUnit());
+        sentence.setAAA(new SentenceUnit());
+        
+        // then get the display name
         String displayName = sentence.getDisplayName();
 
+        // ...and display it
         view.setText(displayName+" ");
     }
     

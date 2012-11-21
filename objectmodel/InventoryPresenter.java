@@ -154,7 +154,7 @@ implements MouseToInventoryPresenterAPI
     			{
     				if(image!=null)// null is valid in the case of unit test
     				{
-    					image.setVisible(false, new Point(width,height));
+    					image.setVisible(false, new Point(-width,-height));
     				}
     			}
     			currentSlot++;
@@ -163,7 +163,7 @@ implements MouseToInventoryPresenterAPI
     		{
     			if(image!=null)// null is valid in the case of unit test
 				{
-    				image.setVisible(false, new Point(width,height));
+    				image.setVisible(false, new Point(-width,-height));
 				}
     		}
     	}

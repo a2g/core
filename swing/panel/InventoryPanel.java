@@ -167,6 +167,7 @@ implements ImagePanelAPI
 	@Override
 	public void paint(Graphics g)
 	{
+		g.clearRect(0, 0, width, height);
 		Iterator<Image> iter = listOfAllVisibleImages.iterator();
 		while(iter.hasNext())
 		{

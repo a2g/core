@@ -782,8 +782,10 @@ implements InternalAPI
 	}
 
 	@Override
-	public void onClickInventory() {
-		// TODO Auto-generated method stub
+	public void onClickInventory() 
+	{
+		// a click on the inventory results in negative coords. 
+		commandLinePresenter.onClick(-1, -1);
 		
 	}
 
