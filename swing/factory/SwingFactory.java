@@ -50,8 +50,8 @@ implements FactoryAPI
 	}
 
 	@Override
-	public DialogTreePanelAPI createDialogTreePanel() {
-		return new DialogTreePanel();
+	public DialogTreePanelAPI createDialogTreePanel(EventBus bus) {
+		return new DialogTreePanel(bus);
 	}
 
 

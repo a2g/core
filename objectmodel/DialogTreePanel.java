@@ -30,7 +30,7 @@ public class DialogTreePanel
 extends Grid 
 implements DialogTreePanelAPI
 {
-    public DialogTreePanel() {
+    public DialogTreePanel(EventBus bus) {
         super(4, 1);
         for (int i = 0; i < getRowCount(); i++) {
             Label widget = new Label("");

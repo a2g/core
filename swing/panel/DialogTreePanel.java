@@ -38,13 +38,28 @@ implements DialogTreePanelAPI
 {
 	private int width;
 	private int height;
-	public DialogTreePanel() {
-		//GridLayout grid = new GridLayout();
-    	//this.setLayout(grid);
-    	//grid.setRows(4);
-    	//grid.setColumns(1); 
+	public DialogTreePanel(EventBus bus) {
+		GridLayout grid = new GridLayout();
+    	this.setLayout(grid);
+    	grid.setRows(4);
+    	grid.setColumns(1); 
+    	Color mouseOut = new Color(255,255,0);
+    	Color mouseOver = new Color(0,255,0);
     	
-    	this.add(new Label("Dialog Tree Panel"));
+		for(int i=0;i<4;i++)
+		{
+			Label label = new Label("label" + i);
+			label.addMouseListener(
+                    new DialogTreeMouseOverHandler(label, mouseOver)
+                    );
+            label.addMouseListener(
+                    new DialogTreeMouseOutHandler(label, mouseOut)
+                    );
+            label.addMouseListener(
+                    new DialogTreeMouseClickHandler(
+                            bus, label, i));
+            this.add(label);
+		}
 	   	this.setBackground(new Color(255,255,0));
     	this.setForeground(new Color(0,0,255));
     }
@@ -71,31 +86,21 @@ implements DialogTreePanelAPI
     
     @Override
 	public void update(DialogTree dialogTree, final EventBus bus) {
-        // destroy old
-    	GridLayout gridLayout = new GridLayout();
-    	setLayout(gridLayout);
-    	gridLayout.setColumns(1);
-    	gridLayout.setRows(4);
-    
-        for (int i = 0; i < dialogTree.getSubBranchIds().size(); i++) 
-        {
-            int subBranchId = dialogTree.getSubBranchIds().get(i).intValue();
-            String lineOfDialog = dialogTree.getLinesOfDialog().get(i);
-            
-            Label label =  new java.awt.Label(lineOfDialog);
-            this.add(label);
+    	// destroy old
 
-            
-            label.addMouseListener(
-                    new DialogTreeMouseOverHandler(label));
-            label.addMouseListener(
-                    new DialogTreeMouseOutHandler(
-                            label));
-            label.addMouseListener(
-                    new DialogTreeMouseClickHandler(
-                            bus, label, subBranchId));
 
-        }	
+    	for (int i = 0; i < 4; i++) 
+    	{
+    		String lineOfDialog = "";
+    		if(i<dialogTree.getSubBranchIds().size())
+    		{
+    			int subBranchId = dialogTree.getSubBranchIds().get(i).intValue();
+    			lineOfDialog = dialogTree.getLinesOfDialog().get(i);
+    		}
+
+			Label a = (Label)getComponent(i);
+			a.setText(lineOfDialog);
+    	}	
     
     }
 
