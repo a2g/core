@@ -20,6 +20,7 @@ package com.github.a2g.core.event;
 import com.google.gwt.event.shared.EventHandler;
 
 public interface SetRolloverEventHandlerAPI extends EventHandler {
-    void onSetMouseOver(String displayName, String textualId, int code);
+	void onSetMouseOver(String displayName, String textualId, int code,
+			double x, double y);
   
 }

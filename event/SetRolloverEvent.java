@@ -55,6 +55,6 @@ public class SetRolloverEvent extends GwtEvent<SetRolloverEventHandlerAPI> {
     @Override
     protected void dispatch(SetRolloverEventHandlerAPI handler) {
         handler.onSetMouseOver(displayName,
-                textualId, code);
+                textualId, code,-1,-1);
     }
 }

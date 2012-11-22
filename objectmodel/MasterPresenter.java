@@ -794,7 +794,7 @@ implements InternalAPI
 	public void onMouseOverInventory
 	(String displayName, String textualId, int code) 
 	{
-		getCommandLineGui().onSetMouseOver(displayName, textualId, code);
+		getCommandLineGui().onSetMouseOver(displayName, textualId, code,-1,-1);
 		bus.fireEvent(
 				new SetRolloverEvent(
 						displayName,

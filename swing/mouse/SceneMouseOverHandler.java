@@ -52,10 +52,11 @@ public class SceneMouseOverHandler implements MouseMotionListener {
 
 
     @Override
-    public void mouseMoved(MouseEvent event) {
-    	int x = event.getX();
-    	int y  = event.getY();
-    	String objectId = scenePanel.getObjectUnderMouse(x,y);
+    public void mouseMoved(MouseEvent event) 
+    {
+    	double x = event.getX()/(double)scenePanel.getWidth();
+    	double y  = event.getY()/(double)scenePanel.getHeight();
+    	String objectId = scenePanel.getObjectUnderMouse(event.getX(),event.getY());
     	if(objectId!="")
     	{
     		String textualAnim = api.getSceneGui().getModel().objectCollection().at(objectId).getCurrentAnimation();
@@ -70,7 +71,7 @@ public class SceneMouseOverHandler implements MouseMotionListener {
     			textualId = ob.getTextualId(); 
     			code = ob.getCode(); 
     		}
-    		api.getCommandLineGui().onSetMouseOver(displayName, textualId, code);
+    		api.getCommandLineGui().onSetMouseOver(displayName, textualId, code, x, y);
     		bus.fireEvent(
     				new SetRolloverEvent(
     						displayName,

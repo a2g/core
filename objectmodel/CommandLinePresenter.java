@@ -40,6 +40,8 @@ ExecuteCommandEventHandlerAPI
     private CommandLineCallbackAPI api;
     private CommandLinePanelAPI view;
     private CommandLine model;
+	private double debugX;
+	private double debugY;
     
     public CommandLinePresenter(final HostingPanelAPI panel, EventBus bus, CommandLineCallbackAPI api) {
         this.model = new CommandLine(api);
@@ -64,12 +66,18 @@ ExecuteCommandEventHandlerAPI
     }
 
     @Override
-    public void onSetMouseOver(String displayName, String textualId, int code) 
+    public void onSetMouseOver(String displayName, String textualId, int code, double x, double y) 
     {
  //       if (api.isInDialogTreeMode()) {
    //         return;
      //   }
-        model.setMouseOver(displayName, textualId,
+    	
+    	if(x!=-1)
+    	{
+    		this.debugX = (double)(int)(x*100);
+    		this.debugY = (double)(int)(y*100);
+    	}
+    		model.setMouseOver(displayName, textualId,
                 code);
 
         updateImage();
@@ -132,7 +140,7 @@ ExecuteCommandEventHandlerAPI
         String displayName = sentence.getDisplayName();
 
         // ...and display it
-        view.setText(displayName+" ");
+        view.setText("("+debugX+","+debugY + displayName);
     }
     
     private  Sentence getSentence() {
