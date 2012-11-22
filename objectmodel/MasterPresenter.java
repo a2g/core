@@ -699,6 +699,7 @@ implements InternalAPI
 		}
 	}
 	
+	@Override
 	public void setDialogTreeActive(boolean isInDialogTreeMode)
 	{ 
 		masterPanel.setDialogTreeActive(isInDialogTreeMode);

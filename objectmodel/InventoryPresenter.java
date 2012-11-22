@@ -207,6 +207,7 @@ implements MouseToInventoryPresenterAPI
 		return item;
 	}
 	
+	@Override
 	public void setMouseOver(double d, double e) 
 	{
 		mousePosX = (int)(d*width);
@@ -227,6 +228,7 @@ implements MouseToInventoryPresenterAPI
 		api.onMouseOverInventory("", "", 0);
 	}
 
+	@Override
 	public void doClick() 
 	{
 		if(this.leftArrowRect.contains(mousePosX, mousePosY))

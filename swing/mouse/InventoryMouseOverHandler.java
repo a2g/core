@@ -47,8 +47,8 @@ public class InventoryMouseOverHandler implements MouseMotionListener
     	Dimension size = inventoryPanel.getSize();
     	double x = event.getX();
     	double y = event.getY();
-    	x/=(double)size.width;
-    	y/=(double)size.height;
+    	x/=size.width;
+    	y/=size.height;
     	api.setMouseOver(x,y);
     }
 

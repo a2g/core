@@ -17,7 +17,6 @@
 package com.github.a2g.core.swing.panel;
 
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
@@ -74,8 +73,8 @@ implements MasterPanelAPI
         	JPanel commandLineAndVerbsAndInventoryF = new JPanel();
         	dialogTreeCardLayout = new CardLayout();
         	panelForDialogTreeStack.setLayout(dialogTreeCardLayout);
-        	panelForDialogTreeStack.add(hostForDialogTreeF, this.DIALOGTREE_WIDGET);   
-        	panelForDialogTreeStack.add(commandLineAndVerbsAndInventoryF, this.COMMANDLINEVERBSINVENTORY_WIDGET);
+        	panelForDialogTreeStack.add(hostForDialogTreeF, MasterPanel.DIALOGTREE_WIDGET);   
+        	panelForDialogTreeStack.add(commandLineAndVerbsAndInventoryF, MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
          	
         	{
         		// layout the command line and the panel below it - vertically.
