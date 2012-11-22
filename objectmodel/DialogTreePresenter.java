@@ -25,20 +25,17 @@ import com.google.gwt.event.shared.EventBus;
 
 public class DialogTreePresenter {
     private EventBus bus;
-    private InternalAPI api;
     private DialogTree theDialogTree;
     private DialogTreePanelAPI view;
     private short dialogTreeTalker;
 		
     public DialogTreePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api) {
         this.bus = bus;
-        this.api = api;
         this.theDialogTree = new DialogTree();
         this.view = api.getFactory().createDialogTreePanel(bus);
         panel.setThing(view);
         this.dialogTreeTalker = 0;
         
-        this.api = api;
     }
 	  
     public void clear() {

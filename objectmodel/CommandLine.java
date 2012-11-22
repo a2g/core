@@ -25,7 +25,7 @@ public class CommandLine {
     private SentenceUnit defaultVerb;
     private SentenceUnit lockedInVerb;
     private SentenceUnit lockedInObject1;
-    private SentenceUnit lockedInObject2;
+   // private SentenceUnit lockedInObject2;
     private SentenceUnit rolledOver;
     private String typeOfRollover;
 
@@ -37,7 +37,7 @@ public class CommandLine {
         		"Walk", CodesForVerbs.getCodeForVerb(0));
         this.lockedInVerb = defaultVerb;
         this.lockedInObject1 = new SentenceUnit();
-        this.lockedInObject2 = new SentenceUnit();
+       // this.lockedInObject2 = new SentenceUnit();
         this.rolledOver = new SentenceUnit();
         this.typeOfRollover = "";
         this.isMouseable = true;
@@ -105,7 +105,7 @@ public class CommandLine {
     
     public void clear() {
         this.lockedInObject1 = new SentenceUnit();
-        this.lockedInObject2 = new SentenceUnit();
+        //this.lockedInObject2 = new SentenceUnit();
         this.lockedInVerb = defaultVerb;
         this.rolledOver = new SentenceUnit();
         this.typeOfRollover = "";
@@ -117,7 +117,7 @@ public class CommandLine {
             this.rolledOver = new SentenceUnit();
             this.typeOfRollover = "";
         } else if (this.typeOfRollover == "B") {
-            this.lockedInObject2 = this.rolledOver;
+           // this.lockedInObject2 = this.rolledOver;
             this.rolledOver = new SentenceUnit();
             this.typeOfRollover = "";
         } else if (this.typeOfRollover == "V") {
