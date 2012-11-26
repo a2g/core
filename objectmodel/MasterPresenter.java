@@ -271,7 +271,7 @@ implements InternalAPI
 		}
 	}
 	
-	public void onEnterScene() 
+	public void callOnEnterScene() 
 	{
 		setPlaySceneActive();
 		NullParentAction npa = new NullParentAction();
@@ -302,7 +302,7 @@ implements InternalAPI
 	}
 	
 
-	public void showEverything() {
+	public void setInitialAnimationsAsCurrent() {
 		int count = this.scenePresenter.getModel().objectCollection().count();
 		for (int i = 0; i<count; i++) 
 		{
@@ -327,7 +327,7 @@ implements InternalAPI
 
 
 
-	public void prepareSceneForFocus() {
+	public void callOnPreEntry() {
 		this.callbacks.onPreEntry(this);
 	}	
 
@@ -343,13 +343,14 @@ implements InternalAPI
 
 	public void showEverythingThenEnterScene()
 	{
-
-		prepareSceneForFocus();
-		showEverything();
 		loadInventoryFromAPI();
-		setDialogTreeActive(false);
-		startEveryFrameCallbacks();
-		onEnterScene();
+		setInitialAnimationsAsCurrent();
+		// it is reasonable for a person to set current animations in pre-entry
+		// and expect them to stay current, so we set cuurentAnimations before pre-entry.
+		callOnPreEntry();
+		setDialogTreeActive(false);// we do this here in case it was left on in pre-entry
+		startCallingOnEveryFrame();
+		callOnEnterScene();
 	}
 
 	public void loadInventoryFromAPI() {
@@ -416,7 +417,7 @@ implements InternalAPI
 		return true;
 	}
 
-	public void startEveryFrameCallbacks() 
+	public void startCallingOnEveryFrame() 
 	{
 		timer = getFactory().createSystemTimer(this);
 		timer.scheduleRepeating(40);
