@@ -191,7 +191,7 @@ implements MasterPanelAPI
 	}
 	
 	@Override
-	public void setCutSceneActive()
+	public void setSceneActiveForNonInteraction()
 	{
 		this.hostForCommandLineF.setVisible(false);
 		this.hostForDialogTreeF.setVisible(false);
@@ -201,12 +201,12 @@ implements MasterPanelAPI
 		this.hostForTitleCardF.setVisible(false);
 		this.hostForVerbsF.setVisible(false);
 		sceneCardLayout.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
-		dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
+		dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.LOADING_WIDGET);
 		
 	}
 	
 	@Override
-	public void setPlaySceneActive()
+	public void setSceneActiveForInteraction()
 	{
 		this.hostForCommandLineF.setVisible(true);
 		this.hostForDialogTreeF.setVisible(false);

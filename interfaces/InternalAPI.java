@@ -78,7 +78,7 @@ extends ImageAddAPI, OnDoCommandAPI {
 	public int getPopupDelay();
 	public void restartReloading();
 	
-	public void displayCueCard(String text, ColorEnum color);
+	public void displayTitleCard(String text, ColorEnum color);
 	
 	public MasterPresenterHostAPI getMasterHostAPI();
 	public FactoryAPI getFactory();

@@ -21,11 +21,11 @@ import com.github.a2g.core.primitive.ColorEnum;
 
 
 
-public class CueCardAction extends BaseAction {
+public class TitleCardAction extends BaseAction {
 	String text;
 	ColorEnum color;
 
-	public CueCardAction(BaseAction parent, String text, ColorEnum color) {
+	public TitleCardAction(BaseAction parent, String text, ColorEnum color) {
 		super(parent, parent.getApi());
 		this.text = text;
 		this.color = color;
@@ -36,7 +36,7 @@ public class CueCardAction extends BaseAction {
 
 		int totalDuration = getApi().getPopupDelay()*50;
 		
-		getApi().displayCueCard(text, color);
+		getApi().displayTitleCard(text, color);
 		this.run(totalDuration);
 	}
 
@@ -47,7 +47,7 @@ public class CueCardAction extends BaseAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		getApi().displayCueCard("", color);	
+		getApi().displayTitleCard("", color);	
 	}
 
 	@Override

@@ -37,9 +37,9 @@ public interface MasterPanelAPI
 
 	void setLoadingActive();
 
-	void setPlaySceneActive();
+	void setSceneActiveForInteraction();
 
-	void setCutSceneActive();
+	void setSceneActiveForNonInteraction();
 
 	void setTitleCardActive();
 }

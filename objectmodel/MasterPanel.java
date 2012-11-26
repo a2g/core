@@ -141,13 +141,13 @@ implements MasterPanelAPI
 	}
 
 	@Override
-	public void setPlaySceneActive() {
+	public void setSceneActiveForInteraction() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void setCutSceneActive() {
+	public void setSceneActiveForNonInteraction() {
 		// TODO Auto-generated method stub
 		
 	}

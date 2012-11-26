@@ -271,15 +271,7 @@ implements InternalAPI
 		}
 	}
 	
-	public void callOnEnterScene() 
-	{
-		setPlaySceneActive();
-		NullParentAction npa = new NullParentAction();
-		npa.setApi(this);
-		BaseAction a = this.callbacks.onEntry(this,npa);
-
-		executeBaseActionAndProcessReturnedInteger(a);
-	}
+	
 
 	@Override
 	public void executeBaseActionAndProcessReturnedInteger(BaseAction a) {
@@ -341,17 +333,7 @@ implements InternalAPI
 
 
 
-	public void showEverythingThenEnterScene()
-	{
-		loadInventoryFromAPI();
-		setInitialAnimationsAsCurrent();
-		// it is reasonable for a person to set current animations in pre-entry
-		// and expect them to stay current, so we set cuurentAnimations before pre-entry.
-		callOnPreEntry();
-		setDialogTreeActive(false);// we do this here in case it was left on in pre-entry
-		startCallingOnEveryFrame();
-		callOnEnterScene();
-	}
+
 
 	public void loadInventoryFromAPI() {
 		
@@ -495,6 +477,16 @@ implements InternalAPI
 		executeBaseActionAndProcessReturnedInteger(actionChain);
 	}
 
+	public void callOnEnterScene() 
+	{
+		NullParentAction npa = new NullParentAction();
+		npa.setApi(this);
+		BaseAction a = this.callbacks.onEntry(this,npa);
+		
+		
+		executeBaseActionAndProcessReturnedInteger(a);
+	}
+	
 	@Override
 	public VerbsPresenter getVerbsGui() {
 		return this.verbsPresenter;
@@ -526,8 +518,18 @@ implements InternalAPI
 	@Override
 	public void startScene()
 	{
-		setCutSceneActive();
-		showEverythingThenEnterScene();
+		setLoadingActive();
+		loadInventoryFromAPI();
+		setInitialAnimationsAsCurrent();
+		
+		// it is reasonable for a person to set current animations in pre-entry
+		// and expect them to stay current, so we set cuurentAnimations before pre-entry.
+		
+		callOnPreEntry();
+		setDialogTreeActive(false);// we do this here in case it was left on in pre-entry
+		startCallingOnEveryFrame();
+		setSceneActiveForNonInteraction();// we do this here in case it was left on in pre-entry
+		callOnEnterScene();
 	}
 
 
@@ -685,7 +687,7 @@ implements InternalAPI
 	}
 
 	@Override
-	public void displayCueCard(String text, ColorEnum color) 
+	public void displayTitleCard(String text, ColorEnum color) 
 	{
 		if(text.length()>0)
 		{
@@ -696,7 +698,7 @@ implements InternalAPI
 		}
 		else
 		{
-			this.setCutSceneActive();
+			this.setSceneActiveForNonInteraction();
 		}
 	}
 	
@@ -717,14 +719,14 @@ implements InternalAPI
 	}
 	
 	
-	public void setCutSceneActive()
+	public void setSceneActiveForNonInteraction()
 	{
-		masterPanel.setCutSceneActive();
+		masterPanel.setSceneActiveForNonInteraction();
 	}
 	
-	public void setPlaySceneActive()
+	public void setSceneActiveForInteraction()
 	{
-		masterPanel.setPlaySceneActive();
+		masterPanel.setSceneActiveForInteraction();
 	}
 
 	@Override
@@ -775,6 +777,7 @@ implements InternalAPI
 	{
 		this.commandLinePresenter.clear();
 		this.commandLinePresenter.setMouseable(true);
+		this.setSceneActiveForInteraction();
 	}
 
 	@Override
@@ -811,7 +814,6 @@ implements InternalAPI
 		this.inventoryPresenter.updateInventory();
 		
 	}
-
 
 }
 

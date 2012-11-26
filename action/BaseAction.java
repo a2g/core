@@ -440,7 +440,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
     
     public BaseAction showTitleCard(String text, ColorEnum color)
     {
-    	return new CueCardAction(this, text, color);
+    	return new TitleCardAction(this, text, color);
     }
 
 	public void cancel() {

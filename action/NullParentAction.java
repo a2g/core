@@ -37,7 +37,9 @@ public class NullParentAction extends BaseDialogTreeAction {
     }
 
     @Override
-    protected void onCompleteGameAction() {}
+    protected void onCompleteGameAction()
+    {
+    }
 
     @Override
     protected void onUpdateGameAction(double progress) {}
