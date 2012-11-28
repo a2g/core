@@ -66,7 +66,7 @@ public class ActionRunner implements ActionCallbackAPI
 	protected void processNextListOfParallelActions() {
 		this.parallelActionsToWaitFor.clear();
 		if (!this.list.isEmpty()) {
-			// add next batch of contigous parallel actions
+			// add next batch of contiguous parallel actions
 			while (!this.list.isEmpty()
 					&& this.list.get(0).isParallel()) {
 				BaseAction theAction = this.list.get(

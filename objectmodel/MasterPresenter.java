@@ -777,7 +777,10 @@ implements InternalAPI
 	{
 		this.commandLinePresenter.clear();
 		this.commandLinePresenter.setMouseable(true);
-		this.setSceneActiveForInteraction();
+		if(!masterPanel.isDialogTreeActive())
+		{
+			this.setSceneActiveForInteraction();
+		}
 	}
 
 	@Override

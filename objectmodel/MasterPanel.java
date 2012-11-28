@@ -157,5 +157,11 @@ implements MasterPanelAPI
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean isDialogTreeActive() {
+		
+		return false;
+	}
 	
 }	

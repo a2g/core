@@ -42,4 +42,6 @@ public interface MasterPanelAPI
 	void setSceneActiveForNonInteraction();
 
 	void setTitleCardActive();
+
+	boolean isDialogTreeActive();
 }

@@ -140,7 +140,7 @@ ExecuteCommandEventHandlerAPI
         String displayName = sentence.getDisplayName();
 
         // ...and display it
-        view.setText("("+debugX+","+debugY + displayName);
+        view.setText("("+debugX+","+debugY +")  "+ displayName);
     }
     
     private  Sentence getSentence() {

@@ -39,6 +39,7 @@ implements MasterPanelAPI
     SwingHostingPanel hostForDialogTreeF;
     SwingHostingPanel hostForLoadingF;
     SwingHostingPanel hostForTitleCardF;
+    boolean isDialogTreeModeActive;
   
     
     static final String LOADING_WIDGET = "LOADING_WIDGET";
@@ -53,7 +54,7 @@ implements MasterPanelAPI
     JPanel panelForDialogTreeStack;
     
     public MasterPanel(int width, int height) {
-
+    	isDialogTreeModeActive = false;
     	// create all the host panels, that we want to arrange.
         hostForCommandLineF = new SwingHostingPanel();
         hostForInventoryF = new SwingHostingPanel();
@@ -152,6 +153,7 @@ implements MasterPanelAPI
 	@Override
 	public void setDialogTreeActive(boolean isInDialogTreeMode)
 	{
+		isDialogTreeModeActive = true;
 		this.hostForCommandLineF.setVisible(!isInDialogTreeMode);
 		this.hostForDialogTreeF.setVisible(isInDialogTreeMode);
 		this.hostForInventoryF.setVisible(!isInDialogTreeMode);
@@ -166,6 +168,7 @@ implements MasterPanelAPI
 	@Override
 	public void setLoadingActive()
 	{
+		isDialogTreeModeActive = false;
 		this.hostForCommandLineF.setVisible(false);
 		this.hostForDialogTreeF.setVisible(false);
 		this.hostForInventoryF.setVisible(false);
@@ -179,6 +182,7 @@ implements MasterPanelAPI
 	@Override
 	public void setTitleCardActive()
 	{
+		isDialogTreeModeActive = false;
 		this.hostForCommandLineF.setVisible(false);
 		this.hostForDialogTreeF.setVisible(false);
 		this.hostForInventoryF.setVisible(false);
@@ -193,6 +197,7 @@ implements MasterPanelAPI
 	@Override
 	public void setSceneActiveForNonInteraction()
 	{
+		isDialogTreeModeActive = false;
 		this.hostForCommandLineF.setVisible(false);
 		this.hostForDialogTreeF.setVisible(false);
 		this.hostForInventoryF.setVisible(false);
@@ -208,6 +213,7 @@ implements MasterPanelAPI
 	@Override
 	public void setSceneActiveForInteraction()
 	{
+		isDialogTreeModeActive = false;
 		this.hostForCommandLineF.setVisible(true);
 		this.hostForDialogTreeF.setVisible(false);
 		this.hostForInventoryF.setVisible(true);
@@ -219,6 +225,11 @@ implements MasterPanelAPI
 		dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
 		
 
+	}
+
+	@Override
+	public boolean isDialogTreeActive() {
+		return isDialogTreeModeActive;
 	}
 	
 }	
