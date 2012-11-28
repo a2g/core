@@ -70,7 +70,7 @@ extends ImageAddAPI, OnDoCommandAPI {
 	public String getLastScene();
     @Override
 	public boolean isInDebugMode();
-    public void executeBaseActionAndProcessReturnedInteger(BaseAction a);
+    public void executeBaseAction(BaseAction a);
     public void setLastCommand(double x, double y, int v, String a, String b);
 
     // dialog tree methods

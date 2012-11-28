@@ -274,7 +274,7 @@ implements InternalAPI
 	
 
 	@Override
-	public void executeBaseActionAndProcessReturnedInteger(BaseAction a) {
+	public void executeBaseAction(BaseAction a) {
 		actionRunner.runAction(a);
 	}
 	
@@ -453,7 +453,7 @@ implements InternalAPI
 		
 		BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, npa, branchId);
 
-		executeBaseActionAndProcessReturnedInteger(
+		executeBaseAction(
 				actionChain);
 	}
 
@@ -474,7 +474,7 @@ implements InternalAPI
 		BaseAction say = npa.say(objId, speech);
 		BaseDialogTreeAction actionChain = callbacks.onDialogTree(this, say, branchId);
 
-		executeBaseActionAndProcessReturnedInteger(actionChain);
+		executeBaseAction(actionChain);
 	}
 
 	public void callOnEnterScene() 
@@ -484,7 +484,7 @@ implements InternalAPI
 		BaseAction a = this.callbacks.onEntry(this,npa);
 		
 		
-		executeBaseActionAndProcessReturnedInteger(a);
+		executeBaseAction(a);
 	}
 	
 	@Override
@@ -762,7 +762,7 @@ implements InternalAPI
          {
         	 
         	 commandLinePresenter.setMouseable(false);
-        	 executeBaseActionAndProcessReturnedInteger(a);
+        	 executeBaseAction(a);
          }
          
          setLastCommand(x, y,
