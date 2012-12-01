@@ -93,7 +93,7 @@ ExecuteCommandEventHandlerAPI
             return true;
         }
         
-        System.out.println("ONEXECUTECOMMAND::nextbestthing  " + model.getSentence().getDisplayName());
+        //System.out.println("ONEXECUTECOMMAND::nextbestthing  " + model.getSentence().getDisplayName());
         this.doNextBestThingToExecute();
         
         return false;

@@ -19,11 +19,13 @@ package com.github.a2g.core.swing.panel;
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.Stack;
 
 import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
+import com.github.a2g.core.primitive.GuiStateEnum;
 import com.github.a2g.core.swing.factory.SwingHostingPanel;
 
 
@@ -39,8 +41,6 @@ implements MasterPanelAPI
     SwingHostingPanel hostForDialogTreeF;
     SwingHostingPanel hostForLoadingF;
     SwingHostingPanel hostForTitleCardF;
-    boolean isDialogTreeModeActive;
-  
     
     static final String LOADING_WIDGET = "LOADING_WIDGET";
     static final String SCENE_WIDGET = "SCENE_WIDGET";
@@ -54,7 +54,7 @@ implements MasterPanelAPI
     JPanel panelForDialogTreeStack;
     
     public MasterPanel(int width, int height) {
-    	isDialogTreeModeActive = false;
+        
     	// create all the host panels, that we want to arrange.
         hostForCommandLineF = new SwingHostingPanel();
         hostForInventoryF = new SwingHostingPanel();
@@ -151,85 +151,77 @@ implements MasterPanelAPI
 	}
 	
 	@Override
-	public void setDialogTreeActive(boolean isInDialogTreeMode)
-	{
-		isDialogTreeModeActive = true;
-		this.hostForCommandLineF.setVisible(!isInDialogTreeMode);
-		this.hostForDialogTreeF.setVisible(isInDialogTreeMode);
-		this.hostForInventoryF.setVisible(!isInDialogTreeMode);
-		this.hostForLoadingF.setVisible(!isInDialogTreeMode);
-		this.hostForSceneF.setVisible(isInDialogTreeMode);
-		this.hostForTitleCardF.setVisible(!isInDialogTreeMode);
-		this.hostForVerbsF.setVisible(!isInDialogTreeMode);
-		sceneCardLayout.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
-		dialogTreeCardLayout.show(panelForDialogTreeStack, isInDialogTreeMode? MasterPanel.DIALOGTREE_WIDGET : MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
-	}
-			
-	@Override
-	public void setLoadingActive()
-	{
-		isDialogTreeModeActive = false;
-		this.hostForCommandLineF.setVisible(false);
-		this.hostForDialogTreeF.setVisible(false);
-		this.hostForInventoryF.setVisible(false);
-		this.hostForLoadingF.setVisible(true);
-		this.hostForSceneF.setVisible(false);
-		this.hostForTitleCardF.setVisible(false);
-		this.hostForVerbsF.setVisible(false);
-		sceneCardLayout.show(panelForSceneStack, MasterPanel.LOADING_WIDGET);
-	}
-	
-	@Override
-	public void setTitleCardActive()
-	{
-		isDialogTreeModeActive = false;
-		this.hostForCommandLineF.setVisible(false);
-		this.hostForDialogTreeF.setVisible(false);
-		this.hostForInventoryF.setVisible(false);
-		this.hostForLoadingF.setVisible(false);
-		this.hostForSceneF.setVisible(false);
-		this.hostForTitleCardF.setVisible(true);
-		this.hostForVerbsF.setVisible(false);
-		dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
-		
-	}
-	
-	@Override
-	public void setSceneActiveForNonInteraction()
-	{
-		isDialogTreeModeActive = false;
-		this.hostForCommandLineF.setVisible(false);
-		this.hostForDialogTreeF.setVisible(false);
-		this.hostForInventoryF.setVisible(false);
-		this.hostForLoadingF.setVisible(false);
-		this.hostForSceneF.setVisible(true);
-		this.hostForTitleCardF.setVisible(false);
-		this.hostForVerbsF.setVisible(false);
-		sceneCardLayout.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
-		dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.LOADING_WIDGET);
-		
-	}
-	
-	@Override
-	public void setSceneActiveForInteraction()
-	{
-		isDialogTreeModeActive = false;
-		this.hostForCommandLineF.setVisible(true);
-		this.hostForDialogTreeF.setVisible(false);
-		this.hostForInventoryF.setVisible(true);
-		this.hostForLoadingF.setVisible(false);
-		this.hostForSceneF.setVisible(true);
-		this.hostForTitleCardF.setVisible(false);
-		this.hostForVerbsF.setVisible(true);
-		sceneCardLayout.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
-		dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
-		
+	public void setActiveState(GuiStateEnum state) {
+		if(state == GuiStateEnum.DialogTreeMode)
+		{
+			this.hostForCommandLineF.setVisible(false);
+			this.hostForDialogTreeF.setVisible(true);
+			this.hostForInventoryF.setVisible(false);
+			this.hostForLoadingF.setVisible(false);
+			this.hostForSceneF.setVisible(true);
+			this.hostForTitleCardF.setVisible(false);
+			this.hostForVerbsF.setVisible(false);
+			sceneCardLayout.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
+			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.DIALOGTREE_WIDGET);
 
+		} 
+		else if(state == GuiStateEnum.CutScene)
+		{
+			this.hostForCommandLineF.setVisible(false);
+			this.hostForDialogTreeF.setVisible(false);
+			this.hostForInventoryF.setVisible(false);
+			this.hostForLoadingF.setVisible(false);
+			this.hostForSceneF.setVisible(true);
+			this.hostForTitleCardF.setVisible(false);
+			this.hostForVerbsF.setVisible(false);
+			sceneCardLayout.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
+			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.LOADING_WIDGET);
+		} 
+		else if(state == GuiStateEnum.ActiveScene)
+		{
+			this.hostForCommandLineF.setVisible(true);
+			this.hostForDialogTreeF.setVisible(false);
+			this.hostForInventoryF.setVisible(true);
+			this.hostForLoadingF.setVisible(false);
+			this.hostForSceneF.setVisible(true);
+			this.hostForTitleCardF.setVisible(false);
+			this.hostForVerbsF.setVisible(true);
+			sceneCardLayout.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
+			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
+
+		}
+		else if(state == GuiStateEnum.Loading)
+		{
+			this.hostForCommandLineF.setVisible(false);
+			this.hostForDialogTreeF.setVisible(false);
+			this.hostForInventoryF.setVisible(false);
+			this.hostForLoadingF.setVisible(true);
+			this.hostForSceneF.setVisible(false);
+			this.hostForTitleCardF.setVisible(false);
+			this.hostForVerbsF.setVisible(false);
+			sceneCardLayout.show(panelForSceneStack, MasterPanel.LOADING_WIDGET);
+		}
+		else if(state == GuiStateEnum.TitleCardNoInteraction)
+		{
+			this.hostForCommandLineF.setVisible(false);
+			this.hostForDialogTreeF.setVisible(false);
+			this.hostForInventoryF.setVisible(false);
+			this.hostForLoadingF.setVisible(false);
+			this.hostForSceneF.setVisible(false);
+			this.hostForTitleCardF.setVisible(true);
+			this.hostForVerbsF.setVisible(false);
+			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
+		}
 	}
 
 	@Override
-	public boolean isDialogTreeActive() {
-		return isDialogTreeModeActive;
+	public boolean isDialogTreeActive() 
+	{
+		boolean isActive = this.hostForDialogTreeF.isVisible() == true;
+		return isActive;
 	}
-	
 }	
+
+
+
+

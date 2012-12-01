@@ -15,6 +15,8 @@
  */
 package com.github.a2g.core.interfaces;
 
+import com.github.a2g.core.primitive.GuiStateEnum;
+
 
 public interface MasterPanelAPI
 {
@@ -33,15 +35,7 @@ public interface MasterPanelAPI
 
 	HostingPanelAPI getHostForScene();
 
-	void setDialogTreeActive(boolean isInDialogTreeMode);
-
-	void setLoadingActive();
-
-	void setSceneActiveForInteraction();
-
-	void setSceneActiveForNonInteraction();
-
-	void setTitleCardActive();
-
+	void setActiveState(GuiStateEnum state);
+	
 	boolean isDialogTreeActive();
 }

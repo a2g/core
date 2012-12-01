@@ -24,6 +24,7 @@ import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.GuiStateEnum;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 
 import com.github.a2g.core.event.PropertyChangeEvent;
@@ -148,7 +149,7 @@ implements InternalAPI
 				masterPanel.getHostForTitleCard(), bus, this, parent);
 
 
-		this.setLoadingActive();
+		this.pushState(GuiStateEnum.Loading);
 
 	}
 
@@ -446,15 +447,21 @@ implements InternalAPI
 	}
 
 	@Override
-	public void executeBranchOnCurrentScene(int branchId) {
+	public void executeBranchOnCurrentScene(int branchId) 
+	{	
+		// clear it so any old branches don't show up
+		this.dialogTreePresenter.clear();
+	
+		// make dialogtreepanel active if not already
 		this.setDialogTreeActive(true);
+		
+		// get the chain from the client code
 		NullParentAction npa = new NullParentAction();
 		npa.setApi(this);
-		
 		BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, npa, branchId);
 
-		executeBaseAction(
-				actionChain);
+		// execute it
+		executeBaseAction(	actionChain );
 	}
 
 
@@ -518,7 +525,7 @@ implements InternalAPI
 	@Override
 	public void startScene()
 	{
-		setLoadingActive();
+		pushState(GuiStateEnum.Loading);
 		loadInventoryFromAPI();
 		setInitialAnimationsAsCurrent();
 		
@@ -526,9 +533,7 @@ implements InternalAPI
 		// and expect them to stay current, so we set cuurentAnimations before pre-entry.
 		
 		callOnPreEntry();
-		setDialogTreeActive(false);// we do this here in case it was left on in pre-entry
 		startCallingOnEveryFrame();
-		setSceneActiveForNonInteraction();// we do this here in case it was left on in pre-entry
 		callOnEnterScene();
 	}
 
@@ -564,7 +569,7 @@ implements InternalAPI
 		
 		
 		// set gui to blank
-		setLoadingActive();
+		pushState(GuiStateEnum.Loading);
 		//scenePresenter.clear(); don't clear, all its images are switched off anyhow.
 		loadingPresenter.clear();
 		//commandLinePresenter.clear();
@@ -672,7 +677,7 @@ implements InternalAPI
 					this.theAnimationMap.put(animationCode, destAnimation);
 				}
 
-				System.out.println("new anim " + objTextualId + " " + animTextualId+" = "+animationCode);
+				//System.out.println("new anim " + objTextualId + " " + animTextualId+" = "+animationCode);
 				
 				for(int k=0;k<srcAnimation.getFrames().getCount();k++)
 				{
@@ -694,39 +699,17 @@ implements InternalAPI
 			
 			titleCardPresenter.setText(text);
 			titleCardPresenter.setColor(color);
-			this.setTitleCardActive();
+			pushState(GuiStateEnum.TitleCardNoInteraction);
 		}
 		else
 		{
-			this.setSceneActiveForNonInteraction();
+			pushState(GuiStateEnum.CutScene);
 		}
 	}
 	
-	@Override
-	public void setDialogTreeActive(boolean isInDialogTreeMode)
-	{ 
-		masterPanel.setDialogTreeActive(isInDialogTreeMode);
-	}
-	
-	public void setLoadingActive()
+	public void pushState(GuiStateEnum state)
 	{
-		masterPanel.setLoadingActive();
-	}
-	
-	public void setTitleCardActive()
-	{
-		masterPanel.setTitleCardActive();
-	}
-	
-	
-	public void setSceneActiveForNonInteraction()
-	{
-		masterPanel.setSceneActiveForNonInteraction();
-	}
-	
-	public void setSceneActiveForInteraction()
-	{
-		masterPanel.setSceneActiveForInteraction();
+		masterPanel.setActiveState(state);
 	}
 
 	@Override
@@ -779,7 +762,7 @@ implements InternalAPI
 		this.commandLinePresenter.setMouseable(true);
 		if(!masterPanel.isDialogTreeActive())
 		{
-			this.setSceneActiveForInteraction();
+			this.pushState(GuiStateEnum.ActiveScene);
 		}
 	}
 
@@ -822,6 +805,19 @@ implements InternalAPI
 	public SceneAPI getSceneFromCacheOrNew(String string) 
 	{
 		return this.parent.getSceneFromCacheOrNew(string);	
+	}
+
+	@Override
+	public void setDialogTreeActive(boolean isInDialogTreeMode) 
+	{
+		if(isInDialogTreeMode)
+		{
+			this.pushState(GuiStateEnum.DialogTreeMode);
+		}
+		else
+		{
+			this.pushState(GuiStateEnum.ActiveScene);
+		}
 	}
 
 }

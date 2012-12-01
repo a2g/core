@@ -54,8 +54,10 @@ public class SceneMouseOverHandler implements MouseMotionListener {
     @Override
     public void mouseMoved(MouseEvent event) 
     {
+    	int w = scenePanel.getWidth();
+    	int h = scenePanel.getHeight();
     	double x = event.getX()/(double)scenePanel.getWidth();
-    	double y  = event.getY()/(double)scenePanel.getHeight();
+    	double y  = (event.getY()+2)/(double)scenePanel.getHeight();
     	String objectId = scenePanel.getObjectUnderMouse(event.getX(),event.getY());
     	if(objectId!="")
     	{

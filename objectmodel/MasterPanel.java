@@ -19,6 +19,7 @@ import com.github.a2g.core.gwt.factory.GWTHostingPanel;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
+import com.github.a2g.core.primitive.GuiStateEnum;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -36,6 +37,7 @@ implements MasterPanelAPI
     GWTHostingPanel hostForDialogTree;
     GWTHostingPanel hostForLoading;
     GWTHostingPanel hostForTitleCard;
+    
     
     public MasterPanel(MasterPresenterHostAPI parent) {
 
@@ -129,39 +131,22 @@ implements MasterPanelAPI
 	}
 
 	@Override
-	public void setDialogTreeActive(boolean isInDialogTreeMode) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setLoadingActive() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setSceneActiveForInteraction() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setSceneActiveForNonInteraction() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setTitleCardActive() {
-		// TODO Auto-generated method stub
-		
+	public void setActiveState(GuiStateEnum state) 
+	{
+		switch(state)
+		{
+		case DialogTreeMode: 
+		case CutScene:
+		case ActiveScene:
+		case Loading:
+		}
 	}
 
 	@Override
 	public boolean isDialogTreeActive() {
-		
-		return false;
+		boolean isActive = this.hostForDialogTree.isVisible();
+		return isActive;
 	}
+
 	
 }	

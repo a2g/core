@@ -218,7 +218,7 @@ implements ScenePanelAPI
 
 	public String getObjectUnderMouse(int x, int y) 
 	{
-		System.out.println("----------------");
+		//System.out.println("----------------");
 		String textualId = "";
 		SceneObjectCollection coll = api.getSceneGui().getModel().objectCollection();
 		ArrayList<SceneObject> list = coll.getSortedList();
@@ -227,7 +227,7 @@ implements ScenePanelAPI
 			SceneObject ob = list.get(i);
 			if(ob.isVisible())
 			{
-				System.out.println(ob.getTextualId() + ob.getNumberPrefix());
+				//System.out.println(ob.getTextualId() + ob.getNumberPrefix());
 				int frame = ob.getCurrentFrame();
 				String anim = ob.getCurrentAnimation();
 				if(ob.getAnimations().at(anim)!=null)
