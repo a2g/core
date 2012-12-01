@@ -28,4 +28,5 @@ public interface MasterPresenterHostAPI {
     public void setLastCommand(double x, double y, int v, String a, String b);
     void alert(String string);
     FactoryAPI getFactory(EventBus bus, MasterPresenter mp);
+	public SceneAPI getSceneFromCacheOrNew(String string);
 }

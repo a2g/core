@@ -50,6 +50,10 @@ public class OnFillLoadListAPIImpl
 		this.implementation.setInventoryPixelSize(x, y);
 	
 	}
+
+	public SceneAPI getSceneFromCacheOrNew(String string) {
+		return this.implementation.getSceneFromCacheOrNew(string);
+	}
 }
 
 

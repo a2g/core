@@ -818,5 +818,11 @@ implements InternalAPI
 		
 	}
 
+	@Override
+	public SceneAPI getSceneFromCacheOrNew(String string) 
+	{
+		return this.parent.getSceneFromCacheOrNew(string);	
+	}
+
 }
 
