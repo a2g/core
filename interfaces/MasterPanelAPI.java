@@ -37,5 +37,5 @@ public interface MasterPanelAPI
 
 	void setActiveState(GuiStateEnum state);
 	
-	boolean isDialogTreeActive();
+	GuiStateEnum getActiveState();
 }

@@ -760,7 +760,8 @@ implements InternalAPI
 	{
 		this.commandLinePresenter.clear();
 		this.commandLinePresenter.setMouseable(true);
-		if(!masterPanel.isDialogTreeActive())
+		
+		if(masterPanel.getActiveState() != GuiStateEnum.DialogTreeMode)
 		{
 			this.pushState(GuiStateEnum.ActiveScene);
 		}
@@ -818,6 +819,13 @@ implements InternalAPI
 		{
 			this.pushState(GuiStateEnum.ActiveScene);
 		}
+	}
+
+	@Override
+	public boolean isCommandLineActive() 
+	{
+		boolean isCommandLineActive = masterPanel.getActiveState()==GuiStateEnum.ActiveScene;
+		return isCommandLineActive;
 	}
 
 }

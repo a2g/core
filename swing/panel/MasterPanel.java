@@ -41,6 +41,7 @@ implements MasterPanelAPI
     SwingHostingPanel hostForDialogTreeF;
     SwingHostingPanel hostForLoadingF;
     SwingHostingPanel hostForTitleCardF;
+    GuiStateEnum guiStateEnum;
     
     static final String LOADING_WIDGET = "LOADING_WIDGET";
     static final String SCENE_WIDGET = "SCENE_WIDGET";
@@ -152,6 +153,7 @@ implements MasterPanelAPI
 	
 	@Override
 	public void setActiveState(GuiStateEnum state) {
+		this.guiStateEnum = state;
 		if(state == GuiStateEnum.DialogTreeMode)
 		{
 			this.hostForCommandLineF.setVisible(false);
@@ -215,11 +217,11 @@ implements MasterPanelAPI
 	}
 
 	@Override
-	public boolean isDialogTreeActive() 
-	{
-		boolean isActive = this.hostForDialogTreeF.isVisible() == true;
-		return isActive;
+	public GuiStateEnum getActiveState() {
+		return guiStateEnum;
 	}
+
+	
 }	
 
 

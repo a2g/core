@@ -37,7 +37,7 @@ implements MasterPanelAPI
     GWTHostingPanel hostForDialogTree;
     GWTHostingPanel hostForLoading;
     GWTHostingPanel hostForTitleCard;
-    
+    GuiStateEnum state;
     
     public MasterPanel(MasterPresenterHostAPI parent) {
 
@@ -133,6 +133,8 @@ implements MasterPanelAPI
 	@Override
 	public void setActiveState(GuiStateEnum state) 
 	{
+		this.state = state;
+		
 		switch(state)
 		{
 		case DialogTreeMode: 
@@ -143,10 +145,8 @@ implements MasterPanelAPI
 	}
 
 	@Override
-	public boolean isDialogTreeActive() {
-		boolean isActive = this.hostForDialogTree.isVisible();
-		return isActive;
+	public GuiStateEnum getActiveState() 
+	{
+		return state;
 	}
-
-	
 }	

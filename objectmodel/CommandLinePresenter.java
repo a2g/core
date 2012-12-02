@@ -68,10 +68,6 @@ ExecuteCommandEventHandlerAPI
     @Override
     public void onSetMouseOver(String displayName, String textualId, int code, double x, double y) 
     {
- //       if (api.isInDialogTreeMode()) {
-   //         return;
-     //   }
-    	
     	if(x!=-1)
     	{
     		this.debugX = (double)(int)(x*100);
@@ -85,7 +81,10 @@ ExecuteCommandEventHandlerAPI
     }
 
     @Override
-    public boolean onClick(double x, double y) {
+    public boolean onClick(double x, double y) 
+    {
+    	if(!this.api.isCommandLineActive())
+    		return false;
     	
         if (isOkToExecute()) {
         	System.out.println("ONEXECUTECOMMAND::execute  " + model.getSentence().getDisplayName());
@@ -104,15 +103,6 @@ ExecuteCommandEventHandlerAPI
         model.clear();
         updateImage();
     }
-    
-    
-    //
-    //
-    //
-    //
-    //
-    
-    
     
     private void doNextBestThingToExecute() {	
         model.doNextBestThingToExecute();
