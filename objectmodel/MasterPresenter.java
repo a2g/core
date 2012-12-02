@@ -326,6 +326,11 @@ implements InternalAPI
 
 	@Override
 	public void doEveryFrame() {
+		int size = this.theObjectMap.size();
+		if(size==0)
+		{
+			System.out.println("sIZE WAS ZERO");
+		}
 		if(timer!=null)
 		{
 			this.callbacks.onEveryFrame(this);
@@ -379,8 +384,9 @@ implements InternalAPI
 	}
 
 	@Override
-	public void switchToScene(String scene) {
-		// since instantiateScene..ToIt does some assynchronous stuff,
+	public void switchToScene(String scene) 
+	{
+		// since instantiateScene..ToIt does some asynchronous stuff,
 		// I thought maybe I could do it, then cancel the timers.
 		// but I've put it off til I need the microseconds.
 		cancelTimer();

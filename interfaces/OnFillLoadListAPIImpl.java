@@ -54,6 +54,11 @@ public class OnFillLoadListAPIImpl
 	public SceneAPI getSceneFromCacheOrNew(String string) {
 		return this.implementation.getSceneFromCacheOrNew(string);
 	}
+
+	public void setValue(String string, int value) 
+	{
+		this.implementation.setValue(string, value);
+	}
 }
 
 
