@@ -85,6 +85,12 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
         return new DialogTreeBranchAction(this,
                 text, branchId);
     }
+    
+    public BaseAction branch(int branchId, boolean isKey, String text) {
+    	if(!isKey)
+    		return doNothing();
+    	return new DialogTreeBranchAction(this, text, branchId);
+	}
 
     public BaseAction doBoth(BaseAction a, BaseAction b) {
         return a.subroutine(b);

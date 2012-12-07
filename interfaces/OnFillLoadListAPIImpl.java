@@ -55,7 +55,7 @@ public class OnFillLoadListAPIImpl
 		return this.implementation.getSceneFromCacheOrNew(string);
 	}
 
-	public void setValue(String string, int value) 
+	public void setValue(Object string, int value) 
 	{
 		this.implementation.setValue(string, value);
 	}

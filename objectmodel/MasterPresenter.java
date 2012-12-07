@@ -364,20 +364,20 @@ implements InternalAPI
 	}
 
 	@Override
-	public void setValue(String name, int value) {
+	public void setValue(Object name, int value) {
 		parent.setValue(name, value);
 
 	}
 
 	@Override
-	public int getValue(String name) {
+	public int getValue(Object name) {
 		int i = parent.getValue(name);
 
 		return i;
 	}
 
 	@Override
-	public boolean isTrue(String name) {
+	public boolean isTrue(Object name) {
 		int property = getValue(name);
 
 		return property != 0;

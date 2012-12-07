@@ -41,11 +41,11 @@ extends ImageAddAPI, OnDoCommandAPI {
 
     // property access methods
     @Override
-	public void setValue(String name, int value);
+	public void setValue(Object name, int value);
     @Override
-	public int getValue(String name);
+	public int getValue(Object name);
     @Override
-	public boolean isTrue(String name);
+	public boolean isTrue(Object name);
     
     // gui methods
     @Override

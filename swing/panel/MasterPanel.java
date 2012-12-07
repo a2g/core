@@ -19,8 +19,6 @@ package com.github.a2g.core.swing.panel;
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.util.Stack;
-
 import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.HostingPanelAPI;

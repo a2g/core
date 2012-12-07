@@ -32,9 +32,9 @@ public interface OnPreEntryAPI {
     public InventoryItem getInventoryItem(int i);
 
     // property access methods
-    public void setValue(String name, int value);
-    public int getValue(String name);
-    public boolean isTrue(String name);
+    public void setValue(Object name, int value);
+    public int getValue(Object name);
+    public boolean isTrue(Object name);
     
     // gui methods
     public DialogTreePresenter getDialogTreeGui();

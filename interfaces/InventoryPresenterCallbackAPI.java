@@ -5,7 +5,7 @@ public interface InventoryPresenterCallbackAPI
 
 	FactoryAPI getFactory();
 
-	int getValue(String string);
+	int getValue(Object string);
 	
 	void onClickInventory(); 
 	

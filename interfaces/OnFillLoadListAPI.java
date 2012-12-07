@@ -24,5 +24,5 @@ public interface OnFillLoadListAPI
 	void kickStartLoading();
 	void setInventoryPixelSize(int width, int height);
 	SceneAPI getSceneFromCacheOrNew(String string);
-	void setValue(String string, int value);
+	void setValue(Object string, int value);
 }
