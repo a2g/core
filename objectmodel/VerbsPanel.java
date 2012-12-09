@@ -33,18 +33,20 @@ implements VerbsPanelAPI
 {
 	EventBus bus;
     public VerbsPanel(EventBus bus, InternalAPI api) {
-        super(4, 3);
+        
         this.bus = bus;
 
     }
 
 	@Override
 	public void setVerbs(Verbs verbs) {
-        for (int i = 0; i
-                < (getColumnCount()
-                        * getRowCount()); i++) {
-            int row = i / getColumnCount();
-            int column = i % getColumnCount();
+		int rows = verbs.getNumberOfRows();
+		int columns = verbs.getNumberOfColumns();
+		this.resize(rows, columns);
+        for (int i = 0; i < (rows * columns); i++) 
+        {
+            int row = i / columns;
+            int column = i % columns;
 
             Verb verb = verbs.items().get(i);
             String textualId = verb.gettextualId();
@@ -65,6 +67,12 @@ implements VerbsPanelAPI
                     this.getElement(), "color",
                     "Purple");
         }
+		
+	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
 		
 	}
 

@@ -27,7 +27,7 @@ import com.google.gwt.event.shared.EventBus;
 
 public class LoaderPresenter 
 {
-	private Loader loaders;
+	private Loader loader;
 	private LoaderPanelAPI view;
 	int current;
 	int total;
@@ -35,7 +35,7 @@ public class LoaderPresenter
 
 	public LoaderPresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api, MergeSceneAndStartAPI master, MasterPresenterHostAPI parent) 
 	{
-		this.loaders = new Loader(master);
+		this.loader = new Loader(master);
 		this.name = "";
 		this.view = api.getFactory().createLoaderPanel();
 		panel.setThing(view);
@@ -75,11 +75,16 @@ public class LoaderPresenter
 
 	public Loader getLoaders()
 	{
-		return loaders;
+		return loader;
 	}
 	
 	public LoaderPanelAPI getView() {
 		return view;
+	}
+
+	public void clearAllLoadedLoads() {
+		loader.clearAllLoadedLoads();
+		
 	}
 	
 	

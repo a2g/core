@@ -59,6 +59,10 @@ public class OnFillLoadListAPIImpl
 	{
 		this.implementation.setValue(string, value);
 	}
+
+	public void clearAllLoadedLoads() {
+		this.implementation.clearAllLoadedLoads();
+	}
 }
 
 

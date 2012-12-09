@@ -16,15 +16,25 @@
 
 package com.github.a2g.core.objectmodel;
 
+import com.github.a2g.core.interfaces.VerbCollectionCallbackAPI;
+
 
 public class Verbs {
     private VerbCollection theItems;
-    public Verbs() {
-        this.theItems = new VerbCollection(); 
+    public Verbs(VerbCollectionCallbackAPI api) {
+        this.theItems = new VerbCollection(api); 
     }
 
     public VerbCollection items() {
         return this.theItems;
     }
+
+	public int getNumberOfRows() {
+		return theItems.getNumberOfRows();
+	}
+
+	public int getNumberOfColumns() {
+		return theItems.getNumberOfColumns();
+	}
 
 }

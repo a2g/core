@@ -791,7 +791,7 @@ implements InternalAPI
 	public void onMouseOverInventory
 	(String displayName, String textualId, int code) 
 	{
-		getCommandLineGui().onSetMouseOver(displayName, textualId, code,-1,-1);
+		getCommandLineGui().onSetMouseOver(displayName, textualId, code);
 		bus.fireEvent(
 				new SetRolloverEvent(
 						displayName,
@@ -832,6 +832,12 @@ implements InternalAPI
 	{
 		boolean isCommandLineActive = masterPanel.getActiveState()==GuiStateEnum.ActiveScene;
 		return isCommandLineActive;
+	}
+
+	@Override
+	public void clearAllLoadedLoads() {
+		this.loadingPresenter.clearAllLoadedLoads();
+		
 	}
 
 }

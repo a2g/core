@@ -41,6 +41,7 @@ extends JPanel implements VerbsPanelAPI
 {
 	EventBus bus;
 	InternalAPI api;
+	Verbs verbs;
     public VerbsPanel(EventBus bus, InternalAPI api) 
     {
     	this.bus = bus;
@@ -58,6 +59,12 @@ extends JPanel implements VerbsPanelAPI
     
     @Override
 	public void setVerbs(Verbs verbs)
+    {
+    	this.verbs = verbs;
+    	update();
+    }
+
+    public void update()
     {
     	GridLayout grid = new GridLayout();
     	this.setLayout(grid);

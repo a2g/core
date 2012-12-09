@@ -65,19 +65,20 @@ ExecuteCommandEventHandlerAPI
         updateImage();
     }
 
-    @Override
-    public void onSetMouseOver(String displayName, String textualId, int code, double x, double y) 
+    public void setXYForDebugging(double x, double y)
     {
     	if(x!=-1)
     	{
     		this.debugX = (double)(int)(x*100);
     		this.debugY = (double)(int)(y*100);
     	}
-    		model.setMouseOver(displayName, textualId,
-                code);
-
+    }
+    
+    @Override
+    public void onSetMouseOver(String displayName, String textualId, int code) 
+    {
+    	model.setMouseOver(displayName, textualId, code);
         updateImage();
-
     }
 
     @Override
@@ -164,6 +165,12 @@ ExecuteCommandEventHandlerAPI
 
 	public CommandLinePanelAPI getView() {
 		return view;
+	}
+
+	public String getDisplayName() 
+	{
+		String displayName = model.getSentence().getDisplayName();
+		return displayName;
 	}
     
 }

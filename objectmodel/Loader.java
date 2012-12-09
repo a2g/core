@@ -102,10 +102,9 @@ implements ImageBundleLoaderCallbackAPI
 
 	public void addToAppropriateAnimation(int numberPrefix, Image imageAndPos,
 			String objectTextualId, String animationTextualId,
-			short objectCode, int objPlusAnimCode, int width, int height) {
+			short objectCode, int objPlusAnimCode, int width, int height) 
+	{
 		theCurrentLoader.addToAppropriateAnimation(numberPrefix, imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode,width, height);
-		
-		
 	}
 
 	public void addEssential(LoadAPI blah, InternalAPI api)
@@ -163,5 +162,11 @@ implements ImageBundleLoaderCallbackAPI
 	public void clearLoaders() 
 	{
 		listOfEssentialLoaders.clear();
+	}
+
+
+	public void clearAllLoadedLoads() 
+	{
+		objectCache.clear();	
 	}
 }

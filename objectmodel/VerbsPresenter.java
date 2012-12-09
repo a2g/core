@@ -21,17 +21,18 @@ import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
+import com.github.a2g.core.interfaces.VerbCollectionCallbackAPI;
 import com.github.a2g.core.interfaces.VerbsPanelAPI;
 
 
-public class VerbsPresenter 
+public class VerbsPresenter implements VerbCollectionCallbackAPI
 {
     private Verbs theVerbs;
     private VerbsPanelAPI view;
 
     public VerbsPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent, InternalAPI api) 
     {
-        this.theVerbs = new Verbs();
+        this.theVerbs = new Verbs(this);
         this.view = api.getFactory().createVerbsPanel();
         panel.setThing(view);
         this.view.setVerbs(theVerbs);
@@ -50,6 +51,12 @@ public class VerbsPresenter
 
 	public VerbsPanelAPI getView() {
 		return view;
+	}
+
+	@Override
+	public void update() 
+	{
+		view.update();
 	}
 	
 }

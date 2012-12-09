@@ -17,13 +17,7 @@
 package com.github.a2g.core.interfaces;
 
 
-public interface OnFillLoadListAPI 
+public interface VerbCollectionCallbackAPI 
 {
-	void addEssential(LoadAPI blah);
-	void setScenePixelSize(int width, int height);
-	void kickStartLoading();
-	void setInventoryPixelSize(int width, int height);
-	SceneAPI getSceneFromCacheOrNew(String string);
-	void setValue(Object string, int value);
-	void clearAllLoadedLoads();
+	public void update();
 }
