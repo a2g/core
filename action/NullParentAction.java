@@ -22,8 +22,8 @@ import com.github.a2g.core.interfaces.InternalAPI;
 
 
 public class NullParentAction extends BaseDialogTreeAction {
-    public NullParentAction() {
-        super(null, null);
+    public NullParentAction(InternalAPI api) {
+        super(null, api);
     }
 
     @Override

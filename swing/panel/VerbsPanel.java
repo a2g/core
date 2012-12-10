@@ -42,13 +42,15 @@ extends JPanel implements VerbsPanelAPI
 	EventBus bus;
 	InternalAPI api;
 	Verbs verbs;
+	GridLayout grid;
     public VerbsPanel(EventBus bus, InternalAPI api) 
     {
     	this.bus = bus;
     	this.api =  api;
     	this.setForeground(new Color(0,0,0));
     	this.setBackground(new Color(255,0,0));
-  		
+    	grid = new GridLayout();
+    	this.setLayout(grid);
     }
     
 	@Override
@@ -66,31 +68,35 @@ extends JPanel implements VerbsPanelAPI
 
     public void update()
     {
-    	GridLayout grid = new GridLayout();
-    	this.setLayout(grid);
+    	this.removeAll();
     	//this.add(new Label("Verbs"));
     	
-    	grid.setRows(4);
-    	grid.setColumns(3); 
+    	int numberOfRows = verbs.getNumberOfRows();
+    	int numberOfColumns = verbs.getNumberOfColumns();
+    	grid.setRows(numberOfRows);
+    	grid.setColumns(numberOfColumns); 
     	
     	for (int i = 0; i < (grid.getColumns()
     			* grid.getRows()); i++) 
     	{
-    		Verb v = verbs.items().get(i);
-    		int code = v.getCode();
-    		String textualId = v.gettextualId();
-    		Label label = new Label(textualId);
+    		if(i<verbs.items().size())
+    		{
+    			Verb v = verbs.items().get(i);
+    			int code = v.getCode();
+    			String textualId = v.gettextualId();
+    			Label label = new Label(textualId);
 
-    		label.addMouseListener
-    		(
-    				new VerbMouseOverHandler( bus, v.getdisplayText(), textualId, code)
-            );
-    		label.addMouseListener
-    		(
-    				new VerbMouseClickHandler(bus, api)
-    		);
+    			label.addMouseListener
+    			(
+    					new VerbMouseOverHandler( bus, v.getdisplayText(), textualId, code)
+    					);
+    			label.addMouseListener
+    			(
+    					new VerbMouseClickHandler(bus, api)
+    					);
 
-    		this.add(label);
+    			this.add(label);
+    		}
     	}
     }
 

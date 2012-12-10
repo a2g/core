@@ -76,4 +76,10 @@ public class VerbCollection {
 		int numCols = e.intValue();
 		return numCols;
 	}
+
+	public int size() 
+	{
+		int size = verbs.size();
+		return size;
+	}
 }

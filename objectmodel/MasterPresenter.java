@@ -364,21 +364,26 @@ implements InternalAPI
 	}
 
 	@Override
-	public void setValue(Object name, int value) {
-		parent.setValue(name, value);
+	public void setValue(Object key, int value) {
+		String keyAsString = key.toString();
+		parent.setValue(keyAsString, value);
 
 	}
 
 	@Override
-	public int getValue(Object name) {
-		int i = parent.getValue(name);
+	public int getValue(Object key) {
+		String keyAsString = key.toString();
+		
+		int i = parent.getValue(keyAsString);
 
 		return i;
 	}
 
 	@Override
-	public boolean isTrue(Object name) {
-		int property = getValue(name);
+	public boolean isTrue(Object key) {
+		String keyAsString = key.toString();
+		
+		int property = getValue(keyAsString);
 
 		return property != 0;
 	}
@@ -462,7 +467,7 @@ implements InternalAPI
 		this.setDialogTreeActive(true);
 		
 		// get the chain from the client code
-		NullParentAction npa = new NullParentAction();
+		NullParentAction npa = new NullParentAction(this);
 		npa.setApi(this);
 		BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, npa, branchId);
 
@@ -482,7 +487,7 @@ implements InternalAPI
 		// 4. Then we execute it
 		// Thus it will say the text, and do what the user prescribes.
 		
-		NullParentAction npa = new NullParentAction();
+		NullParentAction npa = new NullParentAction(this);
 		npa.setApi(this);
 		BaseAction say = npa.say(objId, speech);
 		BaseDialogTreeAction actionChain = callbacks.onDialogTree(this, say, branchId);
@@ -492,7 +497,7 @@ implements InternalAPI
 
 	public void callOnEnterScene() 
 	{
-		NullParentAction npa = new NullParentAction();
+		NullParentAction npa = new NullParentAction(this);
 		npa.setApi(this);
 		BaseAction a = this.callbacks.onEntry(this,npa);
 		
@@ -737,8 +742,7 @@ implements InternalAPI
 	@Override
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,
 			SentenceUnit sentenceA, SentenceUnit sentenceB, double x, double y) {
-		 NullParentAction npa = new NullParentAction() ;
-         npa.setApi(this);
+		 NullParentAction npa = new NullParentAction(this);
          
          BaseAction a = this.callbacks.onDoCommand(
          		this,npa,

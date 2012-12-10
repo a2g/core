@@ -77,6 +77,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
     	if(api!=null)
     	{
     		this.systemAnimation = api.getFactory().createSystemAnimation(this);
+    	}else
+    	{
+    		throw new NullPointerException();
     	}
     }
     
@@ -97,7 +100,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
     }
 
     public BaseDialogTreeAction doNothing() {
-        return new NullParentAction();
+        return new NullParentAction(this.getApi());
     }
 
     public BaseDialogTreeAction endDialogTree() {
@@ -315,6 +318,10 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
     }
 
     protected void setApi(InternalAPI api) {
+    	if(api==null)
+    	{
+    		throw new NullPointerException();
+    	}
         this.api = api;
     }
 

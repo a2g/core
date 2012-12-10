@@ -68,6 +68,8 @@ public class SceneObjectCollection {
     }
 
     public SceneObject at(int index) throws NoSuchElementException {
+    	if(index>=theMap.size())
+    		throw new NoSuchElementException();
         SceneObject sceneObject = null;
         Iterator<SceneObject> it = theMap.values().iterator();
         int i = 0;
