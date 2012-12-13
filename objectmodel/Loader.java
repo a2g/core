@@ -168,5 +168,6 @@ implements ImageBundleLoaderCallbackAPI
 	public void clearAllLoadedLoads() 
 	{
 		objectCache.clear();	
+		setOfCompletedLoaders.clear();
 	}
 }

@@ -149,7 +149,7 @@ implements InternalAPI
 				masterPanel.getHostForTitleCard(), bus, this, parent);
 
 
-		this.pushState(GuiStateEnum.Loading);
+		this.masterPanel.setActiveState(GuiStateEnum.Loading);
 
 	}
 
@@ -276,7 +276,10 @@ implements InternalAPI
 
 	@Override
 	public void executeBaseAction(BaseAction a) {
-		actionRunner.runAction(a);
+		if(a!=null)
+		{
+			actionRunner.runAction(a);
+		}
 	}
 	
 	public void skip()
@@ -497,6 +500,7 @@ implements InternalAPI
 
 	public void callOnEnterScene() 
 	{
+		this.masterPanel.setActiveState(GuiStateEnum.ActiveScene);
 		NullParentAction npa = new NullParentAction(this);
 		npa.setApi(this);
 		BaseAction a = this.callbacks.onEntry(this,npa);
@@ -536,7 +540,7 @@ implements InternalAPI
 	@Override
 	public void startScene()
 	{
-		pushState(GuiStateEnum.Loading);
+		masterPanel.setActiveState(GuiStateEnum.Loading);
 		loadInventoryFromAPI();
 		setInitialAnimationsAsCurrent();
 		
@@ -580,7 +584,7 @@ implements InternalAPI
 		
 		
 		// set gui to blank
-		pushState(GuiStateEnum.Loading);
+		masterPanel.setActiveState(GuiStateEnum.Loading);
 		//scenePresenter.clear(); don't clear, all its images are switched off anyhow.
 		loadingPresenter.clear();
 		//commandLinePresenter.clear();
@@ -710,17 +714,12 @@ implements InternalAPI
 			
 			titleCardPresenter.setText(text);
 			titleCardPresenter.setColor(color);
-			pushState(GuiStateEnum.TitleCardNoInteraction);
+			masterPanel.setActiveState(GuiStateEnum.TitleCardNoInteraction);
 		}
 		else
 		{
-			pushState(GuiStateEnum.CutScene);
+			masterPanel.setActiveState(GuiStateEnum.CutScene);
 		}
-	}
-	
-	public void pushState(GuiStateEnum state)
-	{
-		masterPanel.setActiveState(state);
 	}
 
 	@Override
@@ -773,7 +772,7 @@ implements InternalAPI
 		
 		if(masterPanel.getActiveState() != GuiStateEnum.DialogTreeMode)
 		{
-			this.pushState(GuiStateEnum.ActiveScene);
+			this.masterPanel.setActiveState(GuiStateEnum.ActiveScene);
 		}
 	}
 
@@ -823,11 +822,11 @@ implements InternalAPI
 	{
 		if(isInDialogTreeMode)
 		{
-			this.pushState(GuiStateEnum.DialogTreeMode);
+			this.masterPanel.setActiveState(GuiStateEnum.DialogTreeMode);
 		}
 		else
 		{
-			this.pushState(GuiStateEnum.ActiveScene);
+			this.masterPanel.setActiveState(GuiStateEnum.ActiveScene);
 		}
 	}
 

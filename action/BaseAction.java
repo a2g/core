@@ -90,7 +90,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
     }
     
     public BaseAction branch(int branchId, boolean isKey, String text) {
-    	if(!isKey)
+    	if(isKey)
     		return doNothing();
     	return new DialogTreeBranchAction(this, text, branchId);
 	}
@@ -100,7 +100,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
     }
 
     public BaseDialogTreeAction doNothing() {
-        return new NullParentAction(this.getApi());
+        return new DoNothingAction(this);
     }
 
     public BaseDialogTreeAction endDialogTree() {
