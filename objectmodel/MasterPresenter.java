@@ -805,10 +805,7 @@ implements InternalAPI
 	@Override
 	public void onPropertyChange(PropertyChangeEvent inventoryEvent) 
 	{
-		
-		//if(
 		this.inventoryPresenter.updateInventory();
-		
 	}
 
 	@Override
@@ -840,7 +837,6 @@ implements InternalAPI
 	@Override
 	public void clearAllLoadedLoads() {
 		this.loadingPresenter.clearAllLoadedLoads();
-		
 	}
 
 }
