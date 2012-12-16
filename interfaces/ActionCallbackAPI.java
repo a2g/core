@@ -21,5 +21,5 @@ import com.github.a2g.core.action.BaseAction;
 
 
 public interface ActionCallbackAPI {
-    public void onGameActionComplete(BaseAction a);
+    public void startTheNextAction(BaseAction a);
 }

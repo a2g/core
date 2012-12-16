@@ -25,6 +25,7 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.GuiStateEnum;
+import com.github.a2g.core.swing.panel.MasterPanel;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 
 import com.github.a2g.core.event.PropertyChangeEvent;
@@ -462,7 +463,7 @@ implements InternalAPI
 
 	@Override
 	public void executeBranchOnCurrentScene(int branchId) 
-	{	
+	{	this.actionRunner.cancel();
 		// clear it so any old branches don't show up
 		this.dialogTreePresenter.clear();
 	
@@ -500,12 +501,13 @@ implements InternalAPI
 
 	public void callOnEnterScene() 
 	{
-		this.masterPanel.setActiveState(GuiStateEnum.ActiveScene);
 		NullParentAction npa = new NullParentAction(this);
 		npa.setApi(this);
 		BaseAction a = this.callbacks.onEntry(this,npa);
 		
-		
+		this.masterPanel.setActiveState(GuiStateEnum.ActiveScene);
+		//.. then executeBaseAction will add an action to turn on the Scene 
+		// the title card 		
 		executeBaseAction(a);
 	}
 	
@@ -705,21 +707,45 @@ implements InternalAPI
 
 		}
 	}
+	
+	GuiStateEnum getStateIfEntering(GuiStateEnum state)
+	{
+		switch(state)
+		{
+			case DialogTreeMode:return GuiStateEnum.TitleCardOverDialogTree;
+			case CutScene:return GuiStateEnum.TitleCardOverCutScene;
+			case ActiveScene:return GuiStateEnum.TitleCardOverActiveScene;
+			case Loading:return GuiStateEnum.TitleCardOverLoading;
+		default:
+			return state;
+		}
+	}
 
+	GuiStateEnum getStateIfExiting(GuiStateEnum state)
+	{
+		switch(state)
+		{
+			case TitleCardOverDialogTree: return GuiStateEnum.DialogTreeMode;
+			case TitleCardOverCutScene: return GuiStateEnum.CutScene;
+			case TitleCardOverActiveScene: return GuiStateEnum.ActiveScene;
+			case TitleCardOverLoading: return GuiStateEnum.Loading;
+		default:
+			return state;
+		}
+	}
+	
 	@Override
 	public void displayTitleCard(String text, ColorEnum color) 
-	{
-		if(text.length()>0)
+	{	
+		boolean isEntering = text.length()>0;
+		if(isEntering)
 		{
-			
 			titleCardPresenter.setText(text);
 			titleCardPresenter.setColor(color);
-			masterPanel.setActiveState(GuiStateEnum.TitleCardNoInteraction);
 		}
-		else
-		{
-			masterPanel.setActiveState(GuiStateEnum.CutScene);
-		}
+		GuiStateEnum state = masterPanel.getActiveState();
+		state = isEntering? getStateIfEntering(state) : getStateIfExiting(state);
+		masterPanel.setActiveState(state);
 	}
 
 	@Override
@@ -838,6 +864,8 @@ implements InternalAPI
 	public void clearAllLoadedLoads() {
 		this.loadingPresenter.clearAllLoadedLoads();
 	}
+
+	
 
 }
 

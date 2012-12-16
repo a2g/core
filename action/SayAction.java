@@ -66,6 +66,31 @@ public class SayAction extends BaseAction {
 		this.object = api.getObject(this.objId);
 
 	}
+	
+	int getAdjustedNumberOfFrames(String speech, double approxDuration, int animFramesCount, int talkingAnimationDelay)
+	{
+		// but if we need an animation, we find out how long it takes
+		// to play a single play of the animation to play whilst talking.		
+		int durationOfSingleAnimation = animFramesCount
+				* (40+ 40*talkingAnimationDelay);
+		
+		// ... then we find how many times the animation should repeat
+		// so that it fills up the totalDuration.
+		double numberOfTimesAnimRepeats = approxDuration
+				/ durationOfSingleAnimation;
+		
+		// ... and the number of frames that occurs during that 
+		// many plays of the animation.
+		int numberOfFramesTotal = (int) (numberOfTimesAnimRepeats * animFramesCount* 40);
+		// The effect of this is that there is a little bit of 'over-play'
+		// where the amount of time it takes to 'say' something
+		// when there is a talking animation, is usually a 
+		// little bit more than the time calculated from the speech.
+		// This is to ensure that the animation always ends whilst 
+		// the head is down, mouth is shut. The smaller the number of 
+		// frames in a talking animation the less over-play.	
+		return numberOfFramesTotal;
+	}
 
 	@Override
 	public void runGameAction() {
@@ -77,24 +102,29 @@ public class SayAction extends BaseAction {
 		}
 		this.popup = getApi().getFactory().createPopupPanel(speech.get(0), color);
 				
-	
-
 		if (object != null) {
 			String talkingAnimTextualId = object.getTalkingAnimation();
 			anim = object.getAnimations().at(talkingAnimTextualId);
-			if (anim!=null) {
-				int durationOfSingleAnimation = anim.getFrames().getCount()
-						* (40 * object.getTalkingAnimationDelay());
-
-				double numberOfTimesAnimRepeats = totalDuration
-						/ durationOfSingleAnimation;
-				numberOfFramesTotal = (int) (numberOfTimesAnimRepeats * anim
-						.getFrames().getCount());
-			} else {
+			if (anim==null) 
+			{
+				// if theres no animation then we just wait for the totalDuration;
 				double framesPerSecond = 40;
 				numberOfFramesTotal = (int) (totalDuration * framesPerSecond);
+			} 
+			else
+			{
+				numberOfFramesTotal = getAdjustedNumberOfFrames(
+						speech.get(0),
+						totalDuration, 
+						anim.getFrames().getCount(), 
+						object.getTalkingAnimationDelay()
+						);
 			}
-
+		}
+		if(numberOfFramesTotal<60)
+		{
+			getApi().displayTitleCard("error!!", ColorEnum.Black);
+			assert(false);
 		}
 
 		if (anim != null && object != null) {
@@ -103,7 +133,7 @@ public class SayAction extends BaseAction {
 		}
 
 		this.popup.setPopupPosition(20, 20);
-		this.popup.show();
+		
 
 		this.run((int) totalDuration);
 	}
@@ -111,6 +141,8 @@ public class SayAction extends BaseAction {
 	@Override
 	protected void onUpdateGameAction(double progress) {
 
+		this.popup.show();
+		
 		// update text bubble
 		for (int i = 0; i < ceilings.size(); i++) {
 			if (progress < ceilings.get(i)) {
@@ -137,6 +169,7 @@ public class SayAction extends BaseAction {
 
 		if (this.popup != null) {
 			this.popup.hide();
+			this.popup = null;
 		}
 	}
 

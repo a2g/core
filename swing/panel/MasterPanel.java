@@ -152,8 +152,9 @@ implements MasterPanelAPI
 	@Override
 	public void setActiveState(GuiStateEnum state) {
 		this.guiStateEnum = state;
-		if(state == GuiStateEnum.DialogTreeMode)
+		switch(state)
 		{
+		case DialogTreeMode:
 			this.hostForCommandLineF.setVisible(false);
 			this.hostForDialogTreeF.setVisible(true);
 			this.hostForInventoryF.setVisible(false);
@@ -163,10 +164,8 @@ implements MasterPanelAPI
 			this.hostForVerbsF.setVisible(false);
 			sceneCardLayout.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
 			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.DIALOGTREE_WIDGET);
-
-		} 
-		else if(state == GuiStateEnum.CutScene)
-		{
+			break;
+		case CutScene:
 			this.hostForCommandLineF.setVisible(false);
 			this.hostForDialogTreeF.setVisible(false);
 			this.hostForInventoryF.setVisible(false);
@@ -176,9 +175,8 @@ implements MasterPanelAPI
 			this.hostForVerbsF.setVisible(false);
 			sceneCardLayout.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
 			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.LOADING_WIDGET);
-		} 
-		else if(state == GuiStateEnum.ActiveScene)
-		{
+			break;
+		case ActiveScene:
 			this.hostForCommandLineF.setVisible(true);
 			this.hostForDialogTreeF.setVisible(false);
 			this.hostForInventoryF.setVisible(true);
@@ -188,10 +186,8 @@ implements MasterPanelAPI
 			this.hostForVerbsF.setVisible(true);
 			sceneCardLayout.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
 			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
-
-		}
-		else if(state == GuiStateEnum.Loading)
-		{
+			break;
+		case Loading:
 			this.hostForCommandLineF.setVisible(false);
 			this.hostForDialogTreeF.setVisible(false);
 			this.hostForInventoryF.setVisible(false);
@@ -200,9 +196,11 @@ implements MasterPanelAPI
 			this.hostForTitleCardF.setVisible(false);
 			this.hostForVerbsF.setVisible(false);
 			sceneCardLayout.show(panelForSceneStack, MasterPanel.LOADING_WIDGET);
-		}
-		else if(state == GuiStateEnum.TitleCardNoInteraction)
-		{
+			break;
+		case TitleCardOverActiveScene:
+		case TitleCardOverCutScene:
+		case TitleCardOverDialogTree:
+		case TitleCardOverLoading:
 			this.hostForCommandLineF.setVisible(false);
 			this.hostForDialogTreeF.setVisible(false);
 			this.hostForInventoryF.setVisible(false);
@@ -218,7 +216,6 @@ implements MasterPanelAPI
 	public GuiStateEnum getActiveState() {
 		return guiStateEnum;
 	}
-
 	
 }	
 

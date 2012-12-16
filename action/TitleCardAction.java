@@ -34,10 +34,18 @@ public class TitleCardAction extends BaseAction {
 	@Override
 	public void runGameAction() {
 
-		int totalDuration = getApi().getPopupDelay()*50;
+		if(text.length()>0)
+		{
+			int totalDuration = getApi().getPopupDelay()*50;
 		
-		getApi().displayTitleCard(text, color);
-		this.run(totalDuration);
+			getApi().displayTitleCard(text, color);
+			this.run(totalDuration);
+		}
+		else
+		{
+			getApi().displayTitleCard("", color);
+			this.run(1);
+		}
 	}
 
 	@Override

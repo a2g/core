@@ -6,5 +6,8 @@ public enum GuiStateEnum
 	CutScene,
 	ActiveScene,
 	Loading, 
-	TitleCardNoInteraction
+	TitleCardOverDialogTree,
+	TitleCardOverCutScene,
+	TitleCardOverActiveScene,
+	TitleCardOverLoading
 }

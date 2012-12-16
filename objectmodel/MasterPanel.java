@@ -137,7 +137,6 @@ implements MasterPanelAPI
 		
 		switch(state)
 		{
-		case TitleCardNoInteraction:
 		case DialogTreeMode: 
 		case CutScene:
 		case ActiveScene:
@@ -150,4 +149,5 @@ implements MasterPanelAPI
 	{
 		return state;
 	}
+
 }	

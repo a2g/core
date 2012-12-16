@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import com.github.a2g.core.interfaces.ActionCallbackAPI;
 import com.github.a2g.core.interfaces.ActionRunnerCallbackAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 
 public class ActionRunner implements ActionCallbackAPI
 {
@@ -44,7 +45,11 @@ public class ActionRunner implements ActionCallbackAPI
 			this.list.add(0, a);
 			a = a.getParent();
 		}
-
+		
+		if(this.list.get(0).getClass()!=TitleCardAction.class)
+		{
+			list.add(0,new TitleCardAction(a,"",ColorEnum.Black));
+		}
 		processNextListOfParallelActions();
 
 		return 0;
@@ -112,7 +117,7 @@ public class ActionRunner implements ActionCallbackAPI
 	}
 	
 	@Override
-	public void onGameActionComplete(BaseAction a) {
+	public void startTheNextAction(BaseAction a) {
 		this.numberOfParallelActionsToWaitFor--;
 		if (this.numberOfParallelActionsToWaitFor
 				== 0) {
