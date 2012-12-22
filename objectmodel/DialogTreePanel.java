@@ -22,6 +22,7 @@ import com.github.a2g.core.gwt.mouse.DialogTreeMouseOutHandler;
 import com.github.a2g.core.gwt.mouse.DialogTreeMouseOverHandler;
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
@@ -32,6 +33,9 @@ implements DialogTreePanelAPI
 {
     public DialogTreePanel(EventBus bus) {
         super(4, 1);
+        DOM.setStyleAttribute(
+                this.getElement(), "color",
+                "Purple");
         for (int i = 0; i < getRowCount(); i++) {
             Label widget = new Label("");
 
