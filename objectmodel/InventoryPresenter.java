@@ -92,20 +92,27 @@ implements MouseToInventoryPresenterAPI
         return inv;
     }
 
+    private boolean isRightArrowVisible()
+    {
+		int number = offset+getNumberOfVisibleItems()-this.rectsForSlots.size();	
+		return(number > 0);
+    }
 
 	private void clickRightArrow() {
-		int number = offset+getNumberOfVisibleItems()-this.rectsForSlots.size();	
-		if(number > 0)
+		if(isRightArrowVisible())
 		{
 			offset-=2;
 			this.updateInventory();
 		}
-	
 	}
 
-	private void clickLeftArrow() {
+	private boolean isLeftArrowVisible()
+	{
 		int number = offset+getNumberOfVisibleItems()-this.rectsForSlots.size();
-		if(number < 0 )
+		return (number < 0 );
+	}
+	private void clickLeftArrow() {
+		if(isLeftArrowVisible())
 		{
 			offset+=2;
 			this.updateInventory();
@@ -126,8 +133,21 @@ implements MouseToInventoryPresenterAPI
 		return count;
 	}
 	
+	void hideImage(Image image)
+	{
+		if(image!=null)// null is valid in the case of unit test
+		{
+			image.setVisible(false, new Point(-width,-height));
+		}
+	}
+			
     public void updateInventory() 
     {
+    	
+    	view.setLeftArrowVisible(isLeftArrowVisible());
+    	
+    	view.setRightArrowVisible(isRightArrowVisible());
+    	
     	itemsForSlots.clear();
     	for(int i = 0;i<rectsForSlots.size();i++)
     	{
@@ -152,19 +172,13 @@ implements MouseToInventoryPresenterAPI
     			}
     			else
     			{
-    				if(image!=null)// null is valid in the case of unit test
-    				{
-    					image.setVisible(false, new Point(-width,-height));
-    				}
+    				hideImage(image);
     			}
     			currentSlot++;
     		}
     		else
     		{
-    			if(image!=null)// null is valid in the case of unit test
-				{
-    				image.setVisible(false, new Point(-width,-height));
-				}
+    			hideImage(image);
     		}
     	}
     }

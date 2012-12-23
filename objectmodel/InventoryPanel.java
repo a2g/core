@@ -26,7 +26,9 @@ import com.github.a2g.core.interfaces.InventoryPanelAPI;
 import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
 import com.github.a2g.core.interfaces.PackagedImageAPI;
 import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.res.UserInterfaceDecoration;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
 public class InventoryPanel 
@@ -35,54 +37,36 @@ implements
 ImagePanelAPI
 , InventoryPanelAPI 
 {
+	final com.google.gwt.user.client.ui.Image imgLeft;
+	final com.google.gwt.user.client.ui.Image imgRight;
 	InternalAPI api;
-	public InventoryPanel(InternalAPI api, MouseToInventoryPresenterAPI api2) {
-		// super(1, 1);
+	public InventoryPanel(InternalAPI api, EventBus bus, MouseToInventoryPresenterAPI api2) 
+	{
 		this.api = api;
+		ImageResource resLeft = UserInterfaceDecoration.getLeftArrow();
+		ImageResource resRight = UserInterfaceDecoration.getRightArrow();
+		
+		imgLeft = new com.google.gwt.user.client.ui.Image(resLeft.getSafeUri());
+		imgRight = new com.google.gwt.user.client.ui.Image(resRight.getSafeUri());
+		imgLeft.addClickHandler(
+				new ImageMouseClickHandler(bus, null));
+		imgRight.addClickHandler(
+				new ImageMouseClickHandler(bus, null));
+		this.add(imgLeft, 0, 0);
+		this.add(imgRight, 100, 0);
 	}
 
 	@Override
-	public void updateInventory(Inventory inventory) {
-		/*
-		 * double ratioOfWidthToHeight = 2; int count =
-		 * inventory.items().getCount(); double halfCount = (count /
-		 * ratioOfWidthToHeight); double height = Math.sqrt(halfCount); double
-		 * width = height ratioOfWidthToHeight; // make it square
-		 * 
-		 * this.resize((int) (height + .5), (int) (width + .5));
-		 * 
-		 * int j = 0;
-		 * 
-		 * for (int i = 0; i < inventory.items().getCount() && j < count; i++) {
-		 * InventoryItem item = inventory.items().at( i);
-		 * 
-		 * if (item.isVisible()) { int row = j / getColumnCount(); int column =
-		 * j % getColumnCount();
-		 * 
-		 * if (row < getRowCount() && column < getColumnCount()) {
-		 * item.getDisplayName();
-		 * 
-		 * this.setWidget(row, column, item.getImage().getNativeImage()); } j++;
-		 * } }
-		 */
+	public void updateInventory(Inventory inventory) 
+	{
 	}
 
 	final com.google.gwt.user.client.ui.Image getImageFromResource(
-			GWTPackagedImage imageResource, LoadHandler lh) {
-		// this.numberOfImagesToLoad++;
-		// assert (imageResource != null);
-		// if(theLoadedImageMap.containsKey(imageResource.toString()))
-		// {
-		// final com.google.gwt.user.client.ui.Image image =
-		// theLoadedImageMap.get(imageResource.toString());
-		// lh.onLoad(null);
-		// return image;
-		// }
-		// else
+			GWTPackagedImage imageResource, LoadHandler lh) 
+	{
 		{
 			final com.google.gwt.user.client.ui.Image image = imageResource
 					.unpack();
-			// theLoadedImageMap.put(imageResource.toString(), image);
 			if (lh != null) {
 				image.addLoadHandler(lh);
 			}
@@ -147,5 +131,14 @@ ImagePanelAPI
 		return ((GWTImage) image).getNativeImage().getWidth();
 	}
 
+	@Override
+	public void setLeftArrowVisible(boolean visible) {
+		imgLeft.setVisible(visible);
+	}
 
+	@Override
+	public void setRightArrowVisible(boolean visible) {
+		imgRight.setVisible(visible);
+		
+	}
 }

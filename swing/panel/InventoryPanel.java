@@ -238,5 +238,23 @@ implements ImagePanelAPI
 		super.setSize(width, height);
 	}
 
+
+
+
+	@Override
+	public void setLeftArrowVisible(boolean visible) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	@Override
+	public void setRightArrowVisible(boolean visible) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

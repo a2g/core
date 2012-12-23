@@ -25,7 +25,6 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.GuiStateEnum;
-import com.github.a2g.core.swing.panel.MasterPanel;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 
 import com.github.a2g.core.event.PropertyChangeEvent;

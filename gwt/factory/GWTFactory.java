@@ -57,7 +57,7 @@ implements FactoryAPI
 
 	@Override
 	public InventoryPanelAPI createInventoryPanel(MouseToInventoryPresenterAPI api) {
-		return new InventoryPanel(master, api);
+		return new InventoryPanel(master, bus, api);
 	}
 
 	@Override

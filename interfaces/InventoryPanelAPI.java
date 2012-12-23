@@ -36,5 +36,8 @@ public interface InventoryPanelAPI
 
 	void setPixelSize(int width, int height);
 
+	void setLeftArrowVisible(boolean visible);
+	void setRightArrowVisible(boolean visible);
+
 
 }
