@@ -15,6 +15,8 @@
  */
 package com.github.a2g.core.objectmodel;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.gwt.factory.GWTImage;
 import com.github.a2g.core.gwt.factory.GWTPackagedImage;
@@ -40,7 +42,7 @@ ImagePanelAPI
 	final com.google.gwt.user.client.ui.Image imgLeft;
 	final com.google.gwt.user.client.ui.Image imgRight;
 	InternalAPI api;
-	public InventoryPanel(InternalAPI api, EventBus bus, MouseToInventoryPresenterAPI api2) 
+	public InventoryPanel(InternalAPI api, EventBus bus, final MouseToInventoryPresenterAPI api2) 
 	{
 		this.api = api;
 		ImageResource resLeft = UserInterfaceDecoration.getLeftArrow();
@@ -49,9 +51,23 @@ ImagePanelAPI
 		imgLeft = new com.google.gwt.user.client.ui.Image(resLeft.getSafeUri());
 		imgRight = new com.google.gwt.user.client.ui.Image(resRight.getSafeUri());
 		imgLeft.addClickHandler(
-				new ImageMouseClickHandler(bus, null));
+				new ClickHandler()
+				{	@Override
+					public void onClick(ClickEvent event) 
+					{
+						api2.setMouseOver(.05, .5);
+						api2.doClick();
+					}
+				});
 		imgRight.addClickHandler(
-				new ImageMouseClickHandler(bus, null));
+				new ClickHandler()
+				{	@Override
+					public void onClick(ClickEvent event) 
+					{
+						api2.setMouseOver(.95, .5);
+						api2.doClick();
+					}
+				});
 		this.add(imgLeft, 0, 0);
 		this.add(imgRight, 100, 0);
 	}

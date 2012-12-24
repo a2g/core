@@ -108,7 +108,7 @@ implements MouseToInventoryPresenterAPI
 	private void clickRightArrow() {
 		if(isRightArrowVisible())
 		{
-			netRightArrowClicks+=1;
+			netRightArrowClicks+=2;
 			this.updateInventory();
 		}
 	}
@@ -116,7 +116,7 @@ implements MouseToInventoryPresenterAPI
 	private void clickLeftArrow() {
 		if(isLeftArrowVisible())
 		{
-			netRightArrowClicks-=1;
+			netRightArrowClicks-=2;
 			this.updateInventory();
 		}
 		
@@ -145,9 +145,7 @@ implements MouseToInventoryPresenterAPI
 			
     public void updateInventory() 
     {
-    	
     	view.setLeftArrowVisible(isLeftArrowVisible());
-    	
     	view.setRightArrowVisible(isRightArrowVisible());
     	
     	itemsForSlots.clear();
@@ -155,15 +153,17 @@ implements MouseToInventoryPresenterAPI
     	{
     		itemsForSlots.add(null);
     	}
-    	int currentSlot = netRightArrowClicks; 
+    	int currentSlot = 0; 
     	InventoryItemCollection inv = this.getInventory().items();
+    	int howManyVisibleInventoriesToSkip = this.netRightArrowClicks;
     	for(int i=0;i<inv.getCount();i++)
     	{
     		InventoryItem item = inv.at(i);
     		Image image = item.getImage();
     		if(item.isVisible())
     		{
-    			if(0<=currentSlot&& currentSlot<this.rectsForSlots.size())
+    			howManyVisibleInventoriesToSkip--;
+    			if(howManyVisibleInventoriesToSkip<0&&currentSlot<this.rectsForSlots.size())
     			{
     				itemsForSlots.set(currentSlot, item);
     				if(image!=null)// null is valid in the case of unit test
@@ -171,12 +171,12 @@ implements MouseToInventoryPresenterAPI
     					Rect rect = rectsForSlots.get(currentSlot);
     					image.setVisible(true, new Point(rect.getLeft(), rect.getTop()));
     				}
+    				currentSlot++;
     			}
     			else
     			{
     				hideImage(image);
     			}
-    			currentSlot++;
     		}
     		else
     		{
