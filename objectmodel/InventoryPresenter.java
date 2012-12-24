@@ -41,7 +41,7 @@ implements MouseToInventoryPresenterAPI
 	private int height;
 	ArrayList<Rect> rectsForSlots;
 	ArrayList<InventoryItem> itemsForSlots;
-    int offset;
+    int netRightArrowClicks;
 	private Rect leftArrowRect;
 	private Rect rightArrowRect;
 	private int mousePosX;
@@ -52,7 +52,7 @@ implements MouseToInventoryPresenterAPI
     {
     	rectsForSlots = new ArrayList<Rect>();
     	itemsForSlots =  new ArrayList<InventoryItem>();
-        this.offset = 0;
+        this.netRightArrowClicks = 0;
     	this.eventBus = bus;
         this.theInventory = new Inventory();
         this.api = api;
@@ -92,29 +92,31 @@ implements MouseToInventoryPresenterAPI
         return inv;
     }
 
-    private boolean isRightArrowVisible()
+    boolean isRightArrowVisible()
     {
-		int number = offset+getNumberOfVisibleItems()-this.rectsForSlots.size();	
-		return(number > 0);
+        return rectsForSlots.size() + netRightArrowClicks < getNumberOfVisibleItems();
     }
 
+    boolean isLeftArrowVisible()
+    {
+        return netRightArrowClicks>0 && getNumberOfVisibleItems() >0;
+    }
+  
+
+
+    
 	private void clickRightArrow() {
 		if(isRightArrowVisible())
 		{
-			offset-=2;
+			netRightArrowClicks+=1;
 			this.updateInventory();
 		}
 	}
-
-	private boolean isLeftArrowVisible()
-	{
-		int number = offset+getNumberOfVisibleItems()-this.rectsForSlots.size();
-		return (number < 0 );
-	}
+	
 	private void clickLeftArrow() {
 		if(isLeftArrowVisible())
 		{
-			offset+=2;
+			netRightArrowClicks-=1;
 			this.updateInventory();
 		}
 		
@@ -153,7 +155,7 @@ implements MouseToInventoryPresenterAPI
     	{
     		itemsForSlots.add(null);
     	}
-    	int currentSlot = offset; 
+    	int currentSlot = netRightArrowClicks; 
     	InventoryItemCollection inv = this.getInventory().items();
     	for(int i=0;i<inv.getCount();i++)
     	{

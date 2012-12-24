@@ -23,11 +23,14 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.InventoryPanelAPI;
@@ -69,6 +72,9 @@ implements ImagePanelAPI
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages;
 	
+	SwingImage imgLeft;
+	SwingImage imgRight;
+	
     public InventoryPanel(EventBus bus, InternalAPI api, MouseToInventoryPresenterAPI api2) 
     {
 	this.api = api;
@@ -91,18 +97,29 @@ implements ImagePanelAPI
 		super.addMouseMotionListener
 		(
 				new InventoryMouseOverHandler(this, api2)
-		);
-    }
+				);
 
-	
+		try 
+		{
+			java.awt.Image rawLeft = ImageIO.read(new File("D:/Conan/Swing/bin/com/github/a2g/core/res/LeftArrow.png"));
+			java.awt.Image rawRight = ImageIO.read(new File("D:/Conan/Swing/bin/com/github/a2g/core/res/RightArrow.png"));
 
+			imgLeft = new SwingImage(rawLeft, "", this, new Point(0,0));
+			imgRight = new SwingImage(rawRight, "", this, new Point(0,0));
+
+			//this.add(imgLeft, 0, 0);
+			//this.add(imgRight, 100, 0);
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public Dimension getPreferredSize() 
 	{
 		return new Dimension(width,height);
 	}
-
 
 	@Override
 	public void setThingPosition(Image image, int x, int y) {
@@ -178,11 +195,20 @@ implements ImagePanelAPI
 				g.drawImage(((SwingImage)image).getNativeImage(),p.getX(),p.getY(),this);
 			}
 		}
+		
+		if(listOfVisibleHashCodes.contains(imgLeft.getNativeImage().hashCode()))
+		{
+			g.drawImage(imgLeft.getNativeImage(),0,0,this);
+		}
+		if(listOfVisibleHashCodes.contains(imgRight.getNativeImage().hashCode()))
+		{
+			g.drawImage(imgRight.getNativeImage(),84,0,this);
+		}
+		
 		//System.out.println("printed with tally " + tally +" draws "+ draws);
 		tally=0;
 	}
 	
-
 	@Override
 	public int getImageWidth(Image image) {
 		return ((SwingImage)image).getNativeImage().getWidth(this);
@@ -193,13 +219,9 @@ implements ImagePanelAPI
 		return ((SwingImage)image).getNativeImage().getHeight(this);
 	}
 
-
-
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		return;
 	}
 
 
@@ -220,9 +242,6 @@ implements ImagePanelAPI
 		return imageAndPos;
 	}
 
-
-
-
 	@Override
 	public void updateInventory(Inventory inventory) {
 		// this gets visited every startScene
@@ -238,22 +257,16 @@ implements ImagePanelAPI
 		super.setSize(width, height);
 	}
 
-
-
-
 	@Override
 	public void setLeftArrowVisible(boolean visible) {
-		// TODO Auto-generated method stub
-		
+		imgLeft.setVisible(visible, new Point(0,0));
+		triggerPaint();
 	}
-
-
-
 
 	@Override
 	public void setRightArrowVisible(boolean visible) {
-		// TODO Auto-generated method stub
-		
+		imgRight.setVisible(visible, new Point(50,0));
+		triggerPaint();
 	}
 
 	

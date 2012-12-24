@@ -35,37 +35,28 @@ implements PackagedImageAPI
 	{ 
 		return imagePath; 
 	}
-	
+
 	public java.awt.Image unpack()
 	{
-    	
-		//assert (imageResource != null);
-		//if(theLoadedImageMap.containsKey(imageResource.getPath()))
-		//{
-		//	imageAndPos = theLoadedImageMap.get(imageResource.getPath());
-		//}
-		//else
-		//{
-			java.awt.Image img = null;
+
+		java.awt.Image img = null;
+		try 
+		{
+			String path = this.getPath();
+			img=ImageIO.read(new File(path));
+		}
+		catch(IOException e)
+		{
 			try 
-	    	{
-	    		String path = this.getPath();
-	    		img=ImageIO.read(new File(path));
-	    	}
-	        catch(IOException e)
-	        {
-	        	try 
-	        	{
-	        		img=ImageIO.read(new File("bin/org/zjava.gif"));
-	        	}
-	            catch(IOException f)
-	            {
-	            	System.out.println("couldn't find 'bin/org/zjava.gif', so exiting.");
-	            	System.exit(0);
-	            }
-	        }
-			//theLoadedImageMap.put(imageResource.toString(), imageAndPos);
-		//}
-    	return img;
+			{
+				img=ImageIO.read(new File("bin/org/zjava.gif"));
+			}
+			catch(IOException f)
+			{
+				System.out.println("couldn't find 'bin/org/zjava.gif', so exiting.");
+				System.exit(0);
+			}
+		}
+		return img;
 	}
 }
