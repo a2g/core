@@ -17,6 +17,7 @@
 package com.github.a2g.core.gwt.mouse;
 
 
+import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.user.client.DOM;
@@ -25,15 +26,15 @@ import com.google.gwt.user.client.ui.Label;
 
 public class DialogTreeMouseOverHandler implements MouseOverHandler {
     private final Label label;
-
-    public DialogTreeMouseOverHandler(Label label) {
+    private ColorEnum rolloverColor;
+    
+    public DialogTreeMouseOverHandler(Label label, ColorEnum rolloverColor) {
         this.label = label;
+        this.rolloverColor = rolloverColor;
     }
 
     @Override
     public void onMouseOver(MouseOverEvent event) {
-        DOM.setStyleAttribute(
-                label.getElement(), "color",
-                "#f00");
+        DOM.setStyleAttribute(label.getElement(), "color",rolloverColor.toString());
     }
 }

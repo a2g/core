@@ -18,6 +18,7 @@ package com.github.a2g.core.objectmodel;
 
 
 import com.github.a2g.core.interfaces.CommandLinePanelAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.UIObject;
@@ -27,25 +28,23 @@ public class CommandLinePanel
 extends Label 
 implements CommandLinePanelAPI
 {
-    public CommandLinePanel() {
-        
-        DOM.setStyleAttribute(
-                this.getElement(), "color",
-                "Blue");
-        this.setText(" ");
-    }
-    
-    
-    	@Override
-		public void setVisible(boolean isVisible) {
-		UIObject.setVisible(this.getElement(),
-                isVisible);
-		
+	public CommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll) 
+	{
+		this.setText(" ");
+		 DOM.setStyleAttribute(getElement(), "color", fore.toString());
+		 DOM.setStyleAttribute(getElement(), "backgroundColor", back.toString());
 	}
-	
+
+
+	@Override
+	public void setVisible(boolean isVisible) {
+		UIObject.setVisible(this.getElement(),
+				isVisible);
+	}
+
 	@Override
 	public void setText(String string) {
 		super.setText(string);
-		
 	}
+
 }

@@ -21,6 +21,7 @@ import com.github.a2g.core.gwt.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.gwt.mouse.VerbMouseOverHandler;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.VerbsPanelAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Grid;
@@ -32,9 +33,12 @@ extends Grid
 implements VerbsPanelAPI
 {
 	EventBus bus;
-    public VerbsPanel(EventBus bus, InternalAPI api) {
-        
+	ColorEnum rolloverColor;
+    public VerbsPanel(EventBus bus, InternalAPI api, ColorEnum fore, ColorEnum back) 
+    {
         this.bus = bus;
+		 DOM.setStyleAttribute(getElement(), "color",fore.toString());
+		 DOM.setStyleAttribute(getElement(), "backgroundColor", back.toString());
 
     }
 
@@ -62,10 +66,6 @@ implements VerbsPanelAPI
             widget.addClickHandler(
                     new ImageMouseClickHandler(
                             bus, null));
-            
-            DOM.setStyleAttribute(
-                    this.getElement(), "color",
-                    "Purple");
         }
 		
 	}
@@ -75,5 +75,4 @@ implements VerbsPanelAPI
 		// TODO Auto-generated method stub
 		
 	}
-
 }

@@ -16,13 +16,12 @@
 
 package com.github.a2g.core.swing.panel;
 
-
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
 import com.github.a2g.core.objectmodel.DialogTree;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.swing.mouse.DialogTreeMouseClickHandler;
 import com.github.a2g.core.swing.mouse.DialogTreeMouseOutHandler;
 import com.github.a2g.core.swing.mouse.DialogTreeMouseOverHandler;
@@ -36,16 +35,23 @@ public class DialogTreePanel
 extends JPanel 
 implements DialogTreePanelAPI
 {
+	ColorEnum fore;
+	ColorEnum back;
+	ColorEnum roll;
 	private int width;
 	private int height;
-	public DialogTreePanel(EventBus bus) {
+	public DialogTreePanel(EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum roll) 
+	{
 		GridLayout grid = new GridLayout();
     	this.setLayout(grid);
     	grid.setRows(4);
     	grid.setColumns(1); 
 
-	   	this.setBackground(new Color(255,255,0));
-    	this.setForeground(new Color(0,0,255));
+    	this.fore = fore;
+    	this.back = back;
+    	this.roll = roll;
+	   	this.setBackground(back.css);
+    	this.setForeground(fore.css);
     }
 
 	 @Override
@@ -72,9 +78,7 @@ implements DialogTreePanelAPI
 	public void update(DialogTree dialogTree, final EventBus bus) {
     	// destroy old
     	this.removeAll();
-    	Color mouseOut = new Color(255,255,0);
-    	Color mouseOver = new Color(0,255,0);
-
+    	
     	for (int i = 0; i < dialogTree.getSubBranchIds().size(); i++) 
     	{
     		int subBranchId = dialogTree.getSubBranchIds().get(i).intValue();
@@ -82,10 +86,10 @@ implements DialogTreePanelAPI
     		
     		Label label = new Label(lineOfDialog);
     		label.addMouseListener(
-					new DialogTreeMouseOverHandler(label, mouseOver)
+					new DialogTreeMouseOverHandler(label, roll.css)
 					);
 			label.addMouseListener(
-					new DialogTreeMouseOutHandler(label, mouseOut)
+					new DialogTreeMouseOutHandler(label, fore.css)
 					);
 
 			label.addMouseListener(

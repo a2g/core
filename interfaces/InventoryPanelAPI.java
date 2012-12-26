@@ -38,6 +38,4 @@ public interface InventoryPanelAPI
 
 	void setLeftArrowVisible(boolean visible);
 	void setRightArrowVisible(boolean visible);
-
-
 }

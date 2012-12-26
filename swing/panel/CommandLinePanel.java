@@ -15,10 +15,11 @@
  */
 package com.github.a2g.core.swing.panel;
 
-import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 
 import com.github.a2g.core.interfaces.CommandLinePanelAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 
 
 @SuppressWarnings("serial")
@@ -26,14 +27,15 @@ public class CommandLinePanel
 extends java.awt.Label 
 implements CommandLinePanelAPI
 {
-
-    public CommandLinePanel() {
+	
+    public CommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll) {
         this.setText("command line panel command line panel");
         this.setSize(320, 20);
-        this.setForeground(new Color(255,0,0));
-        this.setBackground(new Color(0,0,0));
-
-    }
+        this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+   		this.setForeground(fore.css);	
+   		this.setBackground(back.css);		
+   		//this.rolloverColor = roll.css;	
+     }
     
 
 	@Override
@@ -55,5 +57,4 @@ implements CommandLinePanelAPI
 	}
 
 
-	
 }

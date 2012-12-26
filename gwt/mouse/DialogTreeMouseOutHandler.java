@@ -17,6 +17,7 @@
 package com.github.a2g.core.gwt.mouse;
 
 
+import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.user.client.DOM;
@@ -25,15 +26,17 @@ import com.google.gwt.user.client.ui.Label;
 
 public class DialogTreeMouseOutHandler implements MouseOutHandler {
     private final Label label;
+    private ColorEnum foregroundColor;
 
-    public DialogTreeMouseOutHandler(Label label) {
+    public DialogTreeMouseOutHandler(Label label, ColorEnum foregroundColor) 
+    {
         this.label = label;
+        this.foregroundColor = foregroundColor;
     }
 
     @Override
-    public void onMouseOut(MouseOutEvent event) {
-        DOM.setStyleAttribute(
-                label.getElement(), "color",
-                "#000");
+    public void onMouseOut(MouseOutEvent event) 
+    {
+        DOM.setStyleAttribute(label.getElement(), "color", foregroundColor.toString());
     }
 }

@@ -16,66 +16,62 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import com.github.a2g.core.gwt.mouse.DialogTreeMouseClickHandler;
 import com.github.a2g.core.gwt.mouse.DialogTreeMouseOutHandler;
 import com.github.a2g.core.gwt.mouse.DialogTreeMouseOverHandler;
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
-
 public class DialogTreePanel 
 extends Grid 
-implements DialogTreePanelAPI
+implements DialogTreePanelAPI 
 {
-    public DialogTreePanel(EventBus bus) {
-        super(4, 1);
-        DOM.setStyleAttribute(
-                this.getElement(), "color",
-                "Purple");
-        for (int i = 0; i < getRowCount(); i++) {
-            Label widget = new Label("");
+	ColorEnum rolloverColor;
+	ColorEnum foregroundColor;
+	public DialogTreePanel(EventBus bus, ColorEnum foregroundColor, ColorEnum backgroundColor, ColorEnum rolloverColor)
+	{
+		super(4, 1);
+		this.rolloverColor = rolloverColor;
+		this.foregroundColor = foregroundColor;
+		
+		DOM.setStyleAttribute(this.getElement(), "Color",foregroundColor.toString());
+		DOM.setStyleAttribute(this.getElement(), "BackgroundColor",backgroundColor.toString());
 
-            this.setWidget(i, 0, widget);
-        }
-    }
-
-    @Override
-	public void update(DialogTree dialogTree, final EventBus bus) {
-        // destroy old
-        for (int i = 0; i < getRowCount(); i++) {
-            this.setWidget(i, 0, null);
-        }
-
-        for (int i = 0; i < getRowCount()
-                && i
-                        < dialogTree.getSubBranchIds().size(); i++) {
-            int subBranchId = dialogTree.getSubBranchIds().get(i).intValue();
-            String lineOfDialog = dialogTree.getLinesOfDialog().get(
-                    i);
-            Label label = new Label(lineOfDialog);
-
-            this.setWidget(i, 0, label);
-
-            label.addMouseOverHandler(
-                    new DialogTreeMouseOverHandler(
-                            label));
-            label.addMouseOutHandler(
-                    new DialogTreeMouseOutHandler(
-                            label));
-            label.addClickHandler(
-                    new DialogTreeMouseClickHandler(
-                            bus, label, subBranchId));
-
-        }	
-    }
+		for (int i = 0; i < getRowCount(); i++) {
+			Label widget = new Label("");
+			this.setWidget(i, 0, widget);
+		}
+	}
 
 	@Override
-	public void setPixelSize(int width, int height) 
-	{
-	
+	public void update(DialogTree dialogTree, final EventBus bus) {
+		// destroy old
+		for (int i = 0; i < getRowCount(); i++) {
+			this.setWidget(i, 0, null);
+		}
+
+		for (int i = 0; i < getRowCount()
+				&& i < dialogTree.getSubBranchIds().size(); i++) {
+			int subBranchId = dialogTree.getSubBranchIds().get(i).intValue();
+			String lineOfDialog = dialogTree.getLinesOfDialog().get(i);
+			Label label = new Label(lineOfDialog);
+
+			this.setWidget(i, 0, label);
+
+			label.addMouseOverHandler(new DialogTreeMouseOverHandler(label, rolloverColor));
+			label.addMouseOutHandler(new DialogTreeMouseOutHandler(label, foregroundColor));
+			label.addClickHandler(new DialogTreeMouseClickHandler(bus, label,
+					subBranchId));
+
+		}
+	}
+
+	@Override
+	public void setPixelSize(int width, int height) {
+
 	}
 }

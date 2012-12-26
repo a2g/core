@@ -27,10 +27,12 @@ import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.InventoryPanelAPI;
 import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
 import com.github.a2g.core.interfaces.PackagedImageAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.res.UserInterfaceDecoration;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
 public class InventoryPanel 
@@ -42,11 +44,15 @@ ImagePanelAPI
 	final com.google.gwt.user.client.ui.Image imgLeft;
 	final com.google.gwt.user.client.ui.Image imgRight;
 	InternalAPI api;
-	public InventoryPanel(InternalAPI api, EventBus bus, final MouseToInventoryPresenterAPI api2) 
+	public InventoryPanel(InternalAPI api, EventBus bus, final MouseToInventoryPresenterAPI api2, ColorEnum fore, ColorEnum back) 
 	{
 		this.api = api;
 		ImageResource resLeft = UserInterfaceDecoration.getLeftArrow();
 		ImageResource resRight = UserInterfaceDecoration.getRightArrow();
+
+		 DOM.setStyleAttribute(getElement(), "color", fore.toString());
+		 DOM.setStyleAttribute(getElement(), "backgroundColor", back.toString());
+
 		
 		imgLeft = new com.google.gwt.user.client.ui.Image(resLeft.getSafeUri());
 		imgRight = new com.google.gwt.user.client.ui.Image(resRight.getSafeUri());

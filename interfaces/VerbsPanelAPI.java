@@ -20,11 +20,7 @@ import com.github.a2g.core.objectmodel.Verbs;
 
 public interface VerbsPanelAPI
 {
-
 	void setVisible(boolean isVisible);
-
 	void setVerbs(Verbs theVerbs);
-
 	void update();
-	
 }

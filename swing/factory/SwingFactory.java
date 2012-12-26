@@ -45,24 +45,26 @@ implements FactoryAPI
 	 this.master = master;
 	}
 	@Override
-	public CommandLinePanelAPI createCommandLinePanel() {
-		return new CommandLinePanel();
+	public CommandLinePanelAPI createCommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll) 
+	{
+		return new CommandLinePanel(fore,back,roll);
 	}
 
 	@Override
-	public DialogTreePanelAPI createDialogTreePanel(EventBus bus) {
-		return new DialogTreePanel(bus);
+	public DialogTreePanelAPI createDialogTreePanel(EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum roll) 
+	{
+		return new DialogTreePanel(bus, fore, back, roll);
 	}
 
 
 	@Override
-	public LoaderPanelAPI createLoaderPanel() {
-		return new LoadingPanel(master);
+	public LoaderPanelAPI createLoaderPanel(ColorEnum fore, ColorEnum back) {
+		return new LoadingPanel(master, fore, back);
 	}
 
 	@Override
-	public MasterPanelAPI createMasterPanel(int width,int height) {
-		return new MasterPanel(width,height);
+	public MasterPanelAPI createMasterPanel(int width,int height,ColorEnum back) {
+		return new MasterPanel(width,height,back);
 	}
 
 	@Override
@@ -71,9 +73,9 @@ implements FactoryAPI
 	}
 
 	@Override
-	public TitleCardPanelAPI createTitleCardPanel() 
+	public TitleCardPanelAPI createTitleCardPanel(ColorEnum fore, ColorEnum back) 
 	{
-		return new TitleCardPanel(master);
+		return new TitleCardPanel(master, fore, back);
 	}
 
 	
@@ -87,9 +89,9 @@ implements FactoryAPI
 
 
 	@Override
-	public VerbsPanelAPI createVerbsPanel() 
+	public VerbsPanelAPI createVerbsPanel(ColorEnum fore, ColorEnum back) 
 	{
-		return new VerbsPanel(bus, master);
+		return new VerbsPanel(bus, master, fore, back);
 	}
 	@Override
 	public SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI callbacks)
@@ -107,9 +109,9 @@ implements FactoryAPI
 	}
 	@Override
 	public InventoryPanelAPI createInventoryPanel(
-			MouseToInventoryPresenterAPI api) 
+			MouseToInventoryPresenterAPI api, ColorEnum fore, ColorEnum back) 
 	{
-		return new InventoryPanel(bus, master, api);	
+		return new InventoryPanel(bus, master, api, fore, back);	
 	}
 	
 }

@@ -127,7 +127,7 @@ implements InternalAPI
 				PropertyChangeEvent.TYPE,
 				this);
 
-		this.masterPanel = getFactory().createMasterPanel(320,240);
+		this.masterPanel = getFactory().createMasterPanel(320,240, ColorEnum.Black);
 		panel.setThing(this.masterPanel);
 
 

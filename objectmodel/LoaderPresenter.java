@@ -22,6 +22,7 @@ import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.LoaderPanelAPI;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
 import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
 
@@ -37,7 +38,7 @@ public class LoaderPresenter
 	{
 		this.loader = new Loader(master);
 		this.name = "";
-		this.view = api.getFactory().createLoaderPanel();
+		this.view = api.getFactory().createLoaderPanel(ColorEnum.Purple, ColorEnum.Black);
 		panel.setThing(view);
 		this.current = 0;
 		this.total = 0;

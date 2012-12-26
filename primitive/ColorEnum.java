@@ -16,7 +16,21 @@
 
 package com.github.a2g.core.primitive;
 
+import java.awt.Color;
+
 
 public enum ColorEnum {
-    Red, Blue, Green, Black
+	Black(0,0,0)
+	,Red(255,0,0)
+    ,Green(0,255,0)
+    ,Blue(0,0,255)
+    ,Purple(127,0,127);
+    
+    
+    public final Color css;   
+
+	ColorEnum(int r, int g, int b) 
+	{
+		this.css = new Color(r,g,b);
+	}
 };

@@ -40,10 +40,8 @@ implements PopupPanelAPI
 		
 		if(color!=null)
 		{
-			DOM.setStyleAttribute(labelInPopup.getElement(), "color",
-				color.toString());
-			DOM.setStyleAttribute(popup.getElement(), "borderColor",
-				color.toString());
+			DOM.setStyleAttribute(labelInPopup.getElement(), "color",color.toString());
+			DOM.setStyleAttribute(popup.getElement(), "borderColor",color.toString());
 		}
 	}
 	@Override

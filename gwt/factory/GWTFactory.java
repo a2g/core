@@ -45,29 +45,32 @@ implements FactoryAPI
 	 this.master = master;
 	 this.host = host;
 	}
+	
 	@Override
-	public CommandLinePanelAPI createCommandLinePanel() {
-		return new CommandLinePanel();
+	public CommandLinePanelAPI createCommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll) 
+	{
+		return new CommandLinePanel(fore, back, roll);
 	}
 
 	@Override
-	public DialogTreePanelAPI createDialogTreePanel(EventBus bus) {
-		return new DialogTreePanel(bus);
+	public DialogTreePanelAPI createDialogTreePanel(EventBus bus, ColorEnum foreground, ColorEnum background, ColorEnum rollover) 
+	{
+		return new DialogTreePanel(bus, foreground, background, rollover);
 	}
 
 	@Override
-	public InventoryPanelAPI createInventoryPanel(MouseToInventoryPresenterAPI api) {
-		return new InventoryPanel(master, bus, api);
+	public InventoryPanelAPI createInventoryPanel(MouseToInventoryPresenterAPI api, ColorEnum fore, ColorEnum back) {
+		return new InventoryPanel(master, bus, api, fore, back);
 	}
 
 	@Override
-	public LoaderPanelAPI createLoaderPanel() {
-		return new LoaderPanel(master);
+	public LoaderPanelAPI createLoaderPanel(ColorEnum fore, ColorEnum back) {
+		return new LoaderPanel(master, fore,back);
 	}
 
 	@Override
-	public MasterPanelAPI createMasterPanel(int width, int height) {
-		return new MasterPanel(host);
+	public MasterPanelAPI createMasterPanel(int width, int height, ColorEnum back) {
+		return new MasterPanel(host, back);
 	}
 
 	@Override
@@ -76,9 +79,9 @@ implements FactoryAPI
 	}
 
 	@Override
-	public TitleCardPanelAPI createTitleCardPanel() 
+	public TitleCardPanelAPI createTitleCardPanel(ColorEnum foreground, ColorEnum background) 
 	{
-		return new TitleCardPanel(master);
+		return new TitleCardPanel(master, foreground, background);
 	}
 
 	
@@ -92,9 +95,9 @@ implements FactoryAPI
 
 
 	@Override
-	public VerbsPanelAPI createVerbsPanel() 
+	public VerbsPanelAPI createVerbsPanel(ColorEnum foreground, ColorEnum background) 
 	{
-		return new VerbsPanel(bus, master);
+		return new VerbsPanel(bus, master, foreground, background);
 	}
 	@Override
 	public SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI callbacks) {

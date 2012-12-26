@@ -34,7 +34,7 @@ extends JPanel implements TitleCardPanelAPI
 	Label panel;
 	int width;
 	int height;
-	public TitleCardPanel(final InternalAPI api) {
+	public TitleCardPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) {
 		{
 			panel = new Label();
 

@@ -32,14 +32,14 @@ implements TitleCardPanelAPI
 	Label label;
 	InternalAPI api;
 	
-    public TitleCardPanel(final InternalAPI api) {
+    public TitleCardPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) {
     	this.api = api;
     	VerticalPanel layout = new VerticalPanel();
     	{
     		label = new Label();
-    		DOM.setStyleAttribute(
-    				label.getElement(), "color",
-    		"Red");
+    		DOM.setStyleAttribute(label.getElement(), "color",fore.toString());
+    		DOM.setStyleAttribute(label.getElement(), "BackgroundColor",back.toString());
+    		
     		label.setText("Loading...");
 
     		layout.add(label);
@@ -52,10 +52,8 @@ implements TitleCardPanelAPI
 	public void setColor(ColorEnum color) {
 		if(color!=null)
 		{
-			DOM.setStyleAttribute(label.getElement(), "color",
-				color.toString());
-			DOM.setStyleAttribute(label.getElement(), "borderColor",
-				color.toString());
+			DOM.setStyleAttribute(label.getElement(), "color",color.toString());
+			DOM.setStyleAttribute(label.getElement(), "borderColor",color.toString());
 		}
 		
 	}

@@ -18,6 +18,7 @@ package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.LoaderPanelAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
@@ -35,14 +36,14 @@ implements LoaderPanelAPI
 	Button reload;
 	InternalAPI api;
 	
-    public LoaderPanel(final InternalAPI api) {
+    public LoaderPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) {
     	this.api = api;
     	VerticalPanel layout = new VerticalPanel();
     	{
+    		DOM.setStyleAttribute(progress.getElement(), "color",fore.toString());
+    		DOM.setStyleAttribute(progress.getElement(), "backgroundColor",back.toString());
+    		
     		progress = new Label();
-    		DOM.setStyleAttribute(
-    				progress.getElement(), "color",
-    		"Red");
     		progress.setText("Loading...");
 
     		layout.add(progress);

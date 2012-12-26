@@ -20,6 +20,7 @@ package com.github.a2g.core.objectmodel;
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
 
@@ -32,10 +33,9 @@ public class DialogTreePresenter {
     public DialogTreePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api) {
         this.bus = bus;
         this.theDialogTree = new DialogTree();
-        this.view = api.getFactory().createDialogTreePanel(bus);
+        this.view = api.getFactory().createDialogTreePanel(bus, ColorEnum.Red, ColorEnum.Black, ColorEnum.Purple);
         panel.setThing(view);
         this.dialogTreeTalker = 0;
-        
     }
 	  
     public void clear() {

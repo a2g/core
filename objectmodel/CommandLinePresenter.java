@@ -26,6 +26,7 @@ import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
 import com.github.a2g.core.interfaces.CommandLinePanelAPI;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.SceneAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
 
@@ -46,7 +47,7 @@ ExecuteCommandEventHandlerAPI
     public CommandLinePresenter(final HostingPanelAPI panel, EventBus bus, CommandLineCallbackAPI api) {
         this.model = new CommandLine(api);
         this.api = api;
-        this.view = api.getFactory().createCommandLinePanel();
+        this.view = api.getFactory().createCommandLinePanel(ColorEnum.Purple, ColorEnum.Black, ColorEnum.Red);
         panel.setThing(view);
         
         bus.addHandler(

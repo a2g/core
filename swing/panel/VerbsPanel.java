@@ -18,7 +18,6 @@
 package com.github.a2g.core.swing.panel;
 
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
@@ -29,6 +28,7 @@ import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.VerbsPanelAPI;
 import com.github.a2g.core.objectmodel.Verb;
 import com.github.a2g.core.objectmodel.Verbs;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.swing.mouse.VerbMouseClickHandler;
 import com.github.a2g.core.swing.mouse.VerbMouseOverHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -43,12 +43,12 @@ extends JPanel implements VerbsPanelAPI
 	InternalAPI api;
 	Verbs verbs;
 	GridLayout grid;
-    public VerbsPanel(EventBus bus, InternalAPI api) 
+    public VerbsPanel(EventBus bus, InternalAPI api, ColorEnum fore, ColorEnum back) 
     {
     	this.bus = bus;
     	this.api =  api;
-    	this.setForeground(new Color(0,0,0));
-    	this.setBackground(new Color(255,0,0));
+    	this.setForeground(fore.css);
+    	this.setBackground(back.css);
     	grid = new GridLayout();
     	this.setLayout(grid);
     }
@@ -86,6 +86,8 @@ extends JPanel implements VerbsPanelAPI
     			String textualId = v.gettextualId();
     			Label label = new Label(textualId);
 
+    			
+    			
     			label.addMouseListener
     			(
     					new VerbMouseOverHandler( bus, v.getdisplayText(), textualId, code)

@@ -28,6 +28,7 @@ import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.LoaderPanelAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 
 @SuppressWarnings("serial")
 public class LoadingPanel 
@@ -40,8 +41,11 @@ implements LoaderPanelAPI
 	int width;
 	int height;
 	
-    public LoadingPanel(final InternalAPI api) {
+    public LoadingPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) 
+    {
     	this.api = api;
+    	this.setBackground(back.css);
+    	this.setForeground(fore.css);
     	
     	{
     	

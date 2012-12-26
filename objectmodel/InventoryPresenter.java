@@ -23,6 +23,7 @@ import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.InventoryPanelAPI;
 import com.github.a2g.core.interfaces.InventoryPresenterCallbackAPI;
 import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.shared.EventBus;
@@ -56,7 +57,8 @@ implements MouseToInventoryPresenterAPI
     	this.eventBus = bus;
         this.theInventory = new Inventory();
         this.api = api;
-        this.view = api.getFactory().createInventoryPanel(this);
+        this.view = api.getFactory().createInventoryPanel(this, ColorEnum.Purple, ColorEnum.Black);
+
         panel.setThing(view);
         this.theInventoryItemMap = new TreeMap<Integer, InventoryItem>();
         // give it a default size - helps out the unit tests

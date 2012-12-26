@@ -18,7 +18,6 @@
 package com.github.a2g.core.swing.panel;
 
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -41,6 +40,7 @@ import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
 import com.github.a2g.core.interfaces.PackagedImageAPI;
 import com.github.a2g.core.objectmodel.Inventory;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.swing.factory.SwingImage;
 import com.github.a2g.core.swing.factory.SwingPackagedImage;
@@ -75,9 +75,9 @@ implements ImagePanelAPI
 	SwingImage imgLeft;
 	SwingImage imgRight;
 	
-    public InventoryPanel(EventBus bus, InternalAPI api, MouseToInventoryPresenterAPI api2) 
+    public InventoryPanel(EventBus bus, InternalAPI api, MouseToInventoryPresenterAPI api2, ColorEnum fore, ColorEnum back) 
     {
-	this.api = api;
+    	this.api = api;
         this.mapOfPointsByImage = new TreeMap<Integer, Point>();
         this.listOfVisibleHashCodes = new LinkedList<Integer>();
         this.listOfAllVisibleImages = new LinkedList<Image>();
@@ -85,10 +85,10 @@ implements ImagePanelAPI
 		this.height = 200;
 		this.setDoubleBuffered(true);
 		tally++;
-		
-    	this.setBackground(new Color(0,0,0));
-    	this.setForeground(new Color(255,255,0));
-		
+	
+		this.setForeground(fore.css);
+		this.setBackground(back.css);
+	
 		super.addMouseListener
 		(
 				new InventoryMouseClickHandler(this, api2)
@@ -107,8 +107,6 @@ implements ImagePanelAPI
 			imgLeft = new SwingImage(rawLeft, "", this, new Point(0,0));
 			imgRight = new SwingImage(rawRight, "", this, new Point(0,0));
 
-			//this.add(imgLeft, 0, 0);
-			//this.add(imgRight, 100, 0);
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
@@ -268,6 +266,4 @@ implements ImagePanelAPI
 		imgRight.setVisible(visible, new Point(50,0));
 		triggerPaint();
 	}
-
-	
 }

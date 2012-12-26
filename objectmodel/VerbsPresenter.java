@@ -23,6 +23,7 @@ import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
 import com.github.a2g.core.interfaces.VerbCollectionCallbackAPI;
 import com.github.a2g.core.interfaces.VerbsPanelAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 
 
 public class VerbsPresenter implements VerbCollectionCallbackAPI
@@ -33,9 +34,10 @@ public class VerbsPresenter implements VerbCollectionCallbackAPI
     public VerbsPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent, InternalAPI api) 
     {
         this.theVerbs = new Verbs(this);
-        this.view = api.getFactory().createVerbsPanel();
+        this.view = api.getFactory().createVerbsPanel(ColorEnum.Purple, ColorEnum.Black);
         panel.setThing(view);
         this.view.setVerbs(theVerbs);
+        
     }
 
 	public void clear() 

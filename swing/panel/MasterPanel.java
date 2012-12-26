@@ -17,12 +17,16 @@
 package com.github.a2g.core.swing.panel;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.GuiStateEnum;
 import com.github.a2g.core.swing.factory.SwingHostingPanel;
 
@@ -52,26 +56,40 @@ implements MasterPanelAPI
     JPanel panelForSceneStack;
     JPanel panelForDialogTreeStack;
     
-    public MasterPanel(int width, int height) {
-        
+    public MasterPanel(int width, int height, ColorEnum back) {
+        this.setBackground(back.css);
     	// create all the host panels, that we want to arrange.
         hostForCommandLineF = new SwingHostingPanel();
+        hostForCommandLineF.setBorder(new EmptyBorder(0,0,0,0));
         hostForInventoryF = new SwingHostingPanel();
+        hostForInventoryF.setBorder(new EmptyBorder(0,0,0,0));
         hostForVerbsF = new SwingHostingPanel();
+        hostForVerbsF.setBorder(new EmptyBorder(0,0,0,0));
         hostForSceneF = new SwingHostingPanel();
+        hostForSceneF.setBorder(new EmptyBorder(0,0,0,0));
         hostForDialogTreeF = new SwingHostingPanel();
+        hostForDialogTreeF.setBorder(new EmptyBorder(0,0,0,0));
         hostForLoadingF = new SwingHostingPanel();
+        hostForLoadingF.setBorder(new EmptyBorder(0,0,0,0));
         hostForTitleCardF = new SwingHostingPanel();
+        hostForTitleCardF.setBorder(new EmptyBorder(0,0,0,0));
+        
         sceneCardLayout =null;
          
     
         // will be constructed from two vertical stacks.
         panelForDialogTreeStack = new JPanel();
-
+        panelForDialogTreeStack.setBorder(new EmptyBorder(0,0,0,0)); 
         {
         	// lay the CL/V/I panel and dialog tree - on top of each other
-        	JPanel commandLineAndVerbsAndInventoryF = new JPanel();
+        	JPanel commandLineAndVerbsAndInventoryF = new JPanel();    	
+        	commandLineAndVerbsAndInventoryF.setBackground(new Color(0,0,255));
+        	commandLineAndVerbsAndInventoryF.setBorder(new EmptyBorder(0,0,0,0)); 
+            
         	dialogTreeCardLayout = new CardLayout();
+        	dialogTreeCardLayout.setHgap(0);
+        	dialogTreeCardLayout.setVgap(0);
+	
         	panelForDialogTreeStack.setLayout(dialogTreeCardLayout);
         	panelForDialogTreeStack.add(hostForDialogTreeF, MasterPanel.DIALOGTREE_WIDGET);   
         	panelForDialogTreeStack.add(commandLineAndVerbsAndInventoryF, MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
@@ -79,6 +97,9 @@ implements MasterPanelAPI
         	{
         		// layout the command line and the panel below it - vertically.
         		JPanel verbsAndInventoryF = new JPanel();
+        		verbsAndInventoryF.setBorder(new EmptyBorder(0,0,0,0));
+        		verbsAndInventoryF.setBackground(new Color(0,255,0));
+        		
         		commandLineAndVerbsAndInventoryF.add(hostForCommandLineF);
         		commandLineAndVerbsAndInventoryF.add(verbsAndInventoryF);
 
@@ -95,9 +116,15 @@ implements MasterPanelAPI
         } 
 
         panelForSceneStack = new JPanel();
+        panelForSceneStack.setBorder(new EmptyBorder(0,0,0,0));
+		
         {
         	sceneCardLayout = new CardLayout();
+        	sceneCardLayout.setHgap(0);
+        	sceneCardLayout.setVgap(0);
+	
         	panelForSceneStack.setLayout(sceneCardLayout);
+        	panelForSceneStack.setBorder(new EmptyBorder(0,0,0,0));
         	panelForSceneStack.add(hostForSceneF, SCENE_WIDGET);
         	panelForSceneStack.add(hostForLoadingF, LOADING_WIDGET);  
         	panelForSceneStack.add(hostForTitleCardF, TITLECARD_WIDGET);  
@@ -105,6 +132,8 @@ implements MasterPanelAPI
         
         // layout the scene at the top, and the rest at te bottom.
         GridLayout topToBottom = new GridLayout(2,1);
+        topToBottom.setHgap(0);
+        topToBottom.setVgap(0);
 		this.setLayout(topToBottom);
         this.add(panelForSceneStack);
         this.add(panelForDialogTreeStack);

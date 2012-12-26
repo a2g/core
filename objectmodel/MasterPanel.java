@@ -19,6 +19,7 @@ import com.github.a2g.core.gwt.factory.GWTHostingPanel;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.GuiStateEnum;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -39,7 +40,7 @@ implements MasterPanelAPI
     GWTHostingPanel hostForTitleCard;
     GuiStateEnum state;
     
-    public MasterPanel(MasterPresenterHostAPI parent) {
+    public MasterPanel(MasterPresenterHostAPI parent, ColorEnum back) {
 
     	// create all the host panels, that we want to arrange.
         hostForCommandLine = new GWTHostingPanel();
@@ -54,12 +55,8 @@ implements MasterPanelAPI
     	AbsolutePanel stackForSceneAndLoading = new AbsolutePanel();
     	AbsolutePanel stackForDialogTreeInvAndCommand = new AbsolutePanel();
  
-        DOM.setStyleAttribute(
-        		stackForDialogTreeInvAndCommand.getElement(),
-                "backgroundColor", "Black");
-        DOM.setStyleAttribute(
-        		stackForSceneAndLoading.getElement(),
-                "backgroundColor", "Black");
+        DOM.setStyleAttribute(stackForDialogTreeInvAndCommand.getElement(),"backgroundColor", back.toString());
+        DOM.setStyleAttribute(stackForSceneAndLoading.getElement(),"backgroundColor", back.toString());
      
 
 
