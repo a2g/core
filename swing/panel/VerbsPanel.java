@@ -18,6 +18,7 @@
 package com.github.a2g.core.swing.panel;
 
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Label;
@@ -47,8 +48,8 @@ extends JPanel implements VerbsPanelAPI
     {
     	this.bus = bus;
     	this.api =  api;
-    	this.setForeground(fore.css);
-    	this.setBackground(back.css);
+    	this.setForeground(new Color(fore.css[0], fore.css[1], fore.css[2]));	
+   		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
     	grid = new GridLayout();
     	this.setLayout(grid);
     }

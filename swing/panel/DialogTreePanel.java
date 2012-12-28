@@ -16,6 +16,7 @@
 
 package com.github.a2g.core.swing.panel;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
@@ -50,8 +51,8 @@ implements DialogTreePanelAPI
     	this.fore = fore;
     	this.back = back;
     	this.roll = roll;
-	   	this.setBackground(back.css);
-    	this.setForeground(fore.css);
+    	this.setForeground(new Color(fore.css[0], fore.css[1], fore.css[2]));	
+   		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
     }
 
 	 @Override
@@ -86,10 +87,10 @@ implements DialogTreePanelAPI
     		
     		Label label = new Label(lineOfDialog);
     		label.addMouseListener(
-					new DialogTreeMouseOverHandler(label, roll.css)
+					new DialogTreeMouseOverHandler(label, new Color(roll.css[0], roll.css[1], roll.css[2]))
 					);
 			label.addMouseListener(
-					new DialogTreeMouseOutHandler(label, fore.css)
+					new DialogTreeMouseOutHandler(label, new Color(fore.css[0], fore.css[1], fore.css[2]))
 					);
 
 			label.addMouseListener(

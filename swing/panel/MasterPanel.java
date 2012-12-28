@@ -21,7 +21,6 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import com.github.a2g.core.interfaces.HostingPanelAPI;
@@ -57,7 +56,7 @@ implements MasterPanelAPI
     JPanel panelForDialogTreeStack;
     
     public MasterPanel(int width, int height, ColorEnum back) {
-        this.setBackground(back.css);
+    	this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
     	// create all the host panels, that we want to arrange.
         hostForCommandLineF = new SwingHostingPanel();
         hostForCommandLineF.setBorder(new EmptyBorder(0,0,0,0));

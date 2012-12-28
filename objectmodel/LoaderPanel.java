@@ -40,10 +40,11 @@ implements LoaderPanelAPI
     	this.api = api;
     	VerticalPanel layout = new VerticalPanel();
     	{
+    		progress = new Label();
+        	
     		DOM.setStyleAttribute(progress.getElement(), "color",fore.toString());
     		DOM.setStyleAttribute(progress.getElement(), "backgroundColor",back.toString());
     		
-    		progress = new Label();
     		progress.setText("Loading...");
 
     		layout.add(progress);

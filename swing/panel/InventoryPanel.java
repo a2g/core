@@ -18,6 +18,7 @@
 package com.github.a2g.core.swing.panel;
 
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -86,8 +87,8 @@ implements ImagePanelAPI
 		this.setDoubleBuffered(true);
 		tally++;
 	
-		this.setForeground(fore.css);
-		this.setBackground(back.css);
+		this.setForeground(new Color(fore.css[0], fore.css[1], fore.css[2]));	
+   		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
 	
 		super.addMouseListener
 		(
