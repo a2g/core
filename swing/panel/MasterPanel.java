@@ -59,31 +59,31 @@ implements MasterPanelAPI
     	this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
     	// create all the host panels, that we want to arrange.
         hostForCommandLineF = new SwingHostingPanel();
-        hostForCommandLineF.setBorder(new EmptyBorder(0,0,0,0));
+        hostForCommandLineF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
         hostForInventoryF = new SwingHostingPanel();
-        hostForInventoryF.setBorder(new EmptyBorder(0,0,0,0));
+        hostForInventoryF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
         hostForVerbsF = new SwingHostingPanel();
-        hostForVerbsF.setBorder(new EmptyBorder(0,0,0,0));
+        hostForVerbsF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
         hostForSceneF = new SwingHostingPanel();
-        hostForSceneF.setBorder(new EmptyBorder(0,0,0,0));
+        hostForSceneF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
         hostForDialogTreeF = new SwingHostingPanel();
-        hostForDialogTreeF.setBorder(new EmptyBorder(0,0,0,0));
+        hostForDialogTreeF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
         hostForLoadingF = new SwingHostingPanel();
-        hostForLoadingF.setBorder(new EmptyBorder(0,0,0,0));
+        hostForLoadingF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
         hostForTitleCardF = new SwingHostingPanel();
-        hostForTitleCardF.setBorder(new EmptyBorder(0,0,0,0));
+        hostForTitleCardF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
         
         sceneCardLayout =null;
          
     
         // will be constructed from two vertical stacks.
         panelForDialogTreeStack = new JPanel();
-        panelForDialogTreeStack.setBorder(new EmptyBorder(0,0,0,0)); 
+        panelForDialogTreeStack.setLayout(new FlowLayout(FlowLayout.LEFT,0,0)); 
         {
         	// lay the CL/V/I panel and dialog tree - on top of each other
         	JPanel commandLineAndVerbsAndInventoryF = new JPanel();    	
         	commandLineAndVerbsAndInventoryF.setBackground(new Color(0,0,255));
-        	commandLineAndVerbsAndInventoryF.setBorder(new EmptyBorder(0,0,0,0)); 
+        	commandLineAndVerbsAndInventoryF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0)); 
             
         	dialogTreeCardLayout = new CardLayout();
         	dialogTreeCardLayout.setHgap(0);
@@ -96,7 +96,7 @@ implements MasterPanelAPI
         	{
         		// layout the command line and the panel below it - vertically.
         		JPanel verbsAndInventoryF = new JPanel();
-        		verbsAndInventoryF.setBorder(new EmptyBorder(0,0,0,0));
+        		verbsAndInventoryF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
         		verbsAndInventoryF.setBackground(new Color(0,255,0));
         		
         		commandLineAndVerbsAndInventoryF.add(hostForCommandLineF);
@@ -115,7 +115,7 @@ implements MasterPanelAPI
         } 
 
         panelForSceneStack = new JPanel();
-        panelForSceneStack.setBorder(new EmptyBorder(0,0,0,0));
+        panelForSceneStack.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 		
         {
         	sceneCardLayout = new CardLayout();
@@ -123,7 +123,6 @@ implements MasterPanelAPI
         	sceneCardLayout.setVgap(0);
 	
         	panelForSceneStack.setLayout(sceneCardLayout);
-        	panelForSceneStack.setBorder(new EmptyBorder(0,0,0,0));
         	panelForSceneStack.add(hostForSceneF, SCENE_WIDGET);
         	panelForSceneStack.add(hostForLoadingF, LOADING_WIDGET);  
         	panelForSceneStack.add(hostForTitleCardF, TITLECARD_WIDGET);  
