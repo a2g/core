@@ -24,7 +24,6 @@ import java.awt.GridLayout;
 import java.awt.Label;
 
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.VerbsPanelAPI;
@@ -49,7 +48,7 @@ extends JPanel implements VerbsPanelAPI
     {
     	this.bus = bus;
     	this.api =  api;
-    	this.setBorder(new EmptyBorder(0,0,0,0));
+    	
     	this.setForeground(new Color(fore.css[0], fore.css[1], fore.css[2]));	
    		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
     	grid = new GridLayout();

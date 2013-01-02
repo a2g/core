@@ -32,7 +32,7 @@ public class SayAction extends BaseAction {
 	private ArrayList<Double> ceilings;
 	private PopupPanelAPI popup;
 	private short objId;
-	private double totalDuration;
+	private double totalDurationInSeconds;
 	private Animation anim;
 	private SceneObject object;
 	private int numberOfFramesTotal;
@@ -46,12 +46,12 @@ public class SayAction extends BaseAction {
 		speech = new ArrayList<String>();
 		ceilings = new ArrayList<Double>();
 		String[] lines = fullSpeech.split("\n");
-		this.totalDuration = 0;
+		this.totalDurationInSeconds = 0;
 		for (int i = 0; i < lines.length; i++) {
 			String line = lines[i];
 			speech.add(line);
 			int milliseconds = getMillisecondsForSpeech(line);
-			totalDuration = totalDuration + milliseconds;
+			totalDurationInSeconds = totalDurationInSeconds + milliseconds;
 		}
 
 		// set ceilings (for easy calcluation)
@@ -59,7 +59,7 @@ public class SayAction extends BaseAction {
 		for (int i = 0; i < lines.length; i++) {
 			String line = lines[i];
 			rollingCeiling += getMillisecondsForSpeech(line);
-			ceilings.add(new Double(rollingCeiling / totalDuration));
+			ceilings.add(new Double(rollingCeiling / totalDurationInSeconds));
 		}
 
 		InternalAPI api = getApi();
@@ -109,19 +109,19 @@ public class SayAction extends BaseAction {
 			{
 				// if theres no animation then we just wait for the totalDuration;
 				double framesPerSecond = 40;
-				numberOfFramesTotal = (int) (totalDuration * framesPerSecond);
+				numberOfFramesTotal = (int) (totalDurationInSeconds * framesPerSecond);
 			} 
 			else
 			{
 				numberOfFramesTotal = getAdjustedNumberOfFrames(
 						speech.get(0),
-						totalDuration, 
+						totalDurationInSeconds, 
 						anim.getFrames().getCount(), 
 						object.getTalkingAnimationDelay()
 						);
 			}
 		}
-		if(numberOfFramesTotal<60)
+		if(numberOfFramesTotal<2)
 		{
 			getApi().displayTitleCard("error!!", ColorEnum.Black);
 			assert(false);
@@ -135,7 +135,7 @@ public class SayAction extends BaseAction {
 		this.popup.setPopupPosition(20, 20);
 		
 
-		this.run((int) totalDuration);
+		this.run((int) totalDurationInSeconds);
 	}
 
 	@Override

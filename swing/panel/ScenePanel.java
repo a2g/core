@@ -20,6 +20,7 @@ package com.github.a2g.core.swing.panel;
 
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -82,6 +83,8 @@ implements ScenePanelAPI
         this.listOfAllVisibleImages = new LinkedList<Image>();
 		this.width = 200;
 		this.height = 200;
+		this.setBounds(0,0,320,200);
+		this.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 		this.setDoubleBuffered(true);
 		tally++;
 		

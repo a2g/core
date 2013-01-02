@@ -31,6 +31,6 @@ public class DialogTreeMouseOutHandler extends MouseAdapter {
 
     @Override
     public void mouseExited(MouseEvent event) {
-        this.label.setBackground(color);
+        this.label.setForeground(color);
     }
 }

@@ -88,10 +88,10 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 				text, branchId);
 	}
 
-	public BaseAction branch(int branchId, boolean isKey, String text) {
+	public BaseAction branch(int branchId, final boolean isKey, String text) {
 		if(isKey)
-			return doNothing();
-		return new DialogTreeBranchAction(this, text, branchId);
+			 return new DialogTreeBranchAction(this, text, branchId);
+		return doNothing();
 	}
 
 	public BaseAction doBoth(BaseAction a, BaseAction b) {
