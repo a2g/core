@@ -504,8 +504,8 @@ implements InternalAPI
 		npa.setApi(this);
 		BaseAction a = this.callbacks.onEntry(this,npa);
 		
-		this.masterPanel.setActiveState(GuiStateEnum.ActiveScene);
-		//.. then executeBaseAction will add an action to turn on the Scene 
+		this.masterPanel.setActiveState(GuiStateEnum.CutScene);
+		//.. then executeBaseAction->actionRunner::runAction will add an TitleCardAction 
 		// the title card 		
 		executeBaseAction(a);
 	}
