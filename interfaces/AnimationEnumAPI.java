@@ -16,17 +16,8 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.objectmodel.MasterPresenter;
-import com.google.gwt.event.shared.EventBus;
 
-
-public interface MasterPresenterHostAPI {
-
-    public void setValue(String name, int value);
-    public int getValue(String name);
-    public void instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(String scene);
-    public void setLastCommand(double x, double y, int v, String a, String b);
-    void alert(String string);
-    FactoryAPI getFactory(EventBus bus, MasterPresenter mp);
-	public SceneAPI getSceneViaCache(String string);
+public interface AnimationEnumAPI 
+{
+	public int getValue();
 }

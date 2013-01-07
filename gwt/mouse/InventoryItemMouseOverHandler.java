@@ -30,10 +30,10 @@ public class InventoryItemMouseOverHandler implements MouseMoveHandler {
     private final int code;
     private final InternalAPI api;
 
-    public InventoryItemMouseOverHandler(EventBus bus, InternalAPI api, String textualId, int code) {
+    public InventoryItemMouseOverHandler(EventBus bus, InternalAPI api, String textualId, int  objectCode) {
         this.bus = bus;
         this.textualId = textualId;
-        this.code = code;
+        this.code = objectCode;
         this.api = api;
 
     }

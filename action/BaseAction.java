@@ -40,7 +40,9 @@ import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.interfaces.ActionCallbackAPI;
+import com.github.a2g.core.interfaces.AnimationEnumAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.ObjectEnumAPI;
 import com.github.a2g.core.interfaces.SystemAnimationAPI;
 import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -147,14 +149,14 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// plain..
-	public BaseAction playAnimation(int animId) {
+	public BaseAction playAnimation(AnimationEnumAPI animId) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
 		return a;
 	}
 
-	public BaseAction playAnimation(int animId, int delay) {
+	public BaseAction playAnimation(AnimationEnumAPI animId, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
@@ -164,7 +166,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// simple backwards
-	public BaseAction playAnimationBackwards(int animId) {
+	public BaseAction playAnimationBackwards(AnimationEnumAPI animId) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
@@ -172,7 +174,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationBackwards(int animId, int delay) {
+	public BaseAction playAnimationBackwards(AnimationEnumAPI animId, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
@@ -182,7 +184,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// simple hold last frame
-	public BaseAction playAnimationHoldLastFrame(int animId) {
+	public BaseAction playAnimationHoldLastFrame(AnimationEnumAPI animId) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
@@ -190,7 +192,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationHoldLastFrame(int animId, int delay) {
+	public BaseAction playAnimationHoldLastFrame(AnimationEnumAPI animId, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
@@ -200,7 +202,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// simple non blocking
-	public BaseAction playAnimationNonBlocking(int animId) {
+	public BaseAction playAnimationNonBlocking(AnimationEnumAPI animId) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
@@ -208,7 +210,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationNonBlocking(int animId, int delay) {
+	public BaseAction playAnimationNonBlocking(AnimationEnumAPI animId, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
@@ -218,7 +220,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}	
 
 	// double combo1of3: backwards + hold last frame
-	public BaseAction playAnimationBackwardsHoldLastFrame(int animId) {
+	public BaseAction playAnimationBackwardsHoldLastFrame(AnimationEnumAPI animId) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
@@ -227,7 +229,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationBackwardsHoldLastFrame(int animId, int delay) {
+	public BaseAction playAnimationBackwardsHoldLastFrame(AnimationEnumAPI animId, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
@@ -238,7 +240,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// double combo2of3: backwards + nonblocking
-	public BaseAction playAnimationBackwardsNonBlocking(int animId) {
+	public BaseAction playAnimationBackwardsNonBlocking(AnimationEnumAPI animId) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
@@ -247,7 +249,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationBackwardsNonBlocking(int animId, int delay) {
+	public BaseAction playAnimationBackwardsNonBlocking(AnimationEnumAPI animId, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
@@ -258,7 +260,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// double combo2of3: holdLastFrame + nonblocking
-	public BaseAction playAnimationHoldLastFrameNonBlocking(int animId) {
+	public BaseAction playAnimationHoldLastFrameNonBlocking(AnimationEnumAPI animId) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
@@ -267,7 +269,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationHoldLastFrameNonBlocking(int animId, int delay) {
+	public BaseAction playAnimationHoldLastFrameNonBlocking(AnimationEnumAPI animId, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
@@ -278,7 +280,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// ..and one method with the whole lot!
-	public BaseAction playAnimationBackwardsHoldLastFrameNonBlocking(int animId) {
+	public BaseAction playAnimationBackwardsHoldLastFrameNonBlocking(AnimationEnumAPI animId) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
@@ -288,7 +290,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationBackwardsHoldLastFrameNonBlocking(int animId, int delay) {
+	public BaseAction playAnimationBackwardsHoldLastFrameNonBlocking(AnimationEnumAPI animId, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animId);
 
@@ -299,30 +301,30 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationRepeatWhilstVisible(int animId) {
+	public BaseAction playAnimationRepeatWhilstVisible(AnimationEnumAPI animId) {
 		return new PlayAnimationRepeatWhilstVisibleAction(
 				this, animId);
 	}
 
-	public BaseAction say(short objId, String speech) {
-		return new SayAction(this, objId,
+	public BaseAction say(ObjectEnumAPI objId, String speech) {
+		return new SayAction(this, objId.getValue(),
 				speech);
 		// return toReturn;
 	}
 
-	public BaseAction sayWithoutAnimation(short objId, String speed) {
+	public BaseAction sayWithoutAnimation(ObjectEnumAPI objId, String speed) {
 		return new SayWithoutAnimationAction(
-				this, objId, speed);
+				this, objId.getValue(), speed);
 	}
 
-	public BaseAction setActiveAnimation(int animId) {
+	public BaseAction setActiveAnimation(AnimationEnumAPI animId) {
 		return new SetActiveAnimationAction(
 				this, animId);
 	}
 
-	public BaseAction setActiveFrame(short objId, int frame) {
+	public BaseAction setActiveFrame(ObjectEnumAPI objId, int frame) {
 		return new SetActiveFrameAction(this,
-				objId, frame);
+				objId.getValue(), frame);
 	}
 
 	protected void setApi(InternalAPI api) {
@@ -333,14 +335,14 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		this.api = api;
 	}
 
-	public BaseAction setBaseMiddleX(short objId, double x) {
+	public BaseAction setBaseMiddleX(ObjectEnumAPI objId, double x) {
 		return new SetBaseMiddleXAction(this,
-				objId, x);
+				objId.getValue(), x);
 	}
 
-	public BaseAction setBaseMiddleY(short objId, double y) {
+	public BaseAction setBaseMiddleY(ObjectEnumAPI objId, double y) {
 		return new SetBaseMiddleYAction(this,
-				objId, y);
+				objId.getValue(), y);
 		// return toReturn;
 	}
 
@@ -348,9 +350,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		this.callbacks = callbacks;
 	}
 
-	public BaseAction setDisplayName(short objId, String displayName) {
+	public BaseAction setDisplayName(ObjectEnumAPI objId, String displayName) {
 		return new SetDisplayNameAction(this,
-				objId, displayName);
+				objId.getValue(), displayName);
 	}
 
 	public BaseAction setInventoryVisible(int invId, boolean isVisible) {
@@ -362,22 +364,22 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		this.parent = parent;
 	}
 
-	public BaseAction setTalkingAnimation(int animId) {
+	public BaseAction setTalkingAnimation(AnimationEnumAPI animId) {
 		return new SetTalkingAnimationAction(
 				this, animId);
 		// return toReturn;
 	}
 
-	public BaseAction setTalkingAnimationDelay(short objId, int delay) {
+	public BaseAction setTalkingAnimationDelay(ObjectEnumAPI objId, int delay) {
 		return new SetTalkingAnimationDelayAction(
-				this, objId, delay);
+				this, objId.getValue(), delay);
 		// return toReturn;
 	}
 	;
 
-	public BaseAction setVisible(short objId, boolean isVisible) {
+	public BaseAction setVisible(ObjectEnumAPI objId, boolean isVisible) {
 		return new SetVisibleAction(this,
-				objId, isVisible);
+				objId.getValue(), isVisible);
 	}
 	;
 
@@ -398,10 +400,10 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return orig;
 	}
 
-	public BaseAction swapProperty(short objId1, short objId2,
+	public BaseAction swapProperty(ObjectEnumAPI objId1, ObjectEnumAPI objId2,
 			SwapType type) {
 		return new SwapPropertyAction(this,
-				objId1, objId2, type);
+				objId1.getValue(), objId2.getValue(), type);
 	}
 
 	public BaseDialogTreeAction  switchTo(String sceneName) {
@@ -410,52 +412,52 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		// return toReturn;
 	}
 
-	public BaseAction waitForFrame(short objId, int frame) {
+	public BaseAction waitForFrame(ObjectEnumAPI objId, int frame) {
 		return new WaitForFrameAction(this,
-				objId, frame);
+				objId.getValue(), frame);
 	}
 
 
-	public BaseAction setHomeAnimation(int animId) {
+	public BaseAction setHomeAnimation(AnimationEnumAPI animId) {
 		return new SetHomeAnimationAction(this,
 				animId);
 	}
 
 
-	public BaseAction walkTo(short objId, double x, double y) {
-		return new WalkToAction(this, objId, x, y,0, false);
+	public BaseAction walkTo(ObjectEnumAPI objId, double x, double y) {
+		return new WalkToAction(this, objId.getValue(), x, y,0, false);
 	}
 
-	public BaseAction walkTo(short objId, PointF point) {
-		return new WalkToAction(this, objId,
+	public BaseAction walkTo(ObjectEnumAPI objId, PointF point) {
+		return new WalkToAction(this, objId.getValue(),
 				point.getX(), point.getY(),0, false);
 	}
 
-	public BaseAction walkTo(short objId, double x, double y, int delay) {
-		return new WalkToAction(this, objId, x, y, delay, false);
+	public BaseAction walkTo(ObjectEnumAPI objId, double x, double y, int delay) {
+		return new WalkToAction(this, objId.getValue(), x, y, delay, false);
 	}
 
-	public BaseAction walkTo(short objId, PointF point, int delay) {
-		return new WalkToAction(this, objId,point.getX(), point.getY(), delay, false);
+	public BaseAction walkTo(ObjectEnumAPI objId, PointF point, int delay) {
+		return new WalkToAction(this, objId.getValue(), point.getX(), point.getY(), delay, false);
 	}
 
 
-	public BaseAction walkToNonBlocking(short objId, double x, double y) {
-		return new WalkToAction(this, objId, x, y,0, true);
+	public BaseAction walkToNonBlocking(ObjectEnumAPI objId, double x, double y) {
+		return new WalkToAction(this, objId.getValue(), x, y,0, true);
 	}
 
-	public BaseAction walkToNonBlocking(short objId, PointF point) {
-		return new WalkToAction(this, objId,
+	public BaseAction walkToNonBlocking(ObjectEnumAPI objId, PointF point) {
+		return new WalkToAction(this, objId.getValue(),
 				point.getX(), point.getY(),0, true);
 	}
 
-	public BaseAction walkToNonBlocking(short objId, double x, double y, int delay) {
-		return new WalkToAction(this, objId, x,
+	public BaseAction walkToNonBlocking(ObjectEnumAPI objId, double x, double y, int delay) {
+		return new WalkToAction(this, objId.getValue(), x,
 				y, delay, true);
 	}
 
-	public BaseAction walkToNonBlocking(short objId, PointF point, int delay) {
-		return new WalkToAction(this, objId,
+	public BaseAction walkToNonBlocking(ObjectEnumAPI objId, PointF point, int delay) {
+		return new WalkToAction(this, objId.getValue(),
 				point.getX(), point.getY(), delay, true);
 	}    
 
@@ -474,7 +476,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	}
 
-	public BaseAction playAnimationNonBlockingHoldLastFrame(int animId) {
+	public BaseAction playAnimationNonBlockingHoldLastFrame(AnimationEnumAPI animId) {
 		PlayAnimationAction a = new PlayAnimationAction(
 					this, animId);
 

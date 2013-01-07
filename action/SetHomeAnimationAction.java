@@ -18,13 +18,14 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.interfaces.AnimationEnumAPI;
 
 
 public class SetHomeAnimationAction extends BaseAction {
-    private int animId;
-    public SetHomeAnimationAction(BaseAction parent, int animId) {
+    private AnimationEnumAPI animId;
+    public SetHomeAnimationAction(BaseAction parent, AnimationEnumAPI animId2) {
         super(parent, parent.getApi());
-        this.animId = animId;
+        this.animId = animId2;
     }
 
     @Override

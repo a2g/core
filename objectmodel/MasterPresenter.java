@@ -24,6 +24,7 @@ import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.action.NullParentAction;
+import com.github.a2g.core.action.SayAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.GuiStateEnum;
 import com.github.a2g.core.action.BaseDialogTreeAction;
@@ -34,17 +35,20 @@ import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ActionRunnerCallbackAPI;
+import com.github.a2g.core.interfaces.AnimationEnumAPI;
 import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.ImageAddAPI;
+import com.github.a2g.core.interfaces.InventoryItemEnumAPI;
 import com.github.a2g.core.interfaces.InventoryPresenterCallbackAPI;
 import com.github.a2g.core.interfaces.LoadAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
 import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
+import com.github.a2g.core.interfaces.ObjectEnumAPI;
 import com.github.a2g.core.interfaces.OnDialogTreeAPI;
 import com.github.a2g.core.interfaces.OnDoCommandAPI;
 import com.github.a2g.core.interfaces.OnEntryAPI;
@@ -226,6 +230,12 @@ implements InternalAPI
 	}
 
 	@Override
+	public SceneObject getObject(ObjectEnumAPI code) 
+	{
+		return getObject(code.getValue());
+	}
+	
+	@Override
 	public SceneObject getObject(short code) {
 		theObjectMap.size();
 		SceneObject ob = this.theObjectMap.get(
@@ -238,6 +248,12 @@ implements InternalAPI
 		return ob;
 	}
 
+	@Override
+	public Animation getAnimation(AnimationEnumAPI code) 
+	{
+		return getAnimation(code.getValue());
+	}
+	
 	@Override
 	public Animation getAnimation(int code) {
 		Animation anim = this.theAnimationMap.get(
@@ -252,6 +268,10 @@ implements InternalAPI
 		return anim;
 	}
 
+	@Override
+	public InventoryItem getInventoryItem(InventoryItemEnumAPI i) {
+		return getInventoryItem(i.getValue());
+	}
 	@Override
 	public InventoryItem getInventoryItem(int i) {
 		InventoryItem inv = inventoryPresenter.getInventoryItem(
@@ -495,7 +515,7 @@ implements InternalAPI
 		
 		NullParentAction npa = new NullParentAction(this);
 		npa.setApi(this);
-		BaseAction say = npa.say(objId, speech);
+		SayAction say = new SayAction(npa, objId, speech);
 		BaseDialogTreeAction actionChain = callbacks.onDialogTree(this, say, branchId);
 
 		executeBaseAction(actionChain);
@@ -841,7 +861,7 @@ implements InternalAPI
 	@Override
 	public SceneAPI getSceneFromCacheOrNew(String string) 
 	{
-		return this.parent.getSceneFromCacheOrNew(string);	
+		return this.parent.getSceneViaCache(string);	
 	}
 
 	@Override

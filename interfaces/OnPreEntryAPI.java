@@ -27,9 +27,9 @@ import com.github.a2g.core.objectmodel.VerbsPresenter;
 
 public interface OnPreEntryAPI {
 	   // get by ID
-    public SceneObject getObject(short code);
-    public Animation getAnimation(int a);
-    public InventoryItem getInventoryItem(int i);
+    public SceneObject getObject(ObjectEnumAPI  o);
+    public Animation getAnimation(AnimationEnumAPI  o);
+    public InventoryItem getInventoryItem(InventoryItemEnumAPI i);
 
     // property access methods
     public void setValue(Object name, int value);
@@ -51,4 +51,5 @@ public interface OnPreEntryAPI {
     public String getLastScene();
     public boolean isInDebugMode();
 	public void setInventoryPixelSize(int width, int height);
+	
 }
