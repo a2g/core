@@ -30,6 +30,8 @@ public class VerbsPresenter implements VerbCollectionCallbackAPI
 {
     private Verbs theVerbs;
     private VerbsPanelAPI view;
+	private int widthOfScene;
+	private int widthOfInventory;
 
     public VerbsPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent, InternalAPI api) 
     {
@@ -37,7 +39,8 @@ public class VerbsPresenter implements VerbCollectionCallbackAPI
         this.view = api.getFactory().createVerbsPanel(ColorEnum.Purple, ColorEnum.Black);
         panel.setThing(view);
         this.view.setVerbs(theVerbs);
-        
+        this.widthOfScene=0;
+        this.widthOfInventory=0;
     }
 
 	public void clear() 
@@ -59,6 +62,16 @@ public class VerbsPresenter implements VerbCollectionCallbackAPI
 	public void update() 
 	{
 		view.update();
+	}
+
+	public void setWidthOfScene(int width) {
+		this.widthOfScene = width;
+		view.setWidth(widthOfScene-widthOfInventory);
+	}
+
+	public void setWidthOfInventory(int width) {
+		this.widthOfInventory = width;
+		view.setWidth(widthOfScene-widthOfInventory);
 	}
 	
 }

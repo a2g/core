@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.GuiStateEnum;
@@ -276,10 +277,12 @@ implements InternalAPI
 
 	@Override
 	public void executeBaseAction(BaseAction a) {
-		if(a!=null)
+		if(a==null)
 		{
-			actionRunner.runAction(a);
+			BaseAction npa = new NullParentAction(this);
+			a = new DoNothingAction(npa);
 		}
+		actionRunner.runAction(a);
 	}
 	
 	public void skip()
@@ -504,7 +507,6 @@ implements InternalAPI
 		npa.setApi(this);
 		BaseAction a = this.callbacks.onEntry(this,npa);
 		
-		this.masterPanel.setActiveState(GuiStateEnum.CutScene);
 		//.. then executeBaseAction->actionRunner::runAction will add an TitleCardAction 
 		// the title card 		
 		executeBaseAction(a);
@@ -549,8 +551,11 @@ implements InternalAPI
 		// and expect them to stay current, so we set cuurentAnimations before pre-entry.
 		
 		callOnPreEntry();
+
 		startCallingOnEveryFrame();
+		this.masterPanel.setActiveState(GuiStateEnum.CutScene);
 		callOnEnterScene();
+
 	}
 
 
@@ -611,7 +616,7 @@ implements InternalAPI
 		this.titleCardPresenter.setPixelSize(width, height);
 		this.loadingPresenter.setPixelSize(width, height);
 		this.dialogTreePresenter.setPixelSize(width, height>>1);
-		
+		this.verbsPresenter.setWidthOfScene(width);
 	}
 
 	@Override
@@ -804,7 +809,7 @@ implements InternalAPI
 	@Override
 	public void setInventoryPixelSize(int width, int height) {
 		this.inventoryPresenter.setSizeOfSingleInventoryImage(width,height);
-		
+		this.verbsPresenter.setWidthOfInventory(inventoryPresenter.getWidth());
 	}
 
 	@Override

@@ -23,4 +23,5 @@ public interface VerbsPanelAPI
 	void setVisible(boolean isVisible);
 	void setVerbs(Verbs theVerbs);
 	void update();
+	void setWidth(int i);
 }

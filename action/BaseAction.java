@@ -474,6 +474,15 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	}
 
+	public BaseAction playAnimationNonBlockingHoldLastFrame(int animId) {
+		PlayAnimationAction a = new PlayAnimationAction(
+					this, animId);
+
+		a.setHoldLastFrame(true);
+		a.setNonBlocking(true);
+		return a;
+	}
+
 }
 
 

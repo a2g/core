@@ -44,11 +44,14 @@ extends JPanel implements VerbsPanelAPI
 	InternalAPI api;
 	Verbs verbs;
 	GridLayout grid;
+	private int preferredWith;
+	private int preferredHeight;
     public VerbsPanel(EventBus bus, InternalAPI api, ColorEnum fore, ColorEnum back) 
     {
     	this.bus = bus;
     	this.api =  api;
-    	
+    	this.preferredWith =160;
+    	this.preferredHeight = 80;
     	this.setForeground(new Color(fore.css[0], fore.css[1], fore.css[2]));	
    		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
     	grid = new GridLayout();
@@ -60,7 +63,7 @@ extends JPanel implements VerbsPanelAPI
 	@Override
 	public Dimension	getPreferredSize()
 	{	
-		return new Dimension(160,80);
+		return new Dimension(this.preferredWith,this.preferredHeight);
 	}
     
     @Override
@@ -105,5 +108,13 @@ extends JPanel implements VerbsPanelAPI
     		}
     	}
     }
+
+	@Override
+	public void setWidth(int i) {
+		this.preferredWith = i;
+		this.preferredHeight = 80;
+		update();
+		
+	}
 
 }

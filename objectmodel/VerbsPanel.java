@@ -75,4 +75,14 @@ implements VerbsPanelAPI
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void setWidth(int i) {
+		// do nothing
+		// since the panel hierarchy
+		// in html evaluates in such a way
+		// as to keep the width of the verbs
+		// panel reasonable.
+		
+	}
 }
