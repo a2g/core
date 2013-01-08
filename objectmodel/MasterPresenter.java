@@ -41,14 +41,12 @@ import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.ImageAddAPI;
-import com.github.a2g.core.interfaces.InventoryItemEnumAPI;
 import com.github.a2g.core.interfaces.InventoryPresenterCallbackAPI;
 import com.github.a2g.core.interfaces.LoadAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
 import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
-import com.github.a2g.core.interfaces.ObjectEnumAPI;
 import com.github.a2g.core.interfaces.OnDialogTreeAPI;
 import com.github.a2g.core.interfaces.OnDoCommandAPI;
 import com.github.a2g.core.interfaces.OnEntryAPI;
@@ -229,11 +227,6 @@ implements InternalAPI
 		return true;
 	}
 
-	@Override
-	public SceneObject getObject(ObjectEnumAPI code) 
-	{
-		return getObject(code.getValue());
-	}
 	
 	@Override
 	public SceneObject getObject(short code) {
@@ -253,8 +246,7 @@ implements InternalAPI
 	{
 		return getAnimation(code.getValue());
 	}
-	
-	@Override
+		
 	public Animation getAnimation(int code) {
 		Animation anim = this.theAnimationMap.get(
 				code);
@@ -268,10 +260,6 @@ implements InternalAPI
 		return anim;
 	}
 
-	@Override
-	public InventoryItem getInventoryItem(InventoryItemEnumAPI i) {
-		return getInventoryItem(i.getValue());
-	}
 	@Override
 	public InventoryItem getInventoryItem(int i) {
 		InventoryItem inv = inventoryPresenter.getInventoryItem(

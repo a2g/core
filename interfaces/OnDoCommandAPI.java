@@ -26,10 +26,11 @@ import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.VerbsPresenter;
 
 public interface OnDoCommandAPI {
-	   // get by ID
-    public SceneObject getObject(ObjectEnumAPI  o);
-    public Animation getAnimation(AnimationEnumAPI  o);
-    public InventoryItem getInventoryItem(InventoryItemEnumAPI i);
+    // get by ID
+    public SceneObject getObject(short  objectCode);
+    public Animation getAnimation(AnimationEnumAPI  animationCode);
+    public InventoryItem getInventoryItem(int inventoryItemCode);
+
 
     // property access methods
     public void setValue(Object name, int value);

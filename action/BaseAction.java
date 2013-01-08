@@ -42,11 +42,11 @@ import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.interfaces.ActionCallbackAPI;
 import com.github.a2g.core.interfaces.AnimationEnumAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.ObjectEnumAPI;
 import com.github.a2g.core.interfaces.SystemAnimationAPI;
 import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointF;
+import com.visuals.inventories._70_piranha_inventory.i;
 
 
 
@@ -306,15 +306,15 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 				this, animId);
 	}
 
-	public BaseAction say(ObjectEnumAPI objId, String speech) {
-		return new SayAction(this, objId.getValue(),
+	public BaseAction say(short objectCode, String speech) {
+		return new SayAction(this, objectCode,
 				speech);
 		// return toReturn;
 	}
 
-	public BaseAction sayWithoutAnimation(ObjectEnumAPI objId, String speed) {
+	public BaseAction sayWithoutAnimation(short objectCode, String speed) {
 		return new SayWithoutAnimationAction(
-				this, objId.getValue(), speed);
+				this, objectCode, speed);
 	}
 
 	public BaseAction setActiveAnimation(AnimationEnumAPI animId) {
@@ -322,9 +322,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 				this, animId);
 	}
 
-	public BaseAction setActiveFrame(ObjectEnumAPI objId, int frame) {
+	public BaseAction setActiveFrame(short objectCode, int frame) {
 		return new SetActiveFrameAction(this,
-				objId.getValue(), frame);
+				objectCode, frame);
 	}
 
 	protected void setApi(InternalAPI api) {
@@ -335,14 +335,14 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		this.api = api;
 	}
 
-	public BaseAction setBaseMiddleX(ObjectEnumAPI objId, double x) {
+	public BaseAction setBaseMiddleX(short objectCode, double x) {
 		return new SetBaseMiddleXAction(this,
-				objId.getValue(), x);
+				objectCode, x);
 	}
 
-	public BaseAction setBaseMiddleY(ObjectEnumAPI objId, double y) {
+	public BaseAction setBaseMiddleY(short objectCode, double y) {
 		return new SetBaseMiddleYAction(this,
-				objId.getValue(), y);
+				objectCode, y);
 		// return toReturn;
 	}
 
@@ -350,14 +350,14 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		this.callbacks = callbacks;
 	}
 
-	public BaseAction setDisplayName(ObjectEnumAPI objId, String displayName) {
+	public BaseAction setDisplayName(short objectCode, String displayName) {
 		return new SetDisplayNameAction(this,
-				objId.getValue(), displayName);
+				objectCode, displayName);
 	}
 
-	public BaseAction setInventoryVisible(int invId, boolean isVisible) {
+	public BaseAction setInventoryVisible(int inventoryId, boolean isVisible) {
 		return new SetInventoryVisibleAction(
-				this, invId, isVisible);
+				this, inventoryId, isVisible);
 	}
 
 	public void setParent(BaseAction parent) {
@@ -370,16 +370,16 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		// return toReturn;
 	}
 
-	public BaseAction setTalkingAnimationDelay(ObjectEnumAPI objId, int delay) {
+	public BaseAction setTalkingAnimationDelay(short objectCode, int delay) {
 		return new SetTalkingAnimationDelayAction(
-				this, objId.getValue(), delay);
+				this, objectCode, delay);
 		// return toReturn;
 	}
 	;
 
-	public BaseAction setVisible(ObjectEnumAPI objId, boolean isVisible) {
+	public BaseAction setVisible(short objectCode, boolean isVisible) {
 		return new SetVisibleAction(this,
-				objId.getValue(), isVisible);
+				objectCode, isVisible);
 	}
 	;
 
@@ -400,10 +400,10 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return orig;
 	}
 
-	public BaseAction swapProperty(ObjectEnumAPI objId1, ObjectEnumAPI objId2,
+	public BaseAction swapProperty(short objectCode1, short objectCode2,
 			SwapType type) {
 		return new SwapPropertyAction(this,
-				objId1.getValue(), objId2.getValue(), type);
+				objectCode1, objectCode2, type);
 	}
 
 	public BaseDialogTreeAction  switchTo(String sceneName) {
@@ -412,9 +412,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		// return toReturn;
 	}
 
-	public BaseAction waitForFrame(ObjectEnumAPI objId, int frame) {
+	public BaseAction waitForFrame(short objectCode, int frame) {
 		return new WaitForFrameAction(this,
-				objId.getValue(), frame);
+				objectCode, frame);
 	}
 
 
@@ -424,40 +424,40 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 
-	public BaseAction walkTo(ObjectEnumAPI objId, double x, double y) {
-		return new WalkToAction(this, objId.getValue(), x, y,0, false);
+	public BaseAction walkTo(short objectCode, double x, double y) {
+		return new WalkToAction(this, objectCode, x, y,0, false);
 	}
 
-	public BaseAction walkTo(ObjectEnumAPI objId, PointF point) {
-		return new WalkToAction(this, objId.getValue(),
+	public BaseAction walkTo(short objectCode, PointF point) {
+		return new WalkToAction(this, objectCode,
 				point.getX(), point.getY(),0, false);
 	}
 
-	public BaseAction walkTo(ObjectEnumAPI objId, double x, double y, int delay) {
-		return new WalkToAction(this, objId.getValue(), x, y, delay, false);
+	public BaseAction walkTo(short objectCode, double x, double y, int delay) {
+		return new WalkToAction(this, objectCode, x, y, delay, false);
 	}
 
-	public BaseAction walkTo(ObjectEnumAPI objId, PointF point, int delay) {
-		return new WalkToAction(this, objId.getValue(), point.getX(), point.getY(), delay, false);
+	public BaseAction walkTo(short objectCode, PointF point, int delay) {
+		return new WalkToAction(this, objectCode, point.getX(), point.getY(), delay, false);
 	}
 
 
-	public BaseAction walkToNonBlocking(ObjectEnumAPI objId, double x, double y) {
-		return new WalkToAction(this, objId.getValue(), x, y,0, true);
+	public BaseAction walkToNonBlocking(short objectCode, double x, double y) {
+		return new WalkToAction(this, objectCode, x, y,0, true);
 	}
 
-	public BaseAction walkToNonBlocking(ObjectEnumAPI objId, PointF point) {
-		return new WalkToAction(this, objId.getValue(),
+	public BaseAction walkToNonBlocking(short objectCode, PointF point) {
+		return new WalkToAction(this, objectCode,
 				point.getX(), point.getY(),0, true);
 	}
 
-	public BaseAction walkToNonBlocking(ObjectEnumAPI objId, double x, double y, int delay) {
-		return new WalkToAction(this, objId.getValue(), x,
+	public BaseAction walkToNonBlocking(short objectCode, double x, double y, int delay) {
+		return new WalkToAction(this, objectCode, x,
 				y, delay, true);
 	}
 
-	public BaseAction walkToNonBlocking(ObjectEnumAPI objId, PointF point, int delay) {
-		return new WalkToAction(this, objId.getValue(),
+	public BaseAction walkToNonBlocking(short objectCode, PointF point, int delay) {
+		return new WalkToAction(this, objectCode,
 				point.getX(), point.getY(), delay, true);
 	}    
 

@@ -33,15 +33,12 @@ public interface InternalAPI
 extends ImageAddAPI, OnDoCommandAPI {
     // get by ID
     @Override
-	public SceneObject getObject(ObjectEnumAPI  o);
+    public SceneObject getObject(short  objectCode);
     @Override
-	public Animation getAnimation(AnimationEnumAPI code);
+    public Animation getAnimation(AnimationEnumAPI  animationCode);
     @Override
-	public InventoryItem getInventoryItem(InventoryItemEnumAPI code);
+    public InventoryItem getInventoryItem(int inventoryItemCode);
 
-	public SceneObject getObject(short o);//no need for short
-	public Animation getAnimation(int code);
-	public InventoryItem getInventoryItem(int code);
  
     
     // property access methods
