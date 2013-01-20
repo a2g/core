@@ -102,7 +102,7 @@ implements ImageBundleLoaderCallbackAPI
 
 	public void addToAppropriateAnimation(int numberPrefix, Image imageAndPos,
 			String objectTextualId, String animationTextualId,
-			short objectCode, int objPlusAnimCode, int width, int height) 
+			short objectCode, String objPlusAnimCode, int width, int height) 
 	{
 		theCurrentLoader.addToAppropriateAnimation(numberPrefix, imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode,width, height);
 	}

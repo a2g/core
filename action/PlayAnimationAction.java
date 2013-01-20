@@ -18,7 +18,6 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.AnimationEnumAPI;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.SceneObject;
 
@@ -31,9 +30,9 @@ public class PlayAnimationAction extends BaseAction {
     private boolean holdLastFrame;
     private boolean isNonBlocking;
 
-    public PlayAnimationAction(BaseAction parent, AnimationEnumAPI animId) {
+    public PlayAnimationAction(BaseAction parent, String  animCode) {
         super(parent, parent.getApi());
-        this.anim = getApi().getAnimation(animId);
+        this.anim = getApi().getAnimation(animCode);
         this.animsParent = anim.getObject();
         this.delay = 0;
         this.isBackwards = false;

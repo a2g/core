@@ -17,6 +17,8 @@
 package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.primitive.CodesForVerbs;
+import com.github.a2g.core.primitive.STARTING_ODD_INVENTORY_CODE;
+import com.github.a2g.core.primitive.STARTING_ODD_OBJECTS_CODE;
 
 
 public class SentenceUnit {
@@ -83,6 +85,15 @@ public class SentenceUnit {
 		if(code>1 && !isVerb)
 			return true;
 		return false;
+	}
+
+	public boolean isInventory() 
+	{
+		int inv = STARTING_ODD_INVENTORY_CODE.STARTING_ODD_INVENTORY_CODE;
+		int obj = STARTING_ODD_OBJECTS_CODE.STARTING_ODD_OBJECTS_CODE;
+		
+		boolean isInventory = code>=inv && code<=obj;
+		return isInventory;
 	}
 }
 

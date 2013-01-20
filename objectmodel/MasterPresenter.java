@@ -35,7 +35,6 @@ import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ActionRunnerCallbackAPI;
-import com.github.a2g.core.interfaces.AnimationEnumAPI;
 import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
@@ -48,7 +47,7 @@ import com.github.a2g.core.interfaces.MasterPanelAPI;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
 import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
 import com.github.a2g.core.interfaces.OnDialogTreeAPI;
-import com.github.a2g.core.interfaces.OnDoCommandAPI;
+import com.github.a2g.core.interfaces.OnDoAPI;
 import com.github.a2g.core.interfaces.OnEntryAPI;
 import com.github.a2g.core.interfaces.OnEveryFrameAPI;
 import com.github.a2g.core.interfaces.OnFillLoadListAPI;
@@ -71,7 +70,7 @@ implements InternalAPI
 , OnEntryAPI
 , OnPreEntryAPI
 , OnEveryFrameAPI
-, OnDoCommandAPI
+, OnDoAPI
 , OnDialogTreeAPI
 , CommandLineCallbackAPI
 , ActionRunnerCallbackAPI
@@ -88,7 +87,7 @@ implements InternalAPI
 
 	private SceneAPI callbacks;
 	private TreeMap<Short, SceneObject> theObjectMap;
-	private TreeMap<Integer, Animation> theAnimationMap;
+	private TreeMap<String, Animation> theAnimationMap;
 	
 
 	private EventBus bus;
@@ -115,7 +114,7 @@ implements InternalAPI
 		this.textSpeedDelay = 20;
 		
 		this.theObjectMap = new TreeMap<Short, SceneObject>();
-		this.theAnimationMap = new TreeMap<Integer, Animation>();
+		this.theAnimationMap = new TreeMap<String, Animation>();
 
 		this.actionRunner = new ActionRunner(this);
 		this.theListOfIndexesToInsertAt= new Integer[100];
@@ -206,7 +205,7 @@ implements InternalAPI
 	} 
 
 	@Override
-	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String objectTextualId, String animationTextualId, short objectCode, int objPlusAnimCode, PackagedImageAPI imageResource) {
+	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String objectTextualId, String animationTextualId, short objectCode, String objPlusAnimCode, PackagedImageAPI imageResource) {
 		if (this.callbacks == null) {
 			return true;
 		}
@@ -242,12 +241,7 @@ implements InternalAPI
 	}
 
 	@Override
-	public Animation getAnimation(AnimationEnumAPI code) 
-	{
-		return getAnimation(code.getValue());
-	}
-		
-	public Animation getAnimation(int code) {
+	public Animation getAnimation(String code) {
 		Animation anim = this.theAnimationMap.get(
 				code);
 
@@ -694,7 +688,7 @@ implements InternalAPI
 			for(int j=0;j<srcObject.getAnimations().getCount();j++)
 			{
 				Animation srcAnimation = srcObject.getAnimations().at(j);
-				int animationCode = srcAnimation.getCode();
+				String animationCode = srcAnimation.getCode();
 				String animTextualId = srcAnimation.getTextualId();
 				
 				Animation destAnimation = destObject.getAnimations().at(animTextualId);
@@ -778,16 +772,42 @@ implements InternalAPI
 
 	@Override
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,
-			SentenceUnit sentenceA, SentenceUnit sentenceB, double x, double y) {
+			SentenceUnit sentenceUnitA, SentenceUnit sentenceUnitB, double x, double y) {
 		 NullParentAction npa = new NullParentAction(this);
          
-         BaseAction a = this.callbacks.onDoCommand(
+		 BaseAction a = null;
+		 if(sentenceUnitB.getCode()==-1)
+		 {
+			 if(sentenceUnitA.isInventory())
+			 {
+				 a = this.callbacks.onDoInventory(
+			         		this,npa,
+			                 verbAsCode, 
+			                 sentenceUnitA,
+			                 x, 
+			                 y);
+				 
+			 }else
+			 {
+				 a = this.callbacks.onDoSceneObject(
+			         		this,npa,
+			                 verbAsCode, 
+			                 sentenceUnitA,
+			                 x, 
+			                 y);
+			 }
+		 }
+		 else
+		 {
+			 a = this.callbacks.onDoCombinatorial(
          		this,npa,
                  verbAsCode, 
-                 sentenceA,
-                 sentenceB, 
+                 sentenceUnitA,
+                 sentenceUnitB, 
                  x, 
                  y);
+		 }
+		 
          if(a!=null)
          {
         	 
@@ -797,8 +817,8 @@ implements InternalAPI
          
          setLastCommand(x, y,
                  verbAsVerbEnumeration,
-                 sentenceA.getTextualId(),
-                 sentenceB.getTextualId());
+                 sentenceUnitA.getTextualId(),
+                 sentenceUnitB.getTextualId());
 
 	}
 

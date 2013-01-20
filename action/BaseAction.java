@@ -40,7 +40,6 @@ import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.interfaces.ActionCallbackAPI;
-import com.github.a2g.core.interfaces.AnimationEnumAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.SystemAnimationAPI;
 import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
@@ -148,16 +147,16 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// plain..
-	public BaseAction playAnimation(AnimationEnumAPI animId) {
+	public BaseAction playAnimation(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		return a;
 	}
 
-	public BaseAction playAnimation(AnimationEnumAPI animId, int delay) {
+	public BaseAction playAnimation(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		a.setDelay(delay);
 		return a;
@@ -165,17 +164,17 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// simple backwards
-	public BaseAction playAnimationBackwards(AnimationEnumAPI animId) {
+	public BaseAction playAnimationBackwards(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		a.setBackwards(true);
 		return a;
 	}
 
-	public BaseAction playAnimationBackwards(AnimationEnumAPI animId, int delay) {
+	public BaseAction playAnimationBackwards(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		a.setBackwards(true);
 		a.setDelay(delay);
@@ -183,17 +182,17 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// simple hold last frame
-	public BaseAction playAnimationHoldLastFrame(AnimationEnumAPI animId) {
+	public BaseAction playAnimationHoldLastFrame(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		a.setHoldLastFrame(true);
 		return a;
 	}
 
-	public BaseAction playAnimationHoldLastFrame(AnimationEnumAPI animId, int delay) {
+	public BaseAction playAnimationHoldLastFrame(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		a.setHoldLastFrame(true);
 		a.setDelay(delay);
@@ -201,17 +200,17 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// simple non blocking
-	public BaseAction playAnimationNonBlocking(AnimationEnumAPI animId) {
+	public BaseAction playAnimationNonBlocking(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		a.setNonBlocking(true);
 		return a;
 	}
 
-	public BaseAction playAnimationNonBlocking(AnimationEnumAPI animId, int delay) {
+	public BaseAction playAnimationNonBlocking(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		a.setNonBlocking(true);
 		a.setDelay(delay);
@@ -219,18 +218,18 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}	
 
 	// double combo1of3: backwards + hold last frame
-	public BaseAction playAnimationBackwardsHoldLastFrame(AnimationEnumAPI animId) {
+	public BaseAction playAnimationBackwardsHoldLastFrame(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		a.setBackwards(true);
 		a.setHoldLastFrame(true);
 		return a;
 	}
 
-	public BaseAction playAnimationBackwardsHoldLastFrame(AnimationEnumAPI animId, int delay) {
+	public BaseAction playAnimationBackwardsHoldLastFrame(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		a.setBackwards(true);
 		a.setHoldLastFrame(true);
@@ -239,18 +238,18 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// double combo2of3: backwards + nonblocking
-	public BaseAction playAnimationBackwardsNonBlocking(AnimationEnumAPI animId) {
+	public BaseAction playAnimationBackwardsNonBlocking(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		a.setBackwards(true);
 		a.setNonBlocking(true);
 		return a;
 	}
 
-	public BaseAction playAnimationBackwardsNonBlocking(AnimationEnumAPI animId, int delay) {
+	public BaseAction playAnimationBackwardsNonBlocking(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		a.setBackwards(true);
 		a.setNonBlocking(true);
@@ -259,18 +258,18 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// double combo2of3: holdLastFrame + nonblocking
-	public BaseAction playAnimationHoldLastFrameNonBlocking(AnimationEnumAPI animId) {
+	public BaseAction playAnimationHoldLastFrameNonBlocking(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		a.setHoldLastFrame(true);
 		a.setNonBlocking(true);
 		return a;
 	}
 
-	public BaseAction playAnimationHoldLastFrameNonBlocking(AnimationEnumAPI animId, int delay) {
+	public BaseAction playAnimationHoldLastFrameNonBlocking(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		a.setHoldLastFrame(true);
 		a.setNonBlocking(true);
@@ -279,9 +278,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// ..and one method with the whole lot!
-	public BaseAction playAnimationBackwardsHoldLastFrameNonBlocking(AnimationEnumAPI animId) {
+	public BaseAction playAnimationBackwardsHoldLastFrameNonBlocking(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		a.setBackwards(true);
 		a.setHoldLastFrame(true);
@@ -289,9 +288,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationBackwardsHoldLastFrameNonBlocking(AnimationEnumAPI animId, int delay) {
+	public BaseAction playAnimationBackwardsHoldLastFrameNonBlocking(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animId);
+				this, animationCode);
 
 		a.setBackwards(true);
 		a.setHoldLastFrame(true);
@@ -300,9 +299,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationRepeatWhilstVisible(AnimationEnumAPI animId) {
+	public BaseAction playAnimationRepeatWhilstVisible(String  animationCode) {
 		return new PlayAnimationRepeatWhilstVisibleAction(
-				this, animId);
+				this, animationCode);
 	}
 
 	public BaseAction say(short objectCode, String speech) {
@@ -316,9 +315,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 				this, objectCode, speed);
 	}
 
-	public BaseAction setActiveAnimation(AnimationEnumAPI animId) {
+	public BaseAction setActiveAnimation(String  animationCode) {
 		return new SetActiveAnimationAction(
-				this, animId);
+				this, animationCode);
 	}
 
 	public BaseAction setActiveFrame(short objectCode, int frame) {
@@ -363,9 +362,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		this.parent = parent;
 	}
 
-	public BaseAction setTalkingAnimation(AnimationEnumAPI animId) {
+	public BaseAction setTalkingAnimation(String  animationCode) {
 		return new SetTalkingAnimationAction(
-				this, animId);
+				this, animationCode);
 		// return toReturn;
 	}
 
@@ -417,9 +416,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 
-	public BaseAction setHomeAnimation(AnimationEnumAPI animId) {
+	public BaseAction setHomeAnimation(String  animationCode) {
 		return new SetHomeAnimationAction(this,
-				animId);
+				animationCode);
 	}
 
 
@@ -475,9 +474,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	}
 
-	public BaseAction playAnimationNonBlockingHoldLastFrame(AnimationEnumAPI animId) {
+	public BaseAction playAnimationNonBlockingHoldLastFrame(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
-					this, animId);
+					this, animationCode);
 
 		a.setHoldLastFrame(true);
 		a.setNonBlocking(true);

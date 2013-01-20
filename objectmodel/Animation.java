@@ -29,7 +29,7 @@ public class Animation {
     private boolean wasSetAsTalkingAnimation;
     private boolean wasSetAsCurrentAnimation;
     private SceneAPI.Special specialAnimationThisWasSetTo;
-	private int code;
+	private String code;
 
     public Animation(String textualId, SceneObject owningSceneObject) {
         this.parent = owningSceneObject;
@@ -57,12 +57,12 @@ public class Animation {
         this.textualId = textualId;
     }
     
-    public void setCode(int code)
+    public void setCode(String objPlusAnimCode)
     {
-    	this.code = code;
+    	this.code = objPlusAnimCode;
     }
     
-    public int getCode()
+    public String getCode()
     {
     	return code;
     }

@@ -30,12 +30,12 @@ import com.github.a2g.core.primitive.ColorEnum;
 
 
 public interface InternalAPI 
-extends ImageAddAPI, OnDoCommandAPI {
+extends ImageAddAPI, OnDoAPI {
     // get by ID
     @Override
     public SceneObject getObject(short  objectCode);
     @Override
-    public Animation getAnimation(AnimationEnumAPI  animationCode);
+    public Animation getAnimation(String  animationCode);
     @Override
     public InventoryItem getInventoryItem(int inventoryItemCode);
 

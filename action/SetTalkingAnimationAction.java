@@ -18,16 +18,15 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.AnimationEnumAPI;
 import com.github.a2g.core.objectmodel.Animation;
 
 
 public class SetTalkingAnimationAction extends BaseAction {
-    private AnimationEnumAPI animId;
+    private String animId;
 
-    public SetTalkingAnimationAction(BaseAction parent, AnimationEnumAPI animId2) {
+    public SetTalkingAnimationAction(BaseAction parent, String animationCode) {
         super(parent, parent.getApi());
-        this.animId = animId2;
+        this.animId = animationCode;
     }
 
     @Override

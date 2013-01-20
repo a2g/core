@@ -28,7 +28,7 @@ import com.github.a2g.core.objectmodel.VerbsPresenter;
 public interface OnEveryFrameAPI {
     // get by ID
     public SceneObject getObject(short  objectCode);
-    public Animation getAnimation(AnimationEnumAPI  animationCode);
+    public Animation getAnimation(String  animationCode);
     public InventoryItem getInventoryItem(int inventoryItemCode);
 
 

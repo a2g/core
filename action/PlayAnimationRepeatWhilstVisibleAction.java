@@ -18,16 +18,15 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.AnimationEnumAPI;
 import com.github.a2g.core.objectmodel.Animation;
 
 
 public class PlayAnimationRepeatWhilstVisibleAction extends BaseAction {
     private Animation anim;
 
-    public PlayAnimationRepeatWhilstVisibleAction(BaseAction parent, AnimationEnumAPI animId) {
+    public PlayAnimationRepeatWhilstVisibleAction(BaseAction parent, String animationCode) {
         super(parent, parent.getApi());
-        this.anim = getApi().getAnimation(animId);
+        this.anim = getApi().getAnimation(animationCode);
     }
 
     @Override

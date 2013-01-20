@@ -143,7 +143,7 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem>{
 		return  loaderName + bundleNumber;
 	}
 	
-	public void addToAppropriateAnimation(int prefix, Image imageAndPos, String objectTextualId, String animationTextualId, short objectCode, int objPlusAnimCode, int width, int height)
+	public void addToAppropriateAnimation(int prefix, Image imageAndPos, String objectTextualId, String animationTextualId, short objectCode, String objPlusAnimCode, int width, int height)
 	{
 		this.theCurrentCacheObject.addToAppropriateAnimation(prefix, imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode, width, height);
 	}
