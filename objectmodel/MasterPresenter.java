@@ -35,6 +35,7 @@ import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ActionRunnerCallbackAPI;
+import com.github.a2g.core.interfaces.AnimationEnumAPI;
 import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
@@ -47,7 +48,7 @@ import com.github.a2g.core.interfaces.MasterPanelAPI;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
 import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
 import com.github.a2g.core.interfaces.OnDialogTreeAPI;
-import com.github.a2g.core.interfaces.OnDoAPI;
+import com.github.a2g.core.interfaces.OnDoCommandAPI;
 import com.github.a2g.core.interfaces.OnEntryAPI;
 import com.github.a2g.core.interfaces.OnEveryFrameAPI;
 import com.github.a2g.core.interfaces.OnFillLoadListAPI;
@@ -70,7 +71,7 @@ implements InternalAPI
 , OnEntryAPI
 , OnPreEntryAPI
 , OnEveryFrameAPI
-, OnDoAPI
+, OnDoCommandAPI
 , OnDialogTreeAPI
 , CommandLineCallbackAPI
 , ActionRunnerCallbackAPI
@@ -772,42 +773,16 @@ implements InternalAPI
 
 	@Override
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,
-			SentenceUnit sentenceUnitA, SentenceUnit sentenceUnitB, double x, double y) {
+			SentenceUnit sentenceA, SentenceUnit sentenceB, double x, double y) {
 		 NullParentAction npa = new NullParentAction(this);
          
-		 BaseAction a = null;
-		 if(sentenceUnitB.getCode()==-1)
-		 {
-			 if(sentenceUnitA.isInventory())
-			 {
-				 a = this.callbacks.onDoInventory(
-			         		this,npa,
-			                 verbAsCode, 
-			                 sentenceUnitA,
-			                 x, 
-			                 y);
-				 
-			 }else
-			 {
-				 a = this.callbacks.onDoSceneObject(
-			         		this,npa,
-			                 verbAsCode, 
-			                 sentenceUnitA,
-			                 x, 
-			                 y);
-			 }
-		 }
-		 else
-		 {
-			 a = this.callbacks.onDoCombinatorial(
+         BaseAction a = this.callbacks.onDoCommand(
          		this,npa,
                  verbAsCode, 
-                 sentenceUnitA,
-                 sentenceUnitB, 
+                 sentenceA,
+                 sentenceB, 
                  x, 
                  y);
-		 }
-		 
          if(a!=null)
          {
         	 
@@ -817,8 +792,8 @@ implements InternalAPI
          
          setLastCommand(x, y,
                  verbAsVerbEnumeration,
-                 sentenceUnitA.getTextualId(),
-                 sentenceUnitB.getTextualId());
+                 sentenceA.getTextualId(),
+                 sentenceB.getTextualId());
 
 	}
 

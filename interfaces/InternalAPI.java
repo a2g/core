@@ -30,7 +30,7 @@ import com.github.a2g.core.primitive.ColorEnum;
 
 
 public interface InternalAPI 
-extends ImageAddAPI, OnDoAPI {
+extends ImageAddAPI, OnDoCommandAPI{
     // get by ID
     @Override
     public SceneObject getObject(short  objectCode);

@@ -95,8 +95,12 @@ public class SentenceUnit {
 		boolean isInventory = code>=inv && code<=obj;
 		return isInventory;
 	}
+	
+	public boolean isUnspecified()
+	{
+		boolean isUnspecified = code==1;
+		return isUnspecified;
+	}
 }
 
-
-;
 
