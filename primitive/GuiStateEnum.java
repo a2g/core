@@ -10,4 +10,4 @@ public enum GuiStateEnum
 	TitleCardOverCutScene,
 	TitleCardOverActiveScene,
 	TitleCardOverLoading
-}
+};

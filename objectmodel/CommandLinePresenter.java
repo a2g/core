@@ -125,8 +125,8 @@ ExecuteCommandEventHandlerAPI
     	Sentence sentence = getSentence();
 
     	// so we should fill in remaining AAA and BBB with blank
-        sentence.setBBB( new SentenceUnit());
-        sentence.setAAA(new SentenceUnit());
+        sentence.setBBB( new SentenceItem());
+        sentence.setAAA(new SentenceItem());
         
         // then get the display name
         String displayName = sentence.getDisplayName();
@@ -149,8 +149,8 @@ ExecuteCommandEventHandlerAPI
 
         if (this.api != null) {
             int verbAsCode = model.getSentence().getVerbAsCode();
-            SentenceUnit sentenceA = model.getSentence().getAAA();
-            SentenceUnit sentenceB = model.getSentence().getBBB();
+            SentenceItem sentenceA = model.getSentence().getAAA();
+            SentenceItem sentenceB = model.getSentence().getBBB();
             // clamp the mouse pointer to within the viewport coords
             if(x>1.0) x=1.0;
             if(x<0.0) x=0.0;

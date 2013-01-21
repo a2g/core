@@ -22,34 +22,34 @@ import com.github.a2g.core.primitive.CodesForVerbs;
 
 public class CommandLine {
 
-    private SentenceUnit defaultVerb;
-    private SentenceUnit lockedInVerb;
-    private SentenceUnit lockedInObject1;
-   // private SentenceUnit lockedInObject2;
-    private SentenceUnit rolledOver;
+    private SentenceItem defaultVerb;
+    private SentenceItem lockedInVerb;
+    private SentenceItem lockedInObject1;
+   // private SentenceItem lockedInObject2;
+    private SentenceItem rolledOver;
     private String typeOfRollover;
 
     private boolean isMouseable; // whether rolling over the verbs will update the commandline
     private boolean isVisible;
     
     public CommandLine(CommandLineCallbackAPI api) {
-        this.defaultVerb = new SentenceUnit( "Walk to AAA", 
+        this.defaultVerb = new SentenceItem( "Walk to AAA", 
         		"Walk", CodesForVerbs.getCodeForVerb(0));
         this.lockedInVerb = defaultVerb;
-        this.lockedInObject1 = new SentenceUnit();
-       // this.lockedInObject2 = new SentenceUnit();
-        this.rolledOver = new SentenceUnit();
+        this.lockedInObject1 = new SentenceItem();
+       // this.lockedInObject2 = new SentenceItem();
+        this.rolledOver = new SentenceItem();
         this.typeOfRollover = "";
         this.isMouseable = true;
         this.isVisible = true;
     }
     
     public void setMouseOver(String displayName, String textualId, int code) {
-        this.rolledOver = new SentenceUnit( displayName, 
+        this.rolledOver = new SentenceItem( displayName, 
         		textualId, code); 
     }
 
-    static boolean isAVerb(SentenceUnit snc) {
+    static boolean isAVerb(SentenceItem snc) {
         return snc.getDisplayName().contains(
                 "AAA")
                         || snc.getDisplayName().contains(
@@ -104,25 +104,25 @@ public class CommandLine {
     }
     
     public void clear() {
-        this.lockedInObject1 = new SentenceUnit();
-        //this.lockedInObject2 = new SentenceUnit();
+        this.lockedInObject1 = new SentenceItem();
+        //this.lockedInObject2 = new SentenceItem();
         this.lockedInVerb = defaultVerb;
-        this.rolledOver = new SentenceUnit();
+        this.rolledOver = new SentenceItem();
         this.typeOfRollover = "";
     }
 
     public void doNextBestThingToExecute() {
         if (this.typeOfRollover == "A") {
             this.lockedInObject1 = this.rolledOver;
-            this.rolledOver = new SentenceUnit();
+            this.rolledOver = new SentenceItem();
             this.typeOfRollover = "";
         } else if (this.typeOfRollover == "B") {
            // this.lockedInObject2 = this.rolledOver;
-            this.rolledOver = new SentenceUnit();
+            this.rolledOver = new SentenceItem();
             this.typeOfRollover = "";
         } else if (this.typeOfRollover == "V") {
             this.lockedInVerb = this.rolledOver;
-            this.rolledOver = new SentenceUnit();
+            this.rolledOver = new SentenceItem();
             this.typeOfRollover = "";
         }
     }

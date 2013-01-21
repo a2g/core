@@ -21,19 +21,19 @@ import com.github.a2g.core.primitive.STARTING_ODD_INVENTORY_CODE;
 import com.github.a2g.core.primitive.STARTING_ODD_OBJECTS_CODE;
 
 
-public class SentenceUnit {
+public class SentenceItem {
 
     private String displayName;
     private String textualId;
     private int code;
 
-    public SentenceUnit(String displayName, String textualId, int code) {
+    public SentenceItem(String displayName, String textualId, int code) {
         this.displayName = displayName;
         this.textualId = textualId;
         this.code = code;
     }
 
-    public SentenceUnit() {
+    public SentenceItem() {
     	   this.displayName = "";
            this.textualId = "";
            this.code = 1;
@@ -96,11 +96,12 @@ public class SentenceUnit {
 		return isInventory;
 	}
 	
-	public boolean isUnspecified()
+	public boolean isEmpty()
 	{
-		boolean isUnspecified = code==1;
-		return isUnspecified;
+		boolean isEmpty = code==1;
+		return isEmpty;
 	}
+
 }
 
 

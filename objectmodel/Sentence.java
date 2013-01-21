@@ -24,29 +24,29 @@ public class Sentence {
 
     private String string;
     private int verbAsNumber;
-    private SentenceUnit AAA;
-    private SentenceUnit BBB;
+    private SentenceItem AAA;
+    private SentenceItem BBB;
 
     public Sentence() {
         this.string = "";
         this.verbAsNumber = 0; 
-        this.AAA = new SentenceUnit();
-        this.BBB = new SentenceUnit();
+        this.AAA = new SentenceItem();
+        this.BBB = new SentenceItem();
     }
 
-    void setVerb(SentenceUnit snc, boolean useTwoObjectForm) 
+    void setVerb(SentenceItem snc, boolean useTwoObjectForm) 
     {
         this.string = useTwoObjectForm? snc.getDisplayNameAfterDivider():snc.getDisplayNameBeforeDivider();
         int i = snc.getCode()/ConstantsForAPI.VERB_MULTIPLIER;;
         this.verbAsNumber = i;
     }
 
-    void setAAA(SentenceUnit a) {
+    void setAAA(SentenceItem a) {
         this.string = this.string.replace("AAA", a.getDisplayName()); 
         this.AAA = a;
     }
 
-    void setBBB(SentenceUnit b) {
+    void setBBB(SentenceItem b) {
         this.string = this.string.replace("BBB", b.getDisplayName()); 
         this.BBB = b;
     }
@@ -59,11 +59,11 @@ public class Sentence {
         return this.string;
     }
 
-    final SentenceUnit getAAA() {
+    final SentenceItem getAAA() {
         return this.AAA;
     }
 
-    final SentenceUnit getBBB() {
+    final SentenceItem getBBB() {
         return this.BBB;
     }
 

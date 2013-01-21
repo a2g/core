@@ -20,7 +20,7 @@ package com.github.a2g.core.interfaces;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.interfaces.OnFillLoadListAPIImpl.LoadKickStarter;
-import com.github.a2g.core.objectmodel.SentenceUnit;
+import com.github.a2g.core.objectmodel.SentenceItem;
 
 public interface SceneAPI  extends ConstantsForAPI
 {
@@ -32,7 +32,7 @@ public interface SceneAPI  extends ConstantsForAPI
  
     public void onEveryFrame(OnEveryFrameAPI api);
     
-    public BaseAction onDoCommand(OnDoCommandAPI api, BaseAction ba, int verb, SentenceUnit objectA, SentenceUnit objectB, double x, double y);  
+    public BaseAction onDoCommand(OnDoCommandAPI api, BaseAction ba, int verb, SentenceItem objectA, SentenceItem objectB, double x, double y);  
     
     public BaseDialogTreeAction onDialogTree(OnDialogTreeAPI api, BaseAction ba, int branch);
     

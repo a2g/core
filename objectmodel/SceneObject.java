@@ -366,9 +366,9 @@ public class SceneObject {
         return textualId;
     }
 
-    public void setCurrentAnimation(String textualId2) {
+    public void setCurrentAnimation(String textualId) {
         this.fak.setCurrentAnimationTextualId(
-                textualId2);
+                textualId);
         updateImage();
     }
 

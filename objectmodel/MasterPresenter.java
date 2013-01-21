@@ -35,7 +35,6 @@ import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ActionRunnerCallbackAPI;
-import com.github.a2g.core.interfaces.AnimationEnumAPI;
 import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
@@ -773,7 +772,7 @@ implements InternalAPI
 
 	@Override
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,
-			SentenceUnit sentenceA, SentenceUnit sentenceB, double x, double y) {
+			SentenceItem sentenceA, SentenceItem sentenceB, double x, double y) {
 		 NullParentAction npa = new NullParentAction(this);
          
          BaseAction a = this.callbacks.onDoCommand(
