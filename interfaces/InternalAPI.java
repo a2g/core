@@ -87,7 +87,7 @@ extends ImageAddAPI, OnDoCommandAPI{
 
 	public void setDialogTreeActive(boolean isInDialogTreeMode);
 	
-	public SceneAPI getSceneFromCacheOrNew(String string);
+	public SceneAPI getSceneFromCacheOrNew(String identifier);
 	public void setScenePixelSize(int width, int height);
 	public void setInventoryPixelSize(int width, int height);
 }
