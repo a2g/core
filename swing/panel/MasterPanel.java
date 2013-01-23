@@ -25,7 +25,6 @@ import javax.swing.JPanel;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.GuiStateEnum;
 import com.github.a2g.core.swing.factory.SwingHostingPanel;
 
 

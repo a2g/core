@@ -15,8 +15,6 @@
  */
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.primitive.GuiStateEnum;
-
 
 public interface MasterPanelAPI
 {
@@ -38,4 +36,17 @@ public interface MasterPanelAPI
 	void setActiveState(GuiStateEnum state);
 	
 	GuiStateEnum getActiveState();
+	
+	public enum GuiStateEnum 
+	{
+		DialogTreeMode, 
+		CutScene,
+		ActiveScene,
+		Loading, 
+		TitleCardOverDialogTree,
+		TitleCardOverCutScene,
+		TitleCardOverActiveScene,
+		TitleCardOverLoading
+	};
+
 }

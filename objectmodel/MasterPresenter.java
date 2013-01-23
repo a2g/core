@@ -26,7 +26,6 @@ import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.action.NullParentAction;
 import com.github.a2g.core.action.SayAction;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.GuiStateEnum;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 
 import com.github.a2g.core.event.PropertyChangeEvent;
@@ -151,7 +150,7 @@ implements InternalAPI
 				masterPanel.getHostForTitleCard(), bus, this, parent);
 
 
-		this.masterPanel.setActiveState(GuiStateEnum.Loading);
+		this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.Loading);
 
 	}
 
@@ -545,7 +544,7 @@ implements InternalAPI
 	@Override
 	public void startScene()
 	{
-		masterPanel.setActiveState(GuiStateEnum.Loading);
+		masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.Loading);
 		loadInventoryFromAPI();
 		setInitialAnimationsAsCurrent();
 		
@@ -555,7 +554,7 @@ implements InternalAPI
 		callOnPreEntry();
 
 		startCallingOnEveryFrame();
-		this.masterPanel.setActiveState(GuiStateEnum.CutScene);
+		this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.CutScene);
 		callOnEnterScene();
 
 	}
@@ -592,7 +591,7 @@ implements InternalAPI
 		
 		
 		// set gui to blank
-		masterPanel.setActiveState(GuiStateEnum.Loading);
+		masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.Loading);
 		//scenePresenter.clear(); don't clear, all its images are switched off anyhow.
 		loadingPresenter.clear();
 		//commandLinePresenter.clear();
@@ -714,27 +713,27 @@ implements InternalAPI
 		}
 	}
 	
-	GuiStateEnum getStateIfEntering(GuiStateEnum state)
+	MasterPanelAPI.GuiStateEnum getStateIfEntering(MasterPanelAPI.GuiStateEnum state)
 	{
 		switch(state)
 		{
-			case DialogTreeMode:return GuiStateEnum.TitleCardOverDialogTree;
-			case CutScene:return GuiStateEnum.TitleCardOverCutScene;
-			case ActiveScene:return GuiStateEnum.TitleCardOverActiveScene;
-			case Loading:return GuiStateEnum.TitleCardOverLoading;
+			case DialogTreeMode:return MasterPanelAPI.GuiStateEnum.TitleCardOverDialogTree;
+			case CutScene:return MasterPanelAPI.GuiStateEnum.TitleCardOverCutScene;
+			case ActiveScene:return MasterPanelAPI.GuiStateEnum.TitleCardOverActiveScene;
+			case Loading:return MasterPanelAPI.GuiStateEnum.TitleCardOverLoading;
 		default:
 			return state;
 		}
 	}
 
-	GuiStateEnum getStateIfExiting(GuiStateEnum state)
+	MasterPanelAPI.GuiStateEnum getStateIfExiting(MasterPanelAPI.GuiStateEnum state)
 	{
 		switch(state)
 		{
-			case TitleCardOverDialogTree: return GuiStateEnum.DialogTreeMode;
-			case TitleCardOverCutScene: return GuiStateEnum.CutScene;
-			case TitleCardOverActiveScene: return GuiStateEnum.ActiveScene;
-			case TitleCardOverLoading: return GuiStateEnum.Loading;
+			case TitleCardOverDialogTree: return MasterPanelAPI.GuiStateEnum.DialogTreeMode;
+			case TitleCardOverCutScene: return MasterPanelAPI.GuiStateEnum.CutScene;
+			case TitleCardOverActiveScene: return MasterPanelAPI.GuiStateEnum.ActiveScene;
+			case TitleCardOverLoading: return MasterPanelAPI.GuiStateEnum.Loading;
 		default:
 			return state;
 		}
@@ -749,7 +748,7 @@ implements InternalAPI
 			titleCardPresenter.setText(text);
 			titleCardPresenter.setColor(color);
 		}
-		GuiStateEnum state = masterPanel.getActiveState();
+		MasterPanelAPI.GuiStateEnum state = masterPanel.getActiveState();
 		state = isEntering? getStateIfEntering(state) : getStateIfExiting(state);
 		masterPanel.setActiveState(state);
 	}
@@ -802,9 +801,9 @@ implements InternalAPI
 		this.commandLinePresenter.clear();
 		this.commandLinePresenter.setMouseable(true);
 		
-		if(masterPanel.getActiveState() != GuiStateEnum.DialogTreeMode)
+		if(masterPanel.getActiveState() != MasterPanelAPI.GuiStateEnum.DialogTreeMode)
 		{
-			this.masterPanel.setActiveState(GuiStateEnum.ActiveScene);
+			this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.ActiveScene);
 		}
 	}
 
@@ -851,18 +850,18 @@ implements InternalAPI
 	{
 		if(isInDialogTreeMode)
 		{
-			this.masterPanel.setActiveState(GuiStateEnum.DialogTreeMode);
+			this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.DialogTreeMode);
 		}
 		else
 		{
-			this.masterPanel.setActiveState(GuiStateEnum.ActiveScene);
+			this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.ActiveScene);
 		}
 	}
 
 	@Override
 	public boolean isCommandLineActive() 
 	{
-		boolean isCommandLineActive = masterPanel.getActiveState()==GuiStateEnum.ActiveScene;
+		boolean isCommandLineActive = masterPanel.getActiveState()==MasterPanelAPI.GuiStateEnum.ActiveScene;
 		return isCommandLineActive;
 	}
 
