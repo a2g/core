@@ -2,6 +2,7 @@ package com.github.a2g.core.swing.factory;
 
 import javax.swing.JOptionPane;
 
+import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.CommandLinePanelAPI;
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
@@ -81,9 +82,9 @@ implements FactoryAPI
 	
 
 	@Override
-	public PopupPanelAPI createPopupPanel(String string, ColorEnum color) 
+	public PopupPanelAPI createPopupPanel(String string, ColorEnum color, BaseAction toCancel) 
 	{
-		return new PopupPanel(string, color);
+		return new PopupPanel(string, color, toCancel);
 	}
 
 

@@ -100,7 +100,7 @@ public class SayAction extends BaseAction {
 		if (object != null && object.getTalkingColor() != null) {
 			color = object.getTalkingColor();
 		}
-		this.popup = getApi().getFactory().createPopupPanel(speech.get(0), color);
+		this.popup = getApi().getFactory().createPopupPanel(speech.get(0), color, this);
 				
 		if (object != null) {
 			String talkingAnimTextualId = object.getTalkingAnimation();

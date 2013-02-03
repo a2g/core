@@ -1,5 +1,6 @@
 package com.github.a2g.core.interfaces;
 
+import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
@@ -10,7 +11,7 @@ public interface FactoryAPI {
 	ScenePanelAPI createScenePanel();
 	TitleCardPanelAPI createTitleCardPanel(ColorEnum foreground, ColorEnum background);
 	VerbsPanelAPI createVerbsPanel(ColorEnum foreground, ColorEnum background);
-	PopupPanelAPI createPopupPanel(String string, ColorEnum color);
+	PopupPanelAPI createPopupPanel(String string, ColorEnum color, BaseAction toCancel);
 	SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI cbs);
 	TimerAPI createSystemTimer(TimerCallbackAPI cbs);
 	MasterPanelAPI createMasterPanel(int width, int height, ColorEnum color);

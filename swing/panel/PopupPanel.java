@@ -17,9 +17,12 @@
 package com.github.a2g.core.swing.panel;
 import java.awt.FontMetrics;
 import java.awt.Label;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 
+import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 
@@ -29,7 +32,7 @@ implements PopupPanelAPI
 	private JFrame popup;
 	private Label labelInPopup;
 	
-	public PopupPanel(String speech, ColorEnum color)
+	public PopupPanel(String speech, ColorEnum color, final BaseAction ba)
 	{
 		// create popup
 		this.popup = new JFrame();
@@ -43,6 +46,42 @@ implements PopupPanelAPI
 		FontMetrics fm = labelInPopup.getFontMetrics(labelInPopup.getFont()); // or another font
 		int strw = fm.stringWidth(speech);
 		popup.setSize(strw*2, fm.getHeight()*2);
+		
+		labelInPopup.addMouseListener(
+				new MouseListener()
+				{
+
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						ba.cancel();
+						
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseExited(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mousePressed(MouseEvent arg0) {
+					
+						
+					}
+
+					@Override
+					public void mouseReleased(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+				}
+		);
 		
 		
 	}

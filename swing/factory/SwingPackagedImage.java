@@ -49,11 +49,11 @@ implements PackagedImageAPI
 		{
 			try 
 			{
-				img=ImageIO.read(new File("bin/org/zjava.gif"));
+				img=ImageIO.read(new File("com/github/a2g/core/leftArrow.png"));
 			}
 			catch(IOException f)
 			{
-				System.out.println("couldn't find 'bin/org/zjava.gif', so exiting.");
+				System.out.println("couldn't find 'com/github/a2g/core/leftArrow.png', so exiting.");
 				System.exit(0);
 			}
 		}

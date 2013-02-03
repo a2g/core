@@ -40,7 +40,7 @@ public class SayWithoutAnimationAction extends BaseAction {
                 * (2 + delay))
                         * 40;
 
-        this.popup = this.getApi().getFactory().createPopupPanel(this.speech, null);
+        this.popup = this.getApi().getFactory().createPopupPanel(this.speech, null, this);
         this.popup.setPopupPosition(20, 20);
         this.popup.show();
 

@@ -18,8 +18,12 @@
 package com.github.a2g.core.objectmodel;
 
 
+import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.gwt.mouse.DialogTreeMouseClickHandler;
 import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Label;
  
@@ -30,7 +34,7 @@ implements PopupPanelAPI
 	private com.google.gwt.user.client.ui.PopupPanel popup;
 	private Label labelInPopup;
 	
-	public PopupPanel(String speech, ColorEnum color)
+	public PopupPanel(String speech, ColorEnum color, final BaseAction toCancel)
 	{
 		this.popup = new com.google.gwt.user.client.ui.PopupPanel();
 		this.popup.setTitle(speech);
@@ -43,6 +47,20 @@ implements PopupPanelAPI
 			DOM.setStyleAttribute(labelInPopup.getElement(), "color",color.toString());
 			DOM.setStyleAttribute(popup.getElement(), "borderColor",color.toString());
 		}
+		
+		labelInPopup.addClickHandler(
+				new ClickHandler()
+				{
+
+					@Override
+					public void onClick(ClickEvent event) {
+						toCancel.cancel();
+						
+					}
+			
+				}
+		);
+
 	}
 	@Override
 	public void show()

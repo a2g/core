@@ -12,6 +12,7 @@ import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.interfaces.ScenePanelAPI;
 import com.github.a2g.core.interfaces.SystemAnimationAPI;
 import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
+import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.gwt.factory.GWTTimer;
 import com.github.a2g.core.interfaces.TimerAPI;
 import com.github.a2g.core.interfaces.TimerCallbackAPI;
@@ -87,9 +88,9 @@ implements FactoryAPI
 	
 
 	@Override
-	public PopupPanelAPI createPopupPanel(String string, ColorEnum color) 
+	public PopupPanelAPI createPopupPanel(String string, ColorEnum color, BaseAction toCancel) 
 	{
-		return new PopupPanel(string, color);
+		return new PopupPanel(string, color, toCancel);
 	}
 
 
