@@ -59,13 +59,6 @@ implements ScenePanelAPI
 , ImagePanelAPI 
 , ActionListener  
 {
-	class Structure
-	{
-		public Image image;
-		int x;
-		int y;
-		boolean visible;
-	}
 	int width;
 	int height;
 	int tally;
@@ -139,12 +132,16 @@ implements ScenePanelAPI
 		return new Dimension(this.width,this.height);
 	}
 
+	void putPoint(SwingImage image, int x,int y)
+	{
+	    mapOfPointsByImage.put(image.getNativeImage().hashCode(), new Point(x,y));
+	}
 
 	@Override
 	public void setThingPosition(Image image, int x, int y) {
 		if(mapOfPointsByImage.containsKey(((SwingImage)image).getNativeImage().hashCode()))
 		{
-			mapOfPointsByImage.put(((SwingImage)image).getNativeImage().hashCode(), new Point(x,y));
+			putPoint((SwingImage)image, x,y);
 			triggerPaint();
 		}
 		
@@ -169,7 +166,7 @@ implements ScenePanelAPI
 	@Override
 	public void insert(Image image, int x, int y, int before) {
 		listOfAllVisibleImages.add(before,image);
-		mapOfPointsByImage.put(((SwingImage)image).getNativeImage().hashCode(), new Point(x,y));
+		putPoint((SwingImage)image, x,y);
 		triggerPaint();
 	}
 
@@ -184,7 +181,7 @@ implements ScenePanelAPI
 	@Override
 	public void add(Image image, int x, int y) {
 		listOfAllVisibleImages.add(image);
-		mapOfPointsByImage.put(((SwingImage)image).getNativeImage().hashCode(), new Point(x,y));
+		putPoint((SwingImage)image, x,y);
 		triggerPaint();
 	}
 
@@ -211,7 +208,11 @@ implements ScenePanelAPI
 			if(listOfVisibleHashCodes.contains(((SwingImage)image).getNativeImage().hashCode()))
 			{
 				Point p = mapOfPointsByImage.get(((SwingImage)image).getNativeImage().hashCode());
-				g.drawImage(((SwingImage)image).getNativeImage(),p.getX(),p.getY(),this);
+				int x = p.getX(); 
+				x+= image.getBoundingRect().getLeft();
+				int y = p.getY();
+				y+= image.getBoundingRect().getTop();
+				g.drawImage(((SwingImage)image).getNativeImage(),x,y,this);
 			}
 		}
 		//System.out.println("printed with tally " + tally +" draws "+ draws);

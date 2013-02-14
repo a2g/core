@@ -39,8 +39,8 @@ public class SceneObject {
     private FrameAndAnimation fak;
     private com.github.a2g.core.objectmodel.Image currentImage;
     private boolean visible;
-    private double width;
-    private double height;
+    private double screenPixelWidth;
+    private double screenPixelHeight;
     private int top; // needed for scrolling images (ie canoe background)
     private int left;
     private int topOffset;
@@ -58,8 +58,8 @@ public class SceneObject {
         this.fak = new FrameAndAnimation(
                 this.textualId);
         this.visible = true;
-        this.width = width;
-        this.height = height;
+        this.screenPixelWidth = width;
+        this.screenPixelHeight = height;
         this.leftOffset = MAX_INT;
         this.topOffset = MAX_INT;
         this.mapOfSpecialAnimations = new TreeMap<Special, String>();
@@ -206,10 +206,10 @@ public class SceneObject {
 
         currentPoint.setX(
                 currentPoint.getX()
-                        * this.width);
+                        * this.screenPixelWidth);
         currentPoint.setY(
                 currentPoint.getY()
-                        * this.height);
+                        * this.screenPixelHeight);
     }
 
     public void setVisible(boolean visible) {
@@ -235,8 +235,11 @@ public class SceneObject {
         if (this.leftOffset == MAX_INT) {
             calculateOffsets();
         }
-        int abs = (int) (x * this.width);
-        int isolatedX = abs - this.leftOffset;
+        int bbwidth = currentImage.getBoundingRect().getWidth();
+        int screenCoordMinusHalfWidth = (int) (x * this.screenPixelWidth - .5*bbwidth);
+     
+        int fixed = currentImage.getBoundingRect().getLeft();
+        int isolatedX = screenCoordMinusHalfWidth  - fixed;
 
         this.left = isolatedX;
         if(currentImage==null)
@@ -250,8 +253,11 @@ public class SceneObject {
         if (this.leftOffset == MAX_INT) {
             calculateOffsets();
         }
-        int abs = (int) (y * this.height);
-        int isolatedY = abs - this.topOffset;
+        int bbheight = currentImage.getBoundingRect().getHeight();
+        int screenCoordMinusHalfHeight = (int) (y * this.screenPixelHeight - .5*bbheight);
+     
+        int fixed = currentImage.getBoundingRect().getTop();
+        int isolatedY = screenCoordMinusHalfHeight  - fixed;
 
         this.top = isolatedY;
         this.currentImage.setLeftTop(new Point(this.left,
@@ -262,19 +268,24 @@ public class SceneObject {
         if (this.leftOffset == MAX_INT) {
             calculateOffsets();
         }
-        int x = this.left + this.leftOffset;
+        int halfBBWidth = (int)(.5*currentImage.getBoundingRect().getWidth());
+        int fixed = currentImage.getBoundingRect().getLeft();
+    
+        int x = this.left + fixed+halfBBWidth;
 
-        return x / this.width;
+        return x / this.screenPixelWidth;
     }
 
     public double getBaseMiddleY() { 
         if (this.leftOffset == MAX_INT) {
             calculateOffsets();
         }
+        int halfBBHeight = (int)(.5*currentImage.getBoundingRect().getHeight());
+   
+        int fixed = currentImage.getBoundingRect().getTop();
+        int y = this.top + fixed + halfBBHeight ;
 
-        int y = this.top + this.topOffset;
-
-        return y / this.height;
+        return y / this.screenPixelHeight;
     }
 
     public void setX(int x) { 

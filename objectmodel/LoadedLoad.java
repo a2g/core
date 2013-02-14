@@ -28,7 +28,7 @@ public class LoadedLoad
         this.sceneObjectCollection = new SceneObjectCollection();
     }
 
-	public void addToAppropriateAnimation(int prefix, Image imageAndPos, String objectTextualId, String animationTextualId, short objectCode, String objPlusAnimCode, int width, int height)
+	public void addToAppropriateAnimation(int prefix, Image imageAndPos, String objectTextualId, String animationTextualId, short objectCode, String objPlusAnimCode, int screenPixelWidth, int screenPixelHeight)
 	{
 		// objects and animations
 		SceneObject sceneObject = this.getSceneObjectCollection().at(
@@ -37,8 +37,8 @@ public class LoadedLoad
 		if (sceneObject == null) {
 			sceneObject = new SceneObject(
 					objectTextualId,
-					width,
-					height);
+					screenPixelWidth,
+					screenPixelHeight);
 			sceneObject.setNumberPrefix(prefix);
 			sceneObject.setCode(objectCode);
 			

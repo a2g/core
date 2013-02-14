@@ -25,17 +25,17 @@ import com.github.a2g.core.primitive.Rect;
 public abstract class Image {
 	
 	private final ImagePanelAPI panel;
-	private final Point offset;
+	private final Point fixedOffset;
 	
 
 	public Image(ImagePanelAPI panel, Point offset) 
 	{
-		this.offset = offset;
+		this.fixedOffset = offset;
 		this.panel = panel;
 	};
 
 	public void addImageToPanel(int before) {
-		panel.insert(this, this.offset.getX(), this.offset.getY(), before);
+		panel.insert(this, this.fixedOffset.getX(), this.fixedOffset.getY(), before);
 	}
 
 	public void removeImageFromPanel() {
@@ -55,20 +55,20 @@ public abstract class Image {
 
 	public Rect getBoundingRect() {
 		return new Rect(
-				this.offset.getX(), 
-				this.offset.getY(),
+				this.fixedOffset.getX(), 
+				this.fixedOffset.getY(),
 				panel.getImageWidth(this), 
 				panel.getImageHeight(this));
 	}
 
 	private void update(Point leftTop) {
 
-		int x = this.offset.getX();
-		int y = this.offset.getY();
+		int x = this.fixedOffset.getX();
+		int y = this.fixedOffset.getY();
 		panel.setThingPosition(
 				this, 
-				x + leftTop.getX(), 
-				y + leftTop.getY()
+				leftTop.getX(), 
+				leftTop.getY()
 		);
 	}
 
