@@ -16,6 +16,7 @@
 
 package com.github.a2g.core.interfaces;
 
+import com.github.a2g.core.interfaces.MasterPanelAPI.GuiStateEnum;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.CommandLinePresenter;
 import com.github.a2g.core.objectmodel.DialogTreePresenter;
@@ -51,5 +52,6 @@ public interface OnEveryFrameAPI {
     public void switchToScene(String scene);
     public String getLastScene();
     public boolean isInDebugMode();
+    public void setActiveState(GuiStateEnum state);
  
 }

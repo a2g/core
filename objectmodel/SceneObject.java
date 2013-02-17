@@ -290,10 +290,14 @@ public class SceneObject {
 
     public void setX(int x) { 
         this.left = x;
+        this.currentImage.setLeftTop(new Point(this.left,
+                this.top));
     }
 
     void setY(int y) { 
         this.top = y;
+        this.currentImage.setLeftTop(new Point(this.left,
+                this.top));
     }
 
     public int getX() { 

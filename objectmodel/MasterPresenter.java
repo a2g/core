@@ -43,6 +43,7 @@ import com.github.a2g.core.interfaces.InventoryPresenterCallbackAPI;
 import com.github.a2g.core.interfaces.LoadAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
+import com.github.a2g.core.interfaces.MasterPanelAPI.GuiStateEnum;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
 import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
 import com.github.a2g.core.interfaces.OnDialogTreeAPI;
@@ -868,6 +869,12 @@ implements InternalAPI
 	@Override
 	public void clearAllLoadedLoads() {
 		this.loadingPresenter.clearAllLoadedLoads();
+	}
+
+	@Override
+	public void setActiveState(GuiStateEnum state) {
+		this.masterPanel.setActiveState(state);
+		
 	}
 
 	

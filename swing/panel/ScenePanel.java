@@ -209,9 +209,9 @@ implements ScenePanelAPI
 			{
 				Point p = mapOfPointsByImage.get(((SwingImage)image).getNativeImage().hashCode());
 				int x = p.getX(); 
-				x+= image.getBoundingRect().getLeft();
+				//x+= image.getBoundingRect().getLeft();
 				int y = p.getY();
-				y+= image.getBoundingRect().getTop();
+				//y+= image.getBoundingRect().getTop();
 				g.drawImage(((SwingImage)image).getNativeImage(),x,y,this);
 			}
 		}

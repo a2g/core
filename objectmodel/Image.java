@@ -67,8 +67,8 @@ public abstract class Image {
 		int y = this.fixedOffset.getY();
 		panel.setThingPosition(
 				this, 
-				leftTop.getX(), 
-				leftTop.getY()
+				leftTop.getX()+x, 
+				leftTop.getY()+y
 		);
 	}
 
