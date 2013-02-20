@@ -19,7 +19,6 @@ package com.github.a2g.core.objectmodel;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.gwt.mouse.DialogTreeMouseClickHandler;
 import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.dom.client.ClickEvent;

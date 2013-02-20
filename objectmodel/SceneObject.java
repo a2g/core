@@ -30,7 +30,6 @@ import com.github.a2g.core.primitive.Rect;
 
 
 public class SceneObject {
-    private static final int MAX_INT = 2147483647;
     private String homeAnimation;
     private Map<SceneAPI.Special, String> mapOfSpecialAnimations;
     private final String textualId;
@@ -41,10 +40,8 @@ public class SceneObject {
     private boolean visible;
     private double screenPixelWidth;
     private double screenPixelHeight;
-    private int top; // needed for scrolling images (ie canoe background)
-    private int left;
-    private int topOffset;
-    private int leftOffset;
+    private int top; // needed for moving image around.
+    private int left; 
     private int numberPrefix;
     private short code;
     private ColorEnum talkingColor;
@@ -60,15 +57,13 @@ public class SceneObject {
         this.visible = true;
         this.screenPixelWidth = width;
         this.screenPixelHeight = height;
-        this.leftOffset = MAX_INT;
-        this.topOffset = MAX_INT;
         this.mapOfSpecialAnimations = new TreeMap<Special, String>();
         this.numberPrefix = 0;
         this.homeAnimation = ConstantsForAPI.INITIAL;
         this.talkingAnimationDelay = 0;
        
         // talkingColro deliberately null, so the 
-        // default color can be in one spot: the sayaction 
+        // default color can be in one spot: the say action 
         this.talkingColor = null;
     }
 
@@ -243,25 +238,18 @@ public class SceneObject {
     
     public void setBaseMiddleX(double x) 
     { 
-        if (this.leftOffset == MAX_INT) {//MAX_INT is what leftOffset is initialized to
-            calculateOffsets();
-        }
         this.left = convertRelativeScreenOrdinateToAbsoluteImageSpaceOrdinate(x, screenPixelWidth, currentImage.getBoundingRect().getLeft(), currentImage.getBoundingRect().getRight());
         this.currentImage.setLeftTop(new Point(this.left,this.top));
     }
 
-    public void setBaseMiddleY(double y) { 
-        if (this.leftOffset == MAX_INT) {//MAX_INT is what leftOffset is initialized to
-            calculateOffsets();
-        }
+    public void setBaseMiddleY(double y) 
+    { 
         this.top = convertRelativeScreenOrdinateToAbsoluteImageSpaceOrdinate(y,this.screenPixelHeight, currentImage.getBoundingRect().getTop(), currentImage.getBoundingRect().getBottom());
         this.currentImage.setLeftTop(new Point(this.left,this.top));
     }
 
-    public double getBaseMiddleX() { 
-        if (this.leftOffset == MAX_INT) {
-            calculateOffsets();
-        }
+    public double getBaseMiddleX() 
+    { 
         int halfBBWidth = (int)(.5*currentImage.getBoundingRect().getWidth());
         int fixed = currentImage.getBoundingRect().getLeft();
     
@@ -270,10 +258,8 @@ public class SceneObject {
         return x / this.screenPixelWidth;
     }
 
-    public double getBaseMiddleY() { 
-        if (this.leftOffset == MAX_INT) {
-            calculateOffsets();
-        }
+    public double getBaseMiddleY() 
+    {
         int halfBBHeight = (int)(.5*currentImage.getBoundingRect().getHeight());
    
         int fixed = currentImage.getBoundingRect().getTop();
@@ -300,14 +286,6 @@ public class SceneObject {
 
     public int getY() { 
         return this.top;
-    }
-
-    void calculateOffsets() {
-        Point p = getMiddleOfBaseAbsolute(
-                ConstantsForAPI.INITIAL);
-
-        this.leftOffset = p.getX(); // (minLeft +maxRight)/2, 
-        this.topOffset = p.getY(); // maxBottom;
     }
 
     Point getMiddleOfBaseAbsolute(String animTextualId) {
