@@ -231,37 +231,31 @@ public class SceneObject {
         this.displayName = displayName;
     }
 
-    public void setBaseMiddleX(double x) { 
-        if (this.leftOffset == MAX_INT) {
+    static int convertRelativeScreenOrdinateToAbsoluteImageSpaceOrdinate(double normalized, double screenSpan, int lowerBound, int upperBound )
+    {
+        int rectSpan = upperBound-lowerBound;
+        int screenCoordMinusHalfWidth = (int) (normalized * screenSpan - .5*rectSpan);
+     
+        int fixed = lowerBound;
+        int isolatedX = screenCoordMinusHalfWidth  - fixed;
+        return isolatedX;
+    }
+    
+    public void setBaseMiddleX(double x) 
+    { 
+        if (this.leftOffset == MAX_INT) {//MAX_INT is what leftOffset is initialized to
             calculateOffsets();
         }
-        int bbwidth = currentImage.getBoundingRect().getWidth();
-        int screenCoordMinusHalfWidth = (int) (x * this.screenPixelWidth - .5*bbwidth);
-     
-        int fixed = currentImage.getBoundingRect().getLeft();
-        int isolatedX = screenCoordMinusHalfWidth  - fixed;
-
-        this.left = isolatedX;
-        if(currentImage==null)
-        {
-        	updateImage();
-        }
+        this.left = convertRelativeScreenOrdinateToAbsoluteImageSpaceOrdinate(x, screenPixelWidth, currentImage.getBoundingRect().getLeft(), currentImage.getBoundingRect().getRight());
         this.currentImage.setLeftTop(new Point(this.left,this.top));
     }
 
     public void setBaseMiddleY(double y) { 
-        if (this.leftOffset == MAX_INT) {
+        if (this.leftOffset == MAX_INT) {//MAX_INT is what leftOffset is initialized to
             calculateOffsets();
         }
-        int bbheight = currentImage.getBoundingRect().getHeight();
-        int screenCoordMinusHalfHeight = (int) (y * this.screenPixelHeight - .5*bbheight);
-     
-        int fixed = currentImage.getBoundingRect().getTop();
-        int isolatedY = screenCoordMinusHalfHeight  - fixed;
-
-        this.top = isolatedY;
-        this.currentImage.setLeftTop(new Point(this.left,
-                this.top));
+        this.top = convertRelativeScreenOrdinateToAbsoluteImageSpaceOrdinate(y,this.screenPixelHeight, currentImage.getBoundingRect().getTop(), currentImage.getBoundingRect().getBottom());
+        this.currentImage.setLeftTop(new Point(this.left,this.top));
     }
 
     public double getBaseMiddleX() { 
