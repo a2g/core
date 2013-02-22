@@ -21,24 +21,24 @@ import com.google.gwt.event.shared.GwtEvent;
 
 
 public class MouseToInventoryPresenterEvent extends GwtEvent<ExecuteCommandEventHandlerAPI> {
-    public static Type<ExecuteCommandEventHandlerAPI> TYPE = new Type<ExecuteCommandEventHandlerAPI>();
-    // private final FriendSummaryDTO friend;
-    private final double x;
-    private final double y;
+	public static Type<ExecuteCommandEventHandlerAPI> TYPE = new Type<ExecuteCommandEventHandlerAPI>();
+	// private final FriendSummaryDTO friend;
+	private final double x;
+	private final double y;
 
-    public MouseToInventoryPresenterEvent(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
+	public MouseToInventoryPresenterEvent(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
 
-    @Override
-    public Type<ExecuteCommandEventHandlerAPI> getAssociatedType() {
-        return TYPE;
-    }
+	@Override
+	public Type<ExecuteCommandEventHandlerAPI> getAssociatedType() {
+		return TYPE;
+	}
 
-    @Override
-    protected void dispatch(ExecuteCommandEventHandlerAPI handler) {
-        handler.onClick(x, y);
-    }
-  
+	@Override
+	protected void dispatch(ExecuteCommandEventHandlerAPI handler) {
+		handler.onClick(x, y);
+	}
+
 }

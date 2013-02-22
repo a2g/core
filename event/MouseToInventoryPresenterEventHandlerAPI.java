@@ -20,6 +20,6 @@ import com.google.gwt.event.shared.EventHandler;
 
 
 public interface MouseToInventoryPresenterEventHandlerAPI extends EventHandler {
-    boolean onClick(double x, double y);
-  
+	boolean onClick(double x, double y);
+
 }

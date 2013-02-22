@@ -18,6 +18,6 @@ package com.github.a2g.core.objectmodel;
 
 
 public class TitleCard {
-   public String text;
+	public String text;
 
 }

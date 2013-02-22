@@ -21,5 +21,5 @@ import com.google.gwt.event.shared.EventHandler;
 
 public interface SetRolloverEventHandlerAPI extends EventHandler {
 	void onSetMouseOver(String displayName, String textualId, int code);
-  
+
 }

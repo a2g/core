@@ -19,13 +19,13 @@ package com.github.a2g.core.gwt.factory;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.google.gwt.user.client.ui.IsWidget;
 
-public class GWTHostingPanel 
+public class GWTHostingPanel
 extends com.google.gwt.user.client.ui.SimplePanel
 implements HostingPanelAPI
 {
 	@Override
 	public void setThing(Object w) {
 		this.add((IsWidget)w);
-		
+
 	}
 }

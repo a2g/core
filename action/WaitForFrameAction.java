@@ -22,40 +22,40 @@ import com.github.a2g.core.objectmodel.SceneObject;
 
 
 public class WaitForFrameAction extends BaseAction {
-    private int frame;
-    private SceneObject object;
+	private int frame;
+	private SceneObject object;
 
-    public WaitForFrameAction(BaseAction parent, short objectId, int frame) {
-        super(parent, parent.getApi());
-        this.frame = frame;
-        this.object = getApi().getObject(
-                objectId);
-    }
+	public WaitForFrameAction(BaseAction parent, short objectId, int frame) {
+		super(parent, parent.getApi());
+		this.frame = frame;
+		this.object = getApi().getObject(
+				objectId);
+	}
 
-    @Override	
-    public void runGameAction() {
-        // we achieve the variable execution time, by using a max value here..
-        String name = object.getCurrentAnimation();
-        int count = object.getAnimations().at(name).getFrames().getCount();
-        int milliseconds = count * 150;
+	@Override
+	public void runGameAction() {
+		// we achieve the variable execution time, by using a max value here..
+		String name = object.getCurrentAnimation();
+		int count = object.getAnimations().at(name).getFrames().getCount();
+		int milliseconds = count * 150;
 
-        this.run(milliseconds);
-    }
+		this.run(milliseconds);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {
-        // ..then cancelling the animation when it reaches the desired condition.
-        if (object.getCurrentFrame() == frame) {
-            cancel();
-        }
-    }
+	@Override
+	protected void onUpdateGameAction(double progress) {
+		// ..then cancelling the animation when it reaches the desired condition.
+		if (object.getCurrentFrame() == frame) {
+			cancel();
+		}
+	}
 
-    @Override
-    protected void onCompleteGameAction() {}
+	@Override
+	protected void onCompleteGameAction() {}
 
-    @Override
-    public boolean isParallel() {
-        return false;
-    }
+	@Override
+	public boolean isParallel() {
+		return false;
+	}
 
 }

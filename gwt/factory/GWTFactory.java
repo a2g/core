@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
- 
+
 package com.github.a2g.core.gwt.factory;
 
 import com.github.a2g.core.interfaces.CommandLinePanelAPI;
@@ -48,7 +48,7 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 
-public class GWTFactory 
+public class GWTFactory
 implements FactoryAPI
 {
 
@@ -58,19 +58,19 @@ implements FactoryAPI
 
 	public GWTFactory(EventBus bus, MasterPresenter master, MasterPresenterHostAPI host)
 	{
-	 this.bus = bus;
-	 this.master = master;
-	 this.host = host;
+		this.bus = bus;
+		this.master = master;
+		this.host = host;
 	}
-	
+
 	@Override
-	public CommandLinePanelAPI createCommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll) 
+	public CommandLinePanelAPI createCommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll)
 	{
 		return new CommandLinePanel(fore, back, roll);
 	}
 
 	@Override
-	public DialogTreePanelAPI createDialogTreePanel(EventBus bus, ColorEnum foreground, ColorEnum background, ColorEnum rollover) 
+	public DialogTreePanelAPI createDialogTreePanel(EventBus bus, ColorEnum foreground, ColorEnum background, ColorEnum rollover)
 	{
 		return new DialogTreePanel(bus, foreground, background, rollover);
 	}
@@ -96,15 +96,15 @@ implements FactoryAPI
 	}
 
 	@Override
-	public TitleCardPanelAPI createTitleCardPanel(ColorEnum foreground, ColorEnum background) 
+	public TitleCardPanelAPI createTitleCardPanel(ColorEnum foreground, ColorEnum background)
 	{
 		return new TitleCardPanel(master, foreground, background);
 	}
 
-	
+
 
 	@Override
-	public PopupPanelAPI createPopupPanel(String string, ColorEnum color, BaseAction toCancel) 
+	public PopupPanelAPI createPopupPanel(String string, ColorEnum color, BaseAction toCancel)
 	{
 		return new PopupPanel(string, color, toCancel);
 	}
@@ -112,7 +112,7 @@ implements FactoryAPI
 
 
 	@Override
-	public VerbsPanelAPI createVerbsPanel(ColorEnum foreground, ColorEnum background) 
+	public VerbsPanelAPI createVerbsPanel(ColorEnum foreground, ColorEnum background)
 	{
 		return new VerbsPanel(bus, master, foreground, background);
 	}
@@ -124,10 +124,10 @@ implements FactoryAPI
 	public TimerAPI createSystemTimer(TimerCallbackAPI cbs) {
 		return new GWTTimer(cbs);
 	}
-	
+
 	public void alert(String text)
 	{
 		Window.alert(text);
 	}
-	
+
 }

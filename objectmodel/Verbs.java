@@ -20,14 +20,14 @@ import com.github.a2g.core.interfaces.VerbCollectionCallbackAPI;
 
 
 public class Verbs {
-    private VerbCollection theItems;
-    public Verbs(VerbCollectionCallbackAPI api) {
-        this.theItems = new VerbCollection(api); 
-    }
+	private VerbCollection theItems;
+	public Verbs(VerbCollectionCallbackAPI api) {
+		this.theItems = new VerbCollection(api);
+	}
 
-    public VerbCollection items() {
-        return this.theItems;
-    }
+	public VerbCollection items() {
+		return this.theItems;
+	}
 
 	public int getNumberOfRows() {
 		return theItems.getNumberOfRows();

@@ -22,43 +22,43 @@ import com.github.a2g.core.objectmodel.Animation;
 
 
 public class PlayAnimationRepeatWhilstVisibleAction extends BaseAction {
-    private Animation anim;
+	private Animation anim;
 
-    public PlayAnimationRepeatWhilstVisibleAction(BaseAction parent, String animationCode) {
-        super(parent, parent.getApi());
-        this.anim = getApi().getAnimation(animationCode);
-    }
+	public PlayAnimationRepeatWhilstVisibleAction(BaseAction parent, String animationCode) {
+		super(parent, parent.getApi());
+		this.anim = getApi().getAnimation(animationCode);
+	}
 
-    @Override
-    public void runGameAction() {
-        int duration = (this.anim.getLength()
-                + 1)
-                        * 40
-                        * 10;
-        String s = this.anim.getTextualId();
+	@Override
+	public void runGameAction() {
+		int duration = (this.anim.getLength()
+				+ 1)
+				* 40
+				* 10;
+		String s = this.anim.getTextualId();
 
-        this.anim.getObject().setCurrentAnimation(
-                s);
-        this.anim.getObject().setVisible(true);
-        this.run(duration);
-    }
+		this.anim.getObject().setCurrentAnimation(
+				s);
+		this.anim.getObject().setVisible(true);
+		this.run(duration);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {
-        double frame = progress
-                * this.anim.getLength();
+	@Override
+	protected void onUpdateGameAction(double progress) {
+		double frame = progress
+				* this.anim.getLength();
 
-        this.anim.getObject().setCurrentFrame(
-                (int) frame);
-    }
+		this.anim.getObject().setCurrentFrame(
+				(int) frame);
+	}
 
-    @Override
-    protected void onCompleteGameAction() {}
+	@Override
+	protected void onCompleteGameAction() {}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 
 }

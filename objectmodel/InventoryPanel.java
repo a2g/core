@@ -35,56 +35,56 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
-public class InventoryPanel 
-extends AbsolutePanel 
-implements 
+public class InventoryPanel
+extends AbsolutePanel
+implements
 ImagePanelAPI
-, InventoryPanelAPI 
+, InventoryPanelAPI
 {
 	final com.google.gwt.user.client.ui.Image imgLeft;
 	final com.google.gwt.user.client.ui.Image imgRight;
 	InternalAPI api;
-	public InventoryPanel(InternalAPI api, EventBus bus, final MouseToInventoryPresenterAPI api2, ColorEnum fore, ColorEnum back) 
+	public InventoryPanel(InternalAPI api, EventBus bus, final MouseToInventoryPresenterAPI api2, ColorEnum fore, ColorEnum back)
 	{
 		this.api = api;
 		ImageResource resLeft = UserInterfaceDecoration.getLeftArrow();
 		ImageResource resRight = UserInterfaceDecoration.getRightArrow();
 
-		 DOM.setStyleAttribute(getElement(), "color", fore.toString());
-		 DOM.setStyleAttribute(getElement(), "backgroundColor", back.toString());
+		DOM.setStyleAttribute(getElement(), "color", fore.toString());
+		DOM.setStyleAttribute(getElement(), "backgroundColor", back.toString());
 
-		
+
 		imgLeft = new com.google.gwt.user.client.ui.Image(resLeft.getSafeUri());
 		imgRight = new com.google.gwt.user.client.ui.Image(resRight.getSafeUri());
 		imgLeft.addClickHandler(
 				new ClickHandler()
 				{	@Override
-					public void onClick(ClickEvent event) 
-					{
-						api2.setMouseOver(.05, .5);
-						api2.doClick();
-					}
+					public void onClick(ClickEvent event)
+				{
+					api2.setMouseOver(.05, .5);
+					api2.doClick();
+				}
 				});
 		imgRight.addClickHandler(
 				new ClickHandler()
 				{	@Override
-					public void onClick(ClickEvent event) 
-					{
-						api2.setMouseOver(.95, .5);
-						api2.doClick();
-					}
+					public void onClick(ClickEvent event)
+				{
+					api2.setMouseOver(.95, .5);
+					api2.doClick();
+				}
 				});
 		this.add(imgLeft, 0, 0);
 		this.add(imgRight, 100, 0);
 	}
 
 	@Override
-	public void updateInventory(Inventory inventory) 
+	public void updateInventory(Inventory inventory)
 	{
 	}
 
 	final com.google.gwt.user.client.ui.Image getImageFromResource(
-			GWTPackagedImage imageResource, LoadHandler lh) 
+			GWTPackagedImage imageResource, LoadHandler lh)
 	{
 		{
 			final com.google.gwt.user.client.ui.Image image = imageResource
@@ -161,6 +161,6 @@ ImagePanelAPI
 	@Override
 	public void setRightArrowVisible(boolean visible) {
 		imgRight.setVisible(visible);
-		
+
 	}
 }

@@ -23,39 +23,39 @@ import com.github.a2g.core.objectmodel.SceneObject;
 
 
 public class SetVisibleAction extends BaseAction {
-    private short objId;
-    private boolean isVisible;
+	private short objId;
+	private boolean isVisible;
 
-    public SetVisibleAction(BaseAction parent, short objId, boolean isVisible) {
-        super(parent, parent.getApi());
-        this.objId = objId;
-        this.isVisible = isVisible;
-    }
+	public SetVisibleAction(BaseAction parent, short objId, boolean isVisible) {
+		super(parent, parent.getApi());
+		this.objId = objId;
+		this.isVisible = isVisible;
+	}
 
-    @Override
-    public void runGameAction() {
+	@Override
+	public void runGameAction() {
 
-        run(1);
-    }
+		run(1);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
-    protected void onCompleteGameAction() {
-        InternalAPI i = getApi();
-        SceneObject o = i.getObject(this.objId);
+	@Override
+	protected void onCompleteGameAction() {
+		InternalAPI i = getApi();
+		SceneObject o = i.getObject(this.objId);
 
-        if (o != null) {
-            o.setVisible(this.isVisible);
-        } else {
-            assert(o != null);
-        }
-    }
+		if (o != null) {
+			o.setVisible(this.isVisible);
+		} else {
+			assert(o != null);
+		}
+	}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 }

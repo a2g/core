@@ -24,38 +24,38 @@ import java.util.TreeMap;
 
 
 public class InventoryItemCollection {
-    private Map<String, InventoryItem> theMap;
+	private Map<String, InventoryItem> theMap;
 
-    public InventoryItemCollection() {
-        theMap = new TreeMap<String, InventoryItem>();
-    }
+	public InventoryItemCollection() {
+		theMap = new TreeMap<String, InventoryItem>();
+	}
 
-    public InventoryItem at(String textualId) {
-        try {
-            return theMap.get(textualId);
-        } catch (Exception e) {}
-        return null;
-    }
+	public InventoryItem at(String textualId) {
+		try {
+			return theMap.get(textualId);
+		} catch (Exception e) {}
+		return null;
+	}
 
-    public void add(InventoryItem item) {
-        theMap.put(item.getTextualId(), item);
-    }
+	public void add(InventoryItem item) {
+		theMap.put(item.getTextualId(), item);
+	}
 
-    public InventoryItem at(int index) throws NoSuchElementException {
-        InventoryItem item = null;
-        Iterator<InventoryItem> iter = theMap.values().iterator();
-        int i = 0;
+	public InventoryItem at(int index) throws NoSuchElementException {
+		InventoryItem item = null;
+		Iterator<InventoryItem> iter = theMap.values().iterator();
+		int i = 0;
 
-        while (i <= index) {
-            item = iter.next();
-            i++;
-        }
+		while (i <= index) {
+			item = iter.next();
+			i++;
+		}
 
-        return item;
-    }
+		return item;
+	}
 
-    public int getCount() {
-        return theMap.size();
-    }
+	public int getCount() {
+		return theMap.size();
+	}
 
 }

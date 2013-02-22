@@ -22,28 +22,28 @@ import com.github.a2g.core.action.BaseDialogTreeAction;
 
 
 public class DoNothingAction extends BaseDialogTreeAction {
-    public DoNothingAction(BaseAction parent) {
-        super(parent, parent.getApi());
-    }
+	public DoNothingAction(BaseAction parent) {
+		super(parent, parent.getApi());
+	}
 
-    @Override
-    public void onUpdate(double progress) {}
+	@Override
+	public void onUpdate(double progress) {}
 
-    @Override
-    public void runGameAction() {
-    	super.run(1);
-    }
+	@Override
+	public void runGameAction() {
+		super.run(1);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
-    protected void onCompleteGameAction() 
-    {
-     }
+	@Override
+	protected void onCompleteGameAction()
+	{
+	}
 
-    @Override
-    public boolean isParallel() {
-        return false;
-    }
+	@Override
+	public boolean isParallel() {
+		return false;
+	}
 }

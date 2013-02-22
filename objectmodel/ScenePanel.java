@@ -31,24 +31,24 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
 
-public class ScenePanel 
-extends AbsolutePanel 
- implements ImagePanelAPI, ScenePanelAPI
+public class ScenePanel
+extends AbsolutePanel
+implements ImagePanelAPI, ScenePanelAPI
 {
 
 	//private TreeMap<String, com.google.gwt.user.client.ui.Image> theLoadedImageMap;
 
-	
-    public ScenePanel(EventBus bus, InternalAPI api) 
-    {
-        this.getElement().setId("cwAbsolutePanel");
-        this.addStyleName("absolutePanel");
- 
-    }
 
-    final com.google.gwt.user.client.ui.Image getImageFromResource(GWTPackagedImage imageResource, LoadHandler lh)
+	public ScenePanel(EventBus bus, InternalAPI api)
 	{
-		
+		this.getElement().setId("cwAbsolutePanel");
+		this.addStyleName("absolutePanel");
+
+	}
+
+	final com.google.gwt.user.client.ui.Image getImageFromResource(GWTPackagedImage imageResource, LoadHandler lh)
+	{
+
 		//assert (imageResource != null);
 		//if(theLoadedImageMap.containsKey(imageResource.toString()))
 		//{
@@ -58,44 +58,44 @@ extends AbsolutePanel
 		//}
 		//else
 		//{
-			final com.google.gwt.user.client.ui.Image image = new com.google.gwt.user.client.ui.Image(imageResource.getNative().getSafeUri());
-			//theLoadedImageMap.put(imageResource.toString(), image);
-			if(lh!=null)
-			{
-				image.addLoadHandler(lh);
-			}
-			return image;
+		final com.google.gwt.user.client.ui.Image image = new com.google.gwt.user.client.ui.Image(imageResource.getNative().getSafeUri());
+		//theLoadedImageMap.put(imageResource.toString(), image);
+		if(lh!=null)
+		{
+			image.addLoadHandler(lh);
+		}
+		return image;
 		//}
 	}
-    
-   @Override
+
+	@Override
 	public Image createNewImageAndAddHandlers
 	(
-			LoadHandler lh, 
+			LoadHandler lh,
 			PackagedImageAPI imageResource,
 			InternalAPI api,
 			EventBus bus,
-			int x, 
-			int y, 
+			int x,
+			int y,
 			String objectTextualId,
 			short objectCode)
 	{
 		com.google.gwt.user.client.ui.Image image = getImageFromResource((GWTPackagedImage)imageResource,lh);
-	
+
 
 		GWTImage imageAndPos = new GWTImage(image, this, new Point(x, y));
-		
-			
-		
+
+
+
 		imageAndPos.getNativeImage().addMouseMoveHandler
 		(
 				new SceneObjectMouseOverHandler(bus, api, objectTextualId, objectCode)
-		);		
-		
+				);
+
 		imageAndPos.getNativeImage().addClickHandler
 		(
 				new ImageMouseClickHandler(bus, this)
-		);
+				);
 
 		return imageAndPos;
 	}
@@ -104,7 +104,7 @@ extends AbsolutePanel
 	@Override
 	public void setImageVisible(Image image, boolean visible)
 	{
-		
+
 		super.setVisible(((GWTImage)image).getNativeImage().getElement(), visible);
 	}
 
@@ -133,22 +133,22 @@ extends AbsolutePanel
 	}
 
 	@Override
-	public int getImageHeight(Image image) 
+	public int getImageHeight(Image image)
 	{
 		return ((GWTImage)image).getNativeImage().getHeight();
 	}
 
 	@Override
-	public int getImageWidth(Image image) 
+	public int getImageWidth(Image image)
 	{
 		return ((GWTImage)image).getNativeImage().getWidth();
 	}
-	
+
 	@Override
 	public void setScenePixelSize(int width, int height)
 	{
 		this.setSize("" + width + "px",
-			"" + height + "px");
+				"" + height + "px");
 	}
-    
+
 }

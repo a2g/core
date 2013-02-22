@@ -19,7 +19,7 @@ package com.github.a2g.core.gwt.factory;
 import com.github.a2g.core.interfaces.SystemAnimationAPI;
 import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
 
-public class GWTSystemAnimation 
+public class GWTSystemAnimation
 extends com.google.gwt.animation.client.Animation
 implements SystemAnimationAPI
 {
@@ -28,17 +28,17 @@ implements SystemAnimationAPI
 	{
 		this.callbacks = callbacks;
 	}
-	
+
 	@Override
 	protected void onUpdate(double progress) {
 		callbacks.onUpdate(progress);
-		
+
 	}
-	
+
 	@Override
 	protected void onComplete()
 	{
-	callbacks.onComplete();
+		callbacks.onComplete();
 	}
-	
+
 }

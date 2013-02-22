@@ -22,60 +22,60 @@ import com.github.a2g.core.interfaces.ConstantsForAPI;
 
 public class Sentence {
 
-    private String string;
-    private int verbAsNumber;
-    private SentenceItem AAA;
-    private SentenceItem BBB;
+	private String string;
+	private int verbAsNumber;
+	private SentenceItem AAA;
+	private SentenceItem BBB;
 
-    public Sentence() {
-        this.string = "";
-        this.verbAsNumber = 0; 
-        this.AAA = new SentenceItem();
-        this.BBB = new SentenceItem();
-    }
+	public Sentence() {
+		this.string = "";
+		this.verbAsNumber = 0;
+		this.AAA = new SentenceItem();
+		this.BBB = new SentenceItem();
+	}
 
-    void setVerb(SentenceItem snc, boolean useTwoObjectForm) 
-    {
-        this.string = useTwoObjectForm? snc.getDisplayNameAfterDivider():snc.getDisplayNameBeforeDivider();
-        int i = snc.getCode()/ConstantsForAPI.VERB_MULTIPLIER;;
-        this.verbAsNumber = i;
-    }
+	void setVerb(SentenceItem snc, boolean useTwoObjectForm)
+	{
+		this.string = useTwoObjectForm? snc.getDisplayNameAfterDivider():snc.getDisplayNameBeforeDivider();
+		int i = snc.getCode()/ConstantsForAPI.VERB_MULTIPLIER;;
+		this.verbAsNumber = i;
+	}
 
-    void setAAA(SentenceItem a) {
-        this.string = this.string.replace("AAA", a.getDisplayName()); 
-        this.AAA = a;
-    }
+	void setAAA(SentenceItem a) {
+		this.string = this.string.replace("AAA", a.getDisplayName());
+		this.AAA = a;
+	}
 
-    void setBBB(SentenceItem b) {
-        this.string = this.string.replace("BBB", b.getDisplayName()); 
-        this.BBB = b;
-    }
+	void setBBB(SentenceItem b) {
+		this.string = this.string.replace("BBB", b.getDisplayName());
+		this.BBB = b;
+	}
 
-    final int getVerbAsVerbEnumeration() {
-        return this.verbAsNumber;
-    }
+	final int getVerbAsVerbEnumeration() {
+		return this.verbAsNumber;
+	}
 
-    final String getDisplayName() {
-        return this.string;
-    }
+	final String getDisplayName() {
+		return this.string;
+	}
 
-    final SentenceItem getAAA() {
-        return this.AAA;
-    }
+	final SentenceItem getAAA() {
+		return this.AAA;
+	}
 
-    final SentenceItem getBBB() {
-        return this.BBB;
-    }
+	final SentenceItem getBBB() {
+		return this.BBB;
+	}
 
-    final int getVerbAsCode() {
-        return this.verbAsNumber * ConstantsForAPI.VERB_MULTIPLIER;
-    }
+	final int getVerbAsCode() {
+		return this.verbAsNumber * ConstantsForAPI.VERB_MULTIPLIER;
+	}
 
-    boolean isLookingForSecondObject() {
-        boolean isLookingForSecondObject = this.AAA.getTextualId().length() > 0;
+	boolean isLookingForSecondObject() {
+		boolean isLookingForSecondObject = this.AAA.getTextualId().length() > 0;
 
-        return isLookingForSecondObject;
-    }
+		return isLookingForSecondObject;
+	}
 
 }
 

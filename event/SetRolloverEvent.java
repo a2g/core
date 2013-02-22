@@ -23,38 +23,38 @@ import com.google.gwt.event.shared.GwtEvent;
 
 
 public class SetRolloverEvent extends GwtEvent<SetRolloverEventHandlerAPI> {
-    public static Type<SetRolloverEventHandlerAPI> TYPE = new Type<SetRolloverEventHandlerAPI>();
-    // private final FriendSummaryDTO friend;
-    private final String displayName;
-    private final String textualId;
-    private final int code;
-    
-    public String getDisplayName() {
-        return displayName;
-    }
+	public static Type<SetRolloverEventHandlerAPI> TYPE = new Type<SetRolloverEventHandlerAPI>();
+	// private final FriendSummaryDTO friend;
+	private final String displayName;
+	private final String textualId;
+	private final int code;
 
-    public String getTextualId() {
-        return textualId;
-    }
+	public String getDisplayName() {
+		return displayName;
+	}
 
-    public int getCode() {
-        return code;
-    }
+	public String getTextualId() {
+		return textualId;
+	}
 
-    public SetRolloverEvent(String displayName, String textualId, int code) {
-        this.displayName = displayName;
-        this.textualId = textualId;
-        this.code = code;
-    }
+	public int getCode() {
+		return code;
+	}
 
-    @Override
-    public Type<SetRolloverEventHandlerAPI> getAssociatedType() {
-        return TYPE;
-    }
+	public SetRolloverEvent(String displayName, String textualId, int code) {
+		this.displayName = displayName;
+		this.textualId = textualId;
+		this.code = code;
+	}
 
-    @Override
-    protected void dispatch(SetRolloverEventHandlerAPI handler) {
-        handler.onSetMouseOver(displayName,
-                textualId, code);
-    }
+	@Override
+	public Type<SetRolloverEventHandlerAPI> getAssociatedType() {
+		return TYPE;
+	}
+
+	@Override
+	protected void dispatch(SetRolloverEventHandlerAPI handler) {
+		handler.onSetMouseOver(displayName,
+				textualId, code);
+	}
 }

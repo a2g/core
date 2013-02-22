@@ -23,30 +23,30 @@ import com.github.a2g.core.action.BaseDialogTreeAction;
 
 public class DialogTreeEndAction extends BaseDialogTreeAction {
 
-    public DialogTreeEndAction(BaseAction parent) {
-        super(parent, parent.getApi());
-    }
+	public DialogTreeEndAction(BaseAction parent) {
+		super(parent, parent.getApi());
+	}
 
-    @Override
-    public void onUpdate(double progress) {}
+	@Override
+	public void onUpdate(double progress) {}
 
-    @Override
-    public void runGameAction() {
-        super.run(1);
-    }
+	@Override
+	public void runGameAction() {
+		super.run(1);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
-    protected void onCompleteGameAction() {
-    	getApi().setDialogTreeActive(false);
-    }
+	@Override
+	protected void onCompleteGameAction() {
+		getApi().setDialogTreeActive(false);
+	}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 
 }

@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
- 
+
 package com.github.a2g.core.swing.factory;
 
 
@@ -50,7 +50,7 @@ import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
-public class SwingFactory 
+public class SwingFactory
 implements FactoryAPI
 {
 
@@ -59,17 +59,17 @@ implements FactoryAPI
 
 	public SwingFactory(EventBus bus, MasterPresenter master)
 	{
-	 this.bus = bus;
-	 this.master = master;
+		this.bus = bus;
+		this.master = master;
 	}
 	@Override
-	public CommandLinePanelAPI createCommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll) 
+	public CommandLinePanelAPI createCommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll)
 	{
 		return new CommandLinePanel(fore,back,roll);
 	}
 
 	@Override
-	public DialogTreePanelAPI createDialogTreePanel(EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum roll) 
+	public DialogTreePanelAPI createDialogTreePanel(EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum roll)
 	{
 		return new DialogTreePanel(bus, fore, back, roll);
 	}
@@ -91,15 +91,15 @@ implements FactoryAPI
 	}
 
 	@Override
-	public TitleCardPanelAPI createTitleCardPanel(ColorEnum fore, ColorEnum back) 
+	public TitleCardPanelAPI createTitleCardPanel(ColorEnum fore, ColorEnum back)
 	{
 		return new TitleCardPanel(master, fore, back);
 	}
 
-	
+
 
 	@Override
-	public PopupPanelAPI createPopupPanel(String string, ColorEnum color, BaseAction toCancel) 
+	public PopupPanelAPI createPopupPanel(String string, ColorEnum color, BaseAction toCancel)
 	{
 		return new PopupPanel(string, color, toCancel);
 	}
@@ -107,7 +107,7 @@ implements FactoryAPI
 
 
 	@Override
-	public VerbsPanelAPI createVerbsPanel(ColorEnum fore, ColorEnum back) 
+	public VerbsPanelAPI createVerbsPanel(ColorEnum fore, ColorEnum back)
 	{
 		return new VerbsPanel(bus, master, fore, back);
 	}
@@ -120,16 +120,16 @@ implements FactoryAPI
 	public TimerAPI createSystemTimer(TimerCallbackAPI cbs) {
 		return new SwingTimer(cbs);
 	}
-	
+
 	void alert(String text)
 	{
 		JOptionPane.showMessageDialog(null, "alert", text,JOptionPane.ERROR_MESSAGE);
 	}
 	@Override
 	public InventoryPanelAPI createInventoryPanel(
-			MouseToInventoryPresenterAPI api, ColorEnum fore, ColorEnum back) 
+			MouseToInventoryPresenterAPI api, ColorEnum fore, ColorEnum back)
 	{
-		return new InventoryPanel(bus, master, api, fore, back);	
+		return new InventoryPanel(bus, master, api, fore, back);
 	}
-	
+
 }

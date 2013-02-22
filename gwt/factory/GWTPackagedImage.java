@@ -22,20 +22,20 @@ public class GWTPackagedImage
 implements PackagedImageAPI
 {
 	com.google.gwt.resources.client.ImageResource img;
-	
+
 	public GWTPackagedImage(com.google.gwt.resources.client.ImageResource img)
 	{
 		this.img = img;
 	}
-	
+
 	public com.google.gwt.resources.client.ImageResource getNative()
 	{
 		return img;
 	}
 
-	public com.google.gwt.user.client.ui.Image unpack() 
+	public com.google.gwt.user.client.ui.Image unpack()
 	{
-		
+
 		return new com.google.gwt.user.client.ui.Image(this.img);
 		//new com.google.gwt.user.client.ui.Image(imageResource.getNative().getSafeUri());
 	}

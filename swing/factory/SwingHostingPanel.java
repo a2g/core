@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 
 @SuppressWarnings("serial")
-public class SwingHostingPanel 
+public class SwingHostingPanel
 extends JPanel
 implements HostingPanelAPI
 {

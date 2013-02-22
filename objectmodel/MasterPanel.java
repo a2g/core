@@ -26,65 +26,65 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 
-public class MasterPanel 
-extends VerticalPanel 
+public class MasterPanel
+extends VerticalPanel
 implements MasterPanelAPI
 {
 	GWTHostingPanel hostForCommandLine;
-    GWTHostingPanel hostForInventory;
-    GWTHostingPanel hostForVerbs;
-    GWTHostingPanel hostForScene;
-    GWTHostingPanel hostForDialogTree;
-    GWTHostingPanel hostForLoading;
-    GWTHostingPanel hostForTitleCard;
-    GuiStateEnum state;
-    
-    public MasterPanel(MasterPresenterHostAPI parent, ColorEnum back) {
+	GWTHostingPanel hostForInventory;
+	GWTHostingPanel hostForVerbs;
+	GWTHostingPanel hostForScene;
+	GWTHostingPanel hostForDialogTree;
+	GWTHostingPanel hostForLoading;
+	GWTHostingPanel hostForTitleCard;
+	GuiStateEnum state;
 
-    	// create all the host panels, that we want to arrange.
-        hostForCommandLine = new GWTHostingPanel();
-        hostForInventory = new GWTHostingPanel();
-        hostForVerbs = new GWTHostingPanel();
-        hostForScene = new GWTHostingPanel();
-        hostForDialogTree = new GWTHostingPanel();
-        hostForLoading = new GWTHostingPanel();
-        hostForTitleCard = new GWTHostingPanel();
+	public MasterPanel(MasterPresenterHostAPI parent, ColorEnum back) {
 
-        // will be constructed from two vertical stacks.
-    	AbsolutePanel stackForSceneAndLoading = new AbsolutePanel();
-    	AbsolutePanel stackForDialogTreeInvAndCommand = new AbsolutePanel();
- 
-        DOM.setStyleAttribute(stackForDialogTreeInvAndCommand.getElement(),"backgroundColor", back.toString());
-        DOM.setStyleAttribute(stackForSceneAndLoading.getElement(),"backgroundColor", back.toString());
-     
+		// create all the host panels, that we want to arrange.
+		hostForCommandLine = new GWTHostingPanel();
+		hostForInventory = new GWTHostingPanel();
+		hostForVerbs = new GWTHostingPanel();
+		hostForScene = new GWTHostingPanel();
+		hostForDialogTree = new GWTHostingPanel();
+		hostForLoading = new GWTHostingPanel();
+		hostForTitleCard = new GWTHostingPanel();
+
+		// will be constructed from two vertical stacks.
+		AbsolutePanel stackForSceneAndLoading = new AbsolutePanel();
+		AbsolutePanel stackForDialogTreeInvAndCommand = new AbsolutePanel();
+
+		DOM.setStyleAttribute(stackForDialogTreeInvAndCommand.getElement(),"backgroundColor", back.toString());
+		DOM.setStyleAttribute(stackForSceneAndLoading.getElement(),"backgroundColor", back.toString());
 
 
-        {
-        	HorizontalPanel verbsAndInventory = new HorizontalPanel();
 
-        	verbsAndInventory.add(hostForVerbs);
-        	verbsAndInventory.add(
-        			hostForInventory);
+		{
+			HorizontalPanel verbsAndInventory = new HorizontalPanel();
 
-        	VerticalPanel commandLineAndVerbsAndInventory = new VerticalPanel();
+			verbsAndInventory.add(hostForVerbs);
+			verbsAndInventory.add(
+					hostForInventory);
 
-        	commandLineAndVerbsAndInventory.add(
-        			hostForCommandLine);
-        	commandLineAndVerbsAndInventory.add(
-        			verbsAndInventory);
-        	stackForDialogTreeInvAndCommand.add(commandLineAndVerbsAndInventory);
-        	stackForDialogTreeInvAndCommand.add(hostForDialogTree);
-        }
-        {
-        	stackForSceneAndLoading.add(hostForScene);
-        	stackForSceneAndLoading.add(hostForLoading);
-        	stackForSceneAndLoading.add(hostForTitleCard);
-        }
-        
-        this.add(stackForSceneAndLoading);
-        this.add(stackForDialogTreeInvAndCommand);
-    	
-    }
+			VerticalPanel commandLineAndVerbsAndInventory = new VerticalPanel();
+
+			commandLineAndVerbsAndInventory.add(
+					hostForCommandLine);
+			commandLineAndVerbsAndInventory.add(
+					verbsAndInventory);
+			stackForDialogTreeInvAndCommand.add(commandLineAndVerbsAndInventory);
+			stackForDialogTreeInvAndCommand.add(hostForDialogTree);
+		}
+		{
+			stackForSceneAndLoading.add(hostForScene);
+			stackForSceneAndLoading.add(hostForLoading);
+			stackForSceneAndLoading.add(hostForTitleCard);
+		}
+
+		this.add(stackForSceneAndLoading);
+		this.add(stackForDialogTreeInvAndCommand);
+
+	}
 
 	@Override
 	public HostingPanelAPI getHostForCommandLine() {
@@ -113,12 +113,12 @@ implements MasterPanelAPI
 	public HostingPanelAPI getHostForDialogTree() {
 		return hostForDialogTree;
 	}
-	
+
 	@Override
 	public HostingPanelAPI getHostForLoading() {
 		return hostForLoading;
 	}
-	
+
 
 
 	@Override
@@ -127,10 +127,10 @@ implements MasterPanelAPI
 	}
 
 	@Override
-	public void setActiveState(GuiStateEnum state) 
+	public void setActiveState(GuiStateEnum state)
 	{
 		this.state = state;
-		
+
 		switch(state)
 		{
 		case DialogTreeMode:
@@ -139,8 +139,8 @@ implements MasterPanelAPI
 			hostForLoading.setVisible(false);
 			hostForTitleCard.setVisible(false);
 			hostForCommandLine.setVisible(false);
-		    hostForInventory.setVisible(false);
-		    hostForVerbs.setVisible(false);
+			hostForInventory.setVisible(false);
+			hostForVerbs.setVisible(false);
 			break;
 		case CutScene:
 			hostForScene.setVisible(true);
@@ -148,14 +148,14 @@ implements MasterPanelAPI
 			hostForLoading.setVisible(false);
 			hostForTitleCard.setVisible(false);
 			hostForCommandLine.setVisible(false);
-		    hostForInventory.setVisible(false);
-		    hostForVerbs.setVisible(false);
-		    break;
+			hostForInventory.setVisible(false);
+			hostForVerbs.setVisible(false);
+			break;
 		case ActiveScene:
 			hostForScene.setVisible(true);
 			hostForCommandLine.setVisible(true);
-		    hostForInventory.setVisible(true);
-		    hostForVerbs.setVisible(true);
+			hostForInventory.setVisible(true);
+			hostForVerbs.setVisible(true);
 			hostForDialogTree.setVisible(false);
 			hostForLoading.setVisible(false);
 			hostForTitleCard.setVisible(false);
@@ -164,16 +164,16 @@ implements MasterPanelAPI
 			hostForScene.setVisible(false);
 			hostForLoading.setVisible(true);
 			hostForCommandLine.setVisible(false);
-		    hostForInventory.setVisible(false);
-		    hostForVerbs.setVisible(false);
+			hostForInventory.setVisible(false);
+			hostForVerbs.setVisible(false);
 			hostForDialogTree.setVisible(false);
 			hostForTitleCard.setVisible(false);
 			break;
 		case TitleCardOverActiveScene:
 			hostForTitleCard.setVisible(true);
 			hostForCommandLine.setVisible(true);
-		    hostForInventory.setVisible(true);
-		    hostForVerbs.setVisible(true);
+			hostForInventory.setVisible(true);
+			hostForVerbs.setVisible(true);
 			hostForDialogTree.setVisible(false);
 			hostForScene.setVisible(false);
 			hostForLoading.setVisible(false);
@@ -181,8 +181,8 @@ implements MasterPanelAPI
 		case TitleCardOverCutScene:
 			hostForTitleCard.setVisible(true);
 			hostForCommandLine.setVisible(false);
-		    hostForInventory.setVisible(false);
-		    hostForVerbs.setVisible(false);
+			hostForInventory.setVisible(false);
+			hostForVerbs.setVisible(false);
 			hostForDialogTree.setVisible(false);
 			hostForScene.setVisible(false);
 			hostForLoading.setVisible(false);
@@ -191,8 +191,8 @@ implements MasterPanelAPI
 			hostForDialogTree.setVisible(true);
 			hostForTitleCard.setVisible(true);
 			hostForCommandLine.setVisible(false);
-		    hostForInventory.setVisible(false);
-		    hostForVerbs.setVisible(false);
+			hostForInventory.setVisible(false);
+			hostForVerbs.setVisible(false);
 			hostForScene.setVisible(false);
 			hostForLoading.setVisible(false);
 			break;
@@ -201,8 +201,8 @@ implements MasterPanelAPI
 			hostForLoading.setVisible(false);
 			hostForDialogTree.setVisible(false);
 			hostForCommandLine.setVisible(false);
-		    hostForInventory.setVisible(false);
-		    hostForVerbs.setVisible(false);
+			hostForInventory.setVisible(false);
+			hostForVerbs.setVisible(false);
 			hostForScene.setVisible(false);
 			break;
 		default:
@@ -211,9 +211,9 @@ implements MasterPanelAPI
 	}
 
 	@Override
-	public GuiStateEnum getActiveState() 
+	public GuiStateEnum getActiveState()
 	{
 		return state;
 	}
 
-}	
+}

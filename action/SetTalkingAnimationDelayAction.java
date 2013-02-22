@@ -21,32 +21,32 @@ import com.github.a2g.core.action.BaseAction;
 
 
 public class SetTalkingAnimationDelayAction extends BaseAction {
-    private short objId;
-    private int delay;
-    public SetTalkingAnimationDelayAction(BaseAction parent, short objId, int delay) {
-        super(parent, parent.getApi());
-        this.objId = objId;
-        this.delay = delay;
-    }
+	private short objId;
+	private int delay;
+	public SetTalkingAnimationDelayAction(BaseAction parent, short objId, int delay) {
+		super(parent, parent.getApi());
+		this.objId = objId;
+		this.delay = delay;
+	}
 
-    @Override
-    public void runGameAction() {
-        super.run(1);
-    }
+	@Override
+	public void runGameAction() {
+		super.run(1);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
-    protected void onCompleteGameAction() {
-        getApi().getObject(this.objId).setTalkingAnimationDelay(
-                this.delay);
-    }
+	@Override
+	protected void onCompleteGameAction() {
+		getApi().getObject(this.objId).setTalkingAnimationDelay(
+				this.delay);
+	}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 
 }

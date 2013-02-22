@@ -22,15 +22,15 @@ import java.awt.event.MouseEvent;
 
 
 public class DialogTreeMouseOutHandler extends MouseAdapter {
-    private final java.awt.Label label;
-    Color color;
-    public DialogTreeMouseOutHandler(java.awt.Label label, Color color) {
-        this.label = label;
-        this.color = color;
-    }	
+	private final java.awt.Label label;
+	Color color;
+	public DialogTreeMouseOutHandler(java.awt.Label label, Color color) {
+		this.label = label;
+		this.color = color;
+	}
 
-    @Override
-    public void mouseExited(MouseEvent event) {
-        this.label.setForeground(color);
-    }
+	@Override
+	public void mouseExited(MouseEvent event) {
+		this.label.setForeground(color);
+	}
 }

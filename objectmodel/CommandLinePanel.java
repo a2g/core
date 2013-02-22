@@ -24,15 +24,15 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.UIObject;
 
 
-public class CommandLinePanel 
-extends Label 
+public class CommandLinePanel
+extends Label
 implements CommandLinePanelAPI
 {
-	public CommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll) 
+	public CommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll)
 	{
 		this.setText(" ");
-		 DOM.setStyleAttribute(getElement(), "color", fore.toString());
-		 DOM.setStyleAttribute(getElement(), "backgroundColor", back.toString());
+		DOM.setStyleAttribute(getElement(), "color", fore.toString());
+		DOM.setStyleAttribute(getElement(), "backgroundColor", back.toString());
 	}
 
 

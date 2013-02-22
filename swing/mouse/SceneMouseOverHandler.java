@@ -29,63 +29,63 @@ import com.github.a2g.core.objectmodel.SceneObject;
 
 @SuppressWarnings("unused")
 public class SceneMouseOverHandler implements MouseMotionListener {
-    private final EventBus bus;
-    private InternalAPI api;
-    private final ScenePanel scenePanel;
-    static boolean isAddedAlready;
+	private final EventBus bus;
+	private InternalAPI api;
+	private final ScenePanel scenePanel;
+	static boolean isAddedAlready;
 
-    public SceneMouseOverHandler(ScenePanel scenePanel, EventBus bus, InternalAPI api) {
-        this.bus = bus;
-        this.api = api;
-        this.scenePanel = scenePanel;
-        if(!isAddedAlready)
-        {
-        	scenePanel.addMouseMotionListener(this);
-        	isAddedAlready = true;
-        }
-    }
-    
-    public InternalAPI getAPI()
-    {
-    	return api;
-    }
+	public SceneMouseOverHandler(ScenePanel scenePanel, EventBus bus, InternalAPI api) {
+		this.bus = bus;
+		this.api = api;
+		this.scenePanel = scenePanel;
+		if(!isAddedAlready)
+		{
+			scenePanel.addMouseMotionListener(this);
+			isAddedAlready = true;
+		}
+	}
+
+	public InternalAPI getAPI()
+	{
+		return api;
+	}
 
 
-    @Override
-    public void mouseMoved(MouseEvent event) 
-    {
-    	int w = scenePanel.getWidth();
-    	int h = scenePanel.getHeight();
-    	double x = event.getX()/(double)scenePanel.getWidth();
-    	double y  = (event.getY()+2)/(double)scenePanel.getHeight();
-    	String objectId = scenePanel.getObjectUnderMouse(event.getX(),event.getY());
-    	if(objectId!="")
-    	{
-    		String textualAnim = api.getSceneGui().getModel().objectCollection().at(objectId).getCurrentAnimation();
-    		api.getSceneGui().getModel().objectCollection().at(objectId).getAnimations().at(textualAnim).getFrames().at(0).getBoundingRect();
-    		SceneObject ob = api.getSceneGui().getModel().objectCollection().at(objectId);
-    		String displayName = "";
-    		String textualId = "";
-    		short code = 0;
-    		if (ob != null) {
-    			//displayName = "" + x + "," + y + ") " +ob.getDisplayName() + "(" + r.getLeft()+","+r.getTop()+ ")to" + "(" + r.getRight()+","+r.getBottom() +")"; 
-    			displayName = ob.getDisplayName();
-    			textualId = ob.getTextualId(); 
-    			code = ob.getCode(); 
-    		}
-    		api.getCommandLineGui().setXYForDebugging(x, y);
-    		api.getCommandLineGui().onSetMouseOver(displayName, textualId, code);
-    		bus.fireEvent(
-    				new SetRolloverEvent(
-    						displayName,
-    						textualId,
-    						code));
-    	}
-    }
+	@Override
+	public void mouseMoved(MouseEvent event)
+	{
+		int w = scenePanel.getWidth();
+		int h = scenePanel.getHeight();
+		double x = event.getX()/(double)scenePanel.getWidth();
+		double y  = (event.getY()+2)/(double)scenePanel.getHeight();
+		String objectId = scenePanel.getObjectUnderMouse(event.getX(),event.getY());
+		if(objectId!="")
+		{
+			String textualAnim = api.getSceneGui().getModel().objectCollection().at(objectId).getCurrentAnimation();
+			api.getSceneGui().getModel().objectCollection().at(objectId).getAnimations().at(textualAnim).getFrames().at(0).getBoundingRect();
+			SceneObject ob = api.getSceneGui().getModel().objectCollection().at(objectId);
+			String displayName = "";
+			String textualId = "";
+			short code = 0;
+			if (ob != null) {
+				//displayName = "" + x + "," + y + ") " +ob.getDisplayName() + "(" + r.getLeft()+","+r.getTop()+ ")to" + "(" + r.getRight()+","+r.getBottom() +")";
+				displayName = ob.getDisplayName();
+				textualId = ob.getTextualId();
+				code = ob.getCode();
+			}
+			api.getCommandLineGui().setXYForDebugging(x, y);
+			api.getCommandLineGui().onSetMouseOver(displayName, textualId, code);
+			bus.fireEvent(
+					new SetRolloverEvent(
+							displayName,
+							textualId,
+							code));
+		}
+	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

@@ -18,15 +18,15 @@ package com.github.a2g.core.objectmodel;
 
 
 
-public class LoadedLoad 
-{	
-    private SceneObjectCollection sceneObjectCollection;
-    private String name;
+public class LoadedLoad
+{
+	private SceneObjectCollection sceneObjectCollection;
+	private String name;
 
-    public LoadedLoad(String name) {
-    	this.name = name;
-        this.sceneObjectCollection = new SceneObjectCollection();
-    }
+	public LoadedLoad(String name) {
+		this.name = name;
+		this.sceneObjectCollection = new SceneObjectCollection();
+	}
 
 	public void addToAppropriateAnimation(int prefix, Image imageAndPos, String objectTextualId, String animationTextualId, short objectCode, String objPlusAnimCode, int screenPixelWidth, int screenPixelHeight)
 	{
@@ -41,21 +41,21 @@ public class LoadedLoad
 					screenPixelHeight);
 			sceneObject.setNumberPrefix(prefix);
 			sceneObject.setCode(objectCode);
-			
-	
+
+
 			this.getSceneObjectCollection().add(	sceneObject);
 		}
 
 		Animation animation  = sceneObject.getAnimations().at(animationTextualId);
 		if (animation == null) {
-			// much simpler if not in the animation map. 
+			// much simpler if not in the animation map.
 			animation = new Animation(
 					animationTextualId,
 					sceneObject);
 			animation.setCode(objPlusAnimCode);
 			sceneObject.getAnimations().add(animation);
-		} 
-		
+		}
+
 		animation.getImageAndPosCollection().add(imageAndPos);
 	}
 
@@ -66,6 +66,6 @@ public class LoadedLoad
 	public String getName() {
 		return name;
 	}
-	
-	
+
+
 }

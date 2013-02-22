@@ -23,48 +23,48 @@ import com.github.a2g.core.objectmodel.SceneObject;
 
 public class SwapPropertyAction extends BaseAction {
 
-    private short objId1;
-    private short objId2;
-    private SwapType type;
+	private short objId1;
+	private short objId2;
+	private SwapType type;
 
-    public SwapPropertyAction(BaseAction parent, short objId1, short objId2, SwapType type) {
-        super(parent, parent.getApi());
-        this.objId1 = objId1;
-        ;
-        this.objId2 = objId2;
-        this.type = type;
-    }
+	public SwapPropertyAction(BaseAction parent, short objId1, short objId2, SwapType type) {
+		super(parent, parent.getApi());
+		this.objId1 = objId1;
+		;
+		this.objId2 = objId2;
+		this.type = type;
+	}
 
-    @Override
-    public void runGameAction() {
-        super.run(1);
-    }
+	@Override
+	public void runGameAction() {
+		super.run(1);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
-    protected void onCompleteGameAction() {
-        SceneObject a = getApi().getObject(
-                this.objId1);
-        SceneObject b = getApi().getObject(
-                this.objId2);
+	@Override
+	protected void onCompleteGameAction() {
+		SceneObject a = getApi().getObject(
+				this.objId1);
+		SceneObject b = getApi().getObject(
+				this.objId2);
 
-        switch (this.type) {
-        case Visibility:
-            boolean temp = a.isVisible();
+		switch (this.type) {
+		case Visibility:
+			boolean temp = a.isVisible();
 
-            a.setVisible(b.isVisible());
-            b.setVisible(temp);
+			a.setVisible(b.isVisible());
+			b.setVisible(temp);
 
-        }
+		}
 
-    }
+	}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 
 }

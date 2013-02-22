@@ -26,21 +26,21 @@ import com.google.gwt.event.shared.EventBus;
 
 
 public class DialogTreeMouseClickHandler extends MouseAdapter {
-    private final Label label;
-    private int branchId;
-    private EventBus bus;
+	private final Label label;
+	private int branchId;
+	private EventBus bus;
 
-    public DialogTreeMouseClickHandler(EventBus bus, Label label, int branchId) {
-        this.label = label;
-        this.bus = bus;
-        this.branchId = branchId;
-    }
+	public DialogTreeMouseClickHandler(EventBus bus, Label label, int branchId) {
+		this.label = label;
+		this.bus = bus;
+		this.branchId = branchId;
+	}
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        bus.fireEvent(
-                new SaySpeechCallDialogTreeEvent(
-                        label.getText(), branchId));
-        
-    }
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		bus.fireEvent(
+				new SaySpeechCallDialogTreeEvent(
+						label.getText(), branchId));
+
+	}
 }

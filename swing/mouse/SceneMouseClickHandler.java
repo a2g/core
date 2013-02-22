@@ -25,55 +25,55 @@ import com.github.a2g.core.interfaces.InternalAPI;
 
 public class SceneMouseClickHandler implements MouseListener
 {
-    private InternalAPI api;
-    private EventBus bus;
+	private InternalAPI api;
+	private EventBus bus;
 
-    public SceneMouseClickHandler(EventBus bus, InternalAPI api) 
-    {
-        this.api = api;      
-        this.bus = bus;
-    }
-    
-    public InternalAPI getAPI()
-    {
-    	return api;
-    }
+	public SceneMouseClickHandler(EventBus bus, InternalAPI api)
+	{
+		this.api = api;
+		this.bus = bus;
+	}
+
+	public InternalAPI getAPI()
+	{
+		return api;
+	}
 
 
-    @Override
-    public void mouseClicked(MouseEvent event) 
-    {
-   
-    }
+	@Override
+	public void mouseClicked(MouseEvent event)
+	{
+
+	}
 
 	@Override
 	public void mousePressed(MouseEvent event) {
-	 	double width = api.getSceneGui().getWidth();
-    	double height = api.getSceneGui().getHeight();
-    	double x = event.getX()/width;
-    	double y = event.getY()/height;
-        bus.fireEvent(
-                new ExecuteCommandEvent(x, y));
-		
+		double width = api.getSceneGui().getWidth();
+		double height = api.getSceneGui().getHeight();
+		double x = event.getX()/width;
+		double y = event.getY()/height;
+		bus.fireEvent(
+				new ExecuteCommandEvent(x, y));
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
+
 }

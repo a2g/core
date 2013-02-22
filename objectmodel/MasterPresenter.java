@@ -59,7 +59,7 @@ import com.github.a2g.core.interfaces.TimerAPI;
 import com.github.a2g.core.interfaces.TimerCallbackAPI;
 import com.google.gwt.event.shared.EventBus;
 
-public class MasterPresenter  
+public class MasterPresenter
 implements InternalAPI
 , SaySpeechCallDialogTreeEventHandlerAPI
 , PropertyChangeEventHandlerAPI
@@ -88,31 +88,31 @@ implements InternalAPI
 	private SceneAPI callbacks;
 	private TreeMap<Short, SceneObject> theObjectMap;
 	private TreeMap<String, Animation> theAnimationMap;
-	
+
 
 	private EventBus bus;
 	private MasterPresenterHostAPI parent;
-	
+
 	private TimerAPI timer;
 	private MasterPanelAPI masterPanel;
 	private ActionRunner actionRunner;
 	private int textSpeedDelay;
 	private Integer[] theListOfIndexesToInsertAt;
-	
+
 
 	private Logger logger = Logger.getLogger("com.mycompany.level");
 
-	
-	private String lastSceneAsString;
-	
 
-	public MasterPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent) 
+	private String lastSceneAsString;
+
+
+	public MasterPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent)
 	{
 		this.bus = bus;
 		this.timer = null;
 		this.parent = parent;
 		this.textSpeedDelay = 20;
-		
+
 		this.theObjectMap = new TreeMap<Short, SceneObject>();
 		this.theAnimationMap = new TreeMap<String, Animation>();
 
@@ -138,7 +138,7 @@ implements InternalAPI
 				masterPanel.getHostForDialogTree(), bus, this);
 		this.commandLinePresenter = new CommandLinePresenter(
 				masterPanel.getHostForCommandLine(), bus, this);
-		
+
 		this.inventoryPresenter = new InventoryPresenter(
 				masterPanel.getHostForInventory(), bus, this);
 		this.scenePresenter = new ScenePresenter(
@@ -168,8 +168,8 @@ implements InternalAPI
 		return this;
 	}
 
-	
-	
+
+
 	@Override
 	public boolean addImageForAnInventoryItem(LoadHandler lh, String objectTextualId, int objectCode, PackagedImageAPI imageResource)
 	{
@@ -180,15 +180,15 @@ implements InternalAPI
 				objectTextualId);
 		boolean result = true;
 
-		
-		if (item == null) 
+
+		if (item == null)
 		{
 
 			Image imageAndPos = inventoryPresenter.getView().createNewImageAndAdddHandlers(
 					imageResource,lh, bus, objectTextualId, objectCode, 0,0);
-			
+
 			imageAndPos.addImageToPanel( 0 );
-			
+
 			boolean initiallyVisible = false;
 			result = inventoryPresenter.addInventory(
 					objectTextualId
@@ -196,13 +196,13 @@ implements InternalAPI
 					, initiallyVisible
 					, imageAndPos
 					);
-		
-			
-			
-	    }
+
+
+
+		}
 
 		return result;
-	} 
+	}
 
 	@Override
 	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String objectTextualId, String animationTextualId, short objectCode, String objPlusAnimCode, PackagedImageAPI imageResource) {
@@ -210,30 +210,30 @@ implements InternalAPI
 			return true;
 		}
 
-				
+
 		Image imageAndPos = this.scenePresenter.getView().createNewImageAndAddHandlers(lh, imageResource, this, bus, x,y, objectTextualId, objectCode);
-		
+
 		loadingPresenter.getLoaders().addToAppropriateAnimation(numberPrefix, imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode, scenePresenter.getWidth(), scenePresenter.getHeight());
-				
-		
+
+
 		int before = getIndexToInsertAt(numberPrefix);
 		updateTheListOfIndexesToInsertAt(numberPrefix);
-		
+
 		// this triggers the loading
 		imageAndPos.addImageToPanel( before );
-	
-		
+
+
 		return true;
 	}
 
-	
+
 	@Override
 	public SceneObject getObject(short code) {
 		theObjectMap.size();
 		SceneObject ob = this.theObjectMap.get(
 				code);
 
-		if (ob == null) 
+		if (ob == null)
 		{
 			ob = null;
 		}
@@ -274,8 +274,8 @@ implements InternalAPI
 			theListOfIndexesToInsertAt[i]++;
 		}
 	}
-	
-	
+
+
 
 	@Override
 	public void executeBaseAction(BaseAction a) {
@@ -286,35 +286,35 @@ implements InternalAPI
 		}
 		actionRunner.runAction(a);
 	}
-	
+
 	public void skip()
 	{
 		actionRunner.skip();
 	}
-	
+
 	public void decrementTextSpeed()
 	{
 		textSpeedDelay++;
 	}
-	
+
 	public void incrementTextSpeed()
 	{
 		textSpeedDelay--;
 	}
-	
+
 
 	public void setInitialAnimationsAsCurrent() {
 		int count = this.scenePresenter.getModel().objectCollection().count();
-		for (int i = 0; i<count; i++) 
+		for (int i = 0; i<count; i++)
 		{
 			SceneObject sceneObject = this.scenePresenter.getModel().objectCollection().at(i);
 
 			if (sceneObject != null) {
-				if (sceneObject.getAnimations().at(ConstantsForAPI.INITIAL)!= null) 
+				if (sceneObject.getAnimations().at(ConstantsForAPI.INITIAL)!= null)
 				{
 					sceneObject.getAnimations().at(ConstantsForAPI.INITIAL).setAsCurrentAnimation();
-				} 
-				else 
+				}
+				else
 				{
 					boolean b = true;
 
@@ -330,7 +330,7 @@ implements InternalAPI
 
 	public void callOnPreEntry() {
 		this.callbacks.onPreEntry(this);
-	}	
+	}
 
 	@Override
 	public void doEveryFrame() {
@@ -350,7 +350,7 @@ implements InternalAPI
 
 
 	public void loadInventoryFromAPI() {
-		
+
 		inventoryPresenter.updateInventory();
 	}
 
@@ -361,13 +361,13 @@ implements InternalAPI
 			String name = items.at(i).getTextualId();
 
 			int isCarrying = items.at(i).isVisible()
-			? 1
-					: 0;
+					? 1
+							: 0;
 
 			setValue(
 					"CARRYING_"
-					+ name.toUpperCase(),
-					isCarrying);
+							+ name.toUpperCase(),
+							isCarrying);
 		}
 	}
 
@@ -381,7 +381,7 @@ implements InternalAPI
 	@Override
 	public int getValue(Object key) {
 		String keyAsString = key.toString();
-		
+
 		int i = parent.getValue(keyAsString);
 
 		return i;
@@ -390,21 +390,21 @@ implements InternalAPI
 	@Override
 	public boolean isTrue(Object key) {
 		String keyAsString = key.toString();
-		
+
 		int property = getValue(keyAsString);
 
 		return property != 0;
 	}
 
 	@Override
-	public void switchToScene(String scene) 
+	public void switchToScene(String scene)
 	{
 		// since instantiateScene..ToIt does some asynchronous stuff,
 		// I thought maybe I could do it, then cancel the timers.
 		// but I've put it off til I need the microseconds.
 		cancelTimer();
 		this.actionRunner.cancel();
-	
+
 		this.parent.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(	scene);
 	}
 
@@ -419,13 +419,13 @@ implements InternalAPI
 		return true;
 	}
 
-	public void startCallingOnEveryFrame() 
+	public void startCallingOnEveryFrame()
 	{
 		timer = getFactory().createSystemTimer(this);
 		timer.scheduleRepeating(40);
 	}
 
-	public void cancelTimer() 
+	public void cancelTimer()
 	{
 		if(this.timer!=null)
 		{
@@ -466,21 +466,21 @@ implements InternalAPI
 	}
 
 	@Override
-	public void executeBranchOnCurrentScene(int branchId) 
+	public void executeBranchOnCurrentScene(int branchId)
 	{	this.actionRunner.cancel();
-		// clear it so any old branches don't show up
-		this.dialogTreePresenter.clear();
-	
-		// make dialogtreepanel active if not already
-		this.setDialogTreeActive(true);
-		
-		// get the chain from the client code
-		NullParentAction npa = new NullParentAction(this);
-		npa.setApi(this);
-		BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, npa, branchId);
+	// clear it so any old branches don't show up
+	this.dialogTreePresenter.clear();
 
-		// execute it
-		executeBaseAction(	actionChain );
+	// make dialogtreepanel active if not already
+	this.setDialogTreeActive(true);
+
+	// get the chain from the client code
+	NullParentAction npa = new NullParentAction(this);
+	npa.setApi(this);
+	BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, npa, branchId);
+
+	// execute it
+	executeBaseAction(	actionChain );
 	}
 
 
@@ -494,7 +494,7 @@ implements InternalAPI
 		// 3. where the user appends other actions to it
 		// 4. Then we execute it
 		// Thus it will say the text, and do what the user prescribes.
-		
+
 		NullParentAction npa = new NullParentAction(this);
 		npa.setApi(this);
 		SayAction say = new SayAction(npa, objId, speech);
@@ -503,17 +503,17 @@ implements InternalAPI
 		executeBaseAction(actionChain);
 	}
 
-	public void callOnEnterScene() 
+	public void callOnEnterScene()
 	{
 		NullParentAction npa = new NullParentAction(this);
 		npa.setApi(this);
 		BaseAction a = this.callbacks.onEntry(this,npa);
-		
-		//.. then executeBaseAction->actionRunner::runAction will add an TitleCardAction 
-		// the title card 		
+
+		//.. then executeBaseAction->actionRunner::runAction will add an TitleCardAction
+		// the title card
 		executeBaseAction(a);
 	}
-	
+
 	@Override
 	public VerbsPresenter getVerbsGui() {
 		return this.verbsPresenter;
@@ -530,7 +530,7 @@ implements InternalAPI
 	}
 
 	@Override
-	public void onSaySpeechCallBranch(String speech, int branchId) 
+	public void onSaySpeechCallBranch(String speech, int branchId)
 	{
 		saySpeechAndThenExecuteBranchWithBranchId(speech, branchId);
 	}
@@ -540,18 +540,18 @@ implements InternalAPI
 	}
 
 
-	
-	
+
+
 	@Override
 	public void startScene()
 	{
 		masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.Loading);
 		loadInventoryFromAPI();
 		setInitialAnimationsAsCurrent();
-		
+
 		// it is reasonable for a person to set current animations in pre-entry
 		// and expect them to stay current, so we set cuurentAnimations before pre-entry.
-		
+
 		callOnPreEntry();
 
 		startCallingOnEveryFrame();
@@ -564,19 +564,19 @@ implements InternalAPI
 	@Override
 	public void addEssential(LoadAPI blah)
 	{
-		
+
 		loadingPresenter.getLoaders().addEssential(blah, this);
 	}
 
 
 	@Override
-	public void kickStartLoading() 
+	public void kickStartLoading()
 	{
 		loadingPresenter.getLoaders().calculateImagesToLoadAndIsSameInventory();
-		
+
 		int total = loadingPresenter.getLoaders().imagesToLoad();
 		boolean isSameInventory = loadingPresenter.getLoaders().isSameInventoryAsLastTime();
-	
+
 		// hide all visible images.
 		// (using scene's data is quicker than using scenePanel data)
 		for(int i=0;i<scenePresenter.getModel().objectCollection().count();i++)
@@ -589,27 +589,27 @@ implements InternalAPI
 		this.theObjectMap.clear();
 		this.theAnimationMap.clear();
 		scenePresenter.reset();
-		
-		
+
+
 		// set gui to blank
 		masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.Loading);
 		//scenePresenter.clear(); don't clear, all its images are switched off anyhow.
 		loadingPresenter.clear();
 		//commandLinePresenter.clear();
 		verbsPresenter.clear();
-			
+
 
 		if(!isSameInventory)
 		{
 			inventoryPresenter.clear();
 		}
-		
+
 		loadingPresenter.setTotal(total);
 		loadingPresenter.getLoaders().loadNext();
 	}
 
 
-	
+
 
 
 	@Override
@@ -628,15 +628,15 @@ implements InternalAPI
 
 
 	public void setScene(SceneAPI scene) {
-		
-		
+
+
 		setCallbacks(scene);
 
 		this.callbacks.onFillLoadList(new OnFillLoadListAPIImpl(this));
 	}
 
 	@Override
-	public void restartReloading() 
+	public void restartReloading()
 	{
 		loadingPresenter.getLoaders().clearLoaders();
 
@@ -648,10 +648,10 @@ implements InternalAPI
 
 
 	@Override
-	public void mergeWithScene(LoadedLoad s) 
+	public void mergeWithScene(LoadedLoad s)
 	{
 
-		
+
 		String name = s.getName();
 		logger.fine(name);
 		System.out.println("dumping " +  name);
@@ -682,7 +682,7 @@ implements InternalAPI
 				ours.add(destObject);
 				this.theObjectMap.put(objectCode,destObject);
 				System.out.println("object " + objTextualId + " " + objectCode);
-				
+
 			}
 
 			for(int j=0;j<srcObject.getAnimations().getCount();j++)
@@ -690,7 +690,7 @@ implements InternalAPI
 				Animation srcAnimation = srcObject.getAnimations().at(j);
 				String animationCode = srcAnimation.getCode();
 				String animTextualId = srcAnimation.getTextualId();
-				
+
 				Animation destAnimation = destObject.getAnimations().at(animTextualId);
 				if(destAnimation==null)
 				{
@@ -701,7 +701,7 @@ implements InternalAPI
 				}
 
 				//System.out.println("new anim " + objTextualId + " " + animTextualId+" = "+animationCode);
-				
+
 				for(int k=0;k<srcAnimation.getFrames().getCount();k++)
 				{
 					Image srcImage = srcAnimation.getFrames().at(k);
@@ -713,15 +713,15 @@ implements InternalAPI
 
 		}
 	}
-	
+
 	MasterPanelAPI.GuiStateEnum getStateIfEntering(MasterPanelAPI.GuiStateEnum state)
 	{
 		switch(state)
 		{
-			case DialogTreeMode:return MasterPanelAPI.GuiStateEnum.TitleCardOverDialogTree;
-			case CutScene:return MasterPanelAPI.GuiStateEnum.TitleCardOverCutScene;
-			case ActiveScene:return MasterPanelAPI.GuiStateEnum.TitleCardOverActiveScene;
-			case Loading:return MasterPanelAPI.GuiStateEnum.TitleCardOverLoading;
+		case DialogTreeMode:return MasterPanelAPI.GuiStateEnum.TitleCardOverDialogTree;
+		case CutScene:return MasterPanelAPI.GuiStateEnum.TitleCardOverCutScene;
+		case ActiveScene:return MasterPanelAPI.GuiStateEnum.TitleCardOverActiveScene;
+		case Loading:return MasterPanelAPI.GuiStateEnum.TitleCardOverLoading;
 		default:
 			return state;
 		}
@@ -731,18 +731,18 @@ implements InternalAPI
 	{
 		switch(state)
 		{
-			case TitleCardOverDialogTree: return MasterPanelAPI.GuiStateEnum.DialogTreeMode;
-			case TitleCardOverCutScene: return MasterPanelAPI.GuiStateEnum.CutScene;
-			case TitleCardOverActiveScene: return MasterPanelAPI.GuiStateEnum.ActiveScene;
-			case TitleCardOverLoading: return MasterPanelAPI.GuiStateEnum.Loading;
+		case TitleCardOverDialogTree: return MasterPanelAPI.GuiStateEnum.DialogTreeMode;
+		case TitleCardOverCutScene: return MasterPanelAPI.GuiStateEnum.CutScene;
+		case TitleCardOverActiveScene: return MasterPanelAPI.GuiStateEnum.ActiveScene;
+		case TitleCardOverLoading: return MasterPanelAPI.GuiStateEnum.Loading;
 		default:
 			return state;
 		}
 	}
-	
+
 	@Override
-	public void displayTitleCard(String text, ColorEnum color) 
-	{	
+	public void displayTitleCard(String text, ColorEnum color)
+	{
 		boolean isEntering = text.length()>0;
 		if(isEntering)
 		{
@@ -773,35 +773,35 @@ implements InternalAPI
 	@Override
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,
 			SentenceItem sentenceA, SentenceItem sentenceB, double x, double y) {
-		 NullParentAction npa = new NullParentAction(this);
-         
-         BaseAction a = this.callbacks.onDoCommand(
-         		this,npa,
-                 verbAsCode, 
-                 sentenceA,
-                 sentenceB, 
-                 x, 
-                 y);
-         if(a!=null)
-         {
-        	 
-        	 commandLinePresenter.setMouseable(false);
-        	 executeBaseAction(a);
-         }
-         
-         setLastCommand(x, y,
-                 verbAsVerbEnumeration,
-                 sentenceA.getTextualId(),
-                 sentenceB.getTextualId());
+		NullParentAction npa = new NullParentAction(this);
+
+		BaseAction a = this.callbacks.onDoCommand(
+				this,npa,
+				verbAsCode,
+				sentenceA,
+				sentenceB,
+				x,
+				y);
+		if(a!=null)
+		{
+
+			commandLinePresenter.setMouseable(false);
+			executeBaseAction(a);
+		}
+
+		setLastCommand(x, y,
+				verbAsVerbEnumeration,
+				sentenceA.getTextualId(),
+				sentenceB.getTextualId());
 
 	}
 
 	@Override
-	public void actionFinished() 
+	public void actionFinished()
 	{
 		this.commandLinePresenter.clear();
 		this.commandLinePresenter.setMouseable(true);
-		
+
 		if(masterPanel.getActiveState() != MasterPanelAPI.GuiStateEnum.DialogTreeMode)
 		{
 			this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.ActiveScene);
@@ -815,16 +815,16 @@ implements InternalAPI
 	}
 
 	@Override
-	public void onClickInventory() 
+	public void onClickInventory()
 	{
-		// a click on the inventory results in negative coords. 
+		// a click on the inventory results in negative coords.
 		commandLinePresenter.onClick(-1, -1);
-		
+
 	}
 
 	@Override
 	public void onMouseOverInventory
-	(String displayName, String textualId, int code) 
+	(String displayName, String textualId, int code)
 	{
 		getCommandLineGui().onSetMouseOver(displayName, textualId, code);
 		bus.fireEvent(
@@ -835,19 +835,19 @@ implements InternalAPI
 	}
 
 	@Override
-	public void onPropertyChange(PropertyChangeEvent inventoryEvent) 
+	public void onPropertyChange(PropertyChangeEvent inventoryEvent)
 	{
 		this.inventoryPresenter.updateInventory();
 	}
 
 	@Override
-	public SceneAPI getSceneByName(String string) 
+	public SceneAPI getSceneByName(String string)
 	{
-		return this.parent.getSceneViaCache(string);	
+		return this.parent.getSceneViaCache(string);
 	}
 
 	@Override
-	public void setDialogTreeActive(boolean isInDialogTreeMode) 
+	public void setDialogTreeActive(boolean isInDialogTreeMode)
 	{
 		if(isInDialogTreeMode)
 		{
@@ -860,7 +860,7 @@ implements InternalAPI
 	}
 
 	@Override
-	public boolean isCommandLineActive() 
+	public boolean isCommandLineActive()
 	{
 		boolean isCommandLineActive = masterPanel.getActiveState()==MasterPanelAPI.GuiStateEnum.ActiveScene;
 		return isCommandLineActive;
@@ -874,10 +874,10 @@ implements InternalAPI
 	@Override
 	public void setActiveState(GuiStateEnum state) {
 		this.masterPanel.setActiveState(state);
-		
+
 	}
 
-	
+
 
 }
 

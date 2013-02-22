@@ -25,16 +25,16 @@ import com.google.gwt.user.client.ui.Label;
 
 
 public class DialogTreeMouseOverHandler implements MouseOverHandler {
-    private final Label label;
-    private ColorEnum rolloverColor;
-    
-    public DialogTreeMouseOverHandler(Label label, ColorEnum rolloverColor) {
-        this.label = label;
-        this.rolloverColor = rolloverColor;
-    }
+	private final Label label;
+	private ColorEnum rolloverColor;
 
-    @Override
-    public void onMouseOver(MouseOverEvent event) {
-        DOM.setStyleAttribute(label.getElement(), "color",rolloverColor.toString());
-    }
+	public DialogTreeMouseOverHandler(Label label, ColorEnum rolloverColor) {
+		this.label = label;
+		this.rolloverColor = rolloverColor;
+	}
+
+	@Override
+	public void onMouseOver(MouseOverEvent event) {
+		DOM.setStyleAttribute(label.getElement(), "color",rolloverColor.toString());
+	}
 }

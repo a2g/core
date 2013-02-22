@@ -25,44 +25,44 @@ import com.google.gwt.event.shared.EventBus;
 
 
 public class DialogTreePresenter {
-    private EventBus bus;
-    private DialogTree theDialogTree;
-    private DialogTreePanelAPI view;
-    private short dialogTreeTalker;
-		
-    public DialogTreePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api) {
-        this.bus = bus;
-        this.theDialogTree = new DialogTree();
-        this.view = api.getFactory().createDialogTreePanel(bus, ColorEnum.Red, ColorEnum.Black, ColorEnum.Purple);
-        panel.setThing(view);
-        this.dialogTreeTalker = 0;
-    }
-	  
-    public void clear() {
-        theDialogTree.clear();
-        view.update(theDialogTree, bus);
-    }
+	private EventBus bus;
+	private DialogTree theDialogTree;
+	private DialogTreePanelAPI view;
+	private short dialogTreeTalker;
+
+	public DialogTreePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api) {
+		this.bus = bus;
+		this.theDialogTree = new DialogTree();
+		this.view = api.getFactory().createDialogTreePanel(bus, ColorEnum.Red, ColorEnum.Black, ColorEnum.Purple);
+		panel.setThing(view);
+		this.dialogTreeTalker = 0;
+	}
+
+	public void clear() {
+		theDialogTree.clear();
+		view.update(theDialogTree, bus);
+	}
 
 
-    public void addBranch(int subBranchId, String lineOfDialog) {
-        theDialogTree.addSubBranch(subBranchId, lineOfDialog);
-        view.update(theDialogTree, bus);
-    }
+	public void addBranch(int subBranchId, String lineOfDialog) {
+		theDialogTree.addSubBranch(subBranchId, lineOfDialog);
+		view.update(theDialogTree, bus);
+	}
 
 
-    public void setDialogTreeTalker(short personWhoSpeaksTheChosenDialog) {
-        this.dialogTreeTalker = personWhoSpeaksTheChosenDialog;
+	public void setDialogTreeTalker(short personWhoSpeaksTheChosenDialog) {
+		this.dialogTreeTalker = personWhoSpeaksTheChosenDialog;
 
-    }
+	}
 
-    public short getDialogTreeTalker() {
-        return this.dialogTreeTalker;
-    }
+	public short getDialogTreeTalker() {
+		return this.dialogTreeTalker;
+	}
 
 	public void setPixelSize(int width, int height) {
 		view.setPixelSize(width,height);
 	}
-	
+
 	public DialogTreePanelAPI getView()
 	{
 		return view;

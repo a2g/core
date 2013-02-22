@@ -25,18 +25,18 @@ import com.google.gwt.user.client.ui.Label;
 
 
 public class DialogTreeMouseOutHandler implements MouseOutHandler {
-    private final Label label;
-    private ColorEnum foregroundColor;
+	private final Label label;
+	private ColorEnum foregroundColor;
 
-    public DialogTreeMouseOutHandler(Label label, ColorEnum foregroundColor) 
-    {
-        this.label = label;
-        this.foregroundColor = foregroundColor;
-    }
+	public DialogTreeMouseOutHandler(Label label, ColorEnum foregroundColor)
+	{
+		this.label = label;
+		this.foregroundColor = foregroundColor;
+	}
 
-    @Override
-    public void onMouseOut(MouseOutEvent event) 
-    {
-        DOM.setStyleAttribute(label.getElement(), "color", foregroundColor.toString());
-    }
+	@Override
+	public void onMouseOut(MouseOutEvent event)
+	{
+		DOM.setStyleAttribute(label.getElement(), "color", foregroundColor.toString());
+	}
 }

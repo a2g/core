@@ -17,7 +17,7 @@
 package com.github.a2g.core.interfaces;
 
 
-public interface VerbCollectionCallbackAPI 
+public interface VerbCollectionCallbackAPI
 {
 	public void update();
 }

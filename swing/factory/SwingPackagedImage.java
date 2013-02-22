@@ -32,22 +32,22 @@ implements PackagedImageAPI
 		this.imagePath = imagePath;
 	}
 	public String getPath()
-	{ 
-		return imagePath; 
+	{
+		return imagePath;
 	}
 
 	public java.awt.Image unpack()
 	{
 
 		java.awt.Image img = null;
-		try 
+		try
 		{
 			String path = this.getPath();
 			img=ImageIO.read(new File(path));
 		}
 		catch(IOException e)
 		{
-			try 
+			try
 			{
 				img=ImageIO.read(new File("com/github/a2g/core/leftArrow.png"));
 			}

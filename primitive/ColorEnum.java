@@ -20,14 +20,14 @@ package com.github.a2g.core.primitive;
 public enum ColorEnum {
 	Black(0,0,0)
 	,Red(255,0,0)
-    ,Green(0,255,0)
-    ,Blue(0,0,255)
-    ,Purple(127,0,127);
-    
-    
-    public final int[] css;   
+	,Green(0,255,0)
+	,Blue(0,0,255)
+	,Purple(127,0,127);
 
-	ColorEnum(int r, int g, int b) 
+
+	public final int[] css;
+
+	ColorEnum(int r, int g, int b)
 	{
 		this.css = new int[3];
 		css[0]=r;

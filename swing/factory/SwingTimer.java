@@ -20,17 +20,17 @@ import com.github.a2g.core.interfaces.TimerAPI;
 import com.github.a2g.core.interfaces.TimerCallbackAPI;
 
 
-public class SwingTimer 
+public class SwingTimer
 extends com.github.a2g.core.swing.animation.Timer
 implements TimerAPI
 {
 	private TimerCallbackAPI callback;
-	
+
 	public SwingTimer(TimerCallbackAPI callback)
 	{
 		this.callback = callback;
 	}
-	
+
 	@Override
 	public void run() {
 		callback.doEveryFrame();

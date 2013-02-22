@@ -19,20 +19,20 @@ package com.github.a2g.core.interfaces;
 import com.google.gwt.event.dom.client.LoadHandler;
 
 
-public interface ImageAddAPI 
+public interface ImageAddAPI
 {
-       
-    /*!
+
+	/*!
 	If the same textualId had already been used in a previous call to this method method, then the call will fail, and return false.
 	@param textualIdForInventory this specifies which inventory item the image represents (see @ref TextualIds).
 	@param codeForInventory this code is registered as the code for the inventory item  (see @ref Codes).
 	@param imageResource the image to add.
 
 	@return true on success, otherwise false.
-     */
-    public boolean addImageForAnInventoryItem(LoadHandler lh, String textualIdForInventory, int codeForInventory, PackagedImageAPI imageResource);
-    
-    /*!
+	 */
+	public boolean addImageForAnInventoryItem(LoadHandler lh, String textualIdForInventory, int codeForInventory, PackagedImageAPI imageResource);
+
+	/*!
 	If the same textualIds have already been used in a previous call to this method method, then the ImageResource is added to the
 	list of animation frames for the animation specified by the ids.
 	@param numberPrefix
@@ -45,9 +45,9 @@ public interface ImageAddAPI
 	@param imageResource the image to add.
 
 	@return true on success, otherwise false.
-     */
-    public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String textualIdForObject, String textualIdForAnimation, short codeForObject, String animCode, PackagedImageAPI imageResource);
-    
+	 */
+	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String textualIdForObject, String textualIdForAnimation, short codeForObject, String animCode, PackagedImageAPI imageResource);
+
 };
 
 

@@ -24,16 +24,16 @@ import com.github.a2g.core.objectmodel.SentenceItem;
 
 public interface SceneAPI  extends ConstantsForAPI
 {
-    public LoadKickStarter onFillLoadList(OnFillLoadListAPIImpl api);
+	public LoadKickStarter onFillLoadList(OnFillLoadListAPIImpl api);
 
-    public void onPreEntry(OnPreEntryAPI api);
-    
-    public BaseAction onEntry(OnEntryAPI api, BaseAction ba);
- 
-    public void onEveryFrame(OnEveryFrameAPI api);
-    
-    public BaseAction onDoCommand(OnDoCommandAPI api, BaseAction ba, int verb, SentenceItem objectA, SentenceItem objectB, double x, double y);  
-    
-    public BaseDialogTreeAction onDialogTree(OnDialogTreeAPI api, BaseAction ba, int branch);
-    
+	public void onPreEntry(OnPreEntryAPI api);
+
+	public BaseAction onEntry(OnEntryAPI api, BaseAction ba);
+
+	public void onEveryFrame(OnEveryFrameAPI api);
+
+	public BaseAction onDoCommand(OnDoCommandAPI api, BaseAction ba, int verb, SentenceItem objectA, SentenceItem objectB, double x, double y);
+
+	public BaseDialogTreeAction onDialogTree(OnDialogTreeAPI api, BaseAction ba, int branch);
+
 }

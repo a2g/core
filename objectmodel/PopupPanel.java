@@ -25,14 +25,14 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Label;
- 
 
-public class PopupPanel 
+
+public class PopupPanel
 implements PopupPanelAPI
 {
 	private com.google.gwt.user.client.ui.PopupPanel popup;
 	private Label labelInPopup;
-	
+
 	public PopupPanel(String speech, ColorEnum color, final BaseAction toCancel)
 	{
 		this.popup = new com.google.gwt.user.client.ui.PopupPanel();
@@ -40,13 +40,13 @@ implements PopupPanelAPI
 		this.labelInPopup = new Label(speech);
 
 		this.popup.setWidget(labelInPopup);
-		
+
 		if(color!=null)
 		{
 			DOM.setStyleAttribute(labelInPopup.getElement(), "color",color.toString());
 			DOM.setStyleAttribute(popup.getElement(), "borderColor",color.toString());
 		}
-		
+
 		labelInPopup.addClickHandler(
 				new ClickHandler()
 				{
@@ -54,11 +54,11 @@ implements PopupPanelAPI
 					@Override
 					public void onClick(ClickEvent event) {
 						toCancel.cancel();
-						
+
 					}
-			
+
 				}
-		);
+				);
 
 	}
 	@Override
@@ -66,7 +66,7 @@ implements PopupPanelAPI
 	{
 		popup.show();
 	}
-	
+
 	@Override
 	public void setPopupPosition(int x, int y)
 	{
@@ -82,5 +82,5 @@ implements PopupPanelAPI
 	{
 		popup.hide();
 	}
-	
+
 }

@@ -27,62 +27,62 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class LoaderPanel 
-extends SimplePanel 
+public class LoaderPanel
+extends SimplePanel
 implements LoaderPanelAPI
 {
 
 	Label progress;
 	Button reload;
 	InternalAPI api;
-	
-    public LoaderPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) {
-    	this.api = api;
-    	VerticalPanel layout = new VerticalPanel();
-    	{
-    		progress = new Label();
-        	
-    		DOM.setStyleAttribute(progress.getElement(), "color",fore.toString());
-    		DOM.setStyleAttribute(progress.getElement(), "backgroundColor",back.toString());
-    		
-    		progress.setText("Loading...");
 
-    		layout.add(progress);
-    	}
-    	{
-    		reload = new Button("Reload");
-    		layout.add(reload);
-    		addHandler(api);
-    	}
-    	this.add(layout);
-    }
-    
-    void addHandler(final InternalAPI api)
-    {
-    	reload.addClickHandler
+	public LoaderPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) {
+		this.api = api;
+		VerticalPanel layout = new VerticalPanel();
+		{
+			progress = new Label();
+
+			DOM.setStyleAttribute(progress.getElement(), "color",fore.toString());
+			DOM.setStyleAttribute(progress.getElement(), "backgroundColor",back.toString());
+
+			progress.setText("Loading...");
+
+			layout.add(progress);
+		}
+		{
+			reload = new Button("Reload");
+			layout.add(reload);
+			addHandler(api);
+		}
+		this.add(layout);
+	}
+
+	void addHandler(final InternalAPI api)
+	{
+		reload.addClickHandler
 		(
-			new ClickHandler()
-			{
-				@Override
-				public void onClick(ClickEvent event) {
-					api.restartReloading();
+				new ClickHandler()
+				{
+					@Override
+					public void onClick(ClickEvent event) {
+						api.restartReloading();
+					}
 				}
-			}
-		);
-    }
+				);
+	}
 
-    @Override
+	@Override
 	public void update(int current, int total, String name) {
-    	progress.setText(" "+current+"/"+total+ " " + name);
-    }
+		progress.setText(" "+current+"/"+total+ " " + name);
+	}
 
 	@Override
 	public void setScenePixelSize(int width, int height)
 	{
 		this.setSize("" + width + "px",
-			"" + height + "px");
+				"" + height + "px");
 	}
 }
-    
-    
+
+
 

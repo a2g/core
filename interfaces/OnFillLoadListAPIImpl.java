@@ -17,19 +17,19 @@
 package com.github.a2g.core.interfaces;
 
 
-public class OnFillLoadListAPIImpl 
+public class OnFillLoadListAPIImpl
 {
 	OnFillLoadListAPI implementation;
 	public OnFillLoadListAPIImpl(OnFillLoadListAPI impl)
 	{
 		this.implementation = impl;
 	}
-			
+
 	public void addEssential(LoadAPI imageBundle)
 	{
 		this.implementation.addEssential(imageBundle);
 	}
-	
+
 
 	public void setScenePixelSize(int width, int height)
 	{
@@ -40,7 +40,7 @@ public class OnFillLoadListAPIImpl
 		this.implementation.kickStartLoading();
 		return new LoadKickStarter();
 	}
-	
+
 	public class LoadKickStarter
 	{
 		private LoadKickStarter(){};
@@ -48,14 +48,14 @@ public class OnFillLoadListAPIImpl
 
 	public void setInventoryPixelSize(int x, int y) {
 		this.implementation.setInventoryPixelSize(x, y);
-	
+
 	}
 
 	public SceneAPI getSceneByName(String string) {
 		return this.implementation.getSceneByName(string);
 	}
 
-	public void setValue(Object string, int value) 
+	public void setValue(Object string, int value)
 	{
 		this.implementation.setValue(string, value);
 	}

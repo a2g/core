@@ -18,7 +18,7 @@ package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.objectmodel.Image;
 
-public interface  ImagePanelAPI 
+public interface  ImagePanelAPI
 {
 	public void setImageVisible(Image image, boolean visible);
 	public void add(Image image, int x, int y);

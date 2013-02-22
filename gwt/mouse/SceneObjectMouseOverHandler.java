@@ -26,32 +26,32 @@ import com.github.a2g.core.objectmodel.SceneObject;
 
 
 public class SceneObjectMouseOverHandler implements MouseMoveHandler {
-    private final EventBus bus;
-    private final String textualId;
-    private final short code;
-    private final InternalAPI api;
+	private final EventBus bus;
+	private final String textualId;
+	private final short code;
+	private final InternalAPI api;
 
-    public SceneObjectMouseOverHandler(EventBus bus, InternalAPI api, String textualId, short code) {
-        this.bus = bus;
-        this.textualId = textualId;
-        this.code = code;
-        this.api = api;
+	public SceneObjectMouseOverHandler(EventBus bus, InternalAPI api, String textualId, short code) {
+		this.bus = bus;
+		this.textualId = textualId;
+		this.code = code;
+		this.api = api;
 
-    }
+	}
 
-    @Override
-    public void onMouseMove(MouseMoveEvent event) {
-        SceneObject ob = api.getObject(
-                this.code);
-        String displayName = "";
+	@Override
+	public void onMouseMove(MouseMoveEvent event) {
+		SceneObject ob = api.getObject(
+				this.code);
+		String displayName = "";
 
-        if (ob != null) {
-            displayName = ob.getDisplayName(); 
-        }
-        bus.fireEvent(
-                new SetRolloverEvent(
-                        displayName,
-                        this.textualId,
-                        this.code));
-    }
+		if (ob != null) {
+			displayName = ob.getDisplayName();
+		}
+		bus.fireEvent(
+				new SetRolloverEvent(
+						displayName,
+						this.textualId,
+						this.code));
+	}
 }

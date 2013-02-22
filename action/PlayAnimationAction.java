@@ -23,86 +23,86 @@ import com.github.a2g.core.objectmodel.SceneObject;
 
 
 public class PlayAnimationAction extends BaseAction {
-    private int delay;
-    private Animation anim;
-    private SceneObject animsParent;
-    private boolean isBackwards;
-    private boolean holdLastFrame;
-    private boolean isNonBlocking;
+	private int delay;
+	private Animation anim;
+	private SceneObject animsParent;
+	private boolean isBackwards;
+	private boolean holdLastFrame;
+	private boolean isNonBlocking;
 
-    public PlayAnimationAction(BaseAction parent, String  animCode) {
-        super(parent, parent.getApi());
-        this.anim = getApi().getAnimation(animCode);
-        this.animsParent = anim.getObject();
-        this.delay = 0;
-        this.isBackwards = false;
-        this.holdLastFrame = false;
-        this.isNonBlocking = false;
-    }
+	public PlayAnimationAction(BaseAction parent, String  animCode) {
+		super(parent, parent.getApi());
+		this.anim = getApi().getAnimation(animCode);
+		this.animsParent = anim.getObject();
+		this.delay = 0;
+		this.isBackwards = false;
+		this.holdLastFrame = false;
+		this.isNonBlocking = false;
+	}
 
-    @Override
-    public void runGameAction() {
-        int duration = (this.anim.getLength()
-                + 1)
-                        * (40 + this.delay);
-        String s = this.anim.getTextualId();
+	@Override
+	public void runGameAction() {
+		int duration = (this.anim.getLength()
+				+ 1)
+				* (40 + this.delay);
+		String s = this.anim.getTextualId();
 
-        if (animsParent != null) {
-            animsParent.setCurrentAnimation(s);
-            animsParent.setVisible(true);
-        }
-        this.run(duration);
-    }
+		if (animsParent != null) {
+			animsParent.setCurrentAnimation(s);
+			animsParent.setVisible(true);
+		}
+		this.run(duration);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {
-        int length = this.anim.getLength();
-        double frame = isBackwards
-                ? (1 - progress) * length
-                : progress * length;
+	@Override
+	protected void onUpdateGameAction(double progress) {
+		int length = this.anim.getLength();
+		double frame = isBackwards
+				? (1 - progress) * length
+						: progress * length;
 
-        if (animsParent != null) {
-            animsParent.setCurrentFrame(
-                    (int) frame);
-        }
-    }
+				if (animsParent != null) {
+					animsParent.setCurrentFrame(
+							(int) frame);
+				}
+	}
 
-    @Override
-    protected void onCompleteGameAction() {
-        
-        if (!this.holdLastFrame) {
-            if (this.anim != null) {
-                SceneObject o = anim.getObject();
+	@Override
+	protected void onCompleteGameAction() {
 
-                if (o != null) {
-                    String s = o.getHomeAnimation();
+		if (!this.holdLastFrame) {
+			if (this.anim != null) {
+				SceneObject o = anim.getObject();
 
-                    o.setCurrentAnimation(s);
-                }
-            }
-        }
-    }
+				if (o != null) {
+					String s = o.getHomeAnimation();
 
-    public void setBackwards(boolean isBackwards) {
-        this.isBackwards = isBackwards;
-    }
+					o.setCurrentAnimation(s);
+				}
+			}
+		}
+	}
 
-    public void setDelay(int delay) {
-        this.delay = delay;
-    }
+	public void setBackwards(boolean isBackwards) {
+		this.isBackwards = isBackwards;
+	}
 
-    public void setHoldLastFrame(boolean holdLastFrame) {
-        this.holdLastFrame = holdLastFrame;
-    }
+	public void setDelay(int delay) {
+		this.delay = delay;
+	}
 
-    public void setNonBlocking(boolean isNonBlocking) {
-        this.isNonBlocking = isNonBlocking;
-    }
+	public void setHoldLastFrame(boolean holdLastFrame) {
+		this.holdLastFrame = holdLastFrame;
+	}
 
-    @Override
-    public boolean isParallel() {
+	public void setNonBlocking(boolean isNonBlocking) {
+		this.isNonBlocking = isNonBlocking;
+	}
 
-        return isNonBlocking;
-    }
+	@Override
+	public boolean isParallel() {
+
+		return isNonBlocking;
+	}
 
 }

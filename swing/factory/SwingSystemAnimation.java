@@ -19,7 +19,7 @@ package com.github.a2g.core.swing.factory;
 import com.github.a2g.core.interfaces.SystemAnimationAPI;
 import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
 
-public class SwingSystemAnimation 
+public class SwingSystemAnimation
 extends com.github.a2g.core.swing.animation.Animation
 implements SystemAnimationAPI
 {
@@ -28,17 +28,17 @@ implements SystemAnimationAPI
 	{
 		this.callbacks = callbacks;
 	}
-	
+
 	@Override
 	protected void onUpdate(double progress) {
 		callbacks.onUpdate(progress);
-		
+
 	}
-	
+
 	@Override
 	protected void onComplete()
 	{
-	callbacks.onComplete();
+		callbacks.onComplete();
 	}
-	
+
 }

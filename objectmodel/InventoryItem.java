@@ -24,52 +24,52 @@ import com.google.gwt.event.shared.EventBus;
 
 public class InventoryItem {
 
-    private final Image image;
-    private final String textualId;
-    private String displayName;
-    private boolean visible;
-    private EventBus bus;
-    private int code;
-    
-    public InventoryItem(EventBus bus, final String textualId, final Image image, int code, boolean isVisible) {
-        assert(bus != null);
-        this.code = code;
-        this.image = image;
-        this.textualId = textualId;
-        this.visible = isVisible;
-        this.displayName = textualId;
-        this.bus = bus;
-    }
+	private final Image image;
+	private final String textualId;
+	private String displayName;
+	private boolean visible;
+	private EventBus bus;
+	private int code;
 
-    public String getTextualId() {
-        return textualId;
-    }
+	public InventoryItem(EventBus bus, final String textualId, final Image image, int code, boolean isVisible) {
+		assert(bus != null);
+		this.code = code;
+		this.image = image;
+		this.textualId = textualId;
+		this.visible = isVisible;
+		this.displayName = textualId;
+		this.bus = bus;
+	}
 
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-        bus.fireEvent(
-                new PropertyChangeEvent(
-                        "CARRYING_" + textualId,
-                        code, visible ? 1 : 0));
-    }
+	public String getTextualId() {
+		return textualId;
+	}
 
-    public boolean isVisible() {
-        return visible;
-    }
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+		bus.fireEvent(
+				new PropertyChangeEvent(
+						"CARRYING_" + textualId,
+						code, visible ? 1 : 0));
+	}
 
-    public final Image getImage() {
-        return image;
-    }
+	public boolean isVisible() {
+		return visible;
+	}
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
+	public final Image getImage() {
+		return image;
+	}
 
-    public String getDisplayName() {
-        return this.displayName;
-    }
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
 
-	public int getCode() 
+	public String getDisplayName() {
+		return this.displayName;
+	}
+
+	public int getCode()
 	{
 		return code;
 	}

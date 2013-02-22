@@ -32,62 +32,62 @@ import com.github.a2g.core.interfaces.LoaderPanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 
 @SuppressWarnings("serial")
-public class LoadingPanel 
-extends JPanel 
+public class LoadingPanel
+extends JPanel
 implements LoaderPanelAPI
 {
 	Label progress;
-	Button reload; 
+	Button reload;
 	InternalAPI api;
 	int width;
 	int height;
-	
-    public LoadingPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) 
-    {
-    	this.api = api;
-    	this.setForeground(new Color(fore.css[0], fore.css[1], fore.css[2]));	
-   		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
-    	
-    	{
-    	
-    		{
-    			progress = new Label();
 
-    			progress.setText("Loading...");
-    			this.add(progress);
-    		}
-    		{
-    			reload = new Button("Reload");
-    			this.add(reload);
-    			addHandler(api);
-    		}
-    		{
-    			BoxLayout layout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
-    			this.setLayout(layout);	
-    		}
-    		
-    	}
-    }
-    
-    void addHandler(final InternalAPI api)
-    {
-    	reload.addActionListener
-		(
-			new ActionListener()
+	public LoadingPanel(final InternalAPI api, ColorEnum fore, ColorEnum back)
+	{
+		this.api = api;
+		this.setForeground(new Color(fore.css[0], fore.css[1], fore.css[2]));
+		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
+
+		{
+
 			{
-				@Override
-				public void actionPerformed(ActionEvent event) {
-					api.restartReloading();
-				}
-			}
-		);
-    }
+				progress = new Label();
 
-    @Override
+				progress.setText("Loading...");
+				this.add(progress);
+			}
+			{
+				reload = new Button("Reload");
+				this.add(reload);
+				addHandler(api);
+			}
+			{
+				BoxLayout layout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
+				this.setLayout(layout);
+			}
+
+		}
+	}
+
+	void addHandler(final InternalAPI api)
+	{
+		reload.addActionListener
+		(
+				new ActionListener()
+				{
+					@Override
+					public void actionPerformed(ActionEvent event) {
+						api.restartReloading();
+					}
+				}
+				);
+	}
+
+	@Override
 	public void update(int current, int total, String name) {
-    	progress.setText(" "+current+"/"+total+ " " + name);
-    }
-    
+		progress.setText(" "+current+"/"+total+ " " + name);
+	}
+
 	@Override
 	public void setScenePixelSize(int width, int height)
 	{
@@ -98,11 +98,11 @@ implements LoaderPanelAPI
 
 
 	@Override
-	public Dimension getPreferredSize() 
+	public Dimension getPreferredSize()
 	{
 		return new Dimension(this.width,this.height);
 	}
 }
-    
-    
+
+
 

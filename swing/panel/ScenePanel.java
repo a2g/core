@@ -53,66 +53,66 @@ import com.google.gwt.event.shared.EventBus;
 
 
 @SuppressWarnings("serial")
-public class ScenePanel 
-extends JPanel 
-implements ScenePanelAPI 
-, ImagePanelAPI 
-, ActionListener  
+public class ScenePanel
+extends JPanel
+implements ScenePanelAPI
+, ImagePanelAPI
+, ActionListener
 {
 	int width;
 	int height;
 	int tally;
 	InternalAPI api;
-	
+
 	private Map<Integer,Point> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages;
-	
-    public ScenePanel(EventBus bus, InternalAPI api) 
-    {
-    	this.api = api;
-        this.mapOfPointsByImage = new TreeMap<Integer, Point>();
-        this.listOfVisibleHashCodes = new LinkedList<Integer>();
-        this.listOfAllVisibleImages = new LinkedList<Image>();
+
+	public ScenePanel(EventBus bus, InternalAPI api)
+	{
+		this.api = api;
+		this.mapOfPointsByImage = new TreeMap<Integer, Point>();
+		this.listOfVisibleHashCodes = new LinkedList<Integer>();
+		this.listOfAllVisibleImages = new LinkedList<Image>();
 		this.width = 200;
 		this.height = 200;
 		this.setBounds(0,0,320,200);
 		this.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 		this.setDoubleBuffered(true);
 		tally++;
-		
+
 		super.addMouseListener
 		(
 				new SceneMouseClickHandler(bus,api)
-		);
-		
+				);
+
 		super.addMouseMotionListener
 		(
 				new SceneMouseOverHandler(this, bus,api)
-		);
-    }
+				);
+	}
 
-    
-  
-   
+
+
+
 	public Image createNewImageAndAdddHandlers(
-			LoadHandler lh, 
+			LoadHandler lh,
 			PackagedImageAPI imageResource,
 			InternalAPI api,
 			EventBus bus,
-			int x, 
-			int y, 
+			int x,
+			int y,
 			String objectTextualId,
 			short objectId)
 	{
 
 		java.awt.Image img = ((SwingPackagedImage)imageResource).unpack();
-		
+
 		SwingImage imageAndPos = new SwingImage(img, objectTextualId, this, new Point(x, y));
-		
+
 		// to fire image loading done.
 		lh.onLoad(null);
-		
+
 		return imageAndPos;
 	}
 
@@ -127,14 +127,14 @@ implements ScenePanelAPI
 
 
 	@Override
-	public Dimension getPreferredSize() 
+	public Dimension getPreferredSize()
 	{
 		return new Dimension(this.width,this.height);
 	}
 
 	void putPoint(SwingImage image, int x,int y)
 	{
-	    mapOfPointsByImage.put(image.getNativeImage().hashCode(), new Point(x,y));
+		mapOfPointsByImage.put(image.getNativeImage().hashCode(), new Point(x,y));
 	}
 
 	@Override
@@ -144,17 +144,17 @@ implements ScenePanelAPI
 			putPoint((SwingImage)image, x,y);
 			triggerPaint();
 		}
-		
+
 	}
 
 	@Override
-	public void setImageVisible(Image image, boolean visible) 
+	public void setImageVisible(Image image, boolean visible)
 	{
 		boolean isIn = listOfVisibleHashCodes.contains(((SwingImage)image).getNativeImage().hashCode());
 		if(visible && !isIn)
 		{
 			listOfVisibleHashCodes.add(((SwingImage)image).getNativeImage().hashCode());
-			triggerPaint(); 
+			triggerPaint();
 		}
 		else if(!visible & isIn)
 		{
@@ -191,13 +191,13 @@ implements ScenePanelAPI
 		mapOfPointsByImage.clear();
 		listOfVisibleHashCodes.clear();
 	}
-	
+
 	public void triggerPaint()
 	{
 		repaint();
 		tally++;
 	}
-	
+
 	@Override
 	public void paint(Graphics g)
 	{
@@ -208,7 +208,7 @@ implements ScenePanelAPI
 			if(listOfVisibleHashCodes.contains(((SwingImage)image).getNativeImage().hashCode()))
 			{
 				Point p = mapOfPointsByImage.get(((SwingImage)image).getNativeImage().hashCode());
-				int x = p.getX(); 
+				int x = p.getX();
 				//x+= image.getBoundingRect().getLeft();
 				int y = p.getY();
 				//y+= image.getBoundingRect().getTop();
@@ -217,10 +217,10 @@ implements ScenePanelAPI
 		}
 		//System.out.println("printed with tally " + tally +" draws "+ draws);
 		tally=0;
-		
+
 	}
 
-	public String getObjectUnderMouse(int x, int y) 
+	public String getObjectUnderMouse(int x, int y)
 	{
 		//System.out.println("----------------");
 		String textualId = "";
@@ -271,7 +271,7 @@ implements ScenePanelAPI
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 
@@ -279,12 +279,12 @@ implements ScenePanelAPI
 	@Override
 	public Image createNewImageAndAddHandlers(final LoadHandler lh,
 			PackagedImageAPI imageResource, InternalAPI api, EventBus bus,
-			int x, int y, String objectTextualId, short objectCode) 
+			int x, int y, String objectTextualId, short objectCode)
 	{
 		java.awt.Image img = ((SwingPackagedImage)imageResource).unpack();
-		
+
 		SwingImage imageAndPos = new SwingImage(img, objectTextualId, this, new Point(x, y));
-		
+
 		// to fire image loading done.
 		// only gwt is asynch, we are swing which synchronous
 		Timer timer = new Timer();
@@ -295,11 +295,11 @@ implements ScenePanelAPI
 			public void run() {
 				lh.onLoad(null);
 			}
-			
+
 		};
 		timer.schedule(task, 1);
-			
-		
+
+
 		return imageAndPos;
 	}
 
@@ -315,5 +315,5 @@ implements ScenePanelAPI
 
 
 
-	
+
 }

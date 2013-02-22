@@ -21,15 +21,15 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.InternalAPI;
 
 
-public abstract class BaseDialogTreeAction 
+public abstract class BaseDialogTreeAction
 extends BaseAction {
 
-    BaseDialogTreeAction(BaseAction parent, InternalAPI api) {
-        super(parent, api);
+	BaseDialogTreeAction(BaseAction parent, InternalAPI api) {
+		super(parent, api);
 
-    }
+	}
 
-		
+
 
 }
 

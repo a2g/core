@@ -37,7 +37,7 @@ import com.google.gwt.event.shared.EventBus;
 
 
 @SuppressWarnings("serial")
-public class VerbsPanel 
+public class VerbsPanel
 extends JPanel implements VerbsPanelAPI
 {
 	EventBus bus;
@@ -46,75 +46,76 @@ extends JPanel implements VerbsPanelAPI
 	GridLayout grid;
 	private int preferredWith;
 	private int preferredHeight;
-    public VerbsPanel(EventBus bus, InternalAPI api, ColorEnum fore, ColorEnum back) 
-    {
-    	this.bus = bus;
-    	this.api =  api;
-    	this.preferredWith =160;
-    	this.preferredHeight = 80;
-    	this.setForeground(new Color(fore.css[0], fore.css[1], fore.css[2]));	
-   		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
-    	grid = new GridLayout();
-    	grid.setVgap(0);
-    	grid.setHgap(0);
-    	this.setLayout(grid);
-    }
-    
+	public VerbsPanel(EventBus bus, InternalAPI api, ColorEnum fore, ColorEnum back)
+	{
+		this.bus = bus;
+		this.api =  api;
+		this.preferredWith =160;
+		this.preferredHeight = 80;
+		this.setForeground(new Color(fore.css[0], fore.css[1], fore.css[2]));
+		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
+		grid = new GridLayout();
+		grid.setVgap(0);
+		grid.setHgap(0);
+		this.setLayout(grid);
+	}
+
 	@Override
 	public Dimension	getPreferredSize()
-	{	
+	{
 		return new Dimension(this.preferredWith,this.preferredHeight);
 	}
-    
-    @Override
+
+	@Override
 	public void setVerbs(Verbs verbs)
-    {
-    	this.verbs = verbs;
-    	update();
-    }
+	{
+		this.verbs = verbs;
+		update();
+	}
 
-    public void update()
-    {
-    	this.removeAll();
-    	//this.add(new Label("Verbs"));
-    	
-    	int numberOfRows = verbs.getNumberOfRows();
-    	int numberOfColumns = verbs.getNumberOfColumns();
-    	grid.setRows(numberOfRows);
-    	grid.setColumns(numberOfColumns); 
-    	
-    	for (int i = 0; i < (grid.getColumns()
-    			* grid.getRows()); i++) 
-    	{
-    		if(i<verbs.items().size())
-    		{
-    			Verb v = verbs.items().get(i);
-    			int code = v.getCode();
-    			String textualId = v.gettextualId();
-    			Label label = new Label(textualId);
+	@Override
+	public void update()
+	{
+		this.removeAll();
+		//this.add(new Label("Verbs"));
 
-    			
-    			
-    			label.addMouseListener
-    			(
-    					new VerbMouseOverHandler( bus, v.getdisplayText(), textualId, code)
-    					);
-    			label.addMouseListener
-    			(
-    					new VerbMouseClickHandler(bus, api)
-    					);
+		int numberOfRows = verbs.getNumberOfRows();
+		int numberOfColumns = verbs.getNumberOfColumns();
+		grid.setRows(numberOfRows);
+		grid.setColumns(numberOfColumns);
 
-    			this.add(label);
-    		}
-    	}
-    }
+		for (int i = 0; i < (grid.getColumns()
+				* grid.getRows()); i++)
+		{
+			if(i<verbs.items().size())
+			{
+				Verb v = verbs.items().get(i);
+				int code = v.getCode();
+				String textualId = v.gettextualId();
+				Label label = new Label(textualId);
+
+
+
+				label.addMouseListener
+				(
+						new VerbMouseOverHandler( bus, v.getdisplayText(), textualId, code)
+						);
+				label.addMouseListener
+				(
+						new VerbMouseClickHandler(bus, api)
+						);
+
+				this.add(label);
+			}
+		}
+	}
 
 	@Override
 	public void setWidth(int i) {
 		this.preferredWith = i;
 		this.preferredHeight = 80;
 		update();
-		
+
 	}
 
 }

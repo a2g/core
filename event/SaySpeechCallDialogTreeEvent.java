@@ -21,25 +21,25 @@ import com.google.gwt.event.shared.GwtEvent;
 
 
 public class SaySpeechCallDialogTreeEvent extends GwtEvent<SaySpeechCallDialogTreeEventHandlerAPI> {
-    public static Type<SaySpeechCallDialogTreeEventHandlerAPI> TYPE = new Type<SaySpeechCallDialogTreeEventHandlerAPI>();
-    // private final FriendSummaryDTO friend;
-    private final String speech;
-    private final int branchId;
-    
-    public SaySpeechCallDialogTreeEvent(String speech, int branchId) {
-        this.speech = speech;
-        this.branchId = branchId;
-    }
+	public static Type<SaySpeechCallDialogTreeEventHandlerAPI> TYPE = new Type<SaySpeechCallDialogTreeEventHandlerAPI>();
+	// private final FriendSummaryDTO friend;
+	private final String speech;
+	private final int branchId;
 
-    @Override
-    public Type<SaySpeechCallDialogTreeEventHandlerAPI> getAssociatedType() {
-        return TYPE;
-    }
+	public SaySpeechCallDialogTreeEvent(String speech, int branchId) {
+		this.speech = speech;
+		this.branchId = branchId;
+	}
 
-    @Override
-    protected void dispatch(SaySpeechCallDialogTreeEventHandlerAPI handler) {
-        handler.onSaySpeechCallBranch(speech,
-                branchId);
-        		
-    }
+	@Override
+	public Type<SaySpeechCallDialogTreeEventHandlerAPI> getAssociatedType() {
+		return TYPE;
+	}
+
+	@Override
+	protected void dispatch(SaySpeechCallDialogTreeEventHandlerAPI handler) {
+		handler.onSaySpeechCallBranch(speech,
+				branchId);
+
+	}
 }

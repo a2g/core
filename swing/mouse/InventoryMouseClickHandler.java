@@ -26,46 +26,46 @@ import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
 
 public class InventoryMouseClickHandler implements MouseListener
 {
-    private MouseToInventoryPresenterAPI api;
-    public InventoryMouseClickHandler(JPanel parent, MouseToInventoryPresenterAPI api2) {
-        this.api = api2;
-    }
-    
-    public MouseToInventoryPresenterAPI getAPI()
-    {
-    	return api;
-    }
+	private MouseToInventoryPresenterAPI api;
+	public InventoryMouseClickHandler(JPanel parent, MouseToInventoryPresenterAPI api2) {
+		this.api = api2;
+	}
+
+	public MouseToInventoryPresenterAPI getAPI()
+	{
+		return api;
+	}
 
 
-    @Override
-    public void mouseClicked(MouseEvent event) 
-    {
-    	api.doClick();
-    }
+	@Override
+	public void mouseClicked(MouseEvent event)
+	{
+		api.doClick();
+	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
+
 }

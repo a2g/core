@@ -21,38 +21,38 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 
 
-/* ! This inherits from BaseDialogTreeAction because it is valid to be used as 
+/* ! This inherits from BaseDialogTreeAction because it is valid to be used as
  *  the last action in a chain that is returned from SceneAPI.onDialogTree().
  *  You can use it in all places where you would use a GameAction
  */
 public class SwitchToAction extends BaseDialogTreeAction {
-    private String scene;
+	private String scene;
 
-    public SwitchToAction(BaseAction parent, String e) {
-        super(parent, parent.getApi());
-        this.scene = e;
-    }
+	public SwitchToAction(BaseAction parent, String e) {
+		super(parent, parent.getApi());
+		this.scene = e;
+	}
 
-    @Override
-    public void runGameAction() {
+	@Override
+	public void runGameAction() {
 
-        super.run(1);
-    }
+		super.run(1);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
-    protected void onCompleteGameAction() {
+	@Override
+	protected void onCompleteGameAction() {
 
-        getApi().switchToScene(this.scene);
+		getApi().switchToScene(this.scene);
 
-    }
+	}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 
 }

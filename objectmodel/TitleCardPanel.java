@@ -24,30 +24,30 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class TitleCardPanel 
-extends SimplePanel 
+public class TitleCardPanel
+extends SimplePanel
 implements TitleCardPanelAPI
 {
 
 	Label label;
 	InternalAPI api;
-	
-    public TitleCardPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) {
-    	this.api = api;
-    	VerticalPanel layout = new VerticalPanel();
-    	{
-    		label = new Label();
-    		DOM.setStyleAttribute(label.getElement(), "color",fore.toString());
-    		DOM.setStyleAttribute(label.getElement(), "BackgroundColor",back.toString());
-    		
-    		label.setText("Loading...");
 
-    		layout.add(label);
-    	}
-    	
-    	this.add(layout);
-    }
-      
+	public TitleCardPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) {
+		this.api = api;
+		VerticalPanel layout = new VerticalPanel();
+		{
+			label = new Label();
+			DOM.setStyleAttribute(label.getElement(), "color",fore.toString());
+			DOM.setStyleAttribute(label.getElement(), "BackgroundColor",back.toString());
+
+			label.setText("Loading...");
+
+			layout.add(label);
+		}
+
+		this.add(layout);
+	}
+
 	@Override
 	public void setColor(ColorEnum color) {
 		if(color!=null)
@@ -55,22 +55,22 @@ implements TitleCardPanelAPI
 			DOM.setStyleAttribute(label.getElement(), "color",color.toString());
 			DOM.setStyleAttribute(label.getElement(), "borderColor",color.toString());
 		}
-		
+
 	}
 
 	@Override
 	public void setText(String text) {
 		label.setText(text);
-		
+
 	}
-	
+
 	@Override
 	public void setScenePixelSize(int width, int height)
 	{
 		this.setSize("" + width + "px",
-			"" + height + "px");
+				"" + height + "px");
 	}
 }
-    
-    
+
+
 

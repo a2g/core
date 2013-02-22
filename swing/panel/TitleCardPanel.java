@@ -28,7 +28,7 @@ import com.github.a2g.core.interfaces.TitleCardPanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 
 @SuppressWarnings("serial")
-public class TitleCardPanel 
+public class TitleCardPanel
 extends JPanel implements TitleCardPanelAPI
 {
 	Label panel;
@@ -44,12 +44,12 @@ extends JPanel implements TitleCardPanelAPI
 
 		{
 			BoxLayout layout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
-			this.setLayout(layout);	
+			this.setLayout(layout);
 		}
 	}
 
 	@Override
-	public void setText(String text) 
+	public void setText(String text)
 	{
 
 		panel.setText(text);
@@ -57,12 +57,12 @@ extends JPanel implements TitleCardPanelAPI
 	}
 
 	@Override
-	public void setColor(ColorEnum colorEnum) 
+	public void setColor(ColorEnum colorEnum)
 	{
 		Color color = new java.awt.Color(255,1,1);
 		panel.setForeground(color);
 	}
-	
+
 	@Override
 	public void setScenePixelSize(int width, int height)
 	{
@@ -73,7 +73,7 @@ extends JPanel implements TitleCardPanelAPI
 
 
 	@Override
-	public Dimension getPreferredSize() 
+	public Dimension getPreferredSize()
 	{
 		return new Dimension(this.width,this.height);
 	}

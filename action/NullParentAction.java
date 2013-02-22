@@ -22,37 +22,37 @@ import com.github.a2g.core.interfaces.InternalAPI;
 
 
 public class NullParentAction extends BaseDialogTreeAction {
-    public NullParentAction(InternalAPI api) {
-        super(null, api);
-    }
+	public NullParentAction(InternalAPI api) {
+		super(null, api);
+	}
 
-    @Override
+	@Override
 	public void setApi(InternalAPI api) {
-        super.setApi(api);
-    }
+		super.setApi(api);
+	}
 
-    @Override
-    public void runGameAction() {
-        super.run(1); // the delayed execution trick
-    }
+	@Override
+	public void runGameAction() {
+		super.run(1); // the delayed execution trick
+	}
 
-    @Override
-    protected void onCompleteGameAction()
-    {
-    }
+	@Override
+	protected void onCompleteGameAction()
+	{
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
+	@Override
 	public void setParent(BaseAction parent) {
-        this.parent = parent;
-    }
+		this.parent = parent;
+	}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 
 }

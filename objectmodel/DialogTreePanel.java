@@ -26,9 +26,9 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
-public class DialogTreePanel 
-extends Grid 
-implements DialogTreePanelAPI 
+public class DialogTreePanel
+extends Grid
+implements DialogTreePanelAPI
 {
 	ColorEnum rolloverColor;
 	ColorEnum foregroundColor;
@@ -37,7 +37,7 @@ implements DialogTreePanelAPI
 		super(4, 1);
 		this.rolloverColor = rolloverColor;
 		this.foregroundColor = foregroundColor;
-		
+
 		DOM.setStyleAttribute(this.getElement(), "Color",foregroundColor.toString());
 		DOM.setStyleAttribute(this.getElement(), "BackgroundColor",backgroundColor.toString());
 

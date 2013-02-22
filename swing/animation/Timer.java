@@ -60,60 +60,60 @@ import java.util.TreeMap;
 public abstract class Timer implements ActionListener
 {
 
-  private static Map<Integer, javax.swing.Timer> timers = new TreeMap<Integer, javax.swing.Timer>();
-/*
+	private static Map<Integer, javax.swing.Timer> timers = new TreeMap<Integer, javax.swing.Timer>();
+	/*
   static {
     hookWindowClosing();
   }*/
-  public Timer()
-  {
-	//super(0, null);  
-  }
-  
-  private static void clearInterval(int id)
-  {
-    if(timers.containsKey(id))
-    {
-  	 
-    	timers.get(id).stop();
-    }
-  };
+	public Timer()
+	{
+		//super(0, null);
+	}
 
-  private static void clearTimeout(int id)
-  {
-	  if(timers.containsKey(id))
-	    {
-	    	timers.get(id).stop();
-	    }
-  }
-  
-  private static int createInterval(final Timer callback, int period)
-  {
-	  javax.swing.Timer timer = new javax.swing.Timer(period,callback);
-	  int timerId = timer.hashCode();
-	  timers.put(timerId, timer);
-	  timer.addActionListener(callback);
-	  timer.setRepeats(true);
-	  timer.setInitialDelay(period);
-	  timer.start();
+	private static void clearInterval(int id)
+	{
+		if(timers.containsKey(id))
+		{
 
-	  return timerId;
-  }
+			timers.get(id).stop();
+		}
+	};
+
+	private static void clearTimeout(int id)
+	{
+		if(timers.containsKey(id))
+		{
+			timers.get(id).stop();
+		}
+	}
+
+	private static int createInterval(final Timer callback, int period)
+	{
+		javax.swing.Timer timer = new javax.swing.Timer(period,callback);
+		int timerId = timer.hashCode();
+		timers.put(timerId, timer);
+		timer.addActionListener(callback);
+		timer.setRepeats(true);
+		timer.setInitialDelay(period);
+		timer.start();
+
+		return timerId;
+	}
 
 
-  private static int createTimeout(final Timer callback, int delay)
-  {
-	  javax.swing.Timer timer = new javax.swing.Timer(delay,callback);
-	  int timerId = timer.hashCode();
-	  timers.put(timerId, timer);
-	  timer.addActionListener(callback);
-	  timer.setRepeats(false);
-	  //timer.setInitialDelay(period)
-	  timer.start();
+	private static int createTimeout(final Timer callback, int delay)
+	{
+		javax.swing.Timer timer = new javax.swing.Timer(delay,callback);
+		int timerId = timer.hashCode();
+		timers.put(timerId, timer);
+		timer.addActionListener(callback);
+		timer.setRepeats(false);
+		//timer.setInitialDelay(period)
+		timer.start();
 
-	  return timerId;
-  }
-/*
+		return timerId;
+	}
+	/*
   private static void hookWindowClosing() {
     // Catch the window closing event.
     Window.addCloseHandler(new CloseHandler<Window>() {
@@ -126,81 +126,81 @@ public abstract class Timer implements ActionListener
     });
   }*/
 
-  private boolean isRepeating;
+	private boolean isRepeating;
 
-  private int timerId;
+	private int timerId;
 
-  /**
-   * Cancels this timer.
-   */
-  public void cancel() {
+	/**
+	 * Cancels this timer.
+	 */
+	public void cancel() {
 
-  	if (isRepeating) {
-      clearInterval(timerId);
-    } else {
-      clearTimeout(timerId);
-    }
-    timers.remove(timerId);
-  }
+		if (isRepeating) {
+			clearInterval(timerId);
+		} else {
+			clearTimeout(timerId);
+		}
+		timers.remove(timerId);
+	}
 
-  /**
-   * This method will be called when a timer fires. Override it to implement the
-   * timer's logic.
-   */
-  public abstract void run();
+	/**
+	 * This method will be called when a timer fires. Override it to implement the
+	 * timer's logic.
+	 */
+	public abstract void run();
 
-  /**
-   * Schedules a timer to elapse in the future.
-   * 
-   * @param delayMillis how long to wait before the timer elapses, in
-   *          milliseconds
-   */
-  public void schedule(int delayMillis) {
-    if (delayMillis < 0) {
-      throw new IllegalArgumentException("must be non-negative");
-    }
-    cancel();
-    isRepeating = false;
-    timerId = createTimeout(this, delayMillis);
-  //timers.put(timerId, this);
+	/**
+	 * Schedules a timer to elapse in the future.
+	 * 
+	 * @param delayMillis how long to wait before the timer elapses, in
+	 *          milliseconds
+	 */
+	public void schedule(int delayMillis) {
+		if (delayMillis < 0) {
+			throw new IllegalArgumentException("must be non-negative");
+		}
+		cancel();
+		isRepeating = false;
+		timerId = createTimeout(this, delayMillis);
+		//timers.put(timerId, this);
 
-  }
+	}
 
-  /**
-   * Schedules a timer that elapses repeatedly.
-   * 
-   * @param periodMillis how long to wait before the timer elapses, in
-   *          milliseconds, between each repetition
-   */
-  public void scheduleRepeating(int periodMillis) {
-    if (periodMillis <= 0) {
-      throw new IllegalArgumentException("must be positive");
-    }
-    cancel();
-    isRepeating = true;
-    timerId = createInterval(this, periodMillis);
-    //timers.put(timerId, this);
-  }
+	/**
+	 * Schedules a timer that elapses repeatedly.
+	 * 
+	 * @param periodMillis how long to wait before the timer elapses, in
+	 *          milliseconds, between each repetition
+	 */
+	public void scheduleRepeating(int periodMillis) {
+		if (periodMillis <= 0) {
+			throw new IllegalArgumentException("must be positive");
+		}
+		cancel();
+		isRepeating = true;
+		timerId = createInterval(this, periodMillis);
+		//timers.put(timerId, this);
+	}
 
-  /*
-   * Called by native code when this timer fires.
-   */
-  final void fire() {
-    // If this is a one-shot timer, remove it from the timer list. This will
-    // allow it to be garbage collected.
-	  
-    if (!isRepeating) {
-    	cancel();
-      timers.remove(timerId);
-    }
+	/*
+	 * Called by native code when this timer fires.
+	 */
+	final void fire() {
+		// If this is a one-shot timer, remove it from the timer list. This will
+		// allow it to be garbage collected.
 
-    // Run the timer's code.
-    run();
-  }
+		if (!isRepeating) {
+			cancel();
+			timers.remove(timerId);
+		}
 
-  @Override
-  public void actionPerformed(ActionEvent e) {
-	  fire();
+		// Run the timer's code.
+		run();
+	}
 
-  }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		fire();
+
+	}
 }

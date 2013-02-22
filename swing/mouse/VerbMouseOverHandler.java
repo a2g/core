@@ -24,28 +24,28 @@ import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.event.SetRolloverEvent;
 
 
-public class VerbMouseOverHandler extends MouseAdapter 
+public class VerbMouseOverHandler extends MouseAdapter
 {
-    private final EventBus bus;
-    ;
-    private final String textualId;
-    private final int code;
-    private final String displayName;
+	private final EventBus bus;
+	;
+	private final String textualId;
+	private final int code;
+	private final String displayName;
 
-    public VerbMouseOverHandler(EventBus bus, String displayName, String textualId, int code) {
-        this.bus = bus;
-        this.textualId = textualId;
-        this.code = code;
-        this.displayName = displayName;
+	public VerbMouseOverHandler(EventBus bus, String displayName, String textualId, int code) {
+		this.bus = bus;
+		this.textualId = textualId;
+		this.code = code;
+		this.displayName = displayName;
 
-    }
+	}
 
-    @Override
-    public void mouseEntered(MouseEvent e)  {
-        bus.fireEvent(
-                new SetRolloverEvent(
-                        displayName,
-                        this.textualId,
-                        this.code));
-    }
+	@Override
+	public void mouseEntered(MouseEvent e)  {
+		bus.fireEvent(
+				new SetRolloverEvent(
+						displayName,
+						this.textualId,
+						this.code));
+	}
 }

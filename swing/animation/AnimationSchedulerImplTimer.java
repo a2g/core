@@ -45,108 +45,108 @@ import java.util.List;
  */
 class AnimationSchedulerImplTimer extends AnimationSchedulerImpl {
 
-  /**
-   * Timer based implementation of {@link AnimationScheduler.AnimationHandle}.
-   */
-  private class AnimationHandleImpl extends AnimationHandle {
-    private final AnimationCallback callback;
+	/**
+	 * Timer based implementation of {@link AnimationScheduler.AnimationHandle}.
+	 */
+	private class AnimationHandleImpl extends AnimationHandle {
+		private final AnimationCallback callback;
 
-    public AnimationHandleImpl(AnimationCallback callback) {
-      this.callback = callback;
-    }
+		public AnimationHandleImpl(AnimationCallback callback) {
+			this.callback = callback;
+		}
 
-    @Override
-    public void cancel() {
-      cancelAnimationFrame(this);
-    }
+		@Override
+		public void cancel() {
+			cancelAnimationFrame(this);
+		}
 
-    public AnimationCallback getCallback() {
-      return callback;
-    }
-  }
+		public AnimationCallback getCallback() {
+			return callback;
+		}
+	}
 
-  /**
-   * The default time in milliseconds between frames. 60 fps == 16.67 ms.
-   */
-  private static final int DEFAULT_FRAME_DELAY = 16;
+	/**
+	 * The default time in milliseconds between frames. 60 fps == 16.67 ms.
+	 */
+	private static final int DEFAULT_FRAME_DELAY = 16;
 
-  /**
-   * The minimum delay in milliseconds between frames. The minimum delay is
-   * imposed to prevent freezing the UI.
-   */
-  private static final int MIN_FRAME_DELAY = 5;
+	/**
+	 * The minimum delay in milliseconds between frames. The minimum delay is
+	 * imposed to prevent freezing the UI.
+	 */
+	private static final int MIN_FRAME_DELAY = 5;
 
-  /**
-   * The list of animations that are currently running.
-   */
-  private final List<AnimationHandleImpl> animationRequests = new ArrayList<AnimationHandleImpl>();
+	/**
+	 * The list of animations that are currently running.
+	 */
+	private final List<AnimationHandleImpl> animationRequests = new ArrayList<AnimationHandleImpl>();
 
-  /**
-   * The singleton timer that updates all animations.
-   */
-  private final Timer timer = new Timer() {
-    @Override
-    public void run() {
-      updateAnimations();
-    }
-  };
+	/**
+	 * The singleton timer that updates all animations.
+	 */
+	private final Timer timer = new Timer() {
+		@Override
+		public void run() {
+			updateAnimations();
+		}
+	};
 
-  @Override
-  public AnimationHandle requestAnimationFrame(final AnimationCallback callback, Element element) {
-    // Save the animation frame request.
-    AnimationHandleImpl requestId = new AnimationHandleImpl(callback);
-    animationRequests.add(requestId);
+	@Override
+	public AnimationHandle requestAnimationFrame(final AnimationCallback callback, Element element) {
+		// Save the animation frame request.
+		AnimationHandleImpl requestId = new AnimationHandleImpl(callback);
+		animationRequests.add(requestId);
 
-    // Start the timer if it isn't started.
-    if (animationRequests.size() == 1) {
-      timer.schedule(DEFAULT_FRAME_DELAY);
-    }
+		// Start the timer if it isn't started.
+		if (animationRequests.size() == 1) {
+			timer.schedule(DEFAULT_FRAME_DELAY);
+		}
 
-    // Return the request id.
-    return requestId;
-  }
+		// Return the request id.
+		return requestId;
+	}
 
-  @Override
-  protected boolean isNativelySupported() {
-    return true;
-  }
+	@Override
+	protected boolean isNativelySupported() {
+		return true;
+	}
 
-  private void cancelAnimationFrame(AnimationHandle requestId) {
-    // Remove the request from the list.
-    animationRequests.remove(requestId);
+	private void cancelAnimationFrame(AnimationHandle requestId) {
+		// Remove the request from the list.
+		animationRequests.remove(requestId);
 
-    // Stop the timer if there are no more requests.
-    if (animationRequests.size() == 0) {
-      timer.cancel();
-    }
-  }
+		// Stop the timer if there are no more requests.
+		if (animationRequests.size() == 0) {
+			timer.cancel();
+		}
+	}
 
-  /**
-   * Iterate over all animations and update them.
-   */
-  private void updateAnimations() {
-    // Copy the animation requests to avoid concurrent modifications.
-    AnimationHandleImpl[] curAnimations = new AnimationHandleImpl[animationRequests.size()];
-    curAnimations = animationRequests.toArray(curAnimations);
+	/**
+	 * Iterate over all animations and update them.
+	 */
+	private void updateAnimations() {
+		// Copy the animation requests to avoid concurrent modifications.
+		AnimationHandleImpl[] curAnimations = new AnimationHandleImpl[animationRequests.size()];
+		curAnimations = animationRequests.toArray(curAnimations);
 
-    // Iterate over the animation requests.
-    Duration duration = new Duration();
-    for (AnimationHandleImpl requestId : curAnimations) {
-      // Remove the current request.
-      animationRequests.remove(requestId);
+		// Iterate over the animation requests.
+		Duration duration = new Duration();
+		for (AnimationHandleImpl requestId : curAnimations) {
+			// Remove the current request.
+			animationRequests.remove(requestId);
 
-      // Execute the callback.
-      requestId.getCallback().execute(duration.getStartMillis());
-    }
+			// Execute the callback.
+			requestId.getCallback().execute(duration.getStartMillis());
+		}
 
-    // Reschedule the timer if there are more animation requests.
-    if (animationRequests.size() > 0) {
-      /*
-       * In order to achieve as close to 60fps as possible, we calculate the new
-       * delay based on the execution time of this method. The delay will be
-       * less than 16ms, assuming this method takes more than 1ms to complete.
-       */
-      timer.schedule(Math.max(MIN_FRAME_DELAY, DEFAULT_FRAME_DELAY - duration.elapsedMillis()));
-    }
-  }
+		// Reschedule the timer if there are more animation requests.
+		if (animationRequests.size() > 0) {
+			/*
+			 * In order to achieve as close to 60fps as possible, we calculate the new
+			 * delay based on the execution time of this method. The delay will be
+			 * less than 16ms, assuming this method takes more than 1ms to complete.
+			 */
+			timer.schedule(Math.max(MIN_FRAME_DELAY, DEFAULT_FRAME_DELAY - duration.elapsedMillis()));
+		}
+	}
 }

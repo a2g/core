@@ -17,16 +17,16 @@
 package com.github.a2g.core.objectmodel;
 
 
-public class Scene {	
-    private SceneObjectCollection sceneObjectCollection;
+public class Scene {
+	private SceneObjectCollection sceneObjectCollection;
 
-    public Scene() {
-        this.sceneObjectCollection = new SceneObjectCollection();
-    }
+	public Scene() {
+		this.sceneObjectCollection = new SceneObjectCollection();
+	}
 
-    public SceneObjectCollection objectCollection() {
-        return sceneObjectCollection;
-    }
+	public SceneObjectCollection objectCollection() {
+		return sceneObjectCollection;
+	}
 
-	
+
 }

@@ -23,79 +23,79 @@ import com.github.a2g.core.primitive.STARTING_ODD_OBJECTS_CODE;
 
 public class SentenceItem {
 
-    private String displayName;
-    private String textualId;
-    private int code;
+	private String displayName;
+	private String textualId;
+	private int code;
 
-    public SentenceItem(String displayName, String textualId, int code) {
-        this.displayName = displayName;
-        this.textualId = textualId;
-        this.code = code;
-    }
+	public SentenceItem(String displayName, String textualId, int code) {
+		this.displayName = displayName;
+		this.textualId = textualId;
+		this.code = code;
+	}
 
-    public SentenceItem() {
-    	   this.displayName = "";
-           this.textualId = "";
-           this.code = 1;
+	public SentenceItem() {
+		this.displayName = "";
+		this.textualId = "";
+		this.code = 1;
 	}
 
 	public int getLength() {
-        return this.displayName.length();
-    }
+		return this.displayName.length();
+	}
 
-    public String getDisplayNameAfterDivider() {
-        int i = this.displayName.lastIndexOf(
-                "|");
+	public String getDisplayNameAfterDivider() {
+		int i = this.displayName.lastIndexOf(
+				"|");
 
-        if (i != -1) {
-            return this.displayName.substring(i+1);
-        }
-        
-        return  this.displayName;
-    	
-    }
+		if (i != -1) {
+			return this.displayName.substring(i+1);
+		}
 
-    public String getDisplayNameBeforeDivider() {
-        int i = this.displayName.lastIndexOf(
-                "|");
+		return  this.displayName;
 
-        if (i != -1) {
-            return this.displayName.substring(0,i);
-        }
-        
-        return  this.displayName;
-    }
+	}
 
-    public final String getDisplayName() {
-        return this.displayName;
-    }
+	public String getDisplayNameBeforeDivider() {
+		int i = this.displayName.lastIndexOf(
+				"|");
 
-    public final String getTextualId() {
-        return this.textualId;
-    }
+		if (i != -1) {
+			return this.displayName.substring(0,i);
+		}
 
-    public final int getCode() {
-        return this.code;
-    }
+		return  this.displayName;
+	}
 
-	public boolean isObjectOrInv() 
+	public final String getDisplayName() {
+		return this.displayName;
+	}
+
+	public final String getTextualId() {
+		return this.textualId;
+	}
+
+	public final int getCode() {
+		return this.code;
+	}
+
+	public boolean isObjectOrInv()
 	{
 		boolean isVerb = CodesForVerbs.isAVerb(code);
-		
+
 		if(code>1 && !isVerb)
 			return true;
 		return false;
 	}
 
-	public boolean isInventory() 
+	public boolean isInventory()
 	{
 		int inv = STARTING_ODD_INVENTORY_CODE.STARTING_ODD_INVENTORY_CODE;
 		int obj = STARTING_ODD_OBJECTS_CODE.STARTING_ODD_OBJECTS_CODE;
-		
+
 		boolean isInventory = code>=inv && code<=obj;
 		return isInventory;
 	}
-	
+
 	public boolean isEmpty()
 	{
 		boolean isEmpty = code==1;

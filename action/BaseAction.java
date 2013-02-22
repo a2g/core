@@ -90,7 +90,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	public BaseAction branch(int branchId, final boolean isKey, String text) {
 		if(isKey)
-			 return new DialogTreeBranchAction(this, text, branchId);
+			return new DialogTreeBranchAction(this, text, branchId);
 		return doNothing();
 	}
 
@@ -122,17 +122,17 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	@Override // method in animation
 	public void onComplete() {
 
-		// It might seem like it's a better idea to 
-		// run this actions action completion handler 
+		// It might seem like it's a better idea to
+		// run this actions action completion handler
 		// before calling startTheNextAction.
 		// However doDialogBranchAction starts execution of another animation tree
 		// and if order is 1) onCompleteGameAction 2) startTheNextAction,
-		// then on startTheNextAction starts triggering animations in the 
+		// then on startTheNextAction starts triggering animations in the
 		// newly replenished series of animations that onCompleteGameAction created,
 		// giving effectively two simultaneous thrads of
 		// executions of the Action chain. This results in an observed bug
 		// where only every second Action runs.
-		// So either a second action runner instance is needed for dialogs. Or, simpler 
+		// So either a second action runner instance is needed for dialogs. Or, simpler
 		// , the call order is kept like this.
 		this.callbacks.startTheNextAction(
 				this);
@@ -141,7 +141,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	@Override
-	public void onUpdate(double progress) 
+	public void onUpdate(double progress)
 	{
 		onUpdateGameAction(progress);
 	}
@@ -215,7 +215,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		a.setNonBlocking(true);
 		a.setDelay(delay);
 		return a;
-	}	
+	}
 
 	// double combo1of3: backwards + hold last frame
 	public BaseAction playAnimationBackwardsHoldLastFrame(String  animationCode) {
@@ -457,7 +457,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	public BaseAction walkToNonBlocking(short objectCode, PointF point, int delay) {
 		return new WalkToAction(this, objectCode,
 				point.getX(), point.getY(), delay, true);
-	}    
+	}
 
 	public BaseAction showTitleCard(String text, ColorEnum color)
 	{
@@ -476,7 +476,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	public BaseAction playAnimationNonBlockingHoldLastFrame(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
-					this, animationCode);
+				this, animationCode);
 
 		a.setHoldLastFrame(true);
 		a.setNonBlocking(true);

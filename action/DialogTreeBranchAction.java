@@ -23,52 +23,52 @@ import com.github.a2g.core.action.BaseDialogTreeAction;
 
 public class DialogTreeBranchAction extends BaseDialogTreeAction {
 
-    private String text;
-    private int branchId;
+	private String text;
+	private int branchId;
 
-    public DialogTreeBranchAction(BaseAction parent, String text, int branchId) {
-        super(parent, parent.getApi());
-        this.setBranchId(branchId);
-        this.setText(text);
-    }
+	public DialogTreeBranchAction(BaseAction parent, String text, int branchId) {
+		super(parent, parent.getApi());
+		this.setBranchId(branchId);
+		this.setText(text);
+	}
 
-    @Override
-    public void onUpdate(double progress) {}
+	@Override
+	public void onUpdate(double progress) {}
 
-    @Override
-    public void runGameAction() {
-        getApi().getDialogTreeGui().addBranch( branchId, text);
-    	super.run(1);
-    }
+	@Override
+	public void runGameAction() {
+		getApi().getDialogTreeGui().addBranch( branchId, text);
+		super.run(1);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
-    protected void onCompleteGameAction() 
-    {
-     }
+	@Override
+	protected void onCompleteGameAction()
+	{
+	}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 
-    public void setBranchId(int branchId) {
-        this.branchId = branchId;
-    }
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
+	}
 
-    public int getBranchId() {
-        return branchId;
-    }
+	public int getBranchId() {
+		return branchId;
+	}
 
-    public void setText(String text) {
-        this.text = text;
-    }
+	public void setText(String text) {
+		this.text = text;
+	}
 
-    public String getText() {
-        return text;
-    }
+	public String getText() {
+		return text;
+	}
 
 }

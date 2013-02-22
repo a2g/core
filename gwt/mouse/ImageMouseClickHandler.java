@@ -25,30 +25,30 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 
 
 public class ImageMouseClickHandler implements ClickHandler {
-    private final EventBus bus;
-    private final AbsolutePanel absolutePanel;
+	private final EventBus bus;
+	private final AbsolutePanel absolutePanel;
 
-    public ImageMouseClickHandler(EventBus bus, AbsolutePanel abs) {
-        this.bus = bus;
-        this.absolutePanel = abs;
+	public ImageMouseClickHandler(EventBus bus, AbsolutePanel abs) {
+		this.bus = bus;
+		this.absolutePanel = abs;
 
-    }
+	}
 
-    @Override
-    public void onClick(ClickEvent event) {
-        double x = -1;
-        double y = -1;
- 
-        if (this.absolutePanel != null) {
-            x = event.getRelativeX(
-                    this.absolutePanel.getElement());
-            y = event.getRelativeY(
-                    this.absolutePanel.getElement());
-            y /= this.absolutePanel.getOffsetHeight();
-            x /= this.absolutePanel.getOffsetWidth();
-        }
-    	 
-        bus.fireEvent(
-                new ExecuteCommandEvent(x, y));
-    }
+	@Override
+	public void onClick(ClickEvent event) {
+		double x = -1;
+		double y = -1;
+
+		if (this.absolutePanel != null) {
+			x = event.getRelativeX(
+					this.absolutePanel.getElement());
+			y = event.getRelativeY(
+					this.absolutePanel.getElement());
+			y /= this.absolutePanel.getOffsetHeight();
+			x /= this.absolutePanel.getOffsetWidth();
+		}
+
+		bus.fireEvent(
+				new ExecuteCommandEvent(x, y));
+	}
 }

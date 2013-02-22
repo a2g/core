@@ -15,7 +15,7 @@
  */
 package com.github.a2g.core.interfaces;
 
-public interface PackagedImageAPI 
+public interface PackagedImageAPI
 {
 
 }

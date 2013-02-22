@@ -24,37 +24,37 @@ import com.github.a2g.core.primitive.ColorEnum;
 
 
 @SuppressWarnings("serial")
-public class CommandLinePanel 
-extends java.awt.Label 
+public class CommandLinePanel
+extends java.awt.Label
 implements CommandLinePanelAPI
 {
-	
-    public CommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll) {
-        this.setText("command line panel command line panel");
-        this.setSize(320, 20);
-        this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-   		this.setForeground(new Color(fore.css[0], fore.css[1], fore.css[2]));	
-   		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));		
-   		//this.rolloverColor = roll.css;	
-     }
-    
+
+	public CommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll) {
+		this.setText("command line panel command line panel");
+		this.setSize(320, 20);
+		this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		this.setForeground(new Color(fore.css[0], fore.css[1], fore.css[2]));
+		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
+		//this.rolloverColor = roll.css;
+	}
+
 
 	@Override
 	public Dimension	getPreferredSize()
-	{	
+	{
 		return new Dimension(320,20);
 	}
-			
+
 	@Override
 	public void setText(String text) {
 		super.setText(text);
-		
+
 	}
 
 	@Override
 	public void setVisible(boolean isVisible) {
 		super.setVisible(isVisible);
-		
+
 	}
 
 

@@ -29,64 +29,64 @@ import com.github.a2g.core.objectmodel.VerbsPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 
 
-public interface InternalAPI 
+public interface InternalAPI
 extends ImageAddAPI, OnDoCommandAPI{
-    // get by ID
-    @Override
-    public SceneObject getObject(short  objectCode);
-    @Override
-    public Animation getAnimation(String  animationCode);
-    @Override
-    public InventoryItem getInventoryItem(int inventoryItemCode);
+	// get by ID
+	@Override
+	public SceneObject getObject(short  objectCode);
+	@Override
+	public Animation getAnimation(String  animationCode);
+	@Override
+	public InventoryItem getInventoryItem(int inventoryItemCode);
 
- 
-    
-    // property access methods
-    @Override
+
+
+	// property access methods
+	@Override
 	public void setValue(Object name, int value);
-    @Override
+	@Override
 	public int getValue(Object name);
-    @Override
+	@Override
 	public boolean isTrue(Object name);
-    
-    // gui methods
-    @Override
+
+	// gui methods
+	@Override
 	public DialogTreePresenter getDialogTreeGui();
-    @Override
+	@Override
 	public VerbsPresenter getVerbsGui();
-    @Override
+	@Override
 	public InventoryPresenter getInventoryGui();
-    @Override
+	@Override
 	public CommandLinePresenter getCommandLineGui();
-    @Override
+	@Override
 	public ScenePresenter getSceneGui();
 
-    // nearly a gui method
-    @Override
+	// nearly a gui method
+	@Override
 	public SceneAPI getCurrentScene();
 
-    // helpful for game
-    @Override
+	// helpful for game
+	@Override
 	public void switchToScene(String scene);
-    @Override
+	@Override
 	public String getLastScene();
-    @Override
+	@Override
 	public boolean isInDebugMode();
-    public void executeBaseAction(BaseAction a);
-    public void setLastCommand(double x, double y, int v, String a, String b);
+	public void executeBaseAction(BaseAction a);
+	public void setLastCommand(double x, double y, int v, String a, String b);
 
-    // dialog tree methods
-    public void executeBranchOnCurrentScene(int place);
+	// dialog tree methods
+	public void executeBranchOnCurrentScene(int place);
 	public int getPopupDelay();
 	public void restartReloading();
-	
+
 	public void displayTitleCard(String text, ColorEnum color);
-	
+
 	public MasterPresenterHostAPI getMasterHostAPI();
 	public FactoryAPI getFactory();
 
 	public void setDialogTreeActive(boolean isInDialogTreeMode);
-	
+
 	public SceneAPI getSceneByName(String identifier);
 	public void setScenePixelSize(int width, int height);
 	public void setInventoryPixelSize(int width, int height);

@@ -26,7 +26,7 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
 
-public class LoaderPresenter 
+public class LoaderPresenter
 {
 	private Loader loader;
 	private LoaderPanelAPI view;
@@ -34,7 +34,7 @@ public class LoaderPresenter
 	int total;
 	private String name;
 
-	public LoaderPresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api, MergeSceneAndStartAPI master, MasterPresenterHostAPI parent) 
+	public LoaderPresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api, MergeSceneAndStartAPI master, MasterPresenterHostAPI parent)
 	{
 		this.loader = new Loader(master);
 		this.name = "";
@@ -68,7 +68,7 @@ public class LoaderPresenter
 
 	}
 
-	public void setPixelSize(int width, int height) 
+	public void setPixelSize(int width, int height)
 	{
 		this.view.setScenePixelSize(width , height);
 
@@ -78,15 +78,15 @@ public class LoaderPresenter
 	{
 		return loader;
 	}
-	
+
 	public LoaderPanelAPI getView() {
 		return view;
 	}
 
 	public void clearAllLoadedLoads() {
 		loader.clearAllLoadedLoads();
-		
+
 	}
-	
-	
+
+
 }

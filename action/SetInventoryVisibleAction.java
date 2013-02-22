@@ -22,35 +22,35 @@ import com.github.a2g.core.action.BaseAction;
 
 public class SetInventoryVisibleAction extends BaseAction {
 
-    private int invId;
-    private boolean isVisible;
+	private int invId;
+	private boolean isVisible;
 
-    public SetInventoryVisibleAction(BaseAction parent, int invId, boolean isVisible) {
-        super(parent, parent.getApi());
-        this.invId = invId;
-        this.isVisible = isVisible;
-    }
+	public SetInventoryVisibleAction(BaseAction parent, int invId, boolean isVisible) {
+		super(parent, parent.getApi());
+		this.invId = invId;
+		this.isVisible = isVisible;
+	}
 
-    @Override
-    public void runGameAction() {
+	@Override
+	public void runGameAction() {
 
-        run(1);
-    }
+		run(1);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
-    protected void onCompleteGameAction() {
-        getApi().getInventoryItem(this.invId).setVisible(
-                this.isVisible);
+	@Override
+	protected void onCompleteGameAction() {
+		getApi().getInventoryItem(this.invId).setVisible(
+				this.isVisible);
 
-    }
+	}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 
 }

@@ -37,35 +37,35 @@ package com.github.a2g.core.swing.animation;
  */
 abstract class AnimationSchedulerImpl extends AnimationScheduler {
 
-  /**
-   * The singleton instance of animation scheduler.
-   */
-  static final AnimationScheduler INSTANCE;
+	/**
+	 * The singleton instance of animation scheduler.
+	 */
+	static final AnimationScheduler INSTANCE;
 
-  static {
-    //AnimationScheduler impl = GWT.create(AnimationScheduler.class);
-    AnimationScheduler impl = new AnimationSchedulerImplTimer();
+	static {
+		//AnimationScheduler impl = GWT.create(AnimationScheduler.class);
+		AnimationScheduler impl = new AnimationSchedulerImplTimer();
 
-    /*
-     * If the implementation isn't natively supported, revert back to the timer
-     * based implementation.
-     * 
-     * If impl==null (such as with GWTMockUitlities.disarm()), use null. We
-     * don't want to create a new AnimationSchedulerImplTimer in this case.
-     */
-    if (impl instanceof AnimationSchedulerImpl) {
-      if (!((AnimationSchedulerImpl) impl).isNativelySupported()) {
-        impl = new AnimationSchedulerImplTimer();
-      }
-    }
+		/*
+		 * If the implementation isn't natively supported, revert back to the timer
+		 * based implementation.
+		 * 
+		 * If impl==null (such as with GWTMockUitlities.disarm()), use null. We
+		 * don't want to create a new AnimationSchedulerImplTimer in this case.
+		 */
+		if (impl instanceof AnimationSchedulerImpl) {
+			if (!((AnimationSchedulerImpl) impl).isNativelySupported()) {
+				impl = new AnimationSchedulerImplTimer();
+			}
+		}
 
-    INSTANCE = impl;
-  }
+		INSTANCE = impl;
+	}
 
-  /**
-   * Check if the implementation is natively supported.
-   * 
-   * @return true if natively supported, false if not
-   */
-  protected abstract boolean isNativelySupported();
+	/**
+	 * Check if the implementation is natively supported.
+	 * 
+	 * @return true if natively supported, false if not
+	 */
+	protected abstract boolean isNativelySupported();
 }

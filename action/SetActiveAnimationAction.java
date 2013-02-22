@@ -22,33 +22,33 @@ import com.github.a2g.core.objectmodel.Animation;
 
 
 public class SetActiveAnimationAction extends BaseAction {
-    private String animId;
-    public SetActiveAnimationAction(BaseAction parent, String animationCode) {
-        super(parent, parent.getApi());
-        this.animId = animationCode; 
-    }
+	private String animId;
+	public SetActiveAnimationAction(BaseAction parent, String animationCode) {
+		super(parent, parent.getApi());
+		this.animId = animationCode;
+	}
 
-    @Override
-    public void runGameAction() {
-        super.run(1);
-    }
+	@Override
+	public void runGameAction() {
+		super.run(1);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
-    protected void onCompleteGameAction() {
-        Animation a = getApi().getAnimation(
-                this.animId);
+	@Override
+	protected void onCompleteGameAction() {
+		Animation a = getApi().getAnimation(
+				this.animId);
 
-        if (a != null) {
-            a.setAsCurrentAnimation();
-        }
-    }
+		if (a != null) {
+			a.setAsCurrentAnimation();
+		}
+	}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 }

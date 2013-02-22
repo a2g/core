@@ -21,41 +21,41 @@ import com.google.gwt.event.shared.GwtEvent;
 
 
 public class PropertyChangeEvent extends GwtEvent<PropertyChangeEventHandlerAPI> {
-    public static Type<PropertyChangeEventHandlerAPI> TYPE = new Type<PropertyChangeEventHandlerAPI>();
-    // private final FriendSummaryDTO friend;
-    private final String name;
-    private final int id;
-    private int value;
+	public static Type<PropertyChangeEventHandlerAPI> TYPE = new Type<PropertyChangeEventHandlerAPI>();
+	// private final FriendSummaryDTO friend;
+	private final String name;
+	private final int id;
+	private int value;
 
-    public PropertyChangeEvent(String name, int id, int value) {
-        this.name = name;
-        this.id = id;
-        this.value = value;
-    }
+	public PropertyChangeEvent(String name, int id, int value) {
+		this.name = name;
+		this.id = id;
+		this.value = value;
+	}
 
-    @Override
-    public Type<PropertyChangeEventHandlerAPI> getAssociatedType() {
-        return TYPE;
-    }
+	@Override
+	public Type<PropertyChangeEventHandlerAPI> getAssociatedType() {
+		return TYPE;
+	}
 
-    @Override
-    protected void dispatch(PropertyChangeEventHandlerAPI handler) {
-        handler.onPropertyChange(this);
-    }
+	@Override
+	protected void dispatch(PropertyChangeEventHandlerAPI handler) {
+		handler.onPropertyChange(this);
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setValue(int value) {
-        this.value = value;
-    }
+	public void setValue(int value) {
+		this.value = value;
+	}
 
-    public int getValue() {
-        return value;
-    }
+	public int getValue() {
+		return value;
+	}
 }

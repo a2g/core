@@ -74,14 +74,14 @@ public class InventoryPresenter implements MouseToInventoryPresenterAPI {
 			boolean initiallyVisible, Image image) {
 		boolean isCarrying = api.getValue("CARRYING_"
 				+ objectTextualId.toUpperCase()) > 0;
-		InventoryItem item = new InventoryItem(this.eventBus, objectTextualId,
-				image, objectCode, isCarrying);
+				InventoryItem item = new InventoryItem(this.eventBus, objectTextualId,
+						image, objectCode, isCarrying);
 
-		item.setVisible(initiallyVisible);
-		this.theInventoryItemMap.put(objectCode, item);
-		this.theInventory.items().add(item);
-		this.updateInventory();
-		return true;
+				item.setVisible(initiallyVisible);
+				this.theInventoryItemMap.put(objectCode, item);
+				this.theInventory.items().add(item);
+				this.updateInventory();
+				return true;
 	}
 
 	public InventoryItem getInventoryItem(int i) {

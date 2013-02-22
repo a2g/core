@@ -22,6 +22,6 @@ import java.util.LinkedList;
 @SuppressWarnings("serial")
 public class LoaderItemCollection extends LinkedList<LoaderItem>
 {
-    
-	 
+
+
 }

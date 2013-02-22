@@ -21,33 +21,33 @@ import com.github.a2g.core.action.BaseAction;
 
 
 public class SetDisplayNameAction extends BaseAction {
-    private short objId;
-    private String displayName;
+	private short objId;
+	private String displayName;
 
-    public SetDisplayNameAction(BaseAction parent, short objId, String displayName) {
-        super(parent, parent.getApi());
-        this.displayName = displayName;
-        this.objId = objId;
-    }
+	public SetDisplayNameAction(BaseAction parent, short objId, String displayName) {
+		super(parent, parent.getApi());
+		this.displayName = displayName;
+		this.objId = objId;
+	}
 
-    @Override
-    public void runGameAction() {
-        super.run(1);
-    }
+	@Override
+	public void runGameAction() {
+		super.run(1);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
-    protected void onCompleteGameAction() {
-        getApi().getObject(this.objId).setDisplayName(
-                this.displayName);
-    }
+	@Override
+	protected void onCompleteGameAction() {
+		getApi().getObject(this.objId).setDisplayName(
+				this.displayName);
+	}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 
 }

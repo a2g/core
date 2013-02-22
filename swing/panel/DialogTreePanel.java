@@ -32,8 +32,8 @@ import java.awt.Label;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class DialogTreePanel 
-extends JPanel 
+public class DialogTreePanel
+extends JPanel
 implements DialogTreePanelAPI
 {
 	ColorEnum fore;
@@ -41,52 +41,52 @@ implements DialogTreePanelAPI
 	ColorEnum roll;
 	private int width;
 	private int height;
-	public DialogTreePanel(EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum roll) 
+	public DialogTreePanel(EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum roll)
 	{
 		GridLayout grid = new GridLayout();
-    	this.setLayout(grid);
-    	grid.setRows(4);
-    	grid.setColumns(1); 
+		this.setLayout(grid);
+		grid.setRows(4);
+		grid.setColumns(1);
 
-    	this.fore = fore;
-    	this.back = back;
-    	this.roll = roll;
-    	this.setForeground(new Color(fore.css[0], fore.css[1], fore.css[2]));	
-   		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
-    }
+		this.fore = fore;
+		this.back = back;
+		this.roll = roll;
+		this.setForeground(new Color(fore.css[0], fore.css[1], fore.css[2]));
+		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
+	}
 
-	 @Override
-	 public void setVisible(boolean isVisible)
-	 {
-		 super.setVisible(isVisible);
-	 }
-	 
-    @Override
+	@Override
+	public void setVisible(boolean isVisible)
+	{
+		super.setVisible(isVisible);
+	}
+
+	@Override
 	public Dimension getPreferredSize()
-    {
-    	return new Dimension(width,height);
-    }
-    
-    @Override
+	{
+		return new Dimension(width,height);
+	}
+
+	@Override
 	public void setPixelSize(int width,int height)
-    {
-    	this.width = width;
-    	this.height = height;
-    	super.setSize(width, height);
-    }
-    
-    @Override
+	{
+		this.width = width;
+		this.height = height;
+		super.setSize(width, height);
+	}
+
+	@Override
 	public void update(DialogTree dialogTree, final EventBus bus) {
-    	// destroy old
-    	this.removeAll();
-    	
-    	for (int i = 0; i < dialogTree.getSubBranchIds().size(); i++) 
-    	{
-    		int subBranchId = dialogTree.getSubBranchIds().get(i).intValue();
-    		String lineOfDialog = dialogTree.getLinesOfDialog().get(i);
-    		
-    		Label label = new Label(lineOfDialog);
-    		label.addMouseListener(
+		// destroy old
+		this.removeAll();
+
+		for (int i = 0; i < dialogTree.getSubBranchIds().size(); i++)
+		{
+			int subBranchId = dialogTree.getSubBranchIds().get(i).intValue();
+			String lineOfDialog = dialogTree.getLinesOfDialog().get(i);
+
+			Label label = new Label(lineOfDialog);
+			label.addMouseListener(
 					new DialogTreeMouseOverHandler(label, new Color(roll.css[0], roll.css[1], roll.css[2]))
 					);
 			label.addMouseListener(
@@ -97,12 +97,12 @@ implements DialogTreePanelAPI
 					new DialogTreeMouseClickHandler(
 							bus, label, subBranchId));
 
-    		add(label);
-		}	
-    
-    	validate();
-    	repaint();
-    }
+			add(label);
+		}
+
+		validate();
+		repaint();
+	}
 
 
 

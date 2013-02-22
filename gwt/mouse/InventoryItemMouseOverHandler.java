@@ -25,33 +25,33 @@ import com.github.a2g.core.interfaces.InternalAPI;
 
 
 public class InventoryItemMouseOverHandler implements MouseMoveHandler {
-    private final EventBus bus;
-    private final String textualId;
-    private final int code;
-    private final InternalAPI api;
+	private final EventBus bus;
+	private final String textualId;
+	private final int code;
+	private final InternalAPI api;
 
-    public InventoryItemMouseOverHandler(EventBus bus, InternalAPI api, String textualId, int  objectCode) {
-        this.bus = bus;
-        this.textualId = textualId;
-        this.code = objectCode;
-        this.api = api;
+	public InventoryItemMouseOverHandler(EventBus bus, InternalAPI api, String textualId, int  objectCode) {
+		this.bus = bus;
+		this.textualId = textualId;
+		this.code = objectCode;
+		this.api = api;
 
-    }
+	}
 
-    @Override
+	@Override
 	public void onMouseMove(MouseMoveEvent event) {
-        com.github.a2g.core.objectmodel.InventoryItem ob = api.getInventoryItem(
-                this.code);
-        String displayName = "";
+		com.github.a2g.core.objectmodel.InventoryItem ob = api.getInventoryItem(
+				this.code);
+		String displayName = "";
 
-        if (ob != null) {
-            displayName = ob.getDisplayName(); 
-        }
-        bus.fireEvent(
-                new SetRolloverEvent(
-                        displayName,
-                        this.textualId,
-                        this.code));
-    }
+		if (ob != null) {
+			displayName = ob.getDisplayName();
+		}
+		bus.fireEvent(
+				new SetRolloverEvent(
+						displayName,
+						this.textualId,
+						this.code));
+	}
 
 }

@@ -25,35 +25,35 @@ import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
 import com.github.a2g.core.swing.panel.InventoryPanel;
 
 
-public class InventoryMouseOverHandler implements MouseMotionListener 
+public class InventoryMouseOverHandler implements MouseMotionListener
 {
-    private MouseToInventoryPresenterAPI api;
-    private final InventoryPanel inventoryPanel;
-    static boolean isAddedAlready;
+	private MouseToInventoryPresenterAPI api;
+	private final InventoryPanel inventoryPanel;
+	static boolean isAddedAlready;
 
-    public InventoryMouseOverHandler(InventoryPanel inventoryPanel, MouseToInventoryPresenterAPI api2) {
-        this.api = api2;
-        this.inventoryPanel = inventoryPanel;
-        if(!isAddedAlready)
-        {
-        	inventoryPanel.addMouseMotionListener(this);
-        	isAddedAlready = true;
-        }
-    }
+	public InventoryMouseOverHandler(InventoryPanel inventoryPanel, MouseToInventoryPresenterAPI api2) {
+		this.api = api2;
+		this.inventoryPanel = inventoryPanel;
+		if(!isAddedAlready)
+		{
+			inventoryPanel.addMouseMotionListener(this);
+			isAddedAlready = true;
+		}
+	}
 
-    @Override
-    public void mouseMoved(MouseEvent event) 
-    {
-    	Dimension size = inventoryPanel.getSize();
-    	double x = event.getX();
-    	double y = event.getY();
-    	x/=size.width;
-    	y/=size.height;
-    	api.setMouseOver(x,y);
-    }
+	@Override
+	public void mouseMoved(MouseEvent event)
+	{
+		Dimension size = inventoryPanel.getSize();
+		double x = event.getX();
+		double y = event.getY();
+		x/=size.width;
+		y/=size.height;
+		api.setMouseOver(x,y);
+	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		
+
 	}
 }

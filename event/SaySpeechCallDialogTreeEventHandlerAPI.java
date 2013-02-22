@@ -21,5 +21,5 @@ import com.google.gwt.event.shared.EventHandler;
 
 public interface SaySpeechCallDialogTreeEventHandlerAPI extends EventHandler {
 	void onSaySpeechCallBranch(String speech, int branchId);
-  
+
 }

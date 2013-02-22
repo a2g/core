@@ -31,22 +31,22 @@ implements PopupPanelAPI
 {
 	private JFrame popup;
 	private Label labelInPopup;
-	
+
 	public PopupPanel(String speech, ColorEnum color, final BaseAction ba)
 	{
 		// create popup
 		this.popup = new JFrame();
 		this.popup.setUndecorated(true);
-	
-		// create label and add to 
+
+		// create label and add to
 		this.labelInPopup = new Label(speech);
 		popup.add(labelInPopup);
-		
+
 		// set popup to be same size as label text
 		FontMetrics fm = labelInPopup.getFontMetrics(labelInPopup.getFont()); // or another font
 		int strw = fm.stringWidth(speech);
 		popup.setSize(strw*2, fm.getHeight()*2);
-		
+
 		labelInPopup.addMouseListener(
 				new MouseListener()
 				{
@@ -54,45 +54,45 @@ implements PopupPanelAPI
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
 						ba.cancel();
-						
+
 					}
 
 					@Override
 					public void mouseEntered(MouseEvent arg0) {
 						// TODO Auto-generated method stub
-						
+
 					}
 
 					@Override
 					public void mouseExited(MouseEvent arg0) {
 						// TODO Auto-generated method stub
-						
+
 					}
 
 					@Override
 					public void mousePressed(MouseEvent arg0) {
-					
-						
+
+
 					}
 
 					@Override
 					public void mouseReleased(MouseEvent arg0) {
 						// TODO Auto-generated method stub
-						
+
 					}
 				}
-		);
-		
-		
+				);
+
+
 	}
-	
+
 	@Override
 	public void show()
 	{
 		popup.setVisible(true);
-		
+
 	}
-	
+
 	@Override
 	public void setPopupPosition(int x, int y)
 	{
@@ -108,5 +108,5 @@ implements PopupPanelAPI
 	{
 		popup.setVisible(false);
 	}
-	
+
 }

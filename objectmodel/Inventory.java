@@ -18,13 +18,13 @@ package com.github.a2g.core.objectmodel;
 
 
 public class Inventory {
-    private InventoryItemCollection theItems;
-    public Inventory() {
-        this.theItems = new InventoryItemCollection(); 
-    }
+	private InventoryItemCollection theItems;
+	public Inventory() {
+		this.theItems = new InventoryItemCollection();
+	}
 
-    public InventoryItemCollection items() {
-        return this.theItems;
-    }
+	public InventoryItemCollection items() {
+		return this.theItems;
+	}
 
 }

@@ -21,35 +21,35 @@ import com.github.a2g.core.action.BaseAction;
 
 
 public class SetActiveFrameAction extends BaseAction {
-    private short objId;
-    private int frame;
+	private short objId;
+	private int frame;
 
-    public SetActiveFrameAction(BaseAction parent, short objId,
-            int frame) {
-        super(parent, parent.getApi());
-        this.objId = objId;
-        this.frame = frame;
-    }
+	public SetActiveFrameAction(BaseAction parent, short objId,
+			int frame) {
+		super(parent, parent.getApi());
+		this.objId = objId;
+		this.frame = frame;
+	}
 
-    @Override
-    public void runGameAction() {
-        super.run(1);
-    }
+	@Override
+	public void runGameAction() {
+		super.run(1);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
-    protected void onCompleteGameAction() {
-        getApi().getObject(this.objId).setCurrentFrame(
-                this.frame);
+	@Override
+	protected void onCompleteGameAction() {
+		getApi().getObject(this.objId).setCurrentFrame(
+				this.frame);
 
-    }
+	}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 
 }

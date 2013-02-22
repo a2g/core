@@ -36,7 +36,7 @@ public class ActionRunner implements ActionCallbackAPI
 		numberOfParallelActionsToWaitFor = 0;
 	}
 
-	public int runAction(BaseAction grandChildOfActionChain) 
+	public int runAction(BaseAction grandChildOfActionChain)
 	{
 		this.list = new ArrayList<BaseAction>();
 		BaseAction a = grandChildOfActionChain;
@@ -45,7 +45,7 @@ public class ActionRunner implements ActionCallbackAPI
 			this.list.add(0, a);
 			a = a.getParent();
 		}
-		
+
 		if(this.list.get(0).getClass()!=TitleCardAction.class)
 		{
 			list.add(0,new TitleCardAction(a,"",ColorEnum.Black));
@@ -59,7 +59,7 @@ public class ActionRunner implements ActionCallbackAPI
 	void executeParallelActions() {
 		this.numberOfParallelActionsToWaitFor = this.parallelActionsToWaitFor.size();
 		for (int i = 0; i
-		< this.parallelActionsToWaitFor.size(); i++) 
+				< this.parallelActionsToWaitFor.size(); i++)
 		{
 			BaseAction a = this.parallelActionsToWaitFor.get(i);
 
@@ -82,7 +82,7 @@ public class ActionRunner implements ActionCallbackAPI
 						theAction);
 			}
 
-			// if there was no parallel actions then add the non parallel one 
+			// if there was no parallel actions then add the non parallel one
 			if (this.parallelActionsToWaitFor.isEmpty()) {
 				BaseAction theAction = this.list.get(
 						0);
@@ -92,7 +92,7 @@ public class ActionRunner implements ActionCallbackAPI
 						theAction);
 			}
 
-			// execute them	
+			// execute them
 			executeParallelActions();
 		}
 		else
@@ -115,7 +115,7 @@ public class ActionRunner implements ActionCallbackAPI
 			parallelActionsToWaitFor.get(i).run(0);
 		}
 	}
-	
+
 	@Override
 	public void startTheNextAction(BaseAction a) {
 		this.numberOfParallelActionsToWaitFor--;
@@ -130,7 +130,7 @@ public class ActionRunner implements ActionCallbackAPI
 		// triggers ongameactioncomplete (above)
 		list.clear();
 		numberOfParallelActionsToWaitFor=0;
-		
+
 		// now cancel the action(s) that are running
 		for(int i=0;i<parallelActionsToWaitFor.size();i++)
 		{

@@ -34,15 +34,15 @@ public interface MasterPanelAPI
 	HostingPanelAPI getHostForScene();
 
 	void setActiveState(GuiStateEnum state);
-	
+
 	GuiStateEnum getActiveState();
-	
-	public enum GuiStateEnum 
+
+	public enum GuiStateEnum
 	{
-		DialogTreeMode, 
+		DialogTreeMode,
 		CutScene,
 		ActiveScene,
-		Loading, 
+		Loading,
 		TitleCardOverDialogTree,
 		TitleCardOverCutScene,
 		TitleCardOverActiveScene,

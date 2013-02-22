@@ -32,146 +32,146 @@ import com.google.gwt.event.shared.EventBus;
 
 
 @SuppressWarnings("unused")
-public class CommandLinePresenter 
-implements 
-ExecuteCommandEventHandlerAPI 
-, SetRolloverEventHandlerAPI 
+public class CommandLinePresenter
+implements
+ExecuteCommandEventHandlerAPI
+, SetRolloverEventHandlerAPI
 {
 
-    private CommandLineCallbackAPI api;
-    private CommandLinePanelAPI view;
-    private CommandLine model;
+	private CommandLineCallbackAPI api;
+	private CommandLinePanelAPI view;
+	private CommandLine model;
 	private double debugX;
 	private double debugY;
-    
-    public CommandLinePresenter(final HostingPanelAPI panel, EventBus bus, CommandLineCallbackAPI api) {
-        this.model = new CommandLine(api);
-        this.api = api;
-        this.view = api.getFactory().createCommandLinePanel(ColorEnum.Purple, ColorEnum.Black, ColorEnum.Red);
-        panel.setThing(view);
-        
-        bus.addHandler(
-                ExecuteCommandEvent.TYPE, this);
-        bus.addHandler(SetRolloverEvent.TYPE,
-                this);
-    }
-   
-    public void setVisible(boolean isVisible) {
-        model.setVisible(isVisible);
-        view.setVisible(isVisible);
-    }
-    
-    public void setMouseable(boolean mouseable) {
-        model.setMouseable(mouseable);
-        updateImage();
-    }
 
-    public void setXYForDebugging(double x, double y)
-    {
-    	if(x!=-1)
-    	{
-    		this.debugX = (double)(int)(x*100);
-    		this.debugY = (double)(int)(y*100);
-    	}
-    }
-    
-    @Override
-    public void onSetMouseOver(String displayName, String textualId, int code) 
-    {
-    	model.setMouseOver(displayName, textualId, code);
-        updateImage();
-    }
+	public CommandLinePresenter(final HostingPanelAPI panel, EventBus bus, CommandLineCallbackAPI api) {
+		this.model = new CommandLine(api);
+		this.api = api;
+		this.view = api.getFactory().createCommandLinePanel(ColorEnum.Purple, ColorEnum.Black, ColorEnum.Red);
+		panel.setThing(view);
 
-    @Override
-    public boolean onClick(double x, double y) 
-    {
-    	if(!this.api.isCommandLineActive())
-    		return false;
-    	
-        if (isOkToExecute()) {
-        	System.out.println("ONEXECUTECOMMAND::execute  " + model.getSentence().getDisplayName());
-            this.execute(x, y);
-            return true;
-        }
-        
-        //System.out.println("ONEXECUTECOMMAND::nextbestthing  " + model.getSentence().getDisplayName());
-        this.doNextBestThingToExecute();
-        
-        return false;
-    }
-    
-    public void clear() 
-    {
-        model.clear();
-        updateImage();
-    }
-    
-    private void doNextBestThingToExecute() {	
-        model.doNextBestThingToExecute();
-        updateImage();
-    }
-    
-    private boolean isOkToExecute() {
-        boolean isOkToExecute = model.isOkToExecute();
+		bus.addHandler(
+				ExecuteCommandEvent.TYPE, this);
+		bus.addHandler(SetRolloverEvent.TYPE,
+				this);
+	}
 
-        return isOkToExecute;
-    }
+	public void setVisible(boolean isVisible) {
+		model.setVisible(isVisible);
+		view.setVisible(isVisible);
+	}
+
+	public void setMouseable(boolean mouseable) {
+		model.setMouseable(mouseable);
+		updateImage();
+	}
+
+	public void setXYForDebugging(double x, double y)
+	{
+		if(x!=-1)
+		{
+			this.debugX = (int)(x*100);
+			this.debugY = (int)(y*100);
+		}
+	}
+
+	@Override
+	public void onSetMouseOver(String displayName, String textualId, int code)
+	{
+		model.setMouseOver(displayName, textualId, code);
+		updateImage();
+	}
+
+	@Override
+	public boolean onClick(double x, double y)
+	{
+		if(!this.api.isCommandLineActive())
+			return false;
+
+		if (isOkToExecute()) {
+			System.out.println("ONEXECUTECOMMAND::execute  " + model.getSentence().getDisplayName());
+			this.execute(x, y);
+			return true;
+		}
+
+		//System.out.println("ONEXECUTECOMMAND::nextbestthing  " + model.getSentence().getDisplayName());
+		this.doNextBestThingToExecute();
+
+		return false;
+	}
+
+	public void clear()
+	{
+		model.clear();
+		updateImage();
+	}
+
+	private void doNextBestThingToExecute() {
+		model.doNextBestThingToExecute();
+		updateImage();
+	}
+
+	private boolean isOkToExecute() {
+		boolean isOkToExecute = model.isOkToExecute();
+
+		return isOkToExecute;
+	}
 
 
-    private void updateImage() {
+	private void updateImage() {
 
-    	// get sentence gets the sentence template filled out
-    	// as much as it can.
-    	Sentence sentence = getSentence();
+		// get sentence gets the sentence template filled out
+		// as much as it can.
+		Sentence sentence = getSentence();
 
-    	// so we should fill in remaining AAA and BBB with blank
-        sentence.setBBB( new SentenceItem());
-        sentence.setAAA(new SentenceItem());
-        
-        // then get the display name
-        String displayName = sentence.getDisplayName();
+		// so we should fill in remaining AAA and BBB with blank
+		sentence.setBBB( new SentenceItem());
+		sentence.setAAA(new SentenceItem());
 
-        // ...and display it
-        view.setText("("+debugX+","+debugY +")  "+ displayName);
-    }
-    
-    private  Sentence getSentence() {
-        Sentence sentence = model.getSentence();
+		// then get the display name
+		String displayName = sentence.getDisplayName();
 
-        return sentence;
-    }
-    private void execute(double x, double y) {
-        // if its incomplete, the clear everything..
-        if (!model.isOkToExecute()) {
-            clear();
-            return;
-        }
+		// ...and display it
+		view.setText("("+debugX+","+debugY +")  "+ displayName);
+	}
 
-        if (this.api != null) {
-            int verbAsCode = model.getSentence().getVerbAsCode();
-            SentenceItem sentenceA = model.getSentence().getAAA();
-            SentenceItem sentenceB = model.getSentence().getBBB();
-            // clamp the mouse pointer to within the viewport coords
-            if(x>1.0) x=1.0;
-            if(x<0.0) x=0.0;
-            if(y>1.0) y=1.0;
-            if(y<0.0) y=0.0;
-            
-            api.doCommand( verbAsCode, getSentence().getVerbAsVerbEnumeration(), sentenceA,
-                    sentenceB, x, y);
-           
-        }
+	private  Sentence getSentence() {
+		Sentence sentence = model.getSentence();
 
-    }
+		return sentence;
+	}
+	private void execute(double x, double y) {
+		// if its incomplete, the clear everything..
+		if (!model.isOkToExecute()) {
+			clear();
+			return;
+		}
+
+		if (this.api != null) {
+			int verbAsCode = model.getSentence().getVerbAsCode();
+			SentenceItem sentenceA = model.getSentence().getAAA();
+			SentenceItem sentenceB = model.getSentence().getBBB();
+			// clamp the mouse pointer to within the viewport coords
+			if(x>1.0) x=1.0;
+			if(x<0.0) x=0.0;
+			if(y>1.0) y=1.0;
+			if(y<0.0) y=0.0;
+
+			api.doCommand( verbAsCode, getSentence().getVerbAsVerbEnumeration(), sentenceA,
+					sentenceB, x, y);
+
+		}
+
+	}
 
 	public CommandLinePanelAPI getView() {
 		return view;
 	}
 
-	public String getDisplayName() 
+	public String getDisplayName()
 	{
 		String displayName = model.getSentence().getDisplayName();
 		return displayName;
 	}
-    
+
 }

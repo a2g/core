@@ -28,27 +28,27 @@ import com.github.a2g.core.primitive.ColorEnum;
 
 public class VerbsPresenter implements VerbCollectionCallbackAPI
 {
-    private Verbs theVerbs;
-    private VerbsPanelAPI view;
+	private Verbs theVerbs;
+	private VerbsPanelAPI view;
 	private int widthOfScene;
 	private int widthOfInventory;
 
-    public VerbsPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent, InternalAPI api) 
-    {
-        this.theVerbs = new Verbs(this);
-        this.view = api.getFactory().createVerbsPanel(ColorEnum.Purple, ColorEnum.Black);
-        panel.setThing(view);
-        this.view.setVerbs(theVerbs);
-        this.widthOfScene=0;
-        this.widthOfInventory=0;
-    }
+	public VerbsPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent, InternalAPI api)
+	{
+		this.theVerbs = new Verbs(this);
+		this.view = api.getFactory().createVerbsPanel(ColorEnum.Purple, ColorEnum.Black);
+		panel.setThing(view);
+		this.view.setVerbs(theVerbs);
+		this.widthOfScene=0;
+		this.widthOfInventory=0;
+	}
 
-	public void clear() 
+	public void clear()
 	{
 		// doesn't change.
-		
+
 	}
-	
+
 	public Verbs getVerbsModel()
 	{
 		return theVerbs;
@@ -59,7 +59,7 @@ public class VerbsPresenter implements VerbCollectionCallbackAPI
 	}
 
 	@Override
-	public void update() 
+	public void update()
 	{
 		view.update();
 	}
@@ -73,5 +73,5 @@ public class VerbsPresenter implements VerbCollectionCallbackAPI
 		this.widthOfInventory = width;
 		view.setWidth(widthOfScene-widthOfInventory);
 	}
-	
+
 }

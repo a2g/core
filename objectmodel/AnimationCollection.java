@@ -22,43 +22,43 @@ import java.util.Map;
 import java.util.TreeMap;
 
 
-public class AnimationCollection 
+public class AnimationCollection
 {
-    private Map<String, Animation> theMap;
+	private Map<String, Animation> theMap;
 
-    AnimationCollection() {
-        theMap = new TreeMap<String, Animation>();
-    }
+	AnimationCollection() {
+		theMap = new TreeMap<String, Animation>();
+	}
 
-    public Animation at(String textualId) {
-    	if(textualId==null)
-    		return null;
-        String key = textualId.toUpperCase();
+	public Animation at(String textualId) {
+		if(textualId==null)
+			return null;
+		String key = textualId.toUpperCase();
 
-        if (theMap.containsKey(key)) {
-            return theMap.get(key);
-        }
-        return null;
-    }
+		if (theMap.containsKey(key)) {
+			return theMap.get(key);
+		}
+		return null;
+	}
 
-    public void add(Animation animation) {
-        theMap.put(
-                animation.getTextualId().toUpperCase(),
-                animation);
-    }
+	public void add(Animation animation) {
+		theMap.put(
+				animation.getTextualId().toUpperCase(),
+				animation);
+	}
 
-    public Animation at(int index) {
-        Animation anim = null;
-        Iterator<Animation> it = theMap.values().iterator();
+	public Animation at(int index) {
+		Animation anim = null;
+		Iterator<Animation> it = theMap.values().iterator();
 
-        for (int i = 0; i <= index; i++) {
-            anim = it.next();
-        }
-        return anim;
-    }
+		for (int i = 0; i <= index; i++) {
+			anim = it.next();
+		}
+		return anim;
+	}
 
-    public int getCount() {
-        return theMap.size();
-    }
+	public int getCount() {
+		return theMap.size();
+	}
 
 }

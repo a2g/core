@@ -22,26 +22,26 @@ import java.util.Vector;
 
 
 public class ImageCollection {
-    private Vector<Image> theVector;
+	private Vector<Image> theVector;
 
-    ImageCollection() {
-        theVector = new Vector<Image>();
-    }
+	ImageCollection() {
+		theVector = new Vector<Image>();
+	}
 
-    public com.github.a2g.core.objectmodel.Image at(int index) {
-        if (index < 0
-                || index >= theVector.size()) {
-            return null;
-        }
-        return theVector.get(index);
-    }
+	public com.github.a2g.core.objectmodel.Image at(int index) {
+		if (index < 0
+				|| index >= theVector.size()) {
+			return null;
+		}
+		return theVector.get(index);
+	}
 
-    public void add(Image image) {
-        theVector.add(image);
-    }
+	public void add(Image image) {
+		theVector.add(image);
+	}
 
-    public int getCount() {
-        return theVector.size();
-    }
+	public int getCount() {
+		return theVector.size();
+	}
 
 }

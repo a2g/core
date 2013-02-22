@@ -27,63 +27,63 @@ import java.util.TreeMap;
 
 
 public class SceneObjectCollection {
-    private Map<String, SceneObject> theMap;
+	private Map<String, SceneObject> theMap;
 
-    public SceneObjectCollection() {
-        theMap = new TreeMap<String, SceneObject>();
-    }
+	public SceneObjectCollection() {
+		theMap = new TreeMap<String, SceneObject>();
+	}
 
-    public ArrayList<SceneObject> getSortedList() {
-        ArrayList<SceneObject> list = new ArrayList<SceneObject>();
+	public ArrayList<SceneObject> getSortedList() {
+		ArrayList<SceneObject> list = new ArrayList<SceneObject>();
 
-        Iterator<SceneObject> it = theMap.values().iterator();
+		Iterator<SceneObject> it = theMap.values().iterator();
 
-        while (it.hasNext()) {
-            list.add(it.next());
-        }
+		while (it.hasNext()) {
+			list.add(it.next());
+		}
 
-        Collections.sort(list,
-                new Comparator<SceneObject>() {
-            @Override
-            public int compare(SceneObject o1, SceneObject o2) {
-                return o1.getNumberPrefix()
-                        - o2.getNumberPrefix();
-            }
-        });
+		Collections.sort(list,
+				new Comparator<SceneObject>() {
+			@Override
+			public int compare(SceneObject o1, SceneObject o2) {
+				return o1.getNumberPrefix()
+						- o2.getNumberPrefix();
+			}
+		});
 
-        return list;
+		return list;
 
-    }
+	}
 
-    public SceneObject at(String textualId) {
-        try {
-            return theMap.get(textualId);
-        } catch (Exception e) {}
-        return null;
-    }
+	public SceneObject at(String textualId) {
+		try {
+			return theMap.get(textualId);
+		} catch (Exception e) {}
+		return null;
+	}
 
-    public void add(SceneObject sceneObject) {
-        theMap.put(sceneObject.getTextualId(),
-                sceneObject);
-    }
+	public void add(SceneObject sceneObject) {
+		theMap.put(sceneObject.getTextualId(),
+				sceneObject);
+	}
 
-    public SceneObject at(int index) throws NoSuchElementException {
-    	if(index>=theMap.size())
-    		throw new NoSuchElementException();
-        SceneObject sceneObject = null;
-        Iterator<SceneObject> it = theMap.values().iterator();
-        int i = 0;
+	public SceneObject at(int index) throws NoSuchElementException {
+		if(index>=theMap.size())
+			throw new NoSuchElementException();
+		SceneObject sceneObject = null;
+		Iterator<SceneObject> it = theMap.values().iterator();
+		int i = 0;
 
-        while (i <= index) {
-            sceneObject = it.next();
-            i++;
-        }
+		while (i <= index) {
+			sceneObject = it.next();
+			i++;
+		}
 
-        return sceneObject;
-    }
+		return sceneObject;
+	}
 
-    public int count() {
-        return theMap.size();
-    }
+	public int count() {
+		return theMap.size();
+	}
 
 }

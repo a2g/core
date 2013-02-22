@@ -21,29 +21,29 @@ import com.github.a2g.core.action.BaseAction;
 
 
 public class SetHomeAnimationAction extends BaseAction {
-    private String animId;
-    public SetHomeAnimationAction(BaseAction parent, String animationCode) {
-        super(parent, parent.getApi());
-        this.animId = animationCode;
-    }
+	private String animId;
+	public SetHomeAnimationAction(BaseAction parent, String animationCode) {
+		super(parent, parent.getApi());
+		this.animId = animationCode;
+	}
 
-    @Override
-    public void runGameAction() {
-        super.run(1);
-    }
+	@Override
+	public void runGameAction() {
+		super.run(1);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
-    protected void onCompleteGameAction() {
-        getApi().getAnimation(this.animId).setAsHomeAnimation();
-    }
+	@Override
+	protected void onCompleteGameAction() {
+		getApi().getAnimation(this.animId).setAsHomeAnimation();
+	}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 
 }

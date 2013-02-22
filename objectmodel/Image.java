@@ -23,12 +23,12 @@ import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
 
 public abstract class Image {
-	
+
 	private final ImagePanelAPI panel;
 	private final Point fixedOffset;
-	
 
-	public Image(ImagePanelAPI panel, Point offset) 
+
+	public Image(ImagePanelAPI panel, Point offset)
 	{
 		this.fixedOffset = offset;
 		this.panel = panel;
@@ -42,12 +42,12 @@ public abstract class Image {
 		panel.remove(this);
 	}
 
-	public void setLeftTop(Point leftTop) 
+	public void setLeftTop(Point leftTop)
 	{
 		update(leftTop);
 	}
 
-	public void setVisible(boolean visible, Point position) 
+	public void setVisible(boolean visible, Point position)
 	{
 		panel.setImageVisible(this, visible);
 		update(position);
@@ -55,9 +55,9 @@ public abstract class Image {
 
 	public Rect getBoundingRect() {
 		return new Rect(
-				this.fixedOffset.getX(), 
+				this.fixedOffset.getX(),
 				this.fixedOffset.getY(),
-				panel.getImageWidth(this), 
+				panel.getImageWidth(this),
 				panel.getImageHeight(this));
 	}
 
@@ -66,12 +66,12 @@ public abstract class Image {
 		int x = this.fixedOffset.getX();
 		int y = this.fixedOffset.getY();
 		panel.setThingPosition(
-				this, 
-				leftTop.getX()+x, 
+				this,
+				leftTop.getX()+x,
 				leftTop.getY()+y
-		);
+				);
 	}
 
-	
+
 
 }

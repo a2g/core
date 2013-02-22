@@ -17,28 +17,28 @@ package com.github.a2g.core.primitive;
 
 
 public class PointF {
-    private double x;
-    private double y;
+	private double x;
+	private double y;
 
-    public PointF(double x, double y) {
-        this.setX(x);
-        this.setY(y);
-    }
+	public PointF(double x, double y) {
+		this.setX(x);
+		this.setY(y);
+	}
 
-    public void setX(double x) {
-        this.x = x;
-    }
+	public void setX(double x) {
+		this.x = x;
+	}
 
-    public void setY(double y) {
-        this.y = y;
-    }
+	public void setY(double y) {
+		this.y = y;
+	}
 
-    public double getX() {
-        return x;
-    }
+	public double getX() {
+		return x;
+	}
 
-    public double getY() {
-        return y;
-    }
+	public double getY() {
+		return y;
+	}
 
 }

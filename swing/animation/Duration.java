@@ -39,40 +39,40 @@ import java.util.Date;
  */
 public class Duration {
 
-  /**
-   * Returns the same result as System.currentTimeMillis() but as a
-   * double. Because emulated long math is significantly slower than doubles in
-   * Production Mode, this method is to be preferred.
-   */
-  public static double currentTimeMillis(){
-    return (new Date()).getTime();
-  };
+	/**
+	 * Returns the same result as System.currentTimeMillis() but as a
+	 * double. Because emulated long math is significantly slower than doubles in
+	 * Production Mode, this method is to be preferred.
+	 */
+	public static double currentTimeMillis(){
+		return (new Date()).getTime();
+	};
 
-  private static int uncheckedConversion(double elapsed)
-  {
-    return (int)elapsed;
-  }
+	private static int uncheckedConversion(double elapsed)
+	{
+		return (int)elapsed;
+	}
 
-  private double start = currentTimeMillis();
+	private double start = currentTimeMillis();
 
-  /**
-   * Creates a new Duration whose start time is now.
-   */
-  public Duration() {
-  }
+	/**
+	 * Creates a new Duration whose start time is now.
+	 */
+	public Duration() {
+	}
 
-  /**
-   * Returns the number of milliseconds that have elapsed since this object was
-   * created.
-   */
-  public int elapsedMillis() {
-    return uncheckedConversion(currentTimeMillis() - start);
-  }
+	/**
+	 * Returns the number of milliseconds that have elapsed since this object was
+	 * created.
+	 */
+	public int elapsedMillis() {
+		return uncheckedConversion(currentTimeMillis() - start);
+	}
 
-  /**
-   * Returns the time when the object was created.
-   */
-  public double getStartMillis() {
-    return start;
-  }
+	/**
+	 * Returns the time when the object was created.
+	 */
+	public double getStartMillis() {
+		return start;
+	}
 }

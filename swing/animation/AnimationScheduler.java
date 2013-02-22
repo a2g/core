@@ -40,77 +40,77 @@ package com.github.a2g.core.swing.animation;
  */
 public abstract class AnimationScheduler {
 
-  /**
-   * The callback used when an animation frame becomes available.
-   */
-  public interface AnimationCallback {
-    /**
-     * Invokes the command.
-     * 
-     * @param timestamp the current timestamp
-     */
-    void execute(double timestamp);
-  }
+	/**
+	 * The callback used when an animation frame becomes available.
+	 */
+	public interface AnimationCallback {
+		/**
+		 * Invokes the command.
+		 * 
+		 * @param timestamp the current timestamp
+		 */
+		void execute(double timestamp);
+	}
 
-  /**
-   * A handle to the requested animation frame created by
-   * requestAnimationFrame(AnimationCallback, Element)
-   */
-  public abstract static class AnimationHandle {
-    /**
-     * Cancel the requested animation frame. If the animation frame is already
-     * canceled, do nothing.
-     */
-    public abstract void cancel();
-  }
+	/**
+	 * A handle to the requested animation frame created by
+	 * requestAnimationFrame(AnimationCallback, Element)
+	 */
+	public abstract static class AnimationHandle {
+		/**
+		 * Cancel the requested animation frame. If the animation frame is already
+		 * canceled, do nothing.
+		 */
+		public abstract void cancel();
+	}
 
-  /**
-   * Returns the default implementation of the AnimationScheduler API.
-   */
-  public static AnimationScheduler get() {
-    return AnimationSchedulerImpl.INSTANCE;
-  }
+	/**
+	 * Returns the default implementation of the AnimationScheduler API.
+	 */
+	public static AnimationScheduler get() {
+		return AnimationSchedulerImpl.INSTANCE;
+	}
 
-  /**
-   * Schedule an animation, letting the browser decide when to trigger the next
-   * step in the animation.
-   * 
-   * <p>
-   * NOTE: If you are animating an element, use
-   * requestAnimationFrame(AnimationCallback, Element) instead so the
-   * browser can optimize for the specified element.
-   * </p>
-   * 
-   * <p>
-   * Using this method instead of a timeout is preferred because the browser is
-   * in the best position to decide how frequently to trigger the callback for
-   * an animation of the specified element. The browser can balance multiple
-   * animations and trigger callbacks at the optimal rate for smooth
-   * performance.
-   * </p>
-   * 
-   * @param callback the callback to fire
-   * @return a handle to the requested animation frame
-   */
-  public AnimationHandle requestAnimationFrame(AnimationCallback callback) {
-    return requestAnimationFrame(callback, null);
-  }
+	/**
+	 * Schedule an animation, letting the browser decide when to trigger the next
+	 * step in the animation.
+	 * 
+	 * <p>
+	 * NOTE: If you are animating an element, use
+	 * requestAnimationFrame(AnimationCallback, Element) instead so the
+	 * browser can optimize for the specified element.
+	 * </p>
+	 * 
+	 * <p>
+	 * Using this method instead of a timeout is preferred because the browser is
+	 * in the best position to decide how frequently to trigger the callback for
+	 * an animation of the specified element. The browser can balance multiple
+	 * animations and trigger callbacks at the optimal rate for smooth
+	 * performance.
+	 * </p>
+	 * 
+	 * @param callback the callback to fire
+	 * @return a handle to the requested animation frame
+	 */
+	public AnimationHandle requestAnimationFrame(AnimationCallback callback) {
+		return requestAnimationFrame(callback, null);
+	}
 
-  /**
-   * Schedule an animation, letting the browser decide when to trigger the next
-   * step in the animation.
-   * 
-   * <p>
-   * Using this method instead of a timeout is preferred because the browser is
-   * in the best position to decide how frequently to trigger the callback for
-   * an animation of the specified element. The browser can balance multiple
-   * animations and trigger callbacks at the optimal rate for smooth
-   * performance.
-   * </p>
-   * 
-   * @param callback the callback to fire
-   * @return a handle to the requested animation frame
-   * @param element the element being animated
-   */
-  public abstract AnimationHandle requestAnimationFrame(com.github.a2g.core.swing.animation.AnimationScheduler.AnimationCallback callback, com.github.a2g.core.swing.animation.Element element);
+	/**
+	 * Schedule an animation, letting the browser decide when to trigger the next
+	 * step in the animation.
+	 * 
+	 * <p>
+	 * Using this method instead of a timeout is preferred because the browser is
+	 * in the best position to decide how frequently to trigger the callback for
+	 * an animation of the specified element. The browser can balance multiple
+	 * animations and trigger callbacks at the optimal rate for smooth
+	 * performance.
+	 * </p>
+	 * 
+	 * @param callback the callback to fire
+	 * @return a handle to the requested animation frame
+	 * @param element the element being animated
+	 */
+	public abstract AnimationHandle requestAnimationFrame(com.github.a2g.core.swing.animation.AnimationScheduler.AnimationCallback callback, com.github.a2g.core.swing.animation.Element element);
 }

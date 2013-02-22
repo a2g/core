@@ -21,27 +21,27 @@ import com.github.a2g.core.action.BaseAction;
 
 
 public class SleepAction extends BaseAction {
-    private int milliseconds;
-    public SleepAction(BaseAction parent, int milliseconds) {
-        super(parent, parent.getApi());
-        this.milliseconds = milliseconds;
-    }
+	private int milliseconds;
+	public SleepAction(BaseAction parent, int milliseconds) {
+		super(parent, parent.getApi());
+		this.milliseconds = milliseconds;
+	}
 
-    @Override	
-    public void runGameAction() {
-        this.run(this.milliseconds);
-    }
+	@Override
+	public void runGameAction() {
+		this.run(this.milliseconds);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
-    protected void onCompleteGameAction() {}
+	@Override
+	protected void onCompleteGameAction() {}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 
 }

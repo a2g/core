@@ -26,15 +26,15 @@ import com.google.gwt.event.shared.EventBus;
 
 
 public class TitleCardPresenter {
-    private TitleCardPanelAPI view;
-    private String text;
-	private ColorEnum color;	
-	
-    public TitleCardPresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api, MasterPresenterHostAPI parent) {
-    	this.text = "";
-        this.view = api.getFactory().createTitleCardPanel(ColorEnum.Red, ColorEnum.Black);
-        panel.setThing(view);
-    }
+	private TitleCardPanelAPI view;
+	private String text;
+	private ColorEnum color;
+
+	public TitleCardPresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api, MasterPresenterHostAPI parent) {
+		this.text = "";
+		this.view = api.getFactory().createTitleCardPanel(ColorEnum.Red, ColorEnum.Black);
+		panel.setThing(view);
+	}
 
 	public void setText(String string) {
 		text = string;
@@ -48,15 +48,15 @@ public class TitleCardPresenter {
 	public void setColor(ColorEnum color) {
 		this.color = color;
 		view.setColor(this.color);
-		
+
 	}
 
-	public void setPixelSize(int width, int height) 
+	public void setPixelSize(int width, int height)
 	{
 		this.view.setScenePixelSize(width , height);
 
 	}
-	
+
 	public TitleCardPanelAPI getView()
 	{
 		return view;

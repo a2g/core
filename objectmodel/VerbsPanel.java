@@ -28,52 +28,52 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
 
-public class VerbsPanel 
-extends Grid 
+public class VerbsPanel
+extends Grid
 implements VerbsPanelAPI
 {
 	EventBus bus;
 	ColorEnum rolloverColor;
-    public VerbsPanel(EventBus bus, InternalAPI api, ColorEnum fore, ColorEnum back) 
-    {
-        this.bus = bus;
-		 DOM.setStyleAttribute(getElement(), "color",fore.toString());
-		 DOM.setStyleAttribute(getElement(), "backgroundColor", back.toString());
+	public VerbsPanel(EventBus bus, InternalAPI api, ColorEnum fore, ColorEnum back)
+	{
+		this.bus = bus;
+		DOM.setStyleAttribute(getElement(), "color",fore.toString());
+		DOM.setStyleAttribute(getElement(), "backgroundColor", back.toString());
 
-    }
+	}
 
 	@Override
 	public void setVerbs(Verbs verbs) {
 		int rows = verbs.getNumberOfRows();
 		int columns = verbs.getNumberOfColumns();
 		this.resize(rows, columns);
-        for (int i = 0; i < (rows * columns); i++) 
-        {
-            int row = i / columns;
-            int column = i % columns;
+		for (int i = 0; i < (rows * columns); i++)
+		{
+			int row = i / columns;
+			int column = i % columns;
 
-            Verb verb = verbs.items().get(i);
-            String textualId = verb.gettextualId();
-            String displayText = verb.getdisplayText();
-            int code = verb.getCode();
-            Label widget = new Label(
-                    textualId);
+			Verb verb = verbs.items().get(i);
+			String textualId = verb.gettextualId();
+			String displayText = verb.getdisplayText();
+			int code = verb.getCode();
+			Label widget = new Label(
+					textualId);
 
-            this.setWidget(row, column, widget);
-            widget.addMouseMoveHandler(
-                    new VerbMouseOverHandler(
-                            bus, displayText,textualId, code));
-            widget.addClickHandler(
-                    new ImageMouseClickHandler(
-                            bus, null));
-        }
-		
+			this.setWidget(row, column, widget);
+			widget.addMouseMoveHandler(
+					new VerbMouseOverHandler(
+							bus, displayText,textualId, code));
+			widget.addClickHandler(
+					new ImageMouseClickHandler(
+							bus, null));
+		}
+
 	}
 
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -83,6 +83,6 @@ implements VerbsPanelAPI
 		// in html evaluates in such a way
 		// as to keep the width of the verbs
 		// panel reasonable.
-		
+
 	}
 }

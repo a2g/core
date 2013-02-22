@@ -25,5 +25,5 @@ public interface LoadAPI
 	public int getNumberOfImagesInBundle(int bundleNumber);
 	public int loadImageBundle(final LoadHandler individualImageCallback, final InternalAPI api, final int bundleNumber, final int CHUNK, final int milliseconds);
 	public boolean isInventory();
-	
+
 }

@@ -12,7 +12,7 @@ import com.github.a2g.core.interfaces.ImageBundleLoaderCallbackAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
 
-public class Loader 
+public class Loader
 implements ImageBundleLoaderCallbackAPI
 {
 	private LoaderItem theCurrentLoader;
@@ -22,20 +22,20 @@ implements ImageBundleLoaderCallbackAPI
 	private MergeSceneAndStartAPI master;
 	private String inventoryResourceAsString;
 	private boolean isSameInventoryAsLastTime;
-	private int imagesToLoad;	
-	
+	private int imagesToLoad;
+
 	public Loader(MergeSceneAndStartAPI callbacks)
 	{
 		this.theCurrentLoader = null;
 		this.listOfEssentialLoaders = new LoaderItemCollection();
 		this.setOfCompletedLoaders = new TreeSet<String>();
 		this.objectCache = new TreeMap<String,LoadedLoad>();
-		this.master = callbacks; 
+		this.master = callbacks;
 	}
-	
-	
+
+
 	@Override
-	public void onLoaderComplete(LoaderItem loader) 
+	public void onLoaderComplete(LoaderItem loader)
 	{
 		String loaderName = loader.toString();
 		setOfCompletedLoaders.add(loaderName);
@@ -50,7 +50,7 @@ implements ImageBundleLoaderCallbackAPI
 		{
 			this.listOfEssentialLoaders.remove(0);
 		}
-		
+
 		loadNext();
 	}
 
@@ -66,12 +66,12 @@ implements ImageBundleLoaderCallbackAPI
 			master.startScene();
 			return;
 		}
-		
+
 		String nameAndNum = theCurrentLoader.getCombinedClassAndNumber();
 		if(objectCache.containsKey(nameAndNum))
 		{
 			master.mergeWithScene(objectCache.get(nameAndNum));
-			
+
 			//remove from processing straight away.
 			this.listOfEssentialLoaders.remove(0);
 			loadNext();
@@ -91,25 +91,25 @@ implements ImageBundleLoaderCallbackAPI
 			// a) be removed from the list
 			// b) loadNext
 		}
-		
+
 	}
-	
+
 	@Override
-	public void onImageLoaded() 
+	public void onImageLoaded()
 	{
 		master.incrementProgress();
 	}
 
 	public void addToAppropriateAnimation(int numberPrefix, Image imageAndPos,
 			String objectTextualId, String animationTextualId,
-			short objectCode, String objPlusAnimCode, int width, int height) 
+			short objectCode, String objPlusAnimCode, int width, int height)
 	{
 		theCurrentLoader.addToAppropriateAnimation(numberPrefix, imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode,width, height);
 	}
 
 	public void addEssential(LoadAPI blah, InternalAPI api)
 	{
-		
+
 		for(int i=0;i<blah.getNumberOfBundles();i++)
 		{
 			listOfEssentialLoaders.add( new LoaderItem(api,blah,i));
@@ -130,16 +130,16 @@ implements ImageBundleLoaderCallbackAPI
 		imagesToLoad =0;
 		// get totals
 		Collections.sort(listOfEssentialLoaders);
-		
+
 		Iterator<LoaderItem> iter = listOfEssentialLoaders.iterator();
 		while(iter.hasNext())
 		{
 			LoaderItem loader = iter.next();
 			String loaderName = loader.getCombinedClassAndNumber();
-			
+
 			if(loader.isInventory())
 			{
-				
+
 				if(loaderName.equalsIgnoreCase(this.inventoryResourceAsString))
 				{
 					iter.remove();
@@ -151,7 +151,7 @@ implements ImageBundleLoaderCallbackAPI
 					this.inventoryResourceAsString = loaderName;
 				}
 			}
-				 
+
 			if(!setOfCompletedLoaders.contains(loaderName))
 			{
 				imagesToLoad+=loader.getNumberOfImages();
@@ -159,15 +159,15 @@ implements ImageBundleLoaderCallbackAPI
 		}
 	}
 
-	public void clearLoaders() 
+	public void clearLoaders()
 	{
 		listOfEssentialLoaders.clear();
 	}
 
 
-	public void clearAllLoadedLoads() 
+	public void clearAllLoadedLoads()
 	{
-		objectCache.clear();	
+		objectCache.clear();
 		setOfCompletedLoaders.clear();
 	}
 }

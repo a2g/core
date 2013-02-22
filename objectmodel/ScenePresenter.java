@@ -25,67 +25,67 @@ import com.github.a2g.core.primitive.Point;
 
 
 public class ScenePresenter {
-    private int width;
-    private int height;
-    //private EventBus eventBus;
+	private int width;
+	private int height;
+	//private EventBus eventBus;
 	private Scene scene;
-    private ScenePanelAPI view;
+	private ScenePanelAPI view;
 
-    public ScenePanelAPI getView() {
-        return view;
-    }
+	public ScenePanelAPI getView() {
+		return view;
+	}
 
-    public void setView(ScenePanelAPI view) {
-        this.view = view;
-    }
+	public void setView(ScenePanelAPI view) {
+		this.view = view;
+	}
 
-    public ScenePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api) 
-    {
-        this.setWidth(320);
-        this.setHeight(180);
-        this.scene = new Scene();
-      //  this.eventBus = bus;
-        this.view = api.getFactory().createScenePanel();
-        panel.setThing(view);
-        view.setVisible(true);
-       
-        // this.theInventoryItemMap = new TreeMap<Integer, InventoryItem>();
-    }
+	public ScenePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api)
+	{
+		this.setWidth(320);
+		this.setHeight(180);
+		this.scene = new Scene();
+		//  this.eventBus = bus;
+		this.view = api.getFactory().createScenePanel();
+		panel.setThing(view);
+		view.setVisible(true);
 
-    // start go in panel
-     
-    public void setPixelSize(int width, int height) {
-        
-        this.view.setScenePixelSize(width,height);
-    }
+		// this.theInventoryItemMap = new TreeMap<Integer, InventoryItem>();
+	}
 
-    public Point getSizeOfSceneArea() {
-        // int width = this.sceneArea.
-        return new Point(this.getWidth(),
-                this.getHeight());
-    }
+	// start go in panel
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
+	public void setPixelSize(int width, int height) {
 
-    public int getWidth() {
-        return width;
-    }
+		this.view.setScenePixelSize(width,height);
+	}
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
+	public Point getSizeOfSceneArea() {
+		// int width = this.sceneArea.
+		return new Point(this.getWidth(),
+				this.getHeight());
+	}
 
-    public int getHeight() {
-        return height;
-    }
-    // end go in panel.
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+	// end go in panel.
 
 	public void clear() {
 		view.clear();
 	}
-	
+
 
 	public Scene getModel() {
 		return scene;
@@ -95,8 +95,8 @@ public class ScenePresenter {
 	{
 		this.scene = new Scene();
 	}
-	
-    
+
+
 }
 
 

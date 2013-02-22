@@ -15,7 +15,7 @@
  */
 package com.github.a2g.core.interfaces;
 
-public interface TimerCallbackAPI 
+public interface TimerCallbackAPI
 {
 	void doEveryFrame();
 }

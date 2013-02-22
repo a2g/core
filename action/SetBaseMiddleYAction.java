@@ -21,33 +21,33 @@ import com.github.a2g.core.action.BaseAction;
 
 
 public class SetBaseMiddleYAction extends BaseAction {
-    private short objId;
-    private double y;
+	private short objId;
+	private double y;
 
-    public SetBaseMiddleYAction(BaseAction parent, short objId, double y) {
-        super(parent, parent.getApi());
-        this.objId = objId;
-        this.y = y;
-    }
+	public SetBaseMiddleYAction(BaseAction parent, short objId, double y) {
+		super(parent, parent.getApi());
+		this.objId = objId;
+		this.y = y;
+	}
 
-    @Override
-    public void runGameAction() {
-        super.run(1);
-    }
+	@Override
+	public void runGameAction() {
+		super.run(1);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
-    protected void onCompleteGameAction() {
-        getApi().getObject(this.objId).setBaseMiddleY(
-                this.y);
-    }
+	@Override
+	protected void onCompleteGameAction() {
+		getApi().getObject(this.objId).setBaseMiddleY(
+				this.y);
+	}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 
 }

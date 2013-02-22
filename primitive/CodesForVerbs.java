@@ -22,11 +22,11 @@ public class CodesForVerbs {
 	{
 		return i * ConstantsForAPI.VERB_MULTIPLIER;
 	}
-	
+
 	public static boolean isAVerb(int code)
 	{
 		int modulus = code%ConstantsForAPI.VERB_MULTIPLIER;
 		return (modulus ==0);
 	}
-    
+
 }

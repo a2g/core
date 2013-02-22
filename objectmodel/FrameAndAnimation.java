@@ -23,28 +23,28 @@ import com.github.a2g.core.interfaces.ConstantsForAPI;
 
 
 public class FrameAndAnimation {
-    private int currentFrame;
-    private String currentAnimationTextualId;
-    public FrameAndAnimation(String owner) {
-        this.currentFrame = 0;
-        this.currentAnimationTextualId = ConstantsForAPI.INITIAL;
-    }
+	private int currentFrame;
+	private String currentAnimationTextualId;
+	public FrameAndAnimation(String owner) {
+		this.currentFrame = 0;
+		this.currentAnimationTextualId = ConstantsForAPI.INITIAL;
+	}
 
-    public void setCurrentFrame(int frame) {
-        this.currentFrame = frame;
-    }
+	public void setCurrentFrame(int frame) {
+		this.currentFrame = frame;
+	}
 
-    public int getCurrentFrame() {
-        return currentFrame;
-    }
+	public int getCurrentFrame() {
+		return currentFrame;
+	}
 
-    public void setCurrentAnimationTextualId(String animationTextualId) {
-        this.currentAnimationTextualId = animationTextualId;
-    }
+	public void setCurrentAnimationTextualId(String animationTextualId) {
+		this.currentAnimationTextualId = animationTextualId;
+	}
 
-    public String getCurrentAnimationTextualId() {
-        return this.currentAnimationTextualId;
-    }
+	public String getCurrentAnimationTextualId() {
+		return this.currentAnimationTextualId;
+	}
 
 }
 

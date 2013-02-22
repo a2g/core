@@ -29,101 +29,101 @@ import com.github.a2g.core.swing.factory.SwingHostingPanel;
 
 
 @SuppressWarnings("serial")
-public class MasterPanel 
+public class MasterPanel
 extends JPanel
 implements MasterPanelAPI
 {
-    SwingHostingPanel hostForCommandLineF;
-    SwingHostingPanel hostForInventoryF;
-    SwingHostingPanel hostForVerbsF;
-    SwingHostingPanel hostForSceneF;
-    SwingHostingPanel hostForDialogTreeF;
-    SwingHostingPanel hostForLoadingF;
-    SwingHostingPanel hostForTitleCardF;
-    GuiStateEnum guiStateEnum;
-    
-    static final String LOADING_WIDGET = "LOADING_WIDGET";
-    static final String SCENE_WIDGET = "SCENE_WIDGET";
-    static final String TITLECARD_WIDGET = "TITLECARD_WIDGET";
-    static final String DIALOGTREE_WIDGET = "TITLECARD_WIDGET";
-    static final String COMMANDLINEVERBSINVENTORY_WIDGET = "COMMANDLINEVERBSINVENTORY_WIDGET";
-    
-    CardLayout sceneCardLayout;
-    CardLayout dialogTreeCardLayout;
-    JPanel panelForSceneStack;
-    JPanel panelForDialogTreeStack;
-    
-    public MasterPanel(int width, int height, ColorEnum back) {
-    	this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
-    	// create all the host panels, that we want to arrange.
-        hostForCommandLineF = new SwingHostingPanel(); hostForCommandLineF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-        hostForInventoryF = new SwingHostingPanel(); hostForInventoryF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-        hostForVerbsF = new SwingHostingPanel(); hostForVerbsF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-        hostForSceneF = new SwingHostingPanel(); hostForSceneF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-        hostForDialogTreeF = new SwingHostingPanel(); hostForDialogTreeF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-        hostForLoadingF = new SwingHostingPanel(); hostForLoadingF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-        hostForTitleCardF = new SwingHostingPanel(); hostForTitleCardF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-        
-        sceneCardLayout =null;
-         
-    
-        // will be constructed from two vertical stacks.
-        panelForDialogTreeStack = new JPanel(); panelForDialogTreeStack.setLayout(new FlowLayout(FlowLayout.LEFT,0,0)); 
-        {
-        	// lay the CL/V/I panel and dialog tree - on top of each other
-        	JPanel commandLineAndVerbsAndInventoryF = new JPanel(); commandLineAndVerbsAndInventoryF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0)); 
-        	commandLineAndVerbsAndInventoryF.setBackground(new Color(0,0,255));
-        	
-        	dialogTreeCardLayout = new CardLayout();
-        	//dialogTreeCardLayout.setHgap(0);
-        	//dialogTreeCardLayout.setVgap(0);
-	
-        	panelForDialogTreeStack.setLayout(dialogTreeCardLayout);
-        	panelForDialogTreeStack.add(hostForDialogTreeF, MasterPanel.DIALOGTREE_WIDGET);   
-        	panelForDialogTreeStack.add(commandLineAndVerbsAndInventoryF, MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
-         	
-        	{
-        		// layout the command line and the panel below it - vertically.
-        		JPanel verbsAndInventoryF = new JPanel();verbsAndInventoryF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-        		verbsAndInventoryF.setBackground(new Color(0,255,0));
-        		
-        		commandLineAndVerbsAndInventoryF.add(hostForCommandLineF);
-        		commandLineAndVerbsAndInventoryF.add(verbsAndInventoryF);
+	SwingHostingPanel hostForCommandLineF;
+	SwingHostingPanel hostForInventoryF;
+	SwingHostingPanel hostForVerbsF;
+	SwingHostingPanel hostForSceneF;
+	SwingHostingPanel hostForDialogTreeF;
+	SwingHostingPanel hostForLoadingF;
+	SwingHostingPanel hostForTitleCardF;
+	GuiStateEnum guiStateEnum;
 
-        		{
-        			// layout the verbs and inventory - from left to right
-        			FlowLayout leftToRight = new FlowLayout(FlowLayout.LEFT,0,0);
-        			verbsAndInventoryF.setLayout(leftToRight);
-        			verbsAndInventoryF.add(hostForVerbsF, "hostForVerbs");
-        			verbsAndInventoryF.add(hostForInventoryF, "hostForInventory");
-        		}
-        	}
-        } 
+	static final String LOADING_WIDGET = "LOADING_WIDGET";
+	static final String SCENE_WIDGET = "SCENE_WIDGET";
+	static final String TITLECARD_WIDGET = "TITLECARD_WIDGET";
+	static final String DIALOGTREE_WIDGET = "TITLECARD_WIDGET";
+	static final String COMMANDLINEVERBSINVENTORY_WIDGET = "COMMANDLINEVERBSINVENTORY_WIDGET";
 
-        panelForSceneStack = new JPanel();panelForSceneStack.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-       		
-        {
-        	sceneCardLayout = new CardLayout();
-        	//sceneCardLayout.setHgap(0);
-        	//sceneCardLayout.setVgap(0);
-	
-        	panelForSceneStack.setLayout(sceneCardLayout);
-        	panelForSceneStack.add(hostForSceneF, SCENE_WIDGET);
-        	panelForSceneStack.add(hostForLoadingF, LOADING_WIDGET);  
-        	panelForSceneStack.add(hostForTitleCardF, TITLECARD_WIDGET);  
-        }
-        
-        // layout the scene at the top, and the rest at te bottom.
-        GridLayout topToBottom = new GridLayout(2,1);
-        topToBottom.setHgap(0);
-        topToBottom.setVgap(0);
+	CardLayout sceneCardLayout;
+	CardLayout dialogTreeCardLayout;
+	JPanel panelForSceneStack;
+	JPanel panelForDialogTreeStack;
+
+	public MasterPanel(int width, int height, ColorEnum back) {
+		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
+		// create all the host panels, that we want to arrange.
+		hostForCommandLineF = new SwingHostingPanel(); hostForCommandLineF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+		hostForInventoryF = new SwingHostingPanel(); hostForInventoryF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+		hostForVerbsF = new SwingHostingPanel(); hostForVerbsF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+		hostForSceneF = new SwingHostingPanel(); hostForSceneF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+		hostForDialogTreeF = new SwingHostingPanel(); hostForDialogTreeF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+		hostForLoadingF = new SwingHostingPanel(); hostForLoadingF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+		hostForTitleCardF = new SwingHostingPanel(); hostForTitleCardF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+
+		sceneCardLayout =null;
+
+
+		// will be constructed from two vertical stacks.
+		panelForDialogTreeStack = new JPanel(); panelForDialogTreeStack.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+		{
+			// lay the CL/V/I panel and dialog tree - on top of each other
+			JPanel commandLineAndVerbsAndInventoryF = new JPanel(); commandLineAndVerbsAndInventoryF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+			commandLineAndVerbsAndInventoryF.setBackground(new Color(0,0,255));
+
+			dialogTreeCardLayout = new CardLayout();
+			//dialogTreeCardLayout.setHgap(0);
+			//dialogTreeCardLayout.setVgap(0);
+
+			panelForDialogTreeStack.setLayout(dialogTreeCardLayout);
+			panelForDialogTreeStack.add(hostForDialogTreeF, MasterPanel.DIALOGTREE_WIDGET);
+			panelForDialogTreeStack.add(commandLineAndVerbsAndInventoryF, MasterPanel.COMMANDLINEVERBSINVENTORY_WIDGET);
+
+			{
+				// layout the command line and the panel below it - vertically.
+				JPanel verbsAndInventoryF = new JPanel();verbsAndInventoryF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+				verbsAndInventoryF.setBackground(new Color(0,255,0));
+
+				commandLineAndVerbsAndInventoryF.add(hostForCommandLineF);
+				commandLineAndVerbsAndInventoryF.add(verbsAndInventoryF);
+
+				{
+					// layout the verbs and inventory - from left to right
+					FlowLayout leftToRight = new FlowLayout(FlowLayout.LEFT,0,0);
+					verbsAndInventoryF.setLayout(leftToRight);
+					verbsAndInventoryF.add(hostForVerbsF, "hostForVerbs");
+					verbsAndInventoryF.add(hostForInventoryF, "hostForInventory");
+				}
+			}
+		}
+
+		panelForSceneStack = new JPanel();panelForSceneStack.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+
+		{
+			sceneCardLayout = new CardLayout();
+			//sceneCardLayout.setHgap(0);
+			//sceneCardLayout.setVgap(0);
+
+			panelForSceneStack.setLayout(sceneCardLayout);
+			panelForSceneStack.add(hostForSceneF, SCENE_WIDGET);
+			panelForSceneStack.add(hostForLoadingF, LOADING_WIDGET);
+			panelForSceneStack.add(hostForTitleCardF, TITLECARD_WIDGET);
+		}
+
+		// layout the scene at the top, and the rest at te bottom.
+		GridLayout topToBottom = new GridLayout(2,1);
+		topToBottom.setHgap(0);
+		topToBottom.setVgap(0);
 		this.setLayout(topToBottom);
-        this.add(panelForSceneStack);
-        this.add(panelForDialogTreeStack);
-        
-        
-        this.setVisible(true);
-    }
+		this.add(panelForSceneStack);
+		this.add(panelForDialogTreeStack);
+
+
+		this.setVisible(true);
+	}
 
 	@Override
 	public HostingPanelAPI getHostForCommandLine() {
@@ -136,7 +136,7 @@ implements MasterPanelAPI
 	}
 
 	@Override
-	public HostingPanelAPI getHostForVerbs() 
+	public HostingPanelAPI getHostForVerbs()
 	{
 		return hostForVerbsF;
 	}
@@ -150,17 +150,17 @@ implements MasterPanelAPI
 	public HostingPanelAPI getHostForDialogTree() {
 		return hostForDialogTreeF;
 	}
-	
+
 	@Override
 	public HostingPanelAPI getHostForLoading() {
 		return hostForLoadingF;
 	}
-	
+
 	@Override
 	public HostingPanelAPI getHostForTitleCard(){
 		return this.hostForTitleCardF;
 	}
-	
+
 	@Override
 	public void setActiveState(GuiStateEnum state) {
 		this.guiStateEnum = state;
@@ -228,8 +228,8 @@ implements MasterPanelAPI
 	public GuiStateEnum getActiveState() {
 		return guiStateEnum;
 	}
-	
-}	
+
+}
 
 
 

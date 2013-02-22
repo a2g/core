@@ -26,32 +26,32 @@ import com.github.a2g.core.swing.panel.ScenePanel;
 
 public class VerbMouseClickHandler implements MouseListener
 {
-    private InternalAPI api;
-    private EventBus bus;
-    static boolean isAddedAlready;
+	private InternalAPI api;
+	private EventBus bus;
+	static boolean isAddedAlready;
 
-    public VerbMouseClickHandler(EventBus bus, InternalAPI api) {
-        this.api = api;
-        this.bus = bus;
-        
-        ScenePanel scenePanel = (ScenePanel)api.getSceneGui().getView();
-        scenePanel.addMouseListener(this);
-    }
-    
-    public InternalAPI getAPI()
-    {
-    	return api;
-    }
+	public VerbMouseClickHandler(EventBus bus, InternalAPI api) {
+		this.api = api;
+		this.bus = bus;
+
+		ScenePanel scenePanel = (ScenePanel)api.getSceneGui().getView();
+		scenePanel.addMouseListener(this);
+	}
+
+	public InternalAPI getAPI()
+	{
+		return api;
+	}
 
 
-    @Override
-    public void mouseClicked(MouseEvent event) 
-    {
-        double x = -1;
-        double y = -1;
-    	 
-        bus.fireEvent( new ExecuteCommandEvent(x, y));
-    }
+	@Override
+	public void mouseClicked(MouseEvent event)
+	{
+		double x = -1;
+		double y = -1;
+
+		bus.fireEvent( new ExecuteCommandEvent(x, y));
+	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -61,20 +61,20 @@ public class VerbMouseClickHandler implements MouseListener
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
+
 }

@@ -23,44 +23,44 @@ import com.github.a2g.core.interfaces.PopupPanelAPI;
 
 
 public class SayWithoutAnimationAction extends BaseAction {
-    private String speech;
-    private PopupPanelAPI popup;
+	private String speech;
+	private PopupPanelAPI popup;
 
-    public SayWithoutAnimationAction(BaseAction parent, int objId, String speech) {
-        super(parent, parent.getApi());
+	public SayWithoutAnimationAction(BaseAction parent, int objId, String speech) {
+		super(parent, parent.getApi());
 
-        this.speech = speech;
-        this.popup = null;
-    }
+		this.speech = speech;
+		this.popup = null;
+	}
 
-    @Override
-    public void runGameAction() {
-        int delay = 0;
-        int duration = (this.speech.length()
-                * (2 + delay))
-                        * 40;
+	@Override
+	public void runGameAction() {
+		int delay = 0;
+		int duration = (this.speech.length()
+				* (2 + delay))
+				* 40;
 
-        this.popup = this.getApi().getFactory().createPopupPanel(this.speech, null, this);
-        this.popup.setPopupPosition(20, 20);
-        this.popup.show();
+		this.popup = this.getApi().getFactory().createPopupPanel(this.speech, null, this);
+		this.popup.setPopupPosition(20, 20);
+		this.popup.show();
 
-        this.run(duration);
-    }
+		this.run(duration);
+	}
 
-    @Override
-    protected void onUpdateGameAction(double progress) {}
+	@Override
+	protected void onUpdateGameAction(double progress) {}
 
-    @Override
-    protected void onCompleteGameAction() {
-        if (this.popup != null) {
-            this.popup.hide();
-        }
-    }
+	@Override
+	protected void onCompleteGameAction() {
+		if (this.popup != null) {
+			this.popup.hide();
+		}
+	}
 
-    @Override
-    public boolean isParallel() {
+	@Override
+	public boolean isParallel() {
 
-        return false;
-    }
+		return false;
+	}
 
 }

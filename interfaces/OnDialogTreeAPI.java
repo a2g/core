@@ -26,30 +26,30 @@ import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.VerbsPresenter;
 
 public interface OnDialogTreeAPI {
-    // get by ID
-    public SceneObject getObject(short  objectCode);
-    public Animation getAnimation(String  animationCode);
-    public InventoryItem getInventoryItem(int inventoryItemCode);
+	// get by ID
+	public SceneObject getObject(short  objectCode);
+	public Animation getAnimation(String  animationCode);
+	public InventoryItem getInventoryItem(int inventoryItemCode);
 
 
-    // property access methods
-    public void setValue(Object name, int value);
-    public int getValue(Object name);
-    public boolean isTrue(Object name);
-    
-    // gui methods
-    public VerbsPresenter getVerbsGui();
-    public InventoryPresenter getInventoryGui();
-    public CommandLinePresenter getCommandLineGui();
-    public ScenePresenter getSceneGui();
-    public DialogTreePresenter getDialogTreeGui();
+	// property access methods
+	public void setValue(Object name, int value);
+	public int getValue(Object name);
+	public boolean isTrue(Object name);
 
-    // nearly a gui method
-    public SceneAPI getCurrentScene();
+	// gui methods
+	public VerbsPresenter getVerbsGui();
+	public InventoryPresenter getInventoryGui();
+	public CommandLinePresenter getCommandLineGui();
+	public ScenePresenter getSceneGui();
+	public DialogTreePresenter getDialogTreeGui();
 
-    // helpful for game
-    public void switchToScene(String scene);
-    public String getLastScene();
-    public boolean isInDebugMode();
-	
+	// nearly a gui method
+	public SceneAPI getCurrentScene();
+
+	// helpful for game
+	public void switchToScene(String scene);
+	public String getLastScene();
+	public boolean isInDebugMode();
+
 }

@@ -30,360 +30,360 @@ import com.github.a2g.core.primitive.Rect;
 
 
 public class SceneObject {
-    private String homeAnimation;
-    private Map<SceneAPI.Special, String> mapOfSpecialAnimations;
-    private final String textualId;
-    private String displayName;
-    private AnimationCollection animationCollection;
-    private FrameAndAnimation fak;
-    private com.github.a2g.core.objectmodel.Image currentImage;
-    private boolean visible;
-    private double screenPixelWidth;
-    private double screenPixelHeight;
-    private int top; // needed for moving image around.
-    private int left; 
-    private int numberPrefix;
-    private short code;
-    private ColorEnum talkingColor;
-    private int talkingAnimationDelay;
+	private String homeAnimation;
+	private Map<SceneAPI.Special, String> mapOfSpecialAnimations;
+	private final String textualId;
+	private String displayName;
+	private AnimationCollection animationCollection;
+	private FrameAndAnimation fak;
+	private com.github.a2g.core.objectmodel.Image currentImage;
+	private boolean visible;
+	private double screenPixelWidth;
+	private double screenPixelHeight;
+	private int top; // needed for moving image around.
+	private int left;
+	private int numberPrefix;
+	private short code;
+	private ColorEnum talkingColor;
+	private int talkingAnimationDelay;
 
-    public SceneObject(String textualId, int width, int height) {
-        this.currentImage = null;
-        this.textualId = textualId;
-        this.displayName = textualId;
-        this.animationCollection = new AnimationCollection();
-        this.fak = new FrameAndAnimation(
-                this.textualId);
-        this.visible = true;
-        this.screenPixelWidth = width;
-        this.screenPixelHeight = height;
-        this.mapOfSpecialAnimations = new TreeMap<Special, String>();
-        this.numberPrefix = 0;
-        this.homeAnimation = ConstantsForAPI.INITIAL;
-        this.talkingAnimationDelay = 0;
-       
-        // talkingColro deliberately null, so the 
-        // default color can be in one spot: the say action 
-        this.talkingColor = null;
-    }
+	public SceneObject(String textualId, int width, int height) {
+		this.currentImage = null;
+		this.textualId = textualId;
+		this.displayName = textualId;
+		this.animationCollection = new AnimationCollection();
+		this.fak = new FrameAndAnimation(
+				this.textualId);
+		this.visible = true;
+		this.screenPixelWidth = width;
+		this.screenPixelHeight = height;
+		this.mapOfSpecialAnimations = new TreeMap<Special, String>();
+		this.numberPrefix = 0;
+		this.homeAnimation = ConstantsForAPI.INITIAL;
+		this.talkingAnimationDelay = 0;
 
-    public void setNumberPrefix(int number) {
-        this.numberPrefix = number;
-    }
+		// talkingColro deliberately null, so the
+		// default color can be in one spot: the say action
+		this.talkingColor = null;
+	}
 
-    public int getNumberPrefix() {
-        return this.numberPrefix;
-    }
+	public void setNumberPrefix(int number) {
+		this.numberPrefix = number;
+	}
 
-    public String getTextualId() {
-        return this.textualId;
-    }
+	public int getNumberPrefix() {
+		return this.numberPrefix;
+	}
 
-    public AnimationCollection getAnimations() {
-        return this.animationCollection;
-    }
+	public String getTextualId() {
+		return this.textualId;
+	}
 
-    public int getCurrentFrame() {
-        int i = this.fak.getCurrentFrame();
+	public AnimationCollection getAnimations() {
+		return this.animationCollection;
+	}
 
-        return i;
-    }
+	public int getCurrentFrame() {
+		int i = this.fak.getCurrentFrame();
 
-    public void setCurrentFrame(int i) {
-        this.fak.setCurrentFrame(i);
-        updateImage();
-    }
+		return i;
+	}
 
-    public void incrementFrameWithWraparound() {
-        if (getAnimations().getCount() == 0) {
-            // Log::NoSingleImage(QString("Here in IncrementFrame"));
-            return;
-        }
+	public void setCurrentFrame(int i) {
+		this.fak.setCurrentFrame(i);
+		updateImage();
+	}
 
-        Animation anim = getAnimations().at(
-                this.fak.getCurrentAnimationTextualId());
-        // Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg( this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
+	public void incrementFrameWithWraparound() {
+		if (getAnimations().getCount() == 0) {
+			// Log::NoSingleImage(QString("Here in IncrementFrame"));
+			return;
+		}
 
-        int i = this.fak.getCurrentFrame() + 1;
+		Animation anim = getAnimations().at(
+				this.fak.getCurrentAnimationTextualId());
+		// Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg( this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
 
-        if (i >= anim.getFrames().getCount()) {
-            this.fak.setCurrentFrame(0);
-        } else {
-            this.fak.setCurrentFrame(i);
-        }
-        // do no update image here - since it is a heavy operation, we do it once per tick.
-    }
+		int i = this.fak.getCurrentFrame() + 1;
 
-    public void decrementFrameWithWraparound() {
-        Animation anim = getAnimations().at(
-                this.fak.getCurrentAnimationTextualId());
-        // Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg( this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
+		if (i >= anim.getFrames().getCount()) {
+			this.fak.setCurrentFrame(0);
+		} else {
+			this.fak.setCurrentFrame(i);
+		}
+		// do no update image here - since it is a heavy operation, we do it once per tick.
+	}
 
-        int i = this.fak.getCurrentFrame() - 1;
+	public void decrementFrameWithWraparound() {
+		Animation anim = getAnimations().at(
+				this.fak.getCurrentAnimationTextualId());
+		// Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg( this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
 
-        if (i < 0) {
-            this.fak.setCurrentFrame(
-                    anim.getFrames().getCount()
-                            - 1);
-        } else {
-            this.fak.setCurrentFrame(i);
-        }
-        // do no update image here - since it is a heavy operation, we do it once per tick.
-    }
+		int i = this.fak.getCurrentFrame() - 1;
 
-    public void updateImage() {
-        // 1. do this only when the this.currentImage != img
-        Animation anim = this.animationCollection.at(
-                fak.getCurrentAnimationTextualId());
-        
-        // if animation is set to something bad, then set it to back to initial
-        if(anim==null)
-        {
-        	fak.setCurrentAnimationTextualId(ConstantsForAPI.INITIAL);
-        	anim = this.animationCollection.at(
-                    fak.getCurrentAnimationTextualId());
-        }
-        
-        if(anim==null)
-        {
-        	anim = this.animationCollection.at(0);
-        	fak.setCurrentAnimationTextualId(anim.getTextualId());
-        }
-        
-        if (anim != null) {
-            if (fak.getCurrentFrame()
-                    >= anim.getLength()) {
-                fak.setCurrentFrame(
-                        anim.getLength() - 1);
-            }
+		if (i < 0) {
+			this.fak.setCurrentFrame(
+					anim.getFrames().getCount()
+					- 1);
+		} else {
+			this.fak.setCurrentFrame(i);
+		}
+		// do no update image here - since it is a heavy operation, we do it once per tick.
+	}
 
-            com.github.a2g.core.objectmodel.Image current = anim.getImageAndPosCollection().at(
-                    fak.getCurrentFrame());
+	public void updateImage() {
+		// 1. do this only when the this.currentImage != img
+		Animation anim = this.animationCollection.at(
+				fak.getCurrentAnimationTextualId());
 
-            // yes current can equal null in some weird cases where I place breakpoints...
-            if (current != null
-                    && !current.equals(this)) {
-                if (this.currentImage != null) {
-                    this.currentImage.setVisible(
-                            false, new Point(this.left,this.top));
-                }
-                this.currentImage = current;
-            }
-        }
-        // 2, but do this always
-        if (this.currentImage != null) {
-            this.currentImage.setVisible(
-                    this.visible, new Point(this.left,
-                    this.top));
-        }
+		// if animation is set to something bad, then set it to back to initial
+		if(anim==null)
+		{
+			fak.setCurrentAnimationTextualId(ConstantsForAPI.INITIAL);
+			anim = this.animationCollection.at(
+					fak.getCurrentAnimationTextualId());
+		}
 
-    }
+		if(anim==null)
+		{
+			anim = this.animationCollection.at(0);
+			fak.setCurrentAnimationTextualId(anim.getTextualId());
+		}
 
-    public void setTalkingAnimationDelay(int delay) 
-    {
-    	this.talkingAnimationDelay = delay;
-    }
-    
-    public int getTalkingAnimationDelay() 
-    {
-    	return this.talkingAnimationDelay;
-    }
+		if (anim != null) {
+			if (fak.getCurrentFrame()
+					>= anim.getLength()) {
+				fak.setCurrentFrame(
+						anim.getLength() - 1);
+			}
 
-    public void walkTo(Point point) {
-        walkTo(point.getX(), point.getY());
-    }
+			com.github.a2g.core.objectmodel.Image current = anim.getImageAndPosCollection().at(
+					fak.getCurrentFrame());
 
-    public void walkTo(double x, double y) {
-        // KillCurrentAnimationAndClearInstructions();
-        PointF currentPoint = new PointF(
-                getBaseMiddleX(),
-                getBaseMiddleY());
+			// yes current can equal null in some weird cases where I place breakpoints...
+			if (current != null
+			&& !current.equals(this)) {
+				if (this.currentImage != null) {
+					this.currentImage.setVisible(
+							false, new Point(this.left,this.top));
+				}
+				this.currentImage = current;
+			}
+		}
+		// 2, but do this always
+		if (this.currentImage != null) {
+			this.currentImage.setVisible(
+					this.visible, new Point(this.left,
+							this.top));
+		}
 
-        currentPoint.setX(
-                currentPoint.getX()
-                        * this.screenPixelWidth);
-        currentPoint.setY(
-                currentPoint.getY()
-                        * this.screenPixelHeight);
-    }
+	}
 
-    public void setVisible(boolean visible) {
-        if (this.visible != visible) {
-            this.visible = visible;
-            updateImage();
-        }
-    }
+	public void setTalkingAnimationDelay(int delay)
+	{
+		this.talkingAnimationDelay = delay;
+	}
 
-    public boolean isVisible() {
-        return this.visible;
-    }
+	public int getTalkingAnimationDelay()
+	{
+		return this.talkingAnimationDelay;
+	}
 
-    public String getDisplayName() {
-        return this.displayName;
-    }
+	public void walkTo(Point point) {
+		walkTo(point.getX(), point.getY());
+	}
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
+	public void walkTo(double x, double y) {
+		// KillCurrentAnimationAndClearInstructions();
+		PointF currentPoint = new PointF(
+				getBaseMiddleX(),
+				getBaseMiddleY());
 
-    static int convertRelativeScreenOrdinateToAbsoluteImageSpaceOrdinate(double normalized, double screenSpan, int lowerBound, int upperBound )
-    {
-        int rectSpan = upperBound-lowerBound;
-        int screenCoordMinusHalfWidth = (int) (normalized * screenSpan - .5*rectSpan);
-     
-        int fixed = lowerBound;
-        int isolatedX = screenCoordMinusHalfWidth  - fixed;
-        return isolatedX;
-    }
-    
-    public void setBaseMiddleX(double x) 
-    { 
-        this.left = convertRelativeScreenOrdinateToAbsoluteImageSpaceOrdinate(x, screenPixelWidth, currentImage.getBoundingRect().getLeft(), currentImage.getBoundingRect().getRight());
-        this.currentImage.setLeftTop(new Point(this.left,this.top));
-    }
+		currentPoint.setX(
+				currentPoint.getX()
+				* this.screenPixelWidth);
+		currentPoint.setY(
+				currentPoint.getY()
+				* this.screenPixelHeight);
+	}
 
-    public void setBaseMiddleY(double y) 
-    { 
-        this.top = convertRelativeScreenOrdinateToAbsoluteImageSpaceOrdinate(y,this.screenPixelHeight, currentImage.getBoundingRect().getTop(), currentImage.getBoundingRect().getBottom());
-        this.currentImage.setLeftTop(new Point(this.left,this.top));
-    }
+	public void setVisible(boolean visible) {
+		if (this.visible != visible) {
+			this.visible = visible;
+			updateImage();
+		}
+	}
 
-    public double getBaseMiddleX() 
-    { 
-        int halfBBWidth = (int)(.5*currentImage.getBoundingRect().getWidth());
-        int fixed = currentImage.getBoundingRect().getLeft();
-    
-        int x = this.left + fixed+halfBBWidth;
+	public boolean isVisible() {
+		return this.visible;
+	}
 
-        return x / this.screenPixelWidth;
-    }
+	public String getDisplayName() {
+		return this.displayName;
+	}
 
-    public double getBaseMiddleY() 
-    {
-        int halfBBHeight = (int)(.5*currentImage.getBoundingRect().getHeight());
-   
-        int fixed = currentImage.getBoundingRect().getTop();
-        int y = this.top + fixed + halfBBHeight ;
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
 
-        return y / this.screenPixelHeight;
-    }
+	static int convertRelativeScreenOrdinateToAbsoluteImageSpaceOrdinate(double normalized, double screenSpan, int lowerBound, int upperBound )
+	{
+		int rectSpan = upperBound-lowerBound;
+		int screenCoordMinusHalfWidth = (int) (normalized * screenSpan - .5*rectSpan);
 
-    public void setX(int x) { 
-        this.left = x;
-        this.currentImage.setLeftTop(new Point(this.left,
-                this.top));
-    }
+		int fixed = lowerBound;
+		int isolatedX = screenCoordMinusHalfWidth  - fixed;
+		return isolatedX;
+	}
 
-    void setY(int y) { 
-        this.top = y;
-        this.currentImage.setLeftTop(new Point(this.left,
-                this.top));
-    }
+	public void setBaseMiddleX(double x)
+	{
+		this.left = convertRelativeScreenOrdinateToAbsoluteImageSpaceOrdinate(x, screenPixelWidth, currentImage.getBoundingRect().getLeft(), currentImage.getBoundingRect().getRight());
+		this.currentImage.setLeftTop(new Point(this.left,this.top));
+	}
 
-    public int getX() { 
-        return this.left;
-    }
+	public void setBaseMiddleY(double y)
+	{
+		this.top = convertRelativeScreenOrdinateToAbsoluteImageSpaceOrdinate(y,this.screenPixelHeight, currentImage.getBoundingRect().getTop(), currentImage.getBoundingRect().getBottom());
+		this.currentImage.setLeftTop(new Point(this.left,this.top));
+	}
 
-    public int getY() { 
-        return this.top;
-    }
+	public double getBaseMiddleX()
+	{
+		int halfBBWidth = (int)(.5*currentImage.getBoundingRect().getWidth());
+		int fixed = currentImage.getBoundingRect().getLeft();
 
-    Point getMiddleOfBaseAbsolute(String animTextualId) {
-        int minLeft = 1000;
-        int maxRight = 0;
-        int maxBottom = 0;
-        Animation xanim = this.animationCollection.at(
-                animTextualId);
+		int x = this.left + fixed+halfBBWidth;
 
-        if (xanim != null) {
-            for (int i = 0; i
-                    < xanim.getLength(); i++) {
-                com.github.a2g.core.objectmodel.Image img = xanim.getFrames().at(
-                        i);
-                Rect rect = img.getBoundingRect();
+		return x / this.screenPixelWidth;
+	}
 
-                if (rect.getLeft() < minLeft) {
-                    minLeft = rect.getLeft();
-                }
-                if (rect.getRight() > maxRight) {
-                    maxRight = rect.getRight();
-                }
-                if (rect.getBottom()
-                        > maxBottom) {
-                    maxBottom = rect.getBottom();
-                }
-            }
-        }
+	public double getBaseMiddleY()
+	{
+		int halfBBHeight = (int)(.5*currentImage.getBoundingRect().getHeight());
 
-        Point p = new Point(
-                (minLeft + maxRight) / 2,
-                maxBottom - 4);
+		int fixed = currentImage.getBoundingRect().getTop();
+		int y = this.top + fixed + halfBBHeight ;
 
-        return p;
-    }
+		return y / this.screenPixelHeight;
+	}
 
-    void setSpecialAnimation(Special type, String textualId) {
-        this.mapOfSpecialAnimations.put(type,
-                textualId);
-    }
+	public void setX(int x) {
+		this.left = x;
+		this.currentImage.setLeftTop(new Point(this.left,
+				this.top));
+	}
 
-    public String getSpecialAnimation(Special type) {
-        return this.mapOfSpecialAnimations.get(
-                type);
-    }
-    public void setTalkingAnimation(String talkingAnimation)
-    {
-    	this.mapOfSpecialAnimations.put(Special.Talking, talkingAnimation);
-    }
+	void setY(int y) {
+		this.top = y;
+		this.currentImage.setLeftTop(new Point(this.left,
+				this.top));
+	}
 
-    public String getTalkingAnimation() {
-        if (this.mapOfSpecialAnimations.containsKey(
-                Special.Talking)) {
-            String animId = this.mapOfSpecialAnimations.get(
-                    Special.Talking);
+	public int getX() {
+		return this.left;
+	}
 
-            return animId;
-        }
-        return "";
-    }
+	public int getY() {
+		return this.top;
+	}
 
-    public String getCurrentAnimation() {
-        String textualId = this.fak.getCurrentAnimationTextualId();
+	Point getMiddleOfBaseAbsolute(String animTextualId) {
+		int minLeft = 1000;
+		int maxRight = 0;
+		int maxBottom = 0;
+		Animation xanim = this.animationCollection.at(
+				animTextualId);
 
-        return textualId;
-    }
+		if (xanim != null) {
+			for (int i = 0; i
+					< xanim.getLength(); i++) {
+				com.github.a2g.core.objectmodel.Image img = xanim.getFrames().at(
+						i);
+				Rect rect = img.getBoundingRect();
 
-    public void setCurrentAnimation(String textualId) {
-        this.fak.setCurrentAnimationTextualId(
-                textualId);
-        updateImage();
-    }
+				if (rect.getLeft() < minLeft) {
+					minLeft = rect.getLeft();
+				}
+				if (rect.getRight() > maxRight) {
+					maxRight = rect.getRight();
+				}
+				if (rect.getBottom()
+						> maxBottom) {
+					maxBottom = rect.getBottom();
+				}
+			}
+		}
 
-    
-    public String getHomeAnimation() {
-        return homeAnimation;
-    }
+		Point p = new Point(
+				(minLeft + maxRight) / 2,
+				maxBottom - 4);
 
-    public void setHomeAnimation(String homeAnimation) {
-        this.homeAnimation = homeAnimation;
-    }
+		return p;
+	}
 
-    public void setCode(short objectCode) {
-        this.code = objectCode;
-    }
+	void setSpecialAnimation(Special type, String textualId) {
+		this.mapOfSpecialAnimations.put(type,
+				textualId);
+	}
 
-    public short getCode() {
-        return code;
+	public String getSpecialAnimation(Special type) {
+		return this.mapOfSpecialAnimations.get(
+				type);
+	}
+	public void setTalkingAnimation(String talkingAnimation)
+	{
+		this.mapOfSpecialAnimations.put(Special.Talking, talkingAnimation);
+	}
 
-    }
+	public String getTalkingAnimation() {
+		if (this.mapOfSpecialAnimations.containsKey(
+				Special.Talking)) {
+			String animId = this.mapOfSpecialAnimations.get(
+					Special.Talking);
 
-    public void setTalkingColor(ColorEnum color) {
-        this.talkingColor = color;
-    }
+			return animId;
+		}
+		return "";
+	}
 
-    public ColorEnum getTalkingColor() {
-        return this.talkingColor;
-    }
+	public String getCurrentAnimation() {
+		String textualId = this.fak.getCurrentAnimationTextualId();
+
+		return textualId;
+	}
+
+	public void setCurrentAnimation(String textualId) {
+		this.fak.setCurrentAnimationTextualId(
+				textualId);
+		updateImage();
+	}
+
+
+	public String getHomeAnimation() {
+		return homeAnimation;
+	}
+
+	public void setHomeAnimation(String homeAnimation) {
+		this.homeAnimation = homeAnimation;
+	}
+
+	public void setCode(short objectCode) {
+		this.code = objectCode;
+	}
+
+	public short getCode() {
+		return code;
+
+	}
+
+	public void setTalkingColor(ColorEnum color) {
+		this.talkingColor = color;
+	}
+
+	public ColorEnum getTalkingColor() {
+		return this.talkingColor;
+	}
 
 }
 

@@ -18,46 +18,46 @@ package com.github.a2g.core.primitive;
 
 
 public class Rect {
-    private int left;
-    private int top;
-    private int right;
-    private int bottom;
+	private int left;
+	private int top;
+	private int right;
+	private int bottom;
 
-    public Rect(int x, int y, int width, int height) {
-        this.left = x;
-        this.top = y;
-        this.right = x + width;
-        this.bottom = y + height;
-    }
-    
-    public boolean contains(int x, int y)
-    {
-    	if( x>=left && x<=right)
-    	{
-    		if( y >=top && y <= bottom)
-    		{
-    			return true;
-    		}
-    	}
-    	return false;
-    }
-    
+	public Rect(int x, int y, int width, int height) {
+		this.left = x;
+		this.top = y;
+		this.right = x + width;
+		this.bottom = y + height;
+	}
 
-    public int getLeft() {
-        return left;
-    }
+	public boolean contains(int x, int y)
+	{
+		if( x>=left && x<=right)
+		{
+			if( y >=top && y <= bottom)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
-    public int getRight() {
-        return right;
-    }
 
-    public int getBottom() {
-        return bottom;
-    }
+	public int getLeft() {
+		return left;
+	}
 
-    public int getTop() {
-        return top;
-    }
+	public int getRight() {
+		return right;
+	}
+
+	public int getBottom() {
+		return bottom;
+	}
+
+	public int getTop() {
+		return top;
+	}
 
 	public int getWidth() {
 		return right -left;

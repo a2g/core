@@ -35,7 +35,7 @@ package com.github.a2g.core.swing.animation;
 /**
  * All HTML element interfaces derive from this class.
  */
-public class Element //extends Node 
+public class Element //extends Node
 {
 
 }
