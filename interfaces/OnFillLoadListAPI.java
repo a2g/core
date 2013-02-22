@@ -23,7 +23,7 @@ public interface OnFillLoadListAPI
 	void setScenePixelSize(int width, int height);
 	void kickStartLoading();
 	void setInventoryPixelSize(int width, int height);
-	SceneAPI getSceneFromCacheOrNew(String string);
+	SceneAPI getSceneByName(String string);
 	void setValue(Object string, int value);
 	void clearAllLoadedLoads();
 }

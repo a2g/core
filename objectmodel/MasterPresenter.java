@@ -841,7 +841,7 @@ implements InternalAPI
 	}
 
 	@Override
-	public SceneAPI getSceneFromCacheOrNew(String string) 
+	public SceneAPI getSceneByName(String string) 
 	{
 		return this.parent.getSceneViaCache(string);	
 	}
