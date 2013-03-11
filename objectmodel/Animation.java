@@ -92,36 +92,6 @@ public class Animation {
 				- 1;
 	}
 
-	public void preloadAnimation() {}
-
-	public void playAnimation(int delay) {}
-
-	public void playAnimation() {}
-
-	public void playAnimationNonBlocking(int delay) {}
-
-	public void playAnimationNonBlocking() {}
-
-	public void playAnimationHoldLastFrame(int delay) {}
-
-	public void playAnimationHoldLastFrame() {}
-
-	public void playAnimationHoldLastFrameNonBlocking(int delay) {}
-
-	public void playAnimationHoldLastFrameNonBlocking() {}
-
-	public void playAnimationRepeatWhilstVisible(int delay) {}
-
-	public void playAnimationRepeatWhilstVisible() {}
-
-	public void playAnimationBackwards(int delay) {}
-
-	public void playAnimationBackwards() {}
-
-	public void playAnimationBackwardsHoldLastFrame(int delay) {}
-
-	public void playAnimationBackwardsHoldLastFrame() {}
-
 	public void setAsSpecialAnimation(SceneAPI.Special special) {
 		specialAnimationThisWasSetTo = special;
 		if (parent != null) {

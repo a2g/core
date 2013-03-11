@@ -39,10 +39,12 @@ public interface MasterPanelAPI
 
 	public enum GuiStateEnum
 	{
-		DialogTreeMode,
+		DialogTree,
+		OnEnterScene,
 		CutScene,
 		ActiveScene,
 		Loading,
+		TitleCardOverOnEnterScene,
 		TitleCardOverDialogTree,
 		TitleCardOverCutScene,
 		TitleCardOverActiveScene,

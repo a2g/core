@@ -133,7 +133,7 @@ implements MasterPanelAPI
 
 		switch(state)
 		{
-		case DialogTreeMode:
+		case DialogTree:
 			hostForDialogTree.setVisible(true);
 			hostForScene.setVisible(true);
 			hostForLoading.setVisible(false);
@@ -143,6 +143,7 @@ implements MasterPanelAPI
 			hostForVerbs.setVisible(false);
 			break;
 		case CutScene:
+		case OnEnterScene:
 			hostForScene.setVisible(true);
 			hostForDialogTree.setVisible(false);
 			hostForLoading.setVisible(false);

@@ -555,7 +555,7 @@ implements InternalAPI
 		callOnPreEntry();
 
 		startCallingOnEveryFrame();
-		this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.CutScene);
+		this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.OnEnterScene);
 		callOnEnterScene();
 
 	}
@@ -718,7 +718,8 @@ implements InternalAPI
 	{
 		switch(state)
 		{
-		case DialogTreeMode:return MasterPanelAPI.GuiStateEnum.TitleCardOverDialogTree;
+		case OnEnterScene: return MasterPanelAPI.GuiStateEnum.TitleCardOverOnEnterScene;
+		case DialogTree:return MasterPanelAPI.GuiStateEnum.TitleCardOverDialogTree;
 		case CutScene:return MasterPanelAPI.GuiStateEnum.TitleCardOverCutScene;
 		case ActiveScene:return MasterPanelAPI.GuiStateEnum.TitleCardOverActiveScene;
 		case Loading:return MasterPanelAPI.GuiStateEnum.TitleCardOverLoading;
@@ -731,7 +732,8 @@ implements InternalAPI
 	{
 		switch(state)
 		{
-		case TitleCardOverDialogTree: return MasterPanelAPI.GuiStateEnum.DialogTreeMode;
+		case TitleCardOverOnEnterScene:return MasterPanelAPI.GuiStateEnum.OnEnterScene;
+		case TitleCardOverDialogTree: return MasterPanelAPI.GuiStateEnum.DialogTree;
 		case TitleCardOverCutScene: return MasterPanelAPI.GuiStateEnum.CutScene;
 		case TitleCardOverActiveScene: return MasterPanelAPI.GuiStateEnum.ActiveScene;
 		case TitleCardOverLoading: return MasterPanelAPI.GuiStateEnum.Loading;
@@ -802,7 +804,7 @@ implements InternalAPI
 		this.commandLinePresenter.clear();
 		this.commandLinePresenter.setMouseable(true);
 
-		if(masterPanel.getActiveState() != MasterPanelAPI.GuiStateEnum.DialogTreeMode)
+		if(masterPanel.getActiveState() == MasterPanelAPI.GuiStateEnum.OnEnterScene)
 		{
 			this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.ActiveScene);
 		}
@@ -851,7 +853,7 @@ implements InternalAPI
 	{
 		if(isInDialogTreeMode)
 		{
-			this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.DialogTreeMode);
+			this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.DialogTree);
 		}
 		else
 		{

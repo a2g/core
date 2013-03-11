@@ -166,7 +166,7 @@ implements MasterPanelAPI
 		this.guiStateEnum = state;
 		switch(state)
 		{
-		case DialogTreeMode:
+		case DialogTree:
 			this.hostForCommandLineF.setVisible(false);
 			this.hostForDialogTreeF.setVisible(true);
 			this.hostForInventoryF.setVisible(false);
@@ -177,6 +177,7 @@ implements MasterPanelAPI
 			sceneCardLayout.show(panelForSceneStack, MasterPanel.SCENE_WIDGET);
 			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanel.DIALOGTREE_WIDGET);
 			break;
+		case OnEnterScene:
 		case CutScene:
 			this.hostForCommandLineF.setVisible(false);
 			this.hostForDialogTreeF.setVisible(false);
