@@ -64,7 +64,7 @@ public class Rect {
 	}
 
 	public int getHeight() {
-		return top-bottom;
+		return bottom-top;
 	}
 
 }
