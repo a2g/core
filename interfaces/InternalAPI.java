@@ -90,6 +90,9 @@ extends ImageAddAPI, OnDoCommandAPI{
 	public SceneAPI getSceneByName(String identifier);
 	public void setScenePixelSize(int width, int height);
 	public void setInventoryPixelSize(int width, int height);
+	
+	public BaseAction createAction();
+	public void fireAndForgetAnAction(BaseAction ba);
 }
 
 

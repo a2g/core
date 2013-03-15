@@ -278,12 +278,13 @@ implements InternalAPI
 
 
 	@Override
-	public void executeBaseAction(BaseAction a) {
+	public void executeBaseAction(BaseAction a) 
+	{
 		if(a==null)
 		{
-			BaseAction npa = new NullParentAction(this);
-			a = new DoNothingAction(npa);
+			a = new DoNothingAction(createAction());
 		}
+
 		actionRunner.runAction(a);
 	}
 
@@ -475,9 +476,7 @@ implements InternalAPI
 	this.setDialogTreeActive(true);
 
 	// get the chain from the client code
-	NullParentAction npa = new NullParentAction(this);
-	npa.setApi(this);
-	BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, npa, branchId);
+	BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, createAction(), branchId);
 
 	// execute it
 	executeBaseAction(	actionChain );
@@ -495,19 +494,15 @@ implements InternalAPI
 		// 4. Then we execute it
 		// Thus it will say the text, and do what the user prescribes.
 
-		NullParentAction npa = new NullParentAction(this);
-		npa.setApi(this);
-		SayAction say = new SayAction(npa, objId, speech);
-		BaseDialogTreeAction actionChain = callbacks.onDialogTree(this, say, branchId);
 
+		SayAction say = new SayAction(createAction(), objId, speech);
+		BaseDialogTreeAction actionChain = callbacks.onDialogTree(this, say, branchId);
 		executeBaseAction(actionChain);
 	}
 
 	public void callOnEnterScene()
-	{
-		NullParentAction npa = new NullParentAction(this);
-		npa.setApi(this);
-		BaseAction a = this.callbacks.onEntry(this,npa);
+	{	
+		BaseAction a = this.callbacks.onEntry(this,createAction());
 
 		//.. then executeBaseAction->actionRunner::runAction will add an TitleCardAction
 		// the title card
@@ -775,22 +770,19 @@ implements InternalAPI
 	@Override
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,
 			SentenceItem sentenceA, SentenceItem sentenceB, double x, double y) {
-		NullParentAction npa = new NullParentAction(this);
-
+		
 		BaseAction a = this.callbacks.onDoCommand(
-				this,npa,
+				this,createAction(),
 				verbAsCode,
 				sentenceA,
 				sentenceB,
 				x,
 				y);
-		if(a!=null)
-		{
+		
 
-			commandLinePresenter.setMouseable(false);
-			executeBaseAction(a);
-		}
-
+		this.commandLinePresenter.setMouseable(false);
+		executeBaseAction(a);
+		
 		setLastCommand(x, y,
 				verbAsVerbEnumeration,
 				sentenceA.getTextualId(),
@@ -877,6 +869,19 @@ implements InternalAPI
 	public void setActiveState(GuiStateEnum state) {
 		this.masterPanel.setActiveState(state);
 
+	}
+
+	@Override
+	public BaseAction createAction() 
+	{
+		NullParentAction npa = new NullParentAction(this);
+		return npa;
+	}
+
+	@Override
+	public void fireAndForgetAnAction(BaseAction ba) 
+	{
+		executeBaseAction(ba);
 	}
 
 
