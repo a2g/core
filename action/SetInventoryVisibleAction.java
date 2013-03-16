@@ -18,9 +18,10 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.NonChainRootAction;
 
 
-public class SetInventoryVisibleAction extends BaseAction {
+public class SetInventoryVisibleAction extends NonChainRootAction {
 
 	private int invId;
 	private boolean isVisible;

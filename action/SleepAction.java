@@ -18,9 +18,10 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.NonChainRootAction;
 
 
-public class SleepAction extends BaseAction {
+public class SleepAction extends NonChainRootAction {
 	private int milliseconds;
 	public SleepAction(BaseAction parent, int milliseconds) {
 		super(parent, parent.getApi());

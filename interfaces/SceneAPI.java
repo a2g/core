@@ -19,6 +19,8 @@ package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
+import com.github.a2g.core.action.ChainRootAction;
+import com.github.a2g.core.action.NonChainRootAction;
 import com.github.a2g.core.interfaces.OnFillLoadListAPIImpl.LoadKickStarter;
 import com.github.a2g.core.objectmodel.SentenceItem;
 
@@ -28,7 +30,7 @@ public interface SceneAPI  extends ConstantsForAPI
 
 	public void onPreEntry(OnPreEntryAPI api);
 
-	public BaseAction onEntry(OnEntryAPI api, BaseAction ba);
+	public NonChainRootAction onEntry(OnEntryAPI api, ChainRootAction ba);
 
 	public void onEveryFrame(OnEveryFrameAPI api);
 

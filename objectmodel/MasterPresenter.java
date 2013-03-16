@@ -23,7 +23,8 @@ import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.DoNothingAction;
-import com.github.a2g.core.action.NullParentAction;
+import com.github.a2g.core.action.ChainRootAction;
+import com.github.a2g.core.action.NonChainRootAction;
 import com.github.a2g.core.action.SayAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.action.BaseDialogTreeAction;
@@ -278,11 +279,11 @@ implements InternalAPI
 
 
 	@Override
-	public void executeBaseAction(BaseAction a) 
+	public void executeBaseAction(BaseAction a)
 	{
 		if(a==null)
 		{
-			a = new DoNothingAction(createAction());
+			a = new DoNothingAction(createChainRootAction());
 		}
 
 		actionRunner.runAction(a);
@@ -476,7 +477,7 @@ implements InternalAPI
 	this.setDialogTreeActive(true);
 
 	// get the chain from the client code
-	BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, createAction(), branchId);
+	BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, createChainRootAction(), branchId);
 
 	// execute it
 	executeBaseAction(	actionChain );
@@ -495,14 +496,14 @@ implements InternalAPI
 		// Thus it will say the text, and do what the user prescribes.
 
 
-		SayAction say = new SayAction(createAction(), objId, speech);
+		SayAction say = new SayAction(createChainRootAction(), objId, speech);
 		BaseDialogTreeAction actionChain = callbacks.onDialogTree(this, say, branchId);
 		executeBaseAction(actionChain);
 	}
 
 	public void callOnEnterScene()
-	{	
-		BaseAction a = this.callbacks.onEntry(this,createAction());
+	{
+		BaseAction a = this.callbacks.onEntry(this,createChainRootAction());
 
 		//.. then executeBaseAction->actionRunner::runAction will add an TitleCardAction
 		// the title card
@@ -770,19 +771,19 @@ implements InternalAPI
 	@Override
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,
 			SentenceItem sentenceA, SentenceItem sentenceB, double x, double y) {
-		
+
 		BaseAction a = this.callbacks.onDoCommand(
-				this,createAction(),
+				this,createChainRootAction(),
 				verbAsCode,
 				sentenceA,
 				sentenceB,
 				x,
 				y);
-		
+
 
 		this.commandLinePresenter.setMouseable(false);
 		executeBaseAction(a);
-		
+
 		setLastCommand(x, y,
 				verbAsVerbEnumeration,
 				sentenceA.getTextualId(),
@@ -872,14 +873,14 @@ implements InternalAPI
 	}
 
 	@Override
-	public BaseAction createAction() 
+	public ChainRootAction createChainRootAction()
 	{
-		NullParentAction npa = new NullParentAction(this);
+		ChainRootAction npa = new ChainRootAction(this);
 		return npa;
 	}
 
 	@Override
-	public void fireAndForgetAnAction(BaseAction ba) 
+	public void fireAndForgetAnAction(NonChainRootAction ba)
 	{
 		executeBaseAction(ba);
 	}

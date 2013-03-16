@@ -19,10 +19,11 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.PopupPanelAPI;
+import com.github.a2g.core.action.NonChainRootAction;
 
 
 
-public class SayWithoutAnimationAction extends BaseAction {
+public class SayWithoutAnimationAction extends NonChainRootAction {
 	private String speech;
 	private PopupPanelAPI popup;
 

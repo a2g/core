@@ -16,47 +16,39 @@
 
 package com.github.a2g.core.action;
 
+
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.action.NonChainRootAction;
+import com.github.a2g.core.interfaces.InternalAPI;
 
+/*
+ * ChainRootAction is identified by having a null parent.
+ */
+public class ChainRootAction extends BaseDialogTreeAction {
+	public ChainRootAction(InternalAPI api) {
+		super(null, api);
+	}
 
-
-public class TitleCardAction extends NonChainRootAction {
-	String text;
-	ColorEnum color;
-
-	public TitleCardAction(BaseAction parent, String text, ColorEnum color) {
-		super(parent, parent.getApi());
-		this.text = text;
-		this.color = color;
+	@Override
+	public void setApi(InternalAPI api) {
+		super.setApi(api);
 	}
 
 	@Override
 	public void runGameAction() {
-
-		if(text.length()>0)
-		{
-			int totalDuration = getApi().getPopupDelay()*50;
-
-			getApi().displayTitleCard(text, color);
-			this.run(totalDuration);
-		}
-		else
-		{
-			getApi().displayTitleCard("", color);
-			this.run(1);
-		}
+		super.run(1); // the delayed execution trick
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {
-
+	protected void onCompleteGameAction()
+	{
 	}
 
 	@Override
-	protected void onCompleteGameAction() {
-		getApi().displayTitleCard("", color);
+	protected void onUpdateGameAction(double progress) {}
+
+	@Override
+	public void setParent(BaseAction parent) {
+		this.parent = parent;
 	}
 
 	@Override

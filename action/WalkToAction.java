@@ -20,9 +20,9 @@ package com.github.a2g.core.action;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.SceneObject;
+import com.github.a2g.core.action.NonChainRootAction;
 
-
-public class WalkToAction extends BaseAction {
+public class WalkToAction extends NonChainRootAction {
 	private SceneObject obj;
 	private double startX;
 	private double startY;

@@ -16,21 +16,17 @@
 
 package com.github.a2g.core.action;
 
-
-import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.action.NonChainRootAction;
 
 
-public abstract class BaseDialogTreeAction
-extends NonChainRootAction {
 
-	BaseDialogTreeAction(BaseAction parent, InternalAPI api) {
+public abstract class NonChainRootAction extends BaseAction
+{
+	protected NonChainRootAction(BaseAction parent, InternalAPI api)
+	{
 		super(parent, api);
-
 	}
-
-
-
 }
 
+
+;

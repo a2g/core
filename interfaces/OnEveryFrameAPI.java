@@ -16,7 +16,8 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.ChainRootAction;
+import com.github.a2g.core.action.NonChainRootAction;
 import com.github.a2g.core.interfaces.MasterPanelAPI.GuiStateEnum;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.CommandLinePresenter;
@@ -54,9 +55,9 @@ public interface OnEveryFrameAPI {
 	public String getLastScene();
 	public boolean isInDebugMode();
 	public void setActiveState(GuiStateEnum state);
-	
-	// these two are needed for starting animations in the onEveryFrame handler 
-	public BaseAction createAction();
-	public void fireAndForgetAnAction(BaseAction ba);
+
+	// these two are needed for starting animations in the onEveryFrame handler
+	public ChainRootAction createChainRootAction();
+	public void fireAndForgetAnAction(NonChainRootAction ba);
 
 }

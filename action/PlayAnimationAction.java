@@ -20,9 +20,10 @@ package com.github.a2g.core.action;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.SceneObject;
+import com.github.a2g.core.action.NonChainRootAction;
 
 
-public class PlayAnimationAction extends BaseAction {
+public class PlayAnimationAction extends NonChainRootAction {
 	private int delay;
 	private Animation anim;
 	private SceneObject animsParent;

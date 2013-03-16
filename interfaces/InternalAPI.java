@@ -18,6 +18,8 @@ package com.github.a2g.core.interfaces;
 
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.ChainRootAction;
+import com.github.a2g.core.action.NonChainRootAction;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.CommandLinePresenter;
 import com.github.a2g.core.objectmodel.DialogTreePresenter;
@@ -90,9 +92,9 @@ extends ImageAddAPI, OnDoCommandAPI{
 	public SceneAPI getSceneByName(String identifier);
 	public void setScenePixelSize(int width, int height);
 	public void setInventoryPixelSize(int width, int height);
-	
-	public BaseAction createAction();
-	public void fireAndForgetAnAction(BaseAction ba);
+
+	public ChainRootAction createChainRootAction();
+	public void fireAndForgetAnAction(NonChainRootAction ba);
 }
 
 

@@ -162,7 +162,7 @@ public class SceneObject {
 
 			// yes current can equal null in some weird cases where I place breakpoints...
 			if (current != null
-			&& !current.equals(this)) {
+					&& !current.equals(this)) {
 				if (this.currentImage != null) {
 					this.currentImage.setVisible(
 							false, new Point(this.left,this.top));

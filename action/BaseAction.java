@@ -88,13 +88,13 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 				text, branchId);
 	}
 
-	public BaseAction branch(int branchId, final boolean isKey, String text) {
+	public NonChainRootAction branch(int branchId, final boolean isKey, String text) {
 		if(isKey)
 			return new DialogTreeBranchAction(this, text, branchId);
 		return doNothing();
 	}
 
-	public BaseAction doBoth(BaseAction a, BaseAction b) {
+	public NonChainRootAction doBoth(NonChainRootAction a, NonChainRootAction b) {
 		return a.subroutine(b);
 	}
 
@@ -147,14 +147,14 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// plain..
-	public BaseAction playAnimation(String  animationCode) {
+	public NonChainRootAction playAnimation(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
 		return a;
 	}
 
-	public BaseAction playAnimation(String  animationCode, int delay) {
+	public NonChainRootAction playAnimation(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
@@ -164,7 +164,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// simple backwards
-	public BaseAction playAnimationBackwards(String  animationCode) {
+	public NonChainRootAction playAnimationBackwards(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
@@ -172,7 +172,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationBackwards(String  animationCode, int delay) {
+	public NonChainRootAction playAnimationBackwards(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
@@ -182,7 +182,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// simple hold last frame
-	public BaseAction playAnimationHoldLastFrame(String  animationCode) {
+	public NonChainRootAction playAnimationHoldLastFrame(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
@@ -190,7 +190,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationHoldLastFrame(String  animationCode, int delay) {
+	public NonChainRootAction playAnimationHoldLastFrame(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
@@ -200,7 +200,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// simple non blocking
-	public BaseAction playAnimationNonBlocking(String  animationCode) {
+	public NonChainRootAction playAnimationNonBlocking(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
@@ -208,7 +208,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationNonBlocking(String  animationCode, int delay) {
+	public NonChainRootAction playAnimationNonBlocking(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
@@ -218,7 +218,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// double combo1of3: backwards + hold last frame
-	public BaseAction playAnimationBackwardsHoldLastFrame(String  animationCode) {
+	public NonChainRootAction playAnimationBackwardsHoldLastFrame(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
@@ -227,7 +227,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationBackwardsHoldLastFrame(String  animationCode, int delay) {
+	public NonChainRootAction playAnimationBackwardsHoldLastFrame(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
@@ -238,7 +238,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// double combo2of3: backwards + nonblocking
-	public BaseAction playAnimationBackwardsNonBlocking(String  animationCode) {
+	public NonChainRootAction playAnimationBackwardsNonBlocking(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
@@ -247,7 +247,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationBackwardsNonBlocking(String  animationCode, int delay) {
+	public NonChainRootAction playAnimationBackwardsNonBlocking(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
@@ -258,7 +258,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// double combo2of3: holdLastFrame + nonblocking
-	public BaseAction playAnimationHoldLastFrameNonBlocking(String  animationCode) {
+	public NonChainRootAction playAnimationHoldLastFrameNonBlocking(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
@@ -267,7 +267,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationHoldLastFrameNonBlocking(String  animationCode, int delay) {
+	public NonChainRootAction playAnimationHoldLastFrameNonBlocking(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
@@ -278,7 +278,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	// ..and one method with the whole lot!
-	public BaseAction playAnimationBackwardsHoldLastFrameNonBlocking(String  animationCode) {
+	public NonChainRootAction playAnimationBackwardsHoldLastFrameNonBlocking(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
@@ -288,7 +288,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationBackwardsHoldLastFrameNonBlocking(String  animationCode, int delay) {
+	public NonChainRootAction playAnimationBackwardsHoldLastFrameNonBlocking(String  animationCode, int delay) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 
@@ -299,28 +299,28 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public BaseAction playAnimationRepeatWhilstVisible(String  animationCode) {
+	public NonChainRootAction playAnimationRepeatWhilstVisible(String  animationCode) {
 		return new PlayAnimationRepeatWhilstVisibleAction(
 				this, animationCode);
 	}
 
-	public BaseAction say(short objectCode, String speech) {
+	public NonChainRootAction say(short objectCode, String speech) {
 		return new SayAction(this, objectCode,
 				speech);
 		// return toReturn;
 	}
 
-	public BaseAction sayWithoutAnimation(short objectCode, String speed) {
+	public NonChainRootAction sayWithoutAnimation(short objectCode, String speed) {
 		return new SayWithoutAnimationAction(
 				this, objectCode, speed);
 	}
 
-	public BaseAction setActiveAnimation(String  animationCode) {
+	public NonChainRootAction setActiveAnimation(String  animationCode) {
 		return new SetActiveAnimationAction(
 				this, animationCode);
 	}
 
-	public BaseAction setActiveFrame(short objectCode, int frame) {
+	public NonChainRootAction setActiveFrame(short objectCode, int frame) {
 		return new SetActiveFrameAction(this,
 				objectCode, frame);
 	}
@@ -333,12 +333,12 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		this.api = api;
 	}
 
-	public BaseAction setBaseMiddleX(short objectCode, double x) {
+	public NonChainRootAction setBaseMiddleX(short objectCode, double x) {
 		return new SetBaseMiddleXAction(this,
 				objectCode, x);
 	}
 
-	public BaseAction setBaseMiddleY(short objectCode, double y) {
+	public NonChainRootAction setBaseMiddleY(short objectCode, double y) {
 		return new SetBaseMiddleYAction(this,
 				objectCode, y);
 		// return toReturn;
@@ -348,12 +348,12 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		this.callbacks = callbacks;
 	}
 
-	public BaseAction setDisplayName(short objectCode, String displayName) {
+	public NonChainRootAction setDisplayName(short objectCode, String displayName) {
 		return new SetDisplayNameAction(this,
 				objectCode, displayName);
 	}
 
-	public BaseAction setInventoryVisible(int inventoryId, boolean isVisible) {
+	public NonChainRootAction setInventoryVisible(int inventoryId, boolean isVisible) {
 		return new SetInventoryVisibleAction(
 				this, inventoryId, isVisible);
 	}
@@ -362,31 +362,31 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		this.parent = parent;
 	}
 
-	public BaseAction setTalkingAnimation(String  animationCode) {
+	public NonChainRootAction setTalkingAnimation(String  animationCode) {
 		return new SetTalkingAnimationAction(
 				this, animationCode);
 		// return toReturn;
 	}
 
-	public BaseAction setTalkingAnimationDelay(short objectCode, int delay) {
+	public NonChainRootAction setTalkingAnimationDelay(short objectCode, int delay) {
 		return new SetTalkingAnimationDelayAction(
 				this, objectCode, delay);
 		// return toReturn;
 	}
 	;
 
-	public BaseAction setVisible(short objectCode, boolean isVisible) {
+	public NonChainRootAction setVisible(short objectCode, boolean isVisible) {
 		return new SetVisibleAction(this,
 				objectCode, isVisible);
 	}
-	;
 
-	public BaseAction sleep(int milliseconds) {
+
+	public NonChainRootAction sleep(int milliseconds) {
 		return new SleepAction(this,
 				milliseconds);
 	}
 
-	public BaseAction subroutine(BaseAction orig) {
+	public NonChainRootAction subroutine(NonChainRootAction orig) {
 		// find root of orig
 		BaseAction somewhereInOrig = orig;
 
@@ -398,7 +398,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return orig;
 	}
 
-	public BaseAction swapProperty(short objectCode1, short objectCode2,
+	public NonChainRootAction swapProperty(short objectCode1, short objectCode2,
 			SwapType type) {
 		return new SwapPropertyAction(this,
 				objectCode1, objectCode2, type);
@@ -410,56 +410,56 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		// return toReturn;
 	}
 
-	public BaseAction waitForFrame(short objectCode, int frame) {
+	public NonChainRootAction waitForFrame(short objectCode, int frame) {
 		return new WaitForFrameAction(this,
 				objectCode, frame);
 	}
 
 
-	public BaseAction setHomeAnimation(String  animationCode) {
+	public NonChainRootAction setHomeAnimation(String  animationCode) {
 		return new SetHomeAnimationAction(this,
 				animationCode);
 	}
 
 
-	public BaseAction walkTo(short objectCode, double x, double y) {
+	public NonChainRootAction walkTo(short objectCode, double x, double y) {
 		return new WalkToAction(this, objectCode, x, y,0, false);
 	}
 
-	public BaseAction walkTo(short objectCode, PointF point) {
+	public NonChainRootAction walkTo(short objectCode, PointF point) {
 		return new WalkToAction(this, objectCode,
 				point.getX(), point.getY(),0, false);
 	}
 
-	public BaseAction walkTo(short objectCode, double x, double y, int delay) {
+	public NonChainRootAction walkTo(short objectCode, double x, double y, int delay) {
 		return new WalkToAction(this, objectCode, x, y, delay, false);
 	}
 
-	public BaseAction walkTo(short objectCode, PointF point, int delay) {
+	public NonChainRootAction walkTo(short objectCode, PointF point, int delay) {
 		return new WalkToAction(this, objectCode, point.getX(), point.getY(), delay, false);
 	}
 
 
-	public BaseAction walkToNonBlocking(short objectCode, double x, double y) {
+	public NonChainRootAction walkToNonBlocking(short objectCode, double x, double y) {
 		return new WalkToAction(this, objectCode, x, y,0, true);
 	}
 
-	public BaseAction walkToNonBlocking(short objectCode, PointF point) {
+	public NonChainRootAction walkToNonBlocking(short objectCode, PointF point) {
 		return new WalkToAction(this, objectCode,
 				point.getX(), point.getY(),0, true);
 	}
 
-	public BaseAction walkToNonBlocking(short objectCode, double x, double y, int delay) {
+	public NonChainRootAction walkToNonBlocking(short objectCode, double x, double y, int delay) {
 		return new WalkToAction(this, objectCode, x,
 				y, delay, true);
 	}
 
-	public BaseAction walkToNonBlocking(short objectCode, PointF point, int delay) {
+	public NonChainRootAction walkToNonBlocking(short objectCode, PointF point, int delay) {
 		return new WalkToAction(this, objectCode,
 				point.getX(), point.getY(), delay, true);
 	}
 
-	public BaseAction showTitleCard(String text, ColorEnum color)
+	public NonChainRootAction showTitleCard(String text, ColorEnum color)
 	{
 		return new TitleCardAction(this, text, color);
 	}
@@ -474,7 +474,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	}
 
-	public BaseAction playAnimationNonBlockingHoldLastFrame(String  animationCode) {
+	public NonChainRootAction playAnimationNonBlockingHoldLastFrame(String  animationCode) {
 		PlayAnimationAction a = new PlayAnimationAction(
 				this, animationCode);
 

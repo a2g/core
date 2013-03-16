@@ -19,9 +19,10 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.objectmodel.Animation;
+import com.github.a2g.core.action.NonChainRootAction;
 
 
-public class PlayAnimationRepeatWhilstVisibleAction extends BaseAction {
+public class PlayAnimationRepeatWhilstVisibleAction extends NonChainRootAction {
 	private Animation anim;
 
 	public PlayAnimationRepeatWhilstVisibleAction(BaseAction parent, String animationCode) {

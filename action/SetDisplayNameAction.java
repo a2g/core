@@ -18,9 +18,10 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.NonChainRootAction;
 
 
-public class SetDisplayNameAction extends BaseAction {
+public class SetDisplayNameAction extends NonChainRootAction {
 	private short objId;
 	private String displayName;
 

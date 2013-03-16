@@ -18,9 +18,10 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.NonChainRootAction;
 
 
-public class SetHomeAnimationAction extends BaseAction {
+public class SetHomeAnimationAction extends NonChainRootAction {
 	private String animId;
 	public SetHomeAnimationAction(BaseAction parent, String animationCode) {
 		super(parent, parent.getApi());
