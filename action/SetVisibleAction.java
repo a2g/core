@@ -20,10 +20,10 @@ package com.github.a2g.core.action;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.objectmodel.SceneObject;
-import com.github.a2g.core.action.NonChainRootAction;
+import com.github.a2g.core.action.ChainedAction;
 
 
-public class SetVisibleAction extends NonChainRootAction {
+public class SetVisibleAction extends ChainedAction {
 	private short objId;
 	private boolean isVisible;
 

@@ -18,11 +18,11 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.action.NonChainRootAction;
+import com.github.a2g.core.action.ChainedAction;
 
 
 
-public class TitleCardAction extends NonChainRootAction {
+public class TitleCardAction extends ChainedAction {
 	String text;
 	ColorEnum color;
 

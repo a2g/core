@@ -19,10 +19,10 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.objectmodel.SceneObject;
-import com.github.a2g.core.action.NonChainRootAction;
+import com.github.a2g.core.action.ChainedAction;
 
 
-public class WaitForFrameAction extends NonChainRootAction {
+public class WaitForFrameAction extends ChainedAction {
 	private int frame;
 	private SceneObject object;
 

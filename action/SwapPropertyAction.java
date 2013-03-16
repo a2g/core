@@ -19,10 +19,10 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.objectmodel.SceneObject;
-import com.github.a2g.core.action.NonChainRootAction;
+import com.github.a2g.core.action.ChainedAction;
 
 
-public class SwapPropertyAction extends NonChainRootAction {
+public class SwapPropertyAction extends ChainedAction {
 
 	private short objId1;
 	private short objId2;

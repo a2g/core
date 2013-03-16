@@ -24,11 +24,11 @@ import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.action.NonChainRootAction;
+import com.github.a2g.core.action.ChainedAction;
 
 
 
-public class SayAction extends NonChainRootAction {
+public class SayAction extends ChainedAction {
 	private ArrayList<String> speech;
 	private ArrayList<Double> ceilings;
 	private PopupPanelAPI popup;

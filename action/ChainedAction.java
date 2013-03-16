@@ -20,9 +20,9 @@ import com.github.a2g.core.interfaces.InternalAPI;
 
 
 
-public abstract class NonChainRootAction extends BaseAction
+public abstract class ChainedAction extends BaseAction
 {
-	protected NonChainRootAction(BaseAction parent, InternalAPI api)
+	protected ChainedAction(BaseAction parent, InternalAPI api)
 	{
 		super(parent, api);
 	}

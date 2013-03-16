@@ -19,7 +19,7 @@ package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainRootAction;
-import com.github.a2g.core.action.NonChainRootAction;
+import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.CommandLinePresenter;
 import com.github.a2g.core.objectmodel.DialogTreePresenter;
@@ -94,7 +94,7 @@ extends ImageAddAPI, OnDoCommandAPI{
 	public void setInventoryPixelSize(int width, int height);
 
 	public ChainRootAction createChainRootAction();
-	public void fireAndForgetAnAction(NonChainRootAction ba);
+	public void executeChainedAction(ChainedAction ba);
 }
 
 

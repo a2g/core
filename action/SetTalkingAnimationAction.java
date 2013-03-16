@@ -19,10 +19,10 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.objectmodel.Animation;
-import com.github.a2g.core.action.NonChainRootAction;
+import com.github.a2g.core.action.ChainedAction;
 
 
-public class SetTalkingAnimationAction extends NonChainRootAction {
+public class SetTalkingAnimationAction extends ChainedAction {
 	private String animId;
 
 	public SetTalkingAnimationAction(BaseAction parent, String animationCode) {

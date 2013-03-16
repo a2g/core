@@ -18,10 +18,10 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.NonChainRootAction;
+import com.github.a2g.core.action.ChainedAction;
 
 
-public class SetBaseMiddleXAction extends NonChainRootAction {
+public class SetBaseMiddleXAction extends ChainedAction {
 	private short objId;
 	private double x;
 	public SetBaseMiddleXAction(BaseAction parent, short objId, double x) {

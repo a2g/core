@@ -18,10 +18,10 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.NonChainRootAction;
+import com.github.a2g.core.action.ChainedAction;
 
 
-public class SetActiveFrameAction extends NonChainRootAction {
+public class SetActiveFrameAction extends ChainedAction {
 	private short objId;
 	private int frame;
 

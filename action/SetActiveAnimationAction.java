@@ -19,10 +19,10 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.objectmodel.Animation;
-import com.github.a2g.core.action.NonChainRootAction;
+import com.github.a2g.core.action.ChainedAction;
 
 
-public class SetActiveAnimationAction extends NonChainRootAction {
+public class SetActiveAnimationAction extends ChainedAction {
 	private String animId;
 	public SetActiveAnimationAction(BaseAction parent, String animationCode) {
 		super(parent, parent.getApi());

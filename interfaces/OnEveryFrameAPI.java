@@ -17,7 +17,7 @@
 package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.action.ChainRootAction;
-import com.github.a2g.core.action.NonChainRootAction;
+import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.interfaces.MasterPanelAPI.GuiStateEnum;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.CommandLinePresenter;
@@ -58,6 +58,6 @@ public interface OnEveryFrameAPI {
 
 	// these two are needed for starting animations in the onEveryFrame handler
 	public ChainRootAction createChainRootAction();
-	public void fireAndForgetAnAction(NonChainRootAction ba);
+	public void executeChainedAction(ChainedAction ba);
 
 }

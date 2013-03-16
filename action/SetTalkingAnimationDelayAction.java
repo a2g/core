@@ -18,10 +18,10 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.NonChainRootAction;
+import com.github.a2g.core.action.ChainedAction;
 
 
-public class SetTalkingAnimationDelayAction extends NonChainRootAction {
+public class SetTalkingAnimationDelayAction extends ChainedAction {
 	private short objId;
 	private int delay;
 	public SetTalkingAnimationDelayAction(BaseAction parent, short objId, int delay) {

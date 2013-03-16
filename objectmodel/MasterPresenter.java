@@ -24,7 +24,7 @@ import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.action.ChainRootAction;
-import com.github.a2g.core.action.NonChainRootAction;
+import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.action.SayAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.action.BaseDialogTreeAction;
@@ -880,7 +880,7 @@ implements InternalAPI
 	}
 
 	@Override
-	public void fireAndForgetAnAction(NonChainRootAction ba)
+	public void executeChainedAction(ChainedAction ba)
 	{
 		executeBaseAction(ba);
 	}
