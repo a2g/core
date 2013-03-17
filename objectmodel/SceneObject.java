@@ -236,15 +236,20 @@ public class SceneObject {
 		return isolatedX;
 	}
 
+	static int convertRelativeScreenOrdinateToAbsoluteImageSpaceOrdinateY(double normalized, double screenSpan, int lowerBound, int upperBound )
+	{
+		int rectSpan = upperBound-lowerBound;
+		int screenCoordMinusHalfWidth = (int) (normalized * screenSpan - rectSpan);
+
+		int fixed = lowerBound;
+		int isolatedX = screenCoordMinusHalfWidth  - fixed;
+		return isolatedX;
+	}
+
+	
 	public void setBaseMiddleX(double x)
 	{
 		this.left = convertRelativeScreenOrdinateToAbsoluteImageSpaceOrdinate(x, screenPixelWidth, currentImage.getBoundingRect().getLeft(), currentImage.getBoundingRect().getRight());
-		this.currentImage.setLeftTop(new Point(this.left,this.top));
-	}
-
-	public void setBaseMiddleY(double y)
-	{
-		this.top = convertRelativeScreenOrdinateToAbsoluteImageSpaceOrdinate(y,this.screenPixelHeight, currentImage.getBoundingRect().getTop(), currentImage.getBoundingRect().getBottom());
 		this.currentImage.setLeftTop(new Point(this.left,this.top));
 	}
 
@@ -260,12 +265,19 @@ public class SceneObject {
 
 	public double getBaseMiddleY()
 	{
-		int halfBBHeight = (int)(.5*currentImage.getBoundingRect().getHeight());
+		int height = currentImage.getBoundingRect().getHeight();
 
 		int fixed = currentImage.getBoundingRect().getTop();
-		int y = this.top + fixed + halfBBHeight ;
+		int y = this.top + fixed + height ;
 
 		return y / this.screenPixelHeight;
+	}
+	
+	public void setBaseMiddleY(double y)
+	{
+		this.top = convertRelativeScreenOrdinateToAbsoluteImageSpaceOrdinateY(y,this.screenPixelHeight, currentImage.getBoundingRect().getTop(), currentImage.getBoundingRect().getBottom());
+		
+		this.currentImage.setLeftTop(new Point(this.left,this.top));
 	}
 
 	public void setX(int x) {
