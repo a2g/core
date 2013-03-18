@@ -483,6 +483,12 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
+	public ChainedAction setValue(String string, int i)
+	{
+		SetValueAction a = new SetValueAction(this, string, i);
+		return a;
+	}
+	
 }
 
 
