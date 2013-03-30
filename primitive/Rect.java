@@ -28,6 +28,10 @@ public class Rect {
 		this.top = y;
 		this.right = x + width;
 		this.bottom = y + height;
+		if(bottom<0)
+		{
+			this.bottom = y + height;
+		}
 	}
 
 	public boolean contains(int x, int y)
@@ -52,19 +56,27 @@ public class Rect {
 	}
 
 	public int getBottom() {
+		if(bottom>=0)
+		{
+			return bottom;
+		}
 		return bottom;
 	}
 
 	public int getTop() {
+		if(top>=0)
+		{
+		   return top;
+		}
 		return top;
 	}
 
 	public int getWidth() {
-		return right -left;
+		return getRight() -getLeft();
 	}
 
 	public int getHeight() {
-		return bottom-top;
+		return getBottom()-getTop();
 	}
 
 }

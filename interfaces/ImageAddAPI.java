@@ -46,7 +46,7 @@ public interface ImageAddAPI
 
 	@return true on success, otherwise false.
 	 */
-	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, String textualIdForObject, String textualIdForAnimation, short codeForObject, String animCode, PackagedImageAPI imageResource);
+	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, int w, int h, String textualIdForObject, String animCode, short codeForObject, String objectPlusAnimCode, PackagedImageAPI imageResource);
 
 };
 
