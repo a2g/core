@@ -36,7 +36,6 @@ import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ActionRunnerCallbackAPI;
 import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
-import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.ImageAddAPI;
@@ -312,9 +311,10 @@ implements InternalAPI
 			SceneObject sceneObject = this.scenePresenter.getModel().objectCollection().at(i);
 
 			if (sceneObject != null) {
-				if (sceneObject.getAnimations().at(ConstantsForAPI.INITIAL)!= null)
+				String home = sceneObject.getHomeAnimation();
+				if (sceneObject.getAnimations().at(home)!=null)
 				{
-					sceneObject.getAnimations().at(ConstantsForAPI.INITIAL).setAsCurrentAnimation();
+					sceneObject.getAnimations().at(home).setAsCurrentAnimation();
 					// set x & y to zero sets the base middles 
 					// to the positions they were in when all objects were rendered out. 
 					sceneObject.setX(0);
@@ -572,7 +572,7 @@ implements InternalAPI
 	@Override
 	public void kickStartLoading()
 	{
-		loadingPresenter.getLoaders().calculateImagesToLoadAndIsSameInventory();
+		loadingPresenter.getLoaders().calculateImagesToLoadAndOmitInventoryIfSame();
 
 		int total = loadingPresenter.getLoaders().imagesToLoad();
 		boolean isSameInventory = loadingPresenter.getLoaders().isSameInventoryAsLastTime();
@@ -597,7 +597,6 @@ implements InternalAPI
 		loadingPresenter.clear();
 		//commandLinePresenter.clear();
 		verbsPresenter.clear();
-
 
 		if(!isSameInventory)
 		{
@@ -688,7 +687,6 @@ implements InternalAPI
 			for(int j=0;j<srcObject.getAnimations().getCount();j++)
 			{
 				Animation srcAnimation = srcObject.getAnimations().at(j);
-				String animationCode = srcAnimation.getCode();
 				String animTextualId = srcAnimation.getTextualId();
 
 				Animation destAnimation = destObject.getAnimations().at(animTextualId);
@@ -696,8 +694,7 @@ implements InternalAPI
 				{
 					destAnimation = new Animation(animTextualId, destObject);
 					destObject.getAnimations().add(destAnimation);
-					destAnimation.setCode(animationCode);
-					this.theAnimationMap.put(animationCode, destAnimation);
+					this.theAnimationMap.put(animTextualId, destAnimation);
 				}
 
 				//System.out.println("new anim " + objTextualId + " " + animTextualId+" = "+animationCode);

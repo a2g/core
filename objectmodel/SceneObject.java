@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 
-import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.SceneAPI;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -59,7 +58,7 @@ public class SceneObject {
 		this.screenPixelHeight = height;
 		this.mapOfSpecialAnimations = new TreeMap<Special, String>();
 		this.numberPrefix = 0;
-		this.homeAnimation = ConstantsForAPI.INITIAL;
+		this.homeAnimation = textualId + "_INITIAL";
 		this.talkingAnimationDelay = 0;
 
 		// talkingColro deliberately null, so the
@@ -135,13 +134,13 @@ public class SceneObject {
 
 	public void updateImage() {
 		// 1. do this only when the this.currentImage != img
-		Animation anim = this.animationCollection.at(
-				fak.getCurrentAnimationTextualId());
+		String currentAnim = fak.getCurrentAnimationTextualId();
+		Animation anim = this.animationCollection.at(currentAnim);
 
 		// if animation is set to something bad, then set it to back to initial
 		if(anim==null)
 		{
-			fak.setCurrentAnimationTextualId(ConstantsForAPI.INITIAL);
+			fak.setCurrentAnimationTextualId(textualId + "_INITIAL");
 			anim = this.animationCollection.at(
 					fak.getCurrentAnimationTextualId());
 		}
@@ -159,8 +158,8 @@ public class SceneObject {
 						anim.getLength() - 1);
 			}
 
-			com.github.a2g.core.objectmodel.Image current = anim.getImageAndPosCollection().at(
-					fak.getCurrentFrame());
+			int curFrame = fak.getCurrentFrame();
+			com.github.a2g.core.objectmodel.Image current = anim.getImageAndPosCollection().at(curFrame);
 
 			
 			// yes current can equal null in some weird cases where I place breakpoints...

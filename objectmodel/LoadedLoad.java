@@ -46,13 +46,12 @@ public class LoadedLoad
 			this.getSceneObjectCollection().add(	sceneObject);
 		}
 
-		Animation animation  = sceneObject.getAnimations().at(animationTextualId);
+		Animation animation  = sceneObject.getAnimations().at(objPlusAnimCode);
 		if (animation == null) {
 			// much simpler if not in the animation map.
 			animation = new Animation(
-					animationTextualId,
+					objPlusAnimCode,
 					sceneObject);
-			animation.setCode(objPlusAnimCode);
 			sceneObject.getAnimations().add(animation);
 		}
 

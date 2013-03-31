@@ -48,7 +48,6 @@ public interface ConstantsForAPI {
 			* VERB_MULTIPLIER;
 	public static final int THROW = 10
 			* VERB_MULTIPLIER;
-	public static final String INITIAL = "INITIAL";
 
 	public static enum Special {
 		North, East, South, West, Talking

@@ -125,7 +125,7 @@ implements ImageBundleLoaderCallbackAPI
 	{
 		return imagesToLoad;
 	}
-	public void calculateImagesToLoadAndIsSameInventory()
+	public void calculateImagesToLoadAndOmitInventoryIfSame()
 	{
 		imagesToLoad =0;
 		// get totals

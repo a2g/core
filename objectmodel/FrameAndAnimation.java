@@ -16,8 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.ConstantsForAPI;
-
 
 
 
@@ -25,9 +23,9 @@ import com.github.a2g.core.interfaces.ConstantsForAPI;
 public class FrameAndAnimation {
 	private int currentFrame;
 	private String currentAnimationTextualId;
-	public FrameAndAnimation(String owner) {
+	public FrameAndAnimation(String objectThatOwnsIt) {
 		this.currentFrame = 0;
-		this.currentAnimationTextualId = ConstantsForAPI.INITIAL;
+		this.currentAnimationTextualId = objectThatOwnsIt + "_INITIAL";
 	}
 
 	public void setCurrentFrame(int frame) {
