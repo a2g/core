@@ -40,8 +40,8 @@ public class SceneObject {
 	private boolean visible;
 	private double screenPixelWidth;
 	private double screenPixelHeight;
-	private int top; // needed for moving image around.
-	private int left;
+	private double baseMiddleY; // needed for moving image around.
+	private double baseMiddleX;
 	private int numberPrefix;
 	private short code;
 	private ColorEnum talkingColor;
@@ -65,6 +65,8 @@ public class SceneObject {
 		// talkingColro deliberately null, so the
 		// default color can be in one spot: the say action
 		this.talkingColor = null;
+		baseMiddleX = 0;// init these to anything
+		baseMiddleY = 0;// init these to anything
 	}
 
 	public void setNumberPrefix(int number) {
@@ -160,12 +162,12 @@ public class SceneObject {
 			com.github.a2g.core.objectmodel.Image current = anim.getImageAndPosCollection().at(
 					fak.getCurrentFrame());
 
+			
 			// yes current can equal null in some weird cases where I place breakpoints...
 			if (current != null
 					&& !current.equals(this)) {
 				if (this.currentImage != null) {
-					this.currentImage.setVisible(
-							false, new Point(this.left,this.top));
+					this.currentImage.setVisible(false, getLeftTop());
 				}
 				this.currentImage = current;
 			}
@@ -173,8 +175,7 @@ public class SceneObject {
 		// 2, but do this always
 		if (this.currentImage != null) {
 			this.currentImage.setVisible(
-					this.visible, new Point(this.left,
-							this.top));
+					this.visible, getLeftTop());
 		}
 
 	}
@@ -254,55 +255,75 @@ public class SceneObject {
 		return doubleY;
 	}
 	
+	public void setX(int x) 
+	{
+		double baseMiddleX = worldToScreenX(x, screenPixelWidth, getCurrentBounds().getLeft(), getCurrentBounds().getRight());
+		this.setBaseMiddleX(baseMiddleX);
+	}
+
+	void setY(int y) 
+	{
+		double baseMiddleY = worldToScreenY(y, screenPixelHeight, getCurrentBounds().getTop(), getCurrentBounds().getBottom());
+		this.setBaseMiddleY(baseMiddleY);
+	}
+
+	public int getX() 
+	{
+		int intX = screenToWorldX(baseMiddleX, screenPixelWidth, getCurrentBounds().getLeft(), getCurrentBounds().getRight());
+		return intX;
+	}
+
+	public int getY() 
+	{
+		int intY = screenToWorldY(baseMiddleY, screenPixelHeight, getCurrentBounds().getTop(), getCurrentBounds().getBottom());
+		return intY;
+	}
 	
-	public void setBaseMiddleX(double x)
+	public void setBaseMiddleX(double baseMiddleX)
 	{
-		int left = screenToWorldX(x, screenPixelWidth, currentImage.getBoundingRect().getLeft(), currentImage.getBoundingRect().getRight());
-		this.setX(left);
+		this.baseMiddleX = baseMiddleX;
+		
+		if(currentImage!=null)
+		{
+			this.currentImage.setLeftTop(getLeftTop());
+		}
 	}
 
-	public double getBaseMiddleX()
+	Point getLeftTop()
 	{
-		double baseMiddleX = worldToScreenX(this.left, screenPixelWidth, currentImage.getBoundingRect().getLeft(), currentImage.getBoundingRect().getRight());
-		return baseMiddleX;
-	}
-
-	public double getBaseMiddleY()
-	{
-		double baseMiddleY =worldToScreenY(this.top, screenPixelHeight, currentImage.getBoundingRect().getTop(), currentImage.getBoundingRect().getBottom());
-		return baseMiddleY;
+		int x = screenToWorldX(this.baseMiddleX, screenPixelWidth, getCurrentBounds().getLeft(), getCurrentBounds().getRight());
+		int y = screenToWorldY(this.baseMiddleY, screenPixelHeight, getCurrentBounds().getTop(), getCurrentBounds().getBottom());
+		return new Point(x,y);
 	}
 	
 	public void setBaseMiddleY(double y)
 	{
-		int top = currentImage.getBoundingRect().getTop();
-		int bottom = currentImage.getBoundingRect().getBottom();
-		int top3 = screenToWorldY(y, screenPixelHeight, top, bottom);
-		
-		
-		this.setY(top3);
-		
-		
+		this.baseMiddleY = y;
+		if(currentImage!=null)
+		{
+			this.currentImage.setLeftTop(getLeftTop());
+		}
 	}
 
-	public void setX(int x) {
-		this.left = x;
-		//this.currentImage.setLeftTop(new Point(this.left,this.top));
+	
+	public double getBaseMiddleX()
+	{
+		return this.baseMiddleX;
 	}
 
-	void setY(int y) {
-		this.top = y;
-		//this.currentImage.setLeftTop(new Point(this.left,this.top));
+	public double getBaseMiddleY()
+	{
+		return this.baseMiddleY;
 	}
-
-	public int getX() {
-		return this.left;
+	
+	Rect getCurrentBounds()
+	{
+		if(currentImage!=null)
+		{
+			return currentImage.getBoundingRect();
+		}
+		return new Rect(0,0,0,0);
 	}
-
-	public int getY() {
-		return this.top;
-	}
-
 	Point getMiddleOfBaseAbsolute(String animTextualId) {
 		int minLeft = 1000;
 		int maxRight = 0;

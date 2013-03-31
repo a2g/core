@@ -45,32 +45,9 @@ public class WalkToAction extends ChainedAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {
-		double x = this.startX
-				+ progress
-				* (this.endX
-						- this.startX);
-		double y = this.startY
-				+ progress
-				* (this.endY
-						- this.startY);
-
-		this.obj.setBaseMiddleX(x);
-		this.obj.setBaseMiddleY(y);
-		int framesPlayedSoFar = (int) (this.framesPlayedDuringWalk
-				* progress);
-		int i = (this.framesInAnim != 0)
-				? framesPlayedSoFar
-						% this.framesInAnim
-						: 0;
-
-		this.obj.setCurrentFrame(i);
-	}
-
-	@Override
 	public void runGameAction() {
 
-		// distance and time calulations
+		// distance and time calculations
 		this.startX = this.obj.getBaseMiddleX();
 		this.startY = this.obj.getBaseMiddleY();
 		double diffX = this.startX - this.endX;
@@ -116,7 +93,30 @@ public class WalkToAction extends ChainedAction {
 			this.framesInAnim = 0;
 		}
 
-		this.run((int) (dist * (10+delay) * 1000));
+		this.run((int) (dist * (10+delay) * 1000.0));
+	}
+
+	@Override
+	protected void onUpdateGameAction(double progress) {
+		double x = this.startX
+				+ progress
+				* (this.endX
+						- this.startX);
+		double y = this.startY
+				+ progress
+				* (this.endY
+						- this.startY);
+
+		this.obj.setBaseMiddleX(x);
+		this.obj.setBaseMiddleY(y);
+		int framesPlayedSoFar = (int) (this.framesPlayedDuringWalk
+				* progress);
+		int i = (this.framesInAnim != 0)
+				? framesPlayedSoFar
+						% this.framesInAnim
+						: 0;
+
+		this.obj.setCurrentFrame(i);
 	}
 
 	@Override // method in animation

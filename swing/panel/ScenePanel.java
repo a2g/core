@@ -257,12 +257,15 @@ implements ScenePanelAPI
 
 	@Override
 	public int getImageWidth(Image image) {
-		return ((SwingImage)image).getNativeImage().getWidth(this);
+		int width =  ((SwingImage)image).getNativeImage().getWidth(this);
+		return width;
 	}
 
 	@Override
-	public int getImageHeight(Image image) {
-		return ((SwingImage)image).getNativeImage().getHeight(this);
+	public int getImageHeight(Image image) 
+	{
+		int height = ((SwingImage)image).getNativeImage().getHeight(this);
+		return height;
 	}
 
 
