@@ -42,11 +42,8 @@ implements PopupPanelAPI
 		this.labelInPopup = new Label(speech);
 		popup.add(labelInPopup);
 
-		// set popup to be same size as label text
-		FontMetrics fm = labelInPopup.getFontMetrics(labelInPopup.getFont()); // or another font
-		int strw = fm.stringWidth(speech);
-		popup.setSize(strw*2, fm.getHeight()*2);
-
+		updateLabelSize(speech);
+	
 		labelInPopup.addMouseListener(
 				new MouseListener()
 				{
@@ -101,6 +98,7 @@ implements PopupPanelAPI
 	@Override
 	public void updateText(String string)
 	{
+		updateLabelSize(string);
 		labelInPopup.setText(string);
 	}
 	@Override
@@ -108,5 +106,14 @@ implements PopupPanelAPI
 	{
 		popup.setVisible(false);
 	}
+	
+	void updateLabelSize(String text)
+	{
+		// set popup to be same size as label text
+		FontMetrics fm = labelInPopup.getFontMetrics(labelInPopup.getFont()); // or another font
+		double stringWidthInPixels = 1.2*fm.stringWidth(text);
+		popup.setSize((int)stringWidthInPixels, fm.getHeight()*2);
+	}
 
 }
+

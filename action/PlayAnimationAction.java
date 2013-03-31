@@ -76,7 +76,7 @@ public class PlayAnimationAction extends ChainedAction {
 				SceneObject o = anim.getObject();
 
 				if (o != null) {
-					String s = o.getHomeAnimation();
+					String s = o.getInitialAnimation();
 
 					o.setCurrentAnimation(s);
 				}

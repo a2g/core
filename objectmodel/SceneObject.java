@@ -29,7 +29,7 @@ import com.github.a2g.core.primitive.Rect;
 
 
 public class SceneObject {
-	private String homeAnimation;
+	private String initialAnimationId;
 	private Map<SceneAPI.Special, String> mapOfSpecialAnimations;
 	private final String textualId;
 	private String displayName;
@@ -58,7 +58,7 @@ public class SceneObject {
 		this.screenPixelHeight = height;
 		this.mapOfSpecialAnimations = new TreeMap<Special, String>();
 		this.numberPrefix = 0;
-		this.homeAnimation = textualId + "_INITIAL";
+		this.initialAnimationId = textualId + "_INITIAL";
 		this.talkingAnimationDelay = 0;
 
 		// talkingColro deliberately null, so the
@@ -140,7 +140,7 @@ public class SceneObject {
 		// if animation is set to something bad, then set it to back to initial
 		if(anim==null)
 		{
-			fak.setCurrentAnimationTextualId(textualId + "_INITIAL");
+			fak.setCurrentAnimationTextualId(this.initialAnimationId);
 			anim = this.animationCollection.at(
 					fak.getCurrentAnimationTextualId());
 		}
@@ -395,12 +395,12 @@ public class SceneObject {
 	}
 
 
-	public String getHomeAnimation() {
-		return homeAnimation;
+	public String getInitialAnimation() {
+		return initialAnimationId;
 	}
 
-	public void setHomeAnimation(String homeAnimation) {
-		this.homeAnimation = homeAnimation;
+	public void setInitialAnimation(String InitialAnimation) {
+		this.initialAnimationId = InitialAnimation;
 	}
 
 	public void setCode(short objectCode) {

@@ -25,7 +25,7 @@ public class Animation {
 	private String textualId;
 	private ImageCollection imageAndPosCollection;
 	private SceneObject parent;
-	private boolean wasSetAsHomeAnimation;
+	private boolean wasSetAsInitialAnimation;
 	private boolean wasSetAsTalkingAnimation;
 	private boolean wasSetAsCurrentAnimation;
 	private SceneAPI.Special specialAnimationThisWasSetTo;
@@ -35,7 +35,7 @@ public class Animation {
 		this.parent = owningSceneObject;
 		this.textualId = textualId;
 		imageAndPosCollection = new com.github.a2g.core.objectmodel.ImageCollection();
-		wasSetAsHomeAnimation = false;
+		wasSetAsInitialAnimation = false;
 		wasSetAsTalkingAnimation = false;
 		wasSetAsCurrentAnimation = false;
 		specialAnimationThisWasSetTo = null;
@@ -109,10 +109,10 @@ public class Animation {
 		}
 	}
 
-	public void setAsHomeAnimation() {
-		this.wasSetAsHomeAnimation = true;
+	public void setAsInitialAnimation() {
+		this.wasSetAsInitialAnimation = true;
 		if (parent != null) {
-			parent.setHomeAnimation(
+			parent.setInitialAnimation(
 					this.textualId);
 		}
 	}
@@ -125,8 +125,8 @@ public class Animation {
 		return parent;
 	}
 
-	public boolean getWasSetAsHomeAnimation() {
-		return wasSetAsHomeAnimation;
+	public boolean getWasSetAsInitialAnimation() {
+		return wasSetAsInitialAnimation;
 	}
 
 	public boolean getWasSetAsTalkingAnimation() {

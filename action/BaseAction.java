@@ -25,7 +25,7 @@ import com.github.a2g.core.action.SetActiveFrameAction;
 import com.github.a2g.core.action.SetBaseMiddleXAction;
 import com.github.a2g.core.action.SetBaseMiddleYAction;
 import com.github.a2g.core.action.SetDisplayNameAction;
-import com.github.a2g.core.action.SetHomeAnimationAction;
+import com.github.a2g.core.action.SetInitialAnimationAction;
 import com.github.a2g.core.action.SetInventoryVisibleAction;
 import com.github.a2g.core.action.SetTalkingAnimationAction;
 import com.github.a2g.core.action.SetTalkingAnimationDelayAction;
@@ -416,8 +416,8 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 
-	public ChainedAction setHomeAnimation(String  animationCode) {
-		return new SetHomeAnimationAction(this,
+	public ChainedAction setInitialAnimation(String  animationCode) {
+		return new SetInitialAnimationAction(this,
 				animationCode);
 	}
 

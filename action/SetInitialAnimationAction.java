@@ -21,9 +21,9 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
 
 
-public class SetHomeAnimationAction extends ChainedAction {
+public class SetInitialAnimationAction extends ChainedAction {
 	private String animId;
-	public SetHomeAnimationAction(BaseAction parent, String animationCode) {
+	public SetInitialAnimationAction(BaseAction parent, String animationCode) {
 		super(parent, parent.getApi());
 		this.animId = animationCode;
 	}
@@ -38,7 +38,7 @@ public class SetHomeAnimationAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		getApi().getAnimation(this.animId).setAsHomeAnimation();
+		getApi().getAnimation(this.animId).setAsInitialAnimation();
 	}
 
 	@Override

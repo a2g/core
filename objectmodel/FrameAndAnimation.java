@@ -25,7 +25,6 @@ public class FrameAndAnimation {
 	private String currentAnimationTextualId;
 	public FrameAndAnimation(String objectThatOwnsIt) {
 		this.currentFrame = 0;
-		this.currentAnimationTextualId = objectThatOwnsIt + "_INITIAL";
 	}
 
 	public void setCurrentFrame(int frame) {

@@ -165,7 +165,7 @@ public class SayAction extends ChainedAction {
 	protected void onCompleteGameAction() {
 		if (this.anim != null) {
 			this.anim.getObject().setCurrentAnimation(
-					this.anim.getObject().getHomeAnimation());
+					this.anim.getObject().getInitialAnimation());
 		}
 
 		if (this.popup != null) {

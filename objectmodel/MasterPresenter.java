@@ -311,10 +311,10 @@ implements InternalAPI
 			SceneObject sceneObject = this.scenePresenter.getModel().objectCollection().at(i);
 
 			if (sceneObject != null) {
-				String home = sceneObject.getHomeAnimation();
-				if (sceneObject.getAnimations().at(home)!=null)
+				String initial = sceneObject.getInitialAnimation();
+				if (sceneObject.getAnimations().at(initial)!=null)
 				{
-					sceneObject.getAnimations().at(home).setAsCurrentAnimation();
+					sceneObject.getAnimations().at(initial).setAsCurrentAnimation();
 					// set x & y to zero sets the base middles 
 					// to the positions they were in when all objects were rendered out. 
 					sceneObject.setX(0);
