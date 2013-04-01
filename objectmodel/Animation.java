@@ -111,9 +111,9 @@ public class Animation {
 
 	public void setAsInitialAnimation() {
 		this.wasSetAsInitialAnimation = true;
-		if (parent != null) {
-			parent.setInitialAnimation(
-					this.textualId);
+		if (parent != null) 
+		{
+			parent.setInitialAnimation(	this.textualId);
 		}
 	}
 

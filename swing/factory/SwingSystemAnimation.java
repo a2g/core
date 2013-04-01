@@ -28,6 +28,13 @@ implements SystemAnimationAPI
 	{
 		this.callbacks = callbacks;
 	}
+	
+	@Override
+	protected 
+	double interpolate(double linear)
+	{
+		return linear;
+	}
 
 	@Override
 	protected void onUpdate(double progress) {

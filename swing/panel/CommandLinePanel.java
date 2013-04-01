@@ -33,8 +33,8 @@ implements CommandLinePanelAPI
 		this.setText("command line panel command line panel");
 		this.setSize(320, 20);
 		this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		this.setForeground(new Color(fore.css[0], fore.css[1], fore.css[2]));
-		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
+		this.setForeground(new Color(fore.r, fore.g, fore.b));
+		this.setBackground(new Color(back.r, back.g, back.b));
 		//this.rolloverColor = roll.css;
 	}
 

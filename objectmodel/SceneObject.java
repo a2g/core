@@ -41,6 +41,8 @@ public class SceneObject {
 	private double screenPixelHeight;
 	private double baseMiddleY; // needed for moving image around.
 	private double baseMiddleX;
+	private int cachedRawX;
+	private int cachedRawY;
 	private int numberPrefix;
 	private short code;
 	private ColorEnum talkingColor;
@@ -166,7 +168,7 @@ public class SceneObject {
 			if (current != null
 					&& !current.equals(this)) {
 				if (this.currentImage != null) {
-					this.currentImage.setVisible(false, getLeftTop());
+					this.currentImage.setVisible(false, getCachedLeftTop());
 				}
 				this.currentImage = current;
 			}
@@ -174,7 +176,7 @@ public class SceneObject {
 		// 2, but do this always
 		if (this.currentImage != null) {
 			this.currentImage.setVisible(
-					this.visible, getLeftTop());
+					this.visible, getCachedLeftTop());
 		}
 
 	}
@@ -281,26 +283,25 @@ public class SceneObject {
 	public void setBaseMiddleX(double baseMiddleX)
 	{
 		this.baseMiddleX = baseMiddleX;
-		
+		this.cachedRawX = screenToWorldX(baseMiddleX, screenPixelWidth, getCurrentBounds().getLeft(), getCurrentBounds().getRight());
 		if(currentImage!=null)
 		{
-			this.currentImage.setLeftTop(getLeftTop());
+			this.currentImage.setLeftTop(getCachedLeftTop());
 		}
 	}
 
-	Point getLeftTop()
+	Point getCachedLeftTop()
 	{
-		int x = screenToWorldX(this.baseMiddleX, screenPixelWidth, getCurrentBounds().getLeft(), getCurrentBounds().getRight());
-		int y = screenToWorldY(this.baseMiddleY, screenPixelHeight, getCurrentBounds().getTop(), getCurrentBounds().getBottom());
-		return new Point(x,y);
+		return new Point(this.cachedRawX,this.cachedRawY);
 	}
 	
 	public void setBaseMiddleY(double y)
 	{
 		this.baseMiddleY = y;
+		this.cachedRawY = screenToWorldY(baseMiddleY, screenPixelHeight, getCurrentBounds().getTop(), getCurrentBounds().getBottom());
 		if(currentImage!=null)
 		{
-			this.currentImage.setLeftTop(getLeftTop());
+			this.currentImage.setLeftTop(getCachedLeftTop());
 		}
 	}
 

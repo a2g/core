@@ -54,7 +54,7 @@ implements MasterPanelAPI
 	JPanel panelForDialogTreeStack;
 
 	public MasterPanel(int width, int height, ColorEnum back) {
-		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
+		this.setBackground(new Color(back.r, back.g, back.b));
 		// create all the host panels, that we want to arrange.
 		hostForCommandLineF = new SwingHostingPanel(); hostForCommandLineF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 		hostForInventoryF = new SwingHostingPanel(); hostForInventoryF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));

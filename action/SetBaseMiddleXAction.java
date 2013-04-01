@@ -32,11 +32,15 @@ public class SetBaseMiddleXAction extends ChainedAction {
 
 	@Override
 	public void runGameAction() {
-		super.run(1);
+		super.run(0);
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {}
+	protected void onUpdateGameAction(double progress) 
+	{
+		getApi().getObject(this.objId).setBaseMiddleX(
+				this.x);
+	}
 
 	@Override
 	protected void onCompleteGameAction() {

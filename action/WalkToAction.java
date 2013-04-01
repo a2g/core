@@ -51,6 +51,7 @@ public class WalkToAction extends ChainedAction {
 		this.startX = this.obj.getBaseMiddleX();
 		this.startY = this.obj.getBaseMiddleY();
 		double diffX = this.startX - this.endX;
+		System.out.println(" walkto " + startX + " " + endX);
 		double diffY = this.startY - this.endY;
 		double diffXSquared = diffX * diffX;
 		double diffYSquared = diffY * diffY;
@@ -92,8 +93,8 @@ public class WalkToAction extends ChainedAction {
 		} else {
 			this.framesInAnim = 0;
 		}
-
 		this.run((int) (dist * (10+delay) * 1000.0));
+		
 	}
 
 	@Override

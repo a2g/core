@@ -45,8 +45,8 @@ implements LoaderPanelAPI
 	public LoadingPanel(final InternalAPI api, ColorEnum fore, ColorEnum back)
 	{
 		this.api = api;
-		this.setForeground(new Color(fore.css[0], fore.css[1], fore.css[2]));
-		this.setBackground(new Color(back.css[0], back.css[1], back.css[2]));
+		this.setForeground(new Color(fore.r, fore.g, fore.b));
+		this.setBackground(new Color(back.r, back.g, back.b));
 
 		{
 

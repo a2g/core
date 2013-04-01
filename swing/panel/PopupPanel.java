@@ -15,10 +15,13 @@
  */
 
 package com.github.a2g.core.swing.panel;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Label;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.font.TextAttribute;
 
 import javax.swing.JFrame;
 
@@ -37,11 +40,15 @@ implements PopupPanelAPI
 		// create popup
 		this.popup = new JFrame();
 		this.popup.setUndecorated(true);
-
+		//this.popup.setBackground(new Color(color.r, color.g, color.b));
 		// create label and add to
 		this.labelInPopup = new Label(speech);
+		this.labelInPopup.setForeground(new Color(color.r, color.g, color.b));
+		this.labelInPopup.setBackground(new Color(0,0,0));
+		
 		popup.add(labelInPopup);
-
+		
+		
 		updateLabelSize(speech);
 	
 		labelInPopup.addMouseListener(
@@ -111,7 +118,7 @@ implements PopupPanelAPI
 	{
 		// set popup to be same size as label text
 		FontMetrics fm = labelInPopup.getFontMetrics(labelInPopup.getFont()); // or another font
-		double stringWidthInPixels = 1.2*fm.stringWidth(text);
+		double stringWidthInPixels = 18+fm.stringWidth(text);
 		popup.setSize((int)stringWidthInPixels, fm.getHeight()*2);
 	}
 

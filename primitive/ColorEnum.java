@@ -25,13 +25,14 @@ public enum ColorEnum {
 	,Purple(127,0,127);
 
 
-	public final int[] css;
+	public final int r;
+	public final int g;
+	public final int b;
 
 	ColorEnum(int r, int g, int b)
 	{
-		this.css = new int[3];
-		css[0]=r;
-		css[1]=g;
-		css[2]=b;
+		this.r = r;
+		this.g = g;
+		this.b = b;
 	}
 };
