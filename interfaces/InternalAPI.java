@@ -95,6 +95,8 @@ extends ImageAddAPI, OnDoCommandAPI{
 
 	public ChainRootAction createChainRootAction();
 	public void executeChainedAction(ChainedAction ba);
+	public short getDefaultSayer();
+	public short getDefaultWalker();
 }
 
 

@@ -51,5 +51,7 @@ public interface OnPreEntryAPI {
 	public String getLastScene();
 	public boolean isInDebugMode();
 	public void setInventoryPixelSize(int width, int height);
+	public void setDefaultSayer(short object);
+	public void setDefaultWalker(short object);
 
 }

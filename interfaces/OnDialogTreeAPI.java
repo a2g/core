@@ -51,5 +51,7 @@ public interface OnDialogTreeAPI {
 	public void switchToScene(String scene);
 	public String getLastScene();
 	public boolean isInDebugMode();
+	public void setDefaultSayer(short object);
+	public void setDefaultWalker(short object);
 
 }

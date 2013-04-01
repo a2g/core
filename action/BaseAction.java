@@ -310,6 +310,12 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		// return toReturn;
 	}
 
+	public ChainedAction say(String speech) {
+		return new SayAction(this, api.getDefaultSayer(),
+				speech);
+		// return toReturn;
+	}
+	
 	public ChainedAction sayWithoutAnimation(short objectCode, String speed) {
 		return new SayWithoutAnimationAction(
 				this, objectCode, speed);
@@ -421,6 +427,44 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 				animationCode);
 	}
 
+	public ChainedAction walkTo( double x, double y) {
+		return new WalkToAction(this, api.getDefaultWalker(), x, y,0, false);
+	}
+
+	public ChainedAction walkTo(PointF point) {
+		return new WalkToAction(this, api.getDefaultWalker(),
+				point.getX(), point.getY(),0, false);
+	}
+
+	public ChainedAction walkTo(double x, double y, int delay) {
+		return new WalkToAction(this, api.getDefaultWalker(), x, y, delay, false);
+	}
+
+	public ChainedAction walkTo( PointF point, int delay) {
+		return new WalkToAction(this, api.getDefaultWalker(), point.getX(), point.getY(), delay, false);
+	}
+
+
+	public ChainedAction walkToNonBlocking(double x, double y) {
+		return new WalkToAction(this, api.getDefaultWalker(), x, y,0, true);
+	}
+
+	public ChainedAction walkToNonBlocking( PointF point) {
+		return new WalkToAction(this, api.getDefaultWalker(),
+				point.getX(), point.getY(),0, true);
+	}
+
+	public ChainedAction walkToNonBlocking( double x, double y, int delay) {
+		return new WalkToAction(this, api.getDefaultWalker(), x,
+				y, delay, true);
+	}
+
+	public ChainedAction walkToNonBlocking(PointF point, int delay) {
+		return new WalkToAction(this, api.getDefaultWalker(),
+				point.getX(), point.getY(), delay, true);
+	}
+	
+	
 
 	public ChainedAction walkTo(short objectCode, double x, double y) {
 		return new WalkToAction(this, objectCode, x, y,0, false);

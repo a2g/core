@@ -27,6 +27,7 @@ import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.action.SayAction;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.STARTING_ODD_OBJECTS_CODE;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 
 import com.github.a2g.core.event.PropertyChangeEvent;
@@ -104,7 +105,8 @@ implements InternalAPI
 
 
 	private String lastSceneAsString;
-
+	private short defaultSayer;
+	private short defaultWalker;
 
 	public MasterPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent)
 	{
@@ -152,7 +154,8 @@ implements InternalAPI
 
 
 		this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.Loading);
-
+		this.defaultSayer = STARTING_ODD_OBJECTS_CODE.STARTING_ODD_OBJECTS_CODE;
+		this.defaultWalker = STARTING_ODD_OBJECTS_CODE.STARTING_ODD_OBJECTS_CODE;
 	}
 
 	public void setCallbacks(SceneAPI callbacks) {
@@ -885,8 +888,28 @@ implements InternalAPI
 	{
 		executeBaseAction(ba);
 	}
+	
+	@Override
+	public void setDefaultSayer(short object)
+	{
+		this.defaultSayer = object;
+	}
+	
+	@Override
+	public void setDefaultWalker(short object)
+	{
+		this.defaultWalker = object;
+	}
 
+	@Override
+	public short getDefaultSayer() {
+		return this.defaultSayer;
+	}
 
+	@Override
+	public short getDefaultWalker() {
+		return this.defaultWalker;
+	}
 
 }
 
