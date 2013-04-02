@@ -22,18 +22,20 @@ import java.awt.event.MouseEvent;
 
 import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.event.SetRolloverEvent;
+import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
+import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
 
 
 public class VerbMouseOverHandler extends MouseAdapter
 {
-	private final EventBus bus;
-	;
 	private final String textualId;
 	private final int code;
 	private final String displayName;
+	private final MouseToVerbsPresenterAPI mouseToPresenter;
 
-	public VerbMouseOverHandler(EventBus bus, String displayName, String textualId, int code) {
-		this.bus = bus;
+	public VerbMouseOverHandler(MouseToVerbsPresenterAPI mouseToPresenter, String displayName, String textualId, int code) 
+	{
+		this.mouseToPresenter = mouseToPresenter;
 		this.textualId = textualId;
 		this.code = code;
 		this.displayName = displayName;
@@ -41,11 +43,8 @@ public class VerbMouseOverHandler extends MouseAdapter
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e)  {
-		bus.fireEvent(
-				new SetRolloverEvent(
-						displayName,
-						this.textualId,
-						this.code));
+	public void mouseEntered(MouseEvent e)  
+	{
+		mouseToPresenter.setMouseOver(displayName, textualId, code);
 	}
 }

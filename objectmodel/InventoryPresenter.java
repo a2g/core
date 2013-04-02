@@ -28,13 +28,15 @@ import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.shared.EventBus;
 
-public class InventoryPresenter implements MouseToInventoryPresenterAPI {
+public class InventoryPresenter 
+implements MouseToInventoryPresenterAPI 
+{
 
 	private Inventory theInventory;
 	private InventoryPanelAPI view;
 	EventBus eventBus;
 	private TreeMap<Integer, InventoryItem> theInventoryItemMap;
-	InventoryPresenterCallbackAPI api;
+	InventoryPresenterCallbackAPI callback;
 	private int width;
 	private int height;
 	ArrayList<Rect> rectsForSlots;
@@ -54,9 +56,8 @@ public class InventoryPresenter implements MouseToInventoryPresenterAPI {
 		this.netRightArrowClicks = 0;
 		this.eventBus = bus;
 		this.theInventory = new Inventory();
-		this.api = api;
-		this.view = api.getFactory().createInventoryPanel(this,
-				ColorEnum.Purple, ColorEnum.Black);
+		this.callback = api;
+		this.view = api.getFactory().createInventoryPanel(this,ColorEnum.Purple, ColorEnum.Black);
 
 		panel.setThing(view);
 		this.theInventoryItemMap = new TreeMap<Integer, InventoryItem>();
@@ -72,7 +73,7 @@ public class InventoryPresenter implements MouseToInventoryPresenterAPI {
 
 	public boolean addInventory(String objectTextualId, int objectCode,
 			boolean initiallyVisible, Image image) {
-		boolean isCarrying = api.getValue("CARRYING_"
+		boolean isCarrying = callback.getValue("CARRYING_"
 				+ objectTextualId.toUpperCase()) > 0;
 				InventoryItem item = new InventoryItem(this.eventBus, objectTextualId,
 						image, objectCode, isCarrying);
@@ -210,13 +211,13 @@ public class InventoryPresenter implements MouseToInventoryPresenterAPI {
 			if (rectsForSlots.get(i).contains(mousePosX, mousePosY)) {
 				InventoryItem inv = getItemForRect(i);
 				if (inv != null) {
-					api.onMouseOverInventory(inv.getDisplayName(),
+					callback.onMouseOverVerbsOrInventory(inv.getDisplayName(),
 							inv.getTextualId(), inv.getCode());
 					return;
 				}
 			}
 		}
-		api.onMouseOverInventory("", "", 0);
+		callback.onMouseOverVerbsOrInventory("", "", 0);
 	}
 
 	@Override
@@ -226,13 +227,19 @@ public class InventoryPresenter implements MouseToInventoryPresenterAPI {
 		} else if (rightArrowRect.contains(mousePosX, mousePosY)) {
 			clickRightArrow();
 		} else {
-			api.onClickInventory();
+			callback.onClickVerbsOrInventory();
 		}
 
 	}
 
 	public int getWidth() {
 		return width;
+	}
+
+	@Override
+	public void doClick(double x, double y) {
+		this.setMouseOver(x, y);
+		this.doClick();
 	}
 
 }

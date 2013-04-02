@@ -21,36 +21,29 @@ import java.awt.event.MouseListener;
 import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.event.ExecuteCommandEvent;
 import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
 import com.github.a2g.core.swing.panel.ScenePanel;
 
 
 public class VerbMouseClickHandler implements MouseListener
 {
-	private InternalAPI api;
-	private EventBus bus;
-	static boolean isAddedAlready;
-
-	public VerbMouseClickHandler(EventBus bus, InternalAPI api) {
-		this.api = api;
-		this.bus = bus;
-
-		ScenePanel scenePanel = (ScenePanel)api.getSceneGui().getView();
-		scenePanel.addMouseListener(this);
-	}
-
-	public InternalAPI getAPI()
+	MouseToVerbsPresenterAPI mouseToPresenter;
+	String displayName;
+	String textualId;
+	int code;
+	
+	public VerbMouseClickHandler(MouseToVerbsPresenterAPI mouseToPresenter, String displayName, String textualId, int code)
 	{
-		return api;
+		this.displayName = displayName;
+		this.textualId = textualId;
+		this.code = code;
+		this.mouseToPresenter = mouseToPresenter;
 	}
-
 
 	@Override
 	public void mouseClicked(MouseEvent event)
 	{
-		double x = -1;
-		double y = -1;
-
-		bus.fireEvent( new ExecuteCommandEvent(x, y));
+		mouseToPresenter.doClick(displayName, textualId, code);
 	}
 
 	@Override

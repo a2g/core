@@ -27,6 +27,7 @@ import com.github.a2g.core.interfaces.InventoryPanelAPI;
 import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
 import com.github.a2g.core.interfaces.LoaderPanelAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
+import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
 import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.interfaces.ScenePanelAPI;
 import com.github.a2g.core.interfaces.SystemAnimationAPI;
@@ -107,9 +108,9 @@ implements FactoryAPI
 
 
 	@Override
-	public VerbsPanelAPI createVerbsPanel(ColorEnum fore, ColorEnum back)
+	public VerbsPanelAPI createVerbsPanel(MouseToVerbsPresenterAPI api, ColorEnum fore, ColorEnum back)
 	{
-		return new VerbsPanel(bus, master, fore, back);
+		return new VerbsPanel(master, api, fore, back);
 	}
 	@Override
 	public SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI callbacks)

@@ -58,6 +58,7 @@ import com.github.a2g.core.interfaces.PackagedImageAPI;
 import com.github.a2g.core.interfaces.SceneAPI;
 import com.github.a2g.core.interfaces.TimerAPI;
 import com.github.a2g.core.interfaces.TimerCallbackAPI;
+import com.github.a2g.core.interfaces.VerbsPresenterCallbackAPI;
 import com.google.gwt.event.shared.EventBus;
 
 public class MasterPresenter
@@ -76,6 +77,7 @@ implements InternalAPI
 , CommandLineCallbackAPI
 , ActionRunnerCallbackAPI
 , InventoryPresenterCallbackAPI
+, VerbsPresenterCallbackAPI
 {
 
 	private CommandLinePresenter commandLinePresenter;
@@ -146,7 +148,7 @@ implements InternalAPI
 		this.scenePresenter = new ScenePresenter(
 				masterPanel.getHostForScene(), bus, this);
 		this.verbsPresenter = new VerbsPresenter(
-				masterPanel.getHostForVerbs(), bus, parent, this);
+				masterPanel.getHostForVerbs(), bus, this);
 		this.loadingPresenter =  new LoaderPresenter(
 				masterPanel.getHostForLoading(), bus, this, this, parent);
 		this.titleCardPresenter =  new TitleCardPresenter(
@@ -814,7 +816,7 @@ implements InternalAPI
 	}
 
 	@Override
-	public void onClickInventory()
+	public void onClickVerbsOrInventory()
 	{
 		// a click on the inventory results in negative coords.
 		commandLinePresenter.onClick(-1, -1);
@@ -822,7 +824,7 @@ implements InternalAPI
 	}
 
 	@Override
-	public void onMouseOverInventory
+	public void onMouseOverVerbsOrInventory
 	(String displayName, String textualId, int code)
 	{
 		getCommandLineGui().onSetMouseOver(displayName, textualId, code);

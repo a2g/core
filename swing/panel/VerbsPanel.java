@@ -26,6 +26,7 @@ import java.awt.Label;
 import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
 import com.github.a2g.core.interfaces.VerbsPanelAPI;
 import com.github.a2g.core.objectmodel.Verb;
 import com.github.a2g.core.objectmodel.Verbs;
@@ -40,15 +41,15 @@ import com.google.gwt.event.shared.EventBus;
 public class VerbsPanel
 extends JPanel implements VerbsPanelAPI
 {
-	EventBus bus;
 	InternalAPI api;
 	Verbs verbs;
 	GridLayout grid;
+	MouseToVerbsPresenterAPI mouseToPresenter;
 	private int preferredWith;
 	private int preferredHeight;
-	public VerbsPanel(EventBus bus, InternalAPI api, ColorEnum fore, ColorEnum back)
+	public VerbsPanel(InternalAPI api, MouseToVerbsPresenterAPI mouseToPresenter, ColorEnum fore, ColorEnum back)
 	{
-		this.bus = bus;
+		this.mouseToPresenter = mouseToPresenter;
 		this.api =  api;
 		this.preferredWith = 160;
 		this.preferredHeight = 80;
@@ -93,17 +94,17 @@ extends JPanel implements VerbsPanelAPI
 				int code = v.getCode();
 				String textualId = v.gettextualId();
 				Label label = new Label(textualId);
-
+				String displayText = v.getdisplayText();
 
 
 				label.addMouseListener
 				(
-						new VerbMouseOverHandler( bus, v.getdisplayText(), textualId, code)
-						);
+					new VerbMouseOverHandler( mouseToPresenter, displayText, textualId, code)
+				);
 				label.addMouseListener
 				(
-						new VerbMouseClickHandler(bus, api)
-						);
+					new VerbMouseClickHandler(mouseToPresenter, displayText, textualId, code)
+				);
 
 				this.add(label);
 			}

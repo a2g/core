@@ -21,8 +21,9 @@ import com.github.a2g.core.interfaces.VerbCollectionCallbackAPI;
 
 public class Verbs {
 	private VerbCollection theItems;
-	public Verbs(VerbCollectionCallbackAPI api) {
-		this.theItems = new VerbCollection(api);
+	public Verbs(/*VerbCollectionCallbackAPI api*/) 
+	{
+		this.theItems = new VerbCollection(/*api*/);
 	}
 
 	public VerbCollection items() {

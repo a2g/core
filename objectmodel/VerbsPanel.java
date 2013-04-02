@@ -18,8 +18,11 @@ package com.github.a2g.core.objectmodel;
 
 
 import com.github.a2g.core.gwt.mouse.ImageMouseClickHandler;
+import com.github.a2g.core.gwt.mouse.VerbMouseClickHandler;
 import com.github.a2g.core.gwt.mouse.VerbMouseOverHandler;
 import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
+import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
 import com.github.a2g.core.interfaces.VerbsPanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
@@ -30,12 +33,16 @@ import com.google.gwt.user.client.ui.Label;
 
 public class VerbsPanel
 extends Grid
-implements VerbsPanelAPI
+implements 
+VerbsPanelAPI
 {
 	EventBus bus;
 	ColorEnum rolloverColor;
-	public VerbsPanel(EventBus bus, InternalAPI api, ColorEnum fore, ColorEnum back)
+	final MouseToVerbsPresenterAPI mouseToPresenter;
+	
+	public VerbsPanel(InternalAPI api, EventBus bus, final MouseToVerbsPresenterAPI mouseToPresenter, ColorEnum fore, ColorEnum back)
 	{
+		this.mouseToPresenter = mouseToPresenter;
 		this.bus = bus;
 		DOM.setStyleAttribute(getElement(), "color",fore.toString());
 		DOM.setStyleAttribute(getElement(), "backgroundColor", back.toString());
@@ -61,11 +68,10 @@ implements VerbsPanelAPI
 
 			this.setWidget(row, column, widget);
 			widget.addMouseMoveHandler(
-					new VerbMouseOverHandler(
-							bus, displayText,textualId, code));
+					new VerbMouseOverHandler(mouseToPresenter,displayText,textualId, code)
+					);
 			widget.addClickHandler(
-					new ImageMouseClickHandler(
-							bus, null));
+					new VerbMouseClickHandler(mouseToPresenter,displayText,textualId, code));
 		}
 
 	}

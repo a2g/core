@@ -27,12 +27,12 @@ import com.github.a2g.core.swing.panel.InventoryPanel;
 
 public class InventoryMouseOverHandler implements MouseMotionListener
 {
-	private MouseToInventoryPresenterAPI api;
+	private MouseToInventoryPresenterAPI mouseToPresenter;
 	private final InventoryPanel inventoryPanel;
 	static boolean isAddedAlready;
 
-	public InventoryMouseOverHandler(InventoryPanel inventoryPanel, MouseToInventoryPresenterAPI api2) {
-		this.api = api2;
+	public InventoryMouseOverHandler(InventoryPanel inventoryPanel, MouseToInventoryPresenterAPI mouseToPresenter2) {
+		this.mouseToPresenter = mouseToPresenter2;
 		this.inventoryPanel = inventoryPanel;
 		if(!isAddedAlready)
 		{
@@ -49,7 +49,7 @@ public class InventoryMouseOverHandler implements MouseMotionListener
 		double y = event.getY();
 		x/=size.width;
 		y/=size.height;
-		api.setMouseOver(x,y);
+		mouseToPresenter.setMouseOver(x,y);
 	}
 
 	@Override

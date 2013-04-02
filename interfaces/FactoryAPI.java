@@ -10,7 +10,7 @@ public interface FactoryAPI {
 	LoaderPanelAPI createLoaderPanel(ColorEnum fore, ColorEnum back);
 	ScenePanelAPI createScenePanel();
 	TitleCardPanelAPI createTitleCardPanel(ColorEnum foreground, ColorEnum background);
-	VerbsPanelAPI createVerbsPanel(ColorEnum foreground, ColorEnum background);
+	VerbsPanelAPI createVerbsPanel(MouseToVerbsPresenterAPI api, ColorEnum foreground, ColorEnum background);
 	PopupPanelAPI createPopupPanel(String string, ColorEnum color, BaseAction toCancel);
 	SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI cbs);
 	TimerAPI createSystemTimer(TimerCallbackAPI cbs);

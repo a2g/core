@@ -21,22 +21,26 @@ import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
+import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
 import com.github.a2g.core.interfaces.VerbCollectionCallbackAPI;
 import com.github.a2g.core.interfaces.VerbsPanelAPI;
+import com.github.a2g.core.interfaces.VerbsPresenterCallbackAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 
 
-public class VerbsPresenter implements VerbCollectionCallbackAPI
+public class VerbsPresenter 
+implements MouseToVerbsPresenterAPI
 {
 	private Verbs theVerbs;
 	private VerbsPanelAPI view;
 	private int widthOfScene;
 	private int widthOfInventory;
-
-	public VerbsPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent, InternalAPI api)
+	VerbsPresenterCallbackAPI callback;
+	public VerbsPresenter(final HostingPanelAPI panel, EventBus bus, VerbsPresenterCallbackAPI callback)
 	{
-		this.theVerbs = new Verbs(this);
-		this.view = api.getFactory().createVerbsPanel(ColorEnum.Purple, ColorEnum.Black);
+		this.callback = callback;
+		this.theVerbs = new Verbs();
+		this.view = callback.getFactory().createVerbsPanel(this, ColorEnum.Purple, ColorEnum.Black);
 		panel.setThing(view);
 		this.view.setVerbs(theVerbs);
 		this.widthOfScene=0;
@@ -58,11 +62,13 @@ public class VerbsPresenter implements VerbCollectionCallbackAPI
 		return view;
 	}
 
+	/*
 	@Override
 	public void update()
 	{
 		view.update();
 	}
+	*/
 
 	public void setWidthOfScene(int width) {
 		this.widthOfScene = width;
@@ -72,6 +78,32 @@ public class VerbsPresenter implements VerbCollectionCallbackAPI
 	public void setWidthOfInventory(int width) {
 		this.widthOfInventory = width;
 		view.setWidth(widthOfScene-widthOfInventory);
+	}
+	
+	@Override
+	public void setMouseOver(String displayName, String textualId, int code) 
+	{
+		callback.onMouseOverVerbsOrInventory(displayName,
+						textualId, 
+						code
+						);
+					
+	}
+
+	@Override
+	public void doClick() {
+		callback.onClickVerbsOrInventory();
+	}
+/*
+	public int getWidth() {
+		return width;
+	}
+*/
+	@Override
+	public void doClick(String displayName, String textualId, int code) 
+	{
+		this.setMouseOver(displayName, textualId, code);
+		this.doClick();
 	}
 
 }

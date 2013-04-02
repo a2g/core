@@ -15,7 +15,7 @@
  */
 package com.github.a2g.core.interfaces;
 
-public interface InventoryPresenterCallbackAPI
+public interface VerbsPresenterCallbackAPI
 {
 
 	FactoryAPI getFactory();

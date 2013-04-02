@@ -17,29 +17,34 @@
 package com.github.a2g.core.gwt.mouse;
 
 
-import com.google.gwt.event.dom.client.MouseMoveEvent;
-import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.google.web.bindery.event.shared.EventBus;
-import com.github.a2g.core.event.SetRolloverEvent;
+import com.github.a2g.core.event.ExecuteCommandEvent;
 import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 
 
-public class VerbMouseOverHandler implements MouseMoveHandler {
-	private final String textualId;
-	private final int code;
-	private final String displayName;
-	MouseToVerbsPresenterAPI mouseToPresenter;
-	public VerbMouseOverHandler(MouseToVerbsPresenterAPI mouseToPresenter, String displayName, String textualId, int code) {
+public class VerbMouseClickHandler 
+implements ClickHandler {
+	private final MouseToVerbsPresenterAPI mouseToPresenter;
+	String textualId;
+	String displayName;
+	int code;
+
+	public VerbMouseClickHandler(MouseToVerbsPresenterAPI mouseToPresenter, String displayName, String textualId, int code) {
 		this.mouseToPresenter = mouseToPresenter;
-		this.textualId = textualId;
 		this.code = code;
-		this.displayName = displayName;
-
+		this.displayName =displayName;
+		this.textualId = textualId;
 	}
 
 	@Override
-	public void onMouseMove(MouseMoveEvent event) 
+	public void onClick(ClickEvent event) 
 	{
-		mouseToPresenter.setMouseOver(displayName, textualId, code);
+
+
+		String displayName="";
+		mouseToPresenter.doClick(displayName, textualId,code);	
 	}
 }

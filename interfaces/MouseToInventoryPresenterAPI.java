@@ -17,6 +17,10 @@ package com.github.a2g.core.interfaces;
 
 public interface MouseToInventoryPresenterAPI
 {
-	void setMouseOver(double d, double e);
+	void setMouseOver(double x, double y);
 	void doClick();
+	// this one is called in practice because when the mouse is clicked on an object
+	// you'll get the click, but the mouseover gets dropped as an optimisation.
+	// The parameterless doClick is still needed for tests, however.
+	void doClick(double x, double y);
 }

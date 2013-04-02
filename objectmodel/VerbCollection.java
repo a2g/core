@@ -26,10 +26,10 @@ import com.github.a2g.core.primitive.CodesForVerbs;
 
 public class VerbCollection {
 	private List<Verb> verbs;
-	VerbCollectionCallbackAPI api;
-	VerbCollection(VerbCollectionCallbackAPI api)
+	//VerbCollectionCallbackAPI api;
+	VerbCollection(/*VerbCollectionCallbackAPI api*/)
 	{
-		this.api = api;
+		//this.api = api;
 		verbs = new ArrayList<Verb>();
 
 		verbs.add(new Verb("Walk", "Walk to AAA", CodesForVerbs.getCodeForVerb(0)));
@@ -57,7 +57,7 @@ public class VerbCollection {
 			if(verbs.get(i).getCode() == verbCode)
 			{
 				verbs.remove(i);
-				api.update();
+				//api.update();
 				break;
 			}
 		}
