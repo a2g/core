@@ -20,7 +20,6 @@ package com.github.a2g.core.objectmodel;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.a2g.core.interfaces.VerbCollectionCallbackAPI;
 import com.github.a2g.core.primitive.CodesForVerbs;
 
 

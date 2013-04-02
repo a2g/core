@@ -17,12 +17,9 @@
 package com.github.a2g.core.gwt.mouse;
 
 
-import com.github.a2g.core.event.ExecuteCommandEvent;
 import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.web.bindery.event.shared.EventBus;
-import com.google.gwt.user.client.ui.AbsolutePanel;
 
 
 public class VerbMouseClickHandler 

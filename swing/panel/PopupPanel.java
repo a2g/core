@@ -16,13 +16,10 @@
 
 package com.github.a2g.core.swing.panel;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Label;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.font.TextAttribute;
-
 import javax.swing.JFrame;
 
 import com.github.a2g.core.action.BaseAction;

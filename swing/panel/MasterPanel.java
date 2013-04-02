@@ -210,6 +210,7 @@ implements MasterPanelAPI
 			this.hostForVerbsF.setVisible(false);
 			sceneCardLayout.show(panelForSceneStack, MasterPanel.LOADING_WIDGET);
 			break;
+		case TitleCardOverOnEnterScene:
 		case TitleCardOverActiveScene:
 		case TitleCardOverCutScene:
 		case TitleCardOverDialogTree:

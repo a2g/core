@@ -33,7 +33,6 @@ import com.github.a2g.core.objectmodel.Verbs;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.swing.mouse.VerbMouseClickHandler;
 import com.github.a2g.core.swing.mouse.VerbMouseOverHandler;
-import com.google.gwt.event.shared.EventBus;
 
 
 

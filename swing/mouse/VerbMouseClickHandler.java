@@ -18,11 +18,7 @@ package com.github.a2g.core.swing.mouse;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import com.google.gwt.event.shared.EventBus;
-import com.github.a2g.core.event.ExecuteCommandEvent;
-import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
-import com.github.a2g.core.swing.panel.ScenePanel;
 
 
 public class VerbMouseClickHandler implements MouseListener

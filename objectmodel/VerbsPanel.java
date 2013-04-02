@@ -17,11 +17,9 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.gwt.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.gwt.mouse.VerbMouseClickHandler;
 import com.github.a2g.core.gwt.mouse.VerbMouseOverHandler;
 import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
 import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
 import com.github.a2g.core.interfaces.VerbsPanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -73,7 +71,6 @@ VerbsPanelAPI
 			widget.addClickHandler(
 					new VerbMouseClickHandler(mouseToPresenter,displayText,textualId, code));
 		}
-
 	}
 
 	@Override

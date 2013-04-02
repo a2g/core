@@ -19,10 +19,7 @@ package com.github.a2g.core.objectmodel;
 
 import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
 import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
-import com.github.a2g.core.interfaces.VerbCollectionCallbackAPI;
 import com.github.a2g.core.interfaces.VerbsPanelAPI;
 import com.github.a2g.core.interfaces.VerbsPresenterCallbackAPI;
 import com.github.a2g.core.primitive.ColorEnum;

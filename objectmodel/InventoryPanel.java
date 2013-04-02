@@ -20,7 +20,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.gwt.factory.GWTImage;
 import com.github.a2g.core.gwt.factory.GWTPackagedImage;
-import com.github.a2g.core.gwt.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.gwt.mouse.InventoryItemMouseClickHandler;
 import com.github.a2g.core.gwt.mouse.InventoryItemMouseOverHandler;
 import com.github.a2g.core.interfaces.ImagePanelAPI;

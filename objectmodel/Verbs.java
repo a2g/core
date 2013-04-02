@@ -16,8 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.VerbCollectionCallbackAPI;
-
 
 public class Verbs {
 	private VerbCollection theItems;

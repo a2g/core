@@ -20,9 +20,6 @@ package com.github.a2g.core.swing.mouse;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import com.google.gwt.event.shared.EventBus;
-import com.github.a2g.core.event.SetRolloverEvent;
-import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
 import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
 
 
