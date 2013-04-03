@@ -24,7 +24,7 @@ import com.github.a2g.core.action.ChainedAction;
 public class SleepAction extends ChainedAction {
 	private int milliseconds;
 	public SleepAction(BaseAction parent, int milliseconds) {
-		super(parent, parent.getApi());
+		super(parent, parent.getApi(), true);
 		this.milliseconds = milliseconds;
 	}
 

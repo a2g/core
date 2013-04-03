@@ -27,7 +27,7 @@ public class SetActiveFrameAction extends ChainedAction {
 
 	public SetActiveFrameAction(BaseAction parent, short objId,
 			int frame) {
-		super(parent, parent.getApi());
+		super(parent, parent.getApi(), true);
 		this.objId = objId;
 		this.frame = frame;
 	}

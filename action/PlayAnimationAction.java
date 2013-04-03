@@ -31,8 +31,8 @@ public class PlayAnimationAction extends ChainedAction {
 	private boolean holdLastFrame;
 	private boolean isNonBlocking;
 
-	public PlayAnimationAction(BaseAction parent, String  animCode) {
-		super(parent, parent.getApi());
+	public PlayAnimationAction(BaseAction parent, String  animCode, boolean isLinear) {
+		super(parent, parent.getApi(), isLinear);
 		this.anim = getApi().getAnimation(animCode);
 		this.animsParent = anim.getObject();
 		this.delay = 0;

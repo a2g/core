@@ -27,7 +27,7 @@ public class TitleCardAction extends ChainedAction {
 	ColorEnum color;
 
 	public TitleCardAction(BaseAction parent, String text, ColorEnum color) {
-		super(parent, parent.getApi());
+		super(parent, parent.getApi(), true);
 		this.text = text;
 		this.color = color;
 	}

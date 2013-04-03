@@ -27,8 +27,8 @@ public class SayWithoutAnimationAction extends ChainedAction {
 	private String speech;
 	private PopupPanelAPI popup;
 
-	public SayWithoutAnimationAction(BaseAction parent, int objId, String speech) {
-		super(parent, parent.getApi());
+	public SayWithoutAnimationAction(BaseAction parent, int objId, String speech, boolean isLinear) {
+		super(parent, parent.getApi(), isLinear);
 
 		this.speech = speech;
 		this.popup = null;

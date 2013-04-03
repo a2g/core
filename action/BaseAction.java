@@ -69,14 +69,15 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	abstract public void runGameAction();
 
-	protected BaseAction(BaseAction parent, InternalAPI api) {
+	protected BaseAction(BaseAction parent, InternalAPI api, boolean isLinear) {
 		this.parent = parent;
 		this.callbacks = null;
 		this.api = api;
 		if(api!=null)
 		{
-			this.systemAnimation = api.getFactory().createSystemAnimation(this);
-		}else
+			this.systemAnimation = api.getFactory().createSystemAnimation(this, isLinear);
+		}
+		else
 		{
 			throw new NullPointerException();
 		}
@@ -148,15 +149,17 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	// plain..
 	public ChainedAction playAnimation(String  animationCode) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 
 		return a;
 	}
 
 	public ChainedAction playAnimation(String  animationCode, int delay) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 
 		a.setDelay(delay);
 		return a;
@@ -165,16 +168,18 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	// simple backwards
 	public ChainedAction playAnimationBackwards(String  animationCode) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 
 		a.setBackwards(true);
 		return a;
 	}
 
 	public ChainedAction playAnimationBackwards(String  animationCode, int delay) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 
 		a.setBackwards(true);
 		a.setDelay(delay);
@@ -183,16 +188,18 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	// simple hold last frame
 	public ChainedAction playAnimationHoldLastFrame(String  animationCode) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 
 		a.setHoldLastFrame(true);
 		return a;
 	}
 
 	public ChainedAction playAnimationHoldLastFrame(String  animationCode, int delay) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 
 		a.setHoldLastFrame(true);
 		a.setDelay(delay);
@@ -201,16 +208,18 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	// simple non blocking
 	public ChainedAction playAnimationNonBlocking(String  animationCode) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 
 		a.setNonBlocking(true);
 		return a;
 	}
 
 	public ChainedAction playAnimationNonBlocking(String  animationCode, int delay) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 
 		a.setNonBlocking(true);
 		a.setDelay(delay);
@@ -219,8 +228,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	// double combo1of3: backwards + hold last frame
 	public ChainedAction playAnimationBackwardsHoldLastFrame(String  animationCode) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode,isLinear);
 
 		a.setBackwards(true);
 		a.setHoldLastFrame(true);
@@ -228,8 +238,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	public ChainedAction playAnimationBackwardsHoldLastFrame(String  animationCode, int delay) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 
 		a.setBackwards(true);
 		a.setHoldLastFrame(true);
@@ -239,8 +250,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	// double combo2of3: backwards + nonblocking
 	public ChainedAction playAnimationBackwardsNonBlocking(String  animationCode) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 
 		a.setBackwards(true);
 		a.setNonBlocking(true);
@@ -248,8 +260,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	public ChainedAction playAnimationBackwardsNonBlocking(String  animationCode, int delay) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 
 		a.setBackwards(true);
 		a.setNonBlocking(true);
@@ -259,8 +272,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	// double combo2of3: holdLastFrame + nonblocking
 	public ChainedAction playAnimationHoldLastFrameNonBlocking(String  animationCode) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode,isLinear);
 
 		a.setHoldLastFrame(true);
 		a.setNonBlocking(true);
@@ -268,8 +282,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	public ChainedAction playAnimationHoldLastFrameNonBlocking(String  animationCode, int delay) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 
 		a.setHoldLastFrame(true);
 		a.setNonBlocking(true);
@@ -279,8 +294,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	// ..and one method with the whole lot!
 	public ChainedAction playAnimationBackwardsHoldLastFrameNonBlocking(String  animationCode) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 
 		a.setBackwards(true);
 		a.setHoldLastFrame(true);
@@ -289,8 +305,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	public ChainedAction playAnimationBackwardsHoldLastFrameNonBlocking(String  animationCode, int delay) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 
 		a.setBackwards(true);
 		a.setHoldLastFrame(true);
@@ -300,8 +317,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	public ChainedAction playAnimationRepeatWhilstVisible(String  animationCode) {
+		boolean isLinear = true;
 		return new PlayAnimationRepeatWhilstVisibleAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 	}
 
 	public ChainedAction say(short objectCode, String speech) {
@@ -317,8 +335,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 	
 	public ChainedAction sayWithoutAnimation(short objectCode, String speed) {
+		boolean isLinear = true;
 		return new SayWithoutAnimationAction(
-				this, objectCode, speed);
+				this, objectCode, speed, isLinear);
 	}
 
 	public ChainedAction setActiveAnimation(String  animationCode) {
@@ -356,12 +375,12 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	public ChainedAction setDisplayName(short objectCode, String displayName) {
 		return new SetDisplayNameAction(this,
-				objectCode, displayName);
+				objectCode, displayName, true);
 	}
 
 	public ChainedAction setInventoryVisible(int inventoryId, boolean isVisible) {
 		return new SetInventoryVisibleAction(
-				this, inventoryId, isVisible);
+				this, inventoryId, isVisible, true);
 	}
 
 	public void setParent(BaseAction parent) {
@@ -370,20 +389,20 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	public ChainedAction setTalkingAnimation(String  animationCode) {
 		return new SetTalkingAnimationAction(
-				this, animationCode);
+				this, animationCode, true);
 		// return toReturn;
 	}
 
 	public ChainedAction setTalkingAnimationDelay(short objectCode, int delay) {
 		return new SetTalkingAnimationDelayAction(
-				this, objectCode, delay);
+				this, objectCode, delay, true);
 		// return toReturn;
 	}
 	;
 
 	public ChainedAction setVisible(short objectCode, boolean isVisible) {
 		return new SetVisibleAction(this,
-				objectCode, isVisible);
+				objectCode, isVisible, true);
 	}
 
 
@@ -424,83 +443,118 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	public ChainedAction setInitialAnimation(String  animationCode) {
 		return new SetInitialAnimationAction(this,
-				animationCode);
+				animationCode, true);
 	}
 
 	public ChainedAction walkTo( double x, double y) {
-		return new WalkToAction(this, api.getDefaultWalker(), x, y,0, false);
+		boolean isLinear = true;
+		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(), x, y,0, isLinear);
+		return a;
 	}
 
 	public ChainedAction walkTo(PointF point) {
-		return new WalkToAction(this, api.getDefaultWalker(),
-				point.getX(), point.getY(),0, false);
+		boolean isLinear = true;
+		WalkToAction a =  new WalkToAction(this, api.getDefaultWalker(),
+				point.getX(), point.getY(),0, isLinear);
+		return a;
 	}
 
 	public ChainedAction walkTo(double x, double y, int delay) {
-		return new WalkToAction(this, api.getDefaultWalker(), x, y, delay, false);
+		boolean isLinear = true;
+		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(), x, y, delay, isLinear);
+		return a;
 	}
 
 	public ChainedAction walkTo( PointF point, int delay) {
-		return new WalkToAction(this, api.getDefaultWalker(), point.getX(), point.getY(), delay, false);
+		boolean isLinear = true;
+		return new WalkToAction(this, api.getDefaultWalker(), point.getX(), point.getY(), delay, isLinear);
 	}
 
 
 	public ChainedAction walkToNonBlocking(double x, double y) {
-		return new WalkToAction(this, api.getDefaultWalker(), x, y,0, true);
+		boolean isLinear = true;
+		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(), x, y,0, isLinear);
+		a.setParallel(true);
+		return a;
 	}
 
 	public ChainedAction walkToNonBlocking( PointF point) {
-		return new WalkToAction(this, api.getDefaultWalker(),
-				point.getX(), point.getY(),0, true);
+		boolean isLinear = true;
+		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(),
+				point.getX(), point.getY(), 0, isLinear);
+		a.setParallel(true);
+		return a;
 	}
 
 	public ChainedAction walkToNonBlocking( double x, double y, int delay) {
-		return new WalkToAction(this, api.getDefaultWalker(), x,
-				y, delay, true);
+		boolean isLinear = true;
+		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(), x,
+				y, delay, isLinear);
+		a.setParallel(true);
+		return a;
 	}
 
 	public ChainedAction walkToNonBlocking(PointF point, int delay) {
-		return new WalkToAction(this, api.getDefaultWalker(),
-				point.getX(), point.getY(), delay, true);
+		boolean isLinear = true;
+		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(),
+				point.getX(), point.getY(), delay, isLinear);
+		a.setParallel(true);
+		return a;
 	}
 	
 	
 
 	public ChainedAction walkTo(short objectCode, double x, double y) {
-		return new WalkToAction(this, objectCode, x, y,0, false);
+		boolean isLinear = true;
+		return new WalkToAction(this, objectCode, x, y, 0, isLinear);
 	}
 
 	public ChainedAction walkTo(short objectCode, PointF point) {
+		boolean isLinear = true;
 		return new WalkToAction(this, objectCode,
-				point.getX(), point.getY(),0, false);
+				point.getX(), point.getY(),0, isLinear);
 	}
 
 	public ChainedAction walkTo(short objectCode, double x, double y, int delay) {
-		return new WalkToAction(this, objectCode, x, y, delay, false);
+		boolean isLinear = true;
+		return new WalkToAction(this, objectCode, x, y, delay, isLinear);
 	}
 
 	public ChainedAction walkTo(short objectCode, PointF point, int delay) {
-		return new WalkToAction(this, objectCode, point.getX(), point.getY(), delay, false);
+		boolean isLinear = true;
+		return new WalkToAction(this, objectCode, point.getX(), point.getY(), delay, isLinear);
 	}
 
 
 	public ChainedAction walkToNonBlocking(short objectCode, double x, double y) {
-		return new WalkToAction(this, objectCode, x, y,0, true);
+		boolean isLinear = true;
+		WalkToAction a = new WalkToAction(this, objectCode, x, y,0, isLinear);
+		a.setParallel(true);
+		return a;
 	}
 
 	public ChainedAction walkToNonBlocking(short objectCode, PointF point) {
-		return new WalkToAction(this, objectCode,
-				point.getX(), point.getY(),0, true);
+		boolean isLinear = true;
+		WalkToAction a = new WalkToAction(this, objectCode,
+				point.getX(), point.getY(),0, isLinear);
+		a.setParallel(true);
+		return a;
 	}
 
 	public ChainedAction walkToNonBlocking(short objectCode, double x, double y, int delay) {
-		return new WalkToAction(this, objectCode, x,
-				y, delay, true);
+		boolean isLinear = true;
+		WalkToAction a = new WalkToAction(this, objectCode, x,
+				y, delay, isLinear);
+		a.setParallel(true);
+		return a;
 	}
 
 	public ChainedAction walkToNonBlocking(short objectCode, PointF point, int delay) {
-		return new WalkToAction(this, objectCode,
-				point.getX(), point.getY(), delay, true);
+		boolean isLinear = true;
+		WalkToAction a = new WalkToAction(this, objectCode,
+				point.getX(), point.getY(), delay, isLinear);
+		a.setParallel(true);
+		return a;
 	}
 
 	public ChainedAction showTitleCard(String text, ColorEnum color)
@@ -519,8 +573,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	public ChainedAction playAnimationNonBlockingHoldLastFrame(String  animationCode) {
+		boolean isLinear = true;
 		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode);
+				this, animationCode, isLinear);
 
 		a.setHoldLastFrame(true);
 		a.setNonBlocking(true);

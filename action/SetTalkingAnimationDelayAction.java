@@ -24,8 +24,8 @@ import com.github.a2g.core.action.ChainedAction;
 public class SetTalkingAnimationDelayAction extends ChainedAction {
 	private short objId;
 	private int delay;
-	public SetTalkingAnimationDelayAction(BaseAction parent, short objId, int delay) {
-		super(parent, parent.getApi());
+	public SetTalkingAnimationDelayAction(BaseAction parent, short objId, int delay, boolean isLinear) {
+		super(parent, parent.getApi(), isLinear);
 		this.objId = objId;
 		this.delay = delay;
 	}

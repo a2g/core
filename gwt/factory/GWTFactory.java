@@ -118,8 +118,8 @@ implements FactoryAPI
 		return new VerbsPanel(master, bus, api, foreground, background);
 	}
 	@Override
-	public SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI callbacks) {
-		return new GWTSystemAnimation(callbacks);
+	public SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI callbacks, boolean isLinear) {
+		return new GWTSystemAnimation(callbacks, isLinear);
 	}
 	@Override
 	public TimerAPI createSystemTimer(TimerCallbackAPI cbs) {

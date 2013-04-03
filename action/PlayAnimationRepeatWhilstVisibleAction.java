@@ -25,8 +25,8 @@ import com.github.a2g.core.action.ChainedAction;
 public class PlayAnimationRepeatWhilstVisibleAction extends ChainedAction {
 	private Animation anim;
 
-	public PlayAnimationRepeatWhilstVisibleAction(BaseAction parent, String animationCode) {
-		super(parent, parent.getApi());
+	public PlayAnimationRepeatWhilstVisibleAction(BaseAction parent, String animationCode, boolean isLinear) {
+		super(parent, parent.getApi(), isLinear);
 		this.anim = getApi().getAnimation(animationCode);
 	}
 

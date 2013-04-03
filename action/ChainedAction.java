@@ -22,9 +22,9 @@ import com.github.a2g.core.interfaces.InternalAPI;
 
 public abstract class ChainedAction extends BaseAction
 {
-	protected ChainedAction(BaseAction parent, InternalAPI api)
+	protected ChainedAction(BaseAction parent, InternalAPI api, boolean isLinear)
 	{
-		super(parent, api);
+		super(parent, api, isLinear);
 	}
 }
 

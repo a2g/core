@@ -12,7 +12,7 @@ public interface FactoryAPI {
 	TitleCardPanelAPI createTitleCardPanel(ColorEnum foreground, ColorEnum background);
 	VerbsPanelAPI createVerbsPanel(MouseToVerbsPresenterAPI api, ColorEnum foreground, ColorEnum background);
 	PopupPanelAPI createPopupPanel(String string, ColorEnum color, BaseAction toCancel);
-	SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI cbs);
+	SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI cbs, boolean isLinear);
 	TimerAPI createSystemTimer(TimerCallbackAPI cbs);
 	MasterPanelAPI createMasterPanel(int width, int height, ColorEnum color);
 	DialogTreePanelAPI createDialogTreePanel(EventBus bus, ColorEnum foreground, ColorEnum background, ColorEnum rollover);

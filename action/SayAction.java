@@ -39,7 +39,7 @@ public class SayAction extends ChainedAction {
 	private int numberOfFramesTotal;
 
 	public SayAction(BaseAction parent, short objId, String fullSpeech) {
-		super(parent, parent.getApi());
+		super(parent, parent.getApi(), true);
 		this.objId = objId;
 		this.popup = null;
 		this.anim = null;

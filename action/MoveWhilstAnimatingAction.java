@@ -34,8 +34,8 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 	private int delay;
 	private boolean isParallel;
 
-	public MoveWhilstAnimatingAction(BaseAction parent, short objId, double x, double y, int delay, boolean isParallel) {
-		super(parent, parent.getApi());
+	public MoveWhilstAnimatingAction(BaseAction parent, short objId, double x, double y, int delay, boolean isParallel, boolean isLinear) {
+		super(parent, parent.getApi(), isLinear);
 		this.obj = getApi().getObject(objId);
 		this.endX = x;
 		this.endY = y;

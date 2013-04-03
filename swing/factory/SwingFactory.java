@@ -113,9 +113,9 @@ implements FactoryAPI
 		return new VerbsPanel(master, api, fore, back);
 	}
 	@Override
-	public SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI callbacks)
+	public SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI callbacks, boolean isLinear)
 	{
-		return new SwingSystemAnimation(callbacks);
+		return new SwingSystemAnimation(callbacks, isLinear);
 	}
 	@Override
 	public TimerAPI createSystemTimer(TimerCallbackAPI cbs) {

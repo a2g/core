@@ -24,16 +24,21 @@ extends com.github.a2g.core.swing.animation.Animation
 implements SystemAnimationAPI
 {
 	SystemAnimationCallbackAPI callbacks;
-	public SwingSystemAnimation(SystemAnimationCallbackAPI callbacks)
+	boolean isLinear;
+	public SwingSystemAnimation(SystemAnimationCallbackAPI callbacks, boolean isLinear)
 	{
+		this.isLinear = isLinear;
 		this.callbacks = callbacks;
 	}
 	
 	@Override
 	protected 
-	double interpolate(double linear)
+	double interpolate(double progress)
 	{
-		return linear;
+		if(isLinear)
+			return progress;
+		else
+			return super.interpolate(progress);
 	}
 
 	@Override

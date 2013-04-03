@@ -36,14 +36,18 @@ extends ChainedAction
 	private int delay;
 	private boolean isParallel;
 
-	public WalkToAction(BaseAction parent, short objId, double x, double y, int delay, boolean isParallel) {
-		super(parent, parent.getApi());
+	public WalkToAction(BaseAction parent, short objId, double x, double y, int delay, boolean isLinear) {
+		super(parent, parent.getApi(), isLinear);
 		this.obj = getApi().getObject(objId);
 		this.endX = x;
 		this.endY = y;
 		this.delay = delay;
-		this.isParallel = isParallel;
 		// TODO Auto-generated constructor stub
+	}
+	
+	void setParallel(boolean isParallel)
+	{
+		this.isParallel= isParallel;
 	}
 
 	@Override
@@ -95,7 +99,7 @@ extends ChainedAction
 		} else {
 			this.framesInAnim = 0;
 		}
-		this.run((int) (dist * (10+delay) * 1000.0));
+		this.run((int) (dist * (5+delay) * 1000.0));
 		
 	}
 

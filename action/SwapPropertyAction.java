@@ -29,7 +29,7 @@ public class SwapPropertyAction extends ChainedAction {
 	private SwapType type;
 
 	public SwapPropertyAction(BaseAction parent, short objId1, short objId2, SwapType type) {
-		super(parent, parent.getApi());
+		super(parent, parent.getApi(), true);
 		this.objId1 = objId1;
 		;
 		this.objId2 = objId2;

@@ -25,8 +25,8 @@ public class SetDisplayNameAction extends ChainedAction {
 	private short objId;
 	private String displayName;
 
-	public SetDisplayNameAction(BaseAction parent, short objId, String displayName) {
-		super(parent, parent.getApi());
+	public SetDisplayNameAction(BaseAction parent, short objId, String displayName, boolean isLinear) {
+		super(parent, parent.getApi(), isLinear);
 		this.displayName = displayName;
 		this.objId = objId;
 	}

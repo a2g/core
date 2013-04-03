@@ -23,12 +23,23 @@ public class GWTSystemAnimation
 extends com.google.gwt.animation.client.Animation
 implements SystemAnimationAPI
 {
+	boolean isLinear;
 	SystemAnimationCallbackAPI callbacks;
-	public GWTSystemAnimation(SystemAnimationCallbackAPI callbacks)
+	public GWTSystemAnimation(SystemAnimationCallbackAPI callbacks, boolean isLinear)
 	{
+		this.isLinear  = isLinear;
 		this.callbacks = callbacks;
 	}
 
+	@Override
+	protected double interpolate(double progress) 
+	{
+		if(isLinear)
+			return progress;
+		else
+		    return (1 + Math.cos(Math.PI + progress * Math.PI)) / 2;
+	}
+	
 	@Override
 	protected void onUpdate(double progress) {
 		callbacks.onUpdate(progress);

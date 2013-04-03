@@ -25,7 +25,7 @@ public class SetBaseMiddleXAction extends ChainedAction {
 	private short objId;
 	private double x;
 	public SetBaseMiddleXAction(BaseAction parent, short objId, double x) {
-		super(parent, parent.getApi());
+		super(parent, parent.getApi(), true);
 		this.objId = objId;
 		this.x = x;
 	}

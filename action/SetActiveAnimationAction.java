@@ -25,7 +25,7 @@ import com.github.a2g.core.action.ChainedAction;
 public class SetActiveAnimationAction extends ChainedAction {
 	private String animId;
 	public SetActiveAnimationAction(BaseAction parent, String animationCode) {
-		super(parent, parent.getApi());
+		super(parent, parent.getApi(), true);
 		this.animId = animationCode;
 	}
 

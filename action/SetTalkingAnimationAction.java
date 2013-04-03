@@ -25,8 +25,8 @@ import com.github.a2g.core.action.ChainedAction;
 public class SetTalkingAnimationAction extends ChainedAction {
 	private String animId;
 
-	public SetTalkingAnimationAction(BaseAction parent, String animationCode) {
-		super(parent, parent.getApi());
+	public SetTalkingAnimationAction(BaseAction parent, String animationCode, boolean isLinear) {
+		super(parent, parent.getApi(), isLinear);
 		this.animId = animationCode;
 	}
 

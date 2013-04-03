@@ -27,8 +27,8 @@ public class SetVisibleAction extends ChainedAction {
 	private short objId;
 	private boolean isVisible;
 
-	public SetVisibleAction(BaseAction parent, short objId, boolean isVisible) {
-		super(parent, parent.getApi());
+	public SetVisibleAction(BaseAction parent, short objId, boolean isVisible, boolean isLinear) {
+		super(parent, parent.getApi(), isLinear);
 		this.objId = objId;
 		this.isVisible = isVisible;
 	}

@@ -23,8 +23,8 @@ import com.github.a2g.core.action.ChainedAction;
 
 public class SetInitialAnimationAction extends ChainedAction {
 	private String animId;
-	public SetInitialAnimationAction(BaseAction parent, String animationCode) {
-		super(parent, parent.getApi());
+	public SetInitialAnimationAction(BaseAction parent, String animationCode, boolean isLinear) {
+		super(parent, parent.getApi(), isLinear);
 		this.animId = animationCode;
 	}
 

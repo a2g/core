@@ -26,7 +26,7 @@ public abstract class BaseDialogTreeAction
 extends ChainedAction {
 
 	BaseDialogTreeAction(BaseAction parent, InternalAPI api) {
-		super(parent, api);
+		super(parent, api, true);
 
 	}
 

@@ -27,7 +27,7 @@ public class WaitForFrameAction extends ChainedAction {
 	private SceneObject object;
 
 	public WaitForFrameAction(BaseAction parent, short objectId, int frame) {
-		super(parent, parent.getApi());
+		super(parent, parent.getApi(), true);
 		this.frame = frame;
 		this.object = getApi().getObject(
 				objectId);

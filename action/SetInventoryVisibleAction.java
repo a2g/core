@@ -26,8 +26,8 @@ public class SetInventoryVisibleAction extends ChainedAction {
 	private int invId;
 	private boolean isVisible;
 
-	public SetInventoryVisibleAction(BaseAction parent, int invId, boolean isVisible) {
-		super(parent, parent.getApi());
+	public SetInventoryVisibleAction(BaseAction parent, int invId, boolean isVisible, boolean isLinear) {
+		super(parent, parent.getApi(), isLinear);
 		this.invId = invId;
 		this.isVisible = isVisible;
 	}
