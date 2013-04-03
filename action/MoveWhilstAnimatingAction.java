@@ -90,6 +90,11 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
+		if(progress>0 && progress <1)
+		{
+
+			progress = progress*1.0;
+		}
 		double x = this.startX
 				+ progress
 				* (this.endX
@@ -107,7 +112,10 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 				? framesPlayedSoFar
 						% this.framesInAnim
 						: 0;
-
+		// The current animation is set every frame 
+		// because of the quirk in Base Action where the next action is
+		// executed before the ladt one finished
+		this.obj.setCurrentAnimation(anim.getTextualId());
 		this.obj.setCurrentFrame(i);
 	}
 
