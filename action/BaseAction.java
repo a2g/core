@@ -474,7 +474,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	public ChainedAction walkToNonBlocking(double x, double y) {
 		boolean isLinear = true;
 		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(), x, y,0, isLinear);
-		a.setParallel(true);
+		a.setNonBlocking(true);
 		return a;
 	}
 
@@ -482,7 +482,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		boolean isLinear = true;
 		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(),
 				point.getX(), point.getY(), 0, isLinear);
-		a.setParallel(true);
+		a.setNonBlocking(true);
 		return a;
 	}
 
@@ -490,7 +490,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		boolean isLinear = true;
 		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(), x,
 				y, delay, isLinear);
-		a.setParallel(true);
+		a.setNonBlocking(true);
 		return a;
 	}
 
@@ -498,7 +498,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		boolean isLinear = true;
 		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(),
 				point.getX(), point.getY(), delay, isLinear);
-		a.setParallel(true);
+		a.setNonBlocking(true);
 		return a;
 	}
 	
@@ -529,7 +529,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	public ChainedAction walkToNonBlocking(short objectCode, double x, double y) {
 		boolean isLinear = true;
 		WalkToAction a = new WalkToAction(this, objectCode, x, y,0, isLinear);
-		a.setParallel(true);
+		a.setNonBlocking(true);
 		return a;
 	}
 
@@ -537,7 +537,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		boolean isLinear = true;
 		WalkToAction a = new WalkToAction(this, objectCode,
 				point.getX(), point.getY(),0, isLinear);
-		a.setParallel(true);
+		a.setNonBlocking(true);
 		return a;
 	}
 
@@ -545,7 +545,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		boolean isLinear = true;
 		WalkToAction a = new WalkToAction(this, objectCode, x,
 				y, delay, isLinear);
-		a.setParallel(true);
+		a.setNonBlocking(true);
 		return a;
 	}
 
@@ -553,7 +553,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		boolean isLinear = true;
 		WalkToAction a = new WalkToAction(this, objectCode,
 				point.getX(), point.getY(), delay, isLinear);
-		a.setParallel(true);
+		a.setNonBlocking(true);
 		return a;
 	}
 
@@ -587,6 +587,22 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		SetValueAction a = new SetValueAction(this, string, i);
 		return a;
 	}
+	
+	public ChainedAction moveWhilstAnimating(short objId, double x, double y)
+	{
+		boolean isLinear = true;
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear); 
+		return a;
+	}
+	
+	public ChainedAction moveWhilstAnimatingNonBlocking(short objId, double x, double y)
+	{
+		boolean isLinear = true;
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear); 
+		a.setNonBlocking(true);
+		return a;
+	}
+
 	
 }
 

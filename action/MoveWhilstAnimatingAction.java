@@ -22,34 +22,52 @@ import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.action.ChainedAction;
 
-public class MoveWhilstAnimatingAction extends ChainedAction {
-	private SceneObject obj;
-	private double startX;
-	private double startY;
-	private double endX;
-	private double endY;
-	private Animation anim;
-	private int framesInAnim;
-	private int framesPlayedDuringWalk;
-	private int delay;
-	private boolean isParallel;
+public class MoveWhilstAnimatingAction extends ChainedAction 
+{
+	private SceneObject obj;// set in constructor
 
-	public MoveWhilstAnimatingAction(BaseAction parent, short objId, double x, double y, int delay, boolean isParallel, boolean isLinear) {
+	private double endX;// set via setters
+	private double endY;// set via setters
+	private double startX;// set via setters
+	private double startY;// set via setters
+	private int animatingDelay;// set via setters
+	private int movingDelay;// set via setters
+	private boolean isParallel;// set via setters
+	
+	private Animation anim; // set in runGameAction
+	private int framesInAnim;// set in runGameAction
+	private int framesPlayedDuringWalk;// set in runGameAction
+	
+	public MoveWhilstAnimatingAction(BaseAction parent, short objId, double endX, double endY, boolean isLinear) 
+	{
 		super(parent, parent.getApi(), isLinear);
 		this.obj = getApi().getObject(objId);
-		this.endX = x;
-		this.endY = y;
-		this.delay = delay;
-		this.isParallel = isParallel;
-		// TODO Auto-generated constructor stub
+		this.animatingDelay = 0;
+		this.movingDelay = 0;
+		this.isParallel = false;
+		this.endX = endX;
+		this.endY = endY;
+		this.startX = 0.0;
+		this.startY = 0.0;
 	}
-
+	
+	SceneObject getObject(){return this.obj;}
+	double getEndX(){ return endX;}
+	double getEndY(){ return endY;}
+	
+	void setNonBlocking(boolean isParallel){ this.isParallel = isParallel;}
+	void setAnimatingDelay(int delay){ this.animatingDelay = delay;}
+	void setMovingDelay(int delay){ this.movingDelay = delay;}
+	
 	@Override
-	public void runGameAction() {
+	public void runGameAction() 
+	{
 
+		this.anim = this.obj.getAnimations().at(obj.getCurrentAnimation());
+		startX = getObject().getBaseMiddleX();
+		startY = getObject().getBaseMiddleY();
+		
 		// distance and time calculations
-		this.startX = this.obj.getBaseMiddleX();
-		this.startY = this.obj.getBaseMiddleY();
 		double diffX = this.startX - this.endX;
 		System.out.println(" walkto " + startX + " " + endX);
 		double diffY = this.startY - this.endY;
@@ -58,42 +76,15 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 		double dist = Math.sqrt(
 				diffXSquared + diffYSquared);
 
-		this.framesPlayedDuringWalk = (int) (dist
-				* 40);
+		this.framesPlayedDuringWalk = (int) (dist* 40 + animatingDelay);
 
-		// anim
-		String anim = "";
-		int width = getApi().getSceneGui().getWidth();
-		int height = getApi().getSceneGui().getHeight();
-
-		if ((diffX * width) * (diffX * width)
-				> (diffY * height)
-				* (diffY * height)) {
-			if (this.endX < this.startX) {
-				anim = this.obj.getSpecialAnimation(
-						com.github.a2g.core.interfaces.SceneAPI.Special.West);
-			} else {
-				anim = this.obj.getSpecialAnimation(
-						com.github.a2g.core.interfaces.SceneAPI.Special.East);
-			}
-		} else {
-			if (this.endY < this.startY) {
-				anim = this.obj.getSpecialAnimation(
-						com.github.a2g.core.interfaces.SceneAPI.Special.North);
-			} else {
-				anim = this.obj.getSpecialAnimation(
-						com.github.a2g.core.interfaces.SceneAPI.Special.South);
-			}
-		}
-		this.obj.setCurrentAnimation(anim);
-		this.anim = this.obj.getAnimations().at(
-				anim);
 		if (this.anim != null) {
 			this.framesInAnim = this.anim.getLength();
 		} else {
 			this.framesInAnim = 0;
 		}
-		this.run((int) (dist * (10+delay) * 1000.0));
+		int milliSeconds = (int)(dist * (5+movingDelay) * 1000.0);
+		this.run(milliSeconds);
 		
 	}
 
@@ -121,12 +112,8 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 	}
 
 	@Override // method in animation
-	protected void onCompleteGameAction() {
-
-		String anim = this.obj.getSpecialAnimation(
-				com.github.a2g.core.interfaces.SceneAPI.Special.South);
-
-		this.obj.setCurrentAnimation(anim);
+	protected void onCompleteGameAction() 
+	{
 		this.obj.setCurrentFrame(0);
 	}
 

@@ -18,55 +18,27 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.objectmodel.Animation;
-import com.github.a2g.core.objectmodel.SceneObject;
-import com.github.a2g.core.action.ChainedAction;
-
 public class WalkToAction 
-extends ChainedAction 
+extends MoveWhilstAnimatingAction 
 {
-	private SceneObject obj;
-	private double startX;
-	private double startY;
-	private double endX;
-	private double endY;
-	private Animation anim;
-	private int framesInAnim;
-	private int framesPlayedDuringWalk;
-	private int delay;
-	private boolean isParallel;
 
-	public WalkToAction(BaseAction parent, short objId, double x, double y, int delay, boolean isLinear) {
-		super(parent, parent.getApi(), isLinear);
-		this.obj = getApi().getObject(objId);
-		this.endX = x;
-		this.endY = y;
-		this.delay = delay;
-		// TODO Auto-generated constructor stub
+
+	public WalkToAction(BaseAction parent, short objId, double endX, double endY, int delay, boolean isLinear)
+	{
+		super(parent, objId, endX, endY, isLinear);
+		
 	}
 	
-	void setParallel(boolean isParallel)
-	{
-		this.isParallel= isParallel;
-	}
-
 	@Override
-	public void runGameAction() {
-
-		// distance and time calculations
-		this.startX = this.obj.getBaseMiddleX();
-		this.startY = this.obj.getBaseMiddleY();
-		double diffX = this.startX - this.endX;
-		System.out.println(" walkto " + startX + " " + endX);
-		double diffY = this.startY - this.endY;
-		double diffXSquared = diffX * diffX;
-		double diffYSquared = diffY * diffY;
-		double dist = Math.sqrt(
-				diffXSquared + diffYSquared);
-
-		this.framesPlayedDuringWalk = (int) (dist
-				* 40);
-
+	public void runGameAction() 
+	{
+		double startX = super.getObject().getBaseMiddleX();
+		double startY = super.getObject().getBaseMiddleY();
+		
+		double diffX = startX - getEndX();
+		System.out.println(" walkto " + startX + " " + getEndX());
+		double diffY = startY - getEndY();
+			
 		// anim
 		String anim = "";
 		int width = getApi().getSceneGui().getWidth();
@@ -75,71 +47,33 @@ extends ChainedAction
 		if ((diffX * width) * (diffX * width)
 				> (diffY * height)
 				* (diffY * height)) {
-			if (this.endX < this.startX) {
-				anim = this.obj.getSpecialAnimation(
+			if (getEndX() < startX) {
+				anim = super.getObject().getSpecialAnimation(
 						com.github.a2g.core.interfaces.SceneAPI.Special.West);
 			} else {
-				anim = this.obj.getSpecialAnimation(
+				anim = super.getObject().getSpecialAnimation(
 						com.github.a2g.core.interfaces.SceneAPI.Special.East);
 			}
 		} else {
-			if (this.endY < this.startY) {
-				anim = this.obj.getSpecialAnimation(
+			if (getEndY() < startY) {
+				anim = super.getObject().getSpecialAnimation(
 						com.github.a2g.core.interfaces.SceneAPI.Special.North);
 			} else {
-				anim = this.obj.getSpecialAnimation(
+				anim = super.getObject().getSpecialAnimation(
 						com.github.a2g.core.interfaces.SceneAPI.Special.South);
 			}
 		}
-		this.obj.setCurrentAnimation(anim);
-		this.anim = this.obj.getAnimations().at(
-				anim);
-		if (this.anim != null) {
-			this.framesInAnim = this.anim.getLength();
-		} else {
-			this.framesInAnim = 0;
-		}
-		this.run((int) (dist * (5+delay) * 1000.0));
-		
+		super.getObject().setCurrentAnimation(anim);
+		super.runGameAction();
 	}
-
-	@Override
-	protected void onUpdateGameAction(double progress) {
-		double x = this.startX
-				+ progress
-				* (this.endX
-						- this.startX);
-		double y = this.startY
-				+ progress
-				* (this.endY
-						- this.startY);
-
-		this.obj.setBaseMiddleX(x);
-		this.obj.setBaseMiddleY(y);
-		int framesPlayedSoFar = (int) (this.framesPlayedDuringWalk
-				* progress);
-		int i = (this.framesInAnim != 0)
-				? framesPlayedSoFar
-						% this.framesInAnim
-						: 0;
-
-		this.obj.setCurrentFrame(i);
-	}
-
-	@Override // method in animation
+	
+	@Override // on complete walking
 	protected void onCompleteGameAction() {
-
-		String anim = this.obj.getSpecialAnimation(
+		super.onCompleteGameAction();
+		String south = super.getObject().getSpecialAnimation(
 				com.github.a2g.core.interfaces.SceneAPI.Special.South);
 
-		this.obj.setCurrentAnimation(anim);
-		this.obj.setCurrentFrame(0);
+		super.getObject().setCurrentAnimation(south);
+		super.getObject().setCurrentFrame(0);
 	}
-
-	@Override
-	public boolean isParallel() {
-
-		return isParallel;
-	}
-
 }
