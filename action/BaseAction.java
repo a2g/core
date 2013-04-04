@@ -126,6 +126,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		// It might seem like it's a better idea to
 		// run this actions action completion handler
 		// before calling startTheNextAction.
+		//
 		// However doDialogBranchAction starts execution of another animation tree
 		// and if order is 1) onCompleteGameAction 2) startTheNextAction,
 		// then on startTheNextAction starts triggering animations in the
@@ -133,12 +134,14 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		// giving effectively two simultaneous threads of
 		// executions of the Action chain. This results in an observed bug
 		// where only every second Action runs.
+		//
 		// So either 1. a second action runner instance is needed for dialogs. 
 		// Or, 2. call order is kept as startNext, onComplete.
 		// This has a flow on effect that any setting done in 
 		// Action1::runGameAction() can be overridden by Action2::onCompleted()
 		// thus make sure that if changing the scene state is done in runGameAction
 		// make it also do it in onProgress.
+		//
 		this.callbacks.startTheNextAction(this);
 
 		onCompleteGameAction();
