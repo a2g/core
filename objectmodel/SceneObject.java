@@ -262,7 +262,7 @@ public class SceneObject {
 		this.setBaseMiddleX(baseMiddleX);
 	}
 
-	void setY(int y) 
+	public void setY(int y) 
 	{
 		double baseMiddleY = worldToScreenY(y, screenPixelHeight, getCurrentBounds().getTop(), getCurrentBounds().getBottom());
 		this.setBaseMiddleY(baseMiddleY);

@@ -593,17 +593,32 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		SetValueAction a = new SetValueAction(this, string, i);
 		return a;
 	}
-	
-	public ChainedAction moveWhilstAnimating(short objId, double x, double y)
+
+	public ChainedAction moveWhilstAnimatingLinear(short objId, double x, double y)
 	{
 		boolean isLinear = true;
 		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear); 
 		return a;
 	}
 	
-	public ChainedAction moveWhilstAnimatingNonBlocking(short objId, double x, double y)
+	public ChainedAction moveWhilstAnimatingLinearNonBlocking(short objId, double x, double y)
 	{
 		boolean isLinear = true;
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear); 
+		a.setNonBlocking(true);
+		return a;
+	}
+	
+	public ChainedAction moveWhilstAnimating(short objId, double x, double y)
+	{
+		boolean isLinear = false;
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear); 
+		return a;
+	}
+	
+	public ChainedAction moveWhilstAnimatingNonBlocking(short objId, double x, double y)
+	{
+		boolean isLinear = false;
 		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear); 
 		a.setNonBlocking(true);
 		return a;
