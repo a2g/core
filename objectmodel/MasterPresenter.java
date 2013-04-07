@@ -779,7 +779,7 @@ implements InternalAPI
 			SentenceItem sentenceA, SentenceItem sentenceB, double x, double y) {
 
 		BaseAction a = this.callbacks.onDoCommand(
-				this,createChainRootAction(),
+				this, createChainRootAction(),
 				verbAsCode,
 				sentenceA,
 				sentenceB,
