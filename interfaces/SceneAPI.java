@@ -17,7 +17,6 @@
 package com.github.a2g.core.interfaces;
 
 
-import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainedAction;
@@ -36,6 +35,6 @@ public interface SceneAPI  extends ConstantsForAPI
 
 	public ChainedAction onDoCommand(OnDoCommandAPI api, ChainRootAction ba, int verb, SentenceItem objectA, SentenceItem objectB, double x, double y);
 
-	public BaseDialogTreeAction onDialogTree(OnDialogTreeAPI api, BaseAction ba, int branch);
+	public BaseDialogTreeAction onDialogTree(OnDialogTreeAPI api, ChainedAction ba, int branch);
 
 }
