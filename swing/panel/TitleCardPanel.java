@@ -17,10 +17,16 @@
 
 package com.github.a2g.core.swing.panel;
 
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Label;
+import java.awt.LayoutManager;
+
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.InternalAPI;
@@ -31,20 +37,28 @@ import com.github.a2g.core.primitive.ColorEnum;
 public class TitleCardPanel
 extends JPanel implements TitleCardPanelAPI
 {
-	Label panel;
+	Button panel;
 	int width;
 	int height;
 	public TitleCardPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) {
 		{
-			panel = new Label();
-
-			panel.setText("(text not set)");
-			this.add(panel);
-		}
-
-		{
-			BoxLayout layout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
+			//this.setLayout(new GridLayout(3,3));
+		    //this.setLayout(new FlowLayout());
+			BoxLayout layout = new BoxLayout(this, BoxLayout.LINE_AXIS);
 			this.setLayout(layout);
+		}
+		{
+			panel = new Button();
+			panel.se
+		//	panel.setAlignmentX(Label.CENTER_ALIGNMENT);
+			//panel.setAlignmentY(Label.CENTER_ALIGNMENT);
+			panel.setLabel("(text not set)");
+			this.add(panel);
+			this.add(panel);
+			this.add(panel);
+			this.add(panel);
+			this.add(panel);
+			this.add(panel);
 		}
 	}
 
@@ -52,7 +66,7 @@ extends JPanel implements TitleCardPanelAPI
 	public void setText(String text)
 	{
 
-		panel.setText(text);
+		panel.setLabel(text);
 
 	}
 

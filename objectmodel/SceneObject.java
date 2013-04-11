@@ -37,12 +37,10 @@ public class SceneObject {
 	private FrameAndAnimation fak;
 	private com.github.a2g.core.objectmodel.Image currentImage;
 	private boolean visible;
-	private double screenPixelWidth;
-	private double screenPixelHeight;
-	private double baseMiddleY; // needed for moving image around.
-	private double baseMiddleX;
-	private int cachedRawX;
-	private int cachedRawY;
+	private final double screenPixelWidth;
+	private final double screenPixelHeight;
+	private int rawY; // needed for moving image around.
+	private int rawX;
 	private int numberPrefix;
 	private short code;
 	private ColorEnum talkingColor;
@@ -66,8 +64,8 @@ public class SceneObject {
 		// talkingColro deliberately null, so the
 		// default color can be in one spot: the say action
 		this.talkingColor = null;
-		baseMiddleX = 0;// init these to anything
-		baseMiddleY = 0;// init these to anything
+		this.setBaseMiddleX(0);
+		this.setBaseMiddleY(0);
 	}
 
 	public void setNumberPrefix(int number) {
@@ -168,7 +166,7 @@ public class SceneObject {
 			if (current != null
 					&& !current.equals(this)) {
 				if (this.currentImage != null) {
-					this.currentImage.setVisible(false, getCachedLeftTop());
+					this.currentImage.setVisible(false, getRawLeftTop());
 				}
 				this.currentImage = current;
 			}
@@ -176,7 +174,7 @@ public class SceneObject {
 		// 2, but do this always
 		if (this.currentImage != null) {
 			this.currentImage.setVisible(
-					this.visible, getCachedLeftTop());
+					this.visible, getRawLeftTop());
 		}
 
 	}
@@ -227,7 +225,12 @@ public class SceneObject {
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
-
+	
+	Point getRawLeftTop()
+	{
+		return new Point(this.rawX,this.rawY);
+	}
+	
 	static double worldToScreenX(int intX, double screenSpan, int lowerBound, int upperBound )
 	{
 		int rectSpan = upperBound-lowerBound;
@@ -256,64 +259,59 @@ public class SceneObject {
 		return doubleY;
 	}
 	
-	public void setX(int x) 
+	public void setX(int rawX) 
 	{
-		double baseMiddleX = worldToScreenX(x, screenPixelWidth, getCurrentBounds().getLeft(), getCurrentBounds().getRight());
-		this.setBaseMiddleX(baseMiddleX);
+		this.rawX = rawX;
+		if(currentImage!=null)
+		{
+			this.currentImage.setLeftTop(getRawLeftTop());
+		}
 	}
 
-	public void setY(int y) 
+	public void setY(int rawY) 
 	{
-		double baseMiddleY = worldToScreenY(y, screenPixelHeight, getCurrentBounds().getTop(), getCurrentBounds().getBottom());
-		this.setBaseMiddleY(baseMiddleY);
+		this.rawY = rawY;
+		if(currentImage!=null)
+		{
+			this.currentImage.setLeftTop(getRawLeftTop());
+		}
 	}
 
 	public int getX() 
 	{
-		int intX = screenToWorldX(baseMiddleX, screenPixelWidth, getCurrentBounds().getLeft(), getCurrentBounds().getRight());
-		return intX;
+		return this.rawX;
 	}
-
+	
 	public int getY() 
 	{
-		int intY = screenToWorldY(baseMiddleY, screenPixelHeight, getCurrentBounds().getTop(), getCurrentBounds().getBottom());
-		return intY;
+		return this.rawY;
 	}
 	
 	public void setBaseMiddleX(double baseMiddleX)
 	{
-		this.baseMiddleX = baseMiddleX;
-		this.cachedRawX = screenToWorldX(baseMiddleX, screenPixelWidth, getCurrentBounds().getLeft(), getCurrentBounds().getRight());
-		if(currentImage!=null)
-		{
-			this.currentImage.setLeftTop(getCachedLeftTop());
-		}
-	}
-
-	Point getCachedLeftTop()
-	{
-		return new Point(this.cachedRawX,this.cachedRawY);
+		int rawX = screenToWorldX(baseMiddleX, screenPixelWidth, getCurrentBounds().getLeft(), getCurrentBounds().getRight());
+		setX(rawX);
 	}
 	
-	public void setBaseMiddleY(double y)
+	public void setBaseMiddleY(double baseMiddleY)
 	{
-		this.baseMiddleY = y;
-		this.cachedRawY = screenToWorldY(baseMiddleY, screenPixelHeight, getCurrentBounds().getTop(), getCurrentBounds().getBottom());
-		if(currentImage!=null)
-		{
-			this.currentImage.setLeftTop(getCachedLeftTop());
-		}
+		int rawY = screenToWorldY(baseMiddleY, screenPixelHeight, getCurrentBounds().getTop(), getCurrentBounds().getBottom());
+		setY(rawY);
 	}
 
 	
 	public double getBaseMiddleX()
 	{
-		return this.baseMiddleX;
+		double bmx = worldToScreenX(rawX, screenPixelWidth, getCurrentBounds().getLeft(), getCurrentBounds().getRight());
+		
+		return bmx;
 	}
 
 	public double getBaseMiddleY()
 	{
-		return this.baseMiddleY;
+		double bmy = worldToScreenY(rawY, screenPixelHeight, getCurrentBounds().getTop(), getCurrentBounds().getBottom());
+		
+		return bmy;
 	}
 	
 	Rect getCurrentBounds()
@@ -324,6 +322,7 @@ public class SceneObject {
 		}
 		return new Rect(0,0,0,0);
 	}
+	
 	Point getMiddleOfBaseAbsolute(String animTextualId) {
 		int minLeft = 1000;
 		int maxRight = 0;
