@@ -560,7 +560,7 @@ implements InternalAPI
 		callOnPreEntry();
 
 		startCallingOnEveryFrame();
-		this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.OnEnterScene);
+		this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.TitleCardOverOnEnterScene);
 		callOnEnterScene();
 
 	}
@@ -745,13 +745,12 @@ implements InternalAPI
 	}
 
 	@Override
-	public void displayTitleCard(String text, ColorEnum color)
+	public void displayTitleCard(String text)
 	{
 		boolean isEntering = text.length()>0;
 		if(isEntering)
 		{
 			titleCardPresenter.setText(text);
-			titleCardPresenter.setColor(color);
 		}
 		MasterPanelAPI.GuiStateEnum state = masterPanel.getActiveState();
 		state = isEntering? getStateIfEntering(state) : getStateIfExiting(state);

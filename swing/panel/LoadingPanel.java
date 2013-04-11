@@ -20,11 +20,11 @@ package com.github.a2g.core.swing.panel;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.InternalAPI;
@@ -62,8 +62,9 @@ implements LoaderPanelAPI
 				addHandler(api);
 			}
 			{
-				BoxLayout layout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
-				this.setLayout(layout);
+			//	this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+				this.setLayout(new FlowLayout());
+				
 			}
 
 		}

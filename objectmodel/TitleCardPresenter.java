@@ -28,7 +28,6 @@ import com.google.gwt.event.shared.EventBus;
 public class TitleCardPresenter {
 	private TitleCardPanelAPI view;
 	private String text;
-	private ColorEnum color;
 
 	public TitleCardPresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api, MasterPresenterHostAPI parent) {
 		this.text = "";
@@ -43,12 +42,6 @@ public class TitleCardPresenter {
 
 	public void clear() {
 		text = "";
-	}
-
-	public void setColor(ColorEnum color) {
-		this.color = color;
-		view.setColor(this.color);
-
 	}
 
 	public void setPixelSize(int width, int height)

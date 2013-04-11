@@ -563,9 +563,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public ChainedAction showTitleCard(String text, ColorEnum color)
+	public ChainedAction showTitleCard(String text)
 	{
-		return new TitleCardAction(this, text, color);
+		return new TitleCardAction(this, text);
 	}
 
 	public void cancel() {

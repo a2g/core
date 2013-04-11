@@ -33,7 +33,7 @@ public class DialogTreePresenter {
 	public DialogTreePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api) {
 		this.bus = bus;
 		this.theDialogTree = new DialogTree();
-		this.view = api.getFactory().createDialogTreePanel(bus, ColorEnum.Red, ColorEnum.Black, ColorEnum.Purple);
+		this.view = api.getFactory().createDialogTreePanel(bus, ColorEnum.Purple, ColorEnum.Black, ColorEnum.Red);
 		panel.setThing(view);
 		this.dialogTreeTalker = 0;
 	}

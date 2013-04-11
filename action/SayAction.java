@@ -124,7 +124,7 @@ public class SayAction extends ChainedAction {
 		}
 		if(numberOfFramesTotal<2)
 		{
-			getApi().displayTitleCard("error!!", ColorEnum.Black);
+			getApi().displayTitleCard("error!!");
 			assert(false);
 		}
 

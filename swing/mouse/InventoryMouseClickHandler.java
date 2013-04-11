@@ -17,14 +17,14 @@ package com.github.a2g.core.swing.mouse;
 
 
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.MouseAdapter;
 
 import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
 
 
-public class InventoryMouseClickHandler implements MouseListener
+public class InventoryMouseClickHandler extends MouseAdapter
 {
 	private MouseToInventoryPresenterAPI api;
 	public InventoryMouseClickHandler(JPanel parent, MouseToInventoryPresenterAPI api2) {
@@ -36,36 +36,12 @@ public class InventoryMouseClickHandler implements MouseListener
 		return api;
 	}
 
-
+	// use mousePressed (not mouseClicked) so allows half-clicks will also be caught
 	@Override
-	public void mouseClicked(MouseEvent event)
-	{
+	public void mousePressed(MouseEvent e) {
 		api.doClick();
 	}
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
 
 
 }

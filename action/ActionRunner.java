@@ -48,7 +48,7 @@ public class ActionRunner implements ActionCallbackAPI
 
 		if(list.size()>0 && this.list.get(0).getClass()!=TitleCardAction.class)
 		{
-			list.add(0,new TitleCardAction(a,"",ColorEnum.Black));
+			list.add(0,new TitleCardAction(a,""));
 		}
 		processNextListOfParallelActions();
 

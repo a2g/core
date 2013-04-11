@@ -65,15 +65,19 @@ implements MasterPanelAPI
 		hostForTitleCardF = new SwingHostingPanel(); hostForTitleCardF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 
 		sceneCardLayout =null;
+		hostForDialogTreeF.setBackground(new Color(back.r, back.g, back.b));
+		
 
 
 		// will be constructed from two vertical stacks.
 		panelForDialogTreeStack = new JPanel(); panelForDialogTreeStack.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+		panelForDialogTreeStack.setBackground(new Color(back.r, back.g, back.b));
+		
 		{
 			// lay the CL/V/I panel and dialog tree - on top of each other
 			JPanel commandLineAndVerbsAndInventoryF = new JPanel(); commandLineAndVerbsAndInventoryF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-			commandLineAndVerbsAndInventoryF.setBackground(new Color(0,0,255));
-
+			commandLineAndVerbsAndInventoryF.setBackground(new Color(back.r, back.g, back.b));
+			
 			dialogTreeCardLayout = new CardLayout();
 			//dialogTreeCardLayout.setHgap(0);
 			//dialogTreeCardLayout.setVgap(0);

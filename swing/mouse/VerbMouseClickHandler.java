@@ -16,12 +16,12 @@
 package com.github.a2g.core.swing.mouse;
 
 
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
 
 
-public class VerbMouseClickHandler implements MouseListener
+public class VerbMouseClickHandler extends MouseAdapter
 {
 	MouseToVerbsPresenterAPI mouseToPresenter;
 	String displayName;
@@ -36,34 +36,9 @@ public class VerbMouseClickHandler implements MouseListener
 		this.mouseToPresenter = mouseToPresenter;
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent event)
-	{
-		mouseToPresenter.doClick(displayName, textualId, code);
-	}
-
+	// use mousePressed (not mouseClicked) so allows half-clicks will also be caught
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		mouseToPresenter.doClick(displayName, textualId, code);
 	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-
 }

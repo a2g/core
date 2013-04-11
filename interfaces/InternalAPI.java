@@ -28,7 +28,6 @@ import com.github.a2g.core.objectmodel.InventoryPresenter;
 import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.VerbsPresenter;
-import com.github.a2g.core.primitive.ColorEnum;
 
 
 public interface InternalAPI
@@ -82,7 +81,7 @@ extends ImageAddAPI, OnDoCommandAPI{
 	public int getPopupDelay();
 	public void restartReloading();
 
-	public void displayTitleCard(String text, ColorEnum color);
+	public void displayTitleCard(String text);
 
 	public MasterPresenterHostAPI getMasterHostAPI();
 	public FactoryAPI getFactory();

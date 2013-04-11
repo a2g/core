@@ -20,13 +20,7 @@ package com.github.a2g.core.swing.panel;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Label;
-import java.awt.LayoutManager;
-
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.InternalAPI;
@@ -40,24 +34,14 @@ extends JPanel implements TitleCardPanelAPI
 	Button panel;
 	int width;
 	int height;
-	public TitleCardPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) {
-		{
-			//this.setLayout(new GridLayout(3,3));
-		    //this.setLayout(new FlowLayout());
-			BoxLayout layout = new BoxLayout(this, BoxLayout.LINE_AXIS);
-			this.setLayout(layout);
-		}
+	public TitleCardPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) 
+	{
+		this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 		{
 			panel = new Button();
-			panel.se
-		//	panel.setAlignmentX(Label.CENTER_ALIGNMENT);
-			//panel.setAlignmentY(Label.CENTER_ALIGNMENT);
+			panel.setFocusable(false);
+			panel.setBackground(new Color(back.r, back.g, back.b));
 			panel.setLabel("(text not set)");
-			this.add(panel);
-			this.add(panel);
-			this.add(panel);
-			this.add(panel);
-			this.add(panel);
 			this.add(panel);
 		}
 	}
@@ -70,12 +54,13 @@ extends JPanel implements TitleCardPanelAPI
 
 	}
 
+	/*
 	@Override
 	public void setColor(ColorEnum colorEnum)
 	{
 		Color color = new java.awt.Color(255,1,1);
 		panel.setForeground(color);
-	}
+	}*/
 
 	@Override
 	public void setScenePixelSize(int width, int height)

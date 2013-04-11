@@ -24,12 +24,10 @@ import com.github.a2g.core.action.ChainedAction;
 
 public class TitleCardAction extends ChainedAction {
 	String text;
-	ColorEnum color;
 
-	public TitleCardAction(BaseAction parent, String text, ColorEnum color) {
+	public TitleCardAction(BaseAction parent, String text) {
 		super(parent, parent.getApi(), true);
 		this.text = text;
-		this.color = color;
 	}
 
 	@Override
@@ -37,14 +35,14 @@ public class TitleCardAction extends ChainedAction {
 
 		if(text.length()>0)
 		{
-			int totalDuration = getApi().getPopupDelay()*50;
+			int totalDuration = 200*getApi().getPopupDelay();
 
-			getApi().displayTitleCard(text, color);
+			getApi().displayTitleCard(text);
 			this.run(totalDuration);
 		}
 		else
 		{
-			getApi().displayTitleCard("", color);
+			getApi().displayTitleCard("");
 			this.run(1);
 		}
 	}
@@ -56,7 +54,7 @@ public class TitleCardAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		getApi().displayTitleCard("", color);
+		getApi().displayTitleCard("");
 	}
 
 	@Override

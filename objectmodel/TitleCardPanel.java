@@ -49,16 +49,6 @@ implements TitleCardPanelAPI
 	}
 
 	@Override
-	public void setColor(ColorEnum color) {
-		if(color!=null)
-		{
-			DOM.setStyleAttribute(label.getElement(), "color",color.toString());
-			DOM.setStyleAttribute(label.getElement(), "borderColor",color.toString());
-		}
-
-	}
-
-	@Override
 	public void setText(String text) {
 		label.setText(text);
 

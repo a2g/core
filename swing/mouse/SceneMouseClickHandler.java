@@ -16,14 +16,14 @@
 package com.github.a2g.core.swing.mouse;
 
 
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.event.ExecuteCommandEvent;
 import com.github.a2g.core.interfaces.InternalAPI;
 
 
-public class SceneMouseClickHandler implements MouseListener
+public class SceneMouseClickHandler extends MouseAdapter
 {
 	private InternalAPI api;
 	private EventBus bus;
@@ -40,12 +40,7 @@ public class SceneMouseClickHandler implements MouseListener
 	}
 
 
-	@Override
-	public void mouseClicked(MouseEvent event)
-	{
-
-	}
-
+	// use mousePressed (not mouseClicked) so allows half-clicks will also be caught
 	@Override
 	public void mousePressed(MouseEvent event) {
 		double width = api.getSceneGui().getWidth();
@@ -56,24 +51,4 @@ public class SceneMouseClickHandler implements MouseListener
 				new ExecuteCommandEvent(x, y));
 
 	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-
 }
