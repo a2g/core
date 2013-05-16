@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 import com.github.a2g.core.interfaces.ActionCallbackAPI;
 import com.github.a2g.core.interfaces.ActionRunnerCallbackAPI;
-import com.github.a2g.core.primitive.ColorEnum;
 
 public class ActionRunner implements ActionCallbackAPI
 {
