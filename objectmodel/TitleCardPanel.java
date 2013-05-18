@@ -49,7 +49,6 @@ implements TitleCardPanelAPI
 	public TitleCardPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) {
 		this.api = api;
 		this.layout = new LayoutPanel();
-
 		this.add(layout);
 		{
 			label = new Label();
@@ -59,9 +58,9 @@ implements TitleCardPanelAPI
 
 			label.setText("Loading...");
 			layout.add(label);
-		
+			layout.setWidgetLeftRight(label, 5, Unit.EM, 5, Unit.EM);     // Center panel
+			layout.setWidgetTopBottom(label, 5, Unit.EM, 5, Unit.EM);	
 		}
-
 	}
 
 	@Override
@@ -72,18 +71,10 @@ implements TitleCardPanelAPI
 	@Override
 	public void setScenePixelSize(int width, int height)
 	{
-		this.setSize("" + width + "px",
-				"" + height + "px");
-		this.layout.setSize("" + width + "px",
-				"" + height + "px");
-		label.setWidth("" + width + "px");
-		label.setHeight("" + height + "px");
-
-		layout.remove(label);
-		layout.add(label);
-	
-		layout.setWidgetLeftRight(label, 5, Unit.EM, 5, Unit.EM);     // Center panel
-		layout.setWidgetTopBottom(label, 5, Unit.EM, 5, Unit.EM);	}
+		this.setSize("" + width + "px",	"" + height + "px");
+		// yes, we need layout.setSize otherwise the layout will not expand to fill the panel.
+		this.layout.setSize("" + width + "px",	"" + height + "px");
+	}
 }
 
 
