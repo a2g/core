@@ -44,7 +44,7 @@ implements DialogTreePanelAPI
 		for (int i = 0; i < getRowCount(); i++) {
 			Label label = new Label("");
 			this.setWidget(i, 0, label);
-			DOM.setStyleAttribute(label.getElement(), "color", foregroundColor.toString());
+			//DOM.setStyleAttribute(label.getElement(), "color", foregroundColor.toString());
 
 		}
 	}
@@ -63,6 +63,7 @@ implements DialogTreePanelAPI
 			Label label = new Label(lineOfDialog);
 
 			this.setWidget(i, 0, label);
+			DOM.setStyleAttribute(label.getElement(), "color", foregroundColor.toString());
 
 			label.addMouseOverHandler(new DialogTreeMouseOverHandler(label, rolloverColor));
 			label.addMouseOutHandler(new DialogTreeMouseOutHandler(label, foregroundColor));
