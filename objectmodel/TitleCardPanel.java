@@ -26,6 +26,8 @@ import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.layout.client.Layout;
 import com.google.gwt.layout.client.Layout.Alignment;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.CellPanel;
+import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
@@ -43,10 +45,12 @@ implements TitleCardPanelAPI
 
 	Label label;
 	InternalAPI api;
-
+	LayoutPanel layout;
 	public TitleCardPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) {
 		this.api = api;
-		HorizontalPanel layout = new HorizontalPanel();
+		this.layout = new LayoutPanel();
+
+		this.add(layout);
 		{
 			label = new Label();
 			label.setAutoHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -58,13 +62,11 @@ implements TitleCardPanelAPI
 		
 		}
 
-		this.add(layout);
 	}
 
 	@Override
 	public void setText(String text) {
 		label.setText(text);
-
 	}
 
 	@Override
@@ -72,8 +74,16 @@ implements TitleCardPanelAPI
 	{
 		this.setSize("" + width + "px",
 				"" + height + "px");
+		this.layout.setSize("" + width + "px",
+				"" + height + "px");
 		label.setWidth("" + width + "px");
-	}
+		label.setHeight("" + height + "px");
+
+		layout.remove(label);
+		layout.add(label);
+	
+		layout.setWidgetLeftRight(label, 5, Unit.EM, 5, Unit.EM);     // Center panel
+		layout.setWidgetTopBottom(label, 5, Unit.EM, 5, Unit.EM);	}
 }
 
 
