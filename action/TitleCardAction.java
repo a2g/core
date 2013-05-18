@@ -48,7 +48,7 @@ public class TitleCardAction extends ChainedAction {
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-
+		getApi().displayTitleCard(text);
 	}
 
 	@Override

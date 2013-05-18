@@ -42,8 +42,10 @@ implements DialogTreePanelAPI
 		DOM.setStyleAttribute(this.getElement(), "BackgroundColor",backgroundColor.toString());
 
 		for (int i = 0; i < getRowCount(); i++) {
-			Label widget = new Label("");
-			this.setWidget(i, 0, widget);
+			Label label = new Label("");
+			this.setWidget(i, 0, label);
+			DOM.setStyleAttribute(label.getElement(), "color", foregroundColor.toString());
+
 		}
 	}
 

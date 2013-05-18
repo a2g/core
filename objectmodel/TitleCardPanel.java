@@ -16,11 +16,23 @@
 
 package com.github.a2g.core.objectmodel;
 
+
+import javax.swing.BoxLayout;
+
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.TitleCardPanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.layout.client.Layout;
+import com.google.gwt.layout.client.Layout.Alignment;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -34,15 +46,16 @@ implements TitleCardPanelAPI
 
 	public TitleCardPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) {
 		this.api = api;
-		VerticalPanel layout = new VerticalPanel();
+		HorizontalPanel layout = new HorizontalPanel();
 		{
 			label = new Label();
+			label.setAutoHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 			DOM.setStyleAttribute(label.getElement(), "color",fore.toString());
 			DOM.setStyleAttribute(label.getElement(), "BackgroundColor",back.toString());
 
 			label.setText("Loading...");
-
 			layout.add(label);
+		
 		}
 
 		this.add(layout);
@@ -59,6 +72,7 @@ implements TitleCardPanelAPI
 	{
 		this.setSize("" + width + "px",
 				"" + height + "px");
+		label.setWidth("" + width + "px");
 	}
 }
 

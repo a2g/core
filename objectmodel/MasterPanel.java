@@ -188,6 +188,7 @@ implements MasterPanelAPI
 			hostForScene.setVisible(false);
 			hostForLoading.setVisible(false);
 			break;
+		case TitleCardOverOnEnterScene:
 		case TitleCardOverDialogTree:
 			hostForDialogTree.setVisible(true);
 			hostForTitleCard.setVisible(true);
