@@ -39,9 +39,6 @@ implements ClickHandler {
 	@Override
 	public void onClick(ClickEvent event) 
 	{
-
-
-		String displayName="";
 		mouseToPresenter.doClick(displayName, textualId,code);	
 	}
 }

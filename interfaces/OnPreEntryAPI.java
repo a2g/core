@@ -25,7 +25,8 @@ import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.VerbsPresenter;
 
-public interface OnPreEntryAPI {
+public interface OnPreEntryAPI extends OnDoCommandAPI
+{
 	// get by ID
 	public SceneObject getObject(short  objectCode);
 	public Animation getAnimation(String  animationCode);
