@@ -6,14 +6,14 @@ import com.google.gwt.event.shared.EventBus;
 
 public interface FactoryAPI {
 	CommandLinePanelAPI createCommandLinePanel(ColorEnum foreground, ColorEnum background, ColorEnum rollover);
-	InventoryPanelAPI createInventoryPanel(MouseToInventoryPresenterAPI api, ColorEnum purple, ColorEnum black);
+	InventoryPanelAPI createInventoryPanel(MouseToInventoryPresenterAPI api, ColorEnum fore, ColorEnum back);
 	LoaderPanelAPI createLoaderPanel(ColorEnum fore, ColorEnum back);
 	ScenePanelAPI createScenePanel();
-	TitleCardPanelAPI createTitleCardPanel(ColorEnum foreground, ColorEnum background);
-	VerbsPanelAPI createVerbsPanel(MouseToVerbsPresenterAPI api, ColorEnum foreground, ColorEnum background);
+	TitleCardPanelAPI createTitleCardPanel(ColorEnum fore, ColorEnum back);
+	VerbsPanelAPI createVerbsPanel(MouseToVerbsPresenterAPI api, ColorEnum fore, ColorEnum back);
 	PopupPanelAPI createPopupPanel(String string, ColorEnum color, BaseAction toCancel);
 	SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI cbs, boolean isLinear);
 	TimerAPI createSystemTimer(TimerCallbackAPI cbs);
 	MasterPanelAPI createMasterPanel(int width, int height, ColorEnum color);
-	DialogTreePanelAPI createDialogTreePanel(EventBus bus, ColorEnum foreground, ColorEnum background, ColorEnum rollover);
+	DialogTreePanelAPI createDialogTreePanel(EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum rollover);
 }

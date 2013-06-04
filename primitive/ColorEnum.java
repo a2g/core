@@ -22,7 +22,7 @@ public enum ColorEnum {
 	,Red(255,0,0)
 	,Green(0,255,0)
 	,Blue(0,0,255)
-	,Purple(127,0,127);
+	,Purple(200,0,200);
 
 
 	public final int r;
