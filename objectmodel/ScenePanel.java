@@ -35,37 +35,25 @@ public class ScenePanel
 extends AbsolutePanel
 implements ImagePanelAPI, ScenePanelAPI
 {
-
-	//private TreeMap<String, com.google.gwt.user.client.ui.Image> theLoadedImageMap;
-
-
+	int cameraOffsetX;
+	int cameraOffsetY;
+	
 	public ScenePanel(EventBus bus, InternalAPI api)
 	{
 		this.getElement().setId("cwAbsolutePanel");
 		this.addStyleName("absolutePanel");
-
+		this.cameraOffsetX = 0;
+		this.cameraOffsetY = 0;
 	}
 
 	final com.google.gwt.user.client.ui.Image getImageFromResource(GWTPackagedImage imageResource, LoadHandler lh)
 	{
-
-		//assert (imageResource != null);
-		//if(theLoadedImageMap.containsKey(imageResource.toString()))
-		//{
-		//	final com.google.gwt.user.client.ui.Image image = theLoadedImageMap.get(imageResource.toString());
-		//	lh.onLoad(null);
-		//	return image;
-		//}
-		//else
-		//{
 		final com.google.gwt.user.client.ui.Image image = new com.google.gwt.user.client.ui.Image(imageResource.getNative().getSafeUri());
-		//theLoadedImageMap.put(imageResource.toString(), image);
 		if(lh!=null)
 		{
 			image.addLoadHandler(lh);
 		}
 		return image;
-		//}
 	}
 
 	@Override
@@ -82,20 +70,17 @@ implements ImagePanelAPI, ScenePanelAPI
 	{
 		com.google.gwt.user.client.ui.Image image = getImageFromResource((GWTPackagedImage)imageResource,lh);
 
-
 		GWTImage imageAndPos = new GWTImage(image, this, new Point(x, y));
-
-
 
 		imageAndPos.getNativeImage().addMouseMoveHandler
 		(
-				new SceneObjectMouseOverHandler(bus, api, objectTextualId, objectCode)
-				);
+			new SceneObjectMouseOverHandler(bus, api, objectTextualId, objectCode)
+		);
 
 		imageAndPos.getNativeImage().addClickHandler
 		(
-				new ImageMouseClickHandler(bus, this)
-				);
+			new ImageMouseClickHandler(bus, this)
+		);
 
 		return imageAndPos;
 	}
@@ -104,7 +89,6 @@ implements ImagePanelAPI, ScenePanelAPI
 	@Override
 	public void setImageVisible(Image image, boolean visible)
 	{
-
 		super.setVisible(((GWTImage)image).getNativeImage().getElement(), visible);
 	}
 
@@ -117,7 +101,7 @@ implements ImagePanelAPI, ScenePanelAPI
 	@Override
 	public void insert(Image image, int x, int y, int before)
 	{
-		super.insert(((GWTImage)image).getNativeImage(),x,y,before);
+		super.insert(((GWTImage)image).getNativeImage(),x+cameraOffsetX,y+cameraOffsetY,before);
 	}
 
 	@Override
@@ -129,7 +113,7 @@ implements ImagePanelAPI, ScenePanelAPI
 	@Override
 	public void setThingPosition(Image image, int left, int top)
 	{
-		super.setWidgetPosition(((GWTImage)image).getNativeImage(), left, top);
+		super.setWidgetPosition(((GWTImage)image).getNativeImage(), left+cameraOffsetX, top+cameraOffsetY);
 	}
 
 	@Override
@@ -149,6 +133,13 @@ implements ImagePanelAPI, ScenePanelAPI
 	{
 		this.setSize("" + width + "px",
 				"" + height + "px");
+	}
+
+	@Override
+	public void setCameraOffset(int x, int y) 
+	{
+		this.cameraOffsetX = x;
+		this.cameraOffsetY = y;
 	}
 
 }

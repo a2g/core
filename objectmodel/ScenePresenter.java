@@ -30,17 +30,13 @@ public class ScenePresenter {
 	//private EventBus eventBus;
 	private Scene scene;
 	private ScenePanelAPI view;
-
-	public ScenePanelAPI getView() {
-		return view;
-	}
-
-	public void setView(ScenePanelAPI view) {
-		this.view = view;
-	}
+	private double cameraX;
+	private double cameraY;
 
 	public ScenePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api)
 	{
+		this.cameraX=0.0;
+		this.cameraY=0.0;
 		this.setWidth(320);
 		this.setHeight(180);
 		this.scene = new Scene();
@@ -52,6 +48,14 @@ public class ScenePresenter {
 		// this.theInventoryItemMap = new TreeMap<Integer, InventoryItem>();
 	}
 
+	public ScenePanelAPI getView() {
+		return view;
+	}
+
+	public void setView(ScenePanelAPI view) {
+		this.view = view;
+	}
+	
 	// start go in panel
 
 	public void setPixelSize(int width, int height) {
@@ -96,6 +100,37 @@ public class ScenePresenter {
 		this.scene = new Scene();
 	}
 
+	public double getCameraY() 
+	{
+		return this.cameraY;
+	}
+	
+	public double getCameraX() 
+	{
+		return this.cameraX;
+	}
+	
+	public void setCameraX(double x)
+	{
+		this.cameraX = x;
+		offsetAllImagesInScene();
+	}
+	
+	public void setCameraY(double y)
+	{
+		this.cameraY = y;
+		offsetAllImagesInScene();
+	}
+	private void offsetAllImagesInScene()
+	{
+		double camX = cameraX*this.width;
+		double camY = cameraY*this.height;
+		view.setCameraOffset((int)camX,(int)camY);
+		for(int i=0;i<this.scene.objectCollection().count();i++)
+		{
+			this.scene.objectCollection().at(i).updateCurrentImage();
+		}
+	}
 
 }
 

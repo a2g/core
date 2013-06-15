@@ -62,6 +62,8 @@ implements ScenePanelAPI
 	int width;
 	int height;
 	int tally;
+	int cameraOffsetX;
+	int cameraOffsetY;
 	InternalAPI api;
 
 	private Map<Integer,Point> mapOfPointsByImage;
@@ -79,6 +81,8 @@ implements ScenePanelAPI
 		this.setBounds(0,0,320,200);
 		this.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 		this.setDoubleBuffered(true);
+		cameraOffsetX=0;
+		cameraOffsetY=0;
 		tally++;
 
 		super.addMouseListener
@@ -212,7 +216,7 @@ implements ScenePanelAPI
 				//x+= image.getBoundingRect().getLeft();
 				int y = p.getY();
 				//y+= image.getBoundingRect().getTop();
-				g.drawImage(((SwingImage)image).getNativeImage(),x,y,this);
+				g.drawImage(((SwingImage)image).getNativeImage(),x-cameraOffsetX,y-cameraOffsetY,this);
 			}
 		}
 		//System.out.println("printed with tally " + tally +" draws "+ draws);
@@ -304,6 +308,13 @@ implements ScenePanelAPI
 
 
 		return imageAndPos;
+	}
+
+	@Override
+	public void setCameraOffset(int x, int y) 
+	{
+		this.cameraOffsetX = x;
+		this.cameraOffsetY = y;
 	}
 
 

@@ -92,7 +92,7 @@ public class SceneObject {
 
 	public void setCurrentFrame(int i) {
 		this.fak.setCurrentFrame(i);
-		updateImage();
+		updateToCorrectImage();
 	}
 
 	public void incrementFrameWithWraparound() {
@@ -132,7 +132,13 @@ public class SceneObject {
 		// do no update image here - since it is a heavy operation, we do it once per tick.
 	}
 
-	public void updateImage() {
+	public void updateCurrentImage()
+	{
+		currentImage.setLeftTop(getRawLeftTop());
+	}
+	
+	
+	public void updateToCorrectImage() {
 		// 1. do this only when the this.currentImage != img
 		String currentAnim = fak.getCurrentAnimationTextualId();
 		Animation anim = this.animationCollection.at(currentAnim);
@@ -210,7 +216,7 @@ public class SceneObject {
 	public void setVisible(boolean visible) {
 		if (this.visible != visible) {
 			this.visible = visible;
-			updateImage();
+			updateToCorrectImage();
 		}
 	}
 
@@ -391,7 +397,7 @@ public class SceneObject {
 	public void setCurrentAnimation(String textualId) {
 		this.fak.setCurrentAnimationTextualId(
 				textualId);
-		updateImage();
+		updateToCorrectImage();
 	}
 
 

@@ -622,7 +622,14 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		a.setNonBlocking(true);
 		return a;
 	}
-
+	
+	public ChainedAction moveCameraToNewXPosition(double x, int duration)
+	{
+		boolean isLinear = false;
+		MoveCameraAction a = new MoveCameraAction(this, x, api.getSceneGui().getCameraY(), duration, isLinear); 
+		a.setNonBlocking(true);
+		return a;
+	}
 	
 }
 
