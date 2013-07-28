@@ -26,12 +26,17 @@ public abstract class Image {
 
 	private final ImagePanelAPI panel;
 	private final Point fixedOffset;
+	private double parallaxX;
+	private double parallaxY;
+	
 
 
 	public Image(ImagePanelAPI panel, Point offset)
 	{
 		this.fixedOffset = offset;
 		this.panel = panel;
+		this.parallaxX = 1.0;
+		this.parallaxY = 1.0;
 	};
 
 	public void addImageToPanel(int before) {
@@ -60,7 +65,27 @@ public abstract class Image {
 				panel.getImageWidth(this),
 				panel.getImageHeight(this));
 	}
-
+	
+	public void setParallaxX(double x)
+	{
+		this.parallaxX = x;
+	}
+	
+	public void setParallaxY(double y)
+	{
+		this.parallaxY = y;
+	}
+	
+	public double getParallaxX()
+	{
+		return parallaxX;
+	}
+	
+	public double getParallaxY()
+	{
+		return this.parallaxY;
+	}
+	
 	private void update(Point leftTop) {
 
 		int x = this.fixedOffset.getX();
@@ -71,7 +96,7 @@ public abstract class Image {
 				leftTop.getY()+y
 				);
 	}
-
+	
 
 
 }
