@@ -21,7 +21,7 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.action.ChainedAction;
 
-public class MoveCameraAction extends ChainedAction 
+public class ScrollCameraAction extends ChainedAction 
 {
 	private SceneObject obj;// set in constructor
 
@@ -32,7 +32,7 @@ public class MoveCameraAction extends ChainedAction
 	private boolean isParallel;// set via setters
 	private int duration;
 	
-	public MoveCameraAction(BaseAction parent, double endX, double endY, int duration, boolean isLinear) 
+	public ScrollCameraAction(BaseAction parent, double endX, double endY, int duration, boolean isLinear) 
 	{
 		super(parent, parent.getApi(), isLinear);
 		this.isParallel = false;

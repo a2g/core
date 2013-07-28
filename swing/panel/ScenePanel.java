@@ -214,12 +214,7 @@ implements ScenePanelAPI
 				Point p = mapOfPointsByImage.get(((SwingImage)image).getNativeImage().hashCode());
 				int x = p.getX();
 				int y = p.getY();
-				if(image.getParallaxX()!=1.0)
-				{
-					double pw = image.getParallaxX();
-					x=x+1;
-				}
-					
+							
 				g.drawImage(((SwingImage)image).getNativeImage(),(int)(x-cameraOffsetX*image.getParallaxX()),(int)(y-cameraOffsetY*image.getParallaxY()),this);
 			}
 		}

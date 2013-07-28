@@ -566,17 +566,17 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	public ChainedAction walkAndScroll( double x, double y, int delay) {
 		boolean isLinear = true;
-		return new WalkAndScrollAction(this, api.getDefaultWalker(), x, y, delay, isLinear);
+		return new WalkAndScrollXAction(this, api.getDefaultWalker(), x, y, delay, isLinear);
 	}
 
 	public ChainedAction walkAndScroll( PointF point, int delay) {
 		boolean isLinear = true;
-		return new WalkAndScrollAction(this, api.getDefaultWalker(), point.getX(), point.getY(), delay, isLinear);
+		return new WalkAndScrollXAction(this, api.getDefaultWalker(), point.getX(), point.getY(), delay, isLinear);
 	}
 	
 	public ChainedAction walkAndScrollNonBlocking(double x, double y, int delay) {
 		boolean isLinear = true;
-		WalkAndScrollAction a = new WalkAndScrollAction(this, api.getDefaultWalker(), x,
+		WalkAndScrollXAction a = new WalkAndScrollXAction(this, api.getDefaultWalker(), x,
 				y, delay, isLinear);
 		a.setNonBlocking(true);
 		return a;
@@ -584,24 +584,24 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	public ChainedAction walkAndScrollNonBlocking(PointF point, int delay) {
 		boolean isLinear = true;
-		WalkAndScrollAction a = new WalkAndScrollAction(this,api.getDefaultWalker(),
+		WalkAndScrollXAction a = new WalkAndScrollXAction(this,api.getDefaultWalker(),
 				point.getX(), point.getY(), delay, isLinear);
 		a.setNonBlocking(true);
 		return a;
 	}
 	public ChainedAction walkAndScroll(short objectCode, double x, double y, int delay) {
 		boolean isLinear = true;
-		return new WalkAndScrollAction(this, objectCode, x, y, delay, isLinear);
+		return new WalkAndScrollXAction(this, objectCode, x, y, delay, isLinear);
 	}
 
 	public ChainedAction walkAndScroll(short objectCode, PointF point, int delay) {
 		boolean isLinear = true;
-		return new WalkAndScrollAction(this, objectCode, point.getX(), point.getY(), delay, isLinear);
+		return new WalkAndScrollXAction(this, objectCode, point.getX(), point.getY(), delay, isLinear);
 	}
 	
 	public ChainedAction walkAndScrollNonBlocking(short objectCode, double x, double y, int delay) {
 		boolean isLinear = true;
-		WalkAndScrollAction a = new WalkAndScrollAction(this, objectCode, x,
+		WalkAndScrollXAction a = new WalkAndScrollXAction(this, objectCode, x,
 				y, delay, isLinear);
 		a.setNonBlocking(true);
 		return a;
@@ -609,7 +609,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	public ChainedAction walkAndScrollNonBlocking(short objectCode, PointF point, int delay) {
 		boolean isLinear = true;
-		WalkAndScrollAction a = new WalkAndScrollAction(this, objectCode,
+		WalkAndScrollXAction a = new WalkAndScrollXAction(this, objectCode,
 				point.getX(), point.getY(), delay, isLinear);
 		a.setNonBlocking(true);
 		return a;
@@ -679,7 +679,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	public ChainedAction moveCameraToNewXPosition(double x, int duration)
 	{
 		boolean isLinear = false;
-		MoveCameraAction a = new MoveCameraAction(this, x, api.getSceneGui().getCameraY(), duration, isLinear); 
+		ScrollCameraAction a = new ScrollCameraAction(this, x, api.getSceneGui().getCameraY(), duration, isLinear); 
 		a.setNonBlocking(true);
 		return a;
 	}

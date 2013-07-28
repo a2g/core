@@ -21,17 +21,17 @@ package com.github.a2g.core.action;
 import com.github.a2g.core.action.BaseAction;
 
 
-public class WalkAndScrollAction 
+public class WalkAndScrollXAction 
 extends WalkToAction 
 {
 	double startCameraX;
-	double startCameraY;
+	//double startCameraY;
 
-	public WalkAndScrollAction(BaseAction parent, short objId, double endX, double endY, int delay, boolean isLinear)
+	public WalkAndScrollXAction(BaseAction parent, short objId, double endX, double endY, int delay, boolean isLinear)
 	{
 		super(parent, objId, endX, endY, delay, isLinear);
 		startCameraX = getApi().getSceneGui().getCameraX();
-		startCameraY = getApi().getSceneGui().getCameraY();
+		//startCameraY = getApi().getSceneGui().getCameraY();
 	}
 	
 	@Override
@@ -48,9 +48,9 @@ extends WalkToAction
 		double x = startCameraX
 				+ progress
 				* ( this.getEndX()- this.getStartX());
-		double y = startCameraY
-				+ progress
-				* (this.getEndY()- this.getStartY());
+		//double y = startCameraY
+	    //			+ progress
+		//		* (this.getEndY()- this.getStartY());
 
 		getApi().getSceneGui().setCameraX(x);
 		//getApi().getSceneGui().setCameraY(y);	
