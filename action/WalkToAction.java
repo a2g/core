@@ -1,4 +1,5 @@
 /*
+
  * Copyright 2012 Anthony Cassidy
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -63,6 +64,8 @@ extends MoveWhilstAnimatingAction
 						com.github.a2g.core.interfaces.SceneAPI.Special.South);
 			}
 		}
+		
+		// we've set it up now, pass to MoveWhilstAnimatingAction to execute
 		super.getObject().setCurrentAnimation(anim);
 		super.runGameAction();
 	}
@@ -70,9 +73,12 @@ extends MoveWhilstAnimatingAction
 	@Override // on complete walking
 	protected void onCompleteGameAction() {
 		super.onCompleteGameAction();
+		
+		// frame one of 'South' is animation is special...
 		String south = super.getObject().getSpecialAnimation(
 				com.github.a2g.core.interfaces.SceneAPI.Special.South);
 
+		// we set to this at the end of walking.
 		super.getObject().setCurrentAnimation(south);
 		super.getObject().setCurrentFrame(0);
 	}

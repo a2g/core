@@ -54,6 +54,8 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 	SceneObject getObject(){return this.obj;}
 	double getEndX(){ return endX;}
 	double getEndY(){ return endY;}
+	double getStartX(){ return startX;}
+	double getStartY(){ return startY;}
 	
 	void setNonBlocking(boolean isParallel){ this.isParallel = isParallel;}
 	void setAnimatingDelay(int delay){ this.animatingDelay = delay;}

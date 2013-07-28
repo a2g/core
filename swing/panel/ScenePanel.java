@@ -244,8 +244,8 @@ implements ScenePanelAPI
 					if(img!=null)
 					{
 						Rect rect = img.getBoundingRect();
-						int adjX = x - ob.getX();
-						int adjY = y - ob.getY();
+						int adjX = x - ob.getX() + cameraOffsetX;
+						int adjY = y - ob.getY() + cameraOffsetY;
 
 						if(rect.contains(adjX, adjY))
 						{
