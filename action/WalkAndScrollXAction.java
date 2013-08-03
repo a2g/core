@@ -21,8 +21,8 @@ package com.github.a2g.core.action;
 import com.github.a2g.core.action.BaseAction;
 
 
-public class WalkAndScrollXAction 
-extends WalkToAction 
+public class WalkAndScrollXAction
+extends WalkToAction
 {
 	double startCameraX;
 	//double startCameraY;
@@ -33,39 +33,39 @@ extends WalkToAction
 		startCameraX = getApi().getSceneGui().getCameraX();
 		//startCameraY = getApi().getSceneGui().getCameraY();
 	}
-	
+
 	@Override
-	public void runGameAction() 
+	public void runGameAction()
 	{
 		super.runGameAction();
 	}
-	
+
 	@Override
-	protected void onUpdateGameAction(double progress) 
+	protected void onUpdateGameAction(double progress)
 	{
 		super.onUpdateGameAction(progress);
-		
+
 		double x = startCameraX
 				+ progress
 				* ( this.getEndX()- this.getStartX());
 		//double y = startCameraY
-	    //			+ progress
+		//			+ progress
 		//		* (this.getEndY()- this.getStartY());
 
 		getApi().getSceneGui().setCameraX(x);
-		//getApi().getSceneGui().setCameraY(y);	
-		
+		//getApi().getSceneGui().setCameraY(y);
+
 	}
-	
+
 	@Override // on complete walking
-	protected void onCompleteGameAction() 
+	protected void onCompleteGameAction()
 	{
 
 		super.onCompleteGameAction();
-		
+
 		getApi().getSceneGui().setCameraX(startCameraX	+ this.getEndX()- this.getStartX());
-		//getApi().getSceneGui().setCameraY(getEndY());	
-		
+		//getApi().getSceneGui().setCameraY(getEndY());
+
 
 	}
 }

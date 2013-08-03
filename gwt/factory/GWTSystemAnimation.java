@@ -32,14 +32,14 @@ implements SystemAnimationAPI
 	}
 
 	@Override
-	protected double interpolate(double progress) 
+	protected double interpolate(double progress)
 	{
 		if(isLinear)
 			return progress;
 		else
-		    return (1 + Math.cos(Math.PI + progress * Math.PI)) / 2;
+			return (1 + Math.cos(Math.PI + progress * Math.PI)) / 2;
 	}
-	
+
 	@Override
 	protected void onUpdate(double progress) {
 		callbacks.onUpdate(progress);

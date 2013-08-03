@@ -134,9 +134,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		// executions of the Action chain. This results in an observed bug
 		// where only every second Action runs.
 		//
-		// So either 1. a second action runner instance is needed for dialogs. 
+		// So either 1. a second action runner instance is needed for dialogs.
 		// Or, 2. call order is kept as startNext, onComplete.
-		// This has a flow on effect that any setting done in 
+		// This has a flow on effect that any setting done in
 		// Action1::runGameAction() can be overridden by Action2::onCompleted()
 		// thus make sure that if changing the scene state is done in runGameAction
 		// make it also do it in onProgress.
@@ -338,7 +338,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 				speech);
 		// return toReturn;
 	}
-	
+
 	public ChainedAction sayWithoutAnimation(short objectCode, String speed) {
 		boolean isLinear = true;
 		return new SayWithoutAnimationAction(
@@ -506,8 +506,8 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		a.setNonBlocking(true);
 		return a;
 	}
-	
-	
+
+
 
 	public ChainedAction walkTo(short objectCode, double x, double y) {
 		boolean isLinear = true;
@@ -562,7 +562,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	
+
 
 	public ChainedAction walkAndScroll( double x, double y, int delay) {
 		boolean isLinear = true;
@@ -573,7 +573,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		boolean isLinear = true;
 		return new WalkAndScrollXAction(this, api.getDefaultWalker(), point.getX(), point.getY(), delay, isLinear);
 	}
-	
+
 	public ChainedAction walkAndScrollNonBlocking(double x, double y, int delay) {
 		boolean isLinear = true;
 		WalkAndScrollXAction a = new WalkAndScrollXAction(this, api.getDefaultWalker(), x,
@@ -598,7 +598,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		boolean isLinear = true;
 		return new WalkAndScrollXAction(this, objectCode, point.getX(), point.getY(), delay, isLinear);
 	}
-	
+
 	public ChainedAction walkAndScrollNonBlocking(short objectCode, double x, double y, int delay) {
 		boolean isLinear = true;
 		WalkAndScrollXAction a = new WalkAndScrollXAction(this, objectCode, x,
@@ -614,7 +614,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		a.setNonBlocking(true);
 		return a;
 	}
-	
+
 	public ChainedAction showTitleCard(String text)
 	{
 		return new TitleCardAction(this, text);
@@ -649,41 +649,41 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	public ChainedAction moveWhilstAnimatingLinear(short objId, double x, double y)
 	{
 		boolean isLinear = true;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear); 
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear);
 		return a;
 	}
-	
+
 	public ChainedAction moveWhilstAnimatingLinearNonBlocking(short objId, double x, double y)
 	{
 		boolean isLinear = true;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear); 
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear);
 		a.setNonBlocking(true);
 		return a;
 	}
-	
+
 	public ChainedAction moveWhilstAnimating(short objId, double x, double y)
 	{
 		boolean isLinear = false;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear); 
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear);
 		return a;
 	}
-	
+
 	public ChainedAction moveWhilstAnimatingNonBlocking(short objId, double x, double y)
 	{
 		boolean isLinear = false;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear); 
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear);
 		a.setNonBlocking(true);
 		return a;
 	}
-	
+
 	public ChainedAction moveCameraToNewXPosition(double x, int duration)
 	{
 		boolean isLinear = false;
-		ScrollCameraAction a = new ScrollCameraAction(this, x, api.getSceneGui().getCameraY(), duration, isLinear); 
+		ScrollCameraAction a = new ScrollCameraAction(this, x, api.getSceneGui().getCameraY(), duration, isLinear);
 		a.setNonBlocking(true);
 		return a;
 	}
-	
+
 }
 
 

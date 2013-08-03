@@ -17,10 +17,10 @@ package com.github.a2g.core.interfaces;
 
 public interface MouseToVerbsPresenterAPI
 {
-	void setMouseOver(String displayName, String textualId, int code); 
+	void setMouseOver(String displayName, String textualId, int code);
 	void doClick();
 	// this one is called in practice because when the mouse is clicked on an object
 	// you'll get the click, but the mouseover gets dropped as an optimisation.
 	// The parameterless doClick is still needed for tests, however.
-	void doClick(String displayName, String textualId, int code); 
+	void doClick(String displayName, String textualId, int code);
 }

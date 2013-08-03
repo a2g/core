@@ -32,6 +32,6 @@ public interface ScenePanelAPI
 	void setScenePixelSize(int width, int height);
 
 	void setVisible(boolean b);
-	
-    void setCameraOffset(int x, int y);
+
+	void setCameraOffset(int x, int y);
 }

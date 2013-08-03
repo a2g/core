@@ -28,31 +28,48 @@ import com.github.a2g.core.objectmodel.VerbsPresenter;
 public interface OnPreEntryAPI extends OnDoCommandAPI
 {
 	// get by ID
+	@Override
 	public SceneObject getObject(short  objectCode);
+	@Override
 	public Animation getAnimation(String  animationCode);
+	@Override
 	public InventoryItem getInventoryItem(int inventoryItemCode);
 
 	// property access methods
+	@Override
 	public void setValue(Object name, int value);
+	@Override
 	public int getValue(Object name);
+	@Override
 	public boolean isTrue(Object name);
 
 	// gui methods
+	@Override
 	public DialogTreePresenter getDialogTreeGui();
+	@Override
 	public VerbsPresenter getVerbsGui();
+	@Override
 	public InventoryPresenter getInventoryGui();
+	@Override
 	public CommandLinePresenter getCommandLineGui();
+	@Override
 	public ScenePresenter getSceneGui();
 
 	// nearly a gui method
+	@Override
 	public SceneAPI getCurrentScene();
 
 	// helpful for game
+	@Override
 	public void switchToScene(String scene);
+	@Override
 	public String getLastScene();
+	@Override
 	public boolean isInDebugMode();
 	public void setInventoryPixelSize(int width, int height);
+	@Override
 	public void setDefaultSayer(short object);
+	@Override
 	public void setDefaultWalker(short object);
 
 }

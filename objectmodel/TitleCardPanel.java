@@ -48,7 +48,7 @@ implements TitleCardPanelAPI
 			label.setText("Loading...");
 			layout.add(label);
 			layout.setWidgetLeftRight(label, 5, Unit.EM, 5, Unit.EM);     // Center panel
-			layout.setWidgetTopBottom(label, 5, Unit.EM, 5, Unit.EM);	
+			layout.setWidgetTopBottom(label, 5, Unit.EM, 5, Unit.EM);
 		}
 	}
 

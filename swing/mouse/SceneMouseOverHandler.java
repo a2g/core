@@ -73,7 +73,9 @@ public class SceneMouseOverHandler implements MouseMotionListener {
 				textualId = ob.getTextualId();
 				code = ob.getCode();
 			}
-			api.getCommandLineGui().setXYForDebugging(x, y);
+			double camx = api.getSceneGui().getCameraX();
+			double camy = api.getSceneGui().getCameraY();
+			api.getCommandLineGui().setXYForDebugging(x+camx, y+camy);
 			api.getCommandLineGui().onSetMouseOver(displayName, textualId, code);
 			bus.fireEvent(
 					new SetRolloverEvent(

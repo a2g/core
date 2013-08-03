@@ -22,7 +22,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 
 
-public class VerbMouseClickHandler 
+public class VerbMouseClickHandler
 implements ClickHandler {
 	private final MouseToVerbsPresenterAPI mouseToPresenter;
 	String textualId;
@@ -37,8 +37,8 @@ implements ClickHandler {
 	}
 
 	@Override
-	public void onClick(ClickEvent event) 
+	public void onClick(ClickEvent event)
 	{
-		mouseToPresenter.doClick(displayName, textualId,code);	
+		mouseToPresenter.doClick(displayName, textualId,code);
 	}
 }

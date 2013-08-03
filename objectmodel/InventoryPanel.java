@@ -45,7 +45,7 @@ ImagePanelAPI
 	final com.google.gwt.user.client.ui.Image imgRight;
 	InternalAPI api;
 	final MouseToInventoryPresenterAPI mouseToPresenter;
-	
+
 	public InventoryPanel(InternalAPI api, EventBus bus, final MouseToInventoryPresenterAPI mouseToPresenter, ColorEnum fore, ColorEnum back)
 	{
 		this.mouseToPresenter = mouseToPresenter;

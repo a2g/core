@@ -28,8 +28,8 @@ import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.shared.EventBus;
 
-public class InventoryPresenter 
-implements MouseToInventoryPresenterAPI 
+public class InventoryPresenter
+implements MouseToInventoryPresenterAPI
 {
 
 	private Inventory theInventory;

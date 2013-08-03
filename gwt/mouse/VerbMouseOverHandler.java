@@ -36,7 +36,7 @@ public class VerbMouseOverHandler implements MouseMoveHandler {
 	}
 
 	@Override
-	public void onMouseMove(MouseMoveEvent event) 
+	public void onMouseMove(MouseMoveEvent event)
 	{
 		mouseToPresenter.setMouseOver(displayName, textualId, code);
 	}

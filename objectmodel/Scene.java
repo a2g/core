@@ -21,8 +21,8 @@ public class Scene {
 	void setCameraPositionX(double x)
 	{
 	}
-	
-	
+
+
 	private SceneObjectCollection sceneObjectCollection;
 
 	public Scene() {

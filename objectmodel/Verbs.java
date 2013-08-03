@@ -19,7 +19,7 @@ package com.github.a2g.core.objectmodel;
 
 public class Verbs {
 	private VerbCollection theItems;
-	public Verbs(/*VerbCollectionCallbackAPI api*/) 
+	public Verbs(/*VerbCollectionCallbackAPI api*/)
 	{
 		this.theItems = new VerbCollection(/*api*/);
 	}

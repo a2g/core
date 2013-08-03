@@ -22,7 +22,7 @@ import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.action.ChainedAction;
 
-public class MoveWhilstAnimatingAction extends ChainedAction 
+public class MoveWhilstAnimatingAction extends ChainedAction
 {
 	private SceneObject obj;// set in constructor
 
@@ -33,42 +33,42 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 	private int animatingDelay;// set via setters
 	private int movingDelay;// set via setters
 	private boolean isParallel;// set via setters
-	
+
 	private Animation anim; // set in runGameAction
 	private int framesInAnim;// set in runGameAction
 	private int framesPlayedDuringWalk;// set in runGameAction
-	
-	public MoveWhilstAnimatingAction(BaseAction parent, short objId, double endX, double endY, boolean isLinear) 
+
+	public MoveWhilstAnimatingAction(BaseAction parent, short objId, double endX, double endY, boolean isLinear)
 	{
 		super(parent, parent.getApi(), isLinear);
 		this.obj = getApi().getObject(objId);
 		this.animatingDelay = 0;
 		this.movingDelay = 0;
 		this.isParallel = false;
-		this.endX = endX;
-		this.endY = endY;
+		this.endX = endX;// - getApi().getSceneGui().getCameraX(); 
+		this.endY = endY;// - getApi().getSceneGui().getCameraY();
 		this.startX = 0.0;
 		this.startY = 0.0;
 	}
-	
+
 	SceneObject getObject(){return this.obj;}
 	double getEndX(){ return endX;}
 	double getEndY(){ return endY;}
 	double getStartX(){ return startX;}
 	double getStartY(){ return startY;}
-	
+
 	void setNonBlocking(boolean isParallel){ this.isParallel = isParallel;}
 	void setAnimatingDelay(int delay){ this.animatingDelay = delay;}
 	void setMovingDelay(int delay){ this.movingDelay = delay;}
-	
+
 	@Override
-	public void runGameAction() 
+	public void runGameAction()
 	{
 
 		this.anim = this.obj.getAnimations().at(obj.getCurrentAnimation());
 		startX = getObject().getBaseMiddleX();
 		startY = getObject().getBaseMiddleY();
-		
+
 		// distance and time calculations
 		double diffX = this.startX - this.endX;
 		System.out.println(" walkto " + startX + " " + endX);
@@ -87,7 +87,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 		}
 		int milliSeconds = (int)(dist * (5+movingDelay) * 1000.0);
 		this.run(milliSeconds);
-		
+
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 				? framesPlayedSoFar
 						% this.framesInAnim
 						: 0;
-		// The current animation is set every frame 
+		// The current animation is set every frame
 		// because of the quirk in Base Action where the next action is
 		// executed before the ladt one finished
 		this.obj.setCurrentAnimation(anim.getTextualId());
@@ -122,7 +122,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 	}
 
 	@Override // method in animation
-	protected void onCompleteGameAction() 
+	protected void onCompleteGameAction()
 	{
 		this.obj.setCurrentFrame(0);
 	}

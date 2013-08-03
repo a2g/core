@@ -17,6 +17,7 @@
 package com.github.a2g.core.objectmodel;
 
 
+//import java.util.Iterator;
 import java.util.TreeMap;
 import java.util.logging.Logger;
 import com.google.gwt.event.dom.client.LoadHandler;
@@ -320,8 +321,8 @@ implements InternalAPI
 				if (sceneObject.getAnimations().at(initial)!=null)
 				{
 					sceneObject.getAnimations().at(initial).setAsCurrentAnimation();
-					// set x & y to zero sets the base middles 
-					// to the positions they were in when all objects were rendered out. 
+					// set x & y to zero sets the base middles
+					// to the positions they were in when all objects were rendered out.
 					sceneObject.setX(0);
 					sceneObject.setY(0);
 				}
@@ -553,7 +554,7 @@ implements InternalAPI
 		masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.Loading);
 		loadInventoryFromAPI();
 		setInitialAnimationsAsCurrent();
-
+		//setAllObjectsToVisible();
 		// it is reasonable for a person to set current animations in pre-entry
 		// and expect them to stay current, so we set cuurentAnimations before pre-entry.
 
@@ -782,8 +783,8 @@ implements InternalAPI
 				verbAsCode,
 				sentenceA,
 				sentenceB,
-				x,
-				y);
+				x+scenePresenter.getCameraX(),
+				y+scenePresenter.getCameraY());
 
 
 		this.commandLinePresenter.setMouseable(false);
@@ -889,13 +890,13 @@ implements InternalAPI
 	{
 		executeBaseAction(ba);
 	}
-	
+
 	@Override
 	public void setDefaultSayer(short object)
 	{
 		this.defaultSayer = object;
 	}
-	
+
 	@Override
 	public void setDefaultWalker(short object)
 	{
@@ -911,6 +912,15 @@ implements InternalAPI
 	public short getDefaultWalker() {
 		return this.defaultWalker;
 	}
+/*
+	void setAllObjectsToVisible()
+	{
+		Iterator<SceneObject> it = theObjectMap.values().iterator();
 
+		while (it.hasNext()) {
+			it.next().setVisible(true);
+		}
+	}
+	*/
 }
 

@@ -136,8 +136,8 @@ public class SceneObject {
 	{
 		currentImage.setLeftTop(getRawLeftTop());
 	}
-	
-	
+
+
 	public void updateToCorrectImage() {
 		// 1. do this only when the this.currentImage != img
 		String currentAnim = fak.getCurrentAnimationTextualId();
@@ -167,7 +167,7 @@ public class SceneObject {
 			int curFrame = fak.getCurrentFrame();
 			com.github.a2g.core.objectmodel.Image current = anim.getImageAndPosCollection().at(curFrame);
 
-			
+
 			// yes current can equal null in some weird cases where I place breakpoints...
 			if (current != null
 					&& !current.equals(this)) {
@@ -214,10 +214,10 @@ public class SceneObject {
 	}
 
 	public void setVisible(boolean visible) {
-		if (this.visible != visible) {
+		//if (this.visible != visible) {
 			this.visible = visible;
 			updateToCorrectImage();
-		}
+		//}
 	}
 
 	public boolean isVisible() {
@@ -231,19 +231,19 @@ public class SceneObject {
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
-	
+
 	Point getRawLeftTop()
 	{
 		return new Point(this.rawX,this.rawY);
 	}
-	
+
 	static double worldToScreenX(int intX, double screenSpan, int lowerBound, int upperBound )
 	{
 		int rectSpan = upperBound-lowerBound;
 		double doubleX = (intX + .5*rectSpan  + lowerBound)/screenSpan ;
 		return doubleX;
 	}
-	
+
 	static int screenToWorldX(double doubleX, double screenSpan, int lowerBound, int upperBound )
 	{
 		int rectSpan = upperBound-lowerBound;
@@ -257,15 +257,15 @@ public class SceneObject {
 		double intY = doubleY * screenSpan - rectSpan  - lowerBound;
 		return (int)intY;
 	}
-	
+
 	static double worldToScreenY(int intY, double screenSpan, int lowerBound, int upperBound )
 	{
 		int rectSpan = upperBound-lowerBound;
 		double doubleY = (intY + rectSpan  + lowerBound)/screenSpan ;
 		return doubleY;
 	}
-	
-	public void setX(int rawX) 
+
+	public void setX(int rawX)
 	{
 		this.rawX = rawX;
 		if(currentImage!=null)
@@ -274,7 +274,7 @@ public class SceneObject {
 		}
 	}
 
-	public void setY(int rawY) 
+	public void setY(int rawY)
 	{
 		this.rawY = rawY;
 		if(currentImage!=null)
@@ -283,43 +283,43 @@ public class SceneObject {
 		}
 	}
 
-	public int getX() 
+	public int getX()
 	{
 		return this.rawX;
 	}
-	
-	public int getY() 
+
+	public int getY()
 	{
 		return this.rawY;
 	}
-	
+
 	public void setBaseMiddleX(double baseMiddleX)
 	{
 		int rawX = screenToWorldX(baseMiddleX, screenPixelWidth, getCurrentBounds().getLeft(), getCurrentBounds().getRight());
 		setX(rawX);
 	}
-	
+
 	public void setBaseMiddleY(double baseMiddleY)
 	{
 		int rawY = screenToWorldY(baseMiddleY, screenPixelHeight, getCurrentBounds().getTop(), getCurrentBounds().getBottom());
 		setY(rawY);
 	}
 
-	
+
 	public double getBaseMiddleX()
 	{
 		double bmx = worldToScreenX(rawX, screenPixelWidth, getCurrentBounds().getLeft(), getCurrentBounds().getRight());
-		
+
 		return bmx;
 	}
 
 	public double getBaseMiddleY()
 	{
 		double bmy = worldToScreenY(rawY, screenPixelHeight, getCurrentBounds().getTop(), getCurrentBounds().getBottom());
-		
+
 		return bmy;
 	}
-	
+
 	Rect getCurrentBounds()
 	{
 		if(currentImage!=null)
@@ -328,7 +328,7 @@ public class SceneObject {
 		}
 		return new Rect(0,0,0,0);
 	}
-	
+
 	Point getMiddleOfBaseAbsolute(String animTextualId) {
 		int minLeft = 1000;
 		int maxRight = 0;

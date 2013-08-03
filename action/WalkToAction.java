@@ -19,27 +19,27 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-public class WalkToAction 
-extends MoveWhilstAnimatingAction 
+public class WalkToAction
+extends MoveWhilstAnimatingAction
 {
 
 
 	public WalkToAction(BaseAction parent, short objId, double endX, double endY, int delay, boolean isLinear)
 	{
 		super(parent, objId, endX, endY, isLinear);
-		
+
 	}
-	
+
 	@Override
-	public void runGameAction() 
+	public void runGameAction()
 	{
 		double startX = super.getObject().getBaseMiddleX();
 		double startY = super.getObject().getBaseMiddleY();
-		
+
 		double diffX = startX - getEndX();
 		System.out.println(" walkto " + startX + " " + getEndX());
 		double diffY = startY - getEndY();
-			
+
 		// anim
 		String anim = "";
 		int width = getApi().getSceneGui().getWidth();
@@ -64,16 +64,16 @@ extends MoveWhilstAnimatingAction
 						com.github.a2g.core.interfaces.SceneAPI.Special.South);
 			}
 		}
-		
+
 		// we've set it up now, pass to MoveWhilstAnimatingAction to execute
 		super.getObject().setCurrentAnimation(anim);
 		super.runGameAction();
 	}
-	
+
 	@Override // on complete walking
 	protected void onCompleteGameAction() {
 		super.onCompleteGameAction();
-		
+
 		// frame one of 'South' is animation is special...
 		String south = super.getObject().getSpecialAnimation(
 				com.github.a2g.core.interfaces.SceneAPI.Special.South);

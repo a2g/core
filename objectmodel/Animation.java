@@ -29,7 +29,7 @@ public class Animation {
 	private boolean wasSetAsTalkingAnimation;
 	private boolean wasSetAsCurrentAnimation;
 	private SceneAPI.Special specialAnimationThisWasSetTo;
-	
+
 
 	public Animation(String textualId, SceneObject owningSceneObject) {
 		this.parent = owningSceneObject;
@@ -111,7 +111,7 @@ public class Animation {
 
 	public void setAsInitialAnimation() {
 		this.wasSetAsInitialAnimation = true;
-		if (parent != null) 
+		if (parent != null)
 		{
 			parent.setInitialAnimation(	this.textualId);
 		}

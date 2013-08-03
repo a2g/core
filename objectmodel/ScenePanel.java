@@ -37,7 +37,7 @@ implements ImagePanelAPI, ScenePanelAPI
 {
 	int cameraOffsetX;
 	int cameraOffsetY;
-	
+
 	public ScenePanel(EventBus bus, InternalAPI api)
 	{
 		this.getElement().setId("cwAbsolutePanel");
@@ -74,13 +74,13 @@ implements ImagePanelAPI, ScenePanelAPI
 
 		imageAndPos.getNativeImage().addMouseMoveHandler
 		(
-			new SceneObjectMouseOverHandler(bus, api, objectTextualId, objectCode)
-		);
+				new SceneObjectMouseOverHandler(bus, api, objectTextualId, objectCode)
+				);
 
 		imageAndPos.getNativeImage().addClickHandler
 		(
-			new ImageMouseClickHandler(bus, this)
-		);
+				new ImageMouseClickHandler(bus, this)
+				);
 
 		return imageAndPos;
 	}
@@ -101,7 +101,7 @@ implements ImagePanelAPI, ScenePanelAPI
 	@Override
 	public void insert(Image image, int x, int y, int before)
 	{
-		super.insert(((GWTImage)image).getNativeImage(),x+cameraOffsetX,y+cameraOffsetY,before);
+		super.insert(((GWTImage)image).getNativeImage(),x-cameraOffsetX,y-cameraOffsetY,before);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ implements ImagePanelAPI, ScenePanelAPI
 	@Override
 	public void setThingPosition(Image image, int left, int top)
 	{
-		super.setWidgetPosition(((GWTImage)image).getNativeImage(), left+cameraOffsetX, top+cameraOffsetY);
+		super.setWidgetPosition(((GWTImage)image).getNativeImage(), left-cameraOffsetX, top-cameraOffsetY);
 	}
 
 	@Override
@@ -136,7 +136,7 @@ implements ImagePanelAPI, ScenePanelAPI
 	}
 
 	@Override
-	public void setCameraOffset(int x, int y) 
+	public void setCameraOffset(int x, int y)
 	{
 		this.cameraOffsetX = x;
 		this.cameraOffsetY = y;

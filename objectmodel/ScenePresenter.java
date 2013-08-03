@@ -55,7 +55,7 @@ public class ScenePresenter {
 	public void setView(ScenePanelAPI view) {
 		this.view = view;
 	}
-	
+
 	// start go in panel
 
 	public void setPixelSize(int width, int height) {
@@ -100,22 +100,22 @@ public class ScenePresenter {
 		this.scene = new Scene();
 	}
 
-	public double getCameraY() 
+	public double getCameraY()
 	{
 		return this.cameraY;
 	}
-	
-	public double getCameraX() 
+
+	public double getCameraX()
 	{
 		return this.cameraX;
 	}
-	
+
 	public void setCameraX(double x)
 	{
 		this.cameraX = x;
 		offsetAllImagesInScene();
 	}
-	
+
 	public void setCameraY(double y)
 	{
 		this.cameraY = y;

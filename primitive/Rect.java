@@ -66,7 +66,7 @@ public class Rect {
 	public int getTop() {
 		if(top>=0)
 		{
-		   return top;
+			return top;
 		}
 		return top;
 	}

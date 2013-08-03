@@ -48,7 +48,7 @@ public class InventoryItemMouseClickHandler implements ClickHandler {
 		}
 
 		//bus.fireEvent(
-			//	new ExecuteCommandEvent(x, y));
+		//	new ExecuteCommandEvent(x, y));
 		mouseToPresenter.doClick(x,y);
 	}
 }

@@ -57,7 +57,7 @@ public interface OnEveryFrameAPI {
 	public void setActiveState(GuiStateEnum state);
 	public void setDefaultSayer(short object);
 	public void setDefaultWalker(short object);
-	
+
 	// these two are needed for starting animations in the onEveryFrame handler
 	public ChainRootAction createChainRootAction();
 	public void executeChainedAction(ChainedAction ba);

@@ -138,12 +138,12 @@ implements ScenePanelAPI
 
 	void putPoint(SwingImage image, int x,int y)
 	{
-		mapOfPointsByImage.put(image.getNativeImage().hashCode(), new Point(x,y));
+		mapOfPointsByImage.put(hash(image), new Point(x,y));
 	}
 
 	@Override
 	public void setThingPosition(Image image, int x, int y) {
-		if(mapOfPointsByImage.containsKey(((SwingImage)image).getNativeImage().hashCode()))
+		if(mapOfPointsByImage.containsKey(hash(image)))
 		{
 			putPoint((SwingImage)image, x,y);
 			triggerPaint();
@@ -154,15 +154,15 @@ implements ScenePanelAPI
 	@Override
 	public void setImageVisible(Image image, boolean visible)
 	{
-		boolean isIn = listOfVisibleHashCodes.contains(((SwingImage)image).getNativeImage().hashCode());
+		boolean isIn = listOfVisibleHashCodes.contains(hash(image));
 		if(visible && !isIn)
 		{
-			listOfVisibleHashCodes.add(((SwingImage)image).getNativeImage().hashCode());
+			listOfVisibleHashCodes.add(hash(image));
 			triggerPaint();
 		}
 		else if(!visible & isIn)
 		{
-			listOfVisibleHashCodes.remove(new Integer(((SwingImage)image).getNativeImage().hashCode()));
+			listOfVisibleHashCodes.remove(hash(image));
 			triggerPaint();
 		}
 	}
@@ -177,7 +177,7 @@ implements ScenePanelAPI
 	@Override
 	public void remove(Image image) {
 		listOfAllVisibleImages.remove(((SwingImage)image).getNativeImage());
-		mapOfPointsByImage.remove(((SwingImage)image).getNativeImage().hashCode());
+		mapOfPointsByImage.remove(hash(image));
 		setImageVisible(image, false);
 		triggerPaint();
 	}
@@ -202,6 +202,12 @@ implements ScenePanelAPI
 		tally++;
 	}
 
+	Integer hash(Image image)
+	{
+		int code= ((SwingImage)image).getNativeImage().hashCode();
+		return new Integer(code);
+	}
+	
 	@Override
 	public void paint(Graphics g)
 	{
@@ -209,9 +215,9 @@ implements ScenePanelAPI
 		while(iter.hasNext())
 		{
 			Image image = iter.next();
-			if(listOfVisibleHashCodes.contains(((SwingImage)image).getNativeImage().hashCode()))
+			if(listOfVisibleHashCodes.contains(hash(image)))
 			{
-				Point p = mapOfPointsByImage.get(((SwingImage)image).getNativeImage().hashCode());
+				Point p = mapOfPointsByImage.get(hash(image));
 				int x = p.getX();
 				int y = p.getY();
 							

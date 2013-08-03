@@ -25,7 +25,7 @@ import com.github.a2g.core.interfaces.VerbsPresenterCallbackAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 
 
-public class VerbsPresenter 
+public class VerbsPresenter
 implements MouseToVerbsPresenterAPI
 {
 	private Verbs theVerbs;
@@ -65,7 +65,7 @@ implements MouseToVerbsPresenterAPI
 	{
 		view.update();
 	}
-	*/
+	 */
 
 	public void setWidthOfScene(int width) {
 		this.widthOfScene = width;
@@ -76,28 +76,28 @@ implements MouseToVerbsPresenterAPI
 		this.widthOfInventory = width;
 		view.setWidth(widthOfScene-widthOfInventory);
 	}
-	
+
 	@Override
-	public void setMouseOver(String displayName, String textualId, int code) 
+	public void setMouseOver(String displayName, String textualId, int code)
 	{
 		callback.onMouseOverVerbsOrInventory(displayName,
-						textualId, 
-						code
-						);
-					
+				textualId,
+				code
+				);
+
 	}
 
 	@Override
 	public void doClick() {
 		callback.onClickVerbsOrInventory();
 	}
-/*
+	/*
 	public int getWidth() {
 		return width;
 	}
-*/
+	 */
 	@Override
-	public void doClick(String displayName, String textualId, int code) 
+	public void doClick(String displayName, String textualId, int code)
 	{
 		this.setMouseOver(displayName, textualId, code);
 		this.doClick();

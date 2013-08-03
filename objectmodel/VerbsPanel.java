@@ -31,13 +31,13 @@ import com.google.gwt.user.client.ui.Label;
 
 public class VerbsPanel
 extends Grid
-implements 
+implements
 VerbsPanelAPI
 {
 	EventBus bus;
 	ColorEnum rolloverColor;
 	final MouseToVerbsPresenterAPI mouseToPresenter;
-	
+
 	public VerbsPanel(InternalAPI api, EventBus bus, final MouseToVerbsPresenterAPI mouseToPresenter, ColorEnum fore, ColorEnum back)
 	{
 		this.mouseToPresenter = mouseToPresenter;
