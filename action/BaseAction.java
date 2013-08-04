@@ -41,8 +41,11 @@ import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.interfaces.ActionCallbackAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.OnDoCommandAPI;
+import com.github.a2g.core.interfaces.SceneAPI;
 import com.github.a2g.core.interfaces.SystemAnimationAPI;
 import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
+import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.PointF;
 
 
@@ -416,6 +419,13 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 				milliseconds);
 	}
 
+	public ChainedAction onDoCommand(SceneAPI scene, OnDoCommandAPI api, ChainRootAction ba,
+			int verb, SentenceItem objectA, SentenceItem objectB, double x, double y) 
+	{
+		ChainedAction secondStep = scene.onDoCommand(api, this.api.createChainRootAction(), verb, objectA, objectB, x, y);
+		return subroutine(secondStep);
+	}
+	
 	public ChainedAction subroutine(ChainedAction orig) {
 		// find root of orig
 		BaseAction somewhereInOrig = orig;
@@ -683,8 +693,5 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		a.setNonBlocking(true);
 		return a;
 	}
-
 }
 
-
-;

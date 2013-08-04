@@ -27,7 +27,8 @@ public class SwapPropertyAction extends ChainedAction {
 	private short objId1;
 	private short objId2;
 	private SwapType type;
-
+	boolean newA;
+	boolean newB;
 	public SwapPropertyAction(BaseAction parent, short objId1, short objId2, SwapType type) {
 		super(parent, parent.getApi(), true);
 		this.objId1 = objId1;
@@ -38,6 +39,12 @@ public class SwapPropertyAction extends ChainedAction {
 
 	@Override
 	public void runGameAction() {
+		SceneObject a = getApi().getObject(
+				this.objId1);
+		SceneObject b = getApi().getObject(
+				this.objId2);
+		newA = b.isVisible();
+		newB = a.isVisible();
 		super.run(1);
 	}
 
@@ -53,10 +60,11 @@ public class SwapPropertyAction extends ChainedAction {
 
 		switch (this.type) {
 		case Visibility:
-			boolean temp = a.isVisible();
+			//boolean newA = b.isVisible();
+			//boolean newB = a.isVisible();
 
-			a.setVisible(b.isVisible());
-			b.setVisible(temp);
+			a.setVisible(newA);
+			b.setVisible(newB);
 
 		}
 
