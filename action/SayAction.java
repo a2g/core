@@ -141,7 +141,16 @@ public class SayAction extends ChainedAction {
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-
+		
+		if(object!=null)
+		{
+			// The current animation is set every frame 
+			// because of the quirk in Base Action where the next action is
+			// executed before the last one finished.
+			String talkingAnimTextualId = object.getTalkingAnimation();// superfluous due to calling order
+			object.setCurrentAnimation(talkingAnimTextualId);// superfluous due to calling order
+		}
+		
 		this.popup.show();
 
 		// update text bubble

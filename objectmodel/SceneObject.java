@@ -425,7 +425,6 @@ public class SceneObject {
 	public ColorEnum getTalkingColor() {
 		return this.talkingColor;
 	}
-
 }
 
 
