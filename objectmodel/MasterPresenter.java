@@ -912,15 +912,6 @@ implements InternalAPI
 	public short getDefaultWalker() {
 		return this.defaultWalker;
 	}
-/*
-	void setAllObjectsToVisible()
-	{
-		Iterator<SceneObject> it = theObjectMap.values().iterator();
 
-		while (it.hasNext()) {
-			it.next().setVisible(true);
-		}
-	}
-	*/
 }
 

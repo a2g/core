@@ -147,8 +147,10 @@ public class SayAction extends ChainedAction {
 			// The current animation is set every frame 
 			// because of the quirk in Base Action where the next action is
 			// executed before the last one finished.
-			String talkingAnimTextualId = object.getTalkingAnimation();// superfluous due to calling order
-			object.setCurrentAnimation(talkingAnimTextualId);// superfluous due to calling order
+			if (anim != null && object != null) {
+				object.setCurrentAnimation(anim.getTextualId());
+				object.setVisible(true);
+			}
 		}
 		
 		this.popup.show();
@@ -166,6 +168,7 @@ public class SayAction extends ChainedAction {
 			int numberOfFramesSoFar = (int) (progress * numberOfFramesTotal);
 			int frame = numberOfFramesSoFar % anim.getFrames().getCount();
 
+			// all frames of the animation should be shown
 			this.object.setCurrentFrame(frame);
 		}
 	}
