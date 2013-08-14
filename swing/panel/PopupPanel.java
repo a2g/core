@@ -40,7 +40,10 @@ implements PopupPanelAPI
 		//this.popup.setBackground(new Color(color.r, color.g, color.b));
 		// create label and add to
 		this.labelInPopup = new Label(speech);
-		this.labelInPopup.setForeground(new Color(color.r, color.g, color.b));
+		if(color!=null)
+		{
+			this.labelInPopup.setForeground(new Color(color.r, color.g, color.b));
+		}
 		this.labelInPopup.setBackground(new Color(0,0,0));
 		
 		popup.add(labelInPopup);
