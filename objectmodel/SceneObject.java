@@ -96,18 +96,19 @@ public class SceneObject {
 	}
 
 	public void incrementFrameWithWraparound() {
-		if (getAnimations().getCount() == 0) {
+		Animation anim = getAnimations().at(
+				this.fak.getCurrentAnimationTextualId());
+		final int animLength = anim.getFrames().getCount();
+		if (animLength == 0) {
 			// Log::NoSingleImage(QString("Here in IncrementFrame"));
 			return;
 		}
 
-		Animation anim = getAnimations().at(
-				this.fak.getCurrentAnimationTextualId());
-		// Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg( this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
+	// Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg( this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
 
 		int i = this.fak.getCurrentFrame() + 1;
 
-		if (i >= anim.getFrames().getCount()) {
+		if (i >= animLength) {
 			this.fak.setCurrentFrame(0);
 		} else {
 			this.fak.setCurrentFrame(i);
@@ -425,6 +426,19 @@ public class SceneObject {
 	public ColorEnum getTalkingColor() {
 		return this.talkingColor;
 	}
+	
+	public void setParallaxX(double x)
+	{
+		for(int a = 0;a<animationCollection.getCount();a++)
+		{
+			Animation anim = animationCollection.at(a);
+			for(int i=0;i<anim.getLength();i++)
+			{
+				anim.getFrames().at(i).setParallaxX(x);
+			}
+		}
+	}
+	
 }
 
 
