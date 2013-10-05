@@ -20,6 +20,7 @@ package com.github.a2g.core.objectmodel;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.primitive.CodesForVerbs;
 
 
@@ -31,18 +32,18 @@ public class VerbCollection {
 		//this.api = api;
 		verbs = new ArrayList<Verb>();
 
-		verbs.add(new Verb("Walk", "Walk to AAA", CodesForVerbs.getCodeForVerb(0)));
-		verbs.add(new Verb("Talk", "Talk to AAA", CodesForVerbs.getCodeForVerb(1)));
-		verbs.add(new Verb("Examine", "Examine AAA", CodesForVerbs.getCodeForVerb(2)));
-		verbs.add(new Verb("Grab", "Grab AAA", CodesForVerbs.getCodeForVerb(3)));
-		verbs.add(new Verb("Cut", "Cut AAA|Cut AAA with BBB", CodesForVerbs.getCodeForVerb(4)));
-		verbs.add(new Verb("Swing", "Swing AAA", CodesForVerbs.getCodeForVerb(5)));
-		verbs.add(new Verb("Give","Give AAA|Give AAA to BBB", CodesForVerbs.getCodeForVerb(6)));
-		verbs.add(new Verb("Use","Use AAA|Use AAA with BBB", CodesForVerbs.getCodeForVerb(7)));
-		verbs.add(new Verb("Push", "Push AAA", CodesForVerbs.getCodeForVerb(8)));
-		verbs.add(new Verb("Pull", "Pull AAA", CodesForVerbs.getCodeForVerb(9)));
-		verbs.add(new Verb("Throw", "Throw AAA|Throw AAA at BBB", CodesForVerbs.getCodeForVerb(10)));
-		verbs.add(new Verb("Eat", "Eat AAA", CodesForVerbs.getCodeForVerb(11)));
+		verbs.add(new Verb("Walk", "Walk to AAA", ConstantsForAPI.WALK));
+		verbs.add(new Verb("Talk", "Talk to AAA", ConstantsForAPI.TALK));
+		verbs.add(new Verb("Examine", "Examine AAA", ConstantsForAPI.EXAMINE));
+		verbs.add(new Verb("Grab", "Grab AAA", ConstantsForAPI.GRAB));
+		verbs.add(new Verb("Cut", "Cut AAA|Cut AAA with BBB", ConstantsForAPI.CUT));
+		verbs.add(new Verb("Swing", "Swing AAA", ConstantsForAPI.SWING));
+		verbs.add(new Verb("Turn on","Turn on AAA", ConstantsForAPI.TURN_ON));
+		verbs.add(new Verb("Use","Use AAA|Use AAA with BBB", ConstantsForAPI.USE));
+		verbs.add(new Verb("Push", "Push AAA", ConstantsForAPI.PUSH));
+		verbs.add(new Verb("Pull", "Pull AAA", ConstantsForAPI.PULL));
+		verbs.add(new Verb("Throw", "Throw AAA|Throw AAA at BBB", ConstantsForAPI.THROW));
+		verbs.add(new Verb("Eat", "Eat AAA", ConstantsForAPI.EAT));
 	}
 
 	public Verb get(int i) {

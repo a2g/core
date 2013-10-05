@@ -38,7 +38,7 @@ public interface ConstantsForAPI {
 			* VERB_MULTIPLIER;
 	public static final int SWING = 5
 			* VERB_MULTIPLIER;
-	public static final int GIVE = 6
+	public static final int TURN_ON = 6
 			* VERB_MULTIPLIER;
 	public static final int USE = 7
 			* VERB_MULTIPLIER;
@@ -48,7 +48,8 @@ public interface ConstantsForAPI {
 			* VERB_MULTIPLIER;
 	public static final int THROW = 10
 			* VERB_MULTIPLIER;
-
+	public static final int EAT = 11
+			* VERB_MULTIPLIER;
 	public static enum Special {
 		North, East, South, West, Talking
 	}
