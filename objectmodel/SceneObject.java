@@ -39,14 +39,14 @@ public class SceneObject {
 	private boolean visible;
 	private final double screenPixelWidth;
 	private final double screenPixelHeight;
-	private int rawY; // needed for moving image around.
-	private int rawX;
+	private double rawY; // needed for moving image around.
+	private double rawX;
 	private int numberPrefix;
 	private short code;
 	private ColorEnum talkingColor;
 	private int talkingAnimationDelay;
 
-	public SceneObject(String textualId, int width, int height) {
+	public SceneObject(String textualId, int screenWidth, int screenHeight) {
 		this.currentImage = null;
 		this.textualId = textualId;
 		this.displayName = textualId;
@@ -54,8 +54,8 @@ public class SceneObject {
 		this.fak = new FrameAndAnimation(
 				this.textualId);
 		this.visible = true;
-		this.screenPixelWidth = width;
-		this.screenPixelHeight = height;
+		this.screenPixelWidth = screenWidth;
+		this.screenPixelHeight = screenHeight;
 		this.mapOfSpecialAnimations = new TreeMap<Special, String>();
 		this.numberPrefix = 0;
 		this.initialAnimationId = textualId + "_INITIAL";
@@ -235,38 +235,39 @@ public class SceneObject {
 
 	Point getRawLeftTop()
 	{
-		return new Point(this.rawX,this.rawY);
+		return new Point((int)this.rawX,(int)this.rawY);
 	}
 
-	static double worldToScreenX(int intX, double screenSpan, int lowerBound, int upperBound )
+	static double worldToScreenX(double intX, double screenSpan, int lowerBound, int upperBound )
 	{
 		int rectSpan = upperBound-lowerBound;
 		double doubleX = (intX + .5*rectSpan  + lowerBound)/screenSpan ;
 		return doubleX;
 	}
 
-	static int screenToWorldX(double doubleX, double screenSpan, int lowerBound, int upperBound )
-	{
-		int rectSpan = upperBound-lowerBound;
-		double intX = doubleX * screenSpan - .5*rectSpan  - lowerBound;
-		return (int)intX;
-	}
-
-	static int screenToWorldY(double doubleY, double screenSpan, int lowerBound, int upperBound )
-	{
-		int rectSpan = upperBound-lowerBound;
-		double intY = doubleY * screenSpan - rectSpan  - lowerBound;
-		return (int)intY;
-	}
-
-	static double worldToScreenY(int intY, double screenSpan, int lowerBound, int upperBound )
+	static double worldToScreenY(double intY, double screenSpan, int lowerBound, int upperBound )
 	{
 		int rectSpan = upperBound-lowerBound;
 		double doubleY = (intY + rectSpan  + lowerBound)/screenSpan ;
 		return doubleY;
 	}
 
-	public void setX(int rawX)
+
+	static double screenToWorldX(double doubleX, double screenSpan, int lowerBound, int upperBound )
+	{
+		int rectSpan = upperBound-lowerBound;
+		double rawX = doubleX * screenSpan - .5*rectSpan  - lowerBound;
+		return rawX;
+	}
+
+	static double screenToWorldY(double doubleY, double screenSpan, int lowerBound, int upperBound )
+	{
+		int rectSpan = upperBound-lowerBound;
+		double rawY = doubleY * screenSpan - rectSpan  - lowerBound;
+		return rawY;
+	}
+	
+	public void setX(double rawX)
 	{
 		this.rawX = rawX;
 		if(currentImage!=null)
@@ -275,7 +276,7 @@ public class SceneObject {
 		}
 	}
 
-	public void setY(int rawY)
+	public void setY(double rawY)
 	{
 		this.rawY = rawY;
 		if(currentImage!=null)
@@ -286,42 +287,42 @@ public class SceneObject {
 
 	public int getX()
 	{
-		return this.rawX;
+		return (int)this.rawX;
 	}
 
 	public int getY()
 	{
-		return this.rawY;
+		return (int)this.rawY;
 	}
 
 	public void setBaseMiddleX(double baseMiddleX)
 	{
-		int rawX = screenToWorldX(baseMiddleX, screenPixelWidth, getCurrentBounds().getLeft(), getCurrentBounds().getRight());
+		double rawX = screenToWorldX(baseMiddleX, screenPixelWidth, getCurrentBoundingRect().getLeft(), getCurrentBoundingRect().getRight());
 		setX(rawX);
 	}
 
 	public void setBaseMiddleY(double baseMiddleY)
 	{
-		int rawY = screenToWorldY(baseMiddleY, screenPixelHeight, getCurrentBounds().getTop(), getCurrentBounds().getBottom());
+		double rawY = screenToWorldY(baseMiddleY, screenPixelHeight, getCurrentBoundingRect().getTop(), getCurrentBoundingRect().getBottom());
 		setY(rawY);
 	}
 
 
 	public double getBaseMiddleX()
 	{
-		double bmx = worldToScreenX(rawX, screenPixelWidth, getCurrentBounds().getLeft(), getCurrentBounds().getRight());
+		double bmx = worldToScreenX(rawX, screenPixelWidth, getCurrentBoundingRect().getLeft(), getCurrentBoundingRect().getRight());
 
 		return bmx;
 	}
 
 	public double getBaseMiddleY()
 	{
-		double bmy = worldToScreenY(rawY, screenPixelHeight, getCurrentBounds().getTop(), getCurrentBounds().getBottom());
+		double bmy = worldToScreenY(rawY, screenPixelHeight, getCurrentBoundingRect().getTop(), getCurrentBoundingRect().getBottom());
 
 		return bmy;
 	}
 
-	Rect getCurrentBounds()
+	Rect getCurrentBoundingRect()
 	{
 		if(currentImage!=null)
 		{
