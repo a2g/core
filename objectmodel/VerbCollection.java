@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.a2g.core.interfaces.ConstantsForAPI;
-import com.github.a2g.core.primitive.CodesForVerbs;
 
 
 public class VerbCollection {
