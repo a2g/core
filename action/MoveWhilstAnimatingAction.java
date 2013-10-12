@@ -114,10 +114,6 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 				? framesPlayedSoFar
 						% this.framesInAnim
 						: 0;
-		// The current animation is set every frame
-		// because of the quirk in Base Action where the next action is
-		// executed before the ladt one finished
-		this.obj.setCurrentAnimation(anim.getTextualId());
 		this.obj.setCurrentFrame(i);
 	}
 

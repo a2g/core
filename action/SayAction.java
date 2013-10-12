@@ -144,11 +144,7 @@ public class SayAction extends ChainedAction {
 		
 		if(object!=null)
 		{
-			// The current animation is set every frame 
-			// because of the quirk in Base Action where the next action is
-			// executed before the last one finished.
 			if (anim != null && object != null) {
-				object.setCurrentAnimation(anim.getTextualId());
 				object.setVisible(true);
 			}
 		}
