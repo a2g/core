@@ -73,7 +73,8 @@ extends ImageAddAPI, OnDoCommandAPI{
 	public String getLastScene();
 	@Override
 	public boolean isInDebugMode();
-	public void executeBaseAction(BaseAction a);
+	public void executeActionWithDialogActionRunner(BaseAction a);
+	public void executeActionWithDoCommandActionRunner(BaseAction a);
 	public void setLastCommand(double x, double y, int v, String a, String b);
 
 	// dialog tree methods

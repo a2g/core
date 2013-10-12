@@ -27,8 +27,10 @@ public class ActionRunner implements ActionCallbackAPI
 	private ArrayList<BaseAction> parallelActionsToWaitFor;
 	private int numberOfParallelActionsToWaitFor;
 	private ActionRunnerCallbackAPI api;
-	public ActionRunner(ActionRunnerCallbackAPI api)
+	final private int id;
+	public ActionRunner(ActionRunnerCallbackAPI api, int id)
 	{
+		this.id = id;
 		this.api=api;
 		list = new ArrayList<BaseAction>();
 		parallelActionsToWaitFor = new ArrayList<BaseAction>();
@@ -96,7 +98,7 @@ public class ActionRunner implements ActionCallbackAPI
 		}
 		else
 		{
-			api.actionFinished();
+			api.actionFinished(this.id);
 		}
 	}
 

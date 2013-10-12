@@ -99,7 +99,8 @@ implements InternalAPI
 
 	private TimerAPI timer;
 	private MasterPanelAPI masterPanel;
-	private ActionRunner actionRunner;
+	private ActionRunner dialogActionRunner;
+	private ActionRunner doCommandActionRunner;
 	private int textSpeedDelay;
 	private Integer[] theListOfIndexesToInsertAt;
 
@@ -121,7 +122,9 @@ implements InternalAPI
 		this.theObjectMap = new TreeMap<Short, SceneObject>();
 		this.theAnimationMap = new TreeMap<String, Animation>();
 
-		this.actionRunner = new ActionRunner(this);
+		this.doCommandActionRunner = new ActionRunner(this,1);
+		this.dialogActionRunner = new ActionRunner(this,2);
+		
 		this.theListOfIndexesToInsertAt= new Integer[100];
 		for(int i=0;i<100;i++)
 			theListOfIndexesToInsertAt[i] = new Integer(0);
@@ -284,19 +287,30 @@ implements InternalAPI
 
 
 	@Override
-	public void executeBaseAction(BaseAction a)
+	public void executeActionWithDialogActionRunner(BaseAction a)
 	{
 		if(a==null)
 		{
 			a = new DoNothingAction(createChainRootAction());
 		}
 
-		actionRunner.runAction(a);
+		dialogActionRunner.runAction(a);
+	}
+	
+	@Override
+	public void executeActionWithDoCommandActionRunner(BaseAction a)
+	{
+		if(a==null)
+		{
+			a = new DoNothingAction(createChainRootAction());
+		}
+
+		doCommandActionRunner.runAction(a);
 	}
 
 	public void skip()
 	{
-		actionRunner.skip();
+		dialogActionRunner.skip();
 	}
 
 	public void decrementTextSpeed()
@@ -415,7 +429,7 @@ implements InternalAPI
 		// I thought maybe I could do it, then cancel the timers.
 		// but I've put it off til I need the microseconds.
 		cancelTimer();
-		this.actionRunner.cancel();
+		this.dialogActionRunner.cancel();
 
 		this.parent.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(	scene);
 	}
@@ -479,18 +493,19 @@ implements InternalAPI
 
 	@Override
 	public void executeBranchOnCurrentScene(int branchId)
-	{	this.actionRunner.cancel();
-	// clear it so any old branches don't show up
-	this.dialogTreePresenter.clear();
+	{	
+		this.dialogActionRunner.cancel();
+		// clear it so any old branches don't show up
+		this.dialogTreePresenter.clear();
 
-	// make dialogtreepanel active if not already
-	this.setDialogTreeActive(true);
+		// make dialogtreepanel active if not already
+		this.setDialogTreeActive(true);
 
-	// get the chain from the client code
-	BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, createChainRootAction(), branchId);
+		// get the chain from the client code
+		BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, createChainRootAction(), branchId);
 
-	// execute it
-	executeBaseAction(	actionChain );
+		// execute it
+		executeActionWithDialogActionRunner( actionChain );
 	}
 
 
@@ -508,7 +523,7 @@ implements InternalAPI
 
 		SayAction say = new SayAction(createChainRootAction(), objId, speech);
 		BaseDialogTreeAction actionChain = callbacks.onDialogTree(this, say, branchId);
-		executeBaseAction(actionChain);
+		executeActionWithDialogActionRunner(actionChain);
 	}
 
 	public void callOnEnterScene()
@@ -517,7 +532,7 @@ implements InternalAPI
 
 		//.. then executeBaseAction->actionRunner::runAction will add an TitleCardAction
 		// the title card
-		executeBaseAction(a);
+		executeActionWithDoCommandActionRunner(a);
 	}
 
 	@Override
@@ -788,7 +803,7 @@ implements InternalAPI
 
 
 		this.commandLinePresenter.setMouseable(false);
-		executeBaseAction(a);
+		executeActionWithDoCommandActionRunner(a);
 
 		setLastCommand(x, y,
 				verbAsVerbEnumeration,
@@ -798,7 +813,7 @@ implements InternalAPI
 	}
 
 	@Override
-	public void actionFinished()
+	public void actionFinished(int id)
 	{
 		this.commandLinePresenter.clear();
 		this.commandLinePresenter.setMouseable(true);
@@ -888,7 +903,7 @@ implements InternalAPI
 	@Override
 	public void executeChainedAction(ChainedAction ba)
 	{
-		executeBaseAction(ba);
+		executeActionWithDoCommandActionRunner(ba);
 	}
 
 	@Override
