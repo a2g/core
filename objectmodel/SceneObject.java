@@ -20,12 +20,15 @@ import java.util.Map;
 import java.util.TreeMap;
 
 
+import com.github.a2g.core.interfaces.OnDoCommandAPI;
 import com.github.a2g.core.interfaces.SceneAPI;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
+import com.visuals.bird._00_animations.a;
+import com.visuals.bird._70_bird_main.o;
 
 
 public class SceneObject {
@@ -166,7 +169,7 @@ public class SceneObject {
 			}
 
 			int curFrame = fak.getCurrentFrame();
-			com.github.a2g.core.objectmodel.Image current = anim.getImageAndPosCollection().at(curFrame);
+			com.github.a2g.core.objectmodel.Image current = anim.getFrameCollection().at(curFrame);
 
 
 			// yes current can equal null in some weird cases where I place breakpoints...
@@ -285,14 +288,14 @@ public class SceneObject {
 		}
 	}
 
-	public int getX()
+	public double getX()
 	{
-		return (int)this.rawX;
+		return this.rawX;
 	}
 
-	public int getY()
+	public double getY()
 	{
-		return (int)this.rawY;
+		return this.rawY;
 	}
 
 	public void setBaseMiddleX(double baseMiddleX)
@@ -322,7 +325,7 @@ public class SceneObject {
 		return bmy;
 	}
 
-	Rect getCurrentBoundingRect()
+	public Rect getCurrentBoundingRect()
 	{
 		if(currentImage!=null)
 		{
@@ -402,7 +405,6 @@ public class SceneObject {
 		updateToCorrectImage();
 	}
 
-
 	public String getInitialAnimation() {
 		return initialAnimationId;
 	}
@@ -438,6 +440,32 @@ public class SceneObject {
 				anim.getFrames().at(i).setParallaxX(x);
 			}
 		}
+	}
+
+	PointF getBaseMiddleXY()
+	{
+		double left = this.getX();
+		double right = this.getY();
+		Rect r = this.getCurrentBoundingRect();
+		double averageXPos = left + (r.getLeft()+r.getRight())/2.0;
+		double lowerYPos = right + r.getBottom();
+		double x = averageXPos/screenPixelWidth;
+		double y = lowerYPos/screenPixelHeight;
+		return new PointF(x,y);
+	}
+	
+	public void setCurrentAnimationAndSetFrameWithoutBaseMiddleMovement(
+			String textualId,
+			int frame) 
+	{
+		PointF h = getBaseMiddleXY();
+		this.fak.setCurrentAnimationTextualId(textualId);
+		this.fak.setCurrentFrame(frame);
+		this.updateToCorrectImage();
+		// then change position
+		setBaseMiddleX(h.getX());
+		setBaseMiddleY(h.getY());
+		
 	}
 	
 }

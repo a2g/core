@@ -17,7 +17,6 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.ScenePanelAPI;
@@ -33,14 +32,13 @@ public class ScenePresenter {
 	private double cameraX;
 	private double cameraY;
 
-	public ScenePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api)
+	public ScenePresenter(final HostingPanelAPI panel, InternalAPI api)
 	{
 		this.cameraX=0.0;
 		this.cameraY=0.0;
 		this.setWidth(320);
 		this.setHeight(180);
 		this.scene = new Scene();
-		//  this.eventBus = bus;
 		this.view = api.getFactory().createScenePanel();
 		panel.setThing(view);
 		view.setVisible(true);

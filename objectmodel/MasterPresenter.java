@@ -150,7 +150,7 @@ implements InternalAPI
 		this.inventoryPresenter = new InventoryPresenter(
 				masterPanel.getHostForInventory(), bus, this);
 		this.scenePresenter = new ScenePresenter(
-				masterPanel.getHostForScene(), bus, this);
+				masterPanel.getHostForScene(), this);
 		this.verbsPresenter = new VerbsPresenter(
 				masterPanel.getHostForVerbs(), bus, this);
 		this.loadingPresenter =  new LoaderPresenter(
@@ -367,7 +367,7 @@ implements InternalAPI
 		}
 		if(timer!=null)
 		{
-			this.callbacks.onEveryFrame(this);
+			//this.callbacks.onEveryFrame(this);
 		}
 	}
 

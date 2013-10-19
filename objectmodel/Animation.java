@@ -23,7 +23,7 @@ import com.github.a2g.core.interfaces.SceneAPI;
 
 public class Animation {
 	private String textualId;
-	private ImageCollection imageAndPosCollection;
+	private ImageCollection framesCollection;
 	private SceneObject parent;
 	private boolean wasSetAsInitialAnimation;
 	private boolean wasSetAsTalkingAnimation;
@@ -34,7 +34,7 @@ public class Animation {
 	public Animation(String textualId, SceneObject owningSceneObject) {
 		this.parent = owningSceneObject;
 		this.textualId = textualId;
-		imageAndPosCollection = new com.github.a2g.core.objectmodel.ImageCollection();
+		framesCollection = new com.github.a2g.core.objectmodel.ImageCollection();
 		wasSetAsInitialAnimation = false;
 		wasSetAsTalkingAnimation = false;
 		wasSetAsCurrentAnimation = false;
@@ -42,7 +42,7 @@ public class Animation {
 	}
 
 	public ImageCollection getFrames() {
-		return imageAndPosCollection;
+		return framesCollection;
 	}
 
 	public String getTextualId() {
@@ -57,28 +57,28 @@ public class Animation {
 		this.textualId = textualId;
 	}
 
-	public ImageCollection getImageAndPosCollection() {
-		return imageAndPosCollection;
+	public ImageCollection getFrameCollection() {
+		return framesCollection;
 	}
 
 	public Image getDefaultFrame() {
-		assert(imageAndPosCollection.getCount()
+		assert(framesCollection.getCount()
 				!= 0);
-		if (imageAndPosCollection.getCount() == 0) {
+		if (framesCollection.getCount() == 0) {
 			return null;
 		}
-		com.github.a2g.core.objectmodel.Image frame = imageAndPosCollection.at(
+		com.github.a2g.core.objectmodel.Image frame = framesCollection.at(
 				0);
 
 		return frame;
 	}
 
 	public int getLength() {
-		return imageAndPosCollection.getCount();
+		return framesCollection.getCount();
 	}
 
 	public int getLastFrame() {
-		return imageAndPosCollection.getCount()
+		return framesCollection.getCount()
 				- 1;
 	}
 
@@ -146,6 +146,15 @@ public class Animation {
 
 	public SceneAPI.Special getDesignatedSpecialAnimation() {
 		return specialAnimationThisWasSetTo;
+	}
+
+	public void setAsCurrentAnimationAndSetFrameWithoutBaseMiddleMovement(
+			int lastFrame) 
+	{
+		if (parent != null)
+		{
+			parent.setCurrentAnimationAndSetFrameWithoutBaseMiddleMovement(this.textualId, lastFrame);
+		}
 	}
 
 };

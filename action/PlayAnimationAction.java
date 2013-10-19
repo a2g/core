@@ -43,13 +43,10 @@ public class PlayAnimationAction extends ChainedAction {
 
 	@Override
 	public void runGameAction() {
-		int duration = (this.anim.getLength()
-				+ 1)
+		int duration = (this.anim.getLength()+ 1)
 				* (40 + this.delay);
-		String s = this.anim.getTextualId();
-
+		
 		if (animsParent != null) {
-			animsParent.setCurrentAnimation(s);
 			animsParent.setVisible(true);
 		}
 		this.run(duration);
@@ -57,12 +54,16 @@ public class PlayAnimationAction extends ChainedAction {
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		int length = this.anim.getLength();
+		int lastFrame = this.anim.getLength()-1;
 		double frame = isBackwards
-				? (1 - progress) * length
-						: progress * length;
+				? (1 - progress) * lastFrame
+						: progress * lastFrame;
 
 				if (animsParent != null) {
+					animsParent.setCurrentFrame(
+							(int) frame);
+
+					animsParent.setCurrentAnimation(anim.getTextualId());
 					animsParent.setCurrentFrame(
 							(int) frame);
 				}
@@ -70,16 +71,12 @@ public class PlayAnimationAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-
+		onUpdateGameAction(1.0);
 		if (!this.holdLastFrame) {
-			if (this.anim != null) {
-				SceneObject o = anim.getObject();
-
-				if (o != null) {
-					String s = o.getInitialAnimation();
-
-					o.setCurrentAnimation(s);
-				}
+			if (this.animsParent != null) 
+			{
+				String s = animsParent.getInitialAnimation();
+				animsParent.setCurrentAnimation(s);
 			}
 		}
 	}

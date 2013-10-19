@@ -121,6 +121,8 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 	protected void onCompleteGameAction()
 	{
 		this.obj.setCurrentFrame(0);
+		this.obj.setBaseMiddleX(endX);
+		this.obj.setBaseMiddleY(endY);
 	}
 
 	@Override

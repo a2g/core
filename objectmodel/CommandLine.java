@@ -98,8 +98,6 @@ public class CommandLine {
 			typeOfRollover="A";
 		}
 
-		// text += "Verb "+ this.lockedInVerb + "obj1 " + this.lockedInObject1 + "obj2 " + this.lockedInObject2;
-
 		return text;
 	}
 

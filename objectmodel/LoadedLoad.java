@@ -55,7 +55,7 @@ public class LoadedLoad
 			sceneObject.getAnimations().add(animation);
 		}
 
-		animation.getImageAndPosCollection().add(imageAndPos);
+		animation.getFrameCollection().add(imageAndPos);
 	}
 
 	public SceneObjectCollection getSceneObjectCollection() {

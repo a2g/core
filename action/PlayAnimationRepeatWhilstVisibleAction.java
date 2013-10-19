@@ -47,7 +47,7 @@ public class PlayAnimationRepeatWhilstVisibleAction extends ChainedAction {
 	@Override
 	protected void onUpdateGameAction(double progress) {
 		double frame = progress
-				* this.anim.getLength();
+				* this.anim.getLength()-1;
 
 		this.anim.getObject().setCurrentFrame(
 				(int) frame);
