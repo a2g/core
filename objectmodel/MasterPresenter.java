@@ -367,7 +367,7 @@ implements InternalAPI
 		}
 		if(timer!=null)
 		{
-			//this.callbacks.onEveryFrame(this);
+			this.callbacks.onEveryFrame(this);
 		}
 	}
 

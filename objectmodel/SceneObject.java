@@ -19,16 +19,12 @@ package com.github.a2g.core.objectmodel;
 import java.util.Map;
 import java.util.TreeMap;
 
-
-import com.github.a2g.core.interfaces.OnDoCommandAPI;
 import com.github.a2g.core.interfaces.SceneAPI;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
-import com.visuals.bird._00_animations.a;
-import com.visuals.bird._70_bird_main.o;
 
 
 public class SceneObject {
