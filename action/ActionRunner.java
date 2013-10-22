@@ -64,6 +64,8 @@ public class ActionRunner implements ActionCallbackAPI
 		{
 			BaseAction a = this.parallelActionsToWaitFor.get(i);
 
+			System.out.println("ActionRunner::executeParallelActions " + this.id+ " " + a.toString() );
+			
 			a.setCallbacks(this);
 			a.runGameAction();
 		}

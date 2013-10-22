@@ -71,6 +71,8 @@ public class PlayAnimationAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
+		System.out.println("ActionRunner::done " + anim.getTextualId() +" is this length: " +anim.getLength());
+		
 		onUpdateGameAction(1.0);
 		if (!this.holdLastFrame) {
 			if (this.animsParent != null) 

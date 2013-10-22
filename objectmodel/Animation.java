@@ -148,7 +148,7 @@ public class Animation {
 		return specialAnimationThisWasSetTo;
 	}
 
-	public void setAsCurrentAnimationAndSetFrameWithoutBaseMiddleMovement(
+	public void setAsCurrentAnimationAndSetToFrameWithoutBaseMiddleMovement(
 			int lastFrame) 
 	{
 		if (parent != null)
@@ -156,5 +156,25 @@ public class Animation {
 			parent.setCurrentAnimationAndSetFrameWithoutBaseMiddleMovement(this.textualId, lastFrame);
 		}
 	}
+	
+	public void setAsCurrentAnimationAndSetToLastFrameWithoutBaseMiddleMovement() 
+	{
+		if (parent != null)
+		{
+			int lastFrame = this.getLength() - 1;
+			parent.setCurrentAnimationAndSetFrameWithoutBaseMiddleMovement(this.textualId, lastFrame);
+		}
+	}
+	
 
+
+	public void setAsCurrentAnimationAndSetToFirstFrameWithoutBaseMiddleMovement() {
+		if (parent != null)
+		{
+			parent.setCurrentAnimationAndSetFrameWithoutBaseMiddleMovement(this.textualId,0);
+		}
+		
+	}
+
+	
 };
