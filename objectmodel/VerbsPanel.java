@@ -17,13 +17,12 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.gwt.mouse.VerbMouseClickHandler;
-import com.github.a2g.core.gwt.mouse.VerbMouseOverHandler;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
 import com.github.a2g.core.interfaces.VerbsPanelAPI;
+import com.github.a2g.core.platforms.html4.mouse.VerbMouseClickHandler;
+import com.github.a2g.core.platforms.html4.mouse.VerbMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;

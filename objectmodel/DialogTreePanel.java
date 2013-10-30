@@ -16,10 +16,10 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.gwt.mouse.DialogTreeMouseClickHandler;
-import com.github.a2g.core.gwt.mouse.DialogTreeMouseOutHandler;
-import com.github.a2g.core.gwt.mouse.DialogTreeMouseOverHandler;
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
+import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseClickHandler;
+import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseOutHandler;
+import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.DOM;

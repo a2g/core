@@ -17,15 +17,15 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.gwt.factory.GWTImage;
-import com.github.a2g.core.gwt.factory.GWTPackagedImage;
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.gwt.mouse.ImageMouseClickHandler;
-import com.github.a2g.core.gwt.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.PackagedImageAPI;
 import com.github.a2g.core.interfaces.ScenePanelAPI;
+import com.github.a2g.core.platforms.html4.ImageForHtml4;
+import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
+import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
+import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.primitive.Point;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -60,9 +60,9 @@ implements ImagePanelAPI, ScenePanelAPI
 			String objectTextualId,
 			short objectCode)
 	{
-		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource((GWTPackagedImage)imageResource,lh);
+		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource((PackagedImageForHtml4)imageResource,lh);
 
-		GWTImage imageAndPos = new GWTImage(image, this, new Point(x, y));
+		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new Point(x, y));
 
 		// add gwt mouse handlers
 		imageAndPos.getNativeImage().addMouseMoveHandler
@@ -82,43 +82,43 @@ implements ImagePanelAPI, ScenePanelAPI
 	@Override
 	public void setImageVisible(Image image, boolean visible)
 	{
-		super.setVisible(((GWTImage)image).getNativeImage().getElement(), visible);
+		super.setVisible(((ImageForHtml4)image).getNativeImage().getElement(), visible);
 	}
 
 	@Override
 	public void add(Image image, int x, int y)
 	{
-		super.add(((GWTImage)image).getNativeImage(),x,y);
+		super.add(((ImageForHtml4)image).getNativeImage(),x,y);
 	}
 
 	@Override
 	public void insert(Image image, int x, int y, int before)
 	{
-		super.insert(((GWTImage)image).getNativeImage(),x-cameraOffsetX,y-cameraOffsetY,before);
+		super.insert(((ImageForHtml4)image).getNativeImage(),x-cameraOffsetX,y-cameraOffsetY,before);
 	}
 
 	@Override
 	public void remove(Image image)
 	{
-		super.remove(((GWTImage)image).getNativeImage());
+		super.remove(((ImageForHtml4)image).getNativeImage());
 	}
 
 	@Override
 	public void setThingPosition(Image image, int left, int top)
 	{
-		super.setWidgetPosition(((GWTImage)image).getNativeImage(), left-cameraOffsetX, top-cameraOffsetY);
+		super.setWidgetPosition(((ImageForHtml4)image).getNativeImage(), left-cameraOffsetX, top-cameraOffsetY);
 	}
 
 	@Override
 	public int getImageHeight(Image image)
 	{
-		return ((GWTImage)image).getNativeImage().getHeight();
+		return ((ImageForHtml4)image).getNativeImage().getHeight();
 	}
 
 	@Override
 	public int getImageWidth(Image image)
 	{
-		return ((GWTImage)image).getNativeImage().getWidth();
+		return ((ImageForHtml4)image).getNativeImage().getWidth();
 	}
 
 	@Override

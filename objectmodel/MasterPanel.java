@@ -15,10 +15,9 @@
  */
 
 package com.github.a2g.core.objectmodel;
-import com.github.a2g.core.gwt.factory.GWTHostingPanel;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
-import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
+import com.github.a2g.core.platforms.html4.HostingPanelForHtml4;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -30,25 +29,25 @@ public class MasterPanel
 extends VerticalPanel
 implements MasterPanelAPI
 {
-	GWTHostingPanel hostForCommandLine;
-	GWTHostingPanel hostForInventory;
-	GWTHostingPanel hostForVerbs;
-	GWTHostingPanel hostForScene;
-	GWTHostingPanel hostForDialogTree;
-	GWTHostingPanel hostForLoading;
-	GWTHostingPanel hostForTitleCard;
+	HostingPanelForHtml4 hostForCommandLine;
+	HostingPanelForHtml4 hostForInventory;
+	HostingPanelForHtml4 hostForVerbs;
+	HostingPanelForHtml4 hostForScene;
+	HostingPanelForHtml4 hostForDialogTree;
+	HostingPanelForHtml4 hostForLoading;
+	HostingPanelForHtml4 hostForTitleCard;
 	GuiStateEnum state;
 
 	public MasterPanel(int width, int height, ColorEnum back) {
 
 		// create all the host panels, that we want to arrange.
-		hostForCommandLine = new GWTHostingPanel();
-		hostForInventory = new GWTHostingPanel();
-		hostForVerbs = new GWTHostingPanel();
-		hostForScene = new GWTHostingPanel();
-		hostForDialogTree = new GWTHostingPanel();
-		hostForLoading = new GWTHostingPanel();
-		hostForTitleCard = new GWTHostingPanel();
+		hostForCommandLine = new HostingPanelForHtml4();
+		hostForInventory = new HostingPanelForHtml4();
+		hostForVerbs = new HostingPanelForHtml4();
+		hostForScene = new HostingPanelForHtml4();
+		hostForDialogTree = new HostingPanelForHtml4();
+		hostForLoading = new HostingPanelForHtml4();
+		hostForTitleCard = new HostingPanelForHtml4();
 
 		// will be constructed from two vertical stacks.
 		AbsolutePanel stackForSceneAndLoading = new AbsolutePanel();
