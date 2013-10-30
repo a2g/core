@@ -13,35 +13,28 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.github.a2g.core.canvas.mouse;
 
+package com.github.a2g.core.canvas.factory;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
-
+import java.awt.Component;
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
+import com.google.gwt.canvas.client.Canvas;
+import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.IsWidget;
+import com.github.a2g.core.interfaces.HostingPanelAPI;
 
-
-public class InventoryMouseClickHandler extends MouseAdapter
+@SuppressWarnings("serial")
+public class Html5HostingPanel
+extends com.google.gwt.user.client.ui.SimplePanel
+implements HostingPanelAPI
 {
-	private MouseToInventoryPresenterAPI api;
-	public InventoryMouseClickHandler(JPanel parent, MouseToInventoryPresenterAPI api2) {
-		this.api = api2;
-	}
+	Canvas canvas;
+	Canvas backBuffer;
 
-	public MouseToInventoryPresenterAPI getAPI()
-	{
-		return api;
-	}
-
-	// use mousePressed (not mouseClicked) so allows half-clicks will also be caught
 	@Override
-	public void mousePressed(MouseEvent e) {
-		api.doClick();
+	public void setThing(Object w) {
+		this.add((IsWidget)w);
+
 	}
-
-
-
-}
+}	

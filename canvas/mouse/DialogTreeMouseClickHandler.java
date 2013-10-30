@@ -17,15 +17,14 @@
 package com.github.a2g.core.canvas.mouse;
 
 
-import java.awt.Label;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.ui.Label;
 
 
-public class DialogTreeMouseClickHandler extends MouseAdapter {
+public class DialogTreeMouseClickHandler implements ClickHandler {
 	private final Label label;
 	private int branchId;
 	private EventBus bus;
@@ -35,12 +34,12 @@ public class DialogTreeMouseClickHandler extends MouseAdapter {
 		this.bus = bus;
 		this.branchId = branchId;
 	}
-	
-	// use mousePressed (not mouseClicked) so allows half-clicks will also be caught
+
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void onClick(ClickEvent event) {
 		bus.fireEvent(
 				new SaySpeechCallDialogTreeEvent(
 						label.getText(), branchId));
+
 	}
 }

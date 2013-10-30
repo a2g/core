@@ -13,25 +13,28 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.github.a2g.core.canvas.mouse;
 
-import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
+import com.github.a2g.core.primitive.ColorEnum;
+import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseOverHandler;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.Label;
 
 
+public class DialogTreeMouseOverHandler implements MouseOverHandler {
+	private final Label label;
+	private ColorEnum rolloverColor;
 
-public class DialogTreeMouseOverHandler extends MouseAdapter {
-	private final java.awt.Label label;
-	Color color;
-
-	public DialogTreeMouseOverHandler(java.awt.Label label, Color color) {
+	public DialogTreeMouseOverHandler(Label label, ColorEnum rolloverColor) {
 		this.label = label;
-		this.color = color;
+		this.rolloverColor = rolloverColor;
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent event) {
-		this.label.setForeground(color);
+	public void onMouseOver(MouseOverEvent event) {
+		DOM.setStyleAttribute(label.getElement(), "color",rolloverColor.toString());
 	}
 }

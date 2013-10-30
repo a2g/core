@@ -46,7 +46,7 @@ ImagePanelAPI
 	InternalAPI api;
 	final MouseToInventoryPresenterAPI mouseToPresenter;
 
-	public InventoryPanel(InternalAPI api, EventBus bus, final MouseToInventoryPresenterAPI mouseToPresenter, ColorEnum fore, ColorEnum back)
+	public InventoryPanel(InternalAPI api, final MouseToInventoryPresenterAPI mouseToPresenter, ColorEnum fore, ColorEnum back)
 	{
 		this.mouseToPresenter = mouseToPresenter;
 		this.api = api;
@@ -86,25 +86,13 @@ ImagePanelAPI
 	{
 	}
 
-	final com.google.gwt.user.client.ui.Image getImageFromResource(
-			GWTPackagedImage imageResource, LoadHandler lh)
-	{
-		{
-			final com.google.gwt.user.client.ui.Image image = imageResource
-					.unpack();
-			if (lh != null) {
-				image.addLoadHandler(lh);
-			}
-			return image;
-		}
-	}
 
 	@Override
 	public Image createNewImageAndAdddHandlers(PackagedImageAPI imageResource,
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int i, int j) {
 
-		com.google.gwt.user.client.ui.Image image = getImageFromResource(
+		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource(
 				(GWTPackagedImage) imageResource, lh);
 
 		GWTImage imageAndPos = new GWTImage(image, this, new Point(0, 0));

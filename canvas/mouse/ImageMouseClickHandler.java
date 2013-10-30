@@ -13,42 +13,42 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.github.a2g.core.canvas.mouse;
 
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.event.ExecuteCommandEvent;
-import com.github.a2g.core.interfaces.InternalAPI;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 
 
-public class SceneMouseClickHandler extends MouseAdapter
-{
-	private InternalAPI api;
-	private EventBus bus;
+public class ImageMouseClickHandler implements ClickHandler {
+	private final EventBus bus;
+	private final AbsolutePanel absolutePanel;
 
-	public SceneMouseClickHandler(EventBus bus, InternalAPI api)
-	{
-		this.api = api;
+	public ImageMouseClickHandler(EventBus bus, AbsolutePanel abs) {
 		this.bus = bus;
+		this.absolutePanel = abs;
+
 	}
 
-	public InternalAPI getAPI()
-	{
-		return api;
-	}
-
-
-	// use mousePressed (not mouseClicked) so allows half-clicks will also be caught
 	@Override
-	public void mousePressed(MouseEvent event) {
-		double width = api.getSceneGui().getWidth();
-		double height = api.getSceneGui().getHeight();
-		double x = event.getX()/width;
-		double y = event.getY()/height;
+	public void onClick(ClickEvent event) {
+		double x = -1;
+		double y = -1;
+
+		if (this.absolutePanel != null) {
+			x = event.getRelativeX(
+					this.absolutePanel.getElement());
+			y = event.getRelativeY(
+					this.absolutePanel.getElement());
+			y /= this.absolutePanel.getOffsetHeight();
+			x /= this.absolutePanel.getOffsetWidth();
+		}
+
 		bus.fireEvent(
 				new ExecuteCommandEvent(x, y));
-
 	}
 }

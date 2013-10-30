@@ -34,14 +34,12 @@ extends Grid
 implements
 VerbsPanelAPI
 {
-	EventBus bus;
 	ColorEnum rolloverColor;
 	final MouseToVerbsPresenterAPI mouseToPresenter;
 
-	public VerbsPanel(InternalAPI api, EventBus bus, final MouseToVerbsPresenterAPI mouseToPresenter, ColorEnum fore, ColorEnum back)
+	public VerbsPanel(InternalAPI api, MouseToVerbsPresenterAPI mouseToPresenter, ColorEnum fore, ColorEnum back)
 	{
 		this.mouseToPresenter = mouseToPresenter;
-		this.bus = bus;
 		DOM.setStyleAttribute(getElement(), "color",fore.toString());
 		DOM.setStyleAttribute(getElement(), "backgroundColor", back.toString());
 

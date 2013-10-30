@@ -19,25 +19,39 @@ package com.github.a2g.core.canvas.mouse;
 
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
+import com.google.web.bindery.event.shared.EventBus;
+import com.github.a2g.core.event.SetRolloverEvent;
+import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.objectmodel.SceneObject;
 
 
-public class VerbMouseOverHandler implements MouseMoveHandler {
+public class SceneObjectMouseOverHandler implements MouseMoveHandler {
+	private final EventBus bus;
 	private final String textualId;
-	private final int code;
-	private final String displayName;
-	MouseToVerbsPresenterAPI mouseToPresenter;
-	public VerbMouseOverHandler(MouseToVerbsPresenterAPI mouseToPresenter, String displayName, String textualId, int code) {
-		this.mouseToPresenter = mouseToPresenter;
+	private final short code;
+	private final InternalAPI api;
+
+	public SceneObjectMouseOverHandler(EventBus bus, InternalAPI api, String textualId, short code) {
+		this.bus = bus;
 		this.textualId = textualId;
 		this.code = code;
-		this.displayName = displayName;
+		this.api = api;
 
 	}
 
 	@Override
-	public void onMouseMove(MouseMoveEvent event)
-	{
-		mouseToPresenter.setMouseOver(displayName, textualId, code);
+	public void onMouseMove(MouseMoveEvent event) {
+		SceneObject ob = api.getObject(
+				this.code);
+		String displayName = "";
+
+		if (ob != null) {
+			displayName = ob.getDisplayName();
+		}
+		bus.fireEvent(
+				new SetRolloverEvent(
+						displayName,
+						this.textualId,
+						this.code));
 	}
 }

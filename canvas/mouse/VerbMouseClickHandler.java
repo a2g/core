@@ -13,32 +13,32 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.github.a2g.core.canvas.mouse;
 
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
 
 
-public class VerbMouseClickHandler extends MouseAdapter
-{
-	MouseToVerbsPresenterAPI mouseToPresenter;
-	String displayName;
+public class VerbMouseClickHandler
+implements ClickHandler {
+	private final MouseToVerbsPresenterAPI mouseToPresenter;
 	String textualId;
+	String displayName;
 	int code;
-	
-	public VerbMouseClickHandler(MouseToVerbsPresenterAPI mouseToPresenter, String displayName, String textualId, int code)
-	{
-		this.displayName = displayName;
-		this.textualId = textualId;
-		this.code = code;
+
+	public VerbMouseClickHandler(MouseToVerbsPresenterAPI mouseToPresenter, String displayName, String textualId, int code) {
 		this.mouseToPresenter = mouseToPresenter;
+		this.code = code;
+		this.displayName =displayName;
+		this.textualId = textualId;
 	}
 
-	// use mousePressed (not mouseClicked) so allows half-clicks will also be caught
 	@Override
-	public void mousePressed(MouseEvent e) {
-		mouseToPresenter.doClick(displayName, textualId, code);
+	public void onClick(ClickEvent event)
+	{
+		mouseToPresenter.doClick(displayName, textualId,code);
 	}
 }

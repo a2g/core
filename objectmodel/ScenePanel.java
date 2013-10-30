@@ -46,15 +46,7 @@ implements ImagePanelAPI, ScenePanelAPI
 		this.cameraOffsetY = 0;
 	}
 
-	final com.google.gwt.user.client.ui.Image getImageFromResource(GWTPackagedImage imageResource, LoadHandler lh)
-	{
-		final com.google.gwt.user.client.ui.Image image = new com.google.gwt.user.client.ui.Image(imageResource.getNative().getSafeUri());
-		if(lh!=null)
-		{
-			image.addLoadHandler(lh);
-		}
-		return image;
-	}
+
 
 	@Override
 	public Image createNewImageAndAddHandlers
@@ -68,10 +60,11 @@ implements ImagePanelAPI, ScenePanelAPI
 			String objectTextualId,
 			short objectCode)
 	{
-		com.google.gwt.user.client.ui.Image image = getImageFromResource((GWTPackagedImage)imageResource,lh);
+		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource((GWTPackagedImage)imageResource,lh);
 
 		GWTImage imageAndPos = new GWTImage(image, this, new Point(x, y));
 
+		// add gwt mouse handlers
 		imageAndPos.getNativeImage().addMouseMoveHandler
 		(
 				new SceneObjectMouseOverHandler(bus, api, objectTextualId, objectCode)

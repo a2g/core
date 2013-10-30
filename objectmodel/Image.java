@@ -18,9 +18,11 @@
 package com.github.a2g.core.objectmodel;
 
 
+import com.github.a2g.core.gwt.factory.GWTPackagedImage;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
+import com.google.gwt.event.dom.client.LoadHandler;
 
 public abstract class Image {
 
@@ -97,6 +99,15 @@ public abstract class Image {
 				);
 	}
 
+	public static final com.google.gwt.user.client.ui.Image getImageFromResource(GWTPackagedImage imageResource, LoadHandler lh)
+	{
+		final com.google.gwt.user.client.ui.Image image = new com.google.gwt.user.client.ui.Image(imageResource.getNative().getSafeUri());
+		if(lh!=null)
+		{
+			image.addLoadHandler(lh);
+		}
+		return image;
+	}
 
 
 }

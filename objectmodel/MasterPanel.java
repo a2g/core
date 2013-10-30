@@ -39,7 +39,7 @@ implements MasterPanelAPI
 	GWTHostingPanel hostForTitleCard;
 	GuiStateEnum state;
 
-	public MasterPanel(MasterPresenterHostAPI parent, ColorEnum back) {
+	public MasterPanel(int width, int height, ColorEnum back) {
 
 		// create all the host panels, that we want to arrange.
 		hostForCommandLine = new GWTHostingPanel();
