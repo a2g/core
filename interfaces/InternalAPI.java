@@ -28,6 +28,7 @@ import com.github.a2g.core.objectmodel.InventoryPresenter;
 import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.VerbsPresenter;
+import com.github.a2g.core.primitive.ColorEnum;
 
 
 public interface InternalAPI
@@ -97,6 +98,8 @@ extends ImageAddAPI, OnDoCommandAPI{
 	public void executeChainedAction(ChainedAction ba);
 	public short getDefaultSayer();
 	public short getDefaultWalker();
+	public void setStateOfPopup(boolean b, int i, int j,
+			ColorEnum talkingColor, String string);
 }
 
 

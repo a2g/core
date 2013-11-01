@@ -56,6 +56,7 @@ import com.github.a2g.core.interfaces.OnFillLoadListAPI;
 import com.github.a2g.core.interfaces.OnFillLoadListAPIImpl;
 import com.github.a2g.core.interfaces.OnPreEntryAPI;
 import com.github.a2g.core.interfaces.PackagedImageAPI;
+import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.interfaces.SceneAPI;
 import com.github.a2g.core.interfaces.TimerAPI;
 import com.github.a2g.core.interfaces.TimerCallbackAPI;
@@ -96,7 +97,7 @@ implements InternalAPI
 
 	private EventBus bus;
 	private MasterPresenterHostAPI parent;
-
+	private PopupPanelAPI speechPopup;
 	private TimerAPI timer;
 	private MasterPanelAPI masterPanel;
 	private ActionRunner dialogActionRunner;
@@ -926,6 +927,30 @@ implements InternalAPI
 	@Override
 	public short getDefaultWalker() {
 		return this.defaultWalker;
+	}
+
+	@Override
+	public void setStateOfPopup(boolean visible, int x, int y,
+			ColorEnum talkingColor, String speech) 
+	{
+		if(talkingColor==null)
+		{
+			talkingColor = ColorEnum.Red;
+		}
+		speechPopup.setColor(talkingColor);
+		speechPopup.updateText(speech);
+		speechPopup.setPopupPosition(x, y);
+		
+		if(visible)
+		{
+			speechPopup.show();
+		}
+		else
+		{
+			speechPopup.hide();
+		}
+		
+		
 	}
 
 }

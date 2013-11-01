@@ -41,7 +41,8 @@ public class SayWithoutAnimationAction extends ChainedAction {
 				* (2 + delay))
 				* 40;
 
-		this.popup = this.getApi().getFactory().createPopupPanel(this.speech, null, this);
+		this.popup = this.getApi().getFactory().createPopupPanel( this);
+		this.popup.updateText(speech);
 		this.popup.setPopupPosition(20, 20);
 		this.popup.show();
 

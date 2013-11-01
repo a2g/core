@@ -33,19 +33,12 @@ implements PopupPanelAPI
 	private com.google.gwt.user.client.ui.PopupPanel popup;
 	private Label labelInPopup;
 
-	public PopupPanel(String speech, ColorEnum color, final BaseAction toCancel)
+	public PopupPanel(final BaseAction toCancel)
 	{
 		this.popup = new com.google.gwt.user.client.ui.PopupPanel();
-		this.popup.setTitle(speech);
-		this.labelInPopup = new Label(speech);
+		this.labelInPopup = new Label();
 
 		this.popup.setWidget(labelInPopup);
-
-		if(color!=null)
-		{
-			DOM.setStyleAttribute(labelInPopup.getElement(), "color",color.toString());
-			DOM.setStyleAttribute(popup.getElement(), "borderColor",color.toString());
-		}
 
 		labelInPopup.addClickHandler(
 				new ClickHandler()
@@ -73,14 +66,25 @@ implements PopupPanelAPI
 		popup.setPopupPosition(x,y);
 	}
 	@Override
-	public void updateText(String string)
+	public void updateText(String speech)
 	{
-		popup.setWidget(new Label(string));
+		this.popup.setTitle(speech);
+		popup.setWidget(new Label(speech));
 	}
 	@Override
 	public void hide()
 	{
 		popup.hide();
+	}
+	@Override
+	public void setColor(ColorEnum color) 
+	{
+		if(color!=null)
+		{
+			DOM.setStyleAttribute(labelInPopup.getElement(), "color",color.toString());
+			DOM.setStyleAttribute(popup.getElement(), "borderColor",color.toString());
+		}
+		
 	}
 
 }

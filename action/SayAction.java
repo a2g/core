@@ -20,10 +20,8 @@ import java.util.ArrayList;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.SceneObject;
-import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.action.ChainedAction;
 
 
@@ -31,7 +29,6 @@ import com.github.a2g.core.action.ChainedAction;
 public class SayAction extends ChainedAction {
 	private ArrayList<String> speech;
 	private ArrayList<Double> ceilings;
-	private PopupPanelAPI popup;
 	private short objId;
 	private double totalDurationInSeconds;
 	private Animation anim;
@@ -41,7 +38,6 @@ public class SayAction extends ChainedAction {
 	public SayAction(BaseAction parent, short objId, String fullSpeech) {
 		super(parent, parent.getApi(), true);
 		this.objId = objId;
-		this.popup = null;
 		this.anim = null;
 		this.numberOfFramesTotal = 0;
 		speech = new ArrayList<String>();
@@ -96,12 +92,6 @@ public class SayAction extends ChainedAction {
 	@Override
 	public void runGameAction() {
 
-		ColorEnum color = ColorEnum.Blue;
-
-		if (object != null && object.getTalkingColor() != null) {
-			color = object.getTalkingColor();
-		}
-		this.popup = getApi().getFactory().createPopupPanel(speech.get(0), color, this);
 
 		if (object != null) {
 			String talkingAnimTextualId = object.getTalkingAnimation();
@@ -133,9 +123,9 @@ public class SayAction extends ChainedAction {
 			object.setVisible(true);
 		}
 
-		this.popup.setPopupPosition(20, 20);
-
-
+		boolean visible = true;
+		getApi().setStateOfPopup( visible, 20,20, object.getTalkingColor(), speech.get(0));
+		
 		this.run((int) totalDurationInSeconds);
 	}
 
@@ -148,13 +138,11 @@ public class SayAction extends ChainedAction {
 				object.setVisible(true);
 			}
 		}
-		
-		this.popup.show();
 
 		// update text bubble
 		for (int i = 0; i < ceilings.size(); i++) {
 			if (progress < ceilings.get(i)) {
-				popup.updateText(speech.get(i));
+				getApi().setStateOfPopup( true, 20,20, object.getTalkingColor(), speech.get(i));
 				break;
 			}
 		}
@@ -176,10 +164,8 @@ public class SayAction extends ChainedAction {
 					this.anim.getObject().getInitialAnimation());
 		}
 
-		if (this.popup != null) {
-			this.popup.hide();
-			this.popup = null;
-		}
+		getApi().setStateOfPopup( false, 20,20, object.getTalkingColor(), "");
+
 	}
 
 	@Override

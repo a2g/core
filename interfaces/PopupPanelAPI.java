@@ -14,9 +14,12 @@
  * the License.
  */
 package com.github.a2g.core.interfaces;
+
+import com.github.a2g.core.primitive.ColorEnum;
+
 public interface PopupPanelAPI
 {
-
+	
 	void setPopupPosition(int i, int j);
 
 	void show();
@@ -24,4 +27,6 @@ public interface PopupPanelAPI
 	void updateText(String string);
 
 	void hide();
+	
+	void setColor(ColorEnum color);
 }

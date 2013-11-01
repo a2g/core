@@ -47,6 +47,7 @@ import com.github.a2g.core.platforms.html4.TimerForHtml4;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
+import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
 
 public class FactoryForHtml4
 implements FactoryAPI
@@ -55,10 +56,11 @@ implements FactoryAPI
 	private EventBus bus;
 	private MasterPresenter master;
 
-	public FactoryForHtml4(EventBus bus, MasterPresenter master)
+	public FactoryForHtml4(EventBus bus, MasterPresenter master, MasterPresenterHostAPI api)
 	{
 		this.bus = bus;
 		this.master = master;
+		api=null;
 	}
 
 	@Override
@@ -102,9 +104,9 @@ implements FactoryAPI
 
 
 	@Override
-	public PopupPanelAPI createPopupPanel(String string, ColorEnum color, BaseAction toCancel)
+	public PopupPanelAPI createPopupPanel(BaseAction forCancelAbility)
 	{
-		return new PopupPanel(string, color, toCancel);
+		return new PopupPanel(forCancelAbility);
 	}
 
 

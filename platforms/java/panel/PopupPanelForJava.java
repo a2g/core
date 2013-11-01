@@ -32,25 +32,18 @@ implements PopupPanelAPI
 	private JFrame popup;
 	private Label labelInPopup;
 
-	public PopupPanelForJava(String speech, ColorEnum color, final BaseAction ba)
+	public PopupPanelForJava(final BaseAction ba)
 	{
 		// create popup
 		this.popup = new JFrame();
 		this.popup.setUndecorated(true);
 		//this.popup.setBackground(new Color(color.r, color.g, color.b));
 		// create label and add to
-		this.labelInPopup = new Label(speech);
-		if(color!=null)
-		{
-			this.labelInPopup.setForeground(new Color(color.r, color.g, color.b));
-		}
-		this.labelInPopup.setBackground(new Color(0,0,0));
-		
+		this.labelInPopup = new Label("");
+
 		popup.add(labelInPopup);
 		
 		
-		updateLabelSize(speech);
-	
 		labelInPopup.addMouseListener(
 				new MouseListener()
 				{
@@ -120,6 +113,16 @@ implements PopupPanelAPI
 		FontMetrics fm = labelInPopup.getFontMetrics(labelInPopup.getFont()); // or another font
 		double stringWidthInPixels = 18+fm.stringWidth(text);
 		popup.setSize((int)stringWidthInPixels, fm.getHeight()*2);
+	}
+
+	@Override
+	public void setColor(ColorEnum color) 
+	{
+		if(color!=null)
+		{
+			this.labelInPopup.setForeground(new Color(color.r, color.g, color.b));
+		}
+		this.labelInPopup.setBackground(new Color(0,0,0));//black
 	}
 
 }

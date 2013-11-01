@@ -99,9 +99,9 @@ implements FactoryAPI
 
 
 	@Override
-	public PopupPanelAPI createPopupPanel(String string, ColorEnum color, BaseAction toCancel)
+	public PopupPanelAPI createPopupPanel(BaseAction cancelCallback)
 	{
-		return new PopupPanel(string, color, toCancel);
+		return new PopupPanel(cancelCallback);
 	}
 
 
