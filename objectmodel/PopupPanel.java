@@ -33,8 +33,9 @@ implements PopupPanelAPI
 	private com.google.gwt.user.client.ui.PopupPanel popup;
 	private Label labelInPopup;
 	private int sceneWidth; 
-	private int sceneHeight; 
-	public PopupPanel(int sceneWidth, int sceneHeight, final BaseAction toCancel)
+	private int sceneHeight;
+	
+	public PopupPanel(int sceneWidth, int sceneHeight)
 	{
 		this.sceneWidth = sceneWidth; 
 		this.sceneHeight = sceneHeight;  
@@ -42,21 +43,8 @@ implements PopupPanelAPI
 		this.labelInPopup = new Label();
 
 		this.popup.setWidget(labelInPopup);
-
-		labelInPopup.addClickHandler(
-				new ClickHandler()
-				{
-
-					@Override
-					public void onClick(ClickEvent event) {
-						toCancel.cancel();
-
-					}
-
-				}
-				);
-
 	}
+	
 	@Override
 	public void setVisible(boolean isVisible)
 	{
@@ -87,10 +75,35 @@ implements PopupPanelAPI
 	{
 		if(color!=null)
 		{
-			DOM.setStyleAttribute(labelInPopup.getElement(), "color",color.toString());
+			DOM.setStyleAttribute(labelInPopup.getElement(), "color","#ff0000");
+			DOM.setStyleAttribute(labelInPopup.getElement(), "fontColor","#ff0000");
+			DOM.setStyleAttribute(labelInPopup.getElement(), "textColor","#ff0000");
+			//DOM.setStyleAttribute(labelInPopup.getElement(), "fontColor",color.toString());
 			DOM.setStyleAttribute(popup.getElement(), "borderColor",color.toString());
 		}
+		//DOM.setStyleAttribute(labelInPopup.getElement(), "backgroundColor", ColorEnum.Black.toString());
+		//DOM.setStyleAttribute(popup.getElement(), "backgroundColor", ColorEnum.Black.toString());
 		
+		
+	}
+	@Override
+	public void setCancelCallback(final BaseAction ba) 
+	{
+		if(ba==null)
+			return;
+		labelInPopup.addClickHandler
+		(
+			new ClickHandler()
+			{
+
+				@Override
+				public void onClick(ClickEvent event) {
+					ba.cancel();
+				}
+
+			}
+		);
+	
 	}
 
 }

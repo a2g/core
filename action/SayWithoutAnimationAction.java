@@ -45,7 +45,7 @@ public class SayWithoutAnimationAction extends ChainedAction {
 				* (2 + delay))
 				* 40;
 
-		this.getApi().setStateOfPopup(true, .1, .1, color, speech);
+		this.getApi().setStateOfPopup(true, .1, .1, color, speech,this);
 
 		this.run(duration);
 	}

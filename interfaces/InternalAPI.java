@@ -99,7 +99,7 @@ extends ImageAddAPI, OnDoCommandAPI{
 	public short getDefaultSayer();
 	public short getDefaultWalker();
 	public void setStateOfPopup(boolean visible, double x, double y,
-			ColorEnum talkingColor, String string);
+			ColorEnum talkingColor, String string, BaseAction cancelCallback);
 }
 
 

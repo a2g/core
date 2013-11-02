@@ -15,16 +15,14 @@
  */
 package com.github.a2g.core.interfaces;
 
+import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.primitive.ColorEnum;
 
 public interface PopupPanelAPI
 {
-	
 	void setPopupPosition(double x, double y);
-
 	void setVisible(boolean isVisible);
-
 	void setText(String string);
-	
 	void setColor(ColorEnum color);
+	void setCancelCallback(final BaseAction ba);
 }

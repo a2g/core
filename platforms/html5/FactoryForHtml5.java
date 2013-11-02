@@ -99,9 +99,9 @@ implements FactoryAPI
 
 
 	@Override
-	public PopupPanelAPI createPopupPanel(int sceneWidth, int sceneHeight, BaseAction cancelCallback)
+	public PopupPanelAPI createPopupPanel(int sceneWidth, int sceneHeight)
 	{
-		return new PopupPanel( sceneWidth,sceneHeight, cancelCallback);
+		return new PopupPanel( sceneWidth,sceneHeight);
 	}
 
 

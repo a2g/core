@@ -124,7 +124,7 @@ public class SayAction extends ChainedAction {
 		}
 
 		boolean visible = true;
-		getApi().setStateOfPopup( visible, .1,.1, object.getTalkingColor(), speech.get(0));
+		getApi().setStateOfPopup( visible, .1,.1, object.getTalkingColor(), speech.get(0),this);
 		
 		this.run((int) totalDurationInSeconds);
 	}
@@ -142,7 +142,7 @@ public class SayAction extends ChainedAction {
 		// update text bubble
 		for (int i = 0; i < ceilings.size(); i++) {
 			if (progress < ceilings.get(i)) {
-				getApi().setStateOfPopup( true, 20,20, object.getTalkingColor(), speech.get(i));
+				getApi().setStateOfPopup( true, .1,.1, object.getTalkingColor(), speech.get(i),null);
 				break;
 			}
 		}
@@ -164,7 +164,7 @@ public class SayAction extends ChainedAction {
 					this.anim.getObject().getInitialAnimation());
 		}
 
-		getApi().setStateOfPopup( false, 20,20, object.getTalkingColor(), "");
+		getApi().setStateOfPopup( false, .1,.1, object.getTalkingColor(), "",null);
 
 	}
 

@@ -125,7 +125,7 @@ implements InternalAPI
 
 		this.doCommandActionRunner = new ActionRunner(this,1);
 		this.dialogActionRunner = new ActionRunner(this,2);
-		
+
 		this.theListOfIndexesToInsertAt= new Integer[100];
 		for(int i=0;i<100;i++)
 			theListOfIndexesToInsertAt[i] = new Integer(0);
@@ -158,7 +158,7 @@ implements InternalAPI
 				masterPanel.getHostForLoading(), bus, this, this, parent);
 		this.titleCardPresenter =  new TitleCardPresenter(
 				masterPanel.getHostForTitleCard(), bus, this, parent);
-
+		this.speechPopup = getFactory().createPopupPanel(scenePresenter.getWidth(), scenePresenter.getHeight());
 
 		this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.Loading);
 		this.defaultSayer = STARTING_ODD_OBJECTS_CODE.STARTING_ODD_OBJECTS_CODE;
@@ -297,7 +297,7 @@ implements InternalAPI
 
 		dialogActionRunner.runAction(a);
 	}
-	
+
 	@Override
 	public void executeActionWithDoCommandActionRunner(BaseAction a)
 	{
@@ -931,16 +931,34 @@ implements InternalAPI
 
 	@Override
 	public void setStateOfPopup(boolean visible, double x, double y,
-			ColorEnum talkingColor, String speech) 
+			ColorEnum talkingColor, String speech,BaseAction ba) 
 	{
 		if(talkingColor==null)
 		{
 			talkingColor = ColorEnum.Red;
 		}
+
+		if(!visible)
+		{
+			if(this.speechPopup!=null)
+			{
+				this.speechPopup.setVisible(false);
+				this.speechPopup = null;
+			}
+			return;
+		}
+
+		if(speechPopup==null)
+		{
+			this.speechPopup = getFactory().createPopupPanel(scenePresenter.getWidth(), scenePresenter.getHeight());
+		}
+
 		speechPopup.setColor(talkingColor);
 		speechPopup.setText(speech);
+		if(ba!=null)
+			speechPopup.setCancelCallback(ba);
 		speechPopup.setPopupPosition(x, y);
-		speechPopup.setVisible(visible);
+		speechPopup.setVisible(true);
 	}
 
 }
