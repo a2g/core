@@ -31,10 +31,14 @@ implements PopupPanelAPI
 {
 	private JFrame popup;
 	private Label labelInPopup;
+	private int sceneWidth;
+	private int sceneHeight;
 
-	public PopupPanelForJava(final BaseAction ba)
+	public PopupPanelForJava(int sceneWidth, int sceneHeight, final BaseAction ba)
 	{
 		// create popup
+		this.sceneWidth = sceneWidth;
+		this.sceneHeight = sceneHeight;
 		this.popup = new JFrame();
 		this.popup.setUndecorated(true);
 		//this.popup.setBackground(new Color(color.r, color.g, color.b));
@@ -84,28 +88,23 @@ implements PopupPanelAPI
 	}
 
 	@Override
-	public void show()
+	public void setVisible(boolean isVisible)
 	{
-		popup.setVisible(true);
-
+		popup.setVisible(isVisible);
 	}
 
 	@Override
-	public void setPopupPosition(int x, int y)
+	public void setPopupPosition(double x, double y)
 	{
-		popup.setLocation(x, y);
+		popup.setLocation((int)(x*sceneWidth), (int)(y*sceneHeight));
 	}
 	@Override
-	public void updateText(String string)
+	public void setText(String string)
 	{
 		updateLabelSize(string);
 		labelInPopup.setText(string);
 	}
-	@Override
-	public void hide()
-	{
-		popup.setVisible(false);
-	}
+	
 	
 	void updateLabelSize(String text)
 	{

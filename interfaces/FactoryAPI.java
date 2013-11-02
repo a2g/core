@@ -11,7 +11,7 @@ public interface FactoryAPI {
 	ScenePanelAPI createScenePanel();
 	TitleCardPanelAPI createTitleCardPanel(ColorEnum fore, ColorEnum back);
 	VerbsPanelAPI createVerbsPanel(MouseToVerbsPresenterAPI api, ColorEnum fore, ColorEnum back);
-	PopupPanelAPI createPopupPanel(BaseAction toCancel);
+	PopupPanelAPI createPopupPanel(int sceneWidth, int sceneHeight, BaseAction toCancel);
 	SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI cbs, boolean isLinear);
 	TimerAPI createSystemTimer(TimerCallbackAPI cbs);
 	MasterPanelAPI createMasterPanel(int width, int height, ColorEnum color);

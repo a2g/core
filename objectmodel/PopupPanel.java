@@ -32,9 +32,12 @@ implements PopupPanelAPI
 {
 	private com.google.gwt.user.client.ui.PopupPanel popup;
 	private Label labelInPopup;
-
-	public PopupPanel(final BaseAction toCancel)
+	private int sceneWidth; 
+	private int sceneHeight; 
+	public PopupPanel(int sceneWidth, int sceneHeight, final BaseAction toCancel)
 	{
+		this.sceneWidth = sceneWidth; 
+		this.sceneHeight = sceneHeight;  
 		this.popup = new com.google.gwt.user.client.ui.PopupPanel();
 		this.labelInPopup = new Label();
 
@@ -55,27 +58,30 @@ implements PopupPanelAPI
 
 	}
 	@Override
-	public void show()
+	public void setVisible(boolean isVisible)
 	{
-		popup.show();
+		if(isVisible)
+		{
+			popup.show();
+		}
+		else
+		{
+			popup.hide();
+		}
 	}
 
 	@Override
-	public void setPopupPosition(int x, int y)
+	public void setPopupPosition(double x, double y)
 	{
-		popup.setPopupPosition(x,y);
+		popup.setPopupPosition((int)(x*sceneWidth),(int)(y*sceneHeight));
 	}
 	@Override
-	public void updateText(String speech)
+	public void setText(String speech)
 	{
 		this.popup.setTitle(speech);
 		popup.setWidget(new Label(speech));
 	}
-	@Override
-	public void hide()
-	{
-		popup.hide();
-	}
+	
 	@Override
 	public void setColor(ColorEnum color) 
 	{

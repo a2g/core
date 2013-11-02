@@ -124,7 +124,7 @@ public class SayAction extends ChainedAction {
 		}
 
 		boolean visible = true;
-		getApi().setStateOfPopup( visible, 20,20, object.getTalkingColor(), speech.get(0));
+		getApi().setStateOfPopup( visible, .1,.1, object.getTalkingColor(), speech.get(0));
 		
 		this.run((int) totalDurationInSeconds);
 	}

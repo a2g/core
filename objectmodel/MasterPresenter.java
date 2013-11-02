@@ -930,7 +930,7 @@ implements InternalAPI
 	}
 
 	@Override
-	public void setStateOfPopup(boolean visible, int x, int y,
+	public void setStateOfPopup(boolean visible, double x, double y,
 			ColorEnum talkingColor, String speech) 
 	{
 		if(talkingColor==null)
@@ -938,19 +938,9 @@ implements InternalAPI
 			talkingColor = ColorEnum.Red;
 		}
 		speechPopup.setColor(talkingColor);
-		speechPopup.updateText(speech);
+		speechPopup.setText(speech);
 		speechPopup.setPopupPosition(x, y);
-		
-		if(visible)
-		{
-			speechPopup.show();
-		}
-		else
-		{
-			speechPopup.hide();
-		}
-		
-		
+		speechPopup.setVisible(visible);
 	}
 
 }

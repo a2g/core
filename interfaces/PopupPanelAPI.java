@@ -20,13 +20,11 @@ import com.github.a2g.core.primitive.ColorEnum;
 public interface PopupPanelAPI
 {
 	
-	void setPopupPosition(int i, int j);
+	void setPopupPosition(double x, double y);
 
-	void show();
+	void setVisible(boolean isVisible);
 
-	void updateText(String string);
-
-	void hide();
+	void setText(String string);
 	
 	void setColor(ColorEnum color);
 }
