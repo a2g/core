@@ -100,6 +100,7 @@ extends ImageAddAPI, OnDoCommandAPI{
 	public short getDefaultWalker();
 	public void setStateOfPopup(boolean visible, double x, double y,
 			ColorEnum talkingColor, String string, BaseAction cancelCallback);
+	public void clickToContinue();
 }
 
 

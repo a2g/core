@@ -63,7 +63,7 @@ implements ImageBundleLoaderCallbackAPI
 		}
 		else
 		{
-			master.startScene();
+			master.enableClickToContinue();
 			return;
 		}
 

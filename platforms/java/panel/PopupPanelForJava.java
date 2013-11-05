@@ -34,7 +34,7 @@ implements PopupPanelAPI
 	private int sceneWidth;
 	private int sceneHeight;
 
-	public PopupPanelForJava(int sceneWidth, int sceneHeight, final BaseAction ba)
+	public PopupPanelForJava(int sceneWidth, int sceneHeight)
 	{
 		// create popup
 		this.sceneWidth = sceneWidth;
@@ -46,45 +46,6 @@ implements PopupPanelAPI
 		this.labelInPopup = new Label("");
 
 		popup.add(labelInPopup);
-		
-		
-		labelInPopup.addMouseListener(
-				new MouseListener()
-				{
-
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						ba.cancel();
-
-					}
-
-					@Override
-					public void mouseEntered(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-
-					}
-
-					@Override
-					public void mouseExited(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-
-					}
-
-					@Override
-					public void mousePressed(MouseEvent arg0) {
-
-
-					}
-
-					@Override
-					public void mouseReleased(MouseEvent arg0) {
-						// TODO Auto-generated method stub
-
-					}
-				}
-				);
-
-
 	}
 
 	@Override
@@ -104,8 +65,8 @@ implements PopupPanelAPI
 		updateLabelSize(string);
 		labelInPopup.setText(string);
 	}
-	
-	
+
+
 	void updateLabelSize(String text)
 	{
 		// set popup to be same size as label text
@@ -122,6 +83,47 @@ implements PopupPanelAPI
 			this.labelInPopup.setForeground(new Color(color.r, color.g, color.b));
 		}
 		this.labelInPopup.setBackground(new Color(0,0,0));//black
+	}
+
+	@Override
+	public void setCancelCallback(final BaseAction ba) 
+	{
+		labelInPopup.addMouseListener
+		(
+				new MouseListener()
+				{
+					@Override
+					public void mouseClicked(MouseEvent arg0) 
+					{
+						ba.cancel();
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent arg0) 
+					{
+						// TODO Auto-generated method stub
+					}
+
+					@Override
+					public void mouseExited(MouseEvent arg0) 
+					{
+						// TODO Auto-generated method stub
+					}
+
+					@Override
+					public void mousePressed(MouseEvent arg0) 
+					{
+
+
+					}
+
+					@Override
+					public void mouseReleased(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+
+					}
+				}
+				);
 	}
 
 }

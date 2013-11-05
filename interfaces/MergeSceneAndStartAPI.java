@@ -23,4 +23,5 @@ public interface MergeSceneAndStartAPI
 	void mergeWithScene(LoadedLoad s) ;
 	void startScene();
 	void incrementProgress();
+	void enableClickToContinue();
 }

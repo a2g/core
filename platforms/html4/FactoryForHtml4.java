@@ -23,12 +23,12 @@ import com.github.a2g.core.interfaces.InventoryPanelAPI;
 import com.github.a2g.core.interfaces.LoaderPanelAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
 import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
+import com.github.a2g.core.interfaces.MouseToLoaderPresenterAPI;
 import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
 import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.interfaces.ScenePanelAPI;
 import com.github.a2g.core.interfaces.SystemAnimationAPI;
 import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
-import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.TimerAPI;
 import com.github.a2g.core.interfaces.TimerCallbackAPI;
 import com.github.a2g.core.interfaces.TitleCardPanelAPI;
@@ -81,8 +81,9 @@ implements FactoryAPI
 	}
 
 	@Override
-	public LoaderPanelAPI createLoaderPanel(ColorEnum fore, ColorEnum back) {
-		return new LoaderPanel(master, fore,back);
+	public LoaderPanelAPI createLoaderPanel(final MouseToLoaderPresenterAPI api, ColorEnum fore, ColorEnum back) 
+	{
+		return new LoaderPanel(api, fore,back);
 	}
 
 	@Override

@@ -22,26 +22,31 @@ import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.LoaderPanelAPI;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
 import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
+import com.github.a2g.core.interfaces.MouseToLoaderPresenterAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
 
-public class LoaderPresenter
+public class LoaderPresenter implements MouseToLoaderPresenterAPI
 {
 	private Loader loader;
 	private LoaderPanelAPI view;
 	int current;
 	int total;
 	private String name;
+	private InternalAPI api;
+	private MergeSceneAndStartAPI master;
 
 	public LoaderPresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api, MergeSceneAndStartAPI master, MasterPresenterHostAPI parent)
 	{
 		this.loader = new Loader(master);
 		this.name = "";
-		this.view = api.getFactory().createLoaderPanel(ColorEnum.Purple, ColorEnum.Black);
+		this.view = api.getFactory().createLoaderPanel(this, ColorEnum.Purple, ColorEnum.Black);
 		panel.setThing(view);
 		this.current = 0;
 		this.total = 0;
+		this.api = api;
+		this.master= master;
 	}
 
 	void incrementProgress()
@@ -86,6 +91,21 @@ public class LoaderPresenter
 	public void clearAllLoadedLoads() {
 		loader.clearAllLoadedLoads();
 
+	}
+
+	@Override
+	public void restartReloading() {
+		api.restartReloading();
+	}
+
+	public void enableClickToContinue()
+	{
+		view.enableClickToContinue();
+	}
+	
+	@Override
+	public void clickToContinue() {
+		master.startScene();
 	}
 
 

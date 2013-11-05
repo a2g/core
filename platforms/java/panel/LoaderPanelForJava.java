@@ -27,8 +27,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.LoaderPanelAPI;
+import com.github.a2g.core.interfaces.MouseToLoaderPresenterAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 
 @SuppressWarnings("serial")
@@ -38,11 +38,12 @@ implements LoaderPanelAPI
 {
 	Label progress;
 	Button reload;
-	InternalAPI api;
+	MouseToLoaderPresenterAPI api;
+	Button clickToContinue;
 	int width;
 	int height;
 
-	public LoaderPanelForJava(final InternalAPI api, ColorEnum fore, ColorEnum back)
+	public LoaderPanelForJava(final MouseToLoaderPresenterAPI api, ColorEnum fore, ColorEnum back)
 	{
 		this.api = api;
 		this.setForeground(new Color(fore.r, fore.g, fore.b));
@@ -59,18 +60,20 @@ implements LoaderPanelAPI
 			{
 				reload = new Button("Reload");
 				this.add(reload);
-				addHandler(api);
 			}
 			{
-			//	this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-				this.setLayout(new FlowLayout());
-				
+				clickToContinue= new Button("Click to continue");
+				clickToContinue.setEnabled(false);
+				this.add(clickToContinue);
 			}
-
+			{
+				this.setLayout(new FlowLayout());
+			}
+			addHandler(api);
 		}
 	}
 
-	void addHandler(final InternalAPI api)
+	void addHandler(final MouseToLoaderPresenterAPI  api)
 	{
 		reload.addActionListener
 		(
@@ -81,11 +84,24 @@ implements LoaderPanelAPI
 						api.restartReloading();
 					}
 				}
-				);
+		);
+		clickToContinue.addActionListener
+		(
+				new ActionListener()
+				{
+					@Override
+					public void actionPerformed(ActionEvent event) {
+						api.clickToContinue();
+					}
+				}
+		);
+
 	}
 
 	@Override
 	public void update(int current, int total, String name) {
+		reload.setEnabled(true);
+		clickToContinue.setEnabled(false);
 		progress.setText(" "+current+"/"+total+ " " + name);
 	}
 
@@ -102,6 +118,12 @@ implements LoaderPanelAPI
 	public Dimension getPreferredSize()
 	{
 		return new Dimension(this.width,this.height);
+	}
+
+	@Override
+	public void enableClickToContinue() {
+		reload.setEnabled(false);
+		clickToContinue.setEnabled(true);
 	}
 }
 

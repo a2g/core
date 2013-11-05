@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.LoaderPanelAPI;
+import com.github.a2g.core.interfaces.MouseToLoaderPresenterAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -34,9 +34,10 @@ implements LoaderPanelAPI
 
 	Label progress;
 	Button reload;
-	InternalAPI api;
+	Button clickToContinue;
+	MouseToLoaderPresenterAPI api;
 
-	public LoaderPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) {
+	public LoaderPanel(final MouseToLoaderPresenterAPI api, ColorEnum fore, ColorEnum back) {
 		this.api = api;
 		VerticalPanel layout = new VerticalPanel();
 		{
@@ -52,12 +53,18 @@ implements LoaderPanelAPI
 		{
 			reload = new Button("Reload");
 			layout.add(reload);
-			addHandler(api);
 		}
+		{
+			clickToContinue = new Button("Click to continue");
+			clickToContinue.setEnabled(false);
+			layout.add(clickToContinue);
+		}
+		addHandler(api);
 		this.add(layout);
 	}
+	
 
-	void addHandler(final InternalAPI api)
+	void addHandler(final MouseToLoaderPresenterAPI api)
 	{
 		reload.addClickHandler
 		(
@@ -68,11 +75,23 @@ implements LoaderPanelAPI
 						api.restartReloading();
 					}
 				}
-				);
+		);
+		clickToContinue.addClickHandler
+		(
+				new ClickHandler()
+				{
+					@Override
+					public void onClick(ClickEvent event) {
+						api.clickToContinue();
+					}
+				}
+		);
 	}
 
 	@Override
 	public void update(int current, int total, String name) {
+		reload.setEnabled(true);
+		clickToContinue.setEnabled(false);
 		progress.setText(" "+current+"/"+total+ " " + name);
 	}
 
@@ -81,6 +100,13 @@ implements LoaderPanelAPI
 	{
 		this.setSize("" + width + "px",
 				"" + height + "px");
+	}
+
+
+	@Override
+	public void enableClickToContinue() {
+		reload.setEnabled(false);
+		clickToContinue.setEnabled(true);
 	}
 }
 

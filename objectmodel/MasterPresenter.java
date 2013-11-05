@@ -961,5 +961,17 @@ implements InternalAPI
 		speechPopup.setVisible(true);
 	}
 
+	@Override
+	public void clickToContinue() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void enableClickToContinue() 
+	{
+		this.loadingPresenter.enableClickToContinue();	
+	}
+
 }
 
