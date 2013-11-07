@@ -28,6 +28,7 @@ public class ActionRunner implements ActionCallbackAPI
 	private int numberOfParallelActionsToWaitFor;
 	private ActionRunnerCallbackAPI api;
 	final private int id;
+
 	public ActionRunner(ActionRunnerCallbackAPI api, int id)
 	{
 		this.id = id;
@@ -57,14 +58,18 @@ public class ActionRunner implements ActionCallbackAPI
 	}
 
 
-	void executeParallelActions() {
+	void executeParallelActions() 
+	{
 		this.numberOfParallelActionsToWaitFor = this.parallelActionsToWaitFor.size();
-		for (int i = 0; i
-				< this.parallelActionsToWaitFor.size(); i++)
+
+		// having count as a local variable prevents a nasty bug - and I'm not sure why.
+		// this only happens in gwt.
+		int count = this.parallelActionsToWaitFor.size();
+		for (int i = 0; i < count ;i++)
 		{
 			BaseAction a = this.parallelActionsToWaitFor.get(i);
 
-			System.out.println("ActionRunner::executeParallelActions " + this.id+ " " + a.toString() );
+			System.out.println("ActionRunner::executeParallelActions " + i+ " " + a.toString() );
 			
 			a.setCallbacks(this);
 			a.runGameAction();
@@ -122,10 +127,15 @@ public class ActionRunner implements ActionCallbackAPI
 	@Override
 	public void startTheNextAction(BaseAction a) {
 		this.numberOfParallelActionsToWaitFor--;
+		System.out.println("Release " + numberOfParallelActionsToWaitFor );
+		
 		if (this.numberOfParallelActionsToWaitFor
-				== 0) {
+				== 0) 
+		{
+			System.out.println("Starting next action " + this.toString() );
 			processNextListOfParallelActions();
 		}
+		
 	}
 
 	public void cancel() {
