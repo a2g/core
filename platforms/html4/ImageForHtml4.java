@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.github.a2g.core.platforms.html4;
 
 import com.github.a2g.core.interfaces.ImagePanelAPI;
@@ -24,7 +25,7 @@ public class ImageForHtml4 extends Image
 	private final com.google.gwt.user.client.ui.Image image;
 
 	public ImageForHtml4(final com.google.gwt.user.client.ui.Image image,
-			ImagePanelAPI panel, Point offset)
+			 ImagePanelAPI panel, Point offset)  
 	{
 		super(panel,offset);
 		this.image = image;
@@ -35,4 +36,5 @@ public class ImageForHtml4 extends Image
 	{
 		return image;
 	}
+
 }
