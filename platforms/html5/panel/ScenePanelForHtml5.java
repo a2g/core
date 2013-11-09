@@ -17,6 +17,15 @@
 package com.github.a2g.core.platforms.html5.panel;
 
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.TreeMap;
+
+import com.google.gwt.canvas.client.Canvas;
+import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.canvas.dom.client.CssColor;
+import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
@@ -30,23 +39,69 @@ import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.primitive.Point;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
+ //commandLineAndVerbsAndInventory = new VerticalPanel();
 
 public class ScenePanelForHtml5
-extends AbsolutePanel
+extends VerticalPanel
 implements ImagePanelAPI, ScenePanelAPI
 {
-	int cameraOffsetX;
-	int cameraOffsetY;
-
+	private AbsolutePanel abs;
+	private int cameraOffsetX;
+	private int cameraOffsetY;
+	private int width;
+	private int height;
+	private int tally;
+	private InternalAPI api;
+	private Canvas canvas;
+	private Canvas backBuffer;
+	private final CssColor redrawColor = CssColor.make("rgba(255,255,255,0.6)");
+	private Context2d context;
+	private Context2d backBufferContext;
+	private Map<Integer,Point> mapOfPointsByImage;
+	private LinkedList<Integer> listOfVisibleHashCodes;
+	private LinkedList<Image> listOfAllVisibleImages;
+	
 	public ScenePanelForHtml5(EventBus bus, InternalAPI api)
 	{
 		this.getElement().setId("cwAbsolutePanel");
 		this.addStyleName("absolutePanel");
 		this.cameraOffsetX = 0;
 		this.cameraOffsetY = 0;
+		this.abs = new AbsolutePanel();
+		this.api = api;
+		this.mapOfPointsByImage = new TreeMap<Integer, Point>();
+		this.listOfVisibleHashCodes = new LinkedList<Integer>();
+		this.listOfAllVisibleImages = new LinkedList<Image>();
+		canvas = Canvas.createIfSupported();
+		backBuffer = Canvas.createIfSupported();
+		if (canvas == null) {
+			// RootPanel.get(holderId).add(new Label(upgradeMessage));
+			return;
+		}
+
+		// init the canvases
+		canvas.setWidth(width + "px");
+		canvas.setHeight(height + "px");
+		canvas.setCoordinateSpaceWidth(width);
+		canvas.setCoordinateSpaceHeight(height);
+		backBuffer.setWidth(width + "px");
+		backBuffer.setHeight(height + "px");
+		backBuffer.setCoordinateSpaceWidth(width);
+		backBuffer.setCoordinateSpaceHeight(height);
+		this.add(backBuffer);
+		this.add(canvas);
+		this.add(abs);
+		context = canvas.getContext2d();
+		backBufferContext = backBuffer.getContext2d();
 	}
 
+	void putPoint(ImageForHtml4 image, int x,int y)
+	{
+		mapOfPointsByImage.put(hash(image), new Point(x,y));
+	}
 
 
 	@Override
@@ -73,7 +128,7 @@ implements ImagePanelAPI, ScenePanelAPI
 
 		imageAndPos.getNativeImage().addClickHandler
 		(
-				new ImageMouseClickHandler(bus, this)
+				new ImageMouseClickHandler(bus, this.abs)
 				);
 
 		return imageAndPos;
@@ -83,31 +138,60 @@ implements ImagePanelAPI, ScenePanelAPI
 	@Override
 	public void setImageVisible(Image image, boolean visible)
 	{
-		super.setVisible(((ImageForHtml4)image).getNativeImage().getElement(), visible);
+		this.abs.setVisible(((ImageForHtml4)image).getNativeImage().getElement(), visible);
+	
+		boolean isIn = listOfVisibleHashCodes.contains(hash(image));
+		if(visible && !isIn)
+		{
+			listOfVisibleHashCodes.add(hash(image));
+			triggerPaint();
+		}
+		else if(!visible & isIn)
+		{
+			listOfVisibleHashCodes.remove(hash(image));
+			triggerPaint();
+		}
 	}
 
 	@Override
 	public void add(Image image, int x, int y)
 	{
-		super.add(((ImageForHtml4)image).getNativeImage(),x,y);
+		this.abs.add(((ImageForHtml4) image).getNativeImage(), x, y);
+		
+		listOfAllVisibleImages.add(image);
+		putPoint((ImageForHtml4)image, x,y);
+		triggerPaint();
 	}
 
 	@Override
 	public void insert(Image image, int x, int y, int before)
 	{
-		super.insert(((ImageForHtml4)image).getNativeImage(),x-cameraOffsetX,y-cameraOffsetY,before);
+		this.abs.insert(((ImageForHtml4)image).getNativeImage(),x-cameraOffsetX,y-cameraOffsetY,before);
+	
+		listOfAllVisibleImages.add(before,image);
+		putPoint((ImageForHtml4)image, x,y);
+		triggerPaint();
 	}
 
 	@Override
 	public void remove(Image image)
 	{
-		super.remove(((ImageForHtml4)image).getNativeImage());
+		this.abs.remove(((ImageForHtml4)image).getNativeImage());
+		listOfAllVisibleImages.remove(((ImageForHtml4)image).getNativeImage());
+		mapOfPointsByImage.remove(hash(image));
+		setImageVisible(image, false);
+		triggerPaint();
 	}
 
 	@Override
 	public void setThingPosition(Image image, int left, int top)
 	{
-		super.setWidgetPosition(((ImageForHtml4)image).getNativeImage(), left-cameraOffsetX, top-cameraOffsetY);
+		this.abs.setWidgetPosition(((ImageForHtml4)image).getNativeImage(), left-cameraOffsetX, top-cameraOffsetY);
+		if(mapOfPointsByImage.containsKey(hash(image)))
+		{
+			putPoint((ImageForHtml4)image, left,top);
+			triggerPaint();
+		}
 	}
 
 	@Override
@@ -123,10 +207,14 @@ implements ImagePanelAPI, ScenePanelAPI
 	}
 
 	@Override
-	public void setScenePixelSize(int width, int height)
+	public void setScenePixelSize(int width2, int height2)
 	{
-		this.setSize("" + width + "px",
+		int width = width2/2;
+		int height = height2/2;
+		this.abs.setSize("" + width + "px",
 				"" + height + "px");
+		this.setSize("" + width2 + "px",
+				"" + height2 + "px");
 	}
 
 	@Override
@@ -134,6 +222,58 @@ implements ImagePanelAPI, ScenePanelAPI
 	{
 		this.cameraOffsetX = x;
 		this.cameraOffsetY = y;
+	}
+	
+	public void triggerPaint()
+	{
+		paint();
+		tally++;
+	}
+
+	Integer hash(Image image)
+	{
+		int code= ((ImageForHtml4)image).getNativeImage().hashCode();
+		return new Integer(code);
+	}
+
+	public void paint()
+	{
+
+	    // update the back canvas
+	    backBufferContext.setFillStyle(redrawColor);
+	    backBufferContext.fillRect(0, 0, width, height);
+	    context.setFillStyle(redrawColor);
+	   context.fillRect(0, 0, width, height);
+		backBufferContext.fill();
+		context.fill();
+		
+		Iterator<Image> iter = listOfAllVisibleImages.iterator();
+		while(iter.hasNext())
+		{
+			Image image = iter.next();
+			if(listOfVisibleHashCodes.contains(hash(image)))
+			{
+				Point p = mapOfPointsByImage.get(hash(image));
+				int x = p.getX();
+				int y = p.getY();
+
+			    backBufferContext.save();
+			    backBufferContext.translate(x, y);
+			    //backBufferContext.rotate(rot);
+			    ImageElement imageElement = (ImageElement)( ((ImageForHtml4)image).getNativeImage().getElement().cast());
+			    backBufferContext.drawImage(imageElement, 0, 0);
+			    context.drawImage(imageElement, 0, 0);
+			    backBufferContext.restore();
+			    context.restore();
+			   }
+		}
+		//System.out.println("printed with tally " + tally +" draws "+ draws);
+		tally=0;
+
+		
+	    // update the front canvas
+	
+	   //context.drawImage(backBufferContext.getCanvas(), 0, 0);
 	}
 
 }
