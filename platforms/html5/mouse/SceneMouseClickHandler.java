@@ -18,20 +18,19 @@ package com.github.a2g.core.platforms.html5.mouse;
 
 
 import com.github.a2g.core.event.ExecuteCommandEvent;
+import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.web.bindery.event.shared.EventBus;
-import com.google.gwt.user.client.ui.AbsolutePanel;
 
 
-public class ImageMouseClickHandler implements ClickHandler {
+public class SceneMouseClickHandler implements ClickHandler {
 	private final EventBus bus;
-	private final AbsolutePanel absolutePanel;
+	private final Canvas canvas;
 
-	public ImageMouseClickHandler(EventBus bus, AbsolutePanel abs) {
+	public SceneMouseClickHandler(EventBus bus, Canvas canvas) {
 		this.bus = bus;
-		this.absolutePanel = abs;
-
+		this.canvas = canvas;
 	}
 
 	@Override
@@ -39,15 +38,14 @@ public class ImageMouseClickHandler implements ClickHandler {
 		double x = -1;
 		double y = -1;
 
-		if (this.absolutePanel != null) {
+		if (this.canvas != null) {
 			x = event.getRelativeX(
-					this.absolutePanel.getElement());
+					this.canvas.getElement());
 			y = event.getRelativeY(
-					this.absolutePanel.getElement());
-			y /= this.absolutePanel.getOffsetHeight();
-			x /= this.absolutePanel.getOffsetWidth();
+					this.canvas.getElement());
+			y /= this.canvas.getOffsetHeight();
+			x /= this.canvas.getOffsetWidth();
 		}
-
 		bus.fireEvent(
 				new ExecuteCommandEvent(x, y));
 	}

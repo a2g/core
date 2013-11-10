@@ -17,6 +17,7 @@
 package com.github.a2g.core.platforms.html5.panel;
 
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -32,14 +33,18 @@ import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.PackagedImageAPI;
 import com.github.a2g.core.interfaces.ScenePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
+import com.github.a2g.core.objectmodel.SceneObject;
+import com.github.a2g.core.objectmodel.SceneObjectCollection;
 import com.github.a2g.core.platforms.html4.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
+import com.github.a2g.core.platforms.html5.mouse.SceneMouseClickHandler;
+import com.github.a2g.core.platforms.html5.mouse.SceneMouseOverHandler;
 import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
  //commandLineAndVerbsAndInventory = new VerticalPanel();
@@ -48,12 +53,12 @@ public class ScenePanelForHtml5
 extends VerticalPanel
 implements ImagePanelAPI, ScenePanelAPI
 {
+	//private EventBus bus;
 	private AbsolutePanel abs;
 	private int cameraOffsetX;
 	private int cameraOffsetY;
-	private int width;
-	private int height;
-	private int tally;
+	//private int width;
+	//private int height;
 	private InternalAPI api;
 	private Canvas canvas;
 	private final CssColor redrawColor = CssColor.make("rgba(255,0,0,0.6)");
@@ -64,6 +69,7 @@ implements ImagePanelAPI, ScenePanelAPI
 	
 	public ScenePanelForHtml5(EventBus bus, InternalAPI api)
 	{
+		//this.bus = bus;
 		this.getElement().setId("cwAbsolutePanel");
 		this.addStyleName("absolutePanel");
 		this.cameraOffsetX = 0;
@@ -78,7 +84,8 @@ implements ImagePanelAPI, ScenePanelAPI
 			// RootPanel.get(holderId).add(new Label(upgradeMessage));
 			return;
 		}
-
+		canvas.addMouseMoveHandler(new SceneMouseOverHandler(this, bus, api));
+		canvas.addClickHandler(new SceneMouseClickHandler(bus, canvas));
 		this.add(canvas);
 		this.add(abs);
 	}
@@ -124,7 +131,7 @@ implements ImagePanelAPI, ScenePanelAPI
 	@Override
 	public void setImageVisible(Image image, boolean visible)
 	{
-		this.abs.setVisible(((ImageForHtml4)image).getNativeImage().getElement(), visible);
+		AbsolutePanel.setVisible(((ImageForHtml4)image).getNativeImage().getElement(), visible);
 	
 		boolean isIn = listOfVisibleHashCodes.contains(hash(image));
 		if(visible && !isIn)
@@ -207,6 +214,7 @@ implements ImagePanelAPI, ScenePanelAPI
 		this.add(canvas);
 		
 		context = canvas.getContext2d();
+	
 	}
 
 	@Override
@@ -219,7 +227,6 @@ implements ImagePanelAPI, ScenePanelAPI
 	public void triggerPaint()
 	{
 		paint();
-		tally++;
 	}
 
 	Integer hash(Image image)
@@ -233,8 +240,7 @@ implements ImagePanelAPI, ScenePanelAPI
 
 	    // update the back canvas
 	    context.setFillStyle(redrawColor);
-        context.fillRect(0, 0, width, height);
-		context.fill();
+        context.fill();
 		
 		Iterator<Image> iter = listOfAllVisibleImages.iterator();
 		while(iter.hasNext())
@@ -254,12 +260,54 @@ implements ImagePanelAPI, ScenePanelAPI
 			    context.restore();
 			   }
 		}
-		//System.out.println("printed with tally " + tally +" draws "+ draws);
-		tally=0;
+		// System.out.println("printed with tally " + tally +" draws "+ draws);
 
 		// update the front canvas
 		//context.drawImage(backBufferContext.getCanvas(), 0, 0);
 	
 	}
+	public int getWidth()
+	{
+		return canvas.getCoordinateSpaceWidth();
+	}
+	public int getHeight()
+	{
+		return canvas.getCoordinateSpaceHeight();
+	}
 
+
+	public String getObjectUnderMouse(int x, int y) 
+	{
+		//System.out.println("----------------");
+		String textualId = "";
+		SceneObjectCollection coll = api.getSceneGui().getModel().objectCollection();
+		ArrayList<SceneObject> list = coll.getSortedList();
+		for(int i = 0;i<list.size();i++)
+		{
+			SceneObject ob = list.get(i);
+			if(ob.isVisible())
+			{
+				//System.out.println(ob.getTextualId() + ob.getNumberPrefix());
+				int frame = ob.getCurrentFrame();
+				String anim = ob.getCurrentAnimation();
+				if(ob.getAnimations().at(anim)!=null)
+				{
+					Image img = ob.getAnimations().at(anim).getFrames().at(frame);
+					if(img!=null)
+					{
+						Rect rect = img.getBoundingRect();
+						int adjX = x - (int)ob.getX() + cameraOffsetX;
+						int adjY = y - (int)ob.getY() + cameraOffsetY;
+
+						if(rect.contains(adjX, adjY))
+						{
+							textualId = ob.getTextualId();
+						}
+					}
+				}
+			}
+		}
+
+		return textualId;
+	}
 }
