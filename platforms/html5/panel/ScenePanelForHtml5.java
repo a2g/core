@@ -61,8 +61,10 @@ implements ImagePanelAPI, ScenePanelAPI
 	//private int height;
 	private InternalAPI api;
 	private Canvas canvas;
+	private Canvas backBuffer;
 	private final CssColor redrawColor = CssColor.make("rgba(255,0,0,0.6)");
 	private Context2d context;
+	private Context2d backBufferContext;
 	private Map<Integer,Point> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages;
@@ -80,6 +82,7 @@ implements ImagePanelAPI, ScenePanelAPI
 		this.listOfVisibleHashCodes = new LinkedList<Integer>();
 		this.listOfAllVisibleImages = new LinkedList<Image>();
 		canvas = Canvas.createIfSupported();
+		backBuffer = Canvas.createIfSupported();
 		if (canvas == null) {
 			// RootPanel.get(holderId).add(new Label(upgradeMessage));
 			return;
@@ -200,20 +203,23 @@ implements ImagePanelAPI, ScenePanelAPI
 	}
 
 	@Override
-	public void setScenePixelSize(int width2, int height2)
+	public void setScenePixelSize(int width, int height)
 	{
 		this.remove(canvas);
 		
-		this.setSize("" + width2 + "px",
-				"" + height2 + "px");
-		canvas.setSize("" + width2 + "px",
-				"" + height2 + "px");
-		canvas.setCoordinateSpaceWidth(width2);
-		canvas.setCoordinateSpaceHeight(height2	);
+		this.setSize("" + width + "px",
+				"" + height + "px");
+		canvas.setSize("" + width + "px",
+				"" + height + "px");
+		canvas.setCoordinateSpaceWidth(width);
+		canvas.setCoordinateSpaceHeight(height	);
+		backBuffer.setCoordinateSpaceWidth(width);
+		backBuffer.setCoordinateSpaceHeight(height);
 	
 		this.add(canvas);
 		
 		context = canvas.getContext2d();
+		backBufferContext = backBuffer.getContext2d();
 	
 	}
 
@@ -237,11 +243,6 @@ implements ImagePanelAPI, ScenePanelAPI
 
 	public void paint()
 	{
-
-	    // update the back canvas
-	    context.setFillStyle(redrawColor);
-        context.fill();
-		
 		Iterator<Image> iter = listOfAllVisibleImages.iterator();
 		while(iter.hasNext())
 		{
@@ -252,24 +253,25 @@ implements ImagePanelAPI, ScenePanelAPI
 				int x = p.getX();
 				int y = p.getY();
 
-				context.save();
-			    context.translate(x, y);
+				backBufferContext.save();
+				backBufferContext.translate(x, y);
 			    //backBufferContext.rotate(rot);
 			    ImageElement imageElement = (ImageElement)( ((ImageForHtml4)image).getNativeImage().getElement().cast());
-			    context.drawImage(imageElement, 0, 0);
-			    context.restore();
-			   }
+			    backBufferContext.drawImage(imageElement, 0, 0);
+			    backBufferContext.restore();
+			}
 		}
 		// System.out.println("printed with tally " + tally +" draws "+ draws);
 
 		// update the front canvas
-		//context.drawImage(backBufferContext.getCanvas(), 0, 0);
-	
+		context.drawImage(backBufferContext.getCanvas(), 0, 0);
 	}
+	
 	public int getWidth()
 	{
 		return canvas.getCoordinateSpaceWidth();
 	}
+	
 	public int getHeight()
 	{
 		return canvas.getCoordinateSpaceHeight();
