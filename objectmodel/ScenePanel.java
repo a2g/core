@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
@@ -26,6 +25,7 @@ import com.github.a2g.core.platforms.html4.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
+import com.github.a2g.core.platforms.html4.mouse.SceneObjectTouchMoveHandler;
 import com.github.a2g.core.primitive.Point;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -37,6 +37,7 @@ implements ImagePanelAPI, ScenePanelAPI
 {
 	int cameraOffsetX;
 	int cameraOffsetY;
+	SceneObjectTouchMoveHandler theTouchMoveHandler;
 
 	public ScenePanel(EventBus bus, InternalAPI api)
 	{
@@ -44,9 +45,8 @@ implements ImagePanelAPI, ScenePanelAPI
 		this.addStyleName("absolutePanel");
 		this.cameraOffsetX = 0;
 		this.cameraOffsetY = 0;
+		this.theTouchMoveHandler = new SceneObjectTouchMoveHandler(api);
 	}
-
-
 
 	@Override
 	public Image createNewImageAndAddHandlers
@@ -68,12 +68,17 @@ implements ImagePanelAPI, ScenePanelAPI
 		imageAndPos.getNativeImage().addMouseMoveHandler
 		(
 				new SceneObjectMouseOverHandler(bus, api, objectTextualId, objectCode)
-				);
+		);
 
 		imageAndPos.getNativeImage().addClickHandler
 		(
 				new ImageMouseClickHandler(bus, this)
-				);
+		);
+		
+		imageAndPos.getNativeImage().addTouchMoveHandler
+		(
+			theTouchMoveHandler
+		);
 
 		return imageAndPos;
 	}
@@ -106,7 +111,7 @@ implements ImagePanelAPI, ScenePanelAPI
 	@Override
 	public void setThingPosition(Image image, int left, int top)
 	{
-		super.setWidgetPosition(((ImageForHtml4)image).getNativeImage(), left-cameraOffsetX, top-cameraOffsetY);
+		super.setWidgetPosition(((ImageForHtml4)image).getNativeImage(), (int)(left-cameraOffsetX*image.getParallaxX()),(int)( top-cameraOffsetY*image.getParallaxY()));
 	}
 
 	@Override
