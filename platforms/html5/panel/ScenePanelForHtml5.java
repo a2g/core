@@ -45,9 +45,10 @@ import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
- //commandLineAndVerbsAndInventory = new VerticalPanel();
+//commandLineAndVerbsAndInventory = new VerticalPanel();
 
 public class ScenePanelForHtml5
 extends VerticalPanel
@@ -68,7 +69,7 @@ implements ImagePanelAPI, ScenePanelAPI
 	private Map<Integer,Point> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages;
-	
+
 	public ScenePanelForHtml5(EventBus bus, InternalAPI api)
 	{
 		//this.bus = bus;
@@ -92,7 +93,7 @@ implements ImagePanelAPI, ScenePanelAPI
 		this.add(canvas);
 		this.add(abs);
 	}
-	
+
 
 	void putPoint(ImageForHtml4 image, int x,int y)
 	{
@@ -125,7 +126,7 @@ implements ImagePanelAPI, ScenePanelAPI
 		imageAndPos.getNativeImage().addClickHandler
 		(
 				new ImageMouseClickHandler(bus, this.abs)
-		);
+				);
 		image.setVisible(false);
 		return imageAndPos;
 	}
@@ -134,8 +135,8 @@ implements ImagePanelAPI, ScenePanelAPI
 	@Override
 	public void setImageVisible(Image image, boolean visible)
 	{
-		AbsolutePanel.setVisible(((ImageForHtml4)image).getNativeImage().getElement(), visible);
-	
+		UIObject.setVisible(((ImageForHtml4)image).getNativeImage().getElement(), visible);
+
 		boolean isIn = listOfVisibleHashCodes.contains(hash(image));
 		if(visible && !isIn)
 		{
@@ -153,7 +154,7 @@ implements ImagePanelAPI, ScenePanelAPI
 	public void add(Image image, int x, int y)
 	{
 		this.abs.add(((ImageForHtml4) image).getNativeImage(), x, y);
-		
+
 		listOfAllVisibleImages.add(image);
 		putPoint((ImageForHtml4)image, x,y);
 		triggerPaint();
@@ -163,7 +164,7 @@ implements ImagePanelAPI, ScenePanelAPI
 	public void insert(Image image, int x, int y, int before)
 	{
 		this.abs.insert(((ImageForHtml4)image).getNativeImage(),x-cameraOffsetX,y-cameraOffsetY,before);
-	
+
 		listOfAllVisibleImages.add(before,image);
 		putPoint((ImageForHtml4)image, x,y);
 		triggerPaint();
@@ -206,7 +207,7 @@ implements ImagePanelAPI, ScenePanelAPI
 	public void setScenePixelSize(int width, int height)
 	{
 		this.remove(canvas);
-		
+
 		this.setSize("" + width + "px",
 				"" + height + "px");
 		canvas.setSize("" + width + "px",
@@ -215,12 +216,12 @@ implements ImagePanelAPI, ScenePanelAPI
 		canvas.setCoordinateSpaceHeight(height	);
 		backBuffer.setCoordinateSpaceWidth(width);
 		backBuffer.setCoordinateSpaceHeight(height);
-	
+
 		this.add(canvas);
-		
+
 		context = canvas.getContext2d();
 		backBufferContext = backBuffer.getContext2d();
-	
+
 	}
 
 	@Override
@@ -229,7 +230,7 @@ implements ImagePanelAPI, ScenePanelAPI
 		this.cameraOffsetX = x;
 		this.cameraOffsetY = y;
 	}
-	
+
 	public void triggerPaint()
 	{
 		paint();
@@ -255,10 +256,10 @@ implements ImagePanelAPI, ScenePanelAPI
 
 				backBufferContext.save();
 				backBufferContext.translate(x, y);
-			    //backBufferContext.rotate(rot);
-			    ImageElement imageElement = (ImageElement)( ((ImageForHtml4)image).getNativeImage().getElement().cast());
-			    backBufferContext.drawImage(imageElement, 0, 0);
-			    backBufferContext.restore();
+				//backBufferContext.rotate(rot);
+				ImageElement imageElement = (ImageElement)( ((ImageForHtml4)image).getNativeImage().getElement().cast());
+				backBufferContext.drawImage(imageElement, 0, 0);
+				backBufferContext.restore();
 			}
 		}
 		// System.out.println("printed with tally " + tally +" draws "+ draws);
@@ -266,19 +267,19 @@ implements ImagePanelAPI, ScenePanelAPI
 		// update the front canvas
 		context.drawImage(backBufferContext.getCanvas(), 0, 0);
 	}
-	
+
 	public int getWidth()
 	{
 		return canvas.getCoordinateSpaceWidth();
 	}
-	
+
 	public int getHeight()
 	{
 		return canvas.getCoordinateSpaceHeight();
 	}
 
 
-	public String getObjectUnderMouse(int x, int y) 
+	public String getObjectUnderMouse(int x, int y)
 	{
 		//System.out.println("----------------");
 		String textualId = "";

@@ -102,7 +102,7 @@ public class LoaderPresenter implements MouseToLoaderPresenterAPI
 	{
 		view.enableClickToContinue();
 	}
-	
+
 	@Override
 	public void clickToContinue() {
 		master.startScene();

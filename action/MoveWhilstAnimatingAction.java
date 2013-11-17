@@ -45,7 +45,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 		this.animatingDelay = 0;
 		this.movingDelay = 0;
 		this.isParallel = false;
-		this.endX = endX;// - getApi().getSceneGui().getCameraX(); 
+		this.endX = endX;// - getApi().getSceneGui().getCameraX();
 		this.endY = endY;// - getApi().getSceneGui().getCameraY();
 		this.startX = 0.0;
 		this.startY = 0.0;

@@ -68,17 +68,17 @@ implements ImagePanelAPI, ScenePanelAPI
 		imageAndPos.getNativeImage().addMouseMoveHandler
 		(
 				new SceneObjectMouseOverHandler(bus, api, objectTextualId, objectCode)
-		);
+				);
 
 		imageAndPos.getNativeImage().addClickHandler
 		(
 				new ImageMouseClickHandler(bus, this)
-		);
-		
+				);
+
 		imageAndPos.getNativeImage().addTouchMoveHandler
 		(
-			theTouchMoveHandler
-		);
+				theTouchMoveHandler
+				);
 
 		return imageAndPos;
 	}

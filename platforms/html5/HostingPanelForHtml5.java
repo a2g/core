@@ -33,4 +33,4 @@ implements HostingPanelAPI
 		this.add((IsWidget)w);
 
 	}
-}	
+}

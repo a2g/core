@@ -62,7 +62,7 @@ implements LoaderPanelAPI
 		addHandler(api);
 		this.add(layout);
 	}
-	
+
 
 	void addHandler(final MouseToLoaderPresenterAPI api)
 	{
@@ -75,7 +75,7 @@ implements LoaderPanelAPI
 						api.restartReloading();
 					}
 				}
-		);
+				);
 		clickToContinue.addClickHandler
 		(
 				new ClickHandler()
@@ -85,7 +85,7 @@ implements LoaderPanelAPI
 						api.clickToContinue();
 					}
 				}
-		);
+				);
 	}
 
 	@Override

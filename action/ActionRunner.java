@@ -58,7 +58,7 @@ public class ActionRunner implements ActionCallbackAPI
 	}
 
 
-	void executeParallelActions() 
+	void executeParallelActions()
 	{
 		this.numberOfParallelActionsToWaitFor = this.parallelActionsToWaitFor.size();
 
@@ -70,7 +70,7 @@ public class ActionRunner implements ActionCallbackAPI
 			BaseAction a = this.parallelActionsToWaitFor.get(i);
 
 			System.out.println("ActionRunner::executeParallelActions " + i+ " " + a.toString() );
-			
+
 			a.setCallbacks(this);
 			a.runGameAction();
 		}
@@ -128,14 +128,14 @@ public class ActionRunner implements ActionCallbackAPI
 	public void startTheNextAction(BaseAction a) {
 		this.numberOfParallelActionsToWaitFor--;
 		System.out.println("Release " + numberOfParallelActionsToWaitFor );
-		
+
 		if (this.numberOfParallelActionsToWaitFor
-				== 0) 
+				== 0)
 		{
 			System.out.println("Starting next action " + this.toString() );
 			processNextListOfParallelActions();
 		}
-		
+
 	}
 
 	public void cancel() {

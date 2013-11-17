@@ -45,7 +45,7 @@ public class PlayAnimationAction extends ChainedAction {
 	public void runGameAction() {
 		int duration = (this.anim.getLength()+ 1)
 				* (40 + this.delay);
-		
+
 		if (animsParent != null) {
 			animsParent.setVisible(true);
 		}
@@ -72,10 +72,10 @@ public class PlayAnimationAction extends ChainedAction {
 	@Override
 	protected void onCompleteGameAction() {
 		System.out.println("ActionRunner::done " + anim.getTextualId() +" is this length: " +anim.getLength());
-		
+
 		onUpdateGameAction(1.0);
 		if (!this.holdLastFrame) {
-			if (this.animsParent != null) 
+			if (this.animsParent != null)
 			{
 				String s = animsParent.getInitialAnimation();
 				animsParent.setCurrentAnimation(s);

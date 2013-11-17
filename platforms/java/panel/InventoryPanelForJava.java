@@ -102,8 +102,8 @@ implements ImagePanelAPI
 
 		try
 		{
-			java.awt.Image rawLeft = ImageIO.read(new File("D:/Conan/Swing/bin/com/github/a2g/core/res/LeftArrow.png"));
-			java.awt.Image rawRight = ImageIO.read(new File("D:/Conan/Swing/bin/com/github/a2g/core/res/RightArrow.png"));
+			java.awt.Image rawLeft = ImageIO.read(new File("E:/Conan/Swing/bin/com/github/a2g/core/res/LeftArrow.png"));
+			java.awt.Image rawRight = ImageIO.read(new File("E:/Conan/Swing/bin/com/github/a2g/core/res/RightArrow.png"));
 
 			imgLeft = new ImageForJava(rawLeft, "", this, new Point(0,0));
 			imgRight = new ImageForJava(rawRight, "", this, new Point(0,0));

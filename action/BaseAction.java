@@ -123,10 +123,10 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	@Override // method in animation
-	public void onComplete() 
+	public void onComplete()
 	{
 		onCompleteGameAction();
-		
+
 		this.callbacks.startTheNextAction(this);
 	}
 
@@ -401,12 +401,12 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	public ChainedAction onDoCommand(SceneAPI scene, OnDoCommandAPI api, ChainRootAction ba,
-			int verb, SentenceItem objectA, SentenceItem objectB, double x, double y) 
+			int verb, SentenceItem objectA, SentenceItem objectB, double x, double y)
 	{
 		ChainedAction secondStep = scene.onDoCommand(api, this.api.createChainRootAction(), verb, objectA, objectB, x, y);
 		return subroutine(secondStep);
 	}
-	
+
 	public ChainedAction subroutine(ChainedAction orig) {
 		// find root of orig
 		BaseAction somewhereInOrig = orig;

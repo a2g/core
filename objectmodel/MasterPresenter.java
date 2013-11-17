@@ -494,7 +494,7 @@ implements InternalAPI
 
 	@Override
 	public void executeBranchOnCurrentScene(int branchId)
-	{	
+	{
 		this.dialogActionRunner.cancel();
 		// clear it so any old branches don't show up
 		this.dialogTreePresenter.clear();
@@ -931,7 +931,7 @@ implements InternalAPI
 
 	@Override
 	public void setStateOfPopup(boolean visible, double x, double y,
-			ColorEnum talkingColor, String speech,BaseAction ba) 
+			ColorEnum talkingColor, String speech,BaseAction ba)
 	{
 		if(talkingColor==null)
 		{
@@ -964,13 +964,13 @@ implements InternalAPI
 	@Override
 	public void clickToContinue() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void enableClickToContinue() 
+	public void enableClickToContinue()
 	{
-		this.loadingPresenter.enableClickToContinue();	
+		this.loadingPresenter.enableClickToContinue();
 	}
 
 }

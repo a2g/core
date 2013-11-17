@@ -26,13 +26,13 @@ import com.github.a2g.core.platforms.html5.panel.ScenePanelForHtml5;
 
 
 public class SceneMouseOverHandler
-implements MouseMoveHandler 
+implements MouseMoveHandler
 {
 	private final EventBus bus;
 	private final InternalAPI api;
 	private final ScenePanelForHtml5 scenePanel;
 
-	public SceneMouseOverHandler(ScenePanelForHtml5 scenePanel, EventBus bus, InternalAPI api) 
+	public SceneMouseOverHandler(ScenePanelForHtml5 scenePanel, EventBus bus, InternalAPI api)
 	{
 		this.bus = bus;
 		this.api = api;
@@ -40,7 +40,7 @@ implements MouseMoveHandler
 	}
 
 	@Override
-	public void onMouseMove(MouseMoveEvent event) 
+	public void onMouseMove(MouseMoveEvent event)
 	{
 		int w = scenePanel.getWidth();
 		int h = scenePanel.getHeight();

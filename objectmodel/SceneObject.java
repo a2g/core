@@ -103,7 +103,7 @@ public class SceneObject {
 			return;
 		}
 
-	// Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg( this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
+		// Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg( this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
 
 		int i = this.fak.getCurrentFrame() + 1;
 
@@ -215,8 +215,8 @@ public class SceneObject {
 
 	public void setVisible(boolean visible) {
 		//if (this.visible != visible) {
-			this.visible = visible;
-			updateToCorrectImage();
+		this.visible = visible;
+		updateToCorrectImage();
 		//}
 	}
 
@@ -265,7 +265,7 @@ public class SceneObject {
 		double rawY = doubleY * screenSpan - rectSpan  - lowerBound;
 		return rawY;
 	}
-	
+
 	public void setX(double rawX)
 	{
 		this.rawX = rawX;
@@ -425,7 +425,7 @@ public class SceneObject {
 	public ColorEnum getTalkingColor() {
 		return this.talkingColor;
 	}
-	
+
 	public void setParallaxX(double x)
 	{
 		for(int a = 0;a<animationCollection.getCount();a++)
@@ -449,10 +449,10 @@ public class SceneObject {
 		double y = lowerYPos/screenPixelHeight;
 		return new PointF(x,y);
 	}
-	
+
 	public void setCurrentAnimationAndSetFrameWithoutBaseMiddleMovement(
 			String textualId,
-			int frame) 
+			int frame)
 	{
 		PointF h = getBaseMiddleXY();
 		this.fak.setCurrentAnimationTextualId(textualId);
@@ -461,9 +461,9 @@ public class SceneObject {
 		// then change position
 		setBaseMiddleX(h.getX());
 		setBaseMiddleY(h.getY());
-		
+
 	}
-	
+
 }
 
 

@@ -15,7 +15,7 @@
  */
 package com.github.a2g.core.interfaces;
 
-public interface MouseToLoaderPresenterAPI 
+public interface MouseToLoaderPresenterAPI
 {
 
 	void restartReloading();

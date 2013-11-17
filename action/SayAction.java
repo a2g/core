@@ -125,13 +125,13 @@ public class SayAction extends ChainedAction {
 
 		boolean visible = true;
 		getApi().setStateOfPopup( visible, .1,.1, object.getTalkingColor(), speech.get(0),this);
-		
+
 		this.run((int) totalDurationInSeconds);
 	}
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		
+
 		if(object!=null)
 		{
 			if (anim != null && object != null) {

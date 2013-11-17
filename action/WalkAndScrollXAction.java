@@ -64,7 +64,7 @@ extends WalkToAction
 		super.onCompleteGameAction();
 
 		getApi().getSceneGui().setCameraX(startCameraX	+ this.getEndX()- this.getStartX());
-	;
+		;
 
 
 	}

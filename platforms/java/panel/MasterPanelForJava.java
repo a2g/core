@@ -40,7 +40,7 @@ implements MasterPanelAPI
 	HostingPanelForJava hostForDialogTreeF;
 	HostingPanelForJava hostForLoadingF;
 	HostingPanelForJava hostForTitleCardF;
-	GuiStateEnum guiStateEnum;
+	GuiStateEnum GuiStateEnum;
 
 	static final String LOADING_WIDGET = "LOADING_WIDGET";
 	static final String SCENE_WIDGET = "SCENE_WIDGET";
@@ -167,7 +167,7 @@ implements MasterPanelAPI
 
 	@Override
 	public void setActiveState(GuiStateEnum state) {
-		this.guiStateEnum = state;
+		this.GuiStateEnum = state;
 		switch(state)
 		{
 		case DialogTree:
@@ -232,7 +232,7 @@ implements MasterPanelAPI
 
 	@Override
 	public GuiStateEnum getActiveState() {
-		return guiStateEnum;
+		return GuiStateEnum;
 	}
 
 }

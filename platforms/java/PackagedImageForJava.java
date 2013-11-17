@@ -49,7 +49,7 @@ implements PackagedImageAPI
 		{
 			try
 			{
-				img=ImageIO.read(new File("com/github/a2g/core/leftArrow.png"));
+				img=ImageIO.read(new File("E:/Conan/Swing/bin/com/github/a2g/core/res/leftArrow.png"));
 			}
 			catch(IOException f)
 			{

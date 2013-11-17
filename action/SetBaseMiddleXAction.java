@@ -24,7 +24,7 @@ import com.github.a2g.core.action.ChainedAction;
 public class SetBaseMiddleXAction extends ChainedAction {
 	private short objId;
 	private double x;
-	
+
 	public SetBaseMiddleXAction(BaseAction parent, short objId, double x) {
 		super(parent, parent.getApi(), true);
 		this.objId = objId;

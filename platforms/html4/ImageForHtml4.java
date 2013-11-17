@@ -25,7 +25,7 @@ public class ImageForHtml4 extends Image
 	private final com.google.gwt.user.client.ui.Image image;
 
 	public ImageForHtml4(final com.google.gwt.user.client.ui.Image image,
-			 ImagePanelAPI panel, Point offset)  
+			ImagePanelAPI panel, Point offset)
 	{
 		super(panel,offset);
 		this.image = image;

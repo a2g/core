@@ -81,7 +81,7 @@ implements FactoryAPI
 	}
 
 	@Override
-	public LoaderPanelAPI createLoaderPanel(final MouseToLoaderPresenterAPI api, ColorEnum fore, ColorEnum back) 
+	public LoaderPanelAPI createLoaderPanel(final MouseToLoaderPresenterAPI api, ColorEnum fore, ColorEnum back)
 	{
 		return new LoaderPanel(api, fore,back);
 	}

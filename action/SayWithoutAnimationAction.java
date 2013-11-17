@@ -29,7 +29,7 @@ public class SayWithoutAnimationAction extends ChainedAction {
 	private String speech;
 	private PopupPanelAPI popup;
 	private ColorEnum color;
-	
+
 	public SayWithoutAnimationAction(BaseAction parent, short objId, String speech, boolean isLinear) {
 		super(parent, parent.getApi(), isLinear);
 		this.speech = speech;

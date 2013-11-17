@@ -32,19 +32,19 @@ implements PopupPanelAPI
 {
 	private com.google.gwt.user.client.ui.PopupPanel popup;
 	private Label labelInPopup;
-	private int sceneWidth; 
+	private int sceneWidth;
 	private int sceneHeight;
-	
+
 	public PopupPanel(int sceneWidth, int sceneHeight)
 	{
-		this.sceneWidth = sceneWidth; 
-		this.sceneHeight = sceneHeight;  
+		this.sceneWidth = sceneWidth;
+		this.sceneHeight = sceneHeight;
 		this.popup = new com.google.gwt.user.client.ui.PopupPanel();
 		this.labelInPopup = new Label();
 
 		this.popup.setWidget(labelInPopup);
 	}
-	
+
 	@Override
 	public void setVisible(boolean isVisible)
 	{
@@ -69,9 +69,9 @@ implements PopupPanelAPI
 		this.popup.setTitle(speech);
 		popup.setWidget(new Label(speech));
 	}
-	
+
 	@Override
-	public void setColor(ColorEnum color) 
+	public void setColor(ColorEnum color)
 	{
 		if(color!=null)
 		{
@@ -83,27 +83,27 @@ implements PopupPanelAPI
 		}
 		//DOM.setStyleAttribute(labelInPopup.getElement(), "backgroundColor", ColorEnum.Black.toString());
 		//DOM.setStyleAttribute(popup.getElement(), "backgroundColor", ColorEnum.Black.toString());
-		
-		
+
+
 	}
 	@Override
-	public void setCancelCallback(final BaseAction ba) 
+	public void setCancelCallback(final BaseAction ba)
 	{
 		if(ba==null)
 			return;
 		labelInPopup.addClickHandler
 		(
-			new ClickHandler()
-			{
+				new ClickHandler()
+				{
 
-				@Override
-				public void onClick(ClickEvent event) {
-					ba.cancel();
+					@Override
+					public void onClick(ClickEvent event) {
+						ba.cancel();
+					}
+
 				}
+				);
 
-			}
-		);
-	
 	}
 
 }
