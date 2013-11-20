@@ -674,5 +674,11 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		a.setNonBlocking(true);
 		return a;
 	}
+	
+	public ChainedAction hideAll()
+	{
+		HideAllAction h = new HideAllAction(this);
+		return h;
+	}
 }
 
