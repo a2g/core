@@ -26,7 +26,6 @@ public abstract class ChainedAction extends BaseAction
 	{
 		super(parent, api, isLinear);
 	}
-
 }
 
 

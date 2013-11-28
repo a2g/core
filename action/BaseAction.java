@@ -680,5 +680,11 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		HideAllAction h = new HideAllAction(this);
 		return h;
 	}
+	
+	public ChainedAction setToInitialPosition(short object) 
+	{
+		SetToInitialPositionAction h = new SetToInitialPositionAction(this, object);
+		return h;
+	}
 }
 
