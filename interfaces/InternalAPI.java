@@ -96,7 +96,7 @@ extends ImageAddAPI, OnDoCommandAPI{
 
 	public ChainRootAction createChainRootAction();
 	public void executeChainedAction(ChainedAction ba);
-	public short getDefaultSayer();
+	public String getDefaultSayAnimation();
 	public short getDefaultWalker();
 	public void setStateOfPopup(boolean visible, double x, double y,
 			ColorEnum talkingColor, String string, BaseAction cancelCallback);

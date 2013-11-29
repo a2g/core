@@ -55,7 +55,7 @@ public interface OnEveryFrameAPI {
 	public String getLastScene();
 	public boolean isInDebugMode();
 	public void setActiveState(GuiStateEnum state);
-	public void setDefaultSayer(short object);
+	public void setDefaultSayAnimation(String object);
 	public void setDefaultWalker(short object);
 
 	// these two are needed for starting animations in the onEveryFrame handler

@@ -18,7 +18,6 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.action.ChainedAction;
@@ -27,13 +26,11 @@ import com.github.a2g.core.action.ChainedAction;
 
 public class SayWithoutAnimationAction extends ChainedAction {
 	private String speech;
-	private PopupPanelAPI popup;
 	private ColorEnum color;
 
 	public SayWithoutAnimationAction(BaseAction parent, short objId, String speech, boolean isLinear) {
 		super(parent, parent.getApi(), isLinear);
 		this.speech = speech;
-		this.popup = null;
 		SceneObject object = getApi().getObject(objId);
 		color = (object!=null)? object.getTalkingColor() : null;
 	}
@@ -55,9 +52,7 @@ public class SayWithoutAnimationAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		if (this.popup != null) {
-			this.popup.setVisible(false);
-		}
+		getApi().setStateOfPopup( false, .1,.1, color, "",null);
 	}
 
 	@Override

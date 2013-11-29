@@ -27,7 +27,6 @@ import com.github.a2g.core.action.SetBaseMiddleYAction;
 import com.github.a2g.core.action.SetDisplayNameAction;
 import com.github.a2g.core.action.SetInitialAnimationAction;
 import com.github.a2g.core.action.SetInventoryVisibleAction;
-import com.github.a2g.core.action.SetTalkingAnimationAction;
 import com.github.a2g.core.action.SetTalkingAnimationDelayAction;
 import com.github.a2g.core.action.SetVisibleAction;
 import com.github.a2g.core.action.SleepAction;
@@ -311,14 +310,14 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 				this, animationCode, isLinear);
 	}
 
-	public ChainedAction say(short objectCode, String speech) {
-		return new SayAction(this, objectCode,
+	public ChainedAction say(String animCode, String speech) {
+		return new SayAction(this, animCode,
 				speech);
 		// return toReturn;
 	}
 
 	public ChainedAction say(String speech) {
-		return new SayAction(this, api.getDefaultSayer(),
+		return new SayAction(this, api.getDefaultSayAnimation(),
 				speech);
 		// return toReturn;
 	}
@@ -376,18 +375,12 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		this.parent = parent;
 	}
 
-	public ChainedAction setTalkingAnimation(String  animationCode) {
-		return new SetTalkingAnimationAction(
-				this, animationCode, true);
-		// return toReturn;
-	}
 
 	public ChainedAction setTalkingAnimationDelay(short objectCode, int delay) {
 		return new SetTalkingAnimationDelayAction(
 				this, objectCode, delay, true);
 		// return toReturn;
 	}
-	;
 
 	public ChainedAction setVisible(short objectCode, boolean isVisible) {
 		return new SetVisibleAction(this,

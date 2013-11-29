@@ -17,7 +17,6 @@ package com.github.a2g.core.interfaces;
 
 public interface VerbsPresenterCallbackAPI
 {
-
 	FactoryAPI getFactory();
 
 	int getValue(Object string);

@@ -19,7 +19,6 @@ package com.github.a2g.core.action;
 import java.util.ArrayList;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.action.ChainedAction;
@@ -29,16 +28,15 @@ import com.github.a2g.core.action.ChainedAction;
 public class SayAction extends ChainedAction {
 	private ArrayList<String> speech;
 	private ArrayList<Double> ceilings;
-	private short objId;
 	private double totalDurationInSeconds;
 	private Animation anim;
 	private SceneObject object;
 	private int numberOfFramesTotal;
 
-	public SayAction(BaseAction parent, short objId, String fullSpeech) {
+	public SayAction(BaseAction parent, String animation, String fullSpeech) {
 		super(parent, parent.getApi(), true);
-		this.objId = objId;
-		this.anim = null;
+		this.anim = getApi().getAnimation(animation);
+		this.object = anim.getObject();
 		this.numberOfFramesTotal = 0;
 		speech = new ArrayList<String>();
 		ceilings = new ArrayList<Double>();
@@ -59,9 +57,7 @@ public class SayAction extends ChainedAction {
 			ceilings.add(new Double(rollingCeiling / totalDurationInSeconds));
 		}
 
-		InternalAPI api = getApi();
-		this.object = api.getObject(this.objId);
-
+		//InternalAPI api = getApi();
 	}
 
 	int getAdjustedNumberOfFrames(String speech, double approxDuration, int animFramesCount, int talkingAnimationDelay)
@@ -92,26 +88,22 @@ public class SayAction extends ChainedAction {
 	@Override
 	public void runGameAction() {
 
-
-		if (object != null) {
-			String talkingAnimTextualId = object.getTalkingAnimation();
-			anim = object.getAnimations().at(talkingAnimTextualId);
-			if (anim==null)
-			{
-				// if theres no animation then we just wait for the totalDuration;
-				double framesPerSecond = 40;
-				numberOfFramesTotal = (int) (totalDurationInSeconds * framesPerSecond);
-			}
-			else
-			{
-				numberOfFramesTotal = getAdjustedNumberOfFrames(
-						speech.get(0),
-						totalDurationInSeconds,
-						anim.getFrames().getCount(),
-						object.getTalkingAnimationDelay()
-						);
-			}
+		if (anim==null)
+		{
+			// if theres no animation then we just wait for the totalDuration;
+			double framesPerSecond = 40;
+			numberOfFramesTotal = (int) (totalDurationInSeconds * framesPerSecond);
 		}
+		else
+		{
+			numberOfFramesTotal = getAdjustedNumberOfFrames(
+					speech.get(0),
+					totalDurationInSeconds,
+					anim.getFrames().getCount(),
+					anim.getDelay()
+					);
+		}
+		
 		if(numberOfFramesTotal<2)
 		{
 			getApi().displayTitleCard("error!!");

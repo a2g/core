@@ -22,7 +22,7 @@ import com.google.gwt.event.shared.EventBus;
 
 public interface MasterPresenterHostAPI {
 
-	public void setValue(String name, int value);
+	public void setValue(String name, Integer value);
 	public int getValue(String name);
 	public void instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(String scene);
 	public void setLastCommand(double x, double y, int v, String a, String b);

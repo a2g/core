@@ -68,7 +68,7 @@ public interface OnPreEntryAPI extends OnDoCommandAPI
 	public boolean isInDebugMode();
 	public void setInventoryPixelSize(int width, int height);
 	@Override
-	public void setDefaultSayer(short object);
+	public void setDefaultSayAnimation(String object);
 	@Override
 	public void setDefaultWalker(short object);
 

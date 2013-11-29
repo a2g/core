@@ -28,7 +28,6 @@ import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.action.SayAction;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.STARTING_ODD_OBJECTS_CODE;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 
 import com.github.a2g.core.event.PropertyChangeEvent;
@@ -110,7 +109,7 @@ implements InternalAPI
 
 
 	private String lastSceneAsString;
-	private short defaultSayer;
+	private String defaultSayAnimation;
 	private short defaultWalker;
 
 	public MasterPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent)
@@ -161,8 +160,6 @@ implements InternalAPI
 		this.speechPopup = getFactory().createPopupPanel(scenePresenter.getWidth(), scenePresenter.getHeight());
 
 		this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.Loading);
-		this.defaultSayer = STARTING_ODD_OBJECTS_CODE.STARTING_ODD_OBJECTS_CODE;
-		this.defaultWalker = STARTING_ODD_OBJECTS_CODE.STARTING_ODD_OBJECTS_CODE;
 	}
 
 	public void setCallbacks(SceneAPI callbacks) {
@@ -513,7 +510,7 @@ implements InternalAPI
 	public void saySpeechAndThenExecuteBranchWithBranchId(String speech, int branchId) {
 		this.dialogTreePresenter.clear();
 
-		short objId = getDialogTreeGui().getDialogTreeTalker();
+		String animId = getDialogTreeGui().getDialogTreeTalkAnimation();
 		// This is a bit sneaky:
 		// 1. we construct a BaseAction that sas the speech
 		// 2. we pass this to onDialogTree
@@ -522,7 +519,7 @@ implements InternalAPI
 		// Thus it will say the text, and do what the user prescribes.
 
 
-		SayAction say = new SayAction(createChainRootAction(), objId, speech);
+		SayAction say = new SayAction(createChainRootAction(), animId, speech);
 		BaseDialogTreeAction actionChain = callbacks.onDialogTree(this, say, branchId);
 		executeActionWithDialogActionRunner(actionChain);
 	}
@@ -908,9 +905,9 @@ implements InternalAPI
 	}
 
 	@Override
-	public void setDefaultSayer(short object)
+	public void setDefaultSayAnimation(String sayAnimation)
 	{
-		this.defaultSayer = object;
+		this.defaultSayAnimation = sayAnimation;
 	}
 
 	@Override
@@ -920,8 +917,8 @@ implements InternalAPI
 	}
 
 	@Override
-	public short getDefaultSayer() {
-		return this.defaultSayer;
+	public String getDefaultSayAnimation() {
+		return this.defaultSayAnimation;
 	}
 
 	@Override

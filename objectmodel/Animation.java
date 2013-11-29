@@ -22,21 +22,21 @@ import com.github.a2g.core.interfaces.SceneAPI;
 
 
 public class Animation {
+	private int delay;
 	private String textualId;
 	private ImageCollection framesCollection;
 	private SceneObject parent;
 	private boolean wasSetAsInitialAnimation;
-	private boolean wasSetAsTalkingAnimation;
 	private boolean wasSetAsCurrentAnimation;
 	private SceneAPI.Special specialAnimationThisWasSetTo;
 
 
 	public Animation(String textualId, SceneObject owningSceneObject) {
+		this.delay = 0;
 		this.parent = owningSceneObject;
 		this.textualId = textualId;
 		framesCollection = new com.github.a2g.core.objectmodel.ImageCollection();
 		wasSetAsInitialAnimation = false;
-		wasSetAsTalkingAnimation = false;
 		wasSetAsCurrentAnimation = false;
 		specialAnimationThisWasSetTo = null;
 	}
@@ -102,13 +102,6 @@ public class Animation {
 		}
 	}
 
-	public void setAsTalkingAnimation() {
-		this.wasSetAsTalkingAnimation = true;
-		if (parent != null) {
-			parent.setTalkingAnimation( this.textualId);
-		}
-	}
-
 	public void setAsInitialAnimation() {
 		this.wasSetAsInitialAnimation = true;
 		if (parent != null)
@@ -129,9 +122,7 @@ public class Animation {
 		return wasSetAsInitialAnimation;
 	}
 
-	public boolean getWasSetAsTalkingAnimation() {
-		return wasSetAsTalkingAnimation;
-	}
+
 
 	public boolean getWasSetAsCurrentAnimation() {
 		return wasSetAsCurrentAnimation;
@@ -174,6 +165,14 @@ public class Animation {
 			parent.setCurrentAnimationAndSetFrameWithoutBaseMiddleMovement(this.textualId,0);
 		}
 
+	}
+
+	public void setDelay(int delay) {
+		this.delay = delay;
+	}
+
+	public int getDelay() {
+		return delay;
 	}
 
 

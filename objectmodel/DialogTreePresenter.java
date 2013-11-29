@@ -28,14 +28,13 @@ public class DialogTreePresenter {
 	private EventBus bus;
 	private DialogTree theDialogTree;
 	private DialogTreePanelAPI view;
-	private short dialogTreeTalker;
+	private String dialogTreeTalkAnimation;
 
 	public DialogTreePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api) {
 		this.bus = bus;
 		this.theDialogTree = new DialogTree();
 		this.view = api.getFactory().createDialogTreePanel(bus, ColorEnum.Purple, ColorEnum.Black, ColorEnum.Red);
 		panel.setThing(view);
-		this.dialogTreeTalker = 0;
 	}
 
 	public void clear() {
@@ -50,13 +49,13 @@ public class DialogTreePresenter {
 	}
 
 
-	public void setDialogTreeTalker(short personWhoSpeaksTheChosenDialog) {
-		this.dialogTreeTalker = personWhoSpeaksTheChosenDialog;
+	public void setDialogTreeTalkAnimation(String dialogTreeTalkAnimation) {
+		this.dialogTreeTalkAnimation = dialogTreeTalkAnimation;
 
 	}
 
-	public short getDialogTreeTalker() {
-		return this.dialogTreeTalker;
+	public String getDialogTreeTalkAnimation() {
+		return this.dialogTreeTalkAnimation;
 	}
 
 	public void setPixelSize(int width, int height) {
