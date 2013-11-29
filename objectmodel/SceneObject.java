@@ -43,7 +43,6 @@ public class SceneObject {
 	private int numberPrefix;
 	private short code;
 	private ColorEnum talkingColor;
-	private int talkingAnimationDelay;
 
 	public SceneObject(String textualId, int screenWidth, int screenHeight) {
 		this.currentImage = null;
@@ -58,7 +57,6 @@ public class SceneObject {
 		this.mapOfSpecialAnimations = new TreeMap<Special, String>();
 		this.numberPrefix = 0;
 		this.initialAnimationId = textualId + "_INITIAL";
-		this.talkingAnimationDelay = 0;
 
 		// talkingColro deliberately null, so the
 		// default color can be in one spot: the say action
@@ -182,17 +180,6 @@ public class SceneObject {
 			this.currentImage.setVisible(
 					this.visible, getRawLeftTop());
 		}
-
-	}
-
-	public void setTalkingAnimationDelay(int delay)
-	{
-		this.talkingAnimationDelay = delay;
-	}
-
-	public int getTalkingAnimationDelay()
-	{
-		return this.talkingAnimationDelay;
 	}
 
 	public void walkTo(Point point) {
