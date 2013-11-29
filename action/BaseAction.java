@@ -27,7 +27,6 @@ import com.github.a2g.core.action.SetBaseMiddleYAction;
 import com.github.a2g.core.action.SetDisplayNameAction;
 import com.github.a2g.core.action.SetInitialAnimationAction;
 import com.github.a2g.core.action.SetInventoryVisibleAction;
-import com.github.a2g.core.action.SetTalkingAnimationDelayAction;
 import com.github.a2g.core.action.SetVisibleAction;
 import com.github.a2g.core.action.SleepAction;
 import com.github.a2g.core.action.SwapPropertyAction;
@@ -373,13 +372,6 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	public void setParent(BaseAction parent) {
 		this.parent = parent;
-	}
-
-
-	public ChainedAction setTalkingAnimationDelay(short objectCode, int delay) {
-		return new SetTalkingAnimationDelayAction(
-				this, objectCode, delay, true);
-		// return toReturn;
 	}
 
 	public ChainedAction setVisible(short objectCode, boolean isVisible) {
