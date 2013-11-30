@@ -23,8 +23,8 @@ import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.action.ChainedAction;
 
 
-public class PlayAnimationAction extends ChainedAction {
-	private int delay;
+public class PlayAnimationAction extends ChainedAction 
+{
 	private Animation anim;
 	private SceneObject animsParent;
 	private boolean isBackwards;
@@ -35,7 +35,6 @@ public class PlayAnimationAction extends ChainedAction {
 		super(parent, parent.getApi(), isLinear);
 		this.anim = getApi().getAnimation(animCode);
 		this.animsParent = anim.getObject();
-		this.delay = 0;
 		this.isBackwards = false;
 		this.holdLastFrame = false;
 		this.isNonBlocking = false;
@@ -44,7 +43,7 @@ public class PlayAnimationAction extends ChainedAction {
 	@Override
 	public void runGameAction() {
 		int duration = (this.anim.getLength()+ 1)
-				* (40 + this.delay);
+				* (40 + anim.getDelay());
 
 		if (animsParent != null) {
 			animsParent.setVisible(true);
@@ -85,10 +84,6 @@ public class PlayAnimationAction extends ChainedAction {
 
 	public void setBackwards(boolean isBackwards) {
 		this.isBackwards = isBackwards;
-	}
-
-	public void setDelay(int delay) {
-		this.delay = delay;
 	}
 
 	public void setHoldLastFrame(boolean holdLastFrame) {

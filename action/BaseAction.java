@@ -143,15 +143,6 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public ChainedAction playAnimation(String  animationCode, int delay) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode, isLinear);
-
-		a.setDelay(delay);
-		return a;
-
-	}
 
 	// simple backwards
 	public ChainedAction playAnimationBackwards(String  animationCode) {
@@ -163,15 +154,6 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public ChainedAction playAnimationBackwards(String  animationCode, int delay) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode, isLinear);
-
-		a.setBackwards(true);
-		a.setDelay(delay);
-		return a;
-	}
 
 	// simple hold last frame
 	public ChainedAction playAnimationHoldLastFrame(String  animationCode) {
@@ -183,15 +165,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public ChainedAction playAnimationHoldLastFrame(String  animationCode, int delay) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode, isLinear);
 
-		a.setHoldLastFrame(true);
-		a.setDelay(delay);
-		return a;
-	}
 
 	// simple non blocking
 	public ChainedAction playAnimationNonBlocking(String  animationCode) {
@@ -203,15 +177,6 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public ChainedAction playAnimationNonBlocking(String  animationCode, int delay) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode, isLinear);
-
-		a.setNonBlocking(true);
-		a.setDelay(delay);
-		return a;
-	}
 
 	// double combo1of3: backwards + hold last frame
 	public ChainedAction playAnimationBackwardsHoldLastFrame(String  animationCode) {
@@ -224,16 +189,6 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public ChainedAction playAnimationBackwardsHoldLastFrame(String  animationCode, int delay) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode, isLinear);
-
-		a.setBackwards(true);
-		a.setHoldLastFrame(true);
-		a.setDelay(delay);
-		return a;
-	}
 
 	// double combo2of3: backwards + nonblocking
 	public ChainedAction playAnimationBackwardsNonBlocking(String  animationCode) {
@@ -246,16 +201,6 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public ChainedAction playAnimationBackwardsNonBlocking(String  animationCode, int delay) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode, isLinear);
-
-		a.setBackwards(true);
-		a.setNonBlocking(true);
-		a.setDelay(delay);
-		return a;
-	}
 
 	// double combo2of3: holdLastFrame + nonblocking
 	public ChainedAction playAnimationHoldLastFrameNonBlocking(String  animationCode) {
@@ -268,17 +213,6 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public ChainedAction playAnimationHoldLastFrameNonBlocking(String  animationCode, int delay) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode, isLinear);
-
-		a.setHoldLastFrame(true);
-		a.setNonBlocking(true);
-		a.setDelay(delay);
-		return a;
-	}
-
 	// ..and one method with the whole lot!
 	public ChainedAction playAnimationBackwardsHoldLastFrameNonBlocking(String  animationCode) {
 		boolean isLinear = true;
@@ -288,18 +222,6 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		a.setBackwards(true);
 		a.setHoldLastFrame(true);
 		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction playAnimationBackwardsHoldLastFrameNonBlocking(String  animationCode, int delay) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(
-				this, animationCode, isLinear);
-
-		a.setBackwards(true);
-		a.setHoldLastFrame(true);
-		a.setNonBlocking(true);
-		a.setDelay(delay);
 		return a;
 	}
 
