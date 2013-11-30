@@ -19,6 +19,6 @@ public interface TimerAPI {
 
 	void cancel();
 
-	void scheduleRepeating(int i);
+	void scheduleRepeating(int milliseconds);
 
 }

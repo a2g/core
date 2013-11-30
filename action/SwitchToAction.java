@@ -45,7 +45,7 @@ public class SwitchToAction extends BaseDialogTreeAction {
 	@Override
 	protected void onCompleteGameAction() {
 
-		getApi().switchToScene(this.scene);
+		getApi().switchToSceneFromAction(this.scene);
 
 	}
 

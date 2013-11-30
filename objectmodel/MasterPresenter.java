@@ -98,6 +98,7 @@ implements InternalAPI
 	private MasterPresenterHostAPI parent;
 	private PopupPanelAPI speechPopup;
 	private TimerAPI timer;
+	private TimerAPI switchTimer;
 	private MasterPanelAPI masterPanel;
 	private ActionRunner dialogActionRunner;
 	private ActionRunner doCommandActionRunner;
@@ -111,11 +112,13 @@ implements InternalAPI
 	private String lastSceneAsString;
 	private String defaultSayAnimation;
 	private short defaultWalker;
+	private String switchDestination;
 
 	public MasterPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent)
 	{
 		this.bus = bus;
 		this.timer = null;
+		this.switchTimer = null;
 		this.parent = parent;
 		this.textSpeedDelay = 20;
 
@@ -357,7 +360,7 @@ implements InternalAPI
 	}
 
 	@Override
-	public void doEveryFrame() {
+	public void onTimer() {
 		int size = this.theObjectMap.size();
 		if(size==0)
 		{
@@ -366,6 +369,13 @@ implements InternalAPI
 		if(timer!=null)
 		{
 			this.callbacks.onEveryFrame(this);
+		}
+		if(switchTimer!=null)
+		{
+			switchTimer.cancel();
+			switchTimer = null;
+			this.parent.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(switchDestination);
+			switchDestination = "";
 		}
 	}
 
@@ -420,18 +430,35 @@ implements InternalAPI
 		return property != 0;
 	}
 
+
+	@Override
+	public void switchToSceneFromAction(String scene)
+	{
+		cancelOnEveryFrameTimer();
+		this.dialogActionRunner.cancel();
+		
+		//now wait for last on every frame to execute
+		//.. which is about 40 milliseconds
+		//(an on every frame can go more than
+		// this, but usually not).
+		switchTimer = getFactory().createSystemTimer(this);
+		switchDestination = scene;
+		switchTimer.scheduleRepeating(40);
+	}
+
+	
 	@Override
 	public void switchToScene(String scene)
 	{
 		// since instantiateScene..ToIt does some asynchronous stuff,
 		// I thought maybe I could do it, then cancel the timers.
 		// but I've put it off til I need the microseconds.
-		cancelTimer();
+		cancelOnEveryFrameTimer();
 		this.dialogActionRunner.cancel();
-
-		this.parent.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(	scene);
+		this.parent.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
 	}
 
+	
 	@Override
 	public String getLastScene() {
 
@@ -449,7 +476,7 @@ implements InternalAPI
 		timer.scheduleRepeating(40);
 	}
 
-	public void cancelTimer()
+	public void cancelOnEveryFrameTimer()
 	{
 		if(this.timer!=null)
 		{

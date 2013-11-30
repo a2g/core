@@ -33,7 +33,7 @@ implements TimerAPI
 
 	@Override
 	public void run() {
-		callback.doEveryFrame();
+		callback.onTimer();
 	}
 }
 

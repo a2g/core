@@ -70,6 +70,7 @@ extends ImageAddAPI, OnDoCommandAPI{
 	// helpful for game
 	@Override
 	public void switchToScene(String scene);
+	public void switchToSceneFromAction(String scene);
 	@Override
 	public String getLastScene();
 	@Override
