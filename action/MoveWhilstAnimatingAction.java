@@ -37,18 +37,23 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 	private Animation anim; // set in runGameAction
 	private int framesInAnim;// set in runGameAction
 	private int framesPlayedDuringWalk;// set in runGameAction
-
+	private boolean isBackwards;
+	private boolean holdLastFrame;
+	
 	public MoveWhilstAnimatingAction(BaseAction parent, short objId, double endX, double endY, boolean isLinear)
 	{
 		super(parent, parent.getApi(), isLinear);
 		this.obj = getApi().getObject(objId);
 		this.animatingDelay = 0;
 		this.movingDelay = 0;
-		this.isParallel = false;
+		
 		this.endX = endX;// - getApi().getSceneGui().getCameraX();
 		this.endY = endY;// - getApi().getSceneGui().getCameraY();
 		this.startX = 0.0;
 		this.startY = 0.0;
+		this.isParallel = false;
+		this.isBackwards = false;
+		this.holdLastFrame = false;
 	}
 
 	SceneObject getObject(){return this.obj;}
@@ -108,21 +113,36 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 
 		this.obj.setBaseMiddleX(x);
 		this.obj.setBaseMiddleY(y);
-		int framesPlayedSoFar = (int) (this.framesPlayedDuringWalk
-				* progress);
+		double framesPlayedSoFar = isBackwards
+				? (1 - progress) * framesPlayedDuringWalk
+						: progress * framesPlayedDuringWalk;
+	
 		int i = (this.framesInAnim != 0)
-				? framesPlayedSoFar
+				? (int)framesPlayedSoFar
 						% this.framesInAnim
 						: 0;
-		this.obj.setCurrentFrame(i);
+
+		if (obj != null) {
+			obj.setCurrentFrame(i);
+			obj.setCurrentAnimation(anim.getTextualId());
+			obj.setCurrentFrame(i);
+		}
 	}
 
 	@Override // method in animation
 	protected void onCompleteGameAction()
 	{
-		this.obj.setCurrentFrame(0);
 		this.obj.setBaseMiddleX(endX);
 		this.obj.setBaseMiddleY(endY);
+		
+		onUpdateGameAction(1.0);
+		if (!this.holdLastFrame) {
+			if (this.obj != null)
+			{
+				String s = obj.getInitialAnimation();
+				obj.setCurrentAnimation(s);
+			}
+		}
 	}
 
 	@Override
@@ -130,5 +150,6 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 
 		return isParallel;
 	}
+
 
 }
