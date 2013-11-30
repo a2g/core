@@ -360,22 +360,7 @@ public class SceneObject {
 		return this.mapOfSpecialAnimations.get(
 				type);
 	}
-	public void setTalkingAnimation(String talkingAnimation)
-	{
-		this.mapOfSpecialAnimations.put(Special.Talking, talkingAnimation);
-	}
-
-	public String getTalkingAnimation() {
-		if (this.mapOfSpecialAnimations.containsKey(
-				Special.Talking)) {
-			String animId = this.mapOfSpecialAnimations.get(
-					Special.Talking);
-
-			return animId;
-		}
-		return "";
-	}
-
+	
 	public String getCurrentAnimation() {
 		String textualId = this.fak.getCurrentAnimationTextualId();
 

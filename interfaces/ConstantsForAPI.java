@@ -51,6 +51,6 @@ public interface ConstantsForAPI {
 	public static final int EAT = 11
 			* VERB_MULTIPLIER;
 	public static enum Special {
-		North, East, South, West, Talking
+		North, East, South, West
 	}
 }
