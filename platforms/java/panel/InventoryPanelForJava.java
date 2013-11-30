@@ -184,6 +184,8 @@ implements ImagePanelAPI
 	public void paint(Graphics g)
 	{
 		g.clearRect(0, 0, width, height);
+		g.setColor(new Color(0,0,0));
+		g.fillRect(0, 0, width, height);
 		Iterator<Image> iter = listOfAllVisibleImages.iterator();
 		while(iter.hasNext())
 		{
