@@ -374,38 +374,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 
-	public ChainedAction walkToNonBlocking(double x, double y) {
-		boolean isLinear = true;
-		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(), x, y,0, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction walkToNonBlocking( PointF point) {
-		boolean isLinear = true;
-		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(),
-				point.getX(), point.getY(), 0, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction walkToNonBlocking( double x, double y, int delay) {
-		boolean isLinear = true;
-		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(), x,
-				y, delay, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction walkToNonBlocking(PointF point, int delay) {
-		boolean isLinear = true;
-		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(),
-				point.getX(), point.getY(), delay, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
 
 
+	
 
 	public ChainedAction walkTo(short objectCode, double x, double y) {
 		boolean isLinear = true;
@@ -427,39 +398,6 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		boolean isLinear = true;
 		return new WalkToAction(this, objectCode, point.getX(), point.getY(), delay, isLinear);
 	}
-
-
-	public ChainedAction walkToNonBlocking(short objectCode, double x, double y) {
-		boolean isLinear = true;
-		WalkToAction a = new WalkToAction(this, objectCode, x, y,0, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction walkToNonBlocking(short objectCode, PointF point) {
-		boolean isLinear = true;
-		WalkToAction a = new WalkToAction(this, objectCode,
-				point.getX(), point.getY(),0, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction walkToNonBlocking(short objectCode, double x, double y, int delay) {
-		boolean isLinear = true;
-		WalkToAction a = new WalkToAction(this, objectCode, x,
-				y, delay, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction walkToNonBlocking(short objectCode, PointF point, int delay) {
-		boolean isLinear = true;
-		WalkToAction a = new WalkToAction(this, objectCode,
-				point.getX(), point.getY(), delay, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
 
 
 	public ChainedAction walkAndScroll( double x, double y, int delay) {
