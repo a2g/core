@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.SceneObject;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.action.ChainedAction;
 
 
@@ -32,6 +33,7 @@ public class SayAction extends ChainedAction {
 	private Animation anim;
 	private SceneObject object;
 	private int numberOfFramesTotal;
+	private static final ColorEnum defaultTalkingColor = ColorEnum.Purple; 
 
 	public SayAction(BaseAction parent, String animation, String fullSpeech) {
 		super(parent, parent.getApi(), true);
@@ -116,7 +118,12 @@ public class SayAction extends ChainedAction {
 		}
 
 		boolean visible = true;
-		getApi().setStateOfPopup( visible, .1,.1, object.getTalkingColor(), speech.get(0),this);
+		ColorEnum color = defaultTalkingColor;
+		if(object!=null)
+		{
+			color = object.getTalkingColor(); 
+		}
+		getApi().setStateOfPopup( visible, .1,.1, color, speech.get(0),this);
 
 		this.run((int) totalDurationInSeconds);
 	}
