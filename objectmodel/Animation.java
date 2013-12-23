@@ -22,7 +22,7 @@ import com.github.a2g.core.interfaces.SceneAPI;
 
 
 public class Animation {
-	private int delay;
+	private double durationInSeconds;
 	private String textualId;
 	private ImageCollection framesCollection;
 	private SceneObject parent;
@@ -32,7 +32,7 @@ public class Animation {
 
 
 	public Animation(String textualId, SceneObject owningSceneObject) {
-		this.delay = 0;
+		this.durationInSeconds = 0;
 		this.parent = owningSceneObject;
 		this.textualId = textualId;
 		framesCollection = new com.github.a2g.core.objectmodel.ImageCollection();
@@ -167,12 +167,12 @@ public class Animation {
 
 	}
 
-	public void setDelay(int delay) {
-		this.delay = delay;
+	public void setDurationSecs(double seconds) {
+		this.durationInSeconds = seconds;
 	}
 
-	public int getDelay() {
-		return delay;
+	public double getDurationSecs() {
+		return durationInSeconds;
 	}
 
 

@@ -42,8 +42,7 @@ public class PlayAnimationAction extends ChainedAction
 
 	@Override
 	public void runGameAction() {
-		int duration = (this.anim.getLength()+ 1)
-				* (40 + anim.getDelay());
+		int duration = (int)(anim.getDurationSecs()*1000);
 
 		if (animsParent != null) {
 			animsParent.setVisible(true);

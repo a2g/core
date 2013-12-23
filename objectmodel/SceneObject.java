@@ -43,6 +43,7 @@ public class SceneObject {
 	private int numberPrefix;
 	private short code;
 	private ColorEnum talkingColor;
+	private double screenCoordsPerSecond;
 
 	public SceneObject(String textualId, int screenWidth, int screenHeight) {
 		this.currentImage = null;
@@ -63,6 +64,8 @@ public class SceneObject {
 		this.talkingColor = null;
 		this.setBaseMiddleX(0);
 		this.setBaseMiddleY(0);
+		
+		this.screenCoordsPerSecond = 1.0;
 	}
 
 	public void setNumberPrefix(int number) {
@@ -434,6 +437,16 @@ public class SceneObject {
 		setBaseMiddleX(h.getX());
 		setBaseMiddleY(h.getY());
 
+	}
+	
+	public double getScreenCoordsPerSecond()
+	{
+		return screenCoordsPerSecond;
+	}
+	
+	public void setScreenCoordsPerSecond(double coordsPerSecond)
+	{
+		this.screenCoordsPerSecond = coordsPerSecond;
 	}
 
 }

@@ -62,12 +62,11 @@ public class SayAction extends ChainedAction {
 		//InternalAPI api = getApi();
 	}
 
-	int getAdjustedNumberOfFrames(String speech, double approxDuration, int animFramesCount, int talkingAnimationDelay)
+	int getAdjustedNumberOfFrames(String speech, double approxDuration, int animFramesCount, double duration)
 	{
 		// but if we need an animation, we find out how long it takes
 		// to play a single play of the animation to play whilst talking.
-		int durationOfSingleAnimation = animFramesCount
-				* (40+ 40*talkingAnimationDelay);
+		int durationOfSingleAnimation = (int)(duration * 1000.0);
 
 		// ... then we find how many times the animation should repeat
 		// so that it fills up the totalDuration.
@@ -102,7 +101,7 @@ public class SayAction extends ChainedAction {
 					speech.get(0),
 					totalDurationInSeconds,
 					anim.getFrames().getCount(),
-					anim.getDelay()
+					anim.getDurationSecs()
 					);
 		}
 		

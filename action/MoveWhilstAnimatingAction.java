@@ -31,7 +31,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 	private double startX;// set via setters
 	private double startY;// set via setters
 	private int animatingDelay;// set via setters
-	private int movingDelay;// set via setters
+	private double screenCoordsPerSecond;// set via setters
 	private boolean isParallel;// set via setters
 
 	private Animation anim; // set in runGameAction
@@ -45,7 +45,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 		super(parent, parent.getApi(), isLinear);
 		this.obj = getApi().getObject(objId);
 		this.animatingDelay = 0;
-		this.movingDelay = 0;
+		this.screenCoordsPerSecond = obj.getScreenCoordsPerSecond();
 		
 		this.endX = endX;// - getApi().getSceneGui().getCameraX();
 		this.endY = endY;// - getApi().getSceneGui().getCameraY();
@@ -64,7 +64,6 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 
 	void setNonBlocking(boolean isParallel){ this.isParallel = isParallel;}
 	void setAnimatingDelay(int delay){ this.animatingDelay = delay;}
-	void setMovingDelay(int delay){ this.movingDelay = delay;}
 
 	@Override
 	public void runGameAction()
@@ -90,8 +89,8 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 		} else {
 			this.framesInAnim = 0;
 		}
-		int milliSeconds = (int)(dist * (5+movingDelay) * 1000.0);
-		this.run(milliSeconds);
+		double seconds = dist / screenCoordsPerSecond;
+		this.run((int)(seconds*1000.0));
 
 	}
 
