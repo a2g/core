@@ -32,7 +32,7 @@ public class Animation {
 
 
 	public Animation(String textualId, SceneObject owningSceneObject) {
-		this.durationInSeconds = 0;
+		this.durationInSeconds = 1.0;
 		this.parent = owningSceneObject;
 		this.textualId = textualId;
 		framesCollection = new com.github.a2g.core.objectmodel.ImageCollection();

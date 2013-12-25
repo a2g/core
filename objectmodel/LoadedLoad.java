@@ -56,6 +56,7 @@ public class LoadedLoad
 		}
 
 		animation.getFrameCollection().add(imageAndPos);
+		animation.setDurationSecs(animation.getFrameCollection().getCount()*40);
 	}
 
 	public SceneObjectCollection getSceneObjectCollection() {

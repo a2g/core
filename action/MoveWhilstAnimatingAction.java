@@ -53,9 +53,13 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 		this.startY = 0.0;
 		this.isParallel = false;
 		this.isBackwards = false;
-		this.holdLastFrame = false;
+		this.holdLastFrame = true;
 	}
-
+	
+	public void setHoldLastFrame(boolean holdLastFrame)
+	{
+		this.holdLastFrame = holdLastFrame;
+	}
 	SceneObject getObject(){return this.obj;}
 	double getEndX(){ return endX;}
 	double getEndY(){ return endY;}
@@ -75,7 +79,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 
 		// distance and time calculations
 		double diffX = this.startX - this.endX;
-		System.out.println(" walkto " + startX + " " + endX);
+		System.out.println(" walkto-start " + startX + " " + startY +" to "+endX + " " + endY);
 		double diffY = this.startY - this.endY;
 		double diffXSquared = diffX * diffX;
 		double diffYSquared = diffY * diffY;
@@ -110,19 +114,19 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 				* (this.endY
 						- this.startY);
 
+		System.out.println(" walkto-mid " + x + " " + y );
 		this.obj.setBaseMiddleX(x);
 		this.obj.setBaseMiddleY(y);
 		double framesPlayedSoFar = isBackwards
 				? (1 - progress) * framesPlayedDuringWalk
 						: progress * framesPlayedDuringWalk;
 	
-		int i = (this.framesInAnim != 0)
+		int i = (this.framesInAnim >1)
 				? (int)framesPlayedSoFar
 						% this.framesInAnim
 						: 0;
 
 		if (obj != null) {
-			obj.setCurrentFrame(i);
 			obj.setCurrentAnimation(anim.getTextualId());
 			obj.setCurrentFrame(i);
 		}
@@ -135,7 +139,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 		this.obj.setBaseMiddleY(endY);
 		
 		onUpdateGameAction(1.0);
-		if (!this.holdLastFrame) {
+		if (holdLastFrame==false) {
 			if (this.obj != null)
 			{
 				String s = obj.getInitialAnimation();

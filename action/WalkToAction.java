@@ -27,7 +27,7 @@ extends MoveWhilstAnimatingAction
 	public WalkToAction(BaseAction parent, short objId, double endX, double endY, int delay, boolean isLinear)
 	{
 		super(parent, objId, endX, endY, isLinear);
-
+		this.setHoldLastFrame(false);
 	}
 
 	@Override
