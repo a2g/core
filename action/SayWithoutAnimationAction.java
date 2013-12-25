@@ -27,10 +27,12 @@ import com.github.a2g.core.action.ChainedAction;
 public class SayWithoutAnimationAction extends ChainedAction {
 	private String speech;
 	private ColorEnum color;
+	private boolean isParallel;
 
 	public SayWithoutAnimationAction(BaseAction parent, short objId, String speech, boolean isLinear) {
 		super(parent, parent.getApi(), isLinear);
 		this.speech = speech;
+		isParallel = false;
 		SceneObject object = getApi().getObject(objId);
 		color = (object!=null)? object.getTalkingColor() : null;
 	}
@@ -58,7 +60,12 @@ public class SayWithoutAnimationAction extends ChainedAction {
 	@Override
 	public boolean isParallel() {
 
-		return false;
+		return isParallel;
+	}
+
+	public void setNonBlocking(boolean b) {
+		isParallel = b;
+		
 	}
 
 }

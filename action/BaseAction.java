@@ -248,7 +248,13 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return new SayWithoutAnimationAction(
 				this, objectCode, speed, isLinear);
 	}
-
+	public ChainedAction sayWithoutAnimationNonBlocking(short objectCode, String speed) {
+		boolean isLinear = true;
+		SayWithoutAnimationAction s =  new SayWithoutAnimationAction(
+				this, objectCode, speed, isLinear);
+		s.setNonBlocking(true);
+		return s;
+	}
 	public ChainedAction setActiveAnimation(String  animationCode) {
 		return new SetActiveAnimationAction(
 				this, animationCode);
