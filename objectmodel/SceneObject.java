@@ -168,10 +168,9 @@ public class SceneObject {
 			int curFrame = fak.getCurrentFrame();
 			com.github.a2g.core.objectmodel.Image current = anim.getFrameCollection().at(curFrame);
 
-
 			// yes current can equal null in some weird cases where I place breakpoints...
-			if (current != null
-					&& !current.equals(this)) {
+			if (current != null) 
+			{
 				if (this.currentImage != null) {
 					this.currentImage.setVisible(false, getRawLeftTop());
 				}
