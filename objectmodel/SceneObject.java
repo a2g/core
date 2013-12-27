@@ -424,7 +424,7 @@ public class SceneObject {
 		return new PointF(x,y);
 	}
 
-	public void setCurrentAnimationAndSetFrameWithoutBaseMiddleMovement(
+	public void setCurrentAnimationAndSetFrameAndAdjustBaseMiddleToMatch(
 			String textualId,
 			int frame)
 	{

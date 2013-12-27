@@ -139,30 +139,30 @@ public class Animation {
 		return specialAnimationThisWasSetTo;
 	}
 
-	public void setAsCurrentAnimationAndSetToFrameWithoutBaseMiddleMovement(
+	public void setAsCurrentAnimationAndSetToFrameAndAdjustBaseMiddleToMatch(
 			int lastFrame)
 	{
 		if (parent != null)
 		{
-			parent.setCurrentAnimationAndSetFrameWithoutBaseMiddleMovement(this.textualId, lastFrame);
+			parent.setCurrentAnimationAndSetFrameAndAdjustBaseMiddleToMatch(this.textualId, lastFrame);
 		}
 	}
 
-	public void setAsCurrentAnimationAndSetToLastFrameWithoutBaseMiddleMovement()
+	public void setAsCurrentAnimationAndSetToLastFrameAndAdjustBaseMiddleToMatch()
 	{
 		if (parent != null)
 		{
 			int lastFrame = this.getLength() - 1;
-			parent.setCurrentAnimationAndSetFrameWithoutBaseMiddleMovement(this.textualId, lastFrame);
+			parent.setCurrentAnimationAndSetFrameAndAdjustBaseMiddleToMatch(this.textualId, lastFrame);
 		}
 	}
 
 
 
-	public void setAsCurrentAnimationAndSetToFirstFrameWithoutBaseMiddleMovement() {
+	public void setAsCurrentAnimationAndSetToFirstFrameAndAdjustBaseMiddleToMatch() {
 		if (parent != null)
 		{
-			parent.setCurrentAnimationAndSetFrameWithoutBaseMiddleMovement(this.textualId,0);
+			parent.setCurrentAnimationAndSetFrameAndAdjustBaseMiddleToMatch(this.textualId,0);
 		}
 
 	}
