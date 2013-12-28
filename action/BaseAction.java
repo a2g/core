@@ -19,7 +19,7 @@ package com.github.a2g.core.action;
 import com.github.a2g.core.action.PlayAnimationAction;
 import com.github.a2g.core.action.PlayAnimationRepeatWhilstVisibleAction;
 import com.github.a2g.core.action.SayAction;
-import com.github.a2g.core.action.SayWithoutAnimationAction;
+import com.github.a2g.core.action.SayWithoutIncrementingFrameAction;
 import com.github.a2g.core.action.SetActiveAnimationAction;
 import com.github.a2g.core.action.SetActiveFrameAction;
 import com.github.a2g.core.action.SetBaseMiddleXAction;
@@ -243,14 +243,14 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		// return toReturn;
 	}
 
-	public ChainedAction sayWithoutAnimation(short objectCode, String speed) {
+	public ChainedAction sayWithoutIncrementingFrame(short objectCode, String speed) {
 		boolean isLinear = true;
-		return new SayWithoutAnimationAction(
+		return new SayWithoutIncrementingFrameAction(
 				this, objectCode, speed, isLinear);
 	}
-	public ChainedAction sayWithoutAnimationNonBlocking(short objectCode, String speed) {
+	public ChainedAction sayWithoutIncrementingFrameNonBlocking(short objectCode, String speed) {
 		boolean isLinear = true;
-		SayWithoutAnimationAction s =  new SayWithoutAnimationAction(
+		SayWithoutIncrementingFrameAction s =  new SayWithoutIncrementingFrameAction(
 				this, objectCode, speed, isLinear);
 		s.setNonBlocking(true);
 		return s;

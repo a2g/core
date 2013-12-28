@@ -24,12 +24,12 @@ import com.github.a2g.core.action.ChainedAction;
 
 
 
-public class SayWithoutAnimationAction extends ChainedAction {
+public class SayWithoutIncrementingFrameAction extends ChainedAction {
 	private String speech;
 	private ColorEnum color;
 	private boolean isParallel;
 
-	public SayWithoutAnimationAction(BaseAction parent, short objId, String speech, boolean isLinear) {
+	public SayWithoutIncrementingFrameAction(BaseAction parent, short objId, String speech, boolean isLinear) {
 		super(parent, parent.getApi(), isLinear);
 		this.speech = speech;
 		isParallel = false;

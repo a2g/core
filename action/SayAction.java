@@ -135,34 +135,34 @@ public class SayAction extends ChainedAction {
 			if (anim != null && object != null) {
 				object.setVisible(true);
 			}
-		}
 
-		// update text bubble
-		for (int i = 0; i < ceilings.size(); i++) {
-			if (progress < ceilings.get(i)) {
-				getApi().setStateOfPopup( true, .1,.1, object.getTalkingColor(), speech.get(i),null);
-				break;
+
+			// update text bubble
+			for (int i = 0; i < ceilings.size(); i++) {
+				if (progress < ceilings.get(i)) {
+					getApi().setStateOfPopup( true, .1,.1, object.getTalkingColor(), speech.get(i),null);
+					break;
+				}
 			}
-		}
 
-		// if theres an associated animation, then use it
-		if (this.anim != null) {
-			int numberOfFramesSoFar = (int) (progress * numberOfFramesTotal);
-			int frame = numberOfFramesSoFar % anim.getFrames().getCount();
+			// if theres an associated animation, then use it
+			if (this.anim != null) {
+				int numberOfFramesSoFar = (int) (progress * numberOfFramesTotal);
+				int frame = numberOfFramesSoFar % anim.getFrames().getCount();
 
-			// all frames of the animation should be shown
-			this.object.setCurrentFrame(frame);
+				// all frames of the animation should be shown
+				this.object.setCurrentFrame(frame);
+			}
 		}
 	}
 
 	@Override
 	protected void onCompleteGameAction() {
-		if (this.anim != null) {
-			this.anim.getObject().setCurrentAnimation(
-					this.anim.getObject().getInitialAnimation());
+		if (this.object != null) {
+			this.object.setCurrentAnimation(object.getInitialAnimation());
 		}
 
-		getApi().setStateOfPopup( false, .1,.1, object.getTalkingColor(), "",null);
+		getApi().setStateOfPopup( false, .1,.1, null, "",null);
 
 	}
 
