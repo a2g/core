@@ -23,8 +23,12 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.PopupPanelAPI;
+import com.github.a2g.core.interfaces.ScenePanelAPI;
+import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.Point;
 
 public class PopupPanelForJava
 implements PopupPanelAPI
@@ -33,9 +37,11 @@ implements PopupPanelAPI
 	private Label labelInPopup;
 	private int sceneWidth;
 	private int sceneHeight;
+	private InternalAPI api;
 
-	public PopupPanelForJava(int sceneWidth, int sceneHeight)
+	public PopupPanelForJava(InternalAPI api, int sceneWidth, int sceneHeight)
 	{
+		this.api = api;
 		// create popup
 		this.sceneWidth = sceneWidth;
 		this.sceneHeight = sceneHeight;
@@ -57,7 +63,12 @@ implements PopupPanelAPI
 	@Override
 	public void setPopupPosition(double x, double y)
 	{
-		popup.setLocation((int)(x*sceneWidth), (int)(y*sceneHeight));
+		//api.getlocationOnScreen
+		ScenePresenter sp = api.getSceneGui();
+		ScenePanelAPI sv = sp.getView();
+		ScenePanelForJava spj = (ScenePanelForJava)sv;
+		Point p = spj.getTopLeft();
+		popup.setLocation(p.getX()+(int)(x*sceneWidth), p.getY()+(int)(y*sceneHeight));
 	}
 	@Override
 	public void setText(String string)

@@ -29,8 +29,10 @@ import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.VerbsPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.Point;
 
 
+@SuppressWarnings("unused")
 public interface InternalAPI
 extends ImageAddAPI, OnDoCommandAPI{
 	// get by ID

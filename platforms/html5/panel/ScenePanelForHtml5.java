@@ -63,6 +63,7 @@ implements ImagePanelAPI, ScenePanelAPI
 	private InternalAPI api;
 	private Canvas canvas;
 	private Canvas backBuffer;
+	@SuppressWarnings("unused")
 	private final CssColor redrawColor = CssColor.make("rgba(255,0,0,0.6)");
 	private Context2d context;
 	private Context2d backBufferContext;

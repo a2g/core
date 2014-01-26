@@ -28,6 +28,7 @@ import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.action.SayAction;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 
 import com.github.a2g.core.event.PropertyChangeEvent;
@@ -62,6 +63,7 @@ import com.github.a2g.core.interfaces.TimerCallbackAPI;
 import com.github.a2g.core.interfaces.VerbsPresenterCallbackAPI;
 import com.google.gwt.event.shared.EventBus;
 
+@SuppressWarnings("unused")
 public class MasterPresenter
 implements InternalAPI
 , SaySpeechCallDialogTreeEventHandlerAPI
@@ -160,7 +162,7 @@ implements InternalAPI
 				masterPanel.getHostForLoading(), bus, this, this, parent);
 		this.titleCardPresenter =  new TitleCardPresenter(
 				masterPanel.getHostForTitleCard(), bus, this, parent);
-		this.speechPopup = getFactory().createPopupPanel(scenePresenter.getWidth(), scenePresenter.getHeight());
+		this.speechPopup = getFactory().createPopupPanel(this,scenePresenter.getWidth(), scenePresenter.getHeight());
 
 		this.masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.Loading);
 	}
@@ -974,7 +976,7 @@ implements InternalAPI
 
 		if(speechPopup==null)
 		{
-			this.speechPopup = getFactory().createPopupPanel(scenePresenter.getWidth(), scenePresenter.getHeight());
+			this.speechPopup = getFactory().createPopupPanel(this, scenePresenter.getWidth(), scenePresenter.getHeight());
 		}
 
 		speechPopup.setColor(talkingColor);
@@ -996,6 +998,5 @@ implements InternalAPI
 	{
 		this.loadingPresenter.enableClickToContinue();
 	}
-
 }
 

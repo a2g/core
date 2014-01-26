@@ -9,11 +9,12 @@ public interface FactoryAPI {
 	ScenePanelAPI createScenePanel();
 	TitleCardPanelAPI createTitleCardPanel(ColorEnum fore, ColorEnum back);
 	VerbsPanelAPI createVerbsPanel(MouseToVerbsPresenterAPI api, ColorEnum fore, ColorEnum back);
-	PopupPanelAPI createPopupPanel(int sceneWidth, int sceneHeight);
 	SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI cbs, boolean isLinear);
 	TimerAPI createSystemTimer(TimerCallbackAPI cbs);
 	MasterPanelAPI createMasterPanel(int width, int height, ColorEnum color);
 	DialogTreePanelAPI createDialogTreePanel(EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum rollover);
 	LoaderPanelAPI createLoaderPanel(MouseToLoaderPresenterAPI api,
 			ColorEnum fore, ColorEnum back);
+	PopupPanelAPI createPopupPanel(InternalAPI api, int sceneWidth,
+			int sceneHeight);
 }

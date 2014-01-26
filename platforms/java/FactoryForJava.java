@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import com.github.a2g.core.interfaces.CommandLinePanelAPI;
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.InventoryPanelAPI;
 import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
 import com.github.a2g.core.interfaces.LoaderPanelAPI;
@@ -100,9 +101,9 @@ implements FactoryAPI
 
 
 	@Override
-	public PopupPanelAPI createPopupPanel(int sceneWidth, int sceneHeight)
+	public PopupPanelAPI createPopupPanel(InternalAPI api, int sceneWidth, int sceneHeight)
 	{
-		return new PopupPanelForJava(sceneWidth, sceneHeight);
+		return new PopupPanelForJava(api, sceneWidth, sceneHeight);
 	}
 
 

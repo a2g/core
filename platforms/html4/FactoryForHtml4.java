@@ -19,6 +19,7 @@ package com.github.a2g.core.platforms.html4;
 import com.github.a2g.core.interfaces.CommandLinePanelAPI;
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
+import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.InventoryPanelAPI;
 import com.github.a2g.core.interfaces.LoaderPanelAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI;
@@ -105,7 +106,7 @@ implements FactoryAPI
 
 
 	@Override
-	public PopupPanelAPI createPopupPanel(int sceneWidth, int sceneHeight)
+	public PopupPanelAPI createPopupPanel(InternalAPI api, int sceneWidth, int sceneHeight)
 	{
 		return new PopupPanel( sceneWidth,  sceneHeight);
 	}
