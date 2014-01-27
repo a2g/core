@@ -45,6 +45,7 @@ import com.github.a2g.core.interfaces.SystemAnimationAPI;
 import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.PointF;
+import com.visuals.bird._00_animations.a;
 
 
 
@@ -535,6 +536,24 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	public ChainedAction setToInitialPosition(short object) 
 	{
 		SetToInitialPositionAction h = new SetToInitialPositionAction(this, object);
+		return h;
+	}
+	
+	public ChainedAction setCurrentAnimationAndSetToFrameAndAdjustBaseMiddleToMatch(String anim, int frame)
+	{
+		AndAdjustBaseMiddleToMatchAction h = new AndAdjustBaseMiddleToMatchAction(this, anim, frame);
+		return h;
+	}
+	
+	public ChainedAction setCurrentAnimationAndSetToStartAndAdjustBaseMiddleToMatch(String anim)
+	{
+		AndAdjustBaseMiddleToMatchAction h = new AndAdjustBaseMiddleToMatchAction(this, anim,0);
+		return h;
+	}
+	
+	public ChainedAction setCurrentAnimationAndSetToEndAndAdjustBaseMiddleToMatch(String anim)
+	{
+		AndAdjustBaseMiddleToMatchAction h = new AndAdjustBaseMiddleToMatchAction(this, anim,-1);
 		return h;
 	}
 }

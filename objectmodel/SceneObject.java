@@ -159,11 +159,20 @@ public class SceneObject {
 		}
 
 		if (anim != null) {
-			if (fak.getCurrentFrame()
-					>= anim.getLength()) {
-				fak.setCurrentFrame(
-						anim.getLength() - 1);
+			
+			// if we use -1 to indicate last frame ( 
+			if(fak.getCurrentFrame()==-1)
+			{
+				// set it to last frame
+				fak.setCurrentFrame(anim.getLength() - 1);
 			}
+			// if the frame overflows...
+			else if (fak.getCurrentFrame()>= anim.getLength()) 
+			{
+				// ...set it to last frame
+				fak.setCurrentFrame(anim.getLength() - 1);
+			}
+			
 
 			int curFrame = fak.getCurrentFrame();
 			com.github.a2g.core.objectmodel.Image current = anim.getFrameCollection().at(curFrame);
@@ -430,8 +439,10 @@ public class SceneObject {
 	{
 		PointF h = getBaseMiddleXY();
 		this.fak.setCurrentAnimationTextualId(textualId);
+		
 		this.fak.setCurrentFrame(frame);
 		this.updateToCorrectImage();
+		
 		// then change position
 		setBaseMiddleX(h.getX());
 		setBaseMiddleY(h.getY());
