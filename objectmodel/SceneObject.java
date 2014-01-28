@@ -433,7 +433,7 @@ public class SceneObject {
 		return new PointF(x,y);
 	}
 
-	public void setCurrentAnimationAndSetFrameAndAdjustBaseMiddleToMatch(
+	public void alignBaseMiddleOfOldFrameToFrameOfNewAnimation(
 			String textualId,
 			int frame)
 	{

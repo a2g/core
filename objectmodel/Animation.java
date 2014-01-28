@@ -139,11 +139,11 @@ public class Animation {
 		return specialAnimationThisWasSetTo;
 	}
 
-	public void setAsCurrentAnimationAndSetFrameAndAdjustBaseMiddleToMatch(int frame)
+	public void alignBaseMiddleOfOldFrameToFrameOfThisAnimation(int frame)
 	{
 		if (parent != null)
 		{
-			parent.setCurrentAnimationAndSetFrameAndAdjustBaseMiddleToMatch(this.textualId, frame);
+			parent.alignBaseMiddleOfOldFrameToFrameOfNewAnimation(this.textualId, frame);
 		}
 	}
 

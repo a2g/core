@@ -45,7 +45,7 @@ public class PlayAnimationAction extends ChainedAction
 		int duration = (int)(anim.getDurationSecs()*1000);
 
 		if (animsParent != null) {
-			animsParent.setVisible(true);
+			//animsParent.setVisible(true);
 		}
 		this.run(duration);
 	}

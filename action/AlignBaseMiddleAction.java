@@ -22,10 +22,10 @@ import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.action.ChainedAction;
 
 
-public class AndAdjustBaseMiddleToMatchAction extends ChainedAction {
+public class AlignBaseMiddleAction extends ChainedAction {
 	private String animId;
 	private int frame;
-	public AndAdjustBaseMiddleToMatchAction(BaseAction parent, String animationCode, int frame) {
+	public AlignBaseMiddleAction(BaseAction parent, String animationCode, int frame) {
 		super(parent, parent.getApi(), true);
 		this.animId = animationCode;
 		this.frame = frame;
@@ -45,7 +45,7 @@ public class AndAdjustBaseMiddleToMatchAction extends ChainedAction {
 				this.animId);
 
 		if (a != null) {
-			a.setAsCurrentAnimationAndSetFrameAndAdjustBaseMiddleToMatch(frame);
+			a.alignBaseMiddleOfOldFrameToFrameOfThisAnimation(frame);
 		}
 	}
 

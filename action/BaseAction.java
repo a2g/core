@@ -45,7 +45,6 @@ import com.github.a2g.core.interfaces.SystemAnimationAPI;
 import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.PointF;
-import com.visuals.bird._00_animations.a;
 
 
 
@@ -539,21 +538,21 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return h;
 	}
 	
-	public ChainedAction setCurrentAnimationAndSetToFrameAndAdjustBaseMiddleToMatch(String anim, int frame)
+	public ChainedAction alignBaseMiddleOfOldFrameToFrameOfNewAnimation(String anim, int frame)
 	{
-		AndAdjustBaseMiddleToMatchAction h = new AndAdjustBaseMiddleToMatchAction(this, anim, frame);
+		AlignBaseMiddleAction h = new AlignBaseMiddleAction(this, anim, frame);
 		return h;
 	}
 	
-	public ChainedAction setCurrentAnimationAndSetToStartAndAdjustBaseMiddleToMatch(String anim)
+	public ChainedAction alignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation(String anim)
 	{
-		AndAdjustBaseMiddleToMatchAction h = new AndAdjustBaseMiddleToMatchAction(this, anim,0);
+		AlignBaseMiddleAction h = new AlignBaseMiddleAction(this, anim,0);
 		return h;
 	}
 	
-	public ChainedAction setCurrentAnimationAndSetToEndAndAdjustBaseMiddleToMatch(String anim)
+	public ChainedAction alignBaseMiddleOfOldFrameToLastFrameOfNewAnimation(String anim)
 	{
-		AndAdjustBaseMiddleToMatchAction h = new AndAdjustBaseMiddleToMatchAction(this, anim,-1);
+		AlignBaseMiddleAction h = new AlignBaseMiddleAction(this, anim,-1);
 		return h;
 	}
 }
