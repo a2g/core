@@ -75,7 +75,7 @@ public class SayAction extends ChainedAction {
 
 		// ... and the number of frames that occurs during that
 		// many plays of the animation.
-		int numberOfFramesTotal = (int) (numberOfTimesAnimRepeats * animFramesCount* 40);
+		int numberOfFramesTotal = (int) (numberOfTimesAnimRepeats * animFramesCount);
 		// The effect of this is that there is a little bit of 'over-play'
 		// where the amount of time it takes to 'say' something
 		// when there is a talking animation, is usually a
