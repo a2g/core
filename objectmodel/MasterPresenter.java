@@ -376,6 +376,7 @@ implements InternalAPI
 		{
 			switchTimer.cancel();
 			switchTimer = null;
+			setCameraToZero();// no scene is meant to keep camera position
 			this.parent.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(switchDestination);
 			switchDestination = "";
 		}
@@ -587,7 +588,11 @@ implements InternalAPI
 		return masterPanel;
 	}
 
-
+	void setCameraToZero()
+	{
+		scenePresenter.setCameraX(0);
+		scenePresenter.setCameraY(0);
+	}
 
 
 	@Override
@@ -596,6 +601,8 @@ implements InternalAPI
 		masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.Loading);
 		loadInventoryFromAPI();
 		setInitialAnimationsAsCurrent();
+	
+		
 		//setAllObjectsToVisible();
 		// it is reasonable for a person to set current animations in pre-entry
 		// and expect them to stay current, so we set cuurentAnimations before pre-entry.
