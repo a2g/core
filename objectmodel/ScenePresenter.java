@@ -26,7 +26,6 @@ import com.github.a2g.core.primitive.Point;
 public class ScenePresenter {
 	private int width;
 	private int height;
-	//private EventBus eventBus;
 	private Scene scene;
 	private ScenePanelAPI view;
 	private double cameraX;

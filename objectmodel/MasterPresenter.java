@@ -458,6 +458,7 @@ implements InternalAPI
 		// but I've put it off til I need the microseconds.
 		cancelOnEveryFrameTimer();
 		this.dialogActionRunner.cancel();
+		setCameraToZero();// no scene is meant to keep camera position
 		this.parent.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
 	}
 
