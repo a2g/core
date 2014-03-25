@@ -730,7 +730,7 @@ implements InternalAPI
 					parent.alert(
 							"Missing initial image for "
 									+ objTextualId
-									+ " ");
+									+ "\n At the least it will need an image in a placeholder folder, so it shows up in list of objects.");
 					return;
 				}
 
