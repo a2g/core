@@ -59,13 +59,14 @@ implements MouseToVerbsPresenterAPI
 		return view;
 	}
 
-	/*
-	@Override
+	
+	
 	public void update()
 	{
+		view.setVerbs(theVerbs);
 		view.update();
 	}
-	 */
+	 
 
 	public void setWidthOfScene(int width) {
 		this.widthOfScene = width;

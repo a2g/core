@@ -52,6 +52,8 @@ VerbsPanelAPI
 		for (int i = 0; i < (rows * columns); i++)
 		{
 			int row = i / columns;
+			if(i>=verbs.items().size())
+				continue;
 			int column = i % columns;
 
 			Verb verb = verbs.items().get(i);

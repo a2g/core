@@ -25,8 +25,7 @@ import com.github.a2g.core.interfaces.ConstantsForAPI;
 
 public class VerbCollection {
 	private List<Verb> verbs;
-	//VerbCollectionCallbackAPI api;
-	VerbCollection(/*VerbCollectionCallbackAPI api*/)
+	VerbCollection()
 	{
 		//this.api = api;
 		verbs = new ArrayList<Verb>();
@@ -36,7 +35,7 @@ public class VerbCollection {
 		verbs.add(new Verb("Examine", "Examine AAA", ConstantsForAPI.EXAMINE));
 		verbs.add(new Verb("Grab", "Grab AAA", ConstantsForAPI.GRAB));
 		verbs.add(new Verb("Cut", "Cut AAA|Cut AAA with BBB", ConstantsForAPI.CUT));
-		verbs.add(new Verb("Swing", "Swing AAA", ConstantsForAPI.SWING));
+		verbs.add(new Verb("Swing", "Swing on AAA", ConstantsForAPI.SWING));
 		verbs.add(new Verb("Turn on","Turn on AAA", ConstantsForAPI.TURN_ON));
 		verbs.add(new Verb("Use","Use AAA|Use AAA with BBB", ConstantsForAPI.USE));
 		verbs.add(new Verb("Push", "Push AAA", ConstantsForAPI.PUSH));
