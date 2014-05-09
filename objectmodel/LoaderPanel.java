@@ -23,6 +23,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -36,6 +38,10 @@ implements LoaderPanelAPI
 	Button reload;
 	Button clickToContinue;
 	MouseToLoaderPresenterAPI api;
+	private Grid containerGrid;
+	private final int TOTAL_NUMBER_OF_CELLS = 36;
+	private int lastNumberOfCellsFilled;
+
 
 	public LoaderPanel(final MouseToLoaderPresenterAPI api, ColorEnum fore, ColorEnum back) {
 		this.api = api;
@@ -59,8 +65,29 @@ implements LoaderPanelAPI
 			clickToContinue.setEnabled(false);
 			layout.add(clickToContinue);
 		}
+		{
+			// Initialize the progress elements
+			containerGrid = new Grid(1, TOTAL_NUMBER_OF_CELLS);
+			DOM.setStyleAttribute(containerGrid.getElement(), "margin","0px");
+			DOM.setStyleAttribute(containerGrid.getElement(), "border","0px solid white");
+			containerGrid.setCellPadding(0);
+			containerGrid.setCellSpacing(0);
+
+			for (int i = 0; i < TOTAL_NUMBER_OF_CELLS; i++) {
+				Grid grid = new Grid(1, 1);
+				grid.setHTML(0, 0, "");
+				DOM.setStyleAttribute(grid.getElement(), "width","5px");
+				DOM.setStyleAttribute(grid.getElement(), "height","15px");
+				DOM.setStyleAttribute(grid.getElement(), "margin","1px");
+				DOM.setStyleAttribute(grid.getElement(), "background","#eee");
+				containerGrid.setWidget(0, i, grid);
+			}
+
+			layout.add(containerGrid);
+		}
 		addHandler(api);
 		this.add(layout);
+
 	}
 
 
@@ -93,6 +120,47 @@ implements LoaderPanelAPI
 		reload.setEnabled(true);
 		clickToContinue.setEnabled(false);
 		progress.setText(" "+current+"/"+total+ " " + name);
+
+		double percentage = current*100.0/total;
+		{
+			// Make sure we are error-tolerant
+			if (percentage > 100) percentage = 100;
+			if (percentage < 0) percentage = 0;
+
+			// Set the internal variable
+			int progress = (int)percentage;
+
+			// Update the elements in the progress grid to
+			// reflect the status
+			int numberOfCellsFilled = (current==1)? 1 : (TOTAL_NUMBER_OF_CELLS-1) * progress / 100 + 1;
+
+			if(numberOfCellsFilled != lastNumberOfCellsFilled)
+			{
+				if(numberOfCellsFilled<lastNumberOfCellsFilled)
+				{
+					for(int i=numberOfCellsFilled;i<lastNumberOfCellsFilled;i++)
+					{
+						Grid grid = (Grid) containerGrid.getWidget(0, i);
+						if(grid!=null)
+						{
+							DOM.setStyleAttribute(grid.getElement(), "background","#eee");
+						}
+					}
+				}
+				else	
+				{
+					for(int i=lastNumberOfCellsFilled;i<numberOfCellsFilled;i++)
+					{
+						Grid grid = (Grid) containerGrid.getWidget(0, i);
+						if(grid!=null)
+						{
+							DOM.setStyleAttribute(grid.getElement(), "background","blue");
+						}
+					}
+				}
+				lastNumberOfCellsFilled = numberOfCellsFilled;
+			}
+		}
 	}
 
 	@Override
