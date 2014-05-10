@@ -23,7 +23,7 @@ import com.github.a2g.core.interfaces.ActionRunnerCallbackAPI;
 
 public class ActionRunner implements ActionCallbackAPI
 {
-	protected ArrayList<BaseAction> list;
+	protected ArrayList<ArrayList<BaseAction>>  list;
 	private ArrayList<BaseAction> parallelActionsToWaitFor;
 	private int numberOfParallelActionsToWaitFor;
 	private ActionRunnerCallbackAPI api;
@@ -33,25 +33,64 @@ public class ActionRunner implements ActionCallbackAPI
 	{
 		this.id = id;
 		this.api=api;
-		list = new ArrayList<BaseAction>();
+		list = new ArrayList<ArrayList<BaseAction>>();
 		parallelActionsToWaitFor = new ArrayList<BaseAction>();
 		numberOfParallelActionsToWaitFor = 0;
+	}
+	
+	static ArrayList<BaseAction> flattenChainAndEnsureTitleCardAtStart(BaseAction grandChildOfActionChain)
+	{
+		ArrayList<BaseAction> toReturn = new ArrayList<BaseAction>();
+		BaseAction a = grandChildOfActionChain;
+
+		// flatten chain
+		while (a.getParent() != null) {
+			toReturn.add(0, a);
+			a = a.getParent();
+		}
+		
+		// ensure titlecard at start
+		if(toReturn.size()>0 && toReturn.get(0).getClass()!=TitleCardAction.class)
+		{
+			toReturn.add(0,new TitleCardAction(a,""));
+		}
+		
+		return toReturn;
+	}
+	
+	static ArrayList<ArrayList<BaseAction>> getGroupsOfConsecutiveParallelActions(ArrayList<BaseAction> flatlist)
+	{
+		ArrayList<ArrayList<BaseAction>> toReturn = new ArrayList<ArrayList<BaseAction>>();
+	
+		while (!flatlist.isEmpty())
+		{
+			ArrayList<BaseAction> groupOfParallelActions = new ArrayList<BaseAction>();
+			groupOfParallelActions.add(flatlist.get(0));
+			flatlist.remove(0);
+			
+			// whilst the last item added was parallel, then add the next one..
+			while (!flatlist.isEmpty() && groupOfParallelActions.get(groupOfParallelActions.size()-1).isParallel()) 
+			{
+				groupOfParallelActions.add(flatlist.get(0));
+				flatlist.remove(0);
+			}
+			toReturn.add(groupOfParallelActions);
+		}
+		
+		return toReturn;
+	}
+	
+	static ArrayList<ArrayList<BaseAction>> getListOfListsFromChain(BaseAction grandChildOfActionChain)
+	{
+		ArrayList<BaseAction> flatlist = flattenChainAndEnsureTitleCardAtStart(grandChildOfActionChain);
+		return getGroupsOfConsecutiveParallelActions(flatlist);	
 	}
 
 	public int runAction(BaseAction grandChildOfActionChain)
 	{
-		this.list = new ArrayList<BaseAction>();
-		BaseAction a = grandChildOfActionChain;
-
-		while (a.getParent() != null) {
-			this.list.add(0, a);
-			a = a.getParent();
-		}
-
-		if(list.size()>0 && this.list.get(0).getClass()!=TitleCardAction.class)
-		{
-			list.add(0,new TitleCardAction(a,""));
-		}
+		ArrayList<BaseAction> flatlist = flattenChainAndEnsureTitleCardAtStart(grandChildOfActionChain);
+		this.list = getGroupsOfConsecutiveParallelActions(flatlist);
+		
 		processNextListOfParallelActions();
 
 		return 0;
@@ -79,27 +118,9 @@ public class ActionRunner implements ActionCallbackAPI
 	protected void processNextListOfParallelActions() {
 		this.parallelActionsToWaitFor.clear();
 		if (!this.list.isEmpty()) {
-			// add next batch of contiguous parallel actions
-			while (!this.list.isEmpty()
-					&& this.list.get(0).isParallel()) {
-				BaseAction theAction = this.list.get(
-						0);
-
-				this.list.remove(0);
-				this.parallelActionsToWaitFor.add(
-						theAction);
-			}
-
-			// if there was no parallel actions then add the non parallel one
-			if (this.parallelActionsToWaitFor.isEmpty()) {
-				BaseAction theAction = this.list.get(
-						0);
-
-				this.list.remove(0);
-				this.parallelActionsToWaitFor.add(
-						theAction);
-			}
-
+			parallelActionsToWaitFor = this.list.get(0); 
+			this.list.remove(0);
+			
 			// execute them
 			executeParallelActions();
 		}

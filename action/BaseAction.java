@@ -79,7 +79,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		}
 		else
 		{
-			throw new NullPointerException();
+		//	throw new NullPointerException();
 		}
 	}
 

@@ -33,8 +33,8 @@ public class PlayAnimationAction extends ChainedAction
 
 	public PlayAnimationAction(BaseAction parent, String  animCode, boolean isLinear) {
 		super(parent, parent.getApi(), isLinear);
-		this.anim = getApi().getAnimation(animCode);
-		this.animsParent = anim.getObject();
+		this.anim = getApi()!=null? getApi().getAnimation(animCode) : null;// null handling for unit tests
+		this.animsParent = anim!=null? anim.getObject() : null;// null handling for unit tests
 		this.isBackwards = false;
 		this.holdLastFrame = false;
 		this.isNonBlocking = false;
