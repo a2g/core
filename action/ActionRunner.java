@@ -80,7 +80,7 @@ public class ActionRunner implements ActionCallbackAPI
 		return toReturn;
 	}
 	
-	static ArrayList<ArrayList<BaseAction>> getListOfListsFromChain(BaseAction grandChildOfActionChain)
+	public static ArrayList<ArrayList<BaseAction>> getListOfListsFromChain(BaseAction grandChildOfActionChain)
 	{
 		ArrayList<BaseAction> flatlist = flattenChainAndEnsureTitleCardAtStart(grandChildOfActionChain);
 		return getGroupsOfConsecutiveParallelActions(flatlist);	
