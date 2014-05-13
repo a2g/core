@@ -238,34 +238,41 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	public ChainedAction say(String speech) {
-		return new SayAction(this, api.getDefaultSayAnimation(),
+		if(api.getIsSayAlwaysWithoutIncremementing())
+		
+			return new SayWithoutIncrementingFrameAction(
+				this, api.getDefaultSayAnimation(), speech);
+		else
+			return new SayAction(this, api.getDefaultSayAnimation(),
 				speech);
 		// return toReturn;
 	}
 
 	public ChainedAction sayWithoutIncrementingFrame(String animCode, String speech) {
-		boolean isLinear = true;
 		return new SayWithoutIncrementingFrameAction(
-				this, animCode, speech, isLinear);
+				this, animCode, speech);
 	}
-	
+
+	public ChainedAction sayWithoutIncrementingHoldLastFrame(String animCode, String speech) {
+		SayWithoutIncrementingFrameAction s = new SayWithoutIncrementingFrameAction(
+				this, animCode, speech);
+		s.setHoldLastFrame(true);
+		return s;
+	}
 	public ChainedAction sayWithoutIncrementingFrameNonBlocking(String animCode, String speech) {
-		boolean isLinear = true;
 		SayWithoutIncrementingFrameAction s =  new SayWithoutIncrementingFrameAction(
-				this, animCode, speech, isLinear);
+				this, animCode, speech);
 		s.setNonBlocking(true);
 		return s;
 	}
 	public ChainedAction sayWithoutIncrementingFrame( String speech) {
-		boolean isLinear = true;
 		return new SayWithoutIncrementingFrameAction(
-				this, api.getDefaultSayAnimation(), speech, isLinear);
+				this, api.getDefaultSayAnimation(), speech);
 	}
 	
 	public ChainedAction sayWithoutIncrementingFrameNonBlocking( String speech) {
-		boolean isLinear = true;
 		SayWithoutIncrementingFrameAction s =  new SayWithoutIncrementingFrameAction(
-				this, api.getDefaultSayAnimation(), speech, isLinear);
+				this, api.getDefaultSayAnimation(), speech);
 		s.setNonBlocking(true);
 		return s;
 	}
@@ -328,9 +335,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	public ChainedAction onDoCommand(SceneAPI scene, OnDoCommandAPI api, ChainRootAction ba,
-			int verb, SentenceItem objectA, SentenceItem objectB, double x, double y)
+			int verb, SentenceItem itemA, SentenceItem itemB, double x, double y)
 	{
-		ChainedAction secondStep = scene.onDoCommand(api, this.api.createChainRootAction(), verb, objectA, objectB, x, y);
+		ChainedAction secondStep = scene.onDoCommand(api, this.api.createChainRootAction(), verb, itemA, itemB, x, y);
 		return subroutine(secondStep);
 	}
 

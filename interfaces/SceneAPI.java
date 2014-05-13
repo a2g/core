@@ -33,7 +33,7 @@ public interface SceneAPI  extends ConstantsForAPI
 
 	public void onEveryFrame(OnEveryFrameAPI api);
 
-	public ChainedAction onDoCommand(OnDoCommandAPI api, ChainRootAction ba, int verb, SentenceItem objectA, SentenceItem objectB, double x, double y);
+	public ChainedAction onDoCommand(OnDoCommandAPI api, ChainRootAction ba, int verb, SentenceItem itemA, SentenceItem itemB, double x, double y);
 
 	public BaseDialogTreeAction onDialogTree(OnDialogTreeAPI api, ChainedAction ba, int branch);
 

@@ -29,13 +29,16 @@ public class SayWithoutIncrementingFrameAction extends ChainedAction {
 	private String speech;
 	private ColorEnum color;
 	private boolean isParallel;
+	private Animation anim;
+	private boolean isHoldLastFrame;
 
-	public SayWithoutIncrementingFrameAction(BaseAction parent, String animCode, String speech, boolean isLinear) {
-		super(parent, parent.getApi(), isLinear);
+	public SayWithoutIncrementingFrameAction(BaseAction parent, String animCode, String speech) {
+		super(parent, parent.getApi(), true);
 		this.speech = speech;
 		isParallel = false;
-		Animation a  = getApi().getAnimation(animCode);
-		SceneObject object = a.getObject();
+		isHoldLastFrame = false;
+		anim  = getApi().getAnimation(animCode);
+		SceneObject object = anim.getObject();
 		color = (object!=null)? object.getTalkingColor() : null;
 		
 	}
@@ -50,6 +53,9 @@ public class SayWithoutIncrementingFrameAction extends ChainedAction {
 		this.getApi().setStateOfPopup(true, .1, .1, color, speech,this);
 
 		this.run(duration);
+		if (anim != null) {
+			anim.setAsCurrentAnimation();
+		}
 	}
 
 	@Override
@@ -58,6 +64,15 @@ public class SayWithoutIncrementingFrameAction extends ChainedAction {
 	@Override
 	protected void onCompleteGameAction() {
 		getApi().setStateOfPopup( false, .1,.1, color, "",null);
+		SceneObject animsParent = anim.getObject();
+		if(!isHoldLastFrame )
+		{
+			if (animsParent != null)
+			{
+				String s = animsParent.getInitialAnimation();
+				animsParent.setCurrentAnimation(s);
+			}
+		}
 	}
 
 	@Override
@@ -68,6 +83,11 @@ public class SayWithoutIncrementingFrameAction extends ChainedAction {
 
 	public void setNonBlocking(boolean b) {
 		isParallel = b;
+		
+	}
+
+	public void setHoldLastFrame(boolean isHoldLastFrame ) {
+		this.isHoldLastFrame = isHoldLastFrame ;
 		
 	}
 
