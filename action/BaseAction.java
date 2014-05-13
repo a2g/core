@@ -243,15 +243,29 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		// return toReturn;
 	}
 
-	public ChainedAction sayWithoutIncrementingFrame(short objectCode, String speed) {
+	public ChainedAction sayWithoutIncrementingFrame(String animCode, String speech) {
 		boolean isLinear = true;
 		return new SayWithoutIncrementingFrameAction(
-				this, objectCode, speed, isLinear);
+				this, animCode, speech, isLinear);
 	}
-	public ChainedAction sayWithoutIncrementingFrameNonBlocking(short objectCode, String speed) {
+	
+	public ChainedAction sayWithoutIncrementingFrameNonBlocking(String animCode, String speech) {
 		boolean isLinear = true;
 		SayWithoutIncrementingFrameAction s =  new SayWithoutIncrementingFrameAction(
-				this, objectCode, speed, isLinear);
+				this, animCode, speech, isLinear);
+		s.setNonBlocking(true);
+		return s;
+	}
+	public ChainedAction sayWithoutIncrementingFrame( String speech) {
+		boolean isLinear = true;
+		return new SayWithoutIncrementingFrameAction(
+				this, api.getDefaultSayAnimation(), speech, isLinear);
+	}
+	
+	public ChainedAction sayWithoutIncrementingFrameNonBlocking( String speech) {
+		boolean isLinear = true;
+		SayWithoutIncrementingFrameAction s =  new SayWithoutIncrementingFrameAction(
+				this, api.getDefaultSayAnimation(), speech, isLinear);
 		s.setNonBlocking(true);
 		return s;
 	}

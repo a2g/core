@@ -115,6 +115,7 @@ implements InternalAPI
 	private String defaultSayAnimation;
 	private short defaultWalker;
 	private String switchDestination;
+	private boolean isSayWithoutIncremementing;
 
 	public MasterPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent)
 	{
@@ -1005,6 +1006,16 @@ implements InternalAPI
 	public void enableClickToContinue()
 	{
 		this.loadingPresenter.enableClickToContinue();
+	}
+
+	@Override
+	public void setIsSayAlwaysWithoutIncremementing(boolean isSayWithoutIncremementing) {
+		this.isSayWithoutIncremementing = isSayWithoutIncremementing;
+	}
+
+	@Override
+	public boolean getIsSayAlwaysWithoutIncremementing() {
+		return isSayWithoutIncremementing;
 	}
 }
 

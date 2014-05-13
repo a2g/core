@@ -104,6 +104,9 @@ extends ImageAddAPI, OnDoCommandAPI{
 	public void setStateOfPopup(boolean visible, double x, double y,
 			ColorEnum talkingColor, String string, BaseAction cancelCallback);
 	public void clickToContinue();
+	//public void setIsSayWithoutIncremementing(boolean isSayWithoutIncremementing);
+	//public boolean getIsSayWithoutIncremementing();
+
 }
 
 

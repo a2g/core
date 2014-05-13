@@ -53,5 +53,7 @@ public interface OnDoCommandAPI {
 	public boolean isInDebugMode();
 	public void setDefaultSayAnimation(String object);
 	public void setDefaultWalker(short object);
+	public void setIsSayAlwaysWithoutIncremementing(boolean isSayWithoutIncremementing);
+	public boolean getIsSayAlwaysWithoutIncremementing();
 
 }

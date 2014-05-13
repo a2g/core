@@ -18,6 +18,7 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.action.ChainedAction;
@@ -29,12 +30,14 @@ public class SayWithoutIncrementingFrameAction extends ChainedAction {
 	private ColorEnum color;
 	private boolean isParallel;
 
-	public SayWithoutIncrementingFrameAction(BaseAction parent, short objId, String speech, boolean isLinear) {
+	public SayWithoutIncrementingFrameAction(BaseAction parent, String animCode, String speech, boolean isLinear) {
 		super(parent, parent.getApi(), isLinear);
 		this.speech = speech;
 		isParallel = false;
-		SceneObject object = getApi().getObject(objId);
+		Animation a  = getApi().getAnimation(animCode);
+		SceneObject object = a.getObject();
 		color = (object!=null)? object.getTalkingColor() : null;
+		
 	}
 
 	@Override

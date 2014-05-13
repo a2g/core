@@ -71,5 +71,9 @@ public interface OnPreEntryAPI extends OnDoCommandAPI
 	public void setDefaultSayAnimation(String object);
 	@Override
 	public void setDefaultWalker(short object);
+	@Override
+	public void setIsSayAlwaysWithoutIncremementing(boolean isSayWithoutIncremementing);
+	@Override
+	public boolean getIsSayAlwaysWithoutIncremementing();
 
 }
