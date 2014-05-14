@@ -38,7 +38,7 @@ public class WaitForFrameAction extends ChainedAction {
 		// we achieve the variable execution time, by using a max value here..
 		String name = object.getCurrentAnimation();
 		int count = object.getAnimations().at(name).getFrames().getCount();
-		int milliseconds = count * 150;
+		int milliseconds = count * 1000;
 
 		this.run(milliseconds);
 	}
