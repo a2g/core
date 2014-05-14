@@ -160,22 +160,24 @@ public class SceneObject {
 
 		if (anim != null) {
 			
+			int effectiveFrame = fak.getCurrentFrame();
 			// if we use -1 to indicate last frame ( 
 			if(fak.getCurrentFrame()==-17)
 			{
-				// set it to last frame
+				// set both to last frame
 				fak.setCurrentFrame(anim.getLength() - 1);
+				effectiveFrame = anim.getLength() - 1;
 			}
 			// if the frame overflows...
 			else if (fak.getCurrentFrame()>= anim.getLength()) 
 			{
 				// ...set it to last frame
-				fak.setCurrentFrame(anim.getLength() - 1);
+				effectiveFrame = anim.getLength() - 1;
 			}
 			
 
-			int curFrame = fak.getCurrentFrame();
-			com.github.a2g.core.objectmodel.Image current = anim.getFrameCollection().at(curFrame);
+
+			com.github.a2g.core.objectmodel.Image current = anim.getFrameCollection().at(effectiveFrame);
 
 			// yes current can equal null in some weird cases where I place breakpoints...
 			if (current != null) 
