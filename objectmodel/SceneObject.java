@@ -161,7 +161,7 @@ public class SceneObject {
 		if (anim != null) {
 			
 			// if we use -1 to indicate last frame ( 
-			if(fak.getCurrentFrame()==-1)
+			if(fak.getCurrentFrame()==-17)
 			{
 				// set it to last frame
 				fak.setCurrentFrame(anim.getLength() - 1);

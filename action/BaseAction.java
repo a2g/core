@@ -573,7 +573,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	
 	public ChainedAction alignBaseMiddleOfOldFrameToLastFrameOfNewAnimation(String anim)
 	{
-		AlignBaseMiddleAction h = new AlignBaseMiddleAction(this, anim,-1);
+		AlignBaseMiddleAction h = new AlignBaseMiddleAction(this, anim,-17);
 		return h;
 	}
 }
