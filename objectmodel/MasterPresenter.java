@@ -839,6 +839,7 @@ implements InternalAPI
 
 
 		this.commandLinePresenter.setMouseable(false);
+		//this.commandLinePresenter.setVisible(false);
 		executeActionWithDoCommandActionRunner(a);
 
 		setLastCommand(x, y,
@@ -851,8 +852,9 @@ implements InternalAPI
 	@Override
 	public void actionFinished(int id)
 	{
-		this.commandLinePresenter.clear();
+		// must be in this order, because clear does't work unless mousable
 		this.commandLinePresenter.setMouseable(true);
+		this.commandLinePresenter.clear();
 
 		if(masterPanel.getActiveState() == MasterPanelAPI.GuiStateEnum.OnEnterScene)
 		{

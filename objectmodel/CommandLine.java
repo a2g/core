@@ -45,6 +45,8 @@ public class CommandLine {
 	}
 
 	public void setMouseOver(String displayName, String textualId, int code) {
+		if(!isMouseable)
+			return;
 		this.rolledOverItem = new SentenceItem( displayName,
 				textualId, code);
 	}
@@ -102,6 +104,8 @@ public class CommandLine {
 	}
 
 	public void clear() {
+		if(!isMouseable)
+			return;
 		this.lockedInObject = new SentenceItem();
 		//this.lockedInObject2 = new SentenceItem();
 		this.lockedInVerb = defaultVerb;
@@ -110,6 +114,8 @@ public class CommandLine {
 	}
 
 	public void doNextBestThingToExecute() {
+		if(!isMouseable)
+			return;
 		if (this.typeOfRollover == "A") {
 			this.lockedInObject = this.rolledOverItem;
 			this.rolledOverItem = new SentenceItem();
