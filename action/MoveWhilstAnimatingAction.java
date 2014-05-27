@@ -142,8 +142,8 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 		if (holdLastFrame==false) {
 			if (this.obj != null)
 			{
-				String s = obj.getInitialAnimation();
-				obj.setCurrentAnimation(s);
+				
+				obj.setToInitialAnimationWithoutChangingFrame();
 			}
 		}
 	}

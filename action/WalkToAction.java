@@ -74,12 +74,10 @@ extends MoveWhilstAnimatingAction
 	protected void onCompleteGameAction() {
 		super.onCompleteGameAction();
 
-		// frame one of 'South' is animation is special...
-		String south = super.getObject().getSpecialAnimation(
-				com.github.a2g.core.interfaces.SceneAPI.Special.South);
-
-		// we set to this at the end of walking.
-		super.getObject().setCurrentAnimation(south);
-		super.getObject().setCurrentFrame(0);
+		// best to set initial animation at the end, since:
+		// - if the walk animation is a cycle then no frame will be completely stationary
+		// - to make it consistent with everything else
+		//super.getObject().setCurrentAnimation(south);super.getObject().setCurrentFrame(0);
+		super.getObject().setToInitialAnimationWithoutChangingFrame();
 	}
 }

@@ -75,8 +75,7 @@ public class PlayAnimationAction extends ChainedAction
 		if (!this.holdLastFrame) {
 			if (this.animsParent != null)
 			{
-				String s = animsParent.getInitialAnimation();
-				animsParent.setCurrentAnimation(s);
+				animsParent.setToInitialAnimationWithoutChangingFrame();
 			}
 		}
 	}

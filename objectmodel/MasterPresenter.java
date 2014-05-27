@@ -334,23 +334,11 @@ implements InternalAPI
 		{
 			SceneObject sceneObject = this.scenePresenter.getModel().objectCollection().at(i);
 
-			if (sceneObject != null) {
-				String initial = sceneObject.getInitialAnimation();
-				if (sceneObject.getAnimations().at(initial)!=null)
-				{
-					sceneObject.getAnimations().at(initial).setAsCurrentAnimation();
-					// set x & y to zero sets the base middles
-					// to the positions they were in when all objects were rendered out.
-					sceneObject.setX(0);
-					sceneObject.setY(0);
-				}
-				else
-				{
-					boolean b = true;
-
-					b = (b) ? true : false;
-				}
-
+			if (sceneObject != null) 
+			{
+				sceneObject.setToInitialAnimationWithoutChangingFrame();	// to the positions they were in when all objects were rendered out.
+				sceneObject.setX(0);
+				sceneObject.setY(0);
 			}
 		}
 

@@ -460,6 +460,12 @@ public class SceneObject {
 	{
 		this.screenCoordsPerSecond = coordsPerSecond;
 	}
+	
+	public void setToInitialAnimationWithoutChangingFrame()
+	{
+		//todo: should really check whether initial animation is null
+		this.setCurrentAnimation(this.getInitialAnimation());
+	}
 
 }
 

@@ -159,7 +159,7 @@ public class SayAction extends ChainedAction {
 	@Override
 	protected void onCompleteGameAction() {
 		if (this.object != null) {
-			this.object.setCurrentAnimation(object.getInitialAnimation());
+			this.object.setToInitialAnimationWithoutChangingFrame();
 		}
 
 		getApi().setStateOfPopup( false, .1,.1, null, "",null);

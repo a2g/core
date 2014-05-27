@@ -69,8 +69,7 @@ public class SayWithoutIncrementingFrameAction extends ChainedAction {
 		{
 			if (animsParent != null)
 			{
-				String s = animsParent.getInitialAnimation();
-				animsParent.setCurrentAnimation(s);
+				animsParent.setToInitialAnimationWithoutChangingFrame();
 			}
 		}
 	}
