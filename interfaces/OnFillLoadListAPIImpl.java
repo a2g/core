@@ -63,6 +63,11 @@ public class OnFillLoadListAPIImpl
 	public void clearAllLoadedLoads() {
 		this.implementation.clearAllLoadedLoads();
 	}
+
+	public void setIgnorePromptAtLoadCompletion(boolean b) {
+		this.implementation.setIgnorePromptAtLoadCompletion(b);
+		
+	}
 }
 
 

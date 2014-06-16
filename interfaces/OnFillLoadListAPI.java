@@ -26,4 +26,5 @@ public interface OnFillLoadListAPI
 	SceneAPI getSceneByName(String string);
 	void setValue(Object string, int value);
 	void clearAllLoadedLoads();
+	void setIgnorePromptAtLoadCompletion(boolean b);
 }

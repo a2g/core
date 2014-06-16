@@ -995,7 +995,7 @@ implements InternalAPI
 	@Override
 	public void enableClickToContinue()
 	{
-		this.loadingPresenter.enableClickToContinue();
+		this.loadingPresenter.onLoadingComplete();
 	}
 
 	@Override
@@ -1006,6 +1006,12 @@ implements InternalAPI
 	@Override
 	public boolean getIsSayAlwaysWithoutIncremementing() {
 		return isSayWithoutIncremementing;
+	}
+
+	@Override
+	public void setIgnorePromptAtLoadCompletion(boolean isIgnore) {
+		this.loadingPresenter.setIgnorePromptAtLoadCompletion(isIgnore);
+		
 	}
 }
 

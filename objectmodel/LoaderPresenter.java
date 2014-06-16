@@ -36,9 +36,11 @@ public class LoaderPresenter implements MouseToLoaderPresenterAPI
 	private String name;
 	private InternalAPI api;
 	private MergeSceneAndStartAPI master;
+	private boolean isIgnore;
 
 	public LoaderPresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api, MergeSceneAndStartAPI master, MasterPresenterHostAPI parent)
 	{
+		this.isIgnore = false;
 		this.loader = new Loader(master);
 		this.name = "";
 		this.view = api.getFactory().createLoaderPanel(this, ColorEnum.Purple, ColorEnum.Black);
@@ -98,14 +100,26 @@ public class LoaderPresenter implements MouseToLoaderPresenterAPI
 		api.restartReloading();
 	}
 
-	public void enableClickToContinue()
+	public void onLoadingComplete()
 	{
-		view.enableClickToContinue();
+		if(isIgnore)
+		{
+			master.startScene();
+		}
+		else
+		{
+			view.enableClickToContinue();
+		}
 	}
 
 	@Override
 	public void clickToContinue() {
 		master.startScene();
+	}
+
+	public void setIgnorePromptAtLoadCompletion(boolean isIgnore) {
+		this.isIgnore = true;
+		
 	}
 
 
