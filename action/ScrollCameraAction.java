@@ -30,9 +30,9 @@ public class ScrollCameraAction extends ChainedAction
 	private double startX;// set via setters
 	private double startY;// set via setters
 	private boolean isParallel;// set via setters
-	private int duration;
+	private double duration;
 
-	public ScrollCameraAction(BaseAction parent, double endX, double endY, int duration, boolean isLinear)
+	public ScrollCameraAction(BaseAction parent, double endX, double endY, double duration, boolean isLinear)
 	{
 		super(parent, parent.getApi(), isLinear);
 		this.isParallel = false;
@@ -55,7 +55,7 @@ public class ScrollCameraAction extends ChainedAction
 		startX = getApi().getSceneGui().getCameraX();
 		startY = getApi().getSceneGui().getCameraY();
 
-		this.run(duration);
+		this.run((int)(duration*1000));
 	}
 
 	@Override

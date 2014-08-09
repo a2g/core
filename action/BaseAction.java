@@ -539,10 +539,17 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public ChainedAction moveCameraToNewXPosition(double x, int duration)
+	public ChainedAction moveCameraToNewXPosition(double x, double durationInSecs)
 	{
 		boolean isLinear = false;
-		ScrollCameraAction a = new ScrollCameraAction(this, x, api.getSceneGui().getCameraY(), duration, isLinear);
+		ScrollCameraAction a = new ScrollCameraAction(this, x, api.getSceneGui().getCameraY(), durationInSecs, isLinear);
+		a.setNonBlocking(true);
+		return a;
+	}
+	public ChainedAction moveCameraToNewYPosition(double y, double durationInSecs)
+	{
+		boolean isLinear = false;
+		ScrollCameraAction a = new ScrollCameraAction(this, api.getSceneGui().getCameraX(), y, durationInSecs, isLinear);
 		a.setNonBlocking(true);
 		return a;
 	}
