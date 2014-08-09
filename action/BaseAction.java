@@ -20,7 +20,7 @@ import com.github.a2g.core.action.PlayAnimationAction;
 import com.github.a2g.core.action.PlayAnimationRepeatWhilstVisibleAction;
 import com.github.a2g.core.action.SayAction;
 import com.github.a2g.core.action.SayWithoutIncrementingFrameAction;
-import com.github.a2g.core.action.SetActiveAnimationAction;
+import com.github.a2g.core.action.SetCurrentAnimationAction;
 import com.github.a2g.core.action.SetActiveFrameAction;
 import com.github.a2g.core.action.SetBaseMiddleXAction;
 import com.github.a2g.core.action.SetBaseMiddleYAction;
@@ -276,8 +276,8 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		s.setNonBlocking(true);
 		return s;
 	}
-	public ChainedAction setActiveAnimation(String  animationCode) {
-		return new SetActiveAnimationAction(
+	public ChainedAction setCurrentAnimation(String  animationCode) {
+		return new SetCurrentAnimationAction(
 				this, animationCode);
 	}
 
@@ -543,10 +543,28 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	{
 		boolean isLinear = false;
 		ScrollCameraAction a = new ScrollCameraAction(this, x, api.getSceneGui().getCameraY(), durationInSecs, isLinear);
+		a.setNonBlocking(false);
+		return a;
+	}
+	
+	public ChainedAction moveCameraToNewXPositionNonBlocking(double x, double durationInSecs)
+	{
+		boolean isLinear = false;
+		ScrollCameraAction a = new ScrollCameraAction(this, x, api.getSceneGui().getCameraY(), durationInSecs, isLinear);
 		a.setNonBlocking(true);
 		return a;
 	}
+	
+	
 	public ChainedAction moveCameraToNewYPosition(double y, double durationInSecs)
+	{
+		boolean isLinear = false;
+		ScrollCameraAction a = new ScrollCameraAction(this, api.getSceneGui().getCameraX(), y, durationInSecs, isLinear);
+		a.setNonBlocking(false);
+		return a;
+	}
+	
+	public ChainedAction moveCameraToNewYPositionNonBlocking(double y, double durationInSecs)
 	{
 		boolean isLinear = false;
 		ScrollCameraAction a = new ScrollCameraAction(this, api.getSceneGui().getCameraX(), y, durationInSecs, isLinear);
