@@ -21,9 +21,9 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 
 
-public class DoNothingAction extends BaseDialogTreeAction {
+public class DoNothingAction extends ChainedAction {
 	public DoNothingAction(BaseAction parent) {
-		super(parent, parent.getApi());
+		super(parent, parent.getApi(), true);
 	}
 
 	@Override

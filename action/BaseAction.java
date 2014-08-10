@@ -99,7 +99,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a.subroutine(b);
 	}
 
-	public BaseDialogTreeAction doNothing() {
+	public ChainedAction doNothing() {
 		return new DoNothingAction(this);
 	}
 
