@@ -18,7 +18,6 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.BaseDialogTreeAction;
 
 
 public class DoNothingAction extends ChainedAction {
