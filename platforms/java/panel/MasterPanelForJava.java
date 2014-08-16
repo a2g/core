@@ -185,7 +185,7 @@ implements MasterPanelAPI
 		case CutScene:
 			this.hostForCommandLineF.setVisible(false);
 			this.hostForDialogTreeF.setVisible(false);
-			this.hostForInventoryF.setVisible(false);
+			this.hostForInventoryF.setVisible(true);
 			this.hostForLoadingF.setVisible(false);
 			this.hostForSceneF.setVisible(true);
 			this.hostForTitleCardF.setVisible(false);

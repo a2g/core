@@ -148,7 +148,7 @@ implements MasterPanelAPI
 			hostForLoading.setVisible(false);
 			hostForTitleCard.setVisible(false);
 			hostForCommandLine.setVisible(false);
-			hostForInventory.setVisible(false);
+			hostForInventory.setVisible(true);
 			hostForVerbs.setVisible(false);
 			break;
 		case ActiveScene:
