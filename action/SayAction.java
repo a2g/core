@@ -34,12 +34,18 @@ public class SayAction extends ChainedAction {
 	private SceneObject object;
 	private int numberOfFramesTotal;
 	private static final ColorEnum defaultTalkingColor = ColorEnum.Purple; 
+	private boolean isNonIncrementing;
+	private boolean isHoldLastFrame;
+	private boolean isParallel;
 
 	public SayAction(BaseAction parent, String animation, String fullSpeech) {
 		super(parent, parent.getApi(), true);
 		this.anim = getApi().getAnimation(animation);
 		this.object = anim.getObject();
 		this.numberOfFramesTotal = 0;
+		this.isNonIncrementing = false;
+		this.isHoldLastFrame = false;
+		this.isParallel = false;
 		speech = new ArrayList<String>();
 		ceilings = new ArrayList<Double>();
 		String[] lines = fullSpeech.split("\n");
@@ -112,7 +118,7 @@ public class SayAction extends ChainedAction {
 		}
 
 		if (anim != null && object != null) {
-			object.setCurrentAnimation(anim.getTextualId());
+			anim.setAsCurrentAnimation();
 			object.setVisible(true);
 		}
 
@@ -138,15 +144,15 @@ public class SayAction extends ChainedAction {
 
 
 			// update text bubble
-			for (int i = 0; i < ceilings.size(); i++) {
-				if (progress < ceilings.get(i)) {
+			for (int i = ceilings.size()-1; i>=0; i--) {
+				if (progress > ceilings.get(i)) {
 					getApi().setStateOfPopup( true, .1,.1, object.getTalkingColor(), speech.get(i),null);
 					break;
 				}
 			}
 
 			// if theres an associated animation, then use it
-			if (this.anim != null) {
+			if (this.anim != null && ! isNonIncrementing) {
 				int numberOfFramesSoFar = (int) (progress * numberOfFramesTotal);
 				int frame = numberOfFramesSoFar % anim.getFrames().getCount();
 
@@ -158,8 +164,12 @@ public class SayAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		if (this.object != null) {
-			this.object.setToInitialAnimationWithoutChangingFrame();
+		if(!isHoldLastFrame )
+		{
+			if (this.object != null) 
+			{
+				this.object.setToInitialAnimationWithoutChangingFrame();
+			}
 		}
 
 		getApi().setStateOfPopup( false, .1,.1, null, "",null);
@@ -169,7 +179,7 @@ public class SayAction extends ChainedAction {
 	@Override
 	public boolean isParallel() {
 
-		return false;
+		return isParallel;
 	}
 
 	int getMillisecondsForSpeech(String speech) {
@@ -178,4 +188,17 @@ public class SayAction extends ChainedAction {
 		// int duration = (speech.length() * (2 + delay)) * 40;
 		return popupDelay * 100;
 	}
+	
+	public void setNonBlocking(boolean b) {
+		isParallel = b;
+	}
+
+	public void setHoldLastFrame(boolean isHoldLastFrame ) {
+		this.isHoldLastFrame = isHoldLastFrame ;
+	}
+	
+	public void setIsNonIncrementing(boolean isNonIncrementing ) {
+		this.isNonIncrementing = isNonIncrementing ;
+	}
+	
 }
