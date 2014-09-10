@@ -146,7 +146,7 @@ public class SayAction extends ChainedAction {
 			// update text bubble
 			for (int i = ceilings.size()-1; i>=0; i--) {
 				if (progress > ceilings.get(i)) {
-					getApi().setStateOfPopup( true, .1,.1, object.getTalkingColor(), speech.get(i),null);
+					getApi().setStateOfPopup( true, .1,.1, object.getTalkingColor(), speech.get(ceilings.size()-1-i),null);
 					break;
 				}
 			}
