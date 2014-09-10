@@ -22,6 +22,7 @@ import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.interfaces.OnFillLoadListAPIImpl.LoadKickStarter;
 import com.github.a2g.core.objectmodel.SentenceItem;
+import com.github.a2g.core.primitive.PointF;
 
 public interface SceneAPI  extends ConstantsForAPI
 {
@@ -37,4 +38,5 @@ public interface SceneAPI  extends ConstantsForAPI
 
 	public BaseDialogTreeAction onDialogTree(OnDialogTreeAPI api, ChainedAction ba, int branch);
 
+	public void onBoundaryCondition(OnBoundaryConditionAPI api, PointF a, PointF b);
 }

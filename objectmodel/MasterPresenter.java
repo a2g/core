@@ -18,6 +18,7 @@ package com.github.a2g.core.objectmodel;
 
 
 //import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.logging.Logger;
 import com.google.gwt.event.dom.client.LoadHandler;
@@ -29,6 +30,7 @@ import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.action.SayAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 
 import com.github.a2g.core.event.PropertyChangeEvent;
@@ -48,6 +50,7 @@ import com.github.a2g.core.interfaces.MasterPanelAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI.GuiStateEnum;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
 import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
+import com.github.a2g.core.interfaces.OnBoundaryConditionAPI;
 import com.github.a2g.core.interfaces.OnDialogTreeAPI;
 import com.github.a2g.core.interfaces.OnDoCommandAPI;
 import com.github.a2g.core.interfaces.OnEntryAPI;
@@ -77,6 +80,7 @@ implements InternalAPI
 , OnEveryFrameAPI
 , OnDoCommandAPI
 , OnDialogTreeAPI
+, OnBoundaryConditionAPI
 , CommandLineCallbackAPI
 , ActionRunnerCallbackAPI
 , InventoryPresenterCallbackAPI
@@ -106,6 +110,7 @@ implements InternalAPI
 	private ActionRunner doCommandActionRunner;
 	private int textSpeedDelay;
 	private Integer[] theListOfIndexesToInsertAt;
+	private ArrayList<PointF> boundaryPoints;
 
 
 	private Logger logger = Logger.getLogger("com.mycompany.level");
@@ -116,6 +121,7 @@ implements InternalAPI
 	private short defaultWalker;
 	private String switchDestination;
 	private boolean isSayWithoutIncremementing;
+	private short boundaryCrossObject;
 
 	public MasterPresenter(final HostingPanelAPI panel, EventBus bus, MasterPresenterHostAPI parent)
 	{
@@ -131,6 +137,7 @@ implements InternalAPI
 		this.doCommandActionRunner = new ActionRunner(this,1);
 		this.dialogActionRunner = new ActionRunner(this,2);
 
+		this.boundaryPoints = new ArrayList<PointF>();
 		this.theListOfIndexesToInsertAt= new Integer[100];
 		for(int i=0;i<100;i++)
 			theListOfIndexesToInsertAt[i] = new Integer(0);
@@ -360,6 +367,7 @@ implements InternalAPI
 		if(timer!=null)
 		{
 			this.callbacks.onEveryFrame(this);
+			this.checkForBoundaryCross();
 		}
 		if(switchTimer!=null)
 		{
@@ -371,7 +379,58 @@ implements InternalAPI
 		}
 	}
 
+	boolean arePointsSameSide(PointF A, PointF B, PointF tp, PointF c)
+	{
+		double result1 = (B.getX()-A.getX())*(tp.getY()-A.getY()) - (B.getY()-A.getY())*(tp.getX()-A.getX());
+		double result2 = (B.getX()-A.getX())*(c.getY()-A.getY()) - (B.getY()-A.getY())*(c.getX()-A.getX());
+		return result1*result2>0;
+	}
 
+	void setBoundaryCrossObject(short boundaryCrossObject)
+	{
+		this.boundaryCrossObject = boundaryCrossObject;
+	}
+	short getBoundaryCrossObject()
+	{
+		return boundaryCrossObject;
+	}
+	
+	PointF getCentre(ArrayList<PointF> points)
+	{
+		double totalX=0;
+		double totalY=0;
+	
+		double size = boundaryPoints.size();
+		for(int i=0;i<size;i++)
+		{
+			PointF bp = boundaryPoints.get(i);
+			totalX+= bp.getX();
+			totalY+= bp.getY();
+		}
+		return new PointF(totalX/size, totalY/size);
+	}
+	void checkForBoundaryCross()
+	{
+		double x = getObject(getBoundaryCrossObject()).getBaseMiddleX();
+		double y = getObject(getBoundaryCrossObject()).getBaseMiddleY();
+		PointF tp = new PointF(x,y);
+		PointF c = getCentre(boundaryPoints);
+		
+		int size = boundaryPoints.size();
+		for(int i=0;i<size;i++)
+		{
+			PointF a = boundaryPoints.get(i);
+			PointF b = boundaryPoints.get(i==0? size-1: i-1);
+		 			
+			boolean isSame = arePointsSameSide(a,b, c, tp);
+			if(!isSame)
+			{
+				this.callbacks.onBoundaryCondition(this, a, b);
+			}
+				
+		
+		}
+	}
 
 
 
@@ -514,10 +573,17 @@ implements InternalAPI
 	{
 		this.dialogActionRunner.cancel();
 		// clear it so any old branches don't show up
-		this.dialogTreePresenter.clear();
-
-		// make dialogtreepanel active if not already
-		this.setDialogTreeActive(true);
+		this.dialogTreePresenter.clearBranches();
+		
+		// make dialogtreepanel not active, then we must *just* be
+		// entering dialog. So text gets reset.
+		if(masterPanel.getActiveState()!=MasterPanelAPI.GuiStateEnum.DialogTree)
+		{
+			this.dialogTreePresenter.resetRecordOfSaidSpeech();
+			this.setDialogTreeActive(true);
+		}
+			
+		
 
 		// get the chain from the client code
 		BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, createChainRootAction(), branchId);
@@ -528,7 +594,9 @@ implements InternalAPI
 
 
 	public void saySpeechAndThenExecuteBranchWithBranchId(String speech, int branchId) {
-		this.dialogTreePresenter.clear();
+		
+		this.dialogTreePresenter.clearBranches();
+		this.dialogTreePresenter.markSpeechAsSaid(speech);
 
 		String animId = getDialogTreeGui().getDialogTreeTalkAnimation();
 		// This is a bit sneaky:
@@ -538,7 +606,7 @@ implements InternalAPI
 		// 4. Then we execute it
 		// Thus it will say the text, and do what the user prescribes.
 
-
+		//String animId = getDialogTreeGui().setBranchVisited(branchId);
 		SayAction say = new SayAction(createChainRootAction(), animId, speech);
 		BaseDialogTreeAction actionChain = callbacks.onDialogTree(this, say, branchId);
 		executeActionWithDialogActionRunner(actionChain);
@@ -1009,8 +1077,8 @@ implements InternalAPI
 	}
 
 	@Override
-	public void setIgnorePromptAtLoadCompletion(boolean isIgnore) {
-		this.loadingPresenter.setIgnorePromptAtLoadCompletion(isIgnore);
+	public void setContinueAfterLoad(boolean isIgnore) {
+		this.loadingPresenter.setContinueAfterLoad(isIgnore);
 		
 	}
 }

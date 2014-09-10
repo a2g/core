@@ -17,10 +17,13 @@
 package com.github.a2g.core.objectmodel;
 
 
+import java.util.Set;
+
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.event.shared.EventBus;
 
 
@@ -29,23 +32,33 @@ public class DialogTreePresenter {
 	private DialogTree theDialogTree;
 	private DialogTreePanelAPI view;
 	private String dialogTreeTalkAnimation;
+	private Set<String> recordOfSaidSpeech;
 
 	public DialogTreePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api) {
 		this.bus = bus;
 		this.theDialogTree = new DialogTree();
 		this.view = api.getFactory().createDialogTreePanel(bus, ColorEnum.Purple, ColorEnum.Black, ColorEnum.Red);
 		panel.setThing(view);
+		recordOfSaidSpeech = new HashSet<String>();
 	}
 
-	public void clear() {
+	public void clearBranches() {
 		theDialogTree.clear();
 		view.update(theDialogTree, bus);
 	}
+	
+	public void resetRecordOfSaidSpeech()
+	{
+		recordOfSaidSpeech.clear();
+	}
 
 
-	public void addBranch(int subBranchId, String lineOfDialog) {
-		theDialogTree.addSubBranch(subBranchId, lineOfDialog);
-		view.update(theDialogTree, bus);
+	public void addBranch(int subBranchId, String lineOfDialog, boolean isAlwaysShown) {
+		if(isAlwaysShown || !recordOfSaidSpeech.contains(lineOfDialog))
+		{
+			theDialogTree.addSubBranch(subBranchId, lineOfDialog);
+			view.update(theDialogTree, bus);
+		}
 	}
 
 
@@ -66,4 +79,10 @@ public class DialogTreePresenter {
 	{
 		return view;
 	}
+	
+	public void markSpeechAsSaid(String text)
+	{
+		recordOfSaidSpeech.add(text);
+	}
+	
 }
