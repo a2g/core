@@ -25,11 +25,13 @@ public class DialogTreeBranchAction extends BaseDialogTreeAction {
 
 	private String text;
 	private int branchId;
+	private boolean isAlwaysPresent;
 
 	public DialogTreeBranchAction(BaseAction parent, String text, int branchId) {
 		super(parent, parent.getApi());
 		this.setBranchId(branchId);
 		this.setText(text);
+		isAlwaysPresent = false;
 	}
 
 	@Override
@@ -37,7 +39,7 @@ public class DialogTreeBranchAction extends BaseDialogTreeAction {
 
 	@Override
 	public void runGameAction() {
-		getApi().getDialogTreeGui().addBranch( branchId, text);
+		getApi().getDialogTreeGui().addBranch( branchId, text, isAlwaysPresent);
 		super.run(1);
 	}
 
@@ -69,6 +71,10 @@ public class DialogTreeBranchAction extends BaseDialogTreeAction {
 
 	public String getText() {
 		return text;
+	}
+	public void setIsAlwaysPresent(boolean isAlwaysPresent)
+	{
+		this.isAlwaysPresent = isAlwaysPresent;
 	}
 
 }
