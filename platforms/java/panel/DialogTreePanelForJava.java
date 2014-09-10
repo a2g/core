@@ -45,7 +45,7 @@ implements DialogTreePanelAPI
 	{
 		GridLayout grid = new GridLayout();
 		this.setLayout(grid);
-		grid.setRows(4);
+		grid.setRows(10);
 		grid.setColumns(1);
 
 		this.fore = fore;
