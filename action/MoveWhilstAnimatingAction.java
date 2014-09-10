@@ -45,6 +45,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 		super(parent, parent.getApi(), isLinear);
 		this.obj = getApi().getObject(objId);
 		this.animatingDelay = 0;
+		assert(obj!=null);
 		this.screenCoordsPerSecond = obj.getScreenCoordsPerSecond();
 		
 		this.endX = endX;// - getApi().getSceneGui().getCameraX();
