@@ -64,8 +64,8 @@ public class OnFillLoadListAPIImpl
 		this.implementation.clearAllLoadedLoads();
 	}
 
-	public void setIgnorePromptAtLoadCompletion(boolean b) {
-		this.implementation.setIgnorePromptAtLoadCompletion(b);
+	public void setContinueAfterLoad(boolean b) {
+		this.implementation.setContinueAfterLoad(b);
 		
 	}
 }
