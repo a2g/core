@@ -117,7 +117,7 @@ public class LoaderPresenter implements MouseToLoaderPresenterAPI
 		master.startScene();
 	}
 
-	public void setIgnorePromptAtLoadCompletion(boolean isIgnore) {
+	public void setContinueAfterLoad(boolean isIgnore) {
 		this.isIgnore = true;
 		
 	}
