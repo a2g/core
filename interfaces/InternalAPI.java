@@ -30,6 +30,7 @@ import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.VerbsPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.PointF;
 
 
 @SuppressWarnings("unused")
@@ -106,6 +107,9 @@ extends ImageAddAPI, OnDoCommandAPI{
 	public void clickToContinue();
 	//public void setIsSayWithoutIncremementing(boolean isSayWithoutIncremementing);
 	//public boolean getIsSayWithoutIncremementing();
+	
+	public boolean isInANoGoZone(PointF tp);
+	public void fireOnMovementBeyondAGateIfRelevant(PointF tp);
 
 }
 

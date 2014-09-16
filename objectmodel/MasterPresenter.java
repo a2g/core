@@ -50,7 +50,7 @@ import com.github.a2g.core.interfaces.MasterPanelAPI;
 import com.github.a2g.core.interfaces.MasterPanelAPI.GuiStateEnum;
 import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
 import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
-import com.github.a2g.core.interfaces.OnBoundaryConditionAPI;
+import com.github.a2g.core.interfaces.OnMovementBeyondAGateAPI;
 import com.github.a2g.core.interfaces.OnDialogTreeAPI;
 import com.github.a2g.core.interfaces.OnDoCommandAPI;
 import com.github.a2g.core.interfaces.OnEntryAPI;
@@ -80,7 +80,7 @@ implements InternalAPI
 , OnEveryFrameAPI
 , OnDoCommandAPI
 , OnDialogTreeAPI
-, OnBoundaryConditionAPI
+, OnMovementBeyondAGateAPI
 , CommandLineCallbackAPI
 , ActionRunnerCallbackAPI
 , InventoryPresenterCallbackAPI
@@ -110,7 +110,8 @@ implements InternalAPI
 	private ActionRunner doCommandActionRunner;
 	private int textSpeedDelay;
 	private Integer[] theListOfIndexesToInsertAt;
-	private ArrayList<PointF> boundaryPoints;
+	private ArrayList<PointF> gatePoints;
+	private ArrayList<Integer> gateIds;
 
 
 	private Logger logger = Logger.getLogger("com.mycompany.level");
@@ -137,7 +138,8 @@ implements InternalAPI
 		this.doCommandActionRunner = new ActionRunner(this,1);
 		this.dialogActionRunner = new ActionRunner(this,2);
 
-		this.boundaryPoints = new ArrayList<PointF>();
+		this.gatePoints = new ArrayList<PointF>();
+		this.gateIds = new ArrayList<Integer>();
 		this.theListOfIndexesToInsertAt= new Integer[100];
 		for(int i=0;i<100;i++)
 			theListOfIndexesToInsertAt[i] = new Integer(0);
@@ -367,7 +369,7 @@ implements InternalAPI
 		if(timer!=null)
 		{
 			this.callbacks.onEveryFrame(this);
-			this.checkForBoundaryCross();
+		//	this.checkForBoundaryCross();
 		}
 		if(switchTimer!=null)
 		{
@@ -379,61 +381,7 @@ implements InternalAPI
 		}
 	}
 
-	boolean arePointsSameSide(PointF A, PointF B, PointF tp, PointF c)
-	{
-		double result1 = (B.getX()-A.getX())*(tp.getY()-A.getY()) - (B.getY()-A.getY())*(tp.getX()-A.getX());
-		double result2 = (B.getX()-A.getX())*(c.getY()-A.getY()) - (B.getY()-A.getY())*(c.getX()-A.getX());
-		return result1*result2>0;
-	}
-
-	void setBoundaryCrossObject(short boundaryCrossObject)
-	{
-		this.boundaryCrossObject = boundaryCrossObject;
-	}
-	short getBoundaryCrossObject()
-	{
-		return boundaryCrossObject;
-	}
 	
-	PointF getCentre(ArrayList<PointF> points)
-	{
-		double totalX=0;
-		double totalY=0;
-	
-		double size = boundaryPoints.size();
-		for(int i=0;i<size;i++)
-		{
-			PointF bp = boundaryPoints.get(i);
-			totalX+= bp.getX();
-			totalY+= bp.getY();
-		}
-		return new PointF(totalX/size, totalY/size);
-	}
-	void checkForBoundaryCross()
-	{
-		double x = getObject(getBoundaryCrossObject()).getBaseMiddleX();
-		double y = getObject(getBoundaryCrossObject()).getBaseMiddleY();
-		PointF tp = new PointF(x,y);
-		PointF c = getCentre(boundaryPoints);
-		
-		int size = boundaryPoints.size();
-		for(int i=0;i<size;i++)
-		{
-			PointF a = boundaryPoints.get(i);
-			PointF b = boundaryPoints.get(i==0? size-1: i-1);
-		 			
-			boolean isSame = arePointsSameSide(a,b, c, tp);
-			if(!isSame)
-			{
-				this.callbacks.onBoundaryCondition(this, a, b);
-			}
-				
-		
-		}
-	}
-
-
-
 	public void loadInventoryFromAPI() {
 
 		inventoryPresenter.updateInventory();
@@ -487,7 +435,7 @@ implements InternalAPI
 	{
 		cancelOnEveryFrameTimer();
 		this.dialogActionRunner.cancel();
-		
+
 		//now wait for last on every frame to execute
 		//.. which is about 40 milliseconds
 		//(an on every frame can go more than
@@ -497,7 +445,7 @@ implements InternalAPI
 		switchTimer.scheduleRepeating(40);
 	}
 
-	
+
 	@Override
 	public void switchToScene(String scene)
 	{
@@ -510,7 +458,7 @@ implements InternalAPI
 		this.parent.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
 	}
 
-	
+
 	@Override
 	public String getLastScene() {
 
@@ -574,7 +522,7 @@ implements InternalAPI
 		this.dialogActionRunner.cancel();
 		// clear it so any old branches don't show up
 		this.dialogTreePresenter.clearBranches();
-		
+
 		// make dialogtreepanel not active, then we must *just* be
 		// entering dialog. So text gets reset.
 		if(masterPanel.getActiveState()!=MasterPanelAPI.GuiStateEnum.DialogTree)
@@ -582,8 +530,8 @@ implements InternalAPI
 			this.dialogTreePresenter.resetRecordOfSaidSpeech();
 			this.setDialogTreeActive(true);
 		}
-			
-		
+
+
 
 		// get the chain from the client code
 		BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(this, createChainRootAction(), branchId);
@@ -594,7 +542,7 @@ implements InternalAPI
 
 
 	public void saySpeechAndThenExecuteBranchWithBranchId(String speech, int branchId) {
-		
+
 		this.dialogTreePresenter.clearBranches();
 		this.dialogTreePresenter.markSpeechAsSaid(speech);
 
@@ -652,6 +600,11 @@ implements InternalAPI
 		scenePresenter.setCameraY(0);
 	}
 
+	void clearBoundaries()
+	{
+		this.gatePoints.clear();
+		this.gateIds.clear();
+	}
 
 	@Override
 	public void startScene()
@@ -659,8 +612,8 @@ implements InternalAPI
 		masterPanel.setActiveState(MasterPanelAPI.GuiStateEnum.Loading);
 		loadInventoryFromAPI();
 		setInitialAnimationsAsCurrent();
-	
-		
+		clearBoundaries();
+
 		//setAllObjectsToVisible();
 		// it is reasonable for a person to set current animations in pre-entry
 		// and expect them to stay current, so we set cuurentAnimations before pre-entry.
@@ -1079,7 +1032,145 @@ implements InternalAPI
 	@Override
 	public void setContinueAfterLoad(boolean isIgnore) {
 		this.loadingPresenter.setContinueAfterLoad(isIgnore);
+
+	}
+
+	@Override
+	public void addBoundaryGate(int id, PointF a, PointF b) 
+	{
+		gateIds.add(new Integer(id));
+		gatePoints.add(a);
+		gatePoints.add(b);
+	}
+	
+	@Override
+	public void addBoundaryPoint(PointF a) 
+	{
+		gateIds.add(new Integer(-1));
+		gatePoints.add(new PointF(-1,-1));
+		//important for the valid point to be the last one, 
+		// due to how the span calculations use the last one.
+		gatePoints.add(a);
 		
 	}
+	
+	boolean arePointsSameSide(PointF A, PointF B, PointF tp, PointF c)
+	{
+		double result1 = (B.getX()-A.getX())*(tp.getY()-A.getY()) - (B.getY()-A.getY())*(tp.getX()-A.getX());
+		double result2 = (B.getX()-A.getX())*(c.getY()-A.getY()) - (B.getY()-A.getY())*(c.getX()-A.getX());
+		return result1*result2>0;
+	}
+
+	public void setBoundaryCrossObject(short boundaryCrossObject)
+	{
+		this.boundaryCrossObject = boundaryCrossObject;
+	}
+	short getBoundaryCrossObject()
+	{
+		return boundaryCrossObject;
+	}
+
+	PointF getGatePointsCentre()
+	{
+		double totalX=0;
+		double totalY=0;
+		int numberOfExtras=0;
+		double size = gateIds.size();
+		for(int i=0;i<size;i++)
+		{
+			if(gateIds.get(i)!=-1)
+			{
+				PointF bp = gatePoints.get(i*2);
+				totalX+= bp.getX();
+				totalY+= bp.getY();
+				numberOfExtras++;
+			}
+			
+			PointF bp = gatePoints.get(i*2+1);
+			totalX+= bp.getX();
+			totalY+= bp.getY();
+		}
+		double numberOfPoints = size + numberOfExtras;
+		return new PointF(totalX/numberOfPoints, totalY/numberOfPoints);
+	}
+
+	PointF getMidPoint(PointF a, PointF b)
+	{
+		return new PointF(a.getX()/2 + b.getX()/2, a.getY()/2 + b.getY()/2);
+	}
+	boolean isBetweenSpokesAndOnWrongSide(PointF p1, PointF p2, PointF tp)
+	{
+		PointF c = getGatePointsCentre();
+		PointF mp = getMidPoint(p1,p2);
+		boolean isBetweenSpokes = arePointsSameSide(c,p1,mp, tp) && arePointsSameSide(c,p2,mp, tp);
+		if(!isBetweenSpokes)
+			return false;
+		boolean isOnSameSideAsCentre = arePointsSameSide(p1,p2,c,tp);
+		if(isOnSameSideAsCentre)
+			return false;
+		return true;
+	}
+	
+	@Override
+	public boolean isInANoGoZone(PointF tp)
+	{
+		if(gatePoints.size()<2)
+			return false;
+
+		// this following line relies craftily on addPoint to 
+		// put a dummy value in the first slot, and
+		// the valid value in the last slot
+		PointF previousPoint = gatePoints.get(gatePoints.size()-1);
+		
+		int size = gateIds.size();
+		for(int i=0;i<size;i++)
+		{
+			// only gates (designated by ids >=0) get their first point processed
+			if(gateIds.get(i)!=-1)
+			{
+				PointF firstPoint = gatePoints.get(i*2+0);
+				if(isBetweenSpokesAndOnWrongSide(previousPoint,firstPoint, tp))
+					return true;
+				previousPoint = firstPoint;
+			}
+			
+			// every gate/point has their second point processed.
+			PointF secondPoint = gatePoints.get(i*2+1);
+			if(isBetweenSpokesAndOnWrongSide(previousPoint,secondPoint, tp))
+				return true;
+			previousPoint = secondPoint;
+		}
+		return false;
+	}
+	
+	@Override
+	public
+	void fireOnMovementBeyondAGateIfRelevant(PointF tp)
+	{
+		int foundId = -1;
+		if(gatePoints.size()>2)
+		{
+			int size = gateIds.size();
+			for(int i=0;i<size;i++)
+			{
+				if(gateIds.get(i)==-1)
+					 continue;
+				
+				PointF a = gatePoints.get(i*2);
+				PointF b = gatePoints.get(i*2+1);
+						
+				if(isBetweenSpokesAndOnWrongSide(a,b,tp))
+				{
+					foundId = gateIds.get(i);
+					break;
+				}
+			}
+		}
+		if(foundId!=-1)
+		{
+			this.callbacks.onMovementBeyondAGate(this, foundId);
+		}
+	}
+
 }
 

@@ -20,6 +20,7 @@ package com.github.a2g.core.action;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.SceneObject;
+import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.action.ChainedAction;
 
 public class MoveWhilstAnimatingAction extends ChainedAction
@@ -39,6 +40,8 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 	private int framesPlayedDuringWalk;// set in runGameAction
 	private boolean isBackwards;
 	private boolean holdLastFrame;
+
+	private boolean isStopped;
 	
 	public MoveWhilstAnimatingAction(BaseAction parent, short objId, double endX, double endY, boolean isLinear)
 	{
@@ -55,6 +58,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 		this.isParallel = false;
 		this.isBackwards = false;
 		this.holdLastFrame = true;
+		this.isStopped = false;
 	}
 	
 	public void setHoldLastFrame(boolean holdLastFrame)
@@ -101,6 +105,8 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
+		if(isStopped)
+			return;
 		if(progress>0 && progress <1)
 		{
 
@@ -116,34 +122,55 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 						- this.startY);
 
 		System.out.println(" walkto-mid " + x + " " + y );
+
+		if(getApi().isInANoGoZone(new PointF(x,y)))
+		{
+			// if in a nogozone in the middle of moving
+			// then the delta(inx,y) may be small enough
+			// for us to tell they have moved between two 
+			// gate points. And if so, then we can fire
+			getApi().fireOnMovementBeyondAGateIfRelevant(new PointF(x,y));
+			
+			// and we only do this once
+			// we don't keep letting the animation try all the points
+			// on the line to it's target, because
+			// some of these will also be behind some other gate.
+			isStopped = true;
+			return;
+		}
+
 		this.obj.setBaseMiddleX(x);
 		this.obj.setBaseMiddleY(y);
-		double framesPlayedSoFar = isBackwards
-				? (1 - progress) * framesPlayedDuringWalk
-						: progress * framesPlayedDuringWalk;
-	
-		int i = (this.framesInAnim >1)
-				? (int)framesPlayedSoFar
-						% this.framesInAnim
-						: 0;
 
+		int frameToSetTo =0;
+		if(this.framesInAnim >1)
+		{
+			double framesPlayedSoFar = framesPlayedDuringWalk * (isBackwards? (1 - progress)
+					: progress);
+			frameToSetTo = (int)framesPlayedSoFar % this.framesInAnim;
+
+		}
 		if (obj != null) {
 			obj.setCurrentAnimation(anim.getTextualId());
-			obj.setCurrentFrame(i);
+			obj.setCurrentFrame(frameToSetTo);
 		}
+
+
 	}
 
 	@Override // method in animation
 	protected void onCompleteGameAction()
 	{
-		this.obj.setBaseMiddleX(endX);
-		this.obj.setBaseMiddleY(endY);
-		
-		onUpdateGameAction(1.0);
+		if(!getApi().isInANoGoZone(new PointF(endX,endY)))
+		{
+			onUpdateGameAction(1.0);
+			this.obj.setBaseMiddleX(endX);
+			this.obj.setBaseMiddleY(endY);
+		}
 		if (holdLastFrame==false) {
 			if (this.obj != null)
 			{
-				
+
 				obj.setToInitialAnimationWithoutChangingFrame();
 			}
 		}

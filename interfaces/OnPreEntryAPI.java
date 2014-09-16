@@ -24,6 +24,7 @@ import com.github.a2g.core.objectmodel.InventoryPresenter;
 import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.VerbsPresenter;
+import com.github.a2g.core.primitive.PointF;
 
 public interface OnPreEntryAPI extends OnDoCommandAPI
 {
@@ -75,5 +76,13 @@ public interface OnPreEntryAPI extends OnDoCommandAPI
 	public void setIsSayAlwaysWithoutIncremementing(boolean isSayWithoutIncremementing);
 	@Override
 	public boolean getIsSayAlwaysWithoutIncremementing();
+	
+	@Override
+	public void addBoundaryGate(int id, PointF a, PointF b);
+	@Override
+	public void addBoundaryPoint(PointF a);
+	
+	@Override
+	public void setBoundaryCrossObject(short o);
 
 }

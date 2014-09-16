@@ -24,6 +24,7 @@ import com.github.a2g.core.objectmodel.InventoryPresenter;
 import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.VerbsPresenter;
+import com.github.a2g.core.primitive.PointF;
 
 public interface OnDoCommandAPI {
 	// get by ID
@@ -55,5 +56,9 @@ public interface OnDoCommandAPI {
 	public void setDefaultWalker(short object);
 	public void setIsSayAlwaysWithoutIncremementing(boolean isSayWithoutIncremementing);
 	public boolean getIsSayAlwaysWithoutIncremementing();
+	
+	public void addBoundaryGate(int id, PointF a, PointF b);
+	public void addBoundaryPoint(PointF a);
+	public void setBoundaryCrossObject(short o);
 
 }
