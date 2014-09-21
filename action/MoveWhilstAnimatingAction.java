@@ -131,7 +131,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 			// gate points. And if so, then we can fire
 			getApi().fireOnMovementBeyondAGateIfRelevant(new PointF(x,y));
 			
-			// and we only do this once
+			// and we make sure we only do this once
 			// we don't keep letting the animation try all the points
 			// on the line to it's target, because
 			// some of these will also be behind some other gate.

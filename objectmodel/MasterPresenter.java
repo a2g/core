@@ -462,7 +462,7 @@ implements InternalAPI
 	@Override
 	public String getLastScene() {
 
-		return lastSceneAsString;
+		return lastSceneAsString.toUpperCase();
 	}
 
 	@Override
