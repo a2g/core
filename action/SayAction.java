@@ -28,7 +28,7 @@ import com.github.a2g.core.action.ChainedAction;
 
 public class SayAction extends ChainedAction {
 	private ArrayList<String> speech;
-	private ArrayList<Double> ceilings;
+	private ArrayList<Double> startingTimeForEachLine;
 	private double totalDurationInSeconds;
 	private Animation anim;
 	private SceneObject object;
@@ -47,7 +47,7 @@ public class SayAction extends ChainedAction {
 		this.isHoldLastFrame = false;
 		this.isParallel = false;
 		speech = new ArrayList<String>();
-		ceilings = new ArrayList<Double>();
+		startingTimeForEachLine = new ArrayList<Double>();
 		String[] lines = fullSpeech.split("\n");
 		this.totalDurationInSeconds = 0;
 		for (int i = 0; i < lines.length; i++) {
@@ -58,11 +58,12 @@ public class SayAction extends ChainedAction {
 		}
 
 		// set ceilings (for easy calcluation)
-		double rollingCeiling = 0;
-		for (int i = 0; i < lines.length; i++) {
+		double rollingStartingTimeForLine = 0;
+		for (int i = 0; i < lines.length; i++) 
+		{
+			startingTimeForEachLine.add(new Double(rollingStartingTimeForLine / totalDurationInSeconds));
 			String line = lines[i];
-			rollingCeiling += getMillisecondsForSpeech(line);
-			ceilings.add(new Double(rollingCeiling / totalDurationInSeconds));
+			rollingStartingTimeForLine += getMillisecondsForSpeech(line);
 		}
 
 		//InternalAPI api = getApi();
@@ -143,10 +144,11 @@ public class SayAction extends ChainedAction {
 			}
 
 
-			// update text bubble
-			for (int i = ceilings.size()-1; i>=0; i--) {
-				if (progress > ceilings.get(i)) {
-					getApi().setStateOfPopup( true, .1,.1, object.getTalkingColor(), speech.get(ceilings.size()-1-i),null);
+			// update text in bubble
+			for (int i = startingTimeForEachLine.size()-1; i>=0; i--) {
+				// go backwards thru the loop to find text that should be valid
+				if (progress > startingTimeForEachLine.get(i)) {
+					getApi().setStateOfPopup( true, .1,.1, object.getTalkingColor(), speech.get(i),null);
 					break;
 				}
 			}
