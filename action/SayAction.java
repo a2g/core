@@ -19,6 +19,8 @@ package com.github.a2g.core.action;
 import java.util.ArrayList;
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.interfaces.SayActionMasterAPI;
+import com.github.a2g.core.interfaces.SayActionObjectAPI;
 import com.github.a2g.core.objectmodel.Animation;
 import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -30,22 +32,24 @@ public class SayAction extends ChainedAction {
 	private ArrayList<String> speech;
 	private ArrayList<Double> startingTimeForEachLine;
 	private double totalDurationInSeconds;
-	private Animation anim;
-	private SceneObject object;
+	private SayActionObjectAPI object;
 	private int numberOfFramesTotal;
 	private static final ColorEnum defaultTalkingColor = ColorEnum.Purple; 
+	private SayActionMasterAPI rootApi;
 	private boolean isNonIncrementing;
 	private boolean isHoldLastFrame;
 	private boolean isParallel;
+	private String animId;
 
-	public SayAction(BaseAction parent, String animation, String fullSpeech) {
+	public SayAction(BaseAction parent, SayActionMasterAPI rootApi, SayActionObjectAPI objectApi, String animationId, String fullSpeech) {
 		super(parent, parent.getApi(), true);
-		this.anim = getApi().getAnimation(animation);
-		this.object = anim.getObject();
+		this.object = objectApi;
+		this.rootApi = rootApi;
 		this.numberOfFramesTotal = 0;
 		this.isNonIncrementing = false;
 		this.isHoldLastFrame = false;
 		this.isParallel = false;
+		this.animId = animationId; 
 		speech = new ArrayList<String>();
 		startingTimeForEachLine = new ArrayList<Double>();
 		String[] lines = fullSpeech.split("\n");
@@ -66,7 +70,7 @@ public class SayAction extends ChainedAction {
 			rollingStartingTimeForLine += getMillisecondsForSpeech(line);
 		}
 
-		//InternalAPI api = getApi();
+		//InternalAPI api = rootApi;
 	}
 
 	int getAdjustedNumberOfFrames(String speech, double approxDuration, int animFramesCount, double duration)
@@ -96,7 +100,7 @@ public class SayAction extends ChainedAction {
 	@Override
 	public void runGameAction() {
 
-		if (anim==null)
+		if (animId=="")
 		{
 			// if theres no animation then we just wait for the totalDuration;
 			double framesPerSecond = 40;
@@ -107,19 +111,19 @@ public class SayAction extends ChainedAction {
 			numberOfFramesTotal = getAdjustedNumberOfFrames(
 					speech.get(0),
 					totalDurationInSeconds,
-					anim.getFrames().getCount(),
-					anim.getDurationSecs()
+					object.getNumberOfFramesForAnimation(animId),
+					object.getDurationForAnimation(animId)
 					);
 		}
 		
 		if(numberOfFramesTotal<2)
 		{
-			getApi().displayTitleCard("error!!");
+			rootApi.displayTitleCard("error!!");
 			assert(false);
 		}
 
-		if (anim != null && object != null) {
-			anim.setAsCurrentAnimation();
+		if (animId != "" && object != null) {
+			object.setCurrentAnimation(animId);
 			object.setVisible(true);
 		}
 
@@ -129,7 +133,7 @@ public class SayAction extends ChainedAction {
 		{
 			color = object.getTalkingColor(); 
 		}
-		getApi().setStateOfPopup( visible, .1,.1, color, speech.get(0),this);
+		rootApi.setStateOfPopup( visible, .1,.1, color, speech.get(0),this);
 
 		this.run((int) totalDurationInSeconds);
 	}
@@ -139,7 +143,7 @@ public class SayAction extends ChainedAction {
 
 		if(object!=null)
 		{
-			if (anim != null && object != null) {
+			if (animId != "" && object != null) {
 				object.setVisible(true);
 			}
 
@@ -148,15 +152,15 @@ public class SayAction extends ChainedAction {
 			for (int i = startingTimeForEachLine.size()-1; i>=0; i--) {
 				// go backwards thru the loop to find text that should be valid
 				if (progress > startingTimeForEachLine.get(i)) {
-					getApi().setStateOfPopup( true, .1,.1, object.getTalkingColor(), speech.get(i),null);
+					rootApi.setStateOfPopup( true, .1,.1, object.getTalkingColor(), speech.get(i),null);
 					break;
 				}
 			}
 
 			// if theres an associated animation, then use it
-			if (this.anim != null && ! isNonIncrementing) {
+			if (this.animId != "" && ! isNonIncrementing) {
 				int numberOfFramesSoFar = (int) (progress * numberOfFramesTotal);
-				int frame = numberOfFramesSoFar % anim.getFrames().getCount();
+				int frame = numberOfFramesSoFar % object.getNumberOfFramesForAnimation(animId);
 
 				// all frames of the animation should be shown
 				this.object.setCurrentFrame(frame);
@@ -174,7 +178,7 @@ public class SayAction extends ChainedAction {
 			}
 		}
 
-		getApi().setStateOfPopup( false, .1,.1, null, "",null);
+		rootApi.setStateOfPopup( false, .1,.1, null, "",null);
 
 	}
 
@@ -185,7 +189,7 @@ public class SayAction extends ChainedAction {
 	}
 
 	int getMillisecondsForSpeech(String speech) {
-		int popupDelay = getApi().getPopupDelay();
+		int popupDelay = rootApi.getPopupDelay();
 		// int delay = how;
 		// int duration = (speech.length() * (2 + delay)) * 40;
 		return popupDelay * 100;

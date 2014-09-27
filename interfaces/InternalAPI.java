@@ -35,7 +35,7 @@ import com.github.a2g.core.primitive.PointF;
 
 @SuppressWarnings("unused")
 public interface InternalAPI
-extends ImageAddAPI, OnDoCommandAPI{
+extends ImageAddAPI, OnDoCommandAPI, SayActionMasterAPI{
 	// get by ID
 	@Override
 	public SceneObject getObject(short  objectCode);

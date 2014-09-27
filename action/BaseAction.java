@@ -231,41 +231,42 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	public ChainedAction say(String animCode, String speech) {
-		return new SayAction(this, animCode,speech);
+		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), api.getDefaultSayAnimation(), speech);
+		return s;
 	}
-
+	
 	public ChainedAction say(String speech) {
-		SayAction s = new SayAction(this, api.getDefaultSayAnimation(), speech);
+		SayAction s = new SayAction(this, api, api.getAnimation(api.getDefaultSayAnimation()).getSceneObject(), api.getDefaultSayAnimation(), speech);
 		s.setIsNonIncrementing(api.getIsSayAlwaysWithoutIncremementing());
 		return s;
 	}
 
 	public ChainedAction sayWithoutIncrementingFrame(String animCode, String speech) {
-		SayAction s = new SayAction(this, animCode, speech);
+		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), api.getDefaultSayAnimation(), speech);
 		s.setIsNonIncrementing(true);
 		return s;
 	}
 
 	public ChainedAction sayWithoutIncrementingHoldLastFrame(String animCode, String speech) {
-		SayAction s = new SayAction(this, animCode, speech);
+		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), api.getDefaultSayAnimation(), speech);
 		s.setIsNonIncrementing(true);
 		s.setHoldLastFrame(true);
 		return s;
 	}
 	public ChainedAction sayWithoutIncrementingFrameNonBlocking(String animCode, String speech) {
-		SayAction s = new SayAction(this, animCode, speech);
+		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), api.getDefaultSayAnimation(), speech);
 		s.setIsNonIncrementing(true);
 		s.setNonBlocking(true);
 		return s;
 	}
 	public ChainedAction sayWithoutIncrementingFrame( String speech) {
-		SayAction s = new SayAction(this, api.getDefaultSayAnimation(), speech);
+		SayAction s = new SayAction(this, api, api.getAnimation(api.getDefaultSayAnimation()).getSceneObject(), api.getDefaultSayAnimation(), speech);
 		s.setIsNonIncrementing(true);
 		return s;
 	}
 	
 	public ChainedAction sayWithoutIncrementingFrameNonBlocking( String speech) {
-		SayAction s = new SayAction(this, api.getDefaultSayAnimation(), speech);
+		SayAction s = new SayAction(this, api, api.getAnimation(api.getDefaultSayAnimation()).getSceneObject(), api.getDefaultSayAnimation(), speech);
 		s.setIsNonIncrementing(true);
 		s.setNonBlocking(true);
 		return s;

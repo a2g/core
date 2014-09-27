@@ -60,6 +60,7 @@ import com.github.a2g.core.interfaces.OnFillLoadListAPIImpl;
 import com.github.a2g.core.interfaces.OnPreEntryAPI;
 import com.github.a2g.core.interfaces.PackagedImageAPI;
 import com.github.a2g.core.interfaces.PopupPanelAPI;
+import com.github.a2g.core.interfaces.SayActionMasterAPI;
 import com.github.a2g.core.interfaces.SceneAPI;
 import com.github.a2g.core.interfaces.TimerAPI;
 import com.github.a2g.core.interfaces.TimerCallbackAPI;
@@ -85,6 +86,7 @@ implements InternalAPI
 , ActionRunnerCallbackAPI
 , InventoryPresenterCallbackAPI
 , VerbsPresenterCallbackAPI
+, SayActionMasterAPI
 {
 
 	private CommandLinePresenter commandLinePresenter;
@@ -549,6 +551,7 @@ implements InternalAPI
 		this.dialogTreePresenter.markSpeechAsSaid(speech);
 
 		String animId = getDialogTreeGui().getDialogTreeTalkAnimation();
+		SceneObject o = getAnimation(animId).getSceneObject();
 		// This is a bit sneaky:
 		// 1. we construct a BaseAction that sas the speech
 		// 2. we pass this to onDialogTree
@@ -557,7 +560,7 @@ implements InternalAPI
 		// Thus it will say the text, and do what the user prescribes.
 
 		//String animId = getDialogTreeGui().setBranchVisited(branchId);
-		SayAction say = new SayAction(createChainRootAction(), animId, speech);
+		SayAction say = new SayAction(createChainRootAction(), this, o, animId, speech);
 		BaseDialogTreeAction actionChain = callbacks.onDialogTree(this, say, branchId);
 		executeActionWithDialogActionRunner(actionChain);
 	}

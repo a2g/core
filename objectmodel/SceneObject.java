@@ -19,6 +19,7 @@ package com.github.a2g.core.objectmodel;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.github.a2g.core.interfaces.SayActionObjectAPI;
 import com.github.a2g.core.interfaces.SceneAPI;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -27,7 +28,7 @@ import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
 
 
-public class SceneObject {
+public class SceneObject implements SayActionObjectAPI{
 	private String initialAnimationId;
 	private Map<SceneAPI.Special, String> mapOfSpecialAnimations;
 	private final String textualId;
@@ -465,6 +466,16 @@ public class SceneObject {
 	{
 		//todo: should really check whether initial animation is null
 		this.setCurrentAnimation(this.getInitialAnimation());
+	}
+
+	@Override
+	public int getNumberOfFramesForAnimation(String animId) {
+		return getAnimations().at(animId).getLength();
+	}
+
+	@Override
+	public double getDurationForAnimation(String animId) {
+		return getAnimations().at(animId).getDurationSecs();
 	}
 
 }
