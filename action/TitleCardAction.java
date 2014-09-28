@@ -34,10 +34,10 @@ public class TitleCardAction extends ChainedAction {
 
 		if(text.length()>0)
 		{
-			int totalDuration = 200*getApi().getPopupDelay();
+			double totalInMilliseconds =4*getApi().getPopupDisplayDuration()*1000;
 
 			getApi().displayTitleCard(text);
-			this.run(totalDuration);
+			this.run((int)totalInMilliseconds);
 		}
 		else
 		{

@@ -231,7 +231,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	public ChainedAction say(String animCode, String speech) {
-		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), api.getDefaultSayAnimation(), speech);
+		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), animCode, speech);
 		return s;
 	}
 	
@@ -248,13 +248,13 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	public ChainedAction sayWithoutIncrementingHoldLastFrame(String animCode, String speech) {
-		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), api.getDefaultSayAnimation(), speech);
+		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), animCode, speech);
 		s.setIsNonIncrementing(true);
 		s.setHoldLastFrame(true);
 		return s;
 	}
 	public ChainedAction sayWithoutIncrementingFrameNonBlocking(String animCode, String speech) {
-		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), api.getDefaultSayAnimation(), speech);
+		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), animCode, speech);
 		s.setIsNonIncrementing(true);
 		s.setNonBlocking(true);
 		return s;

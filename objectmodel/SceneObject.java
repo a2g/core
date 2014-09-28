@@ -470,13 +470,13 @@ public class SceneObject implements SayActionObjectAPI{
 
 	@Override
 	public int getNumberOfFramesForAnimation(String animId) {
-		return getAnimations().at(animId).getLength();
+		return (getAnimations().at(animId)!=null)? getAnimations().at(animId).getLength(): 0;
 	}
 
 	@Override
 	public double getDurationForAnimation(String animId) {
-		return getAnimations().at(animId).getDurationSecs();
-	}
+		return (getAnimations().at(animId)!=null)? getAnimations().at(animId).getDurationSecs(): 0;
+			}
 
 }
 

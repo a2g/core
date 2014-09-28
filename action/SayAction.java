@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.SayActionMasterAPI;
 import com.github.a2g.core.interfaces.SayActionObjectAPI;
-import com.github.a2g.core.objectmodel.Animation;
-import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.action.ChainedAction;
 
@@ -45,6 +43,7 @@ public class SayAction extends ChainedAction {
 		super(parent, parent.getApi(), true);
 		this.object = objectApi;
 		this.rootApi = rootApi;
+		assert(object!=null);
 		this.numberOfFramesTotal = 0;
 		this.isNonIncrementing = false;
 		this.isHoldLastFrame = false;
@@ -187,12 +186,13 @@ public class SayAction extends ChainedAction {
 
 		return isParallel;
 	}
+	
 
 	int getMillisecondsForSpeech(String speech) {
-		int popupDelay = rootApi.getPopupDelay();
+		double popupDisplayDuration = rootApi.getPopupDisplayDuration()*1000;
 		// int delay = how;
 		// int duration = (speech.length() * (2 + delay)) * 40;
-		return popupDelay * 100;
+		return (int)popupDisplayDuration;
 	}
 	
 	public void setNonBlocking(boolean b) {

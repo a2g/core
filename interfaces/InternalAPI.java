@@ -84,7 +84,7 @@ extends ImageAddAPI, OnDoCommandAPI, SayActionMasterAPI{
 
 	// dialog tree methods
 	public void executeBranchOnCurrentScene(int place);
-	public int getPopupDelay();
+	public double getPopupDisplayDuration();
 	public void restartReloading();
 
 	public void displayTitleCard(String text);

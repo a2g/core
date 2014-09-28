@@ -326,7 +326,8 @@ implements ScenePanelAPI
 
 
 	public Point getTopLeft() {
-		return new Point(this.getLocationOnScreen().x,this.getLocationOnScreen().y );
+		return new Point(0,0);
+		//return new Point(this.getLocationOnScreen().x,this.getLocationOnScreen().y );
 	}
 
 

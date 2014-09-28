@@ -7,7 +7,7 @@ public interface SayActionMasterAPI {
 
 	void displayTitleCard(String string);
 
-	int getPopupDelay();
+	double getPopupDisplayDuration();
 
 	void setStateOfPopup(boolean visible, double d, double e, ColorEnum color,
 			String string, BaseAction sayAction);

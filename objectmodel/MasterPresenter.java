@@ -110,7 +110,7 @@ implements InternalAPI
 	private MasterPanelAPI masterPanel;
 	private ActionRunner dialogActionRunner;
 	private ActionRunner doCommandActionRunner;
-	private int textSpeedDelay;
+	private double popupDisplayDuration;
 	private Integer[] theListOfIndexesToInsertAt;
 	private ArrayList<PointF> gatePoints;
 	private ArrayList<Integer> gateIds;
@@ -132,7 +132,7 @@ implements InternalAPI
 		this.timer = null;
 		this.switchTimer = null;
 		this.parent = parent;
-		this.textSpeedDelay = 20;
+		this.popupDisplayDuration = .8;
 
 		this.theObjectMap = new TreeMap<Short, SceneObject>();
 		this.theAnimationMap = new TreeMap<String, Animation>();
@@ -328,14 +328,14 @@ implements InternalAPI
 		dialogActionRunner.skip();
 	}
 
-	public void decrementTextSpeed()
+	public void decrementPopupDisplayDuration()
 	{
-		textSpeedDelay++;
+		popupDisplayDuration*=.9;
 	}
 
-	public void incrementTextSpeed()
+	public void incrementPopupDisplayDuration()
 	{
-		textSpeedDelay--;
+		popupDisplayDuration*=1.1;
 	}
 
 
@@ -692,8 +692,8 @@ implements InternalAPI
 	}
 
 	@Override
-	public int getPopupDelay() {
-		return textSpeedDelay;
+	public double getPopupDisplayDuration() {
+		return popupDisplayDuration;
 	}
 
 
