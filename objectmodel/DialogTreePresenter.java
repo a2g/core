@@ -17,13 +17,14 @@
 package com.github.a2g.core.objectmodel;
 
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.google.gwt.dev.util.collect.HashSet;
+//import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.event.shared.EventBus;
 
 
