@@ -136,7 +136,10 @@ public class SceneObject implements SayActionObjectAPI{
 
 	public void updateCurrentImage()
 	{
-		currentImage.setLeftTop(getRawLeftTop());
+		if(currentImage!=null)
+		{
+			currentImage.setLeftTop(getRawLeftTop());
+		}
 	}
 
 
@@ -162,7 +165,7 @@ public class SceneObject implements SayActionObjectAPI{
 		if (anim != null) {
 			
 			int effectiveFrame = fak.getCurrentFrame();
-			// if we use -1 to indicate last frame ( 
+			// if we use -17 to indicate last frame ( 
 			if(fak.getCurrentFrame()==-17)
 			{
 				// set both to last frame
@@ -215,10 +218,9 @@ public class SceneObject implements SayActionObjectAPI{
 	}
 
 	public void setVisible(boolean visible) {
-		//if (this.visible != visible) {
+		//we always do this, we don't even check if visible!=this.visible
 		this.visible = visible;
 		updateToCorrectImage();
-		//}
 	}
 
 	public boolean isVisible() {

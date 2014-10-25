@@ -99,41 +99,44 @@ public class SayAction extends ChainedAction {
 	@Override
 	public void runGameAction() {
 
-		if (animId=="")
-		{
-			// if theres no animation then we just wait for the totalDuration;
-			double framesPerSecond = 40;
-			numberOfFramesTotal = (int) (totalDurationInSeconds * framesPerSecond);
-		}
-		else
-		{
-			numberOfFramesTotal = getAdjustedNumberOfFrames(
-					speech.get(0),
-					totalDurationInSeconds,
-					object.getNumberOfFramesForAnimation(animId),
-					object.getDurationForAnimation(animId)
-					);
-		}
-		
-		if(numberOfFramesTotal<2)
-		{
-			rootApi.displayTitleCard("error!!");
-			assert(false);
-		}
-
-		if (animId != "" && object != null) {
-			object.setCurrentAnimation(animId);
-			object.setVisible(true);
-		}
-
-		boolean visible = true;
-		ColorEnum color = defaultTalkingColor;
 		if(object!=null)
 		{
-			color = object.getTalkingColor(); 
-		}
-		rootApi.setStateOfPopup( visible, .1,.1, color, speech.get(0),this);
+			if (animId=="")
+			{
+				// if theres no animation then we just wait for the totalDuration;
+				double framesPerSecond = 40;
+				numberOfFramesTotal = (int) (totalDurationInSeconds * framesPerSecond);
+			}
+			else
+			{
+				numberOfFramesTotal = getAdjustedNumberOfFrames(
+						speech.get(0),
+						totalDurationInSeconds,
+						object.getNumberOfFramesForAnimation(animId),
+						object.getDurationForAnimation(animId)
+						);
+			}
 
+			if(numberOfFramesTotal<2)
+			{
+				rootApi.displayTitleCard("error!!");
+				assert(false);
+			}
+
+			if (animId != "" && object != null) {
+				object.setCurrentAnimation(animId);
+				object.setVisible(true);
+			}
+
+			boolean visible = true;
+			ColorEnum color = defaultTalkingColor;
+			if(object!=null)
+			{
+				color = object.getTalkingColor(); 
+			}
+			rootApi.setStateOfPopup( visible, .1,.1, color, speech.get(0),this);
+
+		}
 		this.run((int) totalDurationInSeconds);
 	}
 
@@ -186,7 +189,7 @@ public class SayAction extends ChainedAction {
 
 		return isParallel;
 	}
-	
+
 
 	int getMillisecondsForSpeech(String speech) {
 		double popupDisplayDuration = rootApi.getPopupDisplayDuration()*1000;
@@ -194,7 +197,7 @@ public class SayAction extends ChainedAction {
 		// int duration = (speech.length() * (2 + delay)) * 40;
 		return (int)popupDisplayDuration;
 	}
-	
+
 	public void setNonBlocking(boolean b) {
 		isParallel = b;
 	}
@@ -202,9 +205,9 @@ public class SayAction extends ChainedAction {
 	public void setHoldLastFrame(boolean isHoldLastFrame ) {
 		this.isHoldLastFrame = isHoldLastFrame ;
 	}
-	
+
 	public void setIsNonIncrementing(boolean isNonIncrementing ) {
 		this.isNonIncrementing = isNonIncrementing ;
 	}
-	
+
 }
