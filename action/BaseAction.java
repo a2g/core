@@ -242,7 +242,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	public ChainedAction sayWithoutIncrementingFrame(String animCode, String speech) {
-		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), api.getDefaultSayAnimation(), speech);
+		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), animCode, speech);
 		s.setIsNonIncrementing(true);
 		return s;
 	}

@@ -86,6 +86,8 @@ public class SayAction extends ChainedAction {
 		// ... and the number of frames that occurs during that
 		// many plays of the animation.
 		int numberOfFramesTotal = (int) (numberOfTimesAnimRepeats * animFramesCount);
+		if(numberOfFramesTotal==0)
+			numberOfFramesTotal = animFramesCount;
 		// The effect of this is that there is a little bit of 'over-play'
 		// where the amount of time it takes to 'say' something
 		// when there is a talking animation, is usually a
@@ -119,7 +121,7 @@ public class SayAction extends ChainedAction {
 
 			if(numberOfFramesTotal<2)
 			{
-				rootApi.displayTitleCard("error!!");
+				rootApi.displayTitleCard("error!! id=<"+ animId + "> numberOfFramesTotal="+numberOfFramesTotal);
 				assert(false);
 			}
 
