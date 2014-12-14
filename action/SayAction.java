@@ -119,7 +119,7 @@ public class SayAction extends ChainedAction {
 						);
 			}
 
-			if(numberOfFramesTotal<2)
+			if(numberOfFramesTotal<1)
 			{
 				rootApi.displayTitleCard("error!! id=<"+ animId + "> numberOfFramesTotal="+numberOfFramesTotal);
 				assert(false);
