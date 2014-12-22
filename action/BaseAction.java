@@ -596,5 +596,11 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		AlignBaseMiddleAction h = new AlignBaseMiddleAction(this, anim,-17);
 		return h;
 	}
+	
+	public ChainedAction share(String blah)
+	{
+		ShareAction s = new ShareAction(this,blah);
+		return s;
+	}
 }
 

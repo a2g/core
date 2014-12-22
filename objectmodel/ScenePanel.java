@@ -17,6 +17,7 @@
 package com.github.a2g.core.objectmodel;
 
 import com.google.gwt.event.dom.client.LoadHandler;
+import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.PackagedImageAPI;
@@ -26,9 +27,12 @@ import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectTouchMoveHandler;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Label;
 
 
 public class ScenePanel
@@ -38,14 +42,21 @@ implements ImagePanelAPI, ScenePanelAPI
 	int cameraOffsetX;
 	int cameraOffsetY;
 	SceneObjectTouchMoveHandler theTouchMoveHandler;
+	FlowPanel speechWidget;
+	Label label;
 
 	public ScenePanel(EventBus bus, InternalAPI api)
 	{
 		this.getElement().setId("cwAbsolutePanel");
-		this.addStyleName("absolutePanel");
+		//this.addStyleName("absolutePanel");
 		this.cameraOffsetX = 0;
 		this.cameraOffsetY = 0;
 		this.theTouchMoveHandler = new SceneObjectTouchMoveHandler(api);
+		
+		label = new Label("hello");
+		this.speechWidget = new FlowPanel();
+		speechWidget.add(label);
+		
 	}
 
 	@Override
@@ -60,6 +71,7 @@ implements ImagePanelAPI, ScenePanelAPI
 			String objectTextualId,
 			short objectCode)
 	{
+	
 		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource((PackagedImageForHtml4)imageResource,lh);
 
 		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new Point(x, y));
@@ -138,6 +150,25 @@ implements ImagePanelAPI, ScenePanelAPI
 	{
 		this.cameraOffsetX = x;
 		this.cameraOffsetY = y;
+	}
+
+	@Override
+	public void setStateOfPopup(boolean visible, int x, int y,
+			ColorEnum talkingColor, String speech, BaseAction ba) {
+		if(!visible)
+		{
+			super.remove(speechWidget);
+		}
+		label.setVisible(visible);
+		label.getElement().getStyle().setProperty("color","#ff0000");
+		label.getElement().getStyle().setProperty("fontcolor","#00ff00");
+		label.getElement().getStyle().setProperty("textcolor","#0000ff");
+		if(talkingColor!=null)
+		{
+			label.getElement().getStyle().setProperty("borderColor",talkingColor.toString());
+		}
+		label.setText(speech);
+		super.add(speechWidget, x,y);
 	}
 
 }

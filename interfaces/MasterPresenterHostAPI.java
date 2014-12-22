@@ -29,4 +29,5 @@ public interface MasterPresenterHostAPI {
 	void alert(String string);
 	FactoryAPI getFactory(EventBus bus, MasterPresenter mp);
 	public SceneAPI getSceneViaCache(String string);
+	void shareWinning(String token);
 }

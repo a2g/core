@@ -34,13 +34,17 @@ import java.util.TreeMap;
 
 import javax.swing.JPanel;
 
+
+
 //import com.github.a2g.bridge.Image;
 import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
+import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.PackagedImageAPI;
 import com.github.a2g.core.interfaces.ScenePanelAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.platforms.java.ImageForJava;
@@ -329,6 +333,21 @@ implements ScenePanelAPI
 		return new Point(0,0);
 		//return new Point(this.getLocationOnScreen().x,this.getLocationOnScreen().y );
 	}
+
+
+
+
+	@Override
+	public void setStateOfPopup(boolean visible, int x, int y,
+			ColorEnum talkingColor, String speech, BaseAction ba) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
 
 
 

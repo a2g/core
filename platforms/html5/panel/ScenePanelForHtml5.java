@@ -28,6 +28,7 @@ import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.canvas.dom.client.CssColor;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.LoadHandler;
+import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.PackagedImageAPI;
@@ -41,6 +42,7 @@ import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseOverHandler;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.shared.EventBus;
@@ -314,4 +316,15 @@ implements ImagePanelAPI, ScenePanelAPI
 
 		return textualId;
 	}
+
+
+	@Override
+	public void setStateOfPopup(boolean visible, int x, int y,
+			ColorEnum talkingColor, String speech, BaseAction ba) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 }

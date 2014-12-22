@@ -62,4 +62,6 @@ public interface OnEveryFrameAPI {
 	public ChainRootAction createChainRootAction();
 	public void executeChainedAction(ChainedAction ba);
 
+	public void shareWinning(String token);
+
 }

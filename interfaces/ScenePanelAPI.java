@@ -16,7 +16,9 @@
  */
 package com.github.a2g.core.interfaces;
 
+import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.objectmodel.Image;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
 
@@ -34,4 +36,7 @@ public interface ScenePanelAPI
 	void setVisible(boolean b);
 
 	void setCameraOffset(int x, int y);
+	
+	void setStateOfPopup(boolean visible, int x, int y, ColorEnum talkingColor,
+			String speech, BaseAction ba);	
 }

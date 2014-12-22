@@ -60,5 +60,7 @@ public interface OnDoCommandAPI {
 	public void addBoundaryGate(int id, PointF a, PointF b);
 	public void addBoundaryPoint(PointF a);
 	public void setBoundaryCrossObject(short o);
+	
+	public void shareWinning(String token);
 
 }

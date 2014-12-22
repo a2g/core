@@ -21,6 +21,7 @@ package com.github.a2g.core.objectmodel;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.logging.Logger;
+
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
@@ -32,7 +33,6 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.action.BaseDialogTreeAction;
-
 import com.github.a2g.core.event.PropertyChangeEvent;
 import com.github.a2g.core.event.PropertyChangeEventHandlerAPI;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
@@ -981,9 +981,13 @@ implements InternalAPI
 	}
 
 	@Override
-	public void setStateOfPopup(boolean visible, double x, double y,
+	public void setStateOfPopup(boolean visible, double percentX, double percentY,
 			ColorEnum talkingColor, String speech,BaseAction ba)
 	{
+		double x = this.scenePresenter.getWidth()*percentX;
+		double y = this.scenePresenter.getHeight()*percentY;
+		scenePresenter.getView().setStateOfPopup(visible, (int)x, (int)y, talkingColor, speech, ba);
+		/*
 		if(talkingColor==null)
 		{
 			talkingColor = ColorEnum.Red;
@@ -1010,6 +1014,7 @@ implements InternalAPI
 			speechPopup.setCancelCallback(ba);
 		speechPopup.setPopupPosition(x, y);
 		speechPopup.setVisible(true);
+		*/
 	}
 
 	@Override
@@ -1175,6 +1180,12 @@ implements InternalAPI
 		{
 			this.callbacks.onMovementBeyondAGate(this, foundId);
 		}
+	}
+
+	@Override
+	public void shareWinning(String token) {
+		this.parent.shareWinning(token);
+		
 	}
 
 }

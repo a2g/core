@@ -75,14 +75,14 @@ implements PopupPanelAPI
 	{
 		if(color!=null)
 		{
-			DOM.setStyleAttribute(labelInPopup.getElement(), "color","#ff0000");
-			DOM.setStyleAttribute(labelInPopup.getElement(), "fontColor","#ff0000");
-			DOM.setStyleAttribute(labelInPopup.getElement(), "textColor","#ff0000");
-			//DOM.setStyleAttribute(labelInPopup.getElement(), "fontColor",color.toString());
-			DOM.setStyleAttribute(popup.getElement(), "borderColor",color.toString());
+			labelInPopup.getElement().getStyle().setProperty("color","#ff0000");
+			labelInPopup.getElement().getStyle().setProperty("fontColor","#ff0000");
+			labelInPopup.getElement().getStyle().setProperty("textColor","#ff0000");
+			//labelInPopup.getElement().getStyle().setProperty("fontColor",color.toString());
+			popup.getElement().getStyle().setProperty("borderColor",color.toString());
 		}
-		//DOM.setStyleAttribute(labelInPopup.getElement(), "backgroundColor", ColorEnum.Black.toString());
-		//DOM.setStyleAttribute(popup.getElement(), "backgroundColor", ColorEnum.Black.toString());
+		//labelInPopup.getElement().getStyle().setProperty( "backgroundColor", ColorEnum.Black.toString());
+		//popup.getElement().getStyle().setProperty("backgroundColor", ColorEnum.Black.toString());
 
 
 	}
