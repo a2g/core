@@ -35,6 +35,6 @@ public class DialogTreeMouseOverHandler implements MouseOverHandler {
 
 	@Override
 	public void onMouseOver(MouseOverEvent event) {
-		DOM.setStyleAttribute(label.getElement(), "color",rolloverColor.toString());
+		label.getElement().getStyle().setProperty("color",rolloverColor.toString());
 	}
 }

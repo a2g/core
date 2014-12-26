@@ -42,8 +42,8 @@ implements TitleCardPanelAPI
 		{
 			label = new Label();
 			label.setAutoHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-			DOM.setStyleAttribute(label.getElement(), "color",fore.toString());
-			DOM.setStyleAttribute(label.getElement(), "BackgroundColor",back.toString());
+			label.getElement().getStyle().setProperty( "color",fore.toString());
+			label.getElement().getStyle().setProperty( "BackgroundColor",back.toString());
 
 			label.setText("Loading...");
 			layout.add(label);

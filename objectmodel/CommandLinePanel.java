@@ -19,7 +19,6 @@ package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.interfaces.CommandLinePanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.UIObject;
 
@@ -31,8 +30,8 @@ implements CommandLinePanelAPI
 	public CommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll)
 	{
 		this.setText(" ");
-		DOM.setStyleAttribute(getElement(), "color", fore.toString());
-		DOM.setStyleAttribute(getElement(), "backgroundColor", back.toString());
+		this.getElement().getStyle().setProperty("color", fore.toString());
+		this.getElement().getStyle().setProperty("backgroundColor", back.toString());
 	}
 
 

@@ -37,6 +37,6 @@ public class DialogTreeMouseOutHandler implements MouseOutHandler {
 	@Override
 	public void onMouseOut(MouseOutEvent event)
 	{
-		DOM.setStyleAttribute(label.getElement(), "color", foregroundColor.toString());
+		label.getElement().getStyle().setProperty("color", foregroundColor.toString());
 	}
 }

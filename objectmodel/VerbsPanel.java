@@ -39,8 +39,8 @@ VerbsPanelAPI
 	public VerbsPanel(InternalAPI api, MouseToVerbsPresenterAPI mouseToPresenter, ColorEnum fore, ColorEnum back)
 	{
 		this.mouseToPresenter = mouseToPresenter;
-		DOM.setStyleAttribute(getElement(), "color",fore.toString());
-		DOM.setStyleAttribute(getElement(), "backgroundColor", back.toString());
+		getElement().getStyle().setProperty("color",fore.toString());
+		getElement().getStyle().setProperty("backgroundColor", back.toString());
 
 	}
 

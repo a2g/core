@@ -53,8 +53,8 @@ ImagePanelAPI
 		ImageResource resLeft = UserInterfaceDecoration.getLeftArrow();
 		ImageResource resRight = UserInterfaceDecoration.getRightArrow();
 
-		DOM.setStyleAttribute(getElement(), "color", fore.toString());
-		DOM.setStyleAttribute(getElement(), "backgroundColor", back.toString());
+		getElement().getStyle().setProperty("color", fore.toString());
+		getElement().getStyle().setProperty("backgroundColor", back.toString());
 
 
 		imgLeft = new com.google.gwt.user.client.ui.Image(resLeft.getSafeUri());

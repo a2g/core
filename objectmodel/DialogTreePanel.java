@@ -38,8 +38,8 @@ implements DialogTreePanelAPI
 		this.rolloverColor = rolloverColor;
 		this.foregroundColor = foregroundColor;
 
-		DOM.setStyleAttribute(this.getElement(), "Color",foregroundColor.toString());
-		DOM.setStyleAttribute(this.getElement(), "BackgroundColor",backgroundColor.toString());
+		getElement().getStyle().setProperty("Color",foregroundColor.toString());
+		getElement().getStyle().setProperty("BackgroundColor",backgroundColor.toString());
 
 		for (int i = 0; i < getRowCount(); i++) {
 			Label label = new Label("");
@@ -63,7 +63,7 @@ implements DialogTreePanelAPI
 			Label label = new Label(lineOfDialog);
 
 			this.setWidget(i, 0, label);
-			DOM.setStyleAttribute(label.getElement(), "color", foregroundColor.toString());
+			label.getElement().getStyle().setProperty("color", foregroundColor.toString());
 
 			label.addMouseOverHandler(new DialogTreeMouseOverHandler(label, rolloverColor));
 			label.addMouseOutHandler(new DialogTreeMouseOutHandler(label, foregroundColor));

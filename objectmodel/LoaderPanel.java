@@ -48,8 +48,8 @@ implements LoaderPanelAPI
 		{
 			progress = new Label();
 
-			DOM.setStyleAttribute(progress.getElement(), "color",fore.toString());
-			DOM.setStyleAttribute(progress.getElement(), "backgroundColor",back.toString());
+			progress.getElement().getStyle().setProperty("color",fore.toString());
+			progress.getElement().getStyle().setProperty( "backgroundColor",back.toString());
 
 			progress.setText("Loading...");
 
@@ -67,18 +67,18 @@ implements LoaderPanelAPI
 		{
 			// Initialize the progress elements
 			containerGrid = new Grid(1, TOTAL_NUMBER_OF_CELLS);
-			DOM.setStyleAttribute(containerGrid.getElement(), "margin","0px");
-			DOM.setStyleAttribute(containerGrid.getElement(), "border","0px solid white");
+			containerGrid.getElement().getStyle().setProperty( "margin","0px");
+			containerGrid.getElement().getStyle().setProperty( "border","0px solid white");
 			containerGrid.setCellPadding(0);
 			containerGrid.setCellSpacing(0);
 
 			for (int i = 0; i < TOTAL_NUMBER_OF_CELLS; i++) {
 				Grid grid = new Grid(1, 1);
 				grid.setHTML(0, 0, "");
-				DOM.setStyleAttribute(grid.getElement(), "width","5px");
-				DOM.setStyleAttribute(grid.getElement(), "height","15px");
-				DOM.setStyleAttribute(grid.getElement(), "margin","1px");
-				DOM.setStyleAttribute(grid.getElement(), "background","#eee");
+				grid.getElement().getStyle().setProperty( "width","5px");
+				grid.getElement().getStyle().setProperty( "height","15px");
+				grid.getElement().getStyle().setProperty( "margin","1px");
+				grid.getElement().getStyle().setProperty( "background","#eee");
 				containerGrid.setWidget(0, i, grid);
 			}
 
@@ -142,7 +142,7 @@ implements LoaderPanelAPI
 						Grid grid = (Grid) containerGrid.getWidget(0, i);
 						if(grid!=null)
 						{
-							DOM.setStyleAttribute(grid.getElement(), "background","#eee");
+							grid.getElement().getStyle().setProperty( "background","#eee");
 						}
 					}
 				}
@@ -153,7 +153,7 @@ implements LoaderPanelAPI
 						Grid grid = (Grid) containerGrid.getWidget(0, i);
 						if(grid!=null)
 						{
-							DOM.setStyleAttribute(grid.getElement(), "background","blue");
+							grid.getElement().getStyle().setProperty( "background","blue");
 						}
 					}
 				}

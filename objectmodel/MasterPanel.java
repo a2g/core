@@ -53,8 +53,8 @@ implements MasterPanelAPI
 		AbsolutePanel stackForSceneAndLoading = new AbsolutePanel();
 		AbsolutePanel stackForDialogTreeInvAndCommand = new AbsolutePanel();
 
-		DOM.setStyleAttribute(stackForDialogTreeInvAndCommand.getElement(),"backgroundColor", back.toString());
-		DOM.setStyleAttribute(stackForSceneAndLoading.getElement(),"backgroundColor", back.toString());
+		stackForDialogTreeInvAndCommand.getElement().getStyle().setProperty("backgroundColor", back.toString());
+		stackForSceneAndLoading.getElement().getStyle().setProperty("backgroundColor", back.toString());
 
 
 
