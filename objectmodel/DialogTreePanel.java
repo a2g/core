@@ -22,7 +22,6 @@ import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseOutHandler;
 import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 

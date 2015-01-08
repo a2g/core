@@ -110,6 +110,7 @@ extends ImageAddAPI, OnDoCommandAPI, SayActionMasterAPI{
 	
 	public boolean isInANoGoZone(PointF tp);
 	public void fireOnMovementBeyondAGateIfRelevant(PointF tp);
+	public void log(String type, String content);
 
 }
 

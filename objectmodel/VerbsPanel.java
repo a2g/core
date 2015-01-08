@@ -23,7 +23,6 @@ import com.github.a2g.core.interfaces.VerbsPanelAPI;
 import com.github.a2g.core.platforms.html4.mouse.VerbMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.VerbMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 

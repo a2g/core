@@ -32,7 +32,6 @@ import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.res.UserInterfaceDecoration;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
 public class InventoryPanel

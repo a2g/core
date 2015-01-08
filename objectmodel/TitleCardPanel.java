@@ -21,7 +21,6 @@ import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.TitleCardPanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
