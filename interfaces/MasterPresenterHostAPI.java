@@ -25,10 +25,10 @@ public interface MasterPresenterHostAPI {
 	public void setValue(String name, Integer value);
 	public int getValue(String name);
 	public void instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(String scene);
-	public void setLastCommand(double x, double y, String command);
+	public void setLastCommand(double x, double y, int verb, int a, int b);
 	void alert(String string);
 	FactoryAPI getFactory(EventBus bus, MasterPresenter mp);
 	public SceneAPI getSceneViaCache(String string);
 	void shareWinning(String token);
-	void log(String type, String content);
+	void log(String message);
 }

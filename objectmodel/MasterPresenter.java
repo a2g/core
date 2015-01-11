@@ -491,10 +491,9 @@ implements InternalAPI
 	}
 
 	@Override
-	public void setLastCommand(double x, double y, int v,
-			String a, String b) {
-		parent.setLastCommand(x, y, this.getVerbsGui().getVerbsModel().items().get(v).getdisplayText()+" "+a+" "+b);
-
+	public void setLastCommand(double x, double y, int v, int a, int b)
+	{
+		parent.setLastCommand(x, y, v, a, b);
 	}
 
 	public void setCommandLineGui(CommandLinePresenter commandLinePanel) {
@@ -858,8 +857,8 @@ implements InternalAPI
 
 		setLastCommand(x, y,
 				verbAsVerbEnumeration,
-				sentenceA.getTextualId(),
-				sentenceB.getTextualId());
+				sentenceA.getCode(),
+				sentenceB.getCode());
 
 	}
 
@@ -1190,7 +1189,7 @@ implements InternalAPI
 
 	@Override
 	public void log(String type, String content) {
-		this.parent.log(type, content);
+		this.parent.log(type);
 		
 	}
 
