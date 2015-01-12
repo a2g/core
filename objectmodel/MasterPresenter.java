@@ -491,9 +491,10 @@ implements InternalAPI
 	}
 
 	@Override
-	public void setLastCommand(double x, double y, int v, int a, int b)
+	public void setLastCommand(double x, double y, int v, String a, String b)
 	{
-		parent.setLastCommand(x, y, v, a, b);
+		parent.setLastCommand(x, y, v,a,b);
+
 	}
 
 	public void setCommandLineGui(CommandLinePresenter commandLinePanel) {
@@ -857,8 +858,8 @@ implements InternalAPI
 
 		setLastCommand(x, y,
 				verbAsVerbEnumeration,
-				sentenceA.getCode(),
-				sentenceB.getCode());
+				sentenceA.getTextualId(),
+				sentenceB.getTextualId());
 
 	}
 

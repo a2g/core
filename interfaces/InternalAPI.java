@@ -80,7 +80,7 @@ extends ImageAddAPI, OnDoCommandAPI, SayActionMasterAPI{
 	public boolean isInDebugMode();
 	public void executeActionWithDialogActionRunner(BaseAction a);
 	public void executeActionWithDoCommandActionRunner(BaseAction a);
-	public void setLastCommand(double x, double y, int v, int a, int b);
+	public void setLastCommand(double x, double y, int v, String a, String b);
 
 	// dialog tree methods
 	public void executeBranchOnCurrentScene(int place);
