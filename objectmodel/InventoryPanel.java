@@ -15,6 +15,7 @@
  */
 package com.github.a2g.core.objectmodel;
 
+import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.LoadHandler;
@@ -33,6 +34,7 @@ import com.github.a2g.core.res.UserInterfaceDecoration;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.FlowPanel;
 
 public class InventoryPanel
 extends AbsolutePanel
@@ -40,8 +42,8 @@ implements
 ImagePanelAPI
 , InventoryPanelAPI
 {
-	final com.google.gwt.user.client.ui.Image imgLeft;
-	final com.google.gwt.user.client.ui.Image imgRight;
+	final FlowPanel arrowLeft;
+	final FlowPanel arrowRight;
 	InternalAPI api;
 	final MouseToInventoryPresenterAPI mouseToPresenter;
 
@@ -54,11 +56,37 @@ ImagePanelAPI
 
 		getElement().getStyle().setProperty("color", fore.toString());
 		getElement().getStyle().setProperty("backgroundColor", back.toString());
-
-
-		imgLeft = new com.google.gwt.user.client.ui.Image(resLeft.getSafeUri());
-		imgRight = new com.google.gwt.user.client.ui.Image(resRight.getSafeUri());
-		imgLeft.addClickHandler(
+		getElement().addClassName("");
+		
+		
+		arrowLeft = new FlowPanel();
+		this.add(arrowLeft);
+		arrowLeft.setHeight("0");
+		arrowLeft.setWidth("0");
+		arrowLeft.getElement().addClassName("leftArrow");
+		arrowLeft.getElement().getStyle().setProperty("borderBottom", "10px solid transparent");
+		arrowLeft.getElement().getStyle().setProperty("borderRight", "10px solid blue");
+		arrowLeft.getElement().getStyle().setProperty("borderTop", "10px solid transparent");
+		arrowLeft.getElement().getStyle().setProperty("float", "left");
+		arrowLeft.getElement().getStyle().setPosition(Position.RELATIVE);
+		arrowLeft.getElement().getStyle().setProperty("top", "50%");
+		arrowLeft.getElement().getStyle().setProperty("transform", "translateY(-50%)");
+		
+		arrowRight = new FlowPanel();
+		this.add(arrowRight);
+		arrowRight.setHeight("0");
+		arrowRight.setWidth("0");
+		arrowLeft.getElement().addClassName("rightArrow");
+		arrowRight.getElement().getStyle().setProperty("borderBottom", "10px solid transparent");
+		arrowRight.getElement().getStyle().setProperty("borderLeft", "10px solid blue");
+		arrowRight.getElement().getStyle().setProperty("borderTop", "10px solid transparent");
+		arrowRight.getElement().getStyle().setProperty("float", "right");
+		
+		arrowRight.getElement().getStyle().setPosition(Position.RELATIVE);
+		arrowRight.getElement().getStyle().setProperty("top", "50%");
+		arrowRight.getElement().getStyle().setProperty("transform", "translateY(-50%)");
+		
+		arrowLeft.addDomHandler(
 				new ClickHandler()
 				{	@Override
 					public void onClick(ClickEvent event)
@@ -66,8 +94,8 @@ ImagePanelAPI
 					mouseToPresenter.setMouseOver(.05, .5);
 					mouseToPresenter.doClick();
 				}
-				});
-		imgRight.addClickHandler(
+				}, ClickEvent.getType());
+		arrowRight.addDomHandler(
 				new ClickHandler()
 				{	@Override
 					public void onClick(ClickEvent event)
@@ -75,9 +103,9 @@ ImagePanelAPI
 					mouseToPresenter.setMouseOver(.95, .5);
 					mouseToPresenter.doClick();
 				}
-				});
-		this.add(imgLeft, 0, 0);
-		this.add(imgRight, 100, 0);
+				
+				}, ClickEvent.getType());
+		
 	}
 
 	@Override
@@ -145,12 +173,12 @@ ImagePanelAPI
 
 	@Override
 	public void setLeftArrowVisible(boolean visible) {
-		imgLeft.setVisible(visible);
+		arrowLeft.setVisible(visible);
 	}
 
 	@Override
 	public void setRightArrowVisible(boolean visible) {
-		imgRight.setVisible(visible);
+		arrowRight.setVisible(visible);
 
 	}
 }
