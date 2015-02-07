@@ -57,7 +57,7 @@ implements MouseToInventoryPresenterAPI
 		this.eventBus = bus;
 		this.theInventory = new Inventory();
 		this.callback = api;
-		this.view = api.getFactory().createInventoryPanel(this,ColorEnum.Purple, ColorEnum.Black);
+		this.view = api.getFactory().createInventoryPanel(this,ColorEnum.Purple, ColorEnum.Black, ColorEnum.Fuchsia);
 
 		panel.setThing(view);
 		this.theInventoryItemMap = new TreeMap<Integer, InventoryItem>();

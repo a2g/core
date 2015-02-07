@@ -129,7 +129,7 @@ implements FactoryAPI
 	}
 	@Override
 	public InventoryPanelAPI createInventoryPanel(
-			MouseToInventoryPresenterAPI api, ColorEnum fore, ColorEnum back)
+			MouseToInventoryPresenterAPI api, ColorEnum fore, ColorEnum back, ColorEnum rollover)
 	{
 		return new InventoryPanelForJava(bus, master, api, fore, back);
 	}

@@ -77,8 +77,8 @@ implements FactoryAPI
 	}
 
 	@Override
-	public InventoryPanelAPI createInventoryPanel(MouseToInventoryPresenterAPI api, ColorEnum fore, ColorEnum back) {
-		return new InventoryPanel(master, api, fore, back);
+	public InventoryPanelAPI createInventoryPanel(MouseToInventoryPresenterAPI api, ColorEnum fore, ColorEnum back, ColorEnum rollover) {
+		return new InventoryPanel(master, api, fore, back, rollover);
 	}
 
 	@Override

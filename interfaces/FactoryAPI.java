@@ -5,7 +5,7 @@ import com.google.gwt.event.shared.EventBus;
 
 public interface FactoryAPI {
 	CommandLinePanelAPI createCommandLinePanel(ColorEnum foreground, ColorEnum background, ColorEnum rollover);
-	InventoryPanelAPI createInventoryPanel(MouseToInventoryPresenterAPI api, ColorEnum fore, ColorEnum back);
+	InventoryPanelAPI createInventoryPanel(MouseToInventoryPresenterAPI api, ColorEnum fore, ColorEnum back, ColorEnum rollover);
 	ScenePanelAPI createScenePanel();
 	TitleCardPanelAPI createTitleCardPanel(ColorEnum fore, ColorEnum back);
 	VerbsPanelAPI createVerbsPanel(MouseToVerbsPresenterAPI api, ColorEnum fore, ColorEnum back);

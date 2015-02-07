@@ -47,25 +47,23 @@ ImagePanelAPI
 	InternalAPI api;
 	final MouseToInventoryPresenterAPI mouseToPresenter;
 
-	public InventoryPanel(InternalAPI api, final MouseToInventoryPresenterAPI mouseToPresenter, ColorEnum fore, ColorEnum back)
+	public InventoryPanel(InternalAPI api, final MouseToInventoryPresenterAPI mouseToPresenter, ColorEnum fore, ColorEnum back, ColorEnum rollover)
 	{
 		this.mouseToPresenter = mouseToPresenter;
 		this.api = api;
-		ImageResource resLeft = UserInterfaceDecoration.getLeftArrow();
-		ImageResource resRight = UserInterfaceDecoration.getRightArrow();
 
 		getElement().getStyle().setProperty("color", fore.toString());
 		getElement().getStyle().setProperty("backgroundColor", back.toString());
-		getElement().addClassName("");
-		
-		
+				
 		arrowLeft = new FlowPanel();
 		this.add(arrowLeft);
+		arrowLeft.getElement().addClassName("arrowLeft");
+		
+		
 		arrowLeft.setHeight("0");
 		arrowLeft.setWidth("0");
-		arrowLeft.getElement().addClassName("leftArrow");
 		arrowLeft.getElement().getStyle().setProperty("borderBottom", "10px solid transparent");
-		arrowLeft.getElement().getStyle().setProperty("borderRight", "10px solid blue");
+		arrowLeft.getElement().getStyle().setProperty("borderRight", "10px solid "+fore.toString());
 		arrowLeft.getElement().getStyle().setProperty("borderTop", "10px solid transparent");
 		arrowLeft.getElement().getStyle().setProperty("float", "left");
 		arrowLeft.getElement().getStyle().setPosition(Position.RELATIVE);
@@ -74,11 +72,13 @@ ImagePanelAPI
 		
 		arrowRight = new FlowPanel();
 		this.add(arrowRight);
+		arrowRight.getElement().addClassName("arrowRight");
+		
+		
 		arrowRight.setHeight("0");
 		arrowRight.setWidth("0");
-		arrowLeft.getElement().addClassName("rightArrow");
 		arrowRight.getElement().getStyle().setProperty("borderBottom", "10px solid transparent");
-		arrowRight.getElement().getStyle().setProperty("borderLeft", "10px solid blue");
+		arrowRight.getElement().getStyle().setProperty("borderLeft", "10px solid "+fore.toString());
 		arrowRight.getElement().getStyle().setProperty("borderTop", "10px solid transparent");
 		arrowRight.getElement().getStyle().setProperty("float", "right");
 		
