@@ -507,14 +507,18 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	public ChainedAction moveWhilstAnimatingLinear(short objId, double x, double y)
 	{
 		boolean isLinear = true;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear);
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, isLinear);
+		a.setEndX(x);
+		a.setEndX(y);
 		return a;
 	}
 
 	public ChainedAction moveWhilstAnimatingLinearNonBlocking(short objId, double x, double y)
 	{
 		boolean isLinear = true;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear);
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, isLinear);
+		a.setEndX(x);
+		a.setEndX(y);
 		a.setNonBlocking(true);
 		return a;
 	}
@@ -522,14 +526,26 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	public ChainedAction moveWhilstAnimating(short objId, double x, double y)
 	{
 		boolean isLinear = false;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear);
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, isLinear);
+		a.setEndX(x);
+		a.setEndX(y);
+		return a;
+	}
+	
+	public ChainedAction moveWhilstAnimatingInY(short objId, double y)
+	{
+		boolean isLinear = false;
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, isLinear);
+		a.setEndY(y);
 		return a;
 	}
 
 	public ChainedAction moveWhilstAnimatingNonBlocking(short objId, double x, double y)
 	{
 		boolean isLinear = false;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, x, y, isLinear);
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, isLinear);
+		a.setEndX(x);
+		a.setEndX(y);
 		a.setNonBlocking(true);
 		return a;
 	}

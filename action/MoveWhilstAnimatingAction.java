@@ -43,7 +43,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 
 	private boolean isStopped;
 	
-	public MoveWhilstAnimatingAction(BaseAction parent, short objId, double endX, double endY, boolean isLinear)
+	public MoveWhilstAnimatingAction(BaseAction parent, short objId, boolean isLinear)
 	{
 		super(parent, parent.getApi(), isLinear);
 		this.obj = getApi().getObject(objId);
@@ -51,14 +51,24 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 		assert(obj!=null);
 		this.screenCoordsPerSecond = obj.getScreenCoordsPerSecond();
 		
-		this.endX = endX;// - getApi().getSceneGui().getCameraX();
-		this.endY = endY;// - getApi().getSceneGui().getCameraY();
+		this.endX = Double.NaN;
+		this.endY = Double.NaN;
 		this.startX = 0.0;
 		this.startY = 0.0;
 		this.isParallel = false;
 		this.isBackwards = false;
 		this.holdLastFrame = true;
 		this.isStopped = false;
+	}
+	
+	void setEndX(double endX)
+	{
+		this.endX = endX;
+	}
+	
+	void setEndY(double endY)
+	{
+		this.endY = endY;
 	}
 	
 	public void setHoldLastFrame(boolean holdLastFrame)
@@ -81,7 +91,13 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 		this.anim = this.obj.getAnimations().at(obj.getCurrentAnimation());
 		startX = getObject().getBaseMiddleX();
 		startY = getObject().getBaseMiddleY();
-
+		
+		if(endX == Double.NaN)
+			endX = startX;
+		if(endY == Double.NaN)
+			endY = startY;
+		
+		
 		// distance and time calculations
 		double diffX = this.startX - this.endX;
 		System.out.println(" walkto-start " + startX + " " + startY +" to "+endX + " " + endY);
