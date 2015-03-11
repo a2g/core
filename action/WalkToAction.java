@@ -28,7 +28,7 @@ extends MoveWhilstAnimatingAction
 	{
 		super(parent, objId, isLinear);
 		super.setEndX(endX);
-		super.setEndX(endY);
+		super.setEndY(endY);
 		this.setHoldLastFrame(false);
 	}
 
