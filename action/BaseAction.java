@@ -509,7 +509,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		boolean isLinear = true;
 		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, isLinear);
 		a.setEndX(x);
-		a.setEndX(y);
+		a.setEndY(y);
 		return a;
 	}
 
@@ -518,7 +518,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		boolean isLinear = true;
 		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, isLinear);
 		a.setEndX(x);
-		a.setEndX(y);
+		a.setEndY(y);
 		a.setNonBlocking(true);
 		return a;
 	}
@@ -528,7 +528,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		boolean isLinear = false;
 		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, isLinear);
 		a.setEndX(x);
-		a.setEndX(y);
+		a.setEndY(y);
 		return a;
 	}
 	
@@ -545,7 +545,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		boolean isLinear = false;
 		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, isLinear);
 		a.setEndX(x);
-		a.setEndX(y);
+		a.setEndY(y);
 		a.setNonBlocking(true);
 		return a;
 	}
