@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.github.a2g.core.interfaces.DialogTreePanelAPI;
+import com.github.a2g.core.interfaces.DialogTreePresenterAPI;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -28,12 +29,14 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
 
-public class DialogTreePresenter {
+public class DialogTreePresenter implements DialogTreePresenterAPI
+{
 	private EventBus bus;
 	private DialogTree theDialogTree;
 	private DialogTreePanelAPI view;
 	private String dialogTreeTalkAnimation;
 	private Set<String> recordOfSaidSpeech;
+	
 
 	public DialogTreePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api) {
 		this.bus = bus;
@@ -84,6 +87,17 @@ public class DialogTreePresenter {
 	public void markSpeechAsSaid(String text)
 	{
 		recordOfSaidSpeech.add(text);
+	}
+
+	@Override
+	public void setVisible(boolean isInDialogTreeMode) {
+		view.setVisible(isInDialogTreeMode);
+	}
+
+	@Override
+	public void update(DialogTree theDialogTree, EventBus bus) {
+		view.update(theDialogTree, bus);
+		
 	}
 	
 }

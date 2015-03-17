@@ -24,6 +24,7 @@ import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.event.SetRolloverEventHandlerAPI;
 import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
 import com.github.a2g.core.interfaces.CommandLinePanelAPI;
+import com.github.a2g.core.interfaces.CommandLinePresenterAPI;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.SceneAPI;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -36,6 +37,7 @@ public class CommandLinePresenter
 implements
 ExecuteCommandEventHandlerAPI
 , SetRolloverEventHandlerAPI
+, CommandLinePresenterAPI
 {
 
 	private CommandLineCallbackAPI api;
@@ -172,5 +174,13 @@ ExecuteCommandEventHandlerAPI
 		String displayName = model.getSentence().getDisplayName();
 		return displayName;
 	}
+
+	@Override
+	public void setText(String string) {
+		view.setText(string);
+		
+	}
+
+	
 
 }

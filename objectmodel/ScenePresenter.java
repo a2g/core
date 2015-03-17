@@ -17,19 +17,28 @@
 package com.github.a2g.core.objectmodel;
 
 
+import java.util.TreeMap;
+
+import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.PackagedImageAPI;
 import com.github.a2g.core.interfaces.ScenePanelAPI;
+import com.github.a2g.core.interfaces.ScenePresenterAPI;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.Rect;
+import com.google.gwt.event.dom.client.LoadHandler;
 
 
-public class ScenePresenter {
+public class ScenePresenter implements ScenePresenterAPI{
 	private int width;
 	private int height;
 	private Scene scene;
 	private ScenePanelAPI view;
 	private double cameraX;
 	private double cameraY;
+	private TreeMap<String, Animation> theATIDMap;
 
 	public ScenePresenter(final HostingPanelAPI panel, InternalAPI api)
 	{
@@ -42,7 +51,27 @@ public class ScenePresenter {
 		panel.setThing(view);
 		view.setVisible(true);
 
-		// this.theInventoryItemMap = new TreeMap<Integer, InventoryItem>();
+		this.theATIDMap = new TreeMap<String, Animation>();
+	}
+	
+	
+	public SceneObject getObject(short ocode) {
+		return this.scene.objectCollection().getByOCode(ocode);
+	}
+	public SceneObject getObject(String OTEXT) {
+		return this.scene.objectCollection().getByOTEXT(OTEXT);
+	}
+	public Animation getAnimation(String code) {
+		Animation anim = this.theATIDMap.get(
+				code);
+
+		if (anim == null) {
+			// first param is name, second is parent;
+			anim = new Animation("", null);
+			this.theATIDMap.put(code,
+					anim);
+		}
+		return anim;
 	}
 
 	public ScenePanelAPI getView() {
@@ -125,7 +154,113 @@ public class ScenePresenter {
 		view.setCameraOffset((int)camX,(int)camY);
 		for(int i=0;i<this.scene.objectCollection().count();i++)
 		{
-			this.scene.objectCollection().at(i).updateCurrentImage();
+			this.scene.objectCollection().getByIndex(i).updateCurrentImage();
+		}
+	}
+
+	@Override
+	public Image createNewImageAndAddHandlers(LoadHandler lh,
+			PackagedImageAPI imageResource, InternalAPI api,
+			com.google.gwt.event.shared.EventBus bus, int x, int y,
+			String objectTextualId, short objectCode) {
+		
+		return this.view.createNewImageAndAddHandlers(lh, imageResource, api, bus, x, y, objectTextualId, objectCode);
+	}
+	
+	@Override
+	public void setScenePixelSize(int width, int height) {
+		this.view.setScenePixelSize(width, height);		
+	}
+
+	@Override
+	public void setVisible(boolean b) {
+		this.view.setVisible(b);
+		
+	}
+
+	@Override
+	public void setCameraOffset(int x, int y) {
+		this.view.setCameraOffset(x, y);
+		
+	}
+
+	@Override
+	public void setStateOfPopup(boolean visible, int x, int y,
+			ColorEnum talkingColor, String speech, BaseAction ba) {
+		this.view.setStateOfPopup(visible, x, y, talkingColor, speech, ba);
+		
+	}
+
+	@Override
+	public int getSceneObjectCount() {
+		return this.getModel().objectCollection().count();
+	}
+
+	@Override
+	public void setVisibleByIndex(int index, boolean visible) {
+		getModel().objectCollection().getByIndex(index).setVisible(visible);
+	}
+
+	@Override
+	public boolean getVisibleByIndex(int index) {
+		return getModel().objectCollection().getByIndex(index).isVisible();
+	}
+
+	@Override
+	public String getCurrentAnimationByOTEXT(String otext) {
+		return this.getObject(otext).getCurrentAnimation();
+	}
+
+	@Override
+	public String getDisplayNameByOTEXT(String otext) {
+		return this.getObject(otext).getDisplayName();
+	}
+
+	@Override
+	public short getCodeByOTEXT(String otext) {
+		return this.getObject(otext).getCode();
+	}
+
+	@Override
+	public int getCurrentFrameByIndex(int i) {
+		return this.getModel().objectCollection().getByIndex(i).getCurrentFrame();
+	}
+
+	@Override
+	public double getXByIndex(int i) {
+		return this.getModel().objectCollection().getByIndex(i).getY();
+	}
+
+	@Override
+	public double getYByIndex(int i) {
+		return this.getModel().objectCollection().getByIndex(i).getY();
+	}
+
+	@Override
+	public Rect getBoundingRectByATIDAndFrame(String atid, int frame) {
+		return this.getAnimation(atid).getDefaultFrame().getBoundingRect();
+	}
+
+	@Override
+	public String getCurrentAnimationByIndex(int i) {
+		return this.getModel().objectCollection().getByIndex(i).getCurrentAnimation();
+	}
+
+	@Override
+	public String getOTEXTByIndex(int i) {
+		return this.getModel().objectCollection().getByIndex(i).getTextualId();
+	}
+
+
+	public void addSceneObject(SceneObject destObject) {
+		this.scene.objectCollection().add(destObject);
+	}
+
+	public void addAnimation(String animTextualId, Animation destAnimation) {
+		if(theATIDMap.get(animTextualId)==null)
+		{	
+			//System.out.println("ScenePresenter::added " + animTextualId);
+			this.theATIDMap.put(animTextualId, destAnimation);
 		}
 	}
 

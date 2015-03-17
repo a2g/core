@@ -20,13 +20,14 @@ import java.awt.FontMetrics;
 import java.awt.Label;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.JFrame;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.InternalAPI;
 import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.interfaces.ScenePanelAPI;
-import com.github.a2g.core.objectmodel.ScenePresenter;
+import com.github.a2g.core.interfaces.ScenePresenterAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 
@@ -64,7 +65,7 @@ implements PopupPanelAPI
 	public void setPopupPosition(double x, double y)
 	{
 		//api.getlocationOnScreen
-		ScenePresenter sp = api.getSceneGui();
+		ScenePresenterAPI sp = api.getSceneGui();
 		ScenePanelAPI sv = sp.getView();
 		ScenePanelForJava spj = (ScenePanelForJava)sv;
 		Point p = spj.getTopLeft();

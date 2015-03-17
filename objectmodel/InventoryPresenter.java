@@ -21,15 +21,18 @@ import java.util.TreeMap;
 
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.InventoryPanelAPI;
+import com.github.a2g.core.interfaces.InventoryPresenterAPI;
 import com.github.a2g.core.interfaces.InventoryPresenterCallbackAPI;
 import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
+import com.github.a2g.core.interfaces.PackagedImageAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
+import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
 
 public class InventoryPresenter
-implements MouseToInventoryPresenterAPI
+implements MouseToInventoryPresenterAPI, InventoryPresenterAPI
 {
 
 	private Inventory theInventory;
@@ -240,6 +243,42 @@ implements MouseToInventoryPresenterAPI
 	public void doClick(double x, double y) {
 		this.setMouseOver(x, y);
 		this.doClick();
+	}
+
+	@Override
+	public Image createNewImageAndAdddHandlers(PackagedImageAPI imageResource,
+			LoadHandler lh, EventBus bus, String objectTextualId,
+			int objectCode, int i, int j) {
+		return view.createNewImageAndAdddHandlers(imageResource, lh, bus, objectTextualId, objectCode, i, j);
+	}
+
+	@Override
+	public void setPixelSize(int width, int height) {
+		view.setPixelSize(width, height);
+		
+	}
+
+	@Override
+	public void setLeftArrowVisible(boolean visible) {
+		view.setLeftArrowVisible(visible);
+		
+	}
+
+	@Override
+	public void setRightArrowVisible(boolean visible) {
+		view.setRightArrowVisible(visible);
+		
+	}
+
+	@Override
+	public void setInventoryItemVisibleByITID(String textualId, boolean visible) {
+		theInventory.items().at(textualId).setVisible(visible);
+	}
+
+	@Override
+	public void setInventoryItemVisibleByCode(int iCode, boolean visible) {
+		this.getInventoryItem(iCode).setVisible(visible);
+		
 	}
 
 }

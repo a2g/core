@@ -20,13 +20,8 @@ import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.interfaces.MasterPanelAPI.GuiStateEnum;
 import com.github.a2g.core.objectmodel.Animation;
-import com.github.a2g.core.objectmodel.CommandLinePresenter;
-import com.github.a2g.core.objectmodel.DialogTreePresenter;
 import com.github.a2g.core.objectmodel.InventoryItem;
-import com.github.a2g.core.objectmodel.InventoryPresenter;
 import com.github.a2g.core.objectmodel.SceneObject;
-import com.github.a2g.core.objectmodel.ScenePresenter;
-import com.github.a2g.core.objectmodel.VerbsPresenter;
 
 public interface OnMovementBeyondAGateAPI {
 	// get by ID
@@ -41,11 +36,11 @@ public interface OnMovementBeyondAGateAPI {
 	public boolean isTrue(Object name);
 
 	// gui methods
-	public DialogTreePresenter getDialogTreeGui();
-	public VerbsPresenter getVerbsGui();
-	public InventoryPresenter getInventoryGui();
-	public CommandLinePresenter getCommandLineGui();
-	public ScenePresenter getSceneGui();
+	public DialogTreePresenterAPI getDialogTreeGui();
+	public VerbsPresenterAPI getVerbsGui();
+	public InventoryPresenterAPI getInventoryGui();
+	public CommandLinePresenterAPI getCommandLineGui();
+	public ScenePresenterAPI getSceneGui();
 
 	// nearly a gui method
 	public SceneAPI getCurrentScene();

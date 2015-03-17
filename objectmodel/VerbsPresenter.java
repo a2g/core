@@ -21,12 +21,13 @@ import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
 import com.github.a2g.core.interfaces.VerbsPanelAPI;
+import com.github.a2g.core.interfaces.VerbsPresenterAPI;
 import com.github.a2g.core.interfaces.VerbsPresenterCallbackAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 
 
 public class VerbsPresenter
-implements MouseToVerbsPresenterAPI
+implements MouseToVerbsPresenterAPI, VerbsPresenterAPI
 {
 	private Verbs theVerbs;
 	private VerbsPanelAPI view;
@@ -92,16 +93,36 @@ implements MouseToVerbsPresenterAPI
 	public void doClick() {
 		callback.onClickVerbsOrInventory();
 	}
-	/*
-	public int getWidth() {
-		return width;
-	}
-	 */
+	
 	@Override
 	public void doClick(String displayName, String textualId, int code)
 	{
 		this.setMouseOver(displayName, textualId, code);
 		this.doClick();
+	}
+
+	@Override
+	public void setVisible(boolean isVisible) {
+		this.view.setVisible(isVisible);
+		
+	}
+
+	@Override
+	public void setVerbs(Verbs theVerbs) {
+		this.view.setVerbs(theVerbs);
+		
+	}
+
+	@Override
+	public void setWidth(int i) {
+		this.view.setWidth(i);
+		
+	}
+
+	@Override
+	public void removeByCode(int code) {
+		this.theVerbs.items().removeByCode(code);
+		
 	}
 
 }

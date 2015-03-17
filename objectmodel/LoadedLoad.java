@@ -31,7 +31,7 @@ public class LoadedLoad
 	public void addToAppropriateAnimation(int prefix, Image imageAndPos, String objectTextualId, String animationTextualId, short objectCode, String objPlusAnimCode, int screenPixelWidth, int screenPixelHeight)
 	{
 		// objects and animations
-		SceneObject sceneObject = this.getSceneObjectCollection().at(
+		SceneObject sceneObject = this.getSceneObjectCollection().getByOTEXT(
 				objectTextualId);
 
 		if (sceneObject == null) {
@@ -53,6 +53,8 @@ public class LoadedLoad
 					objPlusAnimCode,
 					sceneObject);
 			sceneObject.getAnimations().add(animation);
+			//System.out.println("added to loader " + objPlusAnimCode);
+
 		}
 
 		animation.getFrameCollection().add(imageAndPos);

@@ -286,30 +286,22 @@ implements ImagePanelAPI, ScenePanelAPI
 	{
 		//System.out.println("----------------");
 		String textualId = "";
-		SceneObjectCollection coll = api.getSceneGui().getModel().objectCollection();
-		ArrayList<SceneObject> list = coll.getSortedList();
-		for(int i = 0;i<list.size();i++)
+		int count = api.getSceneGui().getSceneObjectCount();
+		for(int i = 0;i<count;i++)
 		{
-			SceneObject ob = list.get(i);
-			if(ob.isVisible())
+			if(api.getSceneGui().getVisibleByIndex(i))
 			{
+				String atid = api.getSceneGui().getCurrentAnimationByIndex(i);
+				int frame = api.getSceneGui().getCurrentFrameByIndex(i);
+				Rect rect = api.getSceneGui().getBoundingRectByATIDAndFrame(atid, frame);
 				//System.out.println(ob.getTextualId() + ob.getNumberPrefix());
-				int frame = ob.getCurrentFrame();
-				String anim = ob.getCurrentAnimation();
-				if(ob.getAnimations().at(anim)!=null)
-				{
-					Image img = ob.getAnimations().at(anim).getFrames().at(frame);
-					if(img!=null)
-					{
-						Rect rect = img.getBoundingRect();
-						int adjX = x - (int)ob.getX() + cameraOffsetX;
-						int adjY = y - (int)ob.getY() + cameraOffsetY;
+				
+				int adjX = x - (int)api.getSceneGui().getXByIndex(i) + cameraOffsetX;
+				int adjY = y - (int)api.getSceneGui().getYByIndex(i) + cameraOffsetY;
 
-						if(rect.contains(adjX, adjY))
-						{
-							textualId = ob.getTextualId();
-						}
-					}
+				if(rect.contains(adjX, adjY))
+				{
+					textualId = api.getSceneGui().getOTEXTByIndex(i);
 				}
 			}
 		}

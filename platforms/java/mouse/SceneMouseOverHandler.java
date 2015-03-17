@@ -58,21 +58,13 @@ public class SceneMouseOverHandler implements MouseMotionListener {
 		int h = scenePanel.getHeight();
 		double x = event.getX()/(double)scenePanel.getWidth();
 		double y  = (event.getY()+2)/(double)scenePanel.getHeight();
-		String objectId = scenePanel.getObjectUnderMouse(event.getX(),event.getY());
-		if(objectId!="")
+		String textualId = scenePanel.getObjectUnderMouse(event.getX(),event.getY());
+		if(textualId!="")
 		{
-			String textualAnim = api.getSceneGui().getModel().objectCollection().at(objectId).getCurrentAnimation();
-			api.getSceneGui().getModel().objectCollection().at(objectId).getAnimations().at(textualAnim).getFrames().at(0).getBoundingRect();
-			SceneObject ob = api.getSceneGui().getModel().objectCollection().at(objectId);
-			String displayName = "";
-			String textualId = "";
-			short code = 0;
-			if (ob != null) {
-				//displayName = "" + x + "," + y + ") " +ob.getDisplayName() + "(" + r.getLeft()+","+r.getTop()+ ")to" + "(" + r.getRight()+","+r.getBottom() +")";
-				displayName = ob.getDisplayName();
-				textualId = ob.getTextualId();
-				code = ob.getCode();
-			}
+			//api.getSceneGui().objectCollection().at(objectId).getAnimations().at(textualAnim).getFrames().at(0).getBoundingRect();
+			//displayName = "" + x + "," + y + ") " +ob.getDisplayName() + "(" + r.getLeft()+","+r.getTop()+ ")to" + "(" + r.getRight()+","+r.getBottom() +")";
+			String displayName = api.getSceneGui().getDisplayNameByOTEXT(textualId);
+			short code = api.getSceneGui().getCodeByOTEXT(textualId);
 			double camx = api.getSceneGui().getCameraX();
 			double camy = api.getSceneGui().getCameraY();
 			api.getCommandLineGui().setXYForDebugging(x+camx, y+camy);

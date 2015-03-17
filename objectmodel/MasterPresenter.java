@@ -40,9 +40,12 @@ import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ActionRunnerCallbackAPI;
 import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
+import com.github.a2g.core.interfaces.CommandLinePresenterAPI;
+import com.github.a2g.core.interfaces.DialogTreePresenterAPI;
 import com.github.a2g.core.interfaces.FactoryAPI;
 import com.github.a2g.core.interfaces.HostingPanelAPI;
 import com.github.a2g.core.interfaces.ImageAddAPI;
+import com.github.a2g.core.interfaces.InventoryPresenterAPI;
 import com.github.a2g.core.interfaces.InventoryPresenterCallbackAPI;
 import com.github.a2g.core.interfaces.LoadAPI;
 import com.github.a2g.core.interfaces.InternalAPI;
@@ -64,6 +67,7 @@ import com.github.a2g.core.interfaces.SayActionMasterAPI;
 import com.github.a2g.core.interfaces.SceneAPI;
 import com.github.a2g.core.interfaces.TimerAPI;
 import com.github.a2g.core.interfaces.TimerCallbackAPI;
+import com.github.a2g.core.interfaces.VerbsPresenterAPI;
 import com.github.a2g.core.interfaces.VerbsPresenterCallbackAPI;
 import com.google.gwt.event.shared.EventBus;
 
@@ -98,8 +102,6 @@ implements InternalAPI
 	private TitleCardPresenter titleCardPresenter;
 
 	private SceneAPI callbacks;
-	private TreeMap<Short, SceneObject> theObjectMap;
-	private TreeMap<String, Animation> theAnimationMap;
 
 
 	private EventBus bus;
@@ -134,8 +136,6 @@ implements InternalAPI
 		this.parent = parent;
 		this.popupDisplayDuration = .8;
 
-		this.theObjectMap = new TreeMap<Short, SceneObject>();
-		this.theAnimationMap = new TreeMap<String, Animation>();
 
 		this.doCommandActionRunner = new ActionRunner(this,1);
 		this.dialogActionRunner = new ActionRunner(this,2);
@@ -253,30 +253,13 @@ implements InternalAPI
 
 	@Override
 	public SceneObject getObject(short code) {
-		theObjectMap.size();
-		SceneObject ob = this.theObjectMap.get(
-				code);
-
-		if (ob == null)
-		{
-			ob = null;
-		}
-		return ob;
+		return scenePresenter.getObject(code);
 	}
 
 	@Override
 	public Animation getAnimation(String code) {
-		Animation anim = this.theAnimationMap.get(
-				code);
-
-		if (anim == null) {
-			// first param is name, second is parent;
-			anim = new Animation("", null);
-			this.theAnimationMap.put(code,
-					anim);
+		return scenePresenter.getAnimation(code);
 		}
-		return anim;
-	}
 
 	@Override
 	public InventoryItem getInventoryItem(int i) {
@@ -343,7 +326,7 @@ implements InternalAPI
 		int count = this.scenePresenter.getModel().objectCollection().count();
 		for (int i = 0; i<count; i++)
 		{
-			SceneObject sceneObject = this.scenePresenter.getModel().objectCollection().at(i);
+			SceneObject sceneObject = this.scenePresenter.getModel().objectCollection().getByIndex(i);
 
 			if (sceneObject != null) 
 			{
@@ -363,11 +346,7 @@ implements InternalAPI
 
 	@Override
 	public void onTimer() {
-		int size = this.theObjectMap.size();
-		if(size==0)
-		{
-			System.out.println("sIZE WAS ZERO");
-		}
+	
 		if(timer!=null)
 		{
 			this.callbacks.onEveryFrame(this);
@@ -502,12 +481,12 @@ implements InternalAPI
 	}
 
 	@Override
-	public CommandLinePresenter getCommandLineGui() {
+	public CommandLinePresenterAPI getCommandLineGui() {
 		return commandLinePresenter;
 	}
 
 	@Override
-	public InventoryPresenter getInventoryGui() {
+	public InventoryPresenterAPI getInventoryGui() {
 		return inventoryPresenter;
 	}
 
@@ -575,12 +554,14 @@ implements InternalAPI
 	}
 
 	@Override
-	public VerbsPresenter getVerbsGui() {
+	public VerbsPresenterAPI getVerbsGui() 
+	{
 		return this.verbsPresenter;
 	}
 
 	@Override
-	public DialogTreePresenter getDialogTreeGui() {
+	public DialogTreePresenterAPI getDialogTreeGui() 
+	{
 		return this.dialogTreePresenter;
 	}
 
@@ -650,15 +631,13 @@ implements InternalAPI
 
 		// hide all visible images.
 		// (using scene's data is quicker than using scenePanel data)
-		for(int i=0;i<scenePresenter.getModel().objectCollection().count();i++)
+		int count = scenePresenter.getModel().objectCollection().count();
+		for(int i=0;i<count;i++)
 		{
-			scenePresenter.getModel().objectCollection().at(i).setVisible(false);
+			scenePresenter.getModel().objectCollection().getByIndex(i).setVisible(false);
 		}
 
-		theObjectMap.clear();
-		theAnimationMap.clear();
-		this.theObjectMap.clear();
-		this.theAnimationMap.clear();
+
 		scenePresenter.reset();
 
 
@@ -730,28 +709,28 @@ implements InternalAPI
 
 		for(int i=0;i<theirs.count();i++)
 		{
-			SceneObject srcObject = theirs.at(i);
-			String objTextualId = srcObject.getTextualId();
+			SceneObject srcObject = theirs.getByIndex(i);
+			String otext = srcObject.getTextualId();
 			int prefix = srcObject.getNumberPrefix();
 			short objectCode = srcObject.getCode();
-			SceneObject destObject = ours.at(objTextualId);
+			SceneObject destObject = ours.getByOTEXT(otext);
 			if(destObject==null)
 			{
-				destObject = new SceneObject(objTextualId, scenePresenter.getWidth(), scenePresenter.getHeight());
+				destObject = new SceneObject(otext, scenePresenter.getWidth(), scenePresenter.getHeight());
 				destObject.setNumberPrefix(prefix);
 				destObject.setCode(objectCode);
 
 				if (objectCode == -1) {
 					parent.alert(
 							"Missing initial image for "
-									+ objTextualId
+									+ otext
 									+ "\n At the least it will need an image in a placeholder folder, so it shows up in list of objects.");
 					return;
 				}
 
 				ours.add(destObject);
-				this.theObjectMap.put(objectCode,destObject);
-				System.out.println("object " + objTextualId + " " + objectCode);
+				scenePresenter. addSceneObject(destObject);
+				System.out.println("New object " + otext + " " + objectCode);
 
 			}
 
@@ -765,10 +744,10 @@ implements InternalAPI
 				{
 					destAnimation = new Animation(animTextualId, destObject);
 					destObject.getAnimations().add(destAnimation);
-					this.theAnimationMap.put(animTextualId, destAnimation);
+					scenePresenter.addAnimation(animTextualId, destAnimation);
 				}
 
-				//System.out.println("new anim " + objTextualId + " " + animTextualId+" = "+animationCode);
+				System.out.println("new anim " + otext + " " + animTextualId+" = "+animTextualId);
 
 				for(int k=0;k<srcAnimation.getFrames().getCount();k++)
 				{
@@ -1015,12 +994,6 @@ implements InternalAPI
 		speechPopup.setPopupPosition(x, y);
 		speechPopup.setVisible(true);
 		*/
-	}
-
-	@Override
-	public void clickToContinue() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

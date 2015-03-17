@@ -56,15 +56,15 @@ extends ImageAddAPI, OnDoCommandAPI, SayActionMasterAPI{
 
 	// gui methods
 	@Override
-	public DialogTreePresenter getDialogTreeGui();
+	public DialogTreePresenterAPI getDialogTreeGui();
 	@Override
-	public VerbsPresenter getVerbsGui();
+	public VerbsPresenterAPI getVerbsGui();
 	@Override
-	public InventoryPresenter getInventoryGui();
+	public InventoryPresenterAPI getInventoryGui();
 	@Override
-	public CommandLinePresenter getCommandLineGui();
+	public CommandLinePresenterAPI getCommandLineGui();
 	@Override
-	public ScenePresenter getSceneGui();
+	public ScenePresenterAPI getSceneGui();
 
 	// nearly a gui method
 	@Override
@@ -104,10 +104,7 @@ extends ImageAddAPI, OnDoCommandAPI, SayActionMasterAPI{
 	public short getDefaultWalker();
 	public void setStateOfPopup(boolean visible, double x, double y,
 			ColorEnum talkingColor, String string, BaseAction cancelCallback);
-	public void clickToContinue();
-	//public void setIsSayWithoutIncremementing(boolean isSayWithoutIncremementing);
-	//public boolean getIsSayWithoutIncremementing();
-	
+
 	public boolean isInANoGoZone(PointF tp);
 	public void fireOnMovementBeyondAGateIfRelevant(PointF tp);
 	public void log(String type, String content);

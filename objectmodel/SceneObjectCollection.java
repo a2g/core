@@ -20,28 +20,24 @@ package com.github.a2g.core.objectmodel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.TreeMap;
-
 
 public class SceneObjectCollection {
-	private Map<String, SceneObject> theMap;
+	private List<String> theOTEXTs;
+	private List<Short> theOCodes;
+	private ArrayList<SceneObject> list;
 
 	public SceneObjectCollection() {
-		theMap = new TreeMap<String, SceneObject>();
+		theOTEXTs = new LinkedList<String>();
+		theOCodes = new LinkedList<Short>();
+		list = new ArrayList<SceneObject>();
 	}
 
-	public ArrayList<SceneObject> getSortedList() {
-		ArrayList<SceneObject> list = new ArrayList<SceneObject>();
-
-		Iterator<SceneObject> it = theMap.values().iterator();
-
-		while (it.hasNext()) {
-			list.add(it.next());
-		}
-
+	public void add(SceneObject sceneObject) 
+	{
+		list.add(sceneObject);
 		Collections.sort(list,
 				new Comparator<SceneObject>() {
 			@Override
@@ -51,39 +47,37 @@ public class SceneObjectCollection {
 			}
 		});
 
-		return list;
-
-	}
-
-	public SceneObject at(String textualId) {
-		try {
-			return theMap.get(textualId);
-		} catch (Exception e) {}
-		return null;
-	}
-
-	public void add(SceneObject sceneObject) {
-		theMap.put(sceneObject.getTextualId(),
-				sceneObject);
-	}
-
-	public SceneObject at(int index) throws NoSuchElementException {
-		if(index>=theMap.size())
-			throw new NoSuchElementException();
-		SceneObject sceneObject = null;
-		Iterator<SceneObject> it = theMap.values().iterator();
-		int i = 0;
-
-		while (i <= index) {
-			sceneObject = it.next();
-			i++;
+		theOTEXTs.clear();
+		theOCodes.clear();
+		for(int i=0;i<list.size();i++)
+		{	
+			theOTEXTs.add(list.get(i).getTextualId());
+			theOCodes.add(list.get(i).getCode());
 		}
-
-		return sceneObject;
+		
+		
 	}
 
+	public SceneObject getByIndex(int index) throws NoSuchElementException {
+		if(index==-1)
+			return null;
+		if(index>=list.size())
+			throw new NoSuchElementException();
+		return list.get(index);
+	}
+	
+	public SceneObject getByOTEXT(String OTEXT) {
+		int i = this.theOTEXTs.indexOf(OTEXT);
+		return this.getByIndex(i); 
+	}
+	
+	public SceneObject getByOCode(Short ocode) {
+		int i = this.theOCodes.indexOf(ocode);
+		return this.getByIndex(i); 
+	}
+	
 	public int count() {
-		return theMap.size();
+		return list.size();
 	}
 
 }

@@ -30,9 +30,7 @@ import com.github.a2g.core.platforms.html4.mouse.InventoryItemMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.InventoryItemMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
-import com.github.a2g.core.res.UserInterfaceDecoration;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 

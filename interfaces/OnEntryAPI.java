@@ -17,13 +17,8 @@
 package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.objectmodel.Animation;
-import com.github.a2g.core.objectmodel.CommandLinePresenter;
-import com.github.a2g.core.objectmodel.DialogTreePresenter;
 import com.github.a2g.core.objectmodel.InventoryItem;
-import com.github.a2g.core.objectmodel.InventoryPresenter;
 import com.github.a2g.core.objectmodel.SceneObject;
-import com.github.a2g.core.objectmodel.ScenePresenter;
-import com.github.a2g.core.objectmodel.VerbsPresenter;
 
 public interface OnEntryAPI {
 	// get by ID
@@ -38,11 +33,11 @@ public interface OnEntryAPI {
 	public boolean isTrue(Object name);
 
 	// gui methods
-	public DialogTreePresenter getDialogTreeGui();
-	public VerbsPresenter getVerbsGui();
-	public InventoryPresenter getInventoryGui();
-	public CommandLinePresenter getCommandLineGui();
-	public ScenePresenter getSceneGui();
+	public DialogTreePresenterAPI getDialogTreeGui();
+	public VerbsPresenterAPI getVerbsGui();
+	public InventoryPresenterAPI getInventoryGui();
+	public CommandLinePresenterAPI getCommandLineGui();
+	public ScenePresenterAPI getSceneGui();
 
 	// nearly a gui method
 	public SceneAPI getCurrentScene();

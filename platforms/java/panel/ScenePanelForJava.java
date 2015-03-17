@@ -51,8 +51,6 @@ import com.github.a2g.core.platforms.java.ImageForJava;
 import com.github.a2g.core.platforms.java.PackagedImageForJava;
 import com.github.a2g.core.platforms.java.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.java.mouse.SceneMouseOverHandler;
-import com.github.a2g.core.objectmodel.SceneObject;
-import com.github.a2g.core.objectmodel.SceneObjectCollection;
 import com.google.gwt.event.shared.EventBus;
 
 
@@ -238,30 +236,24 @@ implements ScenePanelAPI
 	{
 		//System.out.println("----------------");
 		String textualId = "";
-		SceneObjectCollection coll = api.getSceneGui().getModel().objectCollection();
-		ArrayList<SceneObject> list = coll.getSortedList();
-		for(int i = 0;i<list.size();i++)
+		int count = api.getSceneGui().getSceneObjectCount();
+		for(int i = 0;i<count;i++)
 		{
-			SceneObject ob = list.get(i);
-			if(ob.isVisible())
+			if(api.getSceneGui().getVisibleByIndex(i))
 			{
 				//System.out.println(ob.getTextualId() + ob.getNumberPrefix());
-				int frame = ob.getCurrentFrame();
-				String anim = ob.getCurrentAnimation();
-				if(ob.getAnimations().at(anim)!=null)
-				{
-					Image img = ob.getAnimations().at(anim).getFrames().at(frame);
-					if(img!=null)
-					{
-						Rect rect = img.getBoundingRect();
-						int adjX = x - (int)ob.getX() + cameraOffsetX;
-						int adjY = y - (int)ob.getY() + cameraOffsetY;
+				int frame = api.getSceneGui().getCurrentFrameByIndex(i);
+				String atid = api.getSceneGui().getCurrentAnimationByIndex(i);
+				Rect rect = api.getSceneGui().getBoundingRectByATIDAndFrame(atid,frame);
+				int obx = (int)api.getSceneGui().getXByIndex(i);
+				int oby = (int)api.getSceneGui().getYByIndex(i);
 
-						if(rect.contains(adjX, adjY))
-						{
-							textualId = ob.getTextualId();
-						}
-					}
+				int adjX = x - obx + cameraOffsetX;
+				int adjY = y - oby + cameraOffsetY;
+
+				if(rect.contains(adjX, adjY))
+				{
+					textualId = api.getSceneGui().getOTEXTByIndex(i);
 				}
 			}
 		}

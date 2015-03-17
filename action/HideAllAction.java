@@ -18,7 +18,6 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.objectmodel.SceneObjectCollection;
 import com.github.a2g.core.action.ChainedAction;
 
 
@@ -38,10 +37,10 @@ public class HideAllAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		SceneObjectCollection coll = getApi().getSceneGui().getModel().objectCollection();
-		for(int i=0;i<coll.count();i++)
+		int count = getApi().getSceneGui().getSceneObjectCount();
+		for(int i=0;i<count;i++)
 		{
-			coll.at(i).setVisible(false);
+			getApi().getSceneGui().setVisibleByIndex(i, false);
 		}
 	}
 

@@ -17,13 +17,8 @@
 package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.objectmodel.Animation;
-import com.github.a2g.core.objectmodel.CommandLinePresenter;
-import com.github.a2g.core.objectmodel.DialogTreePresenter;
 import com.github.a2g.core.objectmodel.InventoryItem;
-import com.github.a2g.core.objectmodel.InventoryPresenter;
 import com.github.a2g.core.objectmodel.SceneObject;
-import com.github.a2g.core.objectmodel.ScenePresenter;
-import com.github.a2g.core.objectmodel.VerbsPresenter;
 import com.github.a2g.core.primitive.PointF;
 
 public interface OnPreEntryAPI extends OnDoCommandAPI
@@ -46,15 +41,15 @@ public interface OnPreEntryAPI extends OnDoCommandAPI
 
 	// gui methods
 	@Override
-	public DialogTreePresenter getDialogTreeGui();
+	public DialogTreePresenterAPI getDialogTreeGui();
 	@Override
-	public VerbsPresenter getVerbsGui();
+	public VerbsPresenterAPI getVerbsGui();
 	@Override
-	public InventoryPresenter getInventoryGui();
+	public InventoryPresenterAPI getInventoryGui();
 	@Override
-	public CommandLinePresenter getCommandLineGui();
+	public CommandLinePresenterAPI getCommandLineGui();
 	@Override
-	public ScenePresenter getSceneGui();
+	public ScenePresenterAPI getSceneGui();
 
 	// nearly a gui method
 	@Override
