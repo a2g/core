@@ -18,7 +18,6 @@ package com.github.a2g.core.event;
 
 import com.google.gwt.event.shared.EventHandler;
 
-
 public interface MouseToInventoryPresenterEventHandlerAPI extends EventHandler {
 	boolean onClick(double x, double y);
 

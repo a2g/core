@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
@@ -24,7 +23,6 @@ import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromSwapAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-
 
 public class SwapPropertyAction extends ChainedAction {
 	private IScenePresenterFromSwapAction scene;
@@ -35,8 +33,10 @@ public class SwapPropertyAction extends ChainedAction {
 	private SwapType type;
 	boolean newA;
 	boolean newB;
-	public SwapPropertyAction(BaseAction parent, short ocodeA, short ocodeB, SwapType type) {
-		super(parent,  true);
+
+	public SwapPropertyAction(BaseAction parent, short ocodeA, short ocodeB,
+			SwapType type) {
+		super(parent, true);
 		this.ocodeA = ocodeA;
 		this.ocodeB = ocodeB;
 		this.type = type;
@@ -44,12 +44,13 @@ public class SwapPropertyAction extends ChainedAction {
 
 	@Override
 	public void runGameAction() {
-	
+
 		super.run(1);
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {}
+	protected void onUpdateGameAction(double progress) {
+	}
 
 	@Override
 	protected void onCompleteGameAction() {
@@ -60,8 +61,8 @@ public class SwapPropertyAction extends ChainedAction {
 			boolean newA = scene.getVisibleByOtid(otidB);
 			boolean newB = scene.getVisibleByOtid(otidA);
 
-			scene.setVisibleByOtid(otidA ,newA);
-			scene.setVisibleByOtid(otidB,newB);
+			scene.setVisibleByOtid(otidA, newA);
+			scene.setVisibleByOtid(otidB, newB);
 
 		}
 
@@ -78,9 +79,12 @@ public class SwapPropertyAction extends ChainedAction {
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setScene(scene);
-		
+
 	}
 
 }

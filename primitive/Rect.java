@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.primitive;
 
-
 public class Rect {
 	private int left;
 	private int top;
@@ -28,24 +27,19 @@ public class Rect {
 		this.top = y;
 		this.right = x + width;
 		this.bottom = y + height;
-		if(bottom<0)
-		{
+		if (bottom < 0) {
 			this.bottom = y + height;
 		}
 	}
 
-	public boolean contains(int x, int y)
-	{
-		if( x>=left && x<=right)
-		{
-			if( y >=top && y <= bottom)
-			{
+	public boolean contains(int x, int y) {
+		if (x >= left && x <= right) {
+			if (y >= top && y <= bottom) {
 				return true;
 			}
 		}
 		return false;
 	}
-
 
 	public int getLeft() {
 		return left;
@@ -56,27 +50,25 @@ public class Rect {
 	}
 
 	public int getBottom() {
-		if(bottom>=0)
-		{
+		if (bottom >= 0) {
 			return bottom;
 		}
 		return bottom;
 	}
 
 	public int getTop() {
-		if(top>=0)
-		{
+		if (top >= 0) {
 			return top;
 		}
 		return top;
 	}
 
 	public int getWidth() {
-		return getRight() -getLeft();
+		return getRight() - getLeft();
 	}
 
 	public int getHeight() {
-		return getBottom()-getTop();
+		return getBottom() - getTop();
 	}
 
 }

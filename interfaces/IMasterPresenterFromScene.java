@@ -2,8 +2,7 @@ package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.primitive.PointF;
 
-public interface IMasterPresenterFromScene
-{
+public interface IMasterPresenterFromScene {
 	void switchToSceneFromAction(String scene);
 
 	void switchToScene(String scene);

@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
@@ -25,7 +24,6 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromSetActiveFrameAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-
 public class SetActiveFrameAction extends ChainedAction {
 	private IScenePresenterFromSetActiveFrameAction scene;
 
@@ -33,8 +31,7 @@ public class SetActiveFrameAction extends ChainedAction {
 	private String otid;
 	private int frame;
 
-	public SetActiveFrameAction(BaseAction parent, short ocode,
-			int frame) {
+	public SetActiveFrameAction(BaseAction parent, short ocode, int frame) {
 		super(parent, true);
 		this.ocode = ocode;
 		this.frame = frame;
@@ -46,13 +43,13 @@ public class SetActiveFrameAction extends ChainedAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {}
+	protected void onUpdateGameAction(double progress) {
+	}
 
 	@Override
 	protected void onCompleteGameAction() {
 		scene.getOtidByCode(ocode);
-		scene.setCurrentFrameByOtid(otid,
-				this.frame);
+		scene.setCurrentFrameByOtid(otid, this.frame);
 
 	}
 
@@ -62,15 +59,17 @@ public class SetActiveFrameAction extends ChainedAction {
 		return false;
 	}
 
-
 	public void setScene(IScenePresenterFromSetActiveFrameAction scene) {
 		this.scene = scene;
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setScene(scene);
-		
+
 	}
 
 }

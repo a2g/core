@@ -19,9 +19,10 @@ package com.github.a2g.core.interfaces;
 import com.github.a2g.core.objectmodel.DialogTree;
 import com.google.gwt.event.shared.EventBus;
 
-public interface IDialogTreePanelFromDialogTreePresenter
-{
+public interface IDialogTreePanelFromDialogTreePresenter {
 	void setVisible(boolean isInDialogTreeMode);
+
 	void update(DialogTree theDialogTree, EventBus bus);
+
 	void setScenePixelSize(int width, int height);
 }

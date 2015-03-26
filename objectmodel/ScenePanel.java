@@ -35,11 +35,8 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 
-
-public class ScenePanel
-extends AbsolutePanel
-implements ImagePanelAPI, IScenePanelFromScenePresenter
-{
+public class ScenePanel extends AbsolutePanel implements ImagePanelAPI,
+		IScenePanelFromScenePresenter {
 	int cameraOffsetX;
 	int cameraOffsetY;
 	SceneObjectTouchMoveHandler theTouchMoveHandler;
@@ -48,10 +45,9 @@ implements ImagePanelAPI, IScenePanelFromScenePresenter
 	private int width;
 	private int height;
 
-	public ScenePanel(EventBus bus, IScenePresenterFromScenePanel api)
-	{
+	public ScenePanel(EventBus bus, IScenePresenterFromScenePanel api) {
 		this.getElement().setId("cwAbsolutePanel");
-		//this.addStyleName("absolutePanel");
+		// this.addStyleName("absolutePanel");
 		this.cameraOffsetX = 0;
 		this.cameraOffsetY = 0;
 		this.theTouchMoveHandler = new SceneObjectTouchMoveHandler(api);
@@ -63,96 +59,78 @@ implements ImagePanelAPI, IScenePanelFromScenePresenter
 	}
 
 	@Override
-	public Image createNewImageAndAddHandlers
-	(
-			LoadHandler lh,
+	public Image createNewImageAndAddHandlers(LoadHandler lh,
 			IPackagedImage imageResource,
-			IScenePresenterFromSceneMouseOver api,
-			EventBus bus,
-			int x,
-			int y,
-			String objectTextualId,
-			short objectCode)
-	{
+			IScenePresenterFromSceneMouseOver api, EventBus bus, int x, int y,
+			String objectTextualId, short objectCode) {
 
-		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource((PackagedImageForHtml4)imageResource,lh);
+		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource(
+				(PackagedImageForHtml4) imageResource, lh);
 
-		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new Point(x, y));
+		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new Point(x,
+				y));
 
 		// add gwt mouse handlers
-		imageAndPos.getNativeImage().addMouseMoveHandler
-		(
-				new SceneObjectMouseOverHandler(bus, api, objectTextualId, objectCode)
-				);
+		imageAndPos.getNativeImage().addMouseMoveHandler(
+				new SceneObjectMouseOverHandler(bus, api, objectTextualId,
+						objectCode));
 
-		imageAndPos.getNativeImage().addClickHandler
-		(
-				new ImageMouseClickHandler(bus, this)
-				);
+		imageAndPos.getNativeImage().addClickHandler(
+				new ImageMouseClickHandler(bus, this));
 
-		imageAndPos.getNativeImage().addTouchMoveHandler
-		(
-				theTouchMoveHandler
-				);
+		imageAndPos.getNativeImage().addTouchMoveHandler(theTouchMoveHandler);
 
 		return imageAndPos;
 	}
 
-
 	@Override
-	public void setImageVisible(Image image, boolean visible)
-	{
-		super.setVisible(((ImageForHtml4)image).getNativeImage().getElement(), visible);
+	public void setImageVisible(Image image, boolean visible) {
+		super.setVisible(((ImageForHtml4) image).getNativeImage().getElement(),
+				visible);
 	}
 
 	@Override
-	public void add(Image image, int x, int y)
-	{
-		super.add(((ImageForHtml4)image).getNativeImage(),x,y);
+	public void add(Image image, int x, int y) {
+		super.add(((ImageForHtml4) image).getNativeImage(), x, y);
 	}
 
 	@Override
-	public void insert(Image image, int x, int y, int before)
-	{
-		super.insert(((ImageForHtml4)image).getNativeImage(),x-cameraOffsetX,y-cameraOffsetY,before);
+	public void insert(Image image, int x, int y, int before) {
+		super.insert(((ImageForHtml4) image).getNativeImage(), x
+				- cameraOffsetX, y - cameraOffsetY, before);
 	}
 
 	@Override
-	public void remove(Image image)
-	{
-		super.remove(((ImageForHtml4)image).getNativeImage());
+	public void remove(Image image) {
+		super.remove(((ImageForHtml4) image).getNativeImage());
 	}
 
 	@Override
-	public void setThingPosition(Image image, int left, int top)
-	{
-		super.setWidgetPosition(((ImageForHtml4)image).getNativeImage(), (int)(left-cameraOffsetX*image.getParallaxX()),(int)( top-cameraOffsetY*image.getParallaxY()));
+	public void setThingPosition(Image image, int left, int top) {
+		super.setWidgetPosition(((ImageForHtml4) image).getNativeImage(),
+				(int) (left - cameraOffsetX * image.getParallaxX()),
+				(int) (top - cameraOffsetY * image.getParallaxY()));
 	}
 
 	@Override
-	public int getImageHeight(Image image)
-	{
-		return ((ImageForHtml4)image).getNativeImage().getHeight();
+	public int getImageHeight(Image image) {
+		return ((ImageForHtml4) image).getNativeImage().getHeight();
 	}
 
 	@Override
-	public int getImageWidth(Image image)
-	{
-		return ((ImageForHtml4)image).getNativeImage().getWidth();
+	public int getImageWidth(Image image) {
+		return ((ImageForHtml4) image).getNativeImage().getWidth();
 	}
 
 	@Override
-	public void setScenePixelSize(int width, int height)
-	{
+	public void setScenePixelSize(int width, int height) {
 		this.width = width;
 		this.height = height;
-		this.setSize("" + width + "px",
-				"" + height + "px");
+		this.setSize("" + width + "px", "" + height + "px");
 	}
 
 	@Override
-	public void setCameraOffset(int x, int y)
-	{
+	public void setCameraOffset(int x, int y) {
 		this.cameraOffsetX = x;
 		this.cameraOffsetY = y;
 	}
@@ -160,20 +138,19 @@ implements ImagePanelAPI, IScenePanelFromScenePresenter
 	@Override
 	public void setStateOfPopup(boolean isVisible, double x, double y,
 			ColorEnum talkingColor, String speech, SayAction sayAction) {
-		if(!isVisible)
-		{
+		if (!isVisible) {
 			super.remove(speechWidget);
 		}
 		label.setVisible(isVisible);
-		label.getElement().getStyle().setProperty("color","#ff0000");
-		label.getElement().getStyle().setProperty("fontcolor","#00ff00");
-		label.getElement().getStyle().setProperty("textcolor","#0000ff");
-		if(talkingColor!=null)
-		{
-			label.getElement().getStyle().setProperty("borderColor",talkingColor.toString());
+		label.getElement().getStyle().setProperty("color", "#ff0000");
+		label.getElement().getStyle().setProperty("fontcolor", "#00ff00");
+		label.getElement().getStyle().setProperty("textcolor", "#0000ff");
+		if (talkingColor != null) {
+			label.getElement().getStyle()
+					.setProperty("borderColor", talkingColor.toString());
 		}
 		label.setText(speech);
-		super.add(speechWidget, (int)(x*width),(int)(y*height));
+		super.add(speechWidget, (int) (x * width), (int) (y * height));
 
 	}
 

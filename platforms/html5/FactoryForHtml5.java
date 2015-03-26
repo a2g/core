@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.platforms.html5;
 
-
 import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.IFactory;
@@ -48,76 +47,80 @@ import com.github.a2g.core.platforms.html5.panel.ScenePanelForHtml5;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
-public class FactoryForHtml5
-implements IFactory
-{
+public class FactoryForHtml5 implements IFactory {
 
 	private EventBus bus;
 	private MasterPresenter master;
 
-	public FactoryForHtml5(EventBus bus, MasterPresenter master, IHostFromMasterPresenter api)
-	{
+	public FactoryForHtml5(EventBus bus, MasterPresenter master,
+			IHostFromMasterPresenter api) {
 		this.bus = bus;
 		this.master = master;
 	}
+
 	@Override
-	public ICommandLinePanelFromCommandLinePresenter createCommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll)
-	{
-		return new CommandLinePanel(fore,back,roll);
+	public ICommandLinePanelFromCommandLinePresenter createCommandLinePanel(
+			ColorEnum fore, ColorEnum back, ColorEnum roll) {
+		return new CommandLinePanel(fore, back, roll);
 	}
 
 	@Override
-	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum roll)
-	{
+	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
+			EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum roll) {
 		return new DialogTreePanel(bus, fore, back, roll);
 	}
 
-
 	@Override
-	public ILoaderPanelFromLoaderPresenter createLoaderPanel(final IMasterPresenterFromLoaderMouse api, ColorEnum fore, ColorEnum back) {
+	public ILoaderPanelFromLoaderPresenter createLoaderPanel(
+			final IMasterPresenterFromLoaderMouse api, ColorEnum fore,
+			ColorEnum back) {
 		return new LoaderPanel(api, fore, back);
 	}
 
 	@Override
-	public IMasterPanelFromMasterPresenter createMasterPanel(int width,int height,ColorEnum back) {
-		return new MasterPanel(width,height,back);
+	public IMasterPanelFromMasterPresenter createMasterPanel(int width,
+			int height, ColorEnum back) {
+		return new MasterPanel(width, height, back);
 	}
 
 	@Override
 	public IScenePanelFromScenePresenter createScenePanel() {
-		return new ScenePanelForHtml5(bus, master.getScenePresenter(), master.getCommandLinePresenter());
+		return new ScenePanelForHtml5(bus, master.getScenePresenter(),
+				master.getCommandLinePresenter());
 	}
 
 	@Override
-	public ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(ColorEnum fore, ColorEnum back)
-	{
+	public ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(
+			ColorEnum fore, ColorEnum back) {
 		return new TitleCardPanel(fore, back);
 	}
 
 	@Override
-	public IVerbsPanelFromVerbsPresenter createVerbsPanel(IVerbsPresenterFromVerbsPanel api, ColorEnum fore, ColorEnum back)
-	{
+	public IVerbsPanelFromVerbsPresenter createVerbsPanel(
+			IVerbsPresenterFromVerbsPanel api, ColorEnum fore, ColorEnum back) {
 		return new VerbsPanel(api, fore, back);
 	}
+
 	@Override
-	public ISystemAnimation createSystemAnimation(IBaseActionFromSystemAnimation callbacks, boolean isLinear)
-	{
+	public ISystemAnimation createSystemAnimation(
+			IBaseActionFromSystemAnimation callbacks, boolean isLinear) {
 		return new SystemAnimationForHtml4(callbacks, isLinear);
 	}
+
 	@Override
 	public ITimer createSystemTimer(IMasterPresenterFromTimer cbs) {
 		return new TimerForHtml4(cbs);
 	}
 
-	/*void alert(String text)
-	{
-		JOptionPane.showMessageDialog(null, "alert", text,JOptionPane.ERROR_MESSAGE);
-	}*/
+	/*
+	 * void alert(String text) { JOptionPane.showMessageDialog(null, "alert",
+	 * text,JOptionPane.ERROR_MESSAGE); }
+	 */
 
 	@Override
 	public IInventoryPanelFromInventoryPresenter createInventoryPanel(
-			IInventoryPresenterFromInventoryPanel api, ColorEnum fore, ColorEnum back, ColorEnum rollover)
-	{
+			IInventoryPresenterFromInventoryPanel api, ColorEnum fore,
+			ColorEnum back, ColorEnum rollover) {
 		return new InventoryPanel(api, fore, back, rollover);
 	}
 

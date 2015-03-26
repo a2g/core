@@ -7,12 +7,7 @@ import com.github.a2g.core.interfaces.action.IGetDisplayNameByOtid;
 import com.github.a2g.core.interfaces.action.IGetSceneGuiHeight;
 import com.github.a2g.core.interfaces.action.IGetSceneGuiWidth;
 
-public interface IScenePresenterFromSceneMouseOver 
-extends IGetSceneGuiWidth
-, IGetSceneGuiHeight
-, IGetDisplayNameByOtid
-, IGetCodeByOtid
-, IGetCameraX
-, IGetCameraY
-{
+public interface IScenePresenterFromSceneMouseOver extends IGetSceneGuiWidth,
+		IGetSceneGuiHeight, IGetDisplayNameByOtid, IGetCodeByOtid, IGetCameraX,
+		IGetCameraY {
 }

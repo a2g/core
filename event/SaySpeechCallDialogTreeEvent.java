@@ -16,11 +16,10 @@
 
 package com.github.a2g.core.event;
 
-
 import com.google.gwt.event.shared.GwtEvent;
 
-
-public class SaySpeechCallDialogTreeEvent extends GwtEvent<SaySpeechCallDialogTreeEventHandlerAPI> {
+public class SaySpeechCallDialogTreeEvent extends
+		GwtEvent<SaySpeechCallDialogTreeEventHandlerAPI> {
 	public static Type<SaySpeechCallDialogTreeEventHandlerAPI> TYPE = new Type<SaySpeechCallDialogTreeEventHandlerAPI>();
 	// private final FriendSummaryDTO friend;
 	private final String speech;
@@ -38,8 +37,7 @@ public class SaySpeechCallDialogTreeEvent extends GwtEvent<SaySpeechCallDialogTr
 
 	@Override
 	protected void dispatch(SaySpeechCallDialogTreeEventHandlerAPI handler) {
-		handler.onSaySpeechCallBranch(speech,
-				branchId);
+		handler.onSaySpeechCallBranch(speech, branchId);
 
 	}
 }

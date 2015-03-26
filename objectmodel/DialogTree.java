@@ -16,10 +16,8 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import java.util.LinkedList;
 import java.util.List;
-
 
 public class DialogTree {
 	private List<Integer> subBranches;

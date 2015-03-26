@@ -21,8 +21,7 @@ import com.github.a2g.core.objectmodel.Inventory;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
 
-public interface IInventoryPanelFromInventoryPresenter
-{
+public interface IInventoryPanelFromInventoryPresenter {
 
 	void setVisible(boolean isVisible);
 
@@ -35,8 +34,10 @@ public interface IInventoryPanelFromInventoryPresenter
 			int objectCode, int i, int j);
 
 	void setScenePixelSize(int width, int height);
+
 	void setInventoryImageSize(int width, int height);
 
 	void setLeftArrowVisible(boolean visible);
+
 	void setRightArrowVisible(boolean visible);
 }

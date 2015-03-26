@@ -16,8 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-
-
 import com.github.a2g.core.event.ExecuteCommandEvent;
 import com.github.a2g.core.event.ExecuteCommandEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
@@ -29,14 +27,8 @@ import com.github.a2g.core.interfaces.IHostingPanel;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
-
-
-public class CommandLinePresenter
-implements
-ExecuteCommandEventHandlerAPI
-, SetRolloverEventHandlerAPI
-, ICommandLinePresenter
-{
+public class CommandLinePresenter implements ExecuteCommandEventHandlerAPI,
+		SetRolloverEventHandlerAPI, ICommandLinePresenter {
 
 	private IMasterPresenterFromCommandLine api;
 	private ICommandLinePanelFromCommandLinePresenter view;
@@ -44,16 +36,16 @@ ExecuteCommandEventHandlerAPI
 	private double debugX;
 	private double debugY;
 
-	public CommandLinePresenter(final IHostingPanel panel, EventBus bus, IMasterPresenterFromCommandLine api) {
+	public CommandLinePresenter(final IHostingPanel panel, EventBus bus,
+			IMasterPresenterFromCommandLine api) {
 		this.model = new CommandLine(api);
 		this.api = api;
-		this.view = api.getFactory().createCommandLinePanel(ColorEnum.Purple, ColorEnum.Black, ColorEnum.Red);
+		this.view = api.getFactory().createCommandLinePanel(ColorEnum.Purple,
+				ColorEnum.Black, ColorEnum.Red);
 		panel.setThing(view);
 
-		bus.addHandler(
-				ExecuteCommandEvent.TYPE, this);
-		bus.addHandler(SetRolloverEvent.TYPE,
-				this);
+		bus.addHandler(ExecuteCommandEvent.TYPE, this);
+		bus.addHandler(SetRolloverEvent.TYPE, this);
 	}
 
 	public void setVisible(boolean isVisible) {
@@ -67,30 +59,28 @@ ExecuteCommandEventHandlerAPI
 	}
 
 	@Override
-	public void setXYForDebugging(double x, double y)
-	{
-		if(x!=-1)
-		{
-			this.debugX = (int)(x*100);
-			this.debugY = (int)(y*100);
+	public void setXYForDebugging(double x, double y) {
+		if (x != -1) {
+			this.debugX = (int) (x * 100);
+			this.debugY = (int) (y * 100);
 		}
 	}
 
 	@Override
-	public void setCommandLineMouseOver(String displayName, String otid, int code)
-	{
+	public void setCommandLineMouseOver(String displayName, String otid,
+			int code) {
 		model.setMouseOver(displayName, otid, code);
 		updateImage();
 	}
 
 	@Override
-	public boolean onClick(double x, double y)
-	{
-		if(!this.api.isCommandLineActive())
+	public boolean onClick(double x, double y) {
+		if (!this.api.isCommandLineActive())
 			return false;
 
 		if (isOkToExecute()) {
-			System.out.println("ONEXECUTECOMMAND::execute  " + model.getSentence().getDisplayName());
+			System.out.println("ONEXECUTECOMMAND::execute  "
+					+ model.getSentence().getDisplayName());
 			this.execute(x, y);
 			return true;
 		}
@@ -100,8 +90,7 @@ ExecuteCommandEventHandlerAPI
 		return false;
 	}
 
-	public void clear()
-	{
+	public void clear() {
 		model.clear();
 		updateImage();
 	}
@@ -117,7 +106,6 @@ ExecuteCommandEventHandlerAPI
 		return isOkToExecute;
 	}
 
-
 	private void updateImage() {
 
 		// get sentence gets the sentence template filled out
@@ -125,21 +113,22 @@ ExecuteCommandEventHandlerAPI
 		Sentence sentence = getSentence();
 
 		// so we should fill in remaining AAA and BBB with blank
-		sentence.setBBB( new SentenceItem());
+		sentence.setBBB(new SentenceItem());
 		sentence.setAAA(new SentenceItem());
 
 		// then get the display name
 		String displayName = sentence.getDisplayName();
 
 		// ...and display it
-		view.setText("("+debugX+","+debugY +")  "+ displayName);
+		view.setText("(" + debugX + "," + debugY + ")  " + displayName);
 	}
 
-	private  Sentence getSentence() {
+	private Sentence getSentence() {
 		Sentence sentence = model.getSentence();
 
 		return sentence;
 	}
+
 	private void execute(double x, double y) {
 		// if its incomplete, the clear everything..
 		if (!model.isOkToExecute()) {
@@ -152,13 +141,17 @@ ExecuteCommandEventHandlerAPI
 			SentenceItem sentenceA = model.getSentence().getAAA();
 			SentenceItem sentenceB = model.getSentence().getBBB();
 			// clamp the mouse pointer to within the viewport coords
-			if(x>1.0) x=1.0;
-			if(x<0.0) x=0.0;
-			if(y>1.0) y=1.0;
-			if(y<0.0) y=0.0;
+			if (x > 1.0)
+				x = 1.0;
+			if (x < 0.0)
+				x = 0.0;
+			if (y > 1.0)
+				y = 1.0;
+			if (y < 0.0)
+				y = 0.0;
 
-			api.doCommand( verbAsCode, getSentence().getVerbAsVerbEnumeration(), sentenceA,
-					sentenceB, x, y);
+			api.doCommand(verbAsCode, getSentence().getVerbAsVerbEnumeration(),
+					sentenceA, sentenceB, x, y);
 
 		}
 
@@ -168,13 +161,9 @@ ExecuteCommandEventHandlerAPI
 		return view;
 	}
 
-	public String getDisplayName()
-	{
+	public String getDisplayName() {
 		String displayName = model.getSentence().getDisplayName();
 		return displayName;
 	}
-
-
-
 
 }

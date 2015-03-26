@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
@@ -25,14 +24,14 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromSetDisplayNameAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-
 public class SetDisplayNameAction extends ChainedAction {
 	private IScenePresenterFromSetDisplayNameAction scene;
 	short ocode;
 	private String otid;
 	private String displayName;
 
-	public SetDisplayNameAction(BaseAction parent, short ocode, String displayName, boolean isLinear) {
+	public SetDisplayNameAction(BaseAction parent, short ocode,
+			String displayName, boolean isLinear) {
 		super(parent, isLinear);
 		this.displayName = displayName;
 		this.ocode = ocode;
@@ -44,13 +43,13 @@ public class SetDisplayNameAction extends ChainedAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {}
+	protected void onUpdateGameAction(double progress) {
+	}
 
 	@Override
 	protected void onCompleteGameAction() {
 		otid = scene.getOtidByCode(ocode);
-		scene.setDisplayNameByOtid(otid,
-				this.displayName);
+		scene.setDisplayNameByOtid(otid, this.displayName);
 	}
 
 	@Override
@@ -58,14 +57,16 @@ public class SetDisplayNameAction extends ChainedAction {
 
 		return false;
 	}
- 
 
 	public void setScene(IScenePresenterFromSetDisplayNameAction scene) {
 		this.scene = scene;
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setScene(scene);
 	}
 

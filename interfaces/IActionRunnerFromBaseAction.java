@@ -16,9 +16,7 @@
 
 package com.github.a2g.core.interfaces;
 
-
 import com.github.a2g.core.action.BaseAction;
-
 
 public interface IActionRunnerFromBaseAction {
 	public void startTheNextAction(BaseAction a);

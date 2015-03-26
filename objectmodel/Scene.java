@@ -16,13 +16,9 @@
 
 package com.github.a2g.core.objectmodel;
 
-
-
 public class Scene {
-	void setCameraPositionX(double x)
-	{
+	void setCameraPositionX(double x) {
 	}
-
 
 	private SceneObjectCollection sceneObjectCollection;
 
@@ -33,6 +29,5 @@ public class Scene {
 	public SceneObjectCollection objectCollection() {
 		return sceneObjectCollection;
 	}
-
 
 }

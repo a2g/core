@@ -16,9 +16,9 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 public class Inventory {
 	private InventoryItemCollection theItems;
+
 	public Inventory() {
 		this.theItems = new InventoryItemCollection();
 	}

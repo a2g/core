@@ -15,6 +15,7 @@
  */
 
 package com.github.a2g.core.objectmodel;
+
 import com.github.a2g.core.interfaces.IHostingPanel;
 import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter;
 import com.github.a2g.core.platforms.html4.HostingPanelForHtml4;
@@ -23,11 +24,8 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-
-public class MasterPanel
-extends VerticalPanel
-implements IMasterPanelFromMasterPresenter
-{
+public class MasterPanel extends VerticalPanel implements
+		IMasterPanelFromMasterPresenter {
 	HostingPanelForHtml4 hostForCommandLine;
 	HostingPanelForHtml4 hostForInventory;
 	HostingPanelForHtml4 hostForVerbs;
@@ -52,25 +50,23 @@ implements IMasterPanelFromMasterPresenter
 		AbsolutePanel stackForSceneAndLoading = new AbsolutePanel();
 		AbsolutePanel stackForDialogTreeInvAndCommand = new AbsolutePanel();
 
-		stackForDialogTreeInvAndCommand.getElement().getStyle().setProperty("backgroundColor", back.toString());
-		stackForSceneAndLoading.getElement().getStyle().setProperty("backgroundColor", back.toString());
-
-
+		stackForDialogTreeInvAndCommand.getElement().getStyle()
+				.setProperty("backgroundColor", back.toString());
+		stackForSceneAndLoading.getElement().getStyle()
+				.setProperty("backgroundColor", back.toString());
 
 		{
 			HorizontalPanel verbsAndInventory = new HorizontalPanel();
 
 			verbsAndInventory.add(hostForVerbs);
-			verbsAndInventory.add(
-					hostForInventory);
+			verbsAndInventory.add(hostForInventory);
 
 			VerticalPanel commandLineAndVerbsAndInventory = new VerticalPanel();
 
-			commandLineAndVerbsAndInventory.add(
-					hostForCommandLine);
-			commandLineAndVerbsAndInventory.add(
-					verbsAndInventory);
-			stackForDialogTreeInvAndCommand.add(commandLineAndVerbsAndInventory);
+			commandLineAndVerbsAndInventory.add(hostForCommandLine);
+			commandLineAndVerbsAndInventory.add(verbsAndInventory);
+			stackForDialogTreeInvAndCommand
+					.add(commandLineAndVerbsAndInventory);
 			stackForDialogTreeInvAndCommand.add(hostForDialogTree);
 		}
 		{
@@ -89,7 +85,6 @@ implements IMasterPanelFromMasterPresenter
 		return hostForCommandLine;
 	}
 
-
 	@Override
 	public IHostingPanel getHostForInventory() {
 		return hostForInventory;
@@ -100,12 +95,10 @@ implements IMasterPanelFromMasterPresenter
 		return hostForVerbs;
 	}
 
-
 	@Override
 	public IHostingPanel getHostForScene() {
 		return hostForScene;
 	}
-
 
 	@Override
 	public IHostingPanel getHostForDialogTree() {
@@ -117,20 +110,16 @@ implements IMasterPanelFromMasterPresenter
 		return hostForLoading;
 	}
 
-
-
 	@Override
 	public IHostingPanel getHostForTitleCard() {
 		return hostForTitleCard;
 	}
 
 	@Override
-	public void setActiveState(GuiStateEnum state)
-	{
+	public void setActiveState(GuiStateEnum state) {
 		this.state = state;
 
-		switch(state)
-		{
+		switch (state) {
 		case DialogTree:
 			hostForDialogTree.setVisible(true);
 			hostForScene.setVisible(true);
@@ -211,8 +200,7 @@ implements IMasterPanelFromMasterPresenter
 	}
 
 	@Override
-	public GuiStateEnum getActiveState()
-	{
+	public GuiStateEnum getActiveState() {
 		return state;
 	}
 

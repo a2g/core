@@ -17,18 +17,15 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.interfaces.IScenePresenterFromWalkAction;
 
-public class WalkToAction
-extends MoveWhilstAnimatingAction
-{
+public class WalkToAction extends MoveWhilstAnimatingAction {
 	private IScenePresenterFromWalkAction scene;
-	
-	public WalkToAction(BaseAction parent, short ocode, double endX, double endY, int delay, boolean isLinear)
-	{
+
+	public WalkToAction(BaseAction parent, short ocode, double endX,
+			double endY, int delay, boolean isLinear) {
 		super(parent, ocode, isLinear);
 		super.setEndX(endX);
 		super.setEndY(endY);
@@ -36,8 +33,7 @@ extends MoveWhilstAnimatingAction
 	}
 
 	@Override
-	public void runGameAction()
-	{
+	public void runGameAction() {
 		double startX = scene.getBaseMiddleXByOtid(getOtid());
 		double startY = scene.getBaseMiddleYByOtid(getOtid());
 
@@ -50,23 +46,20 @@ extends MoveWhilstAnimatingAction
 		int width = scene.getSceneGuiWidth();
 		int height = scene.getSceneGuiHeight();
 
-		if ((diffX * width) * (diffX * width)
-				> (diffY * height)
+		if ((diffX * width) * (diffX * width) > (diffY * height)
 				* (diffY * height)) {
 			if (getEndX() < startX) {
-				anim = scene.getSpecialAnimationByOtid(getOtid(),
-						Special.West);
+				anim = scene.getSpecialAnimationByOtid(getOtid(), Special.West);
 			} else {
-				anim = scene.getSpecialAnimationByOtid(getOtid(),
-						Special.East);
+				anim = scene.getSpecialAnimationByOtid(getOtid(), Special.East);
 			}
 		} else {
 			if (getEndY() < startY) {
-				anim = scene.getSpecialAnimationByOtid(getOtid(),
-						Special.North);
+				anim = scene
+						.getSpecialAnimationByOtid(getOtid(), Special.North);
 			} else {
-				anim = scene.getSpecialAnimationByOtid(getOtid(),
-						Special.South);
+				anim = scene
+						.getSpecialAnimationByOtid(getOtid(), Special.South);
 			}
 		}
 
@@ -75,14 +68,16 @@ extends MoveWhilstAnimatingAction
 		super.runGameAction();
 	}
 
-	@Override // on complete walking
+	@Override
+	// on complete walking
 	protected void onCompleteGameAction() {
 		super.onCompleteGameAction();
 
 		// best to set initial animation at the end, since:
-		// - if the walk animation is a cycle then no frame will be completely stationary
+		// - if the walk animation is a cycle then no frame will be completely
+		// stationary
 		// - to make it consistent with everything else
-		//super.getObject().setCurrentAnimation(south);super.getObject().setCurrentFrame(0);
+		// super.getObject().setCurrentAnimation(south);super.getObject().setCurrentFrame(0);
 		scene.setToInitialAnimationWithoutChangingFrameByOtid(getOtid());
 	}
 

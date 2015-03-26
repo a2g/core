@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
@@ -25,13 +24,13 @@ import com.github.a2g.core.interfaces.IScenePresenterFromPlayAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.ChainedAction;
 
-
 public class PlayAnimationRepeatWhilstVisibleAction extends ChainedAction {
 	private String atid;
 	private String otid;
 	private IScenePresenterFromPlayAction scene;
 
-	public PlayAnimationRepeatWhilstVisibleAction(BaseAction parent, String atid, boolean isLinear) {
+	public PlayAnimationRepeatWhilstVisibleAction(BaseAction parent,
+			String atid, boolean isLinear) {
 		super(parent, isLinear);
 		this.atid = atid;
 	}
@@ -39,20 +38,21 @@ public class PlayAnimationRepeatWhilstVisibleAction extends ChainedAction {
 	@Override
 	public void runGameAction() {
 		otid = scene.getOtidOfAtid(atid);
-		double durationInMs = scene.getDurationByAtid(atid)*1000;
+		double durationInMs = scene.getDurationByAtid(atid) * 1000;
 		scene.setAsACurrentAnimationByAtid(atid);
 		scene.setVisibleByOtid(otid, true);
-		this.run((int)durationInMs);
+		this.run((int) durationInMs);
 	}
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		double frame = progress	* scene.getNumberOfFramesByAtid(atid)-1;
+		double frame = progress * scene.getNumberOfFramesByAtid(atid) - 1;
 		scene.setCurrentFrameByOtid(otid, (int) frame);
 	}
 
 	@Override
-	protected void onCompleteGameAction() {}
+	protected void onCompleteGameAction() {
+	}
 
 	@Override
 	public boolean isParallel() {
@@ -60,14 +60,16 @@ public class PlayAnimationRepeatWhilstVisibleAction extends ChainedAction {
 		return false;
 	}
 
-
 	public void setScene(IScenePresenterFromPlayAction scene) {
 		this.scene = scene;
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setScene(scene);
-		
+
 	}
 }

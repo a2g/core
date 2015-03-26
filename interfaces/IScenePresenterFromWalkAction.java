@@ -8,22 +8,9 @@ import com.github.a2g.core.interfaces.action.IGetSpecialAnimationByOtid;
 import com.github.a2g.core.interfaces.action.ISetAsACurrentAnimationByAtid;
 import com.github.a2g.core.interfaces.action.ISetToInitialAnimationWithoutChangingFrameByOtid;
 
+public interface IScenePresenterFromWalkAction extends IGetBaseMiddleXByOtid,
+		IGetBaseMiddleYByOtid, IGetSceneGuiWidth, IGetSceneGuiHeight,
+		ISetToInitialAnimationWithoutChangingFrameByOtid,
+		ISetAsACurrentAnimationByAtid, IGetSpecialAnimationByOtid {
 
-public interface IScenePresenterFromWalkAction 
-extends
-IGetBaseMiddleXByOtid
-,IGetBaseMiddleYByOtid
-,IGetSceneGuiWidth
-,IGetSceneGuiHeight
-,ISetToInitialAnimationWithoutChangingFrameByOtid
-,ISetAsACurrentAnimationByAtid
-,IGetSpecialAnimationByOtid
-{
-
-	
-	
-	
-	
-
-	
 }

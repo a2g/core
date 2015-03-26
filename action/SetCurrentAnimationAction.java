@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
@@ -25,10 +24,10 @@ import com.github.a2g.core.interfaces.IScenePresenterFromSetCurrentAnimationActi
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.ChainedAction;
 
-
 public class SetCurrentAnimationAction extends ChainedAction {
 	private IScenePresenterFromSetCurrentAnimationAction scene;
 	private String atid;
+
 	public SetCurrentAnimationAction(BaseAction parent, String atid) {
 		super(parent, true);
 		this.atid = atid;
@@ -40,12 +39,13 @@ public class SetCurrentAnimationAction extends ChainedAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {}
+	protected void onUpdateGameAction(double progress) {
+	}
 
 	@Override
 	protected void onCompleteGameAction() {
 		scene.setAsACurrentAnimationByAtid(atid);
-		
+
 	}
 
 	@Override
@@ -53,15 +53,17 @@ public class SetCurrentAnimationAction extends ChainedAction {
 
 		return false;
 	}
- 
 
 	public void setScene(IScenePresenterFromSetCurrentAnimationAction scene) {
 		this.scene = scene;
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setScene(scene);
-		
+
 	}
 }

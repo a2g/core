@@ -19,16 +19,24 @@ package com.github.a2g.core.interfaces;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.google.gwt.event.shared.EventBus;
 
-
 public interface IHostFromMasterPresenter {
 
 	public void setValue(String name, Integer value);
+
 	public int getValue(String name);
-	public void instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(String scene);
+
+	public void instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(
+			String scene);
+
 	public void setLastCommand(double x, double y, int verb, String a, String b);
+
 	void alert(String string);
+
 	IFactory getFactory(EventBus bus, MasterPresenter mp);
+
 	public IGameScene getSceneViaCache(String string);
+
 	void shareWinning(String token);
+
 	void log(String message);
 }

@@ -16,11 +16,8 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import com.github.a2g.core.event.PropertyChangeEvent;
 import com.google.gwt.event.shared.EventBus;
-
-
 
 public class InventoryItem {
 
@@ -31,8 +28,9 @@ public class InventoryItem {
 	private EventBus bus;
 	private int icode;
 
-	public InventoryItem(EventBus bus, final String itid, final Image image, int icode, boolean isVisible) {
-		assert(bus != null);
+	public InventoryItem(EventBus bus, final String itid, final Image image,
+			int icode, boolean isVisible) {
+		assert (bus != null);
 		this.icode = icode;
 		this.image = image;
 		this.itid = itid;
@@ -47,10 +45,8 @@ public class InventoryItem {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
-		bus.fireEvent(
-				new PropertyChangeEvent(
-						"CARRYING_" + itid,
-						icode, visible ? 1 : 0));
+		bus.fireEvent(new PropertyChangeEvent("CARRYING_" + itid, icode,
+				visible ? 1 : 0));
 	}
 
 	public boolean isVisible() {
@@ -69,8 +65,7 @@ public class InventoryItem {
 		return this.displayName;
 	}
 
-	public int getICode()
-	{
+	public int getICode() {
 		return icode;
 	}
 

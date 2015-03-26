@@ -18,9 +18,6 @@ package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.interfaces.IGameScene;
 
-
-
-
 public class Animation {
 	private double durationInSeconds;
 	private String atid;
@@ -29,7 +26,6 @@ public class Animation {
 	private boolean wasSetAsInitialAnimation;
 	private boolean wasSetAsCurrentAnimation;
 	private IGameScene.Special specialAnimationThisWasSetTo;
-
 
 	public Animation(String atid, SceneObject owningSceneObject) {
 		this.durationInSeconds = 1.0;
@@ -41,11 +37,10 @@ public class Animation {
 		specialAnimationThisWasSetTo = null;
 	}
 
-
-	public SceneObject	getObject() {
+	public SceneObject getObject() {
 		return parent;
 	}
-	
+
 	public ImageCollection getFrames() {
 		return framesCollection;
 	}
@@ -53,7 +48,6 @@ public class Animation {
 	public String getAtid() {
 		return atid;
 	}
-
 
 	public void setAtid(String atid) {
 		this.atid = atid;
@@ -64,13 +58,12 @@ public class Animation {
 	}
 
 	public Image getDefaultFrame() {
-		assert(framesCollection.getCount()
-				!= 0);
+		assert (framesCollection.getCount() != 0);
 		if (framesCollection.getCount() == 0) {
 			return null;
 		}
-		com.github.a2g.core.objectmodel.Image frame = framesCollection.getByIndex(
-				0);
+		com.github.a2g.core.objectmodel.Image frame = framesCollection
+				.getByIndex(0);
 
 		return frame;
 	}
@@ -80,15 +73,13 @@ public class Animation {
 	}
 
 	public int getLastFrame() {
-		return framesCollection.getCount()
-				- 1;
+		return framesCollection.getCount() - 1;
 	}
 
 	public void setAsSpecialAnimation(IGameScene.Special special) {
 		specialAnimationThisWasSetTo = special;
 		if (parent != null) {
-			parent.setSpecialAnimation(special,
-					atid);
+			parent.setSpecialAnimation(special, atid);
 		}
 	}
 
@@ -106,9 +97,8 @@ public class Animation {
 
 	public void setAsInitialAnimation() {
 		this.wasSetAsInitialAnimation = true;
-		if (parent != null)
-		{
-			parent.setInitialAnimation(	this.atid);
+		if (parent != null) {
+			parent.setInitialAnimation(this.atid);
 		}
 	}
 
@@ -124,15 +114,12 @@ public class Animation {
 		return wasSetAsInitialAnimation;
 	}
 
-
-
 	public boolean getWasSetAsCurrentAnimation() {
 		return wasSetAsCurrentAnimation;
 	}
 
 	public boolean getWasSetAsSpecialAnimation() {
-		boolean wasSet = specialAnimationThisWasSetTo
-				!= null;
+		boolean wasSet = specialAnimationThisWasSetTo != null;
 
 		return wasSet;
 	}
@@ -141,10 +128,8 @@ public class Animation {
 		return specialAnimationThisWasSetTo;
 	}
 
-	public void alignBaseMiddleOfOldFrameToFrameOfThisAnimation(int frame)
-	{
-		if (parent != null)
-		{
+	public void alignBaseMiddleOfOldFrameToFrameOfThisAnimation(int frame) {
+		if (parent != null) {
 			parent.alignBaseMiddleOfOldFrameToFrameOfNewAnimation(atid, frame);
 		}
 	}
@@ -156,6 +141,5 @@ public class Animation {
 	public double getDurationSecs() {
 		return durationInSeconds;
 	}
-
 
 };

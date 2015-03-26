@@ -20,7 +20,6 @@ import com.github.a2g.core.primitive.CodesForVerbs;
 import com.github.a2g.core.primitive.STARTING_ODD_INVENTORY_CODE;
 import com.github.a2g.core.primitive.STARTING_ODD_OBJECTS_CODE;
 
-
 public class SentenceItem {
 
 	private String displayName;
@@ -44,26 +43,24 @@ public class SentenceItem {
 	}
 
 	public String getDisplayNameAfterDivider() {
-		int i = this.displayName.lastIndexOf(
-				"|");
+		int i = this.displayName.lastIndexOf("|");
 
 		if (i != -1) {
-			return this.displayName.substring(i+1);
+			return this.displayName.substring(i + 1);
 		}
 
-		return  this.displayName;
+		return this.displayName;
 
 	}
 
 	public String getDisplayNameBeforeDivider() {
-		int i = this.displayName.lastIndexOf(
-				"|");
+		int i = this.displayName.lastIndexOf("|");
 
 		if (i != -1) {
-			return this.displayName.substring(0,i);
+			return this.displayName.substring(0, i);
 		}
 
-		return  this.displayName;
+		return this.displayName;
 	}
 
 	public final String getDisplayName() {
@@ -78,30 +75,25 @@ public class SentenceItem {
 		return this.code;
 	}
 
-	public boolean isObjectOrInv()
-	{
+	public boolean isObjectOrInv() {
 		boolean isVerb = CodesForVerbs.isAVerb(code);
 
-		if(code>1 && !isVerb)
+		if (code > 1 && !isVerb)
 			return true;
 		return false;
 	}
 
-	public boolean isInventory()
-	{
+	public boolean isInventory() {
 		final int FIRST_INV = STARTING_ODD_INVENTORY_CODE.STARTING_ODD_INVENTORY_CODE;
 		final int FIRST_OBJ = STARTING_ODD_OBJECTS_CODE.STARTING_ODD_OBJECTS_CODE;
 
-		boolean isInventory = code>=FIRST_INV && code<=FIRST_OBJ;
+		boolean isInventory = code >= FIRST_INV && code <= FIRST_OBJ;
 		return isInventory;
 	}
 
-	public boolean isEmpty()
-	{
-		boolean isEmpty = code==1;
+	public boolean isEmpty() {
+		boolean isEmpty = code == 1;
 		return isEmpty;
 	}
 
 }
-
-

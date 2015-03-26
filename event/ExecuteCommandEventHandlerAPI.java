@@ -18,7 +18,6 @@ package com.github.a2g.core.event;
 
 import com.google.gwt.event.shared.EventHandler;
 
-
 public interface ExecuteCommandEventHandlerAPI extends EventHandler {
 	boolean onClick(double x, double y);
 

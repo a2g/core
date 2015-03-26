@@ -16,12 +16,10 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
-
 
 public class InventoryItemCollection {
 	private Map<String, InventoryItem> theMap;
@@ -33,7 +31,8 @@ public class InventoryItemCollection {
 	public InventoryItem getByItid(String itid) {
 		try {
 			return theMap.get(itid);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+		}
 		return null;
 	}
 

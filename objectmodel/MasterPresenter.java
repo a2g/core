@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 //import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -59,21 +58,13 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromTimer;
 import com.github.a2g.core.interfaces.IMasterPresenterFromVerbs;
 import com.google.gwt.event.shared.EventBus;
 
-
-public class MasterPresenter
-implements
-IMasterPresenterFromScene
-, IMasterPresenterFromDialogTree
-, IMasterPresenterFromTimer
-, IMasterPresenterFromBundle
-, IMasterPresenterFromLoader
-, IMasterPresenterFromCommandLine
-, IMasterPresenterFromActionRunner
-, IMasterPresenterFromInventory
-, IMasterPresenterFromVerbs
-, IMasterPresenterFromTitleCard
-, SaySpeechCallDialogTreeEventHandlerAPI
-, PropertyChangeEventHandlerAPI
+public class MasterPresenter implements IMasterPresenterFromScene,
+		IMasterPresenterFromDialogTree, IMasterPresenterFromTimer,
+		IMasterPresenterFromBundle, IMasterPresenterFromLoader,
+		IMasterPresenterFromCommandLine, IMasterPresenterFromActionRunner,
+		IMasterPresenterFromInventory, IMasterPresenterFromVerbs,
+		IMasterPresenterFromTitleCard, SaySpeechCallDialogTreeEventHandlerAPI,
+		PropertyChangeEventHandlerAPI
 
 {
 
@@ -88,7 +79,6 @@ IMasterPresenterFromScene
 
 	private IGameScene callbacks;
 
-
 	private EventBus bus;
 	private IHostFromMasterPresenter parent;
 	private ITimer timer;
@@ -101,9 +91,7 @@ IMasterPresenterFromScene
 	private ArrayList<PointF> gatePoints;
 	private ArrayList<Integer> gateIds;
 
-
 	private Logger logger = Logger.getLogger("com.mycompany.level");
-
 
 	private String lastSceneAsString;
 	private String switchDestination;
@@ -111,8 +99,8 @@ IMasterPresenterFromScene
 	private short boundaryCrossObject;
 	private MasterProxyForActions proxyForActions;
 
-	public MasterPresenter(final IHostingPanel panel, EventBus bus, IHostFromMasterPresenter parent)
-	{
+	public MasterPresenter(final IHostingPanel panel, EventBus bus,
+			IHostFromMasterPresenter parent) {
 		this.bus = bus;
 		this.timer = null;
 		this.switchTimer = null;
@@ -120,29 +108,24 @@ IMasterPresenterFromScene
 		this.proxyForGameScene = new MasterProxyForGameScene(this);
 		this.proxyForActions = new MasterProxyForActions(this);
 
-
-
-		this.doCommandActionRunner = new ActionRunner(proxyForActions,proxyForActions, proxyForActions, proxyForActions,this, 1);
-		this.dialogActionRunner = new ActionRunner(proxyForActions,proxyForActions, proxyForActions, proxyForActions,this, 2);
+		this.doCommandActionRunner = new ActionRunner(proxyForActions,
+				proxyForActions, proxyForActions, proxyForActions, this, 1);
+		this.dialogActionRunner = new ActionRunner(proxyForActions,
+				proxyForActions, proxyForActions, proxyForActions, this, 2);
 
 		this.gatePoints = new ArrayList<PointF>();
 		this.gateIds = new ArrayList<Integer>();
-		this.theListOfIndexesToInsertAt= new Integer[100];
-		for(int i=0;i<100;i++)
+		this.theListOfIndexesToInsertAt = new Integer[100];
+		for (int i = 0; i < 100; i++)
 			theListOfIndexesToInsertAt[i] = new Integer(0);
 
-		bus.addHandler(
-				SaySpeechCallDialogTreeEvent.TYPE,
-				this);
+		bus.addHandler(SaySpeechCallDialogTreeEvent.TYPE, this);
 
-		bus.addHandler(
-				PropertyChangeEvent.TYPE,
-				this);
+		bus.addHandler(PropertyChangeEvent.TYPE, this);
 
-		this.masterPanel = getFactory().createMasterPanel(320,240, ColorEnum.Black);
+		this.masterPanel = getFactory().createMasterPanel(320, 240,
+				ColorEnum.Black);
 		panel.setThing(this.masterPanel);
-
-
 
 		this.dialogTreePresenter = new DialogTreePresenter(
 				masterPanel.getHostForDialogTree(), bus, this);
@@ -151,22 +134,22 @@ IMasterPresenterFromScene
 
 		this.inventoryPresenter = new InventoryPresenter(
 				masterPanel.getHostForInventory(), bus, this);
-		this.scenePresenter =new ScenePresenter(
-				masterPanel.getHostForScene(), this);
-		this.verbsPresenter = new VerbsPresenter(
-				masterPanel.getHostForVerbs(), bus, this);
+		this.scenePresenter = new ScenePresenter(masterPanel.getHostForScene(),
+				this);
+		this.verbsPresenter = new VerbsPresenter(masterPanel.getHostForVerbs(),
+				bus, this);
 		IFactory factory = parent.getFactory(bus, this);
-		this.loaderPresenter =  new LoaderPresenter(
-				masterPanel.getHostForLoading(), bus, this, parent,factory);
-		this.titleCardPresenter =  new TitleCardPresenter(
-				masterPanel.getHostForTitleCard(), bus,this, factory);
+		this.loaderPresenter = new LoaderPresenter(
+				masterPanel.getHostForLoading(), bus, this, parent, factory);
+		this.titleCardPresenter = new TitleCardPresenter(
+				masterPanel.getHostForTitleCard(), bus, this, factory);
 
-		this.masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
+		this.masterPanel
+				.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
 	}
 
 	public void setCallbacks(IGameScene callbacks) {
-		if(this.callbacks!=null)
-		{
+		if (this.callbacks != null) {
 			lastSceneAsString = this.callbacks.toString();
 		}
 		this.loaderPresenter.setName(callbacks.toString());
@@ -177,36 +160,27 @@ IMasterPresenterFromScene
 		return this;
 	}
 
-
-
 	@Override
-	public boolean addImageForAnInventoryItem(LoadHandler lh, String itid, int icode, IPackagedImage imageResource)
-	{
+	public boolean addImageForAnInventoryItem(LoadHandler lh, String itid,
+			int icode, IPackagedImage imageResource) {
 		if (this.callbacks == null) {
 			return true;
 		}
-		InventoryItem item = this.getInventoryPresenter().getInventory().items().getByItid(
-				itid);
+		InventoryItem item = this.getInventoryPresenter().getInventory()
+				.items().getByItid(itid);
 		boolean result = true;
 
+		if (item == null) {
 
-		if (item == null)
-		{
+			Image imageAndPos = getInventoryPresenter().getView()
+					.createNewImageAndAdddHandlers(imageResource, lh, bus,
+							itid, icode, 0, 0);
 
-			Image imageAndPos = getInventoryPresenter().getView().createNewImageAndAdddHandlers(
-					imageResource,lh, bus, itid, icode, 0,0);
-
-			imageAndPos.addImageToPanel( 0 );
+			imageAndPos.addImageToPanel(0);
 
 			boolean initiallyVisible = false;
-			result = getInventoryPresenter().addInventory(
-					itid
-					, icode
-					, initiallyVisible
-					, imageAndPos
-					);
-
-
+			result = getInventoryPresenter().addInventory(itid, icode,
+					initiallyVisible, imageAndPos);
 
 		}
 
@@ -214,24 +188,27 @@ IMasterPresenterFromScene
 	}
 
 	@Override
-	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix, int x, int y, int w, int h, String otid, String atid, short ocode, 
+	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix,
+			int x, int y, int w, int h, String otid, String atid, short ocode,
 			String objPlusAnimCode, IPackagedImage imageResource) {
 		if (this.callbacks == null) {
 			return true;
 		}
 
+		Image imageAndPos = this.scenePresenter.getView()
+				.createNewImageAndAddHandlers(lh, imageResource,
+						scenePresenter, bus, x, y, otid, ocode);
 
-		Image imageAndPos = this.scenePresenter.getView().createNewImageAndAddHandlers(lh, imageResource, scenePresenter, bus, x,y, otid, ocode);
-
-		loaderPresenter.getLoaders().addToAppropriateAnimation(numberPrefix, imageAndPos, otid, atid, ocode, objPlusAnimCode, scenePresenter.getSceneGuiWidth(), scenePresenter.getSceneGuiHeight());
-
+		loaderPresenter.getLoaders().addToAppropriateAnimation(numberPrefix,
+				imageAndPos, otid, atid, ocode, objPlusAnimCode,
+				scenePresenter.getSceneGuiWidth(),
+				scenePresenter.getSceneGuiHeight());
 
 		int before = getIndexToInsertAt(numberPrefix);
 		updateTheListOfIndexesToInsertAt(numberPrefix);
 
 		// this triggers the loading
-		imageAndPos.addImageToPanel( before );
-
+		imageAndPos.addImageToPanel(before);
 
 		return true;
 	}
@@ -241,58 +218,57 @@ IMasterPresenterFromScene
 		return i;
 	}
 
-	void updateTheListOfIndexesToInsertAt(int numberPrefix)
-	{
-		for(int i=numberPrefix;i<=99;i++)
-		{
+	void updateTheListOfIndexesToInsertAt(int numberPrefix) {
+		for (int i = numberPrefix; i <= 99; i++) {
 			theListOfIndexesToInsertAt[i]++;
 		}
 	}
 
-
-
-
-	public void executeActionWithDialogActionRunner(BaseAction a)
-	{
-		if(a==null)
-		{
+	public void executeActionWithDialogActionRunner(BaseAction a) {
+		if (a == null) {
 			a = new DoNothingAction(createChainRootAction());
 		}
 
 		dialogActionRunner.runAction(a);
 	}
 
-	public void executeActionWithDoCommandActionRunner(BaseAction a)
-	{
-		if(a==null)
-		{
+	public void executeActionWithDoCommandActionRunner(BaseAction a) {
+		if (a == null) {
 			a = new DoNothingAction(createChainRootAction());
 		}
 
 		doCommandActionRunner.runAction(a);
 	}
 
-	public void skip()
-	{
+	public void skip() {
 		dialogActionRunner.skip();
 	}
+
 	public void setInitialAnimationsAsCurrent() {
 		int count = this.scenePresenter.getModel().objectCollection().count();
-		for (int i = 0; i<count; i++)
-		{
-			SceneObject sceneObject = this.scenePresenter.getModel().objectCollection().getByIndex(i);
+		for (int i = 0; i < count; i++) {
+			SceneObject sceneObject = this.scenePresenter.getModel()
+					.objectCollection().getByIndex(i);
 
-			if (sceneObject != null)
-			{
-				sceneObject.setToInitialAnimationWithoutChangingFrame();	// to the positions they were in when all objects were rendered out.
+			if (sceneObject != null) {
+				sceneObject.setToInitialAnimationWithoutChangingFrame(); // to
+																			// the
+																			// positions
+																			// they
+																			// were
+																			// in
+																			// when
+																			// all
+																			// objects
+																			// were
+																			// rendered
+																			// out.
 				sceneObject.setX(0);
 				sceneObject.setY(0);
 			}
 		}
 
 	}
-
-
 
 	public void callOnPreEntry() {
 		this.callbacks.onPreEntry(proxyForGameScene);
@@ -301,21 +277,19 @@ IMasterPresenterFromScene
 	@Override
 	public void onTimer() {
 
-		if(timer!=null)
-		{
+		if (timer != null) {
 			this.callbacks.onEveryFrame(proxyForGameScene);
-			//	this.checkForBoundaryCross();
+			// this.checkForBoundaryCross();
 		}
-		if(switchTimer!=null)
-		{
+		if (switchTimer != null) {
 			switchTimer.cancel();
 			switchTimer = null;
 			setCameraToZero();// no scene is meant to keep camera position
-			this.parent.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(switchDestination);
+			this.parent
+					.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(switchDestination);
 			switchDestination = "";
 		}
 	}
-
 
 	public void loadInventoryFromAPI() {
 
@@ -323,19 +297,15 @@ IMasterPresenterFromScene
 	}
 
 	public void saveInventoryToAPI() {
-		InventoryItemCollection items = this.getInventoryPresenter().getInventory().items();
+		InventoryItemCollection items = this.getInventoryPresenter()
+				.getInventory().items();
 
 		for (int i = 0; i < items.getCount(); i++) {
 			String name = items.getByIndex(i).getItid();
 
-			int isCarrying = items.getByIndex(i).isVisible()
-					? 1
-							: 0;
+			int isCarrying = items.getByIndex(i).isVisible() ? 1 : 0;
 
-			setValue(
-					"CARRYING_"
-							+ name.toUpperCase(),
-							isCarrying);
+			setValue("CARRYING_" + name.toUpperCase(), isCarrying);
 		}
 	}
 
@@ -361,38 +331,34 @@ IMasterPresenterFromScene
 		return property != 0;
 	}
 
-
 	@Override
-	public void switchToSceneFromAction(String scene)
-	{
+	public void switchToSceneFromAction(String scene) {
 		cancelOnEveryFrameTimer();
 		this.dialogActionRunner.cancel();
 
-		//now wait for last on every frame to execute
-		//.. which is about 40 milliseconds
-		//(an on every frame can go more than
+		// now wait for last on every frame to execute
+		// .. which is about 40 milliseconds
+		// (an on every frame can go more than
 		// this, but usually not).
 		switchTimer = getFactory().createSystemTimer(this);
 		switchDestination = scene;
 		switchTimer.scheduleRepeating(40);
 	}
 
-
 	@Override
-	public void switchToScene(String scene)
-	{
+	public void switchToScene(String scene) {
 		// since instantiateScene..ToIt does some asynchronous stuff,
 		// I thought maybe I could do it, then cancel the timers.
 		// but I've put it off til I need the microseconds.
 		cancelOnEveryFrameTimer();
 		this.dialogActionRunner.cancel();
 		setCameraToZero();// no scene is meant to keep camera position
-		this.parent.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
+		this.parent
+				.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
 	}
 
-
 	public String getLastScene() {
-		if(lastSceneAsString!=null)
+		if (lastSceneAsString != null)
 			return lastSceneAsString.toUpperCase();
 		return "";
 	}
@@ -401,16 +367,13 @@ IMasterPresenterFromScene
 		return true;
 	}
 
-	public void startCallingOnEveryFrame()
-	{
+	public void startCallingOnEveryFrame() {
 		timer = getFactory().createSystemTimer(this);
 		timer.scheduleRepeating(40);
 	}
 
-	public void cancelOnEveryFrameTimer()
-	{
-		if(this.timer!=null)
-		{
+	public void cancelOnEveryFrameTimer() {
+		if (this.timer != null) {
 			this.timer.cancel();
 			timer = null;
 		}
@@ -421,31 +384,28 @@ IMasterPresenterFromScene
 	}
 
 	@Override
-	public void executeBranchOnCurrentScene(int branchId)
-	{
+	public void executeBranchOnCurrentScene(int branchId) {
 		this.dialogActionRunner.cancel();
 		// clear it so any old branches don't show up
 		this.dialogTreePresenter.clearBranches();
 
 		// make dialogtreepanel not active, then we must *just* be
 		// entering dialog. So text gets reset.
-		if(masterPanel.getActiveState()!=IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree)
-		{
+		if (masterPanel.getActiveState() != IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree) {
 			this.dialogTreePresenter.resetRecordOfSaidSpeech();
 			this.setDialogTreeActive(true);
 		}
 
-
-
 		// get the chain from the client code
-		BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(proxyForGameScene, createChainRootAction(), branchId);
+		BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(
+				proxyForGameScene, createChainRootAction(), branchId);
 
 		// execute it
-		executeActionWithDialogActionRunner( actionChain );
+		executeActionWithDialogActionRunner(actionChain);
 	}
 
-
-	public void saySpeechAndThenExecuteBranchWithBranchId(String speech, int branchId) {
+	public void saySpeechAndThenExecuteBranchWithBranchId(String speech,
+			int branchId) {
 
 		this.dialogTreePresenter.clearBranches();
 		this.dialogTreePresenter.markSpeechAsSaid(speech);
@@ -458,24 +418,25 @@ IMasterPresenterFromScene
 		// 4. Then we execute it
 		// Thus it will say the text, and do what the user prescribes.
 
-		//String animId = getDialogTreeGui().setBranchVisited(branchId);
+		// String animId = getDialogTreeGui().setBranchVisited(branchId);
 		SayAction say = new SayAction(createChainRootAction(), animId, speech);
-		BaseDialogTreeAction actionChain = callbacks.onDialogTree(proxyForGameScene, say, branchId);
+		BaseDialogTreeAction actionChain = callbacks.onDialogTree(
+				proxyForGameScene, say, branchId);
 		executeActionWithDialogActionRunner(actionChain);
 	}
 
-	public void callOnEnterScene()
-	{
-		BaseAction a = this.callbacks.onEntry(proxyForGameScene,createChainRootAction());
+	public void callOnEnterScene() {
+		BaseAction a = this.callbacks.onEntry(proxyForGameScene,
+				createChainRootAction());
 
-		//.. then executeBaseAction->actionRunner::runAction will add an TitleCardAction
+		// .. then executeBaseAction->actionRunner::runAction will add an
+		// TitleCardAction
 		// the title card
 		executeActionWithDoCommandActionRunner(a);
 	}
 
 	@Override
-	public void onSaySpeechCallBranch(String speech, int branchId)
-	{
+	public void onSaySpeechCallBranch(String speech, int branchId) {
 		saySpeechAndThenExecuteBranchWithBranchId(speech, branchId);
 	}
 
@@ -483,73 +444,70 @@ IMasterPresenterFromScene
 		return masterPanel;
 	}
 
-	void setCameraToZero()
-	{
+	void setCameraToZero() {
 		scenePresenter.setCameraX(0);
 		scenePresenter.setCameraY(0);
 	}
 
-	void clearBoundaries()
-	{
+	void clearBoundaries() {
 		this.gatePoints.clear();
 		this.gateIds.clear();
 	}
 
 	@Override
-	public void startScene()
-	{
-		masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
+	public void startScene() {
+		masterPanel
+				.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
 		loadInventoryFromAPI();
 		setInitialAnimationsAsCurrent();
 		clearBoundaries();
 
-		//setAllObjectsToVisible();
+		// setAllObjectsToVisible();
 		// it is reasonable for a person to set current animations in pre-entry
-		// and expect them to stay current, so we set cuurentAnimations before pre-entry.
+		// and expect them to stay current, so we set cuurentAnimations before
+		// pre-entry.
 
 		callOnPreEntry();
 
 		startCallingOnEveryFrame();
-		this.masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverOnEnterScene);
+		this.masterPanel
+				.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverOnEnterScene);
 		callOnEnterScene();
 
 	}
 
-
-	public void addEssential(ILoad blah)
-	{
+	public void addEssential(ILoad blah) {
 		loaderPresenter.getLoaders().addEssential(blah, this);
 	}
 
-
-	public void kickStartLoading()
-	{
-		loaderPresenter.getLoaders().calculateImagesToLoadAndOmitInventoryIfSame();
+	public void kickStartLoading() {
+		loaderPresenter.getLoaders()
+				.calculateImagesToLoadAndOmitInventoryIfSame();
 
 		int total = loaderPresenter.getLoaders().imagesToLoad();
-		boolean isSameInventory = loaderPresenter.getLoaders().isSameInventoryAsLastTime();
+		boolean isSameInventory = loaderPresenter.getLoaders()
+				.isSameInventoryAsLastTime();
 
 		// hide all visible images.
 		// (using scene's data is quicker than using scenePanel data)
 		int count = scenePresenter.getModel().objectCollection().count();
-		for(int i=0;i<count;i++)
-		{
-			scenePresenter.getModel().objectCollection().getByIndex(i).setVisible(false);
+		for (int i = 0; i < count; i++) {
+			scenePresenter.getModel().objectCollection().getByIndex(i)
+					.setVisible(false);
 		}
-
 
 		scenePresenter.reset();
 
-
 		// set gui to blank
-		masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
-		//scenePresenter.clear(); don't clear, all its images are switched off anyhow.
+		masterPanel
+				.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
+		// scenePresenter.clear(); don't clear, all its images are switched off
+		// anyhow.
 		loaderPresenter.clear();
-		//commandLinePresenter.clear();
+		// commandLinePresenter.clear();
 		verbsPresenter.clear();
 
-		if(!isSameInventory)
-		{
+		if (!isSameInventory) {
 			getInventoryPresenter().clear();
 		}
 
@@ -557,144 +515,138 @@ IMasterPresenterFromScene
 		loaderPresenter.getLoaders().loadNext();
 	}
 
-
-
-
-
 	@Override
 	public void setScenePixelSize(int width, int height) {
 		this.scenePresenter.setScenePixelSize(width, height);
 		this.titleCardPresenter.setScenePixelSize(width, height);
 		this.loaderPresenter.setScenePixelSize(width, height);
-		this.dialogTreePresenter.setScenePixelSize(width, height>>1);
+		this.dialogTreePresenter.setScenePixelSize(width, height >> 1);
 		this.verbsPresenter.setWidthOfScene(width);
 	}
 
-
-
-
 	public void setScene(IGameScene scene) {
-
 
 		setCallbacks(scene);
 
-		this.callbacks.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene));
+		this.callbacks
+				.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene));
 	}
 
 	@Override
-	public void restartReloading()
-	{
+	public void restartReloading() {
 		loaderPresenter.getLoaders().clearLoaders();
 
-		this.callbacks.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene));
+		this.callbacks
+				.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene));
 	}
 
-
-
-
-
 	@Override
-	public void mergeWithScene(LoadedLoad s)
-	{
-
+	public void mergeWithScene(LoadedLoad s) {
 
 		String name = s.getName();
 		logger.fine(name);
-		System.out.println("dumping " +  name);
+		System.out.println("dumping " + name);
 		SceneObjectCollection theirs = s.getSceneObjectCollection();
-		SceneObjectCollection ours = this.scenePresenter.getModel().objectCollection();
+		SceneObjectCollection ours = this.scenePresenter.getModel()
+				.objectCollection();
 
-		for(int i=0;i<theirs.count();i++)
-		{
+		for (int i = 0; i < theirs.count(); i++) {
 			SceneObject srcObject = theirs.getByIndex(i);
 			String otext = srcObject.getOtid();
 			int prefix = srcObject.getNumberPrefix();
 			short objectCode = srcObject.getOCode();
 			SceneObject destObject = ours.getByOtid(otext);
-			if(destObject==null)
-			{
-				destObject = new SceneObject(otext, scenePresenter.getSceneGuiWidth(), scenePresenter.getSceneGuiHeight());
+			if (destObject == null) {
+				destObject = new SceneObject(otext,
+						scenePresenter.getSceneGuiWidth(),
+						scenePresenter.getSceneGuiHeight());
 				destObject.setNumberPrefix(prefix);
 				destObject.setOCode(objectCode);
 
 				if (objectCode == -1) {
-					parent.alert(
-							"Missing initial image for "
-									+ otext
-									+ "\n At the least it will need an image in a placeholder folder, so it shows up in list of objects.");
+					parent.alert("Missing initial image for "
+							+ otext
+							+ "\n At the least it will need an image in a placeholder folder, so it shows up in list of objects.");
 					return;
 				}
 
 				ours.add(destObject);
-				scenePresenter. addSceneObject(destObject);
+				scenePresenter.addSceneObject(destObject);
 				System.out.println("New object " + otext + " " + objectCode);
 
 			}
 
-			for(int j=0;j<srcObject.getAnimations().getCount();j++)
-			{
-				Animation srcAnimation = srcObject.getAnimations().getByIndex(j);
+			for (int j = 0; j < srcObject.getAnimations().getCount(); j++) {
+				Animation srcAnimation = srcObject.getAnimations()
+						.getByIndex(j);
 				String atid = srcAnimation.getAtid();
 
-				Animation destAnimation = destObject.getAnimations().getByAtid(atid);
-				if(destAnimation==null)
-				{
+				Animation destAnimation = destObject.getAnimations().getByAtid(
+						atid);
+				if (destAnimation == null) {
 					destAnimation = new Animation(atid, destObject);
 					destObject.getAnimations().add(destAnimation);
 					scenePresenter.addAnimation(atid, destAnimation);
 				}
 
-				System.out.println("new anim " + otext + " " + atid+" = "+atid);
+				System.out.println("new anim " + otext + " " + atid + " = "
+						+ atid);
 
-				for(int k=0;k<srcAnimation.getFrames().getCount();k++)
-				{
+				for (int k = 0; k < srcAnimation.getFrames().getCount(); k++) {
 					Image srcImage = srcAnimation.getFrames().getByIndex(k);
 					destAnimation.getFrames().add(srcImage);
 				}
 
 			}
 
-
 		}
 	}
 
-	IMasterPanelFromMasterPresenter.GuiStateEnum getStateIfEntering(IMasterPanelFromMasterPresenter.GuiStateEnum state)
-	{
-		switch(state)
-		{
-		case OnEnterScene: return IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverOnEnterScene;
-		case DialogTree:return IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverDialogTree;
-		case CutScene:return IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverCutScene;
-		case ActiveScene:return IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverActiveScene;
-		case Loading:return IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverLoading;
+	IMasterPanelFromMasterPresenter.GuiStateEnum getStateIfEntering(
+			IMasterPanelFromMasterPresenter.GuiStateEnum state) {
+		switch (state) {
+		case OnEnterScene:
+			return IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverOnEnterScene;
+		case DialogTree:
+			return IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverDialogTree;
+		case CutScene:
+			return IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverCutScene;
+		case ActiveScene:
+			return IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverActiveScene;
+		case Loading:
+			return IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverLoading;
 		default:
 			return state;
 		}
 	}
 
-	IMasterPanelFromMasterPresenter.GuiStateEnum getStateIfExiting(IMasterPanelFromMasterPresenter.GuiStateEnum state)
-	{
-		switch(state)
-		{
-		case TitleCardOverOnEnterScene:return IMasterPanelFromMasterPresenter.GuiStateEnum.OnEnterScene;
-		case TitleCardOverDialogTree: return IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree;
-		case TitleCardOverCutScene: return IMasterPanelFromMasterPresenter.GuiStateEnum.CutScene;
-		case TitleCardOverActiveScene: return IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene;
-		case TitleCardOverLoading: return IMasterPanelFromMasterPresenter.GuiStateEnum.Loading;
+	IMasterPanelFromMasterPresenter.GuiStateEnum getStateIfExiting(
+			IMasterPanelFromMasterPresenter.GuiStateEnum state) {
+		switch (state) {
+		case TitleCardOverOnEnterScene:
+			return IMasterPanelFromMasterPresenter.GuiStateEnum.OnEnterScene;
+		case TitleCardOverDialogTree:
+			return IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree;
+		case TitleCardOverCutScene:
+			return IMasterPanelFromMasterPresenter.GuiStateEnum.CutScene;
+		case TitleCardOverActiveScene:
+			return IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene;
+		case TitleCardOverLoading:
+			return IMasterPanelFromMasterPresenter.GuiStateEnum.Loading;
 		default:
 			return state;
 		}
 	}
 
-	public void displayTitleCard(String text)
-	{
-		boolean isEntering = text.length()>0;
-		if(isEntering)
-		{
+	public void displayTitleCard(String text) {
+		boolean isEntering = text.length() > 0;
+		if (isEntering) {
 			titleCardPresenter.setText(text);
 		}
-		IMasterPanelFromMasterPresenter.GuiStateEnum state = masterPanel.getActiveState();
-		state = isEntering? getStateIfEntering(state) : getStateIfExiting(state);
+		IMasterPanelFromMasterPresenter.GuiStateEnum state = masterPanel
+				.getActiveState();
+		state = isEntering ? getStateIfEntering(state)
+				: getStateIfExiting(state);
 		masterPanel.setActiveState(state);
 	}
 
@@ -708,99 +660,82 @@ IMasterPresenterFromScene
 		return parent.getFactory(bus, this);
 	}
 
-
 	@Override
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,
 			SentenceItem sentenceA, SentenceItem sentenceB, double x, double y) {
 
-		BaseAction a = this.callbacks.onDoCommand(
-				proxyForGameScene, 
-				createChainRootAction(),
-				verbAsCode,
-				sentenceA,
-				sentenceB,
-				x+scenePresenter.getCameraX(),
-				y+scenePresenter.getCameraY());
-
+		BaseAction a = this.callbacks.onDoCommand(proxyForGameScene,
+				createChainRootAction(), verbAsCode, sentenceA, sentenceB, x
+						+ scenePresenter.getCameraX(),
+				y + scenePresenter.getCameraY());
 
 		this.commandLinePresenter.setMouseable(false);
-		//this.commandLinePresenter.setVisible(false);
+		// this.commandLinePresenter.setVisible(false);
 		executeActionWithDoCommandActionRunner(a);
 
-		parent.setLastCommand(x, y,
-				verbAsVerbEnumeration,
-				sentenceA.getTextualId(),
-				sentenceB.getTextualId());
+		parent.setLastCommand(x, y, verbAsVerbEnumeration,
+				sentenceA.getTextualId(), sentenceB.getTextualId());
 
 	}
 
 	@Override
-	public void actionFinished(int id)
-	{
+	public void actionFinished(int id) {
 		// must be in this order, because clear does't work unless mousable
 		this.commandLinePresenter.setMouseable(true);
 		this.commandLinePresenter.clear();
 
-		if(masterPanel.getActiveState() == IMasterPanelFromMasterPresenter.GuiStateEnum.OnEnterScene)
-		{
-			this.masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene);
+		if (masterPanel.getActiveState() == IMasterPanelFromMasterPresenter.GuiStateEnum.OnEnterScene) {
+			this.masterPanel
+					.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene);
 		}
 	}
 
 	@Override
 	public void setInventoryImageSize(int width, int height) {
-		this.getInventoryPresenter().setSizeOfSingleInventoryImage(width,height);
-		this.verbsPresenter.setWidthOfInventory(getInventoryPresenter().getWidth());
+		this.getInventoryPresenter().setSizeOfSingleInventoryImage(width,
+				height);
+		this.verbsPresenter.setWidthOfInventory(getInventoryPresenter()
+				.getWidth());
 	}
 
 	@Override
-	public void onClickVerbsOrInventory()
-	{
+	public void onClickVerbsOrInventory() {
 		// a click on the inventory results in negative coords.
 		commandLinePresenter.onClick(-1, -1);
 
 	}
 
 	@Override
-	public void onMouseOverVerbsOrInventory
-	(String displayName, String textualId, int icode)
-	{
-		commandLinePresenter.setCommandLineMouseOver(displayName, textualId, icode);
-		bus.fireEvent(
-				new SetRolloverEvent(
-						displayName,
-						textualId,
-						icode));
+	public void onMouseOverVerbsOrInventory(String displayName,
+			String textualId, int icode) {
+		commandLinePresenter.setCommandLineMouseOver(displayName, textualId,
+				icode);
+		bus.fireEvent(new SetRolloverEvent(displayName, textualId, icode));
 	}
 
 	@Override
-	public void onPropertyChange(PropertyChangeEvent inventoryEvent)
-	{
+	public void onPropertyChange(PropertyChangeEvent inventoryEvent) {
 		this.getInventoryPresenter().updateInventory();
 	}
 
-	public IGameScene getSceneByName(String string)
-	{
+	public IGameScene getSceneByName(String string) {
 		return this.parent.getSceneViaCache(string);
 	}
 
 	@Override
-	public void setDialogTreeActive(boolean isInDialogTreeMode)
-	{
-		if(isInDialogTreeMode)
-		{
-			this.masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree);
-		}
-		else
-		{
-			this.masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene);
+	public void setDialogTreeActive(boolean isInDialogTreeMode) {
+		if (isInDialogTreeMode) {
+			this.masterPanel
+					.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree);
+		} else {
+			this.masterPanel
+					.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene);
 		}
 	}
 
 	@Override
-	public boolean isCommandLineActive()
-	{
-		boolean isCommandLineActive = masterPanel.getActiveState()==IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene;
+	public boolean isCommandLineActive() {
+		boolean isCommandLineActive = masterPanel.getActiveState() == IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene;
 		return isCommandLineActive;
 	}
 
@@ -813,24 +748,22 @@ IMasterPresenterFromScene
 
 	}
 
-	public ChainRootAction createChainRootAction()
-	{
+	public ChainRootAction createChainRootAction() {
 		ChainRootAction npa = new ChainRootAction();
 		return npa;
 	}
 
-	public void executeChainedAction(ChainedAction ba)
-	{
+	public void executeChainedAction(ChainedAction ba) {
 		executeActionWithDoCommandActionRunner(ba);
 	}
-	
+
 	@Override
-	public void enableClickToContinue()
-	{
+	public void enableClickToContinue() {
 		this.loaderPresenter.onLoadingComplete();
 	}
 
-	public void setIsSayAlwaysWithoutIncremementing(boolean isSayWithoutIncremementing) {
+	public void setIsSayAlwaysWithoutIncremementing(
+			boolean isSayWithoutIncremementing) {
 		this.isSayWithoutIncremementing = isSayWithoutIncremementing;
 	}
 
@@ -838,113 +771,105 @@ IMasterPresenterFromScene
 		return isSayWithoutIncremementing;
 	}
 
-	
 	public void setContinueAfterLoad(boolean isIgnore) {
 		this.loaderPresenter.setContinueAfterLoad(isIgnore);
 
 	}
 
-	
-	public void addBoundaryGate(int id, PointF a, PointF b)
-	{
+	public void addBoundaryGate(int id, PointF a, PointF b) {
 		gateIds.add(new Integer(id));
 		gatePoints.add(a);
 		gatePoints.add(b);
 	}
 
-	public void addBoundaryPoint(PointF a)
-	{
+	public void addBoundaryPoint(PointF a) {
 		gateIds.add(new Integer(-1));
-		gatePoints.add(new PointF(-1,-1));
-		//important for the valid point to be the last one,
+		gatePoints.add(new PointF(-1, -1));
+		// important for the valid point to be the last one,
 		// due to how the span calculations use the last one.
 		gatePoints.add(a);
 
 	}
 
-	boolean arePointsSameSide(PointF A, PointF B, PointF tp, PointF c)
-	{
-		double result1 = (B.getX()-A.getX())*(tp.getY()-A.getY()) - (B.getY()-A.getY())*(tp.getX()-A.getX());
-		double result2 = (B.getX()-A.getX())*(c.getY()-A.getY()) - (B.getY()-A.getY())*(c.getX()-A.getX());
-		return result1*result2>0;
+	boolean arePointsSameSide(PointF A, PointF B, PointF tp, PointF c) {
+		double result1 = (B.getX() - A.getX()) * (tp.getY() - A.getY())
+				- (B.getY() - A.getY()) * (tp.getX() - A.getX());
+		double result2 = (B.getX() - A.getX()) * (c.getY() - A.getY())
+				- (B.getY() - A.getY()) * (c.getX() - A.getX());
+		return result1 * result2 > 0;
 	}
 
-	public void setBoundaryCrossObject(short boundaryCrossObject)
-	{
+	public void setBoundaryCrossObject(short boundaryCrossObject) {
 		this.boundaryCrossObject = boundaryCrossObject;
 	}
-	short getBoundaryCrossObject()
-	{
+
+	short getBoundaryCrossObject() {
 		return boundaryCrossObject;
 	}
 
-	PointF getGatePointsCentre()
-	{
-		double totalX=0;
-		double totalY=0;
-		int numberOfExtras=0;
+	PointF getGatePointsCentre() {
+		double totalX = 0;
+		double totalY = 0;
+		int numberOfExtras = 0;
 		double size = gateIds.size();
-		for(int i=0;i<size;i++)
-		{
-			if(gateIds.get(i)!=-1)
-			{
-				PointF bp = gatePoints.get(i*2);
-				totalX+= bp.getX();
-				totalY+= bp.getY();
+		for (int i = 0; i < size; i++) {
+			if (gateIds.get(i) != -1) {
+				PointF bp = gatePoints.get(i * 2);
+				totalX += bp.getX();
+				totalY += bp.getY();
 				numberOfExtras++;
 			}
 
-			PointF bp = gatePoints.get(i*2+1);
-			totalX+= bp.getX();
-			totalY+= bp.getY();
+			PointF bp = gatePoints.get(i * 2 + 1);
+			totalX += bp.getX();
+			totalY += bp.getY();
 		}
 		double numberOfPoints = size + numberOfExtras;
-		return new PointF(totalX/numberOfPoints, totalY/numberOfPoints);
+		return new PointF(totalX / numberOfPoints, totalY / numberOfPoints);
 	}
 
-	PointF getMidPoint(PointF a, PointF b)
-	{
-		return new PointF(a.getX()/2 + b.getX()/2, a.getY()/2 + b.getY()/2);
+	PointF getMidPoint(PointF a, PointF b) {
+		return new PointF(a.getX() / 2 + b.getX() / 2, a.getY() / 2 + b.getY()
+				/ 2);
 	}
-	boolean isBetweenSpokesAndOnWrongSide(PointF p1, PointF p2, PointF tp)
-	{
+
+	boolean isBetweenSpokesAndOnWrongSide(PointF p1, PointF p2, PointF tp) {
 		PointF c = getGatePointsCentre();
-		PointF mp = getMidPoint(p1,p2);
-		boolean isBetweenSpokes = arePointsSameSide(c,p1,mp, tp) && arePointsSameSide(c,p2,mp, tp);
-		if(!isBetweenSpokes)
+		PointF mp = getMidPoint(p1, p2);
+		boolean isBetweenSpokes = arePointsSameSide(c, p1, mp, tp)
+				&& arePointsSameSide(c, p2, mp, tp);
+		if (!isBetweenSpokes)
 			return false;
-		boolean isOnSameSideAsCentre = arePointsSameSide(p1,p2,c,tp);
-		if(isOnSameSideAsCentre)
+		boolean isOnSameSideAsCentre = arePointsSameSide(p1, p2, c, tp);
+		if (isOnSameSideAsCentre)
 			return false;
 		return true;
 	}
 
 	@Override
-	public boolean isInANoGoZone(PointF tp)
-	{
-		if(gatePoints.size()<2)
+	public boolean isInANoGoZone(PointF tp) {
+		if (gatePoints.size() < 2)
 			return false;
 
 		// this following line relies craftily on addPoint to
 		// put a dummy value in the first slot, and
 		// the valid value in the last slot
-		PointF previousPoint = gatePoints.get(gatePoints.size()-1);
+		PointF previousPoint = gatePoints.get(gatePoints.size() - 1);
 
 		int size = gateIds.size();
-		for(int i=0;i<size;i++)
-		{
-			// only gates (designated by ids >=0) get their first point processed
-			if(gateIds.get(i)!=-1)
-			{
-				PointF firstPoint = gatePoints.get(i*2+0);
-				if(isBetweenSpokesAndOnWrongSide(previousPoint,firstPoint, tp))
+		for (int i = 0; i < size; i++) {
+			// only gates (designated by ids >=0) get their first point
+			// processed
+			if (gateIds.get(i) != -1) {
+				PointF firstPoint = gatePoints.get(i * 2 + 0);
+				if (isBetweenSpokesAndOnWrongSide(previousPoint, firstPoint, tp))
 					return true;
 				previousPoint = firstPoint;
 			}
 
 			// every gate/point has their second point processed.
-			PointF secondPoint = gatePoints.get(i*2+1);
-			if(isBetweenSpokesAndOnWrongSide(previousPoint,secondPoint, tp))
+			PointF secondPoint = gatePoints.get(i * 2 + 1);
+			if (isBetweenSpokesAndOnWrongSide(previousPoint, secondPoint, tp))
 				return true;
 			previousPoint = secondPoint;
 		}
@@ -952,30 +877,24 @@ IMasterPresenterFromScene
 	}
 
 	@Override
-	public
-	void fireOnMovementBeyondAGateIfRelevant(PointF tp)
-	{
+	public void fireOnMovementBeyondAGateIfRelevant(PointF tp) {
 		int foundId = -1;
-		if(gatePoints.size()>2)
-		{
+		if (gatePoints.size() > 2) {
 			int size = gateIds.size();
-			for(int i=0;i<size;i++)
-			{
-				if(gateIds.get(i)==-1)
+			for (int i = 0; i < size; i++) {
+				if (gateIds.get(i) == -1)
 					continue;
 
-				PointF a = gatePoints.get(i*2);
-				PointF b = gatePoints.get(i*2+1);
+				PointF a = gatePoints.get(i * 2);
+				PointF b = gatePoints.get(i * 2 + 1);
 
-				if(isBetweenSpokesAndOnWrongSide(a,b,tp))
-				{
+				if (isBetweenSpokesAndOnWrongSide(a, b, tp)) {
 					foundId = gateIds.get(i);
 					break;
 				}
 			}
 		}
-		if(foundId!=-1)
-		{
+		if (foundId != -1) {
 			this.callbacks.onMovementBeyondAGate(proxyForGameScene, foundId);
 		}
 	}
@@ -986,37 +905,50 @@ IMasterPresenterFromScene
 
 	}
 
-
 	public void log(String type, String content) {
 		this.parent.log(type);
 
 	}
+
 	@Override
 	public void setValue(String name, int value) {
 		parent.setValue(name, value);
 
 	}
 
-
-
-
 	@Override
 	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
 			EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum rollover) {
-		return parent.getFactory(bus, this).createDialogTreePanel(bus, fore, back, rollover);
+		return parent.getFactory(bus, this).createDialogTreePanel(bus, fore,
+				back, rollover);
 	}
 
-	
-	public ScenePresenter getScenePresenter(){return scenePresenter;}
-	public CommandLinePresenter getCommandLinePresenter(){return commandLinePresenter;}
-	public VerbsPresenter getVerbsPresenter() {return verbsPresenter;}
+	public ScenePresenter getScenePresenter() {
+		return scenePresenter;
+	}
+
+	public CommandLinePresenter getCommandLinePresenter() {
+		return commandLinePresenter;
+	}
+
+	public VerbsPresenter getVerbsPresenter() {
+		return verbsPresenter;
+	}
 
 	public InventoryPresenter getInventoryPresenter() {
 		return inventoryPresenter;
 	}
-	DialogTreePresenter getDialogTreePresenter(){ return dialogTreePresenter;}
-	TitleCardPresenter getTitleCardPresenter(){ return titleCardPresenter;}
-	LoaderPresenter getLoaderPresenter(){ return loaderPresenter;}
+
+	DialogTreePresenter getDialogTreePresenter() {
+		return dialogTreePresenter;
+	}
+
+	TitleCardPresenter getTitleCardPresenter() {
+		return titleCardPresenter;
+	}
+
+	LoaderPresenter getLoaderPresenter() {
+		return loaderPresenter;
+	}
 
 }
-

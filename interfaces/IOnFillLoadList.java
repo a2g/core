@@ -18,15 +18,16 @@ package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.interfaces.game.ISetValue;
 
-
-public interface IOnFillLoadList
-extends
-ISetValue
-{
+public interface IOnFillLoadList extends ISetValue {
 	void addEssential(ILoad blah);
+
 	void setScenePixelSize(int width, int height);
+
 	void kickStartLoading();
+
 	IGameScene getSceneByName(String string);
+
 	void clearAllLoadedLoads();
+
 	void setContinueAfterLoad(boolean isContinueImmediately);
 }

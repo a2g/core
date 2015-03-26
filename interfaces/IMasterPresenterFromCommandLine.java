@@ -23,5 +23,6 @@ public interface IMasterPresenterFromCommandLine {
 
 	void doCommand(int verbAsCode, int verbAsVerbEnumeration,
 			SentenceItem sentenceA, SentenceItem sentenceB, double x, double y);
+
 	boolean isCommandLineActive();
 }

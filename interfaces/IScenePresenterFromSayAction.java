@@ -11,19 +11,11 @@ import com.github.a2g.core.interfaces.action.ISetStateOfPopup;
 import com.github.a2g.core.interfaces.action.ISetToInitialAnimationWithoutChangingFrameByOtid;
 import com.github.a2g.core.interfaces.action.ISetVisibleByOtid;
 
-public interface IScenePresenterFromSayAction 
-extends 
-IGetNumberOfFramesByAtid
-,IGetDurationByAtid
-,ISetVisibleByOtid
-,IGetTalkingColorByOtid
-,ISetCurrentFrameByOtid
-,ISetToInitialAnimationWithoutChangingFrameByOtid
-,ISetAsACurrentAnimationByAtid
-,IGetOtidOfAtid
-,IGetAtidOfDefaultSayAnim
-,ISetStateOfPopup
-{
+public interface IScenePresenterFromSayAction extends IGetNumberOfFramesByAtid,
+		IGetDurationByAtid, ISetVisibleByOtid, IGetTalkingColorByOtid,
+		ISetCurrentFrameByOtid,
+		ISetToInitialAnimationWithoutChangingFrameByOtid,
+		ISetAsACurrentAnimationByAtid, IGetOtidOfAtid,
+		IGetAtidOfDefaultSayAnim, ISetStateOfPopup {
 
 }
-

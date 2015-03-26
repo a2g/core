@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
@@ -25,10 +24,9 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromHideAllAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-
 public class HideAllAction extends ChainedAction {
 	private IScenePresenterFromHideAllAction scene;
-	
+
 	public HideAllAction(BaseAction parent) {
 		super(parent, true);
 	}
@@ -39,13 +37,13 @@ public class HideAllAction extends ChainedAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {}
+	protected void onUpdateGameAction(double progress) {
+	}
 
 	@Override
 	protected void onCompleteGameAction() {
 		int count = scene.getSceneObjectCount();
-		for(int i=0;i<count;i++)
-		{
+		for (int i = 0; i < count; i++) {
 			String otid = scene.getOtidByIndex(i);
 			scene.setVisibleByOtid(otid, false);
 		}
@@ -57,9 +55,12 @@ public class HideAllAction extends ChainedAction {
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setScene(scene);
-		
+
 	}
 
 	public void setScene(IScenePresenterFromHideAllAction scene) {

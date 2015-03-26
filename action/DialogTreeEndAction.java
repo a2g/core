@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
@@ -24,7 +23,6 @@ import com.github.a2g.core.interfaces.IDialogTreePresenterFromEndAction;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-
 
 public class DialogTreeEndAction extends BaseDialogTreeAction {
 	private IDialogTreePresenterFromEndAction dialogTree;
@@ -34,7 +32,8 @@ public class DialogTreeEndAction extends BaseDialogTreeAction {
 	}
 
 	@Override
-	public void onUpdate(double progress) {}
+	public void onUpdate(double progress) {
+	}
 
 	@Override
 	public void runGameAction() {
@@ -42,7 +41,8 @@ public class DialogTreeEndAction extends BaseDialogTreeAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {}
+	protected void onUpdateGameAction(double progress) {
+	}
 
 	@Override
 	protected void onCompleteGameAction() {
@@ -60,7 +60,10 @@ public class DialogTreeEndAction extends BaseDialogTreeAction {
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setDialogTree(dialogTree);
 	}
 

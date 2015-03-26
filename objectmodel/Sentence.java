@@ -18,8 +18,6 @@ package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 
-
-
 public class Sentence {
 
 	private String string;
@@ -34,10 +32,11 @@ public class Sentence {
 		this.BBB = new SentenceItem();
 	}
 
-	void setVerb(SentenceItem snc, boolean useTwoObjectForm)
-	{
-		this.string = useTwoObjectForm? snc.getDisplayNameAfterDivider():snc.getDisplayNameBeforeDivider();
-		int i = snc.getCode()/ConstantsForAPI.VERB_MULTIPLIER;;
+	void setVerb(SentenceItem snc, boolean useTwoObjectForm) {
+		this.string = useTwoObjectForm ? snc.getDisplayNameAfterDivider() : snc
+				.getDisplayNameBeforeDivider();
+		int i = snc.getCode() / ConstantsForAPI.VERB_MULTIPLIER;
+		;
 		this.verbAsNumber = i;
 	}
 
@@ -77,7 +76,4 @@ public class Sentence {
 		return isLookingForSecondObject;
 	}
 
-}
-
-
-;
+};

@@ -25,25 +25,27 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
-public class DialogTreePanel
-extends Grid
-implements IDialogTreePanelFromDialogTreePresenter
-{
+public class DialogTreePanel extends Grid implements
+		IDialogTreePanelFromDialogTreePresenter {
 	ColorEnum rolloverColor;
 	ColorEnum foregroundColor;
-	public DialogTreePanel(EventBus bus, ColorEnum foregroundColor, ColorEnum backgroundColor, ColorEnum rolloverColor)
-	{
+
+	public DialogTreePanel(EventBus bus, ColorEnum foregroundColor,
+			ColorEnum backgroundColor, ColorEnum rolloverColor) {
 		super(4, 1);
 		this.rolloverColor = rolloverColor;
 		this.foregroundColor = foregroundColor;
 
-		getElement().getStyle().setProperty("Color",foregroundColor.toString());
-		getElement().getStyle().setProperty("BackgroundColor",backgroundColor.toString());
+		getElement().getStyle()
+				.setProperty("Color", foregroundColor.toString());
+		getElement().getStyle().setProperty("BackgroundColor",
+				backgroundColor.toString());
 
 		for (int i = 0; i < getRowCount(); i++) {
 			Label label = new Label("");
 			this.setWidget(i, 0, label);
-			//DOM.setStyleAttribute(label.getElement(), "color", foregroundColor.toString());
+			// DOM.setStyleAttribute(label.getElement(), "color",
+			// foregroundColor.toString());
 
 		}
 	}
@@ -62,10 +64,13 @@ implements IDialogTreePanelFromDialogTreePresenter
 			Label label = new Label(lineOfDialog);
 
 			this.setWidget(i, 0, label);
-			label.getElement().getStyle().setProperty("color", foregroundColor.toString());
+			label.getElement().getStyle()
+					.setProperty("color", foregroundColor.toString());
 
-			label.addMouseOverHandler(new DialogTreeMouseOverHandler(label, rolloverColor));
-			label.addMouseOutHandler(new DialogTreeMouseOutHandler(label, foregroundColor));
+			label.addMouseOverHandler(new DialogTreeMouseOverHandler(label,
+					rolloverColor));
+			label.addMouseOutHandler(new DialogTreeMouseOutHandler(label,
+					foregroundColor));
 			label.addClickHandler(new DialogTreeMouseClickHandler(bus, label,
 					subBranchId));
 

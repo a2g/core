@@ -15,8 +15,8 @@
  */
 package com.github.a2g.core.interfaces;
 
-public interface IHostingPanel
-{
+public interface IHostingPanel {
 	void setThing(Object w);
+
 	void setVisible(boolean b);
 }

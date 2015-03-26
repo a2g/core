@@ -16,22 +16,15 @@
 
 package com.github.a2g.core.primitive;
 
-
 public enum ColorEnum {
-	Black(0,0,0)
-	,Red(255,0,0)
-	,Green(0,255,0)
-	,Blue(0,0,255)
-	,Purple(128,0,128)
-	,Fuchsia(255,0,255);
-
+	Black(0, 0, 0), Red(255, 0, 0), Green(0, 255, 0), Blue(0, 0, 255), Purple(
+			128, 0, 128), Fuchsia(255, 0, 255);
 
 	public final int r;
 	public final int g;
 	public final int b;
 
-	ColorEnum(int r, int g, int b)
-	{
+	ColorEnum(int r, int g, int b) {
 		this.r = r;
 		this.g = g;
 		this.b = b;

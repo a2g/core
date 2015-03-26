@@ -16,43 +16,36 @@
 
 package com.github.a2g.core.interfaces;
 
-
-
-public class IOnFillLoadListImpl
-{
+public class IOnFillLoadListImpl {
 	IOnFillLoadList implementation;
-	public IOnFillLoadListImpl(IOnFillLoadList impl)
-	{
+
+	public IOnFillLoadListImpl(IOnFillLoadList impl) {
 		this.implementation = impl;
 	}
 
-	public void addEssential(ILoad imageBundle)
-	{
+	public void addEssential(ILoad imageBundle) {
 		this.implementation.addEssential(imageBundle);
 	}
 
-
-	public void setScenePixelSize(int width, int height)
-	{
-		this.implementation.setScenePixelSize(width,height);
+	public void setScenePixelSize(int width, int height) {
+		this.implementation.setScenePixelSize(width, height);
 	}
-	public LoadKickStarter createLoadKickStarter()
-	{
+
+	public LoadKickStarter createLoadKickStarter() {
 		this.implementation.kickStartLoading();
 		return new LoadKickStarter();
 	}
 
-	public class LoadKickStarter
-	{
-		private LoadKickStarter(){};
+	public class LoadKickStarter {
+		private LoadKickStarter() {
+		};
 	}
 
 	public IGameScene getSceneByName(String string) {
 		return this.implementation.getSceneByName(string);
 	}
 
-	public void setValue(Object string, int value)
-	{
+	public void setValue(Object string, int value) {
 		this.implementation.setValue(string, value);
 	}
 
@@ -62,8 +55,6 @@ public class IOnFillLoadListImpl
 
 	public void setContinueAfterLoad(boolean isContinueImmediately) {
 		this.implementation.setContinueAfterLoad(isContinueImmediately);
-		
+
 	}
 }
-
-

@@ -15,7 +15,6 @@
  */
 package com.github.a2g.core.interfaces;
 
-public interface IMasterPresenterFromTimer
-{
+public interface IMasterPresenterFromTimer {
 	void onTimer();
 }

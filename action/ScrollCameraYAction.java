@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
@@ -25,8 +24,7 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromScrollAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-public class ScrollCameraYAction extends ChainedAction
-{
+public class ScrollCameraYAction extends ChainedAction {
 	private IScenePresenterFromScrollAction scene;
 	private String obj;// set in constructor
 
@@ -35,58 +33,60 @@ public class ScrollCameraYAction extends ChainedAction
 	private boolean isParallel;// set via setters
 	private double duration;
 
-	public ScrollCameraYAction(BaseAction parent, double endY, double duration, boolean isLinear)
-	{
-		super(parent,  isLinear);
+	public ScrollCameraYAction(BaseAction parent, double endY, double duration,
+			boolean isLinear) {
+		super(parent, isLinear);
 		this.isParallel = false;
 		this.endY = endY;
 		this.duration = duration;
 	}
 
-	String getObject(){return this.obj;}
-	double getEndY(){ return endY;}
+	String getObject() {
+		return this.obj;
+	}
 
-	void setNonBlocking(boolean isParallel){ this.isParallel = isParallel;}
+	double getEndY() {
+		return endY;
+	}
 
-	@Override
-	public void runGameAction()
-	{
-		startY = scene.getCameraY();
-
-		this.run((int)(duration*1000));
+	void setNonBlocking(boolean isParallel) {
+		this.isParallel = isParallel;
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress)
-	{
-		double x = this.startY
-				+ progress
-				* (this.endY
-						- this.startY);
+	public void runGameAction() {
+		startY = scene.getCameraY();
+
+		this.run((int) (duration * 1000));
+	}
+
+	@Override
+	protected void onUpdateGameAction(double progress) {
+		double x = this.startY + progress * (this.endY - this.startY);
 		scene.setCameraY(x);
 	}
 
-	@Override // method in animation
-	protected void onCompleteGameAction()
-	{
+	@Override
+	// method in animation
+	protected void onCompleteGameAction() {
 		scene.setCameraY(endY);
 	}
 
 	@Override
-	public boolean isParallel()
-	{
+	public boolean isParallel() {
 		return isParallel;
 	}
-
-
 
 	public void setScene(IScenePresenterFromScrollAction scene) {
 		this.scene = scene;
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setScene(scene);
-		
+
 	}
 }

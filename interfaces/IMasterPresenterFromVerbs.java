@@ -15,14 +15,14 @@
  */
 package com.github.a2g.core.interfaces;
 
-public interface IMasterPresenterFromVerbs
-{
+public interface IMasterPresenterFromVerbs {
 	IFactory getFactory();
 
 	int getValue(Object string);
 
 	void onClickVerbsOrInventory();
 
-	void onMouseOverVerbsOrInventory(String displayName, String textualId, int code);
+	void onMouseOverVerbsOrInventory(String displayName, String textualId,
+			int code);
 
 }

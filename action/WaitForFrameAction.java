@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
@@ -24,7 +23,6 @@ import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromWaitAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-
 
 public class WaitForFrameAction extends ChainedAction {
 	private IScenePresenterFromWaitAction scene;
@@ -51,14 +49,16 @@ public class WaitForFrameAction extends ChainedAction {
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		// ..then cancelling the animation when it reaches the desired condition.
+		// ..then cancelling the animation when it reaches the desired
+		// condition.
 		if (scene.getCurrentFrameByOtid(otid) == frame) {
 			cancel();
 		}
 	}
 
 	@Override
-	protected void onCompleteGameAction() {}
+	protected void onCompleteGameAction() {
+	}
 
 	@Override
 	public boolean isParallel() {
@@ -74,9 +74,12 @@ public class WaitForFrameAction extends ChainedAction {
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setScene(scene);
-		
+
 	}
 
 }

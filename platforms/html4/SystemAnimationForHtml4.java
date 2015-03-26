@@ -19,22 +19,20 @@ package com.github.a2g.core.platforms.html4;
 import com.github.a2g.core.interfaces.ISystemAnimation;
 import com.github.a2g.core.interfaces.IBaseActionFromSystemAnimation;
 
-public class SystemAnimationForHtml4
-extends com.google.gwt.animation.client.Animation
-implements ISystemAnimation
-{
+public class SystemAnimationForHtml4 extends
+		com.google.gwt.animation.client.Animation implements ISystemAnimation {
 	boolean isLinear;
 	IBaseActionFromSystemAnimation callbacks;
-	public SystemAnimationForHtml4(IBaseActionFromSystemAnimation callbacks, boolean isLinear)
-	{
-		this.isLinear  = isLinear;
+
+	public SystemAnimationForHtml4(IBaseActionFromSystemAnimation callbacks,
+			boolean isLinear) {
+		this.isLinear = isLinear;
 		this.callbacks = callbacks;
 	}
 
 	@Override
-	protected double interpolate(double progress)
-	{
-		if(isLinear)
+	protected double interpolate(double progress) {
+		if (isLinear)
 			return progress;
 		else
 			return (1 + Math.cos(Math.PI + progress * Math.PI)) / 2;
@@ -47,8 +45,7 @@ implements ISystemAnimation
 	}
 
 	@Override
-	protected void onComplete()
-	{
+	protected void onComplete() {
 		callbacks.onComplete();
 	}
 

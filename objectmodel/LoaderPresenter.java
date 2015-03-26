@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import com.github.a2g.core.interfaces.IFactory;
 import com.github.a2g.core.interfaces.IHostingPanel;
 import com.github.a2g.core.interfaces.ILoaderPanelFromLoaderPresenter;
@@ -26,9 +25,7 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
-
-public class LoaderPresenter implements IMasterPresenterFromLoaderMouse
-{
+public class LoaderPresenter implements IMasterPresenterFromLoaderMouse {
 	private Loader loader;
 	private ILoaderPanelFromLoaderPresenter view;
 	int current;
@@ -37,26 +34,26 @@ public class LoaderPresenter implements IMasterPresenterFromLoaderMouse
 	private IMasterPresenterFromLoader master;
 	private boolean isIgnore;
 
-	public LoaderPresenter(final IHostingPanel panel, EventBus bus, IMasterPresenterFromLoader master, IHostFromMasterPresenter parent, IFactory factory)
-	{
+	public LoaderPresenter(final IHostingPanel panel, EventBus bus,
+			IMasterPresenterFromLoader master, IHostFromMasterPresenter parent,
+			IFactory factory) {
 		this.isIgnore = false;
 		this.loader = new Loader(master);
 		this.name = "";
-		this.view = factory.createLoaderPanel(this, ColorEnum.Purple, ColorEnum.Black);
+		this.view = factory.createLoaderPanel(this, ColorEnum.Purple,
+				ColorEnum.Black);
 		panel.setThing(view);
 		this.current = 0;
 		this.total = 0;
-		this.master= master;
+		this.master = master;
 	}
 
-	void incrementProgress()
-	{
-		current = current +1;
+	void incrementProgress() {
+		current = current + 1;
 		view.update(current, total, name);
 	}
 
-	void setTotal(int total)
-	{
+	void setTotal(int total) {
 		this.total = total;
 		this.current = 0;
 		view.update(current, total, name);
@@ -69,18 +66,16 @@ public class LoaderPresenter implements IMasterPresenterFromLoaderMouse
 	public void clear() {
 		name = "";
 		total = 1;
-		current =1;
+		current = 1;
 
 	}
 
-	public void setScenePixelSize(int width, int height)
-	{
-		this.view.setScenePixelSize(width , height);
+	public void setScenePixelSize(int width, int height) {
+		this.view.setScenePixelSize(width, height);
 
 	}
 
-	public Loader getLoaders()
-	{
+	public Loader getLoaders() {
 		return loader;
 	}
 
@@ -98,14 +93,10 @@ public class LoaderPresenter implements IMasterPresenterFromLoaderMouse
 		master.restartReloading();
 	}
 
-	public void onLoadingComplete()
-	{
-		if(isIgnore)
-		{
+	public void onLoadingComplete() {
+		if (isIgnore) {
 			master.startScene();
-		}
-		else
-		{
+		} else {
 			view.enableClickToContinue();
 		}
 	}
@@ -119,6 +110,5 @@ public class LoaderPresenter implements IMasterPresenterFromLoaderMouse
 		this.isIgnore = true;
 
 	}
-
 
 }

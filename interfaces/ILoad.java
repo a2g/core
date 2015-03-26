@@ -18,12 +18,15 @@ package com.github.a2g.core.interfaces;
 
 import com.google.gwt.event.dom.client.LoadHandler;
 
-
-public interface ILoad
-{
+public interface ILoad {
 	public int getNumberOfBundles();
+
 	public int getNumberOfImagesInBundle(int bundleNumber);
-	public int loadImageBundle(final LoadHandler individualImageCallback, final IMasterPresenterFromBundle api, final int bundleNumber, final int CHUNK, final int milliseconds);
+
+	public int loadImageBundle(final LoadHandler individualImageCallback,
+			final IMasterPresenterFromBundle api, final int bundleNumber,
+			final int CHUNK, final int milliseconds);
+
 	public boolean isInventory();
 
 }

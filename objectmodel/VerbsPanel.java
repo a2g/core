@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
 import com.github.a2g.core.interfaces.IVerbsPanelFromVerbsPresenter;
 import com.github.a2g.core.platforms.html4.mouse.VerbMouseClickHandler;
@@ -25,19 +24,14 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
-
-public class VerbsPanel
-extends Grid
-implements
-IVerbsPanelFromVerbsPresenter
-{
+public class VerbsPanel extends Grid implements IVerbsPanelFromVerbsPresenter {
 	ColorEnum rolloverColor;
 	final IVerbsPresenterFromVerbsPanel mouseToPresenter;
 
-	public VerbsPanel(IVerbsPresenterFromVerbsPanel mouseToPresenter, ColorEnum fore, ColorEnum back)
-	{
+	public VerbsPanel(IVerbsPresenterFromVerbsPanel mouseToPresenter,
+			ColorEnum fore, ColorEnum back) {
 		this.mouseToPresenter = mouseToPresenter;
-		getElement().getStyle().setProperty("color",fore.toString());
+		getElement().getStyle().setProperty("color", fore.toString());
 		getElement().getStyle().setProperty("backgroundColor", back.toString());
 
 	}
@@ -47,10 +41,9 @@ IVerbsPanelFromVerbsPresenter
 		int rows = verbs.getNumberOfRows();
 		int columns = verbs.getNumberOfColumns();
 		this.resize(rows, columns);
-		for (int i = 0; i < (rows * columns); i++)
-		{
+		for (int i = 0; i < (rows * columns); i++) {
 			int row = i / columns;
-			if(i>=verbs.items().size())
+			if (i >= verbs.items().size())
 				continue;
 			int column = i % columns;
 
@@ -58,15 +51,13 @@ IVerbsPanelFromVerbsPresenter
 			String textualId = verb.getVtid();
 			String displayText = verb.getdisplayText();
 			int code = verb.getVCode();
-			Label widget = new Label(
-					textualId);
+			Label widget = new Label(textualId);
 
 			this.setWidget(row, column, widget);
-			widget.addMouseMoveHandler(
-					new VerbMouseOverHandler(mouseToPresenter,displayText,textualId, code)
-					);
-			widget.addClickHandler(
-					new VerbMouseClickHandler(mouseToPresenter,displayText,textualId, code));
+			widget.addMouseMoveHandler(new VerbMouseOverHandler(
+					mouseToPresenter, displayText, textualId, code));
+			widget.addClickHandler(new VerbMouseClickHandler(mouseToPresenter,
+					displayText, textualId, code));
 		}
 	}
 

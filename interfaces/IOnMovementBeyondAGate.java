@@ -19,11 +19,6 @@ package com.github.a2g.core.interfaces;
 import com.github.a2g.core.interfaces.game.IIsVisible;
 import com.github.a2g.core.interfaces.game.ISwitchToScene;
 
-public interface IOnMovementBeyondAGate 
-extends
-IIsVisible
-,ISwitchToScene{
-
-
+public interface IOnMovementBeyondAGate extends IIsVisible, ISwitchToScene {
 
 }

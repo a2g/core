@@ -15,8 +15,7 @@
  */
 package com.github.a2g.core.interfaces;
 
-public interface IMasterPresenterFromInventory
-{
+public interface IMasterPresenterFromInventory {
 
 	IFactory getFactory();
 
@@ -24,6 +23,7 @@ public interface IMasterPresenterFromInventory
 
 	void onClickVerbsOrInventory();
 
-	void onMouseOverVerbsOrInventory(String displayName, String textualId, int code);
+	void onMouseOverVerbsOrInventory(String displayName, String textualId,
+			int code);
 
 }

@@ -14,9 +14,7 @@
  * the License.
  */
 
-
 package com.github.a2g.core.objectmodel;
-
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -24,16 +22,13 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Label;
 
-
-public class PopupPanel
-{
+public class PopupPanel {
 	private com.google.gwt.user.client.ui.PopupPanel popup;
 	private Label labelInPopup;
 	private int sceneWidth;
 	private int sceneHeight;
 
-	public PopupPanel(int sceneWidth, int sceneHeight)
-	{
+	public PopupPanel(int sceneWidth, int sceneHeight) {
 		this.sceneWidth = sceneWidth;
 		this.sceneHeight = sceneHeight;
 		this.popup = new com.google.gwt.user.client.ui.PopupPanel();
@@ -42,59 +37,53 @@ public class PopupPanel
 		this.popup.setWidget(labelInPopup);
 	}
 
-	public void setVisible(boolean isVisible)
-	{
-		if(isVisible)
-		{
+	public void setVisible(boolean isVisible) {
+		if (isVisible) {
 			popup.show();
-		}
-		else
-		{
+		} else {
 			popup.hide();
 		}
 	}
 
-	public void setPopupPosition(double x, double y)
-	{
-		popup.setPopupPosition((int)(x*sceneWidth),(int)(y*sceneHeight));
+	public void setPopupPosition(double x, double y) {
+		popup.setPopupPosition((int) (x * sceneWidth), (int) (y * sceneHeight));
 	}
-	public void setText(String speech)
-	{
+
+	public void setText(String speech) {
 		this.popup.setTitle(speech);
 		popup.setWidget(new Label(speech));
 	}
 
-	public void setColor(ColorEnum color)
-	{
-		if(color!=null)
-		{
-			labelInPopup.getElement().getStyle().setProperty("color","#ff0000");
-			labelInPopup.getElement().getStyle().setProperty("fontColor","#ff0000");
-			labelInPopup.getElement().getStyle().setProperty("textColor","#ff0000");
-			//labelInPopup.getElement().getStyle().setProperty("fontColor",color.toString());
-			popup.getElement().getStyle().setProperty("borderColor",color.toString());
+	public void setColor(ColorEnum color) {
+		if (color != null) {
+			labelInPopup.getElement().getStyle()
+					.setProperty("color", "#ff0000");
+			labelInPopup.getElement().getStyle()
+					.setProperty("fontColor", "#ff0000");
+			labelInPopup.getElement().getStyle()
+					.setProperty("textColor", "#ff0000");
+			// labelInPopup.getElement().getStyle().setProperty("fontColor",color.toString());
+			popup.getElement().getStyle()
+					.setProperty("borderColor", color.toString());
 		}
-		//labelInPopup.getElement().getStyle().setProperty( "backgroundColor", ColorEnum.Black.toString());
-		//popup.getElement().getStyle().setProperty("backgroundColor", ColorEnum.Black.toString());
-
+		// labelInPopup.getElement().getStyle().setProperty( "backgroundColor",
+		// ColorEnum.Black.toString());
+		// popup.getElement().getStyle().setProperty("backgroundColor",
+		// ColorEnum.Black.toString());
 
 	}
-	public void setCancelCallback(final BaseAction ba)
-	{
-		if(ba==null)
+
+	public void setCancelCallback(final BaseAction ba) {
+		if (ba == null)
 			return;
-		labelInPopup.addClickHandler
-		(
-				new ClickHandler()
-				{
+		labelInPopup.addClickHandler(new ClickHandler() {
 
-					@Override
-					public void onClick(ClickEvent event) {
-						ba.cancel();
-					}
+			@Override
+			public void onClick(ClickEvent event) {
+				ba.cancel();
+			}
 
-				}
-				);
+		});
 
 	}
 

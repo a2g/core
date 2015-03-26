@@ -25,9 +25,8 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromActionRunner;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-public class ActionRunner implements IActionRunnerFromBaseAction
-{
-	protected ArrayList<ArrayList<BaseAction>>  list;
+public class ActionRunner implements IActionRunnerFromBaseAction {
+	protected ArrayList<ArrayList<BaseAction>> list;
 	private ArrayList<BaseAction> parallelActionsToWaitFor;
 	private int numberOfParallelActionsToWaitFor;
 	private IMasterPresenterFromActionRunner callback;
@@ -37,10 +36,13 @@ public class ActionRunner implements IActionRunnerFromBaseAction
 	private ITitleCardPresenterFromActions tc;
 	private IInventoryPresenterFromActions inv;
 
-	public ActionRunner(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dt, ITitleCardPresenterFromActions tc, IInventoryPresenterFromActions inv, IMasterPresenterFromActionRunner callback, int id)
-	{
+	public ActionRunner(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dt,
+			ITitleCardPresenterFromActions tc,
+			IInventoryPresenterFromActions inv,
+			IMasterPresenterFromActionRunner callback, int id) {
 		this.id = id;
-		this.callback=callback;
+		this.callback = callback;
 		this.scene = scene;
 		this.inv = inv;
 		this.dt = dt;
@@ -49,9 +51,9 @@ public class ActionRunner implements IActionRunnerFromBaseAction
 		parallelActionsToWaitFor = new ArrayList<BaseAction>();
 		numberOfParallelActionsToWaitFor = 0;
 	}
-	
-	static ArrayList<BaseAction> flattenChainAndEnsureTitleCardAtStart(BaseAction grandChildOfActionChain)
-	{
+
+	static ArrayList<BaseAction> flattenChainAndEnsureTitleCardAtStart(
+			BaseAction grandChildOfActionChain) {
 		ArrayList<BaseAction> toReturn = new ArrayList<BaseAction>();
 		BaseAction a = grandChildOfActionChain;
 
@@ -60,70 +62,69 @@ public class ActionRunner implements IActionRunnerFromBaseAction
 			toReturn.add(0, a);
 			a = a.getParent();
 		}
-		
+
 		// ensure titlecard at start
-		if(toReturn.size()>0 && toReturn.get(0).getClass()!=TitleCardAction.class)
-		{
-			toReturn.add(0,new TitleCardAction(a,""));
+		if (toReturn.size() > 0
+				&& toReturn.get(0).getClass() != TitleCardAction.class) {
+			toReturn.add(0, new TitleCardAction(a, ""));
 		}
-		
+
 		return toReturn;
 	}
-	
-	static ArrayList<ArrayList<BaseAction>> getGroupsOfConsecutiveParallelActions(ArrayList<BaseAction> flatlist)
-	{
+
+	static ArrayList<ArrayList<BaseAction>> getGroupsOfConsecutiveParallelActions(
+			ArrayList<BaseAction> flatlist) {
 		ArrayList<ArrayList<BaseAction>> toReturn = new ArrayList<ArrayList<BaseAction>>();
-	
-		while (!flatlist.isEmpty())
-		{
+
+		while (!flatlist.isEmpty()) {
 			ArrayList<BaseAction> groupOfParallelActions = new ArrayList<BaseAction>();
 			groupOfParallelActions.add(flatlist.get(0));
 			flatlist.remove(0);
-			
+
 			// whilst the last item added was parallel, then add the next one..
-			while (!flatlist.isEmpty() && groupOfParallelActions.get(groupOfParallelActions.size()-1).isParallel()) 
-			{
+			while (!flatlist.isEmpty()
+					&& groupOfParallelActions.get(
+							groupOfParallelActions.size() - 1).isParallel()) {
 				groupOfParallelActions.add(flatlist.get(0));
 				flatlist.remove(0);
 			}
 			toReturn.add(groupOfParallelActions);
 		}
-		
+
 		return toReturn;
 	}
-	
-	public static ArrayList<ArrayList<BaseAction>> getListOfListsFromChain(BaseAction grandChildOfActionChain)
-	{
+
+	public static ArrayList<ArrayList<BaseAction>> getListOfListsFromChain(
+			BaseAction grandChildOfActionChain) {
 		ArrayList<BaseAction> flatlist = flattenChainAndEnsureTitleCardAtStart(grandChildOfActionChain);
-		return getGroupsOfConsecutiveParallelActions(flatlist);	
+		return getGroupsOfConsecutiveParallelActions(flatlist);
 	}
 
-	public int runAction(BaseAction grandChildOfActionChain)
-	{
+	public int runAction(BaseAction grandChildOfActionChain) {
 		ArrayList<BaseAction> flatlist = flattenChainAndEnsureTitleCardAtStart(grandChildOfActionChain);
 		this.list = getGroupsOfConsecutiveParallelActions(flatlist);
-		
+
 		processNextListOfParallelActions();
 
 		return 0;
 	}
 
+	void executeParallelActions() {
+		this.numberOfParallelActionsToWaitFor = this.parallelActionsToWaitFor
+				.size();
 
-	void executeParallelActions()
-	{
-		this.numberOfParallelActionsToWaitFor = this.parallelActionsToWaitFor.size();
-
-		// having count as a local variable prevents a nasty bug - and I'm not sure why.
+		// having count as a local variable prevents a nasty bug - and I'm not
+		// sure why.
 		// this only happens in gwt.
 		int count = this.parallelActionsToWaitFor.size();
-		for (int i = 0; i < count ;i++)
-		{
+		for (int i = 0; i < count; i++) {
 			BaseAction a = this.parallelActionsToWaitFor.get(i);
 
-			System.out.println("ActionRunner::executeParallelActions " + i+ " " + a.toString() );
+			System.out.println("ActionRunner::executeParallelActions " + i
+					+ " " + a.toString());
 
 			a.setCallbacks(this);
-			a.setAll(scene,dt,tc,inv);
+			a.setAll(scene, dt, tc, inv);
 			a.runGameAction();
 		}
 	}
@@ -131,29 +132,24 @@ public class ActionRunner implements IActionRunnerFromBaseAction
 	protected void processNextListOfParallelActions() {
 		this.parallelActionsToWaitFor.clear();
 		if (!this.list.isEmpty()) {
-			parallelActionsToWaitFor = this.list.get(0); 
+			parallelActionsToWaitFor = this.list.get(0);
 			this.list.remove(0);
-			
+
 			// execute them
 			executeParallelActions();
-		}
-		else
-		{
+		} else {
 			callback.actionFinished(this.id);
 		}
 	}
 
-	public void skip()
-	{
+	public void skip() {
 		numberOfParallelActionsToWaitFor = 100;
-		for(int i=0;i < parallelActionsToWaitFor.size();i++)
-		{
+		for (int i = 0; i < parallelActionsToWaitFor.size(); i++) {
 			parallelActionsToWaitFor.get(i).cancel();
 		}
 
 		numberOfParallelActionsToWaitFor = parallelActionsToWaitFor.size();
-		for(int i=0;i < parallelActionsToWaitFor.size();i++)
-		{
+		for (int i = 0; i < parallelActionsToWaitFor.size(); i++) {
 			parallelActionsToWaitFor.get(i).run(0);
 		}
 	}
@@ -161,12 +157,10 @@ public class ActionRunner implements IActionRunnerFromBaseAction
 	@Override
 	public void startTheNextAction(BaseAction a) {
 		this.numberOfParallelActionsToWaitFor--;
-		System.out.println("Release " + numberOfParallelActionsToWaitFor );
+		System.out.println("Release " + numberOfParallelActionsToWaitFor);
 
-		if (this.numberOfParallelActionsToWaitFor
-				== 0)
-		{
-			System.out.println("Starting next action " + this.toString() );
+		if (this.numberOfParallelActionsToWaitFor == 0) {
+			System.out.println("Starting next action " + this.toString());
 			processNextListOfParallelActions();
 		}
 
@@ -176,11 +170,10 @@ public class ActionRunner implements IActionRunnerFromBaseAction
 		// first clear the list, just incase cancelling the animation
 		// triggers ongameactioncomplete (above)
 		list.clear();
-		numberOfParallelActionsToWaitFor=0;
+		numberOfParallelActionsToWaitFor = 0;
 
 		// now cancel the action(s) that are running
-		for(int i=0;i<parallelActionsToWaitFor.size();i++)
-		{
+		for (int i = 0; i < parallelActionsToWaitFor.size(); i++) {
 			parallelActionsToWaitFor.get(i).cancel();
 		}
 	}

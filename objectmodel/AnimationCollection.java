@@ -16,14 +16,11 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-
-public class AnimationCollection
-{
+public class AnimationCollection {
 	private Map<String, Animation> theMap;
 
 	AnimationCollection() {
@@ -31,7 +28,7 @@ public class AnimationCollection
 	}
 
 	public Animation getByAtid(String atid) {
-		if(atid==null)
+		if (atid == null)
 			return null;
 		String key = atid.toUpperCase();
 
@@ -42,9 +39,7 @@ public class AnimationCollection
 	}
 
 	public void add(Animation animation) {
-		theMap.put(
-				animation.getAtid().toUpperCase(),
-				animation);
+		theMap.put(animation.getAtid().toUpperCase(), animation);
 	}
 
 	public Animation getByIndex(int index) {

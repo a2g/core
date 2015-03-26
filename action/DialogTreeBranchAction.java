@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
@@ -24,7 +23,6 @@ import com.github.a2g.core.interfaces.IDialogTreePresenterFromBranchAction;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-
 
 public class DialogTreeBranchAction extends BaseDialogTreeAction {
 
@@ -41,7 +39,8 @@ public class DialogTreeBranchAction extends BaseDialogTreeAction {
 	}
 
 	@Override
-	public void onUpdate(double progress) {}
+	public void onUpdate(double progress) {
+	}
 
 	@Override
 	public void runGameAction() {
@@ -49,12 +48,12 @@ public class DialogTreeBranchAction extends BaseDialogTreeAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {}
+	protected void onUpdateGameAction(double progress) {
+	}
 
 	@Override
-	protected void onCompleteGameAction()
-	{
-		dialogTree.addBranch( branchId, text, isAlwaysPresent);
+	protected void onCompleteGameAction() {
+		dialogTree.addBranch(branchId, text, isAlwaysPresent);
 	}
 
 	@Override
@@ -78,19 +77,20 @@ public class DialogTreeBranchAction extends BaseDialogTreeAction {
 	public String getText() {
 		return text;
 	}
-	public void setIsAlwaysPresent(boolean isAlwaysPresent)
-	{
+
+	public void setIsAlwaysPresent(boolean isAlwaysPresent) {
 		this.isAlwaysPresent = isAlwaysPresent;
 	}
-
-	
 
 	public void setDialogTree(IDialogTreePresenterFromBranchAction dialogTree) {
 		this.dialogTree = dialogTree;
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setDialogTree(dialogTree);
 	}
 

@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,9 +27,7 @@ import com.github.a2g.core.primitive.ColorEnum;
 //import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.event.shared.EventBus;
 
-
-public class DialogTreePresenter implements IDialogTreePresenter
-{
+public class DialogTreePresenter implements IDialogTreePresenter {
 	private EventBus bus;
 	private DialogTree theDialogTree;
 	private IDialogTreePanelFromDialogTreePresenter view;
@@ -38,12 +35,13 @@ public class DialogTreePresenter implements IDialogTreePresenter
 	private Set<String> recordOfSaidSpeech;
 	private IMasterPresenterFromDialogTree callbacks;
 
-
-	public DialogTreePresenter(final IHostingPanel panel, EventBus bus, IMasterPresenterFromDialogTree callbacks) {
+	public DialogTreePresenter(final IHostingPanel panel, EventBus bus,
+			IMasterPresenterFromDialogTree callbacks) {
 		this.bus = bus;
 		this.callbacks = callbacks;
 		this.theDialogTree = new DialogTree();
-		this.view = callbacks.createDialogTreePanel(bus, ColorEnum.Purple, ColorEnum.Black, ColorEnum.Red);
+		this.view = callbacks.createDialogTreePanel(bus, ColorEnum.Purple,
+				ColorEnum.Black, ColorEnum.Red);
 		panel.setThing(view);
 		recordOfSaidSpeech = new HashSet<String>();
 	}
@@ -53,21 +51,18 @@ public class DialogTreePresenter implements IDialogTreePresenter
 		view.update(theDialogTree, bus);
 	}
 
-	public void resetRecordOfSaidSpeech()
-	{
+	public void resetRecordOfSaidSpeech() {
 		recordOfSaidSpeech.clear();
 	}
 
-
 	@Override
-	public void addBranch(int subBranchId, String lineOfDialog, boolean isAlwaysShown) {
-		if(isAlwaysShown || !recordOfSaidSpeech.contains(lineOfDialog))
-		{
+	public void addBranch(int subBranchId, String lineOfDialog,
+			boolean isAlwaysShown) {
+		if (isAlwaysShown || !recordOfSaidSpeech.contains(lineOfDialog)) {
 			theDialogTree.addSubBranch(subBranchId, lineOfDialog);
 			view.update(theDialogTree, bus);
 		}
 	}
-
 
 	@Override
 	public void setDialogTreeTalkAnimation(String atid) {
@@ -80,14 +75,11 @@ public class DialogTreePresenter implements IDialogTreePresenter
 		return this.atidOfDialogTreeTalkAnimation;
 	}
 
-	
-	public IDialogTreePanelFromDialogTreePresenter getView()
-	{
+	public IDialogTreePanelFromDialogTreePresenter getView() {
 		return view;
 	}
 
-	public void markSpeechAsSaid(String text)
-	{
+	public void markSpeechAsSaid(String text) {
 		recordOfSaidSpeech.add(text);
 	}
 
@@ -117,7 +109,7 @@ public class DialogTreePresenter implements IDialogTreePresenter
 	@Override
 	public void setScenePixelSize(int width, int height) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

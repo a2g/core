@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import com.github.a2g.core.interfaces.IFactory;
 import com.github.a2g.core.interfaces.IHostingPanel;
 import com.github.a2g.core.interfaces.IMasterPresenterFromTitleCard;
@@ -25,16 +24,17 @@ import com.github.a2g.core.interfaces.ITitleCardPanelFromTitleCardPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
-
-public class TitleCardPresenter implements ITitleCardPresenter{
+public class TitleCardPresenter implements ITitleCardPresenter {
 	private ITitleCardPanelFromTitleCardPresenter view;
 	private String text;
 	private double popupDisplayDuration;
 
-	public TitleCardPresenter(final IHostingPanel panel, EventBus bus, IMasterPresenterFromTitleCard master, IFactory factory) {
+	public TitleCardPresenter(final IHostingPanel panel, EventBus bus,
+			IMasterPresenterFromTitleCard master, IFactory factory) {
 		this.text = "";
 		this.popupDisplayDuration = .8;
-		this.view = factory.createTitleCardPanel(ColorEnum.Red, ColorEnum.Black);
+		this.view = factory
+				.createTitleCardPanel(ColorEnum.Red, ColorEnum.Black);
 		panel.setThing(view);
 	}
 
@@ -47,14 +47,12 @@ public class TitleCardPresenter implements ITitleCardPresenter{
 		text = "";
 	}
 
-	public void setScenePixelSize(int width, int height)
-	{
-		this.view.setScenePixelSize(width , height);
+	public void setScenePixelSize(int width, int height) {
+		this.view.setScenePixelSize(width, height);
 
 	}
 
-	public ITitleCardPanelFromTitleCardPresenter getView()
-	{
+	public ITitleCardPanelFromTitleCardPresenter getView() {
 		return view;
 	}
 
@@ -62,16 +60,12 @@ public class TitleCardPresenter implements ITitleCardPresenter{
 		return popupDisplayDuration;
 	}
 
-	public void decrementPopupDisplayDuration()
-	{
-		popupDisplayDuration*=.9;
+	public void decrementPopupDisplayDuration() {
+		popupDisplayDuration *= .9;
 	}
 
-	public void incrementPopupDisplayDuration()
-	{
-		popupDisplayDuration*=1.1;
+	public void incrementPopupDisplayDuration() {
+		popupDisplayDuration *= 1.1;
 	}
-
-
 
 }

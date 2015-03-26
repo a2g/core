@@ -13,24 +13,19 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointF;
 import com.google.gwt.event.shared.EventBus;
 
-public class MasterProxyForActions 
-implements
-IOnFillLoadList
-, IInventoryPresenterFromActions
-, IScenePresenterFromActions
-, IDialogTreePresenterFromActions
-, ITitleCardPresenterFromActions
-{
+public class MasterProxyForActions implements IOnFillLoadList,
+		IInventoryPresenterFromActions, IScenePresenterFromActions,
+		IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 	private MasterPresenter master;
 
-	MasterProxyForActions(MasterPresenter master)
-	{
+	MasterProxyForActions(MasterPresenter master) {
 		this.master = master;
 	}
 
 	@Override
 	public void setVisibleByItid(String itid, boolean isVisible) {
-		master.getInventoryPresenter().getInventory().items().getByItid(itid).setVisible(isVisible);
+		master.getInventoryPresenter().getInventory().items().getByItid(itid)
+				.setVisible(isVisible);
 
 	}
 
@@ -52,18 +47,20 @@ IOnFillLoadList
 	@Override
 	public void setContinueAfterLoad(boolean isContinueImmediately) {
 		master.getLoaderPresenter().setContinueAfterLoad(isContinueImmediately);
-		
+
 	}
 
 	@Override
 	public void setValue(Object name, int value) {
-		  master.setValue(name, value);
+		master.setValue(name, value);
 	}
 
 	@Override
 	public void alignBaseMiddleOfOldFrameToFrameOfThisAnimationByAtid(
 			String atid, int frame) {
-		  master.getScenePresenter().alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(frame, atid);
+		master.getScenePresenter()
+				.alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
+						frame, atid);
 	}
 
 	@Override
@@ -83,7 +80,8 @@ IOnFillLoadList
 
 	@Override
 	public double getScreenCoordsPerSecondByOtid(String otid) {
-		return master.getScenePresenter().getObjectByOtid(otid).getScreenCoordsPerSecond();
+		return master.getScenePresenter().getObjectByOtid(otid)
+				.getScreenCoordsPerSecond();
 	}
 
 	@Override
@@ -99,12 +97,14 @@ IOnFillLoadList
 	@Override
 	public double getBaseMiddleXByOtid(String otid) {
 
-		return master.getScenePresenter().getObjectByOtid(otid).getBaseMiddleX();
+		return master.getScenePresenter().getObjectByOtid(otid)
+				.getBaseMiddleX();
 	}
 
 	@Override
 	public double getBaseMiddleYByOtid(String otid) {
-		return master.getScenePresenter().getObjectByOtid(otid).getBaseMiddleY();
+		return master.getScenePresenter().getObjectByOtid(otid)
+				.getBaseMiddleY();
 	}
 
 	@Override
@@ -115,7 +115,7 @@ IOnFillLoadList
 	@Override
 	public void fireOnMovementBeyondAGateIfRelevant(PointF point) {
 		master.fireOnMovementBeyondAGateIfRelevant(point);
-		
+
 	}
 
 	@Override
@@ -131,20 +131,22 @@ IOnFillLoadList
 
 	@Override
 	public void setAsACurrentAnimationByAtid(String atid) {
-		master.getScenePresenter().getAnimationByAtid(atid).setAsCurrentAnimation();
-		
+		master.getScenePresenter().getAnimationByAtid(atid)
+				.setAsCurrentAnimation();
+
 	}
 
 	@Override
 	public void setCurrentFrameByOtid(String otid, int frame) {
 		master.getScenePresenter().getObjectByOtid(otid).setCurrentFrame(frame);
-		
+
 	}
 
 	@Override
 	public void setToInitialAnimationWithoutChangingFrameByOtid(String otid) {
-		 master.getScenePresenter().getObjectByOtid(otid).setToInitialAnimationWithoutChangingFrame();
-		
+		master.getScenePresenter().getObjectByOtid(otid)
+				.setToInitialAnimationWithoutChangingFrame();
+
 	}
 
 	@Override
@@ -160,17 +162,20 @@ IOnFillLoadList
 
 	@Override
 	public String getOtidOfAtid(String atid) {
-		return master.getScenePresenter().getAnimationByAtid(atid).getObject().getOtid();
+		return master.getScenePresenter().getAnimationByAtid(atid).getObject()
+				.getOtid();
 	}
 
 	@Override
 	public double getDurationByAtid(String animId) {
-		return master.getScenePresenter().getAnimationByAtid(animId).getDurationSecs();
+		return master.getScenePresenter().getAnimationByAtid(animId)
+				.getDurationSecs();
 	}
 
 	@Override
 	public ColorEnum getTalkingColorByOtid(String otid) {
-		return master.getScenePresenter().getObjectByOtid(otid).getTalkingColor();
+		return master.getScenePresenter().getObjectByOtid(otid)
+				.getTalkingColor();
 	}
 
 	@Override
@@ -181,13 +186,14 @@ IOnFillLoadList
 	@Override
 	public void setStateOfPopup(boolean isVisible, double x, double y,
 			ColorEnum talkingColor, String speech, SayAction sayAction) {
-		master.getScenePresenter().setStateOfPopup(isVisible, x, y, talkingColor, speech, sayAction);
+		master.getScenePresenter().setStateOfPopup(isVisible, x, y,
+				talkingColor, speech, sayAction);
 	}
 
 	@Override
 	public double getCameraX() {
 		return master.getScenePresenter().getCameraY();
-		
+
 	}
 
 	@Override
@@ -198,30 +204,33 @@ IOnFillLoadList
 	@Override
 	public void setCameraX(double x) {
 		master.getScenePresenter().setCameraX(x);
-			
+
 	}
 
 	@Override
 	public void setCameraY(double y) {
 		master.getScenePresenter().setCameraY(y);
-		
+
 	}
 
 	@Override
 	public void setDisplayNameByOtid(String otid, String displayName) {
-		master.getScenePresenter().getObjectByOtid(otid).setDisplayName(displayName);
-		
+		master.getScenePresenter().getObjectByOtid(otid)
+				.setDisplayName(displayName);
+
 	}
 
 	@Override
 	public void setAsAnInitialAnimationByAtid(String atid) {
-		master.getScenePresenter().getAnimationByAtid(atid).setAsInitialAnimation();;
+		master.getScenePresenter().getAnimationByAtid(atid)
+				.setAsInitialAnimation();
+		;
 	}
 
 	@Override
 	public void setXByOtid(String otid, int i) {
 		master.getScenePresenter().getObjectByOtid(otid).setX(i);
-		}
+	}
 
 	@Override
 	public void setYByOtid(String otid, int i) {
@@ -258,7 +267,6 @@ IOnFillLoadList
 		return master.getScenePresenter().getSceneGuiWidth();
 	}
 
-
 	@Override
 	public int getSceneGuiHeight() {
 		return master.getScenePresenter().getSceneGuiHeight();
@@ -266,13 +274,16 @@ IOnFillLoadList
 
 	@Override
 	public String getSpecialAnimationByOtid(String otid, Special type) {
-		return master.getScenePresenter().getObjectByOtid(otid).getSpecialAnimation(type);
+		return master.getScenePresenter().getObjectByOtid(otid)
+				.getSpecialAnimation(type);
 	}
 
 	@Override
-	public void addBranch(int subBranchId, String lineOfDialog, boolean isAlwaysShown) {
-		master.getDialogTreePresenter().addBranch(subBranchId, lineOfDialog, isAlwaysShown);
-		
+	public void addBranch(int subBranchId, String lineOfDialog,
+			boolean isAlwaysShown) {
+		master.getDialogTreePresenter().addBranch(subBranchId, lineOfDialog,
+				isAlwaysShown);
+
 	}
 
 	@Override
@@ -297,20 +308,20 @@ IOnFillLoadList
 
 	@Override
 	public void setDialogTreeVisible(boolean isInDialogTreeMode) {
-		master.getDialogTreePresenter().setDialogTreeVisible(isInDialogTreeMode);
+		master.getDialogTreePresenter()
+				.setDialogTreeVisible(isInDialogTreeMode);
 	}
 
 	@Override
 	public void updateDialogTree(DialogTree theDialogTree, EventBus bus) {
 		master.getDialogTreePresenter().updateDialogTree(theDialogTree, bus);
-		
-	}
 
+	}
 
 	@Override
 	public void setDialogTreeTalkAnimation(String atid) {
 		master.getDialogTreePresenter().setDialogTreeTalkAnimation(atid);
-		
+
 	}
 
 	@Override
@@ -321,7 +332,7 @@ IOnFillLoadList
 	@Override
 	public void addEssential(ILoad blah) {
 		master.addEssential(blah);
-		
+
 	}
 
 	@Override
@@ -332,9 +343,7 @@ IOnFillLoadList
 	@Override
 	public void kickStartLoading() {
 		master.kickStartLoading();
-		
-	}
 
-	
+	}
 
 }

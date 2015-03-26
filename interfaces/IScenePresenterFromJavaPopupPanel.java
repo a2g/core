@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2012 Anthony Cassidy
  *
@@ -19,11 +18,8 @@ package com.github.a2g.core.interfaces;
 import com.github.a2g.core.interfaces.action.IGetSceneGuiHeight;
 import com.github.a2g.core.interfaces.action.IGetSceneGuiWidth;
 
-public interface IScenePresenterFromJavaPopupPanel
-extends
-IGetSceneGuiWidth
-,IGetSceneGuiHeight
-{
+public interface IScenePresenterFromJavaPopupPanel extends IGetSceneGuiWidth,
+		IGetSceneGuiHeight {
 
 	IScenePanelFromScenePresenter getView();
 }

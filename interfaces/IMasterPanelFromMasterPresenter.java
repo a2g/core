@@ -15,9 +15,7 @@
  */
 package com.github.a2g.core.interfaces;
 
-
-public interface IMasterPanelFromMasterPresenter
-{
+public interface IMasterPanelFromMasterPresenter {
 
 	IHostingPanel getHostForDialogTree();
 
@@ -37,18 +35,8 @@ public interface IMasterPanelFromMasterPresenter
 
 	GuiStateEnum getActiveState();
 
-	public enum GuiStateEnum
-	{
-		DialogTree,
-		OnEnterScene,
-		CutScene,
-		ActiveScene,
-		Loading,
-		TitleCardOverOnEnterScene,
-		TitleCardOverDialogTree,
-		TitleCardOverCutScene,
-		TitleCardOverActiveScene,
-		TitleCardOverLoading
+	public enum GuiStateEnum {
+		DialogTree, OnEnterScene, CutScene, ActiveScene, Loading, TitleCardOverOnEnterScene, TitleCardOverDialogTree, TitleCardOverCutScene, TitleCardOverActiveScene, TitleCardOverLoading
 	};
 
 }

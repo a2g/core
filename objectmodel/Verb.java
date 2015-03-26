@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 public class Verb {
 	private final String displayText;
 	private final String vtid;
@@ -36,8 +35,7 @@ public class Verb {
 		return displayText;
 	}
 
-	public int getVCode()
-	{
+	public int getVCode() {
 		return vcode;
 	}
 }

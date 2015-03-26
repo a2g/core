@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2012 Anthony Cassidy
  *
@@ -21,14 +20,13 @@ import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
 
-public interface IScenePanelFromScenePresenter
-extends ISetStateOfPopup
-{
+public interface IScenePanelFromScenePresenter extends ISetStateOfPopup {
 	void clear();
 
 	Image createNewImageAndAddHandlers(LoadHandler lh,
-			IPackagedImage imageResource, IScenePresenterFromSceneMouseOver api,
-			EventBus bus, int x, int y, String objectTextualId, short objectCode);
+			IPackagedImage imageResource,
+			IScenePresenterFromSceneMouseOver api, EventBus bus, int x, int y,
+			String objectTextualId, short objectCode);
 
 	void setScenePixelSize(int width, int height);
 
@@ -36,7 +34,4 @@ extends ISetStateOfPopup
 
 	void setCameraOffset(int x, int y);
 
-	
-	
-	
 }

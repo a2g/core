@@ -17,12 +17,14 @@ package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.objectmodel.LoadedLoad;
 
+public interface IMasterPresenterFromLoader {
+	void mergeWithScene(LoadedLoad s);
 
-public interface IMasterPresenterFromLoader
-{
-	void mergeWithScene(LoadedLoad s) ;
 	void startScene();
+
 	void incrementProgress();
+
 	void enableClickToContinue();
+
 	void restartReloading();
 }

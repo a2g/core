@@ -16,11 +16,10 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 public class Verbs {
 	private VerbCollection theItems;
-	public Verbs()
-	{
+
+	public Verbs() {
 		this.theItems = new VerbCollection();
 	}
 

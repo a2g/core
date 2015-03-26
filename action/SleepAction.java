@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
@@ -24,9 +23,9 @@ import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-
 public class SleepAction extends ChainedAction {
 	private int milliseconds;
+
 	public SleepAction(BaseAction parent, int milliseconds) {
 		super(parent, true);
 		this.milliseconds = milliseconds;
@@ -38,10 +37,12 @@ public class SleepAction extends ChainedAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {}
+	protected void onUpdateGameAction(double progress) {
+	}
 
 	@Override
-	protected void onCompleteGameAction() {}
+	protected void onCompleteGameAction() {
+	}
 
 	@Override
 	public boolean isParallel() {
@@ -50,9 +51,12 @@ public class SleepAction extends ChainedAction {
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -5,18 +5,7 @@ import com.github.a2g.core.interfaces.action.IGetCameraY;
 import com.github.a2g.core.interfaces.action.ISetCameraX;
 import com.github.a2g.core.interfaces.action.ISetCameraY;
 
-public interface IScenePresenterFromScrollAction 
-extends
-IGetCameraX
-,IGetCameraY
-,ISetCameraX
-,ISetCameraY
-{
+public interface IScenePresenterFromScrollAction extends IGetCameraX,
+		IGetCameraY, ISetCameraX, ISetCameraY {
 
-	
-
-	
-
-
-	
 }

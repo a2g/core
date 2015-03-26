@@ -31,9 +31,8 @@ import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
 
-public class InventoryPresenter
-implements IInventoryPresenterFromInventoryPanel, IInventoryPresenter
-{
+public class InventoryPresenter implements
+		IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 
 	private Inventory theInventory;
 	private IInventoryPanelFromInventoryPresenter view;
@@ -60,7 +59,8 @@ implements IInventoryPresenterFromInventoryPanel, IInventoryPresenter
 		this.eventBus = bus;
 		this.theInventory = new Inventory();
 		this.callback = api;
-		this.view = api.getFactory().createInventoryPanel(this,ColorEnum.Purple, ColorEnum.Black, ColorEnum.Fuchsia);
+		this.view = api.getFactory().createInventoryPanel(this,
+				ColorEnum.Purple, ColorEnum.Black, ColorEnum.Fuchsia);
 
 		panel.setThing(view);
 		this.theInventoryItemMap = new TreeMap<Integer, InventoryItem>();
@@ -78,14 +78,14 @@ implements IInventoryPresenterFromInventoryPanel, IInventoryPresenter
 			boolean initiallyVisible, Image image) {
 		boolean isCarrying = callback.getValue("CARRYING_"
 				+ objectTextualId.toUpperCase()) > 0;
-				InventoryItem item = new InventoryItem(this.eventBus, objectTextualId,
-						image, objectCode, isCarrying);
+		InventoryItem item = new InventoryItem(this.eventBus, objectTextualId,
+				image, objectCode, isCarrying);
 
-				item.setVisible(initiallyVisible);
-				this.theInventoryItemMap.put(objectCode, item);
-				this.theInventory.items().add(item);
-				this.updateInventory();
-				return true;
+		item.setVisible(initiallyVisible);
+		this.theInventoryItemMap.put(objectCode, item);
+		this.theInventory.items().add(item);
+		this.updateInventory();
+		return true;
 	}
 
 	public InventoryItem getInventoryItem(int i) {
@@ -252,7 +252,8 @@ implements IInventoryPresenterFromInventoryPanel, IInventoryPresenter
 	public Image createNewImageAndAdddHandlers(IPackagedImage imageResource,
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int i, int j) {
-		return view.createNewImageAndAdddHandlers(imageResource, lh, bus, objectTextualId, objectCode, i, j);
+		return view.createNewImageAndAdddHandlers(imageResource, lh, bus,
+				objectTextualId, objectCode, i, j);
 	}
 
 	@Override
@@ -271,6 +272,7 @@ implements IInventoryPresenterFromInventoryPanel, IInventoryPresenter
 	public void setInventoryItemVisibleByItid(String textualId, boolean visible) {
 		theInventory.items().getByItid(textualId).setVisible(visible);
 	}
+
 	@Override
 	public String getDisplayNameByItid(String itid) {
 		return theInventory.items().getByItid(itid).getDisplayName();
@@ -279,9 +281,7 @@ implements IInventoryPresenterFromInventoryPanel, IInventoryPresenter
 	@Override
 	public void setInventoryImageSize(int width, int height) {
 		view.setInventoryImageSize(width, height);
-		
+
 	}
-
-
 
 }

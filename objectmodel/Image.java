@@ -14,9 +14,7 @@
  * the License.
  */
 
-
 package com.github.a2g.core.objectmodel;
-
 
 import com.github.a2g.core.interfaces.ImagePanelAPI;
 import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
@@ -31,10 +29,7 @@ public abstract class Image {
 	private double parallaxX;
 	private double parallaxY;
 
-
-
-	public Image(ImagePanelAPI panel, Point offset)
-	{
+	public Image(ImagePanelAPI panel, Point offset) {
 		this.fixedOffset = offset;
 		this.panel = panel;
 		this.parallaxX = 1.0;
@@ -42,49 +37,41 @@ public abstract class Image {
 	};
 
 	public void addImageToPanel(int before) {
-		panel.insert(this, this.fixedOffset.getX(), this.fixedOffset.getY(), before);
+		panel.insert(this, this.fixedOffset.getX(), this.fixedOffset.getY(),
+				before);
 	}
 
 	public void removeImageFromPanel() {
 		panel.remove(this);
 	}
 
-	public void setLeftTop(Point leftTop)
-	{
+	public void setLeftTop(Point leftTop) {
 		update(leftTop);
 	}
 
-	public void setVisible(boolean visible, Point position)
-	{
+	public void setVisible(boolean visible, Point position) {
 		panel.setImageVisible(this, visible);
 		update(position);
 	}
 
 	public Rect getBoundingRect() {
-		return new Rect(
-				this.fixedOffset.getX(),
-				this.fixedOffset.getY(),
-				panel.getImageWidth(this),
-				panel.getImageHeight(this));
+		return new Rect(this.fixedOffset.getX(), this.fixedOffset.getY(),
+				panel.getImageWidth(this), panel.getImageHeight(this));
 	}
 
-	public void setParallaxX(double x)
-	{
+	public void setParallaxX(double x) {
 		this.parallaxX = x;
 	}
 
-	public void setParallaxY(double y)
-	{
+	public void setParallaxY(double y) {
 		this.parallaxY = y;
 	}
 
-	public double getParallaxX()
-	{
+	public double getParallaxX() {
 		return parallaxX;
 	}
 
-	public double getParallaxY()
-	{
+	public double getParallaxY() {
 		return this.parallaxY;
 	}
 
@@ -92,22 +79,17 @@ public abstract class Image {
 
 		int x = this.fixedOffset.getX();
 		int y = this.fixedOffset.getY();
-		panel.setThingPosition(
-				this,
-				leftTop.getX()+x,
-				leftTop.getY()+y
-				);
+		panel.setThingPosition(this, leftTop.getX() + x, leftTop.getY() + y);
 	}
 
-	public static final com.google.gwt.user.client.ui.Image getImageFromResource(PackagedImageForHtml4 imageResource, LoadHandler lh)
-	{
-		final com.google.gwt.user.client.ui.Image image = new com.google.gwt.user.client.ui.Image(imageResource.getNative().getSafeUri());
-		if(lh!=null)
-		{
+	public static final com.google.gwt.user.client.ui.Image getImageFromResource(
+			PackagedImageForHtml4 imageResource, LoadHandler lh) {
+		final com.google.gwt.user.client.ui.Image image = new com.google.gwt.user.client.ui.Image(
+				imageResource.getNative().getSafeUri());
+		if (lh != null) {
 			image.addLoadHandler(lh);
 		}
 		return image;
 	}
-
 
 }

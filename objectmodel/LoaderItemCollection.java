@@ -16,12 +16,9 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import java.util.LinkedList;
 
 @SuppressWarnings("serial")
-public class LoaderItemCollection extends LinkedList<LoaderItem>
-{
-
+public class LoaderItemCollection extends LinkedList<LoaderItem> {
 
 }

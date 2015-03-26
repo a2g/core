@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.interfaces.IHostingPanel;
 import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
@@ -25,34 +24,32 @@ import com.github.a2g.core.interfaces.IVerbsPresenter;
 import com.github.a2g.core.interfaces.IMasterPresenterFromVerbs;
 import com.github.a2g.core.primitive.ColorEnum;
 
-
-public class VerbsPresenter
-implements IVerbsPresenterFromVerbsPanel, IVerbsPresenter
-{
+public class VerbsPresenter implements IVerbsPresenterFromVerbsPanel,
+		IVerbsPresenter {
 	private Verbs theVerbs;
 	private IVerbsPanelFromVerbsPresenter view;
 	private int widthOfScene;
 	private int widthOfInventory;
 	IMasterPresenterFromVerbs callback;
-	public VerbsPresenter(final IHostingPanel panel, EventBus bus, IMasterPresenterFromVerbs callback)
-	{
+
+	public VerbsPresenter(final IHostingPanel panel, EventBus bus,
+			IMasterPresenterFromVerbs callback) {
 		this.callback = callback;
 		this.theVerbs = new Verbs();
-		this.view = callback.getFactory().createVerbsPanel(this, ColorEnum.Purple, ColorEnum.Black);
+		this.view = callback.getFactory().createVerbsPanel(this,
+				ColorEnum.Purple, ColorEnum.Black);
 		panel.setThing(view);
 		this.view.setVerbs(theVerbs);
-		this.widthOfScene=0;
-		this.widthOfInventory=0;
+		this.widthOfScene = 0;
+		this.widthOfInventory = 0;
 	}
 
-	public void clear()
-	{
+	public void clear() {
 		// doesn't change.
 
 	}
 
-	public Verbs getVerbsModel()
-	{
+	public Verbs getVerbsModel() {
 		return theVerbs;
 	}
 
@@ -60,33 +57,25 @@ implements IVerbsPresenterFromVerbsPanel, IVerbsPresenter
 		return view;
 	}
 
-
-
 	@Override
-	public void update()
-	{
+	public void update() {
 		view.setVerbs(theVerbs);
 		view.update();
 	}
 
-
 	public void setWidthOfScene(int width) {
 		this.widthOfScene = width;
-		view.setWidth(widthOfScene-widthOfInventory);
+		view.setWidth(widthOfScene - widthOfInventory);
 	}
 
 	public void setWidthOfInventory(int width) {
 		this.widthOfInventory = width;
-		view.setWidth(widthOfScene-widthOfInventory);
+		view.setWidth(widthOfScene - widthOfInventory);
 	}
 
 	@Override
-	public void setMouseOver(String displayName, String textualId, int code)
-	{
-		callback.onMouseOverVerbsOrInventory(displayName,
-				textualId,
-				code
-				);
+	public void setMouseOver(String displayName, String textualId, int code) {
+		callback.onMouseOverVerbsOrInventory(displayName, textualId, code);
 
 	}
 
@@ -96,8 +85,7 @@ implements IVerbsPresenterFromVerbsPanel, IVerbsPresenter
 	}
 
 	@Override
-	public void doClick(String displayName, String textualId, int code)
-	{
+	public void doClick(String displayName, String textualId, int code) {
 		this.setMouseOver(displayName, textualId, code);
 		this.doClick();
 	}

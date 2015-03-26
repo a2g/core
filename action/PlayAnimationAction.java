@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
@@ -25,19 +24,15 @@ import com.github.a2g.core.interfaces.IScenePresenterFromPlayAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.ChainedAction;
 
-
-public class PlayAnimationAction extends ChainedAction 
-{
+public class PlayAnimationAction extends ChainedAction {
 	private String atid;
 	private String otid;
 	private boolean isBackwards;
 	private boolean holdLastFrame;
 	private boolean isNonBlocking;
 	private IScenePresenterFromPlayAction scene;
-	
 
-	
-	public PlayAnimationAction(BaseAction parent, String  atid, boolean isLinear) {
+	public PlayAnimationAction(BaseAction parent, String atid, boolean isLinear) {
 		super(parent, isLinear);
 		this.isBackwards = false;
 		this.holdLastFrame = false;
@@ -46,20 +41,18 @@ public class PlayAnimationAction extends ChainedAction
 	}
 
 	@Override
-	public void runGameAction() 
-	{
+	public void runGameAction() {
 		otid = scene.getOtidOfAtid(atid);
-		int durationInMilliseconds = (int)(scene.getDurationByAtid(atid)*1000);
+		int durationInMilliseconds = (int) (scene.getDurationByAtid(atid) * 1000);
 
 		this.run(durationInMilliseconds);
 	}
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		int lastFrame = scene.getNumberOfFramesByAtid(atid)-1;
-		double frame = isBackwards
-				? (1 - progress) * lastFrame
-						: progress * lastFrame;
+		int lastFrame = scene.getNumberOfFramesByAtid(atid) - 1;
+		double frame = isBackwards ? (1 - progress) * lastFrame : progress
+				* lastFrame;
 
 		scene.setCurrentFrameByOtid(otid, (int) frame);
 		scene.setAsACurrentAnimationByAtid(atid);
@@ -68,11 +61,12 @@ public class PlayAnimationAction extends ChainedAction
 
 	@Override
 	protected void onCompleteGameAction() {
-		
-		System.out.println("ActionRunner::done " + atid +" is this length: " +scene.getNumberOfFramesByAtid(atid));
+
+		System.out.println("ActionRunner::done " + atid + " is this length: "
+				+ scene.getNumberOfFramesByAtid(atid));
 
 		onUpdateGameAction(1.0);
-		
+
 		if (!this.holdLastFrame) {
 			scene.setToInitialAnimationWithoutChangingFrameByOtid(otid);
 		}
@@ -91,19 +85,21 @@ public class PlayAnimationAction extends ChainedAction
 	}
 
 	@Override
-	public boolean isParallel() 
-	{
+	public boolean isParallel() {
 		return isNonBlocking;
 	}
-	
+
 	public void setScene(IScenePresenterFromPlayAction scene) {
 		this.scene = scene;
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setScene(scene);
-		
+
 	}
 
 }

@@ -47,45 +47,48 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.github.a2g.core.interfaces.IHostFromMasterPresenter;
 
-public class FactoryForHtml4
-implements IFactory
-{
+public class FactoryForHtml4 implements IFactory {
 
 	private EventBus bus;
 	private MasterPresenter master;
 
-	public FactoryForHtml4(EventBus bus, MasterPresenter master, IHostFromMasterPresenter api)
-	{
+	public FactoryForHtml4(EventBus bus, MasterPresenter master,
+			IHostFromMasterPresenter api) {
 		this.bus = bus;
 		this.master = master;
-		api=null;
+		api = null;
 	}
 
 	@Override
-	public ICommandLinePanelFromCommandLinePresenter createCommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll)
-	{
+	public ICommandLinePanelFromCommandLinePresenter createCommandLinePanel(
+			ColorEnum fore, ColorEnum back, ColorEnum roll) {
 		return new CommandLinePanel(fore, back, roll);
 	}
 
 	@Override
-	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(EventBus bus, ColorEnum foreground, ColorEnum background, ColorEnum rollover)
-	{
+	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
+			EventBus bus, ColorEnum foreground, ColorEnum background,
+			ColorEnum rollover) {
 		return new DialogTreePanel(bus, foreground, background, rollover);
 	}
 
 	@Override
-	public IInventoryPanelFromInventoryPresenter createInventoryPanel(IInventoryPresenterFromInventoryPanel api, ColorEnum fore, ColorEnum back, ColorEnum rollover) {
+	public IInventoryPanelFromInventoryPresenter createInventoryPanel(
+			IInventoryPresenterFromInventoryPanel api, ColorEnum fore,
+			ColorEnum back, ColorEnum rollover) {
 		return new InventoryPanel(api, fore, back, rollover);
 	}
 
 	@Override
-	public ILoaderPanelFromLoaderPresenter createLoaderPanel(final IMasterPresenterFromLoaderMouse api, ColorEnum fore, ColorEnum back)
-	{
-		return new LoaderPanel(api, fore,back);
+	public ILoaderPanelFromLoaderPresenter createLoaderPanel(
+			final IMasterPresenterFromLoaderMouse api, ColorEnum fore,
+			ColorEnum back) {
+		return new LoaderPanel(api, fore, back);
 	}
 
 	@Override
-	public IMasterPanelFromMasterPresenter createMasterPanel(int width, int height, ColorEnum back) {
+	public IMasterPanelFromMasterPresenter createMasterPanel(int width,
+			int height, ColorEnum back) {
 		return new MasterPanel(width, height, back);
 	}
 
@@ -95,28 +98,31 @@ implements IFactory
 	}
 
 	@Override
-	public ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(ColorEnum foreground, ColorEnum background)
-	{
-		return new TitleCardPanel( foreground, background);
+	public ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(
+			ColorEnum foreground, ColorEnum background) {
+		return new TitleCardPanel(foreground, background);
 	}
 
+	@Override
+	public IVerbsPanelFromVerbsPresenter createVerbsPanel(
+			IVerbsPresenterFromVerbsPanel api, ColorEnum foreground,
+			ColorEnum background) {
+		return new VerbsPanel(master.getVerbsPresenter(), foreground,
+				background);
+	}
 
 	@Override
-	public IVerbsPanelFromVerbsPresenter createVerbsPanel(IVerbsPresenterFromVerbsPanel api, ColorEnum foreground, ColorEnum background)
-	{
-		return new VerbsPanel(master.getVerbsPresenter(), foreground, background);
-	}
-	@Override
-	public ISystemAnimation createSystemAnimation(IBaseActionFromSystemAnimation callbacks, boolean isLinear) {
+	public ISystemAnimation createSystemAnimation(
+			IBaseActionFromSystemAnimation callbacks, boolean isLinear) {
 		return new SystemAnimationForHtml4(callbacks, isLinear);
 	}
+
 	@Override
 	public ITimer createSystemTimer(IMasterPresenterFromTimer cbs) {
 		return new TimerForHtml4(cbs);
 	}
 
-	public void alert(String text)
-	{
+	public void alert(String text) {
 		Window.alert(text);
 	}
 

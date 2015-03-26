@@ -23,37 +23,31 @@ import javax.imageio.ImageIO;
 
 import com.github.a2g.core.interfaces.IPackagedImage;
 
-public class PackagedImageForJava
-implements IPackagedImage
-{
+public class PackagedImageForJava implements IPackagedImage {
 	String imagePath;
-	public PackagedImageForJava(String imagePath)
-	{
+
+	public PackagedImageForJava(String imagePath) {
 		this.imagePath = imagePath;
 	}
-	public String getPath()
-	{
+
+	public String getPath() {
 		return imagePath;
 	}
 
-	public java.awt.Image unpack()
-	{
+	public java.awt.Image unpack() {
 
 		java.awt.Image img = null;
-		try
-		{
+		try {
 			String path = this.getPath();
-			img=ImageIO.read(new File(path));
-		}
-		catch(IOException e)
-		{
-			try
-			{
-				img=ImageIO.read(new File("E:/Conan/Swing/bin/com/github/a2g/core/res/leftArrow.png"));
-			}
-			catch(IOException f)
-			{
-				System.out.println("couldn't find 'com/github/a2g/core/leftArrow.png', so exiting.");
+			img = ImageIO.read(new File(path));
+		} catch (IOException e) {
+			try {
+				img = ImageIO
+						.read(new File(
+								"E:/Conan/Swing/bin/com/github/a2g/core/res/leftArrow.png"));
+			} catch (IOException f) {
+				System.out
+						.println("couldn't find 'com/github/a2g/core/leftArrow.png', so exiting.");
 				System.exit(0);
 			}
 		}

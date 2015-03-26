@@ -16,13 +16,11 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-
 
 public class DoNothingAction extends ChainedAction {
 	public DoNothingAction(BaseAction parent) {
@@ -30,7 +28,8 @@ public class DoNothingAction extends ChainedAction {
 	}
 
 	@Override
-	public void onUpdate(double progress) {}
+	public void onUpdate(double progress) {
+	}
 
 	@Override
 	public void runGameAction() {
@@ -38,11 +37,11 @@ public class DoNothingAction extends ChainedAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {}
+	protected void onUpdateGameAction(double progress) {
+	}
 
 	@Override
-	protected void onCompleteGameAction()
-	{
+	protected void onCompleteGameAction() {
 	}
 
 	@Override
@@ -51,8 +50,11 @@ public class DoNothingAction extends ChainedAction {
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		// do nothing
-		
+
 	}
 }

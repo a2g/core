@@ -63,66 +63,58 @@ import com.github.a2g.core.interfaces.game.IShowInventoryItem;
 import com.github.a2g.core.interfaces.game.ISwitchToScene;
 import com.github.a2g.core.interfaces.game.IUpdateVerbUI;
 
+public interface IOnPreEntry
+		extends
+		// property access methods
+		IGetValue,
+		IIsTrue,
+		ISetValue
+		// helpful for game
+		,
+		IGetCurrentScene,
+		ISwitchToScene,
+		IGetLastScene,
+		IIsInDebugMode,
+		ISetIsSayAlwaysWithoutIncrementing,
+		IGetIsSayAlwaysWithoutIncrementing,
+		IShareWinning,
+		ICreateChainRootAction,
+		IGetSceneGuiHeight
+		// boundary
+		,
+		IAddBoundaryGate,
+		IAddBoundaryPoint,
+		ISetBoundaryCrossObject
+		// object
+		, IHide, IShow, IGetBaseMiddleX, IGetBaseMiddleY, ISetBaseMiddleX,
+		ISetBaseMiddleY,
+		IIsVisible,
+		ISetX,
+		ISetY,
+		ISetDisplayName,
+		ISetScreenCoordsPerSecond,
+		ISetTalkingColor,
+		ISetParallaxX,
+		IGetX,
+		IGetY
 
-
-public interface IOnPreEntry extends
-//property access methods
-IGetValue
-,IIsTrue
-,ISetValue
-//helpful for game
-,IGetCurrentScene
-,ISwitchToScene
-,IGetLastScene
-,IIsInDebugMode
-,ISetIsSayAlwaysWithoutIncrementing
-,IGetIsSayAlwaysWithoutIncrementing
-,IShareWinning
-,ICreateChainRootAction
-,IGetSceneGuiHeight
-//boundary
-,IAddBoundaryGate
-,IAddBoundaryPoint
-,ISetBoundaryCrossObject
-//object
-,IHide
-,IShow
-,IGetBaseMiddleX
-,IGetBaseMiddleY
-,ISetBaseMiddleX
-,ISetBaseMiddleY
-,IIsVisible
-,ISetX
-,ISetY
-,ISetDisplayName
-,ISetScreenCoordsPerSecond
-,ISetTalkingColor
-,ISetParallaxX
-,IGetX
-,IGetY
-
-,ISetVisible
-//inventory
-,IShowInventoryItem
-,IHideInventoryItem
-,ISetInventoryItemDisplayName
-,IIsInventoryItemVisible
-//verb
-,IRemoveVerbByCode
-,IUpdateVerbUI
-//animation
-,IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation
-,ISetAnimationAsObjectInitial
-,ISetAnimationAsSceneTalker
-,ISetAnimationAsObjectCurrent
-,ISetAnimationDuration
-,ISetAnimationAsObjectSpecial
-,ISetAsSceneWalker
-,ISetAnimationAsObjectCurrentAndSetFrame
-,ISetAnimationAsDialogTalker
-{
-
-
-
+		,
+		ISetVisible
+		// inventory
+		,
+		IShowInventoryItem,
+		IHideInventoryItem,
+		ISetInventoryItemDisplayName,
+		IIsInventoryItemVisible
+		// verb
+		,
+		IRemoveVerbByCode,
+		IUpdateVerbUI
+		// animation
+		, IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation,
+		ISetAnimationAsObjectInitial, ISetAnimationAsSceneTalker,
+		ISetAnimationAsObjectCurrent, ISetAnimationDuration,
+		ISetAnimationAsObjectSpecial, ISetAsSceneWalker,
+		ISetAnimationAsObjectCurrentAndSetFrame, ISetAnimationAsDialogTalker {
 
 }

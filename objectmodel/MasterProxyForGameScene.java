@@ -16,34 +16,24 @@ import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointF;
 
-
 /** MasterProxyForGameScene */
-public class MasterProxyForGameScene 
-implements
-IOnFillLoadList
-, IOnEntry
-, IOnPreEntry
-, IOnEveryFrame
-, IOnDoCommand
-, IOnDialogTree
-, IOnMovementBeyondAGate
-{
+public class MasterProxyForGameScene implements IOnFillLoadList, IOnEntry,
+		IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree,
+		IOnMovementBeyondAGate {
 	private MasterPresenter master;
 
-	MasterProxyForGameScene(MasterPresenter master)
-	{
+	MasterProxyForGameScene(MasterPresenter master) {
 		this.master = master;
 	}
 
-	/** @name SceneObject Methods
-	 *  All these methods have an @ref ocode as the first parameter.
-	 *  Behind the scenes they act on a @ref SceneObject.
-	 *  Don't worry about getting any of the constants mixed up
-	 *  these scene object methods all takes shorts so they 
-	 *  can't be used with the ids for Animations (Strings) and
-	 *  InventoryItems (ints). 
+	/**
+	 * @name SceneObject Methods All these methods have an @ref ocode as the
+	 *       first parameter. Behind the scenes they act on a @ref SceneObject.
+	 *       Don't worry about getting any of the constants mixed up these scene
+	 *       object methods all takes shorts so they can't be used with the ids
+	 *       for Animations (Strings) and InventoryItems (ints).
 	 */
-	///@{
+	// /@{
 	@Override
 	public void setBoundaryCrossObject(short ocode) {
 		master.setBoundaryCrossObject(ocode);
@@ -93,8 +83,8 @@ IOnFillLoadList
 	public void setDisplayName(short ocode, String displayName) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		master.getScenePresenter().getObjectByOtid(otid).setDisplayName(displayName);
-
+		master.getScenePresenter().getObjectByOtid(otid)
+				.setDisplayName(displayName);
 
 	}
 
@@ -102,7 +92,8 @@ IOnFillLoadList
 	public void setScreenCoordsPerSecond(short ocode, double coordsPerSecond) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		master.getScenePresenter().getObjectByOtid(otid).setScreenCoordsPerSecond(coordsPerSecond);
+		master.getScenePresenter().getObjectByOtid(otid)
+				.setScreenCoordsPerSecond(coordsPerSecond);
 
 	}
 
@@ -131,46 +122,50 @@ IOnFillLoadList
 	@Override
 	public double getBaseMiddleX(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		return master.getScenePresenter().getObjectByOtid(otid).getBaseMiddleX();
+		return master.getScenePresenter().getObjectByOtid(otid)
+				.getBaseMiddleX();
 	}
 
 	@Override
 	public double getBaseMiddleY(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		return master.getScenePresenter().getObjectByOtid(otid).getBaseMiddleY();
+		return master.getScenePresenter().getObjectByOtid(otid)
+				.getBaseMiddleY();
 	}
 
 	@Override
 	public void setBaseMiddleX(short ocode, double baseMiddleX) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		master.getScenePresenter().getObjectByOtid(otid).setBaseMiddleX(baseMiddleX);
+		master.getScenePresenter().getObjectByOtid(otid)
+				.setBaseMiddleX(baseMiddleX);
 	}
 
 	@Override
 	public void setBaseMiddleY(short ocode, double baseMiddleY) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		master.getScenePresenter().getObjectByOtid(otid).setBaseMiddleY(baseMiddleY);
+		master.getScenePresenter().getObjectByOtid(otid)
+				.setBaseMiddleY(baseMiddleY);
 	}
 
 	@Override
 	public int getX(short ocode) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		return (int)master.getScenePresenter().getObjectByOtid(otid).getX();
+		return (int) master.getScenePresenter().getObjectByOtid(otid).getX();
 	}
 
 	@Override
 	public int getY(short ocode) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		return (int)master.getScenePresenter().getObjectByOtid(otid).getY();
+		return (int) master.getScenePresenter().getObjectByOtid(otid).getY();
 	}
-
 
 	@Override
 	public void incrementFrameWithWraparound(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		master.getScenePresenter().getObjectByOtid(otid).incrementFrameWithWraparound();
+		master.getScenePresenter().getObjectByOtid(otid)
+				.incrementFrameWithWraparound();
 	}
 
 	@Override
@@ -183,7 +178,8 @@ IOnFillLoadList
 	public int getCurrentFrame(short ocode) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		return master.getScenePresenter().getObjectByOtid(otid).getCurrentFrame();
+		return master.getScenePresenter().getObjectByOtid(otid)
+				.getCurrentFrame();
 	}
 
 	@Override
@@ -207,27 +203,22 @@ IOnFillLoadList
 
 	}
 
-	///@}
+	// /@}
 
-
-
-
-
-
-	/** @name Inventory Methods
-	 *  All of these methods take an @ref icode as the first parameter.
-	 *  Behind the scenes they act on an @ref InventoryItem. 
-	 *  Inventory item icodes don't work as parameters to 
-	 *  the Object Methods, so you'll get a compiler warning.
-	 *  The inventory item methods are similarly named, but 
-	 *  all have "InventoryItem" in their names.
+	/**
+	 * @name Inventory Methods All of these methods take an @ref icode as the
+	 *       first parameter. Behind the scenes they act on an @ref
+	 *       InventoryItem. Inventory item icodes don't work as parameters to
+	 *       the Object Methods, so you'll get a compiler warning. The inventory
+	 *       item methods are similarly named, but all have "InventoryItem" in
+	 *       their names.
 	 */
-	///@{
+	// /@{
 	@Override
 	public boolean isInventoryItemVisible(int icode) {
-		return master.getInventoryPresenter().getInventoryItem(icode).isVisible();
+		return master.getInventoryPresenter().getInventoryItem(icode)
+				.isVisible();
 	}
-
 
 	@Override
 	public void showInventoryItem(int icode) {
@@ -237,29 +228,31 @@ IOnFillLoadList
 
 	@Override
 	public void hideInventoryItem(int icode) {
-		master.getInventoryPresenter().getInventoryItem(icode).setVisible(false);
+		master.getInventoryPresenter().getInventoryItem(icode)
+				.setVisible(false);
 
 	}
 
 	@Override
 	public void setInventoryItemDisplayName(int icode, String displayName) {
-		master.getInventoryPresenter().getInventoryItem(icode).setDisplayName(displayName);
+		master.getInventoryPresenter().getInventoryItem(icode)
+				.setDisplayName(displayName);
 
 	}
-	///@}
 
+	// /@}
 
-	
-	/** @name Animation Methods
-	 *  All these methods have an @ref atid as the first parameter.
-	 *  Behind the scenes they act on a @ref Animation,
-	 *  or a @ref SceneObject that owns it.
+	/**
+	 * @name Animation Methods All these methods have an @ref atid as the first
+	 *       parameter. Behind the scenes they act on a @ref Animation, or a @ref
+	 *       SceneObject that owns it.
 	 */
-	///@{
+	// /@{
 
 	@Override
 	public void setAnimationAsObjectSpecial(String atid, Special type) {
-		master.getScenePresenter().getAnimationByAtid(atid).setAsSpecialAnimation(type);
+		master.getScenePresenter().getAnimationByAtid(atid)
+				.setAsSpecialAnimation(type);
 
 	}
 
@@ -271,68 +264,72 @@ IOnFillLoadList
 
 	@Override
 	public void setAnimationAsObjectInitial(String atid) {
-		master.getScenePresenter().getAnimationByAtid(atid).setAsInitialAnimation();
+		master.getScenePresenter().getAnimationByAtid(atid)
+				.setAsInitialAnimation();
 
 	}
 
 	@Override
 	public void setAnimationAsObjectCurrent(String atid) {
-		master.getScenePresenter().getAnimationByAtid(atid).setAsCurrentAnimation();
+		master.getScenePresenter().getAnimationByAtid(atid)
+				.setAsCurrentAnimation();
 	}
 
-
 	@Override
-	public void alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation(String atid,
-			int frame) {
-		master.getScenePresenter().alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(frame, atid);
+	public void alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation(
+			String atid, int frame) {
+		master.getScenePresenter()
+				.alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
+						frame, atid);
 
 	}
 
 	@Override
 	public void setAnimationDuration(String atid, double secs) {
-		master.getScenePresenter().getAnimationByAtid(atid).setDurationSecs(secs);
+		master.getScenePresenter().getAnimationByAtid(atid)
+				.setDurationSecs(secs);
 
 	}
 
 	@Override
-	public void setAnimationAsObjectCurrentAndSetFrame(String atid,int frame) 
-	{
-		master.getScenePresenter().getAnimationByAtid(atid).setAsCurrentAnimationAndSetFrame(frame);
+	public void setAnimationAsObjectCurrentAndSetFrame(String atid, int frame) {
+		master.getScenePresenter().getAnimationByAtid(atid)
+				.setAsCurrentAnimationAndSetFrame(frame);
 
 	}
 
 	@Override
 	public void setAnimationAsDialogTalker(String atid) {
-		master.getDialogTreePresenter().setDialogTreeTalkAnimation(atid);		
+		master.getDialogTreePresenter().setDialogTreeTalkAnimation(atid);
 	}
-
 
 	@Override
 	public boolean isAnimation(String atid) {
-		return master.getScenePresenter().getAnimationByAtid(atid).getFrames().getCount()>0;
+		return master.getScenePresenter().getAnimationByAtid(atid).getFrames()
+				.getCount() > 0;
 	}
 
 	@Override
 	public int getAnimationLastFrame(String atid) {
-		return master.getScenePresenter().getAnimationByAtid(atid).getFrames().getCount();
+		return master.getScenePresenter().getAnimationByAtid(atid).getFrames()
+				.getCount();
 	}
 
 	@Override
 	public int getAnimationLength(String atid) {
-		return master.getScenePresenter().getAnimationByAtid(atid).getFrames().getCount();
+		return master.getScenePresenter().getAnimationByAtid(atid).getFrames()
+				.getCount();
 
 	}
-	///@}
 
-	
-	
-	
-	/** @name Verb Methods
-	 *  These items act on the @ref VerbsPresenter object
-	 *  Behind the scenes they act on a SceneObject.
-	 *  They all have "Verb" in their names.
+	// /@}
+
+	/**
+	 * @name Verb Methods These items act on the @ref VerbsPresenter object
+	 *       Behind the scenes they act on a SceneObject. They all have "Verb"
+	 *       in their names.
 	 */
-	///@{
+	// /@{
 	@Override
 	public void removeVerbByCode(int vcode) {
 		master.getVerbsPresenter().removeByCode(vcode);
@@ -344,13 +341,13 @@ IOnFillLoadList
 		master.getVerbsPresenter().update();
 
 	}
-	///@}
-	
 
-	/** @name General Methods
-	 *  These are a real mixed batch
+	// /@}
+
+	/**
+	 * @name General Methods These are a real mixed batch
 	 */
-	///@{
+	// /@{
 
 	@Override
 	public void addEssential(ILoad load) {
@@ -374,6 +371,7 @@ IOnFillLoadList
 	public IGameScene getSceneByName(String string) {
 		return master.getSceneByName(string);
 	}
+
 	@Override
 	public void setValue(Object key, int value) {
 		master.setValue(key, value);
@@ -475,8 +473,6 @@ IOnFillLoadList
 		master.executeChainedAction(ba);
 
 	}
-	///@}
-   
-	
-	
+	// /@}
+
 }

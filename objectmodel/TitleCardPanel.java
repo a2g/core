@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import com.github.a2g.core.interfaces.ITitleCardPanelFromTitleCardPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.dom.client.Style.Unit;
@@ -25,24 +24,25 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 
-public class TitleCardPanel
-extends SimplePanel
-implements ITitleCardPanelFromTitleCardPresenter
-{
+public class TitleCardPanel extends SimplePanel implements
+		ITitleCardPanelFromTitleCardPresenter {
 	Label label;
 	LayoutPanel layout;
+
 	public TitleCardPanel(ColorEnum fore, ColorEnum back) {
 		this.layout = new LayoutPanel();
 		this.add(layout);
 		{
 			label = new Label();
 			label.setAutoHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-			label.getElement().getStyle().setProperty( "color",fore.toString());
-			label.getElement().getStyle().setProperty( "BackgroundColor",back.toString());
+			label.getElement().getStyle().setProperty("color", fore.toString());
+			label.getElement().getStyle()
+					.setProperty("BackgroundColor", back.toString());
 
 			label.setText("Loading...");
 			layout.add(label);
-			layout.setWidgetLeftRight(label, 5, Unit.EM, 5, Unit.EM);     // Center panel
+			layout.setWidgetLeftRight(label, 5, Unit.EM, 5, Unit.EM); // Center
+																		// panel
 			layout.setWidgetTopBottom(label, 5, Unit.EM, 5, Unit.EM);
 		}
 	}
@@ -53,13 +53,10 @@ implements ITitleCardPanelFromTitleCardPresenter
 	}
 
 	@Override
-	public void setScenePixelSize(int width, int height)
-	{
-		this.setSize("" + width + "px",	"" + height + "px");
-		// yes, we need layout.setSize otherwise the layout will not expand to fill the panel.
-		this.layout.setSize("" + width + "px",	"" + height + "px");
+	public void setScenePixelSize(int width, int height) {
+		this.setSize("" + width + "px", "" + height + "px");
+		// yes, we need layout.setSize otherwise the layout will not expand to
+		// fill the panel.
+		this.layout.setSize("" + width + "px", "" + height + "px");
 	}
 }
-
-
-

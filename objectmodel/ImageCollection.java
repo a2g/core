@@ -16,10 +16,7 @@
 
 package com.github.a2g.core.objectmodel;
 
-
-
 import java.util.Vector;
-
 
 public class ImageCollection {
 	private Vector<Image> theVector;
@@ -29,8 +26,7 @@ public class ImageCollection {
 	}
 
 	public com.github.a2g.core.objectmodel.Image getByIndex(int index) {
-		if (index < 0
-				|| index >= theVector.size()) {
+		if (index < 0 || index >= theVector.size()) {
 			return null;
 		}
 		return theVector.get(index);

@@ -8,16 +8,13 @@ import com.github.a2g.core.interfaces.action.ISetCurrentFrameByOtid;
 import com.github.a2g.core.interfaces.action.ISetToInitialAnimationWithoutChangingFrameByOtid;
 import com.github.a2g.core.interfaces.action.ISetVisibleByOtid;
 
-public interface IScenePresenterFromPlayAction 
-extends 
-IGetNumberOfFramesByAtid
-,IGetOtidOfAtid
-,IGetDurationByAtid
-,ISetCurrentFrameByOtid
-,ISetAsACurrentAnimationByAtid
-,ISetToInitialAnimationWithoutChangingFrameByOtid
-,ISetVisibleByOtid //repeat whilst visible only
+public interface IScenePresenterFromPlayAction extends
+		IGetNumberOfFramesByAtid, IGetOtidOfAtid, IGetDurationByAtid,
+		ISetCurrentFrameByOtid, ISetAsACurrentAnimationByAtid,
+		ISetToInitialAnimationWithoutChangingFrameByOtid, ISetVisibleByOtid // repeat
+																			// whilst
+																			// visible
+																			// only
 {
 
 }
-

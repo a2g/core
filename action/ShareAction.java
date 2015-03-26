@@ -24,14 +24,12 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromShareAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-
-
 public class ShareAction extends ChainedAction {
 	private IScenePresenterFromShareAction scene;
 	String token;
 
 	public ShareAction(BaseAction parent, String text) {
-		super(parent,  true);
+		super(parent, true);
 		this.token = text;
 	}
 
@@ -54,15 +52,17 @@ public class ShareAction extends ChainedAction {
 		return false;
 	}
 
-
 	public void setScene(IScenePresenterFromShareAction scene) {
 		this.scene = scene;
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setScene(scene);
-		
+
 	}
 
 }

@@ -16,15 +16,13 @@
 
 package com.github.a2g.core.interfaces;
 
-
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.interfaces.IOnFillLoadListImpl.LoadKickStarter;
 import com.github.a2g.core.objectmodel.SentenceItem;
 
-public interface IGameScene  extends ConstantsForAPI
-{
+public interface IGameScene extends ConstantsForAPI {
 	public LoadKickStarter onFillLoadList(IOnFillLoadListImpl api);
 
 	public void onPreEntry(IOnPreEntry api);
@@ -33,9 +31,11 @@ public interface IGameScene  extends ConstantsForAPI
 
 	public void onEveryFrame(IOnEveryFrame api);
 
-	public ChainedAction onDoCommand(IOnDoCommand api, ChainRootAction ba, int verb, SentenceItem itemA, SentenceItem itemB, double x, double y);
+	public ChainedAction onDoCommand(IOnDoCommand api, ChainRootAction ba,
+			int verb, SentenceItem itemA, SentenceItem itemB, double x, double y);
 
-	public BaseDialogTreeAction onDialogTree(IOnDialogTree api, ChainedAction ba, int branch);
+	public BaseDialogTreeAction onDialogTree(IOnDialogTree api,
+			ChainedAction ba, int branch);
 
 	public void onMovementBeyondAGate(IOnMovementBeyondAGate api, int id);
 }

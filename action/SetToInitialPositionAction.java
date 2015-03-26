@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
@@ -24,7 +23,6 @@ import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromSetToInitialPosAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-
 
 public class SetToInitialPositionAction extends ChainedAction {
 	private IScenePresenterFromSetToInitialPosAction scene;
@@ -42,17 +40,15 @@ public class SetToInitialPositionAction extends ChainedAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress)
-	{
-	
+	protected void onUpdateGameAction(double progress) {
+
 	}
 
 	@Override
-	protected void onCompleteGameAction() 
-	{
+	protected void onCompleteGameAction() {
 		this.otid = scene.getOtidByCode(ocode);
-		scene.setXByOtid(otid,0);
-		scene.setYByOtid(otid,0);
+		scene.setXByOtid(otid, 0);
+		scene.setYByOtid(otid, 0);
 	}
 
 	@Override
@@ -60,16 +56,18 @@ public class SetToInitialPositionAction extends ChainedAction {
 
 		return false;
 	}
- 
 
 	public void setScene(IScenePresenterFromSetToInitialPosAction scene) {
 		this.scene = scene;
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setScene(scene);
-		
+
 	}
 
 }

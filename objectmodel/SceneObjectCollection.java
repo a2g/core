@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -35,33 +34,28 @@ public class SceneObjectCollection {
 		list = new ArrayList<SceneObject>();
 	}
 
-	public void add(SceneObject sceneObject)
-	{
+	public void add(SceneObject sceneObject) {
 		list.add(sceneObject);
-		Collections.sort(list,
-				new Comparator<SceneObject>() {
+		Collections.sort(list, new Comparator<SceneObject>() {
 			@Override
 			public int compare(SceneObject o1, SceneObject o2) {
-				return o1.getNumberPrefix()
-						- o2.getNumberPrefix();
+				return o1.getNumberPrefix() - o2.getNumberPrefix();
 			}
 		});
 
 		theOtids.clear();
 		theOCodes.clear();
-		for(int i=0;i<list.size();i++)
-		{
+		for (int i = 0; i < list.size(); i++) {
 			theOtids.add(list.get(i).getOtid());
 			theOCodes.add(list.get(i).getOCode());
 		}
 
-
 	}
 
 	public SceneObject getByIndex(int index) throws NoSuchElementException {
-		if(index==-1)
+		if (index == -1)
 			return null;
-		if(index>=list.size())
+		if (index >= list.size())
 			throw new NoSuchElementException();
 		return list.get(index);
 	}

@@ -20,8 +20,7 @@ import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
 
-public interface IInventoryPresenter
-{
+public interface IInventoryPresenter {
 
 	void setVisible(boolean isVisible);
 
@@ -36,6 +35,8 @@ public interface IInventoryPresenter
 	void setInventoryImageSize(int width, int height);
 
 	void setLeftArrowVisible(boolean visible);
+
 	void setRightArrowVisible(boolean visible);
+
 	void setInventoryItemVisibleByItid(String textualId, boolean b);
 }

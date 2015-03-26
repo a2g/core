@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
@@ -24,7 +23,6 @@ import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromSetBaseMiddleXAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-
 
 public class SetBaseMiddleXAction extends ChainedAction {
 	private IScenePresenterFromSetBaseMiddleXAction scene;
@@ -44,9 +42,8 @@ public class SetBaseMiddleXAction extends ChainedAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress)
-	{
-		
+	protected void onUpdateGameAction(double progress) {
+
 	}
 
 	@Override
@@ -60,14 +57,16 @@ public class SetBaseMiddleXAction extends ChainedAction {
 
 		return false;
 	}
- 
 
 	public void setScene(IScenePresenterFromSetBaseMiddleXAction scene) {
 		this.scene = scene;
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setScene(scene);
 	}
 

@@ -22,13 +22,10 @@ import javax.swing.JPanel;
 import com.github.a2g.core.interfaces.IHostingPanel;
 
 @SuppressWarnings("serial")
-public class HostingPanelForJava
-extends JPanel
-implements IHostingPanel
-{
+public class HostingPanelForJava extends JPanel implements IHostingPanel {
 	@Override
 	public void setThing(Object w) {
-		this.add((Component)w);
+		this.add((Component) w);
 
 	}
 }

@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
@@ -37,12 +36,12 @@ public class ChainRootAction extends BaseDialogTreeAction {
 	}
 
 	@Override
-	protected void onCompleteGameAction()
-	{
+	protected void onCompleteGameAction() {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {}
+	protected void onUpdateGameAction(double progress) {
+	}
 
 	@Override
 	public void setParent(BaseAction parent) {
@@ -56,11 +55,12 @@ public class ChainRootAction extends BaseDialogTreeAction {
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		return;// the chain root doesn't need them
-		
+
 	}
-
-
 
 }

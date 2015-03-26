@@ -12,31 +12,26 @@ import com.github.a2g.core.interfaces.ILoaderPresenter;
 import com.github.a2g.core.interfaces.IMasterPresenterFromBundle;
 import com.github.a2g.core.interfaces.IMasterPresenterFromLoader;
 
-public class Loader
-implements ILoaderPresenter
-{
+public class Loader implements ILoaderPresenter {
 	private LoaderItem theCurrentLoader;
 	private LoaderItemCollection listOfEssentialLoaders;
 	private Set<String> setOfCompletedLoaders;
-	private Map<String, LoadedLoad>  objectCache;
+	private Map<String, LoadedLoad> objectCache;
 	private IMasterPresenterFromLoader master;
 	private String inventoryResourceAsString;
 	private boolean isSameInventoryAsLastTime;
 	private int imagesToLoad;
 
-	public Loader(IMasterPresenterFromLoader callbacks)
-	{
+	public Loader(IMasterPresenterFromLoader callbacks) {
 		this.theCurrentLoader = null;
 		this.listOfEssentialLoaders = new LoaderItemCollection();
 		this.setOfCompletedLoaders = new TreeSet<String>();
-		this.objectCache = new TreeMap<String,LoadedLoad>();
+		this.objectCache = new TreeMap<String, LoadedLoad>();
 		this.master = callbacks;
 	}
 
-
 	@Override
-	public void onLoaderComplete(LoaderItem loader)
-	{
+	public void onLoaderComplete(LoaderItem loader) {
 		String loaderName = loader.toString();
 		setOfCompletedLoaders.add(loaderName);
 		LoadedLoad cachedCollection = loader.getSceneObjectCollection();
@@ -46,45 +41,34 @@ implements ILoaderPresenter
 		// now we need to remove the loader from the list.
 		// and since we only load non-ess after ess
 		// then we try ess first.
-		if(!listOfEssentialLoaders.isEmpty())
-		{
+		if (!listOfEssentialLoaders.isEmpty()) {
 			this.listOfEssentialLoaders.remove(0);
 		}
 
 		loadNext();
 	}
 
-
-	void loadNext()
-	{
-		if(!listOfEssentialLoaders.isEmpty())
-		{
+	void loadNext() {
+		if (!listOfEssentialLoaders.isEmpty()) {
 			theCurrentLoader = this.listOfEssentialLoaders.get(0);
-		}
-		else
-		{
+		} else {
 			master.enableClickToContinue();
 			return;
 		}
 
 		String nameAndNum = theCurrentLoader.getCombinedClassAndNumber();
-		if(objectCache.containsKey(nameAndNum))
-		{
+		if (objectCache.containsKey(nameAndNum)) {
 			master.mergeWithScene(objectCache.get(nameAndNum));
 
-			//remove from processing straight away.
+			// remove from processing straight away.
 			this.listOfEssentialLoaders.remove(0);
 			loadNext();
-		}
-		else
-		{
+		} else {
 			theCurrentLoader.setCallbacks(this);
 			String s = theCurrentLoader.getCombinedClassAndNumber();
-			if(this.setOfCompletedLoaders.contains(s))
-			{
+			if (this.setOfCompletedLoaders.contains(s)) {
 				theCurrentLoader.runLoaderAfterItsBeenLoaded();
-			}else
-			{
+			} else {
 				theCurrentLoader.runLoader();
 			}
 			// only when it completes will it
@@ -95,82 +79,67 @@ implements ILoaderPresenter
 	}
 
 	@Override
-	public void onImageLoaded()
-	{
+	public void onImageLoaded() {
 		master.incrementProgress();
 	}
 
 	public void addToAppropriateAnimation(int numberPrefix, Image imageAndPos,
 			String objectTextualId, String animationTextualId,
-			short objectCode, String objPlusAnimCode, int width, int height)
-	{
-		theCurrentLoader.addToAppropriateAnimation(numberPrefix, imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode,width, height);
+			short objectCode, String objPlusAnimCode, int width, int height) {
+		theCurrentLoader.addToAppropriateAnimation(numberPrefix, imageAndPos,
+				objectTextualId, animationTextualId, objectCode,
+				objPlusAnimCode, width, height);
 	}
 
-	public void addEssential(ILoad blah, IMasterPresenterFromBundle api)
-	{
+	public void addEssential(ILoad blah, IMasterPresenterFromBundle api) {
 
-		for(int i=0;i<blah.getNumberOfBundles();i++)
-		{
-			listOfEssentialLoaders.add( new LoaderItem(api,blah,i));
+		for (int i = 0; i < blah.getNumberOfBundles(); i++) {
+			listOfEssentialLoaders.add(new LoaderItem(api, blah, i));
 		}
 	}
 
-
-	public boolean isSameInventoryAsLastTime()
-	{
+	public boolean isSameInventoryAsLastTime() {
 		return isSameInventoryAsLastTime;
 	}
-	public int imagesToLoad()
-	{
+
+	public int imagesToLoad() {
 		return imagesToLoad;
 	}
-	public void calculateImagesToLoadAndOmitInventoryIfSame()
-	{
-		imagesToLoad =0;
+
+	public void calculateImagesToLoadAndOmitInventoryIfSame() {
+		imagesToLoad = 0;
 		// get totals
 		Collections.sort(listOfEssentialLoaders);
 
 		Iterator<LoaderItem> iter = listOfEssentialLoaders.iterator();
-		while(iter.hasNext())
-		{
+		while (iter.hasNext()) {
 			LoaderItem loader = iter.next();
 			String loaderName = loader.getCombinedClassAndNumber();
 
-			if(loader.isInventory())
-			{
+			if (loader.isInventory()) {
 
-				if(loaderName.equalsIgnoreCase(this.inventoryResourceAsString))
-				{
+				if (loaderName.equalsIgnoreCase(this.inventoryResourceAsString)) {
 					iter.remove();
 					this.isSameInventoryAsLastTime = true;
 					continue;
-				}
-				else
-				{
+				} else {
 					this.inventoryResourceAsString = loaderName;
 				}
 			}
 
-			if(!setOfCompletedLoaders.contains(loaderName))
-			{
-				imagesToLoad+=loader.getNumberOfImages();
+			if (!setOfCompletedLoaders.contains(loaderName)) {
+				imagesToLoad += loader.getNumberOfImages();
 			}
 		}
 	}
 
-	public void clearLoaders()
-	{
+	public void clearLoaders() {
 		listOfEssentialLoaders.clear();
 	}
 
-
-	public void clearAllLoadedLoads()
-	{
+	public void clearAllLoadedLoads() {
 		objectCache.clear();
 		setOfCompletedLoaders.clear();
 	}
 
-
-	
 }

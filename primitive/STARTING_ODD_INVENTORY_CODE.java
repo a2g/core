@@ -15,7 +15,6 @@
  */
 package com.github.a2g.core.primitive;
 
-public interface STARTING_ODD_INVENTORY_CODE
-{
+public interface STARTING_ODD_INVENTORY_CODE {
 	static int STARTING_ODD_INVENTORY_CODE = 1787;
 }

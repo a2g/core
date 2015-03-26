@@ -24,8 +24,6 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromTitleCardAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-
-
 public class TitleCardAction extends ChainedAction {
 	private ITitleCardPresenterFromTitleCardAction titleCard;
 	String text;
@@ -38,15 +36,13 @@ public class TitleCardAction extends ChainedAction {
 	@Override
 	public void runGameAction() {
 
-		if(text.length()>0)
-		{
-			double totalInMilliseconds =4*titleCard.getPopupDisplayDuration()*1000;
+		if (text.length() > 0) {
+			double totalInMilliseconds = 4 * titleCard
+					.getPopupDisplayDuration() * 1000;
 
 			titleCard.displayTitleCard(text);
-			this.run((int)totalInMilliseconds);
-		}
-		else
-		{
+			this.run((int) totalInMilliseconds);
+		} else {
 			titleCard.displayTitleCard("");
 			this.run(1);
 		}
@@ -67,16 +63,18 @@ public class TitleCardAction extends ChainedAction {
 
 		return false;
 	}
- 
 
 	public void setTitleCard(ITitleCardPresenterFromTitleCardAction titleCard) {
 		this.titleCard = titleCard;
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setTitleCard(titleCard);
-		
+
 	}
 
 }

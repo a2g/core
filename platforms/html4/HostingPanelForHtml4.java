@@ -19,13 +19,11 @@ package com.github.a2g.core.platforms.html4;
 import com.github.a2g.core.interfaces.IHostingPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 
-public class HostingPanelForHtml4
-extends com.google.gwt.user.client.ui.SimplePanel
-implements IHostingPanel
-{
+public class HostingPanelForHtml4 extends
+		com.google.gwt.user.client.ui.SimplePanel implements IHostingPanel {
 	@Override
 	public void setThing(Object w) {
-		this.add((IsWidget)w);
+		this.add((IsWidget) w);
 
 	}
 }

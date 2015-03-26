@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
@@ -25,14 +24,14 @@ import com.github.a2g.core.interfaces.IScenePresenterFromSetVisibleAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.ChainedAction;
 
-
 public class SetVisibleAction extends ChainedAction {
 	private IScenePresenterFromSetVisibleAction scene;
 	private short ocode;
 	private String otid;
 	private boolean isVisible;
 
-	public SetVisibleAction(BaseAction parent, short ocode, boolean isVisible, boolean isLinear) {
+	public SetVisibleAction(BaseAction parent, short ocode, boolean isVisible,
+			boolean isLinear) {
 		super(parent, isLinear);
 		this.ocode = ocode;
 		this.isVisible = isVisible;
@@ -45,13 +44,14 @@ public class SetVisibleAction extends ChainedAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {}
+	protected void onUpdateGameAction(double progress) {
+	}
 
 	@Override
 	protected void onCompleteGameAction() {
 		this.otid = scene.getOtidByCode(ocode);
 		scene.setVisibleByOtid(otid, this.isVisible);
-		
+
 	}
 
 	@Override
@@ -60,14 +60,16 @@ public class SetVisibleAction extends ChainedAction {
 		return false;
 	}
 
-
 	public void setScene(IScenePresenterFromSetVisibleAction scene) {
 		this.scene = scene;
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setScene(scene);
-		
+
 	}
 }

@@ -19,7 +19,6 @@ package com.github.a2g.core.objectmodel;
 import com.github.a2g.core.interfaces.IMasterPresenterFromCommandLine;
 import com.github.a2g.core.primitive.CodesForVerbs;
 
-
 public class CommandLine {
 
 	private SentenceItem defaultVerb;
@@ -29,12 +28,13 @@ public class CommandLine {
 	private SentenceItem rolledOverItem;
 	private String typeOfRollover;
 
-	private boolean isMouseable; // whether rolling over the verbs will update the commandline
+	private boolean isMouseable; // whether rolling over the verbs will update
+									// the commandline
 	private boolean isVisible;
 
 	public CommandLine(IMasterPresenterFromCommandLine api) {
-		this.defaultVerb = new SentenceItem( "Walk to AAA",
-				"Walk", CodesForVerbs.getCodeForVerb(0));
+		this.defaultVerb = new SentenceItem("Walk to AAA", "Walk",
+				CodesForVerbs.getCodeForVerb(0));
 		this.lockedInVerb = defaultVerb;
 		this.lockedInObject = new SentenceItem();
 		// this.lockedInObject2 = new SentenceItem();
@@ -45,76 +45,67 @@ public class CommandLine {
 	}
 
 	public void setMouseOver(String displayName, String otid, int code) {
-		if(!isMouseable)
+		if (!isMouseable)
 			return;
-		this.rolledOverItem = new SentenceItem( displayName,
-				otid, code);
+		this.rolledOverItem = new SentenceItem(displayName, otid, code);
 	}
 
 	static boolean isAVerb(SentenceItem snc) {
-		return snc.getDisplayName().contains(
-				"AAA")
-				|| snc.getDisplayName().contains(
-						"BBB");
+		return snc.getDisplayName().contains("AAA")
+				|| snc.getDisplayName().contains("BBB");
 	}
-
 
 	public Sentence getSentence() {
 		Sentence text = new Sentence();
 
 		int rolloverCode = this.rolledOverItem.getCode();
 		boolean isRolledOverAVerb = CodesForVerbs.isAVerb(rolloverCode);
-		boolean isLockedInVerb = this.lockedInVerb.getLength() >0;
-		boolean isLockedInVerbATwoForm = this.lockedInVerb.getDisplayName().contains("BBB");
-		//    	boolean isDefaultVerbATwoForm = this.defaultVerb.getDisplayName().contains("BBB");
-		boolean isObjectALockedIn = !this.lockedInObject.getDisplayName().isEmpty();
-		//  	boolean isObjectBLockedIn = !this.lockedInObject2.getDisplayName().isEmpty();
+		boolean isLockedInVerb = this.lockedInVerb.getLength() > 0;
+		boolean isLockedInVerbATwoForm = this.lockedInVerb.getDisplayName()
+				.contains("BBB");
+		// boolean isDefaultVerbATwoForm =
+		// this.defaultVerb.getDisplayName().contains("BBB");
+		boolean isObjectALockedIn = !this.lockedInObject.getDisplayName()
+				.isEmpty();
+		// boolean isObjectBLockedIn =
+		// !this.lockedInObject2.getDisplayName().isEmpty();
 
-
-		if (isRolledOverAVerb)
-		{
-			text.setVerb( rolledOverItem, false);
+		if (isRolledOverAVerb) {
+			text.setVerb(rolledOverItem, false);
 			text.setAAA(lockedInObject);
-			typeOfRollover="V";
-		}
-		else if(isLockedInVerb)
-		{
-			if(isLockedInVerbATwoForm && isObjectALockedIn)
-			{
+			typeOfRollover = "V";
+		} else if (isLockedInVerb) {
+			if (isLockedInVerbATwoForm && isObjectALockedIn) {
 				text.setVerb(lockedInVerb, true);
 				text.setAAA(lockedInObject);
 				text.setBBB(rolledOverItem);
-				typeOfRollover="B";
-			}
-			else
-			{
+				typeOfRollover = "B";
+			} else {
 				text.setVerb(lockedInVerb, false);
 				text.setAAA(rolledOverItem);
-				typeOfRollover="A";
+				typeOfRollover = "A";
 			}
-		}
-		else
-		{
-			text.setVerb( this.defaultVerb, false);
+		} else {
+			text.setVerb(this.defaultVerb, false);
 			text.setAAA(rolledOverItem);
-			typeOfRollover="A";
+			typeOfRollover = "A";
 		}
 
 		return text;
 	}
 
 	public void clear() {
-		if(!isMouseable)
+		if (!isMouseable)
 			return;
 		this.lockedInObject = new SentenceItem();
-		//this.lockedInObject2 = new SentenceItem();
+		// this.lockedInObject2 = new SentenceItem();
 		this.lockedInVerb = defaultVerb;
 		this.rolledOverItem = new SentenceItem();
 		this.typeOfRollover = "";
 	}
 
 	public void doNextBestThingToExecute() {
-		if(!isMouseable)
+		if (!isMouseable)
 			return;
 		if (this.typeOfRollover == "A") {
 			this.lockedInObject = this.rolledOverItem;
@@ -136,13 +127,15 @@ public class CommandLine {
 			return false;
 		}
 		boolean isObjectOrInv = this.rolledOverItem.isObjectOrInv();
-		if(!isObjectOrInv)
+		if (!isObjectOrInv)
 			return false;
 
-		boolean isObjectALockedIn = !this.lockedInObject.getDisplayName().isEmpty();
-		if(!isObjectALockedIn && !lockedInVerb.getDisplayName().contains("BBB"))
+		boolean isObjectALockedIn = !this.lockedInObject.getDisplayName()
+				.isEmpty();
+		if (!isObjectALockedIn
+				&& !lockedInVerb.getDisplayName().contains("BBB"))
 			return true;
-		if(isObjectALockedIn && lockedInVerb.getDisplayName().contains("BBB"))
+		if (isObjectALockedIn && lockedInVerb.getDisplayName().contains("BBB"))
 			return true;
 
 		return false;

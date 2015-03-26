@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.platforms.java;
 
-
 import javax.swing.JOptionPane;
 
 import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
@@ -49,81 +48,79 @@ import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
-public class FactoryForJava
-implements IFactory
-{
+public class FactoryForJava implements IFactory {
 
 	private EventBus bus;
 	private MasterPresenter master;
 
-	public FactoryForJava(EventBus bus, MasterPresenter master)
-	{
+	public FactoryForJava(EventBus bus, MasterPresenter master) {
 		this.bus = bus;
 		this.master = master;
 	}
+
 	@Override
-	public ICommandLinePanelFromCommandLinePresenter createCommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll)
-	{
-		return new CommandLinePanelForJava(fore,back,roll);
+	public ICommandLinePanelFromCommandLinePresenter createCommandLinePanel(
+			ColorEnum fore, ColorEnum back, ColorEnum roll) {
+		return new CommandLinePanelForJava(fore, back, roll);
 	}
 
 	@Override
-	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum roll)
-	{
+	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
+			EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum roll) {
 		return new DialogTreePanelForJava(bus, fore, back, roll);
 	}
 
-
 	@Override
-	public ILoaderPanelFromLoaderPresenter createLoaderPanel(final IMasterPresenterFromLoaderMouse api, ColorEnum fore, ColorEnum back) {
+	public ILoaderPanelFromLoaderPresenter createLoaderPanel(
+			final IMasterPresenterFromLoaderMouse api, ColorEnum fore,
+			ColorEnum back) {
 		return new LoaderPanelForJava(api, fore, back);
 	}
 
 	@Override
-	public IMasterPanelFromMasterPresenter createMasterPanel(int width,int height,ColorEnum back) {
-		return new MasterPanelForJava(width,height,back);
+	public IMasterPanelFromMasterPresenter createMasterPanel(int width,
+			int height, ColorEnum back) {
+		return new MasterPanelForJava(width, height, back);
 	}
 
 	@Override
 	public IScenePanelFromScenePresenter createScenePanel() {
-		return new ScenePanelForJava(bus, master.getScenePresenter(), master.getCommandLinePresenter());
+		return new ScenePanelForJava(bus, master.getScenePresenter(),
+				master.getCommandLinePresenter());
 	}
 
 	@Override
-	public ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(ColorEnum fore, ColorEnum back)
-	{
+	public ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(
+			ColorEnum fore, ColorEnum back) {
 		return new TitleCardPanelForJava(fore, back);
 	}
 
-
-
-	
-
-
-
 	@Override
-	public IVerbsPanelFromVerbsPresenter createVerbsPanel(IVerbsPresenterFromVerbsPanel api, ColorEnum fore, ColorEnum back)
-	{
+	public IVerbsPanelFromVerbsPresenter createVerbsPanel(
+			IVerbsPresenterFromVerbsPanel api, ColorEnum fore, ColorEnum back) {
 		return new VerbsPanelForJava(api, fore, back);
 	}
+
 	@Override
-	public ISystemAnimation createSystemAnimation(IBaseActionFromSystemAnimation callbacks, boolean isLinear)
-	{
+	public ISystemAnimation createSystemAnimation(
+			IBaseActionFromSystemAnimation callbacks, boolean isLinear) {
 		return new SystemAnimationForJava(callbacks, isLinear);
 	}
+
 	@Override
 	public ITimer createSystemTimer(IMasterPresenterFromTimer cbs) {
 		return new TimerForJava(cbs);
 	}
 
-	void alert(String text)
-	{
-		JOptionPane.showMessageDialog(null, "alert", text,JOptionPane.ERROR_MESSAGE);
+	void alert(String text) {
+		JOptionPane.showMessageDialog(null, "alert", text,
+				JOptionPane.ERROR_MESSAGE);
 	}
+
 	@Override
 	public IInventoryPanelFromInventoryPresenter createInventoryPanel(
-			IInventoryPresenterFromInventoryPanel api, ColorEnum fore, ColorEnum back, ColorEnum rollover)
-	{
+			IInventoryPresenterFromInventoryPanel api, ColorEnum fore,
+			ColorEnum back, ColorEnum rollover) {
 		return new InventoryPanelForJava(bus, api, fore, back);
 	}
 

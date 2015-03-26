@@ -26,7 +26,6 @@ import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
 
-
 public class SceneObject {
 	private String initialAnimationId;
 	private Map<IGameScene.Special, String> mapOfSpecialAnimations;
@@ -50,8 +49,7 @@ public class SceneObject {
 		this.textualId = textualId;
 		this.displayName = textualId;
 		this.animationCollection = new AnimationCollection();
-		this.fak = new FrameAndAnimation(
-				this.textualId);
+		this.fak = new FrameAndAnimation(this.textualId);
 		this.visible = true;
 		this.screenPixelWidth = screenWidth;
 		this.screenPixelHeight = screenHeight;
@@ -104,7 +102,8 @@ public class SceneObject {
 			return;
 		}
 
-		// Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg( this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
+		// Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg(
+		// this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
 
 		int i = this.fak.getCurrentFrame() + 1;
 
@@ -113,34 +112,32 @@ public class SceneObject {
 		} else {
 			this.fak.setCurrentFrame(i);
 		}
-		// do no update image here - since it is a heavy operation, we do it once per tick.
+		// do no update image here - since it is a heavy operation, we do it
+		// once per tick.
 	}
 
 	public void decrementFrameWithWraparound() {
 		Animation anim = getAnimations().getByAtid(
 				this.fak.getCurrentAnimationAtid());
-		// Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg( this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
+		// Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg(
+		// this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
 
 		int i = this.fak.getCurrentFrame() - 1;
 
 		if (i < 0) {
-			this.fak.setCurrentFrame(
-					anim.getFrames().getCount()
-					- 1);
+			this.fak.setCurrentFrame(anim.getFrames().getCount() - 1);
 		} else {
 			this.fak.setCurrentFrame(i);
 		}
-		// do no update image here - since it is a heavy operation, we do it once per tick.
+		// do no update image here - since it is a heavy operation, we do it
+		// once per tick.
 	}
 
-	public void updateCurrentImage()
-	{
-		if(currentImage!=null)
-		{
+	public void updateCurrentImage() {
+		if (currentImage != null) {
 			currentImage.setLeftTop(getRawLeftTop());
 		}
 	}
-
 
 	public void updateToCorrectImage() {
 		// 1. do this only when the this.currentImage != img
@@ -148,15 +145,13 @@ public class SceneObject {
 		Animation anim = this.animationCollection.getByAtid(currentAnim);
 
 		// if animation is set to something bad, then set it to back to initial
-		if(anim==null)
-		{
+		if (anim == null) {
 			fak.setCurrentAnimationAtid(this.initialAnimationId);
-			anim = this.animationCollection.getByAtid(
-					fak.getCurrentAnimationAtid());
+			anim = this.animationCollection.getByAtid(fak
+					.getCurrentAnimationAtid());
 		}
 
-		if(anim==null)
-		{
+		if (anim == null) {
 			anim = this.animationCollection.getByIndex(0);
 			fak.setCurrentAnimationAtid(anim.getAtid());
 		}
@@ -165,26 +160,23 @@ public class SceneObject {
 
 			int effectiveFrame = fak.getCurrentFrame();
 			// if we use -17 to indicate last frame (
-			if(fak.getCurrentFrame()==-17)
-			{
+			if (fak.getCurrentFrame() == -17) {
 				// set both to last frame
 				fak.setCurrentFrame(anim.getLength() - 1);
 				effectiveFrame = anim.getLength() - 1;
 			}
 			// if the frame overflows...
-			else if (fak.getCurrentFrame()>= anim.getLength())
-			{
+			else if (fak.getCurrentFrame() >= anim.getLength()) {
 				// ...set it to last frame
 				effectiveFrame = anim.getLength() - 1;
 			}
 
+			com.github.a2g.core.objectmodel.Image current = anim
+					.getFrameCollection().getByIndex(effectiveFrame);
 
-
-			com.github.a2g.core.objectmodel.Image current = anim.getFrameCollection().getByIndex(effectiveFrame);
-
-			// yes current can equal null in some weird cases where I place breakpoints...
-			if (current != null)
-			{
+			// yes current can equal null in some weird cases where I place
+			// breakpoints...
+			if (current != null) {
 				if (this.currentImage != null) {
 					this.currentImage.setVisible(false, getRawLeftTop());
 				}
@@ -193,8 +185,7 @@ public class SceneObject {
 		}
 		// 2, but do this always
 		if (this.currentImage != null) {
-			this.currentImage.setVisible(
-					this.visible, getRawLeftTop());
+			this.currentImage.setVisible(this.visible, getRawLeftTop());
 		}
 	}
 
@@ -204,20 +195,14 @@ public class SceneObject {
 
 	public void walkTo(double x, double y) {
 		// KillCurrentAnimationAndClearInstructions();
-		PointF currentPoint = new PointF(
-				getBaseMiddleX(),
-				getBaseMiddleY());
+		PointF currentPoint = new PointF(getBaseMiddleX(), getBaseMiddleY());
 
-		currentPoint.setX(
-				currentPoint.getX()
-				* this.screenPixelWidth);
-		currentPoint.setY(
-				currentPoint.getY()
-				* this.screenPixelHeight);
+		currentPoint.setX(currentPoint.getX() * this.screenPixelWidth);
+		currentPoint.setY(currentPoint.getY() * this.screenPixelHeight);
 	}
 
 	public void setVisible(boolean visible) {
-		//we always do this, we don't even check if visible!=this.visible
+		// we always do this, we don't even check if visible!=this.visible
 		this.visible = visible;
 		updateToCorrectImage();
 	}
@@ -234,116 +219,107 @@ public class SceneObject {
 		this.displayName = displayName;
 	}
 
-	Point getRawLeftTop()
-	{
-		return new Point((int)this.rawX,(int)this.rawY);
+	Point getRawLeftTop() {
+		return new Point((int) this.rawX, (int) this.rawY);
 	}
 
-	static double worldToScreenX(double intX, double screenSpan, int lowerBound, int upperBound )
-	{
-		int rectSpan = upperBound-lowerBound;
-		double doubleX = (intX + .5*rectSpan  + lowerBound)/screenSpan ;
+	static double worldToScreenX(double intX, double screenSpan,
+			int lowerBound, int upperBound) {
+		int rectSpan = upperBound - lowerBound;
+		double doubleX = (intX + .5 * rectSpan + lowerBound) / screenSpan;
 		return doubleX;
 	}
 
-	static double worldToScreenY(double intY, double screenSpan, int lowerBound, int upperBound )
-	{
-		int rectSpan = upperBound-lowerBound;
-		double doubleY = (intY + rectSpan  + lowerBound)/screenSpan ;
+	static double worldToScreenY(double intY, double screenSpan,
+			int lowerBound, int upperBound) {
+		int rectSpan = upperBound - lowerBound;
+		double doubleY = (intY + rectSpan + lowerBound) / screenSpan;
 		return doubleY;
 	}
 
-
-	static double screenToWorldX(double doubleX, double screenSpan, int lowerBound, int upperBound )
-	{
-		int rectSpan = upperBound-lowerBound;
-		double rawX = doubleX * screenSpan - .5*rectSpan  - lowerBound;
+	static double screenToWorldX(double doubleX, double screenSpan,
+			int lowerBound, int upperBound) {
+		int rectSpan = upperBound - lowerBound;
+		double rawX = doubleX * screenSpan - .5 * rectSpan - lowerBound;
 		return rawX;
 	}
 
-	static double screenToWorldY(double doubleY, double screenSpan, int lowerBound, int upperBound )
-	{
-		int rectSpan = upperBound-lowerBound;
-		double rawY = doubleY * screenSpan - rectSpan  - lowerBound;
+	static double screenToWorldY(double doubleY, double screenSpan,
+			int lowerBound, int upperBound) {
+		int rectSpan = upperBound - lowerBound;
+		double rawY = doubleY * screenSpan - rectSpan - lowerBound;
 		return rawY;
 	}
 
-	public void setX(double rawX)
-	{
+	public void setX(double rawX) {
 		this.rawX = rawX;
-		if(currentImage!=null)
-		{
+		if (currentImage != null) {
 			this.currentImage.setLeftTop(getRawLeftTop());
 		}
 	}
 
-	public void setY(double rawY)
-	{
+	public void setY(double rawY) {
 		this.rawY = rawY;
-		if(currentImage!=null)
-		{
+		if (currentImage != null) {
 			this.currentImage.setLeftTop(getRawLeftTop());
 		}
 	}
 
-	public double getX()
-	{
+	public double getX() {
 		return this.rawX;
 	}
 
-	public double getY()
-	{
+	public double getY() {
 		return this.rawY;
 	}
 
-	public void setBaseMiddleX(double baseMiddleX)
-	{
-		double rawX = screenToWorldX(baseMiddleX, screenPixelWidth, getCurrentBoundingRect().getLeft(), getCurrentBoundingRect().getRight());
+	public void setBaseMiddleX(double baseMiddleX) {
+		double rawX = screenToWorldX(baseMiddleX, screenPixelWidth,
+				getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
+						.getRight());
 		setX(rawX);
 	}
 
-	public void setBaseMiddleY(double baseMiddleY)
-	{
-		double rawY = screenToWorldY(baseMiddleY, screenPixelHeight, getCurrentBoundingRect().getTop(), getCurrentBoundingRect().getBottom());
+	public void setBaseMiddleY(double baseMiddleY) {
+		double rawY = screenToWorldY(baseMiddleY, screenPixelHeight,
+				getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
+						.getBottom());
 		setY(rawY);
 	}
 
-
-	public double getBaseMiddleX()
-	{
-		double bmx = worldToScreenX(rawX, screenPixelWidth, getCurrentBoundingRect().getLeft(), getCurrentBoundingRect().getRight());
+	public double getBaseMiddleX() {
+		double bmx = worldToScreenX(rawX, screenPixelWidth,
+				getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
+						.getRight());
 
 		return bmx;
 	}
 
-	public double getBaseMiddleY()
-	{
-		double bmy = worldToScreenY(rawY, screenPixelHeight, getCurrentBoundingRect().getTop(), getCurrentBoundingRect().getBottom());
+	public double getBaseMiddleY() {
+		double bmy = worldToScreenY(rawY, screenPixelHeight,
+				getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
+						.getBottom());
 
 		return bmy;
 	}
 
-	public Rect getCurrentBoundingRect()
-	{
-		if(currentImage!=null)
-		{
+	public Rect getCurrentBoundingRect() {
+		if (currentImage != null) {
 			return currentImage.getBoundingRect();
 		}
-		return new Rect(0,0,0,0);
+		return new Rect(0, 0, 0, 0);
 	}
 
 	Point getMiddleOfBaseAbsolute(String animTextualId) {
 		int minLeft = 1000;
 		int maxRight = 0;
 		int maxBottom = 0;
-		Animation xanim = this.animationCollection.getByAtid(
-				animTextualId);
+		Animation xanim = this.animationCollection.getByAtid(animTextualId);
 
 		if (xanim != null) {
-			for (int i = 0; i
-					< xanim.getLength(); i++) {
-				com.github.a2g.core.objectmodel.Image img = xanim.getFrames().getByIndex(
-						i);
+			for (int i = 0; i < xanim.getLength(); i++) {
+				com.github.a2g.core.objectmodel.Image img = xanim.getFrames()
+						.getByIndex(i);
 				Rect rect = img.getBoundingRect();
 
 				if (rect.getLeft() < minLeft) {
@@ -352,28 +328,23 @@ public class SceneObject {
 				if (rect.getRight() > maxRight) {
 					maxRight = rect.getRight();
 				}
-				if (rect.getBottom()
-						> maxBottom) {
+				if (rect.getBottom() > maxBottom) {
 					maxBottom = rect.getBottom();
 				}
 			}
 		}
 
-		Point p = new Point(
-				(minLeft + maxRight) / 2,
-				maxBottom - 4);
+		Point p = new Point((minLeft + maxRight) / 2, maxBottom - 4);
 
 		return p;
 	}
 
 	void setSpecialAnimation(Special type, String textualId) {
-		this.mapOfSpecialAnimations.put(type,
-				textualId);
+		this.mapOfSpecialAnimations.put(type, textualId);
 	}
 
 	public String getSpecialAnimation(Special type) {
-		return this.mapOfSpecialAnimations.get(
-				type);
+		return this.mapOfSpecialAnimations.get(type);
 	}
 
 	public String getCurrentAnimation() {
@@ -383,8 +354,7 @@ public class SceneObject {
 	}
 
 	public void setCurrentAnimation(String textualId) {
-		this.fak.setCurrentAnimationAtid(
-				textualId);
+		this.fak.setCurrentAnimationAtid(textualId);
 		updateToCorrectImage();
 	}
 
@@ -413,34 +383,28 @@ public class SceneObject {
 		return this.talkingColor;
 	}
 
-	public void setParallaxX(double x)
-	{
-		for(int a = 0;a<animationCollection.getCount();a++)
-		{
+	public void setParallaxX(double x) {
+		for (int a = 0; a < animationCollection.getCount(); a++) {
 			Animation anim = animationCollection.getByIndex(a);
-			for(int i=0;i<anim.getLength();i++)
-			{
+			for (int i = 0; i < anim.getLength(); i++) {
 				anim.getFrames().getByIndex(i).setParallaxX(x);
 			}
 		}
 	}
 
-	PointF getBaseMiddleXY()
-	{
+	PointF getBaseMiddleXY() {
 		double left = this.getX();
 		double right = this.getY();
 		Rect r = this.getCurrentBoundingRect();
-		double averageXPos = left + (r.getLeft()+r.getRight())/2.0;
+		double averageXPos = left + (r.getLeft() + r.getRight()) / 2.0;
 		double lowerYPos = right + r.getBottom();
-		double x = averageXPos/screenPixelWidth;
-		double y = lowerYPos/screenPixelHeight;
-		return new PointF(x,y);
+		double x = averageXPos / screenPixelWidth;
+		double y = lowerYPos / screenPixelHeight;
+		return new PointF(x, y);
 	}
 
-	public void alignBaseMiddleOfOldFrameToFrameOfNewAnimation(
-			String atid,
-			int frame)
-	{
+	public void alignBaseMiddleOfOldFrameToFrameOfNewAnimation(String atid,
+			int frame) {
 		PointF h = getBaseMiddleXY();
 		this.fak.setCurrentAnimationAtid(textualId);
 
@@ -453,24 +417,17 @@ public class SceneObject {
 
 	}
 
-	public double getScreenCoordsPerSecond()
-	{
+	public double getScreenCoordsPerSecond() {
 		return screenCoordsPerSecond;
 	}
 
-	public void setScreenCoordsPerSecond(double coordsPerSecond)
-	{
+	public void setScreenCoordsPerSecond(double coordsPerSecond) {
 		this.screenCoordsPerSecond = coordsPerSecond;
 	}
 
-	public void setToInitialAnimationWithoutChangingFrame()
-	{
-		//todo: should really check whether initial animation is null
+	public void setToInitialAnimationWithoutChangingFrame() {
+		// todo: should really check whether initial animation is null
 		this.setCurrentAnimation(this.getInitialAnimation());
 	}
 
-
-}
-
-
-;
+};

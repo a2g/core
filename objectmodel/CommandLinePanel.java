@@ -16,29 +16,23 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.UIObject;
 
-
-public class CommandLinePanel
-extends Label
-implements ICommandLinePanelFromCommandLinePresenter
-{
-	public CommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll)
-	{
+public class CommandLinePanel extends Label implements
+		ICommandLinePanelFromCommandLinePresenter {
+	public CommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll) {
 		this.setText(" ");
 		this.getElement().getStyle().setProperty("color", fore.toString());
-		this.getElement().getStyle().setProperty("backgroundColor", back.toString());
+		this.getElement().getStyle()
+				.setProperty("backgroundColor", back.toString());
 	}
-
 
 	@Override
 	public void setVisible(boolean isVisible) {
-		UIObject.setVisible(this.getElement(),
-				isVisible);
+		UIObject.setVisible(this.getElement(), isVisible);
 	}
 
 	@Override

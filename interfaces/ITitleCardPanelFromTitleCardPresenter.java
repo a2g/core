@@ -16,11 +16,10 @@
 
 package com.github.a2g.core.interfaces;
 
-public interface ITitleCardPanelFromTitleCardPresenter
-{
+public interface ITitleCardPanelFromTitleCardPresenter {
 	void setText(String text);
 
-	//void setColor(ColorEnum color);
+	// void setColor(ColorEnum color);
 
 	void setScenePixelSize(int width, int height);
 

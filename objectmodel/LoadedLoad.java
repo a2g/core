@@ -16,10 +16,7 @@
 
 package com.github.a2g.core.objectmodel;
 
-
-
-public class LoadedLoad
-{
+public class LoadedLoad {
 	private SceneObjectCollection sceneObjectCollection;
 	private String name;
 
@@ -28,37 +25,36 @@ public class LoadedLoad
 		this.sceneObjectCollection = new SceneObjectCollection();
 	}
 
-	public void addToAppropriateAnimation(int prefix, Image imageAndPos, String objectTextualId, String animationTextualId, short objectCode, String objPlusAnimCode, int screenPixelWidth, int screenPixelHeight)
-	{
+	public void addToAppropriateAnimation(int prefix, Image imageAndPos,
+			String objectTextualId, String animationTextualId,
+			short objectCode, String objPlusAnimCode, int screenPixelWidth,
+			int screenPixelHeight) {
 		// objects and animations
 		SceneObject sceneObject = this.getSceneObjectCollection().getByOtid(
 				objectTextualId);
 
 		if (sceneObject == null) {
-			sceneObject = new SceneObject(
-					objectTextualId,
-					screenPixelWidth,
+			sceneObject = new SceneObject(objectTextualId, screenPixelWidth,
 					screenPixelHeight);
 			sceneObject.setNumberPrefix(prefix);
 			sceneObject.setOCode(objectCode);
 
-
-			this.getSceneObjectCollection().add(	sceneObject);
+			this.getSceneObjectCollection().add(sceneObject);
 		}
 
-		Animation animation  = sceneObject.getAnimations().getByAtid(objPlusAnimCode);
+		Animation animation = sceneObject.getAnimations().getByAtid(
+				objPlusAnimCode);
 		if (animation == null) {
 			// much simpler if not in the animation map.
-			animation = new Animation(
-					objPlusAnimCode,
-					sceneObject);
+			animation = new Animation(objPlusAnimCode, sceneObject);
 			sceneObject.getAnimations().add(animation);
-			//System.out.println("added to loader " + objPlusAnimCode);
+			// System.out.println("added to loader " + objPlusAnimCode);
 
 		}
 
 		animation.getFrameCollection().add(imageAndPos);
-		animation.setDurationSecs(animation.getFrameCollection().getCount()*40);
+		animation
+				.setDurationSecs(animation.getFrameCollection().getCount() * 40);
 	}
 
 	public SceneObjectCollection getSceneObjectCollection() {
@@ -68,6 +64,5 @@ public class LoadedLoad
 	public String getName() {
 		return name;
 	}
-
 
 }

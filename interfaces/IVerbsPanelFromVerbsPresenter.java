@@ -17,11 +17,12 @@ package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.objectmodel.Verbs;
 
-
-public interface IVerbsPanelFromVerbsPresenter
-{
+public interface IVerbsPanelFromVerbsPresenter {
 	void setVisible(boolean isVisible);
+
 	void setVerbs(Verbs theVerbs);
+
 	void update();
+
 	void setWidth(int i);
 }

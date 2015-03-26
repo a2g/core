@@ -18,10 +18,6 @@ package com.github.a2g.core.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 
-
-
-
-
 public class SetRolloverEvent extends GwtEvent<SetRolloverEventHandlerAPI> {
 	public static Type<SetRolloverEventHandlerAPI> TYPE = new Type<SetRolloverEventHandlerAPI>();
 	// private final FriendSummaryDTO friend;
@@ -54,7 +50,6 @@ public class SetRolloverEvent extends GwtEvent<SetRolloverEventHandlerAPI> {
 
 	@Override
 	protected void dispatch(SetRolloverEventHandlerAPI handler) {
-		handler.setCommandLineMouseOver(displayName,
-				textualId, code);
+		handler.setCommandLineMouseOver(displayName, textualId, code);
 	}
 }

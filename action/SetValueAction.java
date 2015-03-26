@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
@@ -25,11 +24,11 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromSetValueAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-
 public class SetValueAction extends BaseDialogTreeAction {
 	private IScenePresenterFromSetValueAction scene;
 	private String name;
 	private int i;
+
 	public SetValueAction(BaseAction parent, String name, int i) {
 		super(parent);
 		this.name = name;
@@ -37,7 +36,8 @@ public class SetValueAction extends BaseDialogTreeAction {
 	}
 
 	@Override
-	public void onUpdate(double progress) {}
+	public void onUpdate(double progress) {
+	}
 
 	@Override
 	public void runGameAction() {
@@ -45,12 +45,12 @@ public class SetValueAction extends BaseDialogTreeAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {}
+	protected void onUpdateGameAction(double progress) {
+	}
 
 	@Override
-	protected void onCompleteGameAction()
-	{
-		scene.setValue(name,i);
+	protected void onCompleteGameAction() {
+		scene.setValue(name, i);
 	}
 
 	@Override
@@ -58,14 +58,16 @@ public class SetValueAction extends BaseDialogTreeAction {
 		return false;
 	}
 
-
 	public void setScene(IScenePresenterFromSetValueAction scene) {
 		this.scene = scene;
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+	public void setAll(IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard,
+			IInventoryPresenterFromActions inventory) {
 		setScene(scene);
-		
+
 	}
 }

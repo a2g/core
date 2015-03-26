@@ -18,25 +18,22 @@ package com.github.a2g.core.platforms.html4;
 
 import com.github.a2g.core.interfaces.IPackagedImage;
 
-public class PackagedImageForHtml4
-implements IPackagedImage
-{
+public class PackagedImageForHtml4 implements IPackagedImage {
 	com.google.gwt.resources.client.ImageResource img;
 
-	public PackagedImageForHtml4(com.google.gwt.resources.client.ImageResource img)
-	{
+	public PackagedImageForHtml4(
+			com.google.gwt.resources.client.ImageResource img) {
 		this.img = img;
 	}
 
-	public com.google.gwt.resources.client.ImageResource getNative()
-	{
+	public com.google.gwt.resources.client.ImageResource getNative() {
 		return img;
 	}
 
-	public com.google.gwt.user.client.ui.Image unpack()
-	{
+	public com.google.gwt.user.client.ui.Image unpack() {
 
 		return new com.google.gwt.user.client.ui.Image(this.img);
-		//new com.google.gwt.user.client.ui.Image(imageResource.getNative().getSafeUri());
+		// new
+		// com.google.gwt.user.client.ui.Image(imageResource.getNative().getSafeUri());
 	}
 }

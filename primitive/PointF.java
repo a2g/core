@@ -15,7 +15,6 @@
  */
 package com.github.a2g.core.primitive;
 
-
 public class PointF {
 	private double x;
 	private double y;

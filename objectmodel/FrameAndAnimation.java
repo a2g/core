@@ -16,13 +16,10 @@
 
 package com.github.a2g.core.objectmodel;
 
-
-
-
-
 public class FrameAndAnimation {
 	private int currentFrame;
 	private String currentAnimationAtid;
+
 	public FrameAndAnimation(String objectThatOwnsIt) {
 		this.currentFrame = 0;
 	}
@@ -40,11 +37,8 @@ public class FrameAndAnimation {
 	}
 
 	public String getCurrentAnimationAtid() {
-		
+
 		return this.currentAnimationAtid;
 	}
 
-}
-
-
-;
+};

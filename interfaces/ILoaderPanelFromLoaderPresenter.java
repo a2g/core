@@ -15,9 +15,7 @@
  */
 package com.github.a2g.core.interfaces;
 
-
-public interface ILoaderPanelFromLoaderPresenter
-{
+public interface ILoaderPanelFromLoaderPresenter {
 	void setScenePixelSize(int width, int height);
 
 	void update(int current, int total, String name);

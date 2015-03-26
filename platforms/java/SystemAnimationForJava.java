@@ -19,23 +19,21 @@ package com.github.a2g.core.platforms.java;
 import com.github.a2g.core.interfaces.ISystemAnimation;
 import com.github.a2g.core.interfaces.IBaseActionFromSystemAnimation;
 
-public class SystemAnimationForJava
-extends com.github.a2g.core.platforms.java.animation.Animation
-implements ISystemAnimation
-{
+public class SystemAnimationForJava extends
+		com.github.a2g.core.platforms.java.animation.Animation implements
+		ISystemAnimation {
 	IBaseActionFromSystemAnimation callbacks;
 	boolean isLinear;
-	public SystemAnimationForJava(IBaseActionFromSystemAnimation callbacks, boolean isLinear)
-	{
+
+	public SystemAnimationForJava(IBaseActionFromSystemAnimation callbacks,
+			boolean isLinear) {
 		this.isLinear = isLinear;
 		this.callbacks = callbacks;
 	}
-	
+
 	@Override
-	protected 
-	double interpolate(double progress)
-	{
-		if(isLinear)
+	protected double interpolate(double progress) {
+		if (isLinear)
 			return progress;
 		else
 			return super.interpolate(progress);
@@ -48,8 +46,7 @@ implements ISystemAnimation
 	}
 
 	@Override
-	protected void onComplete()
-	{
+	protected void onComplete() {
 		callbacks.onComplete();
 	}
 

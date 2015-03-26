@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.primitive;
 
-
 public class Point {
 	private int x;
 	private int y;
