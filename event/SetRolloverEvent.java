@@ -54,7 +54,7 @@ public class SetRolloverEvent extends GwtEvent<SetRolloverEventHandlerAPI> {
 
 	@Override
 	protected void dispatch(SetRolloverEventHandlerAPI handler) {
-		handler.onSetMouseOver(displayName,
+		handler.setCommandLineMouseOver(displayName,
 				textualId, code);
 	}
 }

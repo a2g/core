@@ -17,11 +17,12 @@
 package com.github.a2g.core.objectmodel;
 
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.SayAction;
+import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.PackagedImageAPI;
-import com.github.a2g.core.interfaces.ScenePanelAPI;
+import com.github.a2g.core.interfaces.IPackagedImage;
+import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
 import com.github.a2g.core.platforms.html4.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
@@ -37,41 +38,43 @@ import com.google.gwt.user.client.ui.Label;
 
 public class ScenePanel
 extends AbsolutePanel
-implements ImagePanelAPI, ScenePanelAPI
+implements ImagePanelAPI, IScenePanelFromScenePresenter
 {
 	int cameraOffsetX;
 	int cameraOffsetY;
 	SceneObjectTouchMoveHandler theTouchMoveHandler;
 	FlowPanel speechWidget;
 	Label label;
+	private int width;
+	private int height;
 
-	public ScenePanel(EventBus bus, InternalAPI api)
+	public ScenePanel(EventBus bus, IScenePresenterFromScenePanel api)
 	{
 		this.getElement().setId("cwAbsolutePanel");
 		//this.addStyleName("absolutePanel");
 		this.cameraOffsetX = 0;
 		this.cameraOffsetY = 0;
 		this.theTouchMoveHandler = new SceneObjectTouchMoveHandler(api);
-		
+
 		label = new Label("hello");
 		this.speechWidget = new FlowPanel();
 		speechWidget.add(label);
-		
+
 	}
 
 	@Override
 	public Image createNewImageAndAddHandlers
 	(
 			LoadHandler lh,
-			PackagedImageAPI imageResource,
-			InternalAPI api,
+			IPackagedImage imageResource,
+			IScenePresenterFromSceneMouseOver api,
 			EventBus bus,
 			int x,
 			int y,
 			String objectTextualId,
 			short objectCode)
 	{
-	
+
 		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource((PackagedImageForHtml4)imageResource,lh);
 
 		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new Point(x, y));
@@ -141,6 +144,8 @@ implements ImagePanelAPI, ScenePanelAPI
 	@Override
 	public void setScenePixelSize(int width, int height)
 	{
+		this.width = width;
+		this.height = height;
 		this.setSize("" + width + "px",
 				"" + height + "px");
 	}
@@ -153,13 +158,13 @@ implements ImagePanelAPI, ScenePanelAPI
 	}
 
 	@Override
-	public void setStateOfPopup(boolean visible, int x, int y,
-			ColorEnum talkingColor, String speech, BaseAction ba) {
-		if(!visible)
+	public void setStateOfPopup(boolean isVisible, double x, double y,
+			ColorEnum talkingColor, String speech, SayAction sayAction) {
+		if(!isVisible)
 		{
 			super.remove(speechWidget);
 		}
-		label.setVisible(visible);
+		label.setVisible(isVisible);
 		label.getElement().getStyle().setProperty("color","#ff0000");
 		label.getElement().getStyle().setProperty("fontcolor","#00ff00");
 		label.getElement().getStyle().setProperty("textcolor","#0000ff");
@@ -168,7 +173,8 @@ implements ImagePanelAPI, ScenePanelAPI
 			label.getElement().getStyle().setProperty("borderColor",talkingColor.toString());
 		}
 		label.setText(speech);
-		super.add(speechWidget, x,y);
+		super.add(speechWidget, (int)(x*width),(int)(y*height));
+
 	}
 
 }

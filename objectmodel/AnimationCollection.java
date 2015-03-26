@@ -30,10 +30,10 @@ public class AnimationCollection
 		theMap = new TreeMap<String, Animation>();
 	}
 
-	public Animation at(String textualId) {
-		if(textualId==null)
+	public Animation getByAtid(String atid) {
+		if(atid==null)
 			return null;
-		String key = textualId.toUpperCase();
+		String key = atid.toUpperCase();
 
 		if (theMap.containsKey(key)) {
 			return theMap.get(key);
@@ -43,11 +43,11 @@ public class AnimationCollection
 
 	public void add(Animation animation) {
 		theMap.put(
-				animation.getTextualId().toUpperCase(),
+				animation.getAtid().toUpperCase(),
 				animation);
 	}
 
-	public Animation at(int index) {
+	public Animation getByIndex(int index) {
 		Animation anim = null;
 		Iterator<Animation> it = theMap.values().iterator();
 

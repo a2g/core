@@ -18,21 +18,33 @@ package com.github.a2g.core.action;
 
 import java.util.ArrayList;
 
-import com.github.a2g.core.interfaces.ActionCallbackAPI;
-import com.github.a2g.core.interfaces.ActionRunnerCallbackAPI;
+import com.github.a2g.core.interfaces.IActionRunnerFromBaseAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IMasterPresenterFromActionRunner;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-public class ActionRunner implements ActionCallbackAPI
+public class ActionRunner implements IActionRunnerFromBaseAction
 {
 	protected ArrayList<ArrayList<BaseAction>>  list;
 	private ArrayList<BaseAction> parallelActionsToWaitFor;
 	private int numberOfParallelActionsToWaitFor;
-	private ActionRunnerCallbackAPI api;
+	private IMasterPresenterFromActionRunner callback;
 	final private int id;
+	private IScenePresenterFromActions scene;
+	private IDialogTreePresenterFromActions dt;
+	private ITitleCardPresenterFromActions tc;
+	private IInventoryPresenterFromActions inv;
 
-	public ActionRunner(ActionRunnerCallbackAPI api, int id)
+	public ActionRunner(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dt, ITitleCardPresenterFromActions tc, IInventoryPresenterFromActions inv, IMasterPresenterFromActionRunner callback, int id)
 	{
 		this.id = id;
-		this.api=api;
+		this.callback=callback;
+		this.scene = scene;
+		this.inv = inv;
+		this.dt = dt;
+		this.tc = tc;
 		list = new ArrayList<ArrayList<BaseAction>>();
 		parallelActionsToWaitFor = new ArrayList<BaseAction>();
 		numberOfParallelActionsToWaitFor = 0;
@@ -111,6 +123,7 @@ public class ActionRunner implements ActionCallbackAPI
 			System.out.println("ActionRunner::executeParallelActions " + i+ " " + a.toString() );
 
 			a.setCallbacks(this);
+			a.setAll(scene,dt,tc,inv);
 			a.runGameAction();
 		}
 	}
@@ -126,7 +139,7 @@ public class ActionRunner implements ActionCallbackAPI
 		}
 		else
 		{
-			api.actionFinished(this.id);
+			callback.actionFinished(this.id);
 		}
 	}
 

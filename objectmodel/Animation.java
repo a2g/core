@@ -16,45 +16,47 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.SceneAPI;
+import com.github.a2g.core.interfaces.IGameScene;
 
 
 
 
 public class Animation {
 	private double durationInSeconds;
-	private String textualId;
+	private String atid;
 	private ImageCollection framesCollection;
 	private SceneObject parent;
 	private boolean wasSetAsInitialAnimation;
 	private boolean wasSetAsCurrentAnimation;
-	private SceneAPI.Special specialAnimationThisWasSetTo;
+	private IGameScene.Special specialAnimationThisWasSetTo;
 
 
-	public Animation(String textualId, SceneObject owningSceneObject) {
+	public Animation(String atid, SceneObject owningSceneObject) {
 		this.durationInSeconds = 1.0;
 		this.parent = owningSceneObject;
-		this.textualId = textualId;
+		this.atid = atid;
 		framesCollection = new com.github.a2g.core.objectmodel.ImageCollection();
 		wasSetAsInitialAnimation = false;
 		wasSetAsCurrentAnimation = false;
 		specialAnimationThisWasSetTo = null;
 	}
 
-	public ImageCollection getFrames() {
-		return framesCollection;
-	}
-
-	public String getTextualId() {
-		return textualId;
-	}
 
 	public SceneObject	getObject() {
 		return parent;
 	}
+	
+	public ImageCollection getFrames() {
+		return framesCollection;
+	}
 
-	public void setTextualId(String textualId) {
-		this.textualId = textualId;
+	public String getAtid() {
+		return atid;
+	}
+
+
+	public void setAtid(String atid) {
+		this.atid = atid;
 	}
 
 	public ImageCollection getFrameCollection() {
@@ -67,7 +69,7 @@ public class Animation {
 		if (framesCollection.getCount() == 0) {
 			return null;
 		}
-		com.github.a2g.core.objectmodel.Image frame = framesCollection.at(
+		com.github.a2g.core.objectmodel.Image frame = framesCollection.getByIndex(
 				0);
 
 		return frame;
@@ -82,23 +84,23 @@ public class Animation {
 				- 1;
 	}
 
-	public void setAsSpecialAnimation(SceneAPI.Special special) {
+	public void setAsSpecialAnimation(IGameScene.Special special) {
 		specialAnimationThisWasSetTo = special;
 		if (parent != null) {
 			parent.setSpecialAnimation(special,
-					textualId);
+					atid);
 		}
 	}
 
 	public void setAsCurrentAnimationAndSetFrame(int i) {
-		parent.setCurrentAnimation(textualId);
+		parent.setCurrentAnimation(atid);
 		parent.setCurrentFrame(i);
 	}
 
 	public void setAsCurrentAnimation() {
 		this.wasSetAsCurrentAnimation = true;
 		if (parent != null) {
-			parent.setCurrentAnimation(textualId);
+			parent.setCurrentAnimation(atid);
 		}
 	}
 
@@ -106,7 +108,7 @@ public class Animation {
 		this.wasSetAsInitialAnimation = true;
 		if (parent != null)
 		{
-			parent.setInitialAnimation(	this.textualId);
+			parent.setInitialAnimation(	this.atid);
 		}
 	}
 
@@ -135,7 +137,7 @@ public class Animation {
 		return wasSet;
 	}
 
-	public SceneAPI.Special getDesignatedSpecialAnimation() {
+	public IGameScene.Special getDesignatedSpecialAnimation() {
 		return specialAnimationThisWasSetTo;
 	}
 
@@ -143,7 +145,7 @@ public class Animation {
 	{
 		if (parent != null)
 		{
-			parent.alignBaseMiddleOfOldFrameToFrameOfNewAnimation(this.textualId, frame);
+			parent.alignBaseMiddleOfOldFrameToFrameOfNewAnimation(atid, frame);
 		}
 	}
 

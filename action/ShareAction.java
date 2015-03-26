@@ -18,14 +18,20 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromShareAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 
 
 public class ShareAction extends ChainedAction {
+	private IScenePresenterFromShareAction scene;
 	String token;
 
 	public ShareAction(BaseAction parent, String text) {
-		super(parent, parent.getApi(), true);
+		super(parent,  true);
 		this.token = text;
 	}
 
@@ -40,12 +46,23 @@ public class ShareAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		getApi().shareWinning(token);
+		scene.shareWinning(token);
 	}
 
 	@Override
 	public boolean isParallel() {
 		return false;
+	}
+
+
+	public void setScene(IScenePresenterFromShareAction scene) {
+		this.scene = scene;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
+		
 	}
 
 }

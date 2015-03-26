@@ -17,9 +17,8 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
-import com.github.a2g.core.interfaces.VerbsPanelAPI;
+import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
+import com.github.a2g.core.interfaces.IVerbsPanelFromVerbsPresenter;
 import com.github.a2g.core.platforms.html4.mouse.VerbMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.VerbMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -30,12 +29,12 @@ import com.google.gwt.user.client.ui.Label;
 public class VerbsPanel
 extends Grid
 implements
-VerbsPanelAPI
+IVerbsPanelFromVerbsPresenter
 {
 	ColorEnum rolloverColor;
-	final MouseToVerbsPresenterAPI mouseToPresenter;
+	final IVerbsPresenterFromVerbsPanel mouseToPresenter;
 
-	public VerbsPanel(InternalAPI api, MouseToVerbsPresenterAPI mouseToPresenter, ColorEnum fore, ColorEnum back)
+	public VerbsPanel(IVerbsPresenterFromVerbsPanel mouseToPresenter, ColorEnum fore, ColorEnum back)
 	{
 		this.mouseToPresenter = mouseToPresenter;
 		getElement().getStyle().setProperty("color",fore.toString());
@@ -55,10 +54,10 @@ VerbsPanelAPI
 				continue;
 			int column = i % columns;
 
-			Verb verb = verbs.items().get(i);
-			String textualId = verb.gettextualId();
+			Verb verb = verbs.items().getByIndex(i);
+			String textualId = verb.getVtid();
 			String displayText = verb.getdisplayText();
-			int code = verb.getCode();
+			int code = verb.getVCode();
 			Label widget = new Label(
 					textualId);
 

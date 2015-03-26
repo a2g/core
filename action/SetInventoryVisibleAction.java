@@ -19,16 +19,22 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromSetInventoryVisibleAction;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 
 public class SetInventoryVisibleAction extends ChainedAction {
-
-	private int invId;
+	private IInventoryPresenterFromSetInventoryVisibleAction inventory;
+	private int icode;
+	private String itid;
 	private boolean isVisible;
 
-	public SetInventoryVisibleAction(BaseAction parent, int invId, boolean isVisible, boolean isLinear) {
-		super(parent, parent.getApi(), isLinear);
-		this.invId = invId;
+	public SetInventoryVisibleAction(BaseAction parent, int icode, boolean isVisible, boolean isLinear) {
+		super(parent,  isLinear);
+		this.icode = icode;
 		this.isVisible = isVisible;
 	}
 
@@ -43,7 +49,8 @@ public class SetInventoryVisibleAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		getApi().getInventoryItem(this.invId).setVisible(
+		itid = inventory.getItidByCode(icode);
+		inventory.setVisibleByItid(itid,
 				this.isVisible);
 
 	}
@@ -52,6 +59,17 @@ public class SetInventoryVisibleAction extends ChainedAction {
 	public boolean isParallel() {
 
 		return false;
+	}
+
+
+	public void setInventory(IInventoryPresenterFromSetInventoryVisibleAction inventory) {
+		this.inventory = inventory;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setInventory(inventory);
+		
 	}
 
 }

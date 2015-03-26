@@ -18,23 +18,23 @@ package com.github.a2g.core.objectmodel;
 
 
 import com.google.gwt.event.shared.EventBus;
-import com.github.a2g.core.interfaces.HostingPanelAPI;
-import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
-import com.github.a2g.core.interfaces.VerbsPanelAPI;
-import com.github.a2g.core.interfaces.VerbsPresenterAPI;
-import com.github.a2g.core.interfaces.VerbsPresenterCallbackAPI;
+import com.github.a2g.core.interfaces.IHostingPanel;
+import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
+import com.github.a2g.core.interfaces.IVerbsPanelFromVerbsPresenter;
+import com.github.a2g.core.interfaces.IVerbsPresenter;
+import com.github.a2g.core.interfaces.IMasterPresenterFromVerbs;
 import com.github.a2g.core.primitive.ColorEnum;
 
 
 public class VerbsPresenter
-implements MouseToVerbsPresenterAPI, VerbsPresenterAPI
+implements IVerbsPresenterFromVerbsPanel, IVerbsPresenter
 {
 	private Verbs theVerbs;
-	private VerbsPanelAPI view;
+	private IVerbsPanelFromVerbsPresenter view;
 	private int widthOfScene;
 	private int widthOfInventory;
-	VerbsPresenterCallbackAPI callback;
-	public VerbsPresenter(final HostingPanelAPI panel, EventBus bus, VerbsPresenterCallbackAPI callback)
+	IMasterPresenterFromVerbs callback;
+	public VerbsPresenter(final IHostingPanel panel, EventBus bus, IMasterPresenterFromVerbs callback)
 	{
 		this.callback = callback;
 		this.theVerbs = new Verbs();
@@ -56,18 +56,19 @@ implements MouseToVerbsPresenterAPI, VerbsPresenterAPI
 		return theVerbs;
 	}
 
-	public VerbsPanelAPI getView() {
+	public IVerbsPanelFromVerbsPresenter getView() {
 		return view;
 	}
 
-	
-	
+
+
+	@Override
 	public void update()
 	{
 		view.setVerbs(theVerbs);
 		view.update();
 	}
-	 
+
 
 	public void setWidthOfScene(int width) {
 		this.widthOfScene = width;
@@ -93,7 +94,7 @@ implements MouseToVerbsPresenterAPI, VerbsPresenterAPI
 	public void doClick() {
 		callback.onClickVerbsOrInventory();
 	}
-	
+
 	@Override
 	public void doClick(String displayName, String textualId, int code)
 	{
@@ -104,25 +105,25 @@ implements MouseToVerbsPresenterAPI, VerbsPresenterAPI
 	@Override
 	public void setVisible(boolean isVisible) {
 		this.view.setVisible(isVisible);
-		
+
 	}
 
 	@Override
 	public void setVerbs(Verbs theVerbs) {
 		this.view.setVerbs(theVerbs);
-		
+
 	}
 
 	@Override
 	public void setWidth(int i) {
 		this.view.setWidth(i);
-		
+
 	}
 
 	@Override
 	public void removeByCode(int code) {
 		this.theVerbs.items().removeByCode(code);
-		
+
 	}
 
 }

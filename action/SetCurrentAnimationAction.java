@@ -18,15 +18,20 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.objectmodel.Animation;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromSetCurrentAnimationAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.ChainedAction;
 
 
 public class SetCurrentAnimationAction extends ChainedAction {
-	private String animId;
-	public SetCurrentAnimationAction(BaseAction parent, String animationCode) {
-		super(parent, parent.getApi(), true);
-		this.animId = animationCode;
+	private IScenePresenterFromSetCurrentAnimationAction scene;
+	private String atid;
+	public SetCurrentAnimationAction(BaseAction parent, String atid) {
+		super(parent, true);
+		this.atid = atid;
 	}
 
 	@Override
@@ -39,17 +44,24 @@ public class SetCurrentAnimationAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		Animation a = getApi().getAnimation(
-				this.animId);
-
-		if (a != null) {
-			a.setAsCurrentAnimation();
-		}
+		scene.setAsACurrentAnimationByAtid(atid);
+		
 	}
 
 	@Override
 	public boolean isParallel() {
 
 		return false;
+	}
+ 
+
+	public void setScene(IScenePresenterFromSetCurrentAnimationAction scene) {
+		this.scene = scene;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
+		
 	}
 }

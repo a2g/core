@@ -22,7 +22,7 @@ package com.github.a2g.core.objectmodel;
 
 public class FrameAndAnimation {
 	private int currentFrame;
-	private String currentAnimationTextualId;
+	private String currentAnimationAtid;
 	public FrameAndAnimation(String objectThatOwnsIt) {
 		this.currentFrame = 0;
 	}
@@ -35,12 +35,13 @@ public class FrameAndAnimation {
 		return currentFrame;
 	}
 
-	public void setCurrentAnimationTextualId(String animationTextualId) {
-		this.currentAnimationTextualId = animationTextualId;
+	public void setCurrentAnimationAtid(String animationAtid) {
+		this.currentAnimationAtid = animationAtid;
 	}
 
-	public String getCurrentAnimationTextualId() {
-		return this.currentAnimationTextualId;
+	public String getCurrentAnimationAtid() {
+		
+		return this.currentAnimationAtid;
 	}
 
 }

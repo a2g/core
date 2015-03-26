@@ -16,16 +16,16 @@
 
 package com.github.a2g.core.platforms.java;
 
-import com.github.a2g.core.interfaces.SystemAnimationAPI;
-import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
+import com.github.a2g.core.interfaces.ISystemAnimation;
+import com.github.a2g.core.interfaces.IBaseActionFromSystemAnimation;
 
 public class SystemAnimationForJava
 extends com.github.a2g.core.platforms.java.animation.Animation
-implements SystemAnimationAPI
+implements ISystemAnimation
 {
-	SystemAnimationCallbackAPI callbacks;
+	IBaseActionFromSystemAnimation callbacks;
 	boolean isLinear;
-	public SystemAnimationForJava(SystemAnimationCallbackAPI callbacks, boolean isLinear)
+	public SystemAnimationForJava(IBaseActionFromSystemAnimation callbacks, boolean isLinear)
 	{
 		this.isLinear = isLinear;
 		this.callbacks = callbacks;

@@ -19,12 +19,18 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromEndAction;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 
 public class DialogTreeEndAction extends BaseDialogTreeAction {
+	private IDialogTreePresenterFromEndAction dialogTree;
 
 	public DialogTreeEndAction(BaseAction parent) {
-		super(parent, parent.getApi());
+		super(parent);
 	}
 
 	@Override
@@ -40,13 +46,22 @@ public class DialogTreeEndAction extends BaseDialogTreeAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		getApi().setDialogTreeActive(false);
+		dialogTree.setDialogTreeActive(false);
 	}
 
 	@Override
 	public boolean isParallel() {
 
 		return false;
+	}
+
+	public void setDialogTree(IDialogTreePresenterFromEndAction dialogTree) {
+		this.dialogTree = dialogTree;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setDialogTree(dialogTree);
 	}
 
 }

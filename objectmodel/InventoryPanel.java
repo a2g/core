@@ -20,10 +20,9 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.InventoryPanelAPI;
-import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
-import com.github.a2g.core.interfaces.PackagedImageAPI;
+import com.github.a2g.core.interfaces.IInventoryPanelFromInventoryPresenter;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryPanel;
+import com.github.a2g.core.interfaces.IPackagedImage;
 import com.github.a2g.core.platforms.html4.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.InventoryItemMouseClickHandler;
@@ -38,26 +37,25 @@ public class InventoryPanel
 extends AbsolutePanel
 implements
 ImagePanelAPI
-, InventoryPanelAPI
+, IInventoryPanelFromInventoryPresenter
 {
 	final FlowPanel arrowLeft;
 	final FlowPanel arrowRight;
-	InternalAPI api;
-	final MouseToInventoryPresenterAPI mouseToPresenter;
+	final IInventoryPresenterFromInventoryPanel mouseToPresenter;
 
-	public InventoryPanel(InternalAPI api, final MouseToInventoryPresenterAPI mouseToPresenter, ColorEnum fore, ColorEnum back, ColorEnum rollover)
+
+	public InventoryPanel(final IInventoryPresenterFromInventoryPanel mouseToPresenter, ColorEnum fore, ColorEnum back, ColorEnum rollover)
 	{
 		this.mouseToPresenter = mouseToPresenter;
-		this.api = api;
 
 		getElement().getStyle().setProperty("color", fore.toString());
 		getElement().getStyle().setProperty("backgroundColor", back.toString());
-				
+
 		arrowLeft = new FlowPanel();
 		this.add(arrowLeft);
 		arrowLeft.getElement().addClassName("arrowLeft");
-		
-		
+
+
 		arrowLeft.setHeight("0");
 		arrowLeft.setWidth("0");
 		arrowLeft.getElement().getStyle().setProperty("borderBottom", "10px solid transparent");
@@ -67,23 +65,23 @@ ImagePanelAPI
 		arrowLeft.getElement().getStyle().setPosition(Position.RELATIVE);
 		arrowLeft.getElement().getStyle().setProperty("top", "50%");
 		arrowLeft.getElement().getStyle().setProperty("transform", "translateY(-50%)");
-		
+
 		arrowRight = new FlowPanel();
 		this.add(arrowRight);
 		arrowRight.getElement().addClassName("arrowRight");
-		
-		
+
+
 		arrowRight.setHeight("0");
 		arrowRight.setWidth("0");
 		arrowRight.getElement().getStyle().setProperty("borderBottom", "10px solid transparent");
 		arrowRight.getElement().getStyle().setProperty("borderLeft", "10px solid "+fore.toString());
 		arrowRight.getElement().getStyle().setProperty("borderTop", "10px solid transparent");
 		arrowRight.getElement().getStyle().setProperty("float", "right");
-		
+
 		arrowRight.getElement().getStyle().setPosition(Position.RELATIVE);
 		arrowRight.getElement().getStyle().setProperty("top", "50%");
 		arrowRight.getElement().getStyle().setProperty("transform", "translateY(-50%)");
-		
+
 		arrowLeft.addDomHandler(
 				new ClickHandler()
 				{	@Override
@@ -101,9 +99,9 @@ ImagePanelAPI
 					mouseToPresenter.setMouseOver(.95, .5);
 					mouseToPresenter.doClick();
 				}
-				
+
 				}, ClickEvent.getType());
-		
+
 	}
 
 	@Override
@@ -113,7 +111,7 @@ ImagePanelAPI
 
 
 	@Override
-	public Image createNewImageAndAdddHandlers(PackagedImageAPI imageResource,
+	public Image createNewImageAndAdddHandlers(IPackagedImage imageResource,
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int i, int j) {
 
@@ -123,7 +121,7 @@ ImagePanelAPI
 		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new Point(0, 0));
 
 		imageAndPos.getNativeImage().addMouseMoveHandler(
-				new InventoryItemMouseOverHandler(bus, api, objectTextualId,
+				new InventoryItemMouseOverHandler(bus, mouseToPresenter, objectTextualId,
 						objectCode));
 
 		imageAndPos.getNativeImage().addClickHandler(
@@ -178,5 +176,17 @@ ImagePanelAPI
 	public void setRightArrowVisible(boolean visible) {
 		arrowRight.setVisible(visible);
 
+	}
+
+	@Override
+	public void setScenePixelSize(int width, int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setInventoryImageSize(int width, int height) {
+		// TODO Auto-generated method stub
+		
 	}
 }

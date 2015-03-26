@@ -16,17 +16,17 @@
 
 package com.github.a2g.core.platforms.java;
 
-import com.github.a2g.core.interfaces.TimerAPI;
-import com.github.a2g.core.interfaces.TimerCallbackAPI;
+import com.github.a2g.core.interfaces.ITimer;
+import com.github.a2g.core.interfaces.IMasterPresenterFromTimer;
 
 
 public class TimerForJava
 extends com.github.a2g.core.platforms.java.animation.Timer
-implements TimerAPI
+implements ITimer
 {
-	private TimerCallbackAPI callback;
+	private IMasterPresenterFromTimer callback;
 
-	public TimerForJava(TimerCallbackAPI callback)
+	public TimerForJava(IMasterPresenterFromTimer callback)
 	{
 		this.callback = callback;
 	}

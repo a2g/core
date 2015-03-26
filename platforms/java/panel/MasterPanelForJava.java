@@ -22,8 +22,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.HostingPanelAPI;
-import com.github.a2g.core.interfaces.MasterPanelAPI;
+import com.github.a2g.core.interfaces.IHostingPanel;
+import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.platforms.java.HostingPanelForJava;
 
@@ -31,7 +31,7 @@ import com.github.a2g.core.platforms.java.HostingPanelForJava;
 @SuppressWarnings("serial")
 public class MasterPanelForJava
 extends JPanel
-implements MasterPanelAPI
+implements IMasterPanelFromMasterPresenter
 {
 	HostingPanelForJava hostForCommandLineF;
 	HostingPanelForJava hostForInventoryF;
@@ -66,18 +66,18 @@ implements MasterPanelAPI
 
 		sceneCardLayout =null;
 		hostForDialogTreeF.setBackground(new Color(back.r, back.g, back.b));
-		
+
 
 
 		// will be constructed from two vertical stacks.
 		panelForDialogTreeStack = new JPanel(); panelForDialogTreeStack.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 		panelForDialogTreeStack.setBackground(new Color(back.r, back.g, back.b));
-		
+
 		{
 			// lay the CL/V/I panel and dialog tree - on top of each other
 			JPanel commandLineAndVerbsAndInventoryF = new JPanel(); commandLineAndVerbsAndInventoryF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 			commandLineAndVerbsAndInventoryF.setBackground(new Color(back.r, back.g, back.b));
-			
+
 			dialogTreeCardLayout = new CardLayout();
 			//dialogTreeCardLayout.setHgap(0);
 			//dialogTreeCardLayout.setVgap(0);
@@ -130,38 +130,38 @@ implements MasterPanelAPI
 	}
 
 	@Override
-	public HostingPanelAPI getHostForCommandLine() {
+	public IHostingPanel getHostForCommandLine() {
 		return hostForCommandLineF;
 	}
 
 	@Override
-	public HostingPanelAPI getHostForInventory() {
+	public IHostingPanel getHostForInventory() {
 		return hostForInventoryF;
 	}
 
 	@Override
-	public HostingPanelAPI getHostForVerbs()
+	public IHostingPanel getHostForVerbs()
 	{
 		return hostForVerbsF;
 	}
 
 	@Override
-	public HostingPanelAPI getHostForScene() {
+	public IHostingPanel getHostForScene() {
 		return hostForSceneF;
 	}
 
 	@Override
-	public HostingPanelAPI getHostForDialogTree() {
+	public IHostingPanel getHostForDialogTree() {
 		return hostForDialogTreeF;
 	}
 
 	@Override
-	public HostingPanelAPI getHostForLoading() {
+	public IHostingPanel getHostForLoading() {
 		return hostForLoadingF;
 	}
 
 	@Override
-	public HostingPanelAPI getHostForTitleCard(){
+	public IHostingPanel getHostForTitleCard(){
 		return this.hostForTitleCardF;
 	}
 

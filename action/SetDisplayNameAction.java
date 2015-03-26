@@ -19,16 +19,23 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromSetDisplayNameAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 
 public class SetDisplayNameAction extends ChainedAction {
-	private short objId;
+	private IScenePresenterFromSetDisplayNameAction scene;
+	short ocode;
+	private String otid;
 	private String displayName;
 
-	public SetDisplayNameAction(BaseAction parent, short objId, String displayName, boolean isLinear) {
-		super(parent, parent.getApi(), isLinear);
+	public SetDisplayNameAction(BaseAction parent, short ocode, String displayName, boolean isLinear) {
+		super(parent, isLinear);
 		this.displayName = displayName;
-		this.objId = objId;
+		this.ocode = ocode;
 	}
 
 	@Override
@@ -41,7 +48,8 @@ public class SetDisplayNameAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		getApi().getObject(this.objId).setDisplayName(
+		otid = scene.getOtidByCode(ocode);
+		scene.setDisplayNameByOtid(otid,
 				this.displayName);
 	}
 
@@ -49,6 +57,16 @@ public class SetDisplayNameAction extends ChainedAction {
 	public boolean isParallel() {
 
 		return false;
+	}
+ 
+
+	public void setScene(IScenePresenterFromSetDisplayNameAction scene) {
+		this.scene = scene;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
 	}
 
 }

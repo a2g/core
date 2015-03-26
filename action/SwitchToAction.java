@@ -19,6 +19,11 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromSwitchAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 
 /* ! This inherits from BaseDialogTreeAction because it is valid to be used as
@@ -26,11 +31,12 @@ import com.github.a2g.core.action.BaseDialogTreeAction;
  *  You can use it in all places where you would use a GameAction
  */
 public class SwitchToAction extends BaseDialogTreeAction {
-	private String scene;
+	private IScenePresenterFromSwitchAction scene;
+	private String switchToThis;
 
 	public SwitchToAction(BaseAction parent, String e) {
-		super(parent, parent.getApi());
-		this.scene = e;
+		super(parent);
+		this.switchToThis = e;
 	}
 
 	@Override
@@ -45,7 +51,7 @@ public class SwitchToAction extends BaseDialogTreeAction {
 	@Override
 	protected void onCompleteGameAction() {
 
-		getApi().switchToSceneFromAction(this.scene);
+		scene.switchToScene(this.switchToThis);
 
 	}
 
@@ -53,6 +59,15 @@ public class SwitchToAction extends BaseDialogTreeAction {
 	public boolean isParallel() {
 
 		return false;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
+	}
+
+	public void setScene(IScenePresenterFromSwitchAction scene) {
+		this.scene = scene;
 	}
 
 }

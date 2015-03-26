@@ -17,37 +17,35 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.interfaces.HostingPanelAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.LoaderPanelAPI;
-import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
-import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
-import com.github.a2g.core.interfaces.MouseToLoaderPresenterAPI;
+import com.github.a2g.core.interfaces.IFactory;
+import com.github.a2g.core.interfaces.IHostingPanel;
+import com.github.a2g.core.interfaces.ILoaderPanelFromLoaderPresenter;
+import com.github.a2g.core.interfaces.IHostFromMasterPresenter;
+import com.github.a2g.core.interfaces.IMasterPresenterFromLoader;
+import com.github.a2g.core.interfaces.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
 
-public class LoaderPresenter implements MouseToLoaderPresenterAPI
+public class LoaderPresenter implements IMasterPresenterFromLoaderMouse
 {
 	private Loader loader;
-	private LoaderPanelAPI view;
+	private ILoaderPanelFromLoaderPresenter view;
 	int current;
 	int total;
 	private String name;
-	private InternalAPI api;
-	private MergeSceneAndStartAPI master;
+	private IMasterPresenterFromLoader master;
 	private boolean isIgnore;
 
-	public LoaderPresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api, MergeSceneAndStartAPI master, MasterPresenterHostAPI parent)
+	public LoaderPresenter(final IHostingPanel panel, EventBus bus, IMasterPresenterFromLoader master, IHostFromMasterPresenter parent, IFactory factory)
 	{
 		this.isIgnore = false;
 		this.loader = new Loader(master);
 		this.name = "";
-		this.view = api.getFactory().createLoaderPanel(this, ColorEnum.Purple, ColorEnum.Black);
+		this.view = factory.createLoaderPanel(this, ColorEnum.Purple, ColorEnum.Black);
 		panel.setThing(view);
 		this.current = 0;
 		this.total = 0;
-		this.api = api;
 		this.master= master;
 	}
 
@@ -75,7 +73,7 @@ public class LoaderPresenter implements MouseToLoaderPresenterAPI
 
 	}
 
-	public void setPixelSize(int width, int height)
+	public void setScenePixelSize(int width, int height)
 	{
 		this.view.setScenePixelSize(width , height);
 
@@ -86,7 +84,7 @@ public class LoaderPresenter implements MouseToLoaderPresenterAPI
 		return loader;
 	}
 
-	public LoaderPanelAPI getView() {
+	public ILoaderPanelFromLoaderPresenter getView() {
 		return view;
 	}
 
@@ -97,7 +95,7 @@ public class LoaderPresenter implements MouseToLoaderPresenterAPI
 
 	@Override
 	public void restartReloading() {
-		api.restartReloading();
+		master.restartReloading();
 	}
 
 	public void onLoadingComplete()
@@ -119,7 +117,7 @@ public class LoaderPresenter implements MouseToLoaderPresenterAPI
 
 	public void setContinueAfterLoad(boolean isIgnore) {
 		this.isIgnore = true;
-		
+
 	}
 
 

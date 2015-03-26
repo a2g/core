@@ -19,15 +19,22 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromSetBaseMiddleYAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 
 public class SetBaseMiddleYAction extends ChainedAction {
-	private short objId;
+	private IScenePresenterFromSetBaseMiddleYAction scene;
+	private String otid;
+	private short ocode;
 	private double y;
 
-	public SetBaseMiddleYAction(BaseAction parent, short objId, double y) {
-		super(parent, parent.getApi(), true);
-		this.objId = objId;
+	public SetBaseMiddleYAction(BaseAction parent, short ocode, double y) {
+		super(parent,  true);
+		this.ocode = ocode;
 		this.y = y;
 	}
 
@@ -41,14 +48,24 @@ public class SetBaseMiddleYAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		getApi().getObject(this.objId).setBaseMiddleY(
-				this.y);
+		otid = scene.getOtidByCode(ocode);
+		scene.setBaseMiddleYByOtid(otid, this.y);
 	}
 
 	@Override
 	public boolean isParallel() {
 
 		return false;
+	}
+ 
+	public void setScene(IScenePresenterFromSetBaseMiddleYAction scene) {
+		this.scene = scene;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
+		
 	}
 
 }

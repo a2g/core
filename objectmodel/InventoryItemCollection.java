@@ -30,18 +30,18 @@ public class InventoryItemCollection {
 		theMap = new TreeMap<String, InventoryItem>();
 	}
 
-	public InventoryItem at(String textualId) {
+	public InventoryItem getByItid(String itid) {
 		try {
-			return theMap.get(textualId);
+			return theMap.get(itid);
 		} catch (Exception e) {}
 		return null;
 	}
 
 	public void add(InventoryItem item) {
-		theMap.put(item.getTextualId(), item);
+		theMap.put(item.getItid(), item);
 	}
 
-	public InventoryItem at(int index) throws NoSuchElementException {
+	public InventoryItem getByIndex(int index) throws NoSuchElementException {
 		InventoryItem item = null;
 		Iterator<InventoryItem> iter = theMap.values().iterator();
 		int i = 0;

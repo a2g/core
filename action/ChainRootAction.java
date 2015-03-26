@@ -18,19 +18,17 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 /*
  * ChainRootAction is identified by having a null parent.
  */
 public class ChainRootAction extends BaseDialogTreeAction {
-	public ChainRootAction(InternalAPI api) {
-		super(null, api);
-	}
-
-	@Override
-	public void setApi(InternalAPI api) {
-		super.setApi(api);
+	public ChainRootAction() {
+		super(null);
 	}
 
 	@Override
@@ -55,6 +53,12 @@ public class ChainRootAction extends BaseDialogTreeAction {
 	public boolean isParallel() {
 
 		return false;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		return;// the chain root doesn't need them
+		
 	}
 
 

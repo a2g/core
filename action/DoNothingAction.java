@@ -18,11 +18,15 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 
 public class DoNothingAction extends ChainedAction {
 	public DoNothingAction(BaseAction parent) {
-		super(parent, parent.getApi(), true);
+		super(parent, true);
 	}
 
 	@Override
@@ -44,5 +48,11 @@ public class DoNothingAction extends ChainedAction {
 	@Override
 	public boolean isParallel() {
 		return false;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		// do nothing
+		
 	}
 }

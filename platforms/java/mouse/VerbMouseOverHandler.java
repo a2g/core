@@ -20,7 +20,7 @@ package com.github.a2g.core.platforms.java.mouse;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
+import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
 
 
 public class VerbMouseOverHandler extends MouseAdapter
@@ -28,9 +28,9 @@ public class VerbMouseOverHandler extends MouseAdapter
 	private final String textualId;
 	private final int code;
 	private final String displayName;
-	private final MouseToVerbsPresenterAPI mouseToPresenter;
+	private final IVerbsPresenterFromVerbsPanel mouseToPresenter;
 
-	public VerbMouseOverHandler(MouseToVerbsPresenterAPI mouseToPresenter, String displayName, String textualId, int code) 
+	public VerbMouseOverHandler(IVerbsPresenterFromVerbsPanel mouseToPresenter, String displayName, String textualId, int code) 
 	{
 		this.mouseToPresenter = mouseToPresenter;
 		this.textualId = textualId;

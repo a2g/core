@@ -22,31 +22,29 @@ import com.github.a2g.core.event.ExecuteCommandEvent;
 import com.github.a2g.core.event.ExecuteCommandEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.event.SetRolloverEventHandlerAPI;
-import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
-import com.github.a2g.core.interfaces.CommandLinePanelAPI;
-import com.github.a2g.core.interfaces.CommandLinePresenterAPI;
-import com.github.a2g.core.interfaces.HostingPanelAPI;
-import com.github.a2g.core.interfaces.SceneAPI;
+import com.github.a2g.core.interfaces.IMasterPresenterFromCommandLine;
+import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
+import com.github.a2g.core.interfaces.ICommandLinePresenter;
+import com.github.a2g.core.interfaces.IHostingPanel;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
 
 
-@SuppressWarnings("unused")
 public class CommandLinePresenter
 implements
 ExecuteCommandEventHandlerAPI
 , SetRolloverEventHandlerAPI
-, CommandLinePresenterAPI
+, ICommandLinePresenter
 {
 
-	private CommandLineCallbackAPI api;
-	private CommandLinePanelAPI view;
+	private IMasterPresenterFromCommandLine api;
+	private ICommandLinePanelFromCommandLinePresenter view;
 	private CommandLine model;
 	private double debugX;
 	private double debugY;
 
-	public CommandLinePresenter(final HostingPanelAPI panel, EventBus bus, CommandLineCallbackAPI api) {
+	public CommandLinePresenter(final IHostingPanel panel, EventBus bus, IMasterPresenterFromCommandLine api) {
 		this.model = new CommandLine(api);
 		this.api = api;
 		this.view = api.getFactory().createCommandLinePanel(ColorEnum.Purple, ColorEnum.Black, ColorEnum.Red);
@@ -68,6 +66,7 @@ ExecuteCommandEventHandlerAPI
 		updateImage();
 	}
 
+	@Override
 	public void setXYForDebugging(double x, double y)
 	{
 		if(x!=-1)
@@ -78,9 +77,9 @@ ExecuteCommandEventHandlerAPI
 	}
 
 	@Override
-	public void onSetMouseOver(String displayName, String textualId, int code)
+	public void setCommandLineMouseOver(String displayName, String otid, int code)
 	{
-		model.setMouseOver(displayName, textualId, code);
+		model.setMouseOver(displayName, otid, code);
 		updateImage();
 	}
 
@@ -165,7 +164,7 @@ ExecuteCommandEventHandlerAPI
 
 	}
 
-	public CommandLinePanelAPI getView() {
+	public ICommandLinePanelFromCommandLinePresenter getView() {
 		return view;
 	}
 
@@ -175,12 +174,7 @@ ExecuteCommandEventHandlerAPI
 		return displayName;
 	}
 
-	@Override
-	public void setText(String string) {
-		view.setText(string);
-		
-	}
 
-	
+
 
 }

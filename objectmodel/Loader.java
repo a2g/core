@@ -7,24 +7,24 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import com.github.a2g.core.interfaces.LoadAPI;
-import com.github.a2g.core.interfaces.ImageBundleLoaderCallbackAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.MergeSceneAndStartAPI;
+import com.github.a2g.core.interfaces.ILoad;
+import com.github.a2g.core.interfaces.ILoaderPresenter;
+import com.github.a2g.core.interfaces.IMasterPresenterFromBundle;
+import com.github.a2g.core.interfaces.IMasterPresenterFromLoader;
 
 public class Loader
-implements ImageBundleLoaderCallbackAPI
+implements ILoaderPresenter
 {
 	private LoaderItem theCurrentLoader;
 	private LoaderItemCollection listOfEssentialLoaders;
 	private Set<String> setOfCompletedLoaders;
 	private Map<String, LoadedLoad>  objectCache;
-	private MergeSceneAndStartAPI master;
+	private IMasterPresenterFromLoader master;
 	private String inventoryResourceAsString;
 	private boolean isSameInventoryAsLastTime;
 	private int imagesToLoad;
 
-	public Loader(MergeSceneAndStartAPI callbacks)
+	public Loader(IMasterPresenterFromLoader callbacks)
 	{
 		this.theCurrentLoader = null;
 		this.listOfEssentialLoaders = new LoaderItemCollection();
@@ -107,7 +107,7 @@ implements ImageBundleLoaderCallbackAPI
 		theCurrentLoader.addToAppropriateAnimation(numberPrefix, imageAndPos, objectTextualId, animationTextualId, objectCode, objPlusAnimCode,width, height);
 	}
 
-	public void addEssential(LoadAPI blah, InternalAPI api)
+	public void addEssential(ILoad blah, IMasterPresenterFromBundle api)
 	{
 
 		for(int i=0;i<blah.getNumberOfBundles();i++)
@@ -170,4 +170,7 @@ implements ImageBundleLoaderCallbackAPI
 		objectCache.clear();
 		setOfCompletedLoaders.clear();
 	}
+
+
+	
 }

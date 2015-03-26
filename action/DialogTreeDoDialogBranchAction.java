@@ -19,15 +19,21 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromDoBranchAction;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 
 public class DialogTreeDoDialogBranchAction extends BaseDialogTreeAction {
 
 	private int branchId;
+	private IDialogTreePresenterFromDoBranchAction dialogTree;
 
 	public DialogTreeDoDialogBranchAction(BaseAction parent, int branchId) {
-		super(parent, parent.getApi());
-		this.setBranchId(branchId);
+		super(parent);
+		this.branchId=branchId;
 	}
 
 	@Override
@@ -44,7 +50,7 @@ public class DialogTreeDoDialogBranchAction extends BaseDialogTreeAction {
 	@Override
 	protected void onCompleteGameAction()
 	{
-		getApi().executeBranchOnCurrentScene(getBranchId());
+		dialogTree.executeBranchOnCurrentScene(getBranchId());
 	}
 
 	@Override
@@ -59,6 +65,16 @@ public class DialogTreeDoDialogBranchAction extends BaseDialogTreeAction {
 
 	public int getBranchId() {
 		return branchId;
+	}
+	
+	public void setDialogTree(IDialogTreePresenterFromDoBranchAction dialogTree) {
+		this.dialogTree = dialogTree;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setDialogTree(dialogTree);
+		
 	}
 
 }

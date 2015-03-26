@@ -19,14 +19,14 @@ import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 
-import com.github.a2g.core.interfaces.CommandLinePanelAPI;
+import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 
 
 @SuppressWarnings("serial")
 public class CommandLinePanelForJava
 extends java.awt.Label
-implements CommandLinePanelAPI
+implements ICommandLinePanelFromCommandLinePresenter
 {
 
 	public CommandLinePanelForJava(ColorEnum fore, ColorEnum back, ColorEnum roll) {

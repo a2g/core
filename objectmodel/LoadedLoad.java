@@ -31,7 +31,7 @@ public class LoadedLoad
 	public void addToAppropriateAnimation(int prefix, Image imageAndPos, String objectTextualId, String animationTextualId, short objectCode, String objPlusAnimCode, int screenPixelWidth, int screenPixelHeight)
 	{
 		// objects and animations
-		SceneObject sceneObject = this.getSceneObjectCollection().getByOTEXT(
+		SceneObject sceneObject = this.getSceneObjectCollection().getByOtid(
 				objectTextualId);
 
 		if (sceneObject == null) {
@@ -40,13 +40,13 @@ public class LoadedLoad
 					screenPixelWidth,
 					screenPixelHeight);
 			sceneObject.setNumberPrefix(prefix);
-			sceneObject.setCode(objectCode);
+			sceneObject.setOCode(objectCode);
 
 
 			this.getSceneObjectCollection().add(	sceneObject);
 		}
 
-		Animation animation  = sceneObject.getAnimations().at(objPlusAnimCode);
+		Animation animation  = sceneObject.getAnimations().getByAtid(objPlusAnimCode);
 		if (animation == null) {
 			// much simpler if not in the animation map.
 			animation = new Animation(

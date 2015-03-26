@@ -18,26 +18,26 @@ package com.github.a2g.core.objectmodel;
 
 
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.interfaces.LoadAPI;
-import com.github.a2g.core.interfaces.ImageBundleLoaderCallbackAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.ILoad;
+import com.github.a2g.core.interfaces.ILoaderPresenterFromLoaderItem;
+import com.github.a2g.core.interfaces.IMasterPresenterFromBundle;
 import com.google.gwt.event.dom.client.LoadEvent;
 
 
 public class LoaderItem implements LoadHandler, Comparable<LoaderItem>{
-	private ImageBundleLoaderCallbackAPI callbacks;
-	LoadAPI  bundle;
+	private ILoaderPresenterFromLoaderItem callbacks;
+	ILoad  bundle;
 	int bundleNumber;
 	int numberOfImagesLeftToLoad;
 	int origNumberOfImagesLeftToLoad;
-	InternalAPI api;
+	IMasterPresenterFromBundle api;
 	private LoadedLoad theCurrentCacheObject;
 
 	//private Logger logger = Logger.getLogger("com.mycompany.level");
 
-	public LoaderItem(InternalAPI api, LoadAPI bundleToCallLoadOn, int bundleNumber)
+	public LoaderItem(IMasterPresenterFromBundle api2, ILoad bundleToCallLoadOn, int bundleNumber)
 	{
-		this.api = api;
+		this.api = api2;
 		this.bundle = bundleToCallLoadOn;
 		this.bundleNumber = bundleNumber;
 		numberOfImagesLeftToLoad = 0;
@@ -50,7 +50,7 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem>{
 		return bundle.toString();
 	}
 
-	public void setCallbacks(ImageBundleLoaderCallbackAPI callbacks)
+	public void setCallbacks(ILoaderPresenterFromLoaderItem callbacks)
 	{
 		this.callbacks = callbacks;
 	}

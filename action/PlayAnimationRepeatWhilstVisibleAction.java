@@ -18,39 +18,37 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.objectmodel.Animation;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromPlayAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.ChainedAction;
 
 
 public class PlayAnimationRepeatWhilstVisibleAction extends ChainedAction {
-	private Animation anim;
+	private String atid;
+	private String otid;
+	private IScenePresenterFromPlayAction scene;
 
-	public PlayAnimationRepeatWhilstVisibleAction(BaseAction parent, String animationCode, boolean isLinear) {
-		super(parent, parent.getApi(), isLinear);
-		this.anim = getApi().getAnimation(animationCode);
+	public PlayAnimationRepeatWhilstVisibleAction(BaseAction parent, String atid, boolean isLinear) {
+		super(parent, isLinear);
+		this.atid = atid;
 	}
 
 	@Override
 	public void runGameAction() {
-		int duration = (this.anim.getLength()
-				+ 1)
-				* 40
-				* 10;
-		String s = this.anim.getTextualId();
-
-		this.anim.getObject().setCurrentAnimation(
-				s);
-		this.anim.getObject().setVisible(true);
-		this.run(duration);
+		otid = scene.getOtidOfAtid(atid);
+		double durationInMs = scene.getDurationByAtid(atid)*1000;
+		scene.setAsACurrentAnimationByAtid(atid);
+		scene.setVisibleByOtid(otid, true);
+		this.run((int)durationInMs);
 	}
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		double frame = progress
-				* this.anim.getLength()-1;
-
-		this.anim.getObject().setCurrentFrame(
-				(int) frame);
+		double frame = progress	* scene.getNumberOfFramesByAtid(atid)-1;
+		scene.setCurrentFrameByOtid(otid, (int) frame);
 	}
 
 	@Override
@@ -62,4 +60,14 @@ public class PlayAnimationRepeatWhilstVisibleAction extends ChainedAction {
 		return false;
 	}
 
+
+	public void setScene(IScenePresenterFromPlayAction scene) {
+		this.scene = scene;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
+		
+	}
 }

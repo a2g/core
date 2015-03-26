@@ -21,16 +21,16 @@ import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.web.bindery.event.shared.EventBus;
 import com.github.a2g.core.event.SetRolloverEvent;
-import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryMouseOver;
 
 
 public class InventoryItemMouseOverHandler implements MouseMoveHandler {
 	private final EventBus bus;
 	private final String textualId;
 	private final int code;
-	private final InternalAPI api;
+	private final IInventoryPresenterFromInventoryMouseOver api;
 
-	public InventoryItemMouseOverHandler(EventBus bus, InternalAPI api, String textualId, int  objectCode) {
+	public InventoryItemMouseOverHandler(EventBus bus, IInventoryPresenterFromInventoryMouseOver api, String textualId, int  objectCode) {
 		this.bus = bus;
 		this.textualId = textualId;
 		this.code = objectCode;
@@ -40,16 +40,10 @@ public class InventoryItemMouseOverHandler implements MouseMoveHandler {
 
 	@Override
 	public void onMouseMove(MouseMoveEvent event) {
-		com.github.a2g.core.objectmodel.InventoryItem ob = api.getInventoryItem(
-				this.code);
-		String displayName = "";
 
-		if (ob != null) {
-			displayName = ob.getDisplayName();
-		}
 		bus.fireEvent(
 				new SetRolloverEvent(
-						displayName,
+						api.getDisplayNameByItid(this.textualId),
 						this.textualId,
 						this.code));
 	}

@@ -28,7 +28,7 @@ public class ImageCollection {
 		theVector = new Vector<Image>();
 	}
 
-	public com.github.a2g.core.objectmodel.Image at(int index) {
+	public com.github.a2g.core.objectmodel.Image getByIndex(int index) {
 		if (index < 0
 				|| index >= theVector.size()) {
 			return null;

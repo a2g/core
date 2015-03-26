@@ -19,14 +19,21 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromSetToInitialPosAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 
 public class SetToInitialPositionAction extends ChainedAction {
-	private short objId;
+	private IScenePresenterFromSetToInitialPosAction scene;
+	short ocode;
+	private String otid;
 
-	public SetToInitialPositionAction(BaseAction parent, short objId) {
-		super(parent, parent.getApi(), true);
-		this.objId = objId;
+	public SetToInitialPositionAction(BaseAction parent, short ocode) {
+		super(parent, true);
+		this.ocode = ocode;
 	}
 
 	@Override
@@ -37,21 +44,32 @@ public class SetToInitialPositionAction extends ChainedAction {
 	@Override
 	protected void onUpdateGameAction(double progress)
 	{
-		getApi().getObject(this.objId).setX(0);
-		getApi().getObject(this.objId).setY(0);
+	
 	}
 
 	@Override
 	protected void onCompleteGameAction() 
 	{
-		getApi().getObject(this.objId).setX(0);
-		getApi().getObject(this.objId).setY(0);
+		this.otid = scene.getOtidByCode(ocode);
+		scene.setXByOtid(otid,0);
+		scene.setYByOtid(otid,0);
 	}
 
 	@Override
 	public boolean isParallel() {
 
 		return false;
+	}
+ 
+
+	public void setScene(IScenePresenterFromSetToInitialPosAction scene) {
+		this.scene = scene;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
+		
 	}
 
 }

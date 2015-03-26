@@ -17,7 +17,7 @@
 package com.github.a2g.core.platforms.html4.mouse;
 
 
-import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryPanel;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -26,9 +26,9 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 public class InventoryItemMouseClickHandler implements ClickHandler {
 	private final AbsolutePanel absolutePanel;
 
-	private final MouseToInventoryPresenterAPI mouseToPresenter;
+	private final IInventoryPresenterFromInventoryPanel mouseToPresenter;
 
-	public InventoryItemMouseClickHandler(AbsolutePanel abs, MouseToInventoryPresenterAPI mouseToPresenter) {
+	public InventoryItemMouseClickHandler(AbsolutePanel abs, IInventoryPresenterFromInventoryPanel mouseToPresenter) {
 		this.absolutePanel = abs;
 		this.mouseToPresenter = mouseToPresenter;
 	}

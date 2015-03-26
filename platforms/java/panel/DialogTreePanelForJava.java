@@ -20,7 +20,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import com.github.a2g.core.interfaces.DialogTreePanelAPI;
+import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.objectmodel.DialogTree;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.platforms.java.mouse.DialogTreeMouseClickHandler;
@@ -34,7 +34,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class DialogTreePanelForJava
 extends JPanel
-implements DialogTreePanelAPI
+implements IDialogTreePanelFromDialogTreePresenter
 {
 	ColorEnum fore;
 	ColorEnum back;
@@ -68,7 +68,7 @@ implements DialogTreePanelAPI
 	}
 
 	@Override
-	public void setPixelSize(int width,int height)
+	public void setScenePixelSize(int width,int height)
 	{
 		this.width = width;
 		this.height = height;

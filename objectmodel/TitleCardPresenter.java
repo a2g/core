@@ -17,21 +17,24 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.interfaces.HostingPanelAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
-import com.github.a2g.core.interfaces.TitleCardPanelAPI;
+import com.github.a2g.core.interfaces.IFactory;
+import com.github.a2g.core.interfaces.IHostingPanel;
+import com.github.a2g.core.interfaces.IMasterPresenterFromTitleCard;
+import com.github.a2g.core.interfaces.ITitleCardPresenter;
+import com.github.a2g.core.interfaces.ITitleCardPanelFromTitleCardPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
 
-public class TitleCardPresenter {
-	private TitleCardPanelAPI view;
+public class TitleCardPresenter implements ITitleCardPresenter{
+	private ITitleCardPanelFromTitleCardPresenter view;
 	private String text;
+	private double popupDisplayDuration;
 
-	public TitleCardPresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api, MasterPresenterHostAPI parent) {
+	public TitleCardPresenter(final IHostingPanel panel, EventBus bus, IMasterPresenterFromTitleCard master, IFactory factory) {
 		this.text = "";
-		this.view = api.getFactory().createTitleCardPanel(ColorEnum.Red, ColorEnum.Black);
+		this.popupDisplayDuration = .8;
+		this.view = factory.createTitleCardPanel(ColorEnum.Red, ColorEnum.Black);
 		panel.setThing(view);
 	}
 
@@ -44,15 +47,31 @@ public class TitleCardPresenter {
 		text = "";
 	}
 
-	public void setPixelSize(int width, int height)
+	public void setScenePixelSize(int width, int height)
 	{
 		this.view.setScenePixelSize(width , height);
 
 	}
 
-	public TitleCardPanelAPI getView()
+	public ITitleCardPanelFromTitleCardPresenter getView()
 	{
 		return view;
 	}
+
+	public double getPopupDisplayDuration() {
+		return popupDisplayDuration;
+	}
+
+	public void decrementPopupDisplayDuration()
+	{
+		popupDisplayDuration*=.9;
+	}
+
+	public void incrementPopupDisplayDuration()
+	{
+		popupDisplayDuration*=1.1;
+	}
+
+
 
 }

@@ -17,7 +17,7 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.interfaces.CommandLinePanelAPI;
+import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.UIObject;
@@ -25,7 +25,7 @@ import com.google.gwt.user.client.ui.UIObject;
 
 public class CommandLinePanel
 extends Label
-implements CommandLinePanelAPI
+implements ICommandLinePanelFromCommandLinePresenter
 {
 	public CommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll)
 	{

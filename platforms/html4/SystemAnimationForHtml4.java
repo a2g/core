@@ -16,16 +16,16 @@
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.SystemAnimationAPI;
-import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
+import com.github.a2g.core.interfaces.ISystemAnimation;
+import com.github.a2g.core.interfaces.IBaseActionFromSystemAnimation;
 
 public class SystemAnimationForHtml4
 extends com.google.gwt.animation.client.Animation
-implements SystemAnimationAPI
+implements ISystemAnimation
 {
 	boolean isLinear;
-	SystemAnimationCallbackAPI callbacks;
-	public SystemAnimationForHtml4(SystemAnimationCallbackAPI callbacks, boolean isLinear)
+	IBaseActionFromSystemAnimation callbacks;
+	public SystemAnimationForHtml4(IBaseActionFromSystemAnimation callbacks, boolean isLinear)
 	{
 		this.isLinear  = isLinear;
 		this.callbacks = callbacks;

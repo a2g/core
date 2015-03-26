@@ -18,65 +18,63 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.objectmodel.Animation;
-import com.github.a2g.core.objectmodel.SceneObject;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromPlayAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.ChainedAction;
 
 
 public class PlayAnimationAction extends ChainedAction 
 {
-	private Animation anim;
-	private SceneObject animsParent;
+	private String atid;
+	private String otid;
 	private boolean isBackwards;
 	private boolean holdLastFrame;
 	private boolean isNonBlocking;
+	private IScenePresenterFromPlayAction scene;
+	
 
-	public PlayAnimationAction(BaseAction parent, String  animCode, boolean isLinear) {
-		super(parent, parent.getApi(), isLinear);
-		this.anim = getApi()!=null? getApi().getAnimation(animCode) : null;// null handling for unit tests
-		this.animsParent = anim!=null? anim.getObject() : null;// null handling for unit tests
+	
+	public PlayAnimationAction(BaseAction parent, String  atid, boolean isLinear) {
+		super(parent, isLinear);
 		this.isBackwards = false;
 		this.holdLastFrame = false;
 		this.isNonBlocking = false;
+		this.atid = atid;
 	}
 
 	@Override
-	public void runGameAction() {
-		int duration = (int)(anim.getDurationSecs()*1000);
+	public void runGameAction() 
+	{
+		otid = scene.getOtidOfAtid(atid);
+		int durationInMilliseconds = (int)(scene.getDurationByAtid(atid)*1000);
 
-		if (animsParent != null) {
-			//animsParent.setVisible(true);
-		}
-		this.run(duration);
+		this.run(durationInMilliseconds);
 	}
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		int lastFrame = this.anim.getLength()-1;
+		int lastFrame = scene.getNumberOfFramesByAtid(atid)-1;
 		double frame = isBackwards
 				? (1 - progress) * lastFrame
 						: progress * lastFrame;
 
-				if (animsParent != null) {
-					animsParent.setCurrentFrame(
-							(int) frame);
-
-					animsParent.setCurrentAnimation(anim.getTextualId());
-					animsParent.setCurrentFrame(
-							(int) frame);
-				}
+		scene.setCurrentFrameByOtid(otid, (int) frame);
+		scene.setAsACurrentAnimationByAtid(atid);
+		scene.setCurrentFrameByOtid(otid, (int) frame);
 	}
 
 	@Override
 	protected void onCompleteGameAction() {
-		System.out.println("ActionRunner::done " + anim.getTextualId() +" is this length: " +anim.getLength());
+		
+		System.out.println("ActionRunner::done " + atid +" is this length: " +scene.getNumberOfFramesByAtid(atid));
 
 		onUpdateGameAction(1.0);
+		
 		if (!this.holdLastFrame) {
-			if (this.animsParent != null)
-			{
-				animsParent.setToInitialAnimationWithoutChangingFrame();
-			}
+			scene.setToInitialAnimationWithoutChangingFrameByOtid(otid);
 		}
 	}
 
@@ -93,9 +91,19 @@ public class PlayAnimationAction extends ChainedAction
 	}
 
 	@Override
-	public boolean isParallel() {
-
+	public boolean isParallel() 
+	{
 		return isNonBlocking;
+	}
+	
+	public void setScene(IScenePresenterFromPlayAction scene) {
+		this.scene = scene;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
+		
 	}
 
 }

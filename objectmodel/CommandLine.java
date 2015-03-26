@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.CommandLineCallbackAPI;
+import com.github.a2g.core.interfaces.IMasterPresenterFromCommandLine;
 import com.github.a2g.core.primitive.CodesForVerbs;
 
 
@@ -32,7 +32,7 @@ public class CommandLine {
 	private boolean isMouseable; // whether rolling over the verbs will update the commandline
 	private boolean isVisible;
 
-	public CommandLine(CommandLineCallbackAPI api) {
+	public CommandLine(IMasterPresenterFromCommandLine api) {
 		this.defaultVerb = new SentenceItem( "Walk to AAA",
 				"Walk", CodesForVerbs.getCodeForVerb(0));
 		this.lockedInVerb = defaultVerb;
@@ -44,11 +44,11 @@ public class CommandLine {
 		this.isVisible = true;
 	}
 
-	public void setMouseOver(String displayName, String textualId, int code) {
+	public void setMouseOver(String displayName, String otid, int code) {
 		if(!isMouseable)
 			return;
 		this.rolledOverItem = new SentenceItem( displayName,
-				textualId, code);
+				otid, code);
 	}
 
 	static boolean isAVerb(SentenceItem snc) {

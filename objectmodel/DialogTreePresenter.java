@@ -20,28 +20,30 @@ package com.github.a2g.core.objectmodel;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.github.a2g.core.interfaces.DialogTreePanelAPI;
-import com.github.a2g.core.interfaces.DialogTreePresenterAPI;
-import com.github.a2g.core.interfaces.HostingPanelAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
+import com.github.a2g.core.interfaces.IHostingPanel;
+import com.github.a2g.core.interfaces.IMasterPresenterFromDialogTree;
+import com.github.a2g.core.interfaces.IDialogTreePresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 //import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.event.shared.EventBus;
 
 
-public class DialogTreePresenter implements DialogTreePresenterAPI
+public class DialogTreePresenter implements IDialogTreePresenter
 {
 	private EventBus bus;
 	private DialogTree theDialogTree;
-	private DialogTreePanelAPI view;
-	private String dialogTreeTalkAnimation;
+	private IDialogTreePanelFromDialogTreePresenter view;
+	private String atidOfDialogTreeTalkAnimation;
 	private Set<String> recordOfSaidSpeech;
-	
+	private IMasterPresenterFromDialogTree callbacks;
 
-	public DialogTreePresenter(final HostingPanelAPI panel, EventBus bus, InternalAPI api) {
+
+	public DialogTreePresenter(final IHostingPanel panel, EventBus bus, IMasterPresenterFromDialogTree callbacks) {
 		this.bus = bus;
+		this.callbacks = callbacks;
 		this.theDialogTree = new DialogTree();
-		this.view = api.getFactory().createDialogTreePanel(bus, ColorEnum.Purple, ColorEnum.Black, ColorEnum.Red);
+		this.view = callbacks.createDialogTreePanel(bus, ColorEnum.Purple, ColorEnum.Black, ColorEnum.Red);
 		panel.setThing(view);
 		recordOfSaidSpeech = new HashSet<String>();
 	}
@@ -50,13 +52,14 @@ public class DialogTreePresenter implements DialogTreePresenterAPI
 		theDialogTree.clear();
 		view.update(theDialogTree, bus);
 	}
-	
+
 	public void resetRecordOfSaidSpeech()
 	{
 		recordOfSaidSpeech.clear();
 	}
 
 
+	@Override
 	public void addBranch(int subBranchId, String lineOfDialog, boolean isAlwaysShown) {
 		if(isAlwaysShown || !recordOfSaidSpeech.contains(lineOfDialog))
 		{
@@ -66,38 +69,55 @@ public class DialogTreePresenter implements DialogTreePresenterAPI
 	}
 
 
-	public void setDialogTreeTalkAnimation(String dialogTreeTalkAnimation) {
-		this.dialogTreeTalkAnimation = dialogTreeTalkAnimation;
+	@Override
+	public void setDialogTreeTalkAnimation(String atid) {
+		this.atidOfDialogTreeTalkAnimation = atid;
 
 	}
 
+	@Override
 	public String getDialogTreeTalkAnimation() {
-		return this.dialogTreeTalkAnimation;
+		return this.atidOfDialogTreeTalkAnimation;
 	}
 
-	public void setPixelSize(int width, int height) {
-		view.setPixelSize(width,height);
-	}
-
-	public DialogTreePanelAPI getView()
+	
+	public IDialogTreePanelFromDialogTreePresenter getView()
 	{
 		return view;
 	}
-	
+
 	public void markSpeechAsSaid(String text)
 	{
 		recordOfSaidSpeech.add(text);
 	}
 
 	@Override
-	public void setVisible(boolean isInDialogTreeMode) {
+	public void setDialogTreeVisible(boolean isInDialogTreeMode) {
 		view.setVisible(isInDialogTreeMode);
 	}
 
 	@Override
-	public void update(DialogTree theDialogTree, EventBus bus) {
+	public void updateDialogTree(DialogTree theDialogTree, EventBus bus) {
 		view.update(theDialogTree, bus);
+
+	}
+
+	@Override
+	public void executeBranchOnCurrentScene(int branchId) {
+		callbacks.executeBranchOnCurrentScene(branchId);
+
+	}
+
+	@Override
+	public void setDialogTreeActive(boolean isActive) {
+		callbacks.setDialogTreeActive(isActive);
+
+	}
+
+	@Override
+	public void setScenePixelSize(int width, int height) {
+		// TODO Auto-generated method stub
 		
 	}
-	
+
 }

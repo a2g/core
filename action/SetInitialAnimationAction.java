@@ -19,13 +19,19 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromSetInitialAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 
 public class SetInitialAnimationAction extends ChainedAction {
-	private String animId;
+	private IScenePresenterFromSetInitialAction scene;
+	private String atid;
 	public SetInitialAnimationAction(BaseAction parent, String animationCode, boolean isLinear) {
-		super(parent, parent.getApi(), isLinear);
-		this.animId = animationCode;
+		super(parent, isLinear);
+		this.atid = animationCode;
 	}
 
 	@Override
@@ -38,13 +44,23 @@ public class SetInitialAnimationAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		getApi().getAnimation(this.animId).setAsInitialAnimation();
+		scene.setAsAnInitialAnimationByAtid(atid);
 	}
 
 	@Override
 	public boolean isParallel() {
 
 		return false;
+	}
+ 
+	public void setScene(IScenePresenterFromSetInitialAction scene) {
+		this.scene = scene;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
+		
 	}
 
 }

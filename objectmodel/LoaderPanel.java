@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.LoaderPanelAPI;
-import com.github.a2g.core.interfaces.MouseToLoaderPresenterAPI;
+import com.github.a2g.core.interfaces.ILoaderPanelFromLoaderPresenter;
+import com.github.a2g.core.interfaces.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -29,19 +29,19 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class LoaderPanel
 extends SimplePanel
-implements LoaderPanelAPI
+implements ILoaderPanelFromLoaderPresenter
 {
 
 	Label progress;
 	Button reload;
 	Button clickToContinue;
-	MouseToLoaderPresenterAPI api;
+	IMasterPresenterFromLoaderMouse api;
 	private Grid containerGrid;
 	private final int TOTAL_NUMBER_OF_CELLS = 36;
 	private int lastNumberOfCellsFilled;
 
 
-	public LoaderPanel(final MouseToLoaderPresenterAPI api, ColorEnum fore, ColorEnum back) {
+	public LoaderPanel(final IMasterPresenterFromLoaderMouse api, ColorEnum fore, ColorEnum back) {
 		this.api = api;
 		VerticalPanel layout = new VerticalPanel();
 		{
@@ -89,7 +89,7 @@ implements LoaderPanelAPI
 	}
 
 
-	void addHandler(final MouseToLoaderPresenterAPI api)
+	void addHandler(final IMasterPresenterFromLoaderMouse api)
 	{
 		reload.addClickHandler
 		(
@@ -145,7 +145,7 @@ implements LoaderPanelAPI
 						}
 					}
 				}
-				else	
+				else
 				{
 					for(int i=lastNumberOfCellsFilled;i<numberOfCellsFilled;i++)
 					{

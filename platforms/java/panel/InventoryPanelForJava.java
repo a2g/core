@@ -33,13 +33,12 @@ import java.util.TreeMap;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.InventoryPanelAPI;
+import com.github.a2g.core.interfaces.IInventoryPanelFromInventoryPresenter;
 import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
-import com.github.a2g.core.interfaces.PackagedImageAPI;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryPanel;
+import com.github.a2g.core.interfaces.IPackagedImage;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
@@ -53,7 +52,7 @@ import com.google.gwt.event.shared.EventBus;
 public class InventoryPanelForJava
 extends JPanel
 implements ImagePanelAPI
-, InventoryPanelAPI
+, IInventoryPanelFromInventoryPresenter
 , ActionListener
 {
 	class Structure
@@ -65,7 +64,6 @@ implements ImagePanelAPI
 	}
 
 	int tally;
-	InternalAPI api;
 	int width;
 	int height;
 
@@ -76,9 +74,8 @@ implements ImagePanelAPI
 	ImageForJava imgLeft;
 	ImageForJava imgRight;
 
-	public InventoryPanelForJava(EventBus bus, InternalAPI api, MouseToInventoryPresenterAPI api2, ColorEnum fore, ColorEnum back)
+	public InventoryPanelForJava(EventBus bus, IInventoryPresenterFromInventoryPanel api2, ColorEnum fore, ColorEnum back)
 	{
-		this.api = api;
 		this.mapOfPointsByImage = new TreeMap<Integer, Point>();
 		this.listOfVisibleHashCodes = new LinkedList<Integer>();
 		this.listOfAllVisibleImages = new LinkedList<Image>();
@@ -228,7 +225,7 @@ implements ImagePanelAPI
 
 	// this is the one that gets called.
 	@Override
-	public Image createNewImageAndAdddHandlers(PackagedImageAPI imageResource,
+	public Image createNewImageAndAdddHandlers(IPackagedImage imageResource,
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int x, int y)
 	{
@@ -251,7 +248,7 @@ implements ImagePanelAPI
 	}
 
 	@Override
-	public void setPixelSize(int width, int height)
+	public void setScenePixelSize(int width, int height)
 	{
 		this.width = width;
 		this.height = height;
@@ -268,5 +265,10 @@ implements ImagePanelAPI
 	public void setRightArrowVisible(boolean visible) {
 		imgRight.setVisible(visible, new Point(50,0));
 		triggerPaint();
+	}
+
+	@Override
+	public void setInventoryImageSize(int width, int height) {
+		
 	}
 }

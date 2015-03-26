@@ -19,7 +19,6 @@ package com.github.a2g.core.objectmodel;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.PopupPanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -27,7 +26,6 @@ import com.google.gwt.user.client.ui.Label;
 
 
 public class PopupPanel
-implements PopupPanelAPI
 {
 	private com.google.gwt.user.client.ui.PopupPanel popup;
 	private Label labelInPopup;
@@ -44,7 +42,6 @@ implements PopupPanelAPI
 		this.popup.setWidget(labelInPopup);
 	}
 
-	@Override
 	public void setVisible(boolean isVisible)
 	{
 		if(isVisible)
@@ -57,19 +54,16 @@ implements PopupPanelAPI
 		}
 	}
 
-	@Override
 	public void setPopupPosition(double x, double y)
 	{
 		popup.setPopupPosition((int)(x*sceneWidth),(int)(y*sceneHeight));
 	}
-	@Override
 	public void setText(String speech)
 	{
 		this.popup.setTitle(speech);
 		popup.setWidget(new Label(speech));
 	}
 
-	@Override
 	public void setColor(ColorEnum color)
 	{
 		if(color!=null)
@@ -85,7 +79,6 @@ implements PopupPanelAPI
 
 
 	}
-	@Override
 	public void setCancelCallback(final BaseAction ba)
 	{
 		if(ba==null)

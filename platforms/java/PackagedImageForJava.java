@@ -21,10 +21,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.github.a2g.core.interfaces.PackagedImageAPI;
+import com.github.a2g.core.interfaces.IPackagedImage;
 
 public class PackagedImageForJava
-implements PackagedImageAPI
+implements IPackagedImage
 {
 	String imagePath;
 	public PackagedImageForJava(String imagePath)

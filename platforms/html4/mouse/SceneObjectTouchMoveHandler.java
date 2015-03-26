@@ -23,26 +23,26 @@ import com.google.gwt.event.dom.client.TouchMoveEvent;
 import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.dom.client.TouchStartHandler;
-import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.IScenePresenterFromSceneTouch;
 
 class CustomAnimation extends Animation
 {
-	InternalAPI api;
+	IScenePresenterFromSceneTouch api;
 	double startCameraX;
 	int touchX;
 	int prevX;
 
-	public CustomAnimation(InternalAPI api, int touchX, int prevX)
+	public CustomAnimation(IScenePresenterFromSceneTouch api, int touchX, int prevX)
 	{
 		this.api=api;
 		this.touchX = touchX;
 		this.prevX = prevX;
-		startCameraX = api.getSceneGui().getCameraX();
+		startCameraX = api.getCameraX();
 	}
 	@Override
 	protected void onComplete() {
 		super.onComplete();
-		api.getSceneGui().setCameraX(startCameraX+ getDistanceToScrollX());
+		api.setCameraX(startCameraX+ getDistanceToScrollX());
 	}
 
 	@Override
@@ -57,7 +57,7 @@ class CustomAnimation extends Animation
 				+ progress
 				* getDistanceToScrollX();
 
-		api.getSceneGui().setCameraX(x);
+		api.setCameraX(x);
 	}
 
 	double getDistanceToScrollX()
@@ -71,10 +71,10 @@ class CustomAnimation extends Animation
 
 public class SceneObjectTouchMoveHandler
 implements TouchMoveHandler, TouchStartHandler {
-	private final InternalAPI api;
+	private final IScenePresenterFromSceneTouch api;
 	private int prevX;
 
-	public SceneObjectTouchMoveHandler( InternalAPI api) {
+	public SceneObjectTouchMoveHandler( IScenePresenterFromSceneTouch api) {
 		this.api = api;
 
 	}

@@ -21,17 +21,16 @@ import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.web.bindery.event.shared.EventBus;
 import com.github.a2g.core.event.SetRolloverEvent;
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.objectmodel.SceneObject;
+import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
 
 
 public class SceneObjectMouseOverHandler implements MouseMoveHandler {
 	private final EventBus bus;
 	private final String textualId;
 	private final short code;
-	private final InternalAPI api;
+	private final IScenePresenterFromSceneMouseOver  api;
 
-	public SceneObjectMouseOverHandler(EventBus bus, InternalAPI api, String textualId, short code) {
+	public SceneObjectMouseOverHandler(EventBus bus, IScenePresenterFromSceneMouseOver api, String textualId, short code) {
 		this.bus = bus;
 		this.textualId = textualId;
 		this.code = code;
@@ -41,13 +40,8 @@ public class SceneObjectMouseOverHandler implements MouseMoveHandler {
 
 	@Override
 	public void onMouseMove(MouseMoveEvent event) {
-		SceneObject ob = api.getObject(
-				this.code);
-		String displayName = "";
 
-		if (ob != null) {
-			displayName = ob.getDisplayName();
-		}
+		String displayName = api.getDisplayNameByOtid(textualId);
 		bus.fireEvent(
 				new SetRolloverEvent(
 						displayName,

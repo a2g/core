@@ -19,14 +19,17 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
+import com.github.a2g.core.interfaces.IScenePresenterFromWalkAction;
+
 public class WalkToAction
 extends MoveWhilstAnimatingAction
 {
-
-
-	public WalkToAction(BaseAction parent, short objId, double endX, double endY, int delay, boolean isLinear)
+	private IScenePresenterFromWalkAction scene;
+	
+	public WalkToAction(BaseAction parent, short ocode, double endX, double endY, int delay, boolean isLinear)
 	{
-		super(parent, objId, isLinear);
+		super(parent, ocode, isLinear);
 		super.setEndX(endX);
 		super.setEndY(endY);
 		this.setHoldLastFrame(false);
@@ -35,8 +38,8 @@ extends MoveWhilstAnimatingAction
 	@Override
 	public void runGameAction()
 	{
-		double startX = super.getObject().getBaseMiddleX();
-		double startY = super.getObject().getBaseMiddleY();
+		double startX = scene.getBaseMiddleXByOtid(getOtid());
+		double startY = scene.getBaseMiddleYByOtid(getOtid());
 
 		double diffX = startX - getEndX();
 		System.out.println(" walkto " + startX + " " + getEndX());
@@ -44,31 +47,31 @@ extends MoveWhilstAnimatingAction
 
 		// anim
 		String anim = "";
-		int width = getApi().getSceneGui().getWidth();
-		int height = getApi().getSceneGui().getHeight();
+		int width = scene.getSceneGuiWidth();
+		int height = scene.getSceneGuiHeight();
 
 		if ((diffX * width) * (diffX * width)
 				> (diffY * height)
 				* (diffY * height)) {
 			if (getEndX() < startX) {
-				anim = super.getObject().getSpecialAnimation(
-						com.github.a2g.core.interfaces.SceneAPI.Special.West);
+				anim = scene.getSpecialAnimationByOtid(getOtid(),
+						Special.West);
 			} else {
-				anim = super.getObject().getSpecialAnimation(
-						com.github.a2g.core.interfaces.SceneAPI.Special.East);
+				anim = scene.getSpecialAnimationByOtid(getOtid(),
+						Special.East);
 			}
 		} else {
 			if (getEndY() < startY) {
-				anim = super.getObject().getSpecialAnimation(
-						com.github.a2g.core.interfaces.SceneAPI.Special.North);
+				anim = scene.getSpecialAnimationByOtid(getOtid(),
+						Special.North);
 			} else {
-				anim = super.getObject().getSpecialAnimation(
-						com.github.a2g.core.interfaces.SceneAPI.Special.South);
+				anim = scene.getSpecialAnimationByOtid(getOtid(),
+						Special.South);
 			}
 		}
 
 		// we've set it up now, pass to MoveWhilstAnimatingAction to execute
-		super.getObject().setCurrentAnimation(anim);
+		scene.setAsACurrentAnimationByAtid(anim);
 		super.runGameAction();
 	}
 
@@ -80,6 +83,14 @@ extends MoveWhilstAnimatingAction
 		// - if the walk animation is a cycle then no frame will be completely stationary
 		// - to make it consistent with everything else
 		//super.getObject().setCurrentAnimation(south);super.getObject().setCurrentFrame(0);
-		super.getObject().setToInitialAnimationWithoutChangingFrame();
+		scene.setToInitialAnimationWithoutChangingFrameByOtid(getOtid());
+	}
+
+	public IScenePresenterFromWalkAction getScene() {
+		return scene;
+	}
+
+	public void setScene(IScenePresenterFromWalkAction scene) {
+		this.scene = scene;
 	}
 }

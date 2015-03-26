@@ -19,12 +19,18 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromHideAllAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 
 public class HideAllAction extends ChainedAction {
-
+	private IScenePresenterFromHideAllAction scene;
+	
 	public HideAllAction(BaseAction parent) {
-		super(parent, parent.getApi(), true);
+		super(parent, true);
 	}
 
 	@Override
@@ -37,15 +43,26 @@ public class HideAllAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		int count = getApi().getSceneGui().getSceneObjectCount();
+		int count = scene.getSceneObjectCount();
 		for(int i=0;i<count;i++)
 		{
-			getApi().getSceneGui().setVisibleByIndex(i, false);
+			String otid = scene.getOtidByIndex(i);
+			scene.setVisibleByOtid(otid, false);
 		}
 	}
 
 	@Override
 	public boolean isParallel() {
 		return false;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
+		
+	}
+
+	public void setScene(IScenePresenterFromHideAllAction scene) {
+		this.scene = scene;
 	}
 }

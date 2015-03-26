@@ -16,10 +16,10 @@
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.PackagedImageAPI;
+import com.github.a2g.core.interfaces.IPackagedImage;
 
 public class PackagedImageForHtml4
-implements PackagedImageAPI
+implements IPackagedImage
 {
 	com.google.gwt.resources.client.ImageResource img;
 

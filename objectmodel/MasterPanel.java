@@ -15,8 +15,8 @@
  */
 
 package com.github.a2g.core.objectmodel;
-import com.github.a2g.core.interfaces.HostingPanelAPI;
-import com.github.a2g.core.interfaces.MasterPanelAPI;
+import com.github.a2g.core.interfaces.IHostingPanel;
+import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter;
 import com.github.a2g.core.platforms.html4.HostingPanelForHtml4;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -26,7 +26,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MasterPanel
 extends VerticalPanel
-implements MasterPanelAPI
+implements IMasterPanelFromMasterPresenter
 {
 	HostingPanelForHtml4 hostForCommandLine;
 	HostingPanelForHtml4 hostForInventory;
@@ -85,42 +85,42 @@ implements MasterPanelAPI
 	}
 
 	@Override
-	public HostingPanelAPI getHostForCommandLine() {
+	public IHostingPanel getHostForCommandLine() {
 		return hostForCommandLine;
 	}
 
 
 	@Override
-	public HostingPanelAPI getHostForInventory() {
+	public IHostingPanel getHostForInventory() {
 		return hostForInventory;
 	}
 
 	@Override
-	public HostingPanelAPI getHostForVerbs() {
+	public IHostingPanel getHostForVerbs() {
 		return hostForVerbs;
 	}
 
 
 	@Override
-	public HostingPanelAPI getHostForScene() {
+	public IHostingPanel getHostForScene() {
 		return hostForScene;
 	}
 
 
 	@Override
-	public HostingPanelAPI getHostForDialogTree() {
+	public IHostingPanel getHostForDialogTree() {
 		return hostForDialogTree;
 	}
 
 	@Override
-	public HostingPanelAPI getHostForLoading() {
+	public IHostingPanel getHostForLoading() {
 		return hostForLoading;
 	}
 
 
 
 	@Override
-	public HostingPanelAPI getHostForTitleCard() {
+	public IHostingPanel getHostForTitleCard() {
 		return hostForTitleCard;
 	}
 

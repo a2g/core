@@ -16,15 +16,11 @@
 
 package com.github.a2g.core.action;
 
-import com.github.a2g.core.interfaces.InternalAPI;
-
-
-
 public abstract class ChainedAction extends BaseAction
 {
-	protected ChainedAction(BaseAction parent, InternalAPI api, boolean isLinear)
+	protected ChainedAction(BaseAction parent, boolean isLinear)
 	{
-		super(parent, api, isLinear);
+		super(parent, isLinear);
 	}
 }
 

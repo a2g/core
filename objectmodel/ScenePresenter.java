@@ -19,103 +19,77 @@ package com.github.a2g.core.objectmodel;
 
 import java.util.TreeMap;
 
-import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.HostingPanelAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.PackagedImageAPI;
-import com.github.a2g.core.interfaces.ScenePanelAPI;
-import com.github.a2g.core.interfaces.ScenePresenterAPI;
+import com.github.a2g.core.action.SayAction;
+import com.github.a2g.core.interfaces.IHostingPanel;
+import com.github.a2g.core.interfaces.IMasterPresenterFromScene;
+import com.github.a2g.core.interfaces.IScenePresenter;
+import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
-import com.google.gwt.event.dom.client.LoadHandler;
 
 
-public class ScenePresenter implements ScenePresenterAPI{
+public class ScenePresenter implements IScenePresenter{
 	private int width;
 	private int height;
 	private Scene scene;
-	private ScenePanelAPI view;
+	private IScenePanelFromScenePresenter view;
 	private double cameraX;
 	private double cameraY;
-	private TreeMap<String, Animation> theATIDMap;
+	private TreeMap<String, Animation> theAtidMap;
+	private String sceneTalkerAtid;
+	private String sceneWalkerOtid;
 
-	public ScenePresenter(final HostingPanelAPI panel, InternalAPI api)
+	public ScenePresenter(final IHostingPanel panel, IMasterPresenterFromScene master)
 	{
 		this.cameraX=0.0;
 		this.cameraY=0.0;
-		this.setWidth(320);
-		this.setHeight(180);
+		this.width = 320;
+		this.height = 180;
 		this.scene = new Scene();
-		this.view = api.getFactory().createScenePanel();
+		this.view = master.getFactory().createScenePanel();
 		panel.setThing(view);
 		view.setVisible(true);
 
-		this.theATIDMap = new TreeMap<String, Animation>();
+		this.theAtidMap = new TreeMap<String, Animation>();
 	}
-	
-	
-	public SceneObject getObject(short ocode) {
+
+
+	private SceneObject getObjectByOCode(short ocode) {
 		return this.scene.objectCollection().getByOCode(ocode);
 	}
-	public SceneObject getObject(String OTEXT) {
-		return this.scene.objectCollection().getByOTEXT(OTEXT);
+	public SceneObject getObjectByOtid(String otid) {
+		return this.scene.objectCollection().getByOtid(otid);
 	}
-	public Animation getAnimation(String code) {
-		Animation anim = this.theATIDMap.get(
-				code);
+	public Animation getAnimationByAtid(String atid) {
+		Animation anim = this.theAtidMap.get(
+				atid);
 
 		if (anim == null) {
 			// first param is name, second is parent;
 			anim = new Animation("", null);
-			this.theATIDMap.put(code,
+			this.theAtidMap.put(atid,
 					anim);
 		}
 		return anim;
 	}
 
-	public ScenePanelAPI getView() {
+	@Override
+	public IScenePanelFromScenePresenter getView() {
 		return view;
 	}
 
-	public void setView(ScenePanelAPI view) {
+	public void setView(IScenePanelFromScenePresenter view) {
 		this.view = view;
 	}
 
-	// start go in panel
-
-	public void setPixelSize(int width, int height) {
+	public void setScenePixelSize(int width, int height) {
 
 		this.view.setScenePixelSize(width,height);
 	}
 
-	public Point getSizeOfSceneArea() {
-		// int width = this.sceneArea.
-		return new Point(this.getWidth(),
-				this.getHeight());
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-	// end go in panel.
-
 	public void clear() {
 		view.clear();
 	}
-
 
 	public Scene getModel() {
 		return scene;
@@ -126,16 +100,19 @@ public class ScenePresenter implements ScenePresenterAPI{
 		this.scene = new Scene();
 	}
 
+	@Override
 	public double getCameraY()
 	{
 		return this.cameraY;
 	}
 
+	@Override
 	public double getCameraX()
 	{
 		return this.cameraX;
 	}
 
+	@Override
 	public void setCameraX(double x)
 	{
 		this.cameraX = x;
@@ -147,6 +124,7 @@ public class ScenePresenter implements ScenePresenterAPI{
 		this.cameraY = y;
 		offsetAllImagesInScene();
 	}
+	
 	private void offsetAllImagesInScene()
 	{
 		double camX = cameraX*this.width;
@@ -158,112 +136,205 @@ public class ScenePresenter implements ScenePresenterAPI{
 		}
 	}
 
-	@Override
-	public Image createNewImageAndAddHandlers(LoadHandler lh,
-			PackagedImageAPI imageResource, InternalAPI api,
-			com.google.gwt.event.shared.EventBus bus, int x, int y,
-			String objectTextualId, short objectCode) {
-		
-		return this.view.createNewImageAndAddHandlers(lh, imageResource, api, bus, x, y, objectTextualId, objectCode);
-	}
-	
-	@Override
-	public void setScenePixelSize(int width, int height) {
-		this.view.setScenePixelSize(width, height);		
-	}
+	//	@Override
+	//	public Image createNewImageAndAddHandlers(LoadHandler lh,
+	//			PackagedImageAPI imageResource, InternalAPI api,
+	//			com.google.gwt.event.shared.EventBus bus, int x, int y,
+	//			String objectTextualId, short objectCode) {
+	//
+	//		return this.view.createNewImageAndAddHandlers(lh, imageResource, api, bus, x, y, objectTextualId, objectCode);
+	//	}
+	//
+	//	@Override
+	//	public void setScenePixelSize(int width, int height) {
+	//		this.view.setScenePixelSize(width, height);
+	//	}
+	//
+	//
+	//
+	//	@Override
+	//	public void setCameraOffset(int x, int y) {
+	//		this.view.setCameraOffset(x, y);
+	//
+	//	}
+	//
 
-	@Override
-	public void setVisible(boolean b) {
-		this.view.setVisible(b);
-		
-	}
-
-	@Override
-	public void setCameraOffset(int x, int y) {
-		this.view.setCameraOffset(x, y);
-		
-	}
-
-	@Override
-	public void setStateOfPopup(boolean visible, int x, int y,
-			ColorEnum talkingColor, String speech, BaseAction ba) {
-		this.view.setStateOfPopup(visible, x, y, talkingColor, speech, ba);
-		
-	}
-
-	@Override
-	public int getSceneObjectCount() {
-		return this.getModel().objectCollection().count();
-	}
-
-	@Override
-	public void setVisibleByIndex(int index, boolean visible) {
-		getModel().objectCollection().getByIndex(index).setVisible(visible);
-	}
-
-	@Override
-	public boolean getVisibleByIndex(int index) {
-		return getModel().objectCollection().getByIndex(index).isVisible();
-	}
-
-	@Override
-	public String getCurrentAnimationByOTEXT(String otext) {
-		return this.getObject(otext).getCurrentAnimation();
-	}
-
-	@Override
-	public String getDisplayNameByOTEXT(String otext) {
-		return this.getObject(otext).getDisplayName();
-	}
-
-	@Override
-	public short getCodeByOTEXT(String otext) {
-		return this.getObject(otext).getCode();
-	}
-
-	@Override
-	public int getCurrentFrameByIndex(int i) {
-		return this.getModel().objectCollection().getByIndex(i).getCurrentFrame();
-	}
-
-	@Override
-	public double getXByIndex(int i) {
-		return this.getModel().objectCollection().getByIndex(i).getY();
-	}
-
-	@Override
-	public double getYByIndex(int i) {
-		return this.getModel().objectCollection().getByIndex(i).getY();
-	}
-
-	@Override
-	public Rect getBoundingRectByATIDAndFrame(String atid, int frame) {
-		return this.getAnimation(atid).getDefaultFrame().getBoundingRect();
-	}
-
-	@Override
-	public String getCurrentAnimationByIndex(int i) {
-		return this.getModel().objectCollection().getByIndex(i).getCurrentAnimation();
-	}
-
-	@Override
-	public String getOTEXTByIndex(int i) {
-		return this.getModel().objectCollection().getByIndex(i).getTextualId();
-	}
+	//
+	//	@Override
+	//	public int getSceneObjectCount() {
+	//		return this.getModel().objectCollection().count();
+	//	}
+	//
+	//	@Override
+	//	public void setVisibleByIndex(int index, boolean visible) {
+	//		getModel().objectCollection().getByIndex(index).setVisible(visible);
+	//	}
+	//
+	//	@Override
+	//	public boolean getVisibleByIndex(int index) {
+	//		return getModel().objectCollection().getByIndex(index).isVisible();
+	//	}
+	//
+	//	@Override
+	//	public String getCurrentAnimationByOtid(String otext) {
+	//		return this.getObject(otext).getCurrentAnimation();
+	//	}
+	//
+	//	@Override
+	//	public String getDisplayNameByOtid(String otext) {
+	//		return this.getObject(otext).getDisplayName();
+	//	}
+	//
+	//	@Override
+	//	public short getCodeByOtid(String otext) {
+	//		return this.getObject(otext).getCode();
+	//	}
+	//
+	//	@Override
+	//	public int getCurrentFrameByIndex(int i) {
+	//		return this.getModel().objectCollection().getByIndex(i).getCurrentFrame();
+	//	}
+	//
+	//	@Override
+	//	public double getXByIndex(int i) {
+	//		return this.getModel().objectCollection().getByIndex(i).getY();
+	//	}
+	//
+	//	@Override
+	//	public double getYByIndex(int i) {
+	//		return this.getModel().objectCollection().getByIndex(i).getY();
+	//	}
+	//
+	//	@Override
+	//	public Rect getBoundingRectByAtidAndFrame(String atid, int frame) {
+	//		return this.getAnimationByAtid(atid).getDefaultFrame().getBoundingRect();
+	//	}
+	//
+	//	@Override
+	//	public String getCurrentAnimationByIndex(int i) {
+	//		return this.getModel().objectCollection().getByIndex(i).getCurrentAnimation();
+	//	}
+	//
+	//	@Override
+	//	public String getOtidByIndex(int i) {
+	//		return this.getModel().objectCollection().getByIndex(i).getTextualId();
+	//	}
 
 
 	public void addSceneObject(SceneObject destObject) {
 		this.scene.objectCollection().add(destObject);
 	}
 
-	public void addAnimation(String animTextualId, Animation destAnimation) {
-		if(theATIDMap.get(animTextualId)==null)
-		{	
+	public void addAnimation(String atid, Animation destAnimation) {
+		if(theAtidMap.get(atid)==null)
+		{
 			//System.out.println("ScenePresenter::added " + animTextualId);
-			this.theATIDMap.put(animTextualId, destAnimation);
+			this.theAtidMap.put(atid, destAnimation);
 		}
 	}
 
+	public void alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
+			 int frame, String atid) {
+		getAnimationByAtid(atid).alignBaseMiddleOfOldFrameToFrameOfThisAnimation(frame);
+
+	}
+
+	@Override
+	public int getSceneObjectCount() {
+		return scene.objectCollection().count();
+	}
+
+	@Override
+	public String getOtidByIndex(int i) {
+		return scene.objectCollection().getByIndex(i).getOtid();
+	}
+	
+	@Override
+	public String getAtidOfCurrentAnimationByOtid(String otid) {
+		return scene.objectCollection().getByOtid(otid).getCurrentAnimation();
+	}
+
+	public void setOtidOfDefaultWalkObject(String otid) {
+		setSceneWalkerOtid(otid);
+	}
+
+	@Override
+	public boolean getVisibleByOtid(String otid) {
+		return scene.objectCollection().getByOtid(otid).isVisible();
+	}
+	
+	@Override
+	public int getCurrentFrameByOtid(String otid) {
+		return scene.objectCollection().getByOtid(otid).getCurrentFrame();
+	}
+
+
+	@Override
+	public int getSceneGuiWidth() {
+		return this.width;
+	}
+
+
+	@Override
+	public int getSceneGuiHeight() {
+		return this.height;
+	}
+
+
+	@Override
+	public String getDisplayNameByOtid(String otid) {
+		return this.scene.objectCollection().getByOtid(otid).getDisplayName();
+	}
+
+
+	@Override
+	public Rect getBoundingRectByFrameAndAtid(int frame, String atid) {
+		return this.getAnimationByAtid(atid).getFrames().getByIndex(frame).getBoundingRect();
+	}
+
+	@Override
+	public double getXByOtid(String otid) {
+		return this.scene.objectCollection().getByOtid(otid).getX();
+	}
+
+	@Override
+	public double getYByOtid(String otid) {
+		return this.scene.objectCollection().getByOtid(otid).getY();
+	}
+
+	@Override
+	public short getCodeByOtid(String otid) {
+		return getObjectByOtid(otid).getOCode();
+	}
+	
+	public String getOtidByCode(short ocode) {
+		return getObjectByOCode(ocode).getOtid();
+	}
+	
+	public void setStateOfPopup(boolean isVisible, double x, double y,
+			ColorEnum talkingColor, String speech, SayAction sayAction) {
+		view.setStateOfPopup(isVisible, x, y, talkingColor, speech, sayAction);
+	}
+
+
+	public String getSceneTalkerAtid() {
+		return sceneTalkerAtid;
+	}
+
+
+	public void setSceneTalkerAtid(String sceneTalkerAtid) {
+		this.sceneTalkerAtid = sceneTalkerAtid;
+	}
+
+
+	public String getSceneWalkerOtid() {
+		return sceneWalkerOtid;
+	}
+
+
+	public void setSceneWalkerOtid(String sceneWalkerOtid) {
+		this.sceneWalkerOtid = sceneWalkerOtid;
+	}
 }
 
 

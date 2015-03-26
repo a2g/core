@@ -19,8 +19,7 @@ package com.github.a2g.core.objectmodel;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.github.a2g.core.interfaces.SayActionObjectAPI;
-import com.github.a2g.core.interfaces.SceneAPI;
+import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
@@ -28,9 +27,9 @@ import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
 
 
-public class SceneObject implements SayActionObjectAPI{
+public class SceneObject {
 	private String initialAnimationId;
-	private Map<SceneAPI.Special, String> mapOfSpecialAnimations;
+	private Map<IGameScene.Special, String> mapOfSpecialAnimations;
 	private final String textualId;
 	private String displayName;
 	private AnimationCollection animationCollection;
@@ -65,7 +64,7 @@ public class SceneObject implements SayActionObjectAPI{
 		this.talkingColor = null;
 		this.setBaseMiddleX(0);
 		this.setBaseMiddleY(0);
-		
+
 		this.screenCoordsPerSecond = 1.0;
 	}
 
@@ -77,7 +76,7 @@ public class SceneObject implements SayActionObjectAPI{
 		return this.numberPrefix;
 	}
 
-	public String getTextualId() {
+	public String getOtid() {
 		return this.textualId;
 	}
 
@@ -97,8 +96,8 @@ public class SceneObject implements SayActionObjectAPI{
 	}
 
 	public void incrementFrameWithWraparound() {
-		Animation anim = getAnimations().at(
-				this.fak.getCurrentAnimationTextualId());
+		Animation anim = getAnimations().getByAtid(
+				this.fak.getCurrentAnimationAtid());
 		final int animLength = anim.getFrames().getCount();
 		if (animLength == 0) {
 			// Log::NoSingleImage(QString("Here in IncrementFrame"));
@@ -118,8 +117,8 @@ public class SceneObject implements SayActionObjectAPI{
 	}
 
 	public void decrementFrameWithWraparound() {
-		Animation anim = getAnimations().at(
-				this.fak.getCurrentAnimationTextualId());
+		Animation anim = getAnimations().getByAtid(
+				this.fak.getCurrentAnimationAtid());
 		// Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg( this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
 
 		int i = this.fak.getCurrentFrame() - 1;
@@ -145,27 +144,27 @@ public class SceneObject implements SayActionObjectAPI{
 
 	public void updateToCorrectImage() {
 		// 1. do this only when the this.currentImage != img
-		String currentAnim = fak.getCurrentAnimationTextualId();
-		Animation anim = this.animationCollection.at(currentAnim);
+		String currentAnim = fak.getCurrentAnimationAtid();
+		Animation anim = this.animationCollection.getByAtid(currentAnim);
 
 		// if animation is set to something bad, then set it to back to initial
 		if(anim==null)
 		{
-			fak.setCurrentAnimationTextualId(this.initialAnimationId);
-			anim = this.animationCollection.at(
-					fak.getCurrentAnimationTextualId());
+			fak.setCurrentAnimationAtid(this.initialAnimationId);
+			anim = this.animationCollection.getByAtid(
+					fak.getCurrentAnimationAtid());
 		}
 
 		if(anim==null)
 		{
-			anim = this.animationCollection.at(0);
-			fak.setCurrentAnimationTextualId(anim.getTextualId());
+			anim = this.animationCollection.getByIndex(0);
+			fak.setCurrentAnimationAtid(anim.getAtid());
 		}
 
 		if (anim != null) {
-			
+
 			int effectiveFrame = fak.getCurrentFrame();
-			// if we use -17 to indicate last frame ( 
+			// if we use -17 to indicate last frame (
 			if(fak.getCurrentFrame()==-17)
 			{
 				// set both to last frame
@@ -173,18 +172,18 @@ public class SceneObject implements SayActionObjectAPI{
 				effectiveFrame = anim.getLength() - 1;
 			}
 			// if the frame overflows...
-			else if (fak.getCurrentFrame()>= anim.getLength()) 
+			else if (fak.getCurrentFrame()>= anim.getLength())
 			{
 				// ...set it to last frame
 				effectiveFrame = anim.getLength() - 1;
 			}
-			
 
 
-			com.github.a2g.core.objectmodel.Image current = anim.getFrameCollection().at(effectiveFrame);
+
+			com.github.a2g.core.objectmodel.Image current = anim.getFrameCollection().getByIndex(effectiveFrame);
 
 			// yes current can equal null in some weird cases where I place breakpoints...
-			if (current != null) 
+			if (current != null)
 			{
 				if (this.currentImage != null) {
 					this.currentImage.setVisible(false, getRawLeftTop());
@@ -337,13 +336,13 @@ public class SceneObject implements SayActionObjectAPI{
 		int minLeft = 1000;
 		int maxRight = 0;
 		int maxBottom = 0;
-		Animation xanim = this.animationCollection.at(
+		Animation xanim = this.animationCollection.getByAtid(
 				animTextualId);
 
 		if (xanim != null) {
 			for (int i = 0; i
 					< xanim.getLength(); i++) {
-				com.github.a2g.core.objectmodel.Image img = xanim.getFrames().at(
+				com.github.a2g.core.objectmodel.Image img = xanim.getFrames().getByIndex(
 						i);
 				Rect rect = img.getBoundingRect();
 
@@ -376,15 +375,15 @@ public class SceneObject implements SayActionObjectAPI{
 		return this.mapOfSpecialAnimations.get(
 				type);
 	}
-	
+
 	public String getCurrentAnimation() {
-		String textualId = this.fak.getCurrentAnimationTextualId();
+		String textualId = this.fak.getCurrentAnimationAtid();
 
 		return textualId;
 	}
 
 	public void setCurrentAnimation(String textualId) {
-		this.fak.setCurrentAnimationTextualId(
+		this.fak.setCurrentAnimationAtid(
 				textualId);
 		updateToCorrectImage();
 	}
@@ -397,11 +396,11 @@ public class SceneObject implements SayActionObjectAPI{
 		this.initialAnimationId = InitialAnimation;
 	}
 
-	public void setCode(short objectCode) {
+	public void setOCode(short objectCode) {
 		this.code = objectCode;
 	}
 
-	public short getCode() {
+	public short getOCode() {
 		return code;
 
 	}
@@ -418,10 +417,10 @@ public class SceneObject implements SayActionObjectAPI{
 	{
 		for(int a = 0;a<animationCollection.getCount();a++)
 		{
-			Animation anim = animationCollection.at(a);
+			Animation anim = animationCollection.getByIndex(a);
 			for(int i=0;i<anim.getLength();i++)
 			{
-				anim.getFrames().at(i).setParallaxX(x);
+				anim.getFrames().getByIndex(i).setParallaxX(x);
 			}
 		}
 	}
@@ -439,46 +438,37 @@ public class SceneObject implements SayActionObjectAPI{
 	}
 
 	public void alignBaseMiddleOfOldFrameToFrameOfNewAnimation(
-			String textualId,
+			String atid,
 			int frame)
 	{
 		PointF h = getBaseMiddleXY();
-		this.fak.setCurrentAnimationTextualId(textualId);
-		
+		this.fak.setCurrentAnimationAtid(textualId);
+
 		this.fak.setCurrentFrame(frame);
 		this.updateToCorrectImage();
-		
+
 		// then change position
 		setBaseMiddleX(h.getX());
 		setBaseMiddleY(h.getY());
 
 	}
-	
+
 	public double getScreenCoordsPerSecond()
 	{
 		return screenCoordsPerSecond;
 	}
-	
+
 	public void setScreenCoordsPerSecond(double coordsPerSecond)
 	{
 		this.screenCoordsPerSecond = coordsPerSecond;
 	}
-	
+
 	public void setToInitialAnimationWithoutChangingFrame()
 	{
 		//todo: should really check whether initial animation is null
 		this.setCurrentAnimation(this.getInitialAnimation());
 	}
 
-	@Override
-	public int getNumberOfFramesForAnimation(String animId) {
-		return (getAnimations().at(animId)!=null)? getAnimations().at(animId).getLength(): 0;
-	}
-
-	@Override
-	public double getDurationForAnimation(String animId) {
-		return (getAnimations().at(animId)!=null)? getAnimations().at(animId).getDurationSecs(): 0;
-			}
 
 }
 

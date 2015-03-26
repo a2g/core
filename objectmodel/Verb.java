@@ -19,25 +19,25 @@ package com.github.a2g.core.objectmodel;
 
 public class Verb {
 	private final String displayText;
-	private final String textualId;
-	private final int code;
+	private final String vtid;
+	private final int vcode;
 
-	public Verb(String textualId, String displayText, int code) {
+	public Verb(String vtid, String displayText, int vcode) {
 		this.displayText = displayText;
-		this.textualId = textualId;
-		this.code = code;
+		this.vtid = vtid;
+		this.vcode = vcode;
 	}
 
-	public String gettextualId() {
-		return textualId;
+	public String getVtid() {
+		return vtid;
 	}
 
 	public String getdisplayText() {
 		return displayText;
 	}
 
-	public int getCode()
+	public int getVCode()
 	{
-		return code;
+		return vcode;
 	}
 }

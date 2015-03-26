@@ -21,17 +21,17 @@ import java.awt.event.MouseAdapter;
 
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryPanel;
 
 
 public class InventoryMouseClickHandler extends MouseAdapter
 {
-	private MouseToInventoryPresenterAPI api;
-	public InventoryMouseClickHandler(JPanel parent, MouseToInventoryPresenterAPI api2) {
+	private IInventoryPresenterFromInventoryPanel api;
+	public InventoryMouseClickHandler(JPanel parent, IInventoryPresenterFromInventoryPanel api2) {
 		this.api = api2;
 	}
 
-	public MouseToInventoryPresenterAPI getAPI()
+	public IInventoryPresenterFromInventoryPanel getAPI()
 	{
 		return api;
 	}

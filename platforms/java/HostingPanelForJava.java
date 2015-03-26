@@ -19,12 +19,12 @@ package com.github.a2g.core.platforms.java;
 import java.awt.Component;
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.HostingPanelAPI;
+import com.github.a2g.core.interfaces.IHostingPanel;
 
 @SuppressWarnings("serial")
 public class HostingPanelForJava
 extends JPanel
-implements HostingPanelAPI
+implements IHostingPanel
 {
 	@Override
 	public void setThing(Object w) {

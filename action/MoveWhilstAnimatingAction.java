@@ -18,15 +18,22 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.objectmodel.Animation;
-import com.github.a2g.core.objectmodel.SceneObject;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromMoveAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.action.ChainedAction;
 
 public class MoveWhilstAnimatingAction extends ChainedAction
 {
-	private SceneObject obj;// set in constructor
+	IScenePresenterFromMoveAction scene;
 
+	private short ocode;
+	private String otid;// set in constructor
+	private String atid; // set in runGameAction
+	
 	private double endX;// set via setters
 	private double endY;// set via setters
 	private double startX;// set via setters
@@ -35,22 +42,22 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 	private double screenCoordsPerSecond;// set via setters
 	private boolean isParallel;// set via setters
 
-	private Animation anim; // set in runGameAction
 	private int framesInAnim;// set in runGameAction
 	private int framesPlayedDuringWalk;// set in runGameAction
 	private boolean isBackwards;
 	private boolean holdLastFrame;
 
 	private boolean isStopped;
+	public static final short DEFAULT_WALK_OBJECT = -1;
 	
-	public MoveWhilstAnimatingAction(BaseAction parent, short objId, boolean isLinear)
+	
+	public MoveWhilstAnimatingAction(BaseAction parent, short ocode, boolean isLinear)
 	{
-		super(parent, parent.getApi(), isLinear);
-		this.obj = getApi().getObject(objId);
-		this.animatingDelay = 0;
-		assert(obj!=null);
-		this.screenCoordsPerSecond = obj.getScreenCoordsPerSecond();
 		
+		super(parent, isLinear);
+		this.ocode = ocode;
+		this.animatingDelay = 0;
+		this.screenCoordsPerSecond = scene.getScreenCoordsPerSecondByOtid(otid);
 		this.endX = Double.NaN;
 		this.endY = Double.NaN;
 		this.startX = 0.0;
@@ -59,6 +66,10 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 		this.isBackwards = false;
 		this.holdLastFrame = true;
 		this.isStopped = false;
+	}
+	String getOtid()
+	{
+		return otid;
 	}
 	
 	void setEndX(double endX)
@@ -75,7 +86,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 	{
 		this.holdLastFrame = holdLastFrame;
 	}
-	SceneObject getObject(){return this.obj;}
+	String getObject(){return this.otid;}
 	double getEndX(){ return endX;}
 	double getEndY(){ return endY;}
 	double getStartX(){ return startX;}
@@ -87,10 +98,16 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 	@Override
 	public void runGameAction()
 	{
-
-		this.anim = this.obj.getAnimations().at(obj.getCurrentAnimation());
-		startX = getObject().getBaseMiddleX();
-		startY = getObject().getBaseMiddleY();
+		if(ocode ==-1)
+		{
+			otid = scene.getOtidOfDefaultWalkObject();
+		}else
+		{
+			otid = scene.getOtidByCode(ocode);
+		}
+		atid = scene.getAtidOfCurrentAnimationByOtid(otid);
+		startX = scene.getBaseMiddleXByOtid(otid);
+		startY = scene.getBaseMiddleYByOtid(otid);
 		
 		if(endX == Double.NaN)
 			endX = startX;
@@ -109,8 +126,8 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 
 		this.framesPlayedDuringWalk = (int) (dist* 40 + animatingDelay);
 
-		if (this.anim != null) {
-			this.framesInAnim = this.anim.getLength();
+		if (this.atid != null) {
+			this.framesInAnim = scene.getNumberOfFramesByAtid(atid);
 		} else {
 			this.framesInAnim = 0;
 		}
@@ -139,13 +156,13 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 
 		System.out.println(" walkto-mid " + x + " " + y );
 
-		if(getApi().isInANoGoZone(new PointF(x,y)))
+		if(scene.isInANoGoZone(new PointF(x,y)))
 		{
 			// if in a nogozone in the middle of moving
 			// then the delta(inx,y) may be small enough
 			// for us to tell they have moved between two 
 			// gate points. And if so, then we can fire
-			getApi().fireOnMovementBeyondAGateIfRelevant(new PointF(x,y));
+			scene.fireOnMovementBeyondAGateIfRelevant(new PointF(x,y));
 			
 			// and we make sure we only do this once
 			// we don't keep letting the animation try all the points
@@ -155,8 +172,8 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 			return;
 		}
 
-		this.obj.setBaseMiddleX(x);
-		this.obj.setBaseMiddleY(y);
+		scene.setBaseMiddleXByOtid(otid, x);
+		scene.setBaseMiddleYByOtid(otid, y);
 
 		int frameToSetTo =0;
 		if(this.framesInAnim >1)
@@ -166,28 +183,25 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 			frameToSetTo = (int)framesPlayedSoFar % this.framesInAnim;
 
 		}
-		if (obj != null) {
-			obj.setCurrentAnimation(anim.getTextualId());
-			obj.setCurrentFrame(frameToSetTo);
-		}
-
-
+		
+		scene.setAsACurrentAnimationByAtid(atid);
+		scene.setCurrentFrameByOtid(otid,frameToSetTo);
 	}
 
 	@Override // method in animation
 	protected void onCompleteGameAction()
 	{
-		if(!getApi().isInANoGoZone(new PointF(endX,endY)))
+		if(!scene.isInANoGoZone(new PointF(endX,endY)))
 		{
 			onUpdateGameAction(1.0);
-			this.obj.setBaseMiddleX(endX);
-			this.obj.setBaseMiddleY(endY);
+			scene.setBaseMiddleXByOtid(otid, endX);
+			scene.setBaseMiddleYByOtid(otid, endY);
 		}
 		if (holdLastFrame==false) {
-			if (this.obj != null)
+			if (this.otid != null)
 			{
 
-				obj.setToInitialAnimationWithoutChangingFrame();
+				scene.setToInitialAnimationWithoutChangingFrameByOtid(otid);
 			}
 		}
 	}
@@ -196,6 +210,16 @@ public class MoveWhilstAnimatingAction extends ChainedAction
 	public boolean isParallel() {
 
 		return isParallel;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
+		
+	}
+
+	public void setScene(IScenePresenterFromMoveAction scene) {
+		this.scene = scene;
 	}
 
 

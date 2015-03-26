@@ -25,32 +25,32 @@ import com.google.gwt.event.shared.EventBus;
 public class InventoryItem {
 
 	private final Image image;
-	private final String textualId;
+	private final String itid;
 	private String displayName;
 	private boolean visible;
 	private EventBus bus;
-	private int code;
+	private int icode;
 
-	public InventoryItem(EventBus bus, final String textualId, final Image image, int code, boolean isVisible) {
+	public InventoryItem(EventBus bus, final String itid, final Image image, int icode, boolean isVisible) {
 		assert(bus != null);
-		this.code = code;
+		this.icode = icode;
 		this.image = image;
-		this.textualId = textualId;
+		this.itid = itid;
 		this.visible = isVisible;
-		this.displayName = textualId;
+		this.displayName = itid;
 		this.bus = bus;
 	}
 
-	public String getTextualId() {
-		return textualId;
+	public String getItid() {
+		return itid;
 	}
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 		bus.fireEvent(
 				new PropertyChangeEvent(
-						"CARRYING_" + textualId,
-						code, visible ? 1 : 0));
+						"CARRYING_" + itid,
+						icode, visible ? 1 : 0));
 	}
 
 	public boolean isVisible() {
@@ -69,9 +69,9 @@ public class InventoryItem {
 		return this.displayName;
 	}
 
-	public int getCode()
+	public int getICode()
 	{
-		return code;
+		return icode;
 	}
 
 }

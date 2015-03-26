@@ -23,18 +23,17 @@ import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.TitleCardPanelAPI;
+import com.github.a2g.core.interfaces.ITitleCardPanelFromTitleCardPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 
 @SuppressWarnings("serial")
 public class TitleCardPanelForJava
-extends JPanel implements TitleCardPanelAPI
+extends JPanel implements ITitleCardPanelFromTitleCardPresenter
 {
 	Button panel;
 	int width;
 	int height;
-	public TitleCardPanelForJava(final InternalAPI api, ColorEnum fore, ColorEnum back) 
+	public TitleCardPanelForJava(ColorEnum fore, ColorEnum back)
 	{
 		this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 		{

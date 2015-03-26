@@ -16,17 +16,17 @@
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.TimerAPI;
-import com.github.a2g.core.interfaces.TimerCallbackAPI;
+import com.github.a2g.core.interfaces.ITimer;
+import com.github.a2g.core.interfaces.IMasterPresenterFromTimer;
 
 
 public class TimerForHtml4
 extends com.google.gwt.user.client.Timer
-implements TimerAPI
+implements ITimer
 {
-	private TimerCallbackAPI callback;
+	private IMasterPresenterFromTimer callback;
 
-	public TimerForHtml4(TimerCallbackAPI callback)
+	public TimerForHtml4(IMasterPresenterFromTimer callback)
 	{
 		this.callback = callback;
 	}

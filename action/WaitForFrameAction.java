@@ -18,26 +18,32 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromWaitAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 
 public class WaitForFrameAction extends ChainedAction {
+	private IScenePresenterFromWaitAction scene;
 	private int frame;
-	private SceneObject object;
+	private short ocode;
+	private String otid;
 
-	public WaitForFrameAction(BaseAction parent, short objectId, int frame) {
-		super(parent, parent.getApi(), true);
+	public WaitForFrameAction(BaseAction parent, short ocode, int frame) {
+		super(parent, true);
 		this.frame = frame;
-		this.object = getApi().getObject(
-				objectId);
+		this.ocode = ocode;
 	}
 
 	@Override
 	public void runGameAction() {
 		// we achieve the variable execution time, by using a max value here..
-		String name = object.getCurrentAnimation();
-		int count = object.getAnimations().at(name).getFrames().getCount();
+		this.otid = scene.getOtidByCode(ocode);
+		String atid = scene.getAtidOfCurrentAnimationByOtid(otid);
+		int count = scene.getNumberOfFramesByAtid(atid);
 		int milliseconds = count * 1000;
 
 		this.run(milliseconds);
@@ -46,7 +52,7 @@ public class WaitForFrameAction extends ChainedAction {
 	@Override
 	protected void onUpdateGameAction(double progress) {
 		// ..then cancelling the animation when it reaches the desired condition.
-		if (object.getCurrentFrame() == frame) {
+		if (scene.getCurrentFrameByOtid(otid) == frame) {
 			cancel();
 		}
 	}
@@ -57,6 +63,20 @@ public class WaitForFrameAction extends ChainedAction {
 	@Override
 	public boolean isParallel() {
 		return false;
+	}
+
+	public IScenePresenterFromWaitAction getScene() {
+		return scene;
+	}
+
+	public void setScene(IScenePresenterFromWaitAction scene) {
+		this.scene = scene;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
+		
 	}
 
 }

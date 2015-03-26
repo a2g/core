@@ -17,8 +17,7 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.TitleCardPanelAPI;
+import com.github.a2g.core.interfaces.ITitleCardPanelFromTitleCardPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
@@ -28,14 +27,11 @@ import com.google.gwt.user.client.ui.SimplePanel;
 
 public class TitleCardPanel
 extends SimplePanel
-implements TitleCardPanelAPI
+implements ITitleCardPanelFromTitleCardPresenter
 {
-
 	Label label;
-	InternalAPI api;
 	LayoutPanel layout;
-	public TitleCardPanel(final InternalAPI api, ColorEnum fore, ColorEnum back) {
-		this.api = api;
+	public TitleCardPanel(ColorEnum fore, ColorEnum back) {
 		this.layout = new LayoutPanel();
 		this.add(layout);
 		{

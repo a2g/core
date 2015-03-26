@@ -20,7 +20,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import com.google.gwt.event.shared.EventBus;
-import com.github.a2g.core.interfaces.InternalAPI;
+import com.github.a2g.core.interfaces.ICommandLinePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.platforms.java.panel.ScenePanelForJava;
@@ -30,13 +31,15 @@ import com.github.a2g.core.objectmodel.SceneObject;
 @SuppressWarnings("unused")
 public class SceneMouseOverHandler implements MouseMotionListener {
 	private final EventBus bus;
-	private InternalAPI api;
+	private IScenePresenterFromSceneMouseOver toScene;
+	private ICommandLinePresenterFromSceneMouseOver toCommandLine;
 	private final ScenePanelForJava scenePanel;
 	static boolean isAddedAlready;
 
-	public SceneMouseOverHandler(ScenePanelForJava scenePanel, EventBus bus, InternalAPI api) {
+	public SceneMouseOverHandler(ScenePanelForJava scenePanel, EventBus bus, IScenePresenterFromSceneMouseOver toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine) {
 		this.bus = bus;
-		this.api = api;
+		this.toScene = toScene;
+		this.toCommandLine = toCommandLine;
 		this.scenePanel = scenePanel;
 		if(!isAddedAlready)
 		{
@@ -45,9 +48,9 @@ public class SceneMouseOverHandler implements MouseMotionListener {
 		}
 	}
 
-	public InternalAPI getAPI()
+	public IScenePresenterFromSceneMouseOver getAPI()
 	{
-		return api;
+		return toScene;
 	}
 
 
@@ -61,14 +64,13 @@ public class SceneMouseOverHandler implements MouseMotionListener {
 		String textualId = scenePanel.getObjectUnderMouse(event.getX(),event.getY());
 		if(textualId!="")
 		{
-			//api.getSceneGui().objectCollection().at(objectId).getAnimations().at(textualAnim).getFrames().at(0).getBoundingRect();
 			//displayName = "" + x + "," + y + ") " +ob.getDisplayName() + "(" + r.getLeft()+","+r.getTop()+ ")to" + "(" + r.getRight()+","+r.getBottom() +")";
-			String displayName = api.getSceneGui().getDisplayNameByOTEXT(textualId);
-			short code = api.getSceneGui().getCodeByOTEXT(textualId);
-			double camx = api.getSceneGui().getCameraX();
-			double camy = api.getSceneGui().getCameraY();
-			api.getCommandLineGui().setXYForDebugging(x+camx, y+camy);
-			api.getCommandLineGui().onSetMouseOver(displayName, textualId, code);
+			String displayName = toScene.getDisplayNameByOtid(textualId);
+			short code = toScene.getCodeByOtid(textualId);
+			double camx = toScene.getCameraX();
+			double camy = toScene.getCameraY();
+			toCommandLine.setXYForDebugging(x+camx, y+camy);
+			toCommandLine.setCommandLineMouseOver(displayName, textualId, code);
 			bus.fireEvent(
 					new SetRolloverEvent(
 							displayName,

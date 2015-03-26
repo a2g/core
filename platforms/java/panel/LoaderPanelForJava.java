@@ -27,23 +27,23 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.LoaderPanelAPI;
-import com.github.a2g.core.interfaces.MouseToLoaderPresenterAPI;
+import com.github.a2g.core.interfaces.ILoaderPanelFromLoaderPresenter;
+import com.github.a2g.core.interfaces.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.primitive.ColorEnum;
 
 @SuppressWarnings("serial")
 public class LoaderPanelForJava
 extends JPanel
-implements LoaderPanelAPI
+implements ILoaderPanelFromLoaderPresenter
 {
 	Label progress;
 	Button reload;
-	MouseToLoaderPresenterAPI api;
+	IMasterPresenterFromLoaderMouse api;
 	Button clickToContinue;
 	int width;
 	int height;
 
-	public LoaderPanelForJava(final MouseToLoaderPresenterAPI api, ColorEnum fore, ColorEnum back)
+	public LoaderPanelForJava(final IMasterPresenterFromLoaderMouse api, ColorEnum fore, ColorEnum back)
 	{
 		this.api = api;
 		this.setForeground(new Color(fore.r, fore.g, fore.b));
@@ -73,7 +73,7 @@ implements LoaderPanelAPI
 		}
 	}
 
-	void addHandler(final MouseToLoaderPresenterAPI  api)
+	void addHandler(final IMasterPresenterFromLoaderMouse  api)
 	{
 		reload.addActionListener
 		(
@@ -84,7 +84,7 @@ implements LoaderPanelAPI
 						api.restartReloading();
 					}
 				}
-		);
+				);
 		clickToContinue.addActionListener
 		(
 				new ActionListener()
@@ -94,7 +94,7 @@ implements LoaderPanelAPI
 						api.clickToContinue();
 					}
 				}
-		);
+				);
 
 	}
 

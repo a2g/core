@@ -18,18 +18,23 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.objectmodel.SceneObject;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromSetVisibleAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.ChainedAction;
 
 
 public class SetVisibleAction extends ChainedAction {
-	private short objId;
+	private IScenePresenterFromSetVisibleAction scene;
+	private short ocode;
+	private String otid;
 	private boolean isVisible;
 
-	public SetVisibleAction(BaseAction parent, short objId, boolean isVisible, boolean isLinear) {
-		super(parent, parent.getApi(), isLinear);
-		this.objId = objId;
+	public SetVisibleAction(BaseAction parent, short ocode, boolean isVisible, boolean isLinear) {
+		super(parent, isLinear);
+		this.ocode = ocode;
 		this.isVisible = isVisible;
 	}
 
@@ -44,19 +49,25 @@ public class SetVisibleAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		InternalAPI i = getApi();
-		SceneObject o = i.getObject(this.objId);
-
-		if (o != null) {
-			o.setVisible(this.isVisible);
-		} else {
-			assert(o != null);
-		}
+		this.otid = scene.getOtidByCode(ocode);
+		scene.setVisibleByOtid(otid, this.isVisible);
+		
 	}
 
 	@Override
 	public boolean isParallel() {
 
 		return false;
+	}
+
+
+	public void setScene(IScenePresenterFromSetVisibleAction scene) {
+		this.scene = scene;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
+		
 	}
 }

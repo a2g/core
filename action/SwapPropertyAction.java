@@ -18,33 +18,33 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromSwapAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 
 public class SwapPropertyAction extends ChainedAction {
-
-	private short objId1;
-	private short objId2;
+	private IScenePresenterFromSwapAction scene;
+	private short ocodeA;
+	private short ocodeB;
+	private String otidA;
+	private String otidB;
 	private SwapType type;
 	boolean newA;
 	boolean newB;
-	public SwapPropertyAction(BaseAction parent, short objId1, short objId2, SwapType type) {
-		super(parent, parent.getApi(), true);
-		this.objId1 = objId1;
-		;
-		this.objId2 = objId2;
+	public SwapPropertyAction(BaseAction parent, short ocodeA, short ocodeB, SwapType type) {
+		super(parent,  true);
+		this.ocodeA = ocodeA;
+		this.ocodeB = ocodeB;
 		this.type = type;
 	}
 
 	@Override
 	public void runGameAction() {
-		SceneObject a = getApi().getObject(
-				this.objId1);
-		SceneObject b = getApi().getObject(
-				this.objId2);
-		newA = b.isVisible();
-		newB = a.isVisible();
+	
 		super.run(1);
 	}
 
@@ -53,18 +53,15 @@ public class SwapPropertyAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		SceneObject a = getApi().getObject(
-				this.objId1);
-		SceneObject b = getApi().getObject(
-				this.objId2);
-
+		otidA = scene.getOtidByCode(ocodeA);
+		otidB = scene.getOtidByCode(ocodeB);
 		switch (this.type) {
 		case Visibility:
-			//boolean newA = b.isVisible();
-			//boolean newB = a.isVisible();
+			boolean newA = scene.getVisibleByOtid(otidB);
+			boolean newB = scene.getVisibleByOtid(otidA);
 
-			a.setVisible(newA);
-			b.setVisible(newB);
+			scene.setVisibleByOtid(otidA ,newA);
+			scene.setVisibleByOtid(otidB,newB);
 
 		}
 
@@ -74,6 +71,16 @@ public class SwapPropertyAction extends ChainedAction {
 	public boolean isParallel() {
 
 		return false;
+	}
+
+	public void setScene(IScenePresenterFromSwapAction scene) {
+		this.scene = scene;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
+		
 	}
 
 }

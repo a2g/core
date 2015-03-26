@@ -44,7 +44,7 @@ public class VerbCollection {
 		verbs.add(new Verb("Eat", "Eat AAA", ConstantsForAPI.EAT));
 	}
 
-	public Verb get(int i) {
+	public Verb getByIndex(int i) {
 		return verbs.get(i);
 	}
 
@@ -52,7 +52,7 @@ public class VerbCollection {
 	{
 		for(int i = 0 ; i<verbs.size();i++)
 		{
-			if(verbs.get(i).getCode() == verbCode)
+			if(verbs.get(i).getVCode() == verbCode)
 			{
 				verbs.remove(i);
 				//api.update();

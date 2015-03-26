@@ -19,19 +19,20 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.interfaces.IScenePresenterFromWalkScrollAction;
 
 
 public class WalkAndScrollXAction
 extends WalkToAction
 {
+	private IScenePresenterFromWalkScrollAction scene;
 	double startCameraX;
 	//double startCameraY;
 
-	public WalkAndScrollXAction(BaseAction parent, short objId, double endX, double endY, int delay, boolean isLinear)
+	public WalkAndScrollXAction(BaseAction parent, short ocode, double endX, double endY, int delay, boolean isLinear)
 	{
-		super(parent, objId, endX, endY, delay, isLinear);
-		startCameraX = getApi().getSceneGui().getCameraX();
-		//startCameraY = getApi().getSceneGui().getCameraY();
+		super(parent, ocode, endX, endY, delay, isLinear);
+		startCameraX = scene.getCameraX();
 	}
 
 	@Override
@@ -48,13 +49,9 @@ extends WalkToAction
 		double x = startCameraX
 				+ progress
 				* ( this.getEndX()- this.getStartX());
-		//double y = startCameraY
-		//			+ progress
-		//		* (this.getEndY()- this.getStartY());
 
-		getApi().getSceneGui().setCameraX(x);
-		//getApi().getSceneGui().setCameraY(y);
-
+		scene.setCameraX(x);
+	
 	}
 
 	@Override // on complete walking
@@ -63,9 +60,13 @@ extends WalkToAction
 
 		super.onCompleteGameAction();
 
-		getApi().getSceneGui().setCameraX(startCameraX	+ this.getEndX()- this.getStartX());
+		scene.setCameraX(startCameraX	+ this.getEndX()- this.getStartX());
 		;
 
 
+	}
+
+	public void setScene(IScenePresenterFromWalkScrollAction scene) {
+		this.scene = scene;
 	}
 }

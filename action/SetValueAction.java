@@ -19,13 +19,19 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromSetValueAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 
 public class SetValueAction extends BaseDialogTreeAction {
+	private IScenePresenterFromSetValueAction scene;
 	private String name;
 	private int i;
 	public SetValueAction(BaseAction parent, String name, int i) {
-		super(parent, parent.getApi());
+		super(parent);
 		this.name = name;
 		this.i = i;
 	}
@@ -44,11 +50,22 @@ public class SetValueAction extends BaseDialogTreeAction {
 	@Override
 	protected void onCompleteGameAction()
 	{
-		getApi().setValue(name,i);
+		scene.setValue(name,i);
 	}
 
 	@Override
 	public boolean isParallel() {
 		return false;
+	}
+
+
+	public void setScene(IScenePresenterFromSetValueAction scene) {
+		this.scene = scene;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
+		
 	}
 }

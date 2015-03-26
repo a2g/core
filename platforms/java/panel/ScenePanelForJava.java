@@ -24,7 +24,6 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -36,14 +35,22 @@ import javax.swing.JPanel;
 
 
 
+
+
+
+
+
+
 //import com.github.a2g.bridge.Image;
 import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.SayAction;
+import com.github.a2g.core.interfaces.ICommandLinePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.PackagedImageAPI;
-import com.github.a2g.core.interfaces.ScenePanelAPI;
+import com.github.a2g.core.interfaces.IPackagedImage;
+import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
@@ -57,7 +64,7 @@ import com.google.gwt.event.shared.EventBus;
 @SuppressWarnings("serial")
 public class ScenePanelForJava
 extends JPanel
-implements ScenePanelAPI
+implements IScenePanelFromScenePresenter
 , ImagePanelAPI
 , ActionListener
 {
@@ -66,15 +73,19 @@ implements ScenePanelAPI
 	int tally;
 	int cameraOffsetX;
 	int cameraOffsetY;
-	InternalAPI api;
+	IScenePresenterFromScenePanel toScene;
+	ICommandLinePresenterFromSceneMouseOver toCommandLine;
 
 	private Map<Integer,Point> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages;
+	private PopupPanelForJava speechPopup;
 
-	public ScenePanelForJava(EventBus bus, InternalAPI api)
+	public ScenePanelForJava(EventBus bus, IScenePresenterFromScenePanel toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine)
 	{
-		this.api = api;
+		this.speechPopup = new PopupPanelForJava(toScene);
+		this.toScene = toScene;
+		this.toCommandLine = toCommandLine;
 		this.mapOfPointsByImage = new TreeMap<Integer, Point>();
 		this.listOfVisibleHashCodes = new LinkedList<Integer>();
 		this.listOfAllVisibleImages = new LinkedList<Image>();
@@ -89,12 +100,12 @@ implements ScenePanelAPI
 
 		super.addMouseListener
 		(
-				new SceneMouseClickHandler(bus,api)
+				new SceneMouseClickHandler(bus,toScene)
 				);
 
 		super.addMouseMotionListener
 		(
-				new SceneMouseOverHandler(this, bus,api)
+				new SceneMouseOverHandler(this, bus, toScene, toCommandLine)
 				);
 	}
 
@@ -103,8 +114,7 @@ implements ScenePanelAPI
 
 	public Image createNewImageAndAdddHandlers(
 			LoadHandler lh,
-			PackagedImageAPI imageResource,
-			InternalAPI api,
+			IPackagedImage imageResource,
 			EventBus bus,
 			int x,
 			int y,
@@ -209,7 +219,7 @@ implements ScenePanelAPI
 		int code= ((ImageForJava)image).getNativeImage().hashCode();
 		return new Integer(code);
 	}
-	
+
 	@Override
 	public void paint(Graphics g)
 	{
@@ -223,7 +233,7 @@ implements ScenePanelAPI
 				Point p = mapOfPointsByImage.get(hash(image));
 				int x = p.getX();
 				int y = p.getY();
-							
+
 				g.drawImage(((ImageForJava)image).getNativeImage(),(int)(x-cameraOffsetX*image.getParallaxX()),(int)(y-cameraOffsetY*image.getParallaxY()),this);
 			}
 		}
@@ -236,24 +246,25 @@ implements ScenePanelAPI
 	{
 		//System.out.println("----------------");
 		String textualId = "";
-		int count = api.getSceneGui().getSceneObjectCount();
+		int count = toScene.getSceneObjectCount();
 		for(int i = 0;i<count;i++)
 		{
-			if(api.getSceneGui().getVisibleByIndex(i))
+			String otid = toScene.getOtidByIndex(i);
+			if(toScene.getVisibleByOtid(otid))
 			{
 				//System.out.println(ob.getTextualId() + ob.getNumberPrefix());
-				int frame = api.getSceneGui().getCurrentFrameByIndex(i);
-				String atid = api.getSceneGui().getCurrentAnimationByIndex(i);
-				Rect rect = api.getSceneGui().getBoundingRectByATIDAndFrame(atid,frame);
-				int obx = (int)api.getSceneGui().getXByIndex(i);
-				int oby = (int)api.getSceneGui().getYByIndex(i);
+				int frame = toScene.getCurrentFrameByOtid(otid);
+				String atid = toScene.getAtidOfCurrentAnimationByOtid(otid);
+				Rect rect = toScene.getBoundingRectByFrameAndAtid(frame,atid);
+				int obx = (int)toScene.getXByOtid(otid);
+				int oby = (int)toScene.getYByOtid(otid);
 
 				int adjX = x - obx + cameraOffsetX;
 				int adjY = y - oby + cameraOffsetY;
 
 				if(rect.contains(adjX, adjY))
 				{
-					textualId = api.getSceneGui().getOTEXTByIndex(i);
+					textualId = otid;
 				}
 			}
 		}
@@ -268,7 +279,7 @@ implements ScenePanelAPI
 	}
 
 	@Override
-	public int getImageHeight(Image image) 
+	public int getImageHeight(Image image)
 	{
 		int height = ((ImageForJava)image).getNativeImage().getHeight(this);
 		return height;
@@ -287,7 +298,7 @@ implements ScenePanelAPI
 
 	@Override
 	public Image createNewImageAndAddHandlers(final LoadHandler lh,
-			PackagedImageAPI imageResource, InternalAPI api, EventBus bus,
+			IPackagedImage imageResource, IScenePresenterFromSceneMouseOver api, EventBus bus,
 			int x, int y, String objectTextualId, short objectCode)
 	{
 		java.awt.Image img = ((PackagedImageForJava)imageResource).unpack();
@@ -313,7 +324,7 @@ implements ScenePanelAPI
 	}
 
 	@Override
-	public void setCameraOffset(int x, int y) 
+	public void setCameraOffset(int x, int y)
 	{
 		this.cameraOffsetX = x;
 		this.cameraOffsetY = y;
@@ -329,11 +340,14 @@ implements ScenePanelAPI
 
 
 
+
 	@Override
-	public void setStateOfPopup(boolean visible, int x, int y,
-			ColorEnum talkingColor, String speech, BaseAction ba) {
-		// TODO Auto-generated method stub
-		
+	public void setStateOfPopup(boolean isVisible, double x, double y,
+			ColorEnum talkingColor, String speech, SayAction sayAction) {
+		this.speechPopup.setVisible(isVisible);
+		this.speechPopup.setColor(talkingColor);
+		this.speechPopup.setText(speech);
+		this.speechPopup.setPopupPosition(x, y);
 	}
 
 

@@ -17,19 +17,19 @@
 package com.github.a2g.core.platforms.html4.mouse;
 
 
-import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
+import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 
 
 public class VerbMouseClickHandler
 implements ClickHandler {
-	private final MouseToVerbsPresenterAPI mouseToPresenter;
+	private final IVerbsPresenterFromVerbsPanel mouseToPresenter;
 	String textualId;
 	String displayName;
 	int code;
 
-	public VerbMouseClickHandler(MouseToVerbsPresenterAPI mouseToPresenter, String displayName, String textualId, int code) {
+	public VerbMouseClickHandler(IVerbsPresenterFromVerbsPanel mouseToPresenter, String displayName, String textualId, int code) {
 		this.mouseToPresenter = mouseToPresenter;
 		this.code = code;
 		this.displayName =displayName;

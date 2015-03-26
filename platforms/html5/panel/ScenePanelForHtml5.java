@@ -17,7 +17,6 @@
 package com.github.a2g.core.platforms.html5.panel;
 
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -28,14 +27,14 @@ import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.canvas.dom.client.CssColor;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.SayAction;
+import com.github.a2g.core.interfaces.ICommandLinePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.PackagedImageAPI;
-import com.github.a2g.core.interfaces.ScenePanelAPI;
+import com.github.a2g.core.interfaces.IPackagedImage;
+import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
 import com.github.a2g.core.objectmodel.Image;
-import com.github.a2g.core.objectmodel.SceneObject;
-import com.github.a2g.core.objectmodel.SceneObjectCollection;
 import com.github.a2g.core.platforms.html4.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
@@ -54,15 +53,18 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ScenePanelForHtml5
 extends VerticalPanel
-implements ImagePanelAPI, ScenePanelAPI
+implements 
+ImagePanelAPI
+, IScenePanelFromScenePresenter
 {
 	//private EventBus bus;
 	private AbsolutePanel abs;
 	private int cameraOffsetX;
 	private int cameraOffsetY;
-	//private int width;
-	//private int height;
-	private InternalAPI api;
+
+	private IScenePresenterFromScenePanel toScene;
+	//private ICommandLineFromSceneMouseOver toCommandLine;
+
 	private Canvas canvas;
 	private Canvas backBuffer;
 	@SuppressWarnings("unused")
@@ -73,7 +75,7 @@ implements ImagePanelAPI, ScenePanelAPI
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages;
 
-	public ScenePanelForHtml5(EventBus bus, InternalAPI api)
+	public ScenePanelForHtml5(EventBus bus, IScenePresenterFromScenePanel toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine)
 	{
 		//this.bus = bus;
 		this.getElement().setId("cwAbsolutePanel");
@@ -81,7 +83,8 @@ implements ImagePanelAPI, ScenePanelAPI
 		this.cameraOffsetX = 0;
 		this.cameraOffsetY = 0;
 		this.abs = new AbsolutePanel();
-		this.api = api;
+		this.toScene = toScene;
+		//this.toCommandLine = toCommandLine;
 		this.mapOfPointsByImage = new TreeMap<Integer, Point>();
 		this.listOfVisibleHashCodes = new LinkedList<Integer>();
 		this.listOfAllVisibleImages = new LinkedList<Image>();
@@ -91,7 +94,7 @@ implements ImagePanelAPI, ScenePanelAPI
 			// RootPanel.get(holderId).add(new Label(upgradeMessage));
 			return;
 		}
-		canvas.addMouseMoveHandler(new SceneMouseOverHandler(this, bus, api));
+		canvas.addMouseMoveHandler(new SceneMouseOverHandler(this, bus, toScene, toCommandLine));
 		canvas.addClickHandler(new SceneMouseClickHandler(bus, canvas));
 		this.add(canvas);
 		this.add(abs);
@@ -108,8 +111,8 @@ implements ImagePanelAPI, ScenePanelAPI
 	public Image createNewImageAndAddHandlers
 	(
 			LoadHandler lh,
-			PackagedImageAPI imageResource,
-			InternalAPI api,
+			IPackagedImage imageResource,
+			IScenePresenterFromSceneMouseOver api,
 			EventBus bus,
 			int x,
 			int y,
@@ -286,22 +289,23 @@ implements ImagePanelAPI, ScenePanelAPI
 	{
 		//System.out.println("----------------");
 		String textualId = "";
-		int count = api.getSceneGui().getSceneObjectCount();
+		int count = toScene.getSceneObjectCount();
 		for(int i = 0;i<count;i++)
 		{
-			if(api.getSceneGui().getVisibleByIndex(i))
+			String otid = toScene.getOtidByIndex(i);
+			if(toScene.getVisibleByOtid(otid))
 			{
-				String atid = api.getSceneGui().getCurrentAnimationByIndex(i);
-				int frame = api.getSceneGui().getCurrentFrameByIndex(i);
-				Rect rect = api.getSceneGui().getBoundingRectByATIDAndFrame(atid, frame);
+				String atid = toScene.getAtidOfCurrentAnimationByOtid(otid);
+				int frame = toScene.getCurrentFrameByOtid(otid);
+				Rect rect = toScene.getBoundingRectByFrameAndAtid(frame,atid);
 				//System.out.println(ob.getTextualId() + ob.getNumberPrefix());
 				
-				int adjX = x - (int)api.getSceneGui().getXByIndex(i) + cameraOffsetX;
-				int adjY = y - (int)api.getSceneGui().getYByIndex(i) + cameraOffsetY;
+				int adjX = x - (int)toScene.getXByOtid(otid) + cameraOffsetX;
+				int adjY = y - (int)toScene.getYByOtid(otid) + cameraOffsetY;
 
 				if(rect.contains(adjX, adjY))
 				{
-					textualId = api.getSceneGui().getOTEXTByIndex(i);
+					textualId = otid;
 				}
 			}
 		}
@@ -311,11 +315,13 @@ implements ImagePanelAPI, ScenePanelAPI
 
 
 	@Override
-	public void setStateOfPopup(boolean visible, int x, int y,
-			ColorEnum talkingColor, String speech, BaseAction ba) {
-		// TODO Auto-generated method stub
-		
+	public void setStateOfPopup(boolean isVisible, double x, double y,
+			ColorEnum talkingColor, String speech, SayAction sayAction) {
+	// maybe use the dom to create speech bubble graphic and render it.
 	}
+
+
+	
 
 
 

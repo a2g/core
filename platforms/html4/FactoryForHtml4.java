@@ -16,31 +16,28 @@ p- * Copyright 2012 Anthony Cassidy
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.CommandLinePanelAPI;
-import com.github.a2g.core.interfaces.DialogTreePanelAPI;
-import com.github.a2g.core.interfaces.FactoryAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.InventoryPanelAPI;
-import com.github.a2g.core.interfaces.LoaderPanelAPI;
-import com.github.a2g.core.interfaces.MasterPanelAPI;
-import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
-import com.github.a2g.core.interfaces.MouseToLoaderPresenterAPI;
-import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
-import com.github.a2g.core.interfaces.PopupPanelAPI;
-import com.github.a2g.core.interfaces.ScenePanelAPI;
-import com.github.a2g.core.interfaces.SystemAnimationAPI;
-import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
-import com.github.a2g.core.interfaces.TimerAPI;
-import com.github.a2g.core.interfaces.TimerCallbackAPI;
-import com.github.a2g.core.interfaces.TitleCardPanelAPI;
-import com.github.a2g.core.interfaces.VerbsPanelAPI;
+import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
+import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
+import com.github.a2g.core.interfaces.IFactory;
+import com.github.a2g.core.interfaces.IInventoryPanelFromInventoryPresenter;
+import com.github.a2g.core.interfaces.ILoaderPanelFromLoaderPresenter;
+import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryPanel;
+import com.github.a2g.core.interfaces.IMasterPresenterFromLoaderMouse;
+import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
+import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
+import com.github.a2g.core.interfaces.ISystemAnimation;
+import com.github.a2g.core.interfaces.IBaseActionFromSystemAnimation;
+import com.github.a2g.core.interfaces.ITimer;
+import com.github.a2g.core.interfaces.IMasterPresenterFromTimer;
+import com.github.a2g.core.interfaces.ITitleCardPanelFromTitleCardPresenter;
+import com.github.a2g.core.interfaces.IVerbsPanelFromVerbsPresenter;
 import com.github.a2g.core.objectmodel.CommandLinePanel;
 import com.github.a2g.core.objectmodel.DialogTreePanel;
 import com.github.a2g.core.objectmodel.InventoryPanel;
 import com.github.a2g.core.objectmodel.LoaderPanel;
 import com.github.a2g.core.objectmodel.MasterPanel;
 import com.github.a2g.core.objectmodel.MasterPresenter;
-import com.github.a2g.core.objectmodel.PopupPanel;
 import com.github.a2g.core.objectmodel.ScenePanel;
 import com.github.a2g.core.objectmodel.TitleCardPanel;
 import com.github.a2g.core.objectmodel.VerbsPanel;
@@ -48,16 +45,16 @@ import com.github.a2g.core.platforms.html4.TimerForHtml4;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
-import com.github.a2g.core.interfaces.MasterPresenterHostAPI;
+import com.github.a2g.core.interfaces.IHostFromMasterPresenter;
 
 public class FactoryForHtml4
-implements FactoryAPI
+implements IFactory
 {
 
 	private EventBus bus;
 	private MasterPresenter master;
 
-	public FactoryForHtml4(EventBus bus, MasterPresenter master, MasterPresenterHostAPI api)
+	public FactoryForHtml4(EventBus bus, MasterPresenter master, IHostFromMasterPresenter api)
 	{
 		this.bus = bus;
 		this.master = master;
@@ -65,65 +62,56 @@ implements FactoryAPI
 	}
 
 	@Override
-	public CommandLinePanelAPI createCommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll)
+	public ICommandLinePanelFromCommandLinePresenter createCommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll)
 	{
 		return new CommandLinePanel(fore, back, roll);
 	}
 
 	@Override
-	public DialogTreePanelAPI createDialogTreePanel(EventBus bus, ColorEnum foreground, ColorEnum background, ColorEnum rollover)
+	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(EventBus bus, ColorEnum foreground, ColorEnum background, ColorEnum rollover)
 	{
 		return new DialogTreePanel(bus, foreground, background, rollover);
 	}
 
 	@Override
-	public InventoryPanelAPI createInventoryPanel(MouseToInventoryPresenterAPI api, ColorEnum fore, ColorEnum back, ColorEnum rollover) {
-		return new InventoryPanel(master, api, fore, back, rollover);
+	public IInventoryPanelFromInventoryPresenter createInventoryPanel(IInventoryPresenterFromInventoryPanel api, ColorEnum fore, ColorEnum back, ColorEnum rollover) {
+		return new InventoryPanel(api, fore, back, rollover);
 	}
 
 	@Override
-	public LoaderPanelAPI createLoaderPanel(final MouseToLoaderPresenterAPI api, ColorEnum fore, ColorEnum back)
+	public ILoaderPanelFromLoaderPresenter createLoaderPanel(final IMasterPresenterFromLoaderMouse api, ColorEnum fore, ColorEnum back)
 	{
 		return new LoaderPanel(api, fore,back);
 	}
 
 	@Override
-	public MasterPanelAPI createMasterPanel(int width, int height, ColorEnum back) {
+	public IMasterPanelFromMasterPresenter createMasterPanel(int width, int height, ColorEnum back) {
 		return new MasterPanel(width, height, back);
 	}
 
 	@Override
-	public ScenePanelAPI createScenePanel() {
-		return new ScenePanel(bus, master);
+	public IScenePanelFromScenePresenter createScenePanel() {
+		return new ScenePanel(bus, master.getScenePresenter());
 	}
 
 	@Override
-	public TitleCardPanelAPI createTitleCardPanel(ColorEnum foreground, ColorEnum background)
+	public ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(ColorEnum foreground, ColorEnum background)
 	{
-		return new TitleCardPanel(master, foreground, background);
+		return new TitleCardPanel( foreground, background);
 	}
 
 
-
 	@Override
-	public PopupPanelAPI createPopupPanel(InternalAPI api, int sceneWidth, int sceneHeight)
+	public IVerbsPanelFromVerbsPresenter createVerbsPanel(IVerbsPresenterFromVerbsPanel api, ColorEnum foreground, ColorEnum background)
 	{
-		return new PopupPanel( sceneWidth,  sceneHeight);
-	}
-
-
-
-	@Override
-	public VerbsPanelAPI createVerbsPanel(MouseToVerbsPresenterAPI api, ColorEnum foreground, ColorEnum background)
-	{
-		return new VerbsPanel(master, api, foreground, background);
+		return new VerbsPanel(master.getVerbsPresenter(), foreground, background);
 	}
 	@Override
-	public SystemAnimationAPI createSystemAnimation(SystemAnimationCallbackAPI callbacks, boolean isLinear) {
+	public ISystemAnimation createSystemAnimation(IBaseActionFromSystemAnimation callbacks, boolean isLinear) {
 		return new SystemAnimationForHtml4(callbacks, isLinear);
 	}
 	@Override
-	public TimerAPI createSystemTimer(TimerCallbackAPI cbs) {
+	public ITimer createSystemTimer(IMasterPresenterFromTimer cbs) {
 		return new TimerForHtml4(cbs);
 	}
 

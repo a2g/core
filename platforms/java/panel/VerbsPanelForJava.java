@@ -25,9 +25,8 @@ import java.awt.Label;
 
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.MouseToVerbsPresenterAPI;
-import com.github.a2g.core.interfaces.VerbsPanelAPI;
+import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
+import com.github.a2g.core.interfaces.IVerbsPanelFromVerbsPresenter;
 import com.github.a2g.core.objectmodel.Verb;
 import com.github.a2g.core.objectmodel.Verbs;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -38,18 +37,16 @@ import com.github.a2g.core.platforms.java.mouse.VerbMouseOverHandler;
 
 @SuppressWarnings("serial")
 public class VerbsPanelForJava
-extends JPanel implements VerbsPanelAPI
+extends JPanel implements IVerbsPanelFromVerbsPresenter
 {
-	InternalAPI api;
 	Verbs verbs;
 	GridLayout grid;
-	MouseToVerbsPresenterAPI mouseToPresenter;
+	IVerbsPresenterFromVerbsPanel mouseToPresenter;
 	private int preferredWith;
 	private int preferredHeight;
-	public VerbsPanelForJava(InternalAPI api, MouseToVerbsPresenterAPI mouseToPresenter, ColorEnum fore, ColorEnum back)
+	public VerbsPanelForJava(IVerbsPresenterFromVerbsPanel mouseToPresenter, ColorEnum fore, ColorEnum back)
 	{
 		this.mouseToPresenter = mouseToPresenter;
-		this.api =  api;
 		this.preferredWith = 160;
 		this.preferredHeight = 80;
 		this.setForeground(new Color(fore.r, fore.g, fore.b));
@@ -89,21 +86,21 @@ extends JPanel implements VerbsPanelAPI
 		{
 			if(i<verbs.items().size())
 			{
-				Verb v = verbs.items().get(i);
-				int code = v.getCode();
-				String textualId = v.gettextualId();
+				Verb v = verbs.items().getByIndex(i);
+				int code = v.getVCode();
+				String textualId = v.getVtid();
 				Label label = new Label(textualId);
 				String displayText = v.getdisplayText();
 
 
 				label.addMouseListener
 				(
-					new VerbMouseOverHandler( mouseToPresenter, displayText, textualId, code)
-				);
+						new VerbMouseOverHandler( mouseToPresenter, displayText, textualId, code)
+						);
 				label.addMouseListener
 				(
-					new VerbMouseClickHandler(mouseToPresenter, displayText, textualId, code)
-				);
+						new VerbMouseClickHandler(mouseToPresenter, displayText, textualId, code)
+						);
 
 				this.add(label);
 			}

@@ -18,16 +18,22 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.objectmodel.Animation;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromAlignAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.ChainedAction;
 
 
 public class AlignBaseMiddleAction extends ChainedAction {
-	private String animId;
+	private String atid;
 	private int frame;
-	public AlignBaseMiddleAction(BaseAction parent, String animationCode, int frame) {
-		super(parent, parent.getApi(), true);
-		this.animId = animationCode;
+	private IScenePresenterFromAlignAction scene;
+
+	public AlignBaseMiddleAction(BaseAction parent, String atid, int frame) {
+		super(parent, true);
+		this.atid = atid;
 		this.frame = frame;
 	}
 
@@ -41,17 +47,22 @@ public class AlignBaseMiddleAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		Animation a = getApi().getAnimation(
-				this.animId);
 
-		if (a != null) {
-			a.alignBaseMiddleOfOldFrameToFrameOfThisAnimation(frame);
-		}
+		scene.alignBaseMiddleOfOldFrameToFrameOfThisAnimationByAtid(atid, frame);
 	}
 
 	@Override
 	public boolean isParallel() {
 
 		return false;
+	}
+
+	public void setScene(IScenePresenterFromAlignAction scene) {
+		this.scene = scene;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
 	}
 }

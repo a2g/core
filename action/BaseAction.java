@@ -36,23 +36,27 @@ import com.github.a2g.core.action.DialogTreeDoDialogBranchAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
-import com.github.a2g.core.interfaces.ActionCallbackAPI;
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.OnDoCommandAPI;
-import com.github.a2g.core.interfaces.SceneAPI;
-import com.github.a2g.core.interfaces.SystemAnimationAPI;
-import com.github.a2g.core.interfaces.SystemAnimationCallbackAPI;
+import com.github.a2g.core.interfaces.IActionRunnerFromBaseAction;
+import com.github.a2g.core.interfaces.IFactory;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IOnDoCommand;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
+import com.github.a2g.core.interfaces.IGameScene;
+import com.github.a2g.core.interfaces.ISystemAnimation;
+import com.github.a2g.core.interfaces.IBaseActionFromSystemAnimation;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.PointF;
 
 
 
-public abstract class BaseAction implements SystemAnimationCallbackAPI
+public abstract class BaseAction implements IBaseActionFromSystemAnimation
 {
-	private SystemAnimationAPI systemAnimation;
-	private ActionCallbackAPI callbacks;
+	private ISystemAnimation systemAnimation;
+	private IActionRunnerFromBaseAction callbacks;
 	protected BaseAction parent;
-	private InternalAPI api;
+	private boolean isLinear;
 
 	public enum SwapType {
 		Visibility
@@ -67,21 +71,20 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	abstract protected void onCompleteGameAction();
 
 	abstract public void runGameAction();
+	
+	abstract public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory);
 
-	protected BaseAction(BaseAction parent, InternalAPI api, boolean isLinear) {
+	protected BaseAction(BaseAction parent, boolean isLinear) {
 		this.parent = parent;
-		this.callbacks = null;
-		this.api = api;
-		if(api!=null)
-		{
-			this.systemAnimation = api.getFactory().createSystemAnimation(this, isLinear);
-		}
-		else
-		{
-		//	throw new NullPointerException();
-		}
+		this.isLinear = isLinear;
+		this.callbacks = null;//initd in setcallbacks
+		this.systemAnimation = null;// initd in setFactory
 	}
 
+	void setFactory(IFactory api)
+	{
+		this.systemAnimation = api.createSystemAnimation(this, isLinear);
+	}
 
 	public BaseDialogTreeAction branch(int branchId, String text) {
 		return new DialogTreeBranchAction(this,
@@ -89,9 +92,10 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	public ChainedAction branch(int branchId, final boolean isKey, String text) {
-		if(isKey)
-			return new DialogTreeBranchAction(this, text, branchId);
-		return doNothing();
+		if(!isKey)
+			return doNothing();
+		DialogTreeBranchAction a = new DialogTreeBranchAction(this, text, branchId);
+		return a;
 	}
 
 	public ChainedAction doBoth(ChainedAction a, ChainedAction b) {
@@ -106,9 +110,6 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return new DialogTreeEndAction(this);
 	}
 
-	public InternalAPI getApi() {
-		return this.api;
-	}
 
 	public BaseAction getParent() {
 		return this.parent;
@@ -231,43 +232,43 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	}
 
 	public ChainedAction say(String animCode, String speech) {
-		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), animCode, speech);
+		SayAction s = new SayAction(this, animCode, speech);
 		return s;
 	}
 	
 	public ChainedAction say(String speech) {
-		SayAction s = new SayAction(this, api, api.getAnimation(api.getDefaultSayAnimation()).getSceneObject(), api.getDefaultSayAnimation(), speech);
-		s.setIsNonIncrementing(api.getIsSayAlwaysWithoutIncremementing());
+		SayAction s = new SayAction(this, SayAction.DEFAULT_SAY_ANIM, speech);
+		s.setNonIncrementing(SayAction.NonIncrementing.FromAPI);
 		return s;
 	}
 
 	public ChainedAction sayWithoutIncrementingFrame(String animCode, String speech) {
-		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), animCode, speech);
-		s.setIsNonIncrementing(true);
+		SayAction s = new SayAction(this, animCode, speech);
+		s.setNonIncrementing(SayAction.NonIncrementing.True);
 		return s;
 	}
 
 	public ChainedAction sayWithoutIncrementingHoldLastFrame(String animCode, String speech) {
-		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), animCode, speech);
-		s.setIsNonIncrementing(true);
+		SayAction s = new SayAction(this, animCode, speech);
+		s.setNonIncrementing(SayAction.NonIncrementing.True);
 		s.setHoldLastFrame(true);
 		return s;
 	}
 	public ChainedAction sayWithoutIncrementingFrameNonBlocking(String animCode, String speech) {
-		SayAction s = new SayAction(this, api, api.getAnimation(animCode).getSceneObject(), animCode, speech);
-		s.setIsNonIncrementing(true);
+		SayAction s = new SayAction(this, animCode, speech);
+		s.setNonIncrementing(SayAction.NonIncrementing.True);
 		s.setNonBlocking(true);
 		return s;
 	}
 	public ChainedAction sayWithoutIncrementingFrame( String speech) {
-		SayAction s = new SayAction(this, api, api.getAnimation(api.getDefaultSayAnimation()).getSceneObject(), api.getDefaultSayAnimation(), speech);
-		s.setIsNonIncrementing(true);
+		SayAction s = new SayAction(this, SayAction.DEFAULT_SAY_ANIM, speech);
+		s.setNonIncrementing(SayAction.NonIncrementing.True);
 		return s;
 	}
 	
 	public ChainedAction sayWithoutIncrementingFrameNonBlocking( String speech) {
-		SayAction s = new SayAction(this, api, api.getAnimation(api.getDefaultSayAnimation()).getSceneObject(), api.getDefaultSayAnimation(), speech);
-		s.setIsNonIncrementing(true);
+		SayAction s = new SayAction(this, SayAction.DEFAULT_SAY_ANIM, speech);
+		s.setNonIncrementing(SayAction.NonIncrementing.True);
 		s.setNonBlocking(true);
 		return s;
 	}
@@ -276,51 +277,37 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 				this, animationCode);
 	}
 
-	public ChainedAction setActiveFrame(short objectCode, int frame) {
-		return new SetActiveFrameAction(this,
-				objectCode, frame);
+	public ChainedAction setActiveFrame(short ocode, int frame) {
+		return new SetActiveFrameAction(this, ocode, frame);
 	}
 
-	protected void setApi(InternalAPI api) {
-		if(api==null)
-		{
-			throw new NullPointerException();
-		}
-		this.api = api;
+	public ChainedAction setBaseMiddleX(short ocode, double x) {
+		return new SetBaseMiddleXAction(this, ocode, x);
 	}
 
-	public ChainedAction setBaseMiddleX(short objectCode, double x) {
-		return new SetBaseMiddleXAction(this,
-				objectCode, x);
-	}
-
-	public ChainedAction setBaseMiddleY(short objectCode, double y) {
-		return new SetBaseMiddleYAction(this,
-				objectCode, y);
+	public ChainedAction setBaseMiddleY(short ocode, double y) {
+		return new SetBaseMiddleYAction(this, ocode, y);
 		// return toReturn;
 	}
 
-	public void setCallbacks(ActionCallbackAPI callbacks) {
+	public void setCallbacks(IActionRunnerFromBaseAction callbacks) {
 		this.callbacks = callbacks;
 	}
 
-	public ChainedAction setDisplayName(short objectCode, String displayName) {
-		return new SetDisplayNameAction(this,
-				objectCode, displayName, true);
+	public ChainedAction setDisplayName(short ocode, String displayName) {
+		return new SetDisplayNameAction(this, ocode, displayName, true);
 	}
 
 	public ChainedAction setInventoryVisible(int inventoryId, boolean isVisible) {
-		return new SetInventoryVisibleAction(
-				this, inventoryId, isVisible, true);
+		return new SetInventoryVisibleAction(this, inventoryId, isVisible, true);
 	}
 
 	public void setParent(BaseAction parent) {
 		this.parent = parent;
 	}
 
-	public ChainedAction setVisible(short objectCode, boolean isVisible) {
-		return new SetVisibleAction(this,
-				objectCode, isVisible, true);
+	public ChainedAction setVisible(short ocode, boolean isVisible) {
+		return new SetVisibleAction(this, ocode, isVisible, true);
 	}
 
 
@@ -329,10 +316,10 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 				milliseconds);
 	}
 
-	public ChainedAction onDoCommand(SceneAPI scene, OnDoCommandAPI api, ChainRootAction ba,
+	public ChainedAction onDoCommand(IGameScene scene, IOnDoCommand api, ChainRootAction ba,
 			int verb, SentenceItem itemA, SentenceItem itemB, double x, double y)
 	{
-		ChainedAction secondStep = scene.onDoCommand(api, this.api.createChainRootAction(), verb, itemA, itemB, x, y);
+		ChainedAction secondStep = scene.onDoCommand(api, api.createChainRootAction(), verb, itemA, itemB, x, y);
 		return subroutine(secondStep);
 	}
 
@@ -348,10 +335,9 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return orig;
 	}
 
-	public ChainedAction swapProperty(short objectCode1, short objectCode2,
+	public ChainedAction swapProperty(short ocodeA, short ocodeB,
 			SwapType type) {
-		return new SwapPropertyAction(this,
-				objectCode1, objectCode2, type);
+		return new SwapPropertyAction(this,	ocodeA, ocodeB, type);
 	}
 
 	public BaseDialogTreeAction  switchTo(String sceneName) {
@@ -360,9 +346,8 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		// return toReturn;
 	}
 
-	public ChainedAction waitForFrame(short objectCode, int frame) {
-		return new WaitForFrameAction(this,
-				objectCode, frame);
+	public ChainedAction waitForFrame(short ocode, int frame) {
+		return new WaitForFrameAction(this,	ocode, frame);
 	}
 
 
@@ -373,26 +358,27 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	public ChainedAction walkTo( double x, double y) {
 		boolean isLinear = true;
-		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(), x, y,0, isLinear);
+		WalkToAction a = new WalkToAction(this, MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, x, y,0, isLinear);
+
 		return a;
 	}
 
 	public ChainedAction walkTo(PointF point) {
 		boolean isLinear = true;
-		WalkToAction a =  new WalkToAction(this, api.getDefaultWalker(),
+		WalkToAction a =  new WalkToAction(this, MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT,
 				point.getX(), point.getY(),0, isLinear);
 		return a;
 	}
 
 	public ChainedAction walkTo(double x, double y, int delay) {
 		boolean isLinear = true;
-		WalkToAction a = new WalkToAction(this, api.getDefaultWalker(), x, y, delay, isLinear);
+		WalkToAction a = new WalkToAction(this, MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, x, y, delay, isLinear);
 		return a;
 	}
 
 	public ChainedAction walkTo( PointF point, int delay) {
 		boolean isLinear = true;
-		return new WalkToAction(this, api.getDefaultWalker(), point.getX(), point.getY(), delay, isLinear);
+		return new WalkToAction(this, MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, point.getX(), point.getY(), delay, isLinear);
 	}
 
 
@@ -400,41 +386,41 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	
 
-	public ChainedAction walkTo(short objectCode, double x, double y) {
+	public ChainedAction walkTo(short ocode, double x, double y) {
 		boolean isLinear = true;
-		return new WalkToAction(this, objectCode, x, y, 0, isLinear);
+		return new WalkToAction(this, ocode, x, y, 0, isLinear);
 	}
 
-	public ChainedAction walkTo(short objectCode, PointF point) {
+	public ChainedAction walkTo(short ocode, PointF point) {
 		boolean isLinear = true;
-		return new WalkToAction(this, objectCode,
+		return new WalkToAction(this, ocode,
 				point.getX(), point.getY(),0, isLinear);
 	}
 
-	public ChainedAction walkTo(short objectCode, double x, double y, int delay) {
+	public ChainedAction walkTo(short ocode, double x, double y, int delay) {
 		boolean isLinear = true;
-		return new WalkToAction(this, objectCode, x, y, delay, isLinear);
+		return new WalkToAction(this, ocode, x, y, delay, isLinear);
 	}
 
-	public ChainedAction walkTo(short objectCode, PointF point, int delay) {
+	public ChainedAction walkTo(short ocode, PointF point, int delay) {
 		boolean isLinear = true;
-		return new WalkToAction(this, objectCode, point.getX(), point.getY(), delay, isLinear);
+		return new WalkToAction(this, ocode, point.getX(), point.getY(), delay, isLinear);
 	}
 
 
 	public ChainedAction walkAndScroll( double x, double y, int delay) {
 		boolean isLinear = true;
-		return new WalkAndScrollXAction(this, api.getDefaultWalker(), x, y, delay, isLinear);
+		return new WalkAndScrollXAction(this, MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, x, y, delay, isLinear);
 	}
 
 	public ChainedAction walkAndScroll( PointF point, int delay) {
 		boolean isLinear = true;
-		return new WalkAndScrollXAction(this, api.getDefaultWalker(), point.getX(), point.getY(), delay, isLinear);
+		return new WalkAndScrollXAction(this, MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, point.getX(), point.getY(), delay, isLinear);
 	}
 
 	public ChainedAction walkAndScrollNonBlocking(double x, double y, int delay) {
 		boolean isLinear = true;
-		WalkAndScrollXAction a = new WalkAndScrollXAction(this, api.getDefaultWalker(), x,
+		WalkAndScrollXAction a = new WalkAndScrollXAction(this, MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, x,
 				y, delay, isLinear);
 		a.setNonBlocking(true);
 		return a;
@@ -442,32 +428,32 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 
 	public ChainedAction walkAndScrollNonBlocking(PointF point, int delay) {
 		boolean isLinear = true;
-		WalkAndScrollXAction a = new WalkAndScrollXAction(this,api.getDefaultWalker(),
+		WalkAndScrollXAction a = new WalkAndScrollXAction(this, MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT,
 				point.getX(), point.getY(), delay, isLinear);
 		a.setNonBlocking(true);
 		return a;
 	}
-	public ChainedAction walkAndScroll(short objectCode, double x, double y, int delay) {
+	public ChainedAction walkAndScroll(short ocode, double x, double y, int delay) {
 		boolean isLinear = true;
-		return new WalkAndScrollXAction(this, objectCode, x, y, delay, isLinear);
+		return new WalkAndScrollXAction(this, ocode, x, y, delay, isLinear);
 	}
 
-	public ChainedAction walkAndScroll(short objectCode, PointF point, int delay) {
+	public ChainedAction walkAndScroll(short ocode, PointF point, int delay) {
 		boolean isLinear = true;
-		return new WalkAndScrollXAction(this, objectCode, point.getX(), point.getY(), delay, isLinear);
+		return new WalkAndScrollXAction(this, ocode, point.getX(), point.getY(), delay, isLinear);
 	}
 
-	public ChainedAction walkAndScrollNonBlocking(short objectCode, double x, double y, int delay) {
+	public ChainedAction walkAndScrollNonBlocking(short ocode, double x, double y, int delay) {
 		boolean isLinear = true;
-		WalkAndScrollXAction a = new WalkAndScrollXAction(this, objectCode, x,
+		WalkAndScrollXAction a = new WalkAndScrollXAction(this, ocode, x,
 				y, delay, isLinear);
 		a.setNonBlocking(true);
 		return a;
 	}
 
-	public ChainedAction walkAndScrollNonBlocking(short objectCode, PointF point, int delay) {
+	public ChainedAction walkAndScrollNonBlocking(short ocode, PointF point, int delay) {
 		boolean isLinear = true;
-		WalkAndScrollXAction a = new WalkAndScrollXAction(this, objectCode,
+		WalkAndScrollXAction a = new WalkAndScrollXAction(this, ocode,
 				point.getX(), point.getY(), delay, isLinear);
 		a.setNonBlocking(true);
 		return a;
@@ -513,10 +499,10 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		return a;
 	}
 
-	public ChainedAction moveWhilstAnimatingLinearNonBlocking(short objId, double x, double y)
+	public ChainedAction moveWhilstAnimatingLinearNonBlocking(short ocode, double x, double y)
 	{
 		boolean isLinear = true;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, objId, isLinear);
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this, ocode, isLinear);
 		a.setEndX(x);
 		a.setEndY(y);
 		a.setNonBlocking(true);
@@ -553,7 +539,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	public ChainedAction moveCameraToNewXPosition(double x, double durationInSecs)
 	{
 		boolean isLinear = false;
-		ScrollCameraAction a = new ScrollCameraAction(this, x, api.getSceneGui().getCameraY(), durationInSecs, isLinear);
+		ScrollCameraXAction a = new ScrollCameraXAction(this, x, durationInSecs, isLinear);
 		a.setNonBlocking(false);
 		return a;
 	}
@@ -561,7 +547,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	public ChainedAction moveCameraToNewXPositionNonBlocking(double x, double durationInSecs)
 	{
 		boolean isLinear = false;
-		ScrollCameraAction a = new ScrollCameraAction(this, x, api.getSceneGui().getCameraY(), durationInSecs, isLinear);
+		ScrollCameraXAction a = new ScrollCameraXAction(this, x, durationInSecs, isLinear);
 		a.setNonBlocking(true);
 		return a;
 	}
@@ -570,7 +556,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	public ChainedAction moveCameraToNewYPosition(double y, double durationInSecs)
 	{
 		boolean isLinear = false;
-		ScrollCameraAction a = new ScrollCameraAction(this, api.getSceneGui().getCameraX(), y, durationInSecs, isLinear);
+		ScrollCameraYAction a = new ScrollCameraYAction(this, y, durationInSecs, isLinear);
 		a.setNonBlocking(false);
 		return a;
 	}
@@ -578,7 +564,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 	public ChainedAction moveCameraToNewYPositionNonBlocking(double y, double durationInSecs)
 	{
 		boolean isLinear = false;
-		ScrollCameraAction a = new ScrollCameraAction(this, api.getSceneGui().getCameraX(), y, durationInSecs, isLinear);
+		ScrollCameraYAction a = new ScrollCameraYAction(this, y, durationInSecs, isLinear);
 		a.setNonBlocking(true);
 		return a;
 	}
@@ -618,5 +604,7 @@ public abstract class BaseAction implements SystemAnimationCallbackAPI
 		ShareAction s = new ShareAction(this,blah);
 		return s;
 	}
+
+	
 }
 

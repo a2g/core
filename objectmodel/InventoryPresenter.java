@@ -19,12 +19,12 @@ package com.github.a2g.core.objectmodel;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-import com.github.a2g.core.interfaces.HostingPanelAPI;
-import com.github.a2g.core.interfaces.InventoryPanelAPI;
-import com.github.a2g.core.interfaces.InventoryPresenterAPI;
-import com.github.a2g.core.interfaces.InventoryPresenterCallbackAPI;
-import com.github.a2g.core.interfaces.MouseToInventoryPresenterAPI;
-import com.github.a2g.core.interfaces.PackagedImageAPI;
+import com.github.a2g.core.interfaces.IHostingPanel;
+import com.github.a2g.core.interfaces.IInventoryPanelFromInventoryPresenter;
+import com.github.a2g.core.interfaces.IInventoryPresenter;
+import com.github.a2g.core.interfaces.IMasterPresenterFromInventory;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryPanel;
+import com.github.a2g.core.interfaces.IPackagedImage;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
@@ -32,14 +32,14 @@ import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
 
 public class InventoryPresenter
-implements MouseToInventoryPresenterAPI, InventoryPresenterAPI
+implements IInventoryPresenterFromInventoryPanel, IInventoryPresenter
 {
 
 	private Inventory theInventory;
-	private InventoryPanelAPI view;
+	private IInventoryPanelFromInventoryPresenter view;
 	EventBus eventBus;
 	private TreeMap<Integer, InventoryItem> theInventoryItemMap;
-	InventoryPresenterCallbackAPI callback;
+	IMasterPresenterFromInventory callback;
 	private int width;
 	private int height;
 	ArrayList<Rect> rectsForSlots;
@@ -52,8 +52,8 @@ implements MouseToInventoryPresenterAPI, InventoryPresenterAPI
 	private final int WIDTH_OF_LEFT_ARROW = 20;
 	private final int WIDTH_OF_RIGHT_ARROW = 20;
 
-	public InventoryPresenter(final HostingPanelAPI panel, EventBus bus,
-			InventoryPresenterCallbackAPI api) {
+	public InventoryPresenter(final IHostingPanel panel, EventBus bus,
+			IMasterPresenterFromInventory api) {
 		rectsForSlots = new ArrayList<Rect>();
 		itemsForSlots = new ArrayList<InventoryItem>();
 		this.netRightArrowClicks = 0;
@@ -121,7 +121,7 @@ implements MouseToInventoryPresenterAPI, InventoryPresenterAPI
 		int count = 0;
 		InventoryItemCollection inv = this.getInventory().items();
 		for (int i = 0; i < inv.getCount(); i++) {
-			InventoryItem item = inv.at(i);
+			InventoryItem item = inv.getByIndex(i);
 			if (item.isVisible())
 				count++;
 		}
@@ -135,6 +135,7 @@ implements MouseToInventoryPresenterAPI, InventoryPresenterAPI
 		}
 	}
 
+	@Override
 	public void updateInventory() {
 		view.setLeftArrowVisible(isLeftArrowVisible());
 		view.setRightArrowVisible(isRightArrowVisible());
@@ -147,7 +148,7 @@ implements MouseToInventoryPresenterAPI, InventoryPresenterAPI
 		InventoryItemCollection inv = this.getInventory().items();
 		int howManyVisibleInventoriesToSkip = this.netRightArrowClicks;
 		for (int i = 0; i < inv.getCount(); i++) {
-			InventoryItem item = inv.at(i);
+			InventoryItem item = inv.getByIndex(i);
 			Image image = item.getImage();
 			if (item.isVisible()) {
 				howManyVisibleInventoriesToSkip--;
@@ -170,17 +171,19 @@ implements MouseToInventoryPresenterAPI, InventoryPresenterAPI
 		}
 	}
 
+	@Override
 	public void setVisible(boolean isVisible) {
 		view.setVisible(isVisible);
 	}
 
+	@Override
 	public void clear() {
 		theInventoryItemMap.clear();
 		theInventory = new Inventory();
 
 	}
 
-	public InventoryPanelAPI getView() {
+	public IInventoryPanelFromInventoryPresenter getView() {
 		return view;
 	}
 
@@ -197,7 +200,7 @@ implements MouseToInventoryPresenterAPI, InventoryPresenterAPI
 		leftArrowRect = new Rect(0, 0, l, h * 2);
 		rightArrowRect = new Rect(l + 2 * w, 0, r, h * 2);
 
-		view.setPixelSize(width, height);
+		view.setInventoryImageSize(width, height);
 	}
 
 	InventoryItem getItemForRect(int i) {
@@ -215,7 +218,7 @@ implements MouseToInventoryPresenterAPI, InventoryPresenterAPI
 				InventoryItem inv = getItemForRect(i);
 				if (inv != null) {
 					callback.onMouseOverVerbsOrInventory(inv.getDisplayName(),
-							inv.getTextualId(), inv.getCode());
+							inv.getItid(), inv.getICode());
 					return;
 				}
 			}
@@ -246,39 +249,39 @@ implements MouseToInventoryPresenterAPI, InventoryPresenterAPI
 	}
 
 	@Override
-	public Image createNewImageAndAdddHandlers(PackagedImageAPI imageResource,
+	public Image createNewImageAndAdddHandlers(IPackagedImage imageResource,
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int i, int j) {
 		return view.createNewImageAndAdddHandlers(imageResource, lh, bus, objectTextualId, objectCode, i, j);
 	}
 
 	@Override
-	public void setPixelSize(int width, int height) {
-		view.setPixelSize(width, height);
-		
-	}
-
-	@Override
 	public void setLeftArrowVisible(boolean visible) {
 		view.setLeftArrowVisible(visible);
-		
+
 	}
 
 	@Override
 	public void setRightArrowVisible(boolean visible) {
 		view.setRightArrowVisible(visible);
-		
+
 	}
 
 	@Override
-	public void setInventoryItemVisibleByITID(String textualId, boolean visible) {
-		theInventory.items().at(textualId).setVisible(visible);
+	public void setInventoryItemVisibleByItid(String textualId, boolean visible) {
+		theInventory.items().getByItid(textualId).setVisible(visible);
+	}
+	@Override
+	public String getDisplayNameByItid(String itid) {
+		return theInventory.items().getByItid(itid).getDisplayName();
 	}
 
 	@Override
-	public void setInventoryItemVisibleByCode(int iCode, boolean visible) {
-		this.getInventoryItem(iCode).setVisible(visible);
+	public void setInventoryImageSize(int width, int height) {
+		view.setInventoryImageSize(width, height);
 		
 	}
+
+
 
 }

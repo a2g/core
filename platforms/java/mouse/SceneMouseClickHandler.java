@@ -18,33 +18,33 @@ package com.github.a2g.core.platforms.java.mouse;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.event.ExecuteCommandEvent;
-import com.github.a2g.core.interfaces.InternalAPI;
-
+import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
 
 public class SceneMouseClickHandler extends MouseAdapter
 {
-	private InternalAPI api;
+	private IScenePresenterFromSceneMouseOver scene;
 	private EventBus bus;
 
-	public SceneMouseClickHandler(EventBus bus, InternalAPI api)
+	public SceneMouseClickHandler(EventBus bus, IScenePresenterFromSceneMouseOver scene)
 	{
-		this.api = api;
+		this.scene = scene;
 		this.bus = bus;
 	}
 
-	public InternalAPI getAPI()
+	public IScenePresenterFromSceneMouseOver getAPI()
 	{
-		return api;
+		return scene;
 	}
 
 
 	// use mousePressed (not mouseClicked) so allows half-clicks will also be caught
 	@Override
 	public void mousePressed(MouseEvent event) {
-		double width = api.getSceneGui().getWidth();
-		double height = api.getSceneGui().getHeight();
+		double width = scene.getSceneGuiWidth();
+		double height = scene.getSceneGuiHeight();
 		double x = event.getX()/width;
 		double y = event.getY()/height;
 		bus.fireEvent(

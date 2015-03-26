@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.DialogTreePanelAPI;
+import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseOutHandler;
 import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseOverHandler;
@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.Label;
 
 public class DialogTreePanel
 extends Grid
-implements DialogTreePanelAPI
+implements IDialogTreePanelFromDialogTreePresenter
 {
 	ColorEnum rolloverColor;
 	ColorEnum foregroundColor;
@@ -73,7 +73,8 @@ implements DialogTreePanelAPI
 	}
 
 	@Override
-	public void setPixelSize(int width, int height) {
+	public void setScenePixelSize(int width, int height) {
 
 	}
+
 }

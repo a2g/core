@@ -25,17 +25,17 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class SceneObjectCollection {
-	private List<String> theOTEXTs;
+	private List<String> theOtids;
 	private List<Short> theOCodes;
 	private ArrayList<SceneObject> list;
 
 	public SceneObjectCollection() {
-		theOTEXTs = new LinkedList<String>();
+		theOtids = new LinkedList<String>();
 		theOCodes = new LinkedList<Short>();
 		list = new ArrayList<SceneObject>();
 	}
 
-	public void add(SceneObject sceneObject) 
+	public void add(SceneObject sceneObject)
 	{
 		list.add(sceneObject);
 		Collections.sort(list,
@@ -47,15 +47,15 @@ public class SceneObjectCollection {
 			}
 		});
 
-		theOTEXTs.clear();
+		theOtids.clear();
 		theOCodes.clear();
 		for(int i=0;i<list.size();i++)
-		{	
-			theOTEXTs.add(list.get(i).getTextualId());
-			theOCodes.add(list.get(i).getCode());
+		{
+			theOtids.add(list.get(i).getOtid());
+			theOCodes.add(list.get(i).getOCode());
 		}
-		
-		
+
+
 	}
 
 	public SceneObject getByIndex(int index) throws NoSuchElementException {
@@ -65,17 +65,17 @@ public class SceneObjectCollection {
 			throw new NoSuchElementException();
 		return list.get(index);
 	}
-	
-	public SceneObject getByOTEXT(String OTEXT) {
-		int i = this.theOTEXTs.indexOf(OTEXT);
-		return this.getByIndex(i); 
+
+	public SceneObject getByOtid(String otid) {
+		int i = this.theOtids.indexOf(otid);
+		return this.getByIndex(i);
 	}
-	
+
 	public SceneObject getByOCode(Short ocode) {
 		int i = this.theOCodes.indexOf(ocode);
-		return this.getByIndex(i); 
+		return this.getByIndex(i);
 	}
-	
+
 	public int count() {
 		return list.size();
 	}

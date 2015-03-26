@@ -18,14 +18,20 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromTitleCardAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 
 
 public class TitleCardAction extends ChainedAction {
+	private ITitleCardPresenterFromTitleCardAction titleCard;
 	String text;
 
 	public TitleCardAction(BaseAction parent, String text) {
-		super(parent, parent.getApi(), true);
+		super(parent, true);
 		this.text = text;
 	}
 
@@ -34,32 +40,43 @@ public class TitleCardAction extends ChainedAction {
 
 		if(text.length()>0)
 		{
-			double totalInMilliseconds =4*getApi().getPopupDisplayDuration()*1000;
+			double totalInMilliseconds =4*titleCard.getPopupDisplayDuration()*1000;
 
-			getApi().displayTitleCard(text);
+			titleCard.displayTitleCard(text);
 			this.run((int)totalInMilliseconds);
 		}
 		else
 		{
-			getApi().displayTitleCard("");
+			titleCard.displayTitleCard("");
 			this.run(1);
 		}
 	}
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		getApi().displayTitleCard(text);
+		titleCard.displayTitleCard(text);
 	}
 
 	@Override
 	protected void onCompleteGameAction() {
-		getApi().displayTitleCard("");
+		titleCard.displayTitleCard("");
 	}
 
 	@Override
 	public boolean isParallel() {
 
 		return false;
+	}
+ 
+
+	public void setTitleCard(ITitleCardPresenterFromTitleCardAction titleCard) {
+		this.titleCard = titleCard;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setTitleCard(titleCard);
+		
 	}
 
 }

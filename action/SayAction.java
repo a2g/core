@@ -19,8 +19,12 @@ package com.github.a2g.core.action;
 import java.util.ArrayList;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.SayActionMasterAPI;
-import com.github.a2g.core.interfaces.SayActionObjectAPI;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromSayAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromSayAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.action.ChainedAction;
 
@@ -30,25 +34,30 @@ public class SayAction extends ChainedAction {
 	private ArrayList<String> speech;
 	private ArrayList<Double> startingTimeForEachLine;
 	private double totalDurationInSeconds;
-	private SayActionObjectAPI object;
+	private IScenePresenterFromSayAction scene;
+	private ITitleCardPresenterFromSayAction titleCard;
 	private int numberOfFramesTotal;
 	private static final ColorEnum defaultTalkingColor = ColorEnum.Purple; 
-	private SayActionMasterAPI rootApi;
-	private boolean isNonIncrementing;
+	private NonIncrementing nonIncrementing;
 	private boolean isHoldLastFrame;
 	private boolean isParallel;
-	private String animId;
+	private String atid;
+	private String otid;
+	public static String DEFAULT_SAY_ANIM = "DEFAULT_SAY_ANIM";// obviously this gets said by object of default say anim
+	enum NonIncrementing
+	{ 
+		True,
+		False,
+		FromAPI
+	}
 
-	public SayAction(BaseAction parent, SayActionMasterAPI rootApi, SayActionObjectAPI objectApi, String animationId, String fullSpeech) {
-		super(parent, parent.getApi(), true);
-		this.object = objectApi;
-		this.rootApi = rootApi;
-		assert(object!=null);
+	public SayAction(BaseAction parent, String atid, String fullSpeech) {
+		super(parent,true);
 		this.numberOfFramesTotal = 0;
-		this.isNonIncrementing = false;
+		this.nonIncrementing = NonIncrementing.False;
 		this.isHoldLastFrame = false;
 		this.isParallel = false;
-		this.animId = animationId; 
+		this.atid = atid; 
 		speech = new ArrayList<String>();
 		startingTimeForEachLine = new ArrayList<Double>();
 		String[] lines = fullSpeech.split("\n");
@@ -69,7 +78,6 @@ public class SayAction extends ChainedAction {
 			rollingStartingTimeForLine += getMillisecondsForSpeech(line);
 		}
 
-		//InternalAPI api = rootApi;
 	}
 
 	int getAdjustedNumberOfFrames(String speech, double approxDuration, int animFramesCount, double duration)
@@ -97,13 +105,24 @@ public class SayAction extends ChainedAction {
 		// frames in a talking animation the less over-play.
 		return numberOfFramesTotal;
 	}
-
+	
 	@Override
 	public void runGameAction() {
-
-		if(object!=null)
+		if(atid == DEFAULT_SAY_ANIM)
 		{
-			if (animId=="")
+			atid = scene.getAtidOfDefaultSayAnim();
+
+			otid = scene.getOtidOfAtid(atid);
+		}
+		else
+		{
+			
+		}
+		
+		//only now do 
+		if(otid!="")
+		{
+			if (atid=="")
 			{
 				// if theres no animation then we just wait for the totalDuration;
 				double framesPerSecond = 40;
@@ -114,29 +133,29 @@ public class SayAction extends ChainedAction {
 				numberOfFramesTotal = getAdjustedNumberOfFrames(
 						speech.get(0),
 						totalDurationInSeconds,
-						object.getNumberOfFramesForAnimation(animId),
-						object.getDurationForAnimation(animId)
+						scene.getNumberOfFramesByAtid(atid),
+						scene.getDurationByAtid(atid)
 						);
 			}
 
 			if(numberOfFramesTotal<1)
 			{
-				rootApi.displayTitleCard("error!! id=<"+ animId + "> numberOfFramesTotal="+numberOfFramesTotal);
+				titleCard.displayTitleCard("error!! id=<"+ atid + "> numberOfFramesTotal="+numberOfFramesTotal);
 				assert(false);
 			}
 
-			if (animId != "" && object != null) {
-				object.setCurrentAnimation(animId);
-				object.setVisible(true);
+			if (atid != "" && otid!="") {
+				scene.setAsACurrentAnimationByAtid(atid);
+				scene.setVisibleByOtid(otid, true);
 			}
 
 			boolean visible = true;
 			ColorEnum color = defaultTalkingColor;
-			if(object!=null)
+			if(otid!="")
 			{
-				color = object.getTalkingColor(); 
+				color = scene.getTalkingColorByOtid(otid);
 			}
-			rootApi.setStateOfPopup( visible, .1,.1, color, speech.get(0),this);
+			scene.setStateOfPopup( visible, .1,.1, color, speech.get(0),this);
 
 		}
 		this.run((int) totalDurationInSeconds);
@@ -145,10 +164,10 @@ public class SayAction extends ChainedAction {
 	@Override
 	protected void onUpdateGameAction(double progress) {
 
-		if(object!=null)
+		if(!otid.isEmpty())
 		{
-			if (animId != "" && object != null) {
-				object.setVisible(true);
+			if (atid != "" && otid != "") {
+				scene.setVisibleByOtid(otid,true);
 			}
 
 
@@ -156,18 +175,18 @@ public class SayAction extends ChainedAction {
 			for (int i = startingTimeForEachLine.size()-1; i>=0; i--) {
 				// go backwards thru the loop to find text that should be valid
 				if (progress > startingTimeForEachLine.get(i)) {
-					rootApi.setStateOfPopup( true, .1,.1, object.getTalkingColor(), speech.get(i),null);
+					scene.setStateOfPopup( true, .1,.1, scene.getTalkingColorByOtid(otid), speech.get(i),null);
 					break;
 				}
 			}
 
 			// if theres an associated animation, then use it
-			if (this.animId != "" && ! isNonIncrementing) {
+			if (this.atid != "" && nonIncrementing==NonIncrementing.False) {
 				int numberOfFramesSoFar = (int) (progress * numberOfFramesTotal);
-				int frame = numberOfFramesSoFar % object.getNumberOfFramesForAnimation(animId);
+				int frame = numberOfFramesSoFar % scene.getNumberOfFramesByAtid(atid);
 
 				// all frames of the animation should be shown
-				this.object.setCurrentFrame(frame);
+				this.scene.setCurrentFrameByOtid(otid, frame);
 			}
 		}
 	}
@@ -176,13 +195,13 @@ public class SayAction extends ChainedAction {
 	protected void onCompleteGameAction() {
 		if(!isHoldLastFrame )
 		{
-			if (this.object != null) 
+			if (this.otid != "") 
 			{
-				this.object.setToInitialAnimationWithoutChangingFrame();
+				scene.setToInitialAnimationWithoutChangingFrameByOtid(otid);
 			}
 		}
 
-		rootApi.setStateOfPopup( false, .1,.1, null, "",null);
+		scene.setStateOfPopup( false, .1,.1, null, "",null);
 
 	}
 
@@ -194,7 +213,7 @@ public class SayAction extends ChainedAction {
 
 
 	int getMillisecondsForSpeech(String speech) {
-		double popupDisplayDuration = rootApi.getPopupDisplayDuration()*1000;
+		double popupDisplayDuration = titleCard.getPopupDisplayDuration()*1000;
 		// int delay = how;
 		// int duration = (speech.length() * (2 + delay)) * 40;
 		return (int)popupDisplayDuration;
@@ -208,8 +227,33 @@ public class SayAction extends ChainedAction {
 		this.isHoldLastFrame = isHoldLastFrame ;
 	}
 
-	public void setIsNonIncrementing(boolean isNonIncrementing ) {
-		this.isNonIncrementing = isNonIncrementing ;
+	public void setNonIncrementing(NonIncrementing nonIncrementing ) {
+		this.nonIncrementing = nonIncrementing ;
 	}
+
+	public IScenePresenterFromSayAction getscene() {
+		return scene;
+	}
+
+	public void setScene(IScenePresenterFromSayAction scene) {
+		this.scene = scene;
+	}
+
+
+	public void setTitleCard(ITitleCardPresenterFromSayAction titleCard) {
+		this.titleCard = titleCard;
+	}
+
+	@Override
+	public void setAll(IScenePresenterFromActions scene, IDialogTreePresenterFromActions dialogTree, ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setTitleCard(titleCard);
+		
+		setScene(scene);
+		
+	}
+
+
+	
+	
 
 }

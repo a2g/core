@@ -24,28 +24,25 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.InternalAPI;
-import com.github.a2g.core.interfaces.PopupPanelAPI;
-import com.github.a2g.core.interfaces.ScenePanelAPI;
-import com.github.a2g.core.interfaces.ScenePresenterAPI;
+import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
+import com.github.a2g.core.interfaces.IScenePresenterFromJavaPopupPanel;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 
 public class PopupPanelForJava
-implements PopupPanelAPI
 {
 	private JFrame popup;
 	private Label labelInPopup;
 	private int sceneWidth;
 	private int sceneHeight;
-	private InternalAPI api;
+	private IScenePresenterFromJavaPopupPanel toScene;
 
-	public PopupPanelForJava(InternalAPI api, int sceneWidth, int sceneHeight)
+	public PopupPanelForJava(IScenePresenterFromJavaPopupPanel toScene)
 	{
-		this.api = api;
+		this.toScene = toScene;
 		// create popup
-		this.sceneWidth = sceneWidth;
-		this.sceneHeight = sceneHeight;
+		this.sceneWidth = toScene.getSceneGuiWidth();
+		this.sceneHeight = toScene.getSceneGuiHeight();
 		this.popup = new JFrame();
 		this.popup.setUndecorated(true);
 		//this.popup.setBackground(new Color(color.r, color.g, color.b));
@@ -55,23 +52,19 @@ implements PopupPanelAPI
 		popup.add(labelInPopup);
 	}
 
-	@Override
 	public void setVisible(boolean isVisible)
 	{
 		popup.setVisible(isVisible);
 	}
 
-	@Override
 	public void setPopupPosition(double x, double y)
 	{
 		//api.getlocationOnScreen
-		ScenePresenterAPI sp = api.getSceneGui();
-		ScenePanelAPI sv = sp.getView();
+		IScenePanelFromScenePresenter sv = toScene.getView();
 		ScenePanelForJava spj = (ScenePanelForJava)sv;
 		Point p = spj.getTopLeft();
 		popup.setLocation(p.getX()+(int)(x*sceneWidth), p.getY()+(int)(y*sceneHeight));
 	}
-	@Override
 	public void setText(String string)
 	{
 		updateLabelSize(string);
@@ -87,8 +80,7 @@ implements PopupPanelAPI
 		popup.setSize((int)stringWidthInPixels, fm.getHeight()*2);
 	}
 
-	@Override
-	public void setColor(ColorEnum color) 
+	public void setColor(ColorEnum color)
 	{
 		if(color!=null)
 		{
@@ -97,33 +89,32 @@ implements PopupPanelAPI
 		this.labelInPopup.setBackground(new Color(0,0,0));//black
 	}
 
-	@Override
-	public void setCancelCallback(final BaseAction ba) 
+	public void setCancelCallback(final BaseAction ba)
 	{
 		labelInPopup.addMouseListener
 		(
 				new MouseListener()
 				{
 					@Override
-					public void mouseClicked(MouseEvent arg0) 
+					public void mouseClicked(MouseEvent arg0)
 					{
 						ba.cancel();
 					}
 
 					@Override
-					public void mouseEntered(MouseEvent arg0) 
+					public void mouseEntered(MouseEvent arg0)
 					{
 						// TODO Auto-generated method stub
 					}
 
 					@Override
-					public void mouseExited(MouseEvent arg0) 
+					public void mouseExited(MouseEvent arg0)
 					{
 						// TODO Auto-generated method stub
 					}
 
 					@Override
-					public void mousePressed(MouseEvent arg0) 
+					public void mousePressed(MouseEvent arg0)
 					{
 
 
