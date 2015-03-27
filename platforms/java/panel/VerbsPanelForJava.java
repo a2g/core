@@ -87,7 +87,7 @@ extends JPanel implements IVerbsPanelFromVerbsPresenter
 			if(i<verbs.items().size())
 			{
 				Verb v = verbs.items().getByIndex(i);
-				int code = v.getVCode();
+				int vcode = v.getVCode();
 				String vtid = v.getVtid();
 				Label label = new Label(vtid);
 				String displayText = v.getdisplayText();
@@ -95,11 +95,11 @@ extends JPanel implements IVerbsPanelFromVerbsPresenter
 
 				label.addMouseListener
 				(
-						new VerbMouseOverHandler( mouseToPresenter, displayText, vtid, code)
+						new VerbMouseOverHandler( mouseToPresenter, displayText, vtid, vcode)
 						);
 				label.addMouseListener
 				(
-						new VerbMouseClickHandler(mouseToPresenter, displayText, vtid, code)
+						new VerbMouseClickHandler(mouseToPresenter, displayText, vtid, vcode)
 						);
 
 				this.add(label);

@@ -27,10 +27,10 @@ public class VerbMouseOverHandler implements MouseMoveHandler {
 	private final int vcode;
 	private final String displayName;
 	IVerbsPresenterFromVerbsPanel mouseToPresenter;
-	public VerbMouseOverHandler(IVerbsPresenterFromVerbsPanel mouseToPresenter, String displayName, String vtid, int code) {
+	public VerbMouseOverHandler(IVerbsPresenterFromVerbsPanel mouseToPresenter, String displayName, String vtid, int vcode) {
 		this.mouseToPresenter = mouseToPresenter;
 		this.vtid = vtid;
-		this.vcode = code;
+		this.vcode = vcode;
 		this.displayName = displayName;
 
 	}

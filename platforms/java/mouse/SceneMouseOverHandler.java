@@ -66,16 +66,16 @@ public class SceneMouseOverHandler implements MouseMotionListener {
 		{
 			//displayName = "" + x + "," + y + ") " +ob.getDisplayName() + "(" + r.getLeft()+","+r.getTop()+ ")to" + "(" + r.getRight()+","+r.getBottom() +")";
 			String displayName = toScene.getDisplayNameByOtid(otid);
-			short code = toScene.getCodeByOtid(otid);
+			short ocode = toScene.getCodeByOtid(otid);
 			double camx = toScene.getCameraX();
 			double camy = toScene.getCameraY();
 			toCommandLine.setXYForDebugging(x+camx, y+camy);
-			toCommandLine.setCommandLineMouseOver(displayName, otid, code);
+			toCommandLine.setCommandLineMouseOver(displayName, otid, ocode);
 			bus.fireEvent(
 					new SetRolloverEvent(
 							displayName,
 							otid,
-							code));
+							ocode));
 		}
 	}
 

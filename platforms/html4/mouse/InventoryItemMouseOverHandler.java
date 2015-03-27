@@ -27,13 +27,13 @@ import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryMouseOver;
 public class InventoryItemMouseOverHandler implements MouseMoveHandler {
 	private final EventBus bus;
 	private final String itid;
-	private final int code;
+	private final int icode;
 	private final IInventoryPresenterFromInventoryMouseOver api;
 
 	public InventoryItemMouseOverHandler(EventBus bus, IInventoryPresenterFromInventoryMouseOver api, String itid, int  objectCode) {
 		this.bus = bus;
 		this.itid = itid;
-		this.code = objectCode;
+		this.icode = objectCode;
 		this.api = api;
 
 	}
@@ -45,7 +45,7 @@ public class InventoryItemMouseOverHandler implements MouseMoveHandler {
 				new SetRolloverEvent(
 						api.getDisplayNameByItid(this.itid),
 						this.itid,
-						this.code));
+						this.icode));
 	}
 
 }

@@ -244,8 +244,8 @@ ImagePanelAPI
 
 	Integer hash(Image image)
 	{
-		int code= ((ImageForHtml4)image).getNativeImage().hashCode();
-		return new Integer(code);
+		int ocode= ((ImageForHtml4)image).getNativeImage().hashCode();
+		return new Integer(ocode);
 	}
 
 	public void paint()

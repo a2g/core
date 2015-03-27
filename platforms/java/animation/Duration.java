@@ -1,4 +1,4 @@
-// Google wrote the code in this file first
+// Google wrote the source in this file first
 // then Anthony Cassidy modified it
 /*
  * Copyright 2008 Anthony Cassidy

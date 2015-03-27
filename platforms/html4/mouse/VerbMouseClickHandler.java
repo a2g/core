@@ -29,9 +29,9 @@ implements ClickHandler {
 	String displayName;
 	int vcode;
 
-	public VerbMouseClickHandler(IVerbsPresenterFromVerbsPanel mouseToPresenter, String displayName, String vtid, int code) {
+	public VerbMouseClickHandler(IVerbsPresenterFromVerbsPanel mouseToPresenter, String displayName, String vtid, int vcode) {
 		this.mouseToPresenter = mouseToPresenter;
-		this.vcode = code;
+		this.vcode = vcode;
 		this.displayName =displayName;
 		this.vtid = vtid;
 	}

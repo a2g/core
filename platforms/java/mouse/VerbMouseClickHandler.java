@@ -26,19 +26,19 @@ public class VerbMouseClickHandler extends MouseAdapter
 	IVerbsPresenterFromVerbsPanel mouseToPresenter;
 	String displayName;
 	String vtid;
-	int code;
+	int vcode;
 	
-	public VerbMouseClickHandler(IVerbsPresenterFromVerbsPanel mouseToPresenter, String displayName, String vtid, int code)
+	public VerbMouseClickHandler(IVerbsPresenterFromVerbsPanel mouseToPresenter, String displayName, String vtid, int vcode)
 	{
 		this.displayName = displayName;
 		this.vtid = vtid;
-		this.code = code;
+		this.vcode = vcode;
 		this.mouseToPresenter = mouseToPresenter;
 	}
 
 	// use mousePressed (not mouseClicked) so allows half-clicks will also be caught
 	@Override
 	public void mousePressed(MouseEvent e) {
-		mouseToPresenter.doClick(displayName, vtid, code);
+		mouseToPresenter.doClick(displayName, vtid, vcode);
 	}
 }

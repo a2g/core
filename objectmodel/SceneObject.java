@@ -40,7 +40,7 @@ public class SceneObject {
 	private double rawY; // needed for moving image around.
 	private double rawX;
 	private int numberPrefix;
-	private short code;
+	private short ocode;
 	private ColorEnum talkingColor;
 	private double screenCoordsPerSecond;
 
@@ -366,12 +366,12 @@ public class SceneObject {
 		this.initialAnimationId = InitialAnimation;
 	}
 
-	public void setOCode(short objectCode) {
-		this.code = objectCode;
+	public void setOCode(short ocode) {
+		this.ocode = ocode;
 	}
 
 	public short getOCode() {
-		return code;
+		return ocode;
 
 	}
 

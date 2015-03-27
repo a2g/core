@@ -22,7 +22,7 @@ public interface IMasterPresenterFromVerbs {
 
 	void onClickVerbsOrInventory();
 
-	void onMouseOverVerbsOrInventory(String displayName, String textualId,
-			int code);
+	void onMouseOverVerbsOrInventory(String displayName, String itid,
+			int icode);
 
 }

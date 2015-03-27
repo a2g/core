@@ -74,8 +74,8 @@ public class VerbsPresenter implements IVerbsPresenterFromVerbsPanel,
 	}
 
 	@Override
-	public void setMouseOver(String displayName, String vtid, int code) {
-		callback.onMouseOverVerbsOrInventory(displayName, vtid, code);
+	public void setMouseOver(String displayName, String vtid, int vcode) {
+		callback.onMouseOverVerbsOrInventory(displayName, vtid, vcode);
 
 	}
 
@@ -85,8 +85,8 @@ public class VerbsPresenter implements IVerbsPresenterFromVerbsPanel,
 	}
 
 	@Override
-	public void doClick(String displayName, String vtid, int code) {
-		this.setMouseOver(displayName, vtid, code);
+	public void doClick(String displayName, String vtid, int vcode) {
+		this.setMouseOver(displayName, vtid, vcode);
 		this.doClick();
 	}
 
@@ -109,8 +109,8 @@ public class VerbsPresenter implements IVerbsPresenterFromVerbsPanel,
 	}
 
 	@Override
-	public void removeByCode(int code) {
-		this.theVerbs.items().removeByCode(code);
+	public void removeByCode(int vcode) {
+		this.theVerbs.items().removeByCode(vcode);
 
 	}
 

@@ -24,6 +24,6 @@ public interface IMasterPresenterFromInventory {
 	void onClickVerbsOrInventory();
 
 	void onMouseOverVerbsOrInventory(String displayName, String itid,
-			int code);
+			int icode);
 
 }

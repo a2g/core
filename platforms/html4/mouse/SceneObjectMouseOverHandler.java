@@ -30,10 +30,10 @@ public class SceneObjectMouseOverHandler implements MouseMoveHandler {
 	private final short ocode;
 	private final IScenePresenterFromSceneMouseOver  api;
 
-	public SceneObjectMouseOverHandler(EventBus bus, IScenePresenterFromSceneMouseOver api, String otid, short code) {
+	public SceneObjectMouseOverHandler(EventBus bus, IScenePresenterFromSceneMouseOver api, String otid, short ocode) {
 		this.bus = bus;
 		this.otid = otid;
-		this.ocode = code;
+		this.ocode = ocode;
 		this.api = api;
 
 	}

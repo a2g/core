@@ -50,14 +50,14 @@ public class VerbsPanel extends Grid implements IVerbsPanelFromVerbsPresenter {
 			Verb verb = verbs.items().getByIndex(i);
 			String vtid = verb.getVtid();
 			String displayText = verb.getdisplayText();
-			int code = verb.getVCode();
+			int vcode = verb.getVCode();
 			Label widget = new Label(vtid);
 
 			this.setWidget(row, column, widget);
 			widget.addMouseMoveHandler(new VerbMouseOverHandler(
-					mouseToPresenter, displayText, vtid, code));
+					mouseToPresenter, displayText, vtid, vcode));
 			widget.addClickHandler(new VerbMouseClickHandler(mouseToPresenter,
-					displayText, vtid, code));
+					displayText, vtid, vcode));
 		}
 	}
 

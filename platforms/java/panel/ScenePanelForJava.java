@@ -216,8 +216,8 @@ implements IScenePanelFromScenePresenter
 
 	Integer hash(Image image)
 	{
-		int code= ((ImageForJava)image).getNativeImage().hashCode();
-		return new Integer(code);
+		int ocode= ((ImageForJava)image).getNativeImage().hashCode();
+		return new Integer(ocode);
 	}
 
 	@Override
