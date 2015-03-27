@@ -29,7 +29,7 @@ import com.github.a2g.core.primitive.Rect;
 public class SceneObject {
 	private String initialAnimationId;
 	private Map<IGameScene.Special, String> mapOfSpecialAnimations;
-	private final String textualId;
+	private final String otid;
 	private String displayName;
 	private AnimationCollection animationCollection;
 	private FrameAndAnimation fak;
@@ -44,18 +44,18 @@ public class SceneObject {
 	private ColorEnum talkingColor;
 	private double screenCoordsPerSecond;
 
-	public SceneObject(String textualId, int screenWidth, int screenHeight) {
+	public SceneObject(String otid, int screenWidth, int screenHeight) {
 		this.currentImage = null;
-		this.textualId = textualId;
-		this.displayName = textualId;
+		this.otid = otid;
+		this.displayName = otid;
 		this.animationCollection = new AnimationCollection();
-		this.fak = new FrameAndAnimation(this.textualId);
+		this.fak = new FrameAndAnimation(this.otid);
 		this.visible = true;
 		this.screenPixelWidth = screenWidth;
 		this.screenPixelHeight = screenHeight;
 		this.mapOfSpecialAnimations = new TreeMap<Special, String>();
 		this.numberPrefix = 0;
-		this.initialAnimationId = textualId + "_INITIAL";
+		this.initialAnimationId = otid + "_INITIAL";
 
 		// talkingColro deliberately null, so the
 		// default color can be in one spot: the say action
@@ -75,7 +75,7 @@ public class SceneObject {
 	}
 
 	public String getOtid() {
-		return this.textualId;
+		return this.otid;
 	}
 
 	public AnimationCollection getAnimations() {
@@ -310,11 +310,11 @@ public class SceneObject {
 		return new Rect(0, 0, 0, 0);
 	}
 
-	Point getMiddleOfBaseAbsolute(String animTextualId) {
+	Point getMiddleOfBaseAbsolute(String atid) {
 		int minLeft = 1000;
 		int maxRight = 0;
 		int maxBottom = 0;
-		Animation xanim = this.animationCollection.getByAtid(animTextualId);
+		Animation xanim = this.animationCollection.getByAtid(atid);
 
 		if (xanim != null) {
 			for (int i = 0; i < xanim.getLength(); i++) {
@@ -339,8 +339,8 @@ public class SceneObject {
 		return p;
 	}
 
-	void setSpecialAnimation(Special type, String textualId) {
-		this.mapOfSpecialAnimations.put(type, textualId);
+	void setSpecialAnimation(Special type, String atid) {
+		this.mapOfSpecialAnimations.put(type, atid);
 	}
 
 	public String getSpecialAnimation(Special type) {
@@ -348,13 +348,13 @@ public class SceneObject {
 	}
 
 	public String getCurrentAnimation() {
-		String textualId = this.fak.getCurrentAnimationAtid();
+		String atid = this.fak.getCurrentAnimationAtid();
 
-		return textualId;
+		return atid;
 	}
 
-	public void setCurrentAnimation(String textualId) {
-		this.fak.setCurrentAnimationAtid(textualId);
+	public void setCurrentAnimation(String atid) {
+		this.fak.setCurrentAnimationAtid(atid);
 		updateToCorrectImage();
 	}
 
@@ -406,9 +406,10 @@ public class SceneObject {
 	public void alignBaseMiddleOfOldFrameToFrameOfNewAnimation(String atid,
 			int frame) {
 		PointF h = getBaseMiddleXY();
-		this.fak.setCurrentAnimationAtid(textualId);
-
+		
+		this.fak.setCurrentAnimationAtid(atid);
 		this.fak.setCurrentFrame(frame);
+		
 		this.updateToCorrectImage();
 
 		// then change position

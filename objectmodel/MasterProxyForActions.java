@@ -75,7 +75,9 @@ public class MasterProxyForActions implements IOnFillLoadList,
 
 	@Override
 	public void setVisibleByOtid(String otid, boolean isVisible) {
-		master.getScenePresenter().getObjectByOtid(otid).setVisible(isVisible);
+		
+		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
+		object.setVisible(isVisible);
 	}
 
 	@Override

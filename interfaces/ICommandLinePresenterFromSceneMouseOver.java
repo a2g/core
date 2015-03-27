@@ -19,5 +19,5 @@ package com.github.a2g.core.interfaces;
 public interface ICommandLinePresenterFromSceneMouseOver {
 	void setXYForDebugging(double d, double e);
 
-	void setCommandLineMouseOver(String displayName, String textualId, int code);
+	void setCommandLineMouseOver(String displayName, String otid, int code);
 }

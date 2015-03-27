@@ -269,8 +269,8 @@ public class InventoryPresenter implements
 	}
 
 	@Override
-	public void setInventoryItemVisibleByItid(String textualId, boolean visible) {
-		theInventory.items().getByItid(textualId).setVisible(visible);
+	public void setInventoryItemVisibleByItid(String itid, boolean visible) {
+		theInventory.items().getByItid(itid).setVisible(visible);
 	}
 
 	@Override

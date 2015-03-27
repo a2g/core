@@ -107,7 +107,7 @@ public class FactoryForHtml4 implements IFactory {
 	public IVerbsPanelFromVerbsPresenter createVerbsPanel(
 			IVerbsPresenterFromVerbsPanel api, ColorEnum foreground,
 			ColorEnum background) {
-		return new VerbsPanel(master.getVerbsPresenter(), foreground,
+		return new VerbsPanel(api, foreground,
 				background);
 	}
 

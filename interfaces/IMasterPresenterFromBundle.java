@@ -21,13 +21,13 @@ import com.google.gwt.event.dom.client.LoadHandler;
 public interface IMasterPresenterFromBundle {
 
 	/*
-	 * ! If the same textualId had already been used in a previous call to this
+	 * ! If the same itid had already been used in a previous call to this
 	 * method method, then the call will fail, and return false.
 	 * 
-	 * @param textualIdForInventory this specifies which inventory item the
-	 * image represents (see @ref TextualIds).
+	 * @param itid this specifies which inventory item the
+	 * image represents (see @ref itids).
 	 * 
-	 * @param codeForInventory this code is registered as the code for the
+	 * @param icode this code is registered as the code for the
 	 * inventory item (see @ref Codes).
 	 * 
 	 * @param imageResource the image to add.
@@ -35,7 +35,7 @@ public interface IMasterPresenterFromBundle {
 	 * @return true on success, otherwise false.
 	 */
 	public boolean addImageForAnInventoryItem(LoadHandler lh,
-			String textualIdForInventory, int codeForInventory,
+			String itid, int icode,
 			IPackagedImage imageResource);
 
 	/*
@@ -51,26 +51,25 @@ public interface IMasterPresenterFromBundle {
 	 * @param y specifies the vertical offset (in pixels) used to position the
 	 * image in its default location in the scene.
 	 * 
-	 * @param textualIdForObject this specifies which object to add the image to
-	 * (see @ref TextualIds).
+	 * @param otid this specifies which object to add the image to
+	 * (see @ref otids).
 	 * 
-	 * @param textualIdForAnimation this specifies which animation of the object
-	 * to add the image to (see @ref TextualIds).
+	 * @param atid this specifies which animation of the object
+	 * to add the image to (see @ref atids).
 	 * 
-	 * @param codeForObject this code is registered as the code for the object
+	 * @param ocode this code is registered as the code for the object
 	 * (unless the texturalIdForObject has been used before). (see @ref Codes).
 	 * 
-	 * @param codeForAnimation this code is registered as the code for the
-	 * animation (unless the textualIdForAnimation has been used before). (see
-	 * @ref Codes).
+	 * @param atid this code is registered as the code for the
+	 * animation (unless the textualIdForAnimation has been used before).
 	 * 
 	 * @param imageResource the image to add.
 	 * 
 	 * @return true on success, otherwise false.
 	 */
 	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix,
-			int x, int y, int w, int h, String textualIdForObject,
-			String animCode, short codeForObject, String objectPlusAnimCode,
+			int x, int y, int w, int h, String otid,
+			String atid, short ocode, String objectPlusAnimCode,
 			IPackagedImage imageResource);
 
 	public void setScenePixelSize(int width, int height);

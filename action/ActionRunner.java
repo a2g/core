@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import com.github.a2g.core.interfaces.IActionRunnerFromBaseAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IFactory;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActionRunner;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
@@ -35,8 +36,10 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 	private IDialogTreePresenterFromActions dt;
 	private ITitleCardPresenterFromActions tc;
 	private IInventoryPresenterFromActions inv;
+	private IFactory factory;
 
-	public ActionRunner(IScenePresenterFromActions scene,
+	public ActionRunner(IFactory factory,
+			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dt,
 			ITitleCardPresenterFromActions tc,
 			IInventoryPresenterFromActions inv,
@@ -47,6 +50,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 		this.inv = inv;
 		this.dt = dt;
 		this.tc = tc;
+		this.factory = factory;
 		list = new ArrayList<ArrayList<BaseAction>>();
 		parallelActionsToWaitFor = new ArrayList<BaseAction>();
 		numberOfParallelActionsToWaitFor = 0;
@@ -124,6 +128,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 					+ " " + a.toString());
 
 			a.setCallbacks(this);
+			a.setFactory(factory);
 			a.setAll(scene, dt, tc, inv);
 			a.runGameAction();
 		}

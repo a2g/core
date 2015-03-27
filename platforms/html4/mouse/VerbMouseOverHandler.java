@@ -23,14 +23,14 @@ import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
 
 
 public class VerbMouseOverHandler implements MouseMoveHandler {
-	private final String textualId;
-	private final int code;
+	private final String vtid;
+	private final int vcode;
 	private final String displayName;
 	IVerbsPresenterFromVerbsPanel mouseToPresenter;
-	public VerbMouseOverHandler(IVerbsPresenterFromVerbsPanel mouseToPresenter, String displayName, String textualId, int code) {
+	public VerbMouseOverHandler(IVerbsPresenterFromVerbsPanel mouseToPresenter, String displayName, String vtid, int code) {
 		this.mouseToPresenter = mouseToPresenter;
-		this.textualId = textualId;
-		this.code = code;
+		this.vtid = vtid;
+		this.vcode = code;
 		this.displayName = displayName;
 
 	}
@@ -38,6 +38,6 @@ public class VerbMouseOverHandler implements MouseMoveHandler {
 	@Override
 	public void onMouseMove(MouseMoveEvent event)
 	{
-		mouseToPresenter.setMouseOver(displayName, textualId, code);
+		mouseToPresenter.setMouseOver(displayName, vtid, vcode);
 	}
 }

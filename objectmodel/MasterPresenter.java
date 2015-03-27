@@ -80,7 +80,7 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 	private IGameScene callbacks;
 
 	private EventBus bus;
-	private IHostFromMasterPresenter parent;
+	private IHostFromMasterPresenter host;
 	private ITimer timer;
 	private ITimer switchTimer;
 	private IMasterPanelFromMasterPresenter masterPanel;
@@ -100,17 +100,18 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 	private MasterProxyForActions proxyForActions;
 
 	public MasterPresenter(final IHostingPanel panel, EventBus bus,
-			IHostFromMasterPresenter parent) {
+			IHostFromMasterPresenter host) {
 		this.bus = bus;
 		this.timer = null;
 		this.switchTimer = null;
-		this.parent = parent;
+		this.host = host;
 		this.proxyForGameScene = new MasterProxyForGameScene(this);
 		this.proxyForActions = new MasterProxyForActions(this);
 
-		this.doCommandActionRunner = new ActionRunner(proxyForActions,
+		IFactory factory = host.getFactory(bus, this);
+		this.doCommandActionRunner = new ActionRunner(factory, proxyForActions,
 				proxyForActions, proxyForActions, proxyForActions, this, 1);
-		this.dialogActionRunner = new ActionRunner(proxyForActions,
+		this.dialogActionRunner = new ActionRunner(factory, proxyForActions,
 				proxyForActions, proxyForActions, proxyForActions, this, 2);
 
 		this.gatePoints = new ArrayList<PointF>();
@@ -138,9 +139,8 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 				this);
 		this.verbsPresenter = new VerbsPresenter(masterPanel.getHostForVerbs(),
 				bus, this);
-		IFactory factory = parent.getFactory(bus, this);
 		this.loaderPresenter = new LoaderPresenter(
-				masterPanel.getHostForLoading(), bus, this, parent, factory);
+				masterPanel.getHostForLoading(), bus, this, host, factory);
 		this.titleCardPresenter = new TitleCardPresenter(
 				masterPanel.getHostForTitleCard(), bus, this, factory);
 
@@ -285,7 +285,7 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 			switchTimer.cancel();
 			switchTimer = null;
 			setCameraToZero();// no scene is meant to keep camera position
-			this.parent
+			this.host
 					.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(switchDestination);
 			switchDestination = "";
 		}
@@ -311,14 +311,14 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 
 	public void setValue(Object key, int value) {
 		String keyAsString = key.toString();
-		parent.setValue(keyAsString, value);
+		host.setValue(keyAsString, value);
 	}
 
 	@Override
 	public int getValue(Object key) {
 		String keyAsString = key.toString();
 
-		int i = parent.getValue(keyAsString);
+		int i = host.getValue(keyAsString);
 
 		return i;
 	}
@@ -353,7 +353,7 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 		cancelOnEveryFrameTimer();
 		this.dialogActionRunner.cancel();
 		setCameraToZero();// no scene is meant to keep camera position
-		this.parent
+		this.host
 				.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
 	}
 
@@ -564,7 +564,7 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 				destObject.setOCode(objectCode);
 
 				if (objectCode == -1) {
-					parent.alert("Missing initial image for "
+					host.alert("Missing initial image for "
 							+ otext
 							+ "\n At the least it will need an image in a placeholder folder, so it shows up in list of objects.");
 					return;
@@ -657,7 +657,7 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 
 	@Override
 	public IFactory getFactory() {
-		return parent.getFactory(bus, this);
+		return host.getFactory(bus, this);
 	}
 
 	@Override
@@ -673,7 +673,7 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 		// this.commandLinePresenter.setVisible(false);
 		executeActionWithDoCommandActionRunner(a);
 
-		parent.setLastCommand(x, y, verbAsVerbEnumeration,
+		host.setLastCommand(x, y, verbAsVerbEnumeration,
 				sentenceA.getTextualId(), sentenceB.getTextualId());
 
 	}
@@ -719,7 +719,7 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 	}
 
 	public IGameScene getSceneByName(String string) {
-		return this.parent.getSceneViaCache(string);
+		return this.host.getSceneViaCache(string);
 	}
 
 	@Override
@@ -901,25 +901,25 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 
 	@Override
 	public void shareWinning(String token) {
-		this.parent.shareWinning(token);
+		this.host.shareWinning(token);
 
 	}
 
 	public void log(String type, String content) {
-		this.parent.log(type);
+		this.host.log(type);
 
 	}
 
 	@Override
 	public void setValue(String name, int value) {
-		parent.setValue(name, value);
+		host.setValue(name, value);
 
 	}
 
 	@Override
 	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
 			EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum rollover) {
-		return parent.getFactory(bus, this).createDialogTreePanel(bus, fore,
+		return host.getFactory(bus, this).createDialogTreePanel(bus, fore,
 				back, rollover);
 	}
 

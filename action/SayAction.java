@@ -41,6 +41,7 @@ public class SayAction extends ChainedAction {
 	private boolean isParallel;
 	private String atid;
 	private String otid;
+	private String fullSpeech;
 	public static String DEFAULT_SAY_ANIM = "DEFAULT_SAY_ANIM";// obviously this
 																// gets said by
 																// object of
@@ -58,26 +59,12 @@ public class SayAction extends ChainedAction {
 		this.isHoldLastFrame = false;
 		this.isParallel = false;
 		this.atid = atid;
+		this.otid = "";
+		this.fullSpeech = fullSpeech;
 		speech = new ArrayList<String>();
 		startingTimeForEachLine = new ArrayList<Double>();
-		String[] lines = fullSpeech.split("\n");
+		
 		this.totalDurationInSeconds = 0;
-		for (int i = 0; i < lines.length; i++) {
-			String line = lines[i];
-			speech.add(line);
-			int milliseconds = getMillisecondsForSpeech(line);
-			totalDurationInSeconds = totalDurationInSeconds + milliseconds;
-		}
-
-		// set ceilings (for easy calcluation)
-		double rollingStartingTimeForLine = 0;
-		for (int i = 0; i < lines.length; i++) {
-			startingTimeForEachLine.add(new Double(rollingStartingTimeForLine
-					/ totalDurationInSeconds));
-			String line = lines[i];
-			rollingStartingTimeForLine += getMillisecondsForSpeech(line);
-		}
-
 	}
 
 	int getAdjustedNumberOfFrames(String speech, double approxDuration,
@@ -108,6 +95,24 @@ public class SayAction extends ChainedAction {
 
 	@Override
 	public void runGameAction() {
+		String[] lines = fullSpeech.split("\n");
+		
+		for (int i = 0; i < lines.length; i++) {
+			String line = lines[i];
+			speech.add(line);
+			int milliseconds = getMillisecondsForSpeech(line);
+			totalDurationInSeconds = totalDurationInSeconds + milliseconds;
+		}
+
+		// set ceilings (for easy calcluation)
+		double rollingStartingTimeForLine = 0;
+		for (int i = 0; i < lines.length; i++) {
+			startingTimeForEachLine.add(new Double(rollingStartingTimeForLine
+					/ totalDurationInSeconds));
+			String line = lines[i];
+			rollingStartingTimeForLine += getMillisecondsForSpeech(line);
+		}
+		
 		if (atid == DEFAULT_SAY_ANIM) {
 			atid = scene.getAtidOfDefaultSayAnim();
 
@@ -236,11 +241,10 @@ public class SayAction extends ChainedAction {
 	public void setAll(IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard,
-			IInventoryPresenterFromActions inventory) {
+			IInventoryPresenterFromActions inventory) 
+	{
 		setTitleCard(titleCard);
-
 		setScene(scene);
-
 	}
 
 }

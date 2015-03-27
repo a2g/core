@@ -38,5 +38,5 @@ public interface IInventoryPresenter {
 
 	void setRightArrowVisible(boolean visible);
 
-	void setInventoryItemVisibleByItid(String textualId, boolean b);
+	void setInventoryItemVisibleByItid(String itid, boolean b);
 }

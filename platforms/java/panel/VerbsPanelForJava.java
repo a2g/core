@@ -88,18 +88,18 @@ extends JPanel implements IVerbsPanelFromVerbsPresenter
 			{
 				Verb v = verbs.items().getByIndex(i);
 				int code = v.getVCode();
-				String textualId = v.getVtid();
-				Label label = new Label(textualId);
+				String vtid = v.getVtid();
+				Label label = new Label(vtid);
 				String displayText = v.getdisplayText();
 
 
 				label.addMouseListener
 				(
-						new VerbMouseOverHandler( mouseToPresenter, displayText, textualId, code)
+						new VerbMouseOverHandler( mouseToPresenter, displayText, vtid, code)
 						);
 				label.addMouseListener
 				(
-						new VerbMouseClickHandler(mouseToPresenter, displayText, textualId, code)
+						new VerbMouseClickHandler(mouseToPresenter, displayText, vtid, code)
 						);
 
 				this.add(label);

@@ -288,7 +288,6 @@ ImagePanelAPI
 	public String getObjectUnderMouse(int x, int y)
 	{
 		//System.out.println("----------------");
-		String textualId = "";
 		int count = toScene.getSceneObjectCount();
 		for(int i = 0;i<count;i++)
 		{
@@ -305,12 +304,12 @@ ImagePanelAPI
 
 				if(rect.contains(adjX, adjY))
 				{
-					textualId = otid;
+					return otid;
 				}
 			}
 		}
 
-		return textualId;
+		return "";
 	}
 
 

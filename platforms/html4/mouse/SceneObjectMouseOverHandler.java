@@ -26,14 +26,14 @@ import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
 
 public class SceneObjectMouseOverHandler implements MouseMoveHandler {
 	private final EventBus bus;
-	private final String textualId;
-	private final short code;
+	private final String otid;
+	private final short ocode;
 	private final IScenePresenterFromSceneMouseOver  api;
 
-	public SceneObjectMouseOverHandler(EventBus bus, IScenePresenterFromSceneMouseOver api, String textualId, short code) {
+	public SceneObjectMouseOverHandler(EventBus bus, IScenePresenterFromSceneMouseOver api, String otid, short code) {
 		this.bus = bus;
-		this.textualId = textualId;
-		this.code = code;
+		this.otid = otid;
+		this.ocode = code;
 		this.api = api;
 
 	}
@@ -41,11 +41,11 @@ public class SceneObjectMouseOverHandler implements MouseMoveHandler {
 	@Override
 	public void onMouseMove(MouseMoveEvent event) {
 
-		String displayName = api.getDisplayNameByOtid(textualId);
+		String displayName = api.getDisplayNameByOtid(otid);
 		bus.fireEvent(
 				new SetRolloverEvent(
 						displayName,
-						this.textualId,
-						this.code));
+						this.otid,
+						this.ocode));
 	}
 }

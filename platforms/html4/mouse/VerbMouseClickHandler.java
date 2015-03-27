@@ -25,20 +25,20 @@ import com.google.gwt.event.dom.client.ClickEvent;
 public class VerbMouseClickHandler
 implements ClickHandler {
 	private final IVerbsPresenterFromVerbsPanel mouseToPresenter;
-	String textualId;
+	String vtid;
 	String displayName;
-	int code;
+	int vcode;
 
-	public VerbMouseClickHandler(IVerbsPresenterFromVerbsPanel mouseToPresenter, String displayName, String textualId, int code) {
+	public VerbMouseClickHandler(IVerbsPresenterFromVerbsPanel mouseToPresenter, String displayName, String vtid, int code) {
 		this.mouseToPresenter = mouseToPresenter;
-		this.code = code;
+		this.vcode = code;
 		this.displayName =displayName;
-		this.textualId = textualId;
+		this.vtid = vtid;
 	}
 
 	@Override
 	public void onClick(ClickEvent event)
 	{
-		mouseToPresenter.doClick(displayName, textualId,code);
+		mouseToPresenter.doClick(displayName, vtid,vcode);
 	}
 }

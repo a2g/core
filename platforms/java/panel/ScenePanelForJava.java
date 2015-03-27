@@ -244,8 +244,7 @@ implements IScenePanelFromScenePresenter
 
 	public String getObjectUnderMouse(int x, int y)
 	{
-		//System.out.println("----------------");
-		String textualId = "";
+		//System.out.println( "----------------");
 		int count = toScene.getSceneObjectCount();
 		for(int i = 0;i<count;i++)
 		{
@@ -264,12 +263,12 @@ implements IScenePanelFromScenePresenter
 
 				if(rect.contains(adjX, adjY))
 				{
-					textualId = otid;
+					return otid;
 				}
 			}
 		}
 
-		return textualId;
+		return "";
 	}
 
 	@Override
