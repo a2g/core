@@ -19,7 +19,12 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromWalkAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 public class WalkToAction extends MoveWhilstAnimatingAction {
 	private IScenePresenterFromWalkAction scene;
@@ -34,6 +39,7 @@ public class WalkToAction extends MoveWhilstAnimatingAction {
 
 	@Override
 	public void runGameAction() {
+		
 		double startX = scene.getBaseMiddleXByOtid(getOtid());
 		double startY = scene.getBaseMiddleYByOtid(getOtid());
 
@@ -81,11 +87,17 @@ public class WalkToAction extends MoveWhilstAnimatingAction {
 		scene.setToInitialAnimationWithoutChangingFrameByOtid(getOtid());
 	}
 
-	public IScenePresenterFromWalkAction getScene() {
-		return scene;
+	@Override
+	public void setAll(IMasterPresenterFromActions master,
+			IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setSceneForWalkTo(scene);
+		super.setAll(master, scene, dialogTree, titleCard, inventory);
+
 	}
 
-	public void setScene(IScenePresenterFromWalkAction scene) {
+	public void setSceneForWalkTo(IScenePresenterFromWalkAction scene) {
 		this.scene = scene;
 	}
 }

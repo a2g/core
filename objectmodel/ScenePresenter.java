@@ -243,7 +243,13 @@ public class ScenePresenter implements IScenePresenter {
 
 	@Override
 	public String getAtidOfCurrentAnimationByOtid(String otid) {
-		return scene.objectCollection().getByOtid(otid).getCurrentAnimation();
+		SceneObject o = scene.objectCollection().getByOtid(otid);
+		if(o!=null)
+		{
+			String a = o.getCurrentAnimation();
+			return a;
+		}
+		return "getAtidOfCurrentAnimationByOtid couldn't find current animation";
 	}
 
 	public void setOtidOfDefaultWalkObject(String otid) {

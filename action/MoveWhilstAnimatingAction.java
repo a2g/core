@@ -27,7 +27,7 @@ import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.action.ChainedAction;
 
 public class MoveWhilstAnimatingAction extends ChainedAction {
-	IScenePresenterFromMoveAction scene;
+	private IScenePresenterFromMoveAction scene;
 
 	private short ocode;
 	private String otid;// set in constructor
@@ -67,6 +67,13 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 	}
 
 	String getOtid() {
+		if(otid!=null)
+			return otid;
+		if (ocode == -1) {
+			otid = scene.getOtidOfDefaultWalkObject();
+		} else {
+			otid = scene.getOtidByCode(ocode);
+		}
 		return otid;
 	}
 
@@ -80,10 +87,6 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 
 	public void setHoldLastFrame(boolean holdLastFrame) {
 		this.holdLastFrame = holdLastFrame;
-	}
-
-	String getObject() {
-		return this.otid;
 	}
 
 	double getEndX() {
@@ -110,16 +113,16 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 		this.animatingDelay = delay;
 	}
 
+	public void initializeOtidFromOCode()
+	{
+		
+	}
 	@Override
 	public void runGameAction() {
-		if (ocode == -1) {
-			otid = scene.getOtidOfDefaultWalkObject();
-		} else {
-			otid = scene.getOtidByCode(ocode);
-		}
-		atid = scene.getAtidOfCurrentAnimationByOtid(otid);
-		startX = scene.getBaseMiddleXByOtid(otid);
-		startY = scene.getBaseMiddleYByOtid(otid);
+		
+		atid = scene.getAtidOfCurrentAnimationByOtid(getOtid());
+		startX = scene.getBaseMiddleXByOtid(getOtid());
+		startY = scene.getBaseMiddleYByOtid(getOtid());
 
 		if (endX == Double.NaN)
 			endX = startX;
@@ -136,7 +139,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 		double dist = Math.sqrt(diffXSquared + diffYSquared);
 
 		this.framesPlayedDuringWalk = (int) (dist * 40 + animatingDelay);
-		this.screenCoordsPerSecond = scene.getScreenCoordsPerSecondByOtid(otid);
+		this.screenCoordsPerSecond = scene.getScreenCoordsPerSecondByOtid(getOtid());
 		if (this.atid != null) {
 			this.framesInAnim = scene.getNumberOfFramesByAtid(atid);
 		} else {
@@ -175,8 +178,8 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 			return;
 		}
 
-		scene.setBaseMiddleXByOtid(otid, x);
-		scene.setBaseMiddleYByOtid(otid, y);
+		scene.setBaseMiddleXByOtid(getOtid(), x);
+		scene.setBaseMiddleYByOtid(getOtid(), y);
 
 		int frameToSetTo = 0;
 		if (this.framesInAnim > 1) {
@@ -187,7 +190,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 		}
 
 		scene.setAsACurrentAnimationByAtid(atid);
-		scene.setCurrentFrameByOtid(otid, frameToSetTo);
+		scene.setCurrentFrameByOtid(getOtid(), frameToSetTo);
 	}
 
 	@Override
@@ -195,13 +198,13 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 	protected void onCompleteGameAction() {
 		if (!scene.isInANoGoZone(new PointF(endX, endY))) {
 			onUpdateGameAction(1.0);
-			scene.setBaseMiddleXByOtid(otid, endX);
-			scene.setBaseMiddleYByOtid(otid, endY);
+			scene.setBaseMiddleXByOtid(getOtid(), endX);
+			scene.setBaseMiddleYByOtid(getOtid(), endY);
 		}
 		if (holdLastFrame == false) {
-			if (this.otid != null) {
+			if (this.getOtid() != null) {
 
-				scene.setToInitialAnimationWithoutChangingFrameByOtid(otid);
+				scene.setToInitialAnimationWithoutChangingFrameByOtid(getOtid());
 			}
 		}
 	}
@@ -217,11 +220,11 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
-		setScene(scene);
+		setSceneForMoveWhilstAnimating(scene);
 
 	}
 
-	public void setScene(IScenePresenterFromMoveAction scene) {
+	public void setSceneForMoveWhilstAnimating(IScenePresenterFromMoveAction scene) {
 		this.scene = scene;
 	}
 
