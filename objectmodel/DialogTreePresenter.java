@@ -33,12 +33,10 @@ public class DialogTreePresenter implements IDialogTreePresenter {
 	private IDialogTreePanelFromDialogTreePresenter view;
 	private String atidOfDialogTreeTalkAnimation;
 	private Set<String> recordOfSaidSpeech;
-	private IMasterPresenterFromDialogTree callbacks;
 
 	public DialogTreePresenter(final IHostingPanel panel, EventBus bus,
 			IMasterPresenterFromDialogTree callbacks) {
 		this.bus = bus;
-		this.callbacks = callbacks;
 		this.theDialogTree = new DialogTree();
 		this.view = callbacks.createDialogTreePanel(bus, ColorEnum.Purple,
 				ColorEnum.Black, ColorEnum.Red);
@@ -54,14 +52,7 @@ public class DialogTreePresenter implements IDialogTreePresenter {
 	public void resetRecordOfSaidSpeech() {
 		recordOfSaidSpeech.clear();
 	}
-
 	
-
-//	@Override
-	//public String getDialogTreeTalkAnimation() {
-		//return this.atidOfDialogTreeTalkAnimation;
-	//}
-
 	public IDialogTreePanelFromDialogTreePresenter getView() {
 		return view;
 	}
@@ -79,7 +70,6 @@ public class DialogTreePresenter implements IDialogTreePresenter {
 		}
 	}
 
-	//@Override
 	public void setDialogTreeTalkAnimation(String atid) {
 		this.atidOfDialogTreeTalkAnimation = atid;
 

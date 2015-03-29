@@ -20,7 +20,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.interfaces.IInventoryPanelFromInventoryPresenter;
-import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryMouseOver;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryPanel;
 import com.github.a2g.core.interfaces.IPackagedImage;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
@@ -30,9 +29,7 @@ import com.github.a2g.core.platforms.html4.mouse.InventoryItemMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.InventoryItemMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
-import com.github.a2g.core.res.UserInterfaceDecoration;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 
@@ -48,10 +45,12 @@ ImagePanelAPI
 
 	public InventoryPanel(final IInventoryPresenterFromInventoryPanel mouseToPresenter, ColorEnum fore, ColorEnum back, ColorEnum rollover)
 	{
+		setVisible(true);
 		this.mouseToPresenter = mouseToPresenter;
 
 		getElement().getStyle().setProperty("color", fore.toString());
 		getElement().getStyle().setProperty("backgroundColor", back.toString());
+		getElement().getStyle().setProperty("overflow", "visible");
 				
 		arrowLeft = new FlowPanel();
 		this.add(arrowLeft);
@@ -114,8 +113,8 @@ ImagePanelAPI
 
 	@Override
 	public Image createNewImageAndAdddHandlers(IPackagedImage imageResource,
-			LoadHandler lh, EventBus bus, String objectTextualId,
-			int objectCode, int i, int j) {
+			LoadHandler lh, EventBus bus, String otid,
+			int ocode, int i, int j) {
 
 		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource(
 				(PackagedImageForHtml4) imageResource, lh);
@@ -123,8 +122,8 @@ ImagePanelAPI
 		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new Point(0, 0));
 
 		imageAndPos.getNativeImage().addMouseMoveHandler(
-				new InventoryItemMouseOverHandler(bus, mouseToPresenter, objectTextualId,
-						objectCode));
+				new InventoryItemMouseOverHandler(bus, mouseToPresenter, otid,
+						ocode));
 
 		imageAndPos.getNativeImage().addClickHandler(
 				new InventoryItemMouseClickHandler(this, mouseToPresenter));
@@ -134,7 +133,6 @@ ImagePanelAPI
 
 	@Override
 	public void setImageVisible(Image image, boolean visible) {
-
 		super.setVisible(((ImageForHtml4) image).getNativeImage().getElement(),
 				visible);
 	}
@@ -184,7 +182,7 @@ ImagePanelAPI
 	}
 
 	@Override
-	public void setInventoryImageSize(int width, int height) {
-		// TODO Auto-generated method stub	
+	public void setDimensionsOfPanel(int width, int height) {
+		this.setPixelSize(width, height);
 	}
 }

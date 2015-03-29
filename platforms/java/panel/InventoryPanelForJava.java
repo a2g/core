@@ -268,7 +268,7 @@ implements ImagePanelAPI
 	}
 
 	@Override
-	public void setInventoryImageSize(int width, int height) {
+	public void setDimensionsOfPanel(int width, int height) {
 		
 	}
 }

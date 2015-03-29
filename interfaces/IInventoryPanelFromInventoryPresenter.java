@@ -35,7 +35,7 @@ public interface IInventoryPanelFromInventoryPresenter {
 
 	void setScenePixelSize(int width, int height);
 
-	void setInventoryImageSize(int width, int height);
+	void setDimensionsOfPanel(int width, int height);
 
 	void setLeftArrowVisible(boolean visible);
 

@@ -24,11 +24,9 @@ import com.github.a2g.core.interfaces.IInventoryPanelFromInventoryPresenter;
 import com.github.a2g.core.interfaces.IInventoryPresenter;
 import com.github.a2g.core.interfaces.IMasterPresenterFromInventory;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryPanel;
-import com.github.a2g.core.interfaces.IPackagedImage;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
-import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
 
 public class InventoryPresenter implements
@@ -196,7 +194,7 @@ public class InventoryPresenter implements
 		leftArrowRect = new Rect(0, 0, l, h * 2);
 		rightArrowRect = new Rect(l + 2 * w, 0, r, h * 2);
 
-		view.setInventoryImageSize(width, height);
+		view.setDimensionsOfPanel(width, height);
 	}
 
 	InventoryItem getItemForRect(int i) {
@@ -249,8 +247,4 @@ public class InventoryPresenter implements
 		return theInventory.items().getByItid(itid).getDisplayName();
 	}
 	
-//	@Override
-//	public void setVisible(boolean isVisible) {
-//		view.setVisible(isVisible);
-//	}
 }

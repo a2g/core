@@ -694,10 +694,8 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 
 	@Override
 	public void setInventoryImageSize(int width, int height) {
-		this.getInventoryPresenter().setSizeOfSingleInventoryImage(width,
-				height);
-		this.verbsPresenter.setWidthOfInventory(getInventoryPresenter()
-				.getWidth());
+		this.getInventoryPresenter().setSizeOfSingleInventoryImage(width, height);
+		this.verbsPresenter.setWidthOfInventory(getInventoryPresenter().getWidth());
 	}
 
 	@Override
