@@ -57,7 +57,6 @@ public class VerbsPresenter implements IVerbsPresenterFromVerbsPanel,
 		return view;
 	}
 
-	@Override
 	public void update() {
 		view.setVerbs(theVerbs);
 		view.update();
@@ -90,28 +89,8 @@ public class VerbsPresenter implements IVerbsPresenterFromVerbsPanel,
 		this.doClick();
 	}
 
-	@Override
-	public void setVisible(boolean isVisible) {
-		this.view.setVisible(isVisible);
-
-	}
-
-	@Override
-	public void setVerbs(Verbs theVerbs) {
-		this.view.setVerbs(theVerbs);
-
-	}
-
-	@Override
-	public void setWidth(int i) {
-		this.view.setWidth(i);
-
-	}
-
-	@Override
 	public void removeByCode(int vcode) {
 		this.theVerbs.items().removeByCode(vcode);
 
 	}
-
 }

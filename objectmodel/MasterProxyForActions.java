@@ -5,6 +5,7 @@ import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.ILoad;
+import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IOnFillLoadList;
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
@@ -14,6 +15,7 @@ import com.github.a2g.core.primitive.PointF;
 import com.google.gwt.event.shared.EventBus;
 
 public class MasterProxyForActions implements IOnFillLoadList,
+IMasterPresenterFromActions,
 		IInventoryPresenterFromActions, IScenePresenterFromActions,
 		IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 	private MasterPresenter master;
@@ -346,6 +348,11 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	public void kickStartLoading() {
 		master.kickStartLoading();
 
+	}
+
+	@Override
+	public boolean isSayNonIncrementing() {
+		return master.isSayNonIncrementing();
 	}
 
 }

@@ -134,8 +134,7 @@ public class InventoryPresenter implements
 			image.setVisible(false, new Point(-width, -height));
 		}
 	}
-
-	@Override
+ 
 	public void updateInventory() {
 		view.setLeftArrowVisible(isLeftArrowVisible());
 		view.setRightArrowVisible(isRightArrowVisible());
@@ -171,12 +170,9 @@ public class InventoryPresenter implements
 		}
 	}
 
-	@Override
-	public void setVisible(boolean isVisible) {
-		view.setVisible(isVisible);
-	}
 
-	@Override
+
+ 
 	public void clear() {
 		theInventoryItemMap.clear();
 		theInventory = new Inventory();
@@ -249,39 +245,12 @@ public class InventoryPresenter implements
 	}
 
 	@Override
-	public Image createNewImageAndAdddHandlers(IPackagedImage imageResource,
-			LoadHandler lh, EventBus bus, String objectTextualId,
-			int objectCode, int i, int j) {
-		return view.createNewImageAndAdddHandlers(imageResource, lh, bus,
-				objectTextualId, objectCode, i, j);
-	}
-
-	@Override
-	public void setLeftArrowVisible(boolean visible) {
-		view.setLeftArrowVisible(visible);
-
-	}
-
-	@Override
-	public void setRightArrowVisible(boolean visible) {
-		view.setRightArrowVisible(visible);
-
-	}
-
-	@Override
-	public void setInventoryItemVisibleByItid(String itid, boolean visible) {
-		theInventory.items().getByItid(itid).setVisible(visible);
-	}
-
-	@Override
 	public String getDisplayNameByItid(String itid) {
 		return theInventory.items().getByItid(itid).getDisplayName();
 	}
-
-	@Override
-	public void setInventoryImageSize(int width, int height) {
-		view.setInventoryImageSize(width, height);
-
-	}
-
+	
+//	@Override
+//	public void setVisible(boolean isVisible) {
+//		view.setVisible(isVisible);
+//	}
 }

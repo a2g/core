@@ -37,6 +37,7 @@ import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActionRunner;
+import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromCommandLine;
 import com.github.a2g.core.interfaces.IFactory;
 import com.github.a2g.core.interfaces.IHostingPanel;
@@ -58,7 +59,8 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromTimer;
 import com.github.a2g.core.interfaces.IMasterPresenterFromVerbs;
 import com.google.gwt.event.shared.EventBus;
 
-public class MasterPresenter implements IMasterPresenterFromScene,
+public class MasterPresenter implements 
+IMasterPresenterFromActions, IMasterPresenterFromScene,
 		IMasterPresenterFromDialogTree, IMasterPresenterFromTimer,
 		IMasterPresenterFromBundle, IMasterPresenterFromLoader,
 		IMasterPresenterFromCommandLine, IMasterPresenterFromActionRunner,
@@ -95,10 +97,10 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 
 	private String lastSceneAsString;
 	private String switchDestination;
-	private boolean isSayWithoutIncremementing;
+	private boolean isSayNonIncremementing;
 	private short boundaryCrossObject;
 	private MasterProxyForActions proxyForActions;
-
+	
 	public MasterPresenter(final IHostingPanel panel, EventBus bus,
 			IHostFromMasterPresenter host) {
 		this.bus = bus;
@@ -109,9 +111,9 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 		this.proxyForActions = new MasterProxyForActions(this);
 
 		IFactory factory = host.getFactory(bus, this);
-		this.doCommandActionRunner = new ActionRunner(factory, proxyForActions,
+		this.doCommandActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions,
 				proxyForActions, proxyForActions, proxyForActions, this, 1);
-		this.dialogActionRunner = new ActionRunner(factory, proxyForActions,
+		this.dialogActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions,
 				proxyForActions, proxyForActions, proxyForActions, this, 2);
 
 		this.gatePoints = new ArrayList<PointF>();
@@ -396,7 +398,7 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 			this.setDialogTreeActive(true);
 		}
 
-		// get the chain from the client code
+		// get the chain from the client
 		BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(
 				proxyForGameScene, createChainRootAction(), branchId);
 
@@ -764,11 +766,11 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 
 	public void setIsSayAlwaysWithoutIncremementing(
 			boolean isSayWithoutIncremementing) {
-		this.isSayWithoutIncremementing = isSayWithoutIncremementing;
+		this.isSayNonIncremementing = isSayWithoutIncremementing;
 	}
 
 	public boolean getIsSayAlwaysWithoutIncremementing() {
-		return isSayWithoutIncremementing;
+		return isSayNonIncremementing;
 	}
 
 	public void setContinueAfterLoad(boolean isIgnore) {
@@ -949,6 +951,16 @@ public class MasterPresenter implements IMasterPresenterFromScene,
 
 	LoaderPresenter getLoaderPresenter() {
 		return loaderPresenter;
+	}
+
+	@Override
+	public double getPopupDisplayDuration() {
+		return titleCardPresenter.getPopupDisplayDuration();
+	}
+
+	@Override
+	public boolean isSayNonIncrementing() {
+		return this.isSayNonIncremementing;
 	}
 
 }

@@ -17,14 +17,8 @@ package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.objectmodel.Verbs;
 
-public interface IVerbsPresenter {
-	void setVisible(boolean isVisible);
+public interface IVerbsPresenter 
+extends IVerbsPresenterFromVerbsPanel
+{
 
-	void setVerbs(Verbs theVerbs);
-
-	void update();
-
-	void setWidth(int i);
-
-	void removeByCode(int cut);
 }

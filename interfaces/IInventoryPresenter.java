@@ -20,23 +20,10 @@ import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
 
-public interface IInventoryPresenter {
+public interface IInventoryPresenter 
+extends IInventoryPresenterFromInventoryPanel
+//, IInventoryPresenterFromActions
+, IInventoryPresenterFromInventoryMouseOver
+{
 
-	void setVisible(boolean isVisible);
-
-	void updateInventory();
-
-	void clear();
-
-	Image createNewImageAndAdddHandlers(IPackagedImage imageResource,
-			LoadHandler lh, EventBus bus, String objectTextualId,
-			int objectCode, int i, int j);
-
-	void setInventoryImageSize(int width, int height);
-
-	void setLeftArrowVisible(boolean visible);
-
-	void setRightArrowVisible(boolean visible);
-
-	void setInventoryItemVisibleByItid(String itid, boolean b);
 }

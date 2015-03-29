@@ -40,6 +40,7 @@ import com.github.a2g.core.interfaces.IActionRunnerFromBaseAction;
 import com.github.a2g.core.interfaces.IFactory;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
@@ -69,10 +70,11 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 
 	abstract public void runGameAction();
 
-	abstract public void setAll(IScenePresenterFromActions scene,
+	abstract public void setAll(
+			IMasterPresenterFromActions master,
+			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard,
-			IInventoryPresenterFromActions inventory);
+			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory);
 
 	protected BaseAction(BaseAction parent, boolean isLinear) {
 		this.parent = parent;
@@ -122,7 +124,11 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	public void onComplete() {
 		onCompleteGameAction();
 
-		this.callbacks.startTheNextAction(this);
+		// callbacks can be null in a unit test
+		if(this.callbacks!=null)
+		{
+			this.callbacks.startTheNextAction(this);
+		}
 	}
 
 	@Override

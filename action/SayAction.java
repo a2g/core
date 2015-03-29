@@ -21,10 +21,11 @@ import java.util.ArrayList;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromSayAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-import com.github.a2g.core.interfaces.ITitleCardPresenterFromSayAction;
+import com.github.a2g.core.interfaces.IMasterPresenterFromSayAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.action.ChainedAction;
 
@@ -33,7 +34,7 @@ public class SayAction extends ChainedAction {
 	private ArrayList<Double> startingTimeForEachLine;
 	private double totalDurationInSeconds;
 	private IScenePresenterFromSayAction scene;
-	private ITitleCardPresenterFromSayAction titleCard;
+	private IMasterPresenterFromSayAction master;
 	private int numberOfFramesTotal;
 	private static final ColorEnum defaultTalkingColor = ColorEnum.Purple;
 	private NonIncrementing nonIncrementing;
@@ -100,8 +101,8 @@ public class SayAction extends ChainedAction {
 		for (int i = 0; i < lines.length; i++) {
 			String line = lines[i];
 			speech.add(line);
-			int milliseconds = getMillisecondsForSpeech(line);
-			totalDurationInSeconds = totalDurationInSeconds + milliseconds;
+			double secondsForLine = getSecondsForLine(line);
+			totalDurationInSeconds = totalDurationInSeconds + secondsForLine;
 		}
 
 		// set ceilings (for easy calcluation)
@@ -110,16 +111,18 @@ public class SayAction extends ChainedAction {
 			startingTimeForEachLine.add(new Double(rollingStartingTimeForLine
 					/ totalDurationInSeconds));
 			String line = lines[i];
-			rollingStartingTimeForLine += getMillisecondsForSpeech(line);
+			rollingStartingTimeForLine += getSecondsForLine(line);
+		}
+		
+		if(this.nonIncrementing==SayAction.NonIncrementing.FromAPI)
+		{
+			this.nonIncrementing = master.isSayNonIncrementing()? NonIncrementing.True : NonIncrementing.False;
 		}
 		
 		if (atid == DEFAULT_SAY_ANIM) {
 			atid = scene.getAtidOfDefaultSayAnim();
-
-			otid = scene.getOtidOfAtid(atid);
-		} else {
-
-		}
+		} 
+		otid = scene.getOtidOfAtid(atid);
 
 		// only now do
 		if (otid != "") {
@@ -127,7 +130,7 @@ public class SayAction extends ChainedAction {
 				// if theres no animation then we just wait for the
 				// totalDuration;
 				double framesPerSecond = 40;
-				numberOfFramesTotal = (int) (totalDurationInSeconds * framesPerSecond);
+				numberOfFramesTotal = (int) ((totalDurationInSeconds) * framesPerSecond);
 			} else {
 				numberOfFramesTotal = getAdjustedNumberOfFrames(speech.get(0),
 						totalDurationInSeconds,
@@ -136,8 +139,8 @@ public class SayAction extends ChainedAction {
 			}
 
 			if (numberOfFramesTotal < 1) {
-				titleCard.displayTitleCard("error!! id=<" + atid
-						+ "> numberOfFramesTotal=" + numberOfFramesTotal);
+				//titleCard.displayTitleCard("error!! id=<" + atid
+				//		+ "> numberOfFramesTotal=" + numberOfFramesTotal);
 				assert (false);
 			}
 
@@ -154,7 +157,7 @@ public class SayAction extends ChainedAction {
 			scene.setStateOfPopup(visible, .1, .1, color, speech.get(0), this);
 
 		}
-		this.run((int) totalDurationInSeconds);
+		this.run((int)(totalDurationInSeconds*1000));
 	}
 
 	@Override
@@ -206,11 +209,11 @@ public class SayAction extends ChainedAction {
 		return isParallel;
 	}
 
-	int getMillisecondsForSpeech(String speech) {
-		double popupDisplayDuration = titleCard.getPopupDisplayDuration() * 1000;
+	double getSecondsForLine(String speech) {
+		double popupDisplayDuration = master.getPopupDisplayDuration();
 		// int delay = how;
 		// int duration = (speech.length() * (2 + delay)) * 40;
-		return (int) popupDisplayDuration;
+		return  popupDisplayDuration;
 	}
 
 	public void setNonBlocking(boolean b) {
@@ -233,18 +236,23 @@ public class SayAction extends ChainedAction {
 		this.scene = scene;
 	}
 
-	public void setTitleCard(ITitleCardPresenterFromSayAction titleCard) {
-		this.titleCard = titleCard;
+	public void setTitleCard(IMasterPresenterFromSayAction titleCard) {
+		this.master = titleCard;
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene,
+	public void setAll(IMasterPresenterFromActions master,
+			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard,
-			IInventoryPresenterFromActions inventory) 
+			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
 	{
-		setTitleCard(titleCard);
+		setMaster(master);
 		setScene(scene);
+	}
+
+	public void setMaster(IMasterPresenterFromSayAction sayActionTest) {
+		this.master = sayActionTest;
+		
 	}
 
 }

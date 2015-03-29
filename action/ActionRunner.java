@@ -23,6 +23,7 @@ import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IFactory;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActionRunner;
+import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
@@ -32,19 +33,23 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 	private int numberOfParallelActionsToWaitFor;
 	private IMasterPresenterFromActionRunner callback;
 	final private int id;
+	private IMasterPresenterFromActions master;
 	private IScenePresenterFromActions scene;
 	private IDialogTreePresenterFromActions dt;
 	private ITitleCardPresenterFromActions tc;
 	private IInventoryPresenterFromActions inv;
+	
 	private IFactory factory;
 
 	public ActionRunner(IFactory factory,
+			IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dt,
 			ITitleCardPresenterFromActions tc,
 			IInventoryPresenterFromActions inv,
 			IMasterPresenterFromActionRunner callback, int id) {
 		this.id = id;
+		this.master = master;
 		this.callback = callback;
 		this.scene = scene;
 		this.inv = inv;
@@ -129,7 +134,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 
 			a.setCallbacks(this);
 			a.setFactory(factory);
-			a.setAll(scene, dt, tc, inv);
+			a.setAll(master, scene, dt, tc, inv);
 			a.runGameAction();
 		}
 	}

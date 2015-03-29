@@ -99,6 +99,7 @@ public class InventoryPanel extends AbsolutePanel implements ImagePanelAPI,
 			}
 
 		}, ClickEvent.getType());
+		this.setVisible(true);
 
 	}
 
@@ -131,7 +132,7 @@ public class InventoryPanel extends AbsolutePanel implements ImagePanelAPI,
 	public void setImageVisible(Image image, boolean visible) {
 
 		super.setVisible(((ImageForHtml4) image).getNativeImage().getElement(),
-				visible);
+			true);
 	}
 
 	@Override

@@ -20,6 +20,7 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
@@ -51,10 +52,10 @@ public class SleepAction extends ChainedAction {
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene,
+	public void setAll(IMasterPresenterFromActions master,
+			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard,
-			IInventoryPresenterFromActions inventory) {
+			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
 		// TODO Auto-generated method stub
 
 	}

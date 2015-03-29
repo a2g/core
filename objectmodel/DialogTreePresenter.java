@@ -55,25 +55,12 @@ public class DialogTreePresenter implements IDialogTreePresenter {
 		recordOfSaidSpeech.clear();
 	}
 
-	@Override
-	public void addBranch(int subBranchId, String lineOfDialog,
-			boolean isAlwaysShown) {
-		if (isAlwaysShown || !recordOfSaidSpeech.contains(lineOfDialog)) {
-			theDialogTree.addSubBranch(subBranchId, lineOfDialog);
-			view.update(theDialogTree, bus);
-		}
-	}
+	
 
-	@Override
-	public void setDialogTreeTalkAnimation(String atid) {
-		this.atidOfDialogTreeTalkAnimation = atid;
-
-	}
-
-	@Override
-	public String getDialogTreeTalkAnimation() {
-		return this.atidOfDialogTreeTalkAnimation;
-	}
+//	@Override
+	//public String getDialogTreeTalkAnimation() {
+		//return this.atidOfDialogTreeTalkAnimation;
+	//}
 
 	public IDialogTreePanelFromDialogTreePresenter getView() {
 		return view;
@@ -83,33 +70,36 @@ public class DialogTreePresenter implements IDialogTreePresenter {
 		recordOfSaidSpeech.add(text);
 	}
 
-	@Override
+	//@Override
+	public void addBranch(int subBranchId, String lineOfDialog,
+			boolean isAlwaysShown) {
+		if (isAlwaysShown || !recordOfSaidSpeech.contains(lineOfDialog)) {
+			theDialogTree.addSubBranch(subBranchId, lineOfDialog);
+			view.update(theDialogTree, bus);
+		}
+	}
+
+	//@Override
+	public void setDialogTreeTalkAnimation(String atid) {
+		this.atidOfDialogTreeTalkAnimation = atid;
+
+	}
+
+	public String getDialogTreeTalkAnimation() {
+		return this.atidOfDialogTreeTalkAnimation;
+	}
+
 	public void setDialogTreeVisible(boolean isInDialogTreeMode) {
 		view.setVisible(isInDialogTreeMode);
 	}
 
-	@Override
 	public void updateDialogTree(DialogTree theDialogTree, EventBus bus) {
 		view.update(theDialogTree, bus);
 
 	}
 
-	@Override
-	public void executeBranchOnCurrentScene(int branchId) {
-		callbacks.executeBranchOnCurrentScene(branchId);
-
+	public void setScenePixelSize(int width, int i) {
+		
+		
 	}
-
-	@Override
-	public void setDialogTreeActive(boolean isActive) {
-		callbacks.setDialogTreeActive(isActive);
-
-	}
-
-	@Override
-	public void setScenePixelSize(int width, int height) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

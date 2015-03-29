@@ -19,6 +19,7 @@ package com.github.a2g.core.action;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromMoveAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
@@ -54,7 +55,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 		super(parent, isLinear);
 		this.ocode = ocode;
 		this.animatingDelay = 0;
-		this.screenCoordsPerSecond = scene.getScreenCoordsPerSecondByOtid(otid);
+		this.screenCoordsPerSecond = 0;
 		this.endX = Double.NaN;
 		this.endY = Double.NaN;
 		this.startX = 0.0;
@@ -135,7 +136,7 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 		double dist = Math.sqrt(diffXSquared + diffYSquared);
 
 		this.framesPlayedDuringWalk = (int) (dist * 40 + animatingDelay);
-
+		this.screenCoordsPerSecond = scene.getScreenCoordsPerSecondByOtid(otid);
 		if (this.atid != null) {
 			this.framesInAnim = scene.getNumberOfFramesByAtid(atid);
 		} else {
@@ -212,10 +213,10 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 	}
 
 	@Override
-	public void setAll(IScenePresenterFromActions scene,
+	public void setAll(IMasterPresenterFromActions master,
+			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard,
-			IInventoryPresenterFromActions inventory) {
+			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
 		setScene(scene);
 
 	}
