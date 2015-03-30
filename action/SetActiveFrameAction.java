@@ -29,7 +29,6 @@ public class SetActiveFrameAction extends ChainedAction {
 	private IScenePresenterFromSetActiveFrameAction scene;
 
 	private short ocode;
-	private String otid;
 	private int frame;
 
 	public SetActiveFrameAction(BaseAction parent, short ocode, int frame) {
@@ -49,7 +48,7 @@ public class SetActiveFrameAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		scene.getOtidByCode(ocode);
+		String otid = scene.getOtidByCode(ocode);
 		scene.setCurrentFrameByOtid(otid, this.frame);
 
 	}

@@ -344,7 +344,10 @@ public class SceneObject {
 	}
 
 	public String getSpecialAnimation(Special type) {
-		return this.mapOfSpecialAnimations.get(type);
+		String toReturn = this.mapOfSpecialAnimations.get(type);
+		if(toReturn==null)
+			return "";
+		return toReturn;
 	}
 
 	public String getCurrentAnimation() {
