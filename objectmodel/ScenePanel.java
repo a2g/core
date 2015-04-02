@@ -32,16 +32,14 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
 
 public class ScenePanel extends AbsolutePanel implements ImagePanelAPI,
 		IScenePanelFromScenePresenter {
 	int cameraOffsetX;
 	int cameraOffsetY;
 	SceneObjectTouchMoveHandler theTouchMoveHandler;
-	FlowPanel speechWidget;
-	Label label;
+	SpeechBalloon speechWidget;
+	
 	private int width;
 	private int height;
 
@@ -51,11 +49,7 @@ public class ScenePanel extends AbsolutePanel implements ImagePanelAPI,
 		this.cameraOffsetX = 0;
 		this.cameraOffsetY = 0;
 		this.theTouchMoveHandler = new SceneObjectTouchMoveHandler(api);
-
-		label = new Label("hello");
-		this.speechWidget = new FlowPanel();
-		speechWidget.add(label);
-
+		this.speechWidget = new SpeechBalloon();
 	}
 
 	@Override
@@ -141,15 +135,13 @@ public class ScenePanel extends AbsolutePanel implements ImagePanelAPI,
 		if (!isVisible) {
 			super.remove(speechWidget);
 		}
-		label.setVisible(isVisible);
-		label.getElement().getStyle().setProperty("color", "#ff0000");
-		label.getElement().getStyle().setProperty("fontcolor", "#00ff00");
-		label.getElement().getStyle().setProperty("textcolor", "#0000ff");
-		if (talkingColor != null) {
-			label.getElement().getStyle()
-					.setProperty("borderColor", talkingColor.toString());
-		}
-		label.setText(speech);
+		
+		speechWidget.setText(speech);
+		
+		speechWidget.setVisible(isVisible);
+		
+		speechWidget.setBorderColor(talkingColor);
+		
 		super.add(speechWidget, (int) (x * width), (int) (y * height));
 
 	}
