@@ -43,6 +43,7 @@ import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectInitial;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectSpecial;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsSceneTalker;
 import com.github.a2g.core.interfaces.game.ISetAnimationDuration;
+import com.github.a2g.core.interfaces.game.ISetAnimationMaxSpeechBalloonRect;
 import com.github.a2g.core.interfaces.game.ISetAsSceneWalker;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleY;
@@ -62,59 +63,65 @@ import com.github.a2g.core.interfaces.game.IShow;
 import com.github.a2g.core.interfaces.game.IShowInventoryItem;
 import com.github.a2g.core.interfaces.game.ISwitchToScene;
 import com.github.a2g.core.interfaces.game.IUpdateVerbUI;
+import com.github.a2g.core.primitive.RectF;
 
 public interface IOnPreEntry
-		extends
-		// property access methods
-		IGetValue,
-		IIsTrue,
-		ISetValue
-		// helpful for game
-		,
-		IGetCurrentScene,
-		ISwitchToScene,
-		IGetLastScene,
-		IIsInDebugMode,
-		ISetIsSayAlwaysWithoutIncrementing,
-		IGetIsSayAlwaysWithoutIncrementing,
-		IShareWinning,
-		ICreateChainRootAction,
-		IGetSceneGuiHeight
-		// boundary
-		,
-		IAddBoundaryGate,
-		IAddBoundaryPoint,
-		ISetBoundaryCrossObject
-		// object
-		, IHide, IShow, IGetBaseMiddleX, IGetBaseMiddleY, ISetBaseMiddleX,
-		ISetBaseMiddleY,
-		IIsVisible,
-		ISetX,
-		ISetY,
-		ISetDisplayName,
-		ISetScreenCoordsPerSecond,
-		ISetTalkingColor,
-		ISetParallaxX,
-		IGetX,
-		IGetY
+extends
+// property access methods
+IGetValue,
+IIsTrue,
+ISetValue
+// helpful for game
+,
+IGetCurrentScene,
+ISwitchToScene,
+IGetLastScene,
+IIsInDebugMode,
+ISetIsSayAlwaysWithoutIncrementing,
+IGetIsSayAlwaysWithoutIncrementing,
+IShareWinning,
+ICreateChainRootAction,
+IGetSceneGuiHeight
+// boundary
+,
+IAddBoundaryGate,
+IAddBoundaryPoint,
+ISetBoundaryCrossObject
+// object
+, IHide, IShow, IGetBaseMiddleX, IGetBaseMiddleY, ISetBaseMiddleX,
+ISetBaseMiddleY,
+IIsVisible,
+ISetX,
+ISetY,
+ISetDisplayName,
+ISetScreenCoordsPerSecond,
+ISetTalkingColor,
+ISetParallaxX,
+IGetX,
+IGetY
 
-		,
-		ISetVisible
-		// inventory
-		,
-		IShowInventoryItem,
-		IHideInventoryItem,
-		ISetInventoryItemDisplayName,
-		IIsInventoryItemVisible
-		// verb
-		,
-		IRemoveVerbByCode,
-		IUpdateVerbUI
-		// animation
-		, IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation,
-		ISetAnimationAsObjectInitial, ISetAnimationAsSceneTalker,
-		ISetAnimationAsObjectCurrent, ISetAnimationDuration,
-		ISetAnimationAsObjectSpecial, ISetAsSceneWalker,
-		ISetAnimationAsObjectCurrentAndSetFrame, ISetAnimationAsDialogTalker {
+,
+ISetVisible
+// inventory
+,
+IShowInventoryItem,
+IHideInventoryItem,
+ISetInventoryItemDisplayName,
+IIsInventoryItemVisible
+// verb
+,
+IRemoveVerbByCode,
+IUpdateVerbUI
+// animation
+, IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation,
+ISetAnimationAsObjectInitial, ISetAnimationAsSceneTalker,
+ISetAnimationAsObjectCurrent, ISetAnimationDuration,
+ISetAnimationAsObjectSpecial, ISetAsSceneWalker,
+ISetAnimationAsObjectCurrentAndSetFrame, ISetAnimationAsDialogTalker 
+,ISetAnimationMaxSpeechBalloonRect
+{
 
 }
+
+
+

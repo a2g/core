@@ -310,35 +310,6 @@ public class SceneObject {
 		return new Rect(0, 0, 0, 0);
 	}
 
-	Point getMiddleOfBaseAbsolute(String atid) {
-		int minLeft = 1000;
-		int maxRight = 0;
-		int maxBottom = 0;
-		Animation xanim = this.animationCollection.getByAtid(atid);
-
-		if (xanim != null) {
-			for (int i = 0; i < xanim.getLength(); i++) {
-				com.github.a2g.core.objectmodel.Image img = xanim.getFrames()
-						.getByIndex(i);
-				Rect rect = img.getBoundingRect();
-
-				if (rect.getLeft() < minLeft) {
-					minLeft = rect.getLeft();
-				}
-				if (rect.getRight() > maxRight) {
-					maxRight = rect.getRight();
-				}
-				if (rect.getBottom() > maxBottom) {
-					maxBottom = rect.getBottom();
-				}
-			}
-		}
-
-		Point p = new Point((minLeft + maxRight) / 2, maxBottom - 4);
-
-		return p;
-	}
-
 	void setSpecialAnimation(Special type, String atid) {
 		this.mapOfSpecialAnimations.put(type, atid);
 	}
@@ -432,6 +403,14 @@ public class SceneObject {
 	public void setToInitialAnimationWithoutChangingFrame() {
 		// todo: should really check whether initial animation is null
 		this.setCurrentAnimation(this.getInitialAnimation());
+	}
+
+	public Point getMouthLocation() {
+		Rect r = getCurrentBoundingRect();
+		double x = rawX + r.getLeft() + r.getWidth()/2;
+		double y = rawY + r.getTop();
+
+		return new Point((int)x,(int)y);
 	}
 
 };

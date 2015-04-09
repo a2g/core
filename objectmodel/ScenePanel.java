@@ -30,6 +30,7 @@ import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectTouchMoveHandler;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
@@ -40,9 +41,6 @@ public class ScenePanel extends AbsolutePanel implements ImagePanelAPI,
 	SceneObjectTouchMoveHandler theTouchMoveHandler;
 	SpeechBalloon speechWidget;
 	
-	private int width;
-	private int height;
-
 	public ScenePanel(EventBus bus, IScenePresenterFromScenePanel api) {
 		this.getElement().setId("cwAbsolutePanel");
 		// this.addStyleName("absolutePanel");
@@ -118,8 +116,6 @@ public class ScenePanel extends AbsolutePanel implements ImagePanelAPI,
 
 	@Override
 	public void setScenePixelSize(int width, int height) {
-		this.width = width;
-		this.height = height;
 		this.setSize("" + width + "px", "" + height + "px");
 	}
 
@@ -129,9 +125,8 @@ public class ScenePanel extends AbsolutePanel implements ImagePanelAPI,
 		this.cameraOffsetY = y;
 	}
 
-	@Override
-	public void setStateOfPopup(boolean isVisible, double x, double y,
-			ColorEnum talkingColor, String speech, SayAction sayAction) {
+	public void setStateOfPopup(boolean isVisible, 
+			ColorEnum talkingColor, String speech, Rect maxBalloonRect, Point mouth, SayAction sayAction) {
 		if (!isVisible) {
 			super.remove(speechWidget);
 		}
@@ -142,7 +137,36 @@ public class ScenePanel extends AbsolutePanel implements ImagePanelAPI,
 		
 		speechWidget.setBorderColor(talkingColor);
 		
-		super.add(speechWidget, (int) (x * width), (int) (y * height));
+		speechWidget.setRectInPixels(maxBalloonRect);
+		Point bubble = maxBalloonRect.getCenter();
+		if(bubble.getY() > mouth.getY())
+		{
+			if(mouth.getX() > bubble.getX())
+			{
+				// on the top, pointing right
+				speechWidget.setStyleAsFromTopPointingRight();
+			}
+			else
+			{
+				// on the top, pointing left
+				speechWidget.setStyleAsFromTopPointingLeft();
+			}
+		}
+		else
+		{
+			if(mouth.getX() > bubble.getX())
+			{
+				// on the bottom, pointing right 
+				speechWidget.setStyleAsFromBottomPointingRight();
+			}
+			else
+			{
+				// on the bottom, pointing left
+				speechWidget.setStyleAsFromBottomPointingLeft();
+			}
+		}
+		
+		super.add(speechWidget, maxBalloonRect.getLeft(),maxBalloonRect.getTop());
 
 	}
 

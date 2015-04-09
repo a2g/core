@@ -16,13 +16,9 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.objectmodel.Image;
-import com.google.gwt.event.dom.client.LoadHandler;
-import com.google.gwt.event.shared.EventBus;
 
 public interface IInventoryPresenter 
 extends IInventoryPresenterFromInventoryPanel
-//, IInventoryPresenterFromActions
 , IInventoryPresenterFromInventoryMouseOver
 {
 

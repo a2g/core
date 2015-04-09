@@ -10,7 +10,6 @@ import com.github.a2g.core.interfaces.IOnFillLoadList;
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointF;
 import com.google.gwt.event.shared.EventBus;
 
@@ -177,21 +176,13 @@ IMasterPresenterFromActions,
 	}
 
 	@Override
-	public ColorEnum getTalkingColorByOtid(String otid) {
-		return master.getScenePresenter().getObjectByOtid(otid)
-				.getTalkingColor();
-	}
-
-	@Override
 	public String getAtidOfDefaultSayAnim() {
 		return master.getScenePresenter().getSceneTalkerAtid();
 	}
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, double x, double y,
-			ColorEnum talkingColor, String speech, SayAction sayAction) {
-		master.getScenePresenter().setStateOfPopup(isVisible, x, y,
-				talkingColor, speech, sayAction);
+	public void setStateOfPopup(String atid, boolean isVisible, String speech, SayAction sayAction) {
+		master.getScenePresenter().setStateOfPopup(atid, isVisible, speech, sayAction);
 	}
 
 	@Override

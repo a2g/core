@@ -15,6 +15,7 @@ import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter.GuiStateEn
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.RectF;
 
 /** MasterProxyForGameScene */
 public class MasterProxyForGameScene implements IOnFillLoadList, IOnEntry,
@@ -474,5 +475,11 @@ public class MasterProxyForGameScene implements IOnFillLoadList, IOnEntry,
 
 	}
 	// /@}
+
+	@Override
+	public void setAnimationMaxSpeechBalloonRect(String atid, RectF rectF) {
+		master.getScenePresenter().getAnimationByAtid(atid).setMaxSpeechBalloonRect(rectF);
+		
+	}
 
 }

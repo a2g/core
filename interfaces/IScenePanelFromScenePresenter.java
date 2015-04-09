@@ -15,12 +15,16 @@
  */
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.interfaces.action.ISetStateOfPopup;
+import com.github.a2g.core.action.SayAction;
 import com.github.a2g.core.objectmodel.Image;
+import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
 
-public interface IScenePanelFromScenePresenter extends ISetStateOfPopup {
+public interface IScenePanelFromScenePresenter 
+{
 	void clear();
 
 	Image createNewImageAndAddHandlers(LoadHandler lh,
@@ -33,5 +37,10 @@ public interface IScenePanelFromScenePresenter extends ISetStateOfPopup {
 	void setVisible(boolean b);
 
 	void setCameraOffset(int x, int y);
+
+	void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
+			String speech, Rect pixels, Point mouth, SayAction sayAction);
+
+
 
 }

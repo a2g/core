@@ -17,6 +17,7 @@
 package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.interfaces.IGameScene;
+import com.github.a2g.core.primitive.RectF;
 
 public class Animation {
 	private double durationInSeconds;
@@ -26,6 +27,7 @@ public class Animation {
 	private boolean wasSetAsInitialAnimation;
 	private boolean wasSetAsCurrentAnimation;
 	private IGameScene.Special specialAnimationThisWasSetTo;
+	private RectF rectForMaxSpeechBalloon;
 
 	public Animation(String atid, SceneObject owningSceneObject) {
 		this.durationInSeconds = 1.0;
@@ -35,6 +37,7 @@ public class Animation {
 		wasSetAsInitialAnimation = false;
 		wasSetAsCurrentAnimation = false;
 		specialAnimationThisWasSetTo = null;
+		rectForMaxSpeechBalloon = new RectF(.25,.25,.5,.5);
 	}
 
 	public SceneObject getObject() {
@@ -140,6 +143,14 @@ public class Animation {
 
 	public double getDurationSecs() {
 		return durationInSeconds;
+	}
+
+	public RectF getMaxSpeechBalloonExtents() {
+		return this.rectForMaxSpeechBalloon;
+	}
+
+	public void setMaxSpeechBalloonRect(RectF rectF) {
+		rectForMaxSpeechBalloon = rectF;
 	}
 
 };

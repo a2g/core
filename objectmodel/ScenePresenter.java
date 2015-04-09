@@ -24,7 +24,9 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromScene;
 import com.github.a2g.core.interfaces.IScenePresenter;
 import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectF;
 
 public class ScenePresenter implements IScenePresenter {
 	private int width;
@@ -36,6 +38,7 @@ public class ScenePresenter implements IScenePresenter {
 	private TreeMap<String, Animation> theAtidMap;
 	private String sceneTalkerAtid;
 	private String sceneWalkerOtid;
+	private ColorEnum talkingColorForScene;
 
 	public ScenePresenter(final IHostingPanel panel,
 			IMasterPresenterFromScene master) {
@@ -49,6 +52,7 @@ public class ScenePresenter implements IScenePresenter {
 		view.setVisible(true);
 
 		this.theAtidMap = new TreeMap<String, Animation>();
+		talkingColorForScene = ColorEnum.Fuchsia;
 	}
 
 	private SceneObject getObjectByOCode(short ocode) {
@@ -125,93 +129,6 @@ public class ScenePresenter implements IScenePresenter {
 			this.scene.objectCollection().getByIndex(i).updateCurrentImage();
 		}
 	}
-
-	// @Override
-	// public Image createNewImageAndAddHandlers(LoadHandler lh,
-	// PackagedImageAPI imageResource, InternalAPI api,
-	// com.google.gwt.event.shared.EventBus bus, int x, int y,
-	// String objectTextualId, short objectCode) {
-	//
-	// return this.view.createNewImageAndAddHandlers(lh, imageResource, api,
-	// bus, x, y, objectTextualId, objectCode);
-	// }
-	//
-	// @Override
-	// public void setScenePixelSize(int width, int height) {
-	// this.view.setScenePixelSize(width, height);
-	// }
-	//
-	//
-	//
-	// @Override
-	// public void setCameraOffset(int x, int y) {
-	// this.view.setCameraOffset(x, y);
-	//
-	// }
-	//
-
-	//
-	// @Override
-	// public int getSceneObjectCount() {
-	// return this.getModel().objectCollection().count();
-	// }
-	//
-	// @Override
-	// public void setVisibleByIndex(int index, boolean visible) {
-	// getModel().objectCollection().getByIndex(index).setVisible(visible);
-	// }
-	//
-	// @Override
-	// public boolean getVisibleByIndex(int index) {
-	// return getModel().objectCollection().getByIndex(index).isVisible();
-	// }
-	//
-	// @Override
-	// public String getCurrentAnimationByOtid(String otext) {
-	// return this.getObject(otext).getCurrentAnimation();
-	// }
-	//
-	// @Override
-	// public String getDisplayNameByOtid(String otext) {
-	// return this.getObject(otext).getDisplayName();
-	// }
-	//
-	// @Override
-	// public short getCodeByOtid(String otext) {
-	// return this.getObject(otext).getCode();
-	// }
-	//
-	// @Override
-	// public int getCurrentFrameByIndex(int i) {
-	// return
-	// this.getModel().objectCollection().getByIndex(i).getCurrentFrame();
-	// }
-	//
-	// @Override
-	// public double getXByIndex(int i) {
-	// return this.getModel().objectCollection().getByIndex(i).getY();
-	// }
-	//
-	// @Override
-	// public double getYByIndex(int i) {
-	// return this.getModel().objectCollection().getByIndex(i).getY();
-	// }
-	//
-	// @Override
-	// public Rect getBoundingRectByAtidAndFrame(String atid, int frame) {
-	// return this.getAnimationByAtid(atid).getDefaultFrame().getBoundingRect();
-	// }
-	//
-	// @Override
-	// public String getCurrentAnimationByIndex(int i) {
-	// return
-	// this.getModel().objectCollection().getByIndex(i).getCurrentAnimation();
-	// }
-	//
-	// @Override
-	// public String getOtidByIndex(int i) {
-	// return this.getModel().objectCollection().getByIndex(i).getTextualId();
-	// }
 
 	public void addSceneObject(SceneObject destObject) {
 		this.scene.objectCollection().add(destObject);
@@ -306,9 +223,24 @@ public class ScenePresenter implements IScenePresenter {
 		return getObjectByOCode(ocode).getOtid();
 	}
 
-	public void setStateOfPopup(boolean isVisible, double x, double y,
-			ColorEnum talkingColor, String speech, SayAction sayAction) {
-		view.setStateOfPopup(isVisible, x, y, talkingColor, speech, sayAction);
+	public void setStateOfPopup(String atid, boolean isVisible, String speech, SayAction sayAction) {
+		Animation a = this.getAnimationByAtid(atid);
+		RectF r = a.getMaxSpeechBalloonExtents();
+		Rect pixels = new Rect(
+				(int)(r.getLeft() * this.getSceneGuiWidth())
+				,	(int)(r.getTop() * this.getSceneGuiHeight())
+					, (int)(r.getWidth()* this.getSceneGuiWidth())
+						, (int)(r.getHeight()* this.getSceneGuiHeight())
+		);
+
+		ColorEnum talkingColor = a.getSceneObject().getTalkingColor();
+		if(talkingColor==null)
+		{
+			talkingColor = this.talkingColorForScene;
+		}
+		Point mouth = a.getSceneObject().getMouthLocation();
+		
+		view.setStateOfPopup(isVisible, talkingColor, speech, pixels, mouth, sayAction);
 	}
 
 	public String getSceneTalkerAtid() {

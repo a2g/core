@@ -314,14 +314,12 @@ ImagePanelAPI
 
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, double x, double y,
-			ColorEnum talkingColor, String speech, SayAction sayAction) {
-	// maybe use the dom to create speech bubble graphic and render it.
+	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
+			String speech, Rect pixels, Point mouth, SayAction sayAction) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
 	
-
-
-
 }

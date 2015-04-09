@@ -71,4 +71,8 @@ public class Rect {
 		return getBottom() - getTop();
 	}
 
+	public Point getCenter() {
+		return new Point((int)((right-left)/2),(int)((bottom-top)/2));
+	}
+
 }

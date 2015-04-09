@@ -150,11 +150,8 @@ public class SayAction extends ChainedAction {
 			}
 
 			boolean visible = true;
-			ColorEnum color = defaultTalkingColor;
-			if (otid != "") {
-				color = scene.getTalkingColorByOtid(otid);
-			}
-			scene.setStateOfPopup(visible, .1, .1, color, speech.get(0), this);
+			
+			scene.setStateOfPopup(atid, visible, speech.get(0), this);
 
 		}
 		this.run((int)(totalDurationInSeconds*1000));
@@ -172,8 +169,8 @@ public class SayAction extends ChainedAction {
 			for (int i = startingTimeForEachLine.size() - 1; i >= 0; i--) {
 				// go backwards thru the loop to find text that should be valid
 				if (progress > startingTimeForEachLine.get(i)) {
-					scene.setStateOfPopup(true, .1, .1,
-							scene.getTalkingColorByOtid(otid), speech.get(i),
+					scene.setStateOfPopup(atid, true
+							, speech.get(i),
 							null);
 					break;
 				}
@@ -199,7 +196,7 @@ public class SayAction extends ChainedAction {
 			}
 		}
 
-		scene.setStateOfPopup(false, .1, .1, null, "", null);
+		scene.setStateOfPopup(atid, false, "", null);
 
 	}
 

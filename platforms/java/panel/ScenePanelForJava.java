@@ -41,6 +41,8 @@ import javax.swing.JPanel;
 
 
 
+
+
 //import com.github.a2g.bridge.Image;
 import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
@@ -339,15 +341,20 @@ implements IScenePanelFromScenePresenter
 
 
 
-
 	@Override
-	public void setStateOfPopup(boolean isVisible, double x, double y,
-			ColorEnum talkingColor, String speech, SayAction sayAction) {
+	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
+			String speech, Rect pixels, Point mouth, SayAction sayAction) {
 		this.speechPopup.setVisible(isVisible);
 		this.speechPopup.setColor(talkingColor);
 		this.speechPopup.setText(speech);
-		this.speechPopup.setPopupPosition(x, y);
+		this.speechPopup.setPopupPosition(pixels.getLeft(), pixels.getTop());
+		
 	}
+
+
+
+
+
 
 
 
