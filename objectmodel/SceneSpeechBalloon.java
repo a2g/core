@@ -52,6 +52,9 @@ public class SceneSpeechBalloon extends VerticalPanel
 		pe.getPE().getStyle().setProperty("textAlign", "center");
 		pe.getPE().getStyle().setProperty("lineHeight", "100px");
 		pe.getPE().getStyle().setProperty("backgroundColor", "#fff");
+		pe.getPE().getStyle().setProperty("marginTop", "0px");
+		pe.getPE().getStyle().setProperty("marginBottom", "0px");
+		
 
 		//drop shadow makes it look worse.
 		//		pe.getStyle().setProperty("WebkitBoxShadow", "2px 2px 4px #888");
@@ -75,12 +78,8 @@ public class SceneSpeechBalloon extends VerticalPanel
 
 	public void setVisible(boolean visible)
 	{
-		super.setVisible(true);
+		super.setVisible(visible);
 	}
-
-
-
-
 
 	String getColor1(boolean isOn)
 	{
@@ -98,7 +97,7 @@ public class SceneSpeechBalloon extends VerticalPanel
 
 
 		//warning: if these 'border's are not set first, the visual result is weird  
-		before.getElement().getStyle().setProperty("border", ""+c.getBeforeBorderWidth()+"px solid");
+		before.getElement().getStyle().setProperty("border", ""+c.getHalfWidthOfLeaderLine()+"px solid");
 		after.getElement().getStyle().setProperty("border", ""+c.getAfterBorderWidth() +"px solid");
 		pe.getPE().getStyle().setProperty("border", ""+c.getBorderWidth()+"px solid "+borderColor.toString().toLowerCase());
 		
@@ -116,7 +115,9 @@ public class SceneSpeechBalloon extends VerticalPanel
 		boolean isPointingRight = c.isPointingRight();
 		int heightInPixels = c.getRectInPixels().getHeight();
 		
-		int top = c.isFromTop()? -22 : heightInPixels+15;
+		int top = c.isFromTop()? -c.getHeightOfLeaderLine() : heightInPixels-1;
+		top+=+c.getBorderWidth();
+		
 		int left = c.getLeaderLineX();
 
 		// before

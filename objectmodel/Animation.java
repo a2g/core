@@ -37,7 +37,7 @@ public class Animation {
 		wasSetAsInitialAnimation = false;
 		wasSetAsCurrentAnimation = false;
 		specialAnimationThisWasSetTo = null;
-		rectForMaxSpeechBalloon = new RectF(.25,.25,.5,.5);
+		rectForMaxSpeechBalloon = new RectF(0,.25,1.0,.5);
 	}
 
 	public SceneObject getObject() {

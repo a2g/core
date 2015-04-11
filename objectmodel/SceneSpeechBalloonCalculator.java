@@ -11,18 +11,27 @@ public class SceneSpeechBalloonCalculator
 	private int xPos;
 	private Rect rectInPixels;
 	private int radius;
-	private int beforeBorderWidth;
+	private int halfWidthOfLeaderLine;
 	private int afterBorderWidth;
 	private int borderWidth;
+	private int heightOfLeaderLine;
 	
-	SceneSpeechBalloonCalculator(Rect maxBalloonRect, int radius, Point mouth, int leaderWidth, int borderWidth)
+	SceneSpeechBalloonCalculator(Rect max, int radius, Point mouth, int leaderWidth, int borderWidth)
 	{
-		this.beforeBorderWidth = (leaderWidth/2);
-		this.afterBorderWidth = beforeBorderWidth - borderWidth -1;// the -1 just looks better, 
+		this.halfWidthOfLeaderLine = (leaderWidth/2);
+		this.heightOfLeaderLine = 2*halfWidthOfLeaderLine;// since they are always square
+		this.afterBorderWidth = halfWidthOfLeaderLine - borderWidth -1;// the -1 just looks better, 
 		this.borderWidth = borderWidth;
 		this.radius = radius;
-		this.rectInPixels = maxBalloonRect;
-		Point centre = maxBalloonRect.getCenter();
+
+		// css styles, in chrome atleast, seem to draw the border
+		// outside of the viewport if I don't factor in the border below
+		this.rectInPixels = new Rect(
+				max.getTop(), 
+				max.getLeft(),
+				max.getWidth()-2*borderWidth+1,
+				max.getHeight()-2*borderWidth+1);
+		Point centre = rectInPixels.getCenter();
 		isFromTop = mouth.getY() < centre.getY();
 		isPointingRight = mouth.getX() > centre.getX();
 		
@@ -35,7 +44,7 @@ public class SceneSpeechBalloonCalculator
 		// to get to the starting point of the leader line.
 		// same with max/minimumStartOfLeaderLine
 		
-		xPos = mouth.getX()-maxBalloonRect.getLeft();
+		xPos = mouth.getX()-rectInPixels.getLeft();
 		//the xPos should be where the leaderline starts so that the perpendicular
 		// edge of the leaderline points to the mouth..
 		// but if its pointing right, the straight line is a whole leaderwidth away.
@@ -43,7 +52,7 @@ public class SceneSpeechBalloonCalculator
 		// to point to the the mouth.
 		xPos-=(isPointingRight?leaderWidth:0);
 		int minimumStartOfLeaderLine = radius-6;
-		int maximumStartOfLeaderLine = maxBalloonRect.getWidth()-radius-leaderWidth+11;
+		int maximumStartOfLeaderLine = rectInPixels.getWidth()-radius-leaderWidth+11;
 		if(xPos>maximumStartOfLeaderLine)
 			xPos = maximumStartOfLeaderLine;
 		if(xPos<minimumStartOfLeaderLine)
@@ -71,8 +80,8 @@ public class SceneSpeechBalloonCalculator
 	public int getRadius() {
 		return radius;
 	}
-	public int getBeforeBorderWidth() {
-		return beforeBorderWidth;
+	public int getHalfWidthOfLeaderLine() {
+		return halfWidthOfLeaderLine;
 		
 	}
 	public int getAfterBorderWidth() {
@@ -81,6 +90,9 @@ public class SceneSpeechBalloonCalculator
 	public int getBorderWidth() {
 		return borderWidth;
 		
+	}
+	public int getHeightOfLeaderLine() {
+		return heightOfLeaderLine;
 	}
 
 }
