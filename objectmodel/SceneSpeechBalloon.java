@@ -100,7 +100,7 @@ public class SceneSpeechBalloon extends VerticalPanel
 		//warning: if these 'border's are not set first, the visual result is weird  
 		before.getElement().getStyle().setProperty("border", ""+c.getBeforeBorderWidth()+"px solid");
 		after.getElement().getStyle().setProperty("border", ""+c.getAfterBorderWidth() +"px solid");
-		pe.getPE().getStyle().setProperty("border", ""+c.getBorderWidth()+"px solid #f00");
+		pe.getPE().getStyle().setProperty("border", ""+c.getBorderWidth()+"px solid "+borderColor.toString().toLowerCase());
 		
 	
 		// first do rectangle
