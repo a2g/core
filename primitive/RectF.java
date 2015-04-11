@@ -16,13 +16,13 @@
 
 package com.github.a2g.core.primitive;
 
-public class Rect {
-	private int left;
-	private int top;
-	private int right;
-	private int bottom;
+public class RectF {
+	private double left;
+	private double top;
+	private double right;
+	private double bottom;
 
-	public Rect(int x, int y, int width, int height) {
+	public RectF(double x, double y, double width, double height) {
 		this.left = x;
 		this.top = y;
 		this.right = x + width;
@@ -32,7 +32,7 @@ public class Rect {
 		}
 	}
 
-	public boolean contains(int x, int y) {
+	public boolean contains(double x, double y) {
 		if (x >= left && x <= right) {
 			if (y >= top && y <= bottom) {
 				return true;
@@ -41,38 +41,38 @@ public class Rect {
 		return false;
 	}
 
-	public int getLeft() {
+	public double getLeft() {
 		return left;
 	}
 
-	public int getRight() {
+	public double getRight() {
 		return right;
 	}
 
-	public int getBottom() {
+	public double getBottom() {
 		if (bottom >= 0) {
 			return bottom;
 		}
 		return bottom;
 	}
 
-	public int getTop() {
+	public double getTop() {
 		if (top >= 0) {
 			return top;
 		}
 		return top;
 	}
 
-	public int getWidth() {
+	public double getWidth() {
 		return getRight() - getLeft();
 	}
 
-	public int getHeight() {
+	public double getHeight() {
 		return getBottom() - getTop();
 	}
-
-	public Point getCenter() {
-		return new Point(left+(int)(getWidth()/2),top+(int)(getHeight()/2));
+	
+	public PointF getCenter() {
+		return new PointF(left+(getWidth()/2),top+(getHeight()/2));
 	}
 
 }

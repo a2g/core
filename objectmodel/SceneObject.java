@@ -376,6 +376,16 @@ public class SceneObject {
 		double y = lowerYPos / screenPixelHeight;
 		return new PointF(x, y);
 	}
+	
+	public Point getMouthLocation() {
+		double left = this.getX();
+		double top = this.getY();
+		Rect r = this.getCurrentBoundingRect();
+		double x = left + (r.getLeft() + r.getRight()) / 2.0;
+		double y = top + r.getBottom();
+
+		return new Point((int)x,(int)y);
+	}
 
 	public void alignBaseMiddleOfOldFrameToFrameOfNewAnimation(String atid,
 			int frame) {
@@ -405,12 +415,6 @@ public class SceneObject {
 		this.setCurrentAnimation(this.getInitialAnimation());
 	}
 
-	public Point getMouthLocation() {
-		Rect r = getCurrentBoundingRect();
-		double x = rawX + r.getLeft() + r.getWidth()/2;
-		double y = rawY + r.getTop();
-
-		return new Point((int)x,(int)y);
-	}
+	
 
 };
