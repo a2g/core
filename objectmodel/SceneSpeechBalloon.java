@@ -22,7 +22,7 @@ class MyPanel extends SimplePanel
 	}
 }
 
-public class SpeechBalloon extends VerticalPanel 
+public class SceneSpeechBalloon extends VerticalPanel 
 {
 	FlowPanel before;
 	MyPanel  pe;
@@ -33,7 +33,7 @@ public class SpeechBalloon extends VerticalPanel
 	private int widthInPixels;
 	private int heightInPixels;
 
-	public SpeechBalloon() {
+	public SceneSpeechBalloon() {
 		this.borderColor = ColorEnum.Red;
 		widthInPixels = 100;
 		heightInPixels = 100;
@@ -54,7 +54,7 @@ public class SpeechBalloon extends VerticalPanel
 		before.getElement().getStyle().setProperty("height", "0");
 		before.getElement().getStyle().setProperty("right", "35px");
 		before.getElement().getStyle().setProperty("bottom", "100px");
-		before.getElement().getStyle().setProperty("border", "19px solid");
+		
 
 		// after
 		after.getElement().getStyle().setProperty("content", "");
@@ -63,15 +63,11 @@ public class SpeechBalloon extends VerticalPanel
 		after.getElement().getStyle().setProperty("height","0");
 		after.getElement().getStyle().setProperty("right", "38px");
 		after.getElement().getStyle().setProperty("bottom", "100px");
-		after.getElement().getStyle().setProperty("border", "15px solid");
-
+	
 		pe.getPE().getStyle().setProperty("textAlign", "center");
 		pe.getPE().getStyle().setProperty("lineHeight", "100px");
 		pe.getPE().getStyle().setProperty("backgroundColor", "#fff");
-		pe.getPE().getStyle().setProperty("border", "3px solid #f00");
-		pe.getPE().getStyle().setProperty("WebkitBorderRadius", "30px");
-		pe.getPE().getStyle().setProperty("MozBorderRadius", "30px");
-		pe.getPE().getStyle().setProperty("borderRadius", "30px");
+
 
 		//drop shadow makes it look worse.
 		//		pe.getStyle().setProperty("WebkitBoxShadow", "2px 2px 4px #888");
@@ -98,15 +94,7 @@ public class SpeechBalloon extends VerticalPanel
 		super.setVisible(true);
 	}
 
-	public void setRectInPixels(Rect rectInPixels)
-	{
-		this.widthInPixels = rectInPixels.getWidth();
-		this.heightInPixels = rectInPixels.getHeight();
-		pe.getPE().getStyle().setProperty("top", "" +(rectInPixels.getTop())+"px");
-		pe.getPE().getStyle().setProperty("left", "" +(rectInPixels.getLeft())+"px");
-		pe.getPE().getStyle().setProperty("width", "" +(rectInPixels.getWidth()-1)+"px");
-		pe.getPE().getStyle().setProperty("height", ""+(rectInPixels.getHeight()-1)+"px");
-	}
+	
 
 
 
@@ -119,31 +107,43 @@ public class SpeechBalloon extends VerticalPanel
 		return isOn? "#fff " : "transparent ";
 	}
 
-	void setBorder(boolean isFromTop, boolean isPointingRight)
-	{	
-		top = isFromTop? -22 : this.heightInPixels+15;
-		left = (int)this.widthInPixels/2;
+
+	
+
+	public void setLeaderLine(SceneSpeechBalloonCalculator c) {
+		
+		// first do rectangle
+		this.widthInPixels = c.getRectInPixels().getWidth();
+		this.heightInPixels = c.getRectInPixels().getHeight();
+		pe.getPE().getStyle().setProperty("top", "" +(c.getRectInPixels().getTop())+"px");
+		pe.getPE().getStyle().setProperty("left", "" +(c.getRectInPixels().getLeft())+"px");
+		pe.getPE().getStyle().setProperty("width", "" +(c.getRectInPixels().getWidth()-1)+"px");
+		pe.getPE().getStyle().setProperty("height", ""+(c.getRectInPixels().getHeight()-1)+"px");
+		pe.getPE().getStyle().setProperty("WebkitBorderRadius", c.getRadius() +"px");
+		pe.getPE().getStyle().setProperty("MozBorderRadius", c.getRadius() +"px");
+		pe.getPE().getStyle().setProperty("borderRadius", c.getRadius() +"px");
+		pe.getPE().getStyle().setProperty("border", ""+c.getBorderWidth()+"px solid #f00");
+		
+		boolean isFromTop = c.isFromTop();
+		boolean isPointingRight = c.isPointingRight();
+		top = c.isFromTop()? -22 : this.heightInPixels+15;
+		left = c.getLeaderLineX();
+		
+		// now before
 		before.getElement().getStyle().setProperty("borderColor", getColor1(!isFromTop)+getColor1(isPointingRight)+getColor1(isFromTop)+getColor1(!isPointingRight));
 		before.getElement().getStyle().setProperty("left", left + "px");
 		before.getElement().getStyle().setProperty("top", top + "px");
+		before.getElement().getStyle().setProperty("border", ""+c.getBeforeBorderWidth()+"px solid");
 
+		// noe after
 		after.getElement().getStyle().setProperty("borderColor", getColor2(!isFromTop)+getColor2(isPointingRight)+getColor2(isFromTop)+getColor2(!isPointingRight));
 		after.getElement().getStyle().setProperty("left", (left+(isPointingRight?5:3))+ "px");
 		after.getElement().getStyle().setProperty("top", (top+(isFromTop?8:0))+ "px");
-
+		after.getElement().getStyle().setProperty("border", ""+c.getAfterBorderWidth() +"px solid");
+		
 		
 	}
+		
+	
 
-	public void setStyleAsFromTopPointingLeft() {
-		setBorder(true,false);
-	}
-	public void setStyleAsFromTopPointingRight() {
-		setBorder(true, true);
-	}
-	public void setStyleAsFromBottomPointingLeft() {
-		setBorder(false,false);
-	}
-	public void setStyleAsFromBottomPointingRight() {
-		setBorder(false,true);
-	}
 }

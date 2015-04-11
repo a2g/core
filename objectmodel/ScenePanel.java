@@ -39,7 +39,7 @@ public class ScenePanel extends AbsolutePanel implements ImagePanelAPI,
 	int cameraOffsetX;
 	int cameraOffsetY;
 	SceneObjectTouchMoveHandler theTouchMoveHandler;
-	SpeechBalloon speechWidget;
+	SceneSpeechBalloon speechWidget;
 	
 	public ScenePanel(EventBus bus, IScenePresenterFromScenePanel api) {
 		this.getElement().setId("cwAbsolutePanel");
@@ -47,7 +47,7 @@ public class ScenePanel extends AbsolutePanel implements ImagePanelAPI,
 		this.cameraOffsetX = 0;
 		this.cameraOffsetY = 0;
 		this.theTouchMoveHandler = new SceneObjectTouchMoveHandler(api);
-		this.speechWidget = new SpeechBalloon();
+		this.speechWidget = new SceneSpeechBalloon();
 	}
 
 	@Override
@@ -133,38 +133,15 @@ public class ScenePanel extends AbsolutePanel implements ImagePanelAPI,
 		
 		speechWidget.setText(speech);
 		
-		speechWidget.setVisible(isVisible);
 		
 		speechWidget.setBorderColor(talkingColor);
 		
-		speechWidget.setRectInPixels(maxBalloonRect);
-		Point bubble = maxBalloonRect.getCenter();
-		if(bubble.getY() > mouth.getY())
-		{
-			if(mouth.getX() > bubble.getX())
-			{
-				// on the top, pointing right
-				speechWidget.setStyleAsFromTopPointingRight();
-			}
-			else
-			{
-				// on the top, pointing left
-				speechWidget.setStyleAsFromTopPointingLeft();
-			}
-		}
-		else
-		{
-			if(mouth.getX() > bubble.getX())
-			{
-				// on the bottom, pointing right 
-				speechWidget.setStyleAsFromBottomPointingRight();
-			}
-			else
-			{
-				// on the bottom, pointing left
-				speechWidget.setStyleAsFromBottomPointingLeft();
-			}
-		}
+		SceneSpeechBalloonCalculator calc = new SceneSpeechBalloonCalculator(maxBalloonRect, 30, mouth, 38, 3);
+		
+		speechWidget.setLeaderLine(calc);
+		
+		speechWidget.setVisible(isVisible);
+		
 		
 		super.add(speechWidget, maxBalloonRect.getLeft(),maxBalloonRect.getTop());
 
