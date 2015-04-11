@@ -46,7 +46,6 @@ public class SceneSpeechBalloon extends VerticalPanel
 		this.add(before);
 		this.add(pe);
 		this.add(after);
-
 		// before
 		before.getElement().getStyle().setProperty("content", "");
 		before.getElement().getStyle().setProperty("position", "absolute");
@@ -54,7 +53,6 @@ public class SceneSpeechBalloon extends VerticalPanel
 		before.getElement().getStyle().setProperty("height", "0");
 		before.getElement().getStyle().setProperty("right", "35px");
 		before.getElement().getStyle().setProperty("bottom", "100px");
-		
 
 		// after
 		after.getElement().getStyle().setProperty("content", "");
@@ -63,10 +61,13 @@ public class SceneSpeechBalloon extends VerticalPanel
 		after.getElement().getStyle().setProperty("height","0");
 		after.getElement().getStyle().setProperty("right", "38px");
 		after.getElement().getStyle().setProperty("bottom", "100px");
-	
+
 		pe.getPE().getStyle().setProperty("textAlign", "center");
 		pe.getPE().getStyle().setProperty("lineHeight", "100px");
 		pe.getPE().getStyle().setProperty("backgroundColor", "#fff");
+
+
+
 
 
 		//drop shadow makes it look worse.
@@ -94,7 +95,7 @@ public class SceneSpeechBalloon extends VerticalPanel
 		super.setVisible(true);
 	}
 
-	
+
 
 
 
@@ -108,10 +109,17 @@ public class SceneSpeechBalloon extends VerticalPanel
 	}
 
 
-	
+
 
 	public void setLeaderLine(SceneSpeechBalloonCalculator c) {
+
+
+		//warning: if these 'border's are not set first, the visual result is weird  
+		before.getElement().getStyle().setProperty("border", ""+c.getBeforeBorderWidth()+"px solid");
+		after.getElement().getStyle().setProperty("border", ""+c.getAfterBorderWidth() +"px solid");
+		pe.getPE().getStyle().setProperty("border", ""+c.getBorderWidth()+"px solid #f00");
 		
+	
 		// first do rectangle
 		this.widthInPixels = c.getRectInPixels().getWidth();
 		this.heightInPixels = c.getRectInPixels().getHeight();
@@ -122,28 +130,25 @@ public class SceneSpeechBalloon extends VerticalPanel
 		pe.getPE().getStyle().setProperty("WebkitBorderRadius", c.getRadius() +"px");
 		pe.getPE().getStyle().setProperty("MozBorderRadius", c.getRadius() +"px");
 		pe.getPE().getStyle().setProperty("borderRadius", c.getRadius() +"px");
-		pe.getPE().getStyle().setProperty("border", ""+c.getBorderWidth()+"px solid #f00");
-		
-		boolean isFromTop = c.isFromTop();
+				boolean isFromTop = c.isFromTop();
 		boolean isPointingRight = c.isPointingRight();
 		top = c.isFromTop()? -22 : this.heightInPixels+15;
 		left = c.getLeaderLineX();
-		
+
 		// now before
 		before.getElement().getStyle().setProperty("borderColor", getColor1(!isFromTop)+getColor1(isPointingRight)+getColor1(isFromTop)+getColor1(!isPointingRight));
 		before.getElement().getStyle().setProperty("left", left + "px");
 		before.getElement().getStyle().setProperty("top", top + "px");
-		before.getElement().getStyle().setProperty("border", ""+c.getBeforeBorderWidth()+"px solid");
-
+		
+		
 		// noe after
 		after.getElement().getStyle().setProperty("borderColor", getColor2(!isFromTop)+getColor2(isPointingRight)+getColor2(isFromTop)+getColor2(!isPointingRight));
 		after.getElement().getStyle().setProperty("left", (left+(isPointingRight?5:3))+ "px");
 		after.getElement().getStyle().setProperty("top", (top+(isFromTop?8:0))+ "px");
-		after.getElement().getStyle().setProperty("border", ""+c.getAfterBorderWidth() +"px solid");
-		
-		
-	}
-		
 	
+
+	}
+
+
 
 }
