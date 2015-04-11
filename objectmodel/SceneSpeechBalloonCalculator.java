@@ -18,6 +18,34 @@ public class SceneSpeechBalloonCalculator
 	
 	SceneSpeechBalloonCalculator(Rect max, int radius, Point mouth, int leaderWidth, int borderWidth)
 	{
+		Point centre = max.getCenter();
+		
+		// the mouth & centre coords are both relative to top left of viewport
+		isFromTop = mouth.getY() < centre.getY();
+		isPointingRight = mouth.getX() > centre.getX();
+		
+		// with the way I've set up the DOM, it seems that 
+		// the paragraph ignores its top and left style value,
+		// and it is positioned by the coords passed when adding to the container.
+		//  ie maxBaloonRect.getLeft, and maxBalloonRect.getTop
+		// This means that before and after elements also inherit these coords
+		// so the Xpos need only be the increment that we add to maxBaloonRect.getLeft
+		// to get to the starting point of the leader line.
+		// same with max/minimumStartOfLeaderLine
+		
+		xPos = mouth.getX()-max.getLeft();
+		//the xPos should be where the leaderline starts so that the perpendicular
+		// edge of the leaderline points to the mouth..
+		// but if its pointing right, the straight line is a whole leaderwidth away.
+		// so we need to adjust for this.
+		xPos-=(isPointingRight?leaderWidth:0);
+		int minimumStartOfLeaderLine = radius-6;// <-- trial and error see how close to the corner we can position our leader
+		int maximumStartOfLeaderLine = max.getWidth()-radius-leaderWidth+11;// <-- trial and error see how close to the corner we can position our leader
+		if(xPos>maximumStartOfLeaderLine)
+			xPos = maximumStartOfLeaderLine;
+		if(xPos<minimumStartOfLeaderLine)
+			xPos = minimumStartOfLeaderLine;
+		
 		this.halfWidthOfLeaderLine = (leaderWidth/2);
 		this.heightOfLeaderLine = 2*halfWidthOfLeaderLine;// since they are always square
 		this.afterBorderWidth = halfWidthOfLeaderLine - borderWidth -1;// the -1 just looks better, 
@@ -31,32 +59,6 @@ public class SceneSpeechBalloonCalculator
 				max.getLeft(),
 				max.getWidth()-2*borderWidth+1,
 				max.getHeight()-2*borderWidth+1);
-		Point centre = rectInPixels.getCenter();
-		isFromTop = mouth.getY() < centre.getY();
-		isPointingRight = mouth.getX() > centre.getX();
-		
-		// with the way I've set up the DOM, it seems that 
-		// the paragraph ignores its top and left style value,
-		// and it is positioned by the coords passed when adding to the container.
-		//  ie maxBaloonRect.getLeft, and maxBalloonRect.getTop
-		// This means that before and after elements also inherit these coords
-		// so the Xpos need only be the increment that we add to maxBaloonRect.getLeft
-		// to get to the starting point of the leader line.
-		// same with max/minimumStartOfLeaderLine
-		
-		xPos = mouth.getX()-rectInPixels.getLeft();
-		//the xPos should be where the leaderline starts so that the perpendicular
-		// edge of the leaderline points to the mouth..
-		// but if its pointing right, the straight line is a whole leaderwidth away.
-		// so we need to start the xPos earlier, if we want its trailing edge
-		// to point to the the mouth.
-		xPos-=(isPointingRight?leaderWidth:0);
-		int minimumStartOfLeaderLine = radius-6;
-		int maximumStartOfLeaderLine = rectInPixels.getWidth()-radius-leaderWidth+11;
-		if(xPos>maximumStartOfLeaderLine)
-			xPos = maximumStartOfLeaderLine;
-		if(xPos<minimumStartOfLeaderLine)
-			xPos = minimumStartOfLeaderLine;
 	}
 	boolean isFromTop()
 	{

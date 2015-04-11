@@ -382,7 +382,7 @@ public class SceneObject {
 		double top = this.getY();
 		Rect r = this.getCurrentBoundingRect();
 		double x = left + (r.getLeft() + r.getRight()) / 2.0;
-		double y = top + r.getBottom();
+		double y = top + r.getTop();
 
 		return new Point((int)x,(int)y);
 	}
