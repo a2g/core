@@ -4,5 +4,5 @@ import com.github.a2g.core.primitive.Rect;
 
 public interface IGetBoundingRectByFrameAndAtid {
 	Rect getBoundingRectByFrameAndAtid(int frame, String atid);
-	
+
 }

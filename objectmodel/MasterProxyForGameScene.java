@@ -19,8 +19,8 @@ import com.github.a2g.core.primitive.RectF;
 
 /** MasterProxyForGameScene */
 public class MasterProxyForGameScene implements IOnFillLoadList, IOnEntry,
-		IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree,
-		IOnMovementBeyondAGate {
+IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree,
+IOnMovementBeyondAGate {
 	private MasterPresenter master;
 
 	MasterProxyForGameScene(MasterPresenter master) {
@@ -85,7 +85,7 @@ public class MasterProxyForGameScene implements IOnFillLoadList, IOnEntry,
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid)
-				.setDisplayName(displayName);
+		.setDisplayName(displayName);
 
 	}
 
@@ -94,15 +94,14 @@ public class MasterProxyForGameScene implements IOnFillLoadList, IOnEntry,
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid)
-				.setScreenCoordsPerSecond(coordsPerSecond);
+		.setScreenCoordsPerSecond(coordsPerSecond);
 
 	}
 
 	@Override
-	public void setTalkingColor(short ocode, ColorEnum red) {
+	public void setAnimationTalkingColor(String atid, ColorEnum red) {
 
-		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		master.getScenePresenter().getObjectByOtid(otid).setTalkingColor(red);
+		master.getScenePresenter().getAnimationByAtid(atid).setTalkingColor(red);
 
 	}
 
@@ -138,14 +137,14 @@ public class MasterProxyForGameScene implements IOnFillLoadList, IOnEntry,
 	public void setBaseMiddleX(short ocode, double baseMiddleX) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid)
-				.setBaseMiddleX(baseMiddleX);
+		.setBaseMiddleX(baseMiddleX);
 	}
 
 	@Override
 	public void setBaseMiddleY(short ocode, double baseMiddleY) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid)
-				.setBaseMiddleY(baseMiddleY);
+		.setBaseMiddleY(baseMiddleY);
 	}
 
 	@Override
@@ -166,7 +165,7 @@ public class MasterProxyForGameScene implements IOnFillLoadList, IOnEntry,
 	public void incrementFrameWithWraparound(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid)
-				.incrementFrameWithWraparound();
+		.incrementFrameWithWraparound();
 	}
 
 	@Override
@@ -230,14 +229,14 @@ public class MasterProxyForGameScene implements IOnFillLoadList, IOnEntry,
 	@Override
 	public void hideInventoryItem(int icode) {
 		master.getInventoryPresenter().getInventoryItem(icode)
-				.setVisible(false);
+		.setVisible(false);
 
 	}
 
 	@Override
 	public void setInventoryItemDisplayName(int icode, String displayName) {
 		master.getInventoryPresenter().getInventoryItem(icode)
-				.setDisplayName(displayName);
+		.setDisplayName(displayName);
 
 	}
 
@@ -253,7 +252,7 @@ public class MasterProxyForGameScene implements IOnFillLoadList, IOnEntry,
 	@Override
 	public void setAnimationAsObjectSpecial(String atid, Special type) {
 		master.getScenePresenter().getAnimationByAtid(atid)
-				.setAsSpecialAnimation(type);
+		.setAsSpecialAnimation(type);
 
 	}
 
@@ -266,36 +265,36 @@ public class MasterProxyForGameScene implements IOnFillLoadList, IOnEntry,
 	@Override
 	public void setAnimationAsObjectInitial(String atid) {
 		master.getScenePresenter().getAnimationByAtid(atid)
-				.setAsInitialAnimation();
+		.setAsInitialAnimation();
 
 	}
 
 	@Override
 	public void setAnimationAsObjectCurrent(String atid) {
 		master.getScenePresenter().getAnimationByAtid(atid)
-				.setAsCurrentAnimation();
+		.setAsCurrentAnimation();
 	}
 
 	@Override
 	public void alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation(
 			String atid, int frame) {
 		master.getScenePresenter()
-				.alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
-						frame, atid);
+		.alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
+				frame, atid);
 
 	}
 
 	@Override
 	public void setAnimationDuration(String atid, double secs) {
 		master.getScenePresenter().getAnimationByAtid(atid)
-				.setDurationSecs(secs);
+		.setDurationSecs(secs);
 
 	}
 
 	@Override
 	public void setAnimationAsObjectCurrentAndSetFrame(String atid, int frame) {
 		master.getScenePresenter().getAnimationByAtid(atid)
-				.setAsCurrentAnimationAndSetFrame(frame);
+		.setAsCurrentAnimationAndSetFrame(frame);
 
 	}
 
@@ -477,9 +476,9 @@ public class MasterProxyForGameScene implements IOnFillLoadList, IOnEntry,
 	// /@}
 
 	@Override
-	public void setAnimationMaxSpeechBalloonRect(String atid, RectF rectF) {
+	public void setAnimationMaxTalkRect(String atid, RectF rectF) {
 		master.getScenePresenter().getAnimationByAtid(atid).setMaxSpeechBalloonRect(rectF);
-		
+
 	}
 
 }

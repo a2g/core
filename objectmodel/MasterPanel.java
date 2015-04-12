@@ -25,7 +25,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MasterPanel extends VerticalPanel implements
-		IMasterPanelFromMasterPresenter {
+IMasterPanelFromMasterPresenter {
 	HostingPanelForHtml4 hostForCommandLine;
 	HostingPanelForHtml4 hostForInventory;
 	HostingPanelForHtml4 hostForVerbs;
@@ -51,9 +51,9 @@ public class MasterPanel extends VerticalPanel implements
 		AbsolutePanel stackForDialogTreeInvAndCommand = new AbsolutePanel();
 
 		stackForDialogTreeInvAndCommand.getElement().getStyle()
-				.setProperty("backgroundColor", back.toString());
+		.setProperty("backgroundColor", back.toString());
 		stackForSceneAndLoading.getElement().getStyle()
-				.setProperty("backgroundColor", back.toString());
+		.setProperty("backgroundColor", back.toString());
 
 		{
 			HorizontalPanel verbsAndInventory = new HorizontalPanel();
@@ -66,7 +66,7 @@ public class MasterPanel extends VerticalPanel implements
 			commandLineAndVerbsAndInventory.add(hostForCommandLine);
 			commandLineAndVerbsAndInventory.add(verbsAndInventory);
 			stackForDialogTreeInvAndCommand
-					.add(commandLineAndVerbsAndInventory);
+			.add(commandLineAndVerbsAndInventory);
 			stackForDialogTreeInvAndCommand.add(hostForDialogTree);
 		}
 		{

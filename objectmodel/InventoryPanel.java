@@ -51,12 +51,12 @@ ImagePanelAPI
 		getElement().getStyle().setProperty("color", fore.toString());
 		getElement().getStyle().setProperty("backgroundColor", back.toString());
 		getElement().getStyle().setProperty("overflow", "visible");
-				
+
 		arrowLeft = new FlowPanel();
 		this.add(arrowLeft);
 		arrowLeft.getElement().addClassName("arrowLeft");
-		
-		
+
+
 		arrowLeft.setHeight("0");
 		arrowLeft.setWidth("0");
 		arrowLeft.getElement().getStyle().setProperty("borderBottom", "10px solid transparent");
@@ -66,23 +66,23 @@ ImagePanelAPI
 		arrowLeft.getElement().getStyle().setPosition(Position.RELATIVE);
 		arrowLeft.getElement().getStyle().setProperty("top", "50%");
 		arrowLeft.getElement().getStyle().setProperty("transform", "translateY(-50%)");
-		
+
 		arrowRight = new FlowPanel();
 		this.add(arrowRight);
 		arrowRight.getElement().addClassName("arrowRight");
-		
-		
+
+
 		arrowRight.setHeight("0");
 		arrowRight.setWidth("0");
 		arrowRight.getElement().getStyle().setProperty("borderBottom", "10px solid transparent");
 		arrowRight.getElement().getStyle().setProperty("borderLeft", "10px solid "+fore.toString());
 		arrowRight.getElement().getStyle().setProperty("borderTop", "10px solid transparent");
 		arrowRight.getElement().getStyle().setProperty("float", "right");
-		
+
 		arrowRight.getElement().getStyle().setPosition(Position.RELATIVE);
 		arrowRight.getElement().getStyle().setProperty("top", "50%");
 		arrowRight.getElement().getStyle().setProperty("transform", "translateY(-50%)");
-		
+
 		arrowLeft.addDomHandler(
 				new ClickHandler()
 				{	@Override
@@ -100,9 +100,9 @@ ImagePanelAPI
 					mouseToPresenter.setMouseOver(.95, .5);
 					mouseToPresenter.doClick();
 				}
-				
+
 				}, ClickEvent.getType());
-		
+
 	}
 
 	@Override
@@ -167,10 +167,12 @@ ImagePanelAPI
 		return ((ImageForHtml4) image).getNativeImage().getWidth();
 	}
 
+	@Override
 	public void setLeftArrowVisible(boolean visible) {
 		arrowLeft.setVisible(visible);
 	}
 
+	@Override
 	public void setRightArrowVisible(boolean visible) {
 		arrowRight.setVisible(visible);
 
@@ -178,7 +180,7 @@ ImagePanelAPI
 
 	@Override
 	public void setScenePixelSize(int width, int height) {
-		// TODO Auto-generated method stub	
+		// TODO Auto-generated method stub
 	}
 
 	@Override

@@ -52,7 +52,7 @@ public class DialogTreePresenter implements IDialogTreePresenter {
 	public void resetRecordOfSaidSpeech() {
 		recordOfSaidSpeech.clear();
 	}
-	
+
 	public IDialogTreePanelFromDialogTreePresenter getView() {
 		return view;
 	}
@@ -89,7 +89,7 @@ public class DialogTreePresenter implements IDialogTreePresenter {
 	}
 
 	public void setScenePixelSize(int width, int i) {
-		
-		
+
+
 	}
 }

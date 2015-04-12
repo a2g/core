@@ -1,6 +1,6 @@
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.action.SayAction;
+import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
@@ -15,8 +15,8 @@ import com.google.gwt.event.shared.EventBus;
 
 public class MasterProxyForActions implements IOnFillLoadList,
 IMasterPresenterFromActions,
-		IInventoryPresenterFromActions, IScenePresenterFromActions,
-		IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
+IInventoryPresenterFromActions, IScenePresenterFromActions,
+IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 	private MasterPresenter master;
 
 	MasterProxyForActions(MasterPresenter master) {
@@ -26,7 +26,7 @@ IMasterPresenterFromActions,
 	@Override
 	public void setVisibleByItid(String itid, boolean isVisible) {
 		master.getInventoryPresenter().getInventory().items().getByItid(itid)
-				.setVisible(isVisible);
+		.setVisible(isVisible);
 
 	}
 
@@ -60,8 +60,8 @@ IMasterPresenterFromActions,
 	public void alignBaseMiddleOfOldFrameToFrameOfThisAnimationByAtid(
 			String atid, int frame) {
 		master.getScenePresenter()
-				.alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
-						frame, atid);
+		.alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
+				frame, atid);
 	}
 
 	@Override
@@ -76,7 +76,7 @@ IMasterPresenterFromActions,
 
 	@Override
 	public void setVisibleByOtid(String otid, boolean isVisible) {
-		
+
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
 		object.setVisible(isVisible);
 	}
@@ -135,7 +135,7 @@ IMasterPresenterFromActions,
 	@Override
 	public void setAsACurrentAnimationByAtid(String atid) {
 		master.getScenePresenter().getAnimationByAtid(atid)
-				.setAsCurrentAnimation();
+		.setAsCurrentAnimation();
 
 	}
 
@@ -148,7 +148,7 @@ IMasterPresenterFromActions,
 	@Override
 	public void setToInitialAnimationWithoutChangingFrameByOtid(String otid) {
 		master.getScenePresenter().getObjectByOtid(otid)
-				.setToInitialAnimationWithoutChangingFrame();
+		.setToInitialAnimationWithoutChangingFrame();
 
 	}
 
@@ -176,12 +176,12 @@ IMasterPresenterFromActions,
 	}
 
 	@Override
-	public String getAtidOfDefaultSayAnim() {
+	public String getAtidOfSceneTalker() {
 		return master.getScenePresenter().getSceneTalkerAtid();
 	}
 
 	@Override
-	public void setStateOfPopup(String atid, boolean isVisible, String speech, SayAction sayAction) {
+	public void setStateOfPopup(String atid, boolean isVisible, String speech, TalkAction sayAction) {
 		master.getScenePresenter().setStateOfPopup(atid, isVisible, speech, sayAction);
 	}
 
@@ -211,14 +211,14 @@ IMasterPresenterFromActions,
 	@Override
 	public void setDisplayNameByOtid(String otid, String displayName) {
 		master.getScenePresenter().getObjectByOtid(otid)
-				.setDisplayName(displayName);
+		.setDisplayName(displayName);
 
 	}
 
 	@Override
 	public void setAsAnInitialAnimationByAtid(String atid) {
 		master.getScenePresenter().getAnimationByAtid(atid)
-				.setAsInitialAnimation();
+		.setAsInitialAnimation();
 		;
 	}
 
@@ -304,7 +304,7 @@ IMasterPresenterFromActions,
 	@Override
 	public void setDialogTreeVisible(boolean isInDialogTreeMode) {
 		master.getDialogTreePresenter()
-				.setDialogTreeVisible(isInDialogTreeMode);
+		.setDialogTreeVisible(isInDialogTreeMode);
 	}
 
 	@Override

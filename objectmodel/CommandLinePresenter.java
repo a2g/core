@@ -28,7 +28,7 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
 public class CommandLinePresenter implements ExecuteCommandEventHandlerAPI,
-		SetRolloverEventHandlerAPI, ICommandLinePresenter {
+SetRolloverEventHandlerAPI, ICommandLinePresenter {
 
 	private IMasterPresenterFromCommandLine api;
 	private ICommandLinePanelFromCommandLinePresenter view;

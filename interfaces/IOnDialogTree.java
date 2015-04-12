@@ -28,12 +28,12 @@ import com.github.a2g.core.interfaces.game.ISwitchToScene;
 
 public interface IOnDialogTree extends
 // property access methods
-		IGetValue, IIsTrue, ISetValue
-		// animation
-		, ISetAnimationAsDialogTalker
-		// helpful for game
-		, IGetCurrentScene, ISwitchToScene, IGetLastScene, IIsInDebugMode
-		// inventory
-		, IIsInventoryItemVisible {
+IGetValue, IIsTrue, ISetValue
+// animation
+, ISetAnimationAsDialogTalker
+// helpful for game
+, IGetCurrentScene, ISwitchToScene, IGetLastScene, IIsInDebugMode
+// inventory
+, IIsInventoryItemVisible {
 
 }

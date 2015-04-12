@@ -9,12 +9,12 @@ import com.github.a2g.core.interfaces.action.ISetToInitialAnimationWithoutChangi
 import com.github.a2g.core.interfaces.action.ISetVisibleByOtid;
 
 public interface IScenePresenterFromPlayAction extends
-		IGetNumberOfFramesByAtid, IGetOtidOfAtid, IGetDurationByAtid,
-		ISetCurrentFrameByOtid, ISetAsACurrentAnimationByAtid,
-		ISetToInitialAnimationWithoutChangingFrameByOtid, ISetVisibleByOtid // repeat
-																			// whilst
-																			// visible
-																			// only
+IGetNumberOfFramesByAtid, IGetOtidOfAtid, IGetDurationByAtid,
+ISetCurrentFrameByOtid, ISetAsACurrentAnimationByAtid,
+ISetToInitialAnimationWithoutChangingFrameByOtid, ISetVisibleByOtid // repeat
+// whilst
+// visible
+// only
 {
 
 }

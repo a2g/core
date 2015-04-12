@@ -18,11 +18,11 @@ package com.github.a2g.core.interfaces;
 
 public interface ConstantsForAPI {
 	public static final int MAX_OBJS = 32; // if you want a large range of
-											// consecutive odd numbers that
-											// produce unique products, then the
-											// lower bound of that range odd
-											// number needs to be sufficiently
-											// high
+	// consecutive odd numbers that
+	// produce unique products, then the
+	// lower bound of that range odd
+	// number needs to be sufficiently
+	// high
 	public static final int STARTING_ODD = 1787;
 
 	public static final int VERB_MULTIPLIER = (MAX_OBJS * 2 + STARTING_ODD)

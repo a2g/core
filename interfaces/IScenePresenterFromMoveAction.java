@@ -16,13 +16,13 @@ import com.github.a2g.core.interfaces.action.ISetCurrentFrameByOtid;
 import com.github.a2g.core.interfaces.action.ISetToInitialAnimationWithoutChangingFrameByOtid;
 
 public interface IScenePresenterFromMoveAction extends
-		IGetScreenCoordsPerSecondByOtid, IGetNumberOfFramesByAtid,
-		IGetAtidOfCurrentAnimationByOtid, IGetBaseMiddleXByOtid,
-		IGetBaseMiddleYByOtid, IIsInANoGoZone,
-		IFireOnMovementBeyondAGateIfRelevant, ISetBaseMiddleXByOtid,
-		ISetBaseMiddleYByOtid, ISetAsACurrentAnimationByAtid,
-		ISetCurrentFrameByOtid,
-		ISetToInitialAnimationWithoutChangingFrameByOtid, IGetOtidByCode,
-		IGetOtidOfDefaultWalkObject {
+IGetScreenCoordsPerSecondByOtid, IGetNumberOfFramesByAtid,
+IGetAtidOfCurrentAnimationByOtid, IGetBaseMiddleXByOtid,
+IGetBaseMiddleYByOtid, IIsInANoGoZone,
+IFireOnMovementBeyondAGateIfRelevant, ISetBaseMiddleXByOtid,
+ISetBaseMiddleYByOtid, ISetAsACurrentAnimationByAtid,
+ISetCurrentFrameByOtid,
+ISetToInitialAnimationWithoutChangingFrameByOtid, IGetOtidByCode,
+IGetOtidOfDefaultWalkObject {
 
 }

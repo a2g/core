@@ -4,7 +4,7 @@ import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
 
 
-public class SceneSpeechBalloonCalculator 
+public class SceneSpeechBalloonCalculator
 {
 	private boolean isFromTop;
 	private boolean isPointingRight;
@@ -15,16 +15,16 @@ public class SceneSpeechBalloonCalculator
 	private int afterBorderWidth;
 	private int borderWidth;
 	private int heightOfLeaderLine;
-	
+
 	SceneSpeechBalloonCalculator(Rect max, int radius, Point mouth, int leaderWidth, int borderWidth)
 	{
 		Point centre = max.getCenter();
-		
+
 		// the mouth & centre coords are both relative to top left of viewport
 		isFromTop = mouth.getY() < centre.getY();
 		isPointingRight = mouth.getX() > centre.getX();
-		
-		// with the way I've set up the DOM, it seems that 
+
+		// with the way I've set up the DOM, it seems that
 		// the paragraph ignores its top and left style value,
 		// and it is positioned by the coords passed when adding to the container.
 		//  ie maxBaloonRect.getLeft, and maxBalloonRect.getTop
@@ -32,7 +32,7 @@ public class SceneSpeechBalloonCalculator
 		// so the Xpos need only be the increment that we add to maxBaloonRect.getLeft
 		// to get to the starting point of the leader line.
 		// same with max/minimumStartOfLeaderLine
-		
+
 		xPos = mouth.getX()-max.getLeft();
 		//the xPos should be where the leaderline starts so that the perpendicular
 		// edge of the leaderline points to the mouth..
@@ -45,17 +45,17 @@ public class SceneSpeechBalloonCalculator
 			xPos = maximumStartOfLeaderLine;
 		if(xPos<minimumStartOfLeaderLine)
 			xPos = minimumStartOfLeaderLine;
-		
+
 		this.halfWidthOfLeaderLine = (leaderWidth/2);
 		this.heightOfLeaderLine = 2*halfWidthOfLeaderLine;// since they are always square
-		this.afterBorderWidth = halfWidthOfLeaderLine - borderWidth -1;// the -1 just looks better, 
+		this.afterBorderWidth = halfWidthOfLeaderLine - borderWidth -1;// the -1 just looks better,
 		this.borderWidth = borderWidth;
 		this.radius = radius;
 
 		// css styles, in chrome atleast, seem to draw the border
 		// outside of the viewport if I don't factor in the border below
 		this.rectInPixels = new Rect(
-				max.getTop(), 
+				max.getTop(),
 				max.getLeft(),
 				max.getWidth()-2*borderWidth+1,
 				max.getHeight()-2*borderWidth+1);
@@ -64,17 +64,17 @@ public class SceneSpeechBalloonCalculator
 	{
 		return isFromTop;
 	}
-	
+
 	boolean isPointingRight()
 	{
 		return isPointingRight;
 	}
-	
+
 	int getLeaderLineX()
 	{
 		return xPos;
 	}
-	
+
 	Rect getRectInPixels()
 	{
 		return rectInPixels;
@@ -84,14 +84,14 @@ public class SceneSpeechBalloonCalculator
 	}
 	public int getHalfWidthOfLeaderLine() {
 		return halfWidthOfLeaderLine;
-		
+
 	}
 	public int getAfterBorderWidth() {
-		return afterBorderWidth;	
+		return afterBorderWidth;
 	}
 	public int getBorderWidth() {
 		return borderWidth;
-		
+
 	}
 	public int getHeightOfLeaderLine() {
 		return heightOfLeaderLine;

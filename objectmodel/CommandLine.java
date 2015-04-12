@@ -29,7 +29,7 @@ public class CommandLine {
 	private String typeOfRollover;
 
 	private boolean isMouseable; // whether rolling over the verbs will update
-									// the commandline
+	// the commandline
 	private boolean isVisible;
 
 	public CommandLine(IMasterPresenterFromCommandLine api) {

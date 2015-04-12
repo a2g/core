@@ -10,12 +10,12 @@ import com.github.a2g.core.interfaces.action.IGetXByOtid;
 import com.github.a2g.core.interfaces.action.IGetYByOtid;
 
 public interface IScenePresenterFromScenePanel
-		extends
-		IScenePresenterFromSceneMouseOver,
-		IScenePresenterFromSceneTouch,
-		IScenePresenterFromJavaPopupPanel// no java stuff here, it just needs
-											// getView
-		, IGetSceneObjectCount, IGetOtidByIndex, IGetVisibleByOtid,
-		IGetAtidOfCurrentAnimationByOtid, IGetCurrentFrameByOtid,
-		IGetBoundingRectByFrameAndAtid, IGetXByOtid, IGetYByOtid {
+extends
+IScenePresenterFromSceneMouseOver,
+IScenePresenterFromSceneTouch,
+IScenePresenterFromJavaPopupPanel// no java stuff here, it just needs
+// getView
+, IGetSceneObjectCount, IGetOtidByIndex, IGetVisibleByOtid,
+IGetAtidOfCurrentAnimationByOtid, IGetCurrentFrameByOtid,
+IGetBoundingRectByFrameAndAtid, IGetXByOtid, IGetYByOtid {
 }

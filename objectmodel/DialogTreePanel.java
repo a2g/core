@@ -26,7 +26,7 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
 public class DialogTreePanel extends Grid implements
-		IDialogTreePanelFromDialogTreePresenter {
+IDialogTreePanelFromDialogTreePresenter {
 	ColorEnum rolloverColor;
 	ColorEnum foregroundColor;
 
@@ -37,7 +37,7 @@ public class DialogTreePanel extends Grid implements
 		this.foregroundColor = foregroundColor;
 
 		getElement().getStyle()
-				.setProperty("Color", foregroundColor.toString());
+		.setProperty("Color", foregroundColor.toString());
 		getElement().getStyle().setProperty("BackgroundColor",
 				backgroundColor.toString());
 
@@ -65,7 +65,7 @@ public class DialogTreePanel extends Grid implements
 
 			this.setWidget(i, 0, label);
 			label.getElement().getStyle()
-					.setProperty("color", foregroundColor.toString());
+			.setProperty("color", foregroundColor.toString());
 
 			label.addMouseOverHandler(new DialogTreeMouseOverHandler(label,
 					rolloverColor));

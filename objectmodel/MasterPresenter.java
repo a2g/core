@@ -26,7 +26,7 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainedAction;
-import com.github.a2g.core.action.SayAction;
+import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.action.BaseDialogTreeAction;
@@ -59,14 +59,14 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromTimer;
 import com.github.a2g.core.interfaces.IMasterPresenterFromVerbs;
 import com.google.gwt.event.shared.EventBus;
 
-public class MasterPresenter implements 
+public class MasterPresenter implements
 IMasterPresenterFromActions, IMasterPresenterFromScene,
-		IMasterPresenterFromDialogTree, IMasterPresenterFromTimer,
-		IMasterPresenterFromBundle, IMasterPresenterFromLoader,
-		IMasterPresenterFromCommandLine, IMasterPresenterFromActionRunner,
-		IMasterPresenterFromInventory, IMasterPresenterFromVerbs,
-		IMasterPresenterFromTitleCard, SaySpeechCallDialogTreeEventHandlerAPI,
-		PropertyChangeEventHandlerAPI
+IMasterPresenterFromDialogTree, IMasterPresenterFromTimer,
+IMasterPresenterFromBundle, IMasterPresenterFromLoader,
+IMasterPresenterFromCommandLine, IMasterPresenterFromActionRunner,
+IMasterPresenterFromInventory, IMasterPresenterFromVerbs,
+IMasterPresenterFromTitleCard, SaySpeechCallDialogTreeEventHandlerAPI,
+PropertyChangeEventHandlerAPI
 
 {
 
@@ -100,7 +100,7 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 	private boolean isSayNonIncremementing;
 	private short boundaryCrossObject;
 	private MasterProxyForActions proxyForActions;
-	
+
 	public MasterPresenter(final IHostingPanel panel, EventBus bus,
 			IHostFromMasterPresenter host) {
 		this.bus = bus;
@@ -147,7 +147,7 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 				masterPanel.getHostForTitleCard(), bus, this, factory);
 
 		this.masterPanel
-				.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
+		.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
 	}
 
 	public void setCallbacks(IGameScene callbacks) {
@@ -254,17 +254,17 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 
 			if (sceneObject != null) {
 				sceneObject.setToInitialAnimationWithoutChangingFrame(); // to
-																			// the
-																			// positions
-																			// they
-																			// were
-																			// in
-																			// when
-																			// all
-																			// objects
-																			// were
-																			// rendered
-																			// out.
+				// the
+				// positions
+				// they
+				// were
+				// in
+				// when
+				// all
+				// objects
+				// were
+				// rendered
+				// out.
 				sceneObject.setX(0);
 				sceneObject.setY(0);
 			}
@@ -288,7 +288,7 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 			switchTimer = null;
 			setCameraToZero();// no scene is meant to keep camera position
 			this.host
-					.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(switchDestination);
+			.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(switchDestination);
 			switchDestination = "";
 		}
 	}
@@ -356,7 +356,7 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 		this.dialogActionRunner.cancel();
 		setCameraToZero();// no scene is meant to keep camera position
 		this.host
-				.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
+		.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
 	}
 
 	public String getLastScene() {
@@ -418,12 +418,12 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 		// 2. we pass this to onDialogTree
 		// 3. where the user appends other actions to it
 		// 4. Then we execute it
-		// Thus it will say the text, and do what the user prescribes.
+		// Thus it will talk the text, and do what the user prescribes.
 
 		// String animId = getDialogTreeGui().setBranchVisited(branchId);
-		SayAction say = new SayAction(createChainRootAction(), animId, speech);
+		TalkAction talk = new TalkAction(createChainRootAction(), animId, speech);
 		BaseDialogTreeAction actionChain = callbacks.onDialogTree(
-				proxyForGameScene, say, branchId);
+				proxyForGameScene, talk, branchId);
 		executeActionWithDialogActionRunner(actionChain);
 	}
 
@@ -459,7 +459,7 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 	@Override
 	public void startScene() {
 		masterPanel
-				.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
+		.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
 		loadInventoryFromAPI();
 		setInitialAnimationsAsCurrent();
 		clearBoundaries();
@@ -473,7 +473,7 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 
 		startCallingOnEveryFrame();
 		this.masterPanel
-				.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverOnEnterScene);
+		.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverOnEnterScene);
 		callOnEnterScene();
 
 	}
@@ -484,7 +484,7 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 
 	public void kickStartLoading() {
 		loaderPresenter.getLoaders()
-				.calculateImagesToLoadAndOmitInventoryIfSame();
+		.calculateImagesToLoadAndOmitInventoryIfSame();
 
 		int total = loaderPresenter.getLoaders().imagesToLoad();
 		boolean isSameInventory = loaderPresenter.getLoaders()
@@ -495,14 +495,14 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 		int count = scenePresenter.getModel().objectCollection().count();
 		for (int i = 0; i < count; i++) {
 			scenePresenter.getModel().objectCollection().getByIndex(i)
-					.setVisible(false);
+			.setVisible(false);
 		}
 
 		scenePresenter.reset();
 
 		// set gui to blank
 		masterPanel
-				.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
+		.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
 		// scenePresenter.clear(); don't clear, all its images are switched off
 		// anyhow.
 		loaderPresenter.clear();
@@ -531,7 +531,7 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 		setCallbacks(scene);
 
 		this.callbacks
-				.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene));
+		.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene));
 	}
 
 	@Override
@@ -539,7 +539,7 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 		loaderPresenter.getLoaders().clearLoaders();
 
 		this.callbacks
-				.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene));
+		.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene));
 	}
 
 	@Override
@@ -668,7 +668,7 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 
 		BaseAction a = this.callbacks.onDoCommand(proxyForGameScene,
 				createChainRootAction(), verbAsCode, sentenceA, sentenceB, x
-						+ scenePresenter.getCameraX(),
+				+ scenePresenter.getCameraX(),
 				y + scenePresenter.getCameraY());
 
 		this.commandLinePresenter.setMouseable(false);
@@ -688,7 +688,7 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 
 		if (masterPanel.getActiveState() == IMasterPanelFromMasterPresenter.GuiStateEnum.OnEnterScene) {
 			this.masterPanel
-					.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene);
+			.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene);
 		}
 	}
 
@@ -726,10 +726,10 @@ IMasterPresenterFromActions, IMasterPresenterFromScene,
 	public void setDialogTreeActive(boolean isInDialogTreeMode) {
 		if (isInDialogTreeMode) {
 			this.masterPanel
-					.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree);
+			.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree);
 		} else {
 			this.masterPanel
-					.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene);
+			.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene);
 		}
 	}
 

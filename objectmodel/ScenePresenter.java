@@ -18,7 +18,7 @@ package com.github.a2g.core.objectmodel;
 
 import java.util.TreeMap;
 
-import com.github.a2g.core.action.SayAction;
+import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.interfaces.IHostingPanel;
 import com.github.a2g.core.interfaces.IMasterPresenterFromScene;
 import com.github.a2g.core.interfaces.IScenePresenter;
@@ -144,7 +144,7 @@ public class ScenePresenter implements IScenePresenter {
 	public void alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
 			int frame, String atid) {
 		getAnimationByAtid(atid)
-				.alignBaseMiddleOfOldFrameToFrameOfThisAnimation(frame);
+		.alignBaseMiddleOfOldFrameToFrameOfThisAnimation(frame);
 
 	}
 
@@ -223,17 +223,17 @@ public class ScenePresenter implements IScenePresenter {
 		return getObjectByOCode(ocode).getOtid();
 	}
 
-	public void setStateOfPopup(String atid, boolean isVisible, String speech, SayAction sayAction) {
+	public void setStateOfPopup(String atid, boolean isVisible, String speech, TalkAction sayAction) {
 		Animation a = this.getAnimationByAtid(atid);
 		RectF r = a.getMaxSpeechBalloonExtents();
 		Rect pixels = new Rect(
 				(int)(r.getLeft() * this.getSceneGuiWidth())
 				,	(int)(r.getTop() * this.getSceneGuiHeight())
-					, (int)(r.getWidth()* this.getSceneGuiWidth())
-						, (int)(r.getHeight()* this.getSceneGuiHeight())
-		);
+				, (int)(r.getWidth()* this.getSceneGuiWidth())
+				, (int)(r.getHeight()* this.getSceneGuiHeight())
+				);
 
-		ColorEnum talkingColor = a.getSceneObject().getTalkingColor();
+		ColorEnum talkingColor = a.getTalkingColor();
 		if(talkingColor==null)
 		{
 			talkingColor = this.talkingColorForScene;

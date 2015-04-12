@@ -4,5 +4,5 @@ import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter.GuiStateEn
 
 public interface ISetActiveState {
 	void setActiveState(GuiStateEnum state);
-	
+
 }

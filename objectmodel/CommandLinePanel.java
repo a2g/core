@@ -22,12 +22,12 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.UIObject;
 
 public class CommandLinePanel extends Label implements
-		ICommandLinePanelFromCommandLinePresenter {
+ICommandLinePanelFromCommandLinePresenter {
 	public CommandLinePanel(ColorEnum fore, ColorEnum back, ColorEnum roll) {
 		this.setText(" ");
 		this.getElement().getStyle().setProperty("color", fore.toString());
 		this.getElement().getStyle()
-				.setProperty("backgroundColor", back.toString());
+		.setProperty("backgroundColor", back.toString());
 	}
 
 	@Override

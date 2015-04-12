@@ -21,7 +21,6 @@ import java.util.TreeMap;
 
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
-import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
@@ -41,7 +40,6 @@ public class SceneObject {
 	private double rawX;
 	private int numberPrefix;
 	private short ocode;
-	private ColorEnum talkingColor;
 	private double screenCoordsPerSecond;
 
 	public SceneObject(String otid, int screenWidth, int screenHeight) {
@@ -57,9 +55,6 @@ public class SceneObject {
 		this.numberPrefix = 0;
 		this.initialAnimationId = otid + "_INITIAL";
 
-		// talkingColro deliberately null, so the
-		// default color can be in one spot: the say action
-		this.talkingColor = null;
 		this.setBaseMiddleX(0);
 		this.setBaseMiddleY(0);
 
@@ -276,21 +271,21 @@ public class SceneObject {
 	public void setBaseMiddleX(double baseMiddleX) {
 		double rawX = screenToWorldX(baseMiddleX, screenPixelWidth,
 				getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
-						.getRight());
+				.getRight());
 		setX(rawX);
 	}
 
 	public void setBaseMiddleY(double baseMiddleY) {
 		double rawY = screenToWorldY(baseMiddleY, screenPixelHeight,
 				getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
-						.getBottom());
+				.getBottom());
 		setY(rawY);
 	}
 
 	public double getBaseMiddleX() {
 		double bmx = worldToScreenX(rawX, screenPixelWidth,
 				getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
-						.getRight());
+				.getRight());
 
 		return bmx;
 	}
@@ -298,7 +293,7 @@ public class SceneObject {
 	public double getBaseMiddleY() {
 		double bmy = worldToScreenY(rawY, screenPixelHeight,
 				getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
-						.getBottom());
+				.getBottom());
 
 		return bmy;
 	}
@@ -349,13 +344,6 @@ public class SceneObject {
 
 	}
 
-	public void setTalkingColor(ColorEnum color) {
-		this.talkingColor = color;
-	}
-
-	public ColorEnum getTalkingColor() {
-		return this.talkingColor;
-	}
 
 	public void setParallaxX(double x) {
 		for (int a = 0; a < animationCollection.getCount(); a++) {
@@ -376,7 +364,7 @@ public class SceneObject {
 		double y = lowerYPos / screenPixelHeight;
 		return new PointF(x, y);
 	}
-	
+
 	public Point getMouthLocation() {
 		double left = this.getX();
 		double top = this.getY();
@@ -390,10 +378,10 @@ public class SceneObject {
 	public void alignBaseMiddleOfOldFrameToFrameOfNewAnimation(String atid,
 			int frame) {
 		PointF h = getBaseMiddleXY();
-		
+
 		this.fak.setCurrentAnimationAtid(atid);
 		this.fak.setCurrentFrame(frame);
-		
+
 		this.updateToCorrectImage();
 
 		// then change position
@@ -415,6 +403,6 @@ public class SceneObject {
 		this.setCurrentAnimation(this.getInitialAnimation());
 	}
 
-	
+
 
 };

@@ -16,7 +16,7 @@
 package com.github.a2g.core.interfaces;
 
 public interface IInventoryPresenterFromInventoryPanel extends
-		IInventoryPresenterFromInventoryMouseOver {
+IInventoryPresenterFromInventoryMouseOver {
 	void setMouseOver(double x, double y);
 
 	void doClick();

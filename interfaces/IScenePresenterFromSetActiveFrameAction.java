@@ -4,6 +4,6 @@ import com.github.a2g.core.interfaces.action.IGetOtidByCode;
 import com.github.a2g.core.interfaces.action.ISetCurrentFrameByOtid;
 
 public interface IScenePresenterFromSetActiveFrameAction extends
-		ISetCurrentFrameByOtid, IGetOtidByCode {
+ISetCurrentFrameByOtid, IGetOtidByCode {
 
 }

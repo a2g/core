@@ -18,7 +18,7 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.PlayAnimationAction;
 import com.github.a2g.core.action.PlayAnimationRepeatWhilstVisibleAction;
-import com.github.a2g.core.action.SayAction;
+import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.action.SetCurrentAnimationAction;
 import com.github.a2g.core.action.SetActiveFrameAction;
 import com.github.a2g.core.action.SetBaseMiddleXAction;
@@ -229,49 +229,49 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 				isLinear);
 	}
 
-	public ChainedAction say(String animCode, String speech) {
-		SayAction s = new SayAction(this, animCode, speech);
+	public ChainedAction talk(String animCode, String speech) {
+		TalkAction s = new TalkAction(this, animCode, speech);
 		return s;
 	}
 
-	public ChainedAction say(String speech) {
-		SayAction s = new SayAction(this, SayAction.DEFAULT_SAY_ANIM, speech);
-		s.setNonIncrementing(SayAction.NonIncrementing.FromAPI);
+	public ChainedAction talk(String speech) {
+		TalkAction s = new TalkAction(this, TalkAction.SCENE_TALKER, speech);
+		s.setNonIncrementing(TalkAction.NonIncrementing.FromAPI);
 		return s;
 	}
 
-	public ChainedAction sayWithoutIncrementingFrame(String animCode,
+	public ChainedAction talkWithoutIncrementingFrame(String animCode,
 			String speech) {
-		SayAction s = new SayAction(this, animCode, speech);
-		s.setNonIncrementing(SayAction.NonIncrementing.True);
+		TalkAction s = new TalkAction(this, animCode, speech);
+		s.setNonIncrementing(TalkAction.NonIncrementing.True);
 		return s;
 	}
 
-	public ChainedAction sayWithoutIncrementingHoldLastFrame(String animCode,
+	public ChainedAction talkWithoutIncrementingHoldLastFrame(String animCode,
 			String speech) {
-		SayAction s = new SayAction(this, animCode, speech);
-		s.setNonIncrementing(SayAction.NonIncrementing.True);
+		TalkAction s = new TalkAction(this, animCode, speech);
+		s.setNonIncrementing(TalkAction.NonIncrementing.True);
 		s.setHoldLastFrame(true);
 		return s;
 	}
 
-	public ChainedAction sayWithoutIncrementingFrameNonBlocking(
+	public ChainedAction talkWithoutIncrementingFrameNonBlocking(
 			String animCode, String speech) {
-		SayAction s = new SayAction(this, animCode, speech);
-		s.setNonIncrementing(SayAction.NonIncrementing.True);
+		TalkAction s = new TalkAction(this, animCode, speech);
+		s.setNonIncrementing(TalkAction.NonIncrementing.True);
 		s.setNonBlocking(true);
 		return s;
 	}
 
-	public ChainedAction sayWithoutIncrementingFrame(String speech) {
-		SayAction s = new SayAction(this, SayAction.DEFAULT_SAY_ANIM, speech);
-		s.setNonIncrementing(SayAction.NonIncrementing.True);
+	public ChainedAction talkWithoutIncrementingFrame(String speech) {
+		TalkAction s = new TalkAction(this, TalkAction.SCENE_TALKER, speech);
+		s.setNonIncrementing(TalkAction.NonIncrementing.True);
 		return s;
 	}
 
-	public ChainedAction sayWithoutIncrementingFrameNonBlocking(String speech) {
-		SayAction s = new SayAction(this, SayAction.DEFAULT_SAY_ANIM, speech);
-		s.setNonIncrementing(SayAction.NonIncrementing.True);
+	public ChainedAction talkWithoutIncrementingFrameNonBlocking(String speech) {
+		TalkAction s = new TalkAction(this, TalkAction.SCENE_TALKER, speech);
+		s.setNonIncrementing(TalkAction.NonIncrementing.True);
 		s.setNonBlocking(true);
 		return s;
 	}

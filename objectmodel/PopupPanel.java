@@ -57,14 +57,14 @@ public class PopupPanel {
 	public void setColor(ColorEnum color) {
 		if (color != null) {
 			labelInPopup.getElement().getStyle()
-					.setProperty("color", "#ff0000");
+			.setProperty("color", "#ff0000");
 			labelInPopup.getElement().getStyle()
-					.setProperty("fontColor", "#ff0000");
+			.setProperty("fontColor", "#ff0000");
 			labelInPopup.getElement().getStyle()
-					.setProperty("textColor", "#ff0000");
+			.setProperty("textColor", "#ff0000");
 			// labelInPopup.getElement().getStyle().setProperty("fontColor",color.toString());
 			popup.getElement().getStyle()
-					.setProperty("borderColor", color.toString());
+			.setProperty("borderColor", color.toString());
 		}
 		// labelInPopup.getElement().getStyle().setProperty( "backgroundColor",
 		// ColorEnum.Black.toString());

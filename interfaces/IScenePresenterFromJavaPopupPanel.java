@@ -19,7 +19,7 @@ import com.github.a2g.core.interfaces.action.IGetSceneGuiHeight;
 import com.github.a2g.core.interfaces.action.IGetSceneGuiWidth;
 
 public interface IScenePresenterFromJavaPopupPanel extends IGetSceneGuiWidth,
-		IGetSceneGuiHeight {
+IGetSceneGuiHeight {
 
 	IScenePanelFromScenePresenter getView();
 }

@@ -60,45 +60,46 @@ import com.github.a2g.core.interfaces.game.IShowInventoryItem;
 import com.github.a2g.core.interfaces.game.ISwitchToScene;
 
 public interface IOnDoCommand
-		extends
-		// property access methods
-		IGetValue,
-		IIsTrue,
-		ISetValue
-		// helpful for game
-		,
-		IGetCurrentScene,
-		ISwitchToScene,
-		IGetLastScene,
-		IIsInDebugMode,
-		ISetIsSayAlwaysWithoutIncrementing,
-		IGetIsSayAlwaysWithoutIncrementing,
-		IShareWinning,
-		ICreateChainRootAction
-		// boundary
-		,
-		IAddBoundaryGate,
-		IAddBoundaryPoint,
-		ISetBoundaryCrossObject
-		// object
-		, IHide, IShow, IGetBaseMiddleX, IGetBaseMiddleY, ISetBaseMiddleX,
-		ISetBaseMiddleY, ISetX, ISetY, IGetX, IGetY, IIsVisible,
-		IGetCurrentAnimation,
-		IGetCurrentFrame,
-		ISetCurrentFrame,
-		ISetDisplayName,
-		ISetAsSceneWalker,
-		ISetAsSceneTalker
-		// animation
-		, IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation,
-		ISetAnimationAsObjectInitial, ISetAnimationAsSceneTalker,
-		ISetAnimationAsObjectCurrent, IGetAnimationLastFrame,
-		IGetAnimationLength,
-		ISetAnimationDuration
-		// inventory
-		, IShowInventoryItem, IHideInventoryItem, IIsInventoryItemVisible,
-		ISetInventoryItemDisplayName {
+extends
+// property access methods
+IGetValue,
+IIsTrue,
+ISetValue
+// helpful for game
+,
+IGetCurrentScene,
+ISwitchToScene,
+IGetLastScene,
+IIsInDebugMode,
+ISetIsSayAlwaysWithoutIncrementing,
+IGetIsSayAlwaysWithoutIncrementing,
+IShareWinning,
+ICreateChainRootAction
+// boundary
+,
+IAddBoundaryGate,
+IAddBoundaryPoint,
+ISetBoundaryCrossObject
+// object
+, IHide, IShow, IGetBaseMiddleX, IGetBaseMiddleY, ISetBaseMiddleX,
+ISetBaseMiddleY, ISetX, ISetY, IGetX, IGetY, IIsVisible,
+IGetCurrentAnimation,
+IGetCurrentFrame,
+ISetCurrentFrame,
+ISetDisplayName,
+ISetAsSceneWalker,
+ISetAsSceneTalker
+// animation
+, IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation,
+ISetAnimationAsObjectInitial, ISetAnimationAsSceneTalker,
+ISetAnimationAsObjectCurrent, IGetAnimationLastFrame,
+IGetAnimationLength,
+ISetAnimationDuration
+// inventory
+, IShowInventoryItem, IHideInventoryItem, IIsInventoryItemVisible,
+ISetInventoryItemDisplayName {
 
+	@Override
 	void setAsSceneWalker(short harry2);
 
 }

@@ -23,37 +23,31 @@ import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.IScenePresenterFromSayAction;
+import com.github.a2g.core.interfaces.IScenePresenterFromTalkAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromSayAction;
-import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.action.ChainedAction;
 
-public class SayAction extends ChainedAction {
+public class TalkAction extends ChainedAction {
 	private ArrayList<String> speech;
 	private ArrayList<Double> startingTimeForEachLine;
 	private double totalDurationInSeconds;
-	private IScenePresenterFromSayAction scene;
+	private IScenePresenterFromTalkAction scene;
 	private IMasterPresenterFromSayAction master;
 	private int numberOfFramesTotal;
-	private static final ColorEnum defaultTalkingColor = ColorEnum.Purple;
 	private NonIncrementing nonIncrementing;
 	private boolean isHoldLastFrame;
 	private boolean isParallel;
 	private String atid;
 	private String otid;
 	private String fullSpeech;
-	public static String DEFAULT_SAY_ANIM = "DEFAULT_SAY_ANIM";// obviously this
-																// gets said by
-																// object of
-																// default say
-																// anim
+	public static String SCENE_TALKER = "SCENE_TALKER";// use animation of scene talker
 
 	enum NonIncrementing {
 		True, False, FromAPI
 	}
 
-	public SayAction(BaseAction parent, String atid, String fullSpeech) {
+	public TalkAction(BaseAction parent, String atid, String fullSpeech) {
 		super(parent, true);
 		this.numberOfFramesTotal = 0;
 		this.nonIncrementing = NonIncrementing.False;
@@ -85,7 +79,7 @@ public class SayAction extends ChainedAction {
 		if (numberOfFramesTotal == 0)
 			numberOfFramesTotal = animFramesCount;
 		// The effect of this is that there is a little bit of 'over-play'
-		// where the amount of time it takes to 'say' something
+		// where the amount of time it takes to 'talk' 
 		// when there is a talking animation, is usually a
 		// little bit more than the time calculated from the speech.
 		// This is to ensure that the animation always ends whilst
@@ -114,13 +108,13 @@ public class SayAction extends ChainedAction {
 			rollingStartingTimeForLine += getSecondsForLine(line);
 		}
 		
-		if(this.nonIncrementing==SayAction.NonIncrementing.FromAPI)
+		if(this.nonIncrementing==TalkAction.NonIncrementing.FromAPI)
 		{
 			this.nonIncrementing = master.isSayNonIncrementing()? NonIncrementing.True : NonIncrementing.False;
 		}
 		
-		if (atid == DEFAULT_SAY_ANIM) {
-			atid = scene.getAtidOfDefaultSayAnim();
+		if (atid == SCENE_TALKER) {
+			atid = scene.getAtidOfSceneTalker();
 		} 
 		otid = scene.getOtidOfAtid(atid);
 
@@ -225,11 +219,11 @@ public class SayAction extends ChainedAction {
 		this.nonIncrementing = nonIncrementing;
 	}
 
-	public IScenePresenterFromSayAction getscene() {
+	public IScenePresenterFromTalkAction getscene() {
 		return scene;
 	}
 
-	public void setScene(IScenePresenterFromSayAction scene) {
+	public void setScene(IScenePresenterFromTalkAction scene) {
 		this.scene = scene;
 	}
 

@@ -48,39 +48,41 @@ import com.github.a2g.core.interfaces.game.ISwitchToScene;
 import com.github.a2g.core.interfaces.game.IUpdateObjectToCorrectImage;
 
 public interface IOnEveryFrame
-		extends
-		// property access methods
-		IGetValue,
-		IIsTrue,
-		ISetValue
-		// helpful for game
-		,
-		IGetCurrentScene,
-		ISwitchToScene,
-		IGetLastScene,
-		IIsInDebugMode,
-		ISetActiveState,
-		IGetSceneGuiWidth
-		// these two are needed for starting animations in the onEveryFrame
-		// handler
-		,
-		ICreateChainRootAction,
-		IExecuteChainedAction
-		// helper
-		,
-		IShareWinning
-		// object
-		, IShow, IHide, IIncremementFrameWithWraparound,
-		IUpdateObjectToCorrectImage, IGetCurrentFrame, ISetCurrentFrame,
-		ISetBaseMiddleX, ISetBaseMiddleY, IGetBaseMiddleX, IGetBaseMiddleY,
-		IGetCurrentAnimation, ISetX, ISetY, IGetX, IGetY, IIsVisible
-		// animation
-		, IIsAnimation, ISetAnimationAsObjectCurrent
+extends
+// property access methods
+IGetValue,
+IIsTrue,
+ISetValue
+// helpful for game
+,
+IGetCurrentScene,
+ISwitchToScene,
+IGetLastScene,
+IIsInDebugMode,
+ISetActiveState,
+IGetSceneGuiWidth
+// these two are needed for starting animations in the onEveryFrame
+// handler
+,
+ICreateChainRootAction,
+IExecuteChainedAction
+// helper
+,
+IShareWinning
+// object
+, IShow, IHide, IIncremementFrameWithWraparound,
+IUpdateObjectToCorrectImage, IGetCurrentFrame, ISetCurrentFrame,
+ISetBaseMiddleX, ISetBaseMiddleY, IGetBaseMiddleX, IGetBaseMiddleY,
+IGetCurrentAnimation, ISetX, ISetY, IGetX, IGetY, IIsVisible
+// animation
+, IIsAnimation, ISetAnimationAsObjectCurrent
 
 {
 
+	@Override
 	void setBaseMiddleY(short harry, double d);
 
+	@Override
 	boolean isVisible(short orangeHutDoorOpen);
 
 }

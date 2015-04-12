@@ -25,7 +25,7 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromVerbs;
 import com.github.a2g.core.primitive.ColorEnum;
 
 public class VerbsPresenter implements IVerbsPresenterFromVerbsPanel,
-		IVerbsPresenter {
+IVerbsPresenter {
 	private Verbs theVerbs;
 	private IVerbsPanelFromVerbsPresenter view;
 	private int widthOfScene;

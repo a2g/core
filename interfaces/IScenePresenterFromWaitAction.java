@@ -6,7 +6,7 @@ import com.github.a2g.core.interfaces.action.IGetNumberOfFramesByAtid;
 import com.github.a2g.core.interfaces.action.IGetOtidByCode;
 
 public interface IScenePresenterFromWaitAction extends
-		IGetAtidOfCurrentAnimationByOtid, IGetNumberOfFramesByAtid,
-		IGetCurrentFrameByOtid, IGetOtidByCode {
+IGetAtidOfCurrentAnimationByOtid, IGetNumberOfFramesByAtid,
+IGetCurrentFrameByOtid, IGetOtidByCode {
 
 }

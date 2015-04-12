@@ -8,6 +8,6 @@ import com.github.a2g.core.interfaces.action.IGetSceneGuiHeight;
 import com.github.a2g.core.interfaces.action.IGetSceneGuiWidth;
 
 public interface IScenePresenterFromSceneMouseOver extends IGetSceneGuiWidth,
-		IGetSceneGuiHeight, IGetDisplayNameByOtid, IGetCodeByOtid, IGetCameraX,
-		IGetCameraY {
+IGetSceneGuiHeight, IGetDisplayNameByOtid, IGetCodeByOtid, IGetCameraX,
+IGetCameraY {
 }

@@ -17,6 +17,7 @@
 package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.interfaces.IGameScene;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.RectF;
 
 public class Animation {
@@ -29,6 +30,8 @@ public class Animation {
 	private IGameScene.Special specialAnimationThisWasSetTo;
 	private RectF rectForMaxSpeechBalloon;
 
+	private ColorEnum talkingColor;
+
 	public Animation(String atid, SceneObject owningSceneObject) {
 		this.durationInSeconds = 1.0;
 		this.parent = owningSceneObject;
@@ -38,6 +41,8 @@ public class Animation {
 		wasSetAsCurrentAnimation = false;
 		specialAnimationThisWasSetTo = null;
 		rectForMaxSpeechBalloon = new RectF(0,.25,1.0,.5);
+		//give it  rrandom color
+		talkingColor = ColorEnum.values()[(int)(Math.random()*ColorEnum.values().length)];
 	}
 
 	public SceneObject getObject() {
@@ -151,6 +156,15 @@ public class Animation {
 
 	public void setMaxSpeechBalloonRect(RectF rectF) {
 		rectForMaxSpeechBalloon = rectF;
+	}
+
+	public ColorEnum getTalkingColor() {
+		return talkingColor;
+	}
+
+	public void setTalkingColor(ColorEnum color) {
+		this.talkingColor = color;
+
 	}
 
 };

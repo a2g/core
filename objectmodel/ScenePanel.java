@@ -17,7 +17,7 @@
 package com.github.a2g.core.objectmodel;
 
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.action.SayAction;
+import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
@@ -35,12 +35,12 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
 public class ScenePanel extends AbsolutePanel implements ImagePanelAPI,
-		IScenePanelFromScenePresenter {
+IScenePanelFromScenePresenter {
 	int cameraOffsetX;
 	int cameraOffsetY;
 	SceneObjectTouchMoveHandler theTouchMoveHandler;
 	SceneSpeechBalloon speechWidget;
-	
+
 	public ScenePanel(EventBus bus, IScenePresenterFromScenePanel api) {
 		this.getElement().setId("cwAbsolutePanel");
 		// this.addStyleName("absolutePanel");
@@ -125,24 +125,25 @@ public class ScenePanel extends AbsolutePanel implements ImagePanelAPI,
 		this.cameraOffsetY = y;
 	}
 
-	public void setStateOfPopup(boolean isVisible, 
-			ColorEnum talkingColor, String speech, Rect maxBalloonRect, Point mouth, SayAction sayAction) {
+	@Override
+	public void setStateOfPopup(boolean isVisible,
+			ColorEnum talkingColor, String speech, Rect maxBalloonRect, Point mouth, TalkAction sayAction) {
 		if (!isVisible) {
 			super.remove(speechWidget);
 		}
-		
+
 		speechWidget.setText(speech);
-		
-		
+
+
 		speechWidget.setBorderColor(talkingColor);
-		
+
 		SceneSpeechBalloonCalculator calc = new SceneSpeechBalloonCalculator(maxBalloonRect, 30, mouth, 38, 3);
-		
+
 		speechWidget.setLeaderLine(calc);
-		
+
 		speechWidget.setVisible(isVisible);
-		
-		
+
+
 		super.add(speechWidget, maxBalloonRect.getLeft(),maxBalloonRect.getTop());
 
 	}

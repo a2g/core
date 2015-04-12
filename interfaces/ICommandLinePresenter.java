@@ -17,5 +17,5 @@
 package com.github.a2g.core.interfaces;
 
 public interface ICommandLinePresenter extends
-		ICommandLinePresenterFromSceneMouseOver {
+ICommandLinePresenterFromSceneMouseOver {
 }

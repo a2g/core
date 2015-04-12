@@ -20,7 +20,7 @@ class MyPanel extends SimplePanel
 	}
 }
 
-public class SceneSpeechBalloon extends VerticalPanel 
+public class SceneSpeechBalloon extends VerticalPanel
 {
 	private FlowPanel before;
 	private MyPanel  pe;
@@ -29,7 +29,7 @@ public class SceneSpeechBalloon extends VerticalPanel
 
 	public SceneSpeechBalloon() {
 		this.borderColor = ColorEnum.Red;
-	
+
 		before = new FlowPanel();
 		pe = new MyPanel();
 		after = new FlowPanel();
@@ -50,11 +50,11 @@ public class SceneSpeechBalloon extends VerticalPanel
 		after.getElement().getStyle().setProperty("height","0");
 
 		pe.getPE().getStyle().setProperty("textAlign", "center");
-		pe.getPE().getStyle().setProperty("lineHeight", "100px");
+		pe.getPE().getStyle().setProperty("lineHeight", "12px");
 		pe.getPE().getStyle().setProperty("backgroundColor", "#fff");
 		pe.getPE().getStyle().setProperty("marginTop", "0px");
 		pe.getPE().getStyle().setProperty("marginBottom", "0px");
-		
+
 
 		//drop shadow makes it look worse.
 		//		pe.getStyle().setProperty("WebkitBoxShadow", "2px 2px 4px #888");
@@ -63,10 +63,10 @@ public class SceneSpeechBalloon extends VerticalPanel
 
 	}
 
-	void setBorderColor(ColorEnum talkingColor)		
+	void setBorderColor(ColorEnum talkingColor)
 	{
 		borderColor = talkingColor;
-		if (talkingColor != null) 
+		if (talkingColor != null)
 		{
 			pe.getPE().getStyle().setProperty("borderColor", talkingColor.toString());
 		}
@@ -76,6 +76,7 @@ public class SceneSpeechBalloon extends VerticalPanel
 		pe.getPE().setInnerText(speech);
 	}
 
+	@Override
 	public void setVisible(boolean visible)
 	{
 		super.setVisible(visible);
@@ -96,12 +97,12 @@ public class SceneSpeechBalloon extends VerticalPanel
 	public void setLeaderLine(SceneSpeechBalloonCalculator c) {
 
 
-		//warning: if these 'border's are not set first, the visual result is weird  
+		//warning: if these 'border's are not set first, the visual result is weird
 		before.getElement().getStyle().setProperty("border", ""+c.getHalfWidthOfLeaderLine()+"px solid");
 		after.getElement().getStyle().setProperty("border", ""+c.getAfterBorderWidth() +"px solid");
 		pe.getPE().getStyle().setProperty("border", ""+c.getBorderWidth()+"px solid "+borderColor.toString().toLowerCase());
-		
-	
+
+
 		// first do rectangle
 		pe.getPE().getStyle().setProperty("top", "" +(c.getRectInPixels().getTop())+"px");
 		pe.getPE().getStyle().setProperty("left", "" +(c.getRectInPixels().getLeft())+"px");
@@ -110,27 +111,27 @@ public class SceneSpeechBalloon extends VerticalPanel
 		pe.getPE().getStyle().setProperty("WebkitBorderRadius", c.getRadius() +"px");
 		pe.getPE().getStyle().setProperty("MozBorderRadius", c.getRadius() +"px");
 		pe.getPE().getStyle().setProperty("borderRadius", c.getRadius() +"px");
-		
+
 		boolean isFromTop = c.isFromTop();
 		boolean isPointingRight = c.isPointingRight();
 		int heightInPixels = c.getRectInPixels().getHeight();
-		
+
 		int top = c.isFromTop()? -c.getHeightOfLeaderLine() : heightInPixels-1;
 		top+=+c.getBorderWidth();
-		
+
 		int left = c.getLeaderLineX();
 
 		// before
 		before.getElement().getStyle().setProperty("borderColor", getColor1(!isFromTop)+getColor1(isPointingRight)+getColor1(isFromTop)+getColor1(!isPointingRight));
 		before.getElement().getStyle().setProperty("left", left + "px");
 		before.getElement().getStyle().setProperty("top", top + "px");
-		
-		
+
+
 		// after
 		after.getElement().getStyle().setProperty("borderColor", getColor2(!isFromTop)+getColor2(isPointingRight)+getColor2(isFromTop)+getColor2(!isPointingRight));
 		after.getElement().getStyle().setProperty("left", (left+(isPointingRight?5:3))+ "px");
 		after.getElement().getStyle().setProperty("top", (top+(isFromTop?8:0))+ "px");
-	
+
 
 	}
 

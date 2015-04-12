@@ -30,7 +30,7 @@ import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.shared.EventBus;
 
 public class InventoryPresenter implements
-		IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
+IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 
 	private Inventory theInventory;
 	private IInventoryPanelFromInventoryPresenter view;
@@ -76,14 +76,14 @@ public class InventoryPresenter implements
 			boolean initiallyVisible, Image image) {
 		boolean isCarrying = callback.getValue("CARRYING_"
 				+ objectTextualId.toUpperCase()) > 0;
-		InventoryItem item = new InventoryItem(this.eventBus, objectTextualId,
-				image, objectCode, isCarrying);
+				InventoryItem item = new InventoryItem(this.eventBus, objectTextualId,
+						image, objectCode, isCarrying);
 
-		item.setVisible(initiallyVisible);
-		this.theInventoryItemMap.put(objectCode, item);
-		this.theInventory.items().add(item);
-		this.updateInventory();
-		return true;
+				item.setVisible(initiallyVisible);
+				this.theInventoryItemMap.put(objectCode, item);
+				this.theInventory.items().add(item);
+				this.updateInventory();
+				return true;
 	}
 
 	public InventoryItem getInventoryItem(int i) {
@@ -132,7 +132,7 @@ public class InventoryPresenter implements
 			image.setVisible(false, new Point(-width, -height));
 		}
 	}
- 
+
 	public void updateInventory() {
 		view.setLeftArrowVisible(isLeftArrowVisible());
 		view.setRightArrowVisible(isRightArrowVisible());
@@ -170,7 +170,7 @@ public class InventoryPresenter implements
 
 
 
- 
+
 	public void clear() {
 		theInventoryItemMap.clear();
 		theInventory = new Inventory();
@@ -246,5 +246,5 @@ public class InventoryPresenter implements
 	public String getDisplayNameByItid(String itid) {
 		return theInventory.items().getByItid(itid).getDisplayName();
 	}
-	
+
 }

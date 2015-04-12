@@ -38,26 +38,26 @@ import com.github.a2g.core.interfaces.game.ISetValue;
 import com.github.a2g.core.interfaces.game.ISwitchToScene;
 
 public interface IOnEntry
-		extends
-		// property access methods
-		IGetValue,
-		IIsTrue,
-		ISetValue
-		// helpful for game
-		, IGetCurrentScene, ISwitchToScene,
-		IGetLastScene,
-		IIsInDebugMode,
-		IGetSceneGuiWidth,
-		IGetSceneGuiHeight
-		// Inventory
-		,
-		IIsInventoryItemVisible
-		// object
-		, IGetBaseMiddleX, IGetBaseMiddleY, ISetBaseMiddleX, ISetBaseMiddleY,
-		IGetX,
-		IGetY
-		// animation
-		, ISetAnimationAsObjectSpecial, ISetAnimationAsSceneTalker,
-		ISetAnimationAsObjectInitial, ISetAnimationAsObjectCurrent {
+extends
+// property access methods
+IGetValue,
+IIsTrue,
+ISetValue
+// helpful for game
+, IGetCurrentScene, ISwitchToScene,
+IGetLastScene,
+IIsInDebugMode,
+IGetSceneGuiWidth,
+IGetSceneGuiHeight
+// Inventory
+,
+IIsInventoryItemVisible
+// object
+, IGetBaseMiddleX, IGetBaseMiddleY, ISetBaseMiddleX, ISetBaseMiddleY,
+IGetX,
+IGetY
+// animation
+, ISetAnimationAsObjectSpecial, ISetAnimationAsSceneTalker,
+ISetAnimationAsObjectInitial, ISetAnimationAsObjectCurrent {
 
 }

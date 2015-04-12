@@ -43,7 +43,7 @@ import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectInitial;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectSpecial;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsSceneTalker;
 import com.github.a2g.core.interfaces.game.ISetAnimationDuration;
-import com.github.a2g.core.interfaces.game.ISetAnimationMaxSpeechBalloonRect;
+import com.github.a2g.core.interfaces.game.ISetAnimationMaxTalkRect;
 import com.github.a2g.core.interfaces.game.ISetAsSceneWalker;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleY;
@@ -63,7 +63,6 @@ import com.github.a2g.core.interfaces.game.IShow;
 import com.github.a2g.core.interfaces.game.IShowInventoryItem;
 import com.github.a2g.core.interfaces.game.ISwitchToScene;
 import com.github.a2g.core.interfaces.game.IUpdateVerbUI;
-import com.github.a2g.core.primitive.RectF;
 
 public interface IOnPreEntry
 extends
@@ -117,8 +116,8 @@ IUpdateVerbUI
 ISetAnimationAsObjectInitial, ISetAnimationAsSceneTalker,
 ISetAnimationAsObjectCurrent, ISetAnimationDuration,
 ISetAnimationAsObjectSpecial, ISetAsSceneWalker,
-ISetAnimationAsObjectCurrentAndSetFrame, ISetAnimationAsDialogTalker 
-,ISetAnimationMaxSpeechBalloonRect
+ISetAnimationAsObjectCurrentAndSetFrame, ISetAnimationAsDialogTalker
+,ISetAnimationMaxTalkRect
 {
 
 }

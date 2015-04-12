@@ -28,7 +28,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class LoaderPanel extends SimplePanel implements
-		ILoaderPanelFromLoaderPresenter {
+ILoaderPanelFromLoaderPresenter {
 
 	Label progress;
 	Button reload;
@@ -46,9 +46,9 @@ public class LoaderPanel extends SimplePanel implements
 			progress = new Label();
 
 			progress.getElement().getStyle()
-					.setProperty("color", fore.toString());
+			.setProperty("color", fore.toString());
 			progress.getElement().getStyle()
-					.setProperty("backgroundColor", back.toString());
+			.setProperty("backgroundColor", back.toString());
 
 			progress.setText("Loading...");
 
@@ -68,7 +68,7 @@ public class LoaderPanel extends SimplePanel implements
 			containerGrid = new Grid(1, TOTAL_NUMBER_OF_CELLS);
 			containerGrid.getElement().getStyle().setProperty("margin", "0px");
 			containerGrid.getElement().getStyle()
-					.setProperty("border", "0px solid white");
+			.setProperty("border", "0px solid white");
 			containerGrid.setCellPadding(0);
 			containerGrid.setCellSpacing(0);
 
@@ -132,7 +132,7 @@ public class LoaderPanel extends SimplePanel implements
 						Grid grid = (Grid) containerGrid.getWidget(0, i);
 						if (grid != null) {
 							grid.getElement().getStyle()
-									.setProperty("background", "#eee");
+							.setProperty("background", "#eee");
 						}
 					}
 				} else {
@@ -140,7 +140,7 @@ public class LoaderPanel extends SimplePanel implements
 						Grid grid = (Grid) containerGrid.getWidget(0, i);
 						if (grid != null) {
 							grid.getElement().getStyle()
-									.setProperty("background", "blue");
+							.setProperty("background", "blue");
 						}
 					}
 				}

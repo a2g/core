@@ -25,7 +25,7 @@ import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 
 public class TitleCardPanel extends SimplePanel implements
-		ITitleCardPanelFromTitleCardPresenter {
+ITitleCardPanelFromTitleCardPresenter {
 	Label label;
 	LayoutPanel layout;
 
@@ -37,12 +37,12 @@ public class TitleCardPanel extends SimplePanel implements
 			label.setAutoHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 			label.getElement().getStyle().setProperty("color", fore.toString());
 			label.getElement().getStyle()
-					.setProperty("BackgroundColor", back.toString());
+			.setProperty("BackgroundColor", back.toString());
 
 			label.setText("Loading...");
 			layout.add(label);
 			layout.setWidgetLeftRight(label, 5, Unit.EM, 5, Unit.EM); // Center
-																		// panel
+			// panel
 			layout.setWidgetTopBottom(label, 5, Unit.EM, 5, Unit.EM);
 		}
 	}
