@@ -17,8 +17,21 @@
 package com.github.a2g.core.primitive;
 
 public enum ColorEnum {
-	Black(0, 0, 0), Red(255, 0, 0), Green(0, 255, 0), Blue(0, 0, 255), Purple(
-			128, 0, 128), Fuchsia(255, 0, 255);
+	Black(0, 0, 0), 
+	Gray(128, 128, 128),
+	Navy(0, 0, 128),
+	Blue(0, 0, 255),
+	Lime(0, 255, 0),
+	Teal(0, 128, 128),
+	Aqua(0, 255, 255),
+	Maroon(128, 0, 0),
+	Red(255, 0, 0),
+	Purple(128, 0, 128),
+	Fuchsia(255, 0, 255),
+	Olive(128, 128, 0), 
+	Yellow(255, 255, 0)	,
+	Silver(192, 192, 192),
+	White(255, 255, 255);
 
 	public final int r;
 	public final int g;
