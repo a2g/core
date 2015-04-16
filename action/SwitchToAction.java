@@ -26,7 +26,7 @@ import com.github.a2g.core.interfaces.IScenePresenterFromSwitchAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 /* ! This inherits from BaseDialogTreeAction because it is valid to be used as
- *  the last action in a chain that is returned from SceneAPI.onDialogTree().
+ *  the last action in a chain that is returned from IGameScene.onDialogTree().
  *  You can use it in all places where you would use a GameAction
  */
 public class SwitchToAction extends BaseDialogTreeAction {

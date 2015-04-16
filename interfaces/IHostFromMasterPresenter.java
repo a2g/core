@@ -39,4 +39,6 @@ public interface IHostFromMasterPresenter {
 	void shareWinning(String token);
 
 	void log(String message);
+	
+	void quitUnconditionally();
 }

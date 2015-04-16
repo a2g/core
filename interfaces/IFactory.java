@@ -11,7 +11,7 @@ public interface IFactory {
 			IInventoryPresenterFromInventoryPanel api, ColorEnum fore,
 			ColorEnum back, ColorEnum rollover);
 
-	IScenePanelFromScenePresenter createScenePanel();
+	IScenePanelFromScenePresenter createScenePanel(IScenePresenterFromScenePanel scenePres);
 
 	ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(ColorEnum fore,
 			ColorEnum back);

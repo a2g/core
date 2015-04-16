@@ -47,7 +47,7 @@ public class ScenePresenter implements IScenePresenter {
 		this.width = 320;
 		this.height = 180;
 		this.scene = new Scene();
-		this.view = master.getFactory().createScenePanel();
+		this.view = master.getFactory().createScenePanel(this);
 		panel.setThing(view);
 		view.setVisible(true);
 

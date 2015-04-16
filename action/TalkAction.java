@@ -25,7 +25,7 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromTalkAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-import com.github.a2g.core.interfaces.IMasterPresenterFromSayAction;
+import com.github.a2g.core.interfaces.IMasterPresenterFromTalkAction;
 import com.github.a2g.core.action.ChainedAction;
 
 public class TalkAction extends ChainedAction {
@@ -33,7 +33,7 @@ public class TalkAction extends ChainedAction {
 	private ArrayList<Double> startingTimeForEachLine;
 	private double totalDurationInSeconds;
 	private IScenePresenterFromTalkAction scene;
-	private IMasterPresenterFromSayAction master;
+	private IMasterPresenterFromTalkAction master;
 	private int numberOfFramesTotal;
 	private NonIncrementing nonIncrementing;
 	private boolean isHoldLastFrame;
@@ -227,7 +227,7 @@ public class TalkAction extends ChainedAction {
 		this.scene = scene;
 	}
 
-	public void setTitleCard(IMasterPresenterFromSayAction titleCard) {
+	public void setTitleCard(IMasterPresenterFromTalkAction titleCard) {
 		this.master = titleCard;
 	}
 
@@ -241,7 +241,7 @@ public class TalkAction extends ChainedAction {
 		setScene(scene);
 	}
 
-	public void setMaster(IMasterPresenterFromSayAction sayActionTest) {
+	public void setMaster(IMasterPresenterFromTalkAction sayActionTest) {
 		this.master = sayActionTest;
 		
 	}

@@ -25,6 +25,7 @@ import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryPanel;
 import com.github.a2g.core.interfaces.ILoaderPanelFromLoaderPresenter;
 import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter;
 import com.github.a2g.core.interfaces.IMasterPresenterFromLoaderMouse;
+import com.github.a2g.core.interfaces.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
 import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.ISystemAnimation;
@@ -84,7 +85,7 @@ public class FactoryForHtml5 implements IFactory {
 	}
 
 	@Override
-	public IScenePanelFromScenePresenter createScenePanel() {
+	public IScenePanelFromScenePresenter createScenePanel(IScenePresenterFromScenePanel scenePres) {
 		return new ScenePanelForHtml5(bus, master.getScenePresenter(),
 				master.getCommandLinePresenter());
 	}

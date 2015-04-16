@@ -26,6 +26,7 @@ import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryPanel;
 import com.github.a2g.core.interfaces.ILoaderPanelFromLoaderPresenter;
 import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter;
 import com.github.a2g.core.interfaces.IMasterPresenterFromLoaderMouse;
+import com.github.a2g.core.interfaces.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
 import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.ISystemAnimation;
@@ -84,8 +85,8 @@ public class FactoryForJava implements IFactory {
 	}
 
 	@Override
-	public IScenePanelFromScenePresenter createScenePanel() {
-		return new ScenePanelForJava(bus, master.getScenePresenter(),
+	public IScenePanelFromScenePresenter createScenePanel(IScenePresenterFromScenePanel scenePres) {
+		return new ScenePanelForJava(bus, scenePres,
 				master.getCommandLinePresenter());
 	}
 
