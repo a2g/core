@@ -2,6 +2,7 @@ package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.interfaces.ILoad;
 import com.github.a2g.core.interfaces.IOnDialogTree;
@@ -479,6 +480,19 @@ IOnMovementBeyondAGate {
 	public void setAnimationMaxTalkRect(String atid, RectF rectF) {
 		master.getScenePresenter().getAnimationByAtid(atid).setMaxSpeechBalloonRect(rectF);
 
+	}
+
+	@Override
+	public void setStateOfPopup(String atid, boolean isVisible, String speech,
+			TalkAction sayAction) {
+		master.getScenePresenter().setStateOfPopup(atid, isVisible, speech, sayAction);
+		
+	}
+
+	@Override
+	public void displayTitleCard(String text) {
+		master.displayTitleCard(text);
+		
 	}
 
 }

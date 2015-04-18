@@ -16,7 +16,9 @@
 
 package com.github.a2g.core.interfaces;
 
+import com.github.a2g.core.interfaces.action.ISetStateOfPopup;
 import com.github.a2g.core.interfaces.game.ICreateChainRootAction;
+import com.github.a2g.core.interfaces.game.IDisplayTitleCard;
 import com.github.a2g.core.interfaces.game.IExecuteChainedAction;
 import com.github.a2g.core.interfaces.game.IGetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.IGetBaseMiddleY;
@@ -68,7 +70,10 @@ ICreateChainRootAction,
 IExecuteChainedAction
 // helper
 ,
+
 IShareWinning
+, ISetStateOfPopup
+, IDisplayTitleCard
 // object
 , IShow, IHide, IIncremementFrameWithWraparound,
 IUpdateObjectToCorrectImage, IGetCurrentFrame, ISetCurrentFrame,

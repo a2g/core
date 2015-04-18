@@ -32,12 +32,12 @@ public class LoaderPresenter implements IMasterPresenterFromLoaderMouse {
 	int total;
 	private String name;
 	private IMasterPresenterFromLoader master;
-	private boolean isIgnore;
+	private boolean isContinueAfterLoad;
 
 	public LoaderPresenter(final IHostingPanel panel, EventBus bus,
 			IMasterPresenterFromLoader master, IHostFromMasterPresenter parent,
 			IFactory factory) {
-		this.isIgnore = false;
+		this.isContinueAfterLoad = false;
 		this.loader = new Loader(master);
 		this.name = "";
 		this.view = factory.createLoaderPanel(this, ColorEnum.Purple,
@@ -94,7 +94,7 @@ public class LoaderPresenter implements IMasterPresenterFromLoaderMouse {
 	}
 
 	public void onLoadingComplete() {
-		if (isIgnore) {
+		if (isContinueAfterLoad) {
 			master.startScene();
 		} else {
 			view.enableClickToContinue();
@@ -107,7 +107,7 @@ public class LoaderPresenter implements IMasterPresenterFromLoaderMouse {
 	}
 
 	public void setContinueAfterLoad(boolean isIgnore) {
-		this.isIgnore = true;
+		this.isContinueAfterLoad = true;
 
 	}
 

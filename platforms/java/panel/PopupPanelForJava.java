@@ -33,16 +33,12 @@ public class PopupPanelForJava
 {
 	private JFrame popup;
 	private Label labelInPopup;
-	private int sceneWidth;
-	private int sceneHeight;
 	private IScenePresenterFromJavaPopupPanel toScene;
 
 	public PopupPanelForJava(IScenePresenterFromJavaPopupPanel toScene)
 	{
 		this.toScene = toScene;
 		// create popup
-		this.sceneWidth = toScene.getSceneGuiWidth();
-		this.sceneHeight = toScene.getSceneGuiHeight();
 		this.popup = new JFrame();
 		this.popup.setUndecorated(true);
 		//this.popup.setBackground(new Color(color.r, color.g, color.b));
@@ -57,13 +53,13 @@ public class PopupPanelForJava
 		popup.setVisible(isVisible);
 	}
 
-	public void setPopupPosition(double x, double y)
+	public void setPopupPosition(int x, int y)
 	{
 		//api.getlocationOnScreen
 		IScenePanelFromScenePresenter sv = toScene.getView();
 		ScenePanelForJava spj = (ScenePanelForJava)sv;
 		Point p = spj.getTopLeft();
-		popup.setLocation(p.getX()+(int)(x*sceneWidth), p.getY()+(int)(y*sceneHeight));
+		popup.setLocation(p.getX()+ x, p.getY()+y);
 	}
 	public void setText(String string)
 	{

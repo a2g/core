@@ -178,7 +178,9 @@ public abstract class Timer implements ActionListener
 		}
 		cancel();
 		isRepeating = true;
-		timerId = createInterval(this, periodMillis);
+		// this is unexpected, but it seems like you need to
+		// have a period of 2000 to get called back every second
+		timerId = createInterval(this, periodMillis*2);
 		//timers.put(timerId, this);
 	}
 

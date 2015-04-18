@@ -344,6 +344,7 @@ implements IScenePanelFromScenePresenter
 	@Override
 	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
 			String speech, Rect pixels, Point mouth, TalkAction sayAction) {
+		
 		this.speechPopup.setVisible(isVisible);
 		this.speechPopup.setColor(talkingColor);
 		this.speechPopup.setText(speech);

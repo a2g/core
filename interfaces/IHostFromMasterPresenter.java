@@ -40,5 +40,4 @@ public interface IHostFromMasterPresenter {
 
 	void log(String message);
 	
-	void quitUnconditionally();
 }

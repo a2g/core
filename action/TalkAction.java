@@ -63,11 +63,10 @@ public class TalkAction extends ChainedAction {
 	}
 
 	int getAdjustedNumberOfFrames(String speech, double approxDuration,
-			int animFramesCount, double duration) {
+			int animFramesCount, double durationOfSingleAnimation) {
 		// but if we need an animation, we find out how long it takes
 		// to play a single play of the animation to play whilst talking.
-		int durationOfSingleAnimation = (int) (duration * 1000.0);
-
+		
 		// ... then we find how many times the animation should repeat
 		// so that it fills up the totalDuration.
 		double numberOfTimesAnimRepeats = approxDuration

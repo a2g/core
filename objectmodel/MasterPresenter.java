@@ -338,9 +338,9 @@ PropertyChangeEventHandlerAPI
 		cancelOnEveryFrameTimer();
 		this.dialogActionRunner.cancel();
 
-		// now wait for last on every frame to execute
+		// now wait for the last onEveryFrame to execute
 		// .. which is about 40 milliseconds
-		// (an on every frame can go more than
+		// (an onEveryFrame can go more than
 		// this, but usually not).
 		switchTimer = getFactory().createSystemTimer(this);
 		switchDestination = scene;
@@ -370,6 +370,8 @@ PropertyChangeEventHandlerAPI
 	}
 
 	public void startCallingOnEveryFrame() {
+		if(timer!=null)
+			timer.cancel();
 		timer = getFactory().createSystemTimer(this);
 		timer.scheduleRepeating(40);
 	}

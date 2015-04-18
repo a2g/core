@@ -25,7 +25,10 @@ import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.border.Border;
 
 import com.github.a2g.core.interfaces.ILoaderPanelFromLoaderPresenter;
 import com.github.a2g.core.interfaces.IMasterPresenterFromLoaderMouse;
@@ -38,6 +41,7 @@ implements ILoaderPanelFromLoaderPresenter
 {
 	Label progress;
 	Button reload;
+	JProgressBar bar;
 	IMasterPresenterFromLoaderMouse api;
 	Button clickToContinue;
 	int width;
@@ -54,7 +58,6 @@ implements ILoaderPanelFromLoaderPresenter
 			{
 				progress = new Label();
 
-				progress.setText("Loading...");
 				this.add(progress);
 			}
 			{
@@ -66,6 +69,11 @@ implements ILoaderPanelFromLoaderPresenter
 				clickToContinue.setEnabled(false);
 				this.add(clickToContinue);
 			}
+			bar = new JProgressBar(0,35);
+			bar.setStringPainted(true);
+			Border border = BorderFactory.createTitledBorder("Loading...");
+		    bar.setBorder(border);
+			this.add(bar);
 			{
 				this.setLayout(new FlowLayout());
 			}
@@ -103,6 +111,10 @@ implements ILoaderPanelFromLoaderPresenter
 		reload.setEnabled(true);
 		clickToContinue.setEnabled(false);
 		progress.setText(" "+current+"/"+total+ " " + name);
+		double percent = 35.0*current/(double)total;
+		
+		bar.setValue((int)percent);
+		//bar.updateUI();
 	}
 
 	@Override
