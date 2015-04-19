@@ -51,10 +51,7 @@ extends JPanel implements IVerbsPanelFromVerbsPresenter
 		this.preferredHeight = 80;
 		this.setForeground(new Color(fore.r, fore.g, fore.b));
 		this.setBackground(new Color(back.r, back.g, back.b));
-		grid = new GridLayout();
-		grid.setVgap(0);
-		grid.setHgap(0);
-		this.setLayout(grid);
+		
 	}
 
 	@Override
@@ -66,6 +63,8 @@ extends JPanel implements IVerbsPanelFromVerbsPresenter
 	@Override
 	public void setVerbs(Verbs verbs)
 	{
+
+		assert(verbs.items().size()<15);
 		this.verbs = verbs;
 		update();
 	}
@@ -74,10 +73,15 @@ extends JPanel implements IVerbsPanelFromVerbsPresenter
 	public void update()
 	{
 		this.removeAll();
-		//this.add(new Label("Verbs"));
+		grid = new GridLayout();
+		grid.setVgap(0);
+		grid.setHgap(0);
+		this.setLayout(grid);
 
 		int numberOfRows = verbs.getNumberOfRows();
 		int numberOfColumns = verbs.getNumberOfColumns();
+		grid.setRows(1);
+		grid.setColumns(1);
 		grid.setRows(numberOfRows);
 		grid.setColumns(numberOfColumns);
 
@@ -111,8 +115,6 @@ extends JPanel implements IVerbsPanelFromVerbsPresenter
 	public void setWidth(int i) {
 		this.preferredWith = i;
 		this.preferredHeight = 80;
-		update();
-
 	}
 
 }

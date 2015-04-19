@@ -18,8 +18,10 @@ package com.github.a2g.core.platforms.java.panel;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+
 import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.IHostingPanel;
@@ -52,18 +54,30 @@ implements IMasterPanelFromMasterPresenter
 	CardLayout dialogTreeCardLayout;
 	JPanel panelForSceneStack;
 	JPanel panelForDialogTreeStack;
+	private HostingPanelForJava sizePlaceholderForCommandLineF;
+	private HostingPanelForJava sizePlaceholderForVerbsF;
+	private HostingPanelForJava sizePlaceholderForInventoryF;
 
 	public MasterPanelForJava(int width, int height, ColorEnum back) {
 		this.setBackground(new Color(back.r, back.g, back.b));
+		
+	
 		// create all the host panels, that we want to arrange.
-		hostForCommandLineF = new HostingPanelForJava(); hostForCommandLineF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-		hostForInventoryF = new HostingPanelForJava(); hostForInventoryF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-		hostForVerbsF = new HostingPanelForJava(); hostForVerbsF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-		hostForSceneF = new HostingPanelForJava(); hostForSceneF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-		hostForDialogTreeF = new HostingPanelForJava(); hostForDialogTreeF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-		hostForLoadingF = new HostingPanelForJava(); hostForLoadingF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-		hostForTitleCardF = new HostingPanelForJava(); hostForTitleCardF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+		hostForCommandLineF = new HostingPanelForJava(); 
+		hostForInventoryF = new HostingPanelForJava(); 
+		hostForVerbsF = new HostingPanelForJava(); 
+		hostForSceneF = new HostingPanelForJava(); 
+		hostForDialogTreeF = new HostingPanelForJava(); 
+		hostForLoadingF = new HostingPanelForJava(); 
+		hostForTitleCardF = new HostingPanelForJava(); 
 
+		
+		sizePlaceholderForCommandLineF =  new HostingPanelForJava(hostForCommandLineF);
+		sizePlaceholderForCommandLineF.setPreferredSize(new Dimension(320,20));
+		sizePlaceholderForVerbsF = new HostingPanelForJava(hostForVerbsF);
+		sizePlaceholderForInventoryF =  new HostingPanelForJava(hostForInventoryF);
+	
+		
 		sceneCardLayout =null;
 		hostForDialogTreeF.setBackground(new Color(back.r, back.g, back.b));
 
@@ -91,15 +105,15 @@ implements IMasterPanelFromMasterPresenter
 				JPanel verbsAndInventoryF = new JPanel();verbsAndInventoryF.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 				verbsAndInventoryF.setBackground(new Color(0,255,0));
 
-				commandLineAndVerbsAndInventoryF.add(hostForCommandLineF);
+				commandLineAndVerbsAndInventoryF.add(sizePlaceholderForCommandLineF);
 				commandLineAndVerbsAndInventoryF.add(verbsAndInventoryF);
 
 				{
 					// layout the verbs and inventory - from left to right
 					FlowLayout leftToRight = new FlowLayout(FlowLayout.LEFT,0,0);
 					verbsAndInventoryF.setLayout(leftToRight);
-					verbsAndInventoryF.add(hostForVerbsF, "hostForVerbs");
-					verbsAndInventoryF.add(hostForInventoryF, "hostForInventory");
+					verbsAndInventoryF.add(sizePlaceholderForVerbsF, "hostForVerbs");
+					verbsAndInventoryF.add(sizePlaceholderForInventoryF, "hostForInventory");
 				}
 			}
 		}

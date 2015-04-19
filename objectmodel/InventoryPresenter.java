@@ -182,17 +182,17 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 	}
 
 	public void setSizeOfSingleInventoryImage(int w, int h) {
-		int l = this.WIDTH_OF_LEFT_ARROW;
-		int r = this.WIDTH_OF_RIGHT_ARROW;
-		this.width = 2 * w + l + r;
+		int la = this.WIDTH_OF_LEFT_ARROW;
+		int ra = this.WIDTH_OF_RIGHT_ARROW;
+		this.width = 2 * w + la + ra;
 		this.height = 2 * h;
 		this.rectsForSlots.clear();
-		rectsForSlots.add(new Rect(l, 0, w, h));
-		rectsForSlots.add(new Rect(l, h, w, h));
-		rectsForSlots.add(new Rect(l + w, 0, w, h));
-		rectsForSlots.add(new Rect(l + w, h, w, h));
-		leftArrowRect = new Rect(0, 0, l, h * 2);
-		rightArrowRect = new Rect(l + 2 * w, 0, r, h * 2);
+		rectsForSlots.add(new Rect(la, 0, w, h));
+		rectsForSlots.add(new Rect(la, h, w, h));
+		rectsForSlots.add(new Rect(la + w, 0, w, h));
+		rectsForSlots.add(new Rect(la + w, h, w, h));
+		leftArrowRect = new Rect(0, 0, la, h * 2);
+		rightArrowRect = new Rect(la + 2 * w, 0, ra, h * 2);
 
 		view.setDimensionsOfPanel(width, height);
 	}

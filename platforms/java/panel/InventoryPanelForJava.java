@@ -269,6 +269,7 @@ implements ImagePanelAPI
 
 	@Override
 	public void setDimensionsOfPanel(int width, int height) {
-		
+		this.width = width;
+		this.height = height;
 	}
 }

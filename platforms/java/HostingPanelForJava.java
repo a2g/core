@@ -16,13 +16,32 @@
 
 package com.github.a2g.core.platforms.java;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.FlowLayout;
+
 import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.IHostingPanel;
 
 @SuppressWarnings("serial")
-public class HostingPanelForJava extends JPanel implements IHostingPanel {
+public class HostingPanelForJava extends JPanel implements IHostingPanel
+{
+	
+	public HostingPanelForJava(HostingPanelForJava another)
+	{
+		setTheOnlyLayoutNecessary();
+		this.add(another);
+	}
+	public HostingPanelForJava()
+	{
+		setTheOnlyLayoutNecessary();
+	}
+	private void setTheOnlyLayoutNecessary()
+	{
+		this.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+		this.setBackground(new Color(0,0,0));
+	}
 	@Override
 	public void setThing(Object w) {
 		this.add((Component) w);
