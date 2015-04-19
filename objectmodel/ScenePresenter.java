@@ -90,6 +90,8 @@ public class ScenePresenter implements IScenePresenter {
 
 	public void clear() {
 		view.clear();
+		theAtidMap.clear();
+		scene.objectCollection().clear();
 	}
 
 	public Scene getModel() {

@@ -117,9 +117,7 @@ PropertyChangeEventHandlerAPI
 
 		this.gatePoints = new ArrayList<PointF>();
 		this.gateIds = new ArrayList<Integer>();
-		this.theListOfIndexesToInsertAt = new Integer[100];
-		for (int i = 0; i < 100; i++)
-			theListOfIndexesToInsertAt[i] = new Integer(0);
+		clearListOfIntegersToInsertAt();
 
 		bus.addHandler(SaySpeechCallDialogTreeEvent.TYPE, this);
 
@@ -147,6 +145,13 @@ PropertyChangeEventHandlerAPI
 
 		this.masterPanel
 		.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
+	}
+
+	private void clearListOfIntegersToInsertAt() {
+		this.theListOfIndexesToInsertAt = new Integer[100];
+		for (int i = 0; i < 100; i++)
+			theListOfIndexesToInsertAt[i] = new Integer(0);
+		
 	}
 
 	public void setCallbacks(IGameScene callbacks) {
@@ -747,6 +752,8 @@ PropertyChangeEventHandlerAPI
 		// inventory images. So we clear the inventory too.
 		// actually this should probably go under "loseEverything"
 		this.inventoryPresenter.clear();
+		this.scenePresenter.clear();
+		this.clearListOfIntegersToInsertAt();
 	}
 
 	public void setActiveState(GuiStateEnum state) {
