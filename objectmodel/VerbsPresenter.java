@@ -57,7 +57,7 @@ IVerbsPresenter {
 		return view;
 	}
 
-	public void update() {
+	public void updateVerbs() {
 		view.setVerbs(theVerbs);
 		view.update();
 	}

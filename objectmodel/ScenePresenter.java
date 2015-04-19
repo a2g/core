@@ -200,8 +200,18 @@ public class ScenePresenter implements IScenePresenter {
 
 	@Override
 	public Rect getBoundingRectByFrameAndAtid(int frame, String atid) {
-		return this.getAnimationByAtid(atid).getFrames().getByIndex(frame)
-				.getBoundingRect();
+		Rect toReturn = new Rect(0,0,1,1);
+		Animation a = getAnimationByAtid(atid);
+		if(a!=null)
+		{
+			ImageCollection fc = a.getFrames();
+			Image i = fc.getByIndex(frame);
+			if(i!=null)
+				toReturn = i.getBoundingRect();
+			else 
+				assert(false);
+		}
+		return toReturn;
 	}
 
 	@Override
@@ -220,6 +230,8 @@ public class ScenePresenter implements IScenePresenter {
 	}
 
 	public String getOtidByCode(short ocode) {
+		if(getObjectByOCode(ocode)==null)
+			return "";
 		return getObjectByOCode(ocode).getOtid();
 	}
 

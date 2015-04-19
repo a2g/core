@@ -165,8 +165,15 @@ IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 
 	@Override
 	public String getOtidOfAtid(String atid) {
-		return master.getScenePresenter().getAnimationByAtid(atid).getObject()
-				.getOtid();
+		String toReturn="";
+		Animation a = master.getScenePresenter().getAnimationByAtid(atid);
+		if(a!=null)
+		{
+			SceneObject o = a.getObject();
+			if(o!=null)
+				toReturn = o.getOtid();
+		}
+		return toReturn;
 	}
 
 	@Override

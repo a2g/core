@@ -339,7 +339,7 @@ IOnMovementBeyondAGate {
 
 	@Override
 	public void updateVerbUI() {
-		master.getVerbsPresenter().update();
+		master.getVerbsPresenter().updateVerbs();
 
 	}
 

@@ -248,7 +248,7 @@ implements IScenePanelFromScenePresenter
 	{
 		//System.out.println( "----------------");
 		int count = toScene.getSceneObjectCount();
-		for(int i = 0;i<count;i++)
+		for(int i = count-1;i>=0;i--)
 		{
 			String otid = toScene.getOtidByIndex(i);
 			if(toScene.getVisibleByOtid(otid))
