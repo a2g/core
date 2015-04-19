@@ -16,11 +16,11 @@
 
 package com.github.a2g.core.platforms.java.panel;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
@@ -76,7 +76,7 @@ implements IMasterPanelFromMasterPresenter
 		sizePlaceholderForCommandLineF.setPreferredSize(new Dimension(320,20));
 		sizePlaceholderForVerbsF = new HostingPanelForJava(hostForVerbsF);
 		sizePlaceholderForInventoryF =  new HostingPanelForJava(hostForInventoryF);
-	
+		
 		
 		sceneCardLayout =null;
 		hostForDialogTreeF.setBackground(new Color(back.r, back.g, back.b));
@@ -119,7 +119,7 @@ implements IMasterPanelFromMasterPresenter
 		}
 
 		panelForSceneStack = new JPanel();panelForSceneStack.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-
+		panelForSceneStack.setPreferredSize(new Dimension(320,180));
 		{
 			sceneCardLayout = new CardLayout();
 			//sceneCardLayout.setHgap(0);
@@ -132,12 +132,12 @@ implements IMasterPanelFromMasterPresenter
 		}
 
 		// layout the scene at the top, and the rest at te bottom.
-		GridLayout topToBottom = new GridLayout(2,1);
+		BorderLayout topToBottom = new BorderLayout(2,1);
 		topToBottom.setHgap(0);
 		topToBottom.setVgap(0);
 		this.setLayout(topToBottom);
-		this.add(panelForSceneStack);
-		this.add(panelForDialogTreeStack);
+		this.add(panelForSceneStack, BorderLayout.NORTH);
+		this.add(panelForDialogTreeStack, BorderLayout.CENTER);
 
 
 		this.setVisible(true);

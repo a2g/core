@@ -174,7 +174,7 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 	public void clear() {
 		theInventoryItemMap.clear();
 		theInventory = new Inventory();
-
+		view.clear();
 	}
 
 	public IInventoryPanelFromInventoryPresenter getView() {

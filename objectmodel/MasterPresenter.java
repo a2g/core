@@ -67,7 +67,6 @@ IMasterPresenterFromCommandLine, IMasterPresenterFromActionRunner,
 IMasterPresenterFromInventory, IMasterPresenterFromVerbs,
 IMasterPresenterFromTitleCard, SaySpeechCallDialogTreeEventHandlerAPI,
 PropertyChangeEventHandlerAPI
-
 {
 
 	MasterProxyForGameScene proxyForGameScene;
@@ -743,6 +742,11 @@ PropertyChangeEventHandlerAPI
 
 	public void clearAllLoadedLoads() {
 		this.loaderPresenter.clearAllLoadedLoads();
+		// if we're clearing all loaded loads then
+		// we want to also get rid of currently loaded
+		// inventory images. So we clear the inventory too.
+		// actually this should probably go under "loseEverything"
+		this.inventoryPresenter.clear();
 	}
 
 	public void setActiveState(GuiStateEnum state) {

@@ -21,6 +21,7 @@ package com.github.a2g.core.platforms.java.panel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -180,7 +181,8 @@ implements ImagePanelAPI
 	@Override
 	public void paint(Graphics g)
 	{
-		g.clearRect(0, 0, width, height);
+		Rectangle r = g.getClipBounds();
+		g.clearRect(0, 0, r.width,r.height);
 		g.setColor(new Color(0,0,0));
 		g.fillRect(0, 0, width, height);
 		Iterator<Image> iter = listOfAllVisibleImages.iterator();

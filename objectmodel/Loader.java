@@ -18,7 +18,7 @@ public class Loader implements ILoaderPresenter {
 	private Set<String> setOfCompletedLoaders;
 	private Map<String, LoadedLoad> objectCache;
 	private IMasterPresenterFromLoader master;
-	private String inventoryResourceAsString;
+	private String nameOfInventoryResourceUsedLastTime;
 	private boolean isSameInventoryAsLastTime;
 	private int imagesToLoad;
 
@@ -28,14 +28,18 @@ public class Loader implements ILoaderPresenter {
 		this.setOfCompletedLoaders = new TreeSet<String>();
 		this.objectCache = new TreeMap<String, LoadedLoad>();
 		this.master = callbacks;
-	}
+		this.nameOfInventoryResourceUsedLastTime  ="";
+				}
 
 	@Override
 	public void onLoaderComplete(LoaderItem loader) {
 		String loaderName = loader.toString();
 		setOfCompletedLoaders.add(loaderName);
 		LoadedLoad cachedCollection = loader.getSceneObjectCollection();
+		
 		String combinedName = loader.getCombinedClassAndNumber();
+		assert(combinedName!=null);
+		assert(cachedCollection!=null);
 		objectCache.put(combinedName, cachedCollection);
 		master.mergeWithScene(cachedCollection);
 		// now we need to remove the loader from the list.
@@ -118,12 +122,13 @@ public class Loader implements ILoaderPresenter {
 
 			if (loader.isInventory()) {
 
-				if (loaderName.equalsIgnoreCase(this.inventoryResourceAsString)) {
+				if (loaderName.equalsIgnoreCase(this.nameOfInventoryResourceUsedLastTime)) {
 					iter.remove();
 					this.isSameInventoryAsLastTime = true;
 					continue;
 				} else {
-					this.inventoryResourceAsString = loaderName;
+					this.isSameInventoryAsLastTime = false;
+					this.nameOfInventoryResourceUsedLastTime = loaderName;
 				}
 			}
 
@@ -135,11 +140,26 @@ public class Loader implements ILoaderPresenter {
 
 	public void clearLoaders() {
 		listOfEssentialLoaders.clear();
+		// and since we've cleared the loaders, 
+		// can we have the same inventory as last time?
+		// A: yes
+		// so we can't set it to false here.
+		
 	}
 
 	public void clearAllLoadedLoads() {
 		objectCache.clear();
 		setOfCompletedLoaders.clear();
+		
+		// and since we've cleared the loaders, 
+		// can we have the same inventory as last time?
+		// A: yes
+		// but we should add a "lose all objects" command
+		//// if we wipe all memory of last loaded inventory resource bundle
+		// then we can't tell whether it should be same inv as last time.
+		nameOfInventoryResourceUsedLastTime = "";
+		// i don't think you need this line.
+		this.isSameInventoryAsLastTime = false;
 	}
 
 }
