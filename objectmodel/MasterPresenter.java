@@ -99,6 +99,7 @@ PropertyChangeEventHandlerAPI
 	private boolean isSayNonIncremementing;
 	private short boundaryCrossObject;
 	private MasterProxyForActions proxyForActions;
+	private boolean isAutoPlayMode;
 
 	public MasterPresenter(final IHostingPanel panel, EventBus bus,
 			IHostFromMasterPresenter host) {
@@ -108,6 +109,7 @@ PropertyChangeEventHandlerAPI
 		this.host = host;
 		this.proxyForGameScene = new MasterProxyForGameScene(this);
 		this.proxyForActions = new MasterProxyForActions(this);
+		this.isAutoPlayMode = true;
 
 		IFactory factory = host.getFactory(bus, this);
 		this.doCommandActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions,
@@ -692,9 +694,17 @@ PropertyChangeEventHandlerAPI
 		this.commandLinePresenter.setMouseable(true);
 		this.commandLinePresenter.clear();
 
-		if (masterPanel.getActiveState() == IMasterPanelFromMasterPresenter.GuiStateEnum.OnEnterScene) {
+		if (masterPanel.getActiveState() == IMasterPanelFromMasterPresenter.GuiStateEnum.OnEnterScene) 
+		{
 			this.masterPanel
 			.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene);
+			if(isAutoPlayMode)
+			{
+				BaseAction a = this.callbacks.onDoCommand(proxyForGameScene,
+						createChainRootAction(), IGameScene.CHEAT, null, null, 0,0);
+				this.commandLinePresenter.setMouseable(false);
+				executeActionWithDoCommandActionRunner(a);
+			}
 		}
 	}
 

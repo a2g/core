@@ -33,6 +33,7 @@ public class SceneObjectCollection {
 		theOCodes = new LinkedList<Short>();
 		list = new ArrayList<SceneObject>();
 	}
+	
 	public void clear()
 	{
 		theOtids.clear();
