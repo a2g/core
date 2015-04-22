@@ -252,7 +252,11 @@ public class ScenePresenter implements IScenePresenter {
 		{
 			talkingColor = this.talkingColorForScene;
 		}
-		Point mouth = a.getSceneObject().getMouthLocation();
+		Point mouth = new Point(0,0);
+		if(a.getSceneObject()!=null)
+		{
+			mouth = a.getSceneObject().getMouthLocation();
+		}
 		view.setStateOfPopup(isVisible, talkingColor, speech, pixels, mouth, sayAction);
 	}
 

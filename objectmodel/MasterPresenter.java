@@ -23,9 +23,9 @@ import java.util.logging.Logger;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.action.MakeSingleCallAction;
 import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointF;
@@ -234,7 +234,7 @@ PropertyChangeEventHandlerAPI
 
 	public void executeActionWithDialogActionRunner(BaseAction a) {
 		if (a == null) {
-			a = new DoNothingAction(createChainRootAction());
+			a = new MakeSingleCallAction(createChainRootAction());
 		}
 
 		dialogActionRunner.runAction(a);
@@ -242,7 +242,7 @@ PropertyChangeEventHandlerAPI
 
 	public void executeActionWithDoCommandActionRunner(BaseAction a) {
 		if (a == null) {
-			a = new DoNothingAction(createChainRootAction());
+			a = new MakeSingleCallAction(createChainRootAction());
 		}
 
 		doCommandActionRunner.runAction(a);
@@ -698,12 +698,23 @@ PropertyChangeEventHandlerAPI
 		{
 			this.masterPanel
 			.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene);
+		}
+
+		if (masterPanel.getActiveState() == IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene) 
+		{
 			if(isAutoPlayMode)
 			{
-				BaseAction a = this.callbacks.onDoCommand(proxyForGameScene,
-						createChainRootAction(), IGameScene.CHEAT, null, null, 0,0);
-				this.commandLinePresenter.setMouseable(false);
-				executeActionWithDoCommandActionRunner(a);
+				PrerecordedCommand next  = this.host.getNextAutoplayAction();
+				if(next!=null)
+				{
+					SentenceItem o1 = new SentenceItem("","",next.getObj1());
+					SentenceItem o2 = new SentenceItem("","",next.getObj2());
+					BaseAction a = this.callbacks.onDoCommand(proxyForGameScene,
+							createChainRootAction(), next.getVerb(),o1,o2,0,0);
+
+					this.commandLinePresenter.setMouseable(false);
+					executeActionWithDoCommandActionRunner(a);
+				}
 			}
 		}
 	}

@@ -141,14 +141,17 @@ IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 
 	@Override
 	public void setCurrentFrameByOtid(String otid, int frame) {
-		master.getScenePresenter().getObjectByOtid(otid).setCurrentFrame(frame);
-
+		if(master.getScenePresenter().getObjectByOtid(otid)!=null)
+		{
+			master.getScenePresenter().getObjectByOtid(otid).setCurrentFrame(frame);
+		}
 	}
 
 	@Override
 	public void setToInitialAnimationWithoutChangingFrameByOtid(String otid) {
-		master.getScenePresenter().getObjectByOtid(otid)
-		.setToInitialAnimationWithoutChangingFrame();
+		if(master.getScenePresenter().getObjectByOtid(otid)!=null)
+			master.getScenePresenter().getObjectByOtid(otid)
+			.setToInitialAnimationWithoutChangingFrame();
 
 	}
 
@@ -239,10 +242,7 @@ IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 		master.getScenePresenter().getObjectByOtid(otid).setY(i);
 	}
 
-	@Override
-	public void setValue(String name, int i) {
-		master.setValue(name, i);
-	}
+	//
 
 	@Override
 	public void shareWinning(String token) {
@@ -351,6 +351,11 @@ IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 	@Override
 	public boolean isSayNonIncrementing() {
 		return master.isSayNonIncrementing();
+	}
+
+	@Override
+	public void setSceneTalkerByAtid(String atid) {
+		master.getScenePresenter().setSceneTalkerAtid(atid);
 	}
 
 }

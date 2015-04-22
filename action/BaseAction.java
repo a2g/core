@@ -19,14 +19,7 @@ package com.github.a2g.core.action;
 import com.github.a2g.core.action.PlayAnimationAction;
 import com.github.a2g.core.action.PlayAnimationRepeatWhilstVisibleAction;
 import com.github.a2g.core.action.TalkAction;
-import com.github.a2g.core.action.SetCurrentAnimationAction;
-import com.github.a2g.core.action.SetActiveFrameAction;
-import com.github.a2g.core.action.SetBaseMiddleXAction;
-import com.github.a2g.core.action.SetBaseMiddleYAction;
-import com.github.a2g.core.action.SetDisplayNameAction;
-import com.github.a2g.core.action.SetInitialAnimationAction;
 import com.github.a2g.core.action.SetInventoryVisibleAction;
-import com.github.a2g.core.action.SetVisibleAction;
 import com.github.a2g.core.action.SleepAction;
 import com.github.a2g.core.action.SwapPropertyAction;
 import com.github.a2g.core.action.SwitchToAction;
@@ -104,7 +97,8 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	}
 
 	public ChainedAction doNothing() {
-		return new DoNothingAction(this);
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.DoNothing);
+		return a;
 	}
 
 	public BaseDialogTreeAction endDialogTree() {
@@ -276,21 +270,31 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 		return s;
 	}
 
-	public ChainedAction setCurrentAnimation(String animationCode) {
-		return new SetCurrentAnimationAction(this, animationCode);
+	public ChainedAction setCurrentAnimation(String atid) {
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetCurrentAnimation );
+		a.setAtid(atid);
+		return a;
 	}
 
 	public ChainedAction setActiveFrame(short ocode, int frame) {
-		return new SetActiveFrameAction(this, ocode, frame);
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetActiveFrame );
+		a.setOCode(ocode);
+		a.setInt(frame);
+		return a;
 	}
 
 	public ChainedAction setBaseMiddleX(short ocode, double x) {
-		return new SetBaseMiddleXAction(this, ocode, x);
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetBaseMiddleX);
+		a.setOCode(ocode);
+		a.setDouble(x);
+		return a;
 	}
 
 	public ChainedAction setBaseMiddleY(short ocode, double y) {
-		return new SetBaseMiddleYAction(this, ocode, y);
-		// return toReturn;
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetBaseMiddleX);
+		a.setOCode(ocode);
+		a.setDouble(y);
+		return a;
 	}
 
 	public void setCallbacks(IActionRunnerFromBaseAction callbacks) {
@@ -298,7 +302,10 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	}
 
 	public ChainedAction setDisplayName(short ocode, String displayName) {
-		return new SetDisplayNameAction(this, ocode, displayName, true);
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetDisplayName);
+		a.setOCode(ocode);
+		a.setString(displayName);
+		return a;
 	}
 
 	public ChainedAction setInventoryVisible(int inventoryId, boolean isVisible) {
@@ -310,7 +317,10 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	}
 
 	public ChainedAction setVisible(short ocode, boolean isVisible) {
-		return new SetVisibleAction(this, ocode, isVisible, true);
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetVisible);
+		a.setOCode(ocode);
+		a.setBoolean(isVisible);
+		return a;
 	}
 
 	public ChainedAction sleep(int milliseconds) {
@@ -349,8 +359,10 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 		return new WaitForFrameAction(this, ocode, frame);
 	}
 
-	public ChainedAction setInitialAnimation(String animationCode) {
-		return new SetInitialAnimationAction(this, animationCode, true);
+	public ChainedAction setInitialAnimation(String atid) {
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetAsInitialAnimation);
+		a.setAtid(atid);
+		return a;
 	}
 
 	public ChainedAction walkTo(double x, double y) {
@@ -495,7 +507,9 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	}
 
 	public ChainedAction setValue(String string, int i) {
-		SetValueAction a = new SetValueAction(this, string, i);
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetValue);
+		a.setString(string);
+		a.setInt(i);
 		return a;
 	}
 
@@ -585,37 +599,51 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	}
 
 	public ChainedAction hideAll() {
-		HideAllAction h = new HideAllAction(this);
-		return h;
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.HideAll);
+		return a;
 	}
 
-	public ChainedAction setToInitialPosition(short object) {
-		SetToInitialPositionAction h = new SetToInitialPositionAction(this,
-				object);
-		return h;
+	public ChainedAction setToInitialPosition(short ocode) {
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetToInitialPosition);
+		a.setOCode(ocode);
+		return a;
 	}
 
 	public ChainedAction alignBaseMiddleOfOldFrameToFrameOfNewAnimation(
-			String anim, int frame) {
-		AlignBaseMiddleAction h = new AlignBaseMiddleAction(this, anim, frame);
-		return h;
+			String atid, int frame) {
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.AlignBaseMiddle);
+		a.setAtid(atid);
+		a.setInt(frame);
+		return a;
 	}
 
 	public ChainedAction alignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation(
-			String anim) {
-		AlignBaseMiddleAction h = new AlignBaseMiddleAction(this, anim, 0);
-		return h;
+			String atid) {
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.AlignBaseMiddle);
+		a.setAtid(atid);
+		a.setInt(0);
+		return a;
 	}
 
 	public ChainedAction alignBaseMiddleOfOldFrameToLastFrameOfNewAnimation(
-			String anim) {
-		AlignBaseMiddleAction h = new AlignBaseMiddleAction(this, anim, -17);
-		return h;
+			String atid) {
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.AlignBaseMiddle);
+		a.setAtid(atid);
+		a.setInt(-17);
+		return a;
 	}
 
-	public ChainedAction share(String blah) {
-		ShareAction s = new ShareAction(this, blah);
-		return s;
+	public ChainedAction share(String string) {
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.ShareWinning);
+		a.setString(string);
+		return a;
+	}
+	
+
+	public BaseAction setSceneTalker(String atid) {
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetSceneTalker);
+		a.setAtid(atid);
+		return a;
 	}
 
 }
