@@ -35,6 +35,7 @@ import com.github.a2g.core.event.PropertyChangeEventHandlerAPI;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
+import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActionRunner;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
@@ -707,11 +708,15 @@ PropertyChangeEventHandlerAPI
 				PrerecordedCommand next  = this.host.getNextAutoplayAction();
 				if(next!=null)
 				{
-					SentenceItem o1 = new SentenceItem("","",next.getObj1());
-					SentenceItem o2 = new SentenceItem("","",next.getObj2());
-					BaseAction a = this.callbacks.onDoCommand(proxyForGameScene,
-							createChainRootAction(), next.getVerb(),o1,o2,0,0);
-
+					BaseAction a = createChainRootAction().sleep(1000);
+				
+					if(next.getVerb()!=ConstantsForAPI.SLEEP)
+					{
+						SentenceItem o1 = new SentenceItem("","",next.getObj1());
+						SentenceItem o2 = new SentenceItem("","",next.getObj2());
+						a = this.callbacks.onDoCommand(proxyForGameScene,
+								createChainRootAction(), next.getVerb(),o1,o2,0,0);
+					}
 					this.commandLinePresenter.setMouseable(false);
 					executeActionWithDoCommandActionRunner(a);
 				}

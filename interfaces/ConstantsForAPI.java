@@ -40,7 +40,7 @@ public interface ConstantsForAPI {
 	public static final int PULL = 9 * VERB_MULTIPLIER;
 	public static final int THROW = 10 * VERB_MULTIPLIER;
 	public static final int EAT = 11 * VERB_MULTIPLIER;
-	public static final int CHEAT = 12 * VERB_MULTIPLIER;
+	public static final int SLEEP = 12 * VERB_MULTIPLIER;
 
 	public static enum Special {
 		North, East, South, West
