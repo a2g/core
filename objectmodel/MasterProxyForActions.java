@@ -358,4 +358,11 @@ IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 		master.getScenePresenter().setSceneTalkerAtid(atid);
 	}
 
+	@Override
+	public void setCurrentAnimationAndFrame(String atid, int frame) {
+		String otid = getOtidOfAtid(atid);
+		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
+		object.setCurrentAnimationAndFrame(atid, frame);
+	}
+
 }

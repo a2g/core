@@ -20,7 +20,7 @@ public class Loader implements ILoaderPresenter {
 	private IMasterPresenterFromLoader master;
 	private String nameOfInventoryResourceUsedLastTime;
 	private boolean isSameInventoryAsLastTime;
-	private int imagesToLoad;
+	private int numberOfImagesToLoad;
 
 	public Loader(IMasterPresenterFromLoader callbacks) {
 		this.theCurrentLoader = null;
@@ -107,11 +107,11 @@ public class Loader implements ILoaderPresenter {
 	}
 
 	public int imagesToLoad() {
-		return imagesToLoad;
+		return numberOfImagesToLoad;
 	}
 
 	public void calculateImagesToLoadAndOmitInventoryIfSame() {
-		imagesToLoad = 0;
+		numberOfImagesToLoad = 0;
 		// get totals
 		Collections.sort(listOfEssentialLoaders);
 
@@ -133,7 +133,7 @@ public class Loader implements ILoaderPresenter {
 			}
 
 			if (!setOfCompletedLoaders.contains(loaderName)) {
-				imagesToLoad += loader.getNumberOfImages();
+				numberOfImagesToLoad += loader.getNumberOfImages();
 			}
 		}
 	}

@@ -8,6 +8,7 @@ import com.github.a2g.core.interfaces.action.ISetAsACurrentAnimationByAtid;
 import com.github.a2g.core.interfaces.action.ISetAsAnInitialAnimationByAtid;
 import com.github.a2g.core.interfaces.action.ISetBaseMiddleXByOtid;
 import com.github.a2g.core.interfaces.action.ISetBaseMiddleYByOtid;
+import com.github.a2g.core.interfaces.action.ISetCurrentAnimationAndFrame;
 import com.github.a2g.core.interfaces.action.ISetCurrentFrameByOtid;
 import com.github.a2g.core.interfaces.action.ISetDisplayNameByOtid;
 import com.github.a2g.core.interfaces.action.ISetSceneTalkerByAtid;
@@ -35,6 +36,8 @@ ISetBaseMiddleXByOtid
 , ISetValue
 , IShareWinning
 , ISetSceneTalkerByAtid
+, ISetCurrentAnimationAndFrame
 {
 
+	
 }

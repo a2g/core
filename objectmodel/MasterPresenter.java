@@ -553,7 +553,6 @@ PropertyChangeEventHandlerAPI
 
 	@Override
 	public void mergeWithScene(LoadedLoad s) {
-
 		String name = s.getName();
 		logger.fine(name);
 		System.out.println("dumping " + name);

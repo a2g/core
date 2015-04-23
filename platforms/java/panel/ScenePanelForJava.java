@@ -306,19 +306,7 @@ implements IScenePanelFromScenePresenter
 
 		ImageForJava imageAndPos = new ImageForJava(img, objectTextualId, this, new Point(x, y));
 
-		// to fire image loading done.
-		// only gwt is asynch, we are swing which synchronous
-		Timer timer = new Timer();
-		TimerTask task = new TimerTask()
-		{
-
-			@Override
-			public void run() {
-				lh.onLoad(null);
-			}
-
-		};
-		timer.schedule(task, 1);
+	
 
 
 		return imageAndPos;

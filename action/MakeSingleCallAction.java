@@ -42,13 +42,13 @@ public class MakeSingleCallAction extends ChainedAction {
 		, SetValue
 		, SetToInitialPosition
 		, SetSceneTalker
+		, SetCurrentAnimationAndFrame
 	}
 	private Type type;
 	private double d;
 	private boolean isTrue;
 	private String atid;
 	private short ocode;
-	private int frame;
 	private String stringValue;
 	private int intValue;
 	private IScenePresenterFromMakeSingleCallAction scene;
@@ -66,7 +66,6 @@ public class MakeSingleCallAction extends ChainedAction {
 	void setDouble(double d){ this.d =d ;}
 	void setOCode(short o){ this.ocode = o;}
 	void setAtid(String atid){ this.atid = atid;}
-	void setFrame(int frame){ this.frame = frame;}
 	void setString(String string){ this.stringValue = string;}
 	void setBoolean(boolean isTrue){ this.isTrue = isTrue;}
 	void setInt(int intValue){ this.intValue = intValue;}
@@ -94,11 +93,11 @@ public class MakeSingleCallAction extends ChainedAction {
 			scene.setBaseMiddleYByOtid(otid, this.d);
 			return;
 		case AlignBaseMiddle:
-			scene.alignBaseMiddleOfOldFrameToFrameOfThisAnimationByAtid(atid, frame);
+			scene.alignBaseMiddleOfOldFrameToFrameOfThisAnimationByAtid(atid, intValue);
 			return;
 		case SetActiveFrame:
 			otid = scene.getOtidByCode(ocode);
-			scene.setCurrentFrameByOtid(otid, this.frame);
+			scene.setCurrentFrameByOtid(otid, intValue);
 			return;
 		case  HideAll:
 			int count = scene.getSceneObjectCount();
@@ -125,6 +124,7 @@ public class MakeSingleCallAction extends ChainedAction {
 			return;
 		case SetValue:
 			scene.setValue(stringValue, intValue);
+			return;
 		case ShareWinning:
 			scene.shareWinning(stringValue);
 			return;
@@ -132,8 +132,13 @@ public class MakeSingleCallAction extends ChainedAction {
 			otid = scene.getOtidByCode(ocode);
 			scene.setXByOtid(otid, 0);
 			scene.setYByOtid(otid, 0);
+			return;
 		case SetSceneTalker:
 			scene.setSceneTalkerByAtid(atid);
+			return;
+		case SetCurrentAnimationAndFrame:
+			scene.setCurrentAnimationAndFrame(atid, intValue);
+			return;
 		}
 	}
 

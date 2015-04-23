@@ -58,23 +58,17 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	public void runLoader() {
 		numberOfImagesLeftToLoad = origNumberOfImagesLeftToLoad = bundle
 				.getNumberOfImagesInBundle(bundleNumber);
-		bundle.loadImageBundle(getLoadHandler(), api, bundleNumber, 1, 1);
+		bundle.loadImageBundle(getLoadHandler(), api, bundleNumber, 1, 0);
 	}
 
 	public void runLoaderAfterItsBeenLoaded() {
 		numberOfImagesLeftToLoad = origNumberOfImagesLeftToLoad = bundle
 				.getNumberOfImagesInBundle(bundleNumber);
 		bundle.loadImageBundle(getLoadHandler(), api, bundleNumber,
-				origNumberOfImagesLeftToLoad, 1);
+				origNumberOfImagesLeftToLoad, 0);
 	}
 
-	private void fireCompletedIfZeroImagesRemaining() {
-		if (numberOfImagesLeftToLoad == 0) {
-			// then call the object that ran the action
-			fireCompleted();
-		}
-
-	}
+	
 
 	public int getNumberOfImages() {
 		int numberOfImages = bundle.getNumberOfImagesInBundle(bundleNumber);
@@ -84,20 +78,20 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	@Override
 	public void onLoad(LoadEvent event) {
 		numberOfImagesLeftToLoad--;
-		fireProgress();
-		fireCompletedIfZeroImagesRemaining();
-	}
+		String name = this.theCurrentCacheObject.getName();
+		if (this.callbacks != null) 
+		{
+			this.callbacks.onImageLoaded();
 
-	public void fireCompleted() {
-		if (this.callbacks != null) {
-			this.callbacks.onLoaderComplete(this);
+			if (numberOfImagesLeftToLoad == 0) {
+				// then call the object that ran the action
+				this.callbacks.onLoaderComplete(this);
+			}
 		}
 	}
 
 	public void fireProgress() {
-		if (this.callbacks != null) {
-			this.callbacks.onImageLoaded();
-		}
+		
 	}
 
 	@Override

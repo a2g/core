@@ -126,6 +126,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 		// sure why.
 		// this only happens in gwt.
 		int count = this.parallelActionsToWaitFor.size();
+		System.out.println("ActionRunner::processing " + count + " parallel actions");
 		for (int i = 0; i < count; i++) {
 			BaseAction a = this.parallelActionsToWaitFor.get(i);
 

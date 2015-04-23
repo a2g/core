@@ -275,7 +275,12 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 		a.setAtid(atid);
 		return a;
 	}
-
+public ChainedAction setCurrentAnimationAndFrame(String atid, int frame) {
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetCurrentAnimationAndFrame );
+		a.setAtid(atid);
+		a.setInt(frame);
+		return a;
+	}
 	public ChainedAction setActiveFrame(short ocode, int frame) {
 		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetActiveFrame );
 		a.setOCode(ocode);

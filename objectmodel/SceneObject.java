@@ -97,9 +97,6 @@ public class SceneObject {
 			return;
 		}
 
-		// Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg(
-		// this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
-
 		int i = this.fak.getCurrentFrame() + 1;
 
 		if (i >= animLength) {
@@ -114,8 +111,6 @@ public class SceneObject {
 	public void decrementFrameWithWraparound() {
 		Animation anim = getAnimations().getByAtid(
 				this.fak.getCurrentAnimationAtid());
-		// Log::Images(QString("Progress to next frame of [%1] which is %2 / %3 %4").arg(this.fak.AnimName()).arg(this.fak.Frame()).arg(anim->GetFrames().Count()-1).arg(
-		// this.anims->At(this.fak.AnimName())->GetFrames().At(this.fak.Frame())));
 
 		int i = this.fak.getCurrentFrame() - 1;
 
@@ -379,8 +374,7 @@ public class SceneObject {
 			int frame) {
 		PointF h = getBaseMiddleXY();
 
-		this.fak.setCurrentAnimationAtid(atid);
-		this.fak.setCurrentFrame(frame);
+		setCurrentAnimationAndFrame(atid, frame);
 
 		this.updateToCorrectImage();
 
@@ -401,6 +395,13 @@ public class SceneObject {
 	public void setToInitialAnimationWithoutChangingFrame() {
 		// todo: should really check whether initial animation is null
 		this.setCurrentAnimation(this.getInitialAnimation());
+	}
+
+	public void setCurrentAnimationAndFrame(String atid, int frame) {
+		this.fak.setCurrentAnimationAtid(atid);
+		this.fak.setCurrentFrame(frame);
+
+		this.updateToCorrectImage();
 	}
 
 
