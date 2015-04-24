@@ -498,7 +498,8 @@ PropertyChangeEventHandlerAPI
 		int total = loaderPresenter.getLoaders().imagesToLoad();
 		boolean isSameInventory = loaderPresenter.getLoaders()
 				.isSameInventoryAsLastTime();
-
+		
+	
 		// hide all visible images.
 		// (using scene's data is quicker than using scenePanel data)
 		int count = scenePresenter.getModel().objectCollection().count();
@@ -539,6 +540,10 @@ PropertyChangeEventHandlerAPI
 
 		setCallbacks(scene);
 
+		// give the setContinueAfterLoad a default
+		this.loaderPresenter.setContinueAfterLoad(host.isAutoplay());
+
+		// then in the scene the user can overwrite this.
 		this.callbacks
 		.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene));
 	}

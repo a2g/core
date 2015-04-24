@@ -42,5 +42,7 @@ public interface IHostFromMasterPresenter {
 	void log(String message);
 
 	public PrerecordedCommand getNextAutoplayAction();
+
+	boolean isAutoplay();
 	
 }
