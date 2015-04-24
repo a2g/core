@@ -78,7 +78,7 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	@Override
 	public void onLoad(LoadEvent event) {
 		numberOfImagesLeftToLoad--;
-		String name = this.theCurrentCacheObject.getName();
+		//String name = this.theCurrentCacheObject.getName();
 		if (this.callbacks != null) 
 		{
 			this.callbacks.onImageLoaded();
