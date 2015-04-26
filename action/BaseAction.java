@@ -281,8 +281,8 @@ public ChainedAction setCurrentAnimationAndFrame(String atid, int frame) {
 		a.setInt(frame);
 		return a;
 	}
-	public ChainedAction setActiveFrame(short ocode, int frame) {
-		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetActiveFrame );
+	public ChainedAction setCurrentFrame(short ocode, int frame) {
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetCurrentFrame );
 		a.setOCode(ocode);
 		a.setInt(frame);
 		return a;

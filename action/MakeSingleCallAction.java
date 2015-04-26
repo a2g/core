@@ -31,7 +31,7 @@ public class MakeSingleCallAction extends ChainedAction {
 		SetBaseMiddleX
 		, SetBaseMiddleY
 		, AlignBaseMiddle
-		, SetActiveFrame
+		, SetCurrentFrame
 		, HideAll
 		, SetCurrentAnimation
 		, SetVisible
@@ -96,7 +96,7 @@ public class MakeSingleCallAction extends ChainedAction {
 		case AlignBaseMiddle:
 			scene.alignBaseMiddleOfOldFrameToFrameOfThisAnimationByAtid(atid, intValue);
 			return;
-		case SetActiveFrame:
+		case SetCurrentFrame:
 			otid = scene.getOtidByCode(ocode);
 			scene.setCurrentFrameByOtid(otid, intValue);
 			return;
