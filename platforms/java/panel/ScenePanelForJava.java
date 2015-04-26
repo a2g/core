@@ -27,23 +27,8 @@ import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.TreeMap;
-
 import javax.swing.JPanel;
-
-
-
-
-
-
-
-
-
-
-
-//import com.github.a2g.bridge.Image;
 import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.TalkAction;

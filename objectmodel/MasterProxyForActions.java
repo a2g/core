@@ -365,4 +365,10 @@ IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 		object.setCurrentAnimationAndFrame(atid, frame);
 	}
 
+	@Override
+	public void quit() {
+		master.quit();
+		
+	}
+
 }

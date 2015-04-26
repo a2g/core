@@ -4,6 +4,7 @@ import com.github.a2g.core.interfaces.action.IAlignBaseMiddleOfOldFrameToFrameOf
 import com.github.a2g.core.interfaces.action.IGetOtidByCode;
 import com.github.a2g.core.interfaces.action.IGetOtidByIndex;
 import com.github.a2g.core.interfaces.action.IGetSceneObjectCount;
+import com.github.a2g.core.interfaces.action.IQuit;
 import com.github.a2g.core.interfaces.action.ISetAsACurrentAnimationByAtid;
 import com.github.a2g.core.interfaces.action.ISetAsAnInitialAnimationByAtid;
 import com.github.a2g.core.interfaces.action.ISetBaseMiddleXByOtid;
@@ -37,6 +38,7 @@ ISetBaseMiddleXByOtid
 , IShareWinning
 , ISetSceneTalkerByAtid
 , ISetCurrentAnimationAndFrame
+, IQuit
 {
 
 	

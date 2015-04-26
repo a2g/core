@@ -645,9 +645,15 @@ public ChainedAction setCurrentAnimationAndFrame(String atid, int frame) {
 	}
 	
 
-	public BaseAction setSceneTalker(String atid) {
+	public ChainedAction setSceneTalker(String atid) {
 		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetSceneTalker);
 		a.setAtid(atid);
+		return a;
+	}
+	
+	public ChainedAction quit()
+	{
+		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.Quit);
 		return a;
 	}
 

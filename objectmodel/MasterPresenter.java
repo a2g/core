@@ -79,7 +79,7 @@ PropertyChangeEventHandlerAPI
 	private LoaderPresenter loaderPresenter;
 	private TitleCardPresenter titleCardPresenter;
 
-	private IGameScene callbacks;
+	private IGameScene sceneHandlers;
 
 	private EventBus bus;
 	private IHostFromMasterPresenter host;
@@ -158,11 +158,11 @@ PropertyChangeEventHandlerAPI
 	}
 
 	public void setCallbacks(IGameScene callbacks) {
-		if (this.callbacks != null) {
-			lastSceneAsString = this.callbacks.toString();
+		if (this.sceneHandlers != null) {
+			lastSceneAsString = this.sceneHandlers.toString();
 		}
 		this.loaderPresenter.setName(callbacks.toString());
-		this.callbacks = callbacks;
+		this.sceneHandlers = callbacks;
 	}
 
 	public MasterPresenter getHeaderPanel() {
@@ -172,7 +172,7 @@ PropertyChangeEventHandlerAPI
 	@Override
 	public boolean addImageForAnInventoryItem(LoadHandler lh, String itid,
 			int icode, IPackagedImage imageResource) {
-		if (this.callbacks == null) {
+		if (this.sceneHandlers == null) {
 			return true;
 		}
 		InventoryItem item = this.getInventoryPresenter().getInventory()
@@ -200,7 +200,7 @@ PropertyChangeEventHandlerAPI
 	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix,
 			int x, int y, int w, int h, String otid, String atid, short ocode,
 			String objPlusAnimCode, IPackagedImage imageResource) {
-		if (this.callbacks == null) {
+		if (this.sceneHandlers == null) {
 			return true;
 		}
 
@@ -280,14 +280,14 @@ PropertyChangeEventHandlerAPI
 	}
 
 	public void callOnPreEntry() {
-		this.callbacks.onPreEntry(proxyForGameScene);
+		this.sceneHandlers.onPreEntry(proxyForGameScene);
 	}
 
 	@Override
 	public void onTimer() {
 
 		if (timer != null) {
-			this.callbacks.onEveryFrame(proxyForGameScene);
+			this.sceneHandlers.onEveryFrame(proxyForGameScene);
 			// this.checkForBoundaryCross();
 		}
 		if (switchTimer != null) {
@@ -391,7 +391,7 @@ PropertyChangeEventHandlerAPI
 	}
 
 	public IGameScene getCurrentScene() {
-		return this.callbacks;
+		return this.sceneHandlers;
 	}
 
 	@Override
@@ -408,7 +408,7 @@ PropertyChangeEventHandlerAPI
 		}
 
 		// get the chain from the client
-		BaseDialogTreeAction actionChain = this.callbacks.onDialogTree(
+		BaseDialogTreeAction actionChain = this.sceneHandlers.onDialogTree(
 				proxyForGameScene, createChainRootAction(), branchId);
 
 		// execute it
@@ -431,13 +431,13 @@ PropertyChangeEventHandlerAPI
 
 		// String animId = getDialogTreeGui().setBranchVisited(branchId);
 		TalkAction talk = new TalkAction(createChainRootAction(), animId, speech);
-		BaseDialogTreeAction actionChain = callbacks.onDialogTree(
+		BaseDialogTreeAction actionChain = sceneHandlers.onDialogTree(
 				proxyForGameScene, talk, branchId);
 		executeActionWithDialogActionRunner(actionChain);
 	}
 
 	public void callOnEnterScene() {
-		BaseAction a = this.callbacks.onEntry(proxyForGameScene,
+		BaseAction a = this.sceneHandlers.onEntry(proxyForGameScene,
 				createChainRootAction());
 
 		// .. then executeBaseAction->actionRunner::runAction will add an
@@ -544,7 +544,7 @@ PropertyChangeEventHandlerAPI
 		this.loaderPresenter.setContinueAfterLoad(host.isAutoplay());
 
 		// then in the scene the user can overwrite this.
-		this.callbacks
+		this.sceneHandlers
 		.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene));
 	}
 
@@ -552,7 +552,7 @@ PropertyChangeEventHandlerAPI
 	public void restartReloading() {
 		loaderPresenter.getLoaders().clearLoaders();
 
-		this.callbacks
+		this.sceneHandlers
 		.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene));
 	}
 
@@ -679,7 +679,7 @@ PropertyChangeEventHandlerAPI
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,
 			SentenceItem sentenceA, SentenceItem sentenceB, double x, double y) {
 
-		BaseAction a = this.callbacks.onDoCommand(proxyForGameScene,
+		BaseAction a = this.sceneHandlers.onDoCommand(proxyForGameScene,
 				createChainRootAction(), verbAsCode, sentenceA, sentenceB, x
 				+ scenePresenter.getCameraX(),
 				y + scenePresenter.getCameraY());
@@ -712,13 +712,20 @@ PropertyChangeEventHandlerAPI
 				PrerecordedCommand next  = this.host.getNextAutoplayAction();
 				if(next!=null)
 				{
-					BaseAction a = createChainRootAction().sleep(1000);
+					
+					BaseAction a = null;
 				
-					if(next.getVerb()!=ConstantsForAPI.SLEEP)
+					if(next.getVerb()==ConstantsForAPI.SLEEP)
 					{
+						// SLEEP = sleep for 100ms
+						a = createChainRootAction().sleep(100);
+					}
+					else 
+					{
+						//otherwise ask the sceneHanders what the outcome is.
 						SentenceItem o1 = new SentenceItem("","",next.getObj1());
 						SentenceItem o2 = new SentenceItem("","",next.getObj2());
-						a = this.callbacks.onDoCommand(proxyForGameScene,
+						a = this.sceneHandlers.onDoCommand(proxyForGameScene,
 								createChainRootAction(), next.getVerb(),o1,o2,0,0);
 					}
 					this.commandLinePresenter.setMouseable(false);
@@ -938,7 +945,7 @@ PropertyChangeEventHandlerAPI
 			}
 		}
 		if (foundId != -1) {
-			this.callbacks.onMovementBeyondAGate(proxyForGameScene, foundId);
+			this.sceneHandlers.onMovementBeyondAGate(proxyForGameScene, foundId);
 		}
 	}
 
@@ -1002,6 +1009,11 @@ PropertyChangeEventHandlerAPI
 	@Override
 	public boolean isSayNonIncrementing() {
 		return this.isSayNonIncremementing;
+	}
+
+	public void quit() {
+		host.quit();
+		
 	}
 
 }

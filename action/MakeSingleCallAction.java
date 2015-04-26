@@ -43,6 +43,7 @@ public class MakeSingleCallAction extends ChainedAction {
 		, SetToInitialPosition
 		, SetSceneTalker
 		, SetCurrentAnimationAndFrame
+		, Quit
 	}
 	private Type type;
 	private double d;
@@ -139,6 +140,8 @@ public class MakeSingleCallAction extends ChainedAction {
 		case SetCurrentAnimationAndFrame:
 			scene.setCurrentAnimationAndFrame(atid, intValue);
 			return;
+		case Quit:
+			scene.quit();
 		}
 	}
 
