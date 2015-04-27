@@ -16,8 +16,12 @@
 
 package com.github.a2g.core.interfaces;
 
+
 public interface ICommandLinePanelFromCommandLinePresenter {
 	void setText(String string);
 
 	void setVisible(boolean isVisible);
+
+
+
 }

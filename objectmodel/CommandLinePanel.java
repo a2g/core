@@ -40,4 +40,6 @@ ICommandLinePanelFromCommandLinePresenter {
 		super.setText(string);
 	}
 
+	
+
 }

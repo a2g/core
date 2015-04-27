@@ -35,7 +35,7 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 	private Inventory theInventory;
 	private IInventoryPanelFromInventoryPresenter view;
 	EventBus eventBus;
-	private TreeMap<Integer, InventoryItem> theInventoryItemMap;
+	private TreeMap<Integer, InventoryItem> mapOfInventoryByICode;
 	IMasterPresenterFromInventory callback;
 	private int width;
 	private int height;
@@ -61,7 +61,7 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 				ColorEnum.Purple, ColorEnum.Black, ColorEnum.Fuchsia);
 
 		panel.setThing(view);
-		this.theInventoryItemMap = new TreeMap<Integer, InventoryItem>();
+		this.mapOfInventoryByICode = new TreeMap<Integer, InventoryItem>();
 		// give it a default size - helps out the unit tests
 		final int DEFAULT_INVENTORY_IMAGE_SIZE = 20;
 		setSizeOfSingleInventoryImage(DEFAULT_INVENTORY_IMAGE_SIZE,
@@ -80,14 +80,14 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 						image, objectCode, isCarrying);
 
 				item.setVisible(initiallyVisible);
-				this.theInventoryItemMap.put(objectCode, item);
+				this.mapOfInventoryByICode.put(objectCode, item);
 				this.theInventory.items().add(item);
 				this.updateInventory();
 				return true;
 	}
 
-	public InventoryItem getInventoryItem(int i) {
-		InventoryItem inv = this.theInventoryItemMap.get(i);
+	public InventoryItem getInventoryItemByICode(int i) {
+		InventoryItem inv = this.mapOfInventoryByICode.get(i);
 
 		return inv;
 	}
@@ -172,7 +172,7 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 
 
 	public void clear() {
-		theInventoryItemMap.clear();
+		mapOfInventoryByICode.clear();
 		theInventory = new Inventory();
 		view.clear();
 	}

@@ -675,6 +675,30 @@ PropertyChangeEventHandlerAPI
 		return host.getFactory(bus, this);
 	}
 
+	SentenceItem getFullItem(int code)
+	{
+		if(SentenceItem.isInventory(code))
+		{
+			InventoryItem i = this.getInventoryPresenter().getInventoryItemByICode(code);
+			return new SentenceItem(i.getDisplayName(),i.getItid(),code);
+		}
+		String otid = this.getScenePresenter().getOtidByCode((short)code);
+		SceneObject o = this.getScenePresenter().getObjectByOtid(otid);
+		if(o==null)
+			return new SentenceItem();
+		
+		return new SentenceItem(o.getDisplayName(),o.getOtid(),code);
+	}
+	
+	SentenceItem getVerb(int vcode)
+	{
+		Verb v = this.verbsPresenter.getVerbsModel().items().getVerbByCode(vcode);
+		if(v==null)
+			return new SentenceItem();
+		
+		return new SentenceItem(v.getdisplayText(), v.getVtid(), vcode);
+	}
+	
 	@Override
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,
 			SentenceItem sentenceA, SentenceItem sentenceB, double x, double y) {
@@ -691,6 +715,34 @@ PropertyChangeEventHandlerAPI
 		host.setLastCommand(x, y, verbAsVerbEnumeration,
 				sentenceA.getTextualId(), sentenceB.getTextualId());
 
+	}
+ 
+	void ProcessAutoPlayCommand()
+	{
+		PrerecordedCommand cmd  = this.host.getNextAutoplayAction();
+		if(cmd!=null)
+		{
+			
+			BaseAction a = null;
+		
+			if(cmd.getVerb()==ConstantsForAPI.SLEEP)
+			{
+				// SLEEP = sleep for 100ms
+				a = createChainRootAction().sleep(100);
+			}
+			else 
+			{
+				this.commandLinePresenter.setVerbItemItem(getVerb(cmd.getVerb()), getFullItem(cmd.getObj1()), getFullItem(cmd.getObj2()));
+				
+				//otherwise ask the sceneHanders what the outcome is.
+				SentenceItem o1 = new SentenceItem("","",cmd.getObj1());
+				SentenceItem o2 = new SentenceItem("","",cmd.getObj2());
+				a = this.sceneHandlers.onDoCommand(proxyForGameScene,
+						createChainRootAction(), cmd.getVerb(),o1,o2,0,0);
+			}
+			this.commandLinePresenter.setMouseable(false);
+			executeActionWithDoCommandActionRunner(a);
+		}
 	}
 
 	@Override
@@ -709,28 +761,7 @@ PropertyChangeEventHandlerAPI
 		{
 			if(isAutoPlayMode)
 			{
-				PrerecordedCommand next  = this.host.getNextAutoplayAction();
-				if(next!=null)
-				{
-					
-					BaseAction a = null;
-				
-					if(next.getVerb()==ConstantsForAPI.SLEEP)
-					{
-						// SLEEP = sleep for 100ms
-						a = createChainRootAction().sleep(100);
-					}
-					else 
-					{
-						//otherwise ask the sceneHanders what the outcome is.
-						SentenceItem o1 = new SentenceItem("","",next.getObj1());
-						SentenceItem o2 = new SentenceItem("","",next.getObj2());
-						a = this.sceneHandlers.onDoCommand(proxyForGameScene,
-								createChainRootAction(), next.getVerb(),o1,o2,0,0);
-					}
-					this.commandLinePresenter.setMouseable(false);
-					executeActionWithDoCommandActionRunner(a);
-				}
+				ProcessAutoPlayCommand();
 			}
 		}
 	}

@@ -55,7 +55,7 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 
 	public void setMouseable(boolean mouseable) {
 		model.setMouseable(mouseable);
-		updateImage();
+		update();
 	}
 
 	@Override
@@ -70,7 +70,7 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 	public void setCommandLineMouseOver(String displayName, String otid,
 			int code) {
 		model.setMouseOver(displayName, otid, code);
-		updateImage();
+		update();
 	}
 
 	@Override
@@ -92,12 +92,12 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 
 	public void clear() {
 		model.clear();
-		updateImage();
+		update();
 	}
 
 	private void doNextBestThingToExecute() {
 		model.doNextBestThingToExecute();
-		updateImage();
+		update();
 	}
 
 	private boolean isOkToExecute() {
@@ -106,7 +106,7 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 		return isOkToExecute;
 	}
 
-	private void updateImage() {
+	private void update() {
 
 		// get sentence gets the sentence template filled out
 		// as much as it can.
@@ -164,6 +164,12 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 	public String getDisplayName() {
 		String displayName = model.getSentence().getDisplayName();
 		return displayName;
+	}
+
+	public void setVerbItemItem(SentenceItem verb, SentenceItem fullItem,
+			SentenceItem fullItem2) {
+		model.setVerbItemItem(verb,fullItem,fullItem2);
+		update();
 	}
 
 }

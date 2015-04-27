@@ -16,5 +16,5 @@
 package com.github.a2g.core.primitive;
 
 public interface STARTING_ODD_OBJECTS_CODE {
-	static int STARTING_ODD_OBJECTS_CODE = 1787;
+	static int STARTING_ODD_OBJECTS_CODE = 1887;
 }

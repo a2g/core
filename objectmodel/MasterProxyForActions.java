@@ -32,7 +32,7 @@ IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 
 	@Override
 	public String getItidByCode(int icode) {
-		return master.getInventoryPresenter().getInventoryItem(icode).getItid();
+		return master.getInventoryPresenter().getInventoryItemByICode(icode).getItid();
 	}
 
 	@Override

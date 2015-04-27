@@ -48,6 +48,14 @@ public class VerbCollection {
 	public Verb getByIndex(int i) {
 		return verbs.get(i);
 	}
+	public Verb getVerbByCode(int verbCode) {
+		for (int i = 0; i < verbs.size(); i++) {
+			if (verbs.get(i).getVCode() == verbCode) {
+				return verbs.get(i);
+			}
+		}
+		return null;
+	}
 
 	public void removeByCode(int verbCode) {
 		for (int i = 0; i < verbs.size(); i++) {

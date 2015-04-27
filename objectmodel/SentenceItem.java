@@ -83,7 +83,7 @@ public class SentenceItem {
 		return false;
 	}
 
-	public boolean isInventory() {
+	static public boolean isInventory(int code) {
 		final int FIRST_INV = STARTING_ODD_INVENTORY_CODE.STARTING_ODD_INVENTORY_CODE;
 		final int FIRST_OBJ = STARTING_ODD_OBJECTS_CODE.STARTING_ODD_OBJECTS_CODE;
 
@@ -94,6 +94,10 @@ public class SentenceItem {
 	public boolean isEmpty() {
 		boolean isEmpty = code == 1;
 		return isEmpty;
+	}
+
+	public boolean isInventory() {
+		return isInventory(this.getCode());
 	}
 
 }

@@ -217,26 +217,26 @@ IOnMovementBeyondAGate {
 	// /@{
 	@Override
 	public boolean isInventoryItemVisible(int icode) {
-		return master.getInventoryPresenter().getInventoryItem(icode)
+		return master.getInventoryPresenter().getInventoryItemByICode(icode)
 				.isVisible();
 	}
 
 	@Override
 	public void showInventoryItem(int icode) {
-		master.getInventoryPresenter().getInventoryItem(icode).setVisible(true);
+		master.getInventoryPresenter().getInventoryItemByICode(icode).setVisible(true);
 
 	}
 
 	@Override
 	public void hideInventoryItem(int icode) {
-		master.getInventoryPresenter().getInventoryItem(icode)
+		master.getInventoryPresenter().getInventoryItemByICode(icode)
 		.setVisible(false);
 
 	}
 
 	@Override
 	public void setInventoryItemDisplayName(int icode, String displayName) {
-		master.getInventoryPresenter().getInventoryItem(icode)
+		master.getInventoryPresenter().getInventoryItemByICode(icode)
 		.setDisplayName(displayName);
 
 	}

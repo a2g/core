@@ -24,12 +24,10 @@ public class CommandLine {
 	private SentenceItem defaultVerb;
 	private SentenceItem lockedInVerb;
 	private SentenceItem lockedInObject;
-	// private SentenceItem lockedInObject2;
 	private SentenceItem rolledOverItem;
 	private String typeOfRollover;
 
-	private boolean isMouseable; // whether rolling over the verbs will update
-	// the commandline
+	private boolean isMouseable; // whether rolling over the verbs will update the command line
 	private boolean isVisible;
 
 	public CommandLine(IMasterPresenterFromCommandLine api) {
@@ -37,7 +35,6 @@ public class CommandLine {
 				CodesForVerbs.getCodeForVerb(0));
 		this.lockedInVerb = defaultVerb;
 		this.lockedInObject = new SentenceItem();
-		// this.lockedInObject2 = new SentenceItem();
 		this.rolledOverItem = new SentenceItem();
 		this.typeOfRollover = "";
 		this.isMouseable = true;
@@ -63,12 +60,8 @@ public class CommandLine {
 		boolean isLockedInVerb = this.lockedInVerb.getLength() > 0;
 		boolean isLockedInVerbATwoForm = this.lockedInVerb.getDisplayName()
 				.contains("BBB");
-		// boolean isDefaultVerbATwoForm =
-		// this.defaultVerb.getDisplayName().contains("BBB");
 		boolean isObjectALockedIn = !this.lockedInObject.getDisplayName()
 				.isEmpty();
-		// boolean isObjectBLockedIn =
-		// !this.lockedInObject2.getDisplayName().isEmpty();
 
 		if (isRolledOverAVerb) {
 			text.setVerb(rolledOverItem, false);
@@ -158,4 +151,19 @@ public class CommandLine {
 	public void setMouseable(boolean mouseable) {
 		this.isMouseable = mouseable;
 	}
+
+	public void setVerbItemItem(SentenceItem verb, SentenceItem fullItem,
+			SentenceItem fullItem2) {
+		lockedInVerb = verb;
+		lockedInObject = fullItem;
+		if(fullItem2.getCode()==1)
+		{
+			rolledOverItem = fullItem;
+		}else
+		{ 
+			rolledOverItem = fullItem2;
+		}
+	}
+
 }
+
