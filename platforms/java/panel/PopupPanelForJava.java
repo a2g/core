@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
@@ -32,7 +33,7 @@ import com.github.a2g.core.primitive.Point;
 public class PopupPanelForJava
 {
 	private JFrame popup;
-	private Label labelInPopup;
+	private JLabel labelInPopup;
 	private IScenePresenterFromJavaPopupPanel toScene;
 
 	public PopupPanelForJava(IScenePresenterFromJavaPopupPanel toScene)
@@ -43,7 +44,8 @@ public class PopupPanelForJava
 		this.popup.setUndecorated(true);
 		//this.popup.setBackground(new Color(color.r, color.g, color.b));
 		// create label and add to
-		this.labelInPopup = new Label("");
+		this.labelInPopup = new JLabel("");
+		labelInPopup.setHorizontalAlignment(JLabel.CENTER);
 
 		popup.add(labelInPopup);
 	}
