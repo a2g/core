@@ -17,7 +17,6 @@
 package com.github.a2g.core.platforms.java.panel;
 import java.awt.Color;
 import java.awt.FontMetrics;
-import java.awt.Label;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 

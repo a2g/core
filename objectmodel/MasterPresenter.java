@@ -724,8 +724,11 @@ PropertyChangeEventHandlerAPI
 		{
 			
 			BaseAction a = null;
-		
-			if(cmd.getVerb()==ConstantsForAPI.SLEEP)
+			if(cmd.getVerb()==ConstantsForAPI.SWITCH)
+			{
+				a = createChainRootAction().switchTo(cmd.getString());
+			}
+			else if(cmd.getVerb()==ConstantsForAPI.SLEEP)
 			{
 				// SLEEP = sleep for 100ms
 				a = createChainRootAction().sleep(100);
