@@ -77,9 +77,5 @@ IDialogTreePanelFromDialogTreePresenter {
 		}
 	}
 
-	@Override
-	public void setScenePixelSize(int width, int height) {
-
-	}
 
 }

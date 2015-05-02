@@ -33,7 +33,7 @@ public interface IInventoryPanelFromInventoryPresenter {
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int i, int j);
 
-	void setScenePixelSize(int width, int height);
+	//void setScenePixelSize(int width, int height);
 
 	void setDimensionsOfPanel(int width, int height);
 

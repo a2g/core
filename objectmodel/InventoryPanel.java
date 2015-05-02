@@ -179,11 +179,6 @@ ImagePanelAPI
 	}
 
 	@Override
-	public void setScenePixelSize(int width, int height) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	public void setDimensionsOfPanel(int width, int height) {
 		this.setPixelSize(width, height);
 	}

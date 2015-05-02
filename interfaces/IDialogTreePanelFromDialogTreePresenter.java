@@ -24,5 +24,4 @@ public interface IDialogTreePanelFromDialogTreePresenter {
 
 	void update(DialogTree theDialogTree, EventBus bus);
 
-	void setScenePixelSize(int width, int height);
 }

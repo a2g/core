@@ -250,14 +250,6 @@ implements ImagePanelAPI
 	}
 
 	@Override
-	public void setScenePixelSize(int width, int height)
-	{
-		this.width = width;
-		this.height = height;
-		super.setSize(width, height);
-	}
-
-	@Override
 	public void setLeftArrowVisible(boolean visible) {
 		imgLeft.setVisible(visible, new Point(0,0));
 		triggerPaint();

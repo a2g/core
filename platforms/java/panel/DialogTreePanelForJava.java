@@ -47,6 +47,8 @@ implements IDialogTreePanelFromDialogTreePresenter
 		this.setLayout(grid);
 		grid.setRows(10);
 		grid.setColumns(1);
+		this.width = 320;
+		this.height = 180;
 
 		this.fore = fore;
 		this.back = back;
@@ -67,19 +69,12 @@ implements IDialogTreePanelFromDialogTreePresenter
 		return new Dimension(width,height);
 	}
 
-	@Override
-	public void setScenePixelSize(int width,int height)
-	{
-		this.width = width;
-		this.height = height;
-		super.setSize(width, height);
-	}
+	
 
 	@Override
 	public void update(DialogTree dialogTree, final EventBus bus) {
 		// destroy old
 		this.removeAll();
-
 		int numberOfSubbranches = dialogTree.getSubBranchIds().size();
 		for (int i = 0; i < numberOfSubbranches; i++)
 		{
