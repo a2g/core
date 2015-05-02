@@ -2,30 +2,30 @@ package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 
-public class PrerecordedCommand {
+public class AutoplayCommand {
 
 	 int verb;
 	 int obj1;
 	 int obj2;
 	 String str;
 	 
-	public PrerecordedCommand(int verb, int obj1, int obj2)
+	public AutoplayCommand(int verb, int obj1, int obj2)
 	{
 		this.verb = verb;
 		this.obj1 = obj1;
 		this.obj2 = obj2;
 	}
-	public PrerecordedCommand(int verb, int obj1) {
+	public AutoplayCommand(int verb, int obj1) {
 		this.verb = verb;
 		this.obj1 = obj1;
 		this.obj2 = 1;
 	}
-	public PrerecordedCommand(int verb) {
+	public AutoplayCommand(int verb) {
 		this.verb = verb;
 		this.obj1 = 1;
 		this.obj2 = 1;
 	}
-	public PrerecordedCommand(String level)
+	public AutoplayCommand(String level)
 	{
 		this.verb = ConstantsForAPI.SWITCH;
 		this.str = level;

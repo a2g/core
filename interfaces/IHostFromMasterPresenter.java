@@ -17,7 +17,7 @@
 package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.objectmodel.MasterPresenter;
-import com.github.a2g.core.objectmodel.PrerecordedCommand;
+import com.github.a2g.core.objectmodel.AutoplayCommand;
 import com.google.gwt.event.shared.EventBus;
 
 public interface IHostFromMasterPresenter {
@@ -41,7 +41,7 @@ public interface IHostFromMasterPresenter {
 
 	void log(String message);
 
-	public PrerecordedCommand getNextAutoplayAction();
+	public AutoplayCommand getNextAutoplayAction();
 
 	boolean isAutoplay();
 

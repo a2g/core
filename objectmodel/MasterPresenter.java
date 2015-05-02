@@ -719,9 +719,9 @@ PropertyChangeEventHandlerAPI
 
 	}
  
-	void ProcessAutoPlayCommand()
+	void ProcessAutoplayCommand()
 	{
-		PrerecordedCommand cmd  = this.host.getNextAutoplayAction();
+		AutoplayCommand cmd  = this.host.getNextAutoplayAction();
 		if(cmd!=null)
 		{
 			
@@ -766,7 +766,7 @@ PropertyChangeEventHandlerAPI
 		{
 			if(this.host.isAutoplay())
 			{
-				ProcessAutoPlayCommand();
+				ProcessAutoplayCommand();
 			}
 		}
 	}
