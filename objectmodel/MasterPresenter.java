@@ -100,7 +100,6 @@ PropertyChangeEventHandlerAPI
 	private boolean isSayNonIncremementing;
 	private short boundaryCrossObject;
 	private MasterProxyForActions proxyForActions;
-	private boolean isAutoPlayMode;
 
 	public MasterPresenter(final IHostingPanel panel, EventBus bus,
 			IHostFromMasterPresenter host) {
@@ -110,7 +109,6 @@ PropertyChangeEventHandlerAPI
 		this.host = host;
 		this.proxyForGameScene = new MasterProxyForGameScene(this);
 		this.proxyForActions = new MasterProxyForActions(this);
-		this.isAutoPlayMode = true;
 
 		IFactory factory = host.getFactory(bus, this);
 		this.doCommandActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions,
@@ -356,14 +354,18 @@ PropertyChangeEventHandlerAPI
 
 	@Override
 	public void switchToScene(String scene) {
-		// since instantiateScene..ToIt does some asynchronous stuff,
-		// I thought maybe I could do it, then cancel the timers.
-		// but I've put it off til I need the microseconds.
-		cancelOnEveryFrameTimer();
-		this.dialogActionRunner.cancel();
-		setCameraToZero();// no scene is meant to keep camera position
-		this.host
-		.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
+		String thisScene = this.sceneHandlers.toString().toUpperCase();
+		if(!thisScene.contains(scene))
+		{
+			// since instantiateScene..ToIt does some asynchronous stuff,
+			// I thought maybe I could do it, then cancel the timers.
+			// but I've put it off til I need the microseconds.
+			cancelOnEveryFrameTimer();
+			this.dialogActionRunner.cancel();
+			setCameraToZero();// no scene is meant to keep camera position
+			this.host
+			.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
+		}
 	}
 
 	public String getLastScene() {
@@ -724,14 +726,14 @@ PropertyChangeEventHandlerAPI
 		{
 			
 			BaseAction a = null;
-			if(cmd.getVerb()==ConstantsForAPI.SWITCH)
-			{
-				a = createChainRootAction().switchTo(cmd.getString());
-			}
-			else if(cmd.getVerb()==ConstantsForAPI.SLEEP)
+			if(cmd.getVerb()==ConstantsForAPI.SLEEP)
 			{
 				// SLEEP = sleep for 100ms
-				a = createChainRootAction().sleep(100);
+				a = createChainRootAction().sleep(cmd.getObj1());
+			}
+			else if(cmd.getVerb()==ConstantsForAPI.SWITCH)
+			{
+				a = createChainRootAction().switchTo(cmd.getString());
 			}
 			else 
 			{
@@ -762,7 +764,7 @@ PropertyChangeEventHandlerAPI
 
 		if (masterPanel.getActiveState() == IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene) 
 		{
-			if(isAutoPlayMode)
+			if(this.host.isAutoplay())
 			{
 				ProcessAutoPlayCommand();
 			}

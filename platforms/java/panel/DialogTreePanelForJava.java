@@ -80,7 +80,8 @@ implements IDialogTreePanelFromDialogTreePresenter
 		// destroy old
 		this.removeAll();
 
-		for (int i = 0; i < dialogTree.getSubBranchIds().size(); i++)
+		int numberOfSubbranches = dialogTree.getSubBranchIds().size();
+		for (int i = 0; i < numberOfSubbranches; i++)
 		{
 			int subBranchId = dialogTree.getSubBranchIds().get(i).intValue();
 			String lineOfDialog = dialogTree.getLinesOfDialog().get(i);
