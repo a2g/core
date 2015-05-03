@@ -54,13 +54,6 @@ extends JPanel implements ITitleCardPanelFromTitleCardPresenter
 
 	}
 
-	/*
-	@Override
-	public void setColor(ColorEnum colorEnum)
-	{
-		Color color = new java.awt.Color(255,1,1);
-		panel.setForeground(color);
-	}*/
 
 	@Override
 	public void setScenePixelSize(int width, int height)

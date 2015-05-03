@@ -8,6 +8,7 @@ public class AutoplayCommand {
 	 int obj1;
 	 int obj2;
 	 String str;
+	private int branch;
 	 
 	public AutoplayCommand(int verb, int obj1, int obj2)
 	{
@@ -32,11 +33,18 @@ public class AutoplayCommand {
 		this.obj1 = 1;
 		this.obj2 = 1;
 	}
+	public AutoplayCommand(int branchId, String text)
+	{
+		this.verb = ConstantsForAPI.DIALOG;
+		this.str = text;
+		this.branch = branchId;
+	}
 	
 	
 	int getVerb(){ return verb;}
 	int getObj1(){ return obj1;}
 	int getObj2(){ return obj2;}
+	int getBranch(){ return branch;}
 
 	public String getString() {
 		return str;

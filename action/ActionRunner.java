@@ -130,8 +130,14 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 		for (int i = 0; i < count; i++) {
 			BaseAction a = this.parallelActionsToWaitFor.get(i);
 
+			String name = a.toString();
+			if(name.startsWith("com.github.a2g.core.action.MakeSingleCallAction"))
+			{
+				MakeSingleCallAction b = (MakeSingleCallAction)a;
+				name = b.getType().toString();
+			}
 			System.out.println("ActionRunner::executeParallelActions " + i
-					+ " " + a.toString());
+					+ " " + name);
 
 			a.setCallbacks(this);
 			a.setFactory(factory);

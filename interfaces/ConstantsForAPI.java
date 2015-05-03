@@ -42,6 +42,7 @@ public interface ConstantsForAPI {
 	public static final int EAT = 11 * VERB_MULTIPLIER;
 	public static final int SLEEP = 12 * VERB_MULTIPLIER;
 	public static final int SWITCH = 13*VERB_MULTIPLIER ;
+	public static final int DIALOG = 14*VERB_MULTIPLIER ;
 
 	public static enum Special {
 		North, East, South, West

@@ -162,5 +162,8 @@ public class MakeSingleCallAction extends ChainedAction {
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
 		setScene(scene);
 	}
+	
+	public Type getType(){ return type;}
+	
  
 }

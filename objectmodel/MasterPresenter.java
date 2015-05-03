@@ -719,13 +719,30 @@ PropertyChangeEventHandlerAPI
 
 	}
  
-	void ProcessAutoplayCommand()
+	void ProcessAutoplayCommand(int id)
 	{
 		AutoplayCommand cmd  = this.host.getNextAutoplayAction();
+	
+		IMasterPanelFromMasterPresenter.GuiStateEnum state = masterPanel.getActiveState();
+		if(state == IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree)
+		{
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		if(cmd!=null)
 		{
 			
 			BaseAction a = null;
+			if(cmd.getVerb()==ConstantsForAPI.DIALOG)
+			{
+
+				saySpeechAndThenExecuteBranchWithBranchId(cmd.getString(), cmd.getBranch());
+			}
 			if(cmd.getVerb()==ConstantsForAPI.SLEEP)
 			{
 				// SLEEP = sleep for 100ms
@@ -761,12 +778,13 @@ PropertyChangeEventHandlerAPI
 			this.masterPanel
 			.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene);
 		}
-
-		if (masterPanel.getActiveState() == IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene) 
+		IMasterPanelFromMasterPresenter.GuiStateEnum state = masterPanel.getActiveState();
+		if (state == IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene||
+			state == IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree) 
 		{
 			if(this.host.isAutoplay())
 			{
-				ProcessAutoplayCommand();
+				ProcessAutoplayCommand(id);
 			}
 		}
 	}
