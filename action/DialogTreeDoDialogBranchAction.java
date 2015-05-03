@@ -50,7 +50,8 @@ public class DialogTreeDoDialogBranchAction extends BaseDialogTreeAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		dialogTree.executeBranchOnCurrentScene(getBranchId());
+		dialogTree.setGuiStateAsDialogTree();
+		// do nothing, this is a placeholder that results in a large chained action
 	}
 
 	@Override

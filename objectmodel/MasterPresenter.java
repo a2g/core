@@ -25,6 +25,7 @@ import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.action.DialogTreeDoDialogBranchAction;
 import com.github.a2g.core.action.MakeSingleCallAction;
 import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -700,18 +701,30 @@ PropertyChangeEventHandlerAPI
 		
 		return new SentenceItem(v.getdisplayText(), v.getVtid(), vcode);
 	}
+	ChainedAction replaceDoDialogActionWithOnDialogTreeChain(ChainedAction a)
+	{
+		if (a instanceof DialogTreeDoDialogBranchAction) {
+			int branchId = ((DialogTreeDoDialogBranchAction) a).getBranchId();
+			ChainedAction b = this.sceneHandlers.onDialogTree(proxyForGameScene, a, branchId);
+			return b;
+		}
+		return a;
+	}
+	
 	
 	@Override
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,
 			SentenceItem sentenceA, SentenceItem sentenceB, double x, double y) {
 
-		BaseAction a = this.sceneHandlers.onDoCommand(proxyForGameScene,
+		ChainedAction a = this.sceneHandlers.onDoCommand(proxyForGameScene,
 				createChainRootAction(), verbAsCode, sentenceA, sentenceB, x
 				+ scenePresenter.getCameraX(),
 				y + scenePresenter.getCameraY());
 
 		this.commandLinePresenter.setMouseable(false);
-		// this.commandLinePresenter.setVisible(false);
+		
+		a = replaceDoDialogActionWithOnDialogTreeChain(a);
+				
 		executeActionWithDoCommandActionRunner(a);
 
 		host.setLastCommand(x, y, verbAsVerbEnumeration,
@@ -722,48 +735,42 @@ PropertyChangeEventHandlerAPI
 	void ProcessAutoplayCommand(int id)
 	{
 		AutoplayCommand cmd  = this.host.getNextAutoplayAction();
-	
-		IMasterPanelFromMasterPresenter.GuiStateEnum state = masterPanel.getActiveState();
-		if(state == IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree)
-		{
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
 		if(cmd!=null)
 		{
-			
-			BaseAction a = null;
+
+			ChainedAction a = null;
 			if(cmd.getVerb()==ConstantsForAPI.DIALOG)
 			{
 
 				saySpeechAndThenExecuteBranchWithBranchId(cmd.getString(), cmd.getBranch());
 			}
-			if(cmd.getVerb()==ConstantsForAPI.SLEEP)
+			else
 			{
-				// SLEEP = sleep for 100ms
-				a = createChainRootAction().sleep(cmd.getObj1());
+				if(cmd.getVerb()==ConstantsForAPI.SLEEP)
+				{
+					// SLEEP = sleep for 100ms
+					a = createChainRootAction().sleep(cmd.getObj1());
+				}
+				else if(cmd.getVerb()==ConstantsForAPI.SWITCH)
+				{
+					a = createChainRootAction().switchTo(cmd.getString());
+				}
+				else 
+				{
+					this.commandLinePresenter.setVerbItemItem(getVerb(cmd.getVerb()), getFullItem(cmd.getObj1()), getFullItem(cmd.getObj2()));
+
+					//otherwise ask the sceneHanders what the outcome is.
+					SentenceItem o1 = new SentenceItem("","",cmd.getObj1());
+					SentenceItem o2 = new SentenceItem("","",cmd.getObj2());
+					a = this.sceneHandlers.onDoCommand(proxyForGameScene,
+							createChainRootAction(), cmd.getVerb(),o1,o2,0,0);
+
+
+					a = replaceDoDialogActionWithOnDialogTreeChain(a);
+				}
+				this.commandLinePresenter.setMouseable(false);
+				executeActionWithDoCommandActionRunner(a);
 			}
-			else if(cmd.getVerb()==ConstantsForAPI.SWITCH)
-			{
-				a = createChainRootAction().switchTo(cmd.getString());
-			}
-			else 
-			{
-				this.commandLinePresenter.setVerbItemItem(getVerb(cmd.getVerb()), getFullItem(cmd.getObj1()), getFullItem(cmd.getObj2()));
-				
-				//otherwise ask the sceneHanders what the outcome is.
-				SentenceItem o1 = new SentenceItem("","",cmd.getObj1());
-				SentenceItem o2 = new SentenceItem("","",cmd.getObj2());
-				a = this.sceneHandlers.onDoCommand(proxyForGameScene,
-						createChainRootAction(), cmd.getVerb(),o1,o2,0,0);
-			}
-			this.commandLinePresenter.setMouseable(false);
-			executeActionWithDoCommandActionRunner(a);
 		}
 	}
 

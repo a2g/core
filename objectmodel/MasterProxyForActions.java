@@ -5,6 +5,7 @@ import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.ILoad;
+import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IOnFillLoadList;
 import com.github.a2g.core.interfaces.IGameScene;
@@ -289,8 +290,8 @@ IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 	}
 
 	@Override
-	public void executeBranchOnCurrentScene(int branchId) {
-		master.executeBranchOnCurrentScene(branchId);
+	public void setGuiStateAsDialogTree() {
+		master.setActiveState(GuiStateEnum.DialogTree);
 	}
 
 	@Override
