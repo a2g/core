@@ -16,6 +16,7 @@
 
 package com.github.a2g.core.interfaces;
 
+import com.github.a2g.core.platforms.java.PackagedImageForJava;
 import com.google.gwt.event.dom.client.LoadHandler;
 
 public interface IMasterPresenterFromBundle {
@@ -75,5 +76,8 @@ public interface IMasterPresenterFromBundle {
 	public void setScenePixelSize(int width, int height);
 
 	public void setInventoryImageSize(int width, int height);
+
+	public boolean addMP3ForASoundObject(LoadHandler lh, double d,
+			PackagedImageForJava packagedImageForJava);
 
 };

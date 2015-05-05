@@ -28,6 +28,7 @@ import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.action.DialogTreeDoDialogBranchAction;
 import com.github.a2g.core.action.MakeSingleCallAction;
 import com.github.a2g.core.action.TalkAction;
+import com.github.a2g.core.platforms.java.PackagedImageForJava;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.action.BaseDialogTreeAction;
@@ -1075,6 +1076,13 @@ PropertyChangeEventHandlerAPI
 	public void quit() {
 		host.quit();
 		
+	}
+
+	@Override
+	public boolean addMP3ForASoundObject(LoadHandler lh, double d,
+			PackagedImageForJava packagedImageForJava) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
