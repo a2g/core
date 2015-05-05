@@ -34,30 +34,38 @@ import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectSpecial;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsSceneTalker;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleY;
+import com.github.a2g.core.interfaces.game.ISetInventoryItemVisible;
 import com.github.a2g.core.interfaces.game.ISetValue;
 import com.github.a2g.core.interfaces.game.ISwitchToScene;
 
 public interface IOnEntry
 extends
 // property access methods
-IGetValue,
-IIsTrue,
-ISetValue
+IGetValue
+, IIsTrue
+, ISetValue
 // helpful for game
-, IGetCurrentScene, ISwitchToScene,
-IGetLastScene,
-IIsInDebugMode,
-IGetSceneGuiWidth,
-IGetSceneGuiHeight
+, IGetCurrentScene
+, ISwitchToScene
+, IGetLastScene
+, IIsInDebugMode
+, IGetSceneGuiWidth
+, IGetSceneGuiHeight
 // Inventory
-,
-IIsInventoryItemVisible
+, IIsInventoryItemVisible
+, ISetInventoryItemVisible
 // object
-, IGetBaseMiddleX, IGetBaseMiddleY, ISetBaseMiddleX, ISetBaseMiddleY,
-IGetX,
-IGetY
+, IGetBaseMiddleX
+, IGetBaseMiddleY
+, ISetBaseMiddleX
+, ISetBaseMiddleY
+, IGetX
+, IGetY
 // animation
-, ISetAnimationAsObjectSpecial, ISetAnimationAsSceneTalker,
-ISetAnimationAsObjectInitial, ISetAnimationAsObjectCurrent {
+, ISetAnimationAsObjectSpecial
+, ISetAnimationAsSceneTalker
+, ISetAnimationAsObjectInitial
+, ISetAnimationAsObjectCurrent
+{
 
 }

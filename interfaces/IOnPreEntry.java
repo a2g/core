@@ -50,6 +50,7 @@ import com.github.a2g.core.interfaces.game.ISetBaseMiddleY;
 import com.github.a2g.core.interfaces.game.ISetBoundaryCrossObject;
 import com.github.a2g.core.interfaces.game.ISetDisplayName;
 import com.github.a2g.core.interfaces.game.ISetInventoryItemDisplayName;
+import com.github.a2g.core.interfaces.game.ISetInventoryItemVisible;
 import com.github.a2g.core.interfaces.game.ISetIsSayAlwaysWithoutIncrementing;
 import com.github.a2g.core.interfaces.game.ISetParallaxX;
 import com.github.a2g.core.interfaces.game.ISetScreenCoordsPerSecond;
@@ -102,11 +103,12 @@ IGetY
 ,
 ISetVisible
 // inventory
-,
-IShowInventoryItem,
-IHideInventoryItem,
-ISetInventoryItemDisplayName,
-IIsInventoryItemVisible
+
+, IShowInventoryItem
+, IHideInventoryItem
+, ISetInventoryItemDisplayName
+, IIsInventoryItemVisible
+, ISetInventoryItemVisible
 // verb
 ,
 IRemoveVerbByCode,

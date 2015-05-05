@@ -495,4 +495,10 @@ IOnMovementBeyondAGate {
 		
 	}
 
+	@Override
+	public void setInventoryItemVisible(int icode, boolean isVisible) {
+		master.getInventoryPresenter().getInventoryItemByICode(icode).setVisible(isVisible);
+
+	}
+
 }

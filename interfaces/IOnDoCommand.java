@@ -50,6 +50,7 @@ import com.github.a2g.core.interfaces.game.ISetBoundaryCrossObject;
 import com.github.a2g.core.interfaces.game.ISetCurrentFrame;
 import com.github.a2g.core.interfaces.game.ISetDisplayName;
 import com.github.a2g.core.interfaces.game.ISetInventoryItemDisplayName;
+import com.github.a2g.core.interfaces.game.ISetInventoryItemVisible;
 import com.github.a2g.core.interfaces.game.ISetIsSayAlwaysWithoutIncrementing;
 import com.github.a2g.core.interfaces.game.ISetValue;
 import com.github.a2g.core.interfaces.game.ISetX;
@@ -96,8 +97,12 @@ ISetAnimationAsObjectCurrent, IGetAnimationLastFrame,
 IGetAnimationLength,
 ISetAnimationDuration
 // inventory
-, IShowInventoryItem, IHideInventoryItem, IIsInventoryItemVisible,
-ISetInventoryItemDisplayName {
+, IShowInventoryItem
+, IHideInventoryItem
+, IIsInventoryItemVisible
+, ISetInventoryItemDisplayName
+, ISetInventoryItemVisible
+{
 
 	@Override
 	void setAsSceneWalker(short harry2);
