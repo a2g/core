@@ -42,6 +42,8 @@ public class ScenePresenter implements IScenePresenter {
 
 	public ScenePresenter(final IHostingPanel panel,
 			IMasterPresenterFromScene master) {
+		this.sceneTalkerAtid = "";
+		this.sceneWalkerOtid = "";
 		this.cameraX = 0.0;
 		this.cameraY = 0.0;
 		this.width = 320;

@@ -115,38 +115,39 @@ public class TalkAction extends ChainedAction {
 		if (atid == SCENE_TALKER) {
 			atid = scene.getAtidOfSceneTalker();
 		} 
-		otid = scene.getOtidOfAtid(atid);
-
+		
 		// only now do
-		if (otid != "") {
-			if (atid == "") {
-				// if theres no animation then we just wait for the
-				// totalDuration;
-				double framesPerSecond = 40;
-				numberOfFramesTotal = (int) ((totalDurationInSeconds) * framesPerSecond);
-			} else {
-				numberOfFramesTotal = getAdjustedNumberOfFrames(speech.get(0),
-						totalDurationInSeconds,
-						scene.getNumberOfFramesByAtid(atid),
-						scene.getDurationByAtid(atid));
-			}
+		if (atid == "") {
+			// if theres no animation then we just wait for the
+			// totalDuration;
+			double framesPerSecond = 40;
+			numberOfFramesTotal = (int) ((totalDurationInSeconds) * framesPerSecond);
+		} else {
+			numberOfFramesTotal = getAdjustedNumberOfFrames(speech.get(0),
+					totalDurationInSeconds,
+					scene.getNumberOfFramesByAtid(atid),
+					scene.getDurationByAtid(atid));
+		}
 
-			if (numberOfFramesTotal < 1) {
-				//titleCard.displayTitleCard("error!! id=<" + atid
-				//		+ "> numberOfFramesTotal=" + numberOfFramesTotal);
-				assert (false);
-			}
+		if (numberOfFramesTotal < 1) {
+			//titleCard.displayTitleCard("error!! id=<" + atid
+			//		+ "> numberOfFramesTotal=" + numberOfFramesTotal);
+			assert (false);
+		}
 
-			if (atid != "" && otid != "") {
+		// always make the speaker visible
+		if (atid != "")
+		{
+			otid = scene.getOtidOfAtid(atid);
+			if(otid != "") 
+			{
 				scene.setAsACurrentAnimationByAtid(atid);
 				scene.setVisibleByOtid(otid, true);
 			}
-
-			boolean visible = true;
-			
-			scene.setStateOfPopup(atid, visible, speech.get(0), this);
-
 		}
+
+		boolean visible = true;
+		scene.setStateOfPopup(atid, visible, speech.get(0), this);
 		this.run((int)(totalDurationInSeconds*1000));
 	}
 
