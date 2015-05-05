@@ -369,7 +369,16 @@ IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 	@Override
 	public void quit() {
 		master.quit();
-		
+	}
+
+	@Override
+	public void playSoundByStid(String stid) {
+		master.playSoundByStid(stid);
+	}
+
+	@Override
+	public double getSoundDurationByStid(String stid) {
+		return master.getSoundDurationByStid(stid);
 	}
 
 }

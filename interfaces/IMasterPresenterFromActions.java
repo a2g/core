@@ -18,6 +18,7 @@ package com.github.a2g.core.interfaces;
 
 public interface IMasterPresenterFromActions
 extends IMasterPresenterFromTalkAction
+,IMasterPresenterFromSoundAction
 {
 
 

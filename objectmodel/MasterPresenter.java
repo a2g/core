@@ -18,9 +18,13 @@ package com.github.a2g.core.objectmodel;
 
 //import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.logging.Logger;
 
 import com.google.gwt.event.dom.client.LoadHandler;
+import com.google.gwt.event.dom.client.LoadedMetadataEvent;
+import com.google.gwt.event.dom.client.LoadedMetadataHandler;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainRootAction;
@@ -61,6 +65,7 @@ import com.github.a2g.core.interfaces.ITimer;
 import com.github.a2g.core.interfaces.IMasterPresenterFromTimer;
 import com.github.a2g.core.interfaces.IMasterPresenterFromVerbs;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.media.client.Audio;
 
 public class MasterPresenter implements
 IMasterPresenterFromActions, IMasterPresenterFromScene,
@@ -102,6 +107,7 @@ PropertyChangeEventHandlerAPI
 	private boolean isSayNonIncremementing;
 	private short boundaryCrossObject;
 	private MasterProxyForActions proxyForActions;
+	private Map<String, Audio> mapOfAudio;
 
 	public MasterPresenter(final IHostingPanel panel, EventBus bus,
 			IHostFromMasterPresenter host) {
@@ -111,6 +117,7 @@ PropertyChangeEventHandlerAPI
 		this.host = host;
 		this.proxyForGameScene = new MasterProxyForGameScene(this);
 		this.proxyForActions = new MasterProxyForActions(this);
+		mapOfAudio = new TreeMap<String,Audio>();
 
 		IFactory factory = host.getFactory(bus, this);
 		this.doCommandActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions,
@@ -1079,10 +1086,26 @@ PropertyChangeEventHandlerAPI
 	}
 
 	@Override
-	public boolean addMP3ForASoundObject(LoadHandler lh, double d,
-			PackagedImageForJava packagedImageForJava) {
-		// TODO Auto-generated method stub
+	public boolean addMP3ForASoundObject(final LoadHandler lh, String stid, String url) {
+		Audio a = Audio.createIfSupported();
+		mapOfAudio.put(stid,a);
+	    a.setSrc(url);
+	   
+	    a.load();
+	    lh.onLoad(null);
 		return false;
+	}
+
+	@Override
+	public void playSoundByStid(String stid) {
+		mapOfAudio.get(stid).play();
+		
+	}
+
+	@Override
+	public double getSoundDurationByStid(String stid) {
+		double dur = mapOfAudio.get(stid).getDuration();
+		return dur;
 	}
 
 }

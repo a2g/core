@@ -656,5 +656,12 @@ public ChainedAction setCurrentAnimationAndFrame(String atid, int frame) {
 		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.Quit);
 		return a;
 	}
+	
+	public ChainedAction playSound(String stid)
+	{
+		PlaySoundAction a =  new PlaySoundAction(this, stid);
+		return a;
+	}
+
 
 }

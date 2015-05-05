@@ -33,7 +33,5 @@ public class PackagedImageForHtml4 implements IPackagedImage {
 	public com.google.gwt.user.client.ui.Image unpack() {
 
 		return new com.google.gwt.user.client.ui.Image(this.img);
-		// new
-		// com.google.gwt.user.client.ui.Image(imageResource.getNative().getSafeUri());
 	}
 }
