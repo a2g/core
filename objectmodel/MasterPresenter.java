@@ -23,8 +23,6 @@ import java.util.TreeMap;
 import java.util.logging.Logger;
 
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.google.gwt.event.dom.client.LoadedMetadataEvent;
-import com.google.gwt.event.dom.client.LoadedMetadataHandler;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainRootAction;
