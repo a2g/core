@@ -127,7 +127,7 @@ public class FactoryForJava implements IFactory {
 	}
 
 	@Override
-	public ISound createAudio(String url) {
+	public ISound createSound(String url) {
 		return new SoundForJava(url);
 	}
 

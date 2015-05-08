@@ -128,7 +128,7 @@ public class FactoryForHtml5 implements IFactory {
 	}
 	
 	@Override
-	public ISound createAudio(String url) {
+	public ISound createSound(String url) {
 		return new SoundForHtml4(url);
 	}
 

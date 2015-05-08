@@ -33,5 +33,5 @@ public interface IFactory {
 	ILoaderPanelFromLoaderPresenter createLoaderPanel(
 			IMasterPresenterFromLoaderMouse api, ColorEnum fore, ColorEnum back);
 	
-	ISound createAudio(String url);
+	ISound createSound(String url);
 }

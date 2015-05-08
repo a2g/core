@@ -103,7 +103,7 @@ PropertyChangeEventHandlerAPI
 	private boolean isSayNonIncremementing;
 	private short boundaryCrossObject;
 	private MasterProxyForActions proxyForActions;
-	private Map<String, ISound> mapOfAudio;
+	private Map<String, ISound> mapOfSounds;
 
 	public MasterPresenter(final IHostingPanel panel, EventBus bus,
 			IHostFromMasterPresenter host) {
@@ -113,7 +113,7 @@ PropertyChangeEventHandlerAPI
 		this.host = host;
 		this.proxyForGameScene = new MasterProxyForGameScene(this);
 		this.proxyForActions = new MasterProxyForActions(this);
-		mapOfAudio = new TreeMap<String,ISound>();
+		mapOfSounds = new TreeMap<String,ISound>();
 
 		IFactory factory = host.getFactory(bus, this);
 		this.doCommandActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions,
@@ -1085,21 +1085,21 @@ PropertyChangeEventHandlerAPI
 
 	@Override
 	public void playSoundByStid(String stid) {
-		mapOfAudio.get(stid).play();
+		mapOfSounds.get(stid).play();
 		
 	}
 
 	@Override
 	public double getSoundDurationByStid(String stid) {
-		double dur = mapOfAudio.get(stid).getDuration();
+		double dur = mapOfSounds.get(stid).getDuration();
 		return dur;
 	}
 
 	@Override
 	public boolean addMP3ForASoundObject(String name, String location) 
 	{
-		ISound audio = this.getFactory().createAudio(location);
-		this.mapOfAudio.put(name, audio);
+		ISound sound = this.getFactory().createSound(location);
+		this.mapOfSounds.put(name, sound);
 		
 		return false;
 	}
