@@ -381,4 +381,9 @@ IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 		return master.getSoundDurationByStid(stid);
 	}
 
+	@Override
+	public void addMP3ForASoundObject(String name, String location) {
+		master.addMP3ForASoundObject(name, location);
+	}
+
 }

@@ -662,6 +662,12 @@ public ChainedAction setCurrentAnimationAndFrame(String atid, int frame) {
 		PlaySoundAction a =  new PlaySoundAction(this, stid);
 		return a;
 	}
+	public ChainedAction playSoundNonBlocking(String stid)
+	{
+		PlaySoundAction a =  new PlaySoundAction(this, stid);
+		a.setParallel(true);
+		return a;
+	}
 
 
 }

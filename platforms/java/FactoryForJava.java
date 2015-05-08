@@ -18,6 +18,7 @@ package com.github.a2g.core.platforms.java;
 
 import javax.swing.JOptionPane;
 
+import com.github.a2g.core.interfaces.IAudio;
 import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.IFactory;
@@ -123,6 +124,11 @@ public class FactoryForJava implements IFactory {
 			IInventoryPresenterFromInventoryPanel api, ColorEnum fore,
 			ColorEnum back, ColorEnum rollover) {
 		return new InventoryPanelForJava(bus, api, fore, back);
+	}
+
+	@Override
+	public IAudio createAudio(String url) {
+		return new AudioForJava(url);
 	}
 
 }

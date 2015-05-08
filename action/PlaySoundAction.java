@@ -24,22 +24,23 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromSoundAction;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-import com.github.a2g.core.interfaces.action.IPlaySoundByStid;
 
 public class PlaySoundAction extends ChainedAction {
 	private String stid;
 	private IMasterPresenterFromSoundAction master;
+	private boolean isParallel;
 
 	public PlaySoundAction(BaseAction parent, String stid) {
 		super(parent, true);
 		this.stid = stid;
+		isParallel = false;
 	}
 
 	@Override
 	public void runGameAction() {
-		int millisecs = (int)(master.getSoundDurationByStid(stid)*1000);
+		int millisecs = (int)(100*master.getSoundDurationByStid(stid));
 		master.playSoundByStid(stid);
-		this.run(millisecs*1000);
+		this.run(millisecs);
 	}
 
 	@Override
@@ -50,10 +51,14 @@ public class PlaySoundAction extends ChainedAction {
 	protected void onCompleteGameAction() {
 	}
 
+	public void setParallel(boolean isParallel)
+	{
+		this.isParallel = isParallel;
+	}
 	@Override
 	public boolean isParallel() {
 
-		return false;
+		return isParallel;
 	}
 
 	@Override

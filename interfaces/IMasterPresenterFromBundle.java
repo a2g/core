@@ -77,6 +77,6 @@ public interface IMasterPresenterFromBundle {
 
 	public void setInventoryImageSize(int width, int height);
 
-	public boolean addMP3ForASoundObject(final LoadHandler lh, String stid, String url);
+	public boolean addMP3ForASoundObject(String name, String location);
 
 };

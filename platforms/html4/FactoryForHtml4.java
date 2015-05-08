@@ -16,6 +16,7 @@ p- * Copyright 2012 Anthony Cassidy
 
 package com.github.a2g.core.platforms.html4;
 
+import com.github.a2g.core.interfaces.IAudio;
 import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.IFactory;
@@ -48,7 +49,8 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.github.a2g.core.interfaces.IHostFromMasterPresenter;
 
-public class FactoryForHtml4 implements IFactory {
+public class FactoryForHtml4 
+implements IFactory {
 
 	private EventBus bus;
 	private MasterPresenter master;
@@ -125,6 +127,11 @@ public class FactoryForHtml4 implements IFactory {
 
 	public void alert(String text) {
 		Window.alert(text);
+	}
+
+	@Override
+	public IAudio createAudio(String url) {
+		return new AudioForHtml4(url);
 	}
 
 }

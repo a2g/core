@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
-
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
@@ -30,7 +29,6 @@ import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.action.DialogTreeDoDialogBranchAction;
 import com.github.a2g.core.action.MakeSingleCallAction;
 import com.github.a2g.core.action.TalkAction;
-import com.github.a2g.core.platforms.java.PackagedImageForJava;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.action.BaseDialogTreeAction;
@@ -40,6 +38,7 @@ import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
+import com.github.a2g.core.interfaces.IAudio;
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActionRunner;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
@@ -63,7 +62,6 @@ import com.github.a2g.core.interfaces.ITimer;
 import com.github.a2g.core.interfaces.IMasterPresenterFromTimer;
 import com.github.a2g.core.interfaces.IMasterPresenterFromVerbs;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.media.client.Audio;
 
 public class MasterPresenter implements
 IMasterPresenterFromActions, IMasterPresenterFromScene,
@@ -105,7 +103,7 @@ PropertyChangeEventHandlerAPI
 	private boolean isSayNonIncremementing;
 	private short boundaryCrossObject;
 	private MasterProxyForActions proxyForActions;
-	private Map<String, Audio> mapOfAudio;
+	private Map<String, IAudio> mapOfAudio;
 
 	public MasterPresenter(final IHostingPanel panel, EventBus bus,
 			IHostFromMasterPresenter host) {
@@ -115,7 +113,7 @@ PropertyChangeEventHandlerAPI
 		this.host = host;
 		this.proxyForGameScene = new MasterProxyForGameScene(this);
 		this.proxyForActions = new MasterProxyForActions(this);
-		mapOfAudio = new TreeMap<String,Audio>();
+		mapOfAudio = new TreeMap<String,IAudio>();
 
 		IFactory factory = host.getFactory(bus, this);
 		this.doCommandActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions,
@@ -1083,16 +1081,7 @@ PropertyChangeEventHandlerAPI
 		
 	}
 
-	@Override
-	public boolean addMP3ForASoundObject(final LoadHandler lh, String stid, String url) {
-		Audio a = Audio.createIfSupported();
-		mapOfAudio.put(stid,a);
-	    a.setSrc(url);
-	   
-	    a.load();
-	    lh.onLoad(null);
-		return false;
-	}
+	
 
 	@Override
 	public void playSoundByStid(String stid) {
@@ -1104,6 +1093,15 @@ PropertyChangeEventHandlerAPI
 	public double getSoundDurationByStid(String stid) {
 		double dur = mapOfAudio.get(stid).getDuration();
 		return dur;
+	}
+
+	@Override
+	public boolean addMP3ForASoundObject(String name, String location) 
+	{
+		IAudio audio = this.getFactory().createAudio(location);
+		this.mapOfAudio.put(name, audio);
+		
+		return false;
 	}
 
 }

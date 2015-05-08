@@ -16,6 +16,7 @@
 
 package com.github.a2g.core.platforms.html5;
 
+import com.github.a2g.core.interfaces.IAudio;
 import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.IFactory;
@@ -42,6 +43,7 @@ import com.github.a2g.core.objectmodel.LoaderPanel;
 import com.github.a2g.core.objectmodel.MasterPanel;
 import com.github.a2g.core.objectmodel.TitleCardPanel;
 import com.github.a2g.core.objectmodel.VerbsPanel;
+import com.github.a2g.core.platforms.html4.AudioForHtml4;
 import com.github.a2g.core.platforms.html4.SystemAnimationForHtml4;
 import com.github.a2g.core.platforms.html4.TimerForHtml4;
 import com.github.a2g.core.platforms.html5.panel.ScenePanelForHtml5;
@@ -123,6 +125,11 @@ public class FactoryForHtml5 implements IFactory {
 			IInventoryPresenterFromInventoryPanel api, ColorEnum fore,
 			ColorEnum back, ColorEnum rollover) {
 		return new InventoryPanel(api, fore, back, rollover);
+	}
+	
+	@Override
+	public IAudio createAudio(String url) {
+		return new AudioForHtml4(url);
 	}
 
 }
