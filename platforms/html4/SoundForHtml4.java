@@ -1,12 +1,12 @@
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.IAudio;
+import com.github.a2g.core.interfaces.ISound;
 import com.google.gwt.media.client.Audio;
 
-public class AudioForHtml4 
-implements IAudio{
+public class SoundForHtml4 
+implements ISound{
 	Audio audio;
-	public AudioForHtml4(String location)
+	public SoundForHtml4(String location)
 	{
 		audio = Audio.createIfSupported();
 		if(audio!=null)

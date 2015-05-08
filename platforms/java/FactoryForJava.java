@@ -18,7 +18,7 @@ package com.github.a2g.core.platforms.java;
 
 import javax.swing.JOptionPane;
 
-import com.github.a2g.core.interfaces.IAudio;
+import com.github.a2g.core.interfaces.ISound;
 import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.IFactory;
@@ -127,8 +127,8 @@ public class FactoryForJava implements IFactory {
 	}
 
 	@Override
-	public IAudio createAudio(String url) {
-		return new AudioForJava(url);
+	public ISound createAudio(String url) {
+		return new SoundForJava(url);
 	}
 
 }

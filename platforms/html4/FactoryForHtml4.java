@@ -16,7 +16,7 @@ p- * Copyright 2012 Anthony Cassidy
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.IAudio;
+import com.github.a2g.core.interfaces.ISound;
 import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.IFactory;
@@ -130,8 +130,8 @@ implements IFactory {
 	}
 
 	@Override
-	public IAudio createAudio(String url) {
-		return new AudioForHtml4(url);
+	public ISound createAudio(String url) {
+		return new SoundForHtml4(url);
 	}
 
 }

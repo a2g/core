@@ -12,15 +12,15 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.Line;
 import javax.sound.sampled.LineUnavailableException;
 
-import com.github.a2g.core.interfaces.IAudio;
+import com.github.a2g.core.interfaces.ISound;
 
-public class AudioForJava
-implements IAudio
+public class SoundForJava
+implements ISound
 {
 	AudioInputStream audioInputStream;
 	double durationInSeconds;
 	
-	AudioForJava(String location)
+	SoundForJava(String location)
 	{
 		try
 		  {

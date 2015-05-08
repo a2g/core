@@ -38,7 +38,7 @@ import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
 import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
-import com.github.a2g.core.interfaces.IAudio;
+import com.github.a2g.core.interfaces.ISound;
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActionRunner;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
@@ -103,7 +103,7 @@ PropertyChangeEventHandlerAPI
 	private boolean isSayNonIncremementing;
 	private short boundaryCrossObject;
 	private MasterProxyForActions proxyForActions;
-	private Map<String, IAudio> mapOfAudio;
+	private Map<String, ISound> mapOfAudio;
 
 	public MasterPresenter(final IHostingPanel panel, EventBus bus,
 			IHostFromMasterPresenter host) {
@@ -113,7 +113,7 @@ PropertyChangeEventHandlerAPI
 		this.host = host;
 		this.proxyForGameScene = new MasterProxyForGameScene(this);
 		this.proxyForActions = new MasterProxyForActions(this);
-		mapOfAudio = new TreeMap<String,IAudio>();
+		mapOfAudio = new TreeMap<String,ISound>();
 
 		IFactory factory = host.getFactory(bus, this);
 		this.doCommandActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions,
@@ -1098,7 +1098,7 @@ PropertyChangeEventHandlerAPI
 	@Override
 	public boolean addMP3ForASoundObject(String name, String location) 
 	{
-		IAudio audio = this.getFactory().createAudio(location);
+		ISound audio = this.getFactory().createAudio(location);
 		this.mapOfAudio.put(name, audio);
 		
 		return false;
