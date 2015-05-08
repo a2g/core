@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.platforms.java.PackagedImageForJava;
 import com.google.gwt.event.dom.client.LoadHandler;
 
 public interface IMasterPresenterFromBundle {
