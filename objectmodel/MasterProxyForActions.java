@@ -277,8 +277,8 @@ IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 
 	@Override
 	public String getSpecialAnimationByOtid(String otid, Special type) {
-		return master.getScenePresenter().getObjectByOtid(otid)
-				.getSpecialAnimation(type);
+		SceneObject o= master.getScenePresenter().getObjectByOtid(otid);
+		return o.getSpecialAnimation(type);
 	}
 
 	@Override

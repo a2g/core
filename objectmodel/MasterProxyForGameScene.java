@@ -252,8 +252,8 @@ IOnMovementBeyondAGate {
 
 	@Override
 	public void setAnimationAsObjectSpecial(String atid, Special type) {
-		master.getScenePresenter().getAnimationByAtid(atid)
-		.setAsSpecialAnimation(type);
+		Animation a = master.getScenePresenter().getAnimationByAtid(atid);
+		a.setAsSpecialAnimation(type);
 
 	}
 

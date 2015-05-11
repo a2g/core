@@ -22,16 +22,19 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.TreeMap;
 
 public class SceneObjectCollection {
 	private List<String> theOtids;
 	private List<Short> theOCodes;
 	private ArrayList<SceneObject> list;
+	private TreeMap<String, Animation> theAtidMap;
 
 	public SceneObjectCollection() {
 		theOtids = new LinkedList<String>();
 		theOCodes = new LinkedList<Short>();
 		list = new ArrayList<SceneObject>();
+		this.theAtidMap = new TreeMap<String, Animation>();
 	}
 	
 	public void clear()
@@ -39,6 +42,7 @@ public class SceneObjectCollection {
 		theOtids.clear();
 		theOCodes.clear();
 		list.clear();
+		theAtidMap.clear();
 	}
 
 	public void add(SceneObject sceneObject) {
@@ -79,6 +83,24 @@ public class SceneObjectCollection {
 
 	public int count() {
 		return list.size();
+	}
+
+	public Animation getAnimtaionByAtid(String atid) {
+		Animation anim = this.theAtidMap.get(atid);
+
+		if (anim == null) {
+			// first param is name, second is parent;
+			anim = new Animation("", null);
+			this.theAtidMap.put(atid, anim);
+		}
+		return anim;
+	}
+
+	public void addAnimation(String atid, Animation destAnimation) {
+		if (theAtidMap.get(atid) == null) {
+			// System.out.println("ScenePresenter::added " + animTextualId);
+			this.theAtidMap.put(atid, destAnimation);
+		}
 	}
 
 }

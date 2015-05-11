@@ -19,7 +19,6 @@ package com.github.a2g.core.objectmodel;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;
@@ -27,7 +26,7 @@ import com.github.a2g.core.primitive.Rect;
 
 public class SceneObject {
 	private String initialAnimationId;
-	private Map<IGameScene.Special, String> mapOfSpecialAnimations;
+	private Map<String, String> mapOfSpecialAnimations;
 	private final String otid;
 	private String displayName;
 	private AnimationCollection animationCollection;
@@ -51,7 +50,7 @@ public class SceneObject {
 		this.visible = true;
 		this.screenPixelWidth = screenWidth;
 		this.screenPixelHeight = screenHeight;
-		this.mapOfSpecialAnimations = new TreeMap<Special, String>();
+		this.mapOfSpecialAnimations = new TreeMap<String, String>();
 		this.numberPrefix = 0;
 		this.initialAnimationId = otid + "_INITIAL";
 
@@ -301,11 +300,11 @@ public class SceneObject {
 	}
 
 	void setSpecialAnimation(Special type, String atid) {
-		this.mapOfSpecialAnimations.put(type, atid);
+		this.mapOfSpecialAnimations.put(type.toString(), atid);
 	}
 
 	public String getSpecialAnimation(Special type) {
-		String toReturn = this.mapOfSpecialAnimations.get(type);
+		String toReturn = this.mapOfSpecialAnimations.get(type.toString());
 		if(toReturn==null)
 			return "";
 		return toReturn;
@@ -338,7 +337,6 @@ public class SceneObject {
 		return ocode;
 
 	}
-
 
 	public void setParallaxX(double x) {
 		for (int a = 0; a < animationCollection.getCount(); a++) {

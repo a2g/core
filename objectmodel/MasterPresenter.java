@@ -520,8 +520,7 @@ PropertyChangeEventHandlerAPI
 		// set gui to blank
 		masterPanel
 		.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
-		// scenePresenter.clear(); don't clear, all its images are switched off
-		// anyhow.
+		scenePresenter.clearEverythingExceptView(); // something like caching doesn't work if this is on.
 		loaderPresenter.clear();
 		// commandLinePresenter.clear();
 		verbsPresenter.clear();
@@ -550,6 +549,9 @@ PropertyChangeEventHandlerAPI
 		// give the setContinueAfterLoad a default
 		this.loaderPresenter.setContinueAfterLoad(host.isAutoplay());
 
+		// clear sounds before onFillLoadList
+		mapOfSounds.clear();
+		
 		// then in the scene the user can overwrite this.
 		this.sceneHandlers
 		.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene));
@@ -854,7 +856,8 @@ PropertyChangeEventHandlerAPI
 		// inventory images. So we clear the inventory too.
 		// actually this should probably go under "loseEverything"
 		this.inventoryPresenter.clear();
-		this.scenePresenter.clear();
+		this.scenePresenter.clearEverythingExceptView();
+		this.scenePresenter.clearView();
 		this.clearListOfIntegersToInsertAt();
 	}
 

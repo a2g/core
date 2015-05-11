@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-import java.util.TreeMap;
 
 import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.interfaces.IHostingPanel;
@@ -35,7 +34,7 @@ public class ScenePresenter implements IScenePresenter {
 	private IScenePanelFromScenePresenter view;
 	private double cameraX;
 	private double cameraY;
-	private TreeMap<String, Animation> theAtidMap;
+	
 	private String sceneTalkerAtid;
 	private String sceneWalkerOtid;
 	private ColorEnum talkingColorForScene;
@@ -53,7 +52,7 @@ public class ScenePresenter implements IScenePresenter {
 		panel.setThing(view);
 		view.setVisible(true);
 
-		this.theAtidMap = new TreeMap<String, Animation>();
+		
 		talkingColorForScene = ColorEnum.Fuchsia;
 	}
 
@@ -66,14 +65,7 @@ public class ScenePresenter implements IScenePresenter {
 	}
 
 	public Animation getAnimationByAtid(String atid) {
-		Animation anim = this.theAtidMap.get(atid);
-
-		if (anim == null) {
-			// first param is name, second is parent;
-			anim = new Animation("", null);
-			this.theAtidMap.put(atid, anim);
-		}
-		return anim;
+		return this.scene.objectCollection().getAnimtaionByAtid(atid);
 	}
 
 	@Override
@@ -90,10 +82,14 @@ public class ScenePresenter implements IScenePresenter {
 		this.view.setScenePixelSize(width, height);
 	}
 
-	public void clear() {
-		view.clear();
-		theAtidMap.clear();
+	public void clearEverythingExceptView() {
+		
 		scene.objectCollection().clear();
+	}
+	
+	public void clearView()
+	{
+		view.clear();
 	}
 
 	public Scene getModel() {
@@ -139,10 +135,7 @@ public class ScenePresenter implements IScenePresenter {
 	}
 
 	public void addAnimation(String atid, Animation destAnimation) {
-		if (theAtidMap.get(atid) == null) {
-			// System.out.println("ScenePresenter::added " + animTextualId);
-			this.theAtidMap.put(atid, destAnimation);
-		}
+		this.scene.objectCollection().addAnimation(atid,destAnimation);
 	}
 
 	public void alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
