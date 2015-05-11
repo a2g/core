@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
+
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
@@ -541,6 +542,15 @@ PropertyChangeEventHandlerAPI
 		this.dialogTreePresenter.setScenePixelSize(width, height >> 1);
 		this.verbsPresenter.setWidthOfScene(width);
 	}
+	
+	void clearMapOfSounds()
+	{
+		for (Map.Entry<String, ISound> entry : mapOfSounds.entrySet())
+		{
+			entry.getValue().stop();
+		}
+		mapOfSounds.clear();
+	}
 
 	public void setScene(IGameScene scene) {
 
@@ -550,7 +560,7 @@ PropertyChangeEventHandlerAPI
 		this.loaderPresenter.setContinueAfterLoad(host.isAutoplay());
 
 		// clear sounds before onFillLoadList
-		mapOfSounds.clear();
+		clearMapOfSounds();
 		
 		// then in the scene the user can overwrite this.
 		this.sceneHandlers
@@ -1105,6 +1115,11 @@ PropertyChangeEventHandlerAPI
 		this.mapOfSounds.put(name, sound);
 		
 		return false;
+	}
+
+	@Override
+	public void stopSoundByStid(String stid) {
+		mapOfSounds.get(stid).stop();
 	}
 
 }

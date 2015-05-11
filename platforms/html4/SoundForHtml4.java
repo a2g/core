@@ -24,5 +24,10 @@ implements ISound{
 	public double getDuration() {
 		return audio.getDuration();
 	}
+	@Override
+	public void stop() {
+		audio.setCurrentTime(0.0); 
+		
+	}
 
 }

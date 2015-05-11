@@ -38,7 +38,7 @@ public class PlaySoundAction extends ChainedAction {
 
 	@Override
 	public void runGameAction() {
-		int millisecs = (int)(100*master.getSoundDurationByStid(stid));
+		int millisecs = (int)(1000*master.getSoundDurationByStid(stid));
 		master.playSoundByStid(stid);
 		this.run(millisecs);
 	}
@@ -49,6 +49,7 @@ public class PlaySoundAction extends ChainedAction {
 
 	@Override
 	protected void onCompleteGameAction() {
+		master.stopSoundByStid(stid);
 	}
 
 	public void setParallel(boolean isParallel)
