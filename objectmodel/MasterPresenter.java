@@ -427,8 +427,10 @@ PropertyChangeEventHandlerAPI
 			int branchId) {
 
 		this.dialogTreePresenter.clearBranches();
-		this.dialogTreePresenter.markSpeechAsSaid(speech);
-
+		if(branchId!=-1)
+		{
+			this.dialogTreePresenter.markSpeechAsSaid(speech);
+		}
 		String animId = this.dialogTreePresenter.getDialogTreeTalkAnimation();
 		// This is a bit sneaky:
 		// 1. we construct a BaseAction that sas the speech
@@ -441,7 +443,9 @@ PropertyChangeEventHandlerAPI
 		TalkAction talk = new TalkAction(createChainRootAction(), animId, speech);
 		BaseDialogTreeAction actionChain = sceneHandlers.onDialogTree(
 				proxyForGameScene, talk, branchId);
-		executeActionWithDialogActionRunner(actionChain);
+		ChainedAction  actionChain2 = replaceDoDialogActionWithOnDialogTreeChain(actionChain);
+		
+		executeActionWithDialogActionRunner(actionChain2);
 	}
 
 	public void callOnEnterScene() {
