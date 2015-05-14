@@ -398,27 +398,6 @@ PropertyChangeEventHandlerAPI
 		return this.sceneHandlers;
 	}
 
-//	@Override
-//	public void executeBranchOnCurrentScene(int branchId) {
-//		this.dialogActionRunner.cancel();
-//		// clear it so any old branches don't show up
-//		this.dialogTreePresenter.clearBranches();
-//
-//		// make dialogtreepanel not active, then we must *just* be
-//		// entering dialog. So text gets reset.
-//		if (masterPanel.getActiveState() != IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree) {
-//			this.dialogTreePresenter.resetRecordOfSaidSpeech();
-//			this.setDialogTreeActive(true);
-//		}
-//
-//		// get the chain from the client
-//		BaseDialogTreeAction actionChain = this.sceneHandlers.onDialogTree(
-//				proxyForGameScene, createChainRootAction(), branchId);
-//
-//		// execute it
-//		executeActionWithDialogActionRunner(actionChain);
-//	}
-
 	public void saySpeechAndThenExecuteBranchWithBranchId(String speech,
 			int branchId) {
 
