@@ -24,6 +24,7 @@ import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
+import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter.GuiStateEnum;
 
 public class DialogTreeEndAction extends BaseDialogTreeAction {
 	private IDialogTreePresenterFromEndAction dialogTree;
@@ -47,7 +48,7 @@ public class DialogTreeEndAction extends BaseDialogTreeAction {
 
 	@Override
 	protected void onCompleteGameAction() {
-		dialogTree.setDialogTreeActive(false);
+		dialogTree.setActiveGuiState(GuiStateEnum.ActiveScene);
 	}
 
 	@Override

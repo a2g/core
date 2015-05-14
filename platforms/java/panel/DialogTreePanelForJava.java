@@ -21,12 +21,13 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
+import com.github.a2g.core.interfaces.IMasterPresenterFromDialogTreeMouse;
 import com.github.a2g.core.objectmodel.DialogTree;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.platforms.java.mouse.DialogTreeMouseClickHandler;
 import com.github.a2g.core.platforms.java.mouse.DialogTreeMouseOutHandler;
 import com.github.a2g.core.platforms.java.mouse.DialogTreeMouseOverHandler;
-import com.google.gwt.event.shared.EventBus;
+
 import java.awt.Label;
 
 import javax.swing.JPanel;
@@ -41,7 +42,8 @@ implements IDialogTreePanelFromDialogTreePresenter
 	ColorEnum roll;
 	private int width;
 	private int height;
-	public DialogTreePanelForJava(EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum roll)
+	private IMasterPresenterFromDialogTreeMouse master;
+	public DialogTreePanelForJava(IMasterPresenterFromDialogTreeMouse master, ColorEnum fore, ColorEnum back, ColorEnum roll)
 	{
 		GridLayout grid = new GridLayout();
 		this.setLayout(grid);
@@ -49,6 +51,7 @@ implements IDialogTreePanelFromDialogTreePresenter
 		grid.setColumns(1);
 		this.width = 320;
 		this.height = 180;
+		this.master = master;
 
 		this.fore = fore;
 		this.back = back;
@@ -72,7 +75,7 @@ implements IDialogTreePanelFromDialogTreePresenter
 	
 
 	@Override
-	public void update(DialogTree dialogTree, final EventBus bus) {
+	public void update(DialogTree dialogTree) {
 		// destroy old
 		this.removeAll();
 		int numberOfSubbranches = dialogTree.getSubBranchIds().size();
@@ -91,7 +94,7 @@ implements IDialogTreePanelFromDialogTreePresenter
 
 			label.addMouseListener(
 					new DialogTreeMouseClickHandler(
-							bus, label, subBranchId));
+							master, label, subBranchId));
 
 			add(label);
 		}

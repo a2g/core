@@ -1,7 +1,6 @@
 package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.primitive.ColorEnum;
-import com.google.gwt.event.shared.EventBus;
 
 public interface IFactory {
 	ICommandLinePanelFromCommandLinePresenter createCommandLinePanel(
@@ -27,8 +26,9 @@ public interface IFactory {
 	IMasterPanelFromMasterPresenter createMasterPanel(int width, int height,
 			ColorEnum color);
 
-	IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(EventBus bus,
-			ColorEnum fore, ColorEnum back, ColorEnum rollover);
+	IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
+			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore, ColorEnum back, ColorEnum roll);
+		
 
 	ILoaderPanelFromLoaderPresenter createLoaderPanel(
 			IMasterPresenterFromLoaderMouse api, ColorEnum fore, ColorEnum back);

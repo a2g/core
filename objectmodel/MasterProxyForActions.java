@@ -289,15 +289,7 @@ IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 
 	}
 
-	@Override
-	public void setGuiStateAsDialogTree() {
-		master.setActiveState(GuiStateEnum.DialogTree);
-	}
-
-	@Override
-	public void setDialogTreeActive(boolean isInDialogTreeMode) {
-		master.setDialogTreeActive(isInDialogTreeMode);
-	}
+	
 
 	@Override
 	public void displayTitleCard(String text) {
@@ -389,6 +381,12 @@ IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 	@Override
 	public void stopSoundByStid(String stid) {
 		master.stopSoundByStid(stid);
+	}
+
+	@Override
+	public void setActiveGuiState(GuiStateEnum state) {
+		master.setActiveState(state);
+		
 	}
 
 }

@@ -16,6 +16,7 @@ p- * Copyright 2012 Anthony Cassidy
 
 package com.github.a2g.core.platforms.html4;
 
+import com.github.a2g.core.interfaces.IMasterPresenterFromDialogTreeMouse;
 import com.github.a2g.core.interfaces.ISound;
 import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
@@ -68,12 +69,7 @@ implements IFactory {
 		return new CommandLinePanel(fore, back, roll);
 	}
 
-	@Override
-	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
-			EventBus bus, ColorEnum foreground, ColorEnum background,
-			ColorEnum rollover) {
-		return new DialogTreePanel(bus, foreground, background, rollover);
-	}
+	
 
 	@Override
 	public IInventoryPanelFromInventoryPresenter createInventoryPanel(
@@ -132,6 +128,14 @@ implements IFactory {
 	@Override
 	public ISound createSound(String url) {
 		return new SoundForHtml4(url);
+	}
+
+	@Override
+	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
+			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore,
+			ColorEnum back, ColorEnum roll) {
+		return new DialogTreePanel(master, fore, back, roll);
+		
 	}
 
 }

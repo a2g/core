@@ -35,8 +35,6 @@ import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.event.PropertyChangeEvent;
 import com.github.a2g.core.event.PropertyChangeEventHandlerAPI;
-import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
-import com.github.a2g.core.event.SaySpeechCallDialogTreeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.ISound;
@@ -70,7 +68,7 @@ IMasterPresenterFromDialogTree, IMasterPresenterFromTimer,
 IMasterPresenterFromBundle, IMasterPresenterFromLoader,
 IMasterPresenterFromCommandLine, IMasterPresenterFromActionRunner,
 IMasterPresenterFromInventory, IMasterPresenterFromVerbs,
-IMasterPresenterFromTitleCard, SaySpeechCallDialogTreeEventHandlerAPI,
+IMasterPresenterFromTitleCard, 
 PropertyChangeEventHandlerAPI
 {
 
@@ -125,8 +123,6 @@ PropertyChangeEventHandlerAPI
 		this.gatePoints = new ArrayList<PointF>();
 		this.gateIds = new ArrayList<Integer>();
 		clearListOfIntegersToInsertAt();
-
-		bus.addHandler(SaySpeechCallDialogTreeEvent.TYPE, this);
 
 		bus.addHandler(PropertyChangeEvent.TYPE, this);
 
@@ -402,26 +398,26 @@ PropertyChangeEventHandlerAPI
 		return this.sceneHandlers;
 	}
 
-	@Override
-	public void executeBranchOnCurrentScene(int branchId) {
-		this.dialogActionRunner.cancel();
-		// clear it so any old branches don't show up
-		this.dialogTreePresenter.clearBranches();
-
-		// make dialogtreepanel not active, then we must *just* be
-		// entering dialog. So text gets reset.
-		if (masterPanel.getActiveState() != IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree) {
-			this.dialogTreePresenter.resetRecordOfSaidSpeech();
-			this.setDialogTreeActive(true);
-		}
-
-		// get the chain from the client
-		BaseDialogTreeAction actionChain = this.sceneHandlers.onDialogTree(
-				proxyForGameScene, createChainRootAction(), branchId);
-
-		// execute it
-		executeActionWithDialogActionRunner(actionChain);
-	}
+//	@Override
+//	public void executeBranchOnCurrentScene(int branchId) {
+//		this.dialogActionRunner.cancel();
+//		// clear it so any old branches don't show up
+//		this.dialogTreePresenter.clearBranches();
+//
+//		// make dialogtreepanel not active, then we must *just* be
+//		// entering dialog. So text gets reset.
+//		if (masterPanel.getActiveState() != IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree) {
+//			this.dialogTreePresenter.resetRecordOfSaidSpeech();
+//			this.setDialogTreeActive(true);
+//		}
+//
+//		// get the chain from the client
+//		BaseDialogTreeAction actionChain = this.sceneHandlers.onDialogTree(
+//				proxyForGameScene, createChainRootAction(), branchId);
+//
+//		// execute it
+//		executeActionWithDialogActionRunner(actionChain);
+//	}
 
 	public void saySpeechAndThenExecuteBranchWithBranchId(String speech,
 			int branchId) {
@@ -846,16 +842,6 @@ PropertyChangeEventHandlerAPI
 		return this.host.getSceneViaCache(string);
 	}
 
-	@Override
-	public void setDialogTreeActive(boolean isInDialogTreeMode) {
-		if (isInDialogTreeMode) {
-			this.masterPanel
-			.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree);
-		} else {
-			this.masterPanel
-			.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene);
-		}
-	}
 
 	@Override
 	public boolean isCommandLineActive() {
@@ -1051,7 +1037,7 @@ PropertyChangeEventHandlerAPI
 	@Override
 	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
 			EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum rollover) {
-		return host.getFactory(bus, this).createDialogTreePanel(bus, fore,
+		return host.getFactory(bus, this).createDialogTreePanel(this, fore,
 				back, rollover);
 	}
 

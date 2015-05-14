@@ -17,29 +17,27 @@
 package com.github.a2g.core.platforms.html4.mouse;
 
 
-import com.github.a2g.core.event.SaySpeechCallDialogTreeEvent;
+import com.github.a2g.core.interfaces.IMasterPresenterFromDialogTreeMouse;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Label;
 
 
 public class DialogTreeMouseClickHandler implements ClickHandler {
 	private final Label label;
 	private int branchId;
-	private EventBus bus;
+	private IMasterPresenterFromDialogTreeMouse master;
+	
 
-	public DialogTreeMouseClickHandler(EventBus bus, Label label, int branchId) {
+	public DialogTreeMouseClickHandler(IMasterPresenterFromDialogTreeMouse master, Label label, int branchId) {
 		this.label = label;
-		this.bus = bus;
 		this.branchId = branchId;
+		this.master=master;
 	}
 
 	@Override
 	public void onClick(ClickEvent event) {
-		bus.fireEvent(
-				new SaySpeechCallDialogTreeEvent(
-						label.getText(), branchId));
+		master.onSaySpeechCallBranch(label.getText(), branchId);
 
 	}
 }

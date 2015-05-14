@@ -17,11 +17,11 @@
 package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
+import com.github.a2g.core.interfaces.IMasterPresenterFromDialogTreeMouse;
 import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseOutHandler;
 import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
@@ -29,12 +29,14 @@ public class DialogTreePanel extends Grid implements
 IDialogTreePanelFromDialogTreePresenter {
 	ColorEnum rolloverColor;
 	ColorEnum foregroundColor;
+	private IMasterPresenterFromDialogTreeMouse master;
 
-	public DialogTreePanel(EventBus bus, ColorEnum foregroundColor,
+	public DialogTreePanel(IMasterPresenterFromDialogTreeMouse master, ColorEnum foregroundColor,
 			ColorEnum backgroundColor, ColorEnum rolloverColor) {
 		super(4, 1);
 		this.rolloverColor = rolloverColor;
 		this.foregroundColor = foregroundColor;
+		this.master = master;
 
 		getElement().getStyle()
 		.setProperty("Color", foregroundColor.toString());
@@ -51,7 +53,7 @@ IDialogTreePanelFromDialogTreePresenter {
 	}
 
 	@Override
-	public void update(DialogTree dialogTree, final EventBus bus) {
+	public void update(DialogTree dialogTree) {
 		// destroy old
 		for (int i = 0; i < getRowCount(); i++) {
 			this.setWidget(i, 0, null);
@@ -71,7 +73,7 @@ IDialogTreePanelFromDialogTreePresenter {
 					rolloverColor));
 			label.addMouseOutHandler(new DialogTreeMouseOutHandler(label,
 					foregroundColor));
-			label.addClickHandler(new DialogTreeMouseClickHandler(bus, label,
+			label.addClickHandler(new DialogTreeMouseClickHandler(master, label,
 					subBranchId));
 
 		}

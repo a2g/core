@@ -1,7 +1,9 @@
 package com.github.a2g.core.interfaces;
 
-public interface IDialogTreePresenterFromEndAction {
+import com.github.a2g.core.interfaces.action.ISetActiveGuiState;
 
-	void setDialogTreeActive(boolean b);
+public interface IDialogTreePresenterFromEndAction 
+extends ISetActiveGuiState{
 
+	
 }

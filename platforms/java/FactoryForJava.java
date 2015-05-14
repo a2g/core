@@ -18,6 +18,7 @@ package com.github.a2g.core.platforms.java;
 
 import javax.swing.JOptionPane;
 
+import com.github.a2g.core.interfaces.IMasterPresenterFromDialogTreeMouse;
 import com.github.a2g.core.interfaces.ISound;
 import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
@@ -68,8 +69,8 @@ public class FactoryForJava implements IFactory {
 
 	@Override
 	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
-			EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum roll) {
-		return new DialogTreePanelForJava(bus, fore, back, roll);
+			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore, ColorEnum back, ColorEnum roll) {
+		return new DialogTreePanelForJava(master, fore, back, roll);
 	}
 
 	@Override

@@ -36,7 +36,7 @@ import com.github.a2g.core.interfaces.game.IIsAnimation;
 import com.github.a2g.core.interfaces.game.IIsInDebugMode;
 import com.github.a2g.core.interfaces.game.IIsTrue;
 import com.github.a2g.core.interfaces.game.IIsVisible;
-import com.github.a2g.core.interfaces.game.ISetActiveState;
+import com.github.a2g.core.interfaces.game.ISetActiveGuiState;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectCurrent;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleY;
@@ -61,7 +61,7 @@ IGetCurrentScene,
 ISwitchToScene,
 IGetLastScene,
 IIsInDebugMode,
-ISetActiveState,
+ISetActiveGuiState,
 IGetSceneGuiWidth
 // these two are needed for starting animations in the onEveryFrame
 // handler

@@ -464,7 +464,7 @@ IOnMovementBeyondAGate {
 	}
 
 	@Override
-	public void setActiveState(GuiStateEnum state) {
+	public void setActiveGuiState(GuiStateEnum state) {
 		master.setActiveState(state);
 
 	}

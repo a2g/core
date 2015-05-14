@@ -1,7 +1,10 @@
 package com.github.a2g.core.interfaces;
 
-public interface IDialogTreePresenterFromDoBranchAction {
+import com.github.a2g.core.interfaces.action.ISetActiveGuiState;
 
-	void setGuiStateAsDialogTree();
+public interface IDialogTreePresenterFromDoBranchAction 
+extends ISetActiveGuiState
+{
+
 
 }

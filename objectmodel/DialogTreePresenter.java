@@ -28,7 +28,6 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
 public class DialogTreePresenter implements IDialogTreePresenter {
-	private EventBus bus;
 	private DialogTree theDialogTree;
 	private IDialogTreePanelFromDialogTreePresenter view;
 	private String atidOfDialogTreeTalkAnimation;
@@ -36,7 +35,6 @@ public class DialogTreePresenter implements IDialogTreePresenter {
 
 	public DialogTreePresenter(final IHostingPanel panel, EventBus bus,
 			IMasterPresenterFromDialogTree callbacks) {
-		this.bus = bus;
 		this.theDialogTree = new DialogTree();
 		this.view = callbacks.createDialogTreePanel(bus, ColorEnum.Purple,
 				ColorEnum.Black, ColorEnum.Red);
@@ -46,7 +44,7 @@ public class DialogTreePresenter implements IDialogTreePresenter {
 
 	public void clearBranches() {
 		theDialogTree.clear();
-		view.update(theDialogTree, bus);
+		view.update(theDialogTree);
 	}
 
 	public void resetRecordOfSaidSpeech() {
@@ -66,7 +64,7 @@ public class DialogTreePresenter implements IDialogTreePresenter {
 			boolean isAlwaysShown) {
 		if (isAlwaysShown || !recordOfSaidSpeech.contains(lineOfDialog)) {
 			theDialogTree.addSubBranch(subBranchId, lineOfDialog);
-			view.update(theDialogTree, bus);
+			view.update(theDialogTree);
 		}
 	}
 
@@ -84,7 +82,7 @@ public class DialogTreePresenter implements IDialogTreePresenter {
 	}
 
 	public void updateDialogTree(DialogTree theDialogTree, EventBus bus) {
-		view.update(theDialogTree, bus);
+		view.update(theDialogTree);
 
 	}
 

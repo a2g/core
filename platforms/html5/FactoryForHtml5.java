@@ -16,6 +16,7 @@
 
 package com.github.a2g.core.platforms.html5;
 
+import com.github.a2g.core.interfaces.IMasterPresenterFromDialogTreeMouse;
 import com.github.a2g.core.interfaces.ISound;
 import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
@@ -67,11 +68,7 @@ public class FactoryForHtml5 implements IFactory {
 		return new CommandLinePanel(fore, back, roll);
 	}
 
-	@Override
-	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
-			EventBus bus, ColorEnum fore, ColorEnum back, ColorEnum roll) {
-		return new DialogTreePanel(bus, fore, back, roll);
-	}
+	
 
 	@Override
 	public ILoaderPanelFromLoaderPresenter createLoaderPanel(
@@ -130,6 +127,14 @@ public class FactoryForHtml5 implements IFactory {
 	@Override
 	public ISound createSound(String url) {
 		return new SoundForHtml4(url);
+	}
+
+	@Override
+	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
+			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore,
+			ColorEnum back, ColorEnum roll) {
+		return new DialogTreePanel(master, fore, back, roll);
+		
 	}
 
 }
