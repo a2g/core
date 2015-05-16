@@ -27,6 +27,18 @@ public class DialogTree {
 		subBranches = new LinkedList<Integer>();
 		linesOfDialog = new LinkedList<String>();
 	}
+	
+	String getDialogForId(int id)
+	{
+		for(int i=0;i<subBranches.size();i++)
+		{
+			if(subBranches.get(i)==id)
+			{
+				return linesOfDialog.get(i);
+			}
+		}
+		return "";
+	}
 
 	void clear() {
 		subBranches.clear();

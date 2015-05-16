@@ -81,9 +81,14 @@ public class DialogTreePresenter implements IDialogTreePresenter {
 		view.setVisible(isInDialogTreeMode);
 	}
 
-	public void updateDialogTree(DialogTree theDialogTree, EventBus bus) {
+	public void updateDialogTree(DialogTree theDialogTree) {
 		view.update(theDialogTree);
 
+	}
+	
+	String getLineOfDialogForId(int id)
+	{
+		return theDialogTree.getDialogForId(id);
 	}
 
 	public void setScenePixelSize(int width, int i) {

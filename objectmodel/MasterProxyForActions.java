@@ -308,8 +308,8 @@ IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 	}
 
 	@Override
-	public void updateDialogTree(DialogTree theDialogTree, EventBus bus) {
-		master.getDialogTreePresenter().updateDialogTree(theDialogTree, bus);
+	public void updateDialogTree(DialogTree theDialogTree) {
+		master.getDialogTreePresenter().updateDialogTree(theDialogTree);
 
 	}
 

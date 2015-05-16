@@ -28,6 +28,7 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.action.DialogTreeDoDialogBranchAction;
+import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.action.MakeSingleCallAction;
 import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -103,10 +104,12 @@ PropertyChangeEventHandlerAPI
 	private short boundaryCrossObject;
 	private MasterProxyForActions proxyForActions;
 	private Map<String, ISound> mapOfSounds;
+	private boolean isAutoplayCancelled;
 
 	public MasterPresenter(final IHostingPanel panel, EventBus bus,
 			IHostFromMasterPresenter host) {
 		this.bus = bus;
+		isAutoplayCancelled = false;
 		this.timer = null;
 		this.switchTimer = null;
 		this.host = host;
@@ -235,7 +238,7 @@ PropertyChangeEventHandlerAPI
 
 	public void executeActionWithDialogActionRunner(BaseAction a) {
 		if (a == null) {
-			a = new MakeSingleCallAction(createChainRootAction());
+			a = new DoNothingAction(createChainRootAction());
 		}
 
 		dialogActionRunner.runAction(a);
@@ -243,7 +246,7 @@ PropertyChangeEventHandlerAPI
 
 	public void executeActionWithDoCommandActionRunner(BaseAction a) {
 		if (a == null) {
-			a = new MakeSingleCallAction(createChainRootAction());
+			a = new DoNothingAction(createChainRootAction());
 		}
 
 		doCommandActionRunner.runAction(a);
@@ -732,12 +735,19 @@ PropertyChangeEventHandlerAPI
 		AutoplayCommand cmd  = this.host.getNextAutoplayAction();
 		if(cmd!=null)
 		{
-
+			
 			ChainedAction a = null;
 			if(cmd.getVerb()==ConstantsForAPI.DIALOG)
 			{
-
-				saySpeechAndThenExecuteBranchWithBranchId(cmd.getString(), cmd.getBranch());
+				int branchId  = cmd.getBranch();
+				String text = dialogTreePresenter.getLineOfDialogForId(branchId);
+				if(text=="")
+				{
+					isAutoplayCancelled = true;
+					titleCardPresenter.setText("can't say that id currently");
+					return;
+				}
+				saySpeechAndThenExecuteBranchWithBranchId(text, branchId);
 			}
 			else
 			{
@@ -758,8 +768,13 @@ PropertyChangeEventHandlerAPI
 					SentenceItem o1 = new SentenceItem("","",cmd.getObj1());
 					SentenceItem o2 = new SentenceItem("","",cmd.getObj2());
 					a = this.sceneHandlers.onDoCommand(proxyForGameScene,
-							createChainRootAction(), cmd.getVerb(),o1,o2,0,0);
-
+							createChainRootAction(), cmd.getVerb(),o1,o2,cmd.getDouble1(),cmd.getDouble2());
+					if (a instanceof DoNothingAction) {
+						isAutoplayCancelled = true;
+						titleCardPresenter.setText("zction returned do nothing");
+						return;
+				
+					}
 
 					a = replaceDoDialogActionWithOnDialogTreeChain(a);
 				}
@@ -784,7 +799,7 @@ PropertyChangeEventHandlerAPI
 		if (state == IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene||
 			state == IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree) 
 		{
-			if(this.host.isAutoplay())
+			if(this.host.isAutoplay() && !isAutoplayCancelled)
 			{
 				ProcessAutoplayCommand(id);
 			}

@@ -97,7 +97,7 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	}
 
 	public ChainedAction doNothing() {
-		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.DoNothing);
+		DoNothingAction a =  new DoNothingAction(this);
 		return a;
 	}
 

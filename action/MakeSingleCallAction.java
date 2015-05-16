@@ -37,7 +37,6 @@ public class MakeSingleCallAction extends ChainedAction {
 		, SetVisible
 		, SetDisplayName
 		, SetAsInitialAnimation
-		, DoNothing
 		, ShareWinning
 		, SetValue
 		, SetToInitialPosition
@@ -54,11 +53,6 @@ public class MakeSingleCallAction extends ChainedAction {
 	private int intValue;
 	private IScenePresenterFromMakeSingleCallAction scene;
 
-	public MakeSingleCallAction(BaseAction parent) {
-		super(parent, true);
-		this.type = Type.DoNothing;
-	}
-	
 	public MakeSingleCallAction(BaseAction parent, Type type) {
 		super(parent, true);
 		this.type = type;
@@ -120,8 +114,6 @@ public class MakeSingleCallAction extends ChainedAction {
 			return;
 		case SetAsInitialAnimation:
 			scene.setAsAnInitialAnimationByAtid(atid);
-			return;
-		case DoNothing:
 			return;
 		case SetValue:
 			scene.setValue(stringValue, intValue);
