@@ -164,17 +164,19 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 		System.out.println(" walkto-mid " + x + " " + y);
 
 		if (scene.isInANoGoZone(new PointF(x, y))) {
-			// if in a nogozone in the middle of moving
-			// then the delta(inx,y) may be small enough
-			// for us to tell they have moved between two
-			// gate points. And if so, then we can fire
-			scene.fireOnMovementBeyondAGateIfRelevant(new PointF(x, y));
 
 			// and we make sure we only do this once
 			// we don't keep letting the animation try all the points
 			// on the line to it's target, because
 			// some of these will also be behind some other gate.
 			isStopped = true;
+			
+			// if in a nogozone in the middle of moving
+			// then the delta(inx,y) may be small enough
+			// for us to tell they have moved between two
+			// gate points. And if so, then we can fire
+			scene.fireOnMovementBeyondAGateIfRelevant(new PointF(x, y));
+
 			return;
 		}
 
@@ -196,11 +198,19 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 	@Override
 	// method in animation
 	protected void onCompleteGameAction() {
-		if (!scene.isInANoGoZone(new PointF(endX, endY))) {
+		if (scene.isInANoGoZone(new PointF(endX, endY))) {
+			if(!isStopped)
+			{
+				isStopped = true;
+				scene.fireOnMovementBeyondAGateIfRelevant(new PointF(endX, endY));
+			}
+		}else
+		{
 			onUpdateGameAction(1.0);
 			scene.setBaseMiddleXByOtid(getOtid(), endX);
 			scene.setBaseMiddleYByOtid(getOtid(), endY);
-		}
+		} 
+		
 		if (holdLastFrame == false) {
 			if (this.getOtid() != null) {
 

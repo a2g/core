@@ -91,6 +91,7 @@ PropertyChangeEventHandlerAPI
 	private IMasterPanelFromMasterPresenter masterPanel;
 	private ActionRunner dialogActionRunner;
 	private ActionRunner doCommandActionRunner;
+	private ActionRunner onEveryFrameActionRunner;
 
 	private Integer[] theListOfIndexesToInsertAt;
 	private ArrayList<PointF> gatePoints;
@@ -122,7 +123,8 @@ PropertyChangeEventHandlerAPI
 				proxyForActions, proxyForActions, proxyForActions, this, 1);
 		this.dialogActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions,
 				proxyForActions, proxyForActions, proxyForActions, this, 2);
-
+		this.onEveryFrameActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions,
+				proxyForActions, proxyForActions, proxyForActions, this, 3);
 		this.gatePoints = new ArrayList<PointF>();
 		this.gateIds = new ArrayList<Integer>();
 		clearListOfIntegersToInsertAt();
@@ -250,6 +252,14 @@ PropertyChangeEventHandlerAPI
 		}
 
 		doCommandActionRunner.runAction(a);
+	}
+	
+	public void executeActionWithOnEveryFrameActionRunner(BaseAction a) {
+		if (a == null) {
+			a = new DoNothingAction(createChainRootAction());
+		}
+
+		onEveryFrameActionRunner.runAction(a);
 	}
 
 	public void skip() {
@@ -732,6 +742,10 @@ PropertyChangeEventHandlerAPI
  
 	void ProcessAutoplayCommand(int id)
 	{
+		//ignore id==3, which is the oneveryframe action runner
+		if(id==3)
+			return;
+		
 		AutoplayCommand cmd  = this.host.getNextAutoplayAction();
 		if(cmd!=null)
 		{
@@ -866,7 +880,7 @@ PropertyChangeEventHandlerAPI
 	}
 
 	public void executeChainedAction(ChainedAction ba) {
-		executeActionWithDoCommandActionRunner(ba);
+		executeActionWithOnEveryFrameActionRunner(ba);
 	}
 
 	@Override
@@ -1002,13 +1016,12 @@ PropertyChangeEventHandlerAPI
 
 				if (isBetweenSpokesAndOnWrongSide(a, b, tp)) {
 					foundId = gateIds.get(i);
+					this.sceneHandlers.onMovementBeyondAGate(proxyForGameScene, a,b,tp, foundId);
 					break;
 				}
 			}
 		}
-		if (foundId != -1) {
-			this.sceneHandlers.onMovementBeyondAGate(proxyForGameScene, foundId);
-		}
+		
 	}
 
 	@Override

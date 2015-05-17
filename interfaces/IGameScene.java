@@ -21,6 +21,7 @@ import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.interfaces.IOnFillLoadListImpl.LoadKickStarter;
 import com.github.a2g.core.objectmodel.SentenceItem;
+import com.github.a2g.core.primitive.PointF;
 
 public interface IGameScene extends ConstantsForAPI {
 	public LoadKickStarter onFillLoadList(IOnFillLoadListImpl api);
@@ -37,5 +38,5 @@ public interface IGameScene extends ConstantsForAPI {
 	public BaseDialogTreeAction onDialogTree(IOnDialogTree api,
 			ChainedAction ba, int branch);
 
-	public void onMovementBeyondAGate(IOnMovementBeyondAGate api, int id);
+	public void onMovementBeyondAGate(IOnMovementBeyondAGate api, PointF a, PointF b, PointF tp, int id);
 }
