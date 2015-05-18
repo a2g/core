@@ -12,7 +12,6 @@ import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.primitive.PointF;
-import com.google.gwt.event.shared.EventBus;
 
 public class MasterProxyForActions implements IOnFillLoadList,
 IMasterPresenterFromActions,

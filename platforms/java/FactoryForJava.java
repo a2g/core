@@ -106,8 +106,8 @@ public class FactoryForJava implements IFactory {
 
 	@Override
 	public ISystemAnimation createSystemAnimation(
-			IBaseActionFromSystemAnimation callbacks, boolean isLinear) {
-		return new SystemAnimationForJava(callbacks, isLinear);
+			IBaseActionFromSystemAnimation callbacks ) {
+		return new SystemAnimationForJava(callbacks);
 	}
 
 	@Override

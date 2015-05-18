@@ -18,8 +18,7 @@ public interface IFactory {
 	IVerbsPanelFromVerbsPresenter createVerbsPanel(
 			IVerbsPresenterFromVerbsPanel api, ColorEnum fore, ColorEnum back);
 
-	ISystemAnimation createSystemAnimation(IBaseActionFromSystemAnimation cbs,
-			boolean isLinear);
+	ISystemAnimation createSystemAnimation(IBaseActionFromSystemAnimation cbs);
 
 	ITimer createSystemTimer(IMasterPresenterFromTimer cbs);
 

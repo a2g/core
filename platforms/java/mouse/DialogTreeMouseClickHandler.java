@@ -38,7 +38,7 @@ public class DialogTreeMouseClickHandler extends MouseAdapter {
 	// use mousePressed (not mouseClicked) so allows half-clicks will also be caught
 	@Override
 	public void mousePressed(MouseEvent e) {
-		master.onSaySpeechCallBranch(
-						label.getText(), branchId);
+		master.saySpeechAndThenExecuteBranchWithBranchId(
+						branchId);
 	}
 }

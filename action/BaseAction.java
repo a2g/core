@@ -30,7 +30,7 @@ import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.interfaces.IActionRunnerFromBaseAction;
-import com.github.a2g.core.interfaces.IFactory;
+import com.github.a2g.core.interfaces.ISystemAnimation;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
@@ -76,8 +76,9 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 		this.systemAnimation = null;// initd in setFactory
 	}
 
-	void setFactory(IFactory api) {
-		this.systemAnimation = api.createSystemAnimation(this, isLinear);
+	void setSystemAnimation(ISystemAnimation systemAnimation) {
+		this.systemAnimation = systemAnimation;
+		this.systemAnimation.setLinear(isLinear);
 	}
 
 	public BaseDialogTreeAction branch(int branchId, String text) {

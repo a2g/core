@@ -24,9 +24,8 @@ public class SystemAnimationForHtml4 extends
 	boolean isLinear;
 	IBaseActionFromSystemAnimation callbacks;
 
-	public SystemAnimationForHtml4(IBaseActionFromSystemAnimation callbacks,
-			boolean isLinear) {
-		this.isLinear = isLinear;
+	public SystemAnimationForHtml4(IBaseActionFromSystemAnimation callbacks) {
+		this.isLinear = false;
 		this.callbacks = callbacks;
 	}
 
@@ -47,6 +46,12 @@ public class SystemAnimationForHtml4 extends
 	@Override
 	protected void onComplete() {
 		callbacks.onComplete();
+	}
+
+	@Override
+	public void setLinear(boolean isLinear) {
+		this.isLinear = isLinear;
+		
 	}
 
 }

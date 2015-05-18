@@ -112,8 +112,8 @@ implements IFactory {
 
 	@Override
 	public ISystemAnimation createSystemAnimation(
-			IBaseActionFromSystemAnimation callbacks, boolean isLinear) {
-		return new SystemAnimationForHtml4(callbacks, isLinear);
+			IBaseActionFromSystemAnimation callbacks) {
+		return new SystemAnimationForHtml4(callbacks);
 	}
 
 	@Override

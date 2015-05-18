@@ -29,7 +29,6 @@ import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainedAction;
 import com.github.a2g.core.action.DialogTreeDoDialogBranchAction;
 import com.github.a2g.core.action.DoNothingAction;
-import com.github.a2g.core.action.MakeSingleCallAction;
 import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointF;
@@ -411,19 +410,24 @@ PropertyChangeEventHandlerAPI
 		return this.sceneHandlers;
 	}
 
-	public void saySpeechAndThenExecuteBranchWithBranchId(String speech,
-			int branchId) {
-
+	@Override
+	public void saySpeechAndThenExecuteBranchWithBranchId(int branchId) {
+		// get speech before clearing
+		String speech = this.getDialogTreePresenter().getLineOfDialogForId(branchId);
+		
+		// clear the branches
 		this.dialogTreePresenter.clearBranches();
+		
+		// mark speech as said, but not the escape phrase, that is golden.
 		if(branchId!=-1)
 		{
 			this.dialogTreePresenter.markSpeechAsSaid(speech);
 		}
 		String animId = this.dialogTreePresenter.getDialogTreeTalkAnimation();
 		// This is a bit sneaky:
-		// 1. we construct a BaseAction that sas the speech
-		// 2. we pass this to onDialogTree
-		// 3. where the user appends other actions to it
+		// 1. we create a TalkAction as the root of the chain.
+		// 2. we pass this to onDialogTree..
+		// 3. ..where the user appends other actions to it
 		// 4. Then we execute it
 		// Thus it will talk the text, and do what the user prescribes.
 
@@ -446,10 +450,7 @@ PropertyChangeEventHandlerAPI
 		executeActionWithDoCommandActionRunner(a);
 	}
 
-	@Override
-	public void onSaySpeechCallBranch(String speech, int branchId) {
-		saySpeechAndThenExecuteBranchWithBranchId(speech, branchId);
-	}
+	
 
 	public IMasterPanelFromMasterPresenter getMasterPanel() {
 		return masterPanel;
@@ -761,7 +762,7 @@ PropertyChangeEventHandlerAPI
 					titleCardPresenter.setText("can't say that id currently");
 					return;
 				}
-				saySpeechAndThenExecuteBranchWithBranchId(text, branchId);
+				saySpeechAndThenExecuteBranchWithBranchId(branchId);
 			}
 			else
 			{

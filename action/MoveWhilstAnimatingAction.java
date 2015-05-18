@@ -229,7 +229,8 @@ public class MoveWhilstAnimatingAction extends ChainedAction {
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
+	{
 		setSceneForMoveWhilstAnimating(scene);
 
 	}

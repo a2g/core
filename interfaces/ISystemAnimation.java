@@ -21,4 +21,6 @@ public interface ISystemAnimation {
 
 	void run(int i);
 
+	void setLinear(boolean isLinear);
+
 }

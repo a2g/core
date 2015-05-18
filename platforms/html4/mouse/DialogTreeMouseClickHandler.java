@@ -37,7 +37,7 @@ public class DialogTreeMouseClickHandler implements ClickHandler {
 
 	@Override
 	public void onClick(ClickEvent event) {
-		master.onSaySpeechCallBranch(label.getText(), branchId);
+		master.saySpeechAndThenExecuteBranchWithBranchId(branchId);
 
 	}
 }

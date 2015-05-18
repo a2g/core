@@ -25,9 +25,8 @@ public class SystemAnimationForJava extends
 	IBaseActionFromSystemAnimation callbacks;
 	boolean isLinear;
 
-	public SystemAnimationForJava(IBaseActionFromSystemAnimation callbacks,
-			boolean isLinear) {
-		this.isLinear = isLinear;
+	public SystemAnimationForJava(IBaseActionFromSystemAnimation callbacks) {
+		this.isLinear = false;
 		this.callbacks = callbacks;
 	}
 
@@ -48,6 +47,12 @@ public class SystemAnimationForJava extends
 	@Override
 	protected void onComplete() {
 		callbacks.onComplete();
+	}
+
+	@Override
+	public void setLinear(boolean isLinear) {
+		this.isLinear = isLinear;
+		
 	}
 
 }
