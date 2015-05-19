@@ -38,7 +38,6 @@ import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.interfaces.IGameScene;
-import com.github.a2g.core.interfaces.ISystemAnimation;
 import com.github.a2g.core.interfaces.IBaseActionFromSystemAnimation;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.PointF;

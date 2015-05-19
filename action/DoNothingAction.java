@@ -21,12 +21,10 @@ import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.IScenePresenterFromMakeSingleCallAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.ChainedAction;
 
 public class DoNothingAction extends ChainedAction {
-private IScenePresenterFromMakeSingleCallAction scene;
 
 	public DoNothingAction(BaseAction parent) {
 		super(parent, true);
