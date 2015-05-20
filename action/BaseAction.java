@@ -20,37 +20,25 @@ import com.github.a2g.core.action.PlayAnimationAction;
 import com.github.a2g.core.action.PlayAnimationRepeatWhilstVisibleAction;
 import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.action.SetInventoryVisibleAction;
-import com.github.a2g.core.action.SleepAction;
-import com.github.a2g.core.action.SwapPropertyAction;
-import com.github.a2g.core.action.SwitchToAction;
 import com.github.a2g.core.action.DialogTreeBranchAction;
 import com.github.a2g.core.action.DialogTreeEndAction;
 import com.github.a2g.core.action.DialogTreeDoDialogBranchAction;
-import com.github.a2g.core.action.WaitForFrameAction;
-import com.github.a2g.core.action.WalkToAction;
 import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.interfaces.IActionRunnerFromBaseAction;
 import com.github.a2g.core.interfaces.ISystemAnimation;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
-import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.IBaseActionFromSystemAnimation;
-import com.github.a2g.core.objectmodel.SentenceItem;
-import com.github.a2g.core.primitive.PointF;
 
 public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	private ISystemAnimation systemAnimation;
 	private IActionRunnerFromBaseAction callbacks;
 	protected BaseAction parent;
 	private boolean isLinear;
-
-	public enum SwapType {
-		Visibility
-	}
+ 
 
 	// all the abstract have GameAction in them to let
 	// the client know they are dealing with GameAction and not Animation
@@ -328,167 +316,9 @@ public ChainedAction setCurrentAnimationAndFrame(String atid, int frame) {
 		return a;
 	}
 
-	public ChainedAction sleep(int milliseconds) {
-		return new SleepAction(this, milliseconds);
-	}
 
-	public ChainedAction onDoCommand(IGameScene scene, IOnDoCommand api,
-			ChainRootAction ba, int verb, SentenceItem itemA,
-			SentenceItem itemB, double x, double y) {
-		ChainedAction secondStep = scene.onDoCommand(api,
-				api.createChainRootAction(), verb, itemA, itemB, x, y);
-		return subroutine(secondStep);
-	}
 
-	public ChainedAction subroutine(ChainedAction orig) {
-		// find root of orig
-		BaseAction somewhereInOrig = orig;
 
-		while (somewhereInOrig.getParent().getParent() != null) {
-			somewhereInOrig = somewhereInOrig.getParent();
-		}
-		somewhereInOrig.setParent(this);
-		return orig;
-	}
-
-	public ChainedAction swapProperty(short ocodeA, short ocodeB, SwapType type) {
-		return new SwapPropertyAction(this, ocodeA, ocodeB, type);
-	}
-
-	public BaseDialogTreeAction switchTo(String sceneName) {
-		return new SwitchToAction(this, sceneName);
-		// return toReturn;
-	}
-
-	public ChainedAction waitForFrame(short ocode, int frame) {
-		return new WaitForFrameAction(this, ocode, frame);
-	}
-
-	public ChainedAction setInitialAnimation(String atid) {
-		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetAsInitialAnimation);
-		a.setAtid(atid);
-		return a;
-	}
-
-	public ChainedAction walkTo(double x, double y) {
-		boolean isLinear = true;
-		WalkToAction a = new WalkToAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, x, y, 0,
-				isLinear);
-
-		return a;
-	}
-
-	public ChainedAction walkTo(PointF point) {
-		boolean isLinear = true;
-		WalkToAction a = new WalkToAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, point.getX(),
-				point.getY(), 0, isLinear);
-		return a;
-	}
-
-	public ChainedAction walkTo(double x, double y, int delay) {
-		boolean isLinear = true;
-		WalkToAction a = new WalkToAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, x, y, delay,
-				isLinear);
-		return a;
-	}
-
-	public ChainedAction walkTo(PointF point, int delay) {
-		boolean isLinear = true;
-		return new WalkToAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, point.getX(),
-				point.getY(), delay, isLinear);
-	}
-
-	public ChainedAction walkTo(short ocode, double x, double y) {
-		boolean isLinear = true;
-		return new WalkToAction(this, ocode, x, y, 0, isLinear);
-	}
-
-	public ChainedAction walkTo(short ocode, PointF point) {
-		boolean isLinear = true;
-		return new WalkToAction(this, ocode, point.getX(), point.getY(), 0,
-				isLinear);
-	}
-
-	public ChainedAction walkTo(short ocode, double x, double y, int delay) {
-		boolean isLinear = true;
-		return new WalkToAction(this, ocode, x, y, delay, isLinear);
-	}
-
-	public ChainedAction walkTo(short ocode, PointF point, int delay) {
-		boolean isLinear = true;
-		return new WalkToAction(this, ocode, point.getX(), point.getY(), delay,
-				isLinear);
-	}
-
-	public ChainedAction walkAndScroll(double x, double y, int delay) {
-		boolean isLinear = true;
-		return new WalkAndScrollXAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, x, y, delay,
-				isLinear);
-	}
-
-	public ChainedAction walkAndScroll(PointF point, int delay) {
-		boolean isLinear = true;
-		return new WalkAndScrollXAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, point.getX(),
-				point.getY(), delay, isLinear);
-	}
-
-	public ChainedAction walkAndScrollNonBlocking(double x, double y, int delay) {
-		boolean isLinear = true;
-		WalkAndScrollXAction a = new WalkAndScrollXAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, x, y, delay,
-				isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction walkAndScrollNonBlocking(PointF point, int delay) {
-		boolean isLinear = true;
-		WalkAndScrollXAction a = new WalkAndScrollXAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, point.getX(),
-				point.getY(), delay, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction walkAndScroll(short ocode, double x, double y,
-			int delay) {
-		boolean isLinear = true;
-		return new WalkAndScrollXAction(this, ocode, x, y, delay, isLinear);
-	}
-
-	public ChainedAction walkAndScroll(short ocode, PointF point, int delay) {
-		boolean isLinear = true;
-		return new WalkAndScrollXAction(this, ocode, point.getX(),
-				point.getY(), delay, isLinear);
-	}
-
-	public ChainedAction walkAndScrollNonBlocking(short ocode, double x,
-			double y, int delay) {
-		boolean isLinear = true;
-		WalkAndScrollXAction a = new WalkAndScrollXAction(this, ocode, x, y,
-				delay, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction walkAndScrollNonBlocking(short ocode, PointF point,
-			int delay) {
-		boolean isLinear = true;
-		WalkAndScrollXAction a = new WalkAndScrollXAction(this, ocode,
-				point.getX(), point.getY(), delay, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction showTitleCard(String text) {
-		return new TitleCardAction(this, text);
-	}
 
 	public void cancel() {
 		systemAnimation.cancel();
@@ -499,175 +329,5 @@ public ChainedAction setCurrentAnimationAndFrame(String atid, int frame) {
 		systemAnimation.run(i);
 
 	}
-
-	public ChainedAction playAnimationNonBlockingHoldLastFrame(
-			String animationCode) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(this, animationCode,
-				isLinear);
-
-		a.setHoldLastFrame(true);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction setValue(String string, int i) {
-		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetValue);
-		a.setString(string);
-		a.setInt(i);
-		return a;
-	}
-
-	public ChainedAction moveWhilstAnimatingLinear(short objId, double x,
-			double y) {
-		boolean isLinear = true;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this,
-				objId, isLinear);
-		a.setEndX(x);
-		a.setEndY(y);
-		return a;
-	}
-
-	public ChainedAction moveWhilstAnimatingLinearNonBlocking(short ocode,
-			double x, double y) {
-		boolean isLinear = true;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this,
-				ocode, isLinear);
-		a.setEndX(x);
-		a.setEndY(y);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction moveWhilstAnimating(short objId, double x, double y) {
-		boolean isLinear = false;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this,
-				objId, isLinear);
-		a.setEndX(x);
-		a.setEndY(y);
-		return a;
-	}
-
-	public ChainedAction moveWhilstAnimatingInY(short objId, double y) {
-		boolean isLinear = false;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this,
-				objId, isLinear);
-		a.setEndY(y);
-		return a;
-	}
-
-	public ChainedAction moveWhilstAnimatingNonBlocking(short objId, double x,
-			double y) {
-		boolean isLinear = false;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this,
-				objId, isLinear);
-		a.setEndX(x);
-		a.setEndY(y);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction moveCameraToNewXPosition(double x,
-			double durationInSecs) {
-		boolean isLinear = false;
-		ScrollCameraXAction a = new ScrollCameraXAction(this, x,
-				durationInSecs, isLinear);
-		a.setNonBlocking(false);
-		return a;
-	}
-
-	public ChainedAction moveCameraToNewXPositionNonBlocking(double x,
-			double durationInSecs) {
-		boolean isLinear = false;
-		ScrollCameraXAction a = new ScrollCameraXAction(this, x,
-				durationInSecs, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction moveCameraToNewYPosition(double y,
-			double durationInSecs) {
-		boolean isLinear = false;
-		ScrollCameraYAction a = new ScrollCameraYAction(this, y,
-				durationInSecs, isLinear);
-		a.setNonBlocking(false);
-		return a;
-	}
-
-	public ChainedAction moveCameraToNewYPositionNonBlocking(double y,
-			double durationInSecs) {
-		boolean isLinear = false;
-		ScrollCameraYAction a = new ScrollCameraYAction(this, y,
-				durationInSecs, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainedAction hideAll() {
-		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.HideAll);
-		return a;
-	}
-
-	public ChainedAction setToInitialPosition(short ocode) {
-		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetToInitialPosition);
-		a.setOCode(ocode);
-		return a;
-	}
-
-	public ChainedAction alignBaseMiddleOfOldFrameToFrameOfNewAnimation(
-			String atid, int frame) {
-		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.AlignBaseMiddle);
-		a.setAtid(atid);
-		a.setInt(frame);
-		return a;
-	}
-
-	public ChainedAction alignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation(
-			String atid) {
-		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.AlignBaseMiddle);
-		a.setAtid(atid);
-		a.setInt(0);
-		return a;
-	}
-
-	public ChainedAction alignBaseMiddleOfOldFrameToLastFrameOfNewAnimation(
-			String atid) {
-		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.AlignBaseMiddle);
-		a.setAtid(atid);
-		a.setInt(-17);
-		return a;
-	}
-
-	public ChainedAction share(String string) {
-		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.ShareWinning);
-		a.setString(string);
-		return a;
-	}
-	
-
-	public ChainedAction setSceneTalker(String atid) {
-		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetSceneTalker);
-		a.setAtid(atid);
-		return a;
-	}
-	
-	public ChainedAction quit()
-	{
-		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.Quit);
-		return a;
-	}
-	
-	public ChainedAction playSound(String stid)
-	{
-		PlaySoundAction a =  new PlaySoundAction(this, stid);
-		return a;
-	}
-	public ChainedAction playSoundNonBlocking(String stid)
-	{
-		PlaySoundAction a =  new PlaySoundAction(this, stid);
-		a.setParallel(true);
-		return a;
-	}
-
 
 }
