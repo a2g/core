@@ -36,6 +36,8 @@ public class AutoplayCommandQueue
 	{
 		if(!currentSet.isEmpty())
 			return currentSet.removeFirst();
+		if(solutions.isEmpty())
+			return null;
 		getNextSet(solutions.getFirst().getNext(currentIndexIntoFirst++));
 		if(!currentSet.isEmpty())
 			return currentSet.removeFirst();

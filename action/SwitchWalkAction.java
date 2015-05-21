@@ -26,7 +26,7 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromWalkAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-public class SwitchWalkAction extends MoveWhilstAnimatingAction {
+public class SwitchWalkAction extends SwitchMoveWhilstAnimatingAction {
 	private IScenePresenterFromWalkAction scene;
 
 	public SwitchWalkAction(BaseAction parent, short ocode, double endX,
