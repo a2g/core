@@ -16,8 +16,13 @@
 
 package com.github.a2g.core.action;
 
-public abstract class ChainedAction extends BaseActionDecorated {
-	protected ChainedAction(BaseAction parent, boolean isLinear) {
-		super(parent, isLinear);
+import com.github.a2g.core.action.BaseAction;
+
+public abstract class ChainEndAction extends BaseAction
+{
+
+	ChainEndAction(BaseAction parent) {
+		super(parent, true);
+
 	}
 }

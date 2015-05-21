@@ -17,7 +17,6 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromBranchAction;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
@@ -25,15 +24,17 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-public class DialogTreeBranchAction extends BaseDialogTreeAction {
+public class DialogTreeBranchAction extends DialogChainableAction {
 
 	private String text;
 	private int branchId;
 	private boolean isAlwaysPresent;
 	private IDialogTreePresenterFromBranchAction dialogTree;
+	private boolean isOkToAdd;
 
-	public DialogTreeBranchAction(BaseAction parent, String text, int branchId) {
-		super(parent);
+	public DialogTreeBranchAction(BaseAction parent, String text, int branchId, boolean isOkToAdd) {
+		super(parent, true);
+		this.isOkToAdd = isOkToAdd;
 		this.setBranchId(branchId);
 		this.setText(text);
 		isAlwaysPresent = false;
@@ -53,8 +54,12 @@ public class DialogTreeBranchAction extends BaseDialogTreeAction {
 	}
 
 	@Override
-	protected void onCompleteGameAction() {
-		dialogTree.addBranch(branchId, text, isAlwaysPresent);
+	protected boolean onCompleteGameAction() {
+		if(isOkToAdd)
+		{
+			dialogTree.addBranch(branchId, text, isAlwaysPresent);
+		}
+		return false;
 	}
 
 	@Override

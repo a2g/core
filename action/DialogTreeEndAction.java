@@ -17,7 +17,6 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromEndAction;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
@@ -26,11 +25,11 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter.GuiStateEnum;
 
-public class DialogTreeEndAction extends BaseDialogTreeAction {
+public class DialogTreeEndAction extends DialogChainEndAction{
 	private IDialogTreePresenterFromEndAction dialogTree;
 
 	public DialogTreeEndAction(BaseAction parent) {
-		super(parent);
+		super(parent );
 	}
 
 	@Override
@@ -47,8 +46,9 @@ public class DialogTreeEndAction extends BaseDialogTreeAction {
 	}
 
 	@Override
-	protected void onCompleteGameAction() {
+	protected boolean onCompleteGameAction() {
 		dialogTree.setActiveGuiState(GuiStateEnum.ActiveScene);
+		return false;
 	}
 
 	@Override

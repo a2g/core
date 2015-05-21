@@ -1,7 +1,7 @@
 package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.action.ChainRootAction;
-import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.interfaces.ILoad;
@@ -470,7 +470,7 @@ IOnMovementBeyondAGate {
 	}
 
 	@Override
-	public void executeChainedAction(ChainedAction ba) {
+	public void executeChainedAction(ChainableAction ba) {
 		master.executeChainedAction(ba);
 
 	}

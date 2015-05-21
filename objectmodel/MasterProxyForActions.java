@@ -116,8 +116,8 @@ IDialogTreePresenterFromActions, ITitleCardPresenterFromActions {
 	}
 
 	@Override
-	public void fireOnMovementBeyondAGateIfRelevant(PointF point) {
-		master.fireOnMovementBeyondAGateIfRelevant(point);
+	public boolean fireOnMovementBeyondAGateIfRelevant(PointF point) {
+		return master.fireOnMovementBeyondAGateIfRelevant(point);
 
 	}
 

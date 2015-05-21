@@ -26,13 +26,15 @@ import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainRootAction;
-import com.github.a2g.core.action.ChainedAction;
-import com.github.a2g.core.action.DialogTreeDoDialogBranchAction;
+import com.github.a2g.core.action.ChainableAction;
+import com.github.a2g.core.action.ActivateDialogTreeModeAction;
+import com.github.a2g.core.action.DialogChainRootAction;
+import com.github.a2g.core.action.DialogTreeChainToAction;
+import com.github.a2g.core.action.DialogTreeTalkAction;
 import com.github.a2g.core.action.DoNothingAction;
-import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointF;
-import com.github.a2g.core.action.BaseDialogTreeAction;
+import com.github.a2g.core.action.DecoratedForDialogBaseAction;
 import com.github.a2g.core.event.PropertyChangeEvent;
 import com.github.a2g.core.event.PropertyChangeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
@@ -432,10 +434,10 @@ PropertyChangeEventHandlerAPI
 		// Thus it will talk the text, and do what the user prescribes.
 
 		// String animId = getDialogTreeGui().setBranchVisited(branchId);
-		TalkAction talk = new TalkAction(createChainRootAction(), animId, speech);
-		BaseDialogTreeAction actionChain = sceneHandlers.onDialogTree(
+		DialogTreeTalkAction talk = new DialogTreeTalkAction(createDialogChainRootAction(), animId, speech);
+		BaseAction actionChain = sceneHandlers.onDialogTree(
 				proxyForGameScene, talk, branchId);
-		ChainedAction  actionChain2 = replaceDoDialogActionWithOnDialogTreeChain(actionChain);
+		BaseAction  actionChain2 = replaceDialogChainToActionWithOnDialogTreeChain(actionChain);
 		
 		executeActionWithDialogActionRunner(actionChain2);
 	}
@@ -710,11 +712,23 @@ PropertyChangeEventHandlerAPI
 		
 		return new SentenceItem(v.getdisplayText(), v.getVtid(), vcode);
 	}
-	ChainedAction replaceDoDialogActionWithOnDialogTreeChain(ChainedAction a)
+	
+	BaseAction replaceDialogChainToActionWithOnDialogTreeChain(BaseAction a)
 	{
-		if (a instanceof DialogTreeDoDialogBranchAction) {
-			int branchId = ((DialogTreeDoDialogBranchAction) a).getBranchId();
-			ChainedAction b = this.sceneHandlers.onDialogTree(proxyForGameScene, a, branchId);
+		if (a instanceof DialogTreeChainToAction) {
+			int branchId = ((DialogTreeChainToAction) a).getBranchId();
+			DecoratedForDialogBaseAction d = createDialogChainRootAction();
+			BaseAction b = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
+			return b;
+		}
+		return a;
+	}
+	BaseAction replaceDoDialogActionWithOnDialogTreeChain(BaseAction a)
+	{
+		if (a instanceof ActivateDialogTreeModeAction) {
+			int branchId = ((ActivateDialogTreeModeAction) a).getBranchId();
+			DecoratedForDialogBaseAction d = createDialogChainRootAction();
+			BaseAction b = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
 			return b;
 		}
 		return a;
@@ -725,7 +739,7 @@ PropertyChangeEventHandlerAPI
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,
 			SentenceItem sentenceA, SentenceItem sentenceB, double x, double y) {
 
-		ChainedAction a = this.sceneHandlers.onDoCommand(proxyForGameScene,
+		BaseAction a = this.sceneHandlers.onDoCommand(proxyForGameScene,
 				createChainRootAction(), verbAsCode, sentenceA, sentenceB, x
 				+ scenePresenter.getCameraX(),
 				y + scenePresenter.getCameraY());
@@ -751,7 +765,7 @@ PropertyChangeEventHandlerAPI
 		if(cmd!=null)
 		{
 			
-			ChainedAction a = null;
+			BaseAction a = null;
 			if(cmd.getVerb()==ConstantsForAPI.DIALOG)
 			{
 				int branchId  = cmd.getBranch();
@@ -879,8 +893,13 @@ PropertyChangeEventHandlerAPI
 		ChainRootAction npa = new ChainRootAction();
 		return npa;
 	}
+	
+	public DialogChainRootAction createDialogChainRootAction() {
+		DialogChainRootAction npa = new DialogChainRootAction();
+		return npa;
+	}
 
-	public void executeChainedAction(ChainedAction ba) {
+	public void executeChainedAction(ChainableAction ba) {
 		executeActionWithOnEveryFrameActionRunner(ba);
 	}
 
@@ -1004,7 +1023,8 @@ PropertyChangeEventHandlerAPI
 	}
 
 	@Override
-	public void fireOnMovementBeyondAGateIfRelevant(PointF tp) {
+	public boolean fireOnMovementBeyondAGateIfRelevant(PointF tp) 
+	{
 		int foundId = -1;
 		if (gatePoints.size() > 2) {
 			int size = gateIds.size();
@@ -1018,11 +1038,11 @@ PropertyChangeEventHandlerAPI
 				if (isBetweenSpokesAndOnWrongSide(a, b, tp)) {
 					foundId = gateIds.get(i);
 					this.sceneHandlers.onMovementBeyondAGate(proxyForGameScene, a,b,tp, foundId);
-					break;
+					return true;
 				}
 			}
 		}
-		
+		return false;
 	}
 
 	@Override

@@ -26,10 +26,10 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromWalkAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-public class WalkAction extends MoveWhilstAnimatingAction {
+public class SwitchWalkAction extends MoveWhilstAnimatingAction {
 	private IScenePresenterFromWalkAction scene;
 
-	public WalkAction(BaseAction parent, short ocode, double endX,
+	public SwitchWalkAction(BaseAction parent, short ocode, double endX,
 			double endY, int delay, boolean isLinear) {
 		super(parent, ocode, isLinear);
 		super.setEndX(endX);

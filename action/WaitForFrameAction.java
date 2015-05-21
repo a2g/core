@@ -17,7 +17,7 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
@@ -25,7 +25,7 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromWaitAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-public class WaitForFrameAction extends ChainedAction {
+public class WaitForFrameAction extends ChainableAction {
 	private IScenePresenterFromWaitAction scene;
 	private int frame;
 	private short ocode;
@@ -58,7 +58,8 @@ public class WaitForFrameAction extends ChainedAction {
 	}
 
 	@Override
-	protected void onCompleteGameAction() {
+	protected boolean onCompleteGameAction() {
+		return false;
 	}
 
 	@Override

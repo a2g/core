@@ -17,22 +17,18 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
-import com.github.a2g.core.interfaces.IDialogTreePresenterFromDoBranchAction;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
-import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-public class DialogTreeDoDialogBranchAction extends BaseDialogTreeAction {
+public class DialogTreeChainToAction extends DialogChainEndAction {
 
 	private int branchId;
-	private IDialogTreePresenterFromDoBranchAction dialogTree;
 
-	public DialogTreeDoDialogBranchAction(BaseAction parent, int branchId) {
-		super(parent);
+	public DialogTreeChainToAction(BaseAction parent, int branchId) {
+		super(parent );
 		this.branchId = branchId;
 	}
 
@@ -50,9 +46,9 @@ public class DialogTreeDoDialogBranchAction extends BaseDialogTreeAction {
 	}
 
 	@Override
-	protected void onCompleteGameAction() {
-		dialogTree.setActiveGuiState(GuiStateEnum.DialogTree);
+	protected boolean onCompleteGameAction() {
 		// do nothing, this is a placeholder that results in a large chained action
+		return false;
 	}
 
 	@Override
@@ -69,16 +65,12 @@ public class DialogTreeDoDialogBranchAction extends BaseDialogTreeAction {
 		return branchId;
 	}
 
-	public void setDialogTree(IDialogTreePresenterFromDoBranchAction dialogTree) {
-		this.dialogTree = dialogTree;
-	}
 
 	@Override
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
-		setDialogTree(dialogTree);
 
 	}
 

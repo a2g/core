@@ -24,13 +24,11 @@ import com.google.gwt.user.client.ui.Label;
 
 
 public class DialogTreeMouseClickHandler implements ClickHandler {
-	private final Label label;
 	private int branchId;
 	private IMasterPresenterFromDialogTreeMouse master;
 	
 
 	public DialogTreeMouseClickHandler(IMasterPresenterFromDialogTreeMouse master, Label label, int branchId) {
-		this.label = label;
 		this.branchId = branchId;
 		this.master=master;
 	}

@@ -23,9 +23,8 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromMakeSingleCallAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-import com.github.a2g.core.action.ChainableAction;
 
-public class MakeSingleCallAction extends ChainableAction {
+public class DialogTreeMakeSingleCallAction extends DialogChainableAction {
 	enum Type 
 	{
 		SetBaseMiddleX
@@ -43,6 +42,7 @@ public class MakeSingleCallAction extends ChainableAction {
 		, SetSceneTalker
 		, SetCurrentAnimationAndFrame
 		, Quit
+		, Sleep
 	}
 	private Type type;
 	private double d;
@@ -52,10 +52,12 @@ public class MakeSingleCallAction extends ChainableAction {
 	private String stringValue;
 	private int intValue;
 	private IScenePresenterFromMakeSingleCallAction scene;
+	private int milliseconds;
 
-	public MakeSingleCallAction(BaseAction parent, Type type) {
+	public DialogTreeMakeSingleCallAction(BaseAction parent, Type type) {
 		super(parent, true);
 		this.type = type;
+		this.milliseconds = 1;
 	}
 	
 	void setDouble(double d){ this.d =d ;}
@@ -67,7 +69,11 @@ public class MakeSingleCallAction extends ChainableAction {
 
 	@Override
 	public void runGameAction() {
-		super.run(1);
+		super.run(milliseconds);
+	}
+	void setMilliseconds(int milliseconds)
+	{
+		this.milliseconds = milliseconds;
 	}
 
 	@Override
@@ -134,6 +140,11 @@ public class MakeSingleCallAction extends ChainableAction {
 			return false;
 		case Quit:
 			scene.quit();
+		case Sleep:
+			//do nothing, the "sleep" happened in the animation duration.
+			break;
+		default:
+			break;
 		}
 		return false;
 	}

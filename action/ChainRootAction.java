@@ -26,9 +26,9 @@ import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 /*
  * ChainRootAction is identified by having a null parent.
  */
-public class ChainRootAction extends BaseDialogTreeAction {
+public class ChainRootAction extends DecoratedForSceneBaseAction {
 	public ChainRootAction() {
-		super(null);
+		super(null, true);
 	}
 
 	@Override
@@ -37,7 +37,8 @@ public class ChainRootAction extends BaseDialogTreeAction {
 	}
 
 	@Override
-	protected void onCompleteGameAction() {
+	protected boolean onCompleteGameAction() {
+		return false;
 	}
 
 	@Override
@@ -63,6 +64,10 @@ public class ChainRootAction extends BaseDialogTreeAction {
 		return;// the chain root doesn't need them
 
 	}
+
+	
+
+	
 
 
 }

@@ -17,46 +17,41 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromDoBranchAction;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.ITitleCardPresenterFromTitleCardAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-public class TitleCardAction extends ChainableAction {
-	private ITitleCardPresenterFromTitleCardAction titleCard;
-	String text;
+public class ActivateDialogTreeModeAction extends BaseAction {
 
-	public TitleCardAction(BaseAction parent, String text) {
+	private int branchId;
+	private IDialogTreePresenterFromDoBranchAction dialogTree;
+
+	public ActivateDialogTreeModeAction(BaseAction parent, int branchId) {
 		super(parent, true);
-		this.text = text;
+		this.branchId = branchId;
+	}
+
+	@Override
+	public void onUpdate(double progress) {
 	}
 
 	@Override
 	public void runGameAction() {
-
-		if (text.length() > 0) {
-			double totalInMilliseconds = 4 * titleCard
-					.getPopupDisplayDuration() * 1000;
-
-			titleCard.displayTitleCard(text);
-			this.run((int) totalInMilliseconds);
-		} else {
-			titleCard.displayTitleCard("");
-			this.run(1);
-		}
+		super.run(1);
 	}
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		titleCard.displayTitleCard(text);
 	}
 
 	@Override
 	protected boolean onCompleteGameAction() {
-		titleCard.displayTitleCard("");
+		dialogTree.setActiveGuiState(GuiStateEnum.DialogTree);
+		// do nothing, this is a placeholder that results in a large chained action
 		return false;
 	}
 
@@ -66,8 +61,16 @@ public class TitleCardAction extends ChainableAction {
 		return false;
 	}
 
-	public void setTitleCard(ITitleCardPresenterFromTitleCardAction titleCard) {
-		this.titleCard = titleCard;
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
+	}
+
+	public int getBranchId() {
+		return branchId;
+	}
+
+	public void setDialogTree(IDialogTreePresenterFromDoBranchAction dialogTree) {
+		this.dialogTree = dialogTree;
 	}
 
 	@Override
@@ -75,7 +78,7 @@ public class TitleCardAction extends ChainableAction {
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
-		setTitleCard(titleCard);
+		setDialogTree(dialogTree);
 
 	}
 

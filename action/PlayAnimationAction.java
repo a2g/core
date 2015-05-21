@@ -23,9 +23,9 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromPlayAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.action.ChainableAction;
 
-public class PlayAnimationAction extends ChainedAction {
+public class PlayAnimationAction extends ChainableAction {
 	private String atid;
 	private String otid;
 	private boolean isBackwards;
@@ -61,7 +61,7 @@ public class PlayAnimationAction extends ChainedAction {
 	}
 
 	@Override
-	protected void onCompleteGameAction() {
+	protected boolean onCompleteGameAction() {
 
 		System.out.println("ActionRunner::done " + atid + " is this length: "
 				+ scene.getNumberOfFramesByAtid(atid));
@@ -71,6 +71,7 @@ public class PlayAnimationAction extends ChainedAction {
 		if (!this.holdLastFrame) {
 			scene.setToInitialAnimationWithoutChangingFrameByOtid(otid);
 		}
+		return false;
 	}
 
 	public void setBackwards(boolean isBackwards) {

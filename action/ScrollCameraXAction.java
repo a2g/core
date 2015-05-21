@@ -17,7 +17,7 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
@@ -25,7 +25,7 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromScrollAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-public class ScrollCameraXAction extends ChainedAction {
+public class ScrollCameraXAction extends ChainableAction {
 	private IScenePresenterFromScrollAction scene;
 	private String obj;// set in constructor
 
@@ -69,8 +69,9 @@ public class ScrollCameraXAction extends ChainedAction {
 
 	@Override
 	// method in animation
-	protected void onCompleteGameAction() {
+	protected boolean onCompleteGameAction() {
 		scene.setCameraX(endX);
+		return false;
 	}
 
 	@Override

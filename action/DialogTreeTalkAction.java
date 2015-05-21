@@ -19,6 +19,7 @@ package com.github.a2g.core.action;
 import java.util.ArrayList;
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.interfaces.IChainRootForDialog;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
@@ -26,9 +27,9 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromTalkAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromTalkAction;
-import com.github.a2g.core.action.ChainableAction;
 
-public class TalkAction extends ChainableAction {
+public class DialogTreeTalkAction extends DialogChainableAction 
+implements IChainRootForDialog{
 	private ArrayList<String> speech;
 	private ArrayList<Double> startingTimeForEachLine;
 	private double totalDurationInSeconds;
@@ -47,8 +48,8 @@ public class TalkAction extends ChainableAction {
 		True, False, FromAPI
 	}
 
-	public TalkAction(BaseAction parent, String atid, String fullSpeech) {
-		super(parent, true);
+	public DialogTreeTalkAction(BaseAction parent, String atid, String fullSpeech) {
+		super(parent,true);
 		this.numberOfFramesTotal = 0;
 		this.nonIncrementing = NonIncrementing.False;
 		this.isHoldLastFrame = false;
@@ -107,7 +108,7 @@ public class TalkAction extends ChainableAction {
 			rollingStartingTimeForLine += getSecondsForLine(line);
 		}
 		
-		if(this.nonIncrementing==TalkAction.NonIncrementing.FromAPI)
+		if(this.nonIncrementing==DialogTreeTalkAction.NonIncrementing.FromAPI)
 		{
 			this.nonIncrementing = master.isSayNonIncrementing()? NonIncrementing.True : NonIncrementing.False;
 		}
@@ -147,7 +148,7 @@ public class TalkAction extends ChainableAction {
 		}
 
 		boolean visible = true;
-		scene.setStateOfPopup(atid, visible, speech.get(0), this);
+		scene.setStateOfPopup(atid, visible, speech.get(0), null);
 		this.run((int)(totalDurationInSeconds*1000));
 	}
 

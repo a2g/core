@@ -24,13 +24,11 @@ import java.awt.event.MouseEvent;
 import com.github.a2g.core.interfaces.IMasterPresenterFromDialogTreeMouse;
 
 public class DialogTreeMouseClickHandler extends MouseAdapter {
-	private final Label label;
 	private int branchId;
 	private IMasterPresenterFromDialogTreeMouse master;
 	
 
 	public DialogTreeMouseClickHandler(IMasterPresenterFromDialogTreeMouse master, Label label, int branchId) {
-		this.label = label;
 		this.master = master;
 		this.branchId = branchId;
 	}

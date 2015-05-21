@@ -17,13 +17,12 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainedAction;
 
-public abstract class BaseDialogTreeAction extends ChainedAction {
+public abstract class DialogChainEndAction extends BaseAction
+{
 
-	BaseDialogTreeAction(BaseAction parent) {
+	DialogChainEndAction(BaseAction parent) {
 		super(parent, true);
 
 	}
-
 }

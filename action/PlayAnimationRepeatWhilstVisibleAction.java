@@ -23,9 +23,9 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromPlayAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.action.ChainableAction;
 
-public class PlayAnimationRepeatWhilstVisibleAction extends ChainedAction {
+public class PlayAnimationRepeatWhilstVisibleAction extends ChainableAction {
 	private String atid;
 	private String otid;
 	private IScenePresenterFromPlayAction scene;
@@ -52,7 +52,8 @@ public class PlayAnimationRepeatWhilstVisibleAction extends ChainedAction {
 	}
 
 	@Override
-	protected void onCompleteGameAction() {
+	protected boolean onCompleteGameAction() {
+		return false;
 	}
 
 	@Override

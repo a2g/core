@@ -17,31 +17,30 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.BaseDialogTreeAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromSetInventoryVisibleAction;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.IScenePresenterFromSwitchAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-/* ! This inherits from BaseDialogTreeAction because it is valid to be used as
- *  the last action in a chain that is returned from IGameScene.onDialogTree().
- *  You can use it in all places where you would use a GameAction
- */
-public class SwitchToAction extends BaseDialogTreeAction {
-	private IScenePresenterFromSwitchAction scene;
-	private String switchToThis;
+public class DialogTreeSetInventoryVisibleAction extends DialogChainableAction {
+	private IInventoryPresenterFromSetInventoryVisibleAction inventory;
+	private int icode;
+	private String itid;
+	private boolean isVisible;
 
-	public SwitchToAction(BaseAction parent, String e) {
-		super(parent);
-		this.switchToThis = e;
+	public DialogTreeSetInventoryVisibleAction(BaseAction parent, int icode,
+			boolean isVisible ) {
+		super(parent, true);
+		this.icode = icode;
+		this.isVisible = isVisible;
 	}
 
 	@Override
 	public void runGameAction() {
 
-		super.run(1);
+		run(1);
 	}
 
 	@Override
@@ -49,9 +48,10 @@ public class SwitchToAction extends BaseDialogTreeAction {
 	}
 
 	@Override
-	protected void onCompleteGameAction() {
-
-		scene.switchToScene(this.switchToThis);
+	protected boolean onCompleteGameAction() {
+		itid = inventory.getItidByCode(icode);
+		inventory.setVisibleByItid(itid, this.isVisible);
+		return false;
 
 	}
 
@@ -61,16 +61,18 @@ public class SwitchToAction extends BaseDialogTreeAction {
 		return false;
 	}
 
+	public void setInventory(
+			IInventoryPresenterFromSetInventoryVisibleAction inventory) {
+		this.inventory = inventory;
+	}
+
 	@Override
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
-		setScene(scene);
-	}
+		setInventory(inventory);
 
-	public void setScene(IScenePresenterFromSwitchAction scene) {
-		this.scene = scene;
 	}
 
 }

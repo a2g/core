@@ -13,7 +13,7 @@ public interface IMasterPresenterFromScene {
 
 	void setValue(String name, int i);
 
-	void fireOnMovementBeyondAGateIfRelevant(PointF pointF);
+	boolean fireOnMovementBeyondAGateIfRelevant(PointF pointF);
 
 	boolean isInANoGoZone(PointF pointF);
 }

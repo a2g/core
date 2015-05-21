@@ -50,12 +50,12 @@ public class WalkAndScrollXAction extends WalkAction {
 
 	@Override
 	// on complete walking
-	protected void onCompleteGameAction() {
+	protected boolean onCompleteGameAction() {
 
 		super.onCompleteGameAction();
 
 		scene.setCameraX(startCameraX + this.getEndX() - this.getStartX());
-		;
+		return false;
 
 	}
 

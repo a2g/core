@@ -17,7 +17,7 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainedAction;
+import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
@@ -25,7 +25,7 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromSoundAction;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-public class PlaySoundAction extends ChainedAction {
+public class PlaySoundAction extends ChainableAction {
 	private String stid;
 	private IMasterPresenterFromSoundAction master;
 	private boolean isParallel;
@@ -48,8 +48,9 @@ public class PlaySoundAction extends ChainedAction {
 	}
 
 	@Override
-	protected void onCompleteGameAction() {
+	protected boolean onCompleteGameAction() {
 		master.stopSoundByStid(stid);
+		return false;
 	}
 
 	public void setParallel(boolean isParallel)

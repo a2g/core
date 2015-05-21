@@ -21,17 +21,25 @@ import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromSwitchAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-import com.github.a2g.core.action.ChainableAction;
 
-public class DoNothingAction extends ChainableAction {
+/* ! This inherits from BaseDialogTreeAction because it is valid to be used as
+ *  the last action in a chain that is returned from IGameScene.onDialogTree().
+ *  You can use it in all places where you would use a GameAction
+ */
+public class SwitchHardAction extends BaseAction {
+	private IScenePresenterFromSwitchAction scene;
+	private String switchToThis;
 
-	public DoNothingAction(BaseAction parent) {
-		super(parent, true);
+	public SwitchHardAction(BaseAction parent, String e) {
+		super(parent,true);
+		this.switchToThis = e;
 	}
-	
+
 	@Override
 	public void runGameAction() {
+
 		super.run(1);
 	}
 
@@ -41,7 +49,9 @@ public class DoNothingAction extends ChainableAction {
 
 	@Override
 	protected boolean onCompleteGameAction() {
-		return false;
+
+		scene.switchToScene(this.switchToThis);
+		return true;
 	}
 
 	@Override
@@ -50,14 +60,16 @@ public class DoNothingAction extends ChainableAction {
 		return false;
 	}
 
-
 	@Override
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+		setScene(scene);
 	}
-	
-	
- 
+
+	public void setScene(IScenePresenterFromSwitchAction scene) {
+		this.scene = scene;
+	}
+
 }

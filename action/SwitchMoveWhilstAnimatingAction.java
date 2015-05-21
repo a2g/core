@@ -23,8 +23,9 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromMoveAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
+import com.github.a2g.core.primitive.PointF;
 
-public class MoveWhilstAnimatingAction extends ChainableAction{
+public class SwitchMoveWhilstAnimatingAction extends BaseAction {
 	private IScenePresenterFromMoveAction scene;
 
 	private short ocode;
@@ -44,9 +45,11 @@ public class MoveWhilstAnimatingAction extends ChainableAction{
 	private boolean isBackwards;
 	private boolean holdLastFrame;
 
+	private boolean isStopped;
+	private boolean isExitedThruGate;
 	public static final short DEFAULT_WALK_OBJECT = -1;
 
-	public MoveWhilstAnimatingAction(BaseAction parent, short ocode,
+	public SwitchMoveWhilstAnimatingAction(BaseAction parent, short ocode,
 			boolean isLinear) {
 
 		super(parent, isLinear);
@@ -60,6 +63,8 @@ public class MoveWhilstAnimatingAction extends ChainableAction{
 		this.isParallel = false;
 		this.isBackwards = false;
 		this.holdLastFrame = true;
+		this.isStopped = false;
+		this.isExitedThruGate = false;
 	}
 
 	String getOtid() {
@@ -144,6 +149,8 @@ public class MoveWhilstAnimatingAction extends ChainableAction{
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
+		if (isStopped)
+			return;
 		if (progress > 0 && progress < 1) {
 
 			progress = progress * 1.0;
@@ -152,6 +159,23 @@ public class MoveWhilstAnimatingAction extends ChainableAction{
 		double y = this.startY + progress * (this.endY - this.startY);
 
 		System.out.println(" walkto-mid " + x + " " + y);
+
+		if (scene.isInANoGoZone(new PointF(x, y))) {
+
+			// and we make sure we only do this once
+			// we don't keep letting the animation try all the points
+			// on the line to it's target, because
+			// some of these will also be behind some other gate.
+			isStopped = true;
+			
+			// if in a nogozone in the middle of moving
+			// then the delta(inx,y) may be small enough
+			// for us to tell they have moved between two
+			// gate points. And if so, then we can fire
+			isExitedThruGate = scene.fireOnMovementBeyondAGateIfRelevant(new PointF(x, y));
+
+			return;
+		}
 
 		scene.setBaseMiddleXByOtid(getOtid(), x);
 		scene.setBaseMiddleYByOtid(getOtid(), y);
@@ -171,18 +195,25 @@ public class MoveWhilstAnimatingAction extends ChainableAction{
 	@Override
 	// method in animation
 	protected boolean onCompleteGameAction() { 
-
-		onUpdateGameAction(1.0);
-		scene.setBaseMiddleXByOtid(getOtid(), endX);
-		scene.setBaseMiddleYByOtid(getOtid(), endY);
-
+		if (scene.isInANoGoZone(new PointF(endX, endY))) {
+			if(!isStopped)
+			{
+				isStopped = true;
+				isExitedThruGate = scene.fireOnMovementBeyondAGateIfRelevant(new PointF(endX, endY));
+			}
+		}else
+		{
+			onUpdateGameAction(1.0);
+			scene.setBaseMiddleXByOtid(getOtid(), endX);
+			scene.setBaseMiddleYByOtid(getOtid(), endY);
+		} 
 		
 		if (holdLastFrame == false) {
 			if (this.getOtid() != null) {
 				scene.setToInitialAnimationWithoutChangingFrameByOtid(getOtid());
 			}
 		}
-		return false;
+		return isExitedThruGate;
 	}
 
 	@Override

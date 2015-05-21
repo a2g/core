@@ -17,47 +17,39 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.ITitleCardPresenterFromTitleCardAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-public class TitleCardAction extends ChainableAction {
-	private ITitleCardPresenterFromTitleCardAction titleCard;
-	String text;
-
-	public TitleCardAction(BaseAction parent, String text) {
-		super(parent, true);
-		this.text = text;
+/*
+ * DialogChainRootAction is identified by having a null parent.
+ */
+public class DialogChainRootAction 
+extends DialogChainableAction 
+{
+	public DialogChainRootAction() {
+		super(null,true );
 	}
 
 	@Override
 	public void runGameAction() {
-
-		if (text.length() > 0) {
-			double totalInMilliseconds = 4 * titleCard
-					.getPopupDisplayDuration() * 1000;
-
-			titleCard.displayTitleCard(text);
-			this.run((int) totalInMilliseconds);
-		} else {
-			titleCard.displayTitleCard("");
-			this.run(1);
-		}
-	}
-
-	@Override
-	protected void onUpdateGameAction(double progress) {
-		titleCard.displayTitleCard(text);
+		super.run(1); // the delayed execution trick
 	}
 
 	@Override
 	protected boolean onCompleteGameAction() {
-		titleCard.displayTitleCard("");
-		return false;
+		return true;
+	}
+
+	@Override
+	protected void onUpdateGameAction(double progress) {
+	}
+
+	@Override
+	public void setParent(BaseAction parent) {
+		this.parent = parent;
 	}
 
 	@Override
@@ -66,17 +58,16 @@ public class TitleCardAction extends ChainableAction {
 		return false;
 	}
 
-	public void setTitleCard(ITitleCardPresenterFromTitleCardAction titleCard) {
-		this.titleCard = titleCard;
-	}
-
 	@Override
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
-		setTitleCard(titleCard);
+		return;// the chain root doesn't need them
 
 	}
+
+	
+
 
 }
