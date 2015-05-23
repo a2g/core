@@ -28,6 +28,7 @@ import com.google.gwt.canvas.dom.client.CssColor;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.TalkAction;
+import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ICommandLinePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.IScenePresenterFromScenePanel;
@@ -315,7 +316,7 @@ ImagePanelAPI
 
 	@Override
 	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
-			String speech, Rect pixels, Point mouth, TalkAction sayAction) {
+			String speech, Rect pixels, Point mouth, TalkPerformer talkPerformer) {
 		// TODO Auto-generated method stub
 		
 	}

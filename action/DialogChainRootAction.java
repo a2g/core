@@ -40,7 +40,7 @@ extends DialogChainableAction
 
 	@Override
 	protected boolean onCompleteGameAction() {
-		return true;
+		return false;
 	}
 
 	@Override

@@ -16,182 +16,48 @@
 
 package com.github.a2g.core.action;
 
-import java.util.ArrayList;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.IScenePresenterFromTalkAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-import com.github.a2g.core.interfaces.IMasterPresenterFromTalkAction;
 import com.github.a2g.core.action.ChainableAction;
+import com.github.a2g.core.action.performer.TalkPerformer;
+import com.github.a2g.core.action.performer.TalkPerformer.NonIncrementing;
 
 public class TalkAction extends ChainableAction {
-	private ArrayList<String> speech;
-	private ArrayList<Double> startingTimeForEachLine;
-	private double totalDurationInSeconds;
-	private IScenePresenterFromTalkAction scene;
-	private IMasterPresenterFromTalkAction master;
-	private int numberOfFramesTotal;
-	private NonIncrementing nonIncrementing;
-	private boolean isHoldLastFrame;
+	TalkPerformer performer;
 	private boolean isParallel;
-	private String atid;
-	private String otid;
-	private String fullSpeech;
-	public static String SCENE_TALKER = "SCENE_TALKER";// use animation of scene talker
-
-	enum NonIncrementing {
-		True, False, FromAPI
-	}
+	 
+	 
 
 	public TalkAction(BaseAction parent, String atid, String fullSpeech) {
 		super(parent, true);
-		this.numberOfFramesTotal = 0;
-		this.nonIncrementing = NonIncrementing.False;
-		this.isHoldLastFrame = false;
+		performer = new TalkPerformer(atid, fullSpeech);
+		 
 		this.isParallel = false;
-		this.atid = atid;
-		this.otid = "";
-		this.fullSpeech = fullSpeech;
-		speech = new ArrayList<String>();
-		startingTimeForEachLine = new ArrayList<Double>();
-		
-		this.totalDurationInSeconds = 0;
+		 
 	}
 
-	int getAdjustedNumberOfFrames(String speech, double approxDuration,
-			int animFramesCount, double durationOfSingleAnimation) {
-		// but if we need an animation, we find out how long it takes
-		// to play a single play of the animation to play whilst talking.
-		
-		// ... then we find how many times the animation should repeat
-		// so that it fills up the totalDuration.
-		double numberOfTimesAnimRepeats = approxDuration
-				/ durationOfSingleAnimation;
-
-		// ... and the number of frames that occurs during that
-		// many plays of the animation.
-		int numberOfFramesTotal = (int) (numberOfTimesAnimRepeats * animFramesCount);
-		if (numberOfFramesTotal == 0)
-			numberOfFramesTotal = animFramesCount;
-		// The effect of this is that there is a little bit of 'over-play'
-		// where the amount of time it takes to 'talk' 
-		// when there is a talking animation, is usually a
-		// little bit more than the time calculated from the speech.
-		// This is to ensure that the animation always ends whilst
-		// the head is down, mouth is shut. The smaller the number of
-		// frames in a talking animation the less over-play.
-		return numberOfFramesTotal;
-	}
-
+	 
 	@Override
 	public void runGameAction() {
-		String[] lines = fullSpeech.split("\n");
-		
-		for (int i = 0; i < lines.length; i++) {
-			String line = lines[i];
-			speech.add(line);
-			double secondsForLine = getSecondsForLine(line);
-			totalDurationInSeconds = totalDurationInSeconds + secondsForLine;
-		}
-
-		// set ceilings (for easy calcluation)
-		double rollingStartingTimeForLine = 0;
-		for (int i = 0; i < lines.length; i++) {
-			startingTimeForEachLine.add(new Double(rollingStartingTimeForLine
-					/ totalDurationInSeconds));
-			String line = lines[i];
-			rollingStartingTimeForLine += getSecondsForLine(line);
-		}
-		
-		if(this.nonIncrementing==TalkAction.NonIncrementing.FromAPI)
-		{
-			this.nonIncrementing = master.isSayNonIncrementing()? NonIncrementing.True : NonIncrementing.False;
-		}
-		
-		if (atid == SCENE_TALKER) {
-			atid = scene.getAtidOfSceneTalker();
-		} 
-		
-		// only now do
-		if (atid == "") {
-			// if theres no animation then we just wait for the
-			// totalDuration;
-			double framesPerSecond = 40;
-			numberOfFramesTotal = (int) ((totalDurationInSeconds) * framesPerSecond);
-		} else {
-			numberOfFramesTotal = getAdjustedNumberOfFrames(speech.get(0),
-					totalDurationInSeconds,
-					scene.getNumberOfFramesByAtid(atid),
-					scene.getDurationByAtid(atid));
-		}
-
-		if (numberOfFramesTotal < 1) {
-			//titleCard.displayTitleCard("error!! id=<" + atid
-			//		+ "> numberOfFramesTotal=" + numberOfFramesTotal);
-			assert (false);
-		}
-
-		// always make the speaker visible
-		if (atid != "")
-		{
-			otid = scene.getOtidOfAtid(atid);
-			if(otid != "") 
-			{
-				scene.setAsACurrentAnimationByAtid(atid);
-				scene.setVisibleByOtid(otid, true);
-			}
-		}
-
-		boolean visible = true;
-		scene.setStateOfPopup(atid, visible, speech.get(0), this);
-		this.run((int)(totalDurationInSeconds*1000));
+		double duration = performer.initializeAndReturnDuration();
+		this.run((int)(duration*1000));
 	}
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
 
-		if (!otid.isEmpty()) {
-			if (atid != "" && otid != "") {
-				scene.setVisibleByOtid(otid, true);
-			}
-
-			// update text in bubble
-			for (int i = startingTimeForEachLine.size() - 1; i >= 0; i--) {
-				// go backwards thru the loop to find text that should be valid
-				if (progress > startingTimeForEachLine.get(i)) {
-					scene.setStateOfPopup(atid, true
-							, speech.get(i),
-							null);
-					break;
-				}
-			}
-
-			// if theres an associated animation, then use it
-			if (this.atid != "" && nonIncrementing == NonIncrementing.False) {
-				int numberOfFramesSoFar = (int) (progress * numberOfFramesTotal);
-				int frame = numberOfFramesSoFar
-						% scene.getNumberOfFramesByAtid(atid);
-
-				// all frames of the animation should be shown
-				this.scene.setCurrentFrameByOtid(otid, frame);
-			}
-		}
+		performer.onUpdateGameAction(progress);
 	}
 
 	@Override
 	protected boolean onCompleteGameAction() {
-		if (!isHoldLastFrame) {
-			if (this.otid != "") {
-				scene.setToInitialAnimationWithoutChangingFrameByOtid(otid);
-			}
-		}
-
-		scene.setStateOfPopup(atid, false, "", null);
-		return false;
+		boolean result = performer.onCompleteGameAction();
+		return result;
 	}
 
 	@Override
@@ -200,35 +66,17 @@ public class TalkAction extends ChainableAction {
 		return isParallel;
 	}
 
-	double getSecondsForLine(String speech) {
-		double popupDisplayDuration = master.getPopupDisplayDuration();
-		// int delay = how;
-		// int duration = (speech.length() * (2 + delay)) * 40;
-		return  popupDisplayDuration;
-	}
 
 	public void setNonBlocking(boolean b) {
 		isParallel = b;
 	}
 
 	public void setHoldLastFrame(boolean isHoldLastFrame) {
-		this.isHoldLastFrame = isHoldLastFrame;
+		performer.setHoldLastFrame(isHoldLastFrame);
 	}
 
 	public void setNonIncrementing(NonIncrementing nonIncrementing) {
-		this.nonIncrementing = nonIncrementing;
-	}
-
-	public IScenePresenterFromTalkAction getscene() {
-		return scene;
-	}
-
-	public void setScene(IScenePresenterFromTalkAction scene) {
-		this.scene = scene;
-	}
-
-	public void setTitleCard(IMasterPresenterFromTalkAction titleCard) {
-		this.master = titleCard;
+		performer.setNonIncrementing(nonIncrementing);
 	}
 
 	@Override
@@ -237,13 +85,8 @@ public class TalkAction extends ChainableAction {
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
 	{
-		setMaster(master);
-		setScene(scene);
+		performer.setMaster(master);
+		performer.setTitleCard(titleCard);
+		performer.setScene(scene);
 	}
-
-	public void setMaster(IMasterPresenterFromTalkAction sayActionTest) {
-		this.master = sayActionTest;
-		
-	}
-
 }

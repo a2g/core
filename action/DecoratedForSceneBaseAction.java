@@ -18,7 +18,6 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.PlayAnimationAction;
 import com.github.a2g.core.action.PlayAnimationRepeatWhilstVisibleAction;
-import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.action.SetInventoryVisibleAction;
 import com.github.a2g.core.action.SleepAction;
 import com.github.a2g.core.action.SwapPropertyAction;
@@ -26,6 +25,7 @@ import com.github.a2g.core.action.SwitchHardAction;
 import com.github.a2g.core.action.ActivateDialogTreeModeAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkAction;
+import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.IChainRootForScene;
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IGameScene;
@@ -170,22 +170,22 @@ implements IChainRootForScene
 	}
 	@Override
 	public ChainableAction talk(String speech) {
-		TalkAction s = new TalkAction(this, TalkAction.SCENE_TALKER, speech);
-		s.setNonIncrementing(TalkAction.NonIncrementing.FromAPI);
+		TalkAction s = new TalkAction(this, TalkPerformer.SCENE_TALKER, speech);
+		s.setNonIncrementing(TalkPerformer.NonIncrementing.FromAPI);
 		return s;
 	}
 	@Override
 	public ChainableAction talkWithoutIncrementingFrame(String animCode,
 			String speech) {
 		TalkAction s = new TalkAction(this, animCode, speech);
-		s.setNonIncrementing(TalkAction.NonIncrementing.True);
+		s.setNonIncrementing(TalkPerformer.NonIncrementing.True);
 		return s;
 	}
 	@Override
 	public ChainableAction talkWithoutIncrementingHoldLastFrame(String animCode,
 			String speech) {
 		TalkAction s = new TalkAction(this, animCode, speech);
-		s.setNonIncrementing(TalkAction.NonIncrementing.True);
+		s.setNonIncrementing(TalkPerformer.NonIncrementing.True);
 		s.setHoldLastFrame(true);
 		return s;
 	}
@@ -193,20 +193,20 @@ implements IChainRootForScene
 	public ChainableAction talkWithoutIncrementingFrameNonBlocking(
 			String animCode, String speech) {
 		TalkAction s = new TalkAction(this, animCode, speech);
-		s.setNonIncrementing(TalkAction.NonIncrementing.True);
+		s.setNonIncrementing(TalkPerformer.NonIncrementing.True);
 		s.setNonBlocking(true);
 		return s;
 	}
 	@Override
 	public ChainableAction talkWithoutIncrementingFrame(String speech) {
-		TalkAction s = new TalkAction(this, TalkAction.SCENE_TALKER, speech);
-		s.setNonIncrementing(TalkAction.NonIncrementing.True);
+		TalkAction s = new TalkAction(this, TalkPerformer.SCENE_TALKER, speech);
+		s.setNonIncrementing(TalkPerformer.NonIncrementing.True);
 		return s;
 	}
 	@Override
 	public ChainableAction talkWithoutIncrementingFrameNonBlocking(String speech) {
-		TalkAction s = new TalkAction(this, TalkAction.SCENE_TALKER, speech);
-		s.setNonIncrementing(TalkAction.NonIncrementing.True);
+		TalkAction s = new TalkAction(this, TalkPerformer.SCENE_TALKER, speech);
+		s.setNonIncrementing(TalkPerformer.NonIncrementing.True);
 		s.setNonBlocking(true);
 		return s;
 	}

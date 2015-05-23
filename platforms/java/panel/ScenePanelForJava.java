@@ -28,10 +28,13 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
+
 import javax.swing.JPanel;
+
 import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.TalkAction;
+import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ICommandLinePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.IScenePresenterFromScenePanel;
@@ -316,7 +319,7 @@ implements IScenePanelFromScenePresenter
 
 	@Override
 	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
-			String speech, Rect pixels, Point mouth, TalkAction sayAction) {
+			String speech, Rect pixels, Point mouth, TalkPerformer sayAction) {
 		
 		this.speechPopup.setVisible(isVisible);
 		this.speechPopup.setColor(talkingColor);

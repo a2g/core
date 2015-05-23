@@ -17,6 +17,7 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.IChainRootForDialog;
 
 public abstract class DecoratedForDialogBaseAction extends BaseAction
@@ -54,7 +55,7 @@ implements IChainRootForDialog
 
 	@Override
 	public	DialogChainableAction talk(String speech) {
-		DialogTreeTalkAction s = new DialogTreeTalkAction(this, TalkAction.SCENE_TALKER, speech);
+		DialogTreeTalkAction s = new DialogTreeTalkAction(this, TalkPerformer.SCENE_TALKER, speech);
 		return s;
 	} 
 

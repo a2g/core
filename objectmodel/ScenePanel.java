@@ -18,6 +18,7 @@ package com.github.a2g.core.objectmodel;
 
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.TalkAction;
+import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.ImagePanelAPI;
@@ -127,7 +128,7 @@ IScenePanelFromScenePresenter {
 
 	@Override
 	public void setStateOfPopup(boolean isVisible,
-			ColorEnum talkingColor, String speech, Rect maxBalloonRect, Point mouth, TalkAction sayAction) {
+			ColorEnum talkingColor, String speech, Rect maxBalloonRect, Point mouth, TalkPerformer sayAction) {
 		if (!isVisible) {
 			super.remove(speechWidget);
 		}

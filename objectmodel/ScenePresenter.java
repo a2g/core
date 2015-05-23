@@ -18,6 +18,7 @@ package com.github.a2g.core.objectmodel;
 
 
 import com.github.a2g.core.action.TalkAction;
+import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.IHostingPanel;
 import com.github.a2g.core.interfaces.IMasterPresenterFromScene;
 import com.github.a2g.core.interfaces.IScenePresenter;
@@ -232,7 +233,7 @@ public class ScenePresenter implements IScenePresenter {
 		return getObjectByOCode(ocode).getOtid();
 	}
 
-	public void setStateOfPopup(String atid, boolean isVisible, String speech, TalkAction sayAction) {
+	public void setStateOfPopup(String atid, boolean isVisible, String speech, TalkPerformer sayAction) {
 		Animation a = this.getAnimationByAtid(atid);
 		RectF r = a.getMaxSpeechBalloonExtents();
 		Rect pixels = new Rect(

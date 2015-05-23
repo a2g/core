@@ -3,6 +3,7 @@ package com.github.a2g.core.objectmodel;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.TalkAction;
+import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.interfaces.ILoad;
 import com.github.a2g.core.interfaces.IOnDialogTree;
@@ -484,7 +485,7 @@ IOnMovementBeyondAGate {
 
 	@Override
 	public void setStateOfPopup(String atid, boolean isVisible, String speech,
-			TalkAction sayAction) {
+			TalkPerformer sayAction) {
 		master.getScenePresenter().setStateOfPopup(atid, isVisible, speech, sayAction);
 		
 	}
