@@ -1,6 +1,7 @@
 package com.github.a2g.core.interfaces;
 
-public interface IScenePresenterFromActions extends
+public interface IScenePresenterFromActions
+extends
 IScenePresenterFromMoveAction
 , IScenePresenterFromPlayAction
 , IScenePresenterFromTalkPerformer

@@ -138,8 +138,6 @@ public class DialogTreeMakeSingleCallAction extends DialogChainableAction {
 		case SetCurrentAnimationAndFrame:
 			scene.setCurrentAnimationAndFrame(atid, intValue);
 			return false;
-		case Quit:
-			scene.quit();
 		case Sleep:
 			//do nothing, the "sleep" happened in the animation duration.
 			break;

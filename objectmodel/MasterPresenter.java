@@ -76,7 +76,6 @@ IMasterPresenterFromTitleCard,
 PropertyChangeEventHandlerAPI
 {
 	private static final Logger LOADING = Logger.getLogger("LOADING");
-	private static final Logger LOADING_ANIM = Logger.getLogger("LOADING.ANIM");
 	private static final Logger COMMAND_AUTOPLAY = Logger.getLogger("COMMAND.AUTOPLAY");
 	
 	MasterProxyForGameScene proxyForGameScene;
@@ -791,7 +790,11 @@ PropertyChangeEventHandlerAPI
 			return;
 		
 		AutoplayCommand cmd  = this.host.getNextAutoplayAction();
-		if(cmd!=null)
+		if(cmd==null)
+		{
+			host.onFinishedAutoplay();
+		}
+		else
 		{
 			
 			BaseAction a = null;
@@ -801,7 +804,7 @@ PropertyChangeEventHandlerAPI
 				String text = dialogTreePresenter.getLineOfDialogForId(branchId);
 				if(text=="")
 				{
-					isAutoplayCancelled = true;
+					cancelAutoplay();
 					titleCardPresenter.setText("can't say that id currently");
 					return;
 				}
@@ -836,7 +839,7 @@ PropertyChangeEventHandlerAPI
 					a = this.sceneHandlers.onDoCommand(proxyForGameScene,
 							createChainRootAction(), cmd.getVerb(),o1,o2,cmd.getDouble1(),cmd.getDouble2());
 					if (a instanceof DoNothingAction) {
-						isAutoplayCancelled = true;
+						cancelAutoplay();
 						titleCardPresenter.setText("action returned do nothing");
 						return;
 				
@@ -847,6 +850,15 @@ PropertyChangeEventHandlerAPI
 				this.commandLinePresenter.setMouseable(false);
 				executeActionWithDoCommandActionRunner(a);
 			}
+		}
+	}
+	
+	void cancelAutoplay()
+	{
+		if(!isAutoplayCancelled)
+		{
+			host.onFinishedAutoplay();
+			isAutoplayCancelled = true;
 		}
 	}
 
@@ -1143,13 +1155,6 @@ PropertyChangeEventHandlerAPI
 	public boolean isSayNonIncrementing() {
 		return this.isSayNonIncremementing;
 	}
-
-	public void quit() {
-		host.quit();
-		
-	}
-
-	
 
 	@Override
 	public void playSoundByStid(String stid) {

@@ -20,7 +20,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class LoadedLoad {
-	private static final Logger LOADING = Logger.getLogger("LOADING");
 	private static final Logger LOADING_ANIM = Logger.getLogger("LOADING.ANIM");
 	
 	private SceneObjectCollection sceneObjectCollection;

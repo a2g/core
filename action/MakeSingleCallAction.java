@@ -132,8 +132,6 @@ public class MakeSingleCallAction extends ChainableAction {
 		case SetCurrentAnimationAndFrame:
 			scene.setCurrentAnimationAndFrame(atid, intValue);
 			return false;
-		case Quit:
-			scene.quit();
 		}
 		return false;
 	}

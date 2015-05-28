@@ -358,10 +358,7 @@ public class MasterProxyForActions implements IOnFillLoadList,
 		object.setCurrentAnimationAndFrame(atid, frame);
 	}
 
-	@Override
-	public void quit() {
-		master.quit();
-	}
+	
 
 	@Override
 	public void playSoundByStid(String stid) {

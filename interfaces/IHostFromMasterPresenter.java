@@ -44,7 +44,8 @@ public interface IHostFromMasterPresenter {
 	public AutoplayCommand getNextAutoplayAction();
 
 	boolean isAutoplay();
-
-	void quit();
+	
+	void onFinishedAutoplay();
+ 
 	
 }
