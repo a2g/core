@@ -31,13 +31,10 @@ public class ScrollCameraYAction extends ChainableAction {
 
 	private double endY;// set via setters
 	private double startY;// set via setters
-	private boolean isParallel;// set via setters
 	private double duration;
 
-	public ScrollCameraYAction(BaseAction parent, double endY, double duration,
-			boolean isLinear) {
-		super(parent, isLinear);
-		this.isParallel = false;
+	public ScrollCameraYAction(BaseAction parent, double endY, double duration) {
+		super(parent);
 		this.endY = endY;
 		this.duration = duration;
 	}
@@ -48,10 +45,6 @@ public class ScrollCameraYAction extends ChainableAction {
 
 	double getEndY() {
 		return endY;
-	}
-
-	void setNonBlocking(boolean isParallel) {
-		this.isParallel = isParallel;
 	}
 
 	@Override
@@ -74,10 +67,7 @@ public class ScrollCameraYAction extends ChainableAction {
 		return false;
 	}
 
-	@Override
-	public boolean isParallel() {
-		return isParallel;
-	}
+
 
 	public void setScene(IScenePresenterFromScrollAction scene) {
 		this.scene = scene;

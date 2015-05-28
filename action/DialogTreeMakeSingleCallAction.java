@@ -55,7 +55,7 @@ public class DialogTreeMakeSingleCallAction extends DialogChainableAction {
 	private int milliseconds;
 
 	public DialogTreeMakeSingleCallAction(BaseAction parent, Type type) {
-		super(parent, true);
+		super(parent);
 		this.type = type;
 		this.milliseconds = 1;
 	}
@@ -149,11 +149,7 @@ public class DialogTreeMakeSingleCallAction extends DialogChainableAction {
 		return false;
 	}
 
-	@Override
-	public boolean isParallel() {
-
-		return false;
-	}
+	 
 
 	public void setScene(IScenePresenterFromMakeSingleCallAction scene) {
 		this.scene = scene;

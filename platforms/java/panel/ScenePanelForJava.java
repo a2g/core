@@ -28,12 +28,12 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 
 import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ICommandLinePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
@@ -58,6 +58,8 @@ implements IScenePanelFromScenePresenter
 , ImagePanelAPI
 , ActionListener
 {
+	private static final Logger JAVACANVAS = Logger.getLogger("JAVACANVAS");
+	
 	int width;
 	int height;
 	int tally;

@@ -8,6 +8,7 @@ import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.PointF;
 
 public interface IChainRootForScene {
+	// convenient to see all the base action ones at the top.
 	public BaseAction doBoth(ChainableAction a, ChainableAction b);
 	public BaseAction activateDialogTreeMode(int branchId);
 	public BaseAction onDoCommand(IGameScene scene, IOnDoCommand api,
@@ -15,9 +16,27 @@ public interface IChainRootForScene {
 			SentenceItem itemB, double x, double y);
 	public BaseAction subroutine(BaseAction orig);
 	public BaseAction switchTo(String sceneName);
-	public BaseAction switchWalkTo(double x, double y);
-	public BaseAction switchWalkTo(PointF point);
+	public BaseAction walkTo(double x, double y);// should not have ocode here because switching implies main character
+	public BaseAction walkTo(PointF point);
 	public BaseAction quit();
+	
+	// there's 2 choices
+	// 1) BaseAction walkSwitch and ChainAbleAction walkTo
+	// 2) BaseAction walkTo, and ChainableAction walkWithNoSwitch
+	// client is likely to code with walkTo
+	// in case 1, using walkTo in its wrong scenario (as 
+	// a terminator) would not be picked up by compiler.
+	// since a chainableAction would pass as a baseAction.
+	// in case 2, using walkTo in its wrong scenario (in
+	// the middle of a chain) where client expects it not
+	// to switch, WOULD generate a compiler error. 
+	// Thus 2 is better, because it protects the user
+	// against unexpected results. 
+	public ChainableAction walkToWithoutSwitching(double x, double y);
+	public ChainableAction walkToWithoutSwitching(PointF point);
+	public ChainableAction walkToWithoutSwitching(short ocode, double x, double y);
+	public ChainableAction walkToWithoutSwitching(short ocode, PointF point);
+ 
 	
 	public ChainableAction subroutine(ChainableAction orig);
 	
@@ -79,32 +98,6 @@ public interface IChainRootForScene {
 	public ChainableAction setInitialAnimation(String atid);
 
 
-	public ChainableAction walkTo(double x, double y);
-	public ChainableAction walkTo(PointF point);
-	public ChainableAction walkTo(double x, double y, int delay) ;
-	public ChainableAction walkTo(PointF point, int delay);
-	public ChainableAction walkTo(short ocode, double x, double y);
-	public ChainableAction walkTo(short ocode, PointF point);
-	public ChainableAction walkTo(short ocode, double x, double y, int delay);
-	public ChainableAction walkTo(short ocode, PointF point, int delay);
-	public ChainableAction walkAndScroll(double x, double y, int delay);
-
-	public ChainableAction walkAndScroll(PointF point, int delay);
-
-	public ChainableAction walkAndScrollNonBlocking(double x, double y, int delay);
-
-	public ChainableAction walkAndScrollNonBlocking(PointF point, int delay);
-
-	public ChainableAction walkAndScroll(short ocode, double x, double y,
-			int delay);
-
-	public ChainableAction walkAndScroll(short ocode, PointF point, int delay);
-	public ChainableAction walkAndScrollNonBlocking(short ocode, double x,
-			double y, int delay);
-
-	public ChainableAction walkAndScrollNonBlocking(short ocode, PointF point,
-			int delay);
-
 	public ChainableAction showTitleCard(String text);
 
 
@@ -112,12 +105,6 @@ public interface IChainRootForScene {
 			String animationCode);
 
 	public ChainableAction setValue(String string, int i);
-
-	public ChainableAction moveWhilstAnimatingLinear(short objId, double x,
-			double y);
-
-	public ChainableAction moveWhilstAnimatingLinearNonBlocking(short ocode,
-			double x, double y);
 
 	public ChainableAction moveWhilstAnimating(short objId, double x, double y);
 

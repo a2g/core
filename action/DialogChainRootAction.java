@@ -16,31 +16,29 @@
 
 package com.github.a2g.core.action;
 
-import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromDoBranchAction;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-/*
- * DialogChainRootAction is identified by having a null parent.
- */
-public class DialogChainRootAction 
-extends DialogChainableAction 
-{
+public class DialogChainRootAction extends DialogChainableAction {
+
+	private IDialogTreePresenterFromDoBranchAction dialogTree;
+
 	public DialogChainRootAction() {
-		super(null,true );
+		super(null);
+	}
+
+	@Override
+	public void onUpdate(double progress) {
 	}
 
 	@Override
 	public void runGameAction() {
-		super.run(1); // the delayed execution trick
-	}
-
-	@Override
-	protected boolean onCompleteGameAction() {
-		return false;
+		super.run(1);
 	}
 
 	@Override
@@ -48,14 +46,14 @@ extends DialogChainableAction
 	}
 
 	@Override
-	public void setParent(BaseAction parent) {
-		this.parent = parent;
+	protected boolean onCompleteGameAction() {
+		dialogTree.setActiveGuiState(GuiStateEnum.DialogTree);
+		// do nothing, this is a placeholder that results in a large chained action
+		return false;
 	}
 
-	@Override
-	public boolean isParallel() {
-
-		return false;
+	public void setDialogTree(IDialogTreePresenterFromDoBranchAction dialogTree) {
+		this.dialogTree = dialogTree;
 	}
 
 	@Override
@@ -63,11 +61,8 @@ extends DialogChainableAction
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
-		return;// the chain root doesn't need them
+		setDialogTree(dialogTree);
 
 	}
-
-	
-
 
 }

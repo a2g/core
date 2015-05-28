@@ -31,8 +31,8 @@ public class PlayAnimationRepeatWhilstVisibleAction extends ChainableAction {
 	private IScenePresenterFromPlayAction scene;
 
 	public PlayAnimationRepeatWhilstVisibleAction(BaseAction parent,
-			String atid, boolean isLinear) {
-		super(parent, isLinear);
+			String atid) {
+		super(parent);
 		this.atid = atid;
 	}
 
@@ -56,11 +56,7 @@ public class PlayAnimationRepeatWhilstVisibleAction extends ChainableAction {
 		return false;
 	}
 
-	@Override
-	public boolean isParallel() {
-
-		return false;
-	}
+	 
 
 	public void setScene(IScenePresenterFromPlayAction scene) {
 		this.scene = scene;

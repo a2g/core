@@ -10,5 +10,9 @@ IScenePresenterFromMoveAction
 , IScenePresenterFromWaitAction
 , IScenePresenterFromWalkAction
 , IScenePresenterFromWalkScrollAction
-, IScenePresenterFromMakeSingleCallAction{
+, IScenePresenterFromMakeSingleCallAction
+, IScenePresenterFromMovePerformer
+, IScenePresenterFromSwitchPerformer
+, IScenePresenterFromScrollPerformer
+, IScenePresenterFromWalkPerformer{
 }

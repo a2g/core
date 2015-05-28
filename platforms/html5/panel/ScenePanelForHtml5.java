@@ -21,13 +21,13 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.canvas.dom.client.CssColor;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ICommandLinePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
@@ -58,6 +58,8 @@ implements
 ImagePanelAPI
 , IScenePanelFromScenePresenter
 {
+	private static final Logger HTML5CANVAS = Logger.getLogger("HTML5CANVAS");
+	
 	//private EventBus bus;
 	private AbsolutePanel abs;
 	private int cameraOffsetX;
@@ -288,6 +290,7 @@ ImagePanelAPI
 
 	public String getObjectUnderMouse(int x, int y)
 	{
+		
 		//System.out.println("----------------");
 		int count = toScene.getSceneObjectCount();
 		for(int i = 0;i<count;i++)

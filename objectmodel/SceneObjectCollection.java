@@ -23,8 +23,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
 public class SceneObjectCollection {
+	private static final Logger LOADING = Logger.getLogger("LOADING");
+	private static final Logger LOADING_ANIM = Logger.getLogger("LOADING.ANIM");
+	
 	private List<String> theOtids;
 	private List<Short> theOCodes;
 	private ArrayList<SceneObject> list;

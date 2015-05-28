@@ -17,7 +17,7 @@
 package com.github.a2g.core.action;
 
 public abstract class ChainableAction extends DecoratedForSceneBaseAction {
-	protected ChainableAction(BaseAction parent, boolean isLinear) {
-		super(parent, isLinear);
+	protected ChainableAction(BaseAction parent) {
+		super(parent);
 	}
 }

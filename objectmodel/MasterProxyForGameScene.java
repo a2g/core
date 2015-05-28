@@ -2,7 +2,6 @@ package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
-import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.interfaces.ILoad;
@@ -199,9 +198,9 @@ IOnMovementBeyondAGate {
 	}
 
 	@Override
-	public void setAsSceneWalker(short ocode) {
+	public void setAsDefaultSceneObject(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		master.getScenePresenter().setOtidOfDefaultWalkObject(otid);
+		master.getScenePresenter().setOtidOfDefaultSceneObject(otid);
 
 	}
 

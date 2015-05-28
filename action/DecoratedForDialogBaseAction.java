@@ -25,7 +25,7 @@ implements IChainRootForDialog
 {
 
 	DecoratedForDialogBaseAction(BaseAction parent) {
-		super(parent, true);
+		super(parent);
 
 	}
 	@Override
@@ -61,7 +61,7 @@ implements IChainRootForDialog
 
 	@Override
 	public BaseAction switchTo(String string) {
-		SwitchHardAction s = new SwitchHardAction(this, string );
+		SwitchAction s = new SwitchAction(this, string );
 		return s;
 	}
 

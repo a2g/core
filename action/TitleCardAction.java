@@ -30,7 +30,7 @@ public class TitleCardAction extends ChainableAction {
 	String text;
 
 	public TitleCardAction(BaseAction parent, String text) {
-		super(parent, true);
+		super(parent);
 		this.text = text;
 	}
 
@@ -60,11 +60,7 @@ public class TitleCardAction extends ChainableAction {
 		return false;
 	}
 
-	@Override
-	public boolean isParallel() {
-
-		return false;
-	}
+	 
 
 	public void setTitleCard(ITitleCardPresenterFromTitleCardAction titleCard) {
 		this.titleCard = titleCard;

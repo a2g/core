@@ -28,12 +28,10 @@ import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 public class PlaySoundAction extends ChainableAction {
 	private String stid;
 	private IMasterPresenterFromSoundAction master;
-	private boolean isParallel;
 
 	public PlaySoundAction(BaseAction parent, String stid) {
-		super(parent, true);
+		super(parent);
 		this.stid = stid;
-		isParallel = false;
 	}
 
 	@Override
@@ -53,15 +51,8 @@ public class PlaySoundAction extends ChainableAction {
 		return false;
 	}
 
-	public void setParallel(boolean isParallel)
-	{
-		this.isParallel = isParallel;
-	}
-	@Override
-	public boolean isParallel() {
-
-		return isParallel;
-	}
+	 
+	 
 
 	@Override
 	public void setAll(IMasterPresenterFromActions master,

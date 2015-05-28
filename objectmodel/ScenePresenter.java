@@ -17,7 +17,6 @@
 package com.github.a2g.core.objectmodel;
 
 
-import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.IHostingPanel;
 import com.github.a2g.core.interfaces.IMasterPresenterFromScene;
@@ -29,6 +28,7 @@ import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.primitive.RectF;
 
 public class ScenePresenter implements IScenePresenter {
+	public static final short DEFAULT_SCENE_OBJECT = -1;
 	private int width;
 	private int height;
 	private Scene scene;
@@ -37,13 +37,13 @@ public class ScenePresenter implements IScenePresenter {
 	private double cameraY;
 	
 	private String sceneTalkerAtid;
-	private String sceneWalkerOtid;
+	private String defaultSceneObjectOtid;
 	private ColorEnum talkingColorForScene;
 
 	public ScenePresenter(final IHostingPanel panel,
 			IMasterPresenterFromScene master) {
 		this.sceneTalkerAtid = "";
-		this.sceneWalkerOtid = "";
+		this.defaultSceneObjectOtid = "";
 		this.cameraX = 0.0;
 		this.cameraY = 0.0;
 		this.width = 320;
@@ -52,7 +52,7 @@ public class ScenePresenter implements IScenePresenter {
 		this.view = master.getFactory().createScenePanel(this);
 		panel.setThing(view);
 		view.setVisible(true);
-
+		defaultSceneObjectOtid = "ScenePresenter::getDefaultSceneObjectOtid was used before it was initialized";
 		
 		talkingColorForScene = ColorEnum.Fuchsia;
 	}
@@ -167,8 +167,8 @@ public class ScenePresenter implements IScenePresenter {
 		return "getAtidOfCurrentAnimationByOtid couldn't find current animation";
 	}
 
-	public void setOtidOfDefaultWalkObject(String otid) {
-		setSceneWalkerOtid(otid);
+	public void setOtidOfDefaultSceneObject(String otid) {
+		setDefaultSceneObjectOtid(otid);
 	}
 
 	@Override
@@ -228,8 +228,10 @@ public class ScenePresenter implements IScenePresenter {
 	}
 
 	public String getOtidByCode(short ocode) {
+		if(ocode==-1)
+			return this.getDefaultSceneObjectOtid();
 		if(getObjectByOCode(ocode)==null)
-			return "";
+			return "ScenePresenter::getOtidByCode recd bad ocode "+ocode;
 		return getObjectByOCode(ocode).getOtid();
 	}
 
@@ -264,11 +266,11 @@ public class ScenePresenter implements IScenePresenter {
 		this.sceneTalkerAtid = sceneTalkerAtid;
 	}
 
-	public String getSceneWalkerOtid() {
-		return sceneWalkerOtid;
+	public String getDefaultSceneObjectOtid() {
+		return defaultSceneObjectOtid;
 	}
 
-	public void setSceneWalkerOtid(String sceneWalkerOtid) {
-		this.sceneWalkerOtid = sceneWalkerOtid;
+	public void setDefaultSceneObjectOtid(String otid) {
+		this.defaultSceneObjectOtid = otid;
 	}
 };

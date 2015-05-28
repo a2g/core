@@ -44,7 +44,7 @@ import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectSpecial;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsSceneTalker;
 import com.github.a2g.core.interfaces.game.ISetAnimationDuration;
 import com.github.a2g.core.interfaces.game.ISetAnimationMaxTalkRect;
-import com.github.a2g.core.interfaces.game.ISetAsSceneWalker;
+import com.github.a2g.core.interfaces.game.ISetAsDefaultSceneObject;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleY;
 import com.github.a2g.core.interfaces.game.ISetBoundaryCrossObject;
@@ -117,7 +117,7 @@ IUpdateVerbUI
 , IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation,
 ISetAnimationAsObjectInitial, ISetAnimationAsSceneTalker,
 ISetAnimationAsObjectCurrent, ISetAnimationDuration,
-ISetAnimationAsObjectSpecial, ISetAsSceneWalker,
+ISetAnimationAsObjectSpecial, ISetAsDefaultSceneObject,
 ISetAnimationAsObjectCurrentAndSetFrame, ISetAnimationAsDialogTalker
 ,ISetAnimationMaxTalkRect
 {

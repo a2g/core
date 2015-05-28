@@ -29,13 +29,13 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	private ISystemAnimation systemAnimation;
 	private IActionRunnerFromBaseAction callbacks;
 	protected BaseAction parent;
-	private boolean isLinear;
+	private boolean isEaseToAndFrom;
+	protected boolean isParallel;
  
 
 	// all the abstract have GameAction in them to let
 	// the client know they are dealing with GameAction and not Animation
-	abstract public boolean isParallel();
-
+	
 	abstract protected void onUpdateGameAction(double progress);
 
 	abstract protected boolean onCompleteGameAction();
@@ -48,16 +48,25 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory);
 
-	protected BaseAction(BaseAction parent, boolean isLinear) {
+	protected BaseAction(BaseAction parent) {
 		this.parent = parent;
-		this.isLinear = isLinear;
 		this.callbacks = null;// initd in setcallbacks
 		this.systemAnimation = null;// initd in setFactory
+		this.isParallel = false;
+		this.isEaseToAndFrom = false;
+	}
+	void setParallel(boolean parallel)
+	{
+		this.isParallel = parallel;
+	}
+	
+	public boolean isParallel() {
+		return isParallel;
 	}
 
 	void setSystemAnimation(ISystemAnimation systemAnimation) {
 		this.systemAnimation = systemAnimation;
-		this.systemAnimation.setLinear(isLinear);
+		this.systemAnimation.setEaseToAndFrom(!isEaseToAndFrom);
 	}
 
 	
@@ -97,6 +106,8 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	public void setParent(BaseAction parent) {
 		this.parent = parent;
 	}
+	 
+
 
 	public ChainableAction setVisible(short ocode, boolean isVisible) {
 		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetVisible);
@@ -122,5 +133,7 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	public void setCallbacks(ActionRunner callbacks) {
 		this.callbacks = callbacks;
 	}
+
+	
 
 }

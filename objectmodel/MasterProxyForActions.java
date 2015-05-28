@@ -1,6 +1,5 @@
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
@@ -118,9 +117,8 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	}
 
 	@Override
-	public boolean fireOnMovementBeyondAGateIfRelevant(PointF point) {
+	public boolean doSwitchBeyondGateIfSetUp(PointF point) {
 		return master.fireOnMovementBeyondAGateIfRelevant(point);
-
 	}
 
 	@Override
@@ -160,12 +158,14 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	@Override
 	public String getOtidByCode(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		return master.getScenePresenter().getObjectByOtid(otid).getOtid();
+		if(master.getScenePresenter().getObjectByOtid(otid)!=null)
+					return master.getScenePresenter().getObjectByOtid(otid).getOtid();
+		return null;
 	}
 
 	@Override
-	public String getOtidOfDefaultWalkObject() {
-		return master.getScenePresenter().getSceneWalkerOtid();
+	public String getOtidOfDefaultSceneObject() {
+		return master.getScenePresenter().getDefaultSceneObjectOtid();
 	}
 
 	@Override

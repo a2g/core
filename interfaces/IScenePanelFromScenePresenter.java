@@ -15,7 +15,6 @@
  */
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.primitive.ColorEnum;

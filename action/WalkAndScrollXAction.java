@@ -1,5 +1,4 @@
 /*
-
  * Copyright 2012 Anthony Cassidy
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -18,48 +17,72 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.IScenePresenterFromWalkScrollAction;
+import com.github.a2g.core.action.performer.MovePerformer;
+import com.github.a2g.core.action.performer.ScrollPerformer;
+import com.github.a2g.core.action.performer.WalkPerformer;
+import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
+import com.github.a2g.core.interfaces.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
+import com.github.a2g.core.primitive.PointF;
 
-public class WalkAndScrollXAction extends WalkAction {
-	private IScenePresenterFromWalkScrollAction scene;
-	double startCameraX;
+public class WalkAndScrollXAction extends ChainableAction{
 
-	// double startCameraY;
-
-	public WalkAndScrollXAction(BaseAction parent, short ocode, double endX,
-			double endY, int delay, boolean isLinear) {
-		super(parent, ocode, endX, endY, delay, isLinear);
-		startCameraX = scene.getCameraX();
+	MovePerformer mover;
+	WalkPerformer walker;
+	ScrollPerformer scroller;
+	public WalkAndScrollXAction(BaseAction parent, short ocode) {
+		super(parent);
+		mover = new MovePerformer(ocode);
+		mover.setToInitialAtEnd(true);// walk always does this
+		
+		walker = new WalkPerformer(ocode);
+		scroller = new ScrollPerformer();
 	}
 
 	@Override
+	public void setAll(IMasterPresenterFromActions master,
+			IScenePresenterFromActions scene,
+			IDialogTreePresenterFromActions dialogTree,
+			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
+	{
+		mover.setScene(scene); 
+		walker.setScene(scene);
+		scroller.setScene(scene);
+	}
+	  
+
+	@Override
 	public void runGameAction() {
-		super.runGameAction();
+		double duration = mover.run();
+		walker.run(mover.getStartPt(), mover.getEndPt());
+		scroller.run( mover.getStartPt(), mover.getEndPt());
+		this.run((int) (duration * 1000.0));
+
 	}
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		super.onUpdateGameAction(progress);
-
-		double x = startCameraX + progress
-				* (this.getEndX() - this.getStartX());
-
-		scene.setCameraX(x);
-
+		PointF pt = mover.onUpdateCalculate(progress);
+		mover.onUpdateCalculate(progress, pt);
+		scroller.onUpdate(progress);
+		
 	}
 
 	@Override
-	// on complete walking
-	protected boolean onCompleteGameAction() {
-
-		super.onCompleteGameAction();
-
-		scene.setCameraX(startCameraX + this.getEndX() - this.getStartX());
+	// method in animation
+	protected boolean onCompleteGameAction() { 
+		onUpdateGameAction(1.0);
+		mover.onComplete();
+		scroller.onComplete();
 		return false;
-
 	}
 
-	public void setScene(IScenePresenterFromWalkScrollAction scene) {
-		this.scene = scene;
-	}
+	 
+
+
+	 
+
+
 }

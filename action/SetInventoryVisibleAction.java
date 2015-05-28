@@ -33,7 +33,7 @@ public class SetInventoryVisibleAction extends ChainableAction {
 
 	public SetInventoryVisibleAction(BaseAction parent, int icode,
 			boolean isVisible) {
-		super(parent, true);
+		super(parent);
 		this.icode = icode;
 		this.isVisible = isVisible;
 	}
@@ -56,11 +56,7 @@ public class SetInventoryVisibleAction extends ChainableAction {
 
 	}
 
-	@Override
-	public boolean isParallel() {
-
-		return false;
-	}
+	
 
 	public void setInventory(
 			IInventoryPresenterFromSetInventoryVisibleAction inventory) {

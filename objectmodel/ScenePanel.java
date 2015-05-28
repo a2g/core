@@ -17,7 +17,6 @@
 package com.github.a2g.core.objectmodel;
 
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.IScenePresenterFromScenePanel;

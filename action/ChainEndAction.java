@@ -22,7 +22,7 @@ public abstract class ChainEndAction extends BaseAction
 {
 
 	ChainEndAction(BaseAction parent) {
-		super(parent, true);
+		super(parent);
 
 	}
 }

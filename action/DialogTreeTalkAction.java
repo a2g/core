@@ -27,56 +27,15 @@ import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.action.performer.TalkPerformer.NonIncrementing;
 
 public class DialogTreeTalkAction extends DialogChainableAction {
-	TalkPerformer performer;
-	private boolean isParallel;
+	TalkPerformer talker;
 	 
 	 
 
 	public DialogTreeTalkAction(BaseAction parent, String atid, String fullSpeech) {
-		super(parent, true);
-		performer = new TalkPerformer(atid, fullSpeech);
-		 
-		this.isParallel = false;
-		 
+		super(parent );
+		talker = new TalkPerformer(atid, fullSpeech);
 	}
 
-	 
-	@Override
-	public void runGameAction() {
-		double duration = performer.initializeAndReturnDuration();
-		this.run((int)(duration*1000));
-	}
-
-	@Override
-	protected void onUpdateGameAction(double progress) {
-
-		performer.onUpdateGameAction(progress);
-	}
-
-	@Override
-	protected boolean onCompleteGameAction() {
-		boolean result = performer.onCompleteGameAction();
-		return result;
-	}
-
-	@Override
-	public boolean isParallel() {
-
-		return isParallel;
-	}
-
-
-	public void setNonBlocking(boolean b) {
-		isParallel = b;
-	}
-
-	public void setHoldLastFrame(boolean isHoldLastFrame) {
-		performer.setHoldLastFrame(isHoldLastFrame);
-	}
-
-	public void setNonIncrementing(NonIncrementing nonIncrementing) {
-		performer.setNonIncrementing(nonIncrementing);
-	}
 
 	@Override
 	public void setAll(IMasterPresenterFromActions master,
@@ -84,8 +43,34 @@ public class DialogTreeTalkAction extends DialogChainableAction {
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
 	{
-		performer.setMaster(master);
-		performer.setTitleCard(titleCard);
-		performer.setScene(scene);
+		talker.setMaster(master);
+		talker.setScene(scene);
 	}
+	 
+	@Override
+	public void runGameAction() {
+		double duration = talker.run();
+		this.run((int)(duration*1000));
+	}
+
+	@Override
+	protected void onUpdateGameAction(double progress) 
+	{
+		talker.onUpdate(progress);
+	}
+
+	@Override
+	protected boolean onCompleteGameAction() {
+		boolean result = talker.onComplete();
+		return result;
+	}
+
+	public void setHoldLastFrame(boolean isHoldLastFrame) {
+		talker.setHoldLastFrame(isHoldLastFrame);
+	}
+
+	public void setNonIncrementing(NonIncrementing nonIncrementing) {
+		talker.setNonIncrementing(nonIncrementing);
+	}
+
 }

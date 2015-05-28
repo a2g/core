@@ -32,7 +32,7 @@ public class WaitForFrameAction extends ChainableAction {
 	private String otid;
 
 	public WaitForFrameAction(BaseAction parent, short ocode, int frame) {
-		super(parent, true);
+		super(parent);
 		this.frame = frame;
 		this.ocode = ocode;
 	}
@@ -62,10 +62,7 @@ public class WaitForFrameAction extends ChainableAction {
 		return false;
 	}
 
-	@Override
-	public boolean isParallel() {
-		return false;
-	}
+	 
 
 	public IScenePresenterFromWaitAction getScene() {
 		return scene;

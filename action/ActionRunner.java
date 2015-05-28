@@ -16,7 +16,10 @@
 
 package com.github.a2g.core.action;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.github.a2g.core.interfaces.IActionRunnerFromBaseAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
@@ -28,6 +31,10 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 public class ActionRunner implements IActionRunnerFromBaseAction {
+
+	private static final Logger RUNNER = Logger.getLogger("RUNNER");
+	private static final Logger RUNNER_REFC = Logger.getLogger("RUNNER.REFCOUNT");
+	
 	protected ArrayList<ArrayList<BaseAction>> list;
 	private ArrayList<BaseAction> parallelActionsToWaitFor;
 	private int numberOfParallelActionsToWaitFor;
@@ -67,7 +74,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 		BaseAction a = grandChildOfActionChain;
 
 		// flatten chain
-		while (a.getParent() != null) {
+		while (a != null) {
 			toReturn.add(0, a);
 			a = a.getParent();
 		}
@@ -126,7 +133,8 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 		// sure why.
 		// this only happens in gwt.
 		int count = this.parallelActionsToWaitFor.size();
-		System.out.println("ActionRunner::processing " + count + " parallel actions");
+		RUNNER.log( Level.FINE, "processing {0} parallel actions", new Object[]{ count } );
+		
 		for (int i = 0; i < count; i++) {
 			BaseAction a = this.parallelActionsToWaitFor.get(i);
 
@@ -136,8 +144,8 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 				MakeSingleCallAction b = (MakeSingleCallAction)a;
 				name = b.getType().toString();
 			}
-			System.out.println("ActionRunner::executeParallelActions " + i
-					+ " " + name);
+			RUNNER.log( Level.FINE, "execute parallel actions {0} {1}", new Object[]{ i,name} );
+			
 
 			a.setCallbacks(this);
 			
@@ -175,10 +183,11 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 	@Override
 	public void startTheNextAction(BaseAction a) {
 		this.numberOfParallelActionsToWaitFor--;
-		System.out.println("Release " + numberOfParallelActionsToWaitFor);
-
+		RUNNER_REFC.log( Level.FINE, "Release {0}", new Object[]{ numberOfParallelActionsToWaitFor} );
+		
 		if (this.numberOfParallelActionsToWaitFor == 0) {
-			System.out.println("Starting next action " + this.toString());
+			RUNNER.log( Level.FINE, "Starting next action {0}", new Object[]{ this.toString()} );
+			
 			processNextListOfParallelActions();
 		}
 

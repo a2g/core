@@ -51,11 +51,7 @@ public class DialogTreeChainToAction extends DialogChainEndAction {
 		return false;
 	}
 
-	@Override
-	public boolean isParallel() {
-
-		return false;
-	}
+	 
 
 	public void setBranchId(int branchId) {
 		this.branchId = branchId;

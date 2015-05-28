@@ -44,6 +44,26 @@ public interface ConstantsForAPI {
 	public static final int SWITCH = 13*VERB_MULTIPLIER ;
 	public static final int DIALOG = 14*VERB_MULTIPLIER ;
 
+	/**
+	 * this should be used instead of the magic number -1
+	 * when one wants to specify aligning to the last frame
+	 * in any of the .Align methods of BaseAction.
+	 * 
+	 * -1 should never be used as a magic number
+	 */
+	public static final int ALIGN_TO_LAST = -1;
+	/**
+	 * when processing dialog trees, the branch
+	 * given the value of -1 is special
+	 * in that if -1 is the branch id for 
+	 * a line of dialog, then after that line
+	 * of dialog is spoken, it is NOT removed
+	 * from the available options.
+	 * 
+	 * -1 should never be used as a magic number
+	 */
+	public static final int EXIT_DLG = -1;
+	
 	public static enum Special {
 		North, East, South, West
 	}

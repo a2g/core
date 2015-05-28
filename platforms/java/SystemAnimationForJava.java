@@ -23,19 +23,20 @@ public class SystemAnimationForJava extends
 		com.github.a2g.core.platforms.java.animation.Animation implements
 		ISystemAnimation {
 	IBaseActionFromSystemAnimation callbacks;
-	boolean isLinear;
+	boolean isEaseToAndFrom;
 
 	public SystemAnimationForJava(IBaseActionFromSystemAnimation callbacks) {
-		this.isLinear = false;
+		this.isEaseToAndFrom = false;
 		this.callbacks = callbacks;
 	}
 
 	@Override
 	protected double interpolate(double progress) {
-		if (isLinear)
-			return progress;
-		else
+		if (isEaseToAndFrom)
 			return super.interpolate(progress);
+		else
+			return progress;
+			
 	}
 
 	@Override
@@ -50,8 +51,8 @@ public class SystemAnimationForJava extends
 	}
 
 	@Override
-	public void setLinear(boolean isLinear) {
-		this.isLinear = isLinear;
+	public void setEaseToAndFrom(boolean isLinear) {
+		this.isEaseToAndFrom = isLinear;
 		
 	}
 

@@ -31,7 +31,7 @@ public class ActivateDialogTreeModeAction extends BaseAction {
 	private IDialogTreePresenterFromDoBranchAction dialogTree;
 
 	public ActivateDialogTreeModeAction(BaseAction parent, int branchId) {
-		super(parent, true);
+		super(parent);
 		this.branchId = branchId;
 	}
 
@@ -55,11 +55,7 @@ public class ActivateDialogTreeModeAction extends BaseAction {
 		return false;
 	}
 
-	@Override
-	public boolean isParallel() {
-
-		return false;
-	}
+	
 
 	public void setBranchId(int branchId) {
 		this.branchId = branchId;

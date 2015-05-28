@@ -205,7 +205,6 @@ implements ImagePanelAPI
 			g.drawImage(imgRight.getNativeImage(),84,0,this);
 		}
 
-		//System.out.println("printed with tally " + tally +" draws "+ draws);
 		tally=0;
 	}
 

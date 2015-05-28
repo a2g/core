@@ -31,13 +31,10 @@ public class ScrollCameraXAction extends ChainableAction {
 
 	private double endX;// set via setters
 	private double startX;// set via setters
-	private boolean isParallel;// set via setters
 	private double duration;
 
-	public ScrollCameraXAction(BaseAction parent, double endX, double duration,
-			boolean isLinear) {
-		super(parent, isLinear);
-		this.isParallel = false;
+	public ScrollCameraXAction(BaseAction parent, double endX, double duration) {
+		super(parent);
 		this.endX = endX;
 		this.duration = duration;
 	}
@@ -48,10 +45,6 @@ public class ScrollCameraXAction extends ChainableAction {
 
 	double getEndX() {
 		return endX;
-	}
-
-	void setNonBlocking(boolean isParallel) {
-		this.isParallel = isParallel;
 	}
 
 	@Override
@@ -72,11 +65,6 @@ public class ScrollCameraXAction extends ChainableAction {
 	protected boolean onCompleteGameAction() {
 		scene.setCameraX(endX);
 		return false;
-	}
-
-	@Override
-	public boolean isParallel() {
-		return isParallel;
 	}
 
 	public void setScene(IScenePresenterFromScrollAction scene) {

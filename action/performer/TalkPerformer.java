@@ -62,7 +62,7 @@ public class TalkPerformer {
 		return numberOfFramesTotal;
 	}
 
-	public double initializeAndReturnDuration() {
+	public double run() {
 		String[] lines = fullSpeech.split("\n");
 		
 		for (int i = 0; i < lines.length; i++) {
@@ -122,10 +122,10 @@ public class TalkPerformer {
 
 		boolean visible = true;
 		scene.setStateOfPopup(atid, visible, speech.get(0), this);
-		return totalDurationInSeconds*1000.0;
+		return totalDurationInSeconds;
 	}
 
-	public void onUpdateGameAction(double progress) {
+	public void onUpdate(double progress) {
 
 		if (!otid.isEmpty()) {
 			if (atid != "" && otid != "") {
@@ -155,7 +155,7 @@ public class TalkPerformer {
 		}
 	}
 
-	public boolean onCompleteGameAction() {
+	public boolean onComplete() {
 		if (!isHoldLastFrame) {
 			if (this.otid != "") {
 				scene.setToInitialAnimationWithoutChangingFrameByOtid(otid);
@@ -190,9 +190,6 @@ public class TalkPerformer {
 		this.scene = scene;
 	}
 
-	public void setTitleCard(IMasterPresenterFromTalkPerformer titleCard) {
-		this.master = titleCard;
-	}
 
 	public void setMaster(IMasterPresenterFromTalkPerformer sayActionTest) {
 		this.master = sayActionTest;

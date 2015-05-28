@@ -21,7 +21,7 @@ import com.github.a2g.core.action.PlayAnimationRepeatWhilstVisibleAction;
 import com.github.a2g.core.action.SetInventoryVisibleAction;
 import com.github.a2g.core.action.SleepAction;
 import com.github.a2g.core.action.SwapPropertyAction;
-import com.github.a2g.core.action.SwitchHardAction;
+import com.github.a2g.core.action.SwitchAction;
 import com.github.a2g.core.action.ActivateDialogTreeModeAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkAction;
@@ -29,6 +29,7 @@ import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.IChainRootForScene;
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IGameScene;
+import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.PointF;
 
@@ -41,8 +42,8 @@ implements IChainRootForScene
 		Visibility
 	}
 
-	protected DecoratedForSceneBaseAction(BaseAction parent, boolean isLinear) {
-		super(parent,isLinear);
+	protected DecoratedForSceneBaseAction(BaseAction parent) {
+		super(parent);
 	}
 
 	@Override
@@ -63,20 +64,15 @@ implements IChainRootForScene
 
 	// plain..
 	@Override
-	public ChainableAction playAnimation(String animationCode) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(this, animationCode,
-				isLinear);
-
+	public ChainableAction playAnimation(String atid) {
+		PlayAnimationAction a = new PlayAnimationAction(this, atid);
 		return a;
 	}
 
 	// simple backwards
 	@Override
-	public ChainableAction playAnimationBackwards(String animationCode) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(this, animationCode,
-				isLinear);
+	public ChainableAction playAnimationBackwards(String atid) {
+		PlayAnimationAction a = new PlayAnimationAction(this, atid);
 
 		a.setBackwards(true);
 		return a;
@@ -84,10 +80,8 @@ implements IChainRootForScene
 
 	// simple hold last frame
 	@Override
-	public ChainableAction playAnimationHoldLastFrame(String animationCode) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(this, animationCode,
-				isLinear);
+	public ChainableAction playAnimationHoldLastFrame(String atid) {
+		PlayAnimationAction a = new PlayAnimationAction(this, atid);
 
 		a.setHoldLastFrame(true);
 		return a;
@@ -95,12 +89,10 @@ implements IChainRootForScene
 
 	// simple non blocking
 	@Override
-	public ChainableAction playAnimationNonBlocking(String animationCode) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(this, animationCode,
-				isLinear);
+	public ChainableAction playAnimationNonBlocking(String atid) {
+		PlayAnimationAction a = new PlayAnimationAction(this, atid);
 
-		a.setNonBlocking(true);
+		a.setParallel(true);
 		return a;
 	}
 
@@ -108,11 +100,8 @@ implements IChainRootForScene
 	
 	@Override
 	public ChainableAction playAnimationBackwardsHoldLastFrame(
-			String animationCode) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(this, animationCode,
-				isLinear);
-
+			String atid) {
+		PlayAnimationAction a = new PlayAnimationAction(this, atid);
 		a.setBackwards(true);
 		a.setHoldLastFrame(true);
 		return a;
@@ -120,48 +109,40 @@ implements IChainRootForScene
 
 	// double combo2of3: backwards + nonblocking
 	@Override
-	public ChainableAction playAnimationBackwardsNonBlocking(String animationCode) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(this, animationCode,
-				isLinear);
+	public ChainableAction playAnimationBackwardsNonBlocking(String atid) {
+		PlayAnimationAction a = new PlayAnimationAction(this, atid);
 
 		a.setBackwards(true);
-		a.setNonBlocking(true);
+		a.setParallel(true);
 		return a;
 	}
 
 	// double combo2of3: holdLastFrame + nonblocking
 	@Override
 	public ChainableAction playAnimationHoldLastFrameNonBlocking(
-			String animationCode) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(this, animationCode,
-				isLinear);
+			String atid) {
+		PlayAnimationAction a = new PlayAnimationAction(this, atid);
 
 		a.setHoldLastFrame(true);
-		a.setNonBlocking(true);
+		a.setParallel(true);
 		return a;
 	}
 
 	// ..and one method with the whole lot!
 	@Override
 	public ChainableAction playAnimationBackwardsHoldLastFrameNonBlocking(
-			String animationCode) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(this, animationCode,
-				isLinear);
+			String atid) {
+		PlayAnimationAction a = new PlayAnimationAction(this, atid);
 
 		a.setBackwards(true);
 		a.setHoldLastFrame(true);
-		a.setNonBlocking(true);
+		a.setParallel(true);
 		return a;
 	}
 
 	@Override
-	public ChainableAction playAnimationRepeatWhilstVisible(String animationCode) {
-		boolean isLinear = true;
-		return new PlayAnimationRepeatWhilstVisibleAction(this, animationCode,
-				isLinear);
+	public ChainableAction playAnimationRepeatWhilstVisible(String atid) {
+		return new PlayAnimationRepeatWhilstVisibleAction(this, atid);
 	}
 	@Override
 	public ChainableAction talk(String animCode, String speech) {
@@ -194,7 +175,7 @@ implements IChainRootForScene
 			String animCode, String speech) {
 		TalkAction s = new TalkAction(this, animCode, speech);
 		s.setNonIncrementing(TalkPerformer.NonIncrementing.True);
-		s.setNonBlocking(true);
+		s.setParallel(true);
 		return s;
 	}
 	@Override
@@ -207,7 +188,7 @@ implements IChainRootForScene
 	public ChainableAction talkWithoutIncrementingFrameNonBlocking(String speech) {
 		TalkAction s = new TalkAction(this, TalkPerformer.SCENE_TALKER, speech);
 		s.setNonIncrementing(TalkPerformer.NonIncrementing.True);
-		s.setNonBlocking(true);
+		s.setParallel(true);
 		return s;
 	}
 	@Override
@@ -298,177 +279,79 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		somewhereInOrig.setParent(this);
 		return secondStep;
 	}
-	 
+	@Override
 	public ChainableAction swapProperty(short ocodeA, short ocodeB, SwapType type) {
 		return new SwapPropertyAction(this, ocodeA, ocodeB, type);
 	}
-
+	@Override
 	public BaseAction switchTo(String sceneName) {
-		return new SwitchHardAction(this, sceneName);
+		return new SwitchAction(this, sceneName);
 		// return toReturn;
 	}
-
+	@Override
 	public ChainableAction waitForFrame(short ocode, int frame) {
 		return new WaitForFrameAction(this, ocode, frame);
 	}
-
+	@Override
 	public ChainableAction setInitialAnimation(String atid) {
 		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetAsInitialAnimation);
 		a.setAtid(atid);
 		return a;
 	}
-
-	public ChainableAction walkTo(double x, double y) {
-		boolean isLinear = true;
-		WalkAction a = new WalkAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, x, y, 0,
-				isLinear);
-
-		return a;
+	@Override
+	public ChainableAction walkToWithoutSwitching(double x, double y) {
+		return walkToWithoutSwitching(new PointF(x,y));
 	}
-
-	public ChainableAction walkTo(PointF point) {
-		boolean isLinear = true;
+	@Override
+	public ChainableAction walkToWithoutSwitching(PointF end) {
 		WalkAction a = new WalkAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, point.getX(),
-				point.getY(), 0, isLinear);
+				ScenePresenter.DEFAULT_SCENE_OBJECT);
+		a.setEndX(end.getX());
+		a.setEndY(end.getY());
 		return a;
 	}
 
 	@Override
-	public BaseAction switchWalkTo(double x, double y) {
-		boolean isLinear = true;
-		SwitchWalkAction a = new SwitchWalkAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, x, y, 0,
-				isLinear);
-
-		return a;
+	public BaseAction walkTo(double x, double y) {
+		return walkTo(new PointF(x,y));
 	}
 	@Override
-	public BaseAction switchWalkTo(PointF point) {
-		boolean isLinear = true;
-		SwitchWalkAction a = new SwitchWalkAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, point.getX(),
-				point.getY(), 0, isLinear);
+	public BaseAction walkTo(PointF end) {
+		WalkMaybeSwitchAction a = new WalkMaybeSwitchAction(this,
+				ScenePresenter.DEFAULT_SCENE_OBJECT);
+		a.setEndX(end.getX());
+		a.setEndY(end.getY());
 		return a;
 	}
 	
-	public ChainableAction walkTo(double x, double y, int delay) {
-		boolean isLinear = true;
-		WalkAction a = new WalkAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, x, y, delay,
-				isLinear);
+	@Override
+	public ChainableAction walkToWithoutSwitching(short ocode, double x, double y) {
+		return walkToWithoutSwitching(ocode,new PointF(x,y));
+	}
+	@Override
+	public ChainableAction walkToWithoutSwitching(short ocode, PointF end) {
+		WalkAction a = new WalkAction(this, ocode);
+		a.setEndX(end.getX());
+		a.setEndY(end.getY());
 		return a;
 	}
-
-	public ChainableAction walkTo(PointF point, int delay) {
-		boolean isLinear = true;
-		return new WalkAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, point.getX(),
-				point.getY(), delay, isLinear);
-	}
-
-	public ChainableAction walkTo(short ocode, double x, double y) {
-		boolean isLinear = true;
-		return new WalkAction(this, ocode, x, y, 0, isLinear);
-	}
-
-	public ChainableAction walkTo(short ocode, PointF point) {
-		boolean isLinear = true;
-		return new WalkAction(this, ocode, point.getX(), point.getY(), 0,
-				isLinear);
-	}
-
-	public ChainableAction walkTo(short ocode, double x, double y, int delay) {
-		boolean isLinear = true;
-		return new WalkAction(this, ocode, x, y, delay, isLinear);
-	}
-
-	public ChainableAction walkTo(short ocode, PointF point, int delay) {
-		boolean isLinear = true;
-		return new WalkAction(this, ocode, point.getX(), point.getY(), delay,
-				isLinear);
-	}
-
-	public ChainableAction walkAndScroll(double x, double y, int delay) {
-		boolean isLinear = true;
-		return new WalkAndScrollXAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, x, y, delay,
-				isLinear);
-	}
-
-	public ChainableAction walkAndScroll(PointF point, int delay) {
-		boolean isLinear = true;
-		return new WalkAndScrollXAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, point.getX(),
-				point.getY(), delay, isLinear);
-	}
-
-	public ChainableAction walkAndScrollNonBlocking(double x, double y, int delay) {
-		boolean isLinear = true;
-		WalkAndScrollXAction a = new WalkAndScrollXAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, x, y, delay,
-				isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainableAction walkAndScrollNonBlocking(PointF point, int delay) {
-		boolean isLinear = true;
-		WalkAndScrollXAction a = new WalkAndScrollXAction(this,
-				MoveWhilstAnimatingAction.DEFAULT_WALK_OBJECT, point.getX(),
-				point.getY(), delay, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainableAction walkAndScroll(short ocode, double x, double y,
-			int delay) {
-		boolean isLinear = true;
-		return new WalkAndScrollXAction(this, ocode, x, y, delay, isLinear);
-	}
-
-	public ChainableAction walkAndScroll(short ocode, PointF point, int delay) {
-		boolean isLinear = true;
-		return new WalkAndScrollXAction(this, ocode, point.getX(),
-				point.getY(), delay, isLinear);
-	}
-
-	public ChainableAction walkAndScrollNonBlocking(short ocode, double x,
-			double y, int delay) {
-		boolean isLinear = true;
-		WalkAndScrollXAction a = new WalkAndScrollXAction(this, ocode, x, y,
-				delay, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainableAction walkAndScrollNonBlocking(short ocode, PointF point,
-			int delay) {
-		boolean isLinear = true;
-		WalkAndScrollXAction a = new WalkAndScrollXAction(this, ocode,
-				point.getX(), point.getY(), delay, isLinear);
-		a.setNonBlocking(true);
-		return a;
-	}
-
+ 
+	@Override
 	public ChainableAction showTitleCard(String text) {
 		return new TitleCardAction(this, text);
 	}
 
 	
-
+	@Override
 	public ChainableAction playAnimationNonBlockingHoldLastFrame(
-			String animationCode) {
-		boolean isLinear = true;
-		PlayAnimationAction a = new PlayAnimationAction(this, animationCode,
-				isLinear);
+			String atid) {
+		PlayAnimationAction a = new PlayAnimationAction(this, atid);
 
 		a.setHoldLastFrame(true);
-		a.setNonBlocking(true);
+		a.setParallel(true);
 		return a;
 	}
-
+	@Override
 	public ChainableAction setValue(String string, int i) {
 		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetValue);
 		a.setString(string);
@@ -476,40 +359,18 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		return a;
 	}
 
-	public ChainableAction moveWhilstAnimatingLinear(short objId, double x,
-			double y) {
-		boolean isLinear = true;
+	@Override
+	public ChainableAction moveWhilstAnimating(short ocode, double x, double y) {
 		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this,
-				objId, isLinear);
-		a.setEndX(x);
-		a.setEndY(y);
-		return a;
-	}
-
-	public ChainableAction moveWhilstAnimatingLinearNonBlocking(short ocode,
-			double x, double y) {
-		boolean isLinear = true;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this,
-				ocode, isLinear);
-		a.setEndX(x);
-		a.setEndY(y);
-		a.setNonBlocking(true);
-		return a;
-	}
-
-	public ChainableAction moveWhilstAnimating(short objId, double x, double y) {
-		boolean isLinear = false;
-		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this,
-				objId, isLinear);
+				ocode);
 		a.setEndX(x);
 		a.setEndY(y);
 		return a;
 	}
 
 	public ChainableAction moveWhilstAnimatingInY(short objId, double y) {
-		boolean isLinear = false;
 		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this,
-				objId, isLinear);
+				objId);
 		a.setEndY(y);
 		return a;
 	}
@@ -517,50 +378,45 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 	@Override
 	public ChainableAction moveWhilstAnimatingNonBlocking(short objId, double x,
 			double y) {
-		boolean isLinear = false;
 		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this,
-				objId, isLinear);
+				objId );
 		a.setEndX(x);
 		a.setEndY(y);
-		a.setNonBlocking(true);
+		a.setParallel(true);
 		return a;
 	}
-
+	@Override
 	public ChainableAction moveCameraToNewXPosition(double x,
 			double durationInSecs) {
-		boolean isLinear = false;
 		ScrollCameraXAction a = new ScrollCameraXAction(this, x,
-				durationInSecs, isLinear);
-		a.setNonBlocking(false);
+				durationInSecs);
+		a.setParallel(false);
 		return a;
 	}
 
 	@Override
 	public ChainableAction moveCameraToNewXPositionNonBlocking(double x,
 			double durationInSecs) {
-		boolean isLinear = false;
 		ScrollCameraXAction a = new ScrollCameraXAction(this, x,
-				durationInSecs, isLinear);
-		a.setNonBlocking(true);
+				durationInSecs );
+		a.setParallel(true);
 		return a;
 	}
 
 	@Override
 	public ChainableAction moveCameraToNewYPosition(double y,
 			double durationInSecs) {
-		boolean isLinear = false;
 		ScrollCameraYAction a = new ScrollCameraYAction(this, y,
-				durationInSecs, isLinear);
-		a.setNonBlocking(false);
+				durationInSecs );
+		a.setParallel(false);
 		return a;
 	}
 	@Override
 	public ChainableAction moveCameraToNewYPositionNonBlocking(double y,
 			double durationInSecs) {
-		boolean isLinear = false;
 		ScrollCameraYAction a = new ScrollCameraYAction(this, y,
-				durationInSecs, isLinear);
-		a.setNonBlocking(true);
+				durationInSecs );
+		a.setParallel(true);
 		return a;
 	}
 	@Override

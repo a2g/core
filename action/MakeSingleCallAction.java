@@ -54,7 +54,7 @@ public class MakeSingleCallAction extends ChainableAction {
 	private IScenePresenterFromMakeSingleCallAction scene;
 
 	public MakeSingleCallAction(BaseAction parent, Type type) {
-		super(parent, true);
+		super(parent );
 		this.type = type;
 	}
 	
@@ -138,12 +138,7 @@ public class MakeSingleCallAction extends ChainableAction {
 		return false;
 	}
 
-	@Override
-	public boolean isParallel() {
-
-		return false;
-	}
-
+	 
 	public void setScene(IScenePresenterFromMakeSingleCallAction scene) {
 		this.scene = scene;
 	}

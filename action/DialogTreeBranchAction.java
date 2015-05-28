@@ -33,7 +33,7 @@ public class DialogTreeBranchAction extends DialogChainableAction {
 	private boolean isOkToAdd;
 
 	public DialogTreeBranchAction(BaseAction parent, String text, int branchId, boolean isOkToAdd) {
-		super(parent, true);
+		super(parent);
 		this.isOkToAdd = isOkToAdd;
 		this.setBranchId(branchId);
 		this.setText(text);
@@ -54,7 +54,7 @@ public class DialogTreeBranchAction extends DialogChainableAction {
 	}
 
 	@Override
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteGameAction() { 
 		if(isOkToAdd)
 		{
 			dialogTree.addBranch(branchId, text, isAlwaysPresent);
@@ -62,11 +62,7 @@ public class DialogTreeBranchAction extends DialogChainableAction {
 		return false;
 	}
 
-	@Override
-	public boolean isParallel() {
-
-		return false;
-	}
+	 
 
 	public void setBranchId(int branchId) {
 		this.branchId = branchId;

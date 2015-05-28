@@ -16,6 +16,9 @@
 
 package com.github.a2g.core.objectmodel;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.github.a2g.core.event.ExecuteCommandEvent;
 import com.github.a2g.core.event.ExecuteCommandEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
@@ -29,7 +32,8 @@ import com.google.gwt.event.shared.EventBus;
 
 public class CommandLinePresenter implements ExecuteCommandEventHandlerAPI,
 SetRolloverEventHandlerAPI, ICommandLinePresenter {
-
+	private static final Logger COMMAND_MANUAL = Logger.getLogger("COMMAND.MANUAL");
+	
 	private IMasterPresenterFromCommandLine api;
 	private ICommandLinePanelFromCommandLinePresenter view;
 	private CommandLine model;
@@ -79,8 +83,7 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 			return false;
 
 		if (isOkToExecute()) {
-			System.out.println("ONEXECUTECOMMAND::execute  "
-					+ model.getSentence().getDisplayName());
+			COMMAND_MANUAL.log(Level.FINE, "ONEXECUTECOMMAND::execute {0}", new Object[]{model.getSentence().getDisplayName()});
 			this.execute(x, y);
 			return true;
 		}

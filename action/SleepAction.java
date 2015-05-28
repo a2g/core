@@ -28,7 +28,7 @@ public class SleepAction extends ChainableAction {
 	private int milliseconds;
 
 	public SleepAction(BaseAction parent, int milliseconds) {
-		super(parent, true);
+		super(parent);
 		this.milliseconds = milliseconds;
 	}
 
@@ -45,12 +45,7 @@ public class SleepAction extends ChainableAction {
 	protected boolean onCompleteGameAction() {
 		return false;
 	}
-
-	@Override
-	public boolean isParallel() {
-
-		return false;
-	}
+ 
 
 	@Override
 	public void setAll(IMasterPresenterFromActions master,

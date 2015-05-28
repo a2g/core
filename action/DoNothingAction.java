@@ -27,7 +27,7 @@ import com.github.a2g.core.action.ChainableAction;
 public class DoNothingAction extends ChainableAction {
 
 	public DoNothingAction(BaseAction parent) {
-		super(parent, true);
+		super(parent );
 	}
 	
 	@Override
@@ -43,12 +43,7 @@ public class DoNothingAction extends ChainableAction {
 	protected boolean onCompleteGameAction() {
 		return false;
 	}
-
-	@Override
-	public boolean isParallel() {
-
-		return false;
-	}
+ 
 
 
 	@Override

@@ -19,9 +19,10 @@ package com.github.a2g.core.action;
 public abstract class DialogChainableAction
 extends DecoratedForDialogBaseAction  
 {
-	protected DialogChainableAction(BaseAction parent, boolean isLinear) {
+	protected DialogChainableAction(BaseAction parent) {
 		super(parent );
 	}
+	
 
 	
 

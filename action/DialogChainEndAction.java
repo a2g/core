@@ -22,7 +22,7 @@ public abstract class DialogChainEndAction extends BaseAction
 {
 
 	DialogChainEndAction(BaseAction parent) {
-		super(parent, true);
+		super(parent);
 
 	}
 }

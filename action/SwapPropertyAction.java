@@ -37,7 +37,7 @@ public class SwapPropertyAction extends ChainableAction {
 
 	public SwapPropertyAction(BaseAction parent, short ocodeA, short ocodeB,
 			SwapType type) {
-		super(parent, true);
+		super(parent);
 		this.ocodeA = ocodeA;
 		this.ocodeB = ocodeB;
 		this.type = type;
@@ -69,11 +69,7 @@ public class SwapPropertyAction extends ChainableAction {
 		return false;
 	}
 
-	@Override
-	public boolean isParallel() {
-
-		return false;
-	}
+	 
 
 	public void setScene(IScenePresenterFromSwapAction scene) {
 		this.scene = scene;

@@ -16,7 +16,13 @@
 
 package com.github.a2g.core.objectmodel;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class LoadedLoad {
+	private static final Logger LOADING = Logger.getLogger("LOADING");
+	private static final Logger LOADING_ANIM = Logger.getLogger("LOADING.ANIM");
+	
 	private SceneObjectCollection sceneObjectCollection;
 	private String name;
 
@@ -48,7 +54,7 @@ public class LoadedLoad {
 			// much simpler if not in the animation map.
 			animation = new Animation(objPlusAnimCode, sceneObject);
 			sceneObject.getAnimations().add(animation);
-			// System.out.println("added to loader " + objPlusAnimCode);
+			LOADING_ANIM.log(Level.FINE, "added to loader {0}",new Object[]{objPlusAnimCode});
 
 		}
 

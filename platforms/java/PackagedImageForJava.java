@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 import com.github.a2g.core.interfaces.IPackagedImage;
 
@@ -46,8 +47,7 @@ public class PackagedImageForJava implements IPackagedImage {
 						.read(new File(
 								"E:/Conan/Swing/bin/com/github/a2g/core/res/leftArrow.png"));
 			} catch (IOException f) {
-				System.out
-						.println("couldn't find 'com/github/a2g/core/leftArrow.png', so exiting.");
+				JOptionPane.showMessageDialog (null, "couldn't find 'com/github/a2g/core/leftArrow.png', so exiting.", "No Arrow!", JOptionPane.WARNING_MESSAGE);
 				System.exit(0);
 			}
 		}

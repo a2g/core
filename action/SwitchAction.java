@@ -28,12 +28,12 @@ import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
  *  the last action in a chain that is returned from IGameScene.onDialogTree().
  *  You can use it in all places where you would use a GameAction
  */
-public class SwitchHardAction extends BaseAction {
+public class SwitchAction extends BaseAction {
 	private IScenePresenterFromSwitchAction scene;
 	private String switchToThis;
 
-	public SwitchHardAction(BaseAction parent, String e) {
-		super(parent,true);
+	public SwitchAction(BaseAction parent, String e) {
+		super(parent);
 		this.switchToThis = e;
 	}
 
@@ -53,12 +53,7 @@ public class SwitchHardAction extends BaseAction {
 		scene.switchToScene(this.switchToThis);
 		return true;
 	}
-
-	@Override
-	public boolean isParallel() {
-
-		return false;
-	}
+ 
 
 	@Override
 	public void setAll(IMasterPresenterFromActions master,

@@ -28,7 +28,7 @@ import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
  */
 public class ChainRootAction extends DecoratedForSceneBaseAction {
 	public ChainRootAction() {
-		super(null, true);
+		super(null);
 	}
 
 	@Override
@@ -50,11 +50,7 @@ public class ChainRootAction extends DecoratedForSceneBaseAction {
 		this.parent = parent;
 	}
 
-	@Override
-	public boolean isParallel() {
-
-		return false;
-	}
+	
 
 	@Override
 	public void setAll(IMasterPresenterFromActions master,

@@ -30,14 +30,12 @@ public class PlayAnimationAction extends ChainableAction {
 	private String otid;
 	private boolean isBackwards;
 	private boolean holdLastFrame;
-	private boolean isNonBlocking;
 	private IScenePresenterFromPlayAction scene;
 
-	public PlayAnimationAction(BaseAction parent, String atid, boolean isLinear) {
-		super(parent, isLinear);
+	public PlayAnimationAction(BaseAction parent, String atid) {
+		super(parent);
 		this.isBackwards = false;
 		this.holdLastFrame = false;
-		this.isNonBlocking = false;
 		this.atid = atid;
 	}
 
@@ -63,9 +61,6 @@ public class PlayAnimationAction extends ChainableAction {
 	@Override
 	protected boolean onCompleteGameAction() {
 
-		System.out.println("ActionRunner::done " + atid + " is this length: "
-				+ scene.getNumberOfFramesByAtid(atid));
-
 		onUpdateGameAction(1.0);
 
 		if (!this.holdLastFrame) {
@@ -82,15 +77,6 @@ public class PlayAnimationAction extends ChainableAction {
 		this.holdLastFrame = holdLastFrame;
 	}
 
-	public void setNonBlocking(boolean isNonBlocking) {
-		this.isNonBlocking = isNonBlocking;
-	}
-
-	@Override
-	public boolean isParallel() {
-		return isNonBlocking;
-	}
-
 	public void setScene(IScenePresenterFromPlayAction scene) {
 		this.scene = scene;
 	}
@@ -103,5 +89,7 @@ public class PlayAnimationAction extends ChainableAction {
 		setScene(scene);
 
 	}
+
+	 
 
 }

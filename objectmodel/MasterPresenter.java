@@ -20,6 +20,7 @@ package com.github.a2g.core.objectmodel;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.event.dom.client.LoadHandler;
@@ -30,6 +31,7 @@ import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.ActivateDialogTreeModeAction;
 import com.github.a2g.core.action.DialogChainRootAction;
 import com.github.a2g.core.action.DialogTreeChainToAction;
+import com.github.a2g.core.action.DialogTreeEndAction;
 import com.github.a2g.core.action.DialogTreeTalkAction;
 import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -73,7 +75,10 @@ IMasterPresenterFromInventory, IMasterPresenterFromVerbs,
 IMasterPresenterFromTitleCard, 
 PropertyChangeEventHandlerAPI
 {
-
+	private static final Logger LOADING = Logger.getLogger("LOADING");
+	private static final Logger LOADING_ANIM = Logger.getLogger("LOADING.ANIM");
+	private static final Logger COMMAND_AUTOPLAY = Logger.getLogger("COMMAND.AUTOPLAY");
+	
 	MasterProxyForGameScene proxyForGameScene;
 	private CommandLinePresenter commandLinePresenter;
 	private InventoryPresenter inventoryPresenter;
@@ -97,8 +102,6 @@ PropertyChangeEventHandlerAPI
 	private Integer[] theListOfIndexesToInsertAt;
 	private ArrayList<PointF> gatePoints;
 	private ArrayList<Integer> gateIds;
-
-	private Logger logger = Logger.getLogger("com.mycompany.level");
 
 	private String lastSceneAsString;
 	private String switchDestination;
@@ -241,7 +244,23 @@ PropertyChangeEventHandlerAPI
 
 	public void executeActionWithDialogActionRunner(BaseAction a) {
 		if (a == null) {
-			a = new DoNothingAction(createChainRootAction());
+			// null must get turned in to 
+			// a DialogTreeEndAction
+			// since
+			// a) when it falls thru the switch
+			// we want it to exit the dialog..
+			// not to just sit there and hang.
+			// b) if it falls thru the switch
+			// it will usually fall to what
+			// was auto-generated as the default
+			// return value when the IGameScene
+			// interface was implemented.
+			// c) the default return value, when
+			// IGameScene is implemented
+			// is null..
+			// ... thus null must be interpreted
+			// as DialogTreeEndAction
+			a = new DialogTreeEndAction(createChainRootAction());
 		}
 
 		dialogActionRunner.runAction(a);
@@ -370,18 +389,15 @@ PropertyChangeEventHandlerAPI
 
 	@Override
 	public void switchToScene(String scene) {
-		String thisScene = this.sceneHandlers.toString().toUpperCase();
-		if(!thisScene.contains(scene))
-		{
+		
 			// since instantiateScene..ToIt does some asynchronous stuff,
 			// I thought maybe I could do it, then cancel the timers.
 			// but I've put it off til I need the microseconds.
 			cancelOnEveryFrameTimer();
 			this.dialogActionRunner.cancel();
 			setCameraToZero();// no scene is meant to keep camera position
-			this.host
-			.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
-		}
+			this.host.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
+		
 	}
 
 	public String getLastScene() {
@@ -573,35 +589,36 @@ PropertyChangeEventHandlerAPI
 	@Override
 	public void mergeWithScene(LoadedLoad s) {
 		String name = s.getName();
-		logger.fine(name);
-		System.out.println("dumping " + name);
+		LOADING.log(Level.FINE, "merge with scene {0}",new Object[]{name});
+
 		SceneObjectCollection theirs = s.getSceneObjectCollection();
 		SceneObjectCollection ours = this.scenePresenter.getModel()
 				.objectCollection();
 
 		for (int i = 0; i < theirs.count(); i++) {
 			SceneObject srcObject = theirs.getByIndex(i);
-			String otext = srcObject.getOtid();
+			String otid = srcObject.getOtid();
 			int prefix = srcObject.getNumberPrefix();
-			short objectCode = srcObject.getOCode();
-			SceneObject destObject = ours.getByOtid(otext);
+			short ocode = srcObject.getOCode();
+			SceneObject destObject = ours.getByOtid(otid);
 			if (destObject == null) {
-				destObject = new SceneObject(otext,
+				destObject = new SceneObject(otid,
 						scenePresenter.getSceneGuiWidth(),
 						scenePresenter.getSceneGuiHeight());
 				destObject.setNumberPrefix(prefix);
-				destObject.setOCode(objectCode);
+				destObject.setOCode(ocode);
 
-				if (objectCode == -1) {
+				if (ocode == -1) {
 					host.alert("Missing initial image for "
-							+ otext
+							+ otid
 							+ "\n At the least it will need an image in a placeholder folder, so it shows up in list of objects.");
 					return;
 				}
 
 				ours.add(destObject);
 				scenePresenter.addSceneObject(destObject);
-				System.out.println("New object " + otext + " " + objectCode);
+				LOADING.log(Level.FINE, "new object {0} {1}",new Object[]{otid,ocode});
+
 
 			}
 
@@ -618,8 +635,8 @@ PropertyChangeEventHandlerAPI
 					scenePresenter.addAnimation(atid, destAnimation);
 				}
 
-				System.out.println("new anim " + otext + " " + atid + " = "
-						+ atid);
+				LOADING.log(Level.FINE, "new anim {0} {1}",new Object[]{otid,atid});
+
 
 				for (int k = 0; k < srcAnimation.getFrames().getCount(); k++) {
 					Image srcImage = srcAnimation.getFrames().getByIndex(k);
@@ -689,7 +706,7 @@ PropertyChangeEventHandlerAPI
 		return host.getFactory(bus, this);
 	}
 
-	SentenceItem getFullItem(int code)
+	SentenceItem getSIOfObject(int code)
 	{
 		if(SentenceItem.isInventory(code))
 		{
@@ -704,7 +721,7 @@ PropertyChangeEventHandlerAPI
 		return new SentenceItem(o.getDisplayName(),o.getOtid(),code);
 	}
 	
-	SentenceItem getVerb(int vcode)
+	SentenceItem getSIOfVerb(int vcode)
 	{
 		Verb v = this.verbsPresenter.getVerbsModel().items().getVerbByCode(vcode);
 		if(v==null)
@@ -713,15 +730,27 @@ PropertyChangeEventHandlerAPI
 		return new SentenceItem(v.getdisplayText(), v.getVtid(), vcode);
 	}
 	
-	BaseAction replaceDialogChainToActionWithOnDialogTreeChain(BaseAction a)
+	void linkUpperMostActionOfAToB(BaseAction a, BaseAction b)
 	{
-		if (a instanceof DialogTreeChainToAction) {
-			int branchId = ((DialogTreeChainToAction) a).getBranchId();
-			DecoratedForDialogBaseAction d = createDialogChainRootAction();
-			BaseAction b = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
-			return b;
+		for(;;)
+		{
+			if(a.getParent()==null)
+				break;
+			a = a.getParent();
 		}
-		return a;
+		a.setParent(b);
+	}
+	
+	BaseAction replaceDialogChainToActionWithOnDialogTreeChain(BaseAction b)
+	{
+		if (b instanceof DialogTreeChainToAction) {
+			int branchId = ((DialogTreeChainToAction) b).getBranchId();
+			DecoratedForDialogBaseAction d = createDialogChainRootAction();
+			BaseAction a = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
+			linkUpperMostActionOfAToB(a,b);
+			return a;
+		}
+		return b;
 	}
 	BaseAction replaceDoDialogActionWithOnDialogTreeChain(BaseAction a)
 	{
@@ -776,6 +805,7 @@ PropertyChangeEventHandlerAPI
 					titleCardPresenter.setText("can't say that id currently");
 					return;
 				}
+				COMMAND_AUTOPLAY.log(Level.FINE, "DIALOG {0} {1}", new Object[]{branchId,text});
 				saySpeechAndThenExecuteBranchWithBranchId(branchId);
 			}
 			else
@@ -784,14 +814,21 @@ PropertyChangeEventHandlerAPI
 				{
 					// SLEEP = sleep for 100ms
 					a = createChainRootAction().sleep(cmd.getObj1());
+					COMMAND_AUTOPLAY.log(Level.FINE, "SLEEP {0}", new Object[]{cmd.getObj1()});
+					
 				}
 				else if(cmd.getVerb()==ConstantsForAPI.SWITCH)
 				{
 					a = createChainRootAction().switchTo(cmd.getString());
+					COMMAND_AUTOPLAY.log(Level.FINE, "SWITCH {0}", new Object[]{cmd.getString()});
+					
 				}
 				else 
 				{
-					this.commandLinePresenter.setVerbItemItem(getVerb(cmd.getVerb()), getFullItem(cmd.getObj1()), getFullItem(cmd.getObj2()));
+					COMMAND_AUTOPLAY.log(Level.FINE, "{0} {1} {2}", 
+							new Object[]{cmd.getVerbAsString(), getSIOfObject(cmd.getObj1()).getDisplayName(), getSIOfObject(cmd.getObj2()).getDisplayName()});
+					
+					this.commandLinePresenter.setVerbItemItem(getSIOfVerb(cmd.getVerb()), getSIOfObject(cmd.getObj1()), getSIOfObject(cmd.getObj2()));
 
 					//otherwise ask the sceneHanders what the outcome is.
 					SentenceItem o1 = new SentenceItem("","",cmd.getObj1());
@@ -800,7 +837,7 @@ PropertyChangeEventHandlerAPI
 							createChainRootAction(), cmd.getVerb(),o1,o2,cmd.getDouble1(),cmd.getDouble2());
 					if (a instanceof DoNothingAction) {
 						isAutoplayCancelled = true;
-						titleCardPresenter.setText("zction returned do nothing");
+						titleCardPresenter.setText("action returned do nothing");
 						return;
 				
 					}
