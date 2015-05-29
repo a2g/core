@@ -589,7 +589,7 @@ PropertyChangeEventHandlerAPI
 	@Override
 	public void mergeWithScene(LoadedLoad s) {
 		String name = s.getName();
-		LOADING.log(Level.FINE, "merge with scene {0}",new Object[]{name});
+		LOADING.log(Level.FINE, "merge with scene "+name);
 
 		SceneObjectCollection theirs = s.getSceneObjectCollection();
 		SceneObjectCollection ours = this.scenePresenter.getModel()
@@ -617,7 +617,7 @@ PropertyChangeEventHandlerAPI
 
 				ours.add(destObject);
 				scenePresenter.addSceneObject(destObject);
-				LOADING.log(Level.FINE, "new object {0} {1}",new Object[]{otid,ocode});
+				LOADING.log(Level.FINE, "new object "+otid+" "+ocode);
 
 
 			}
@@ -635,7 +635,7 @@ PropertyChangeEventHandlerAPI
 					scenePresenter.addAnimation(atid, destAnimation);
 				}
 
-				LOADING.log(Level.FINE, "new anim {0} {1}",new Object[]{otid,atid});
+				LOADING.log(Level.FINE, "new anim "+otid+" "+atid);
 
 
 				for (int k = 0; k < srcAnimation.getFrames().getCount(); k++) {
@@ -809,7 +809,7 @@ PropertyChangeEventHandlerAPI
 					titleCardPresenter.setText("can't say that id currently");
 					return;
 				}
-				COMMAND_AUTOPLAY.log(Level.FINE, "DIALOG {0} {1}", new Object[]{branchId,text});
+				COMMAND_AUTOPLAY.log(Level.FINE, "DIALOG "+branchId+" "+text);
 				saySpeechAndThenExecuteBranchWithBranchId(branchId);
 			}
 			else
@@ -818,19 +818,18 @@ PropertyChangeEventHandlerAPI
 				{
 					// SLEEP = sleep for 100ms
 					a = createChainRootAction().sleep(cmd.getObj1());
-					COMMAND_AUTOPLAY.log(Level.FINE, "SLEEP {0}", new Object[]{cmd.getObj1()});
+					COMMAND_AUTOPLAY.log(Level.FINE, "SLEEP "+cmd.getObj1());
 					
 				}
 				else if(cmd.getVerb()==ConstantsForAPI.SWITCH)
 				{
 					a = createChainRootAction().switchTo(cmd.getString());
-					COMMAND_AUTOPLAY.log(Level.FINE, "SWITCH {0}", new Object[]{cmd.getString()});
+					COMMAND_AUTOPLAY.log(Level.FINE, "SWITCH "+cmd.getString());
 					
 				}
 				else 
 				{
-					COMMAND_AUTOPLAY.log(Level.FINE, "{0} {1} {2}", 
-							new Object[]{cmd.getVerbAsString(), getSIOfObject(cmd.getObj1()).getDisplayName(), getSIOfObject(cmd.getObj2()).getDisplayName()});
+					COMMAND_AUTOPLAY.log(Level.FINE,"autoplay " +cmd.getVerbAsString()+" "+getSIOfObject(cmd.getObj1()).getDisplayName()+ " "+ getSIOfObject(cmd.getObj2()).getDisplayName());
 					
 					this.commandLinePresenter.setVerbItemItem(getSIOfVerb(cmd.getVerb()), getSIOfObject(cmd.getObj1()), getSIOfObject(cmd.getObj2()));
 

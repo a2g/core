@@ -134,7 +134,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 		// sure why.
 		// this only happens in gwt.
 		int count = this.parallelActionsToWaitFor.size();
-		RUNNER.log( Level.FINE, "processing {0} parallel actions", new Object[]{ count } );
+		RUNNER.log( Level.FINE, "processing "+count+" parallel actions" );
 		
 		for (int i = 0; i < count; i++) {
 			BaseAction a = this.parallelActionsToWaitFor.get(i);
@@ -145,8 +145,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 				MakeSingleCallAction b = (MakeSingleCallAction)a;
 				name = b.getType().toString();
 			}
-			RUNNER.log( Level.FINE, "execute parallel actions {0} {1}", new Object[]{ i,name} );
-			
+			RUNNER.log( Level.FINE, "execute parallel actions "+i+" "+name );
 
 			a.setCallbacks(this);
 			
@@ -184,10 +183,10 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 	@Override
 	public void startTheNextAction(BaseAction a) {
 		this.numberOfParallelActionsToWaitFor--;
-		RUNNER_REFCOUNT.log( Level.FINE, "Release {0}", new Object[]{ numberOfParallelActionsToWaitFor} );
+		RUNNER_REFCOUNT.log( Level.FINE, "Release " +numberOfParallelActionsToWaitFor );
 		
 		if (this.numberOfParallelActionsToWaitFor == 0) {
-			RUNNER.log( Level.FINE, "Starting next action {0}", new Object[]{ this.toString()} );
+			RUNNER.log( Level.FINE, "Starting next action "+this.toString() );
 			
 			processNextListOfParallelActions();
 		}

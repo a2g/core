@@ -55,13 +55,12 @@ public class LoadedLoad {
 			// much simpler if not in the animation map.
 			animation = new Animation(objPlusAnimCode, sceneObject);
 			sceneObject.getAnimations().add(animation);
-			LOADING_ANIM.log(Level.FINE, "added to loader {0}",new Object[]{objPlusAnimCode});
-
+			LOADING_ANIM.log(Level.FINE, "added to loader "+objPlusAnimCode);
 		}
 
 		animation.getFrameCollection().add(imageAndPos);
-		animation
-		.setDurationSecs(animation.getFrameCollection().getCount() * 40);
+		double seconds = animation.getFrameCollection().getCount() * 40*4;//as if the animation is at 25fps, but then slowed down 4 times.
+		animation.setDurationSecs(seconds/1000);
 	}
 
 	public SceneObjectCollection getSceneObjectCollection() {
