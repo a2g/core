@@ -19,8 +19,10 @@ package com.github.a2g.core.objectmodel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.github.a2g.core.primitive.LogNames;
+
 public class LoadedLoad {
-	private static final Logger LOADING_ANIM = Logger.getLogger("LOADING.ANIM");
+	private static final Logger LOADING_ANIM = Logger.getLogger(LogNames.LOADING_ANIM);
 	
 	private SceneObjectCollection sceneObjectCollection;
 	private String name;

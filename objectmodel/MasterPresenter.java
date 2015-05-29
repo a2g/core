@@ -35,6 +35,7 @@ import com.github.a2g.core.action.DialogTreeEndAction;
 import com.github.a2g.core.action.DialogTreeTalkAction;
 import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.action.DecoratedForDialogBaseAction;
 import com.github.a2g.core.event.PropertyChangeEvent;
@@ -75,8 +76,8 @@ IMasterPresenterFromInventory, IMasterPresenterFromVerbs,
 IMasterPresenterFromTitleCard, 
 PropertyChangeEventHandlerAPI
 {
-	private static final Logger LOADING = Logger.getLogger("LOADING");
-	private static final Logger COMMAND_AUTOPLAY = Logger.getLogger("COMMAND.AUTOPLAY");
+	private static final Logger LOADING = Logger.getLogger(LogNames.LOADING);
+	private static final Logger COMMAND_AUTOPLAY = Logger.getLogger(LogNames.COMMAND_AUTOPLAY);
 	
 	MasterProxyForGameScene proxyForGameScene;
 	private CommandLinePresenter commandLinePresenter;

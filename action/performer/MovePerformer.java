@@ -20,12 +20,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.github.a2g.core.interfaces.IScenePresenterFromMovePerformer;
+import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointF;
 
 
 public class MovePerformer
 {	
-	private static final Logger MOVE = Logger.getLogger("MOVE");
+	private static final Logger MOVE = Logger.getLogger(LogNames.MOVE);
 	
 	private IScenePresenterFromMovePerformer scene;
 

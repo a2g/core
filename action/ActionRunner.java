@@ -29,11 +29,12 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromActionRunner;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
+import com.github.a2g.core.primitive.LogNames;
 
 public class ActionRunner implements IActionRunnerFromBaseAction {
 
-	private static final Logger RUNNER = Logger.getLogger("RUNNER");
-	private static final Logger RUNNER_REFC = Logger.getLogger("RUNNER.REFCOUNT");
+	private static final Logger RUNNER = Logger.getLogger(LogNames.RUNNER);
+	private static final Logger RUNNER_REFCOUNT = Logger.getLogger(LogNames.RUNNER_REFCOUNT);
 	
 	protected ArrayList<ArrayList<BaseAction>> list;
 	private ArrayList<BaseAction> parallelActionsToWaitFor;
@@ -183,7 +184,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 	@Override
 	public void startTheNextAction(BaseAction a) {
 		this.numberOfParallelActionsToWaitFor--;
-		RUNNER_REFC.log( Level.FINE, "Release {0}", new Object[]{ numberOfParallelActionsToWaitFor} );
+		RUNNER_REFCOUNT.log( Level.FINE, "Release {0}", new Object[]{ numberOfParallelActionsToWaitFor} );
 		
 		if (this.numberOfParallelActionsToWaitFor == 0) {
 			RUNNER.log( Level.FINE, "Starting next action {0}", new Object[]{ this.toString()} );

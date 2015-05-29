@@ -31,7 +31,6 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	IMasterPresenterFromBundle api;
 	private LoadedLoad theCurrentCacheObject;
 
-	// private Logger logger = Logger.getLogger("com.mycompany.level");
 
 	public LoaderItem(IMasterPresenterFromBundle api2,
 			ILoad bundleToCallLoadOn, int bundleNumber) {

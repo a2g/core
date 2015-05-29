@@ -28,11 +28,12 @@ import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.interfaces.ICommandLinePresenter;
 import com.github.a2g.core.interfaces.IHostingPanel;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.LogNames;
 import com.google.gwt.event.shared.EventBus;
 
 public class CommandLinePresenter implements ExecuteCommandEventHandlerAPI,
 SetRolloverEventHandlerAPI, ICommandLinePresenter {
-	private static final Logger COMMAND_MANUAL = Logger.getLogger("COMMAND.MANUAL");
+	private static final Logger COMMAND_MANUAL = Logger.getLogger(LogNames.COMMAND_MANUAL);
 	
 	private IMasterPresenterFromCommandLine api;
 	private ICommandLinePanelFromCommandLinePresenter view;

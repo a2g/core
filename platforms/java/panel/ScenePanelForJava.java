@@ -58,7 +58,7 @@ implements IScenePanelFromScenePresenter
 , ImagePanelAPI
 , ActionListener
 {
-	//private static final Logger JAVACANVAS = Logger.getLogger("JAVACANVAS");
+	//private static final Logger JAVACANVAS = Logger.getLogger(LogNames.JAVACANVAS);
 	
 	int width;
 	int height;

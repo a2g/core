@@ -58,7 +58,7 @@ implements
 ImagePanelAPI
 , IScenePanelFromScenePresenter
 {
-	//private static final Logger HTML5CANVAS = Logger.getLogger("HTML5CANVAS");
+	//private static final Logger HTML5CANVAS = Logger.getLogger(LogNames.HTML5CANVAS);
 	
 	//private EventBus bus;
 	private AbsolutePanel abs;
