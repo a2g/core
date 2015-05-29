@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -142,7 +141,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 			String name = a.toString();
 			if(name.startsWith("com.github.a2g.core.action.MakeSingleCallAction"))
 			{
-				MakeSingleCallAction b = (MakeSingleCallAction)a;
+				SingleCallAction b = (SingleCallAction)a;
 				name = b.getType().toString();
 			}
 			RUNNER.log( Level.FINE, "execute parallel actions "+i+" "+name );

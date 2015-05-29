@@ -1,24 +1,26 @@
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
-import com.github.a2g.core.action.DecoratedForSceneBaseAction.SwapType;
+import com.github.a2g.core.action.ChainableAction.SwapType;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.PointF;
 
 public interface IChainRootForScene {
-	// convenient to see all the base action ones at the top.
-	public BaseAction doBoth(ChainableAction a, ChainableAction b);
-	public BaseAction activateDialogTreeMode(int branchId);
-	public BaseAction onDoCommand(IGameScene scene, IOnDoCommand api,
+	// all the ChainEndActions can only be the last
+	// action in a chain.
+	// subroutine is an exeption since there is both a ChainEndAction
+	// and ChainableAction version of it.
+	public ChainEndAction doBoth(ChainableAction a, ChainableAction b);
+	public ChainEndAction activateDialogTreeMode(int branchId);
+	public ChainEndAction onDoCommand(IGameScene scene, IOnDoCommand api,
 			ChainRootAction ba, int verb, SentenceItem itemA,
 			SentenceItem itemB, double x, double y);
-	public BaseAction subroutine(BaseAction orig);
-	public BaseAction switchTo(String sceneName);
-	public BaseAction walkTo(double x, double y);// should not have ocode here because switching implies main character
-	public BaseAction walkTo(PointF point);
-	public BaseAction quit();
+	public ChainEndAction subroutine(ChainEndAction orig);
+	public ChainEndAction switchTo(String sceneName);
+	public ChainEndAction walkTo(double x, double y);// should not have ocode here because switching implies main character
+	public ChainEndAction walkTo(PointF point);
 	
 	// there's 2 choices
 	// 1) BaseAction walkSwitch and ChainAbleAction walkTo

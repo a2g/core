@@ -16,15 +16,82 @@
 
 package com.github.a2g.core.action;
 
-public abstract class DialogChainableAction
-extends DecoratedForDialogBaseAction  
+import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
+import com.github.a2g.core.action.performer.TalkPerformer;
+import com.github.a2g.core.interfaces.IChainRootForDialog;
+
+public abstract class DialogChainableAction extends DialogChainEndAction
+implements IChainRootForDialog
 {
-	protected DialogChainableAction(BaseAction parent) {
-		super(parent );
+
+	DialogChainableAction(BaseAction parent) {
+		super(parent);
+
 	}
-	
+	@Override
+	public DialogChainableAction branch(int branchId, final boolean isOkToAdd, String text) {
 
-	
+		DialogTreeBranchAction a = new DialogTreeBranchAction(this, text,
+				branchId, isOkToAdd);
+		return a;
+	}
+	@Override
+	public DialogChainableAction branch(int branchId, String text) {
+		return new DialogTreeBranchAction(this, text, branchId, true);
+	}
+	@Override
+	public DialogChainEndAction endDialogTree() {
+		return new DialogTreeEndAction(this);
+	}
+	public DialogChainEndAction chainTo(int branchId) {
+		return new DialogTreeChainToAction(this, branchId);
+	}
 
-	
+	@Override
+	public	DialogChainableAction talk(String animCode, String speech) {
+		DialogTreeTalkAction s = new DialogTreeTalkAction(this, animCode, speech);
+		return s;
+	} 
+
+	@Override
+	public	DialogChainableAction talk(String speech) {
+		DialogTreeTalkAction s = new DialogTreeTalkAction(this, TalkPerformer.SCENE_TALKER, speech);
+		return s;
+	} 
+
+	@Override
+	public DialogChainEndAction switchTo(String string) {
+		DialogSwitchAction s = new DialogSwitchAction(this, string );
+		return s;
+	}
+
+	@Override
+	public DialogChainableAction setValue(String key, int value) {
+		DialogTreeSingleCallAction a =  new DialogTreeSingleCallAction(this, Type.SetValue);
+		a.setString(key);
+		a.setInt(value);
+		return a;
+	}
+
+	@Override
+	public DialogChainableAction setInventoryVisible(int key, boolean value) {
+		DialogTreeSetInventoryVisibleAction a =  new DialogTreeSetInventoryVisibleAction(this,  key, value);
+		return a;
+	}
+
+	@Override
+	public DialogChainableAction sleep(int milliseconds){
+		DialogTreeSingleCallAction a =  new DialogTreeSingleCallAction(this, Type.Sleep);
+		a.setInt(milliseconds);
+		return a;
+	}
+
+	@Override
+	public DialogChainableAction setInitialAnimation(String atid)
+	{
+		DialogTreeSingleCallAction a =  new DialogTreeSingleCallAction(this, Type.SetAsInitialAnimation);
+		a.setAtid(atid);
+		return a;
+	}
 }

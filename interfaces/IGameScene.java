@@ -16,7 +16,8 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.ChainEndAction;
+import com.github.a2g.core.action.DialogChainEndAction;
 import com.github.a2g.core.interfaces.IOnFillLoadListImpl.LoadKickStarter;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.PointF;
@@ -26,14 +27,14 @@ public interface IGameScene extends ConstantsForAPI {
 
 	public void onPreEntry(IOnPreEntry api);
 
-	public BaseAction onEntry(IOnEntry api, IChainRootForScene ba);
+	public ChainEndAction onEntry(IOnEntry api, IChainRootForScene ba);
 
 	public void onEveryFrame(IOnEveryFrame api);
 
-	public BaseAction onDoCommand(IOnDoCommand api, IChainRootForScene ba,
+	public ChainEndAction onDoCommand(IOnDoCommand api, IChainRootForScene ba,
 			int verb, SentenceItem itemA, SentenceItem itemB, double x, double y);
 
-	public BaseAction onDialogTree(IOnDialogTree api,
+	public DialogChainEndAction onDialogTree(IOnDialogTree api,
 			IChainRootForDialog ba, int branch);
 
 	public void onMovementBeyondAGate(IOnMovementBeyondAGate api, PointF a, PointF b, PointF tp, int id);

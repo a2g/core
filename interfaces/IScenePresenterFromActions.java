@@ -15,5 +15,7 @@ IScenePresenterFromMoveAction
 , IScenePresenterFromMovePerformer
 , IScenePresenterFromSwitchPerformer
 , IScenePresenterFromScrollPerformer
-, IScenePresenterFromWalkPerformer{
+, IScenePresenterFromWalkPerformer
+, IScenePresenterFromSingleCallPerformer
+{
 }

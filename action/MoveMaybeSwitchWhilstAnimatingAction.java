@@ -26,7 +26,7 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.primitive.PointF;
 
-public class MoveMaybeSwitchWhilstAnimatingAction extends ChainableAction{
+public class MoveMaybeSwitchWhilstAnimatingAction extends ChainEndAction{
 
 	MovePerformer mover;
 	SwitchPerformer switcher;

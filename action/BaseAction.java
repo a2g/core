@@ -16,6 +16,7 @@
 
 package com.github.a2g.core.action;
 
+import com.github.a2g.core.action.performer.SingleCallPerformer;
 import com.github.a2g.core.interfaces.IActionRunnerFromBaseAction;
 import com.github.a2g.core.interfaces.ISystemAnimation;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
@@ -110,7 +111,7 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 
 
 	public ChainableAction setVisible(short ocode, boolean isVisible) {
-		MakeSingleCallAction a =  new MakeSingleCallAction(this, MakeSingleCallAction.Type.SetVisible);
+		SingleCallAction a =  new SingleCallAction(this, SingleCallPerformer.Type.SetVisible);
 		a.setOCode(ocode);
 		a.setBoolean(isVisible);
 		return a;

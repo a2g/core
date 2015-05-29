@@ -25,7 +25,7 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-public class ActivateDialogTreeModeAction extends BaseAction {
+public class ActivateDialogTreeModeAction extends ChainEndAction {
 
 	private int branchId;
 	private IDialogTreePresenterFromDoBranchAction dialogTree;

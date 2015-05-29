@@ -17,24 +17,26 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
+import com.github.a2g.core.action.performer.SingleCallPerformer;
 
-public class SleepAction extends ChainableAction {
-	private int milliseconds;
+public class DialogTreeSingleCallAction 
+extends DialogChainableAction {
 
-	public SleepAction(BaseAction parent, int milliseconds) {
+	SingleCallPerformer single;
+	
+	protected DialogTreeSingleCallAction(BaseAction parent, SingleCallPerformer.Type type) {
 		super(parent);
-		this.milliseconds = milliseconds;
+		single = new SingleCallPerformer(type);
 	}
-
+	
 	@Override
 	public void runGameAction() {
-		this.run(this.milliseconds);
+		super.run(1);
 	}
 
 	@Override
@@ -43,17 +45,23 @@ public class SleepAction extends ChainableAction {
 
 	@Override
 	protected boolean onCompleteGameAction() {
-		return false;
+		return single.onComplete();
 	}
- 
 
 	@Override
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
-		// TODO Auto-generated method stub
-
+		single.setScene(scene);
 	}
-
+	
+	public SingleCallPerformer.Type getType(){ return single.getType();}
+ 
+	void setDouble(double d){ single.setDouble(d) ;}
+	void setOCode(short o){ single.setOCode(o);}
+	void setAtid(String atid){ single.setAtid(atid);}
+	void setString(String string){ single.setString(string);}
+	void setBoolean(boolean isTrue){ single.setBoolean(isTrue);}
+	void setInt(int intValue){ single.setInt(intValue);}
 }

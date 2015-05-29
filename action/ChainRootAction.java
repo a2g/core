@@ -26,7 +26,7 @@ import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 /*
  * ChainRootAction is identified by having a null parent.
  */
-public class ChainRootAction extends DecoratedForSceneBaseAction {
+public class ChainRootAction extends ChainableAction {
 	public ChainRootAction() {
 		super(null);
 	}

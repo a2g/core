@@ -23,13 +23,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 
-import com.github.a2g.core.primitive.LogNames;
 
 public class SceneObjectCollection {
-	private static final Logger LOADING = Logger.getLogger(LogNames.LOADING);
-	private static final Logger LOADING_ANIM = Logger.getLogger(LogNames.LOADING_ANIM);
+	//private static final Logger LOADING = Logger.getLogger(LogNames.LOADING);
+	//private static final Logger LOADING_ANIM = Logger.getLogger(LogNames.LOADING_ANIM);
 	
 	private List<String> theOtids;
 	private List<Short> theOCodes;

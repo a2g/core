@@ -37,7 +37,7 @@ import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointF;
-import com.github.a2g.core.action.DecoratedForDialogBaseAction;
+import com.github.a2g.core.action.DialogChainableAction;
 import com.github.a2g.core.event.PropertyChangeEvent;
 import com.github.a2g.core.event.PropertyChangeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
@@ -745,7 +745,7 @@ PropertyChangeEventHandlerAPI
 	{
 		if (b instanceof DialogTreeChainToAction) {
 			int branchId = ((DialogTreeChainToAction) b).getBranchId();
-			DecoratedForDialogBaseAction d = createDialogChainRootAction();
+			DialogChainableAction d = createDialogChainRootAction();
 			BaseAction a = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
 			linkUpperMostActionOfAToB(a,b);
 			return a;
@@ -756,7 +756,7 @@ PropertyChangeEventHandlerAPI
 	{
 		if (a instanceof ActivateDialogTreeModeAction) {
 			int branchId = ((ActivateDialogTreeModeAction) a).getBranchId();
-			DecoratedForDialogBaseAction d = createDialogChainRootAction();
+			DialogChainableAction d = createDialogChainRootAction();
 			BaseAction b = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
 			return b;
 		}

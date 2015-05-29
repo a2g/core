@@ -21,26 +21,24 @@ import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.IScenePresenterFromSwitchAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
+import com.github.a2g.core.action.ChainableAction;
+import com.github.a2g.core.action.performer.SingleCallPerformer;
 
-/* ! This inherits from BaseDialogTreeAction because it is valid to be used as
- *  the last action in a chain that is returned from IGameScene.onDialogTree().
- *  You can use it in all places where you would use a GameAction
- */
-public class SwitchAction extends ChainEndAction {
-	private IScenePresenterFromSwitchAction scene;
-	private String switchToThis;
+public class SingleCallAction 
+extends ChainableAction {
 
-	public SwitchAction(BaseAction parent, String e) {
+	SingleCallPerformer single;
+	
+	protected SingleCallAction(BaseAction parent, SingleCallPerformer.Type type) {
 		super(parent);
-		this.switchToThis = e;
+		single = new SingleCallPerformer(type);
 	}
-
+	
 	@Override
 	public void runGameAction() {
-
-		super.run(1);
+		int millisecs = single.run();
+		super.run(millisecs);
 	}
 
 	@Override
@@ -49,22 +47,23 @@ public class SwitchAction extends ChainEndAction {
 
 	@Override
 	protected boolean onCompleteGameAction() {
-
-		scene.switchToScene(this.switchToThis);
-		return true;
+		return single.onComplete();
 	}
- 
 
 	@Override
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
-		setScene(scene);
+		single.setScene(scene);
 	}
-
-	public void setScene(IScenePresenterFromSwitchAction scene) {
-		this.scene = scene;
-	}
-
+	
+	public SingleCallPerformer.Type getType(){ return single.getType();}
+ 
+	void setDouble(double d){ single.setDouble(d) ;}
+	void setOCode(short o){ single.setOCode(o);}
+	void setAtid(String atid){ single.setAtid(atid);}
+	void setString(String string){ single.setString(string);}
+	void setBoolean(boolean isTrue){ single.setBoolean(isTrue);}
+	void setInt(int intValue){ single.setInt(intValue);}
 }

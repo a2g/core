@@ -1,6 +1,5 @@
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.DialogChainEndAction;
 import com.github.a2g.core.action.DialogChainableAction;
 
@@ -16,5 +15,5 @@ public interface IChainRootForDialog {
 	
 	DialogChainEndAction  endDialogTree();
 	DialogChainEndAction  chainTo(int branchId);
-	BaseAction            switchTo(String string);
+	DialogChainEndAction  switchTo(String string);
 }
