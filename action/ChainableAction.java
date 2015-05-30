@@ -17,7 +17,6 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.PlayAnimationAction;
-import com.github.a2g.core.action.PlayAnimationRepeatWhilstVisibleAction;
 import com.github.a2g.core.action.SwitchAction;
 import com.github.a2g.core.action.ActivateDialogTreeModeAction;
 import com.github.a2g.core.action.WaitForFrameAction;
@@ -138,10 +137,6 @@ implements IChainRootForScene
 		return a;
 	}
 
-	@Override
-	public ChainableAction playAnimationRepeatWhilstVisible(String atid) {
-		return new PlayAnimationRepeatWhilstVisibleAction(this, atid);
-	}
 	@Override
 	public ChainableAction talk(String animCode, String speech) {
 		TalkAction s = new TalkAction(this, animCode, speech);

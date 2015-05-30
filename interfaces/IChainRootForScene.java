@@ -68,7 +68,6 @@ public interface IChainRootForScene {
 	// ..and one method with the whole lot!
 	public ChainableAction playAnimationBackwardsHoldLastFrameNonBlocking(
 			String animationCode);
-	public ChainableAction playAnimationRepeatWhilstVisible(String animationCode);
 	public ChainableAction talk(String animCode, String speech);
 	public ChainableAction talk(String speech);
 	public ChainableAction talkWithoutIncrementingFrame(String animCode,
