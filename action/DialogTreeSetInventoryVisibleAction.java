@@ -19,13 +19,13 @@ package com.github.a2g.core.action;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
-import com.github.a2g.core.interfaces.IInventoryPresenterFromSetInventoryVisibleAction;
+import com.github.a2g.core.interfaces.IInventoryPresenterFromSingleCallPerformer;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 public class DialogTreeSetInventoryVisibleAction extends DialogChainableAction {
-	private IInventoryPresenterFromSetInventoryVisibleAction inventory;
+	private IInventoryPresenterFromSingleCallPerformer inventory;
 	private int icode;
 	private String itid;
 	private boolean isVisible;
@@ -58,7 +58,7 @@ public class DialogTreeSetInventoryVisibleAction extends DialogChainableAction {
 	 
 
 	public void setInventory(
-			IInventoryPresenterFromSetInventoryVisibleAction inventory) {
+			IInventoryPresenterFromSingleCallPerformer inventory) {
 		this.inventory = inventory;
 	}
 

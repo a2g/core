@@ -28,7 +28,8 @@ import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
  *  the last action in a chain that is returned from IGameScene.onDialogTree().
  *  You can use it in all places where you would use a GameAction
  */
-public class SwitchAction extends ChainEndAction {
+public class SwitchAction 
+extends ChainEndAction {
 	private IScenePresenterFromSwitchAction scene;
 	private String switchToThis;
 

@@ -3,7 +3,6 @@ package com.github.a2g.core.interfaces;
 import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
-import com.github.a2g.core.action.ChainableAction.SwapType;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.PointF;
 
@@ -93,7 +92,7 @@ public interface IChainRootForScene {
 
 	public ChainableAction sleep(int milliseconds);
 
-	public ChainableAction swapProperty(short ocodeA, short ocodeB, SwapType type);
+	public ChainableAction swapVisibility(short ocodeA, short ocodeB);
 
 	public ChainableAction waitForFrame(short ocode, int frame);
 

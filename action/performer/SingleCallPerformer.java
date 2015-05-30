@@ -16,7 +16,9 @@
 
 package com.github.a2g.core.action.performer;
 
+import com.github.a2g.core.interfaces.IInventoryPresenterFromSingleCallPerformer;
 import com.github.a2g.core.interfaces.IScenePresenterFromSingleCallPerformer;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromSingleCallPerformer;
 
 
 public class SingleCallPerformer
@@ -38,29 +40,35 @@ public class SingleCallPerformer
 		, SetSceneTalker
 		, SetCurrentAnimationAndFrame
 		, Sleep
+		, SetInventoryVisible
+		, SwapVisibility
 	}
 	Type type;
 	private double d;
 	private boolean isTrue;
 	private String atid;
 	private short ocode;
+	private short ocode2;
+	private int icode;
 	private String stringValue;
 	private int intValue;
 	private IScenePresenterFromSingleCallPerformer scene;
+	private IInventoryPresenterFromSingleCallPerformer inventory;
+	//private IMasterPresenterFromSingleCallPerformer master;
+	private ITitleCardPresenterFromSingleCallPerformer title;
 
 	public SingleCallPerformer( Type type) {
 		this.type = type;
 	}
 	
 	public void setDouble(double d){ this.d =d ;}
-	public void setOCode(short o){ this.ocode = o;}
+	public void setOCode(short ocode){ this.ocode = ocode;}
+	public void setOCode2(short ocode2){ this.ocode2 = ocode2;}
+	public void setICode(int icode){ this.icode = icode;}
 	public void setAtid(String atid){ this.atid = atid;}
 	public void setString(String string){ this.stringValue = string;}
 	public void setBoolean(boolean isTrue){ this.isTrue = isTrue;}
 	public void setInt(int intValue){ this.intValue = intValue;}
-
-	
-
 
 	public SingleCallPerformer(short ocode) {
 		this.ocode = ocode;
@@ -75,6 +83,9 @@ public class SingleCallPerformer
 	public boolean onComplete()
 	{
 		String otid;
+		String otidA;
+		String otidB;
+		String itid;
 		switch(type)
 		{
 		case SetBaseMiddleX:
@@ -132,6 +143,17 @@ public class SingleCallPerformer
 			return false;
 		case Sleep:
 			return false;
+		case SetInventoryVisible:
+			itid = inventory.getItidByCode(icode);
+			inventory.setVisibleByItid(itid, this.isTrue);
+		case SwapVisibility:
+			otidA = scene.getOtidByCode(ocode);
+			otidB = scene.getOtidByCode(ocode2);
+			boolean newA = scene.getVisibleByOtid(otidB);
+			boolean newB = scene.getVisibleByOtid(otidA);
+
+			scene.setVisibleByOtid(otidA, newA);
+			scene.setVisibleByOtid(otidB, newB);
 		 default:
 			break;
 		}
@@ -140,6 +162,14 @@ public class SingleCallPerformer
  
 	public void setScene(IScenePresenterFromSingleCallPerformer scene) {
 		this.scene = scene;
+	}
+	
+	public void setInventory(IInventoryPresenterFromSingleCallPerformer inventory) {
+		this.inventory = inventory;
+	}
+	
+	public void setTitleCard(ITitleCardPresenterFromSingleCallPerformer title ) {
+		this.title  = title ;
 	}
 
 	public Type getType(){ return type;}

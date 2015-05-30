@@ -22,36 +22,36 @@ import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.ITitleCardPresenterFromTitleCardAction;
+import com.github.a2g.core.interfaces.ITitleCardPresenterFromSingleCallPerformer;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 public class TitleCardAction extends ChainableAction {
-	private ITitleCardPresenterFromTitleCardAction titleCard;
-	String text;
+	private ITitleCardPresenterFromSingleCallPerformer titleCard;
+	String stringValue;
 
 	public TitleCardAction(BaseAction parent, String text) {
 		super(parent);
-		this.text = text;
+		this.stringValue = text;
 	}
 
 	@Override
 	public void runGameAction() {
 
-		if (text.length() > 0) {
+		if (stringValue.length() > 0) {
 			double totalInMilliseconds = 4 * titleCard
 					.getPopupDisplayDuration() * 1000;
 
-			titleCard.displayTitleCard(text);
-			this.run((int) totalInMilliseconds);
+			titleCard.displayTitleCard(stringValue);
+			super.run( (int) totalInMilliseconds);
 		} else {
 			titleCard.displayTitleCard("");
-			this.run(1);
+			super.run(1);
 		}
 	}
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		titleCard.displayTitleCard(text);
+		titleCard.displayTitleCard(stringValue);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class TitleCardAction extends ChainableAction {
 
 	 
 
-	public void setTitleCard(ITitleCardPresenterFromTitleCardAction titleCard) {
+	public void setTitleCard(ITitleCardPresenterFromSingleCallPerformer titleCard) {
 		this.titleCard = titleCard;
 	}
 

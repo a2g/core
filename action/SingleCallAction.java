@@ -60,10 +60,13 @@ extends ChainableAction {
 	
 	public SingleCallPerformer.Type getType(){ return single.getType();}
  
-	void setDouble(double d){ single.setDouble(d) ;}
-	void setOCode(short o){ single.setOCode(o);}
-	void setAtid(String atid){ single.setAtid(atid);}
-	void setString(String string){ single.setString(string);}
-	void setBoolean(boolean isTrue){ single.setBoolean(isTrue);}
-	void setInt(int intValue){ single.setInt(intValue);}
+	public void setDouble(double d){ single.setDouble(d) ;}
+	public void setOCode(short o){ single.setOCode(o);}
+	public void setAtid(String atid){ single.setAtid(atid);}
+	public void setString(String string){ single.setString(string);}
+	public void setBoolean(boolean isTrue){ single.setBoolean(isTrue);}
+	public void setInt(int intValue){ single.setInt(intValue);}
+	public void setICode(int icode) {single.setICode(icode);}
+	public void setOCode2(short ocode2) {single.setOCode2(ocode2);}
+		
 }

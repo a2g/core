@@ -18,8 +18,6 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.PlayAnimationAction;
 import com.github.a2g.core.action.PlayAnimationRepeatWhilstVisibleAction;
-import com.github.a2g.core.action.SetInventoryVisibleAction;
-import com.github.a2g.core.action.SwapPropertyAction;
 import com.github.a2g.core.action.SwitchAction;
 import com.github.a2g.core.action.ActivateDialogTreeModeAction;
 import com.github.a2g.core.action.WaitForFrameAction;
@@ -234,9 +232,12 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		return a;
 	}
 
-	public ChainableAction setInventoryVisible(int inventoryId, boolean isVisible) {
-		return new SetInventoryVisibleAction(this, inventoryId, isVisible);
-	}
+	public ChainableAction setInventoryVisible(int icode, boolean isVisible) {
+		SingleCallAction a =  new SingleCallAction(this, Type.SetInventoryVisible);
+		a.setICode(icode);
+		a.setBoolean(isVisible);
+		return a;
+		}
  
 	public ChainableAction setVisible(short ocode, boolean isVisible) {
 		SingleCallAction a =  new SingleCallAction(this, Type.SetVisible);
@@ -283,9 +284,11 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		return secondStep;
 	}
 	@Override
-	public ChainableAction swapProperty(short ocodeA, short ocodeB, SwapType type) {
-		return new SwapPropertyAction(this, ocodeA, ocodeB, type);
-	}
+	public ChainableAction swapVisibility(short ocodeA, short ocodeB) {
+		SingleCallAction a =  new SingleCallAction(this, Type.SetAsInitialAnimation);
+		a.setOCode(ocodeA);
+		a.setOCode2(ocodeB);
+		return a;}
 	@Override
 	public ChainEndAction switchTo(String sceneName) {
 		return new SwitchAction(this, sceneName);
