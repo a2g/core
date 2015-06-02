@@ -61,9 +61,10 @@ implements IChainRootForDialog
 	} 
 
 	@Override
-	public DialogChainEndAction switchTo(String string) {
-		DialogSwitchAction s = new DialogSwitchAction(this, string );
-		return s;
+	public DialogChainEndAction switchTo(String sceneName) {
+		DialogTreeSingleCallAction a =  new DialogTreeSingleCallAction(this, Type.Switch);
+		a.setString(sceneName);
+		return a;
 	}
 
 	@Override
@@ -75,8 +76,9 @@ implements IChainRootForDialog
 	}
 
 	@Override
-	public DialogChainableAction setInventoryVisible(int key, boolean value) {
-		DialogTreeSetInventoryVisibleAction a =  new DialogTreeSetInventoryVisibleAction(this,  key, value);
+	public DialogChainableAction setInventoryVisible(int icode, boolean value) {
+		DialogTreeSingleCallAction a =  new DialogTreeSingleCallAction(this, Type.Sleep);
+		a.setICode(icode);
 		return a;
 	}
 

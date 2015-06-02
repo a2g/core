@@ -23,6 +23,10 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
+/**
+ * Needs to be it's own class because it gets searched
+ * for explicitly (see MasterPresenter) 
+ */
 public class DialogTreeChainToAction extends DialogChainEndAction {
 
 	private int branchId;

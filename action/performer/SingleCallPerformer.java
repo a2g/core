@@ -42,6 +42,7 @@ public class SingleCallPerformer
 		, Sleep
 		, SetInventoryVisible
 		, SwapVisibility
+		, Switch
 	}
 	Type type;
 	private double d;
@@ -146,6 +147,7 @@ public class SingleCallPerformer
 		case SetInventoryVisible:
 			itid = inventory.getItidByCode(icode);
 			inventory.setVisibleByItid(itid, this.isTrue);
+			return false;
 		case SwapVisibility:
 			otidA = scene.getOtidByCode(ocode);
 			otidB = scene.getOtidByCode(ocode2);
@@ -154,6 +156,10 @@ public class SingleCallPerformer
 
 			scene.setVisibleByOtid(otidA, newA);
 			scene.setVisibleByOtid(otidB, newB);
+			return false;
+		case Switch:
+			scene.switchToScene(stringValue);
+			return true;
 		 default:
 			break;
 		}

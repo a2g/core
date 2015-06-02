@@ -18,6 +18,7 @@ import com.github.a2g.core.interfaces.action.ISetXByOtid;
 import com.github.a2g.core.interfaces.action.ISetYByOtid;
 import com.github.a2g.core.interfaces.action.IShareWinning;
 import com.github.a2g.core.interfaces.game.ISetValue;
+import com.github.a2g.core.interfaces.game.ISwitchToScene;
 
 public interface IScenePresenterFromSingleCallPerformer
 extends
@@ -39,6 +40,7 @@ ISetBaseMiddleXByOtid
 , ISetSceneTalkerByAtid
 , ISetCurrentAnimationAndFrame
 , IGetVisibleByOtid
+, ISwitchToScene
 {
 
 	

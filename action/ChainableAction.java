@@ -17,7 +17,6 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.PlayAnimationAction;
-import com.github.a2g.core.action.SwitchAction;
 import com.github.a2g.core.action.ActivateDialogTreeModeAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkAction;
@@ -283,11 +282,14 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		SingleCallAction a =  new SingleCallAction(this, Type.SetAsInitialAnimation);
 		a.setOCode(ocodeA);
 		a.setOCode2(ocodeB);
-		return a;}
+		return a;
+	}
+	
 	@Override
 	public ChainEndAction switchTo(String sceneName) {
-		return new SwitchAction(this, sceneName);
-		// return toReturn;
+		SingleCallAction a =  new SingleCallAction(this, Type.Switch);
+		a.setString(sceneName);
+		return a;
 	}
 	@Override
 	public ChainableAction waitForFrame(short ocode, int frame) {
