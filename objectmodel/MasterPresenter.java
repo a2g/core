@@ -101,7 +101,7 @@ PropertyChangeEventHandlerAPI
 
 	private Integer[] theListOfIndexesToInsertAt;
 	private ArrayList<PointF> gatePoints;
-	private ArrayList<Integer> gateIds;
+	private ArrayList<String> gateDests;
 
 	private String lastSceneAsString;
 	private String switchDestination;
@@ -130,7 +130,7 @@ PropertyChangeEventHandlerAPI
 		this.onEveryFrameActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions,
 				proxyForActions, proxyForActions, proxyForActions, this, 3);
 		this.gatePoints = new ArrayList<PointF>();
-		this.gateIds = new ArrayList<Integer>();
+		this.gateDests = new ArrayList<String>();
 		clearListOfIntegersToInsertAt();
 
 		bus.addHandler(PropertyChangeEvent.TYPE, this);
@@ -481,7 +481,7 @@ PropertyChangeEventHandlerAPI
 
 	void clearBoundaries() {
 		this.gatePoints.clear();
-		this.gateIds.clear();
+		this.gateDests.clear();
 	}
 
 	@Override
@@ -971,14 +971,14 @@ PropertyChangeEventHandlerAPI
 
 	}
 
-	public void addBoundaryGate(int id, PointF a, PointF b) {
-		gateIds.add(new Integer(id));
+	public void addBoundaryGate(String sceneToSwitchTo, PointF a, PointF b) {
+		gateDests.add(sceneToSwitchTo);
 		gatePoints.add(a);
 		gatePoints.add(b);
 	}
 
 	public void addBoundaryPoint(PointF a) {
-		gateIds.add(new Integer(-1));
+		gateDests.add("");
 		gatePoints.add(new PointF(-1, -1));
 		// important for the valid point to be the last one,
 		// due to how the span calculations use the last one.
@@ -1006,9 +1006,9 @@ PropertyChangeEventHandlerAPI
 		double totalX = 0;
 		double totalY = 0;
 		int numberOfExtras = 0;
-		double size = gateIds.size();
+		double size = gateDests.size();
 		for (int i = 0; i < size; i++) {
-			if (gateIds.get(i) != -1) {
+			if (gateDests.get(i).length()!=0) {
 				PointF bp = gatePoints.get(i * 2);
 				totalX += bp.getX();
 				totalY += bp.getY();
@@ -1051,11 +1051,11 @@ PropertyChangeEventHandlerAPI
 		// the valid value in the last slot
 		PointF previousPoint = gatePoints.get(gatePoints.size() - 1);
 
-		int size = gateIds.size();
+		int size = gateDests.size();
 		for (int i = 0; i < size; i++) {
 			// only gates (designated by ids >=0) get their first point
 			// processed
-			if (gateIds.get(i) != -1) {
+			if (gateDests.get(i).length()!=0) {
 				PointF firstPoint = gatePoints.get(i * 2 + 0);
 				if (isBetweenSpokesAndOnWrongSide(previousPoint, firstPoint, tp))
 					return true;
@@ -1074,19 +1074,20 @@ PropertyChangeEventHandlerAPI
 	@Override
 	public boolean fireOnMovementBeyondAGateIfRelevant(PointF tp) 
 	{
-		int foundId = -1;
+		String foundDest = "";
 		if (gatePoints.size() > 2) {
-			int size = gateIds.size();
+			int size = gateDests.size();
 			for (int i = 0; i < size; i++) {
-				if (gateIds.get(i) == -1)
+				if (gateDests.get(i).length()==0)
 					continue;
 
 				PointF a = gatePoints.get(i * 2);
 				PointF b = gatePoints.get(i * 2 + 1);
 
 				if (isBetweenSpokesAndOnWrongSide(a, b, tp)) {
-					foundId = gateIds.get(i);
-					this.sceneHandlers.onMovementBeyondAGate(proxyForGameScene, a,b,tp, foundId);
+					foundDest = gateDests.get(i);
+					//this.sceneHandlers.onMovementBeyondAGate(proxyForGameScene, a,b,tp, foundId);
+					this.switchToScene(foundDest);
 					return true;
 				}
 			}

@@ -453,8 +453,8 @@ IOnMovementBeyondAGate {
 	}
 
 	@Override
-	public void addBoundaryGate(int id, PointF a, PointF b) {
-		master.addBoundaryGate(id, a, b);
+	public void addBoundaryGate(String sceneToSwitchTo, PointF a, PointF b) {
+		master.addBoundaryGate(sceneToSwitchTo, a, b);
 	}
 
 	@Override
