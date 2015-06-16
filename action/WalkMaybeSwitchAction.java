@@ -80,8 +80,7 @@ public class WalkMaybeSwitchAction extends ChainEndAction{
 	// method in animation
 	protected boolean onCompleteGameAction() { 
 		onUpdateGameAction(1.0);
-		if(!switcher.isStopped())
-			mover.onComplete();
+		mover.onComplete();
 		boolean isExited = switcher.onComplete();
 		return isExited;
 	}
