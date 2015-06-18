@@ -84,7 +84,7 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 			return false;
 
 		if (isOkToExecute()) {
-			COMMAND_MANUAL.log(Level.FINE, "ONEXECUTECOMMAND::execute "+model.getSentence().getDisplayName());
+			COMMAND_MANUAL.log(Level.FINE, "OnExecuteCommand::execute "+model.getSentence().getDisplayName());
 			this.execute(x, y);
 			return true;
 		}

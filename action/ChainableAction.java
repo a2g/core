@@ -279,7 +279,7 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 	}
 	@Override
 	public ChainableAction swapVisibility(short ocodeA, short ocodeB) {
-		SingleCallAction a =  new SingleCallAction(this, Type.SetAsInitialAnimation);
+		SingleCallAction a =  new SingleCallAction(this, Type.SwapVisibility);
 		a.setOCode(ocodeA);
 		a.setOCode2(ocodeB);
 		return a;
