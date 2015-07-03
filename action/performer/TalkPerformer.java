@@ -14,6 +14,7 @@ public class TalkPerformer {
 	private int numberOfFramesTotal;
 	private NonIncrementing nonIncrementing;
 	private boolean isHoldLastFrame;
+	private String atidOfWhatItWasBeforeTalking;
 	
 	private String atid;
 	private String otid;
@@ -63,6 +64,7 @@ public class TalkPerformer {
 	}
 
 	public double run() {
+		this.atidOfWhatItWasBeforeTalking = scene.getAtidOfCurrentAnimationByOtid(otid);
 		String[] lines = fullSpeech.split("\n");
 		
 		for (int i = 0; i < lines.length; i++) {
@@ -158,7 +160,8 @@ public class TalkPerformer {
 	public boolean onComplete() {
 		if (!isHoldLastFrame) {
 			if (this.otid != "") {
-				scene.setToInitialAnimationWithoutChangingFrameByOtid(otid);
+				scene.setAsACurrentAnimationByAtid(atidOfWhatItWasBeforeTalking);
+				//scene.setToInitialAnimationWithoutChangingFrameByOtid(otid);
 			}
 		}
 
