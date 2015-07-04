@@ -2,6 +2,7 @@ package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.interfaces.action.IGetAtidOfCurrentAnimationByOtid;
 import com.github.a2g.core.interfaces.action.IGetAtidOfSceneTalker;
+import com.github.a2g.core.interfaces.action.IGetCurrentFrameByOtid;
 import com.github.a2g.core.interfaces.action.IGetDurationByAtid;
 import com.github.a2g.core.interfaces.action.IGetNumberOfFramesByAtid;
 import com.github.a2g.core.interfaces.action.IGetOtidOfAtid;
@@ -22,6 +23,7 @@ extends ISetStateOfPopup
 , IGetOtidOfAtid
 , IGetAtidOfSceneTalker
 , IGetAtidOfCurrentAnimationByOtid
+, IGetCurrentFrameByOtid
 
 {
 
