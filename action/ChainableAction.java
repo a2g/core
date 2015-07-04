@@ -382,6 +382,17 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		return a;
 	}
 	@Override
+	public ChainableAction moveWhilstAnimatingLinearNonBlocking(short objId, double x,
+			double y) {
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this,
+				objId );
+		a.setEndX(x);
+		a.setEndY(y);
+		a.setLinear(true);
+		a.setParallel(true);
+		return a;
+	}
+	@Override
 	public ChainableAction moveCameraToNewXPosition(double x,
 			double durationInSecs) {
 		ScrollCameraXAction a = new ScrollCameraXAction(this, x,

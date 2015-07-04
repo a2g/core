@@ -110,6 +110,8 @@ public interface IChainRootForScene {
 
 	public ChainableAction moveWhilstAnimatingNonBlocking(short objId, double x,
 			double y);
+	public ChainableAction moveWhilstAnimatingLinearNonBlocking(short objId, double x,
+			double y);
 
 	public ChainableAction moveCameraToNewXPosition(double x,
 			double durationInSecs);
@@ -134,6 +136,7 @@ public interface IChainRootForScene {
 	
 	public ChainableAction playSound(String stid);
 	public ChainableAction playSoundNonBlocking(String stid);
+
 
 
 }

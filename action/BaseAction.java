@@ -30,7 +30,7 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	private ISystemAnimation systemAnimation;
 	private IActionRunnerFromBaseAction callbacks;
 	protected BaseAction parent;
-	private boolean isEaseToAndFrom;
+	private boolean isLinear;
 	protected boolean isParallel;
  
 
@@ -54,7 +54,7 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 		this.callbacks = null;// initd in setcallbacks
 		this.systemAnimation = null;// initd in setFactory
 		this.isParallel = false;
-		this.isEaseToAndFrom = false;
+		this.isLinear = false;
 	}
 	void setParallel(boolean parallel)
 	{
@@ -67,10 +67,13 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 
 	void setSystemAnimation(ISystemAnimation systemAnimation) {
 		this.systemAnimation = systemAnimation;
-		this.systemAnimation.setEaseToAndFrom(!isEaseToAndFrom);
+		this.systemAnimation.setEaseToAndFrom(!isLinear);
 	}
 
-	
+	void setLinear(boolean isLinear)
+	{
+		this.isLinear = isLinear;
+	}
 
 
 	public BaseAction doBoth(ChainableAction a, ChainableAction b) {

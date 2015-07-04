@@ -64,15 +64,7 @@ public class TalkAction extends ChainableAction {
 		boolean result = talker.onComplete();
 		return result;
 	}
-
-	 
-
- 
-
-	public void setHoldLastFrame(boolean isHoldLastFrame) {
-		talker.setHoldLastFrame(isHoldLastFrame);
-	}
-
+  
 	public void setNonIncrementing(NonIncrementing nonIncrementing) {
 		talker.setNonIncrementing(nonIncrementing);
 	}

@@ -51,8 +51,8 @@ public class SystemAnimationForJava extends
 	}
 
 	@Override
-	public void setEaseToAndFrom(boolean isLinear) {
-		this.isEaseToAndFrom = isLinear;
+	public void setEaseToAndFrom(boolean isEaseToAndFrom) {
+		this.isEaseToAndFrom = isEaseToAndFrom;
 		
 	}
 

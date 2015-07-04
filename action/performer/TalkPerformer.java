@@ -13,7 +13,6 @@ public class TalkPerformer {
 	private IMasterPresenterFromTalkPerformer master;
 	private int numberOfFramesTotal;
 	private NonIncrementing nonIncrementing;
-	private boolean isHoldLastFrame;
 	private String atidOfWhatItWasBeforeTalking;
 	private int frameOfWhatItWasBeforeTalking;
 	
@@ -29,7 +28,6 @@ public class TalkPerformer {
 	public TalkPerformer(String atid, String fullSpeech) {
 		this.numberOfFramesTotal = 0;
 		this.nonIncrementing = NonIncrementing.False;
-		this.isHoldLastFrame = false;
 		this.atid = atid;
 		this.otid = "";
 		this.fullSpeech = fullSpeech;
@@ -163,11 +161,12 @@ public class TalkPerformer {
 	}
 
 	public boolean onComplete() {
-		if (!isHoldLastFrame) {
-			if (this.otid != "") {
-				scene.setAsACurrentAnimationByAtid(atidOfWhatItWasBeforeTalking);
+
+		if (this.otid != "") {
+			scene.setAsACurrentAnimationByAtid(atidOfWhatItWasBeforeTalking);
+			if(this.nonIncrementing != NonIncrementing.True)
+			{
 				scene.setCurrentFrameByOtid(otid, frameOfWhatItWasBeforeTalking);
-				//scene.setToInitialAnimationWithoutChangingFrameByOtid(otid);
 			}
 		}
 
@@ -182,11 +181,7 @@ public class TalkPerformer {
 		return  popupDisplayDuration;
 	}
 
-
-	public void setHoldLastFrame(boolean isHoldLastFrame) {
-		this.isHoldLastFrame = isHoldLastFrame;
-	}
-
+ 
 	public void setNonIncrementing(NonIncrementing nonIncrementing) {
 		this.nonIncrementing = nonIncrementing;
 	}
