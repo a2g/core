@@ -154,14 +154,7 @@ implements IChainRootForScene
 		s.setNonIncrementing(TalkPerformer.NonIncrementing.True);
 		return s;
 	}
-	@Override
-	public ChainableAction talkWithoutIncrementingHoldLastFrame(String animCode,
-			String speech) {
-		TalkAction s = new TalkAction(this, animCode, speech);
-		s.setNonIncrementing(TalkPerformer.NonIncrementing.True);
-		s.setHoldLastFrame(true);
-		return s;
-	}
+	 
 	@Override
 	public ChainableAction talkWithoutIncrementingFrameNonBlocking(
 			String animCode, String speech) {

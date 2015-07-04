@@ -15,6 +15,7 @@ public class TalkPerformer {
 	private NonIncrementing nonIncrementing;
 	private boolean isHoldLastFrame;
 	private String atidOfWhatItWasBeforeTalking;
+	private int frameOfWhatItWasBeforeTalking;
 	
 	private String atid;
 	private String otid;
@@ -64,7 +65,6 @@ public class TalkPerformer {
 	}
 
 	public double run() {
-		this.atidOfWhatItWasBeforeTalking = scene.getAtidOfCurrentAnimationByOtid(otid);
 		String[] lines = fullSpeech.split("\n");
 		
 		for (int i = 0; i < lines.length; i++) {
@@ -117,6 +117,11 @@ public class TalkPerformer {
 			otid = scene.getOtidOfAtid(atid);
 			if(otid != "") 
 			{
+				// stash old state
+				this.frameOfWhatItWasBeforeTalking = scene.getCurrentFrameByOtid(otid);
+				this.atidOfWhatItWasBeforeTalking = scene.getAtidOfCurrentAnimationByOtid(otid);
+				
+				// set new state
 				scene.setAsACurrentAnimationByAtid(atid);
 				scene.setVisibleByOtid(otid, true);
 			}
@@ -161,6 +166,7 @@ public class TalkPerformer {
 		if (!isHoldLastFrame) {
 			if (this.otid != "") {
 				scene.setAsACurrentAnimationByAtid(atidOfWhatItWasBeforeTalking);
+				scene.setCurrentFrameByOtid(otid, frameOfWhatItWasBeforeTalking);
 				//scene.setToInitialAnimationWithoutChangingFrameByOtid(otid);
 			}
 		}

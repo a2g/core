@@ -72,8 +72,6 @@ public interface IChainRootForScene {
 	public ChainableAction talk(String speech);
 	public ChainableAction talkWithoutIncrementingFrame(String animCode,
 			String speech);
-	public ChainableAction talkWithoutIncrementingHoldLastFrame(String animCode,
-			String speech);
 	public ChainableAction talkWithoutIncrementingFrameNonBlocking(
 			String animCode, String speech);
 	public ChainableAction talkWithoutIncrementingFrame(String speech);
