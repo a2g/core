@@ -25,6 +25,7 @@ import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.IChainRootForScene;
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IGameScene;
+import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.PointF;
@@ -489,6 +490,22 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		return a;
 	}
 
+	@Override
+	public ChainableAction setAnimationAsObjectSpecial(String atid, Special type)
+	{
+		SingleCallAction s = new SingleCallAction(this, Type.SetAnimationSpecial);
+		s.setAtid(atid);
+		s.setString(type.toString());
+		s.setInt(type.toInt());
+		return s;
+	}
 	
+	@Override
+	public ChainableAction setAnimationAsSceneTalker(String atid)
+	{
+		SingleCallAction s = new SingleCallAction(this, Type.SetAnimationSceneTalker);
+		s.setAtid(atid);
+		return s;
+	}
 
 }

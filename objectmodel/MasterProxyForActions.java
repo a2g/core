@@ -386,4 +386,10 @@ public class MasterProxyForActions implements IOnFillLoadList,
 
 	}
 
+	@Override
+	public void setAnimationAsObjectSpecial(String atid, Special type) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

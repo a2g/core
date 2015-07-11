@@ -16,6 +16,7 @@
 
 package com.github.a2g.core.action.performer;
 
+import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromSingleCallPerformer;
 import com.github.a2g.core.interfaces.IScenePresenterFromSingleCallPerformer;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromSingleCallPerformer;
@@ -43,6 +44,8 @@ public class SingleCallPerformer
 		, SetInventoryVisible
 		, SwapVisibility
 		, Switch
+		, SetAnimationSpecial
+		, SetAnimationSceneTalker
 	}
 	Type type;
 	private double d;
@@ -89,6 +92,9 @@ public class SingleCallPerformer
 		String itid;
 		switch(type)
 		{
+		case Switch:
+			scene.switchToScene(stringValue);
+			return true;
 		case SetBaseMiddleX:
 			otid = scene.getOtidByCode(ocode);
 			scene.setBaseMiddleXByOtid(otid, this.d);
@@ -157,9 +163,29 @@ public class SingleCallPerformer
 			scene.setVisibleByOtid(otidA, newA);
 			scene.setVisibleByOtid(otidB, newB);
 			return false;
-		case Switch:
-			scene.switchToScene(stringValue);
-			return true;
+		
+		case SetAnimationSceneTalker:
+			scene.setSceneTalkerByAtid(atid);
+			return false;
+		case SetAnimationSpecial:
+			if(intValue==Special.North.toInt())
+			{
+				scene.setAnimationAsObjectSpecial(atid, Special.North);
+			}else if(intValue==Special.East.toInt())
+				
+			{
+				scene.setAnimationAsObjectSpecial(atid, Special.East);
+				
+			}else if(intValue==Special.South.toInt())
+			{
+				scene.setAnimationAsObjectSpecial(atid, Special.South);
+				
+			}else if(intValue==Special.West.toInt())
+			{
+				scene.setAnimationAsObjectSpecial(atid, Special.West);
+			}
+			return false;
+				
 		 default:
 			break;
 		}
@@ -177,6 +203,7 @@ public class SingleCallPerformer
 	public void setTitleCard(ITitleCardPresenterFromSingleCallPerformer title ) {
 		this.title  = title ;
 	}
+	
 
 	public Type getType(){ return type;}
 	

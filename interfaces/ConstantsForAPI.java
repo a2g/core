@@ -65,6 +65,14 @@ public interface ConstantsForAPI {
 	public static final int EXIT_DLG = -1;
 	
 	public static enum Special {
-		North, East, South, West
+		North(1), East(2), South(3), West(4);
+		Special(int i)
+		{
+			m_val = i;
+		}
+		public int toInt() {
+			return m_val;
+		}
+		private int m_val;
 	}
 }
