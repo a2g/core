@@ -66,7 +66,8 @@ public class ScenePresenter implements IScenePresenter {
 	}
 
 	public Animation getAnimationByAtid(String atid) {
-		return this.scene.objectCollection().getAnimtaionByAtid(atid);
+		SceneObjectCollection coll = this.scene.objectCollection();
+		return coll.getAnimtaionByAtid(atid);
 	}
 
 	@Override

@@ -77,7 +77,6 @@ public class WalkMaybeSwitchAction extends ChainEndAction{
 	}
 
 	@Override
-	// method in animation
 	protected boolean onCompleteGameAction() { 
 		onUpdateGameAction(1.0);
 		mover.onComplete();
@@ -95,4 +94,8 @@ public class WalkMaybeSwitchAction extends ChainEndAction{
 		switcher.setEndY(endY);
 	}
  
+	public void setToInitialAtEnd(boolean setToInitialAtEnd) 
+	{
+		mover.setToInitialAtEnd(setToInitialAtEnd);
+	}
 }

@@ -322,6 +322,19 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 	}
 	
 	@Override
+	public ChainEndAction walkAndSwitch(PointF end, String sceneName) {
+		WalkAction a = new WalkAction(this, ScenePresenter.DEFAULT_SCENE_OBJECT);
+		a.setEndX(end.getX());
+		a.setEndY(end.getY());
+		a.setToInitialAtEnd(false);
+		
+		SingleCallAction b =  new SingleCallAction(a, Type.Switch);
+		b.setString(sceneName);
+		
+		return b;
+	}
+	
+	@Override
 	public ChainableAction walkToWithoutSwitching(short ocode, double x, double y) {
 		return walkToWithoutSwitching(ocode,new PointF(x,y));
 	}
@@ -508,4 +521,11 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		return s;
 	}
 
+	@Override
+	public ChainableAction setAnimationAsObjectInitial(String atid)
+	{
+		SingleCallAction s = new SingleCallAction(this, Type.SetAnimationObjectInitial);
+		s.setAtid(atid);
+		return s;
+	}
 }

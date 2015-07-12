@@ -92,4 +92,9 @@ public class WalkAction extends ChainableAction{
 		mover.setScene(scene);
 	}
 
+	public void setToInitialAtEnd(boolean isSetToInitialAtEnd) {
+		mover.setToInitialAtEnd(isSetToInitialAtEnd);
+		
+	}
+
 }

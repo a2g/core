@@ -23,11 +23,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.github.a2g.core.primitive.LogNames;
 
 
 public class SceneObjectCollection {
 	//private static final Logger LOADING = Logger.getLogger(LogNames.LOADING);
-	//private static final Logger LOADING_ANIM = Logger.getLogger(LogNames.LOADING_ANIM);
+	private static final Logger ADDING_ANIM_TO_SOC_MAP = Logger.getLogger(LogNames.ADDING_ANIM_TO_SOC_MAP);
 	
 	private List<String> theOtids;
 	private List<Short> theOCodes;
@@ -96,6 +100,7 @@ public class SceneObjectCollection {
 			// first param is name, second is parent;
 			anim = new Animation("", null);
 			this.theAtidMap.put(atid, anim);
+			ADDING_ANIM_TO_SOC_MAP.log(Level.FINE, "getAnimationBy " +atid);
 		}
 		return anim;
 	}
@@ -104,6 +109,7 @@ public class SceneObjectCollection {
 		if (theAtidMap.get(atid) == null) {
 			// System.out.println("ScenePresenter::added " + animTextualId);
 			this.theAtidMap.put(atid, destAnimation);
+			ADDING_ANIM_TO_SOC_MAP.log(Level.FINE, "addAnimation " +atid);
 		}
 	}
 

@@ -388,8 +388,18 @@ public class MasterProxyForActions implements IOnFillLoadList,
 
 	@Override
 	public void setAnimationAsObjectSpecial(String atid, Special type) {
-		// TODO Auto-generated method stub
-		
+		String otid = getOtidOfAtid(atid);
+		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
+		object.setSpecialAnimation(type, atid);
 	}
+
+	@Override
+	public void setAnimationAsObjectInitial(String atid) {
+		String otid = getOtidOfAtid(atid);
+		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
+		object.setInitialAnimation(atid);
+	}
+	
+	
 
 }

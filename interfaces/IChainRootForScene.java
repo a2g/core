@@ -139,6 +139,9 @@ public interface IChainRootForScene {
 	public ChainableAction playSoundNonBlocking(String stid);
 	public ChainableAction setAnimationAsObjectSpecial(String atid, Special type);
 	public ChainableAction setAnimationAsSceneTalker(String atid);
+	public ChainableAction setAnimationAsObjectInitial(String atid);
+	public ChainEndAction walkAndSwitch(PointF end, String sceneName);
+	
 
 
 }

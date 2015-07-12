@@ -18,6 +18,7 @@ import com.github.a2g.core.interfaces.action.ISetVisibleByOtid;
 import com.github.a2g.core.interfaces.action.ISetXByOtid;
 import com.github.a2g.core.interfaces.action.ISetYByOtid;
 import com.github.a2g.core.interfaces.action.IShareWinning;
+import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectInitial;
 import com.github.a2g.core.interfaces.game.ISetValue;
 import com.github.a2g.core.interfaces.game.ISwitchToScene;
 
@@ -43,7 +44,9 @@ ISetBaseMiddleXByOtid
 , IGetVisibleByOtid
 , ISwitchToScene
 , ISetAnimationAsObjectSpecial
+, ISetAnimationAsObjectInitial
 {
 
+	
 	
 }

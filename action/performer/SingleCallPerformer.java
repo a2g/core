@@ -46,6 +46,7 @@ public class SingleCallPerformer
 		, Switch
 		, SetAnimationSpecial
 		, SetAnimationSceneTalker
+		, SetAnimationObjectInitial
 	}
 	Type type;
 	private double d;
@@ -166,6 +167,9 @@ public class SingleCallPerformer
 		
 		case SetAnimationSceneTalker:
 			scene.setSceneTalkerByAtid(atid);
+			return false;
+		case SetAnimationObjectInitial:
+			scene.setAnimationAsObjectInitial(atid);
 			return false;
 		case SetAnimationSpecial:
 			if(intValue==Special.North.toInt())

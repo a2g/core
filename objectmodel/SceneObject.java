@@ -325,8 +325,8 @@ public class SceneObject {
 		return initialAnimationId;
 	}
 
-	public void setInitialAnimation(String InitialAnimation) {
-		this.initialAnimationId = InitialAnimation;
+	public void setInitialAnimation(String initialAnimation) {
+		this.initialAnimationId = initialAnimation;
 	}
 
 	public void setOCode(short ocode) {

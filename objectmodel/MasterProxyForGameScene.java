@@ -263,12 +263,7 @@ IOnMovementBeyondAGate {
 
 	}
 
-	@Override
-	public void setAnimationAsObjectInitial(String atid) {
-		master.getScenePresenter().getAnimationByAtid(atid)
-		.setAsInitialAnimation();
 
-	}
 
 	@Override
 	public void setAnimationAsObjectCurrent(String atid) {
@@ -505,6 +500,25 @@ IOnMovementBeyondAGate {
 	public void addMP3ForASoundObject(String name, String location) {
 		master.addMP3ForASoundObject(name, location);
 		
+	}
+	public String getOtidOfAtid(String atid) {
+		String toReturn = "";
+		ScenePresenter pres = master.getScenePresenter();
+		Animation a = pres.getAnimationByAtid(atid);
+		if (a != null) {
+			SceneObject o = a.getObject();
+			if (o != null)
+				toReturn = o.getOtid();
+		}
+		return toReturn;
+	}
+	
+	@Override
+	public void setAnimationAsObjectInitial(String atid) {
+		String otid = getOtidOfAtid(atid);
+		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
+		object.setInitialAnimation(atid);
+
 	}
 
 }
