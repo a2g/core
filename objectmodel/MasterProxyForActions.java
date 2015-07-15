@@ -382,7 +382,7 @@ public class MasterProxyForActions implements IOnFillLoadList,
 
 	@Override
 	public void setActiveGuiState(GuiStateEnum state) {
-		master.setActiveState(state);
+		master.setActiveGuiState(state);
 
 	}
 

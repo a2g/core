@@ -93,7 +93,7 @@ public class SceneObjectCollection {
 		return list.size();
 	}
 
-	public Animation getAnimtaionByAtid(String atid) {
+	public Animation getAnimationByAtid(String atid) {
 		Animation anim = this.theAtidMap.get(atid);
 
 		if (anim == null) {
@@ -101,6 +101,8 @@ public class SceneObjectCollection {
 			anim = new Animation("", null);
 			this.theAtidMap.put(atid, anim);
 			ADDING_ANIM_TO_SOC_MAP.log(Level.FINE, "getAnimationBy " +atid);
+			throw new NoSuchElementException("Animation getAnimationByAtid");
+			
 		}
 		return anim;
 	}

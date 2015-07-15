@@ -41,6 +41,12 @@ implements IChainRootForDialog
 		return new DialogTreeBranchAction(this, text, branchId, true);
 	}
 	@Override
+	public DialogChainableAction branchSticky(int branchId, String text) {
+		DialogTreeBranchAction a = new DialogTreeBranchAction(this, text, branchId, true);
+		a.setIsAlwaysPresent(true);
+		return a;
+	}
+	@Override
 	public DialogChainEndAction endDialogTree() {
 		return new DialogTreeEndAction(this);
 	}

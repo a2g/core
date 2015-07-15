@@ -29,6 +29,7 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.ActivateDialogTreeModeAction;
+import com.github.a2g.core.action.DialogChainEndAction;
 import com.github.a2g.core.action.DialogChainRootAction;
 import com.github.a2g.core.action.DialogTreeChainToAction;
 import com.github.a2g.core.action.DialogTreeEndAction;
@@ -456,6 +457,7 @@ PropertyChangeEventHandlerAPI
 		BaseAction  actionChain2 = replaceDialogChainToActionWithOnDialogTreeChain(actionChain);
 		
 		executeActionWithDialogActionRunner(actionChain2);
+		
 	}
 
 	public void callOnEnterScene() {
@@ -753,7 +755,8 @@ PropertyChangeEventHandlerAPI
 		if (a instanceof ActivateDialogTreeModeAction) {
 			int branchId = ((ActivateDialogTreeModeAction) a).getBranchId();
 			DialogChainableAction d = createDialogChainRootAction();
-			BaseAction b = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
+			DialogChainEndAction b = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
+			b.setParent(a);
 			return b;
 		}
 		return a;
@@ -860,6 +863,14 @@ PropertyChangeEventHandlerAPI
 
 	@Override
 	public void actionFinished(int id) {
+		if(true)// this used to be id==2, but will leave until this yields bugs
+			
+		{
+			if(this.dialogTreePresenter.getNumberOfVisibleBranches()==0)
+			{
+				setActiveGuiState(GuiStateEnum.ActiveScene);
+			}
+		}
 		// must be in this order, because clear does't work unless mousable
 		this.commandLinePresenter.setMouseable(true);
 		this.commandLinePresenter.clear();
@@ -929,7 +940,7 @@ PropertyChangeEventHandlerAPI
 		this.clearListOfIntegersToInsertAt();
 	}
 
-	public void setActiveState(GuiStateEnum state) {
+	public void setActiveGuiState(GuiStateEnum state) {
 		this.masterPanel.setActiveState(state);
 
 	}
