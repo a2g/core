@@ -21,8 +21,8 @@ public class BoundaryCalculator {
 		this.gateDests = new ArrayList<String>();
 	
 	}
-	public void addBoundaryGate(String sceneToSwitchTo, PointF a, PointF b) {
-		gateDests.add(sceneToSwitchTo);
+	public void addBoundaryGate(Object name, PointF a, PointF b) {
+		gateDests.add(name==null? "" : name.toString());
 		gatePoints.add(a);
 		gatePoints.add(b);
 	}

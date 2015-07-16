@@ -979,7 +979,7 @@ PropertyChangeEventHandlerAPI
 	}
 
 	public void addBoundaryGate(double tlx,double tly, double brx,double bry, Object sceneToSwitchTo) {
-		boundaryCalculator.addBoundaryGate(sceneToSwitchTo.toString(),  new PointF(tlx,tly), new PointF(brx,bry));
+		boundaryCalculator.addBoundaryGate(sceneToSwitchTo,  new PointF(tlx,tly), new PointF(brx,bry));
 	}
 
 	public void addBoundaryPoint(double x, double y) {

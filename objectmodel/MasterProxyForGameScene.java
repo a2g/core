@@ -455,7 +455,6 @@ IOnMovementBeyondAGate {
 	@Override
 	public void addBoundaryPoint(double  x, double y) {
 		master.addBoundaryPoint(x,y);
-
 	}
 
 	@Override
