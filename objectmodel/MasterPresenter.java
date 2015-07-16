@@ -978,16 +978,14 @@ PropertyChangeEventHandlerAPI
 
 	}
 
-	public void addBoundaryGate(String sceneToSwitchTo, PointF a, PointF b) {
-		boundaryCalculator.addBoundaryGate(sceneToSwitchTo, a, b);
+	public void addBoundaryGate(double tlx,double tly, double brx,double bry, Object sceneToSwitchTo) {
+		boundaryCalculator.addBoundaryGate(sceneToSwitchTo.toString(),  new PointF(tlx,tly), new PointF(brx,bry));
 	}
 
-	public void addBoundaryPoint(PointF a) {
-		boundaryCalculator.addBoundaryPoint(a);
+	public void addBoundaryPoint(double x, double y) {
+		boundaryCalculator.addBoundaryPoint(new PointF(x,y));
 	}
-
-
-
+	
 	public void setBoundaryCrossObject(short boundaryCrossObject) {
 		this.boundaryCrossObject = boundaryCrossObject;
 	}
