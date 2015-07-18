@@ -24,11 +24,20 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
@@ -40,6 +49,7 @@ import com.github.a2g.core.interfaces.ImagePanelAPI;
 import com.github.a2g.core.interfaces.IPackagedImage;
 import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.platforms.java.ImageForJava;
@@ -56,7 +66,7 @@ implements IScenePanelFromScenePresenter
 , ImagePanelAPI
 , ActionListener
 {
-	//private static final Logger JAVACANVAS = Logger.getLogger(LogNames.JAVACANVAS);
+	private static final Logger IMAGE_DUMP = Logger.getLogger(LogNames.IMAGE_DUMP);
 	
 	int width;
 	int height;
@@ -95,8 +105,28 @@ implements IScenePanelFromScenePresenter
 
 		super.addMouseMotionListener
 		(
-				new SceneMouseOverHandler(this, bus, toScene, toCommandLine)
-				);
+			new SceneMouseOverHandler(this, bus, toScene, toCommandLine)
+		);
+		
+		InputMap im = getInputMap(WHEN_FOCUSED);
+        ActionMap am = getActionMap();
+
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "onEnter");
+
+        am.put("onEnter", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+            	ListIterator<Image> im = listOfAllVisibleImages.listIterator();
+            	 
+                while(im.hasNext())
+                {
+                	Image i = im.next();
+                	IMAGE_DUMP.log(Level.FINE, "image" +i.toString());
+        			
+                }
+            }
+        });
 	}
 
 
@@ -213,6 +243,7 @@ implements IScenePanelFromScenePresenter
 	@Override
 	public void paint(Graphics g)
 	{
+		this.requestFocus();
 		g.clearRect(0, 0, width, height);
 		Iterator<Image> iter = listOfAllVisibleImages.iterator();
 		while(iter.hasNext())
