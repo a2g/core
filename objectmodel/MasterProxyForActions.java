@@ -158,9 +158,10 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	@Override
 	public String getOtidByCode(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		if(master.getScenePresenter().getObjectByOtid(otid)!=null)
-					return master.getScenePresenter().getObjectByOtid(otid).getOtid();
-		return null;
+		return otid;
+	//	if(master.getScenePresenter().getObjectByOtid(otid)!=null)
+		//			return master.getScenePresenter().getObjectByOtid(otid).getOtid();
+		//return null;
 	}
 
 	@Override

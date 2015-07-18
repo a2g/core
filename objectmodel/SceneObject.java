@@ -306,7 +306,7 @@ public class SceneObject {
 	public String getSpecialAnimation(Special type) {
 		String toReturn = this.mapOfSpecialAnimations.get(type.toString());
 		if(toReturn==null)
-			return "";
+			return this.getInitialAnimation();// more reliable fallback
 		return toReturn;
 	}
 
