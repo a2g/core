@@ -35,12 +35,6 @@ IOnMovementBeyondAGate {
 	 *       object methods all takes shorts so they can't be used with the ids
 	 *       for Animations (Strings) and InventoryItems (ints).
 	 */
-	// /@{
-	@Override
-	public void setBoundaryCrossObject(short ocode) {
-		master.setBoundaryCrossObject(ocode);
-
-	}
 
 	@Override
 	public void hide(short ocode) {

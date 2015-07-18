@@ -47,7 +47,6 @@ import com.github.a2g.core.interfaces.game.ISetAnimationMaxTalkRect;
 import com.github.a2g.core.interfaces.game.ISetAsDefaultSceneObject;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleY;
-import com.github.a2g.core.interfaces.game.ISetBoundaryCrossObject;
 import com.github.a2g.core.interfaces.game.ISetDisplayName;
 import com.github.a2g.core.interfaces.game.ISetInventoryItemDisplayName;
 import com.github.a2g.core.interfaces.game.ISetInventoryItemVisible;
@@ -70,9 +69,8 @@ extends
 // property access methods
 IGetValue,
 IIsTrue,
-ISetValue
+ISetValue,
 // helpful for game
-,
 IGetCurrentScene,
 ISwitchToScene,
 IGetLastScene,
@@ -81,14 +79,16 @@ ISetIsSayAlwaysWithoutIncrementing,
 IGetIsSayAlwaysWithoutIncrementing,
 IShareWinning,
 ICreateChainRootAction,
-IGetSceneGuiHeight
+IGetSceneGuiHeight,
 // boundary
-,
 IAddBoundaryGate,
 IAddBoundaryPoint,
-ISetBoundaryCrossObject
 // object
-, IHide, IShow, IGetBaseMiddleX, IGetBaseMiddleY, ISetBaseMiddleX,
+IHide, 
+IShow, 
+IGetBaseMiddleX, 
+IGetBaseMiddleY, 
+ISetBaseMiddleX,
 ISetBaseMiddleY,
 IIsVisible,
 ISetX,
@@ -98,28 +98,30 @@ ISetScreenCoordsPerSecond,
 ISetTalkingColor,
 ISetParallaxX,
 IGetX,
-IGetY
-
-,
-ISetVisible
+IGetY,
+ISetVisible,
 // inventory
+IShowInventoryItem,
+IHideInventoryItem,
+ISetInventoryItemDisplayName,
+IIsInventoryItemVisible,
+ISetInventoryItemVisible,
 
-, IShowInventoryItem
-, IHideInventoryItem
-, ISetInventoryItemDisplayName
-, IIsInventoryItemVisible
-, ISetInventoryItemVisible
 // verb
-,
 IRemoveVerbByCode,
-IUpdateVerbUI
+IUpdateVerbUI,
+
 // animation
-, IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation,
-ISetAnimationAsObjectInitial, ISetAnimationAsSceneTalker,
-ISetAnimationAsObjectCurrent, ISetAnimationDuration,
-ISetAnimationAsObjectSpecial, ISetAsDefaultSceneObject,
-ISetAnimationAsObjectCurrentAndSetFrame, ISetAnimationAsDialogTalker
-,ISetAnimationMaxTalkRect
+IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation,
+ISetAnimationAsObjectInitial, 
+ISetAnimationAsSceneTalker,
+ISetAnimationAsObjectCurrent,
+ISetAnimationDuration,
+ISetAnimationAsObjectSpecial, 
+ISetAsDefaultSceneObject,
+ISetAnimationAsObjectCurrentAndSetFrame,
+ISetAnimationAsDialogTalker,
+ISetAnimationMaxTalkRect
 {
 
 }

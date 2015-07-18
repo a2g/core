@@ -46,7 +46,6 @@ import com.github.a2g.core.interfaces.game.ISetAsSceneTalker;
 import com.github.a2g.core.interfaces.game.ISetAsDefaultSceneObject;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleY;
-import com.github.a2g.core.interfaces.game.ISetBoundaryCrossObject;
 import com.github.a2g.core.interfaces.game.ISetCurrentFrame;
 import com.github.a2g.core.interfaces.game.ISetDisplayName;
 import com.github.a2g.core.interfaces.game.ISetInventoryItemDisplayName;
@@ -65,9 +64,9 @@ extends
 // property access methods
 IGetValue,
 IIsTrue,
-ISetValue
+ISetValue,
+
 // helpful for game
-,
 IGetCurrentScene,
 ISwitchToScene,
 IGetLastScene,
@@ -75,33 +74,46 @@ IIsInDebugMode,
 ISetIsSayAlwaysWithoutIncrementing,
 IGetIsSayAlwaysWithoutIncrementing,
 IShareWinning,
-ICreateChainRootAction
+ICreateChainRootAction,
+
 // boundary
-,
 IAddBoundaryGate,
 IAddBoundaryPoint,
-ISetBoundaryCrossObject
+
 // object
-, IHide, IShow, IGetBaseMiddleX, IGetBaseMiddleY, ISetBaseMiddleX,
-ISetBaseMiddleY, ISetX, ISetY, IGetX, IGetY, IIsVisible,
+IHide, 
+IShow, 
+IGetBaseMiddleX, 
+IGetBaseMiddleY, 
+ISetBaseMiddleX,
+ISetBaseMiddleY, 
+ISetX, 
+ISetY, 
+IGetX, 
+IGetY, 
+IIsVisible,
 IGetCurrentAnimation,
 IGetCurrentFrame,
 ISetCurrentFrame,
 ISetDisplayName,
 ISetAsDefaultSceneObject,
-ISetAsSceneTalker
+ISetAsSceneTalker,
+
 // animation
-, IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation,
-ISetAnimationAsObjectInitial, ISetAnimationAsSceneTalker,
-ISetAnimationAsObjectCurrent, IGetAnimationLastFrame,
+IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation,
+ISetAnimationAsObjectInitial, 
+ISetAnimationAsSceneTalker,
+ISetAnimationAsObjectCurrent, 
+IGetAnimationLastFrame,
 IGetAnimationLength,
-ISetAnimationDuration
+ISetAnimationDuration,
+
 // inventory
-, IShowInventoryItem
-, IHideInventoryItem
-, IIsInventoryItemVisible
-, ISetInventoryItemDisplayName
-, ISetInventoryItemVisible
+IShowInventoryItem,
+IHideInventoryItem,
+IIsInventoryItemVisible,
+ISetInventoryItemDisplayName,
+ISetInventoryItemVisible
 {
 
 	@Override
