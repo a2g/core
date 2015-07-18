@@ -103,7 +103,8 @@ PropertyChangeEventHandlerAPI
 	private ActionRunner onEveryFrameActionRunner;
 
 	private BoundaryCalculator boundaryCalculator;
-	private Integer[] theListOfIndexesToInsertAt;
+	private InsertionPointCalculator insertionPointCalculator;
+	
 
 	private String lastSceneAsString;
 	private String switchDestination;
@@ -123,6 +124,7 @@ PropertyChangeEventHandlerAPI
 		this.proxyForGameScene = new MasterProxyForGameScene(this);
 		this.proxyForActions = new MasterProxyForActions(this);
 		this.boundaryCalculator = new BoundaryCalculator(this);
+		this.insertionPointCalculator = new InsertionPointCalculator();
 		mapOfSounds = new TreeMap<String,ISound>();
 
 		IFactory factory = host.getFactory(bus, this);
@@ -132,7 +134,7 @@ PropertyChangeEventHandlerAPI
 				proxyForActions, proxyForActions, proxyForActions, this, 2);
 		this.onEveryFrameActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions,
 				proxyForActions, proxyForActions, proxyForActions, this, 3);
-		clearListOfIntegersToInsertAt();
+		insertionPointCalculator.clear();
 
 		bus.addHandler(PropertyChangeEvent.TYPE, this);
 
@@ -160,12 +162,7 @@ PropertyChangeEventHandlerAPI
 		.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
 	}
 
-	private void clearListOfIntegersToInsertAt() {
-		this.theListOfIndexesToInsertAt = new Integer[100];
-		for (int i = 0; i < 100; i++)
-			theListOfIndexesToInsertAt[i] = new Integer(0);
-		
-	}
+	
 
 	public void setCallbacks(IGameScene callbacks) {
 		if (this.sceneHandlers != null) {
@@ -223,8 +220,8 @@ PropertyChangeEventHandlerAPI
 				scenePresenter.getSceneGuiWidth(),
 				scenePresenter.getSceneGuiHeight());
 
-		int before = getIndexToInsertAt(numberPrefix);
-		updateTheListOfIndexesToInsertAt(numberPrefix);
+		int before = insertionPointCalculator.getIndexToInsertAt(numberPrefix);
+		insertionPointCalculator.updateTheListOfIndexesToInsertAt(numberPrefix);
 
 		// this triggers the loading
 		imageAndPos.addImageToPanel(before);
@@ -232,16 +229,7 @@ PropertyChangeEventHandlerAPI
 		return true;
 	}
 
-	public int getIndexToInsertAt(int numberPrefix) {
-		int i = theListOfIndexesToInsertAt[numberPrefix];
-		return i;
-	}
 
-	void updateTheListOfIndexesToInsertAt(int numberPrefix) {
-		for (int i = numberPrefix; i <= 99; i++) {
-			theListOfIndexesToInsertAt[i]++;
-		}
-	}
 
 	public void executeActionWithDialogActionRunner(BaseAction a) {
 		if (a == null) {
@@ -937,7 +925,7 @@ PropertyChangeEventHandlerAPI
 		this.inventoryPresenter.clear();
 		this.scenePresenter.clearEverythingExceptView();
 		this.scenePresenter.clearView();
-		this.clearListOfIntegersToInsertAt();
+		this.insertionPointCalculator.clear();
 	}
 
 	public void setActiveGuiState(GuiStateEnum state) {
