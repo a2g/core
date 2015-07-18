@@ -28,12 +28,14 @@ public abstract class Image {
 	private final Point fixedOffset;
 	private double parallaxX;
 	private double parallaxY;
+	String atid;
 
-	public Image(ImagePanelAPI panel, Point offset) {
+	public Image(ImagePanelAPI panel, Point offset, String atid) {
 		this.fixedOffset = offset;
 		this.panel = panel;
 		this.parallaxX = 1.0;
 		this.parallaxY = 1.0;
+		this.atid = atid;
 	};
 
 	public void addImageToPanel(int before) {
@@ -90,6 +92,10 @@ public abstract class Image {
 			image.addLoadHandler(lh);
 		}
 		return image;
+	}
+
+	public String getAtid() {
+		return atid;
 	}
 
 }

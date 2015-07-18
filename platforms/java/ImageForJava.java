@@ -26,7 +26,7 @@ public class ImageForJava extends Image {
 
 	public ImageForJava(final java.awt.Image image, String objectId,
 			ImagePanelAPI panel, Point offset) {
-		super(panel, offset);
+		super(panel, offset, objectId);
 		this.image = image;
 		this.objectId = objectId;
 		panel.setImageVisible(this, false);

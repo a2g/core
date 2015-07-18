@@ -116,14 +116,16 @@ implements IScenePanelFromScenePresenter
         am.put("onEnter", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	
+            	// this is only hit with a setfocus in paint, ie:
+            	// public void paint(Graphics g)
+            	//{
+            	//  this.requestFocus();
             	ListIterator<Image> im = listOfAllVisibleImages.listIterator();
             	 
                 while(im.hasNext())
                 {
                 	Image i = im.next();
-                	IMAGE_DUMP.log(Level.FINE, "image" +i.toString());
-        			
+                	IMAGE_DUMP.log(Level.FINE, "image" +i.getAtid());
                 }
             }
         });
@@ -243,7 +245,7 @@ implements IScenePanelFromScenePresenter
 	@Override
 	public void paint(Graphics g)
 	{
-		this.requestFocus();
+		//this.requestFocus();
 		g.clearRect(0, 0, width, height);
 		Iterator<Image> iter = listOfAllVisibleImages.iterator();
 		while(iter.hasNext())
@@ -324,10 +326,6 @@ implements IScenePanelFromScenePresenter
 		java.awt.Image img = ((PackagedImageForJava)imageResource).unpack();
 
 		ImageForJava imageAndPos = new ImageForJava(img, objectTextualId, this, new Point(x, y));
-
-	
-
-
 		return imageAndPos;
 	}
 
