@@ -43,7 +43,6 @@ public class ScenePresenter implements IScenePresenter {
 	public ScenePresenter(final IHostingPanel panel,
 			IMasterPresenterFromScene master) {
 		this.sceneTalkerAtid = "";
-		this.defaultSceneObjectOtid = "";
 		this.cameraX = 0.0;
 		this.cameraY = 0.0;
 		this.width = 320;
@@ -260,7 +259,10 @@ public class ScenePresenter implements IScenePresenter {
 	}
 
 	public String getSceneTalkerAtid() {
-		return sceneTalkerAtid;
+		if(!sceneTalkerAtid.isEmpty())
+			return sceneTalkerAtid;
+		String defaultInitial = this.getObjectByOtid(defaultSceneObjectOtid).getInitialAnimation();
+		return defaultInitial;
 	}
 
 	public void setSceneTalkerAtid(String sceneTalkerAtid) {
