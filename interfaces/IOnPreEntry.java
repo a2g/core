@@ -36,7 +36,7 @@ import com.github.a2g.core.interfaces.game.IIsInventoryItemVisible;
 import com.github.a2g.core.interfaces.game.IIsTrue;
 import com.github.a2g.core.interfaces.game.IIsVisible;
 import com.github.a2g.core.interfaces.game.IRemoveVerbByCode;
-import com.github.a2g.core.interfaces.game.ISetAnimationAsDialogTalker;
+import com.github.a2g.core.interfaces.game.ISetAnimationAsSceneDialogTalker;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectCurrent;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectCurrentAndSetFrame;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectInitial;
@@ -120,7 +120,7 @@ ISetAnimationDuration,
 ISetAnimationAsObjectSpecial, 
 ISetAsDefaultSceneObject,
 ISetAnimationAsObjectCurrentAndSetFrame,
-ISetAnimationAsDialogTalker,
+ISetAnimationAsSceneDialogTalker,
 ISetAnimationMaxTalkRect
 {
 

@@ -288,7 +288,7 @@ IOnMovementBeyondAGate {
 	}
 
 	@Override
-	public void setAnimationAsDialogTalker(String atid) {
+	public void setAnimationAsSceneDialogTalker(String atid) {
 		master.getDialogTreePresenter().setDialogTreeTalkAnimation(atid);
 	}
 
