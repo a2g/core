@@ -41,8 +41,7 @@ import com.github.a2g.core.interfaces.game.IIsVisible;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectCurrent;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectInitial;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsSceneTalker;
-import com.github.a2g.core.interfaces.game.ISetAnimationDuration;
-import com.github.a2g.core.interfaces.game.ISetAsSceneTalker;
+import com.github.a2g.core.interfaces.game.ISetAnimationDuration; 
 import com.github.a2g.core.interfaces.game.ISetAsDefaultSceneObject;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleY;
@@ -97,7 +96,6 @@ IGetCurrentFrame,
 ISetCurrentFrame,
 ISetDisplayName,
 ISetAsDefaultSceneObject,
-ISetAsSceneTalker,
 
 // animation
 IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation,

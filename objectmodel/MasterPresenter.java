@@ -16,8 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-//import java.util.Iterator;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Level;

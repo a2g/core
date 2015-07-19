@@ -15,7 +15,6 @@ import com.github.a2g.core.interfaces.IOnPreEntry;
 import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.RectF;
 
 /** MasterProxyForGameScene */

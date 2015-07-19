@@ -1,10 +1,5 @@
 package com.github.a2g.core.objectmodel;
 
-import java.util.ArrayList;
-
-import com.github.a2g.core.interfaces.IMasterPresenterFromBoundaryCalculator;
-import com.github.a2g.core.primitive.PointF;
-
 public class InsertionPointCalculator {
 	
 	private Integer[] theListOfIndexesToInsertAt;
