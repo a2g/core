@@ -220,6 +220,13 @@ PropertyChangeEventHandlerAPI
 				scenePresenter.getSceneGuiWidth(),
 				scenePresenter.getSceneGuiHeight());
 
+		// if its adding an animation to an existing object then use preceding.
+		SceneObject o = scenePresenter.getObjectByOtid(otid);
+		if(o!=null)
+		{
+			numberPrefix = o.getNumberPrefix();
+		}
+		
 		int before = insertionPointCalculator.getIndexToInsertAt(numberPrefix);
 		insertionPointCalculator.updateTheListOfIndexesToInsertAt(numberPrefix);
 
