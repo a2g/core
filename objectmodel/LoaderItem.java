@@ -95,6 +95,10 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 
 	@Override
 	public int compareTo(LoaderItem o) {
+		int thisMain = this.getName().contains("main")? 1:0;
+		int thatMain = o.getName().contains("main")? 1:0;
+		if(thisMain!=thatMain)
+			return thatMain - thisMain;
 		int result = this.bundleNumber - o.bundleNumber;
 		return result;
 	}
