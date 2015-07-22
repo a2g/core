@@ -57,7 +57,7 @@ public class SceneObject {
 		this.setBaseMiddleX(0);
 		this.setBaseMiddleY(0);
 
-		this.screenCoordsPerSecond = 1.0;
+		this.screenCoordsPerSecond = .3;
 	}
 
 	public void setNumberPrefix(int number) {

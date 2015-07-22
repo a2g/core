@@ -25,11 +25,11 @@ public interface IOnFillLoadList extends ISetValue {
 
 	void kickStartLoading();
 
-	IGameScene getSceneByName(String string);
+	IGameScene getSceneByName(Object string);
 
 	void clearAllLoadedLoads();
 
-	void setContinueAfterLoad(boolean isContinueImmediately);
+	void setContinueAfterLoad(boolean isContinueImmediatelyAfterLoading);
 	
 	void addMP3ForASoundObject(String name, String location);
 			

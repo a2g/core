@@ -37,7 +37,7 @@ public class LoaderPresenter implements IMasterPresenterFromLoaderMouse {
 	public LoaderPresenter(final IHostingPanel panel, EventBus bus,
 			IMasterPresenterFromLoader master, IHostFromMasterPresenter parent,
 			IFactory factory) {
-		this.isContinueAfterLoad = false;
+		this.isContinueAfterLoad = true;
 		this.loader = new Loader(master);
 		this.name = "";
 		this.view = factory.createLoaderPanel(this, ColorEnum.Purple,

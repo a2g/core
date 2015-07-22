@@ -41,8 +41,8 @@ public class IOnFillLoadListImpl {
 		};
 	}
 
-	public IGameScene getSceneByName(String string) {
-		return this.implementation.getSceneByName(string);
+	public IGameScene getSceneByName(Object string) {
+		return this.implementation.getSceneByName(string.toString());
 	}
 
 	public void setValue(Object string, int value) {

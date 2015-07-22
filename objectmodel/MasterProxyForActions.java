@@ -37,8 +37,8 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	}
 
 	@Override
-	public IGameScene getSceneByName(String string) {
-		return master.getSceneByName(string);
+	public IGameScene getSceneByName(Object string) {
+		return master.getSceneByName(string.toString());
 	}
 
 	@Override
