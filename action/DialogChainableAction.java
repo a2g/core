@@ -30,7 +30,7 @@ implements IChainRootForDialog
 
 	}
 	@Override
-	public DialogChainableAction branch(int branchId, final boolean isOkToAdd, String text) {
+	public DialogChainableAction branch(int branchId, boolean isOkToAdd, String text) {
 
 		DialogTreeBranchAction a = new DialogTreeBranchAction(this, text,
 				branchId, isOkToAdd);
