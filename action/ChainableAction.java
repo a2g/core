@@ -322,10 +322,10 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 	}
 	
 	@Override
-	public ChainEndAction walkAndSwitch(PointF end, String sceneName) {
+	public ChainEndAction walkAndSwitch(double x, double y, String sceneName) {
 		WalkAction a = new WalkAction(this, ScenePresenter.DEFAULT_SCENE_OBJECT);
-		a.setEndX(end.getX());
-		a.setEndY(end.getY());
+		a.setEndX(x);
+		a.setEndY(y);
 		a.setToInitialAtEnd(false);
 		
 		SingleCallAction b =  new SingleCallAction(a, Type.Switch);
@@ -528,4 +528,15 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		s.setAtid(atid);
 		return s;
 	}
+	
+	public ChainableAction walkAndTalkNoSwitching(short ocode, double x, double y, String speech)
+	{
+		WalkAndTalkAction s = new WalkAndTalkAction(this, ocode, speech);
+		s.setNonIncrementing(TalkPerformer.NonIncrementing.True);
+		s.setEndX(x);
+		s.setEndY(y);
+		return s;
+		
+	}
+
 }

@@ -38,7 +38,9 @@ public interface IChainRootForScene {
 	public ChainableAction walkToWithoutSwitching(PointF point);
 	public ChainableAction walkToWithoutSwitching(short ocode, double x, double y);
 	public ChainableAction walkToWithoutSwitching(short ocode, PointF point);
- 
+	public ChainEndAction walkAndSwitch(double x, double y, String sceneName);
+	public ChainableAction walkAndTalkNoSwitching(short ocode, double x, double y, String speech);
+
 	
 	public ChainableAction subroutine(ChainableAction orig);
 	
@@ -140,8 +142,6 @@ public interface IChainRootForScene {
 	public ChainableAction setAnimationAsObjectSpecial(String atid, Special type);
 	public ChainableAction setAnimationAsSceneTalker(String atid);
 	public ChainableAction setAnimationAsObjectInitial(String atid);
-	public ChainEndAction walkAndSwitch(PointF end, String sceneName);
-	
 
 
 }
