@@ -749,7 +749,7 @@ PropertyChangeEventHandlerAPI
 			int branchId = ((ActivateDialogTreeModeAction) a).getBranchId();
 			DialogChainableAction d = createDialogChainRootAction();
 			DialogChainEndAction b = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
-			b.setParent(a);
+			d.setParent(a);
 			return b;
 		}
 		return a;
