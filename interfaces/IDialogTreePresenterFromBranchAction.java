@@ -4,8 +4,8 @@ import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter.GuiStateEn
 
 public interface IDialogTreePresenterFromBranchAction {
 
-	void addBranch(int branchId, String text, boolean isAlwaysPresent);
-
+	void addBranch(int subBranchId, String lineOfDialog,
+			boolean isAddableAsSaidSpeech);
 	void setActiveGuiState(GuiStateEnum dialogtree);
 
 }

@@ -18,14 +18,20 @@ package com.github.a2g.core.objectmodel;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class DialogTree {
 	private List<Integer> subBranches;
 	private List<String> linesOfDialog;
+	private Map<Integer,Boolean> mapOfIsAddableToSaidSpeechIndexedByBranch;
+
 
 	DialogTree() {
 		subBranches = new LinkedList<Integer>();
 		linesOfDialog = new LinkedList<String>();
+		mapOfIsAddableToSaidSpeechIndexedByBranch = new TreeMap<Integer,Boolean>();
+		
 	}
 	
 	String getDialogForId(int id)
@@ -43,9 +49,10 @@ public class DialogTree {
 	void clear() {
 		subBranches.clear();
 		linesOfDialog.clear();
+		mapOfIsAddableToSaidSpeechIndexedByBranch.clear();
 	}
 
-	public void addSubBranch(int branchId, String text) {
+	public void addSubBranch(int branchId, String text, boolean isAddableToSaidSpeech) {
 		subBranches.add(branchId);
 		linesOfDialog.add(text);
 	}
@@ -56,5 +63,11 @@ public class DialogTree {
 
 	public List<String> getLinesOfDialog() {
 		return linesOfDialog;
+	}
+	
+	public boolean isAddableAsSaid(int branchId) {
+		if(this.mapOfIsAddableToSaidSpeechIndexedByBranch.containsKey(branchId))
+			return mapOfIsAddableToSaidSpeechIndexedByBranch.get(branchId);
+		return true;
 	}
 }

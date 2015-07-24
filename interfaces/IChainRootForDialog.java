@@ -8,7 +8,6 @@ public interface IChainRootForDialog {
 	DialogChainableAction talk(String speech);
 	DialogChainableAction branch(int branchId, final boolean isOkToAdd, String text);
 	DialogChainableAction branch(int branchId, String text) ;
-	DialogChainableAction branchSticky(int branchId, String text) ;
 	
 	DialogChainableAction setValue(String key, int value) ;
 	DialogChainableAction setInventoryVisible(int redNote, boolean b);
@@ -18,4 +17,6 @@ public interface IChainRootForDialog {
 	DialogChainEndAction  endDialogTree();
 	DialogChainEndAction  chainTo(int branchId);
 	DialogChainEndAction  switchTo(String string);
+	DialogChainableAction branchSticky(int branchId, String text) ;
+	DialogChainEndAction branchSticky(int nativ2, boolean b, String string);
 }

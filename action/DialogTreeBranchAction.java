@@ -28,7 +28,7 @@ public class DialogTreeBranchAction extends DialogChainableAction {
 
 	private String text;
 	private int branchId;
-	private boolean isAlwaysPresent;
+	private boolean isExemptFromSaidList;
 	private IDialogTreePresenterFromBranchAction dialogTree;
 	private boolean isOkToAdd;
 
@@ -37,7 +37,7 @@ public class DialogTreeBranchAction extends DialogChainableAction {
 		this.isOkToAdd = isOkToAdd;
 		this.setBranchId(branchId);
 		this.setText(text);
-		isAlwaysPresent = false;
+		isExemptFromSaidList = false;
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class DialogTreeBranchAction extends DialogChainableAction {
 	protected boolean onCompleteGameAction() { 
 		if(isOkToAdd)
 		{
-			dialogTree.addBranch(branchId, text, isAlwaysPresent);
+			dialogTree.addBranch(branchId, text, !isExemptFromSaidList);
 		}
 		return false;
 	}
@@ -80,8 +80,8 @@ public class DialogTreeBranchAction extends DialogChainableAction {
 		return text;
 	}
 
-	public void setIsAlwaysPresent(boolean isAlwaysPresent) {
-		this.isAlwaysPresent = isAlwaysPresent;
+	public void setIsExemptFromSaidList(boolean isExemptFromSaidList) {
+		this.isExemptFromSaidList = isExemptFromSaidList;
 	}
 
 	public void setDialogTree(IDialogTreePresenterFromBranchAction dialogTree) {

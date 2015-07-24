@@ -40,12 +40,7 @@ implements IChainRootForDialog
 	public DialogChainableAction branch(int branchId, String text) {
 		return new DialogTreeBranchAction(this, text, branchId, true);
 	}
-	@Override
-	public DialogChainableAction branchSticky(int branchId, String text) {
-		DialogTreeBranchAction a = new DialogTreeBranchAction(this, text, branchId, true);
-		a.setIsAlwaysPresent(true);
-		return a;
-	}
+	
 	@Override
 	public DialogChainEndAction endDialogTree() {
 		return new DialogTreeEndAction(this);
@@ -100,6 +95,18 @@ implements IChainRootForDialog
 	{
 		DialogTreeSingleCallAction a =  new DialogTreeSingleCallAction(this, Type.SetAsInitialAnimation);
 		a.setAtid(atid);
+		return a;
+	}
+	@Override
+	public DialogChainableAction branchSticky(int branchId, String text) {
+		DialogTreeBranchAction a = new DialogTreeBranchAction(this, text, branchId, true);
+		a.setIsExemptFromSaidList(true);
+		return a;
+	}
+	@Override
+	public DialogChainableAction branchSticky(int branchId, boolean isOkToAdd, String text) {
+		DialogTreeBranchAction a = new DialogTreeBranchAction(this, text, branchId, isOkToAdd);
+		a.setIsExemptFromSaidList(true);
 		return a;
 	}
 }

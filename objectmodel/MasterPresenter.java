@@ -426,12 +426,12 @@ PropertyChangeEventHandlerAPI
 	public void saySpeechAndThenExecuteBranchWithBranchId(int branchId) {
 		// get speech before clearing
 		String speech = this.getDialogTreePresenter().getLineOfDialogForId(branchId);
-		
+		boolean isAddableAsSaid =this.getDialogTreePresenter().isAddableAsSaid(branchId);
 		// clear the branches
 		this.dialogTreePresenter.clearBranches();
 		
 		// mark speech as said, but not the escape phrase, that is golden.
-		if(branchId!=-1)
+		if(branchId!=-1 && !isAddableAsSaid)
 		{
 			this.dialogTreePresenter.markSpeechAsSaid(speech);
 		}

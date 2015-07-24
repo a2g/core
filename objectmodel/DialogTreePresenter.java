@@ -27,12 +27,13 @@ import com.github.a2g.core.primitive.ColorEnum;
 //import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.event.shared.EventBus;
 
-public class DialogTreePresenter implements IDialogTreePresenter {
+public class DialogTreePresenter 
+implements IDialogTreePresenter {
 	private DialogTree theDialogTree;
 	private IDialogTreePanelFromDialogTreePresenter view;
 	private String atidOfDialogTreeTalkAnimation;
 	private Set<String> recordOfSaidSpeech;
-
+	
 	public DialogTreePresenter(final IHostingPanel panel, EventBus bus,
 			IMasterPresenterFromDialogTree callbacks) {
 		this.theDialogTree = new DialogTree();
@@ -61,9 +62,9 @@ public class DialogTreePresenter implements IDialogTreePresenter {
 
 	//@Override
 	public void addBranch(int subBranchId, String lineOfDialog,
-			boolean isAlwaysShown) {
-		if (isAlwaysShown || !recordOfSaidSpeech.contains(lineOfDialog)) {
-			theDialogTree.addSubBranch(subBranchId, lineOfDialog);
+			boolean isAddableAsSaidSpeech) {
+		if (!recordOfSaidSpeech.contains(lineOfDialog)) {
+			theDialogTree.addSubBranch(subBranchId, lineOfDialog, isAddableAsSaidSpeech);
 			view.update(theDialogTree);
 		}
 	}
@@ -72,7 +73,7 @@ public class DialogTreePresenter implements IDialogTreePresenter {
 		this.atidOfDialogTreeTalkAnimation = atid;
 
 	}
-
+	
 	public String getDialogTreeTalkAnimation() {
 		return this.atidOfDialogTreeTalkAnimation;
 	}
@@ -97,7 +98,11 @@ public class DialogTreePresenter implements IDialogTreePresenter {
 	}
 
 	public void setScenePixelSize(int width, int i) {
-
-
 	}
+
+	public boolean isAddableAsSaid(int branchId) {
+		return theDialogTree.isAddableAsSaid(branchId);
+	}
+
+	
 }
