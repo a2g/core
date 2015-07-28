@@ -112,7 +112,7 @@ public class TalkPerformer {
 		// always make the speaker visible
 		if (atid != "")
 		{
-			otid = scene.getOtidOfAtid(atid);
+			otid = scene.getOtidByAtid(atid);
 			if(otid != "") 
 			{
 				// stash old state

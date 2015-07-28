@@ -134,7 +134,7 @@ public class MasterProxyForActions implements IOnFillLoadList,
 
 	@Override
 	public void setAsACurrentAnimationByAtid(String atid) {
-		String otid = getOtidOfAtid(atid);
+		String otid = getOtidByAtid(atid);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setCurrentAnimation(atid);
 	}
@@ -159,9 +159,6 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	public String getOtidByCode(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		return otid;
-	//	if(master.getScenePresenter().getObjectByOtid(otid)!=null)
-		//			return master.getScenePresenter().getObjectByOtid(otid).getOtid();
-		//return null;
 	}
 
 	@Override
@@ -170,15 +167,8 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	}
 
 	@Override
-	public String getOtidOfAtid(String atid) {
-		String toReturn = "";
-		Animation a = master.getScenePresenter().getAnimationByAtid(atid);
-		if (a != null) {
-			SceneObject o = a.getObject();
-			if (o != null)
-				toReturn = o.getOtid();
-		}
-		return toReturn;
+	public String getOtidByAtid(String atid) {
+		return master.getScenePresenter().getOtidByAtid(atid);
 	}
 
 	@Override
@@ -231,7 +221,7 @@ public class MasterProxyForActions implements IOnFillLoadList,
 
 	@Override
 	public void setAsAnInitialAnimationByAtid(String atid) {
-		String otid = getOtidOfAtid(atid);
+		String otid = getOtidByAtid(atid);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setInitialAnimation(atid);
 		;
@@ -355,7 +345,7 @@ public class MasterProxyForActions implements IOnFillLoadList,
 
 	@Override
 	public void setCurrentAnimationAndFrame(String atid, int frame) {
-		String otid = getOtidOfAtid(atid);
+		String otid = getOtidByAtid(atid);
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
 		object.setCurrentAnimationAndFrame(atid, frame);
 	}
@@ -390,14 +380,14 @@ public class MasterProxyForActions implements IOnFillLoadList,
 
 	@Override
 	public void setAnimationAsObjectSpecial(String atid, Special type) {
-		String otid = getOtidOfAtid(atid);
+		String otid = getOtidByAtid(atid);
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
 		object.setSpecialAnimation(type, atid);
 	}
 
 	@Override
 	public void setAnimationAsObjectInitial(String atid) {
-		String otid = getOtidOfAtid(atid);
+		String otid = getOtidByAtid(atid);
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
 		object.setInitialAnimation(atid);
 	}

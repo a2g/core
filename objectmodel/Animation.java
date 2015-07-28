@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.RectF;
 
@@ -30,13 +29,13 @@ public class Animation {
 	private ColorEnum talkingColor;
 
 	public Animation(String atid, SceneObject ownerSceneObject) {
+		this.framesCollection = new com.github.a2g.core.objectmodel.ImageCollection();
 		this.durationInSeconds = 1.0;
 		this.ownerObject = ownerSceneObject;
 		this.atid = atid;
-		framesCollection = new com.github.a2g.core.objectmodel.ImageCollection();
-		rectForMaxSpeechBalloon = new RectF(0,.25,1.0,.5);
-		//give it  rrandom color
-		talkingColor = ColorEnum.values()[(int)(Math.random()*ColorEnum.values().length)];
+		this.rectForMaxSpeechBalloon = new RectF(0,.25,1.0,.5);
+		//give it  random color, to force us to commit, and not rely on default :)
+		this.talkingColor = ColorEnum.values()[(int)(Math.random()*ColorEnum.values().length)];
 	}
 
 	public SceneObject getObject() {
@@ -57,17 +56,6 @@ public class Animation {
 
 	public ImageCollection getFrameCollection() {
 		return framesCollection;
-	}
-
-	public Image getDefaultFrame() {
-		assert (framesCollection.getCount() != 0);
-		if (framesCollection.getCount() == 0) {
-			return null;
-		}
-		com.github.a2g.core.objectmodel.Image frame = framesCollection
-				.getByIndex(0);
-
-		return frame;
 	}
 
 	public int getLength() {
@@ -107,7 +95,6 @@ public class Animation {
 
 	public void setTalkingColor(ColorEnum color) {
 		this.talkingColor = color;
-
 	}
 	
 	public void setSceneObject(SceneObject parent) {
@@ -118,53 +105,6 @@ public class Animation {
 		return ownerObject;
 	}
 
-	/*
-	 * public boolean getWasSetAsInitialAnimation() {
-		return wasSetAsInitialAnimation;
-	}
-
-	public boolean getWasSetAsCurrentAnimation() {
-		return wasSetAsCurrentAnimation;
-	}
-
-	public boolean getWasSetAsSpecialAnimation() {
-		boolean wasSet = specialAnimationThisWasSetTo != null;
-
-		return wasSet;
-	}
-	public void setAsSpecialAnimation(IGameScene.Special special) {
-		specialAnimationThisWasSetTo = special;
-		if (parent != null) {
-			parent.setSpecialAnimation(special, atid);
-		}
-	}
-
-	public void setAsCurrentAnimationAndSetFrame(int i) {
-		parent.setCurrentAnimation(atid);
-		parent.setCurrentFrame(i);
-	}
-
-	public void setAsCurrentAnimation() {
-		this.wasSetAsCurrentAnimation = true;
-		if (parent != null) {
-			parent.setCurrentAnimation(atid);
-		}
-	}
-
-	public void setAsInitialAnimation() {
-		this.wasSetAsInitialAnimation = true;
-		if (parent != null) {
-			parent.setInitialAnimation(this.atid);
-		}
-	}
-
-	
-	
-
-	public IGameScene.Special getDesignatedSpecialAnimation() {
-		return specialAnimationThisWasSetTo;
-	}
-	*/
-	 
+ 
 
 };

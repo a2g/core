@@ -141,9 +141,9 @@ public class ScenePresenter implements IScenePresenter {
 
 	public void alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
 			int frame, String atid) {
-		getAnimationByAtid(atid)
-		.alignBaseMiddleOfOldFrameToFrameOfThisAnimation(frame);
-
+		String otid = getOtidByAtid(atid);
+		SceneObject o = getObjectByOtid(otid);
+		o.alignBaseMiddleOfOldFrameToFrameOfNewAnimation(atid, frame);
 	}
 
 	@Override
@@ -275,5 +275,16 @@ public class ScenePresenter implements IScenePresenter {
 
 	public void setDefaultSceneObjectOtid(String otid) {
 		this.defaultSceneObjectOtid = otid;
+	}
+
+	public String getOtidByAtid(String atid) {
+		String toReturn = "";
+		Animation a = getAnimationByAtid(atid);
+		if (a != null) {
+			SceneObject o = a.getObject();
+			if (o != null)
+				toReturn = o.getOtid();
+		}
+		return toReturn;
 	}
 };

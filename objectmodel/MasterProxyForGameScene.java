@@ -245,7 +245,7 @@ IOnMovementBeyondAGate {
 
 	@Override
 	public void setAnimationAsObjectSpecial(String atid, Special type) {
-		String otid = getOtidOfAtid(atid);	
+		String otid = getOtidByAtid(atid);	
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setSpecialAnimation(type, atid);
 
@@ -261,7 +261,7 @@ IOnMovementBeyondAGate {
 
 	@Override
 	public void setAnimationAsObjectCurrent(String atid) {
-		String otid = getOtidOfAtid(atid);	
+		String otid = getOtidByAtid(atid);	
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setCurrentAnimation(atid);
 	}
@@ -284,7 +284,7 @@ IOnMovementBeyondAGate {
 
 	@Override
 	public void setAnimationAsObjectCurrentAndSetFrame(String atid, int frame) {
-		String otid = getOtidOfAtid(atid);	
+		String otid = getOtidByAtid(atid);	
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setCurrentAnimationAndFrame(atid, frame);
 	}
@@ -495,21 +495,13 @@ IOnMovementBeyondAGate {
 		master.addMP3ForASoundObject(name, location);
 		
 	}
-	public String getOtidOfAtid(String atid) {
-		String toReturn = "";
-		ScenePresenter pres = master.getScenePresenter();
-		Animation a = pres.getAnimationByAtid(atid);
-		if (a != null) {
-			SceneObject o = a.getObject();
-			if (o != null)
-				toReturn = o.getOtid();
+	public String getOtidByAtid(String atid) {
+		return master.getScenePresenter().getOtidByAtid(atid);
 		}
-		return toReturn;
-	}
 	
 	@Override
 	public void setAnimationAsObjectInitial(String atid) {
-		String otid = getOtidOfAtid(atid);
+		String otid = getOtidByAtid(atid);
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
 		object.setInitialAnimation(atid);
 

@@ -41,7 +41,7 @@ public class PlayAnimationAction extends ChainableAction {
 
 	@Override
 	public void runGameAction() {
-		otid = scene.getOtidOfAtid(atid);
+		otid = scene.getOtidByAtid(atid);
 		int durationInMilliseconds = (int) (scene.getDurationByAtid(atid) * 1000);
 
 		this.run(durationInMilliseconds);
