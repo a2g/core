@@ -245,8 +245,9 @@ IOnMovementBeyondAGate {
 
 	@Override
 	public void setAnimationAsObjectSpecial(String atid, Special type) {
-		Animation a = master.getScenePresenter().getAnimationByAtid(atid);
-		a.setAsSpecialAnimation(type);
+		String otid = getOtidOfAtid(atid);	
+		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
+		o.setSpecialAnimation(type, atid);
 
 	}
 
@@ -260,8 +261,9 @@ IOnMovementBeyondAGate {
 
 	@Override
 	public void setAnimationAsObjectCurrent(String atid) {
-		master.getScenePresenter().getAnimationByAtid(atid)
-		.setAsCurrentAnimation();
+		String otid = getOtidOfAtid(atid);	
+		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
+		o.setCurrentAnimation(atid);
 	}
 
 	@Override
@@ -282,9 +284,9 @@ IOnMovementBeyondAGate {
 
 	@Override
 	public void setAnimationAsObjectCurrentAndSetFrame(String atid, int frame) {
-		master.getScenePresenter().getAnimationByAtid(atid)
-		.setAsCurrentAnimationAndSetFrame(frame);
-
+		String otid = getOtidOfAtid(atid);	
+		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
+		o.setCurrentAnimationAndFrame(atid, frame);
 	}
 
 	@Override

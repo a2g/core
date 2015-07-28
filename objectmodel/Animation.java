@@ -24,29 +24,23 @@ public class Animation {
 	private double durationInSeconds;
 	private String atid;
 	private ImageCollection framesCollection;
-	private SceneObject parent;
-	private boolean wasSetAsInitialAnimation;
-	private boolean wasSetAsCurrentAnimation;
-	private IGameScene.Special specialAnimationThisWasSetTo;
+	private SceneObject ownerObject;
 	private RectF rectForMaxSpeechBalloon;
 
 	private ColorEnum talkingColor;
 
-	public Animation(String atid, SceneObject owningSceneObject) {
+	public Animation(String atid, SceneObject ownerSceneObject) {
 		this.durationInSeconds = 1.0;
-		this.parent = owningSceneObject;
+		this.ownerObject = ownerSceneObject;
 		this.atid = atid;
 		framesCollection = new com.github.a2g.core.objectmodel.ImageCollection();
-		wasSetAsInitialAnimation = false;
-		wasSetAsCurrentAnimation = false;
-		specialAnimationThisWasSetTo = null;
 		rectForMaxSpeechBalloon = new RectF(0,.25,1.0,.5);
 		//give it  rrandom color
 		talkingColor = ColorEnum.values()[(int)(Math.random()*ColorEnum.values().length)];
 	}
 
 	public SceneObject getObject() {
-		return parent;
+		return ownerObject;
 	}
 
 	public ImageCollection getFrames() {
@@ -83,62 +77,11 @@ public class Animation {
 	public int getLastFrame() {
 		return framesCollection.getCount() - 1;
 	}
-
-	public void setAsSpecialAnimation(IGameScene.Special special) {
-		specialAnimationThisWasSetTo = special;
-		if (parent != null) {
-			parent.setSpecialAnimation(special, atid);
-		}
-	}
-
-	public void setAsCurrentAnimationAndSetFrame(int i) {
-		parent.setCurrentAnimation(atid);
-		parent.setCurrentFrame(i);
-	}
-
-	public void setAsCurrentAnimation() {
-		this.wasSetAsCurrentAnimation = true;
-		if (parent != null) {
-			parent.setCurrentAnimation(atid);
-		}
-	}
-
-	public void setAsInitialAnimation() {
-		this.wasSetAsInitialAnimation = true;
-		if (parent != null) {
-			parent.setInitialAnimation(this.atid);
-		}
-	}
-
-	public void setSceneObject(SceneObject parent) {
-		this.parent = parent;
-	}
-
-	public SceneObject getSceneObject() {
-		return parent;
-	}
-
-	public boolean getWasSetAsInitialAnimation() {
-		return wasSetAsInitialAnimation;
-	}
-
-	public boolean getWasSetAsCurrentAnimation() {
-		return wasSetAsCurrentAnimation;
-	}
-
-	public boolean getWasSetAsSpecialAnimation() {
-		boolean wasSet = specialAnimationThisWasSetTo != null;
-
-		return wasSet;
-	}
-
-	public IGameScene.Special getDesignatedSpecialAnimation() {
-		return specialAnimationThisWasSetTo;
-	}
+	
 
 	public void alignBaseMiddleOfOldFrameToFrameOfThisAnimation(int frame) {
-		if (parent != null) {
-			parent.alignBaseMiddleOfOldFrameToFrameOfNewAnimation(atid, frame);
+		if (ownerObject != null) {
+			ownerObject.alignBaseMiddleOfOldFrameToFrameOfNewAnimation(atid, frame);
 		}
 	}
 
@@ -166,5 +109,62 @@ public class Animation {
 		this.talkingColor = color;
 
 	}
+	
+	public void setSceneObject(SceneObject parent) {
+		this.ownerObject = parent;
+	}
+
+	public SceneObject getSceneObject() {
+		return ownerObject;
+	}
+
+	/*
+	 * public boolean getWasSetAsInitialAnimation() {
+		return wasSetAsInitialAnimation;
+	}
+
+	public boolean getWasSetAsCurrentAnimation() {
+		return wasSetAsCurrentAnimation;
+	}
+
+	public boolean getWasSetAsSpecialAnimation() {
+		boolean wasSet = specialAnimationThisWasSetTo != null;
+
+		return wasSet;
+	}
+	public void setAsSpecialAnimation(IGameScene.Special special) {
+		specialAnimationThisWasSetTo = special;
+		if (parent != null) {
+			parent.setSpecialAnimation(special, atid);
+		}
+	}
+
+	public void setAsCurrentAnimationAndSetFrame(int i) {
+		parent.setCurrentAnimation(atid);
+		parent.setCurrentFrame(i);
+	}
+
+	public void setAsCurrentAnimation() {
+		this.wasSetAsCurrentAnimation = true;
+		if (parent != null) {
+			parent.setCurrentAnimation(atid);
+		}
+	}
+
+	public void setAsInitialAnimation() {
+		this.wasSetAsInitialAnimation = true;
+		if (parent != null) {
+			parent.setInitialAnimation(this.atid);
+		}
+	}
+
+	
+	
+
+	public IGameScene.Special getDesignatedSpecialAnimation() {
+		return specialAnimationThisWasSetTo;
+	}
+	*/
+	 
 
 };
