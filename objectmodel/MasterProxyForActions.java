@@ -178,6 +178,14 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	}
 
 	@Override
+	public String getAtidOfSceneAsker() {
+		return master.getScenePresenter().getSceneAskerAtid();
+	}
+	@Override
+	public String getAtidOfSceneAnswerer() {
+		return master.getScenePresenter().getSceneAnswererAtid();
+	}
+	@Override
 	public String getAtidOfSceneTalker() {
 		return master.getScenePresenter().getSceneTalkerAtid();
 	}
@@ -305,16 +313,7 @@ public class MasterProxyForActions implements IOnFillLoadList,
 
 	}
 
-	@Override
-	public void setDialogTreeTalkAnimation(String atid) {
-		master.getDialogTreePresenter().setDialogTreeTalkAnimation(atid);
-
-	}
-
-	@Override
-	public String getDialogTreeTalkAnimation() {
-		return master.getDialogTreePresenter().getDialogTreeTalkAnimation();
-	}
+	
 
 	@Override
 	public void addEssential(ILoad blah) {
@@ -391,6 +390,8 @@ public class MasterProxyForActions implements IOnFillLoadList,
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
 		object.setInitialAnimation(atid);
 	}
+ 
+	 
 	
 	
 

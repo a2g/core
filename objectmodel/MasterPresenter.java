@@ -435,7 +435,7 @@ PropertyChangeEventHandlerAPI
 		{
 			this.dialogTreePresenter.markSpeechAsSaid(speech);
 		}
-		String animId = this.dialogTreePresenter.getDialogTreeTalkAnimation();
+		String atidOfInterviewer = this.scenePresenter.getSceneAskerAtid();
 		// This is a bit sneaky:
 		// 1. we create a TalkAction as the root of the chain.
 		// 2. we pass this to onDialogTree..
@@ -443,8 +443,7 @@ PropertyChangeEventHandlerAPI
 		// 4. Then we execute it
 		// Thus it will talk the text, and do what the user prescribes.
 
-		// String animId = getDialogTreeGui().setBranchVisited(branchId);
-		DialogTreeTalkAction talk = new DialogTreeTalkAction(createDialogChainRootAction(), animId, speech);
+		DialogTreeTalkAction talk = new DialogTreeTalkAction(createDialogChainRootAction(), atidOfInterviewer, speech);
 		BaseAction actionChain = sceneHandlers.onDialogTree(
 				proxyForGameScene, talk, branchId);
 		BaseAction  actionChain2 = replaceDialogChainToActionWithOnDialogTreeChain(actionChain);

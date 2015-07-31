@@ -290,8 +290,8 @@ IOnMovementBeyondAGate {
 	}
 
 	@Override
-	public void setAnimationAsSceneDialogTalker(String atid) {
-		master.getDialogTreePresenter().setDialogTreeTalkAnimation(atid);
+	public void setAnimationAsSceneAsker(String atid) {
+		master.getScenePresenter().setSceneAskerAtid(atid);
 	}
 
 	@Override
@@ -505,6 +505,12 @@ IOnMovementBeyondAGate {
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
 		object.setInitialAnimation(atid);
 
+	}
+
+	@Override
+	public void setAnimationAsSceneAnswerer(String atid) {
+		//	master.getDialogTreePresenter().setDialogTreeTalkAnimation(atid);
+		
 	}
 
 }

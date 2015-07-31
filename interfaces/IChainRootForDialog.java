@@ -4,8 +4,8 @@ import com.github.a2g.core.action.DialogChainEndAction;
 import com.github.a2g.core.action.DialogChainableAction;
 
 public interface IChainRootForDialog {
-	DialogChainableAction talk(String anim, String speech);
-	DialogChainableAction talk(String speech);
+	DialogChainableAction answer(String speech);
+	DialogChainableAction ask(String speech);
 	DialogChainableAction branch(int branchId, final boolean isOkToAdd, String text);
 	DialogChainableAction branch(int branchId, String text) ;
 	

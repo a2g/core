@@ -11,8 +11,4 @@ IDialogTreePresenterFromEndAction {
 	void updateDialogTree(DialogTree theDialogTree);
 
 	void setScenePixelSize(int width, int height);
-
-	void setDialogTreeTalkAnimation(String atid);
-
-	String getDialogTreeTalkAnimation();
 }

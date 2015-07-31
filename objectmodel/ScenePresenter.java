@@ -39,10 +39,15 @@ public class ScenePresenter implements IScenePresenter {
 	private String sceneTalkerAtid;
 	private String defaultSceneObjectOtid;
 	private ColorEnum talkingColorForScene;
+	private String sceneAskerAtid;
+	private String sceneAnswererAtid;
 
 	public ScenePresenter(final IHostingPanel panel,
 			IMasterPresenterFromScene master) {
 		this.sceneTalkerAtid = "";
+		this.sceneAskerAtid = "";
+		this.sceneAnswererAtid = "";
+
 		this.cameraX = 0.0;
 		this.cameraY = 0.0;
 		this.width = 320;
@@ -268,6 +273,29 @@ public class ScenePresenter implements IScenePresenter {
 	public void setSceneTalkerAtid(String sceneTalkerAtid) {
 		this.sceneTalkerAtid = sceneTalkerAtid;
 	}
+	
+	public String getSceneAskerAtid() {
+		if(!sceneAskerAtid.isEmpty())
+			return sceneAskerAtid;
+		String nextBest = this.getSceneTalkerAtid();
+		return nextBest;
+	}
+	
+	public void setSceneAskerAtid(String sceneAskerAtid) {
+		this.sceneAskerAtid = sceneAskerAtid;
+	}
+	public String getSceneAnswererAtid() {
+		if(!sceneAnswererAtid.isEmpty())
+			return sceneAnswererAtid;
+		String nextBest = this.getSceneTalkerAtid();
+		return nextBest;
+	}
+	
+	public void setSceneAnswererAtid(String sceneAnswererAtid) {
+		this.sceneAnswererAtid = sceneAnswererAtid;
+	}
+	
+	
 
 	public String getDefaultSceneObjectOtid() {
 		return defaultSceneObjectOtid;

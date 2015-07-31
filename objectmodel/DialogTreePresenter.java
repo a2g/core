@@ -24,14 +24,12 @@ import com.github.a2g.core.interfaces.IHostingPanel;
 import com.github.a2g.core.interfaces.IMasterPresenterFromDialogTree;
 import com.github.a2g.core.interfaces.IDialogTreePresenter;
 import com.github.a2g.core.primitive.ColorEnum;
-//import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwt.event.shared.EventBus;
 
 public class DialogTreePresenter 
 implements IDialogTreePresenter {
 	private DialogTree theDialogTree;
 	private IDialogTreePanelFromDialogTreePresenter view;
-	private String atidOfDialogTreeTalkAnimation;
 	private Set<String> recordOfSaidSpeech;
 	
 	public DialogTreePresenter(final IHostingPanel panel, EventBus bus,
@@ -69,14 +67,6 @@ implements IDialogTreePresenter {
 		}
 	}
 
-	public void setDialogTreeTalkAnimation(String atid) {
-		this.atidOfDialogTreeTalkAnimation = atid;
-
-	}
-	
-	public String getDialogTreeTalkAnimation() {
-		return this.atidOfDialogTreeTalkAnimation;
-	}
 
 	public void setDialogTreeVisible(boolean isInDialogTreeMode) {
 		view.setVisible(isInDialogTreeMode);

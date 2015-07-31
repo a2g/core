@@ -50,14 +50,14 @@ implements IChainRootForDialog
 	}
 
 	@Override
-	public	DialogChainableAction talk(String animCode, String speech) {
-		DialogTreeTalkAction s = new DialogTreeTalkAction(this, animCode, speech);
+	public	DialogChainableAction answer(String speech) {
+		DialogTreeTalkAction s = new DialogTreeTalkAction(this, TalkPerformer.SCENE_ANSWERER, speech);
 		return s;
 	} 
 
 	@Override
-	public	DialogChainableAction talk(String speech) {
-		DialogTreeTalkAction s = new DialogTreeTalkAction(this, TalkPerformer.SCENE_TALKER, speech);
+	public	DialogChainableAction ask(String speech) {
+		DialogTreeTalkAction s = new DialogTreeTalkAction(this, TalkPerformer.SCENE_ASKER, speech);
 		return s;
 	} 
 
