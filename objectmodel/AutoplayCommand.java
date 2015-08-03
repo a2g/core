@@ -12,6 +12,18 @@ public class AutoplayCommand implements ConstantsForAPI
 	private double double2;
 	private AutoplayCommand parent;
 
+	@Override public String toString() {
+		String s = new String();
+		s+=" verb="+verb;
+		s+=" obj1="+obj1;
+		s+=" obj2="+obj2;
+		s+=" str="+str;
+		s+=" dou1="+double1;
+		s+=" dou2="+double2;
+		return s;
+	}
+
+
 	public static AutoplayCommand start()
 	{
 		return new AutoplayCommand(null, -1, 1,1, "start", 0.0,0.0);
@@ -113,8 +125,8 @@ public class AutoplayCommand implements ConstantsForAPI
 	public int getVerb() {
 		return verb;
 	}
-	
-	
+
+
 
 
 }
