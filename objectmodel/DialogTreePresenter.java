@@ -94,5 +94,9 @@ implements IDialogTreePresenter {
 		return theDialogTree.isAddableAsSaid(branchId);
 	}
 
+	public boolean isBranchValid(int branchId) {
+		return getLineOfDialogForId(branchId).length()>0;
+	}
+
 	
 }

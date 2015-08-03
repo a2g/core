@@ -431,7 +431,7 @@ PropertyChangeEventHandlerAPI
 		this.dialogTreePresenter.clearBranches();
 		
 		// mark speech as said, but not the escape phrase, that is golden.
-		if(branchId!=-1 && !isAddableAsSaid)
+		if(branchId!=ConstantsForAPI.EXIT_DLG && !isAddableAsSaid)
 		{
 			this.dialogTreePresenter.markSpeechAsSaid(speech);
 		}
@@ -784,7 +784,7 @@ PropertyChangeEventHandlerAPI
 		AutoplayCommand cmd  = this.host.getNextAutoplayAction();
 		if(cmd==null)
 		{
-			host.onFinishedAutoplay();
+			host.onFinishedAutoplay(null);
 		}
 		else
 		{
@@ -793,14 +793,15 @@ PropertyChangeEventHandlerAPI
 			if(cmd.getVerb()==ConstantsForAPI.DIALOG)
 			{
 				int branchId  = cmd.getBranch();
-				String text = dialogTreePresenter.getLineOfDialogForId(branchId);
-				if(text=="")
+				boolean isValid = dialogTreePresenter.isBranchValid(branchId);
+				
+				// getLineOfDialog
+				if(!isValid && branchId!=ConstantsForAPI.EXIT_DLG)
 				{
-					cancelAutoplay();
-					titleCardPresenter.setText("can't say that id currently");
+					cancelAutoplay(cmd);
 					return;
 				}
-				COMMAND_AUTOPLAY.log(Level.FINE, "DIALOG "+branchId+" "+text);
+				COMMAND_AUTOPLAY.log(Level.FINE, "DIALOG "+branchId+" "+dialogTreePresenter.getLineOfDialogForId(branchId));
 				saySpeechAndThenExecuteBranchWithBranchId(branchId);
 			}
 			else
@@ -829,11 +830,11 @@ PropertyChangeEventHandlerAPI
 					SentenceItem o2 = new SentenceItem("","",cmd.getObj2());
 					a = this.sceneHandlers.onDoCommand(proxyForGameScene,
 							createChainRootAction(), cmd.getVerb(),o1,o2,cmd.getDouble1(),cmd.getDouble2());
+					
 					if (a instanceof DoNothingAction) {
-						cancelAutoplay();
+						cancelAutoplay(cmd);
 						titleCardPresenter.setText("action returned do nothing");
 						return;
-				
 					}
 
 					a = replaceDoDialogActionWithOnDialogTreeChain(a);
@@ -844,11 +845,11 @@ PropertyChangeEventHandlerAPI
 		}
 	}
 	
-	void cancelAutoplay()
+	void cancelAutoplay(AutoplayCommand cmd)
 	{
 		if(!isAutoplayCancelled)
 		{
-			host.onFinishedAutoplay();
+			host.onFinishedAutoplay(cmd);
 			isAutoplayCancelled = true;
 		}
 	}
