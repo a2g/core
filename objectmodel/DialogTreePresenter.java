@@ -54,15 +54,15 @@ implements IDialogTreePresenter {
 		return view;
 	}
 
-	public void markSpeechAsSaid(String text) {
+	public void addSpeechToSaidList(String text) {
 		recordOfSaidSpeech.add(text);
 	}
 
 	//@Override
 	public void addBranch(int subBranchId, String lineOfDialog,
-			boolean isAddableAsSaidSpeech) {
+			boolean isAddableToSaidList) {
 		if (!recordOfSaidSpeech.contains(lineOfDialog)) {
-			theDialogTree.addSubBranch(subBranchId, lineOfDialog, isAddableAsSaidSpeech);
+			theDialogTree.addSubBranch(subBranchId, lineOfDialog, isAddableToSaidList);
 			view.update(theDialogTree);
 		}
 	}
@@ -90,8 +90,8 @@ implements IDialogTreePresenter {
 	public void setScenePixelSize(int width, int i) {
 	}
 
-	public boolean isAddableAsSaid(int branchId) {
-		return theDialogTree.isAddableAsSaid(branchId);
+	public boolean isAddableToSaidList(int branchId) {
+		return theDialogTree.isAddableToSaidList(branchId);
 	}
 
 	public boolean isBranchValid(int branchId) {

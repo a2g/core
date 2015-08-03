@@ -426,14 +426,14 @@ PropertyChangeEventHandlerAPI
 	public void saySpeechAndThenExecuteBranchWithBranchId(int branchId) {
 		// get speech before clearing
 		String speech = this.getDialogTreePresenter().getLineOfDialogForId(branchId);
-		boolean isAddableAsSaid =this.getDialogTreePresenter().isAddableAsSaid(branchId);
+		boolean isAddableToSaidList =this.getDialogTreePresenter().isAddableToSaidList(branchId);
 		// clear the branches
 		this.dialogTreePresenter.clearBranches();
 		
 		// mark speech as said, but not the escape phrase, that is golden.
-		if(branchId!=ConstantsForAPI.EXIT_DLG && !isAddableAsSaid)
+		if(branchId!=ConstantsForAPI.EXIT_DLG && isAddableToSaidList)
 		{
-			this.dialogTreePresenter.markSpeechAsSaid(speech);
+			this.dialogTreePresenter.addSpeechToSaidList(speech);
 		}
 		String atidOfInterviewer = this.scenePresenter.getSceneAskerAtid();
 		// This is a bit sneaky:
@@ -809,8 +809,8 @@ PropertyChangeEventHandlerAPI
 				if(cmd.getVerb()==ConstantsForAPI.SLEEP)
 				{
 					// SLEEP = sleep for 100ms
-					a = createChainRootAction().sleep(cmd.getObj1());
-					COMMAND_AUTOPLAY.log(Level.FINE, "SLEEP "+cmd.getObj1());
+					a = createChainRootAction().sleep(cmd.getInt1());
+					COMMAND_AUTOPLAY.log(Level.FINE, "SLEEP "+cmd.getInt1());
 					
 				}
 				else if(cmd.getVerb()==ConstantsForAPI.SWITCH)
@@ -821,13 +821,13 @@ PropertyChangeEventHandlerAPI
 				}
 				else 
 				{
-					COMMAND_AUTOPLAY.log(Level.FINE,"autoplay " +cmd.getVerbAsString()+" "+getSIOfObject(cmd.getObj1()).getDisplayName()+ " "+ getSIOfObject(cmd.getObj2()).getDisplayName());
+					COMMAND_AUTOPLAY.log(Level.FINE,"autoplay " +cmd.getVerbAsString()+" "+getSIOfObject(cmd.getInt1()).getDisplayName()+ " "+ getSIOfObject(cmd.getInt2()).getDisplayName());
 					
-					this.commandLinePresenter.setVerbItemItem(getSIOfVerb(cmd.getVerb()), getSIOfObject(cmd.getObj1()), getSIOfObject(cmd.getObj2()));
+					this.commandLinePresenter.setVerbItemItem(getSIOfVerb(cmd.getVerb()), getSIOfObject(cmd.getInt1()), getSIOfObject(cmd.getInt2()));
 
 					//otherwise ask the sceneHanders what the outcome is.
-					SentenceItem o1 = new SentenceItem("","",cmd.getObj1());
-					SentenceItem o2 = new SentenceItem("","",cmd.getObj2());
+					SentenceItem o1 = new SentenceItem("","",cmd.getInt1());
+					SentenceItem o2 = new SentenceItem("","",cmd.getInt2());
 					a = this.sceneHandlers.onDoCommand(proxyForGameScene,
 							createChainRootAction(), cmd.getVerb(),o1,o2,cmd.getDouble1(),cmd.getDouble2());
 					

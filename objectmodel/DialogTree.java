@@ -55,6 +55,7 @@ public class DialogTree {
 	public void addSubBranch(int branchId, String text, boolean isAddableToSaidSpeech) {
 		subBranches.add(branchId);
 		linesOfDialog.add(text);
+		mapOfIsAddableToSaidSpeechIndexedByBranch.put(branchId, isAddableToSaidSpeech);
 	}
 
 	public List<Integer> getSubBranchIds() {
@@ -65,7 +66,7 @@ public class DialogTree {
 		return linesOfDialog;
 	}
 	
-	public boolean isAddableAsSaid(int branchId) {
+	public boolean isAddableToSaidList(int branchId) {
 		if(this.mapOfIsAddableToSaidSpeechIndexedByBranch.containsKey(branchId))
 			return mapOfIsAddableToSaidSpeechIndexedByBranch.get(branchId);
 		return true;

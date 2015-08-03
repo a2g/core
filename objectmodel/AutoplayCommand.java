@@ -39,18 +39,6 @@ public class AutoplayCommand implements ConstantsForAPI
 		this.double2 = d2;
 	}
 
-	// eg use, throw
-	private AutoplayCommand generic(int verb, short obj1, short obj2) {
-		AutoplayCommand a = new AutoplayCommand(this, verb,obj1,obj2,"voo",0.0,0.0);
-		return a;
-	}
-
-	// eg sleep, dialog
-	private AutoplayCommand generic(int verb, int obj1) {
-		AutoplayCommand a = new AutoplayCommand(this, verb,obj1,1,"vo",0.0,0.0);
-		return a;
-	}
-
 	String getVerbAsString(){
 		switch(verb)
 		{
@@ -73,8 +61,8 @@ public class AutoplayCommand implements ConstantsForAPI
 		return "error, see AutoplayCommand::getVerbAsString";
 	}
 	
-	int getObj1(){ return int1;}
-	int getObj2(){ return int2;}
+	int getInt1(){ return int1;}
+	int getInt2(){ return int2;}
 	int getBranch(){ return int1;}
 	double getDouble1(){ return double1;}
 	double getDouble2(){ return double2;}
@@ -134,7 +122,7 @@ public class AutoplayCommand implements ConstantsForAPI
 	}
 
 	public AutoplayCommand sleep() {
-		return generic(ConstantsForAPI.SLEEP, 100);
+		return generic(ConstantsForAPI.SLEEP, 1000);
 	}
 
 	public AutoplayCommand examine(short obj) {
@@ -159,5 +147,19 @@ public class AutoplayCommand implements ConstantsForAPI
 
 	public AutoplayCommand turnOn(short obj) {
 		return generic(ConstantsForAPI.TURN_ON, obj);
+	}
+	
+	//private
+	
+	// eg use, throw
+	private AutoplayCommand generic(int verb, short obj1, short obj2) {
+		AutoplayCommand a = new AutoplayCommand(this, verb,obj1,obj2,"voo",0.0,0.0);
+		return a;
+	}
+
+	// eg sleep, dialog
+	private AutoplayCommand generic(int verb, int obj1) {
+		AutoplayCommand a = new AutoplayCommand(this, verb,obj1,1,"vo",0.0,0.0);
+		return a;
 	}
 }
