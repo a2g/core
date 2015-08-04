@@ -252,14 +252,6 @@ IOnMovementBeyondAGate {
 	}
 
 	@Override
-	public void setAnimationAsSceneTalker(String atid) {
-		master.getScenePresenter().setSceneTalkerAtid(atid);
-
-	}
-
-
-
-	@Override
 	public void setAnimationAsObjectCurrent(String atid) {
 		String otid = getOtidByAtid(atid);	
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
@@ -289,10 +281,6 @@ IOnMovementBeyondAGate {
 		o.setCurrentAnimationAndFrame(atid, frame);
 	}
 
-	@Override
-	public void setAnimationAsSceneAsker(String atid) {
-		master.getScenePresenter().setSceneAskerAtid(atid);
-	}
 
 	@Override
 	public boolean isAnimation(String atid) {
@@ -508,9 +496,20 @@ IOnMovementBeyondAGate {
 	}
 
 	@Override
+	public void setAnimationAsSceneTalker(String atid) {
+		master.getScenePresenter().setSceneTalkerAtid(atid);
+
+	}
+	
+	@Override
 	public void setAnimationAsSceneAnswerer(String atid) {
-		//	master.getDialogTreePresenter().setDialogTreeTalkAnimation(atid);
+		master.getScenePresenter().setSceneAnswererAtid(atid);
 		
+	}
+
+	@Override
+	public void setAnimationAsSceneAsker(String atid) {
+		master.getScenePresenter().setSceneAskerAtid(atid);
 	}
 
 }
