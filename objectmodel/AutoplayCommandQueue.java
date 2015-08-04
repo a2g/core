@@ -1,5 +1,6 @@
 package com.github.a2g.core.objectmodel;
 
+import com.github.a2g.core.interfaces.IOnPreEntry;
 import com.github.a2g.core.interfaces.ISolution;
 
 import java.util.ArrayDeque;
@@ -32,7 +33,7 @@ public class AutoplayCommandQueue
 		}
 	}
 	
-	public AutoplayCommand getNext()
+	public AutoplayCommand getNext(IOnPreEntry api)
 	{
 		if(!currentSet.isEmpty())
 			return currentSet.removeFirst();
@@ -43,7 +44,8 @@ public class AutoplayCommandQueue
 		if(!currentSet.isEmpty())
 			return currentSet.removeFirst();
 		solutions.removeFirst();
+		solutions.getFirst().onPreEntry(api);
 		currentIndexIntoFirst = 0;
-		return getNext();	
+		return getNext(api);	
 	}
 }

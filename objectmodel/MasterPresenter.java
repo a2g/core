@@ -781,7 +781,7 @@ PropertyChangeEventHandlerAPI
 		if(id==3)
 			return;
 		
-		AutoplayCommand cmd  = this.host.getNextAutoplayAction();
+		AutoplayCommand cmd  = this.host.getNextAutoplayAction(null);
 		if(cmd==null)
 		{
 			host.onFinishedAutoplay(null);

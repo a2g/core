@@ -41,7 +41,7 @@ public interface IHostFromMasterPresenter {
 
 	void log(String message);
 
-	public AutoplayCommand getNextAutoplayAction();
+	public AutoplayCommand getNextAutoplayAction(IOnPreEntry api);
 
 	boolean isAutoplay();
 	

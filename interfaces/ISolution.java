@@ -6,4 +6,5 @@ public interface ISolution
 extends ConstantsForAPI
 {
 	AutoplayCommand getNext(int i);
+	void onPreEntry(IOnPreEntry api);
 }
