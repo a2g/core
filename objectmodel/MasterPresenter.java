@@ -781,7 +781,7 @@ PropertyChangeEventHandlerAPI
 		if(id==3)
 			return;
 		
-		AutoplayCommand cmd  = this.host.getNextAutoplayAction(null);
+		AutoplayCommand cmd  = this.host.getNextAutoplayAction(proxyForGameScene);
 		if(cmd==null)
 		{
 			host.onFinishedAutoplay(null);

@@ -7,7 +7,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
 
-public class AutoplayCommandQueue 
+public class AutoplayCommandQueue implements ISolution 
 {
 	Deque<ISolution> solutions;
 	Deque<AutoplayCommand> currentSet;
@@ -16,6 +16,7 @@ public class AutoplayCommandQueue
 	{
 		currentIndexIntoFirst = 0 ;
 		solutions = new ArrayDeque<ISolution>();
+		solutions.add(this);//this isn't a bug, we must do this
 		currentSet =  new LinkedList<AutoplayCommand>();
 	}
 	
@@ -24,7 +25,7 @@ public class AutoplayCommandQueue
 		solutions.add(sol);
 	}
 	
-	void getNextSet(AutoplayCommand a)
+	private void getNextSet(AutoplayCommand a)
 	{
 		if(a!=null&&a.getParent()!=null )
 		{
@@ -47,5 +48,20 @@ public class AutoplayCommandQueue
 		solutions.getFirst().onPreEntry(api);
 		currentIndexIntoFirst = 0;
 		return getNext(api);	
+	}
+
+	@Override
+	public AutoplayCommand getNext(int i) {
+		// this queue uses this as the getNect method
+		// of the first solution in Solutions.
+		// Thus triggering the second solution in solutions
+		// and the subsequent call to onPreEntry
+		return null;
+	}
+
+	@Override
+	public void onPreEntry(IOnPreEntry api) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -86,12 +86,12 @@ public class AutoplayCommand implements ConstantsForAPI
 	}
 
 	public AutoplayCommand walk(short obj, double x, double y) {
-		AutoplayCommand a = new AutoplayCommand(this, verb,obj,1,"vodd",x,y);
+		AutoplayCommand a = new AutoplayCommand(this, ConstantsForAPI.WALK,obj,1,"vodd",x,y);
 		return a;
 	}
 	
 	public AutoplayCommand walk(double x, double y) {
-		AutoplayCommand a = new AutoplayCommand(this, verb,1,1,"vdd",x,y);
+		AutoplayCommand a = new AutoplayCommand(this, ConstantsForAPI.WALK,1,1,"vdd",x,y);
 		return a;
 	}
 	
