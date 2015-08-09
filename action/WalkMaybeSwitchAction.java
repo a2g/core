@@ -38,8 +38,7 @@ public class WalkMaybeSwitchAction extends ChainEndAction{
 		super(parent);
 		this.ocode = ocode;
 		mover = new MovePerformer(ocode);
-		mover.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false)
-		
+		mover.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
 		switcher = new SwitchPerformer(ocode);
 		walker = new WalkPerformer(ocode);
 	}
@@ -51,17 +50,15 @@ public class WalkMaybeSwitchAction extends ChainEndAction{
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
 	{
 		mover.setScene(scene);
-		switcher.setScene(scene);
 		walker.setScene(scene);
+		switcher.setScene(scene);
 	}
-
 
 	@Override
 	public void runGameAction() {
 		switcher.run( );
 		double duration = mover.run();
 		walker.run(mover.getStartPt(), mover.getEndPt());
-
 		this.run((int) (duration * 1000.0));
 	}
 
@@ -83,7 +80,6 @@ public class WalkMaybeSwitchAction extends ChainEndAction{
 		boolean isExited = switcher.onComplete();
 		return isExited;
 	}
-	
 	void setEndX(double endX) {
 		mover.setEndX(endX);
 		switcher.setEndX(endX);

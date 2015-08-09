@@ -44,26 +44,21 @@ public class WalkAction extends ChainableAction{
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
 	{
-		walker.setScene(scene); 
 		mover.setScene(scene);
+		walker.setScene(scene);
 	}
-	
-	  
 
 	@Override
 	public void runGameAction() {
-		
 		double duration = mover.run();
 		walker.run(mover.getStartPt(), mover.getEndPt());
 		this.run((int) (duration * 1000.0));
-
 	}
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
 		PointF pt = mover.onUpdateCalculate(progress);
 		mover.onUpdateCalculate(progress, pt);
-		
 	}
 
 	@Override
@@ -73,10 +68,6 @@ public class WalkAction extends ChainableAction{
 		mover.onComplete();
 		return false;
 	}
-
-	 
-
-
 	void setEndX(double endX) {
 		mover.setEndX(endX);
 	}
