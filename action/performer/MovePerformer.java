@@ -111,7 +111,7 @@ public class MovePerformer
 		// Also, if we called change animation every update
 		// then we could get weird results, as frame number
 		// is clamped when we go from a long to a short animation.
-		scene.setAsACurrentAnimationByAtid(atid);
+		scene.setCurrentAnimationByAtid(atid);
 		
 		double duration = dist / screenCoordsPerSecond;
 		return duration;

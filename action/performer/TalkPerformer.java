@@ -126,7 +126,7 @@ public class TalkPerformer {
 				this.atidOfWhatItWasBeforeTalking = scene.getAtidOfCurrentAnimationByOtid(otid);
 				
 				// set new state
-				scene.setAsACurrentAnimationByAtid(atid);
+				scene.setCurrentAnimationByAtid(atid);
 				scene.setVisibleByOtid(otid, true);
 			}
 		}
@@ -169,7 +169,7 @@ public class TalkPerformer {
 	public boolean onComplete() {
 
 		if (this.otid != "") {
-			scene.setAsACurrentAnimationByAtid(atidOfWhatItWasBeforeTalking);
+			scene.setCurrentAnimationByAtid(atidOfWhatItWasBeforeTalking);
 			if(this.nonIncrementing != NonIncrementing.True)
 			{
 				scene.setCurrentFrameByOtid(otid, frameOfWhatItWasBeforeTalking);

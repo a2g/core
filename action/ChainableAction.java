@@ -291,7 +291,7 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 	}
 	@Override
 	public ChainableAction setInitialAnimation(String atid) {
-		SingleCallAction a =  new SingleCallAction(this, Type.SetAsInitialAnimation);
+		SingleCallAction a =  new SingleCallAction(this, Type.SetInitialAnimation);
 		a.setAtid(atid);
 		return a;
 	}

@@ -6,7 +6,7 @@ import com.github.a2g.core.interfaces.action.IGetBaseMiddleYByOtid;
 import com.github.a2g.core.interfaces.action.IGetNumberOfFramesByAtid;
 import com.github.a2g.core.interfaces.action.IGetOtidByCode;
 import com.github.a2g.core.interfaces.action.IGetScreenCoordsPerSecondByOtid;
-import com.github.a2g.core.interfaces.action.ISetAsACurrentAnimationByAtid;
+import com.github.a2g.core.interfaces.action.ICurrentAnimationByAtid;
 import com.github.a2g.core.interfaces.action.ISetBaseMiddleXByOtid;
 import com.github.a2g.core.interfaces.action.ISetBaseMiddleYByOtid;
 import com.github.a2g.core.interfaces.action.ISetCurrentFrameByOtid;
@@ -19,7 +19,7 @@ extends IGetOtidByCode
 , IGetBaseMiddleXByOtid
 , IGetBaseMiddleYByOtid
 , IGetScreenCoordsPerSecondByOtid
-, ISetAsACurrentAnimationByAtid 
+, ICurrentAnimationByAtid 
 , IGetNumberOfFramesByAtid
 , ISetBaseMiddleXByOtid 
 , ISetBaseMiddleYByOtid 

@@ -42,7 +42,7 @@ import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectCurrent;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectInitial;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsSceneTalker;
 import com.github.a2g.core.interfaces.game.ISetAnimationDuration; 
-import com.github.a2g.core.interfaces.game.ISetAsDefaultSceneObject;
+import com.github.a2g.core.interfaces.game.IDefaultSceneObject;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleY;
 import com.github.a2g.core.interfaces.game.ISetCurrentFrame;
@@ -95,7 +95,7 @@ IGetCurrentAnimation,
 IGetCurrentFrame,
 ISetCurrentFrame,
 ISetDisplayName,
-ISetAsDefaultSceneObject,
+IDefaultSceneObject,
 
 // animation
 IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation,
@@ -115,6 +115,6 @@ ISetInventoryItemVisible
 {
 
 	@Override
-	void setAsDefaultSceneObject(short harry2);
+	void setDefaultSceneObject(short harry2);
 
 }

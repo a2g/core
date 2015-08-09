@@ -65,7 +65,7 @@ public class WalkPerformer
 		}
 
 		// we've set it up now, pass to MoveWhilstAnimatingAction to execute
-		scene.setAsACurrentAnimationByAtid(anim);
+		scene.setCurrentAnimationByAtid(anim);
 
 	}
 

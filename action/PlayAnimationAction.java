@@ -54,7 +54,7 @@ public class PlayAnimationAction extends ChainableAction {
 				* lastFrame;
 
 		scene.setCurrentFrameByOtid(otid, (int) frame);
-		scene.setAsACurrentAnimationByAtid(atid);
+		scene.setCurrentAnimationByAtid(atid);
 		scene.setCurrentFrameByOtid(otid, (int) frame);
 	}
 

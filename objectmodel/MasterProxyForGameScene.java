@@ -191,7 +191,7 @@ IOnMovementBeyondAGate {
 	}
 
 	@Override
-	public void setAsDefaultSceneObject(short ocode) {
+	public void setDefaultSceneObject(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().setOtidOfDefaultSceneObject(otid);
 

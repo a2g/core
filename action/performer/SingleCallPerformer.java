@@ -34,7 +34,7 @@ public class SingleCallPerformer
 		, SetCurrentAnimation
 		, SetVisible
 		, SetDisplayName
-		, SetAsInitialAnimation
+		, SetInitialAnimation
 		, ShareWinning
 		, SetValue
 		, SetToInitialPosition
@@ -119,7 +119,7 @@ public class SingleCallPerformer
 			}
 			return false;
 		case SetCurrentAnimation:
-			scene.setAsACurrentAnimationByAtid(atid);
+			scene.setCurrentAnimationByAtid(atid);
 			return false;
 		case SetVisible:
 			otid = scene.getOtidByCode(ocode);
@@ -129,8 +129,8 @@ public class SingleCallPerformer
 			otid = scene.getOtidByCode(ocode);
 			scene.setDisplayNameByOtid(otid, this.stringValue);
 			return false;
-		case SetAsInitialAnimation:
-			scene.setAsAnInitialAnimationByAtid(atid);
+		case SetInitialAnimation:
+			scene.setInitialAnimationByAtid(atid);
 			return false;
 		case SetValue:
 			scene.setValue(stringValue, intValue);

@@ -5,8 +5,8 @@ import com.github.a2g.core.interfaces.action.IGetOtidByCode;
 import com.github.a2g.core.interfaces.action.IGetOtidByIndex;
 import com.github.a2g.core.interfaces.action.IGetSceneObjectCount;
 import com.github.a2g.core.interfaces.action.ISetAnimationAsObjectSpecial;
-import com.github.a2g.core.interfaces.action.ISetAsACurrentAnimationByAtid;
-import com.github.a2g.core.interfaces.action.ISetAsAnInitialAnimationByAtid;
+import com.github.a2g.core.interfaces.action.ICurrentAnimationByAtid;
+import com.github.a2g.core.interfaces.action.ISetInitialAnimationByAtid;
 import com.github.a2g.core.interfaces.action.ISetBaseMiddleXByOtid;
 import com.github.a2g.core.interfaces.action.ISetBaseMiddleYByOtid;
 import com.github.a2g.core.interfaces.action.ISetCurrentAnimationAndFrame;
@@ -29,9 +29,9 @@ ISetBaseMiddleXByOtid
 , IGetOtidByIndex
 , ISetVisibleByOtid
 , IGetSceneObjectCount
-, ISetAsACurrentAnimationByAtid 
+, ICurrentAnimationByAtid 
 , ISetDisplayNameByOtid
-, ISetAsAnInitialAnimationByAtid
+, ISetInitialAnimationByAtid
 , ISetXByOtid
 , ISetYByOtid 
 , ISetValue

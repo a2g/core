@@ -133,7 +133,7 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	}
 
 	@Override
-	public void setAsACurrentAnimationByAtid(String atid) {
+	public void setCurrentAnimationByAtid(String atid) {
 		String otid = getOtidByAtid(atid);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setCurrentAnimation(atid);
@@ -228,7 +228,7 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	}
 
 	@Override
-	public void setAsAnInitialAnimationByAtid(String atid) {
+	public void setInitialAnimationByAtid(String atid) {
 		String otid = getOtidByAtid(atid);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setInitialAnimation(atid);

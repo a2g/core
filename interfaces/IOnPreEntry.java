@@ -45,7 +45,7 @@ import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectSpecial;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsSceneTalker;
 import com.github.a2g.core.interfaces.game.ISetAnimationDuration;
 import com.github.a2g.core.interfaces.game.ISetAnimationMaxTalkRect;
-import com.github.a2g.core.interfaces.game.ISetAsDefaultSceneObject;
+import com.github.a2g.core.interfaces.game.IDefaultSceneObject;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleY;
 import com.github.a2g.core.interfaces.game.ISetDisplayName;
@@ -119,7 +119,7 @@ ISetAnimationAsSceneTalker,
 ISetAnimationAsObjectCurrent,
 ISetAnimationDuration,
 ISetAnimationAsObjectSpecial, 
-ISetAsDefaultSceneObject,
+IDefaultSceneObject,
 ISetAnimationAsObjectCurrentAndSetFrame,
 ISetAnimationAsSceneAsker,
 ISetAnimationAsSceneAnswerer,

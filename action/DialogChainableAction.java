@@ -93,7 +93,7 @@ implements IChainRootForDialog
 	@Override
 	public DialogChainableAction setInitialAnimation(String atid)
 	{
-		DialogTreeSingleCallAction a =  new DialogTreeSingleCallAction(this, Type.SetAsInitialAnimation);
+		DialogTreeSingleCallAction a =  new DialogTreeSingleCallAction(this, Type.SetInitialAnimation);
 		a.setAtid(atid);
 		return a;
 	}

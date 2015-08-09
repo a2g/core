@@ -8,7 +8,7 @@ import com.github.a2g.core.interfaces.action.IGetCurrentFrameByOtid;
 import com.github.a2g.core.interfaces.action.IGetDurationByAtid;
 import com.github.a2g.core.interfaces.action.IGetNumberOfFramesByAtid;
 import com.github.a2g.core.interfaces.action.IGetOtidByAtid;
-import com.github.a2g.core.interfaces.action.ISetAsACurrentAnimationByAtid;
+import com.github.a2g.core.interfaces.action.ICurrentAnimationByAtid;
 import com.github.a2g.core.interfaces.action.ISetCurrentFrameByOtid;
 import com.github.a2g.core.interfaces.action.ISetStateOfPopup;
 import com.github.a2g.core.interfaces.action.ISetToInitialAnimationWithoutChangingFrameByOtid;
@@ -21,7 +21,7 @@ extends ISetStateOfPopup
 , ISetVisibleByOtid
 , ISetCurrentFrameByOtid
 , ISetToInitialAnimationWithoutChangingFrameByOtid
-, ISetAsACurrentAnimationByAtid
+, ICurrentAnimationByAtid
 , IGetOtidByAtid
 , IGetAtidOfSceneTalker
 , IGetAtidOfSceneAsker
