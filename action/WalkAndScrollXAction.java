@@ -35,7 +35,7 @@ public class WalkAndScrollXAction extends ChainableAction{
 	public WalkAndScrollXAction(BaseAction parent, short ocode) {
 		super(parent);
 		mover = new MovePerformer(ocode);
-		mover.setToInitialAtEnd(true);// walk always does this
+		mover.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false)
 		
 		walker = new WalkPerformer(ocode);
 		scroller = new ScrollPerformer();

@@ -38,7 +38,7 @@ public class WalkMaybeSwitchAction extends ChainEndAction{
 		super(parent);
 		this.ocode = ocode;
 		mover = new MovePerformer(ocode);
-		mover.setToInitialAtEnd(true);// walk always does this
+		mover.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false)
 		
 		switcher = new SwitchPerformer(ocode);
 		walker = new WalkPerformer(ocode);
@@ -93,9 +93,4 @@ public class WalkMaybeSwitchAction extends ChainEndAction{
 		mover.setEndY(endY);
 		switcher.setEndY(endY);
 	}
- 
-	public void setToInitialAtEnd(boolean setToInitialAtEnd) 
-	{
-		mover.setToInitialAtEnd(setToInitialAtEnd);
-	}
-}
+ }

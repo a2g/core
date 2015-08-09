@@ -37,7 +37,7 @@ public class WalkAndTalkAction extends ChainableAction{
 	public WalkAndTalkAction(BaseAction parent, short ocode, String speech) {
 		super(parent);
 		mover = new MovePerformer(ocode);
-		mover.setToInitialAtEnd(true);// walk always does this
+		mover.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false)
 		walker = new WalkPerformer(ocode);
 		talker = new TalkPerformer(TalkPerformer.SCENE_TALKER, speech);
 	}
@@ -97,17 +97,10 @@ public class WalkAndTalkAction extends ChainableAction{
 		mover.setEndY(endY);
 	}
 
-
-
-
 	public void setScene(IScenePresenterFromMoveAction scene) {
 		mover.setScene(scene);
 	}
 
-	public void setToInitialAtEnd(boolean isSetToInitialAtEnd) {
-		mover.setToInitialAtEnd(isSetToInitialAtEnd);
-		
-	}
 
 	public void setNonIncrementing(NonIncrementing value) {
 		talker.setNonIncrementing(value);
