@@ -78,7 +78,7 @@ PropertyChangeEventHandlerAPI
 , IMasterPresenterFromBoundaryCalculator
 {
 	private static final Logger LOADING = Logger.getLogger(LogNames.LOADING);
-	private static final Logger COMMAND_AUTOPLAY = Logger.getLogger(LogNames.COMMAND_AUTOPLAY);
+	private static final Logger COMMAND_AUTOPLAY = Logger.getLogger(LogNames.COMMANDS_AUTOPLAY);
 	
 	MasterProxyForGameScene proxyForGameScene;
 	private CommandLinePresenter commandLinePresenter;

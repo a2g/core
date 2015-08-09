@@ -33,6 +33,9 @@ import com.github.a2g.core.primitive.LogNames;
 public class ActionRunner implements IActionRunnerFromBaseAction {
 
 	private static final Logger RUNNER = Logger.getLogger(LogNames.RUNNER);
+	private static final Logger ACTIONS_EXECUTED = Logger.getLogger(LogNames.ACTIONS_EXECUTED);
+	
+	
 	private static final Logger RUNNER_REFCOUNT = Logger.getLogger(LogNames.RUNNER_REFCOUNT);
 	
 	protected ArrayList<ArrayList<BaseAction>> list;
@@ -139,13 +142,15 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 			BaseAction a = this.parallelActionsToWaitFor.get(i);
 
 			String name = a.toString();
-			if(name.startsWith("com.github.a2g.core.action.MakeSingleCallAction"))
+			String prefix = "com.github.a2g.core.action.";
+			name = name.substring(prefix.length());
+			if(name.startsWith("MakeSingleCallAction"))
 			{
 				SingleCallAction b = (SingleCallAction)a;
 				name = b.getType().toString();
 			}
 			RUNNER.log( Level.FINE, "execute parallel actions "+i+" "+name );
-
+			ACTIONS_EXECUTED.log(Level.FINE, name);
 			a.setCallbacks(this);
 			
 			a.setSystemAnimation(factory.createSystemAnimation(a));
