@@ -169,7 +169,7 @@ public class ScenePresenter implements IScenePresenter {
 			String a = o.getCurrentAnimation();
 			return a;
 		}
-		return "getAtidOfCurrentAnimationByOtid couldn't find current animation";
+		return "getAtidOfCurrentAnimationByOtid couldn't find otid for <"+otid+">";
 	}
 
 	public void setOtidOfDefaultSceneObject(String otid) {
@@ -221,6 +221,7 @@ public class ScenePresenter implements IScenePresenter {
 	public double getXByOtid(String otid) {
 		return this.scene.objectCollection().getByOtid(otid).getX();
 	}
+	
 
 	@Override
 	public double getYByOtid(String otid) {
@@ -315,4 +316,15 @@ public class ScenePresenter implements IScenePresenter {
 		}
 		return toReturn;
 	}
+
+	public int getExistingPrefixIfAvailable(short ocode, int numberPrefix) {
+		SceneObject o = this.getObjectByOCode(ocode);
+		if(o!=null)
+		{
+			return o.getNumberPrefix();
+		}
+		return numberPrefix;
+	}
+
+	
 };

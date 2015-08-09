@@ -39,8 +39,8 @@ public class WalkMaybeSwitchAction extends ChainEndAction{
 		this.ocode = ocode;
 		mover = new MovePerformer(ocode);
 		mover.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
-		switcher = new SwitchPerformer(ocode);
 		walker = new WalkPerformer(ocode);
+		switcher = new SwitchPerformer(ocode);
 	}
 
 	@Override
@@ -76,7 +76,10 @@ public class WalkMaybeSwitchAction extends ChainEndAction{
 	@Override
 	protected boolean onCompleteGameAction() { 
 		onUpdateGameAction(1.0);
-		mover.onComplete();
+		if(!switcher.isStopped())//<- this line is crucial or man will slide in initial pos. Not sure why, I think its in the scenario where switcher starts destroying the scene first?
+		{
+			mover.onComplete();
+		}
 		boolean isExited = switcher.onComplete();
 		return isExited;
 	}

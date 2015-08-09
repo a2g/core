@@ -219,11 +219,7 @@ PropertyChangeEventHandlerAPI
 				scenePresenter.getSceneGuiHeight());
 
 		// if its adding an animation to an existing object then use preceding.
-		SceneObject o = scenePresenter.getObjectByOtid(otid);
-		if(o!=null)
-		{
-			numberPrefix = o.getNumberPrefix();
-		}
+		numberPrefix = scenePresenter.getExistingPrefixIfAvailable(ocode, numberPrefix);
 		
 		int before = insertionPointCalculator.getIndexToInsertAt(numberPrefix);
 		insertionPointCalculator.updateTheListOfIndexesToInsertAt(numberPrefix);
@@ -589,8 +585,13 @@ PropertyChangeEventHandlerAPI
 			String otid = srcObject.getOtid();
 			int prefix = srcObject.getNumberPrefix();
 			short ocode = srcObject.getOCode();
-			SceneObject destObject = ours.getByOtid(otid);
-			if (destObject == null) {
+			SceneObject destObject = null;
+			int index = ours.getIndexByOtid(otid);
+			if (index != -1) {
+				destObject = ours.getByIndex(index);
+			}
+			else
+			{
 				destObject = new SceneObject(otid,
 						scenePresenter.getSceneGuiWidth(),
 						scenePresenter.getSceneGuiHeight());
@@ -697,6 +698,8 @@ PropertyChangeEventHandlerAPI
 
 	SentenceItem getSIOfObject(int code)
 	{
+		if(code==1)
+			return new SentenceItem();
 		if(SentenceItem.isInventory(code))
 		{
 			InventoryItem i = this.getInventoryPresenter().getInventoryItemByICode(code);

@@ -37,10 +37,12 @@ public class LoadedLoad {
 			short objectCode, String objPlusAnimCode, int screenPixelWidth,
 			int screenPixelHeight) {
 		// objects and animations
-		SceneObject sceneObject = this.getSceneObjectCollection().getByOtid(
+		int index = this.getSceneObjectCollection().getIndexByOtid(
 				objectTextualId);
-
-		if (sceneObject == null) {
+		SceneObject sceneObject = null;
+		if (index != -1) {
+			sceneObject = getSceneObjectCollection().getByIndex(index);
+		}else{
 			sceneObject = new SceneObject(objectTextualId, screenPixelWidth,
 					screenPixelHeight);
 			sceneObject.setNumberPrefix(prefix);

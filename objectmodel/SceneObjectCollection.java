@@ -78,10 +78,20 @@ public class SceneObjectCollection {
 			throw new NoSuchElementException();
 		return list.get(index);
 	}
+	
 
 	public SceneObject getByOtid(String otid) {
 		int i = this.theOtids.indexOf(otid);
+		if(i==-1)
+		{
+			throw new NoSuchElementException();
+		}
 		return this.getByIndex(i);
+	}
+	
+	public int getIndexByOtid(String otid) {
+		int index = this.theOtids.indexOf(otid);
+		return index;
 	}
 
 	public SceneObject getByOCode(Short ocode) {
@@ -100,7 +110,7 @@ public class SceneObjectCollection {
 			// first param is name, second is parent;
 			anim = new Animation("", null);
 			this.theAtidMap.put(atid, anim);
-			ADDING_ANIM_TO_SOC_MAP.log(Level.FINE, "getAnimationBy " +atid);
+			ADDING_ANIM_TO_SOC_MAP.log(Level.FINE, "getAnimationBy <" +atid +">");
 			throw new NoSuchElementException("Animation getAnimationByAtid");
 			
 		}
@@ -114,5 +124,7 @@ public class SceneObjectCollection {
 			ADDING_ANIM_TO_SOC_MAP.log(Level.FINE, "addAnimation " +atid);
 		}
 	}
+
+	
 
 }
