@@ -20,11 +20,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.github.a2g.core.interfaces.IScenePresenterFromMovePerformer;
+import com.github.a2g.core.interfaces.performer.IMovePerformer;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointF;
 
 
-public class MovePerformer
+public class MovePerformer implements IMovePerformer
 {	
 	private static final Logger MOVE = Logger.getLogger(LogNames.MOVE);
 	
@@ -56,14 +57,17 @@ public class MovePerformer
 
 	 
 
+	@Override
 	public void setEndX(double endX) {
 		this.endX = endX;
 	}
 
+	@Override
 	public void setEndY(double endY) {
 		this.endY = endY;
 	}
 
+	@Override
 	public void setToInitialAtEnd(boolean setToInitialAtEnd) {
 		this.setToInitialAtEnd = setToInitialAtEnd;
 	}
@@ -78,6 +82,7 @@ public class MovePerformer
 	}
 	
 
+	@Override
 	public double run() {
 		String otid =  scene.getOtidByCode(ocode);
 		
@@ -118,6 +123,7 @@ public class MovePerformer
 
 	}
 
+	@Override
 	public PointF onUpdateCalculate(double progress) {
 		if (progress > 0 && progress < 1) {
 
@@ -130,6 +136,8 @@ public class MovePerformer
 		
 		return new PointF(x,y);
 	}
+	
+	@Override
 	public void onUpdateCalculate(double progress, PointF pt) {
 		String otid = scene.getOtidByCode(ocode);
 		String atid = scene.getAtidOfCurrentAnimationByOtid(otid);
@@ -150,6 +158,7 @@ public class MovePerformer
 		scene.setCurrentFrameByOtid(otid, frameToSetTo);
 	}
 
+	@Override
 	public void onComplete() {
 		String otid = scene.getOtidByCode(ocode);
 		if (setToInitialAtEnd == true) {
@@ -159,14 +168,17 @@ public class MovePerformer
 		}
 	}
 
+	@Override
 	public void setScene(IScenePresenterFromMovePerformer scene) {
 		this.scene = scene;
 	}
 
+	@Override
 	public PointF getStartPt() {
 		return new PointF(startX,startY);
 	}
 
+	@Override
 	public PointF getEndPt() {
 		return new PointF(endX,endY);
 	}

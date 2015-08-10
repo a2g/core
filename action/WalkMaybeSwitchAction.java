@@ -25,22 +25,25 @@ import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
+import com.github.a2g.core.interfaces.performer.IMovePerformer;
+import com.github.a2g.core.interfaces.performer.ISwitchPerformer;
+import com.github.a2g.core.interfaces.performer.IWalkPerformer;
 import com.github.a2g.core.primitive.PointF;
 
 public class WalkMaybeSwitchAction extends ChainEndAction{
 
-	MovePerformer mover;
-	SwitchPerformer switcher;
-	WalkPerformer walker;
+	IMovePerformer mover;
+	ISwitchPerformer switcher;
+	IWalkPerformer walker;
 	short ocode;
 
-	public WalkMaybeSwitchAction(BaseAction parent, short ocode) {
+	public WalkMaybeSwitchAction(BaseAction parent, IMovePerformer m, IWalkPerformer w, ISwitchPerformer s) {
 		super(parent);
 		this.ocode = ocode;
-		mover = new MovePerformer(ocode);
+		mover = m;
 		mover.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
-		walker = new WalkPerformer(ocode);
-		switcher = new SwitchPerformer(ocode);
+		walker = w;
+		switcher = s;
 	}
 
 	@Override

@@ -17,9 +17,10 @@
 package com.github.a2g.core.action.performer;
 
 import com.github.a2g.core.interfaces.IScenePresenterFromSwitchPerformer;
+import com.github.a2g.core.interfaces.performer.ISwitchPerformer;
 import com.github.a2g.core.primitive.PointF;
 
-public class SwitchPerformer 
+public class SwitchPerformer implements ISwitchPerformer
 {
 	private IScenePresenterFromSwitchPerformer scene;
 
@@ -46,11 +47,12 @@ public class SwitchPerformer
 	}
 
 
-
+	@Override
 	public void setEndX(double endX) {
 		this.endX = endX;
 	}
 
+	@Override
 	public void setEndY(double endY) {
 		this.endY = endY;
 	}
@@ -72,6 +74,7 @@ public class SwitchPerformer
 	}
 
 
+	@Override
 	public void run( ) {
 		String otid = scene.getOtidByCode(ocode);
 		startX = scene.getBaseMiddleXByOtid(otid);
@@ -83,6 +86,7 @@ public class SwitchPerformer
 			endY = startY;
     }
 
+	@Override
 	public void onUpdate(double progress) {
 		if (isStopped)
 			return;
@@ -112,7 +116,7 @@ public class SwitchPerformer
 
 	}
 
-	// method in animation
+	@Override
 	public boolean onComplete() { 
 		
 		if (scene.isInANoGoZone(new PointF(endX, endY))) {
@@ -125,10 +129,12 @@ public class SwitchPerformer
 		return isExitedThruGate;
 	}
 
+	@Override
 	public void setScene(IScenePresenterFromSwitchPerformer scene) {
 		this.scene = scene;
 	}
 
+	@Override
 	public boolean isStopped() {
 		return isStopped;
 	}

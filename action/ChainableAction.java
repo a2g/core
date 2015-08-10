@@ -20,8 +20,11 @@ import com.github.a2g.core.action.PlayAnimationAction;
 import com.github.a2g.core.action.ActivateDialogTreeModeAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkAction;
+import com.github.a2g.core.action.performer.MovePerformer;
 import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
+import com.github.a2g.core.action.performer.SwitchPerformer;
 import com.github.a2g.core.action.performer.TalkPerformer;
+import com.github.a2g.core.action.performer.WalkPerformer;
 import com.github.a2g.core.interfaces.IChainRootForScene;
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IGameScene;
@@ -314,8 +317,11 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 	}
 	@Override
 	public ChainEndAction walkTo(PointF end) {
-		WalkMaybeSwitchAction a = new WalkMaybeSwitchAction(this,
-				ScenePresenter.DEFAULT_SCENE_OBJECT);
+		short dso = ScenePresenter.DEFAULT_SCENE_OBJECT;
+		MovePerformer m = new MovePerformer(dso);
+		WalkPerformer w = new WalkPerformer(dso);
+		SwitchPerformer s = new SwitchPerformer(dso);
+		WalkMaybeSwitchAction a = new WalkMaybeSwitchAction(this, m,w,s);
 		a.setEndX(end.getX());
 		a.setEndY(end.getY());
 		return a;

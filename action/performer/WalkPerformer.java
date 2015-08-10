@@ -18,10 +18,11 @@ package com.github.a2g.core.action.performer;
 
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.interfaces.IScenePresenterFromWalkPerformer;
+import com.github.a2g.core.interfaces.performer.IWalkPerformer;
 import com.github.a2g.core.primitive.PointF;
 
 
-public class WalkPerformer
+public class WalkPerformer implements IWalkPerformer
 {	
 	private IScenePresenterFromWalkPerformer scene;
 	private short ocode;
@@ -32,6 +33,7 @@ public class WalkPerformer
 		this.ocode = ocode;
 	}
 	
+	@Override
 	public void run( PointF startPt, PointF endPt) 
 	{
 		assert(scene!=null);
@@ -69,6 +71,7 @@ public class WalkPerformer
 
 	}
 
+	@Override
 	public void setScene(IScenePresenterFromWalkPerformer scene) {
 		this.scene = scene;
 	}
