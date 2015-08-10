@@ -20,17 +20,17 @@ import com.github.a2g.core.interfaces.IScenePresenterFromSwitchPerformer;
 
 public interface ISwitchPerformer{
 
-	boolean onComplete();
+	boolean onCompleteForSwitch();
 
-	void onUpdate(double progress);
+	void onUpdateForSwitch(double progress);
 
-	void run();
+	void runForSwitch();
 
-	boolean isStopped();
+	boolean isStoppedForSwitch();
 
-	void setEndX(double endX);
+	void setEndXForSwitch(double endX);
 
-	void setEndY(double endY);
+	void setEndYForSwitch(double endY);
 
-	void setScene(IScenePresenterFromSwitchPerformer scene);
+	void setSceneForSwitch(IScenePresenterFromSwitchPerformer scene);
 }

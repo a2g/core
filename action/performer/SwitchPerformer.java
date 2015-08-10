@@ -48,12 +48,12 @@ public class SwitchPerformer implements ISwitchPerformer
 
 
 	@Override
-	public void setEndX(double endX) {
+	public void setEndXForSwitch(double endX) {
 		this.endX = endX;
 	}
 
 	@Override
-	public void setEndY(double endY) {
+	public void setEndYForSwitch(double endY) {
 		this.endY = endY;
 	}
 
@@ -75,7 +75,7 @@ public class SwitchPerformer implements ISwitchPerformer
 
 
 	@Override
-	public void run( ) {
+	public void runForSwitch( ) {
 		String otid = scene.getOtidByCode(ocode);
 		startX = scene.getBaseMiddleXByOtid(otid);
 		startY = scene.getBaseMiddleYByOtid(otid);
@@ -87,7 +87,7 @@ public class SwitchPerformer implements ISwitchPerformer
     }
 
 	@Override
-	public void onUpdate(double progress) {
+	public void onUpdateForSwitch(double progress) {
 		if (isStopped)
 			return;
 		if (progress > 0 && progress < 1) {
@@ -117,7 +117,7 @@ public class SwitchPerformer implements ISwitchPerformer
 	}
 
 	@Override
-	public boolean onComplete() { 
+	public boolean onCompleteForSwitch() { 
 		
 		if (scene.isInANoGoZone(new PointF(endX, endY))) {
 			if(!isStopped)
@@ -130,12 +130,12 @@ public class SwitchPerformer implements ISwitchPerformer
 	}
 
 	@Override
-	public void setScene(IScenePresenterFromSwitchPerformer scene) {
+	public void setSceneForSwitch(IScenePresenterFromSwitchPerformer scene) {
 		this.scene = scene;
 	}
 
 	@Override
-	public boolean isStopped() {
+	public boolean isStoppedForSwitch() {
 		return isStopped;
 	}
 

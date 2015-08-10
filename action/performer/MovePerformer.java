@@ -58,17 +58,17 @@ public class MovePerformer implements IMovePerformer
 	 
 
 	@Override
-	public void setEndX(double endX) {
+	public void setEndXForMover(double endX) {
 		this.endX = endX;
 	}
 
 	@Override
-	public void setEndY(double endY) {
+	public void setEndYForMover(double endY) {
 		this.endY = endY;
 	}
 
 	@Override
-	public void setToInitialAtEnd(boolean setToInitialAtEnd) {
+	public void setToInitialAtEndForMover(boolean setToInitialAtEnd) {
 		this.setToInitialAtEnd = setToInitialAtEnd;
 	}
   
@@ -83,7 +83,7 @@ public class MovePerformer implements IMovePerformer
 	
 
 	@Override
-	public double run() {
+	public double runForMover() {
 		String otid =  scene.getOtidByCode(ocode);
 		
 		String atid = scene.getAtidOfCurrentAnimationByOtid(otid);
@@ -124,7 +124,7 @@ public class MovePerformer implements IMovePerformer
 	}
 
 	@Override
-	public PointF onUpdateCalculate(double progress) {
+	public PointF onUpdateCalculateForMover(double progress) {
 		if (progress > 0 && progress < 1) {
 
 			progress = progress * 1.0;
@@ -138,7 +138,7 @@ public class MovePerformer implements IMovePerformer
 	}
 	
 	@Override
-	public void onUpdateCalculate(double progress, PointF pt) {
+	public void onUpdateCalculateForMover(double progress, PointF pt) {
 		String otid = scene.getOtidByCode(ocode);
 		String atid = scene.getAtidOfCurrentAnimationByOtid(otid);
 		
@@ -159,7 +159,7 @@ public class MovePerformer implements IMovePerformer
 	}
 
 	@Override
-	public void onComplete() {
+	public void onCompleteForMover() {
 		String otid = scene.getOtidByCode(ocode);
 		if (setToInitialAtEnd == true) {
 			if (otid != null) {
@@ -169,17 +169,17 @@ public class MovePerformer implements IMovePerformer
 	}
 
 	@Override
-	public void setScene(IScenePresenterFromMovePerformer scene) {
+	public void setSceneForMover(IScenePresenterFromMovePerformer scene) {
 		this.scene = scene;
 	}
 
 	@Override
-	public PointF getStartPt() {
+	public PointF getStartPtForMover() {
 		return new PointF(startX,startY);
 	}
 
 	@Override
-	public PointF getEndPt() {
+	public PointF getEndPtForMover() {
 		return new PointF(endX,endY);
 	}
 

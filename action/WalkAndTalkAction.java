@@ -37,7 +37,7 @@ public class WalkAndTalkAction extends ChainableAction{
 	public WalkAndTalkAction(BaseAction parent, short ocode, String speech) {
 		super(parent);
 		mover = new MovePerformer(ocode);
-		mover.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false)
+		mover.setToInitialAtEndForMover(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false)
 		walker = new WalkPerformer(ocode);
 		talker = new TalkPerformer(TalkPerformer.SCENE_TALKER, speech);
 	}
@@ -48,8 +48,8 @@ public class WalkAndTalkAction extends ChainableAction{
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
 	{
-		walker.setScene(scene); 
-		mover.setScene(scene);
+		walker.setSceneForWalk(scene); 
+		mover.setSceneForMover(scene);
 		talker.setScene(scene);
 		talker.setMaster(master);
 	}
@@ -62,8 +62,8 @@ public class WalkAndTalkAction extends ChainableAction{
 		// sets some non-walking animation..
 		// but we want the walk animation set.
 		talker.run();
-		double duration = mover.run();
-		walker.run(mover.getStartPt(), mover.getEndPt());
+		double duration = mover.runForMover();
+		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
 		
 		this.run((int) (duration * 1000.0));
 
@@ -71,8 +71,8 @@ public class WalkAndTalkAction extends ChainableAction{
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		PointF pt = mover.onUpdateCalculate(progress);
-		mover.onUpdateCalculate(progress, pt);
+		PointF pt = mover.onUpdateCalculateForMover(progress);
+		mover.onUpdateCalculateForMover(progress, pt);
 		//talker.onUpdate(progress);
 		
 	}
@@ -82,7 +82,7 @@ public class WalkAndTalkAction extends ChainableAction{
 	protected boolean onCompleteGameAction() { 
 		onUpdateGameAction(1.0);
 		talker.onComplete();
-		mover.onComplete();
+		mover.onCompleteForMover();
 		return false;
 	}
 
@@ -90,15 +90,15 @@ public class WalkAndTalkAction extends ChainableAction{
 
 
 	void setEndX(double endX) {
-		mover.setEndX(endX);
+		mover.setEndXForMover(endX);
 	}
 
 	void setEndY(double endY) {
-		mover.setEndY(endY);
+		mover.setEndYForMover(endY);
 	}
 
 	public void setScene(IScenePresenterFromMoveAction scene) {
-		mover.setScene(scene);
+		mover.setSceneForMover(scene);
 	}
 
 

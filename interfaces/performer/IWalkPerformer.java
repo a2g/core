@@ -22,8 +22,8 @@ import com.github.a2g.core.primitive.PointF;
 public interface IWalkPerformer
 {
 
-	void run(PointF startPt, PointF endPt);
+	void runForWalk(PointF startPt, PointF endPt);
  
-	void setScene(IScenePresenterFromWalkPerformer scene);
+	void setSceneForWalk(IScenePresenterFromWalkPerformer scene);
 
 }

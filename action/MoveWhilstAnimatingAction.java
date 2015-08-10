@@ -40,12 +40,12 @@ public class MoveWhilstAnimatingAction extends ChainableAction{
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
 	{
-		mover.setScene(scene);
+		mover.setSceneForMover(scene);
 	}
 	
 	@Override
 	public void runGameAction() {
-		double duration = mover.run();
+		double duration = mover.runForMover();
 		
 		this.run((int) (duration * 1000.0));
 
@@ -53,25 +53,25 @@ public class MoveWhilstAnimatingAction extends ChainableAction{
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		PointF pt = mover.onUpdateCalculate(progress);
-		mover.onUpdateCalculate(progress, pt);
+		PointF pt = mover.onUpdateCalculateForMover(progress);
+		mover.onUpdateCalculateForMover(progress, pt);
 	}
 
 	@Override
 	// method in animation
 	protected boolean onCompleteGameAction() { 
 		onUpdateGameAction(1.0);
-		mover.onComplete();
+		mover.onCompleteForMover();
 		return false;
 	}
 
 
 	void setEndX(double endX) {
-		mover.setEndX(endX);
+		mover.setEndXForMover(endX);
 	}
 
 	void setEndY(double endY) {
-		mover.setEndY(endY);
+		mover.setEndYForMover(endY);
 	}
 
 	 

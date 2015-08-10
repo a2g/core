@@ -21,29 +21,24 @@ import com.github.a2g.core.primitive.PointF;
 
 public interface IMovePerformer {
 
-	double run();
+	double runForMover();
 
+	void onCompleteForMover();
 
-	void onComplete();
+	void setToInitialAtEndForMover(boolean isSetToInitialAtEnd);
 
-	void setToInitialAtEnd(boolean isSetToInitialAtEnd);
+	PointF getEndPtForMover();
 
-	PointF getEndPt();
+	PointF getStartPtForMover();
 
-	PointF getStartPt();
+	PointF onUpdateCalculateForMover(double progress);
 
+	void onUpdateCalculateForMover(double progress, PointF pt);
 
-	PointF onUpdateCalculate(double progress);
+	void setEndXForMover(double endX);
 
+	void setEndYForMover(double endY);
 
-	void onUpdateCalculate(double progress, PointF pt);
-
-
-	void setEndX(double endX);
-
-
-	void setEndY(double endY);
-
-	void setScene(IScenePresenterFromMovePerformer scene);
+	void setSceneForMover(IScenePresenterFromMovePerformer scene);
 
 }

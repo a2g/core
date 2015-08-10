@@ -42,10 +42,10 @@ public class TitleCardAction extends ChainableAction {
 					.getPopupDisplayDuration() * 1000;
 
 			titleCard.displayTitleCard(stringValue);
-			super.run( (int) totalInMilliseconds);
+			this.run( (int) totalInMilliseconds);
 		} else {
 			titleCard.displayTitleCard("");
-			super.run(1);
+			this.run(1);
 		}
 	}
 

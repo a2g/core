@@ -43,14 +43,14 @@ public class MoveMaybeSwitchWhilstAnimatingAction extends ChainEndAction{
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
 	{
-		mover.setScene(scene);
-		switcher.setScene(scene);
+		mover.setSceneForMover(scene);
+		switcher.setSceneForSwitch(scene);
 	}
 
 	@Override
 	public void runGameAction() {
-		switcher.run();
-		double duration = mover.run();
+		switcher.runForSwitch();
+		double duration = mover.runForMover();
 
 		this.run((int) (duration * 1000.0));
 
@@ -60,19 +60,19 @@ public class MoveMaybeSwitchWhilstAnimatingAction extends ChainEndAction{
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		PointF pt = mover.onUpdateCalculate(progress);
-		switcher.onUpdate(progress);
-		if(switcher.isStopped()) 
+		PointF pt = mover.onUpdateCalculateForMover(progress);
+		switcher.onUpdateForSwitch(progress);
+		if(switcher.isStoppedForSwitch()) 
 			return;
-		mover.onUpdateCalculate(progress, pt);
+		mover.onUpdateCalculateForMover(progress, pt);
 	}
 
 	@Override
 	// method in animation
 	protected boolean onCompleteGameAction() { 
 		onUpdateGameAction(1.0);
-		mover.onComplete();
-		boolean isExited = switcher.onComplete();
+		mover.onCompleteForMover();
+		boolean isExited = switcher.onCompleteForSwitch();
 		return isExited;
 	}
 

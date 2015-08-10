@@ -19,10 +19,10 @@ import com.github.a2g.core.primitive.PointF;
 
 public interface IScrollPerformer {
 
-	void run(PointF start, PointF end);
+	void runForScroll(PointF start, PointF end);
 
-	void onUpdate(double progress);
+	void onUpdateForScroll(double progress);
 
-	void onComplete();
+	void onCompleteForScroll();
 
 }

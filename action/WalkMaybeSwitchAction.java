@@ -30,20 +30,18 @@ import com.github.a2g.core.interfaces.performer.ISwitchPerformer;
 import com.github.a2g.core.interfaces.performer.IWalkPerformer;
 import com.github.a2g.core.primitive.PointF;
 
-public class WalkMaybeSwitchAction extends ChainEndAction{
-
+public class WalkMaybeSwitchAction extends ChainEndAction
+{
 	IMovePerformer mover;
 	ISwitchPerformer switcher;
 	IWalkPerformer walker;
-	short ocode;
 
 	public WalkMaybeSwitchAction(BaseAction parent, IMovePerformer m, IWalkPerformer w, ISwitchPerformer s) {
 		super(parent);
-		this.ocode = ocode;
-		mover = m;
-		mover.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
 		walker = w;
 		switcher = s;
+		mover = m;
+		mover.setToInitialAtEndForMover(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
 	}
 
 	@Override
@@ -52,16 +50,16 @@ public class WalkMaybeSwitchAction extends ChainEndAction{
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
 	{
-		mover.setScene(scene);
-		walker.setScene(scene);
-		switcher.setScene(scene);
+		mover.setSceneForMover(scene);
+		walker.setSceneForWalk(scene);
+		switcher.setSceneForSwitch(scene);
 	}
 
 	@Override
 	public void runGameAction() {
-		switcher.run( );
-		double duration = mover.run();
-		walker.run(mover.getStartPt(), mover.getEndPt());
+		switcher.runForSwitch( );
+		double duration = mover.runForMover();
+		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
 		this.run((int) (duration * 1000.0));
 	}
 
@@ -69,30 +67,31 @@ public class WalkMaybeSwitchAction extends ChainEndAction{
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		PointF pt = mover.onUpdateCalculate(progress);
-		switcher.onUpdate(progress);
-		if(switcher.isStopped()) 
+		PointF pt = mover.onUpdateCalculateForMover(progress);
+		switcher.onUpdateForSwitch(progress);
+		if(switcher.isStoppedForSwitch()) 
 			return;
-		mover.onUpdateCalculate(progress, pt);
+		mover.onUpdateCalculateForMover(progress, pt);
 	}
 
 	@Override
 	protected boolean onCompleteGameAction() { 
 		onUpdateGameAction(1.0);
-		if(!switcher.isStopped())//<- this line is crucial or man will slide in initial pos. Not sure why, I think its in the scenario where switcher starts destroying the scene first?
+		if(!switcher.isStoppedForSwitch())//<- this line is crucial or man will slide in initial pos. Not sure why, I think its in the scenario where switcher starts destroying the scene first?
 		{
-			mover.onComplete();
+			mover.onCompleteForMover();
 		}
-		boolean isExited = switcher.onComplete();
+		boolean isExited = switcher.onCompleteForSwitch();
 		return isExited;
 	}
+	
 	void setEndX(double endX) {
-		mover.setEndX(endX);
-		switcher.setEndX(endX);
+		mover.setEndXForMover(endX);
+		switcher.setEndXForSwitch(endX);
 	}
 
 	void setEndY(double endY) {
-		mover.setEndY(endY);
-		switcher.setEndY(endY);
+		mover.setEndYForMover(endY);
+		switcher.setEndYForSwitch(endY);
 	}
  }

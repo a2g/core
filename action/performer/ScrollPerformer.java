@@ -29,13 +29,13 @@ public class ScrollPerformer implements IScrollPerformer
 	public ScrollPerformer() {}
 
 	@Override
-	public void run(PointF start, PointF end) {
+	public void runForScroll(PointF start, PointF end) {
 		startCameraX = scene.getCameraX();
 		endXMinusStartX = end.getX() - start.getX(); 
 	}
 	
 	@Override
-	public void onUpdate(double progress)
+	public void onUpdateForScroll(double progress)
 	{
 		double x = startCameraX + progress * endXMinusStartX;
 
@@ -43,9 +43,9 @@ public class ScrollPerformer implements IScrollPerformer
 	}
 
 	@Override
-	public void onComplete()
+	public void onCompleteForScroll()
 	{
-	 onUpdate(1.0);
+	 onUpdateForScroll(1.0);
 	}
 	
 	public void setScene(IScenePresenterFromScrollPerformer scene) {

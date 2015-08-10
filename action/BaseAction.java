@@ -130,8 +130,10 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	}
 
 	public void run(int i) {
-		systemAnimation.run(i);
-
+		if(systemAnimation!=null)// can be null during testing.
+		{
+			systemAnimation.run(i);
+		}	
 	}
 
 	public void setCallbacks(ActionRunner callbacks) {

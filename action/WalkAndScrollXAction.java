@@ -35,7 +35,7 @@ public class WalkAndScrollXAction extends ChainableAction{
 	public WalkAndScrollXAction(BaseAction parent, short ocode) {
 		super(parent);
 		mover = new MovePerformer(ocode);
-		mover.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false)
+		mover.setToInitialAtEndForMover(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false)
 		
 		walker = new WalkPerformer(ocode);
 		scroller = new ScrollPerformer();
@@ -47,26 +47,26 @@ public class WalkAndScrollXAction extends ChainableAction{
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
 	{
-		mover.setScene(scene); 
-		walker.setScene(scene);
+		mover.setSceneForMover(scene); 
+		walker.setSceneForWalk(scene);
 		scroller.setScene(scene);
 	}
 	  
 
 	@Override
 	public void runGameAction() {
-		double duration = mover.run();
-		walker.run(mover.getStartPt(), mover.getEndPt());
-		scroller.run( mover.getStartPt(), mover.getEndPt());
+		double duration = mover.runForMover();
+		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
+		scroller.runForScroll( mover.getStartPtForMover(), mover.getEndPtForMover());
 		this.run((int) (duration * 1000.0));
 
 	}
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		PointF pt = mover.onUpdateCalculate(progress);
-		mover.onUpdateCalculate(progress, pt);
-		scroller.onUpdate(progress);
+		PointF pt = mover.onUpdateCalculateForMover(progress);
+		mover.onUpdateCalculateForMover(progress, pt);
+		scroller.onUpdateForScroll(progress);
 		
 	}
 
@@ -74,8 +74,8 @@ public class WalkAndScrollXAction extends ChainableAction{
 	// method in animation
 	protected boolean onCompleteGameAction() { 
 		onUpdateGameAction(1.0);
-		mover.onComplete();
-		scroller.onComplete();
+		mover.onCompleteForMover();
+		scroller.onCompleteForScroll();
 		return false;
 	}
 
