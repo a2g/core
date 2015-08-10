@@ -997,9 +997,9 @@ PropertyChangeEventHandlerAPI
 	}
 
 	@Override
-	public boolean fireOnMovementBeyondAGateIfRelevant(PointF tp) 
+	public boolean doSwitchIfBeyondGate(PointF tp) 
 	{
-		return boundaryCalculator.fireOnMovementBeyondAGateIfRelevant(tp);
+		return boundaryCalculator.doSwitchIfBeyondGate(tp);
 	}
 
 	@Override

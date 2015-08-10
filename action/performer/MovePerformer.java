@@ -160,8 +160,9 @@ public class MovePerformer implements IMovePerformer
 
 	@Override
 	public void onCompleteForMover() {
-		String otid = scene.getOtidByCode(ocode);
+		// just set to initial if needed
 		if (setToInitialAtEnd == true) {
+			String otid = scene.getOtidByCode(ocode);
 			if (otid != null) {
 				scene.setToInitialAnimationWithoutChangingFrameByOtid(otid);
 			}

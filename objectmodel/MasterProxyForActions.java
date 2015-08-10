@@ -117,8 +117,8 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	}
 
 	@Override
-	public boolean doSwitchBeyondGateIfSetUp(PointF point) {
-		return master.fireOnMovementBeyondAGateIfRelevant(point);
+	public boolean doSwitchIfBeyondGate(PointF point) {
+		return master.doSwitchIfBeyondGate(point);
 	}
 
 	@Override

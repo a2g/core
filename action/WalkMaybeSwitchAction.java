@@ -69,6 +69,10 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 	protected void onUpdateGameAction(double progress) {
 		PointF pt = mover.onUpdateCalculateForMover(progress);
 		switcher.onUpdateForSwitch(progress);
+		// in this case the previous line could have switched scenes.
+		// or it could have run in to the no-go-zone, in which case
+		// we don't want mover updating it.
+		// In both the above cases isStoppedForSwitch is true.
 		if(switcher.isStoppedForSwitch()) 
 			return;
 		mover.onUpdateCalculateForMover(progress, pt);
@@ -77,11 +81,19 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 	@Override
 	protected boolean onCompleteGameAction() { 
 		onUpdateGameAction(1.0);
-		if(!switcher.isStoppedForSwitch())//<- this line is crucial or man will slide in initial pos. Not sure why, I think its in the scenario where switcher starts destroying the scene first?
+		// the next line is crucial because the previous line
+		// might have just switched scenes. 
+		// If it has stopped? we still do mover.onCompleteForMover..
+		// which kist sets to initial. It doesn't update position.
+		// If scene has exited do we not do mover.onCompleteForMover
+		// because the Otids referred to in mover and switcher
+		// refer to objects in a scene that we've exited from.
+		boolean isExited = switcher.isExitedThruGate();
+		if(!isExited)
 		{
 			mover.onCompleteForMover();
+			isExited = switcher.onCompleteForSwitch();
 		}
-		boolean isExited = switcher.onCompleteForSwitch();
 		return isExited;
 	}
 	

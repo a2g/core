@@ -299,11 +299,11 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		return a;
 	}
 	@Override
-	public ChainableAction walkToWithoutSwitching(double x, double y) {
-		return walkToWithoutSwitching(new PointF(x,y));
+	public ChainableAction walkNeverSwitch(double x, double y) {
+		return walkNeverSwitch(new PointF(x,y));
 	}
 	@Override
-	public ChainableAction walkToWithoutSwitching(PointF end) {
+	public ChainableAction walkNeverSwitch(PointF end) {
 		WalkAction a = new WalkAction(this,
 				ScenePresenter.DEFAULT_SCENE_OBJECT);
 		a.setEndX(end.getX());
@@ -328,7 +328,7 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 	}
 	
 	@Override
-	public ChainEndAction walkAndSwitch(double x, double y, String sceneName) {
+	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName) {
 		WalkAction a = new WalkAction(this, ScenePresenter.DEFAULT_SCENE_OBJECT);
 		a.setEndX(x);
 		a.setEndY(y);
@@ -341,11 +341,11 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 	}
 	
 	@Override
-	public ChainableAction walkToWithoutSwitching(short ocode, double x, double y) {
-		return walkToWithoutSwitching(ocode,new PointF(x,y));
+	public ChainableAction walkNeverSwitch(short ocode, double x, double y) {
+		return walkNeverSwitch(ocode,new PointF(x,y));
 	}
 	@Override
-	public ChainableAction walkToWithoutSwitching(short ocode, PointF end) {
+	public ChainableAction walkNeverSwitch(short ocode, PointF end) {
 		WalkAction a = new WalkAction(this, ocode);
 		a.setEndX(end.getX());
 		a.setEndY(end.getY());
@@ -535,7 +535,7 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		return s;
 	}
 	
-	public ChainableAction walkAndTalkNoSwitching(short ocode, double x, double y, String speech)
+	public ChainableAction walkAndTalkNeverSwitch(short ocode, double x, double y, String speech)
 	{
 		WalkAndTalkAction s = new WalkAndTalkAction(this, ocode, speech);
 		s.setNonIncrementing(TalkPerformer.NonIncrementing.True);

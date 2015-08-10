@@ -34,13 +34,13 @@ public interface IChainRootForScene {
 	// to switch, WOULD generate a compiler error. 
 	// Thus 2 is better, because it protects the user
 	// against unexpected results. 
-	public ChainableAction walkToWithoutSwitching(double x, double y);
-	public ChainableAction walkToWithoutSwitching(PointF point);
-	public ChainableAction walkToWithoutSwitching(short ocode, double x, double y);
-	public ChainableAction walkToWithoutSwitching(short ocode, PointF point);
-	public ChainEndAction walkAndSwitch(double x, double y, String sceneName);
-	public ChainableAction walkAndTalkNoSwitching(short ocode, double x, double y, String speech);
-
+	public ChainableAction walkNeverSwitch(double x, double y);
+	public ChainableAction walkNeverSwitch(PointF point);
+	public ChainableAction walkNeverSwitch(short ocode, double x, double y);
+	public ChainableAction walkNeverSwitch(short ocode, PointF point);
+	public ChainableAction walkAndTalkNeverSwitch(short ocode, double x, double y, String speech);
+	public ChainEndAction  walkAlwaysSwitch(double x, double y, String sceneName);
+	
 	
 	public ChainableAction subroutine(ChainableAction orig);
 	

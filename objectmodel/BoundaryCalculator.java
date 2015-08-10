@@ -40,7 +40,7 @@ public class BoundaryCalculator {
 		this.gateDests.clear();
 	}
 	
-	public boolean fireOnMovementBeyondAGateIfRelevant(PointF tp) 
+	public boolean doSwitchIfBeyondGate(PointF tp) 
 	{
 		String foundDest = "";
 		if (gatePoints.size() > 2) {

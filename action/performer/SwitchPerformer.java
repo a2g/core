@@ -110,7 +110,7 @@ public class SwitchPerformer implements ISwitchPerformer
 			// then the delta(inx,y) may be small enough
 			// for us to tell they have moved between two
 			// gate points. And if so, then we can fire
-			isExitedThruGate = scene.doSwitchBeyondGateIfSetUp(new PointF(x, y));
+			isExitedThruGate = scene.doSwitchIfBeyondGate(new PointF(x, y));
 
 		}
 
@@ -123,7 +123,7 @@ public class SwitchPerformer implements ISwitchPerformer
 			if(!isStopped)
 			{
 				isStopped = true;
-				isExitedThruGate = scene.doSwitchBeyondGateIfSetUp(new PointF(endX, endY));
+				isExitedThruGate = scene.doSwitchIfBeyondGate(new PointF(endX, endY));
 			}
 		}
 		return isExitedThruGate;
@@ -138,5 +138,9 @@ public class SwitchPerformer implements ISwitchPerformer
 	public boolean isStoppedForSwitch() {
 		return isStopped;
 	}
-
+	@Override
+	public boolean isExitedThruGate()
+	{
+		return isExitedThruGate;
+	}
 }
