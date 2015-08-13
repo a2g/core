@@ -76,6 +76,7 @@ PropertyChangeEventHandlerAPI
 {
 	private static final Logger LOADING = Logger.getLogger(LogNames.LOADING);
 	private static final Logger COMMAND_AUTOPLAY = Logger.getLogger(LogNames.COMMANDS_AUTOPLAY);
+	private static final Logger ACTIONS_EXECUTED = Logger.getLogger(LogNames.ACTIONS_EXECUTED);
 
 	MasterProxyForGameScene proxyForGameScene;
 	private CommandLinePresenter commandLinePresenter;
@@ -244,7 +245,7 @@ PropertyChangeEventHandlerAPI
 			// is null..
 			// ... thus null must be interpreted
 			// as DialogTreeEndAction
-			a = new DialogTreeEndAction(createChainRootAction());
+			a = new DialogTreeEndAction(createDialogChainRootAction());
 		}
 
 		dialogActionRunner.runAction(a);
@@ -423,9 +424,9 @@ PropertyChangeEventHandlerAPI
 		// 4. Then we execute it
 		// Thus it will talk the text, and do what the user prescribes.
 
-		DialogTreeTalkAction talk = new DialogTreeTalkAction(createDialogChainRootAction(), atidOfInterviewer, speech);
+		DialogTreeTalkAction newTalkAction = new DialogTreeTalkAction(createDialogChainRootAction(), atidOfInterviewer, speech);
 		BaseAction actionChain = sceneHandlers.onDialogTree(
-				proxyForGameScene, talk, branchId);
+				proxyForGameScene, newTalkAction, branchId);
 		BaseAction  actionChain2 = replaceDialogChainToActionWithOnDialogTreeChain(actionChain);
 
 		executeActionWithDialogActionRunner(actionChain2);
@@ -708,6 +709,7 @@ PropertyChangeEventHandlerAPI
 
 	void linkUpperMostActionOfAToB(BaseAction a, BaseAction b)
 	{
+		// a and b should be valid here.
 		for(;;)
 		{
 			if(a.getParent()==null)
@@ -724,6 +726,8 @@ PropertyChangeEventHandlerAPI
 			int branchId = ((DialogTreeChainToAction) b).getBranchId();
 			DialogChainableAction d = createDialogChainRootAction();
 			BaseAction a = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
+			if(a==null)
+				a = new DoNothingAction(createDialogChainRootAction());
 			linkUpperMostActionOfAToB(a,b);
 			return a;
 		}
@@ -771,80 +775,90 @@ PropertyChangeEventHandlerAPI
 		AutoplayCommand cmd  = this.host.getNextAutoplayAction(proxyForGameScene);
 		if(cmd==null)
 		{
-			host.onFinishedAutoplay(null);
+			host.onFinishedAutoplay(null, null);
 		}
 		else
 		{
 
 			BaseAction a = null;
+			GuiStateEnum mode = masterPanel.getActiveState();
 			if(cmd.getVerb()==ConstantsForAPI.DIALOG)
 			{
+				if(mode!=GuiStateEnum.DialogTree)
+				{
+					// verb was dialog, mode wasn't
+					cancelAutoplay(cmd , "verb was dialog, mode wasn't");
+					return;
+				}
 				int branchId  = cmd.getBranch();
 				boolean isValid = dialogTreePresenter.isBranchValid(branchId);
 
 				// getLineOfDialog
 				if(!isValid && branchId!=ConstantsForAPI.EXIT_DLG)
 				{
-					cancelAutoplay(cmd);
+					cancelAutoplay(cmd, "Invalid branch number");
 					return;
 				}
 				COMMAND_AUTOPLAY.log(Level.FINE, "DIALOG "+branchId+" "+dialogTreePresenter.getLineOfDialogForId(branchId));
 				saySpeechAndThenExecuteBranchWithBranchId(branchId);
 			}
+			else if(cmd.getVerb()==ConstantsForAPI.SLEEP)
+			{
+				// SLEEP = sleep for 100ms
+				a = createChainRootAction().sleep(cmd.getInt1());
+				COMMAND_AUTOPLAY.log(Level.FINE, "SLEEP "+cmd.getInt1());
+
+			} 
+			else if(mode==GuiStateEnum.DialogTree)
+			{
+				// mode was dialog verb wasn't dialog or sleep
+				cancelAutoplay(cmd, "mode was dialog verb wasn't dialog or sleep");
+				return;
+			}
+			else if(cmd.getVerb()==ConstantsForAPI.SWITCH)
+			{
+				a = createChainRootAction().switchTo(cmd.getString());
+				COMMAND_AUTOPLAY.log(Level.FINE, "SWITCH "+cmd.getString());
+
+			}
 			else
 			{
-				if(cmd.getVerb()==ConstantsForAPI.SLEEP)
-				{
-					// SLEEP = sleep for 100ms
-					a = createChainRootAction().sleep(cmd.getInt1());
-					COMMAND_AUTOPLAY.log(Level.FINE, "SLEEP "+cmd.getInt1());
+				COMMAND_AUTOPLAY.log(Level.FINE,"autoplay " +cmd.getVerbAsString()+" "+getSIOfObject(cmd.getInt1()).getDisplayName()+ " "+ getSIOfObject(cmd.getInt2()).getDisplayName());
 
+				this.commandLinePresenter.setVerbItemItem(getSIOfVerb(cmd.getVerb()), getSIOfObject(cmd.getInt1()), getSIOfObject(cmd.getInt2()));
+
+				//otherwise ask the sceneHanders what the outcome is.
+				SentenceItem o1 = new SentenceItem("","",cmd.getInt1());
+				SentenceItem o2 = new SentenceItem("","",cmd.getInt2());
+				a = this.sceneHandlers.onDoCommand(proxyForGameScene,
+						createChainRootAction(), cmd.getVerb(),o1,o2,cmd.getDouble1(),cmd.getDouble2());
+
+				if (a instanceof DoNothingAction) {
+					cancelAutoplay(cmd, "onDoCommand returned do nothing");
+					return;
 				}
-				else if(cmd.getVerb()==ConstantsForAPI.SWITCH)
-				{
-					a = createChainRootAction().switchTo(cmd.getString());
-					COMMAND_AUTOPLAY.log(Level.FINE, "SWITCH "+cmd.getString());
 
-				}
-				else
-				{
-					COMMAND_AUTOPLAY.log(Level.FINE,"autoplay " +cmd.getVerbAsString()+" "+getSIOfObject(cmd.getInt1()).getDisplayName()+ " "+ getSIOfObject(cmd.getInt2()).getDisplayName());
-
-					this.commandLinePresenter.setVerbItemItem(getSIOfVerb(cmd.getVerb()), getSIOfObject(cmd.getInt1()), getSIOfObject(cmd.getInt2()));
-
-					//otherwise ask the sceneHanders what the outcome is.
-					SentenceItem o1 = new SentenceItem("","",cmd.getInt1());
-					SentenceItem o2 = new SentenceItem("","",cmd.getInt2());
-					a = this.sceneHandlers.onDoCommand(proxyForGameScene,
-							createChainRootAction(), cmd.getVerb(),o1,o2,cmd.getDouble1(),cmd.getDouble2());
-
-					if (a instanceof DoNothingAction) {
-						cancelAutoplay(cmd);
-						titleCardPresenter.setText("action returned do nothing");
-						return;
-					}
-
-					a = replaceDoDialogActionWithOnDialogTreeChain(a);
-				}
-				this.commandLinePresenter.setMouseable(false);
-				executeActionWithDoCommandActionRunner(a);
+				a = replaceDoDialogActionWithOnDialogTreeChain(a);
 			}
+			this.commandLinePresenter.setMouseable(false);
+			executeActionWithDoCommandActionRunner(a);
 		}
 	}
 
-	void cancelAutoplay(AutoplayCommand cmd)
+
+	void cancelAutoplay(AutoplayCommand cmd, String message)
 	{
 		if(!isAutoplayCancelled)
 		{
-			host.onFinishedAutoplay(cmd);
+			host.onFinishedAutoplay(cmd, message);
 			isAutoplayCancelled = true;
 		}
 	}
 
 	@Override
-	public void actionFinished(int id) {
-		if(true)// this used to be id==2, but will leave until this yields bugs
-
+	public void actionChainFinished(int id) {
+		ACTIONS_EXECUTED.fine("-------------------------------------actionChainFinished!");
+		if(id==2)// this used to be id==2, but will leave until this yields bugs
 		{
 			if(this.dialogTreePresenter.getNumberOfVisibleBranches()==0)
 			{

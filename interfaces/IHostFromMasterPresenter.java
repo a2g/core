@@ -45,7 +45,7 @@ public interface IHostFromMasterPresenter {
 
 	boolean isAutoplay();
 
-	void onFinishedAutoplay(AutoplayCommand lastCommand);
+	void onFinishedAutoplay(AutoplayCommand lastCommand, String reasonForFinish);
 
 
 }

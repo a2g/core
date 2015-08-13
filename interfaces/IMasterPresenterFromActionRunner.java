@@ -16,5 +16,5 @@
 package com.github.a2g.core.interfaces;
 
 public interface IMasterPresenterFromActionRunner {
-	public void actionFinished(int actionRunnerId);
+	public void actionChainFinished(int actionRunnerId);
 }
