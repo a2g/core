@@ -41,7 +41,7 @@ import com.github.a2g.core.event.PropertyChangeEvent;
 import com.github.a2g.core.event.PropertyChangeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
-import com.github.a2g.core.interfaces.IMasterPresenterFromBoundaryCalculator;
+import com.github.a2g.core.interfaces.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.interfaces.ISound;
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActionRunner;
@@ -75,7 +75,6 @@ IMasterPresenterFromCommandLine, IMasterPresenterFromActionRunner,
 IMasterPresenterFromInventory, IMasterPresenterFromVerbs,
 IMasterPresenterFromTitleCard, 
 PropertyChangeEventHandlerAPI
-, IMasterPresenterFromBoundaryCalculator
 {
 	private static final Logger LOADING = Logger.getLogger(LogNames.LOADING);
 	private static final Logger COMMAND_AUTOPLAY = Logger.getLogger(LogNames.COMMANDS_AUTOPLAY);
@@ -100,14 +99,12 @@ PropertyChangeEventHandlerAPI
 	private ActionRunner doCommandActionRunner;
 	private ActionRunner onEveryFrameActionRunner;
 
-	private BoundaryCalculator boundaryCalculator;
 	private InsertionPointCalculator insertionPointCalculator;
 	
 
 	private String lastSceneAsString;
 	private String switchDestination;
 	private boolean isSayNonIncremementing;
-	private short boundaryCrossObject;
 	private MasterProxyForActions proxyForActions;
 	private Map<String, ISound> mapOfSounds;
 	private boolean isAutoplayCancelled;
@@ -121,7 +118,6 @@ PropertyChangeEventHandlerAPI
 		this.host = host;
 		this.proxyForGameScene = new MasterProxyForGameScene(this);
 		this.proxyForActions = new MasterProxyForActions(this);
-		this.boundaryCalculator = new BoundaryCalculator(this);
 		this.insertionPointCalculator = new InsertionPointCalculator();
 		mapOfSounds = new TreeMap<String,ISound>();
 
@@ -284,17 +280,7 @@ PropertyChangeEventHandlerAPI
 
 			if (sceneObject != null) {
 				sceneObject.setToInitialAnimationWithoutChangingFrame(); // to
-				// the
-				// positions
-				// they
-				// were
-				// in
-				// when
-				// all
-				// objects
-				// were
-				// rendered
-				// out.
+				// reset position
 				sceneObject.setX(0);
 				sceneObject.setY(0);
 			}
@@ -475,7 +461,7 @@ PropertyChangeEventHandlerAPI
 		.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
 		loadInventoryFromAPI();
 		setInitialAnimationsAsCurrent();
-		boundaryCalculator.clearBoundaries();
+		scenePresenter.clearBoundaries();
 
 		// setAllObjectsToVisible();
 		// it is reasonable for a person to set current animations in pre-entry
@@ -972,34 +958,6 @@ PropertyChangeEventHandlerAPI
 	public void setContinueAfterLoad(boolean isIgnore) {
 		this.loaderPresenter.setContinueAfterLoad(isIgnore);
 
-	}
-
-	public void addBoundaryGate(double tlx,double tly, double brx,double bry, Object sceneToSwitchTo) {
-		boundaryCalculator.addBoundaryGate(sceneToSwitchTo,  new PointF(tlx,tly), new PointF(brx,bry));
-	}
-
-	public void addBoundaryPoint(double x, double y) {
-		boundaryCalculator.addBoundaryPoint(new PointF(x,y));
-	}
-	
-	public void setBoundaryCrossObject(short boundaryCrossObject) {
-		this.boundaryCrossObject = boundaryCrossObject;
-	}
-
-	short getBoundaryCrossObject() {
-		return boundaryCrossObject;
-	}
-
-
-	@Override
-	public boolean isInANoGoZone(PointF tp) {
-		return boundaryCalculator.isInANoGoZone(tp);
-	}
-
-	@Override
-	public boolean doSwitchIfBeyondGate(PointF tp) 
-	{
-		return boundaryCalculator.doSwitchIfBeyondGate(tp);
 	}
 
 	@Override

@@ -22,12 +22,16 @@ import com.github.a2g.core.interfaces.IHostingPanel;
 import com.github.a2g.core.interfaces.IMasterPresenterFromScene;
 import com.github.a2g.core.interfaces.IScenePresenter;
 import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
+import com.github.a2g.core.interfaces.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.primitive.RectF;
 
-public class ScenePresenter implements IScenePresenter {
+public class ScenePresenter 
+implements IScenePresenter
+, IScenePresenterFromBoundaryCalculator {
 	public static final short DEFAULT_SCENE_OBJECT = -1;
 	private int width;
 	private int height;
@@ -41,6 +45,9 @@ public class ScenePresenter implements IScenePresenter {
 	private ColorEnum talkingColorForScene;
 	private String sceneAskerAtid;
 	private String sceneAnswererAtid;
+	
+
+	private BoundaryCalculator boundaryCalculator;
 
 	public ScenePresenter(final IHostingPanel panel,
 			IMasterPresenterFromScene master) {
@@ -52,6 +59,8 @@ public class ScenePresenter implements IScenePresenter {
 		this.cameraY = 0.0;
 		this.width = 320;
 		this.height = 180;
+		this.boundaryCalculator = new BoundaryCalculator(this);
+		
 		this.scene = new Scene();
 		this.view = master.getFactory().createScenePanel(this);
 		panel.setThing(view);
@@ -325,6 +334,37 @@ public class ScenePresenter implements IScenePresenter {
 		}
 		return numberPrefix;
 	}
+
+	public void clearBoundaries() {
+		boundaryCalculator.clearBoundaries();
+	}
+
+	@Override
+	public void switchToScene(String foundDest) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+	public void addBoundaryGate(double tlx,double tly, double brx,double bry, Object sceneToSwitchTo) {
+		boundaryCalculator.addBoundaryGate(sceneToSwitchTo,  new PointF(tlx,tly), new PointF(brx,bry));
+	}
+
+	public void addBoundaryPoint(double x, double y) {
+		boundaryCalculator.addBoundaryPoint(new PointF(x,y));
+	}
+	
+	 
+	public boolean isInANoGoZone(PointF tp) {
+		return boundaryCalculator.isInANoGoZone(tp);
+	}
+
+	 
+	public boolean doSwitchIfBeyondGate(PointF tp) 
+	{
+		return boundaryCalculator.doSwitchIfBeyondGate(tp);
+	}
+
 
 	
 };

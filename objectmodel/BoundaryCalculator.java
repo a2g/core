@@ -2,21 +2,21 @@ package com.github.a2g.core.objectmodel;
 
 import java.util.ArrayList;
 
-import com.github.a2g.core.interfaces.IMasterPresenterFromBoundaryCalculator;
+import com.github.a2g.core.interfaces.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.primitive.PointF;
 
 public class BoundaryCalculator {
 	
-	private IMasterPresenterFromBoundaryCalculator master;
+	private IScenePresenterFromBoundaryCalculator scene;
 	private ArrayList<PointF> gatePoints;
 	private ArrayList<String> gateDests;
 
 	private static String TREAT_GATE_AS_POINT = "TREAT_GATE_AS_POINT";
 
 	
-	public BoundaryCalculator(IMasterPresenterFromBoundaryCalculator master)
+	public BoundaryCalculator(IScenePresenterFromBoundaryCalculator master)
 	{
-		this.master = master;
+		this.scene = master;
 		this.gatePoints = new ArrayList<PointF>();
 		this.gateDests = new ArrayList<String>();
 	
@@ -56,7 +56,7 @@ public class BoundaryCalculator {
 					foundDest = gateDests.get(i);
 					if(foundDest!=null && foundDest.length()>0)
 					{
-						master.switchToScene(foundDest);
+						scene.switchToScene(foundDest);
 						return true;
 					}
 				}

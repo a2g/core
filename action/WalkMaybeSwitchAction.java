@@ -71,7 +71,7 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 		switcher.onUpdateForSwitch(progress);
 		// in this case the previous line could have switched scenes.
 		// or it could have run in to the no-go-zone, in which case
-		// we don't want mover updating it.
+		// we don't want mover updating it to a new position.
 		// In both the above cases isStoppedForSwitch is true.
 		if(switcher.isStoppedForSwitch()) 
 			return;

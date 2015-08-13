@@ -12,4 +12,5 @@ public interface LogNames {
 	String ADDING_ANIM_TO_SOC_MAP = "ADDING_ANIM_TO_SOC_MAP";
 	String IMAGE_DUMP = "IMAGE_DUMP";
 	String ACTIONS_EXECUTED = "ACTIONS_EXECUTED";
+	String KEY_ENTRY = "KEY_ENTRY";
 }

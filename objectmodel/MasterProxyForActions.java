@@ -113,12 +113,12 @@ public class MasterProxyForActions implements IOnFillLoadList,
 
 	@Override
 	public boolean isInANoGoZone(PointF point) {
-		return master.isInANoGoZone(point);
+		return master.getScenePresenter().isInANoGoZone(point);
 	}
 
 	@Override
 	public boolean doSwitchIfBeyondGate(PointF point) {
-		return master.doSwitchIfBeyondGate(point);
+		return master.getScenePresenter().doSwitchIfBeyondGate(point);
 	}
 
 	@Override

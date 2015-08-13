@@ -432,12 +432,12 @@ IOnMovementBeyondAGate {
 
 	@Override
 	public void addBoundaryGate(double tlx,double tly,double brx,double bry,Object sceneToSwitchTo) {
-		master.addBoundaryGate(tlx,tly,brx,bry,sceneToSwitchTo);
+		master.getScenePresenter().addBoundaryGate(tlx,tly,brx,bry,sceneToSwitchTo);
 	}
 
 	@Override
 	public void addBoundaryPoint(double  x, double y) {
-		master.addBoundaryPoint(x,y);
+		master.getScenePresenter().addBoundaryPoint(x,y);
 	}
 
 	@Override

@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2012 Anthony Cassidy
  *
@@ -14,8 +13,6 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
-
 package com.github.a2g.core.platforms.java.panel;
 
 
@@ -36,6 +33,7 @@ import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
@@ -108,7 +106,7 @@ implements IScenePanelFromScenePresenter
 			new SceneMouseOverHandler(this, bus, toScene, toCommandLine)
 		);
 		
-		InputMap im = getInputMap(WHEN_FOCUSED);
+		InputMap im = getInputMap(JComponent.WHEN_FOCUSED);
         ActionMap am = getActionMap();
 
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "onEnter");
@@ -308,16 +306,6 @@ implements IScenePanelFromScenePresenter
 	}
 
 
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-
 	@Override
 	public Image createNewImageAndAddHandlers(final LoadHandler lh,
 			IPackagedImage imageResource, IScenePresenterFromSceneMouseOver api, EventBus bus,
@@ -343,9 +331,6 @@ implements IScenePanelFromScenePresenter
 		//return new Point(this.getLocationOnScreen().x,this.getLocationOnScreen().y );
 	}
 
-
-
-
 	@Override
 	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
 			String speech, Rect pixels, Point mouth, TalkPerformer sayAction) {
@@ -360,16 +345,11 @@ implements IScenePanelFromScenePresenter
 
 
 
-
-
-
-
-
-
-
-
-
-
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 

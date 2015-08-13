@@ -15,8 +15,9 @@
  */
 package com.github.a2g.core.interfaces;
 
-public interface IMasterPresenterFromBoundaryCalculator {
+import com.github.a2g.core.primitive.PointF;
+
+public interface IScenePresenterFromBoundaryCalculator {
 
 	void switchToScene(String foundDest);
-
 }
