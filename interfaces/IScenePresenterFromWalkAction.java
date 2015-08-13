@@ -17,7 +17,7 @@ IGetBaseMiddleYByOtid
 , IGetSceneGuiHeight
 , ISetToInitialAnimationWithoutChangingFrameByOtid
 , ICurrentAnimationByAtid
-, IGetSpecialAnimationByOtid 
+, IGetSpecialAnimationByOtid
 , IGetOtidOfDefaultSceneObject
 , IGetOtidByCode
 {

@@ -18,13 +18,13 @@ IScenePresenterFromSceneMouseOver,
 IScenePresenterFromSceneTouch,
 IScenePresenterFromJavaPopupPanel,// no java stuff here, it just needs
 // getView
-IGetSceneObjectCount, 
-IGetOtidByIndex, 
+IGetSceneObjectCount,
+IGetOtidByIndex,
 IGetVisibleByOtid,
-IGetAtidOfCurrentAnimationByOtid, 
+IGetAtidOfCurrentAnimationByOtid,
 IGetCurrentFrameByOtid,
-IGetBoundingRectByFrameAndAtid, 
-IGetXByOtid, 
+IGetBoundingRectByFrameAndAtid,
+IGetXByOtid,
 IGetYByOtid
 {
 	ArrayList<PointF> getBoundaryPoints();

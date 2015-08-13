@@ -27,10 +27,10 @@ public interface IFactory {
 
 	IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
 			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore, ColorEnum back, ColorEnum roll);
-		
+
 
 	ILoaderPanelFromLoaderPresenter createLoaderPanel(
 			IMasterPresenterFromLoaderMouse api, ColorEnum fore, ColorEnum back);
-	
+
 	ISound createSound(String url);
 }

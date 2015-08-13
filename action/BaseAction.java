@@ -32,11 +32,11 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	protected BaseAction parent;
 	private boolean isLinear;
 	protected boolean isParallel;
- 
+
 
 	// all the abstract have GameAction in them to let
 	// the client know they are dealing with GameAction and not Animation
-	
+
 	abstract protected void onUpdateGameAction(double progress);
 
 	abstract protected boolean onCompleteGameAction();
@@ -60,7 +60,7 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	{
 		this.isParallel = parallel;
 	}
-	
+
 	public boolean isParallel() {
 		return isParallel;
 	}
@@ -110,7 +110,7 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	public void setParent(BaseAction parent) {
 		this.parent = parent;
 	}
-	 
+
 
 
 	public ChainableAction setVisible(short ocode, boolean isVisible) {
@@ -133,13 +133,13 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 		if(systemAnimation!=null)// can be null during testing.
 		{
 			systemAnimation.run(i);
-		}	
+		}
 	}
 
 	public void setCallbacks(ActionRunner callbacks) {
 		this.callbacks = callbacks;
 	}
 
-	
+
 
 }

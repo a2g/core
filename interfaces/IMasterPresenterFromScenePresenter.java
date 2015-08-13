@@ -1,10 +1,8 @@
 package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.interfaces.game.ISwitchToScene;
-import com.github.a2g.core.objectmodel.Scene;
-import com.github.a2g.core.primitive.PointF;
 
-public interface IMasterPresenterFromScenePresenter 
+public interface IMasterPresenterFromScenePresenter
 extends ISwitchToScene
 {
 

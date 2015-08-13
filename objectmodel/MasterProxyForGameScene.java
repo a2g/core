@@ -245,7 +245,7 @@ IOnMovementBeyondAGate {
 
 	@Override
 	public void setAnimationAsObjectSpecial(String atid, Special type) {
-		String otid = getOtidByAtid(atid);	
+		String otid = getOtidByAtid(atid);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setSpecialAnimation(type, atid);
 
@@ -253,7 +253,7 @@ IOnMovementBeyondAGate {
 
 	@Override
 	public void setAnimationAsObjectCurrent(String atid) {
-		String otid = getOtidByAtid(atid);	
+		String otid = getOtidByAtid(atid);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setCurrentAnimation(atid);
 	}
@@ -276,7 +276,7 @@ IOnMovementBeyondAGate {
 
 	@Override
 	public void setAnimationAsObjectCurrentAndSetFrame(String atid, int frame) {
-		String otid = getOtidByAtid(atid);	
+		String otid = getOtidByAtid(atid);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setCurrentAnimationAndFrame(atid, frame);
 	}
@@ -463,13 +463,13 @@ IOnMovementBeyondAGate {
 	public void setStateOfPopup(String atid, boolean isVisible, String speech,
 			TalkPerformer sayAction) {
 		master.getScenePresenter().setStateOfPopup(atid, isVisible, speech, sayAction);
-		
+
 	}
 
 	@Override
 	public void displayTitleCard(String text) {
 		master.displayTitleCard(text);
-		
+
 	}
 
 	@Override
@@ -481,12 +481,12 @@ IOnMovementBeyondAGate {
 	@Override
 	public void addMP3ForASoundObject(String name, String location) {
 		master.addMP3ForASoundObject(name, location);
-		
+
 	}
 	public String getOtidByAtid(String atid) {
 		return master.getScenePresenter().getOtidByAtid(atid);
-		}
-	
+	}
+
 	@Override
 	public void setAnimationAsObjectInitial(String atid) {
 		String otid = getOtidByAtid(atid);
@@ -500,11 +500,11 @@ IOnMovementBeyondAGate {
 		master.getScenePresenter().setSceneTalkerAtid(atid);
 
 	}
-	
+
 	@Override
 	public void setAnimationAsSceneAnswerer(String atid) {
 		master.getScenePresenter().setSceneAnswererAtid(atid);
-		
+
 	}
 
 	@Override

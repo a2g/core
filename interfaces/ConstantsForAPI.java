@@ -55,7 +55,7 @@ public interface ConstantsForAPI {
 	/**
 	 * when processing dialog trees, the branch
 	 * given the value of -1 is special
-	 * in that if -1 is the branch id for 
+	 * in that if -1 is the branch id for
 	 * a line of dialog, then after that line
 	 * of dialog is spoken, it is NOT removed
 	 * from the available options.
@@ -63,7 +63,7 @@ public interface ConstantsForAPI {
 	 * -1 should never be used as a magic number
 	 */
 	public static final int EXIT_DLG = -1;
-	
+
 	public static enum Special {
 		North(1), East(2), South(3), West(4);
 		Special(int i)

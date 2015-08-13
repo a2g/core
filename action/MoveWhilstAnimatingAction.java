@@ -38,15 +38,15 @@ public class MoveWhilstAnimatingAction extends ChainableAction{
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
+			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory)
 	{
 		mover.setSceneForMover(scene);
 	}
-	
+
 	@Override
 	public void runGameAction() {
 		double duration = mover.runForMover();
-		
+
 		this.run((int) (duration * 1000.0));
 
 	}
@@ -59,7 +59,7 @@ public class MoveWhilstAnimatingAction extends ChainableAction{
 
 	@Override
 	// method in animation
-	protected boolean onCompleteGameAction() { 
+	protected boolean onCompleteGameAction() {
 		onUpdateGameAction(1.0);
 		mover.onCompleteForMover();
 		return false;
@@ -74,7 +74,7 @@ public class MoveWhilstAnimatingAction extends ChainableAction{
 		mover.setEndYForMover(endY);
 	}
 
-	 
+
 
 
 

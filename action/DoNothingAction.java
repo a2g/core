@@ -29,7 +29,7 @@ public class DoNothingAction extends ChainableAction {
 	public DoNothingAction(BaseAction parent) {
 		super(parent );
 	}
-	
+
 	@Override
 	public void runGameAction() {
 		super.run(1);
@@ -43,7 +43,7 @@ public class DoNothingAction extends ChainableAction {
 	protected boolean onCompleteGameAction() {
 		return false;
 	}
- 
+
 
 
 	@Override
@@ -52,7 +52,7 @@ public class DoNothingAction extends ChainableAction {
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
 	}
-	
-	
- 
+
+
+
 }

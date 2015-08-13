@@ -22,7 +22,7 @@ import com.github.a2g.core.primitive.PointF;
 
 
 public class ScrollPerformer implements IScrollPerformer
-{	
+{
 	private IScenePresenterFromScrollPerformer scene;
 	double startCameraX;
 	double endXMinusStartX;
@@ -31,9 +31,9 @@ public class ScrollPerformer implements IScrollPerformer
 	@Override
 	public void runForScroll(PointF start, PointF end) {
 		startCameraX = scene.getCameraX();
-		endXMinusStartX = end.getX() - start.getX(); 
+		endXMinusStartX = end.getX() - start.getX();
 	}
-	
+
 	@Override
 	public void onUpdateForScroll(double progress)
 	{
@@ -45,9 +45,9 @@ public class ScrollPerformer implements IScrollPerformer
 	@Override
 	public void onCompleteForScroll()
 	{
-	 onUpdateForScroll(1.0);
+		onUpdateForScroll(1.0);
 	}
-	
+
 	public void setScene(IScenePresenterFromScrollPerformer scene) {
 		this.scene = scene;
 	}

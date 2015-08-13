@@ -17,9 +17,6 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.performer.MovePerformer;
-import com.github.a2g.core.action.performer.SwitchPerformer;
-import com.github.a2g.core.action.performer.WalkPerformer;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
@@ -48,7 +45,7 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
+			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory)
 	{
 		mover.setSceneForMover(scene);
 		walker.setSceneForWalk(scene);
@@ -72,17 +69,21 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 		// in this case the previous line could have switched scenes.
 		// or it could have run in to the no-go-zone, in which case
 		// we don't want mover updating it to a new position.
+		// or else it may access objects which are not there.
 		// In both the above cases isStoppedForSwitch is true.
-		if(switcher.isStoppedForSwitch()) 
-			return;
+		if(switcher.isStoppedForSwitch())
+		{
+			this.cancel();// process onComplete immediately
+			return;//prevent mover from executing.
+		}
 		mover.onUpdateCalculateForMover(progress, pt);
 	}
 
 	@Override
-	protected boolean onCompleteGameAction() { 
+	protected boolean onCompleteGameAction() {
 		onUpdateGameAction(1.0);
 		// the next line is crucial because the previous line
-		// might have just switched scenes. 
+		// might have just switched scenes.
 		// If it has stopped? we still do mover.onCompleteForMover..
 		// which kist sets to initial. It doesn't update position.
 		// If scene has exited do we not do mover.onCompleteForMover
@@ -96,7 +97,7 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 		}
 		return isExited;
 	}
-	
+
 	void setEndX(double endX) {
 		mover.setEndXForMover(endX);
 		switcher.setEndXForSwitch(endX);
@@ -106,4 +107,4 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 		mover.setEndYForMover(endY);
 		switcher.setEndYForSwitch(endY);
 	}
- }
+}

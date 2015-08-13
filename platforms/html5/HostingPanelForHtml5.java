@@ -21,7 +21,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.github.a2g.core.interfaces.IHostingPanel;
 
 public class HostingPanelForHtml5 extends
-		com.google.gwt.user.client.ui.SimplePanel implements IHostingPanel {
+com.google.gwt.user.client.ui.SimplePanel implements IHostingPanel {
 	Canvas canvas;
 	Canvas backBuffer;
 

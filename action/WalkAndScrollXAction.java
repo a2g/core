@@ -36,7 +36,7 @@ public class WalkAndScrollXAction extends ChainableAction{
 		super(parent);
 		mover = new MovePerformer(ocode);
 		mover.setToInitialAtEndForMover(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false)
-		
+
 		walker = new WalkPerformer(ocode);
 		scroller = new ScrollPerformer();
 	}
@@ -45,13 +45,13 @@ public class WalkAndScrollXAction extends ChainableAction{
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
+			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory)
 	{
-		mover.setSceneForMover(scene); 
+		mover.setSceneForMover(scene);
 		walker.setSceneForWalk(scene);
 		scroller.setScene(scene);
 	}
-	  
+
 
 	@Override
 	public void runGameAction() {
@@ -67,22 +67,22 @@ public class WalkAndScrollXAction extends ChainableAction{
 		PointF pt = mover.onUpdateCalculateForMover(progress);
 		mover.onUpdateCalculateForMover(progress, pt);
 		scroller.onUpdateForScroll(progress);
-		
+
 	}
 
 	@Override
 	// method in animation
-	protected boolean onCompleteGameAction() { 
+	protected boolean onCompleteGameAction() {
 		onUpdateGameAction(1.0);
 		mover.onCompleteForMover();
 		scroller.onCompleteForScroll();
 		return false;
 	}
 
-	 
 
 
-	 
+
+
 
 
 }

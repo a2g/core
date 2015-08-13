@@ -32,7 +32,7 @@ import com.github.a2g.core.primitive.LogNames;
 public class SceneObjectCollection {
 	//private static final Logger LOADING = Logger.getLogger(LogNames.LOADING);
 	private static final Logger ADDING_ANIM_TO_SOC_MAP = Logger.getLogger(LogNames.ADDING_ANIM_TO_SOC_MAP);
-	
+
 	private List<String> theOtids;
 	private List<Short> theOCodes;
 	private ArrayList<SceneObject> list;
@@ -44,7 +44,7 @@ public class SceneObjectCollection {
 		list = new ArrayList<SceneObject>();
 		this.theAtidMap = new TreeMap<String, Animation>();
 	}
-	
+
 	public void clear()
 	{
 		theOtids.clear();
@@ -78,7 +78,7 @@ public class SceneObjectCollection {
 			throw new NoSuchElementException();
 		return list.get(index);
 	}
-	
+
 
 	public SceneObject getByOtid(String otid) {
 		int i = this.theOtids.indexOf(otid);
@@ -88,7 +88,7 @@ public class SceneObjectCollection {
 		}
 		return this.getByIndex(i);
 	}
-	
+
 	public int getIndexByOtid(String otid) {
 		int index = this.theOtids.indexOf(otid);
 		return index;
@@ -112,7 +112,7 @@ public class SceneObjectCollection {
 			this.theAtidMap.put(atid, anim);
 			ADDING_ANIM_TO_SOC_MAP.log(Level.FINE, "getAnimationBy <" +atid +">");
 			throw new NoSuchElementException("Animation getAnimationByAtid");
-			
+
 		}
 		return anim;
 	}
@@ -125,6 +125,6 @@ public class SceneObjectCollection {
 		}
 	}
 
-	
+
 
 }

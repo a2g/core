@@ -31,7 +31,7 @@ import com.github.a2g.core.action.performer.TalkPerformer.NonIncrementing;
 
 public class TalkAction extends ChainableAction {
 	TalkPerformer talker;
-	
+
 	public TalkAction(BaseAction parent, String atid, String fullSpeech) {
 		super(parent);
 		talker = new TalkPerformer(atid, fullSpeech);
@@ -40,13 +40,13 @@ public class TalkAction extends ChainableAction {
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
+			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory)
 	{
 		talker.setMaster(master);
 		talker.setScene(scene);
 	}
-	
-	 
+
+
 	@Override
 	public void runGameAction() {
 		double duration = talker.run();
@@ -64,7 +64,7 @@ public class TalkAction extends ChainableAction {
 		boolean result = talker.onComplete();
 		return result;
 	}
-  
+
 	public void setNonIncrementing(NonIncrementing nonIncrementing) {
 		talker.setNonIncrementing(nonIncrementing);
 	}

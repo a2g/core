@@ -29,6 +29,13 @@ import com.github.a2g.core.interfaces.IScenePresenterFromMoveAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.primitive.PointF;
 
+/**
+ * 
+ * This only uses a walk,talk and move NOT switch.
+ * As a result there is no collision detection
+ * So a walk-talk (eg in an action), can
+ * end up running over the boundary.
+ */
 public class WalkAndTalkAction extends ChainableAction{
 
 	MovePerformer mover;
@@ -46,15 +53,15 @@ public class WalkAndTalkAction extends ChainableAction{
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
+			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory)
 	{
-		walker.setSceneForWalk(scene); 
+		walker.setSceneForWalk(scene);
 		mover.setSceneForMover(scene);
 		talker.setScene(scene);
 		talker.setMaster(master);
 	}
-	
-	  
+
+
 
 	@Override
 	public void runGameAction() {
@@ -64,7 +71,7 @@ public class WalkAndTalkAction extends ChainableAction{
 		talker.run();
 		double duration = mover.runForMover();
 		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
-		
+
 		this.run((int) (duration * 1000.0));
 
 	}
@@ -74,19 +81,19 @@ public class WalkAndTalkAction extends ChainableAction{
 		PointF pt = mover.onUpdateCalculateForMover(progress);
 		mover.onUpdateCalculateForMover(progress, pt);
 		//talker.onUpdate(progress);
-		
+
 	}
 
 	@Override
 	// method in animation
-	protected boolean onCompleteGameAction() { 
+	protected boolean onCompleteGameAction() {
 		onUpdateGameAction(1.0);
 		talker.onComplete();
 		mover.onCompleteForMover();
 		return false;
 	}
 
-	 
+
 
 
 	void setEndX(double endX) {

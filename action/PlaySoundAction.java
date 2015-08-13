@@ -51,21 +51,21 @@ public class PlaySoundAction extends ChainableAction {
 		return false;
 	}
 
-	 
-	 
+
+
 
 	@Override
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
+			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory)
 	{
 		setMaster(master);
 	}
 
 	public void setMaster(IMasterPresenterFromSoundAction sayActionTest) {
 		this.master = sayActionTest;
-		
+
 	}
 
 }

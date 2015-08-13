@@ -40,11 +40,12 @@ implements IChainRootForDialog
 	public DialogChainableAction branchNormal(int branchId, String text) {
 		return new DialogTreeBranchAction(this, text, branchId, true);
 	}
-	
+
 	@Override
 	public DialogChainEndAction endDialogTree() {
 		return new DialogTreeEndAction(this);
 	}
+	@Override
 	public DialogChainEndAction chainTo(int branchId) {
 		return new DialogTreeChainToAction(this, branchId);
 	}
@@ -53,13 +54,13 @@ implements IChainRootForDialog
 	public	DialogChainableAction answer(String speech) {
 		DialogTreeTalkAction s = new DialogTreeTalkAction(this, TalkPerformer.SCENE_ANSWERER, speech);
 		return s;
-	} 
+	}
 
 	@Override
 	public	DialogChainableAction ask(String speech) {
 		DialogTreeTalkAction s = new DialogTreeTalkAction(this, TalkPerformer.SCENE_ASKER, speech);
 		return s;
-	} 
+	}
 
 	@Override
 	public DialogChainEndAction switchTo(String sceneName) {

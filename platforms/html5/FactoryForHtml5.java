@@ -68,7 +68,7 @@ public class FactoryForHtml5 implements IFactory {
 		return new CommandLinePanel(fore, back, roll);
 	}
 
-	
+
 
 	@Override
 	public ILoaderPanelFromLoaderPresenter createLoaderPanel(
@@ -123,7 +123,7 @@ public class FactoryForHtml5 implements IFactory {
 			ColorEnum back, ColorEnum rollover) {
 		return new InventoryPanel(api, fore, back, rollover);
 	}
-	
+
 	@Override
 	public ISound createSound(String url) {
 		return new SoundForHtml4(url);
@@ -134,7 +134,7 @@ public class FactoryForHtml5 implements IFactory {
 			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore,
 			ColorEnum back, ColorEnum roll) {
 		return new DialogTreePanel(master, fore, back, roll);
-		
+
 	}
 
 }

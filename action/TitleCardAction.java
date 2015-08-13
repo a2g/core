@@ -60,7 +60,7 @@ public class TitleCardAction extends ChainableAction {
 		return false;
 	}
 
-	 
+
 
 	public void setTitleCard(ITitleCardPresenterFromSingleCallPerformer titleCard) {
 		this.titleCard = titleCard;

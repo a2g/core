@@ -12,19 +12,19 @@ import com.github.a2g.core.interfaces.action.ISetBaseMiddleYByOtid;
 import com.github.a2g.core.interfaces.action.ISetCurrentFrameByOtid;
 import com.github.a2g.core.interfaces.action.ISetToInitialAnimationWithoutChangingFrameByOtid;
 
-public interface IScenePresenterFromMovePerformer 
+public interface IScenePresenterFromMovePerformer
 extends IGetOtidByCode
 
 , IGetAtidOfCurrentAnimationByOtid
 , IGetBaseMiddleXByOtid
 , IGetBaseMiddleYByOtid
 , IGetScreenCoordsPerSecondByOtid
-, ICurrentAnimationByAtid 
+, ICurrentAnimationByAtid
 , IGetNumberOfFramesByAtid
-, ISetBaseMiddleXByOtid 
-, ISetBaseMiddleYByOtid 
+, ISetBaseMiddleXByOtid
+, ISetBaseMiddleYByOtid
 , ISetToInitialAnimationWithoutChangingFrameByOtid
-, ISetCurrentFrameByOtid 
+, ISetCurrentFrameByOtid
 {
 
 }

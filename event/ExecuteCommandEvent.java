@@ -19,7 +19,7 @@ package com.github.a2g.core.event;
 import com.google.gwt.event.shared.GwtEvent;
 
 public class ExecuteCommandEvent extends
-		GwtEvent<ExecuteCommandEventHandlerAPI> {
+GwtEvent<ExecuteCommandEventHandlerAPI> {
 	public static Type<ExecuteCommandEventHandlerAPI> TYPE = new Type<ExecuteCommandEventHandlerAPI>();
 	// private final FriendSummaryDTO friend;
 	private final double x;

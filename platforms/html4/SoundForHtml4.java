@@ -3,7 +3,7 @@ package com.github.a2g.core.platforms.html4;
 import com.github.a2g.core.interfaces.ISound;
 import com.google.gwt.media.client.Audio;
 
-public class SoundForHtml4 
+public class SoundForHtml4
 implements ISound{
 	Audio audio;
 	public SoundForHtml4(String location)
@@ -26,8 +26,8 @@ implements ISound{
 	}
 	@Override
 	public void stop() {
-		audio.setCurrentTime(0.0); 
-		
+		audio.setCurrentTime(0.0);
+
 	}
 
 }

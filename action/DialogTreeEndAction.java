@@ -51,7 +51,7 @@ public class DialogTreeEndAction extends DialogChainEndAction{
 		return false;
 	}
 
-	 
+
 
 	public void setDialogTree(IDialogTreePresenterFromEndAction dialogTree) {
 		this.dialogTree = dialogTree;

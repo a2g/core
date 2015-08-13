@@ -14,9 +14,9 @@ import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.primitive.PointF;
 
 public class MasterProxyForActions implements IOnFillLoadList,
-		IMasterPresenterFromActions, IInventoryPresenterFromActions,
-		IScenePresenterFromActions, IDialogTreePresenterFromActions,
-		ITitleCardPresenterFromActions {
+IMasterPresenterFromActions, IInventoryPresenterFromActions,
+IScenePresenterFromActions, IDialogTreePresenterFromActions,
+ITitleCardPresenterFromActions {
 	private MasterPresenter master;
 
 	MasterProxyForActions(MasterPresenter master) {
@@ -26,7 +26,7 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	@Override
 	public void setVisibleByItid(String itid, boolean isVisible) {
 		master.getInventoryPresenter().getInventory().items().getByItid(itid)
-				.setVisible(isVisible);
+		.setVisible(isVisible);
 
 	}
 
@@ -61,8 +61,8 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	public void alignBaseMiddleOfOldFrameToFrameOfThisAnimationByAtid(
 			String atid, int frame) {
 		master.getScenePresenter()
-				.alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
-						frame, atid);
+		.alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
+				frame, atid);
 	}
 
 	@Override
@@ -143,7 +143,7 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	public void setCurrentFrameByOtid(String otid, int frame) {
 		if (master.getScenePresenter().getObjectByOtid(otid) != null) {
 			master.getScenePresenter().getObjectByOtid(otid)
-					.setCurrentFrame(frame);
+			.setCurrentFrame(frame);
 		}
 	}
 
@@ -151,7 +151,7 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	public void setToInitialAnimationWithoutChangingFrameByOtid(String otid) {
 		if (master.getScenePresenter().getObjectByOtid(otid) != null)
 			master.getScenePresenter().getObjectByOtid(otid)
-					.setToInitialAnimationWithoutChangingFrame();
+			.setToInitialAnimationWithoutChangingFrame();
 
 	}
 
@@ -223,7 +223,7 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	@Override
 	public void setDisplayNameByOtid(String otid, String displayName) {
 		master.getScenePresenter().getObjectByOtid(otid)
-				.setDisplayName(displayName);
+		.setDisplayName(displayName);
 
 	}
 
@@ -304,7 +304,7 @@ public class MasterProxyForActions implements IOnFillLoadList,
 	@Override
 	public void setDialogTreeVisible(boolean isInDialogTreeMode) {
 		master.getDialogTreePresenter()
-				.setDialogTreeVisible(isInDialogTreeMode);
+		.setDialogTreeVisible(isInDialogTreeMode);
 	}
 
 	@Override
@@ -313,7 +313,7 @@ public class MasterProxyForActions implements IOnFillLoadList,
 
 	}
 
-	
+
 
 	@Override
 	public void addEssential(ILoad blah) {
@@ -349,7 +349,7 @@ public class MasterProxyForActions implements IOnFillLoadList,
 		object.setCurrentAnimationAndFrame(atid, frame);
 	}
 
-	
+
 
 	@Override
 	public void playSoundByStid(String stid) {
@@ -390,9 +390,9 @@ public class MasterProxyForActions implements IOnFillLoadList,
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
 		object.setInitialAnimation(atid);
 	}
- 
-	 
-	
-	
+
+
+
+
 
 }

@@ -6,23 +6,23 @@ import com.github.a2g.core.interfaces.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.primitive.PointF;
 
 public class BoundaryCalculator {
-	
+
 	private IScenePresenterFromBoundaryCalculator scene;
 	private ArrayList<PointF> gatePoints;
 	private ArrayList<String> gateDests;
 
 	private static String TREAT_GATE_AS_POINT = "TREAT_GATE_AS_POINT";
 
-	
+
 	public BoundaryCalculator(IScenePresenterFromBoundaryCalculator master)
 	{
 		this.scene = master;
 		this.gatePoints = new ArrayList<PointF>();
 		this.gateDests = new ArrayList<String>();
-	
+
 	}
 	public ArrayList<PointF> getGatePoints(){ return gatePoints;}
-	
+
 	public void addBoundaryGate(Object name, PointF a, PointF b) {
 		gateDests.add(name==null? "" : name.toString());
 		gatePoints.add(a);
@@ -41,8 +41,8 @@ public class BoundaryCalculator {
 		this.gatePoints.clear();
 		this.gateDests.clear();
 	}
-	
-	public boolean doSwitchIfBeyondGate(PointF tp) 
+
+	public boolean doSwitchIfBeyondGate(PointF tp)
 	{
 		String foundDest = "";
 		if (gatePoints.size() > 2) {
@@ -66,7 +66,7 @@ public class BoundaryCalculator {
 		}
 		return false;
 	}
-	
+
 	public boolean isInANoGoZone(PointF tp)
 	{
 		if (gatePoints.size() < 2)
@@ -96,7 +96,7 @@ public class BoundaryCalculator {
 		}
 		return false;
 	}
-	
+
 
 	private boolean isBetweenSpokesAndOnWrongSide(PointF p1, PointF p2, PointF tp) {
 		PointF c = getGatePointsCentre();
@@ -110,7 +110,7 @@ public class BoundaryCalculator {
 			return false;
 		return true;
 	}
-	
+
 
 	public PointF getGatePointsCentre() {
 		double totalX = 0;
@@ -118,7 +118,7 @@ public class BoundaryCalculator {
 		int numberOfExtras = 0;
 		double size = gateDests.size();
 		for (int i = 0; i < size; i++) {
-			// if it's NOT a point, then we process the first 
+			// if it's NOT a point, then we process the first
 			// point in the pair.
 			if (gateDests.get(i)!=TREAT_GATE_AS_POINT) {
 				PointF bp = gatePoints.get(i * 2);
@@ -127,7 +127,7 @@ public class BoundaryCalculator {
 				numberOfExtras++;
 			}
 
-			// both gates and single points 
+			// both gates and single points
 			// have a valid second point
 			// so we always process
 			PointF bp = gatePoints.get(i * 2 + 1);
@@ -136,14 +136,14 @@ public class BoundaryCalculator {
 		}
 		double numberOfPoints = size + numberOfExtras;
 		return new PointF(totalX / numberOfPoints
-				        , totalY / numberOfPoints);
+				, totalY / numberOfPoints);
 	}
-	
+
 	private PointF getMidPoint(PointF a, PointF b) {
 		return new PointF(a.getX()/2 + b.getX()/2
-				        , a.getY()/2 + b.getY()/2);
+				, a.getY()/2 + b.getY()/2);
 	}
-	
+
 	private boolean arePointsSameSide(PointF A, PointF B, PointF tp, PointF c) {
 		// if a point is on a line the result will be zero, when substituted
 		// in to the line equation
@@ -156,5 +156,5 @@ public class BoundaryCalculator {
 				- (B.getY() - A.getY()) * (c.getX() - A.getX());
 		return result1 * result2 > 0;
 	}
-	
+
 }

@@ -26,17 +26,17 @@ public interface IScenePresenterFromSingleCallPerformer
 extends
 ISetBaseMiddleXByOtid
 , ISetBaseMiddleYByOtid
-, IGetOtidByCode 
+, IGetOtidByCode
 , IAlignBaseMiddleOfOldFrameToFrameOfThisAnimationByAtid
 , ISetCurrentFrameByOtid
 , IGetOtidByIndex
 , ISetVisibleByOtid
 , IGetSceneObjectCount
-, ICurrentAnimationByAtid 
+, ICurrentAnimationByAtid
 , ISetDisplayNameByOtid
 , ISetInitialAnimationByAtid
 , ISetXByOtid
-, ISetYByOtid 
+, ISetYByOtid
 , ISetValue
 , IShareWinning
 , ISetSceneTalkerByAtid
@@ -47,6 +47,6 @@ ISetBaseMiddleXByOtid
 , ISetAnimationAsObjectInitial
 {
 
-	
-	
+
+
 }

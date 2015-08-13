@@ -3,8 +3,8 @@ package com.github.a2g.core.interfaces;
 import com.github.a2g.core.interfaces.action.IGetCameraX;
 import com.github.a2g.core.interfaces.action.ISetCameraX;
 
-public interface IScenePresenterFromScrollPerformer 
-extends 
+public interface IScenePresenterFromScrollPerformer
+extends
 IGetCameraX,
 ISetCameraX {
 

@@ -70,7 +70,7 @@ public class RectF {
 	public double getHeight() {
 		return getBottom() - getTop();
 	}
-	
+
 	public PointF getCenter() {
 		return new PointF(left+(getWidth()/2),top+(getHeight()/2));
 	}

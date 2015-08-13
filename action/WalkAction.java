@@ -27,10 +27,18 @@ import com.github.a2g.core.interfaces.IScenePresenterFromMoveAction;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.primitive.PointF;
 
-public class WalkAction extends ChainableAction{
-
+/**
+ * 
+ * This only uses a walker and a mover NOT a switcher.
+ * As a result there is no collision detection
+ * So a plain-old walk, (eg in an action) can
+ * end up running over the boundary.
+ */
+public class WalkAction extends ChainableAction
+{
 	MovePerformer mover;
 	WalkPerformer walker;
+
 	public WalkAction(BaseAction parent, short ocode) {
 		super(parent);
 		mover = new MovePerformer(ocode);
@@ -42,7 +50,7 @@ public class WalkAction extends ChainableAction{
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
+			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory)
 	{
 		mover.setSceneForMover(scene);
 		walker.setSceneForWalk(scene);
@@ -63,7 +71,7 @@ public class WalkAction extends ChainableAction{
 
 	@Override
 	// method in animation
-	protected boolean onCompleteGameAction() { 
+	protected boolean onCompleteGameAction() {
 		onUpdateGameAction(1.0);
 		mover.onCompleteForMover();
 		return false;
@@ -76,16 +84,12 @@ public class WalkAction extends ChainableAction{
 		mover.setEndYForMover(endY);
 	}
 
-
-
-
 	public void setScene(IScenePresenterFromMoveAction scene) {
 		mover.setSceneForMover(scene);
 	}
 
 	public void setToInitialAtEnd(boolean isSetToInitialAtEnd) {
 		mover.setToInitialAtEndForMover(isSetToInitialAtEnd);
-		
-	}
 
+	}
 }

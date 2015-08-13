@@ -35,13 +35,11 @@ import com.github.a2g.core.action.DialogTreeTalkAction;
 import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
-import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.action.DialogChainableAction;
 import com.github.a2g.core.event.PropertyChangeEvent;
 import com.github.a2g.core.event.PropertyChangeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
-import com.github.a2g.core.interfaces.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.interfaces.ISound;
 import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActionRunner;
@@ -73,12 +71,12 @@ IMasterPresenterFromDialogTree, IMasterPresenterFromTimer,
 IMasterPresenterFromBundle, IMasterPresenterFromLoader,
 IMasterPresenterFromCommandLine, IMasterPresenterFromActionRunner,
 IMasterPresenterFromInventory, IMasterPresenterFromVerbs,
-IMasterPresenterFromTitleCard, 
+IMasterPresenterFromTitleCard,
 PropertyChangeEventHandlerAPI
 {
 	private static final Logger LOADING = Logger.getLogger(LogNames.LOADING);
 	private static final Logger COMMAND_AUTOPLAY = Logger.getLogger(LogNames.COMMANDS_AUTOPLAY);
-	
+
 	MasterProxyForGameScene proxyForGameScene;
 	private CommandLinePresenter commandLinePresenter;
 	private InventoryPresenter inventoryPresenter;
@@ -100,7 +98,7 @@ PropertyChangeEventHandlerAPI
 	private ActionRunner onEveryFrameActionRunner;
 
 	private InsertionPointCalculator insertionPointCalculator;
-	
+
 
 	private String lastSceneAsString;
 	private String switchDestination;
@@ -108,7 +106,7 @@ PropertyChangeEventHandlerAPI
 	private MasterProxyForActions proxyForActions;
 	private Map<String, ISound> mapOfSounds;
 	private boolean isAutoplayCancelled;
-	
+
 	public MasterPresenter(final IHostingPanel panel, EventBus bus,
 			IHostFromMasterPresenter host) {
 		this.bus = bus;
@@ -156,7 +154,7 @@ PropertyChangeEventHandlerAPI
 		.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
 	}
 
-	
+
 
 	public void setCallbacks(IGameScene callbacks) {
 		if (this.sceneHandlers != null) {
@@ -216,7 +214,7 @@ PropertyChangeEventHandlerAPI
 
 		// if its adding an animation to an existing object then use preceding.
 		numberPrefix = scenePresenter.getExistingPrefixIfAvailable(ocode, numberPrefix);
-		
+
 		int before = insertionPointCalculator.getIndexToInsertAt(numberPrefix);
 		insertionPointCalculator.updateTheListOfIndexesToInsertAt(numberPrefix);
 
@@ -230,7 +228,7 @@ PropertyChangeEventHandlerAPI
 
 	public void executeActionWithDialogActionRunner(BaseAction a) {
 		if (a == null) {
-			// null must get turned in to 
+			// null must get turned in to
 			// a DialogTreeEndAction
 			// since
 			// a) when it falls thru the switch
@@ -259,7 +257,7 @@ PropertyChangeEventHandlerAPI
 
 		doCommandActionRunner.runAction(a);
 	}
-	
+
 	public void executeActionWithOnEveryFrameActionRunner(BaseAction a) {
 		if (a == null) {
 			a = new DoNothingAction(createChainRootAction());
@@ -349,31 +347,31 @@ PropertyChangeEventHandlerAPI
 		return property != 0;
 	}
 
-//	@Override
-//	public void switchToSceneFromAction(String scene) {
-//		cancelOnEveryFrameTimer();
-//		this.dialogActionRunner.cancel();
-//
-//		// now wait for the last onEveryFrame to execute
-//		// .. which is about 40 milliseconds
-//		// (an onEveryFrame can go more than
-//		// this, but usually not).
-//		switchTimer = getFactory().createSystemTimer(this);
-//		switchDestination = scene;
-//		switchTimer.scheduleRepeating(40);
-//	}
+	//	@Override
+	//	public void switchToSceneFromAction(String scene) {
+	//		cancelOnEveryFrameTimer();
+	//		this.dialogActionRunner.cancel();
+	//
+	//		// now wait for the last onEveryFrame to execute
+	//		// .. which is about 40 milliseconds
+	//		// (an onEveryFrame can go more than
+	//		// this, but usually not).
+	//		switchTimer = getFactory().createSystemTimer(this);
+	//		switchDestination = scene;
+	//		switchTimer.scheduleRepeating(40);
+	//	}
 
 	@Override
 	public void switchToScene(String scene) {
-		
-			// since instantiateScene..ToIt does some asynchronous stuff,
-			// I thought maybe I could do it, then cancel the timers.
-			// but I've put it off til I need the microseconds.
-			cancelOnEveryFrameTimer();
-			this.dialogActionRunner.cancel();
-			setCameraToZero();// no scene is meant to keep camera position
-			this.host.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
-		
+
+		// since instantiateScene..ToIt does some asynchronous stuff,
+		// I thought maybe I could do it, then cancel the timers.
+		// but I've put it off til I need the microseconds.
+		cancelOnEveryFrameTimer();
+		this.dialogActionRunner.cancel();
+		setCameraToZero();// no scene is meant to keep camera position
+		this.host.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
+
 	}
 
 	public String getLastScene() {
@@ -411,7 +409,7 @@ PropertyChangeEventHandlerAPI
 		boolean isAddableToSaidList =this.getDialogTreePresenter().isAddableToSaidList(branchId);
 		// clear the branches
 		this.dialogTreePresenter.clearBranches();
-		
+
 		// mark speech as said, but not the escape phrase, that is golden.
 		if(branchId!=ConstantsForAPI.EXIT_DLG && isAddableToSaidList)
 		{
@@ -429,9 +427,9 @@ PropertyChangeEventHandlerAPI
 		BaseAction actionChain = sceneHandlers.onDialogTree(
 				proxyForGameScene, talk, branchId);
 		BaseAction  actionChain2 = replaceDialogChainToActionWithOnDialogTreeChain(actionChain);
-		
+
 		executeActionWithDialogActionRunner(actionChain2);
-		
+
 	}
 
 	public void callOnEnterScene() {
@@ -444,7 +442,7 @@ PropertyChangeEventHandlerAPI
 		executeActionWithDoCommandActionRunner(a);
 	}
 
-	
+
 
 	public IMasterPanelFromMasterPresenter getMasterPanel() {
 		return masterPanel;
@@ -488,8 +486,8 @@ PropertyChangeEventHandlerAPI
 		int total = loaderPresenter.getLoaders().imagesToLoad();
 		boolean isSameInventory = loaderPresenter.getLoaders()
 				.isSameInventoryAsLastTime();
-		
-	
+
+
 		// hide all visible images.
 		// (using scene's data is quicker than using scenePanel data)
 		int count = scenePresenter.getModel().objectCollection().count();
@@ -524,7 +522,7 @@ PropertyChangeEventHandlerAPI
 		this.dialogTreePresenter.setScenePixelSize(width, height >> 1);
 		this.verbsPresenter.setWidthOfScene(width);
 	}
-	
+
 	void clearMapOfSounds()
 	{
 		for (Map.Entry<String, ISound> entry : mapOfSounds.entrySet())
@@ -543,7 +541,7 @@ PropertyChangeEventHandlerAPI
 
 		// clear sounds before onFillLoadList
 		clearMapOfSounds();
-		
+
 		// then in the scene the user can overwrite this.
 		this.sceneHandlers
 		.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene));
@@ -695,19 +693,19 @@ PropertyChangeEventHandlerAPI
 		SceneObject o = this.getScenePresenter().getObjectByOtid(otid);
 		if(o==null)
 			return new SentenceItem();
-		
+
 		return new SentenceItem(o.getDisplayName(),o.getOtid(),code);
 	}
-	
+
 	SentenceItem getSIOfVerb(int vcode)
 	{
 		Verb v = this.verbsPresenter.getVerbsModel().items().getVerbByCode(vcode);
 		if(v==null)
 			return new SentenceItem();
-		
+
 		return new SentenceItem(v.getdisplayText(), v.getVtid(), vcode);
 	}
-	
+
 	void linkUpperMostActionOfAToB(BaseAction a, BaseAction b)
 	{
 		for(;;)
@@ -718,7 +716,7 @@ PropertyChangeEventHandlerAPI
 		}
 		a.setParent(b);
 	}
-	
+
 	BaseAction replaceDialogChainToActionWithOnDialogTreeChain(BaseAction b)
 	{
 		// Note: b is null in default implementation onDialogTree
@@ -742,8 +740,8 @@ PropertyChangeEventHandlerAPI
 		}
 		return a;
 	}
-	
-	
+
+
 	@Override
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,
 			SentenceItem sentenceA, SentenceItem sentenceB, double x, double y) {
@@ -754,22 +752,22 @@ PropertyChangeEventHandlerAPI
 				y + scenePresenter.getCameraY());
 
 		this.commandLinePresenter.setMouseable(false);
-		
+
 		a = replaceDoDialogActionWithOnDialogTreeChain(a);
-				
+
 		executeActionWithDoCommandActionRunner(a);
 
 		host.setLastCommand(x, y, verbAsVerbEnumeration,
 				sentenceA.getTextualId(), sentenceB.getTextualId());
 
 	}
- 
+
 	void ProcessAutoplayCommand(int id)
 	{
 		//ignore id==3, which is the oneveryframe action runner
 		if(id==3)
 			return;
-		
+
 		AutoplayCommand cmd  = this.host.getNextAutoplayAction(proxyForGameScene);
 		if(cmd==null)
 		{
@@ -777,13 +775,13 @@ PropertyChangeEventHandlerAPI
 		}
 		else
 		{
-			
+
 			BaseAction a = null;
 			if(cmd.getVerb()==ConstantsForAPI.DIALOG)
 			{
 				int branchId  = cmd.getBranch();
 				boolean isValid = dialogTreePresenter.isBranchValid(branchId);
-				
+
 				// getLineOfDialog
 				if(!isValid && branchId!=ConstantsForAPI.EXIT_DLG)
 				{
@@ -800,18 +798,18 @@ PropertyChangeEventHandlerAPI
 					// SLEEP = sleep for 100ms
 					a = createChainRootAction().sleep(cmd.getInt1());
 					COMMAND_AUTOPLAY.log(Level.FINE, "SLEEP "+cmd.getInt1());
-					
+
 				}
 				else if(cmd.getVerb()==ConstantsForAPI.SWITCH)
 				{
 					a = createChainRootAction().switchTo(cmd.getString());
 					COMMAND_AUTOPLAY.log(Level.FINE, "SWITCH "+cmd.getString());
-					
+
 				}
-				else 
+				else
 				{
 					COMMAND_AUTOPLAY.log(Level.FINE,"autoplay " +cmd.getVerbAsString()+" "+getSIOfObject(cmd.getInt1()).getDisplayName()+ " "+ getSIOfObject(cmd.getInt2()).getDisplayName());
-					
+
 					this.commandLinePresenter.setVerbItemItem(getSIOfVerb(cmd.getVerb()), getSIOfObject(cmd.getInt1()), getSIOfObject(cmd.getInt2()));
 
 					//otherwise ask the sceneHanders what the outcome is.
@@ -819,7 +817,7 @@ PropertyChangeEventHandlerAPI
 					SentenceItem o2 = new SentenceItem("","",cmd.getInt2());
 					a = this.sceneHandlers.onDoCommand(proxyForGameScene,
 							createChainRootAction(), cmd.getVerb(),o1,o2,cmd.getDouble1(),cmd.getDouble2());
-					
+
 					if (a instanceof DoNothingAction) {
 						cancelAutoplay(cmd);
 						titleCardPresenter.setText("action returned do nothing");
@@ -833,7 +831,7 @@ PropertyChangeEventHandlerAPI
 			}
 		}
 	}
-	
+
 	void cancelAutoplay(AutoplayCommand cmd)
 	{
 		if(!isAutoplayCancelled)
@@ -846,7 +844,7 @@ PropertyChangeEventHandlerAPI
 	@Override
 	public void actionFinished(int id) {
 		if(true)// this used to be id==2, but will leave until this yields bugs
-			
+
 		{
 			if(this.dialogTreePresenter.getNumberOfVisibleBranches()==0)
 			{
@@ -857,14 +855,14 @@ PropertyChangeEventHandlerAPI
 		this.commandLinePresenter.setMouseable(true);
 		this.commandLinePresenter.clear();
 
-		if (masterPanel.getActiveState() == IMasterPanelFromMasterPresenter.GuiStateEnum.OnEnterScene) 
+		if (masterPanel.getActiveState() == IMasterPanelFromMasterPresenter.GuiStateEnum.OnEnterScene)
 		{
 			this.masterPanel
 			.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene);
 		}
 		IMasterPanelFromMasterPresenter.GuiStateEnum state = masterPanel.getActiveState();
 		if (state == IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene||
-			state == IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree) 
+				state == IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree)
 		{
 			if(this.host.isAutoplay() && !isAutoplayCancelled)
 			{
@@ -931,7 +929,7 @@ PropertyChangeEventHandlerAPI
 		ChainRootAction npa = new ChainRootAction();
 		return npa;
 	}
-	
+
 	public DialogChainRootAction createDialogChainRootAction() {
 		DialogChainRootAction npa = new DialogChainRootAction();
 		return npa;
@@ -1025,7 +1023,7 @@ PropertyChangeEventHandlerAPI
 	@Override
 	public void playSoundByStid(String stid) {
 		mapOfSounds.get(stid).play();
-		
+
 	}
 
 	@Override
@@ -1035,11 +1033,11 @@ PropertyChangeEventHandlerAPI
 	}
 
 	@Override
-	public boolean addMP3ForASoundObject(String name, String location) 
+	public boolean addMP3ForASoundObject(String name, String location)
 	{
 		ISound sound = this.getFactory().createSound(location);
 		this.mapOfSounds.put(name, sound);
-		
+
 		return false;
 	}
 

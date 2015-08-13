@@ -34,7 +34,7 @@ import com.google.gwt.event.shared.EventBus;
 public class CommandLinePresenter implements ExecuteCommandEventHandlerAPI,
 SetRolloverEventHandlerAPI, ICommandLinePresenter {
 	private static final Logger COMMAND_MANUAL = Logger.getLogger(LogNames.COMMANDS_VIA_GUI);
-	
+
 	private IMasterPresenterFromCommandLine api;
 	private ICommandLinePanelFromCommandLinePresenter view;
 	private CommandLine model;

@@ -25,7 +25,7 @@ import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
 /**
  * Needs to be it's own class because it gets searched
- * for explicitly (see MasterPresenter) 
+ * for explicitly (see MasterPresenter)
  */
 public class DialogTreeChainToAction extends DialogChainEndAction {
 
@@ -55,7 +55,7 @@ public class DialogTreeChainToAction extends DialogChainEndAction {
 		return false;
 	}
 
-	 
+
 
 	public void setBranchId(int branchId) {
 		this.branchId = branchId;

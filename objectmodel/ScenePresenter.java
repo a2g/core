@@ -31,7 +31,7 @@ import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.primitive.RectF;
 
-public class ScenePresenter 
+public class ScenePresenter
 implements IScenePresenter
 , IScenePresenterFromBoundaryCalculator {
 	public static final short DEFAULT_SCENE_OBJECT = -1;
@@ -41,7 +41,7 @@ implements IScenePresenter
 	private IScenePanelFromScenePresenter view;
 	private double cameraX;
 	private double cameraY;
-	
+
 	private String sceneTalkerAtid;
 	private String defaultSceneObjectOtid;
 	private ColorEnum talkingColorForScene;
@@ -63,13 +63,13 @@ implements IScenePresenter
 		this.width = 320;
 		this.height = 180;
 		this.boundaryCalculator = new BoundaryCalculator(this);
-		
+
 		this.scene = new Scene();
 		this.view = master.getFactory().createScenePanel(this);
 		panel.setThing(view);
 		view.setVisible(true);
 		defaultSceneObjectOtid = "ScenePresenter::getDefaultSceneObjectOtid was used before it was initialized";
-		
+
 		talkingColorForScene = ColorEnum.Fuchsia;
 	}
 
@@ -101,10 +101,10 @@ implements IScenePresenter
 	}
 
 	public void clearEverythingExceptView() {
-		
+
 		scene.objectCollection().clear();
 	}
-	
+
 	public void clearView()
 	{
 		view.clear();
@@ -223,7 +223,7 @@ implements IScenePresenter
 			Image i = fc.getByIndex(frame);
 			if(i!=null)
 				toReturn = i.getBoundingRect();
-			else 
+			else
 				assert(false);
 		}
 		return toReturn;
@@ -233,7 +233,7 @@ implements IScenePresenter
 	public double getXByOtid(String otid) {
 		return this.scene.objectCollection().getByOtid(otid).getX();
 	}
-	
+
 
 	@Override
 	public double getYByOtid(String otid) {
@@ -286,14 +286,14 @@ implements IScenePresenter
 	public void setSceneTalkerAtid(String sceneTalkerAtid) {
 		this.sceneTalkerAtid = sceneTalkerAtid;
 	}
-	
+
 	public String getSceneAskerAtid() {
 		if(!sceneAskerAtid.isEmpty())
 			return sceneAskerAtid;
 		String nextBest = this.getSceneTalkerAtid();
 		return nextBest;
 	}
-	
+
 	public void setSceneAskerAtid(String sceneAskerAtid) {
 		this.sceneAskerAtid = sceneAskerAtid;
 	}
@@ -303,12 +303,12 @@ implements IScenePresenter
 		String nextBest = this.getSceneTalkerAtid();
 		return nextBest;
 	}
-	
+
 	public void setSceneAnswererAtid(String sceneAnswererAtid) {
 		this.sceneAnswererAtid = sceneAnswererAtid;
 	}
-	
-	
+
+
 
 	public String getDefaultSceneObjectOtid() {
 		return defaultSceneObjectOtid;
@@ -346,7 +346,7 @@ implements IScenePresenter
 	public void switchToScene(String foundDest) {
 		master.switchToScene(foundDest);
 	}
-	
+
 
 	public void addBoundaryGate(double tlx,double tly, double brx,double bry, Object sceneToSwitchTo) {
 		boundaryCalculator.addBoundaryGate(sceneToSwitchTo,  new PointF(tlx,tly), new PointF(brx,bry));
@@ -355,14 +355,14 @@ implements IScenePresenter
 	public void addBoundaryPoint(double x, double y) {
 		boundaryCalculator.addBoundaryPoint(new PointF(x,y));
 	}
-	
-	 
+
+
 	public boolean isInANoGoZone(PointF tp) {
 		return boundaryCalculator.isInANoGoZone(tp);
 	}
 
-	 
-	public boolean doSwitchIfBeyondGate(PointF tp) 
+
+	public boolean doSwitchIfBeyondGate(PointF tp)
 	{
 		return boundaryCalculator.doSwitchIfBeyondGate(tp);
 	}
@@ -378,5 +378,5 @@ implements IScenePresenter
 	}
 
 
-	
+
 };

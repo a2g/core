@@ -27,7 +27,7 @@ import com.github.a2g.core.interfaces.IHostingPanel;
 @SuppressWarnings("serial")
 public class HostingPanelForJava extends JPanel implements IHostingPanel
 {
-	
+
 	public HostingPanelForJava(HostingPanelForJava another)
 	{
 		setTheOnlyLayoutNecessary();

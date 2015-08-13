@@ -31,9 +31,9 @@ public class DialogTree {
 		subBranches = new LinkedList<Integer>();
 		linesOfDialog = new LinkedList<String>();
 		mapOfIsAddableToSaidSpeechIndexedByBranch = new TreeMap<Integer,Boolean>();
-		
+
 	}
-	
+
 	String getDialogForId(int id)
 	{
 		for(int i=0;i<subBranches.size();i++)
@@ -65,7 +65,7 @@ public class DialogTree {
 	public List<String> getLinesOfDialog() {
 		return linesOfDialog;
 	}
-	
+
 	public boolean isAddableToSaidList(int branchId) {
 		if(this.mapOfIsAddableToSaidSpeechIndexedByBranch.containsKey(branchId))
 			return mapOfIsAddableToSaidSpeechIndexedByBranch.get(branchId);

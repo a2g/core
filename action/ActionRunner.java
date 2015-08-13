@@ -34,10 +34,10 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 
 	private static final Logger RUNNER = Logger.getLogger(LogNames.RUNNER);
 	private static final Logger ACTIONS_EXECUTED = Logger.getLogger(LogNames.ACTIONS_EXECUTED);
-	
-	
+
+
 	private static final Logger RUNNER_REFCOUNT = Logger.getLogger(LogNames.RUNNER_REFCOUNT);
-	
+
 	protected ArrayList<ArrayList<BaseAction>> list;
 	private ArrayList<BaseAction> parallelActionsToWaitFor;
 	private int numberOfParallelActionsToWaitFor;
@@ -48,7 +48,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 	private IDialogTreePresenterFromActions dt;
 	private ITitleCardPresenterFromActions tc;
 	private IInventoryPresenterFromActions inv;
-	
+
 	private IFactory factory;
 
 	public ActionRunner(IFactory factory,
@@ -137,7 +137,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 		// this only happens in gwt.
 		int count = this.parallelActionsToWaitFor.size();
 		RUNNER.log( Level.FINE, "processing "+count+" parallel actions" );
-		
+
 		for (int i = 0; i < count; i++) {
 			BaseAction a = this.parallelActionsToWaitFor.get(i);
 
@@ -152,7 +152,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 			RUNNER.log( Level.FINE, "execute parallel actions "+i+" "+name );
 			ACTIONS_EXECUTED.log(Level.FINE, name);
 			a.setCallbacks(this);
-			
+
 			a.setSystemAnimation(factory.createSystemAnimation(a));
 			a.setAll(master, scene, dt, tc, inv);
 			a.runGameAction();
@@ -188,10 +188,10 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 	public void startTheNextAction(BaseAction a) {
 		this.numberOfParallelActionsToWaitFor--;
 		RUNNER_REFCOUNT.log( Level.FINE, "Release " +numberOfParallelActionsToWaitFor );
-		
+
 		if (this.numberOfParallelActionsToWaitFor == 0) {
 			RUNNER.log( Level.FINE, "Starting next action "+this.toString() );
-			
+
 			processNextListOfParallelActions();
 		}
 

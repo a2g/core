@@ -200,7 +200,6 @@ public class TalkPerformer {
 		this.scene = scene;
 	}
 
-
 	public void setMaster(IMasterPresenterFromTalkPerformer sayActionTest) {
 		this.master = sayActionTest;
 		

@@ -29,14 +29,14 @@ public class Loader implements ILoaderPresenter {
 		this.objectCache = new TreeMap<String, LoadedLoad>();
 		this.master = callbacks;
 		this.nameOfInventoryResourceUsedLastTime  ="";
-				}
+	}
 
 	@Override
 	public void onLoaderComplete(LoaderItem loader) {
 		String loaderName = loader.toString();
 		setOfCompletedLoaders.add(loaderName);
 		LoadedLoad cachedCollection = loader.getSceneObjectCollection();
-		
+
 		String combinedName = loader.getCombinedClassAndNumber();
 		assert(combinedName!=null);
 		assert(cachedCollection!=null);
@@ -140,18 +140,18 @@ public class Loader implements ILoaderPresenter {
 
 	public void clearLoaders() {
 		listOfEssentialLoaders.clear();
-		// and since we've cleared the loaders, 
+		// and since we've cleared the loaders,
 		// can we have the same inventory as last time?
 		// A: yes
 		// so we can't set it to false here.
-		
+
 	}
 
 	public void clearAllLoadedLoads() {
 		objectCache.clear();
 		setOfCompletedLoaders.clear();
-		
-		// and since we've cleared the loaders, 
+
+		// and since we've cleared the loaders,
 		// can we have the same inventory as last time?
 		// A: yes
 		// but we should add a "lose all objects" command

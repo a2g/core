@@ -20,7 +20,7 @@ import com.github.a2g.core.interfaces.ISystemAnimation;
 import com.github.a2g.core.interfaces.IBaseActionFromSystemAnimation;
 
 public class SystemAnimationForHtml4 extends
-		com.google.gwt.animation.client.Animation implements ISystemAnimation {
+com.google.gwt.animation.client.Animation implements ISystemAnimation {
 	boolean isEaseToAndFrom;
 	IBaseActionFromSystemAnimation callbacks;
 
@@ -35,7 +35,7 @@ public class SystemAnimationForHtml4 extends
 			return (1 + Math.cos(Math.PI + progress * Math.PI)) / 2;
 		else
 			return progress;
-			
+
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class SystemAnimationForHtml4 extends
 	@Override
 	public void setEaseToAndFrom(boolean isEaseToAndFrom) {
 		this.isEaseToAndFrom = isEaseToAndFrom;
-		
+
 	}
 
 }

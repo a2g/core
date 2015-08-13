@@ -47,7 +47,7 @@ implements ISound
 
 	@Override
 	public void play() {
-	
+
 		//can use this to do mp3
 		//http://stackoverflow.com/questions/3046669/how-do-i-get-a-mp3-files-total-time-in-java
 
@@ -84,12 +84,12 @@ implements ISound
 		} catch (LineUnavailableException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 
 	}
 
 	@Override
-	public double getDuration() 
+	public double getDuration()
 	{
 		return durationInSeconds;
 	}

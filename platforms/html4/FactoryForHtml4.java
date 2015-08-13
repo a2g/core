@@ -50,7 +50,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.github.a2g.core.interfaces.IHostFromMasterPresenter;
 
-public class FactoryForHtml4 
+public class FactoryForHtml4
 implements IFactory {
 
 	private EventBus bus;
@@ -69,7 +69,7 @@ implements IFactory {
 		return new CommandLinePanel(fore, back, roll);
 	}
 
-	
+
 
 	@Override
 	public IInventoryPanelFromInventoryPresenter createInventoryPanel(
@@ -135,7 +135,7 @@ implements IFactory {
 			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore,
 			ColorEnum back, ColorEnum roll) {
 		return new DialogTreePanel(master, fore, back, roll);
-		
+
 	}
 
 }

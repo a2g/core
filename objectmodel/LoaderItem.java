@@ -67,7 +67,7 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 				origNumberOfImagesLeftToLoad, 0);
 	}
 
-	
+
 
 	public int getNumberOfImages() {
 		int numberOfImages = bundle.getNumberOfImagesInBundle(bundleNumber);
@@ -78,7 +78,7 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	public void onLoad(LoadEvent event) {
 		numberOfImagesLeftToLoad--;
 		//String name = this.theCurrentCacheObject.getName();
-		if (this.callbacks != null) 
+		if (this.callbacks != null)
 		{
 			this.callbacks.onImageLoaded();
 
@@ -90,7 +90,7 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	}
 
 	public void fireProgress() {
-		
+
 	}
 
 	@Override

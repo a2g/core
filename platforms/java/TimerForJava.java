@@ -20,7 +20,7 @@ import com.github.a2g.core.interfaces.ITimer;
 import com.github.a2g.core.interfaces.IMasterPresenterFromTimer;
 
 public class TimerForJava extends
-		com.github.a2g.core.platforms.java.animation.Timer implements ITimer {
+com.github.a2g.core.platforms.java.animation.Timer implements ITimer {
 	private IMasterPresenterFromTimer callback;
 
 	public TimerForJava(IMasterPresenterFromTimer callback) {

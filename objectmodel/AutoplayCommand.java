@@ -60,7 +60,7 @@ public class AutoplayCommand implements ConstantsForAPI
 		}
 		return "error, see AutoplayCommand::getVerbAsString";
 	}
-	
+
 	int getInt1(){ return int1;}
 	int getInt2(){ return int2;}
 	int getBranch(){ return int1;}
@@ -72,7 +72,7 @@ public class AutoplayCommand implements ConstantsForAPI
 	}
 
 	public AutoplayCommand getParent()
-	{ 
+	{
 		return parent;
 	}
 
@@ -89,12 +89,12 @@ public class AutoplayCommand implements ConstantsForAPI
 		AutoplayCommand a = new AutoplayCommand(this, ConstantsForAPI.WALK,obj,1,"vodd",x,y);
 		return a;
 	}
-	
+
 	public AutoplayCommand walk(double x, double y) {
 		AutoplayCommand a = new AutoplayCommand(this, ConstantsForAPI.WALK,1,1,"vdd",x,y);
 		return a;
 	}
-	
+
 	public AutoplayCommand switchTo(String sceneName) {
 		this.verb = ConstantsForAPI.SWITCH;
 		AutoplayCommand a = new AutoplayCommand(this, verb,1,1,sceneName,0.0,0.0);
@@ -108,7 +108,7 @@ public class AutoplayCommand implements ConstantsForAPI
 	public AutoplayCommand talk(short obj) {
 		return generic(ConstantsForAPI.TALK, obj);
 	}
-	
+
 	public AutoplayCommand walk(short obj) {
 		return generic(ConstantsForAPI.WALK, obj);
 	}
@@ -148,9 +148,9 @@ public class AutoplayCommand implements ConstantsForAPI
 	public AutoplayCommand turnOn(short obj) {
 		return generic(ConstantsForAPI.TURN_ON, obj);
 	}
-	
+
 	//private
-	
+
 	// eg use, throw
 	private AutoplayCommand generic(int verb, short obj1, short obj2) {
 		AutoplayCommand a = new AutoplayCommand(this, verb,obj1,obj2,"voo",0.0,0.0);

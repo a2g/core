@@ -50,7 +50,7 @@ public class ChainRootAction extends ChainableAction {
 		this.parent = parent;
 	}
 
-	
+
 
 	@Override
 	public void setAll(IMasterPresenterFromActions master,
@@ -61,5 +61,5 @@ public class ChainRootAction extends ChainableAction {
 
 	}
 
-	
+
 }

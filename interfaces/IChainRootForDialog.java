@@ -8,12 +8,12 @@ public interface IChainRootForDialog {
 	DialogChainableAction ask(String speech);
 	DialogChainableAction branchNormal(int branchId, final boolean isOkToAdd, String text);
 	DialogChainableAction branchNormal(int branchId, String text) ;
-	
+
 	DialogChainableAction setValue(String key, int value) ;
 	DialogChainableAction setInventoryVisible(int redNote, boolean b);
 	DialogChainableAction sleep(int milliseconds);
 	DialogChainableAction setInitialAnimation(String atid);
-	
+
 	DialogChainEndAction  endDialogTree();
 	DialogChainEndAction  chainTo(int branchId);
 	DialogChainEndAction  switchTo(String string);

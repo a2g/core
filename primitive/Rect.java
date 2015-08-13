@@ -72,7 +72,7 @@ public class Rect {
 	}
 
 	public Point getCenter() {
-		return new Point(left+(int)(getWidth()/2),top+(int)(getHeight()/2));
+		return new Point(left+getWidth()/2,top+getHeight()/2);
 	}
 
 }

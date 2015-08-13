@@ -7,7 +7,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
 
-public class AutoplayCommandQueue implements ISolution 
+public class AutoplayCommandQueue implements ISolution
 {
 	Deque<ISolution> solutions;
 	Deque<AutoplayCommand> currentSet;
@@ -19,12 +19,12 @@ public class AutoplayCommandQueue implements ISolution
 		solutions.add(this);//this isn't a bug, we must do this
 		currentSet =  new LinkedList<AutoplayCommand>();
 	}
-	
+
 	public void add(ISolution sol)
 	{
 		solutions.add(sol);
 	}
-	
+
 	private void getNextSet(AutoplayCommand a)
 	{
 		if(a!=null&&a.getParent()!=null )
@@ -33,7 +33,7 @@ public class AutoplayCommandQueue implements ISolution
 			getNextSet(a.getParent());
 		}
 	}
-	
+
 	public AutoplayCommand getNext(IOnPreEntry api)
 	{
 		if(!currentSet.isEmpty())
@@ -48,7 +48,7 @@ public class AutoplayCommandQueue implements ISolution
 		if(!solutions.isEmpty())
 			solutions.getFirst().onPreEntry(api);
 		currentIndexIntoFirst = 0;
-		return getNext(api);	
+		return getNext(api);
 	}
 
 	@Override
@@ -63,6 +63,6 @@ public class AutoplayCommandQueue implements ISolution
 	@Override
 	public void onPreEntry(IOnPreEntry api) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

@@ -23,7 +23,7 @@ import com.github.a2g.core.primitive.LogNames;
 
 public class LoadedLoad {
 	private static final Logger LOADING_ANIM = Logger.getLogger(LogNames.LOADING_ANIM);
-	
+
 	private SceneObjectCollection sceneObjectCollection;
 	private String name;
 

@@ -41,7 +41,7 @@ import com.github.a2g.core.interfaces.game.IIsVisible;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectCurrent;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectInitial;
 import com.github.a2g.core.interfaces.game.ISetAnimationAsSceneTalker;
-import com.github.a2g.core.interfaces.game.ISetAnimationDuration; 
+import com.github.a2g.core.interfaces.game.ISetAnimationDuration;
 import com.github.a2g.core.interfaces.game.IDefaultSceneObject;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.ISetBaseMiddleY;
@@ -80,16 +80,16 @@ IAddBoundaryGate,
 IAddBoundaryPoint,
 
 // object
-IHide, 
-IShow, 
-IGetBaseMiddleX, 
-IGetBaseMiddleY, 
+IHide,
+IShow,
+IGetBaseMiddleX,
+IGetBaseMiddleY,
 ISetBaseMiddleX,
-ISetBaseMiddleY, 
-ISetX, 
-ISetY, 
-IGetX, 
-IGetY, 
+ISetBaseMiddleY,
+ISetX,
+ISetY,
+IGetX,
+IGetY,
 IIsVisible,
 IGetCurrentAnimation,
 IGetCurrentFrame,
@@ -99,9 +99,9 @@ IDefaultSceneObject,
 
 // animation
 IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation,
-ISetAnimationAsObjectInitial, 
+ISetAnimationAsObjectInitial,
 ISetAnimationAsSceneTalker,
-ISetAnimationAsObjectCurrent, 
+ISetAnimationAsObjectCurrent,
 IGetAnimationLastFrame,
 IGetAnimationLength,
 ISetAnimationDuration,

@@ -160,7 +160,7 @@ public class CommandLine {
 		{
 			rolledOverItem = fullItem;
 		}else
-		{ 
+		{
 			rolledOverItem = fullItem2;
 		}
 	}

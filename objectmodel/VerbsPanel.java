@@ -24,8 +24,8 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
-public class VerbsPanel extends Grid 
-implements IVerbsPanelFromVerbsPresenter 
+public class VerbsPanel extends Grid
+implements IVerbsPanelFromVerbsPresenter
 {
 	ColorEnum rolloverColor;
 	final IVerbsPresenterFromVerbsPanel mouseToPresenter;

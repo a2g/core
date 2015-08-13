@@ -21,29 +21,29 @@ public interface IChainRootForScene {
 	public ChainEndAction switchTo(String sceneName);
 	public ChainEndAction walkTo(double x, double y);// should not have ocode here because switching implies main character
 	public ChainEndAction walkTo(PointF point);
-	
+
 	// there's 2 choices
 	// 1) BaseAction walkSwitch and ChainAbleAction walkTo
 	// 2) BaseAction walkTo, and ChainableAction walkWithNoSwitch
 	// client is likely to code with walkTo
-	// in case 1, using walkTo in its wrong scenario (as 
+	// in case 1, using walkTo in its wrong scenario (as
 	// a terminator) would not be picked up by compiler.
 	// since a chainableAction would pass as a baseAction.
 	// in case 2, using walkTo in its wrong scenario (in
 	// the middle of a chain) where client expects it not
-	// to switch, WOULD generate a compiler error. 
+	// to switch, WOULD generate a compiler error.
 	// Thus 2 is better, because it protects the user
-	// against unexpected results. 
+	// against unexpected results.
 	public ChainableAction walkNeverSwitch(double x, double y);
 	public ChainableAction walkNeverSwitch(PointF point);
 	public ChainableAction walkNeverSwitch(short ocode, double x, double y);
 	public ChainableAction walkNeverSwitch(short ocode, PointF point);
 	public ChainableAction walkAndTalkNeverSwitch(short ocode, double x, double y, String speech);
 	public ChainEndAction  walkAlwaysSwitch(double x, double y, String sceneName);
-	
-	
+
+
 	public ChainableAction subroutine(ChainableAction orig);
-	
+
 	public ChainableAction doNothing();
 
 	// plain..
@@ -136,7 +136,7 @@ public interface IChainRootForScene {
 	public ChainableAction alignBaseMiddleOfOldFrameToLastFrameOfNewAnimation(String atid);
 	public ChainableAction share(String string);
 	public ChainableAction setSceneTalker(String atid);
-	
+
 	public ChainableAction playSound(String stid);
 	public ChainableAction playSoundNonBlocking(String stid);
 	public ChainableAction setAnimationAsObjectSpecial(String atid, Special type);

@@ -62,7 +62,7 @@ public class WaitForFrameAction extends ChainableAction {
 		return false;
 	}
 
-	 
+
 
 	public IScenePresenterFromWaitAction getScene() {
 		return scene;

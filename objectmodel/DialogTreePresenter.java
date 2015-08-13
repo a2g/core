@@ -26,12 +26,12 @@ import com.github.a2g.core.interfaces.IDialogTreePresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
-public class DialogTreePresenter 
+public class DialogTreePresenter
 implements IDialogTreePresenter {
 	private DialogTree theDialogTree;
 	private IDialogTreePanelFromDialogTreePresenter view;
 	private Set<String> recordOfSaidSpeech;
-	
+
 	public DialogTreePresenter(final IHostingPanel panel, EventBus bus,
 			IMasterPresenterFromDialogTree callbacks) {
 		this.theDialogTree = new DialogTree();
@@ -75,12 +75,12 @@ implements IDialogTreePresenter {
 	public void updateDialogTree(DialogTree theDialogTree) {
 		view.update(theDialogTree);
 	}
-	
+
 	String getLineOfDialogForId(int id)
 	{
 		return theDialogTree.getDialogForId(id);
 	}
-	
+
 	int getNumberOfVisibleBranches()
 	{
 		int size = theDialogTree.getLinesOfDialog().size();
@@ -98,5 +98,5 @@ implements IDialogTreePresenter {
 		return getLineOfDialogForId(branchId).length()>0;
 	}
 
-	
+
 }

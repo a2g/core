@@ -30,7 +30,7 @@ public interface IOnFillLoadList extends ISetValue {
 	void clearAllLoadedLoads();
 
 	void setContinueAfterLoad(boolean isContinueImmediatelyAfterLoading);
-	
+
 	void addMP3ForASoundObject(String name, String location);
-			
+
 }

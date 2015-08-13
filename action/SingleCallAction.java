@@ -25,16 +25,16 @@ import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.SingleCallPerformer;
 
-public class SingleCallAction 
+public class SingleCallAction
 extends ChainableAction {
 
 	SingleCallPerformer single;
-	
+
 	protected SingleCallAction(BaseAction parent, SingleCallPerformer.Type type) {
 		super(parent);
 		single = new SingleCallPerformer(type);
 	}
-	
+
 	@Override
 	public void runGameAction() {
 		int millisecs = single.run();
@@ -59,9 +59,9 @@ extends ChainableAction {
 		single.setInventory(inventory);
 		single.setTitleCard(titleCard);
 	}
-	
+
 	public SingleCallPerformer.Type getType(){ return single.getType();}
- 
+
 	public void setDouble(double d){ single.setDouble(d) ;}
 	public void setOCode(short o){ single.setOCode(o);}
 	public void setAtid(String atid){ single.setAtid(atid);}
@@ -70,5 +70,5 @@ extends ChainableAction {
 	public void setInt(int intValue){ single.setInt(intValue);}
 	public void setICode(int icode) {single.setICode(icode);}
 	public void setOCode2(short ocode2) {single.setOCode2(ocode2);}
-		
+
 }

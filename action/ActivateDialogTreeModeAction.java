@@ -55,7 +55,7 @@ public class ActivateDialogTreeModeAction extends ChainEndAction {
 		return false;
 	}
 
-	
+
 
 	public void setBranchId(int branchId) {
 		this.branchId = branchId;

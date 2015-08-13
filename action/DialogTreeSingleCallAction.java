@@ -24,16 +24,16 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.performer.SingleCallPerformer;
 
-public class DialogTreeSingleCallAction 
+public class DialogTreeSingleCallAction
 extends DialogChainableAction {
 
 	SingleCallPerformer single;
-	
+
 	protected DialogTreeSingleCallAction(BaseAction parent, SingleCallPerformer.Type type) {
 		super(parent);
 		single = new SingleCallPerformer(type);
 	}
-	
+
 	@Override
 	public void runGameAction() {
 		super.run(1);
@@ -56,9 +56,9 @@ extends DialogChainableAction {
 		single.setScene(scene);
 		single.setInventory(inventory);
 	}
-	
+
 	public SingleCallPerformer.Type getType(){ return single.getType();}
- 
+
 	public void setDouble(double d){ single.setDouble(d) ;}
 	public void setOCode(short o){ single.setOCode(o);}
 	public void setAtid(String atid){ single.setAtid(atid);}

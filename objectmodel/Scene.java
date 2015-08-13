@@ -26,7 +26,7 @@ public class Scene {
 	public SceneObjectCollection objectCollection() {
 		return sceneObjectCollection;
 	}
-	
+
 	public void clear()
 	{
 		sceneObjectCollection.clear();

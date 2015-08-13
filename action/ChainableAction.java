@@ -33,11 +33,11 @@ import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.PointF;
 
-public abstract class ChainableAction 
+public abstract class ChainableAction
 extends ChainEndAction
 implements IChainRootForScene
 {
-	
+
 	public enum SwapType {
 		Visibility
 	}
@@ -50,8 +50,8 @@ implements IChainRootForScene
 	public ChainEndAction doBoth(ChainableAction a, ChainableAction b) {
 		return a.subroutine(b);
 	}
-	
-	
+
+
 	@Override
 	public ChainableAction doNothing() {
 		DoNothingAction a =  new DoNothingAction(this);
@@ -97,7 +97,7 @@ implements IChainRootForScene
 	}
 
 	// double combo1of3: backwards + hold last frame
-	
+
 	@Override
 	public ChainableAction playAnimationBackwardsHoldLastFrame(
 			String atid) {
@@ -158,7 +158,7 @@ implements IChainRootForScene
 		s.setNonIncrementing(TalkPerformer.NonIncrementing.True);
 		return s;
 	}
-	 
+
 	@Override
 	public ChainableAction talkWithoutIncrementingFrameNonBlocking(
 			String animCode, String speech) {
@@ -187,7 +187,7 @@ implements IChainRootForScene
 		return a;
 	}
 	@Override
-public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
+	public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		SingleCallAction a =  new SingleCallAction(this, Type.SetCurrentAnimationAndFrame );
 		a.setAtid(atid);
 		a.setInt(frame);
@@ -201,6 +201,7 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		return a;
 	}
 
+	@Override
 	public ChainableAction setBaseMiddleX(short ocode, double x) {
 		SingleCallAction a =  new SingleCallAction(this, Type.SetBaseMiddleX);
 		a.setOCode(ocode);
@@ -208,6 +209,7 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		return a;
 	}
 
+	@Override
 	public ChainableAction setBaseMiddleY(short ocode, double y) {
 		SingleCallAction a =  new SingleCallAction(this, Type.SetBaseMiddleX);
 		a.setOCode(ocode);
@@ -216,6 +218,7 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 	}
 
 
+	@Override
 	public ChainableAction setDisplayName(short ocode, String displayName) {
 		SingleCallAction a =  new SingleCallAction(this, Type.SetDisplayName);
 		a.setOCode(ocode);
@@ -223,13 +226,15 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		return a;
 	}
 
+	@Override
 	public ChainableAction setInventoryVisible(int icode, boolean isVisible) {
 		SingleCallAction a =  new SingleCallAction(this, Type.SetInventoryVisible);
 		a.setICode(icode);
 		a.setBoolean(isVisible);
 		return a;
-		}
- 
+	}
+
+	@Override
 	public ChainableAction setVisible(short ocode, boolean isVisible) {
 		SingleCallAction a =  new SingleCallAction(this, Type.SetVisible);
 		a.setOCode(ocode);
@@ -237,12 +242,14 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		return a;
 	}
 
+	@Override
 	public ChainableAction sleep(int milliseconds) {
 		SingleCallAction a =  new SingleCallAction(this, Type.Sleep);
 		a.setInt(milliseconds);
 		return a;
 	}
 
+	@Override
 	public ChainEndAction onDoCommand(IGameScene scene, IOnDoCommand api,
 			ChainRootAction ba, int verb, SentenceItem itemA,
 			SentenceItem itemB, double x, double y) {
@@ -250,8 +257,8 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 				api.createChainRootAction(), verb, itemA, itemB, x, y);
 		return subroutine(secondStep);
 	}
-	
-	
+
+
 	@Override
 	public ChainableAction subroutine(ChainableAction secondStep) {
 		// find root of orig
@@ -281,7 +288,7 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		a.setOCode2(ocodeB);
 		return a;
 	}
-	
+
 	@Override
 	public ChainEndAction switchTo(String sceneName) {
 		SingleCallAction a =  new SingleCallAction(this, Type.Switch);
@@ -326,20 +333,20 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		a.setEndY(end.getY());
 		return a;
 	}
-	
+
 	@Override
 	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName) {
 		WalkAction a = new WalkAction(this, ScenePresenter.DEFAULT_SCENE_OBJECT);
 		a.setEndX(x);
 		a.setEndY(y);
 		a.setToInitialAtEnd(false);
-		
+
 		SingleCallAction b =  new SingleCallAction(a, Type.Switch);
 		b.setString(sceneName);
-		
+
 		return b;
 	}
-	
+
 	@Override
 	public ChainableAction walkNeverSwitch(short ocode, double x, double y) {
 		return walkNeverSwitch(ocode,new PointF(x,y));
@@ -351,13 +358,13 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		a.setEndY(end.getY());
 		return a;
 	}
- 
+
 	@Override
 	public ChainableAction showTitleCard(String text) {
 		return new TitleCardAction(this, text);
 	}
 
-	
+
 	@Override
 	public ChainableAction playAnimationNonBlockingHoldLastFrame(
 			String atid) {
@@ -384,6 +391,7 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		return a;
 	}
 
+	@Override
 	public ChainableAction moveWhilstAnimatingInY(short objId, double y) {
 		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this,
 				objId);
@@ -487,14 +495,14 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		a.setString(string);
 		return a;
 	}
-	
+
 	@Override
 	public ChainableAction setSceneTalker(String atid) {
 		SingleCallAction a =  new SingleCallAction(this, Type.SetSceneTalker);
 		a.setAtid(atid);
 		return a;
 	}
-	 
+
 	@Override
 	public ChainableAction playSound(String stid)
 	{
@@ -518,7 +526,7 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		s.setInt(type.toInt());
 		return s;
 	}
-	
+
 	@Override
 	public ChainableAction setAnimationAsSceneTalker(String atid)
 	{
@@ -534,7 +542,8 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		s.setAtid(atid);
 		return s;
 	}
-	
+
+	@Override
 	public ChainableAction walkAndTalkNeverSwitch(short ocode, double x, double y, String speech)
 	{
 		WalkAndTalkAction s = new WalkAndTalkAction(this, ocode, speech);
@@ -542,7 +551,7 @@ public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
 		s.setEndX(x);
 		s.setEndY(y);
 		return s;
-		
+
 	}
 
 }

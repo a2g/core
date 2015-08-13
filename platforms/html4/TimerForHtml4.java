@@ -20,7 +20,7 @@ import com.github.a2g.core.interfaces.ITimer;
 import com.github.a2g.core.interfaces.IMasterPresenterFromTimer;
 
 public class TimerForHtml4 extends com.google.gwt.user.client.Timer implements
-		ITimer {
+ITimer {
 	private IMasterPresenterFromTimer callback;
 
 	public TimerForHtml4(IMasterPresenterFromTimer callback) {

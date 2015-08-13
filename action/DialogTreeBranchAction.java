@@ -54,7 +54,7 @@ public class DialogTreeBranchAction extends DialogChainableAction {
 	}
 
 	@Override
-	protected boolean onCompleteGameAction() { 
+	protected boolean onCompleteGameAction() {
 		if(isOkToAdd)
 		{
 			dialogTree.addBranch(branchId, text, !isExemptFromSaidList);
@@ -62,7 +62,7 @@ public class DialogTreeBranchAction extends DialogChainableAction {
 		return false;
 	}
 
-	 
+
 
 	public void setBranchId(int branchId) {
 		this.branchId = branchId;

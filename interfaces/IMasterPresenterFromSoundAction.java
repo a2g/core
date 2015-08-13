@@ -5,11 +5,11 @@ import com.github.a2g.core.interfaces.action.IPlaySoundByStid;
 import com.github.a2g.core.interfaces.action.IStopSoundByStid;
 
 public interface IMasterPresenterFromSoundAction
-extends		
+extends
 IPlaySoundByStid
 , IGetSoundDurationByStid
 , IStopSoundByStid
 {
 
-	
+
 }

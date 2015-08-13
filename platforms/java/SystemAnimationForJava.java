@@ -20,8 +20,8 @@ import com.github.a2g.core.interfaces.ISystemAnimation;
 import com.github.a2g.core.interfaces.IBaseActionFromSystemAnimation;
 
 public class SystemAnimationForJava extends
-		com.github.a2g.core.platforms.java.animation.Animation implements
-		ISystemAnimation {
+com.github.a2g.core.platforms.java.animation.Animation implements
+ISystemAnimation {
 	IBaseActionFromSystemAnimation callbacks;
 	boolean isEaseToAndFrom;
 
@@ -36,7 +36,7 @@ public class SystemAnimationForJava extends
 			return super.interpolate(progress);
 		else
 			return progress;
-			
+
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class SystemAnimationForJava extends
 	@Override
 	public void setEaseToAndFrom(boolean isEaseToAndFrom) {
 		this.isEaseToAndFrom = isEaseToAndFrom;
-		
+
 	}
 
 }

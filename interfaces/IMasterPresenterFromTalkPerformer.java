@@ -4,7 +4,7 @@ import com.github.a2g.core.interfaces.action.IGetPopupDisplayDuration;
 import com.github.a2g.core.interfaces.action.IIsSayNonIncrementing;
 
 public interface IMasterPresenterFromTalkPerformer
-extends		
+extends
 IGetPopupDisplayDuration
 ,IIsSayNonIncrementing
 {

@@ -28,8 +28,8 @@ import com.github.a2g.core.action.performer.TalkPerformer.NonIncrementing;
 
 public class DialogTreeTalkAction extends DialogChainableAction {
 	TalkPerformer talker;
-	 
-	 
+
+
 
 	public DialogTreeTalkAction(BaseAction parent, String atid, String fullSpeech) {
 		super(parent );
@@ -41,12 +41,12 @@ public class DialogTreeTalkAction extends DialogChainableAction {
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) 
+			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory)
 	{
 		talker.setMaster(master);
 		talker.setScene(scene);
 	}
-	 
+
 	@Override
 	public void runGameAction() {
 		double duration = talker.run();
@@ -54,7 +54,7 @@ public class DialogTreeTalkAction extends DialogChainableAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) 
+	protected void onUpdateGameAction(double progress)
 	{
 		talker.onUpdate(progress);
 	}

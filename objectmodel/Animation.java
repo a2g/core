@@ -65,7 +65,7 @@ public class Animation {
 	public int getLastFrame() {
 		return framesCollection.getCount() - 1;
 	}
-	
+
 
 	public void alignBaseMiddleOfOldFrameToFrameOfThisAnimation(int frame) {
 		if (ownerObject != null) {
@@ -96,7 +96,7 @@ public class Animation {
 	public void setTalkingColor(ColorEnum color) {
 		this.talkingColor = color;
 	}
-	
+
 	public void setSceneObject(SceneObject parent) {
 		this.ownerObject = parent;
 	}
@@ -105,6 +105,6 @@ public class Animation {
 		return ownerObject;
 	}
 
- 
+
 
 };
