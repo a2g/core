@@ -17,9 +17,11 @@
 package com.github.a2g.core.objectmodel;
 
 
+import java.util.ArrayList;
+
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.IHostingPanel;
-import com.github.a2g.core.interfaces.IMasterPresenterFromScene;
+import com.github.a2g.core.interfaces.IMasterPresenterFromScenePresenter;
 import com.github.a2g.core.interfaces.IScenePresenter;
 import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.IScenePresenterFromBoundaryCalculator;
@@ -45,12 +47,13 @@ implements IScenePresenter
 	private ColorEnum talkingColorForScene;
 	private String sceneAskerAtid;
 	private String sceneAnswererAtid;
-	
+	private IMasterPresenterFromScenePresenter master;
 
 	private BoundaryCalculator boundaryCalculator;
 
 	public ScenePresenter(final IHostingPanel panel,
-			IMasterPresenterFromScene master) {
+			IMasterPresenterFromScenePresenter master) {
+		this.master = master;
 		this.sceneTalkerAtid = "";
 		this.sceneAskerAtid = "";
 		this.sceneAnswererAtid = "";
@@ -341,8 +344,7 @@ implements IScenePresenter
 
 	@Override
 	public void switchToScene(String foundDest) {
-		// TODO Auto-generated method stub
-		
+		master.switchToScene(foundDest);
 	}
 	
 
@@ -363,6 +365,16 @@ implements IScenePresenter
 	public boolean doSwitchIfBeyondGate(PointF tp) 
 	{
 		return boundaryCalculator.doSwitchIfBeyondGate(tp);
+	}
+
+	@Override
+	public ArrayList<PointF> getBoundaryPoints() {
+		return boundaryCalculator.getGatePoints();
+	}
+
+	@Override
+	public PointF getBoundaryPointsCentre() {
+		return boundaryCalculator.getGatePointsCentre();
 	}
 
 

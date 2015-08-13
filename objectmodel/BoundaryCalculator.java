@@ -21,6 +21,8 @@ public class BoundaryCalculator {
 		this.gateDests = new ArrayList<String>();
 	
 	}
+	public ArrayList<PointF> getGatePoints(){ return gatePoints;}
+	
 	public void addBoundaryGate(Object name, PointF a, PointF b) {
 		gateDests.add(name==null? "" : name.toString());
 		gatePoints.add(a);
@@ -110,7 +112,7 @@ public class BoundaryCalculator {
 	}
 	
 
-	private PointF getGatePointsCentre() {
+	public PointF getGatePointsCentre() {
 		double totalX = 0;
 		double totalY = 0;
 		int numberOfExtras = 0;
@@ -154,4 +156,5 @@ public class BoundaryCalculator {
 				- (B.getY() - A.getY()) * (c.getX() - A.getX());
 		return result1 * result2 > 0;
 	}
+	
 }

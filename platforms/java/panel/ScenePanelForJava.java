@@ -16,6 +16,7 @@
 package com.github.a2g.core.platforms.java.panel;
 
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -49,6 +50,7 @@ import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.platforms.java.ImageForJava;
 import com.github.a2g.core.platforms.java.PackagedImageForJava;
@@ -71,6 +73,7 @@ implements IScenePanelFromScenePresenter
 	int tally;
 	int cameraOffsetX;
 	int cameraOffsetY;
+	boolean isRenderBoundary;
 	IScenePresenterFromScenePanel toScene;
 	ICommandLinePresenterFromSceneMouseOver toCommandLine;
 
@@ -81,6 +84,7 @@ implements IScenePanelFromScenePresenter
 
 	public ScenePanelForJava(EventBus bus, IScenePresenterFromScenePanel toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine)
 	{
+		isRenderBoundary = true;
 		this.speechPopup = new PopupPanelForJava(toScene);
 		this.toScene = toScene;
 		this.toCommandLine = toCommandLine;
@@ -114,6 +118,7 @@ implements IScenePanelFromScenePresenter
         am.put("onEnter", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	isRenderBoundary = !isRenderBoundary;
             	// this is only hit with a setfocus in paint, ie:
             	// public void paint(Graphics g)
             	//{
@@ -260,6 +265,49 @@ implements IScenePanelFromScenePresenter
 		}
 		//System.out.println("printed with tally " + tally +" draws "+ draws);
 		tally=0;
+		
+		if(isRenderBoundary)
+		{
+			g.setColor(new Color(255,0,0));
+			int size = toScene.getBoundaryPoints().size();
+			
+			// gate vs point: gate adds 2 valid to array, point adds 1 dummy, then 1 valid
+			// ...so last point is always real. doesn't need checking.
+			double lastX = toScene.getBoundaryPoints().get(size-1).getX()*width;
+			double lastY = toScene.getBoundaryPoints().get(size-1).getY()*height;
+			double maxX = lastX;
+			double minX = lastX;
+			double maxY = lastY;
+			double minY = lastY;
+			for(int i=0; i<size; i++)
+			{
+				double newX = toScene.getBoundaryPoints().get(i).getX()*width;
+				double newY = toScene.getBoundaryPoints().get(i).getY()*height;
+				
+				
+				if(newX<0)
+					continue;
+				maxX = Math.max(maxX, newX);
+				maxY = Math.max(maxY, newY);
+				
+				minX = Math.min(minX, newX);
+				minY = Math.min(minY, newY);
+				g.drawLine((int)newX, (int)newY, (int)lastX, (int)lastY);
+				lastX = newX;
+				lastY = newY;
+			}
+			
+			PointF c = toScene.getBoundaryPointsCentre();
+			g.drawOval((int)(c.getX()*width), (int)(c.getY()*height), 3, 3);
+			
+			// if the green center is better, then replace the impl
+			// of getBoundaryPointsCentre with max/min maths from here
+			g.setColor(new Color(0,255,0));
+			double x2 = maxX/2 + minX/2;
+			double y2 = maxY/2 + minY/2;
+			g.drawOval((int)x2, (int)y2, 4, 4);
+			
+		}
 
 	}
 

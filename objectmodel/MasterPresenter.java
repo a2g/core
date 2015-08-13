@@ -50,7 +50,7 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromCommandLine;
 import com.github.a2g.core.interfaces.IFactory;
 import com.github.a2g.core.interfaces.IHostingPanel;
 import com.github.a2g.core.interfaces.IMasterPresenterFromDialogTree;
-import com.github.a2g.core.interfaces.IMasterPresenterFromScene;
+import com.github.a2g.core.interfaces.IMasterPresenterFromScenePresenter;
 import com.github.a2g.core.interfaces.IMasterPresenterFromTitleCard;
 import com.github.a2g.core.interfaces.IMasterPresenterFromBundle;
 import com.github.a2g.core.interfaces.IMasterPresenterFromInventory;
@@ -68,7 +68,7 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromVerbs;
 import com.google.gwt.event.shared.EventBus;
 
 public class MasterPresenter implements
-IMasterPresenterFromActions, IMasterPresenterFromScene,
+IMasterPresenterFromActions, IMasterPresenterFromScenePresenter,
 IMasterPresenterFromDialogTree, IMasterPresenterFromTimer,
 IMasterPresenterFromBundle, IMasterPresenterFromLoader,
 IMasterPresenterFromCommandLine, IMasterPresenterFromActionRunner,
@@ -349,19 +349,19 @@ PropertyChangeEventHandlerAPI
 		return property != 0;
 	}
 
-	@Override
-	public void switchToSceneFromAction(String scene) {
-		cancelOnEveryFrameTimer();
-		this.dialogActionRunner.cancel();
-
-		// now wait for the last onEveryFrame to execute
-		// .. which is about 40 milliseconds
-		// (an onEveryFrame can go more than
-		// this, but usually not).
-		switchTimer = getFactory().createSystemTimer(this);
-		switchDestination = scene;
-		switchTimer.scheduleRepeating(40);
-	}
+//	@Override
+//	public void switchToSceneFromAction(String scene) {
+//		cancelOnEveryFrameTimer();
+//		this.dialogActionRunner.cancel();
+//
+//		// now wait for the last onEveryFrame to execute
+//		// .. which is about 40 milliseconds
+//		// (an onEveryFrame can go more than
+//		// this, but usually not).
+//		switchTimer = getFactory().createSystemTimer(this);
+//		switchDestination = scene;
+//		switchTimer.scheduleRepeating(40);
+//	}
 
 	@Override
 	public void switchToScene(String scene) {
