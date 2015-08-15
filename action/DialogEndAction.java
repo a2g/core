@@ -25,10 +25,10 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter.GuiStateEnum;
 
-public class DialogTreeEndAction extends DialogChainEndAction{
+public class DialogEndAction extends DialogChainEndAction{
 	private IDialogTreePresenterFromEndAction dialogTree;
 
-	public DialogTreeEndAction(BaseAction parent) {
+	public DialogEndAction(BaseAction parent) {
 		super(parent );
 	}
 

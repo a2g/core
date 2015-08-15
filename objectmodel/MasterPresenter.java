@@ -30,8 +30,8 @@ import com.github.a2g.core.action.ChainToDialogAction;
 import com.github.a2g.core.action.DialogChainEndAction;
 import com.github.a2g.core.action.DialogChainRootAction;
 import com.github.a2g.core.action.DialogChainToDialogAction;
-import com.github.a2g.core.action.DialogTreeEndAction;
-import com.github.a2g.core.action.DialogTreeTalkAction;
+import com.github.a2g.core.action.DialogEndAction;
+import com.github.a2g.core.action.DialogTalkAction;
 import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
@@ -245,7 +245,7 @@ PropertyChangeEventHandlerAPI
 			// is null..
 			// ... thus null must be interpreted
 			// as DialogTreeEndAction
-			a = new DialogTreeEndAction(MatOps.createDialogChainRootAction());
+			a = new DialogEndAction(MatOps.createDialogChainRootAction());
 		}
 
 		dialogActionRunner.runAction(a);
@@ -420,7 +420,7 @@ PropertyChangeEventHandlerAPI
 		// 4. Then we execute it
 		// Thus it will talk the text, and do what the user prescribes.
 
-		DialogTreeTalkAction newTalkAction = new DialogTreeTalkAction(MatOps.createDialogChainRootAction(), atidOfInterviewer, speech);
+		DialogTalkAction newTalkAction = new DialogTalkAction(MatOps.createDialogChainRootAction(), atidOfInterviewer, speech);
 		BaseAction actionChain = sceneHandlers.onDialogTree(
 				proxyForGameScene, newTalkAction, branchId);
 		BaseAction  actionChain2 = replaceChainToDialogActionWithCallToOnDialogTree(actionChain);
@@ -726,7 +726,7 @@ PropertyChangeEventHandlerAPI
 			DialogChainableAction d = MatOps.createDialogChainRootAction();
 			BaseAction a = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
 			if(a==null || a instanceof DoNothingAction)
-				a = new DialogTreeEndAction(d);
+				a = new DialogEndAction(d);
 			linkUpperMostActionOfAToB(a,b);
 			return a;
 		}

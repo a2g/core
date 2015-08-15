@@ -24,12 +24,12 @@ import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.performer.SingleCallPerformer;
 
-public class DialogTreeSingleCallAction
+public class DialogSingleCallAction
 extends DialogChainableAction {
 
 	SingleCallPerformer single;
 
-	protected DialogTreeSingleCallAction(BaseAction parent, SingleCallPerformer.Type type) {
+	protected DialogSingleCallAction(BaseAction parent, SingleCallPerformer.Type type) {
 		super(parent);
 		single = new SingleCallPerformer(type);
 	}

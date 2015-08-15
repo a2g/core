@@ -26,12 +26,12 @@ import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.action.performer.TalkPerformer.NonIncrementing;
 
-public class DialogTreeTalkAction extends DialogChainableAction {
+public class DialogTalkAction extends DialogChainableAction {
 	TalkPerformer talker;
 
 
 
-	public DialogTreeTalkAction(BaseAction parent, String atid, String fullSpeech) {
+	public DialogTalkAction(BaseAction parent, String atid, String fullSpeech) {
 		super(parent );
 		talker = new TalkPerformer(atid, fullSpeech);
 	}

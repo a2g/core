@@ -24,7 +24,7 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-public class DialogTreeBranchAction extends DialogChainableAction {
+public class DialogBranchAction extends DialogChainableAction {
 
 	private String text;
 	private int branchId;
@@ -32,7 +32,7 @@ public class DialogTreeBranchAction extends DialogChainableAction {
 	private IDialogTreePresenterFromBranchAction dialogTree;
 	private boolean isOkToAdd;
 
-	public DialogTreeBranchAction(BaseAction parent, String text, int branchId, boolean isOkToAdd) {
+	public DialogBranchAction(BaseAction parent, String text, int branchId, boolean isOkToAdd) {
 		super(parent);
 		this.isOkToAdd = isOkToAdd;
 		this.setBranchId(branchId);

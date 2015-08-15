@@ -32,18 +32,18 @@ implements IChainRootForDialog
 	@Override
 	public DialogChainableAction branchNormal(int branchId, boolean isOkToAdd, String text) {
 
-		DialogTreeBranchAction a = new DialogTreeBranchAction(this, text,
+		DialogBranchAction a = new DialogBranchAction(this, text,
 				branchId, isOkToAdd);
 		return a;
 	}
 	@Override
 	public DialogChainableAction branchNormal(int branchId, String text) {
-		return new DialogTreeBranchAction(this, text, branchId, true);
+		return new DialogBranchAction(this, text, branchId, true);
 	}
 
 	@Override
 	public DialogChainEndAction endDialogTree() {
-		return new DialogTreeEndAction(this);
+		return new DialogEndAction(this);
 	}
 	@Override
 	public DialogChainEndAction chainTo(int branchId) {
@@ -52,26 +52,26 @@ implements IChainRootForDialog
 
 	@Override
 	public	DialogChainableAction answer(String speech) {
-		DialogTreeTalkAction s = new DialogTreeTalkAction(this, TalkPerformer.SCENE_ANSWERER, speech);
+		DialogTalkAction s = new DialogTalkAction(this, TalkPerformer.SCENE_ANSWERER, speech);
 		return s;
 	}
 
 	@Override
 	public	DialogChainableAction ask(String speech) {
-		DialogTreeTalkAction s = new DialogTreeTalkAction(this, TalkPerformer.SCENE_ASKER, speech);
+		DialogTalkAction s = new DialogTalkAction(this, TalkPerformer.SCENE_ASKER, speech);
 		return s;
 	}
 
 	@Override
 	public DialogChainEndAction switchTo(String sceneName) {
-		DialogTreeSingleCallAction a =  new DialogTreeSingleCallAction(this, Type.Switch);
+		DialogSingleCallAction a =  new DialogSingleCallAction(this, Type.Switch);
 		a.setString(sceneName);
 		return a;
 	}
 
 	@Override
 	public DialogChainableAction setValue(String key, int value) {
-		DialogTreeSingleCallAction a =  new DialogTreeSingleCallAction(this, Type.SetValue);
+		DialogSingleCallAction a =  new DialogSingleCallAction(this, Type.SetValue);
 		a.setString(key);
 		a.setInt(value);
 		return a;
@@ -79,14 +79,14 @@ implements IChainRootForDialog
 
 	@Override
 	public DialogChainableAction setInventoryVisible(int icode, boolean value) {
-		DialogTreeSingleCallAction a =  new DialogTreeSingleCallAction(this, Type.Sleep);
+		DialogSingleCallAction a =  new DialogSingleCallAction(this, Type.Sleep);
 		a.setICode(icode);
 		return a;
 	}
 
 	@Override
 	public DialogChainableAction sleep(int milliseconds){
-		DialogTreeSingleCallAction a =  new DialogTreeSingleCallAction(this, Type.Sleep);
+		DialogSingleCallAction a =  new DialogSingleCallAction(this, Type.Sleep);
 		a.setInt(milliseconds);
 		return a;
 	}
@@ -94,19 +94,19 @@ implements IChainRootForDialog
 	@Override
 	public DialogChainableAction setInitialAnimation(String atid)
 	{
-		DialogTreeSingleCallAction a =  new DialogTreeSingleCallAction(this, Type.SetInitialAnimation);
+		DialogSingleCallAction a =  new DialogSingleCallAction(this, Type.SetInitialAnimation);
 		a.setAtid(atid);
 		return a;
 	}
 	@Override
 	public DialogChainableAction branchSticky(int branchId, String text) {
-		DialogTreeBranchAction a = new DialogTreeBranchAction(this, text, branchId, true);
+		DialogBranchAction a = new DialogBranchAction(this, text, branchId, true);
 		a.setIsExemptFromSaidList(true);
 		return a;
 	}
 	@Override
 	public DialogChainableAction branchSticky(int branchId, boolean isOkToAdd, String text) {
-		DialogTreeBranchAction a = new DialogTreeBranchAction(this, text, branchId, isOkToAdd);
+		DialogBranchAction a = new DialogBranchAction(this, text, branchId, isOkToAdd);
 		a.setIsExemptFromSaidList(true);
 		return a;
 	}
