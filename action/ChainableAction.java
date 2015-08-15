@@ -17,7 +17,7 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.PlayAnimationAction;
-import com.github.a2g.core.action.ActivateDialogTreeModeAction;
+import com.github.a2g.core.action.ChainToDialogAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkAction;
 import com.github.a2g.core.action.performer.MovePerformer;
@@ -59,7 +59,7 @@ implements IChainRootForScene
 	}
 	@Override
 	public ChainEndAction activateDialogTreeMode(int branchId) {
-		return new ActivateDialogTreeModeAction(this, branchId);
+		return new ChainToDialogAction(this, branchId);
 	}
 
 	// plain..

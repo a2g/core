@@ -18,7 +18,7 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 
-public abstract class DialogChainEndAction extends BaseAction
+public abstract class DialogChainEndAction extends ChainEndAction
 {
 
 	DialogChainEndAction(BaseAction parent) {

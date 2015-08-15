@@ -33,7 +33,8 @@ import com.github.a2g.core.primitive.LogNames;
 public class ActionRunner implements IActionRunnerFromBaseAction {
 
 	private static final Logger RUNNER = Logger.getLogger(LogNames.RUNNER);
-	private static final Logger ACTIONS_EXECUTED = Logger.getLogger(LogNames.ACTIONS_EXECUTED);
+	private static final Logger ACTIONS_EXECUTED = Logger.getLogger(LogNames.ACTIONS_AS_THEY_ARE_EXECUTED);
+	private static final Logger ACTIONS_FLATTENED_B4_EXECUTION = Logger.getLogger(LogNames.ACTIONS_FLATTENED_B4_EXECUTION);
 
 
 	private static final Logger RUNNER_REFCOUNT = Logger.getLogger(LogNames.RUNNER_REFCOUNT);
@@ -115,14 +116,16 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 		return toReturn;
 	}
 
-	public static ArrayList<ArrayList<BaseAction>> getListOfListsFromChain(
-			BaseAction grandChildOfActionChain) {
-		ArrayList<BaseAction> flatlist = flattenChainAndEnsureTitleCardAtStart(grandChildOfActionChain);
-		return getGroupsOfConsecutiveParallelActions(flatlist);
-	}
+
 
 	public int runAction(BaseAction grandChildOfActionChain) {
 		ArrayList<BaseAction> flatlist = flattenChainAndEnsureTitleCardAtStart(grandChildOfActionChain);
+		String list = "";
+		for(int i=0;i<flatlist.size();i++)
+		{
+			list+= this.getNameFromBaseAction(flatlist.get(i))+ "\n";
+		}
+		ACTIONS_FLATTENED_B4_EXECUTION.fine(list);
 		this.list = getGroupsOfConsecutiveParallelActions(flatlist);
 
 		processNextListOfParallelActions();
@@ -143,14 +146,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 		for (int i = 0; i < count; i++) {
 			BaseAction a = this.parallelActionsToWaitFor.get(i);
 
-			String name = a.toString();
-			String prefix = "com.github.a2g.core.action.";
-			name = name.substring(prefix.length());
-			if(name.startsWith("MakeSingleCallAction"))
-			{
-				SingleCallAction b = (SingleCallAction)a;
-				name = b.getType().toString();
-			}
+			String name = getNameFromBaseAction(a);
 			RUNNER.log( Level.FINE, "execute parallel actions "+i+" "+name );
 			ACTIONS_EXECUTED.log(Level.FINE, name);
 			a.setCallbacks(this);
@@ -159,6 +155,19 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 			a.setAll(master, scene, dt, tc, inv);
 			a.runGameAction();
 		}
+	}
+
+	private String getNameFromBaseAction(BaseAction a) 
+	{
+		String name = a.toString();
+		String prefix = "com.github.a2g.core.action.";
+		name = name.substring(prefix.length());
+		if(name.startsWith("MakeSingleCallAction"))
+		{
+			SingleCallAction b = (SingleCallAction)a;
+			name = b.getType().toString();
+		}
+		return name;
 	}
 
 	protected void processNextListOfParallelActions() {

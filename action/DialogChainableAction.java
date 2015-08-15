@@ -47,7 +47,7 @@ implements IChainRootForDialog
 	}
 	@Override
 	public DialogChainEndAction chainTo(int branchId) {
-		return new DialogTreeChainToAction(this, branchId);
+		return new DialogChainToDialogAction(this, branchId);
 	}
 
 	@Override

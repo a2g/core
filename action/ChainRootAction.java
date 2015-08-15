@@ -15,8 +15,7 @@
  */
 
 package com.github.a2g.core.action;
-
-import com.github.a2g.core.action.BaseAction;
+ 
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;

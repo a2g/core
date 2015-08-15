@@ -18,21 +18,19 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
-import com.github.a2g.core.interfaces.IDialogTreePresenterFromDoBranchAction;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
-import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 
-public class ActivateDialogTreeModeAction extends ChainEndAction {
+/**
+ * Needs to be it's own class because it gets searched
+ * for explicitly (see MasterPresenter)
+ */
+public class DialogChainToDialogAction extends ChainToDialogAction {
 
-	private int branchId;
-	private IDialogTreePresenterFromDoBranchAction dialogTree;
-
-	public ActivateDialogTreeModeAction(BaseAction parent, int branchId) {
-		super(parent);
-		this.branchId = branchId;
+	public DialogChainToDialogAction(BaseAction parent, int branchId) {
+		super(parent, branchId);
 	}
 
 	@Override
@@ -50,23 +48,8 @@ public class ActivateDialogTreeModeAction extends ChainEndAction {
 
 	@Override
 	protected boolean onCompleteGameAction() {
-		dialogTree.setActiveGuiState(GuiStateEnum.DialogTree);
 		// do nothing, this is a placeholder that results in a large chained action
 		return false;
-	}
-
-
-
-	public void setBranchId(int branchId) {
-		this.branchId = branchId;
-	}
-
-	public int getBranchId() {
-		return branchId;
-	}
-
-	public void setDialogTree(IDialogTreePresenterFromDoBranchAction dialogTree) {
-		this.dialogTree = dialogTree;
 	}
 
 	@Override
@@ -74,7 +57,6 @@ public class ActivateDialogTreeModeAction extends ChainEndAction {
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
-		setDialogTree(dialogTree);
 
 	}
 

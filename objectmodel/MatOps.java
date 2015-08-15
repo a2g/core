@@ -1,6 +1,6 @@
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.action.ActivateDialogTreeModeAction;
+import com.github.a2g.core.action.ChainToDialogAction;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.DialogChainEndAction;
