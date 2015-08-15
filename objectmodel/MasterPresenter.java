@@ -768,7 +768,6 @@ PropertyChangeEventHandlerAPI
 		else
 		{
 
-			BaseAction a = null;
 			GuiStateEnum mode = masterPanel.getActiveState();
 			if(cmd.getVerb()==ConstantsForAPI.DIALOG)
 			{
@@ -789,26 +788,24 @@ PropertyChangeEventHandlerAPI
 				}
 				COMMAND_AUTOPLAY.log(Level.FINE, "DIALOG "+branchId+" "+dialogTreePresenter.getLineOfDialogForId(branchId));
 				saySpeechAndThenExecuteBranchWithBranchId(branchId);
-				return;
 			}
 			else if(cmd.getVerb()==ConstantsForAPI.SLEEP)
 			{
 				// SLEEP = sleep for 100ms
-				a = MatOps.createChainRootAction().sleep(cmd.getInt1());
+				BaseAction sleep = MatOps.createChainRootAction().sleep(cmd.getInt1());
 				COMMAND_AUTOPLAY.log(Level.FINE, "SLEEP "+cmd.getInt1());
-				return;
+				executeActionWithDoCommandActionRunner(sleep);
 			} 
+			else if(cmd.getVerb()==ConstantsForAPI.SWITCH)
+			{
+				BaseAction switchTo = MatOps.createChainRootAction().switchTo(cmd.getString());
+				COMMAND_AUTOPLAY.log(Level.FINE, "SWITCH "+cmd.getString());
+				executeActionWithDoCommandActionRunner(switchTo);
+			}
 			else if(mode==GuiStateEnum.DialogTree)
 			{
 				// mode was dialog verb wasn't dialog or sleep
 				cancelAutoplay(cmd, "mode was dialog verb wasn't dialog or sleep");
-				return;
-			}
-			else if(cmd.getVerb()==ConstantsForAPI.SWITCH)
-			{
-				a = MatOps.createChainRootAction().switchTo(cmd.getString());
-				COMMAND_AUTOPLAY.log(Level.FINE, "SWITCH "+cmd.getString());
-
 			}
 			else
 			{
@@ -819,7 +816,7 @@ PropertyChangeEventHandlerAPI
 				//otherwise ask the sceneHanders what the outcome is.
 				SentenceItem o1 = new SentenceItem("","",cmd.getInt1());
 				SentenceItem o2 = new SentenceItem("","",cmd.getInt2());
-				a = this.sceneHandlers.onDoCommand(proxyForGameScene,
+				BaseAction a = this.sceneHandlers.onDoCommand(proxyForGameScene,
 						MatOps.createChainRootAction(), cmd.getVerb(),o1,o2,cmd.getDouble1(),cmd.getDouble2());
 
 				if (a == null || a instanceof DoNothingAction) {
@@ -828,9 +825,9 @@ PropertyChangeEventHandlerAPI
 				}
 
 				a = replaceChainToDialogActionWithCallToOnDialogTree(a);
+				this.commandLinePresenter.setMouseable(false);
+				executeActionWithDoCommandActionRunner(a);
 			}
-			this.commandLinePresenter.setMouseable(false);
-			executeActionWithDoCommandActionRunner(a);
 		}
 	}
 
