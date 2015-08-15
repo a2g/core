@@ -23,7 +23,7 @@ public class AutoplayCommand implements ConstantsForAPI
 		return s;
 	}
 
-	public static AutoplayCommand start()
+	public static AutoplayCommand beginChain()
 	{
 		return new AutoplayCommand(null, -1, 1,1, "start", 0.0,0.0);
 	}

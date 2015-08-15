@@ -44,11 +44,7 @@ public class ChainRootAction extends ChainableAction {
 	@Override
 	protected void onUpdateGameAction(double progress) {
 	}
-
-	@Override
-	public void setParent(BaseAction parent) {
-		this.parent = parent;
-	}
+ 
 
 
 

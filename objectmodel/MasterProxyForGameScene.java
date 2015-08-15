@@ -427,7 +427,7 @@ IOnMovementBeyondAGate {
 
 	@Override
 	public ChainRootAction createChainRootAction() {
-		return master.createChainRootAction();
+		return MatOps.createChainRootAction();
 	}
 
 	@Override

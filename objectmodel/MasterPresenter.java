@@ -245,7 +245,7 @@ PropertyChangeEventHandlerAPI
 			// is null..
 			// ... thus null must be interpreted
 			// as DialogTreeEndAction
-			a = new DialogTreeEndAction(createDialogChainRootAction());
+			a = new DialogTreeEndAction(MatOps.createDialogChainRootAction());
 		}
 
 		dialogActionRunner.runAction(a);
@@ -253,7 +253,7 @@ PropertyChangeEventHandlerAPI
 
 	public void executeActionWithDoCommandActionRunner(BaseAction a) {
 		if (a == null) {
-			a = new DoNothingAction(createChainRootAction());
+			a = new DoNothingAction(MatOps.createChainRootAction());
 		}
 
 		doCommandActionRunner.runAction(a);
@@ -261,7 +261,7 @@ PropertyChangeEventHandlerAPI
 
 	public void executeActionWithOnEveryFrameActionRunner(BaseAction a) {
 		if (a == null) {
-			a = new DoNothingAction(createChainRootAction());
+			a = new DoNothingAction(MatOps.createChainRootAction());
 		}
 
 		onEveryFrameActionRunner.runAction(a);
@@ -424,7 +424,7 @@ PropertyChangeEventHandlerAPI
 		// 4. Then we execute it
 		// Thus it will talk the text, and do what the user prescribes.
 
-		DialogTreeTalkAction newTalkAction = new DialogTreeTalkAction(createDialogChainRootAction(), atidOfInterviewer, speech);
+		DialogTreeTalkAction newTalkAction = new DialogTreeTalkAction(MatOps.createDialogChainRootAction(), atidOfInterviewer, speech);
 		BaseAction actionChain = sceneHandlers.onDialogTree(
 				proxyForGameScene, newTalkAction, branchId);
 		BaseAction  actionChain2 = replaceDialogChainToActionWithOnDialogTreeChain(actionChain);
@@ -435,7 +435,7 @@ PropertyChangeEventHandlerAPI
 
 	public void callOnEnterScene() {
 		BaseAction a = this.sceneHandlers.onEntry(proxyForGameScene,
-				createChainRootAction());
+				MatOps.createChainRootAction());
 
 		// .. then executeBaseAction->actionRunner::runAction will add an
 		// TitleCardAction
@@ -714,6 +714,8 @@ PropertyChangeEventHandlerAPI
 		{
 			if(a.getParent()==null)
 				break;
+			if(a.getParent().getParent()==null)
+				break;
 			a = a.getParent();
 		}
 		a.setParent(b);
@@ -724,25 +726,27 @@ PropertyChangeEventHandlerAPI
 		// Note: b is null in default implementation onDialogTree
 		if (b instanceof DialogTreeChainToAction) {
 			int branchId = ((DialogTreeChainToAction) b).getBranchId();
-			DialogChainableAction d = createDialogChainRootAction();
+			DialogChainableAction d = MatOps.createDialogChainRootAction();
 			BaseAction a = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
 			if(a==null)
-				a = new DoNothingAction(createDialogChainRootAction());
+				a = new DialogTreeEndAction(d);
 			linkUpperMostActionOfAToB(a,b);
 			return a;
 		}
 		return b;
 	}
-	BaseAction replaceDoDialogActionWithOnDialogTreeChain(BaseAction a)
+	BaseAction replaceDoDialogActionWithOnDialogTreeChain(BaseAction b)
 	{
-		if (a instanceof ActivateDialogTreeModeAction) {
-			int branchId = ((ActivateDialogTreeModeAction) a).getBranchId();
-			DialogChainableAction d = createDialogChainRootAction();
-			DialogChainEndAction b = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
-			d.setParent(a);
-			return b;
+		if (b instanceof ActivateDialogTreeModeAction) {
+			int branchId = ((ActivateDialogTreeModeAction) b).getBranchId();
+			DialogChainableAction d = MatOps.createDialogChainRootAction();
+			BaseAction a = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
+			if(a==null)
+				a = new DialogTreeEndAction(d);
+			linkUpperMostActionOfAToB(a,b);
+			return a;
 		}
-		return a;
+		return b;
 	}
 
 
@@ -751,7 +755,7 @@ PropertyChangeEventHandlerAPI
 			SentenceItem sentenceA, SentenceItem sentenceB, double x, double y) {
 
 		BaseAction a = this.sceneHandlers.onDoCommand(proxyForGameScene,
-				createChainRootAction(), verbAsCode, sentenceA, sentenceB, x
+				MatOps.createChainRootAction(), verbAsCode, sentenceA, sentenceB, x
 				+ scenePresenter.getCameraX(),
 				y + scenePresenter.getCameraY());
 
@@ -805,7 +809,7 @@ PropertyChangeEventHandlerAPI
 			else if(cmd.getVerb()==ConstantsForAPI.SLEEP)
 			{
 				// SLEEP = sleep for 100ms
-				a = createChainRootAction().sleep(cmd.getInt1());
+				a = MatOps.createChainRootAction().sleep(cmd.getInt1());
 				COMMAND_AUTOPLAY.log(Level.FINE, "SLEEP "+cmd.getInt1());
 
 			} 
@@ -817,7 +821,7 @@ PropertyChangeEventHandlerAPI
 			}
 			else if(cmd.getVerb()==ConstantsForAPI.SWITCH)
 			{
-				a = createChainRootAction().switchTo(cmd.getString());
+				a = MatOps.createChainRootAction().switchTo(cmd.getString());
 				COMMAND_AUTOPLAY.log(Level.FINE, "SWITCH "+cmd.getString());
 
 			}
@@ -831,7 +835,7 @@ PropertyChangeEventHandlerAPI
 				SentenceItem o1 = new SentenceItem("","",cmd.getInt1());
 				SentenceItem o2 = new SentenceItem("","",cmd.getInt2());
 				a = this.sceneHandlers.onDoCommand(proxyForGameScene,
-						createChainRootAction(), cmd.getVerb(),o1,o2,cmd.getDouble1(),cmd.getDouble2());
+						MatOps.createChainRootAction(), cmd.getVerb(),o1,o2,cmd.getDouble1(),cmd.getDouble2());
 
 				if (a instanceof DoNothingAction) {
 					cancelAutoplay(cmd, "onDoCommand returned do nothing");
@@ -937,16 +941,6 @@ PropertyChangeEventHandlerAPI
 	public void setActiveGuiState(GuiStateEnum state) {
 		this.masterPanel.setActiveState(state);
 
-	}
-
-	public ChainRootAction createChainRootAction() {
-		ChainRootAction npa = new ChainRootAction();
-		return npa;
-	}
-
-	public DialogChainRootAction createDialogChainRootAction() {
-		DialogChainRootAction npa = new DialogChainRootAction();
-		return npa;
 	}
 
 	public void executeChainedAction(ChainableAction ba) {
