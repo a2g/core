@@ -512,4 +512,9 @@ IOnMovementBeyondAGate {
 		master.getScenePresenter().setSceneAskerAtid(atid);
 	}
 
+	@Override
+	public void clearInventory() {
+		master.getInventoryPresenter().clear();
+	}
+
 }

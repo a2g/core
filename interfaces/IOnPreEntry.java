@@ -19,6 +19,7 @@ package com.github.a2g.core.interfaces;
 import com.github.a2g.core.interfaces.game.IAddBoundaryGate;
 import com.github.a2g.core.interfaces.game.IAddBoundaryPoint;
 import com.github.a2g.core.interfaces.game.IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
+import com.github.a2g.core.interfaces.game.IClearInventory;
 import com.github.a2g.core.interfaces.game.ICreateChainRootAction;
 import com.github.a2g.core.interfaces.game.IGetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.IGetBaseMiddleY;
@@ -107,6 +108,7 @@ IHideInventoryItem,
 ISetInventoryItemDisplayName,
 IIsInventoryItemVisible,
 ISetInventoryItemVisible,
+IClearInventory,
 
 // verb
 IRemoveVerbByCode,
