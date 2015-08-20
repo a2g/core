@@ -513,8 +513,13 @@ IOnMovementBeyondAGate {
 	}
 
 	@Override
-	public void clearInventory() {
-		master.getInventoryPresenter().clear();
+	public void hideAllInventory() {
+		master.getInventoryPresenter().hideAllInventory();
+	}
+
+	@Override
+	public void setTitleCard(String titlecard) {
+		master.getTitleCardPresenter().setText(titlecard);
 	}
 
 }

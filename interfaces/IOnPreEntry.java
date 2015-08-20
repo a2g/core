@@ -19,7 +19,7 @@ package com.github.a2g.core.interfaces;
 import com.github.a2g.core.interfaces.game.IAddBoundaryGate;
 import com.github.a2g.core.interfaces.game.IAddBoundaryPoint;
 import com.github.a2g.core.interfaces.game.IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
-import com.github.a2g.core.interfaces.game.IClearInventory;
+import com.github.a2g.core.interfaces.game.IHideAllInventory;
 import com.github.a2g.core.interfaces.game.ICreateChainRootAction;
 import com.github.a2g.core.interfaces.game.IGetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.IGetBaseMiddleY;
@@ -56,6 +56,7 @@ import com.github.a2g.core.interfaces.game.ISetIsSayAlwaysWithoutIncrementing;
 import com.github.a2g.core.interfaces.game.ISetParallaxX;
 import com.github.a2g.core.interfaces.game.ISetScreenCoordsPerSecond;
 import com.github.a2g.core.interfaces.game.ISetTalkingColor;
+import com.github.a2g.core.interfaces.game.ISetTitleCard;
 import com.github.a2g.core.interfaces.game.ISetValue;
 import com.github.a2g.core.interfaces.game.ISetVisible;
 import com.github.a2g.core.interfaces.game.ISetX;
@@ -108,7 +109,10 @@ IHideInventoryItem,
 ISetInventoryItemDisplayName,
 IIsInventoryItemVisible,
 ISetInventoryItemVisible,
-IClearInventory,
+IHideAllInventory,
+
+//titlecard
+ISetTitleCard,
 
 // verb
 IRemoveVerbByCode,

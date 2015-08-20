@@ -47,7 +47,7 @@ public class AutoplayCommandQueue implements ISolution
 		solutions.removeFirst();
 		if(!solutions.isEmpty())
 		{
-			api.clearInventory();
+			api.hideAllInventory();
 			solutions.getFirst().onPreEntry(api);
 		}
 		currentIndexIntoFirst = 0;

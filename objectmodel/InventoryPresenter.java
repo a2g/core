@@ -247,4 +247,12 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 		return theInventory.items().getByItid(itid).getDisplayName();
 	}
 
+	public void hideAllInventory() {
+		InventoryItemCollection inv = this.getInventory().items();
+		for (int i = 0; i < inv.getCount(); i++) {
+			InventoryItem item = inv.getByIndex(i);
+			item.setVisible(false);
+		}
+	}
+
 }
