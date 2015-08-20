@@ -273,19 +273,29 @@ implements IScenePanelFromScenePresenter
 			
 			// gate vs point: gate adds 2 valid to array, point adds 1 dummy, then 1 valid
 			// ...so last point is always real. doesn't need checking.
-			double lastX = toScene.getBoundaryPoints().get(size-1).getX()*width;
-			double lastY = toScene.getBoundaryPoints().get(size-1).getY()*height;
+			double lastX = toScene.getBoundaryPoints().get(size-1).second.getX()*width;
+			double lastY = toScene.getBoundaryPoints().get(size-1).second.getY()*height;
 			for(int i=0; i<size; i++)
 			{
-				double newX = toScene.getBoundaryPoints().get(i).getX()*width;
-				double newY = toScene.getBoundaryPoints().get(i).getY()*height;
+				double newX = toScene.getBoundaryPoints().get(i).first.getX()*width;
+				double newY = toScene.getBoundaryPoints().get(i).first.getY()*height;
 				
+				if(newX>=0)
+				{
+					g.drawLine((int)newX, (int)newY, (int)lastX, (int)lastY);
+					lastX = newX;
+					lastY = newY;
+				}
 				
-				if(newX<0)
-					continue;
-				g.drawLine((int)newX, (int)newY, (int)lastX, (int)lastY);
-				lastX = newX;
-				lastY = newY;
+				newX = toScene.getBoundaryPoints().get(i).second.getX()*width;
+				newY = toScene.getBoundaryPoints().get(i).second.getY()*height;
+				
+				if(newX>=0)
+				{
+					g.drawLine((int)newX, (int)newY, (int)lastX, (int)lastY);
+					lastX = newX;
+					lastY = newY;
+				}
 			}
 			
 			PointF c = toScene.getBoundaryPointsCentre();

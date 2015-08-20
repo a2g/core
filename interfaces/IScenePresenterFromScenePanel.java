@@ -10,6 +10,8 @@ import com.github.a2g.core.interfaces.action.IGetSceneObjectCount;
 import com.github.a2g.core.interfaces.action.IGetVisibleByOtid;
 import com.github.a2g.core.interfaces.action.IGetXByOtid;
 import com.github.a2g.core.interfaces.action.IGetYByOtid;
+import com.github.a2g.core.objectmodel.BoundaryCalculator;
+import com.github.a2g.core.objectmodel.BoundaryCalculator.Gate;
 import com.github.a2g.core.primitive.PointF;
 
 public interface IScenePresenterFromScenePanel
@@ -27,6 +29,6 @@ IGetBoundingRectByFrameAndAtid,
 IGetXByOtid,
 IGetYByOtid
 {
-	ArrayList<PointF> getBoundaryPoints();
+	ArrayList<Gate> getBoundaryPoints();
 	PointF getBoundaryPointsCentre();
 }

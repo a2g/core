@@ -6,10 +6,21 @@ import com.github.a2g.core.interfaces.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.primitive.PointF;
 
 public class BoundaryCalculator {
-
+	public class Gate
+	{
+		public String destination;
+		public PointF first;
+		public PointF second;
+		
+		public Gate(Object dest, PointF first, PointF second)
+		{
+			this.destination = (dest==null)? "" : dest.toString();
+			this.first = first;
+			this.second = second;
+		}
+	}
 	private IScenePresenterFromBoundaryCalculator scene;
-	private ArrayList<PointF> gatePoints;
-	private ArrayList<String> gateDests;
+	private ArrayList<Gate> gateDests;
 
 	private static String TREAT_GATE_AS_POINT = "TREAT_GATE_AS_POINT";
 
@@ -17,50 +28,40 @@ public class BoundaryCalculator {
 	public BoundaryCalculator(IScenePresenterFromBoundaryCalculator master)
 	{
 		this.scene = master;
-		this.gatePoints = new ArrayList<PointF>();
-		this.gateDests = new ArrayList<String>();
-
+		this.gateDests = new ArrayList<Gate>(); 
 	}
-	public ArrayList<PointF> getGatePoints(){ return gatePoints;}
+	public ArrayList<Gate> getGatePoints(){ return gateDests;}
 
 	public void addBoundaryGate(Object name, PointF a, PointF b) {
-		gateDests.add(name==null? "" : name.toString());
-		gatePoints.add(a);
-		gatePoints.add(b);
+		gateDests.add(new Gate(name, a, b));
 	}
 
 	public void addBoundaryPoint(PointF a) {
-		gateDests.add(TREAT_GATE_AS_POINT );
-		gatePoints.add(new PointF(-1, -1));
-		// important for the valid point to be the last one,
-		// due to how the span calculations use the last one.
-		gatePoints.add(a);
+		gateDests.add(new Gate(TREAT_GATE_AS_POINT, new PointF(-1, -1), a));
 
 	}
 	public void clearBoundaries() {
-		this.gatePoints.clear();
 		this.gateDests.clear();
 	}
 
 	public boolean doSwitchIfBeyondGate(PointF tp)
 	{
 		String foundDest = "";
-		if (gatePoints.size() > 2) {
-			int size = gateDests.size();
-			for (int i = 0; i < size; i++) {
-				if (gateDests.get(i)==null || gateDests.get(i).length()==0)
-					continue;
+		int size = gateDests.size();
+		for (int i = 0; i < size; i++) {
+			if (gateDests.get(i).destination==null 
+					|| gateDests.get(i).destination.length()==0)
+				continue;
 
-				PointF a = gatePoints.get(i * 2);
-				PointF b = gatePoints.get(i * 2 + 1);
+			PointF a = gateDests.get(i).first;
+			PointF b = gateDests.get(i).second;
 
-				if (isBetweenSpokesAndOnWrongSide(a, b, tp)) {
-					foundDest = gateDests.get(i);
-					if(foundDest!=null && foundDest.length()>0)
-					{
-						scene.switchToScene(foundDest);
-						return true;
-					}
+			if (isBetweenSpokesAndOnWrongSide(a, b, tp)) {
+				foundDest = gateDests.get(i).destination;
+				if(foundDest!=null && foundDest.length()>0)
+				{
+					scene.switchToScene(foundDest);
+					return true;
 				}
 			}
 		}
@@ -69,27 +70,24 @@ public class BoundaryCalculator {
 
 	public boolean isInANoGoZone(PointF tp)
 	{
-		if (gatePoints.size() < 2)
+		if (gateDests.size() < 2)// 2
 			return false;
 
-		// this following line relies craftily on addPoint to
-		// put a dummy value in the first slot, and
-		// the valid value in the last slot
-		PointF previousPoint = gatePoints.get(gatePoints.size() - 1);
+		PointF previousPoint = gateDests.get(gateDests.size() - 1).second;
 
 		int size = gateDests.size();
 		for (int i = 0; i < size; i++) {
 			// only gates get their first point
 			// (so if it is a point it gets ignored)
-			if (gateDests.get(i)!=TREAT_GATE_AS_POINT) {
-				PointF firstPoint = gatePoints.get(i * 2 + 0);
+			if (gateDests.get(i).destination!=TREAT_GATE_AS_POINT) {
+				PointF firstPoint = gateDests.get(i).first;
 				if (isBetweenSpokesAndOnWrongSide(previousPoint, firstPoint, tp))
 					return true;
 				previousPoint = firstPoint;
 			}
 
 			// every gate/point has their second point processed.
-			PointF secondPoint = gatePoints.get(i * 2 + 1);
+			PointF secondPoint = gateDests.get(i).second;
 			if (isBetweenSpokesAndOnWrongSide(previousPoint, secondPoint, tp))
 				return true;
 			previousPoint = secondPoint;
@@ -113,31 +111,43 @@ public class BoundaryCalculator {
 
 
 	public PointF getGatePointsCentre() {
-		int size = gatePoints.size();
+		int size = gateDests.size();
 		if(size==0)
 			return new PointF(.5,.5);
 		
 		// gate vs point: gate adds 2 valid to array, point adds 1 dummy, then 1 valid
-		// ...so last point is always real. doesn't need checking.
-		double maxX = gatePoints.get(0).getX();
-		double minX = gatePoints.get(0).getX();
-		double maxY = gatePoints.get(0).getY();
-		double minY = gatePoints.get(0).getY();
+		// ...so second point is always real. doesn't need checking.
+		double maxX = gateDests.get(0).second.getX();
+		double minX = gateDests.get(0).second.getX();
+		double maxY = gateDests.get(0).second.getY();
+		double minY = gateDests.get(0).second.getY();
 		for(int i=0; i<size; i++)
 		{
-			double newX = gatePoints.get(i).getX();
-			double newY = gatePoints.get(i).getY();
+			double firstX = gateDests.get(i).first.getX();
+			double firstY = gateDests.get(i).first.getY();
 			
-			if(newX<0)
-				continue;
-			maxX = Math.max(maxX, newX);
-			maxY = Math.max(maxY, newY);
+			if(firstX>0)
+			{
+				maxX = Math.max(maxX, firstX);
+				maxY = Math.max(maxY, firstY);
 			
-			minX = Math.min(minX, newX);
-			minY = Math.min(minY, newY);
+				minX = Math.min(minX, firstX);
+				minY = Math.min(minY, firstY);
+			}
+			
+			double secondX = gateDests.get(i).first.getX();
+			double secondY = gateDests.get(i).first.getY();
+			
+			if(secondX>0)
+			{
+				maxX = Math.max(maxX, secondX);
+				maxY = Math.max(maxY, secondY);
+			
+				minX = Math.min(minX, secondX);
+				minY = Math.min(minY, secondY);
+			}
 		}
-		
-		
+		 
 		return new PointF(.5*minX+.5*maxX, .5*maxY+.5*minY);
 		
 	}
