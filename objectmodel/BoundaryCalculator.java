@@ -113,30 +113,33 @@ public class BoundaryCalculator {
 
 
 	public PointF getGatePointsCentre() {
-		double totalX = 0;
-		double totalY = 0;
-		int numberOfExtras = 0;
-		double size = gateDests.size();
-		for (int i = 0; i < size; i++) {
-			// if it's NOT a point, then we process the first
-			// point in the pair.
-			if (gateDests.get(i)!=TREAT_GATE_AS_POINT) {
-				PointF bp = gatePoints.get(i * 2);
-				totalX += bp.getX();
-				totalY += bp.getY();
-				numberOfExtras++;
-			}
-
-			// both gates and single points
-			// have a valid second point
-			// so we always process
-			PointF bp = gatePoints.get(i * 2 + 1);
-			totalX += bp.getX();
-			totalY += bp.getY();
+		int size = gatePoints.size();
+		if(size==0)
+			return new PointF(.5,.5);
+		
+		// gate vs point: gate adds 2 valid to array, point adds 1 dummy, then 1 valid
+		// ...so last point is always real. doesn't need checking.
+		double maxX = gatePoints.get(0).getX();
+		double minX = gatePoints.get(0).getX();
+		double maxY = gatePoints.get(0).getY();
+		double minY = gatePoints.get(0).getY();
+		for(int i=0; i<size; i++)
+		{
+			double newX = gatePoints.get(i).getX();
+			double newY = gatePoints.get(i).getY();
+			
+			if(newX<0)
+				continue;
+			maxX = Math.max(maxX, newX);
+			maxY = Math.max(maxY, newY);
+			
+			minX = Math.min(minX, newX);
+			minY = Math.min(minY, newY);
 		}
-		double numberOfPoints = size + numberOfExtras;
-		return new PointF(totalX / numberOfPoints
-				, totalY / numberOfPoints);
+		
+		
+		return new PointF(.5*minX+.5*maxX, .5*maxY+.5*minY);
+		
 	}
 
 	private PointF getMidPoint(PointF a, PointF b) {

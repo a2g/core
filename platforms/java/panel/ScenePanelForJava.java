@@ -275,10 +275,6 @@ implements IScenePanelFromScenePresenter
 			// ...so last point is always real. doesn't need checking.
 			double lastX = toScene.getBoundaryPoints().get(size-1).getX()*width;
 			double lastY = toScene.getBoundaryPoints().get(size-1).getY()*height;
-			double maxX = lastX;
-			double minX = lastX;
-			double maxY = lastY;
-			double minY = lastY;
 			for(int i=0; i<size; i++)
 			{
 				double newX = toScene.getBoundaryPoints().get(i).getX()*width;
@@ -287,11 +283,6 @@ implements IScenePanelFromScenePresenter
 				
 				if(newX<0)
 					continue;
-				maxX = Math.max(maxX, newX);
-				maxY = Math.max(maxY, newY);
-				
-				minX = Math.min(minX, newX);
-				minY = Math.min(minY, newY);
 				g.drawLine((int)newX, (int)newY, (int)lastX, (int)lastY);
 				lastX = newX;
 				lastY = newY;
@@ -299,14 +290,6 @@ implements IScenePanelFromScenePresenter
 			
 			PointF c = toScene.getBoundaryPointsCentre();
 			g.drawOval((int)(c.getX()*width), (int)(c.getY()*height), 3, 3);
-			
-			// if the green center is better, then replace the impl
-			// of getBoundaryPointsCentre with max/min maths from here
-			g.setColor(new Color(0,255,0));
-			double x2 = maxX/2 + minX/2;
-			double y2 = maxY/2 + minY/2;
-			g.drawOval((int)x2, (int)y2, 4, 4);
-			
 		}
 
 	}
