@@ -1,17 +1,19 @@
 package com.github.a2g.core.objectmodel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import com.github.a2g.core.interfaces.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.primitive.PointF;
 
-public class BoundaryCalculator {
-	public class Gate
+public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>{
+	public class Gate 
 	{
 		public String destination;
 		public PointF first;
 		public PointF second;
-		
+
 		public Gate(Object dest, PointF first, PointF second)
 		{
 			this.destination = (dest==null)? "" : dest.toString();
@@ -21,6 +23,7 @@ public class BoundaryCalculator {
 	}
 	private IScenePresenterFromBoundaryCalculator scene;
 	private ArrayList<Gate> gateDests;
+	private PointF cachedCalculationOfCentre;
 
 	private static String TREAT_GATE_AS_POINT = "TREAT_GATE_AS_POINT";
 
@@ -29,16 +32,23 @@ public class BoundaryCalculator {
 	{
 		this.scene = master;
 		this.gateDests = new ArrayList<Gate>(); 
+		updateCentre();
 	}
 	public ArrayList<Gate> getGatePoints(){ return gateDests;}
 
+	void sort()
+	{
+		this.updateCentre();
+		Collections.sort(gateDests, this);
+	}
 	public void addBoundaryGate(Object name, PointF a, PointF b) {
 		gateDests.add(new Gate(name, a, b));
+		sort();
 	}
 
 	public void addBoundaryPoint(PointF a) {
 		gateDests.add(new Gate(TREAT_GATE_AS_POINT, new PointF(-1, -1), a));
-
+		sort();
 	}
 	public void clearBoundaries() {
 		this.gateDests.clear();
@@ -111,45 +121,52 @@ public class BoundaryCalculator {
 
 
 	public PointF getGatePointsCentre() {
-		int size = gateDests.size();
-		if(size==0)
-			return new PointF(.5,.5);
-		
-		// gate vs point: gate adds 2 valid to array, point adds 1 dummy, then 1 valid
-		// ...so second point is always real. doesn't need checking.
-		double maxX = gateDests.get(0).second.getX();
-		double minX = gateDests.get(0).second.getX();
-		double maxY = gateDests.get(0).second.getY();
-		double minY = gateDests.get(0).second.getY();
-		for(int i=0; i<size; i++)
+		return cachedCalculationOfCentre;
+	}
+	
+	public void updateCentre()
+	{
+		cachedCalculationOfCentre = new PointF(.5,.5);
+
+		if(gateDests.size()>0)
 		{
-			double firstX = gateDests.get(i).first.getX();
-			double firstY = gateDests.get(i).first.getY();
-			
-			if(firstX>0)
+			double maxX = gateDests.get(0).second.getX();
+			double minX = gateDests.get(0).second.getX();
+			double maxY = gateDests.get(0).second.getY();
+			double minY = gateDests.get(0).second.getY();
+			for(int i=0; i<gateDests.size(); i++)
 			{
-				maxX = Math.max(maxX, firstX);
-				maxY = Math.max(maxY, firstY);
-			
-				minX = Math.min(minX, firstX);
-				minY = Math.min(minY, firstY);
+				{
+					double firstX = gateDests.get(i).first.getX();
+					double firstY = gateDests.get(i).first.getY();
+
+					if(firstX>0)
+					{
+						maxX = Math.max(maxX, firstX);
+						maxY = Math.max(maxY, firstY);
+
+						minX = Math.min(minX, firstX);
+						minY = Math.min(minY, firstY);
+					}
+				}
+
+				{
+					double secondX = gateDests.get(i).second.getX();
+					double secondY = gateDests.get(i).second.getY();
+
+					if(secondX>0)
+					{
+						maxX = Math.max(maxX, secondX);
+						maxY = Math.max(maxY, secondY);
+
+						minX = Math.min(minX, secondX);
+						minY = Math.min(minY, secondY);
+					}
+				}
 			}
-			
-			double secondX = gateDests.get(i).first.getX();
-			double secondY = gateDests.get(i).first.getY();
-			
-			if(secondX>0)
-			{
-				maxX = Math.max(maxX, secondX);
-				maxY = Math.max(maxY, secondY);
-			
-				minX = Math.min(minX, secondX);
-				minY = Math.min(minY, secondY);
-			}
+
+			cachedCalculationOfCentre = new PointF(.5*minX+.5*maxX, .5*maxY+.5*minY);
 		}
-		 
-		return new PointF(.5*minX+.5*maxX, .5*maxY+.5*minY);
-		
 	}
 
 	private PointF getMidPoint(PointF a, PointF b) {
@@ -170,4 +187,18 @@ public class BoundaryCalculator {
 		return result1 * result2 > 0;
 	}
 
+	@Override
+	public int compare(Gate o1, Gate o2) {
+		double a1 = getSomeScalarMeasureMentOfAngle(o1.second, cachedCalculationOfCentre);
+		double a2 = getSomeScalarMeasureMentOfAngle(o2.second, cachedCalculationOfCentre);
+		return (int)(a1-a2);
+	}
+	
+	public static double getSomeScalarMeasureMentOfAngle(PointF p1, PointF p2) { 
+		double deltaX = p2.getX() - p1.getX(); 
+		double deltaY = p2.getY() - p1.getY(); 
+		return Math.toDegrees(Math.atan2(deltaY, deltaX));
+		//http://stackoverflow.com/questions/7586063/how-to-calculate-the-angle-between-a-line-and-the-horizontal-axis
+	} 
+	
 }
