@@ -10,19 +10,19 @@ import com.github.a2g.core.primitive.PointF;
 public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>{
 	protected class Gate 
 	{
-		public String destination;
-		public PointF first;
-		public PointF second;
+		public String switchTo;
+		public PointF a;
+		public PointF b;
 
 		public Gate(Object dest, PointF first, PointF second)
 		{
-			this.destination = (dest==null)? "" : dest.toString();
-			this.first = first;
-			this.second = second;
+			this.switchTo = (dest==null)? "" : dest.toString();
+			this.a = first;
+			this.b = second;
 		}
 	}
 	private IScenePresenterFromBoundaryCalculator scene;
-	private ArrayList<Gate> gateDests;
+	private ArrayList<Gate> gates;
 	private PointF cachedCalculationOfCentre;
 
 	private static String TREAT_GATE_AS_POINT = "TREAT_GATE_AS_POINT";
@@ -31,24 +31,19 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>{
 	public BoundaryCalculator(IScenePresenterFromBoundaryCalculator master)
 	{
 		this.scene = master;
-		this.gateDests = new ArrayList<Gate>(); 
+		this.gates = new ArrayList<Gate>(); 
 		updateCentre();
 	}
+	
 	public ArrayList<PointF> getGatePoints()
 	{ 
 		ArrayList<PointF> toReturn = new ArrayList<PointF>();
-		
-		for(int i=0;i<gateDests.size();i++)
+		for(int i=0;i<gates.size();i++)
 		{
-			Gate g = gateDests.get(i);
-			if(g.destination==TREAT_GATE_AS_POINT)
+			toReturn.add(gates.get(i).a);// always add first
+			if(gates.get(i).switchTo!=TREAT_GATE_AS_POINT)
 			{
-				toReturn.add(g.second);
-			}
-			else
-			{
-				toReturn.add(g.first);
-				toReturn.add(g.second);
+				toReturn.add(gates.get(i).b);// only add second if not point
 			}
 		}
 		return toReturn;
@@ -58,40 +53,35 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>{
 	void sort()
 	{
 		this.updateCentre();
-		Collections.sort(gateDests, this);
+		Collections.sort(gates, this);
 	}
-	public void addBoundaryGate(Object name, PointF a, PointF b) {
-		gateDests.add(new Gate(name, a, b));
+	
+	public void addBoundaryGate(Object switchTo, PointF a, PointF b) {
+		gates.add(new Gate(switchTo==""? null : switchTo, a, b));
 		sort();
 	}
 
 	public void addBoundaryPoint(PointF a) {
-		gateDests.add(new Gate(TREAT_GATE_AS_POINT, new PointF(-1, -1), a));
+		gates.add(new Gate(TREAT_GATE_AS_POINT,  a, new PointF(-1, -1)));
 		sort();
 	}
+	
 	public void clearBoundaries() {
-		this.gateDests.clear();
+		this.gates.clear();
 	}
 
 	public boolean doSwitchIfBeyondGate(PointF tp)
 	{
-		String foundDest = "";
-		int size = gateDests.size();
+		int size = gates.size();
 		for (int i = 0; i < size; i++) {
-			if (gateDests.get(i).destination==null 
-					|| gateDests.get(i).destination.length()==0)
+			Gate g = gates.get(i);
+			if (g.switchTo==null||g.switchTo==TREAT_GATE_AS_POINT)
 				continue;
-
-			PointF a = gateDests.get(i).first;
-			PointF b = gateDests.get(i).second;
-
-			if (isBetweenSpokesAndOnWrongSide(a, b, tp)) {
-				foundDest = gateDests.get(i).destination;
-				if(foundDest!=null && foundDest.length()>0)
-				{
-					scene.switchToScene(foundDest);
-					return true;
-				}
+		
+			if (isBetweenSpokesAndOnWrongSide(g.a, g.b, tp)) 
+			{
+				scene.switchToScene(g.switchTo);
+				return true;
 			}
 		}
 		return false;
@@ -99,27 +89,15 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>{
 
 	public boolean isInANoGoZone(PointF tp)
 	{
-		if (gateDests.size() < 2)// 2
+		ArrayList<PointF> a = getGatePoints();
+		if (a.size() < 3)// need 3 to form an area
 			return false;
 
-		PointF previousPoint = gateDests.get(gateDests.size() - 1).second;
-
-		int size = gateDests.size();
-		for (int i = 0; i < size; i++) {
-			// only gates get their first point
-			// (so if it is a point it gets ignored)
-			if (gateDests.get(i).destination!=TREAT_GATE_AS_POINT) {
-				PointF firstPoint = gateDests.get(i).first;
-				if (isBetweenSpokesAndOnWrongSide(previousPoint, firstPoint, tp))
-					return true;
-				previousPoint = firstPoint;
-			}
-
-			// every gate/point has their second point processed.
-			PointF secondPoint = gateDests.get(i).second;
-			if (isBetweenSpokesAndOnWrongSide(previousPoint, secondPoint, tp))
+		PointF previousPoint = a.get(a.size() - 1);
+		for (int i = 0; i < a.size(); i++) {
+			if (isBetweenSpokesAndOnWrongSide(previousPoint, a.get(i), tp))
 				return true;
-			previousPoint = secondPoint;
+			previousPoint = a.get(i);
 		}
 		return false;
 	}
@@ -146,45 +124,23 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>{
 	public void updateCentre()
 	{
 		cachedCalculationOfCentre = new PointF(.5,.5);
-
-		if(gateDests.size()>0)
+		ArrayList<PointF> a = getGatePoints();
+		if(a.size()>0)
 		{
-			double maxX = gateDests.get(0).second.getX();
-			double minX = gateDests.get(0).second.getX();
-			double maxY = gateDests.get(0).second.getY();
-			double minY = gateDests.get(0).second.getY();
-			for(int i=0; i<gateDests.size(); i++)
+			double maxX = a.get(0).getX();
+			double minX = a.get(0).getX();
+			double maxY = a.get(0).getY();
+			double minY = a.get(0).getY();
+			for(int i=0; i<a.size(); i++)
 			{
-				{
-					double firstX = gateDests.get(i).first.getX();
-					double firstY = gateDests.get(i).first.getY();
-
-					if(firstX>0)
-					{
-						maxX = Math.max(maxX, firstX);
-						maxY = Math.max(maxY, firstY);
-
-						minX = Math.min(minX, firstX);
-						minY = Math.min(minY, firstY);
-					}
-				}
-
-				{
-					double secondX = gateDests.get(i).second.getX();
-					double secondY = gateDests.get(i).second.getY();
-
-					if(secondX>0)
-					{
-						maxX = Math.max(maxX, secondX);
-						maxY = Math.max(maxY, secondY);
-
-						minX = Math.min(minX, secondX);
-						minY = Math.min(minY, secondY);
-					}
-				}
+				double x = a.get(i).getX();
+				double y = a.get(i).getY();
+				maxX = Math.max(maxX, x);
+				minX = Math.min(minX, x);
+				minY = Math.min(minY, y);
+				maxY = Math.max(maxY, y);
 			}
-
-			cachedCalculationOfCentre = new PointF(.5*minX+.5*maxX, .5*maxY+.5*minY);
+			cachedCalculationOfCentre = new PointF(.5*minX+.5*maxX, .5*minY+.5*maxY);
 		}
 	}
 
@@ -208,8 +164,10 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>{
 
 	@Override
 	public int compare(Gate o1, Gate o2) {
-		double a1 = getSomeScalarMeasureMentOfAngle(o1.second, cachedCalculationOfCentre);
-		double a2 = getSomeScalarMeasureMentOfAngle(o2.second, cachedCalculationOfCentre);
+		// we sort by the first point in each gate...
+		// if they overlap, then its the room author's fault!
+		double a1 = getSomeScalarMeasureMentOfAngle(o1.a, cachedCalculationOfCentre);
+		double a2 = getSomeScalarMeasureMentOfAngle(o2.a, cachedCalculationOfCentre);
 		return (int)(a1-a2);
 	}
 	
