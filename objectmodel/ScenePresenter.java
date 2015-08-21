@@ -25,7 +25,6 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromScenePresenter;
 import com.github.a2g.core.interfaces.IScenePresenter;
 import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.IScenePresenterFromBoundaryCalculator;
-import com.github.a2g.core.objectmodel.BoundaryCalculator.Gate;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;
@@ -369,7 +368,7 @@ implements IScenePresenter
 	}
 
 	@Override
-	public ArrayList<Gate> getBoundaryPoints() {
+	public ArrayList<PointF> getBoundaryPoints() {
 		return boundaryCalculator.getGatePoints();
 	}
 

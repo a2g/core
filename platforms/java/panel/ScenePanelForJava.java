@@ -23,6 +23,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -269,33 +270,19 @@ implements IScenePanelFromScenePresenter
 		if(isRenderBoundary)
 		{
 			g.setColor(new Color(255,0,0));
-			int size = toScene.getBoundaryPoints().size();
-			
-			// gate vs point: gate adds 2 valid to array, point adds 1 dummy, then 1 valid
-			// ...so last point is always real. doesn't need checking.
-			double lastX = toScene.getBoundaryPoints().get(size-1).second.getX()*width;
-			double lastY = toScene.getBoundaryPoints().get(size-1).second.getY()*height;
+			// connect all the points in a big line
+			ArrayList<PointF> points = toScene.getBoundaryPoints();
+			int size = points.size();
+			double lastX = points.get(size-1).getX()*width;
+			double lastY = points.get(size-1).getY()*height;
 			for(int i=0; i<size; i++)
 			{
-				double newX = toScene.getBoundaryPoints().get(i).first.getX()*width;
-				double newY = toScene.getBoundaryPoints().get(i).first.getY()*height;
+				double newX = points.get(i).getX()*width;
+				double newY = points.get(i).getY()*height;
 				
-				if(newX>=0)
-				{
-					g.drawLine((int)newX, (int)newY, (int)lastX, (int)lastY);
-					lastX = newX;
-					lastY = newY;
-				}
-				
-				newX = toScene.getBoundaryPoints().get(i).second.getX()*width;
-				newY = toScene.getBoundaryPoints().get(i).second.getY()*height;
-				
-				if(newX>=0)
-				{
-					g.drawLine((int)newX, (int)newY, (int)lastX, (int)lastY);
-					lastX = newX;
-					lastY = newY;
-				}
+				g.drawLine((int)newX, (int)newY, (int)lastX, (int)lastY);
+				lastX = newX;
+				lastY = newY;
 			}
 			
 			PointF c = toScene.getBoundaryPointsCentre();

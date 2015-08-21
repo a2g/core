@@ -8,7 +8,7 @@ import com.github.a2g.core.interfaces.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.primitive.PointF;
 
 public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>{
-	public class Gate 
+	protected class Gate 
 	{
 		public String destination;
 		public PointF first;
@@ -34,7 +34,26 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>{
 		this.gateDests = new ArrayList<Gate>(); 
 		updateCentre();
 	}
-	public ArrayList<Gate> getGatePoints(){ return gateDests;}
+	public ArrayList<PointF> getGatePoints()
+	{ 
+		ArrayList<PointF> toReturn = new ArrayList<PointF>();
+		
+		for(int i=0;i<gateDests.size();i++)
+		{
+			Gate g = gateDests.get(i);
+			if(g.destination==TREAT_GATE_AS_POINT)
+			{
+				toReturn.add(g.second);
+			}
+			else
+			{
+				toReturn.add(g.first);
+				toReturn.add(g.second);
+			}
+		}
+		return toReturn;
+		
+	}
 
 	void sort()
 	{
