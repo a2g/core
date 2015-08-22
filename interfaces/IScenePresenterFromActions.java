@@ -17,5 +17,6 @@ IScenePresenterFromMoveAction
 , IScenePresenterFromScrollPerformer
 , IScenePresenterFromWalkPerformer
 , IScenePresenterFromSingleCallPerformer
+, IScenePresenterFromScalePerformer
 {
 }

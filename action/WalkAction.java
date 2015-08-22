@@ -18,6 +18,7 @@ package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.performer.MovePerformer;
+import com.github.a2g.core.action.performer.ScalePerformer;
 import com.github.a2g.core.action.performer.WalkPerformer;
 import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
@@ -38,12 +39,14 @@ public class WalkAction extends ChainableAction
 {
 	MovePerformer mover;
 	WalkPerformer walker;
+	ScalePerformer scaler;
 
 	public WalkAction(BaseAction parent, short ocode) {
 		super(parent);
 		mover = new MovePerformer(ocode);
 		mover.setToInitialAtEndForMover(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
 		walker = new WalkPerformer(ocode);
+		scaler = new ScalePerformer(ocode);
 	}
 
 	@Override
@@ -54,12 +57,14 @@ public class WalkAction extends ChainableAction
 	{
 		mover.setSceneForMover(scene);
 		walker.setSceneForWalk(scene);
+		scaler.setSceneForScaler(scene);
 	}
 
 	@Override
 	public void runGameAction() {
 		double duration = mover.runForMover();
 		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
+		scaler.runForScaler();
 		this.run((int) (duration * 1000.0));
 	}
 
@@ -67,6 +72,7 @@ public class WalkAction extends ChainableAction
 	protected void onUpdateGameAction(double progress) {
 		PointF pt = mover.onUpdateCalculateForMover(progress);
 		mover.onUpdateCalculateForMover(progress, pt);
+		scaler.onUpdateForScaler(progress);
 	}
 
 	@Override
@@ -74,6 +80,7 @@ public class WalkAction extends ChainableAction
 	protected boolean onCompleteGameAction() {
 		onUpdateGameAction(1.0);
 		mover.onCompleteForMover();
+		scaler.onCompleteForScaler();
 		return false;
 	}
 	void setEndX(double endX) {
@@ -91,5 +98,13 @@ public class WalkAction extends ChainableAction
 	public void setToInitialAtEnd(boolean isSetToInitialAtEnd) {
 		mover.setToInitialAtEndForMover(isSetToInitialAtEnd);
 
+	}
+
+	public void setEndScale(double endScale) {
+		scaler.setEndScaleForScaler(endScale);
+	}
+
+	public void setStartScale(double startScale) {
+		scaler.setStartScaleForScaler(startScale);
 	}
 }

@@ -23,6 +23,7 @@ import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.interfaces.performer.IMovePerformer;
+import com.github.a2g.core.interfaces.performer.IScalePerformer;
 import com.github.a2g.core.interfaces.performer.ISwitchPerformer;
 import com.github.a2g.core.interfaces.performer.IWalkPerformer;
 import com.github.a2g.core.primitive.PointF;
@@ -32,12 +33,14 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 	IMovePerformer mover;
 	ISwitchPerformer switcher;
 	IWalkPerformer walker;
+	IScalePerformer scaler;
 
-	public WalkMaybeSwitchAction(BaseAction parent, IMovePerformer m, IWalkPerformer w, ISwitchPerformer s) {
+	public WalkMaybeSwitchAction(BaseAction parent, IMovePerformer m, IWalkPerformer w, ISwitchPerformer s, IScalePerformer sc) {
 		super(parent);
 		walker = w;
 		switcher = s;
 		mover = m;
+		scaler = sc;
 		mover.setToInitialAtEndForMover(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
 	}
 
@@ -50,6 +53,7 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 		mover.setSceneForMover(scene);
 		walker.setSceneForWalk(scene);
 		switcher.setSceneForSwitch(scene);
+		scaler.setSceneForScaler(scene);
 	}
 
 	@Override
@@ -57,6 +61,7 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 		switcher.runForSwitch( );
 		double duration = mover.runForMover();
 		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
+		scaler.runForScaler();
 		this.run((int) (duration * 1000.0));
 	}
 
@@ -77,6 +82,7 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 			return;//prevent mover from executing.
 		}
 		mover.onUpdateCalculateForMover(progress, pt);
+		scaler.onUpdateForScaler(progress);
 	}
 
 	@Override
@@ -93,6 +99,7 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 		if(!isExited)
 		{
 			mover.onCompleteForMover();
+			scaler.onCompleteForScaler();
 			isExited = switcher.onCompleteForSwitch();
 		}
 		return isExited;

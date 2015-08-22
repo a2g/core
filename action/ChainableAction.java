@@ -21,6 +21,7 @@ import com.github.a2g.core.action.ChainToDialogAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkAction;
 import com.github.a2g.core.action.performer.MovePerformer;
+import com.github.a2g.core.action.performer.ScalePerformer;
 import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
 import com.github.a2g.core.action.performer.SwitchPerformer;
 import com.github.a2g.core.action.performer.TalkPerformer;
@@ -309,6 +310,9 @@ implements IChainRootForScene
 	public ChainableAction walkNeverSwitch(double x, double y) {
 		return walkNeverSwitch(new PointF(x,y));
 	}
+	
+
+	
 	@Override
 	public ChainableAction walkNeverSwitch(PointF end) {
 		WalkAction a = new WalkAction(this,
@@ -322,13 +326,18 @@ implements IChainRootForScene
 	public ChainEndAction walkTo(double x, double y) {
 		return walkTo(new PointF(x,y));
 	}
+	
+	
+
+	
 	@Override
 	public ChainEndAction walkTo(PointF end) {
 		short dso = ScenePresenter.DEFAULT_SCENE_OBJECT;
 		MovePerformer m = new MovePerformer(dso);
 		WalkPerformer w = new WalkPerformer(dso);
-		SwitchPerformer s = new SwitchPerformer(dso);
-		WalkMaybeSwitchAction a = new WalkMaybeSwitchAction(this, m,w,s);
+		SwitchPerformer sw = new SwitchPerformer(dso);
+		ScalePerformer sc = new ScalePerformer(dso);
+		WalkMaybeSwitchAction a = new WalkMaybeSwitchAction(this, m,w,sw,sc);
 		a.setEndX(end.getX());
 		a.setEndY(end.getY());
 		return a;
@@ -339,6 +348,21 @@ implements IChainRootForScene
 		WalkAction a = new WalkAction(this, ScenePresenter.DEFAULT_SCENE_OBJECT);
 		a.setEndX(x);
 		a.setEndY(y);
+		a.setToInitialAtEnd(false);
+
+		SingleCallAction b =  new SingleCallAction(a, Type.Switch);
+		b.setString(sceneName);
+
+		return b;
+	}
+	
+	@Override
+	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, PointF p, String sceneName, double startScale, double endScale) {
+		WalkAction a = new WalkAction(this, ocode);
+		a.setEndX(p.getX());
+		a.setEndY(p.getY());
+		a.setStartScale(startScale);
+		a.setEndScale(endScale);
 		a.setToInitialAtEnd(false);
 
 		SingleCallAction b =  new SingleCallAction(a, Type.Switch);
@@ -550,6 +574,18 @@ implements IChainRootForScene
 		s.setNonIncrementing(TalkPerformer.NonIncrementing.True);
 		s.setEndX(x);
 		s.setEndY(y);
+		return s;
+
+	}
+	
+	@Override
+	public ChainableAction walkAndScaleNeverSwitch(short ocode, PointF p, double startScale, double endScale)
+	{
+		WalkAction s = new WalkAction(this, ocode);
+		s.setEndX(p.getX());
+		s.setEndY(p.getY());
+		s.setStartScale(startScale);
+		s.setEndScale(endScale);
 		return s;
 
 	}

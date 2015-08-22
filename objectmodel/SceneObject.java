@@ -404,7 +404,10 @@ public class SceneObject {
 
 	public void setScale(double scale) {
 		currentImage.setScale(scale,getRawLeftTop());
-		
+	}
+
+	public void setScaleOnCurrentFrame(double scale) {
+		currentImage.setScale(scale,getRawLeftTop());
 	}
 
 
