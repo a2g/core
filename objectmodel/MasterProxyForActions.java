@@ -141,9 +141,9 @@ ITitleCardPresenterFromActions {
 
 	@Override
 	public void setCurrentFrameByOtid(String otid, int frame) {
-		if (master.getScenePresenter().getObjectByOtid(otid) != null) {
-			master.getScenePresenter().getObjectByOtid(otid)
-			.setCurrentFrame(frame);
+		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
+		if (o != null) {
+			o.setCurrentFrame(frame);
 		}
 	}
 

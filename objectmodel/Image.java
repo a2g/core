@@ -28,6 +28,7 @@ public abstract class Image {
 	private final Point fixedOffset;
 	private double parallaxX;
 	private double parallaxY;
+	private double scale;
 	String atid;
 
 	public Image(ImagePanelAPI panel, Point offset, String atid) {
@@ -36,6 +37,7 @@ public abstract class Image {
 		this.parallaxX = 1.0;
 		this.parallaxY = 1.0;
 		this.atid = atid;
+		this.scale = 1.0;
 	};
 
 	public void addImageToPanel(int before) {
@@ -50,6 +52,17 @@ public abstract class Image {
 	public void setLeftTop(Point leftTop) {
 		update(leftTop);
 	}
+	
+	public void setScale(double scale, Point point)
+	{
+		this.scale = scale;
+		update(point);
+	}
+
+	public double getScale()
+	{
+		return scale;
+	}
 
 	public void setVisible(boolean visible, Point position) {
 		panel.setImageVisible(this, visible);
@@ -57,8 +70,10 @@ public abstract class Image {
 	}
 
 	public Rect getBoundingRect() {
-		return new Rect(this.fixedOffset.getX(), this.fixedOffset.getY(),
-				panel.getImageWidth(this), panel.getImageHeight(this));
+		return new Rect(this.fixedOffset.getX(), 
+						this.fixedOffset.getY(),
+						(int)(panel.getImageWidth(this)*scale), 
+						(int)(panel.getImageHeight(this)*scale));
 	}
 
 	public void setParallaxX(double x) {
@@ -97,5 +112,6 @@ public abstract class Image {
 	public String getAtid() {
 		return atid;
 	}
+ 
 
 }

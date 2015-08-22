@@ -402,6 +402,11 @@ public class SceneObject {
 		this.updateToCorrectImage();
 	}
 
+	public void setScale(double scale) {
+		currentImage.setScale(scale,getRawLeftTop());
+		
+	}
+
 
 
 };
