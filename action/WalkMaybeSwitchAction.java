@@ -59,9 +59,9 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 	@Override
 	public void runGameAction() {
 		switcher.runForSwitch( );
+		scaler.runForScaler();
 		double duration = mover.runForMover();
 		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
-		scaler.runForScaler();
 		this.run((int) (duration * 1000.0));
 	}
 
@@ -81,8 +81,9 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 			this.cancel();// process onComplete immediately
 			return;//prevent mover from executing.
 		}
-		mover.onUpdateCalculateForMover(progress, pt);
 		scaler.onUpdateForScaler(progress);
+		mover.onUpdateCalculateForMover(progress, pt);
+		
 	}
 
 	@Override
@@ -98,8 +99,8 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 		boolean isExited = switcher.isExitedThruGate();
 		if(!isExited)
 		{
-			mover.onCompleteForMover();
 			scaler.onCompleteForScaler();
+			mover.onCompleteForMover();
 			isExited = switcher.onCompleteForSwitch();
 		}
 		return isExited;
