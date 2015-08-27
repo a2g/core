@@ -25,14 +25,14 @@ import com.google.gwt.event.dom.client.LoadHandler;
 public abstract class Image {
 
 	private final ImagePanelAPI panel;
-	private final Point fixedOffset;
+	private final Point constOffset;
 	private double parallaxX;
 	private double parallaxY;
 	private double scale;
 	String atid;
 
 	public Image(ImagePanelAPI panel, Point offset, String atid) {
-		this.fixedOffset = offset;
+		this.constOffset = offset;
 		this.panel = panel;
 		this.parallaxX = 1.0;
 		this.parallaxY = 1.0;
@@ -41,7 +41,7 @@ public abstract class Image {
 	};
 
 	public void addImageToPanel(int before) {
-		panel.insert(this, this.fixedOffset.getX(), this.fixedOffset.getY(),
+		panel.insert(this, this.constOffset.getX(), this.constOffset.getY(),
 				before);
 	}
 
@@ -53,10 +53,9 @@ public abstract class Image {
 		update(leftTop);
 	}
 	
-	public void setScale(double scale, Point point)
+	public void setScale(double scale)
 	{
 		this.scale = scale;
-		update(point);
 	}
 
 	public double getScale()
@@ -69,11 +68,11 @@ public abstract class Image {
 		update(position);
 	}
 
-	public Rect getBoundingRect() {
-		return new Rect(this.fixedOffset.getX(), 
-						this.fixedOffset.getY(),
-						(int)(panel.getImageWidth(this)*scale), 
-						(int)(panel.getImageHeight(this)*scale));
+	public Rect getBoundingRectPreScaling() {
+		return new Rect(this.constOffset.getX(), 
+						this.constOffset.getY(),
+						(int)(panel.getImageWidth(this)), 
+						(int)(panel.getImageHeight(this)));
 	}
 
 	public void setParallaxX(double x) {
@@ -92,11 +91,14 @@ public abstract class Image {
 		return this.parallaxY;
 	}
 
-	private void update(Point leftTop) {
+	private void update(Point xAndY) {
 
-		int x = this.fixedOffset.getX();
-		int y = this.fixedOffset.getY();
-		panel.setThingPosition(this, leftTop.getX() + x, leftTop.getY() + y);
+		//this should be alright because we deduct the constOffset
+		// when calculating x & y
+		int constXOffset = (int)(this.constOffset.getX());
+		int constYOffset = (int)(this.constOffset.getY());
+		panel.setThingPosition(this, constXOffset + xAndY.getX(),
+				constYOffset + xAndY.getY() );
 	}
 
 	public static final com.google.gwt.user.client.ui.Image getImageFromResource(

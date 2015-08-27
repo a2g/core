@@ -258,8 +258,8 @@ implements IScenePanelFromScenePresenter
 			if(listOfVisibleHashCodes.contains(hash(image)))
 			{
 				Point p = mapOfPointsByImage.get(hash(image));
-				int x = p.getX();
-				int y = p.getY();
+				int leftTopPlusX = p.getX();
+				int leftTopPlusY = p.getY();
 
 				
 				// img - the specified image to be drawn. This method does nothing if img is null.
@@ -272,13 +272,18 @@ implements IScenePanelFromScenePresenter
 				// dy1 - the y coordinate of the first corner of the destination rectangle.
 				// dx2 - the x coordinate of the second corner of the destination rectangle.
 				// dy2 - the y coordinate of the second corner of the destination rectangle.
-				//Rect r = image.getBoundingRect();
+				
+				// source coords: these are correct. don't change.
 				int sx1 = 0;
 				int sy1 = 0;
 				int sx2 = getImageWidth(image);
 				int sy2 = getImageHeight(image);
-				int dx1 = (int)(x-cameraOffsetX*image.getParallaxX());
-				int dy1 = (int)(y-cameraOffsetY*image.getParallaxY());
+				
+				// these are also correct, the real question
+				// lies in what is leftTopPlusY
+				// these are set with SetThingPosition
+				int dx1 = (int)(leftTopPlusX);
+				int dy1 = (int)(leftTopPlusY);
 				int dx2 = (int)(dx1 + sx2*image.getScale());
 				int dy2 = (int)(dy1 + sy2*image.getScale());
 				g.drawImage(((ImageForJava)image).getNativeImage(),  dx1,  dy1,  dx2,  dy2,  sx1,  sy1,  sx2,  sy2, this);

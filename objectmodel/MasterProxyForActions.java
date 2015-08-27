@@ -394,7 +394,7 @@ ITitleCardPresenterFromActions {
 	@Override
 	public void setScaleOnCurrentFrameByOtid(String otid, double scale) {
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
-		object.setScaleOnCurrentFrame(scale);
+		object.setScale(scale);
 		
 	}
 

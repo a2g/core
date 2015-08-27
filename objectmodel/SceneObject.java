@@ -40,6 +40,7 @@ public class SceneObject {
 	private int numberPrefix;
 	private short ocode;
 	private double screenCoordsPerSecond;
+	private double scale;
 
 	public SceneObject(String otid, int screenWidth, int screenHeight) {
 		this.currentImage = null;
@@ -53,6 +54,7 @@ public class SceneObject {
 		this.mapOfSpecialAnimations = new TreeMap<String, String>();
 		this.numberPrefix = 0;
 		this.initialAnimationId = otid + "_INITIAL";
+		this.scale = 1;
 
 		this.setBaseMiddleX(0);
 		this.setBaseMiddleY(0);
@@ -174,22 +176,11 @@ public class SceneObject {
 		}
 		// 2, but do this always
 		if (this.currentImage != null) {
+			this.currentImage.setScale(scale);
 			this.currentImage.setVisible(this.visible, getRawLeftTop());
 		}
 	}
-
-	public void walkTo(Point point) {
-		walkTo(point.getX(), point.getY());
-	}
-
-	public void walkTo(double x, double y) {
-		// KillCurrentAnimationAndClearInstructions();
-		PointF currentPoint = new PointF(getBaseMiddleX(), getBaseMiddleY());
-
-		currentPoint.setX(currentPoint.getX() * this.screenPixelWidth);
-		currentPoint.setY(currentPoint.getY() * this.screenPixelHeight);
-	}
-
+ 
 	public void setVisible(boolean visible) {
 		// we always do this, we don't even check if visible!=this.visible
 		this.visible = visible;
@@ -213,29 +204,29 @@ public class SceneObject {
 	}
 
 	static double worldToScreenX(double intX, double screenSpan,
-			int lowerBound, int upperBound) {
-		int rectSpan = upperBound - lowerBound;
+			int lowerBound, int upperBound, double scale) {
+		double rectSpan = (upperBound - lowerBound)*scale;
 		double doubleX = (intX + .5 * rectSpan + lowerBound) / screenSpan;
 		return doubleX;
 	}
 
 	static double worldToScreenY(double intY, double screenSpan,
-			int lowerBound, int upperBound) {
-		int rectSpan = upperBound - lowerBound;
+			int lowerBound, int upperBound, double scale) {
+		double rectSpan = (upperBound - lowerBound)*scale;
 		double doubleY = (intY + rectSpan + lowerBound) / screenSpan;
 		return doubleY;
 	}
 
 	static double screenToWorldX(double doubleX, double screenSpan,
-			int lowerBound, int upperBound) {
-		int rectSpan = upperBound - lowerBound;
+			int lowerBound, int upperBound, double scale) {
+		double rectSpan = (upperBound - lowerBound)*scale;
 		double rawX = doubleX * screenSpan - .5 * rectSpan - lowerBound;
 		return rawX;
 	}
 
 	static double screenToWorldY(double doubleY, double screenSpan,
-			int lowerBound, int upperBound) {
-		int rectSpan = upperBound - lowerBound;
+			int lowerBound, int upperBound, double scale) {
+		double rectSpan = (upperBound - lowerBound)*scale;
 		double rawY = doubleY * screenSpan - rectSpan - lowerBound;
 		return rawY;
 	}
@@ -265,21 +256,21 @@ public class SceneObject {
 	public void setBaseMiddleX(double baseMiddleX) {
 		double rawX = screenToWorldX(baseMiddleX, screenPixelWidth,
 				getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
-				.getRight());
+				.getRight(),scale);
 		setX(rawX);
 	}
 
 	public void setBaseMiddleY(double baseMiddleY) {
 		double rawY = screenToWorldY(baseMiddleY, screenPixelHeight,
 				getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
-				.getBottom());
+				.getBottom(),scale);
 		setY(rawY);
 	}
 
 	public double getBaseMiddleX() {
 		double bmx = worldToScreenX(rawX, screenPixelWidth,
 				getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
-				.getRight());
+				.getRight(),scale);
 
 		return bmx;
 	}
@@ -287,14 +278,14 @@ public class SceneObject {
 	public double getBaseMiddleY() {
 		double bmy = worldToScreenY(rawY, screenPixelHeight,
 				getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
-				.getBottom());
+				.getBottom(),scale);
 
 		return bmy;
 	}
 
 	public Rect getCurrentBoundingRect() {
 		if (currentImage != null) {
-			return currentImage.getBoundingRect();
+			return currentImage.getBoundingRectPreScaling();
 		}
 		return new Rect(0, 0, 0, 0);
 	}
@@ -403,13 +394,7 @@ public class SceneObject {
 	}
 
 	public void setScale(double scale) {
-		currentImage.setScale(scale,getRawLeftTop());
+		this.scale = scale;
 	}
-
-	public void setScaleOnCurrentFrame(double scale) {
-		currentImage.setScale(scale,getRawLeftTop());
-	}
-
-
 
 };

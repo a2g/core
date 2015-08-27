@@ -222,7 +222,7 @@ implements IScenePresenter
 			ImageCollection fc = a.getFrames();
 			Image i = fc.getByIndex(frame);
 			if(i!=null)
-				toReturn = i.getBoundingRect();
+				toReturn = i.getBoundingRectPreScaling();
 			else
 				assert(false);
 		}
