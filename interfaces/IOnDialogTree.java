@@ -16,16 +16,16 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.interfaces.game.IGetCurrentScene;
-import com.github.a2g.core.interfaces.game.IGetLastScene;
-import com.github.a2g.core.interfaces.game.IGetValue;
-import com.github.a2g.core.interfaces.game.IIsInDebugMode;
-import com.github.a2g.core.interfaces.game.IIsInventoryItemVisible;
-import com.github.a2g.core.interfaces.game.IIsTrue;
-import com.github.a2g.core.interfaces.game.ISetAnimationAsSceneAnswerer;
-import com.github.a2g.core.interfaces.game.ISetAnimationAsSceneAsker;
-import com.github.a2g.core.interfaces.game.ISetValue;
-import com.github.a2g.core.interfaces.game.ISwitchToScene;
+import com.github.a2g.core.interfaces.methods.game.IGetCurrentScene;
+import com.github.a2g.core.interfaces.methods.game.IGetLastScene;
+import com.github.a2g.core.interfaces.methods.game.IGetValue;
+import com.github.a2g.core.interfaces.methods.game.IIsInDebugMode;
+import com.github.a2g.core.interfaces.methods.game.IIsInventoryItemVisible;
+import com.github.a2g.core.interfaces.methods.game.IIsTrue;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneAnswerer;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneAsker;
+import com.github.a2g.core.interfaces.methods.game.ISetValue;
+import com.github.a2g.core.interfaces.methods.game.ISwitchToScene;
 
 public interface IOnDialogTree extends
 // property access methods

@@ -18,13 +18,13 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
-import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
-import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
-import com.github.a2g.core.interfaces.IMasterPresenterFromTalkPerformer;
-import com.github.a2g.core.interfaces.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.IScenePresenterFromTalkPerformer;
-import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTalkPerformer;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromTalkPerformer;
+import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.action.performer.TalkPerformer.NonIncrementing;

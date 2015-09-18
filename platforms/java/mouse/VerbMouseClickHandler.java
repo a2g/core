@@ -18,7 +18,8 @@ package com.github.a2g.core.platforms.java.mouse;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
+
+import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
 
 
 public class VerbMouseClickHandler extends MouseAdapter

@@ -17,9 +17,9 @@
 package com.github.a2g.core.action.performer;
 
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
-import com.github.a2g.core.interfaces.IInventoryPresenterFromSingleCallPerformer;
-import com.github.a2g.core.interfaces.IScenePresenterFromSingleCallPerformer;
-import com.github.a2g.core.interfaces.ITitleCardPresenterFromSingleCallPerformer;
+import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromSingleCallPerformer;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromSingleCallPerformer;
+import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromSingleCallPerformer;
 
 
 public class SingleCallPerformer

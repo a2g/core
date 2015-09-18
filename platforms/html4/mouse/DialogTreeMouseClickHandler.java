@@ -17,7 +17,7 @@
 package com.github.a2g.core.platforms.html4.mouse;
 
 
-import com.github.a2g.core.interfaces.IMasterPresenterFromDialogTreeMouse;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTreeMouse;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.Label;

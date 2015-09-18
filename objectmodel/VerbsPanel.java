@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
-import com.github.a2g.core.interfaces.IVerbsPanelFromVerbsPresenter;
+import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
+import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
 import com.github.a2g.core.platforms.html4.mouse.VerbMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.VerbMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;

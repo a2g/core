@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.ISystemAnimation;
-import com.github.a2g.core.interfaces.IBaseActionFromSystemAnimation;
+import com.github.a2g.core.interfaces.internal.IBaseActionFromSystemAnimation;
+import com.github.a2g.core.interfaces.internal.ISystemAnimation;
 
 public class SystemAnimationForHtml4 extends
 com.google.gwt.animation.client.Animation implements ISystemAnimation {

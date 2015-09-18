@@ -25,8 +25,8 @@ import java.awt.Label;
 
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
-import com.github.a2g.core.interfaces.IVerbsPanelFromVerbsPresenter;
+import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
+import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
 import com.github.a2g.core.objectmodel.Verb;
 import com.github.a2g.core.objectmodel.Verbs;
 import com.github.a2g.core.primitive.ColorEnum;

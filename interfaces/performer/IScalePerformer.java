@@ -1,6 +1,6 @@
 package com.github.a2g.core.interfaces.performer;
 
-import com.github.a2g.core.interfaces.IScenePresenterFromScalePerformer;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromScalePerformer;
 
 public interface IScalePerformer {
 

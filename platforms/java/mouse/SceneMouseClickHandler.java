@@ -21,7 +21,7 @@ import java.awt.event.MouseEvent;
 
 import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.event.ExecuteCommandEvent;
-import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver;
 
 public class SceneMouseClickHandler extends MouseAdapter
 {

@@ -22,7 +22,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
-import com.github.a2g.core.interfaces.IPackagedImage;
+import com.github.a2g.core.interfaces.internal.IPackagedImage;
 
 public class PackagedImageForJava implements IPackagedImage {
 	String imagePath;

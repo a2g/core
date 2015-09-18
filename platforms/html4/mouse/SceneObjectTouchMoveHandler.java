@@ -23,7 +23,7 @@ import com.google.gwt.event.dom.client.TouchMoveEvent;
 import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.dom.client.TouchStartHandler;
-import com.github.a2g.core.interfaces.IScenePresenterFromSceneTouch;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneTouch;
 
 class CustomAnimation extends Animation
 {

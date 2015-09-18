@@ -7,10 +7,10 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import com.github.a2g.core.interfaces.ILoad;
-import com.github.a2g.core.interfaces.ILoaderPresenter;
-import com.github.a2g.core.interfaces.IMasterPresenterFromBundle;
-import com.github.a2g.core.interfaces.IMasterPresenterFromLoader;
+import com.github.a2g.core.interfaces.internal.ILoad;
+import com.github.a2g.core.interfaces.internal.ILoaderPresenter;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoader;
 
 public class Loader implements ILoaderPresenter {
 	private LoaderItem theCurrentLoader;

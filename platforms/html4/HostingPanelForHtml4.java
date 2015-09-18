@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.IHostingPanel;
+import com.github.a2g.core.interfaces.internal.IHostingPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 
 public class HostingPanelForHtml4 extends

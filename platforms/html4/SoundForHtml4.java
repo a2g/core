@@ -1,6 +1,6 @@
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.ISound;
+import com.github.a2g.core.interfaces.internal.ISound;
 import com.google.gwt.media.client.Audio;
 
 public class SoundForHtml4

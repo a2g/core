@@ -20,8 +20,8 @@ import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.web.bindery.event.shared.EventBus;
 import com.github.a2g.core.event.SetRolloverEvent;
-import com.github.a2g.core.interfaces.ICommandLinePresenterFromSceneMouseOver;
-import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.internal.ICommandLinePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver;
 import com.github.a2g.core.platforms.html5.panel.ScenePanelForHtml5;
 
 

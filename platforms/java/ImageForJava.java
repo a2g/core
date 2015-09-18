@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.platforms.java;
 
-import com.github.a2g.core.interfaces.ImagePanelAPI;
+import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.primitive.Point;
 

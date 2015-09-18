@@ -15,8 +15,8 @@
  */
 package com.github.a2g.core.interfaces.performer;
 
-import com.github.a2g.core.interfaces.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.IScenePresenterFromMovePerformer;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromMovePerformer;
 import com.github.a2g.core.primitive.PointF;
 
 public interface IMovePerformer {

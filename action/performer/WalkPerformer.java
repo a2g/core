@@ -17,7 +17,7 @@
 package com.github.a2g.core.action.performer;
 
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
-import com.github.a2g.core.interfaces.IScenePresenterFromWalkPerformer;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromWalkPerformer;
 import com.github.a2g.core.interfaces.performer.IWalkPerformer;
 import com.github.a2g.core.primitive.PointF;
 

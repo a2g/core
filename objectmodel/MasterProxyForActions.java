@@ -2,15 +2,15 @@ package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
-import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
-import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
-import com.github.a2g.core.interfaces.ILoad;
-import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter.GuiStateEnum;
-import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.internal.ILoad;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.github.a2g.core.interfaces.IOnFillLoadList;
 import com.github.a2g.core.interfaces.IGameScene;
-import com.github.a2g.core.interfaces.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
 import com.github.a2g.core.primitive.PointF;
 
 public class MasterProxyForActions implements IOnFillLoadList,

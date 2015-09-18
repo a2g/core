@@ -19,10 +19,10 @@ package com.github.a2g.core.objectmodel;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
-import com.github.a2g.core.interfaces.IHostingPanel;
-import com.github.a2g.core.interfaces.IMasterPresenterFromDialogTree;
-import com.github.a2g.core.interfaces.IDialogTreePresenter;
+import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
+import com.github.a2g.core.interfaces.internal.IDialogTreePresenter;
+import com.github.a2g.core.interfaces.internal.IHostingPanel;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTree;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 

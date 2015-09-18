@@ -16,11 +16,11 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.IFactory;
-import com.github.a2g.core.interfaces.IHostingPanel;
-import com.github.a2g.core.interfaces.IMasterPresenterFromTitleCard;
-import com.github.a2g.core.interfaces.ITitleCardPresenter;
-import com.github.a2g.core.interfaces.ITitleCardPanelFromTitleCardPresenter;
+import com.github.a2g.core.interfaces.internal.IFactory;
+import com.github.a2g.core.interfaces.internal.IHostingPanel;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTitleCard;
+import com.github.a2g.core.interfaces.internal.ITitleCardPanelFromTitleCardPresenter;
+import com.github.a2g.core.interfaces.internal.ITitleCardPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 

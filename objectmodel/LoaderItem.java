@@ -17,9 +17,9 @@
 package com.github.a2g.core.objectmodel;
 
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.interfaces.ILoad;
-import com.github.a2g.core.interfaces.ILoaderPresenterFromLoaderItem;
-import com.github.a2g.core.interfaces.IMasterPresenterFromBundle;
+import com.github.a2g.core.interfaces.internal.ILoad;
+import com.github.a2g.core.interfaces.internal.ILoaderPresenterFromLoaderItem;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
 import com.google.gwt.event.dom.client.LoadEvent;
 
 public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {

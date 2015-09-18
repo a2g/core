@@ -16,56 +16,57 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.interfaces.game.IAddBoundaryGate;
-import com.github.a2g.core.interfaces.game.IAddBoundaryPoint;
-import com.github.a2g.core.interfaces.game.IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
-import com.github.a2g.core.interfaces.game.IHideAllInventory;
-import com.github.a2g.core.interfaces.game.ICreateChainRootAction;
-import com.github.a2g.core.interfaces.game.IGetBaseMiddleX;
-import com.github.a2g.core.interfaces.game.IGetBaseMiddleY;
-import com.github.a2g.core.interfaces.game.IGetCurrentScene;
-import com.github.a2g.core.interfaces.game.IGetIsSayAlwaysWithoutIncrementing;
-import com.github.a2g.core.interfaces.game.IGetLastScene;
-import com.github.a2g.core.interfaces.game.IGetSceneGuiHeight;
-import com.github.a2g.core.interfaces.game.IGetValue;
-import com.github.a2g.core.interfaces.game.IGetX;
-import com.github.a2g.core.interfaces.game.IGetY;
-import com.github.a2g.core.interfaces.game.IHide;
-import com.github.a2g.core.interfaces.game.IHideInventoryItem;
-import com.github.a2g.core.interfaces.game.IIsInDebugMode;
-import com.github.a2g.core.interfaces.game.IIsInventoryItemVisible;
-import com.github.a2g.core.interfaces.game.IIsTrue;
-import com.github.a2g.core.interfaces.game.IIsVisible;
-import com.github.a2g.core.interfaces.game.IRemoveVerbByCode;
-import com.github.a2g.core.interfaces.game.ISetAnimationAsSceneAnswerer;
-import com.github.a2g.core.interfaces.game.ISetAnimationAsSceneAsker;
-import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectCurrent;
-import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectCurrentAndSetFrame;
-import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectInitial;
-import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectSpecial;
-import com.github.a2g.core.interfaces.game.ISetAnimationAsSceneTalker;
-import com.github.a2g.core.interfaces.game.ISetAnimationDuration;
-import com.github.a2g.core.interfaces.game.ISetAnimationMaxTalkRect;
-import com.github.a2g.core.interfaces.game.IDefaultSceneObject;
-import com.github.a2g.core.interfaces.game.ISetBaseMiddleX;
-import com.github.a2g.core.interfaces.game.ISetBaseMiddleY;
-import com.github.a2g.core.interfaces.game.ISetDisplayName;
-import com.github.a2g.core.interfaces.game.ISetInventoryItemDisplayName;
-import com.github.a2g.core.interfaces.game.ISetInventoryItemVisible;
-import com.github.a2g.core.interfaces.game.ISetIsSayAlwaysWithoutIncrementing;
-import com.github.a2g.core.interfaces.game.ISetParallaxX;
-import com.github.a2g.core.interfaces.game.ISetScreenCoordsPerSecond;
-import com.github.a2g.core.interfaces.game.ISetTalkingColor;
-import com.github.a2g.core.interfaces.game.ISetTitleCard;
-import com.github.a2g.core.interfaces.game.ISetValue;
-import com.github.a2g.core.interfaces.game.ISetVisible;
-import com.github.a2g.core.interfaces.game.ISetX;
-import com.github.a2g.core.interfaces.game.ISetY;
-import com.github.a2g.core.interfaces.game.IShareWinning;
-import com.github.a2g.core.interfaces.game.IShow;
-import com.github.a2g.core.interfaces.game.IShowInventoryItem;
-import com.github.a2g.core.interfaces.game.ISwitchToScene;
-import com.github.a2g.core.interfaces.game.IUpdateVerbUI;
+import com.github.a2g.core.interfaces.methods.game.IAddBoundaryGate;
+import com.github.a2g.core.interfaces.methods.game.IAddBoundaryPoint;
+import com.github.a2g.core.interfaces.methods.game.IAddObstacleRect;
+import com.github.a2g.core.interfaces.methods.game.IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
+import com.github.a2g.core.interfaces.methods.game.ICreateChainRootAction;
+import com.github.a2g.core.interfaces.methods.game.IDefaultSceneObject;
+import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleX;
+import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleY;
+import com.github.a2g.core.interfaces.methods.game.IGetCurrentScene;
+import com.github.a2g.core.interfaces.methods.game.IGetIsSayAlwaysWithoutIncrementing;
+import com.github.a2g.core.interfaces.methods.game.IGetLastScene;
+import com.github.a2g.core.interfaces.methods.game.IGetSceneGuiHeight;
+import com.github.a2g.core.interfaces.methods.game.IGetValue;
+import com.github.a2g.core.interfaces.methods.game.IGetX;
+import com.github.a2g.core.interfaces.methods.game.IGetY;
+import com.github.a2g.core.interfaces.methods.game.IHide;
+import com.github.a2g.core.interfaces.methods.game.IHideAllInventory;
+import com.github.a2g.core.interfaces.methods.game.IHideInventoryItem;
+import com.github.a2g.core.interfaces.methods.game.IIsInDebugMode;
+import com.github.a2g.core.interfaces.methods.game.IIsInventoryItemVisible;
+import com.github.a2g.core.interfaces.methods.game.IIsTrue;
+import com.github.a2g.core.interfaces.methods.game.IIsVisible;
+import com.github.a2g.core.interfaces.methods.game.IRemoveVerbByCode;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectCurrent;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectCurrentAndSetFrame;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectInitial;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectSpecial;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneAnswerer;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneAsker;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneTalker;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationDuration;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationMaxTalkRect;
+import com.github.a2g.core.interfaces.methods.game.ISetBaseMiddleX;
+import com.github.a2g.core.interfaces.methods.game.ISetBaseMiddleY;
+import com.github.a2g.core.interfaces.methods.game.ISetDisplayName;
+import com.github.a2g.core.interfaces.methods.game.ISetInventoryItemDisplayName;
+import com.github.a2g.core.interfaces.methods.game.ISetInventoryItemVisible;
+import com.github.a2g.core.interfaces.methods.game.ISetIsSayAlwaysWithoutIncrementing;
+import com.github.a2g.core.interfaces.methods.game.ISetParallaxX;
+import com.github.a2g.core.interfaces.methods.game.ISetScreenCoordsPerSecond;
+import com.github.a2g.core.interfaces.methods.game.ISetTalkingColor;
+import com.github.a2g.core.interfaces.methods.game.ISetTitleCard;
+import com.github.a2g.core.interfaces.methods.game.ISetValue;
+import com.github.a2g.core.interfaces.methods.game.ISetVisible;
+import com.github.a2g.core.interfaces.methods.game.ISetX;
+import com.github.a2g.core.interfaces.methods.game.ISetY;
+import com.github.a2g.core.interfaces.methods.game.IShareWinning;
+import com.github.a2g.core.interfaces.methods.game.IShow;
+import com.github.a2g.core.interfaces.methods.game.IShowInventoryItem;
+import com.github.a2g.core.interfaces.methods.game.ISwitchToScene;
+import com.github.a2g.core.interfaces.methods.game.IUpdateVerbUI;
 
 public interface IOnPreEntry
 extends
@@ -86,6 +87,7 @@ IGetSceneGuiHeight,
 // boundary
 IAddBoundaryGate,
 IAddBoundaryPoint,
+IAddObstacleRect,
 // object
 IHide,
 IShow,

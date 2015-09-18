@@ -20,10 +20,11 @@ package com.github.a2g.core.platforms.java.panel;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
+
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.ITitleCardPanelFromTitleCardPresenter;
+import com.github.a2g.core.interfaces.internal.ITitleCardPanelFromTitleCardPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 
 @SuppressWarnings("serial")

@@ -20,11 +20,11 @@ package com.github.a2g.core.objectmodel;
 import java.util.ArrayList;
 
 import com.github.a2g.core.action.performer.TalkPerformer;
-import com.github.a2g.core.interfaces.IHostingPanel;
-import com.github.a2g.core.interfaces.IMasterPresenterFromScenePresenter;
-import com.github.a2g.core.interfaces.IScenePresenter;
-import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
-import com.github.a2g.core.interfaces.IScenePresenterFromBoundaryCalculator;
+import com.github.a2g.core.interfaces.internal.IHostingPanel;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromScenePresenter;
+import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
+import com.github.a2g.core.interfaces.internal.IScenePresenter;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;

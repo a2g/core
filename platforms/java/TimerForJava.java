@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.platforms.java;
 
-import com.github.a2g.core.interfaces.ITimer;
-import com.github.a2g.core.interfaces.IMasterPresenterFromTimer;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTimer;
+import com.github.a2g.core.interfaces.internal.ITimer;
 
 public class TimerForJava extends
 com.github.a2g.core.platforms.java.animation.Timer implements ITimer {

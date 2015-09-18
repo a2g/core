@@ -18,11 +18,11 @@ package com.github.a2g.core.objectmodel;
 
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.performer.TalkPerformer;
-import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
-import com.github.a2g.core.interfaces.IScenePresenterFromScenePanel;
-import com.github.a2g.core.interfaces.ImagePanelAPI;
-import com.github.a2g.core.interfaces.IPackagedImage;
-import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
+import com.github.a2g.core.interfaces.internal.IPackagedImage;
+import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
+import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.platforms.html4.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;

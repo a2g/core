@@ -17,14 +17,14 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.performer.SingleCallPerformer;
-import com.github.a2g.core.interfaces.IActionRunnerFromBaseAction;
-import com.github.a2g.core.interfaces.ISystemAnimation;
-import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
-import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
-import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
-import com.github.a2g.core.interfaces.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
-import com.github.a2g.core.interfaces.IBaseActionFromSystemAnimation;
+import com.github.a2g.core.interfaces.internal.IActionRunnerFromBaseAction;
+import com.github.a2g.core.interfaces.internal.IBaseActionFromSystemAnimation;
+import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.internal.ISystemAnimation;
+import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 
 public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	private ISystemAnimation systemAnimation;

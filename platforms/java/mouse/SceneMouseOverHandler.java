@@ -20,8 +20,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import com.google.gwt.event.shared.EventBus;
-import com.github.a2g.core.interfaces.ICommandLinePresenterFromSceneMouseOver;
-import com.github.a2g.core.interfaces.IScenePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.internal.ICommandLinePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.platforms.java.panel.ScenePanelForJava;

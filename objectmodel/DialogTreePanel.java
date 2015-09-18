@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
-import com.github.a2g.core.interfaces.IMasterPresenterFromDialogTreeMouse;
+import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTreeMouse;
 import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseOutHandler;
 import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseOverHandler;

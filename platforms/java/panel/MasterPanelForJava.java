@@ -24,8 +24,8 @@ import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.IHostingPanel;
-import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter;
+import com.github.a2g.core.interfaces.internal.IHostingPanel;
+import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.platforms.java.HostingPanelForJava;
 

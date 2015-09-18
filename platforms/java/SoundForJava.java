@@ -11,7 +11,7 @@ import javax.sound.sampled.Line;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import com.github.a2g.core.interfaces.ISound;
+import com.github.a2g.core.interfaces.internal.ISound;
 
 public class SoundForJava
 implements ISound

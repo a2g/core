@@ -16,25 +16,6 @@ p- * Copyright 2012 Anthony Cassidy
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.IMasterPresenterFromDialogTreeMouse;
-import com.github.a2g.core.interfaces.ISound;
-import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
-import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
-import com.github.a2g.core.interfaces.IFactory;
-import com.github.a2g.core.interfaces.IInventoryPanelFromInventoryPresenter;
-import com.github.a2g.core.interfaces.ILoaderPanelFromLoaderPresenter;
-import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter;
-import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryPanel;
-import com.github.a2g.core.interfaces.IMasterPresenterFromLoaderMouse;
-import com.github.a2g.core.interfaces.IScenePresenterFromScenePanel;
-import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
-import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
-import com.github.a2g.core.interfaces.ISystemAnimation;
-import com.github.a2g.core.interfaces.IBaseActionFromSystemAnimation;
-import com.github.a2g.core.interfaces.ITimer;
-import com.github.a2g.core.interfaces.IMasterPresenterFromTimer;
-import com.github.a2g.core.interfaces.ITitleCardPanelFromTitleCardPresenter;
-import com.github.a2g.core.interfaces.IVerbsPanelFromVerbsPresenter;
 import com.github.a2g.core.objectmodel.CommandLinePanel;
 import com.github.a2g.core.objectmodel.DialogTreePanel;
 import com.github.a2g.core.objectmodel.InventoryPanel;
@@ -48,7 +29,26 @@ import com.github.a2g.core.platforms.html4.TimerForHtml4;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
-import com.github.a2g.core.interfaces.IHostFromMasterPresenter;
+import com.github.a2g.core.interfaces.internal.IBaseActionFromSystemAnimation;
+import com.github.a2g.core.interfaces.internal.ICommandLinePanelFromCommandLinePresenter;
+import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
+import com.github.a2g.core.interfaces.internal.IFactory;
+import com.github.a2g.core.interfaces.internal.IHostFromMasterPresenter;
+import com.github.a2g.core.interfaces.internal.IInventoryPanelFromInventoryPresenter;
+import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
+import com.github.a2g.core.interfaces.internal.ILoaderPanelFromLoaderPresenter;
+import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTreeMouse;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoaderMouse;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTimer;
+import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
+import com.github.a2g.core.interfaces.internal.ISound;
+import com.github.a2g.core.interfaces.internal.ISystemAnimation;
+import com.github.a2g.core.interfaces.internal.ITimer;
+import com.github.a2g.core.interfaces.internal.ITitleCardPanelFromTitleCardPresenter;
+import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
+import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
 
 public class FactoryForHtml4
 implements IFactory {

@@ -16,27 +16,27 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.interfaces.game.IGetBaseMiddleX;
-import com.github.a2g.core.interfaces.game.IGetBaseMiddleY;
-import com.github.a2g.core.interfaces.game.IGetCurrentScene;
-import com.github.a2g.core.interfaces.game.IGetLastScene;
-import com.github.a2g.core.interfaces.game.IGetSceneGuiHeight;
-import com.github.a2g.core.interfaces.game.IGetSceneGuiWidth;
-import com.github.a2g.core.interfaces.game.IGetValue;
-import com.github.a2g.core.interfaces.game.IGetX;
-import com.github.a2g.core.interfaces.game.IGetY;
-import com.github.a2g.core.interfaces.game.IIsInDebugMode;
-import com.github.a2g.core.interfaces.game.IIsInventoryItemVisible;
-import com.github.a2g.core.interfaces.game.IIsTrue;
-import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectCurrent;
-import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectInitial;
-import com.github.a2g.core.interfaces.game.ISetAnimationAsObjectSpecial;
-import com.github.a2g.core.interfaces.game.ISetAnimationAsSceneTalker;
-import com.github.a2g.core.interfaces.game.ISetBaseMiddleX;
-import com.github.a2g.core.interfaces.game.ISetBaseMiddleY;
-import com.github.a2g.core.interfaces.game.ISetInventoryItemVisible;
-import com.github.a2g.core.interfaces.game.ISetValue;
-import com.github.a2g.core.interfaces.game.ISwitchToScene;
+import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleX;
+import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleY;
+import com.github.a2g.core.interfaces.methods.game.IGetCurrentScene;
+import com.github.a2g.core.interfaces.methods.game.IGetLastScene;
+import com.github.a2g.core.interfaces.methods.game.IGetSceneGuiHeight;
+import com.github.a2g.core.interfaces.methods.game.IGetSceneGuiWidth;
+import com.github.a2g.core.interfaces.methods.game.IGetValue;
+import com.github.a2g.core.interfaces.methods.game.IGetX;
+import com.github.a2g.core.interfaces.methods.game.IGetY;
+import com.github.a2g.core.interfaces.methods.game.IIsInDebugMode;
+import com.github.a2g.core.interfaces.methods.game.IIsInventoryItemVisible;
+import com.github.a2g.core.interfaces.methods.game.IIsTrue;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectCurrent;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectInitial;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectSpecial;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneTalker;
+import com.github.a2g.core.interfaces.methods.game.ISetBaseMiddleX;
+import com.github.a2g.core.interfaces.methods.game.ISetBaseMiddleY;
+import com.github.a2g.core.interfaces.methods.game.ISetInventoryItemVisible;
+import com.github.a2g.core.interfaces.methods.game.ISetValue;
+import com.github.a2g.core.interfaces.methods.game.ISwitchToScene;
 
 public interface IOnEntry
 extends

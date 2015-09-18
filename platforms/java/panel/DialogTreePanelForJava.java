@@ -20,8 +20,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import com.github.a2g.core.interfaces.IDialogTreePanelFromDialogTreePresenter;
-import com.github.a2g.core.interfaces.IMasterPresenterFromDialogTreeMouse;
+import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTreeMouse;
 import com.github.a2g.core.objectmodel.DialogTree;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.platforms.java.mouse.DialogTreeMouseClickHandler;

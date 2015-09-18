@@ -16,7 +16,8 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.interfaces.game.ISetValue;
+import com.github.a2g.core.interfaces.internal.ILoad;
+import com.github.a2g.core.interfaces.methods.game.ISetValue;
 
 public interface IOnFillLoadList extends ISetValue {
 	void addEssential(ILoad blah);

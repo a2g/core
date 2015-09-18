@@ -19,7 +19,7 @@ package com.github.a2g.core.platforms.html4.mouse;
 
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
+import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
 
 
 public class VerbMouseOverHandler implements MouseMoveHandler {

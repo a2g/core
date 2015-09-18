@@ -19,7 +19,7 @@ import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 
-import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
+import com.github.a2g.core.interfaces.internal.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 
 

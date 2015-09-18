@@ -22,7 +22,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.IHostingPanel;
+import com.github.a2g.core.interfaces.internal.IHostingPanel;
 
 @SuppressWarnings("serial")
 public class HostingPanelForJava extends JPanel implements IHostingPanel

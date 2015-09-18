@@ -17,13 +17,13 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.IDialogTreePresenterFromActions;
-import com.github.a2g.core.interfaces.IDialogTreePresenterFromDoBranchAction;
-import com.github.a2g.core.interfaces.IInventoryPresenterFromActions;
-import com.github.a2g.core.interfaces.IMasterPanelFromMasterPresenter.GuiStateEnum;
-import com.github.a2g.core.interfaces.IMasterPresenterFromActions;
-import com.github.a2g.core.interfaces.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.ITitleCardPresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromDoBranchAction;
+import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
+import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
 
 public class ChainToDialogAction extends DialogChainEndAction {
 

@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.ITitleCardPanelFromTitleCardPresenter;
+import com.github.a2g.core.interfaces.internal.ITitleCardPanelFromTitleCardPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;

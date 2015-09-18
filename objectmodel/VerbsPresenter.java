@@ -17,11 +17,11 @@
 package com.github.a2g.core.objectmodel;
 
 import com.google.gwt.event.shared.EventBus;
-import com.github.a2g.core.interfaces.IHostingPanel;
-import com.github.a2g.core.interfaces.IVerbsPresenterFromVerbsPanel;
-import com.github.a2g.core.interfaces.IVerbsPanelFromVerbsPresenter;
-import com.github.a2g.core.interfaces.IVerbsPresenter;
-import com.github.a2g.core.interfaces.IMasterPresenterFromVerbs;
+import com.github.a2g.core.interfaces.internal.IHostingPanel;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromVerbs;
+import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
+import com.github.a2g.core.interfaces.internal.IVerbsPresenter;
+import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
 import com.github.a2g.core.primitive.ColorEnum;
 
 public class VerbsPresenter implements IVerbsPresenterFromVerbsPanel,

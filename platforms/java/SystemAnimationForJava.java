@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.platforms.java;
 
-import com.github.a2g.core.interfaces.ISystemAnimation;
-import com.github.a2g.core.interfaces.IBaseActionFromSystemAnimation;
+import com.github.a2g.core.interfaces.internal.IBaseActionFromSystemAnimation;
+import com.github.a2g.core.interfaces.internal.ISystemAnimation;
 
 public class SystemAnimationForJava extends
 com.github.a2g.core.platforms.java.animation.Animation implements

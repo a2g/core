@@ -34,12 +34,12 @@ import java.util.TreeMap;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.IInventoryPanelFromInventoryPresenter;
 import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.interfaces.ImagePanelAPI;
-import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryPanel;
-import com.github.a2g.core.interfaces.IPackagedImage;
+import com.github.a2g.core.interfaces.internal.IInventoryPanelFromInventoryPresenter;
+import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
+import com.github.a2g.core.interfaces.internal.IPackagedImage;
+import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;

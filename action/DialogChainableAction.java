@@ -19,7 +19,7 @@ package com.github.a2g.core.action;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
 import com.github.a2g.core.action.performer.TalkPerformer;
-import com.github.a2g.core.interfaces.IChainRootForDialog;
+import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
 
 public abstract class DialogChainableAction extends DialogChainEndAction
 implements IChainRootForDialog

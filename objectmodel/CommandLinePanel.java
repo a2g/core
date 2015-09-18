@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.ICommandLinePanelFromCommandLinePresenter;
+import com.github.a2g.core.interfaces.internal.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.UIObject;

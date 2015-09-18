@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.ITimer;
-import com.github.a2g.core.interfaces.IMasterPresenterFromTimer;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTimer;
+import com.github.a2g.core.interfaces.internal.ITimer;
 
 public class TimerForHtml4 extends com.google.gwt.user.client.Timer implements
 ITimer {

@@ -24,8 +24,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.IScenePanelFromScenePresenter;
-import com.github.a2g.core.interfaces.IScenePresenterFromJavaPopupPanel;
+import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromJavaPopupPanel;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 

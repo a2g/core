@@ -2,8 +2,8 @@ package com.github.a2g.core.action.performer;
 
 import java.util.ArrayList;
 
-import com.github.a2g.core.interfaces.IMasterPresenterFromTalkPerformer;
-import com.github.a2g.core.interfaces.IScenePresenterFromTalkPerformer;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTalkPerformer;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromTalkPerformer;
 
 public class TalkPerformer {
 	private ArrayList<String> speech;

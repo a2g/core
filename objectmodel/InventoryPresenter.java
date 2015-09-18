@@ -19,11 +19,11 @@ package com.github.a2g.core.objectmodel;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-import com.github.a2g.core.interfaces.IHostingPanel;
-import com.github.a2g.core.interfaces.IInventoryPanelFromInventoryPresenter;
-import com.github.a2g.core.interfaces.IInventoryPresenter;
-import com.github.a2g.core.interfaces.IMasterPresenterFromInventory;
-import com.github.a2g.core.interfaces.IInventoryPresenterFromInventoryPanel;
+import com.github.a2g.core.interfaces.internal.IHostingPanel;
+import com.github.a2g.core.interfaces.internal.IInventoryPanelFromInventoryPresenter;
+import com.github.a2g.core.interfaces.internal.IInventoryPresenter;
+import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromInventory;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;

@@ -16,12 +16,12 @@ inve * Copyright 2012 Anthony Cassidy
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.IFactory;
-import com.github.a2g.core.interfaces.IHostingPanel;
-import com.github.a2g.core.interfaces.ILoaderPanelFromLoaderPresenter;
-import com.github.a2g.core.interfaces.IHostFromMasterPresenter;
-import com.github.a2g.core.interfaces.IMasterPresenterFromLoader;
-import com.github.a2g.core.interfaces.IMasterPresenterFromLoaderMouse;
+import com.github.a2g.core.interfaces.internal.IFactory;
+import com.github.a2g.core.interfaces.internal.IHostFromMasterPresenter;
+import com.github.a2g.core.interfaces.internal.IHostingPanel;
+import com.github.a2g.core.interfaces.internal.ILoaderPanelFromLoaderPresenter;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoader;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 

@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.ILoaderPanelFromLoaderPresenter;
-import com.github.a2g.core.interfaces.IMasterPresenterFromLoaderMouse;
+import com.github.a2g.core.interfaces.internal.ILoaderPanelFromLoaderPresenter;
+import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
