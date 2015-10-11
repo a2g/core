@@ -522,4 +522,10 @@ IOnMovementBeyondAGate {
 		master.getTitleCardPresenter().setText(titlecard);
 	}
 
+	@Override
+	public void addObstacleRect(double x1, double y1, double x2, double y2) {
+		master.getScenePresenter().addObstacleRect(x1, y1, x2, y2);
+		
+	}
+
 }

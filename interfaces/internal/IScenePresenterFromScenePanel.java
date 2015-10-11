@@ -10,7 +10,6 @@ import com.github.a2g.core.interfaces.methods.action.IGetSceneObjectCount;
 import com.github.a2g.core.interfaces.methods.action.IGetVisibleByOtid;
 import com.github.a2g.core.interfaces.methods.action.IGetXByOtid;
 import com.github.a2g.core.interfaces.methods.action.IGetYByOtid;
-import com.github.a2g.core.objectmodel.BoundaryCalculator;
 import com.github.a2g.core.primitive.PointF;
 
 public interface IScenePresenterFromScenePanel

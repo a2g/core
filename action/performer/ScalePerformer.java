@@ -16,12 +16,8 @@
 
 package com.github.a2g.core.action.performer;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScalePerformer;
 import com.github.a2g.core.interfaces.performer.IScalePerformer;
-import com.github.a2g.core.primitive.LogNames;
 
 
 public class ScalePerformer implements IScalePerformer

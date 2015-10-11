@@ -3,7 +3,6 @@ package com.github.a2g.core.interfaces.internal;
 import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
-import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;

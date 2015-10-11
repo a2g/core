@@ -15,7 +15,6 @@
  */
 package com.github.a2g.core.interfaces.performer;
 
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromSwitchPerformer;
 
 public interface ISwitchPerformer{
