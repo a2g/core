@@ -19,6 +19,7 @@ package com.github.a2g.core.platforms.java;
 import javax.swing.JOptionPane;
 
 import com.github.a2g.core.interfaces.internal.IBaseActionFromSystemAnimation;
+import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
 import com.github.a2g.core.interfaces.internal.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.internal.IFactory;
@@ -30,6 +31,7 @@ import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTreeMou
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTimer;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ISound;
 import com.github.a2g.core.interfaces.internal.ISystemAnimation;
@@ -130,6 +132,12 @@ public class FactoryForJava implements IFactory {
 	@Override
 	public ISound createSound(String url) {
 		return new SoundForJava(url);
+	}
+
+	@Override
+	public IBoundaryCalculator createBoundaryCalculator(
+			IScenePresenterFromBoundaryCalculator callbacks) {
+		return new BoundaryCalculatorForJava(callbacks);
 	}
 
 }

@@ -20,6 +20,8 @@ package com.github.a2g.core.objectmodel;
 import java.util.ArrayList;
 
 import com.github.a2g.core.action.performer.TalkPerformer;
+import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
+import com.github.a2g.core.interfaces.internal.IFactory;
 import com.github.a2g.core.interfaces.internal.IHostingPanel;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
@@ -49,10 +51,10 @@ implements IScenePresenter
 	private String sceneAnswererAtid;
 	private IMasterPresenterFromScenePresenter master;
 
-	private BoundaryCalculator boundaryCalculator;
+	private IBoundaryCalculator boundaryCalculator;
 
 	public ScenePresenter(final IHostingPanel panel,
-			IMasterPresenterFromScenePresenter master) {
+			IMasterPresenterFromScenePresenter master, IFactory factory) {
 		this.master = master;
 		this.sceneTalkerAtid = "";
 		this.sceneAskerAtid = "";
@@ -62,7 +64,7 @@ implements IScenePresenter
 		this.cameraY = 0.0;
 		this.width = 320;
 		this.height = 180;
-		this.boundaryCalculator = new BoundaryCalculator(this);
+		this.boundaryCalculator = factory.createBoundaryCalculator(this);
 
 		this.scene = new Scene();
 		this.view = master.getFactory().createScenePanel(this);

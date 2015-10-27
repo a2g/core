@@ -57,7 +57,6 @@ extends ChainableAction {
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
 		single.setScene(scene);
 		single.setInventory(inventory);
-		single.setTitleCard(titleCard);
 	}
 
 	public SingleCallPerformer.Type getType(){ return single.getType();}

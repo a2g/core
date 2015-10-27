@@ -33,4 +33,6 @@ public interface IFactory {
 			IMasterPresenterFromLoaderMouse api, ColorEnum fore, ColorEnum back);
 
 	ISound createSound(String url);
+	
+	IBoundaryCalculator createBoundaryCalculator(IScenePresenterFromBoundaryCalculator callbacks);
 }

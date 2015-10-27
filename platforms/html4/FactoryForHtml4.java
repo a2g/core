@@ -16,6 +16,7 @@ p- * Copyright 2012 Anthony Cassidy
 
 package com.github.a2g.core.platforms.html4;
 
+import com.github.a2g.core.objectmodel.BoundaryCalculator;
 import com.github.a2g.core.objectmodel.CommandLinePanel;
 import com.github.a2g.core.objectmodel.DialogTreePanel;
 import com.github.a2g.core.objectmodel.InventoryPanel;
@@ -30,6 +31,7 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.github.a2g.core.interfaces.internal.IBaseActionFromSystemAnimation;
+import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
 import com.github.a2g.core.interfaces.internal.ICommandLinePanelFromCommandLinePresenter;
 import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.internal.IFactory;
@@ -42,6 +44,7 @@ import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTreeMou
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTimer;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ISound;
 import com.github.a2g.core.interfaces.internal.ISystemAnimation;
@@ -136,6 +139,12 @@ implements IFactory {
 			ColorEnum back, ColorEnum roll) {
 		return new DialogTreePanel(master, fore, back, roll);
 
+	}
+
+	@Override
+	public IBoundaryCalculator createBoundaryCalculator(
+			IScenePresenterFromBoundaryCalculator callbacks) {
+		return new BoundaryCalculator(callbacks);
 	}
 
 }

@@ -140,7 +140,7 @@ PropertyChangeEventHandlerAPI
 		this.inventoryPresenter = new InventoryPresenter(
 				masterPanel.getHostForInventory(), bus, this);
 		this.scenePresenter = new ScenePresenter(masterPanel.getHostForScene(),
-				this);
+				this, factory);
 		this.verbsPresenter = new VerbsPresenter(masterPanel.getHostForVerbs(),
 				bus, this);
 		this.loaderPresenter = new LoaderPresenter(

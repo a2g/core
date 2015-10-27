@@ -1,4 +1,4 @@
-package com.github.a2g.core.objectmodel;
+package com.github.a2g.core.platforms.java;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,9 +6,10 @@ import java.util.Comparator;
 
 import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
-import com.github.a2g.core.primitive.PointF; 
+import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.RectF;
 
-public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, IBoundaryCalculator{
+public class BoundaryCalculatorForJava implements Comparator<BoundaryCalculatorForJava.Gate>, IBoundaryCalculator{
 	protected class Gate 
 	{
 		public String switchTo;
@@ -24,15 +25,17 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 	}
 	private IScenePresenterFromBoundaryCalculator scene;
 	private ArrayList<Gate> gates;
+	private ArrayList<RectF> obstacles;
 	private PointF cachedCalculationOfCentre;
 
 	private static String TREAT_GATE_AS_POINT = "TREAT_GATE_AS_POINT";
 
 
-	public BoundaryCalculator(IScenePresenterFromBoundaryCalculator master)
+	public BoundaryCalculatorForJava(IScenePresenterFromBoundaryCalculator master)
 	{
 		this.scene = master;
 		this.gates = new ArrayList<Gate>(); 
+		this.obstacles = new ArrayList<RectF>(); 
 		
 		updateCentre();
 	}

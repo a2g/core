@@ -19,7 +19,6 @@ package com.github.a2g.core.action.performer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromSingleCallPerformer;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromSingleCallPerformer;
-import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromSingleCallPerformer;
 
 
 public class SingleCallPerformer
@@ -59,8 +58,6 @@ public class SingleCallPerformer
 	private int intValue;
 	private IScenePresenterFromSingleCallPerformer scene;
 	private IInventoryPresenterFromSingleCallPerformer inventory;
-	//private IMasterPresenterFromSingleCallPerformer master;
-	private ITitleCardPresenterFromSingleCallPerformer title;
 
 	public SingleCallPerformer( Type type) {
 		this.type = type;
@@ -203,11 +200,6 @@ public class SingleCallPerformer
 	public void setInventory(IInventoryPresenterFromSingleCallPerformer inventory) {
 		this.inventory = inventory;
 	}
-	
-	public void setTitleCard(ITitleCardPresenterFromSingleCallPerformer title ) {
-		this.title  = title ;
-	}
-	
 
 	public Type getType(){ return type;}
 	

@@ -99,7 +99,7 @@ public class MovePerformer implements IMovePerformer
 		double diffX = this.startX - this.endX;
 		
 		
-		MOVE.log( Level.FINER, "walkto-start {0} {1} to {2} {3}", new Object[]{ startX, startY, endX, endY } );
+		//MOVE.log( Level.FINER, "walkto-start {0} {1} to {2} {3}", new Object[]{ startX, startY, endX, endY } );
 		double diffY = this.startY - this.endY;
 		double diffXSquared = diffX * diffX;
 		double diffYSquared = diffY * diffY;
@@ -132,8 +132,8 @@ public class MovePerformer implements IMovePerformer
 		double x = this.startX + progress * (this.endX - this.startX);
 		double y = this.startY + progress * (this.endY - this.startY);
 
-		MOVE.log( Level.FINER, "walkto-mid {0} {1}", new Object[]{ x,y} );
-		
+		//MOVE.log( Level.FINER, "walk to-mid {0} {1}", new Object[]{ x,y} );
+		MOVE.log( Level.FINER, "walk to-mid can add more detail here if in java");		
 		return new PointF(x,y);
 	}
 	
