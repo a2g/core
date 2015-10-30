@@ -3,6 +3,7 @@ package com.github.a2g.core.platforms.java;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
@@ -36,10 +37,10 @@ public class BoundaryCalculatorForJava implements Comparator<BoundaryCalculatorF
 		this.scene = master;
 		this.gates = new ArrayList<Gate>(); 
 		this.obstacles = new ArrayList<RectF>(); 
-		
+
 		updateCentre();
 	}
-	
+
 	public ArrayList<PointF> getGatePoints()
 	{ 
 		ArrayList<PointF> toReturn = new ArrayList<PointF>();
@@ -52,7 +53,7 @@ public class BoundaryCalculatorForJava implements Comparator<BoundaryCalculatorF
 			}
 		}
 		return toReturn;
-		
+
 	}
 
 	void sort()
@@ -60,7 +61,7 @@ public class BoundaryCalculatorForJava implements Comparator<BoundaryCalculatorF
 		this.updateCentre();
 		Collections.sort(gates, this);
 	}
-	
+
 	public void addBoundaryGate(Object switchTo, PointF a, PointF b) {
 		gates.add(new Gate(switchTo==""? null : switchTo, a, b));
 		sort();
@@ -70,13 +71,13 @@ public class BoundaryCalculatorForJava implements Comparator<BoundaryCalculatorF
 		gates.add(new Gate(TREAT_GATE_AS_POINT,  a, new PointF(-1, -1)));
 		sort();
 	}
-	
+
 	public void addObstacleRect(double x1, double y1, double x2, double y2)
 	{
-		
+
 	}
 
-	
+
 	public void clearBoundaries() {
 		this.gates.clear();
 	}
@@ -88,7 +89,7 @@ public class BoundaryCalculatorForJava implements Comparator<BoundaryCalculatorF
 			Gate g = gates.get(i);
 			if (g.switchTo==null||g.switchTo==TREAT_GATE_AS_POINT)
 				continue;
-		
+
 			if (isBetweenSpokesAndOnWrongSide(g.a, g.b, tp)) 
 			{
 				scene.switchToScene(g.switchTo);
@@ -131,7 +132,7 @@ public class BoundaryCalculatorForJava implements Comparator<BoundaryCalculatorF
 	public PointF getGatePointsCentre() {
 		return cachedCalculationOfCentre;
 	}
-	
+
 	public void updateCentre()
 	{
 		cachedCalculationOfCentre = new PointF(.5,.5);
@@ -181,12 +182,94 @@ public class BoundaryCalculatorForJava implements Comparator<BoundaryCalculatorF
 		double a2 = getSomeScalarMeasureMentOfAngle(o2.a, cachedCalculationOfCentre);
 		return (int)(a1-a2);
 	}
-	
+
 	public static double getSomeScalarMeasureMentOfAngle(PointF p1, PointF p2) { 
 		double deltaX = p2.getX() - p1.getX(); 
 		double deltaY = p2.getY() - p1.getY(); 
 		return Math.toDegrees(Math.atan2(deltaY, deltaX));
 		//http://stackoverflow.com/questions/7586063/how-to-calculate-the-angle-between-a-line-and-the-horizontal-axis
 	} 
+
+	public static boolean IsLineSegmentIntersectingTheOtherOne(PointF a, PointF b, PointF c, PointF d)
+	{
+	    double denominator = ((b.getX() - a.getX()) * (d.getY() - c.getY())) - ((b.getY() - a.getY()) * (d.getX() - c.getX()));
+	 
+	    if (denominator == 0)
+	    {
+	        return false;
+	    }
+	 
+	    double numerator1 = ((a.getY() - c.getY()) * (d.getX() - c.getX())) - ((a.getX() - c.getX()) * (d.getY() - c.getY()));
+	 
+	    double numerator2 = ((a.getY() - c.getY()) * (b.getX() - a.getX())) - ((a.getX() - c.getX()) * (b.getY() - a.getY()));
+	 
+	    if (numerator1 == 0 || numerator2 == 0)
+	    {
+	        return false;
+	    }
+	 
+	    double r = numerator1 / denominator;
+	    double s = numerator2 / denominator;
+	 
+	    return (r > 0 && r < 1) && (s > 0 && s < 1);
+	}
 	
+	public static boolean IsVertexConcave(List<PointF> vertices, int vertex)
+	{
+	    PointF current = vertices.get(vertex);
+	    PointF next = vertices.get((vertex + 1) % vertices.size());
+	    PointF previous = vertices.get(vertex == 0 ? vertices.size() - 1 : vertex - 1);
+	 
+	    PointF left = new PointF(current.getX() - previous.getX(), current.getY() - previous.getY());
+	    PointF right = new PointF(next.getX() - current.getX(), next.getY() - current.getY());
+	 
+	    double cross = (left.getX() * right.getY()) - (left.getY() * right.getX());
+	 
+	    return cross < 0;
+	}
+	public static boolean IsInside(  List<PointF> polygon, PointF position, boolean toleranceOnOutside)
+	{
+		PointF point = position;
+
+		final float epsilon = 0.5f;
+
+		boolean inside = false;
+
+		// Must have 3 or more edges
+		if (polygon.size() < 3) return false;
+
+		PointF oldPoint = polygon.get(polygon.size() - 1);
+		double oldSqDist = PointF.DistanceSquared(oldPoint, point);
+
+		for (int i = 0; i < polygon.size(); i++)
+		{
+			PointF newPoint = polygon.get(i);
+			double newSqDist = PointF.DistanceSquared(newPoint, point);
+
+			if (oldSqDist + newSqDist + 2.0f * Math.sqrt(oldSqDist * newSqDist) - PointF.DistanceSquared(newPoint, oldPoint) < epsilon)
+				return toleranceOnOutside;
+
+			PointF left;
+			PointF right;
+			if (newPoint.getX() > oldPoint.getX())
+			{
+				left = oldPoint;
+				right = newPoint;
+			}
+			else
+			{
+				left = newPoint;
+				right = oldPoint;
+			}
+
+			if (left.getX() < point.getX() && point.getX() <= right.getX() && (point.getY() - left.getY()) * (right.getX() - left.getX()) < (right.getY() - left.getY()) * (point.getX() - left.getX()))
+				inside = !inside;
+
+			oldPoint = newPoint;
+			oldSqDist = newSqDist;
+		}
+
+		return inside;
+	}
+
 }

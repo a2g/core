@@ -40,4 +40,10 @@ public class PointF {
 		return y;
 	}
 
+	public static double DistanceSquared(PointF oldPoint, PointF point) {
+		double xdiff = oldPoint.getX()-point.getX();
+		double ydiff = oldPoint.getY()-point.getY();
+		return xdiff*xdiff+ydiff*ydiff;
+	}
+
 }
