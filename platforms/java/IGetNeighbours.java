@@ -1,8 +1,8 @@
 package com.github.a2g.core.platforms.java;
 
-import java.util.List;
+import java.util.Iterator; 
 
 interface IGetNeighbours<N>  
 {
-	List<N> GetNeighbours();
+	Iterator<N> getNeighbours();
 }
