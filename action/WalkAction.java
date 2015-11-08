@@ -17,16 +17,12 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.performer.MovePerformer;
-import com.github.a2g.core.action.performer.ScalePerformer;
-import com.github.a2g.core.action.performer.WalkPerformer;
+import com.github.a2g.core.action.performer.SuperWalkPerformer;
 import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromMoveAction;
 import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
-import com.github.a2g.core.primitive.PointF;
 
 /**
  * 
@@ -37,16 +33,14 @@ import com.github.a2g.core.primitive.PointF;
  */
 public class WalkAction extends ChainableAction
 {
-	MovePerformer mover;
-	WalkPerformer walker;
-	ScalePerformer scaler;
+	SuperWalkPerformer mover;
+	 
 
 	public WalkAction(BaseAction parent, short ocode) {
 		super(parent);
-		mover = new MovePerformer(ocode);
-		mover.setToInitialAtEndForMover(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
-		walker = new WalkPerformer(ocode);
-		scaler = new ScalePerformer(ocode);
+		mover = new SuperWalkPerformer(ocode);
+		mover.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
+		
 	}
 
 	@Override
@@ -55,59 +49,44 @@ public class WalkAction extends ChainableAction
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory)
 	{
-
-		scaler.setSceneForScaler(scene);
-		mover.setSceneForMover(scene);
-		walker.setSceneForWalk(scene);
+		mover.setScene(scene); 
 	}
 
 	@Override
 	public void runGameAction() {
-		scaler.runForScaler();
-		double duration = mover.runForMover();
-		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
-		
-		this.run((int) (duration * 1000.0));
+		double duration = mover.runGameAction();
+		this.run((int) (duration));
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {
-		scaler.onUpdateForScaler(progress);
-		PointF pt = mover.onUpdateCalculateForMover(progress);
-		mover.onUpdateCalculateForMover(progress, pt);
+	protected void onUpdateGameAction(double progress) 
+	{	
+		mover.onUpdateGameAction(progress);
 	}
 
 	@Override
 	// method in animation
 	protected boolean onCompleteGameAction() {
-		onUpdateGameAction(1.0);
-		scaler.onCompleteForScaler();
-		mover.onCompleteForMover();
-		
-		return false;
+		return mover.onCompleteGameAction();
 	}
 	void setEndX(double endX) {
-		mover.setEndXForMover(endX);
+		mover.setEndX(endX);
 	}
 
 	void setEndY(double endY) {
-		mover.setEndYForMover(endY);
+		mover.setEndY(endY);
 	}
-
-	public void setScene(IScenePresenterFromMoveAction scene) {
-		mover.setSceneForMover(scene);
-	}
+ 
 
 	public void setToInitialAtEnd(boolean isSetToInitialAtEnd) {
-		mover.setToInitialAtEndForMover(isSetToInitialAtEnd);
-
+		mover.setToInitialAtEnd(isSetToInitialAtEnd); 
 	}
 
 	public void setEndScale(double endScale) {
-		scaler.setEndScaleForScaler(endScale);
+		mover.setEndScale(endScale);
 	}
 
 	public void setStartScale(double startScale) {
-		scaler.setStartScaleForScaler(startScale);
+		mover.setStartScale(startScale);
 	}
 }
