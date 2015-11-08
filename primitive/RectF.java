@@ -75,4 +75,8 @@ public class RectF {
 		return new PointF(left+(getWidth()/2),top+(getHeight()/2));
 	}
 
+	public RectF inset() {
+		return new RectF(left+.01, top+.01, right-.01, bottom-.02);
+	}
+
 }

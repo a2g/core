@@ -7,8 +7,6 @@ import java.util.List;
 
 import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
-import com.github.a2g.core.platforms.java.Path.IDistanceFunc;
-import com.github.a2g.core.platforms.java.Path.IEstimateFunc;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.RectF;
 
@@ -202,40 +200,40 @@ implements Comparator<BoundaryCalculatorForJava.Gate>
 
 	public static boolean IsLineSegmentIntersectingTheOtherOne(PointF a, PointF b, PointF c, PointF d)
 	{
-	    double denominator = ((b.getX() - a.getX()) * (d.getY() - c.getY())) - ((b.getY() - a.getY()) * (d.getX() - c.getX()));
-	 
-	    if (denominator == 0)
-	    {
-	        return false;
-	    }
-	 
-	    double numerator1 = ((a.getY() - c.getY()) * (d.getX() - c.getX())) - ((a.getX() - c.getX()) * (d.getY() - c.getY()));
-	 
-	    double numerator2 = ((a.getY() - c.getY()) * (b.getX() - a.getX())) - ((a.getX() - c.getX()) * (b.getY() - a.getY()));
-	 
-	    if (numerator1 == 0 || numerator2 == 0)
-	    {
-	        return false;
-	    }
-	 
-	    double r = numerator1 / denominator;
-	    double s = numerator2 / denominator;
-	 
-	    return (r > 0 && r < 1) && (s > 0 && s < 1);
+		double denominator = ((b.getX() - a.getX()) * (d.getY() - c.getY())) - ((b.getY() - a.getY()) * (d.getX() - c.getX()));
+
+		if (denominator == 0)
+		{
+			return false;
+		}
+
+		double numerator1 = ((a.getY() - c.getY()) * (d.getX() - c.getX())) - ((a.getX() - c.getX()) * (d.getY() - c.getY()));
+
+		double numerator2 = ((a.getY() - c.getY()) * (b.getX() - a.getX())) - ((a.getX() - c.getX()) * (b.getY() - a.getY()));
+
+		if (numerator1 == 0 || numerator2 == 0)
+		{
+			return false;
+		}
+
+		double r = numerator1 / denominator;
+		double s = numerator2 / denominator;
+
+		return (r > 0 && r < 1) && (s > 0 && s < 1);
 	}
-	
-	public static boolean IsVertexConcave(List<PointF> vertices, int vertex)
+
+	public static boolean IsAConcaveVertex(List<PointF> vertices, int vertex)
 	{
-	    PointF current = vertices.get(vertex);
-	    PointF next = vertices.get((vertex + 1) % vertices.size());
-	    PointF previous = vertices.get(vertex == 0 ? vertices.size() - 1 : vertex - 1);
-	 
-	    PointF left = new PointF(current.getX() - previous.getX(), current.getY() - previous.getY());
-	    PointF right = new PointF(next.getX() - current.getX(), next.getY() - current.getY());
-	 
-	    double cross = (left.getX() * right.getY()) - (left.getY() * right.getX());
-	 
-	    return cross < 0;
+		PointF current = vertices.get(vertex);
+		PointF next = vertices.get((vertex + 1) % vertices.size());
+		PointF previous = vertices.get(vertex == 0 ? vertices.size() - 1 : vertex - 1);
+
+		PointF left = new PointF(current.getX() - previous.getX(), current.getY() - previous.getY());
+		PointF right = new PointF(next.getX() - current.getX(), next.getY() - current.getY());
+
+		double cross = (left.getX() * right.getY()) - (left.getY() * right.getX());
+
+		return cross < 0;
 	}
 	public static boolean IsInside(  List<PointF> polygon, PointF position, boolean toleranceOnOutside)
 	{
@@ -284,13 +282,93 @@ implements Comparator<BoundaryCalculatorForJava.Gate>
 
 	@Override
 	public void finishedGateAndObstacleAdding() {
+
+	}
+ 
+	public void findPath()
+	{
+		PointFWithNeighbours start = new PointFWithNeighbours(new PointF(0,0));
+		PointFWithNeighbours end = new PointFWithNeighbours(new PointF(1,1));
+		// we need to create a whole network of PointFWithNeighbours,
+		// with all the neighbours filled out properly.
+		// So we must first create PointFWithNeighbours for 
+		// all concave vertices, including start and end points...
+		// then process them all 
+		ArrayList<PointFWithNeighbours> concaveVertices = new ArrayList<PointFWithNeighbours>();
+		concaveVertices.add(start);
+		concaveVertices.add(end);
+		for(int i=0;i<obstacles.size();i++)
+		{
+			concaveVertices.add(new PointFWithNeighbours(getTopLeft(obstacles.get(i))));
+			concaveVertices.add(new PointFWithNeighbours(getTopRight(obstacles.get(i))));
+			concaveVertices.add(new PointFWithNeighbours(getBottomLeft(obstacles.get(i))));
+			concaveVertices.add(new PointFWithNeighbours(getBottomRight(obstacles.get(i))));
+		}
 		
-		PointFWithNeighbours a = new PointFWithNeighbours(cachedCalculationOfCentre);
-		PointFWithNeighbours b = new PointFWithNeighbours(cachedCalculationOfCentre);
-		
-		Path<PointFWithNeighbours> result = Path.findPath(a, b, this, this); 
+		for(int i=0;i<concaveVertices.size();i++)
+		{
+			PointFWithNeighbours first = concaveVertices.get(i);
+			for(int j=0;j<concaveVertices.size();j++)
+			{
+				PointFWithNeighbours second = concaveVertices.get(j);
+				if(second.hasNeighbourlynessBeenTested(first))
+					continue;
+				// if not yet tested, then let's do a brute force neighbor test.
+				// ...they are only neighbors if they can see each other.
+
+				boolean isSecondSeeingFirst = true;
+				for(int k=0;k<obstacles.size();k++)
+				{
+					RectF smallOb = obstacles.get(k).inset();
+					if(IsLineSegmentIntersectingTheOtherOne(first, second, getTopLeft(smallOb), getTopRight(smallOb)))
+					{
+						isSecondSeeingFirst = false;
+						break;
+					}
+					if(IsLineSegmentIntersectingTheOtherOne(first, second, getTopRight(smallOb), getBottomRight(smallOb)))
+					{
+						isSecondSeeingFirst = false;
+						break;
+					}
+					if(IsLineSegmentIntersectingTheOtherOne(first, second, getBottomRight(smallOb), getBottomLeft(smallOb)))
+					{
+						isSecondSeeingFirst = false;
+						break;
+					}
+					if(IsLineSegmentIntersectingTheOtherOne(first, second, getBottomLeft(smallOb), getTopLeft(smallOb)))
+					{
+						isSecondSeeingFirst = false;
+						break;
+					}
+				}
+				
+				first.setHasNeighbourlynessBeenTested(second);
+				second.setHasNeighbourlynessBeenTested(first);
+				
+				if(isSecondSeeingFirst)
+				{
+					first.addNeighbour(second);
+					second.addNeighbour(first);
+				}
+			}
+		}
+
+		Path<PointFWithNeighbours> result = Path.findPath(start, end, this, this); 
 	}
 
+	static private PointF getTopLeft(RectF rectF) {
+		return new PointF(rectF.getLeft(), rectF.getTop());
+	}
+	static private PointF getTopRight(RectF rectF) {
+		return new PointF(rectF.getRight(), rectF.getTop());
+	}
+	
+	static private PointF getBottomLeft(RectF rectF) {
+		return new PointF(rectF.getLeft(), rectF.getBottom());
+	}
+	static private PointF getBottomRight(RectF rectF) {
+		return new PointF(rectF.getRight(), rectF.getBottom());
+	}
 
 	@Override
 	public double estimate(PointFWithNeighbours n, PointFWithNeighbours dest) {
