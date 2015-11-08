@@ -184,6 +184,12 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		double deltaY = p2.getY() - p1.getY(); 
 		return Math.toDegrees(Math.atan2(deltaY, deltaX));
 		//http://stackoverflow.com/questions/7586063/how-to-calculate-the-angle-between-a-line-and-the-horizontal-axis
+	}
+
+	@Override
+	public void finishedGateAndObstacleAdding() {
+		// do nothing without a star
+		
 	} 
 	
 }

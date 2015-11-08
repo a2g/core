@@ -272,4 +272,10 @@ public class BoundaryCalculatorForJava implements Comparator<BoundaryCalculatorF
 		return inside;
 	}
 
+	@Override
+	public void finishedGateAndObstacleAdding() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
