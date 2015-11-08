@@ -7,10 +7,17 @@ import java.util.List;
 
 import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
+import com.github.a2g.core.platforms.java.Path.IDistanceFunc;
+import com.github.a2g.core.platforms.java.Path.IEstimateFunc;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.RectF;
 
-public class BoundaryCalculatorForJava implements Comparator<BoundaryCalculatorForJava.Gate>, IBoundaryCalculator{
+public class BoundaryCalculatorForJava 
+implements Comparator<BoundaryCalculatorForJava.Gate>
+, IBoundaryCalculator
+, Path.IDistanceFunc<PointFWithNeighbours>
+, Path.IEstimateFunc<PointFWithNeighbours>
+{
 	protected class Gate 
 	{
 		public String switchTo;
@@ -27,6 +34,7 @@ public class BoundaryCalculatorForJava implements Comparator<BoundaryCalculatorF
 	private IScenePresenterFromBoundaryCalculator scene;
 	private ArrayList<Gate> gates;
 	private ArrayList<RectF> obstacles;
+	private ArrayList<PointFWithNeighbours> points;
 	private PointF cachedCalculationOfCentre;
 
 	private static String TREAT_GATE_AS_POINT = "TREAT_GATE_AS_POINT";
@@ -37,6 +45,8 @@ public class BoundaryCalculatorForJava implements Comparator<BoundaryCalculatorF
 		this.scene = master;
 		this.gates = new ArrayList<Gate>(); 
 		this.obstacles = new ArrayList<RectF>(); 
+
+		points = new ArrayList<PointFWithNeighbours>();
 
 		updateCentre();
 	}
@@ -274,8 +284,23 @@ public class BoundaryCalculatorForJava implements Comparator<BoundaryCalculatorF
 
 	@Override
 	public void finishedGateAndObstacleAdding() {
-		// TODO Auto-generated method stub
 		
+		PointFWithNeighbours a = new PointFWithNeighbours(cachedCalculationOfCentre);
+		PointFWithNeighbours b = new PointFWithNeighbours(cachedCalculationOfCentre);
+		
+		Path<PointFWithNeighbours> result = Path.findPath(a, b, this, this); 
 	}
 
+
+	@Override
+	public double estimate(PointFWithNeighbours n, PointFWithNeighbours dest) {
+		// if we return 0 here "then this becomes Dijkstra's algorithm"
+		// see http://blogs.msdn.com/b/ericlippert/archive/2007/10/10/path-finding-using-a-in-c-3-0-part-four.aspx
+		return 0;
+	}
+
+	@Override
+	public double distance(PointFWithNeighbours lastStep, PointFWithNeighbours n) {
+		return Math.hypot(lastStep.getX()-n.getX(), lastStep.getY()-n.getY());
+	}
 }

@@ -15,7 +15,14 @@ public class PointFWithNeighbours implements IGetNeighbours<PointFWithNeighbours
 	{
 		this.thePoint = thePoint;
 	}
-	
+	double getX()
+	{
+		return thePoint.getX();
+	}
+	double getY()
+	{
+		return thePoint.getY();
+	}
 	@Override
 	public Iterator<PointFWithNeighbours> getNeighbours() {
 		return neighbours.iterator();

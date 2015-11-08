@@ -3,19 +3,19 @@ package com.github.a2g.core.platforms.java;
 import java.util.HashSet;
 import java.util.Iterator;  
 
-class Path<Node extends IGetNeighbours<Node>> implements Iterable<Node>
+class Path<TNode extends IGetNeighbours<TNode>> implements Iterable<TNode>
 {
-	private Node lastStep;
-	private Path<Node> previousSteps;
+	private TNode lastStep;
+	private Path<TNode> previousSteps;
 	private double totalCost;
 
-	public Path(Node start)
+	public Path(TNode start)
 	{
 		this.lastStep = start;
 		this.previousSteps = null;
 		this.totalCost = 0;
 	}
-	private Path(Node lastStep, Path<Node> previousSteps, double totalCost)
+	private Path(TNode lastStep, Path<TNode> previousSteps, double totalCost)
 	{
 		this.lastStep = lastStep;
 		this.previousSteps = previousSteps;
@@ -23,28 +23,28 @@ class Path<Node extends IGetNeighbours<Node>> implements Iterable<Node>
 	}
 
 
-	public Node getLastStep(){ return lastStep;}
-	public Path<Node> getPreviousSteps(){ return previousSteps;}
+	public TNode getLastStep(){ return lastStep;}
+	public Path<TNode> getPreviousSteps(){ return previousSteps;}
 	public double getTotalCost(){return totalCost;}
 
 
-	public Path<Node> addStep(Node step, double stepCost)
+	public Path<TNode> addStep(TNode step, double stepCost)
 	{
-		return new Path<Node>(step, this, totalCost + stepCost);
+		return new Path<TNode>(step, this, totalCost + stepCost);
 	}
 
 
 	@Override
-	public Iterator<Node> iterator() {
+	public Iterator<TNode> iterator() {
 
 		return new PathIterator(this);
 	}
 
-	public class PathIterator implements Iterator<Node> 
+	public class PathIterator implements Iterator<TNode> 
 	{
-		Path<Node> p;
+		Path<TNode> p;
 
-		PathIterator(Path<Node> p)
+		PathIterator(Path<TNode> p)
 		{
 			this.p = p;
 		}
@@ -56,8 +56,8 @@ class Path<Node extends IGetNeighbours<Node>> implements Iterable<Node>
 		}
 
 		@Override
-		public Node next() {
-			Node toReturn = p.getLastStep();
+		public TNode next() {
+			TNode toReturn = p.getLastStep();
 			p = p.getPreviousSteps();
 			return toReturn;
 		}
@@ -69,40 +69,38 @@ class Path<Node extends IGetNeighbours<Node>> implements Iterable<Node>
 
 	}
 
-	interface IDistanceFunc<Node>
+	public interface IDistanceFunc<TNode>
 	{
-		double distance(Node lastStep, Node n);
+		double distance(TNode lastStep, TNode n);
 	}
 
-	interface IEstimateFunc<Node>
+	public interface IEstimateFunc<TNode>
 	{
-		double estimate(Node n);
+		double estimate(TNode n, TNode destination);
 	}
 
-	public Path<Node> findPath(
-			Node start, 
-			Node destination, IDistanceFunc<Node> d, IEstimateFunc<Node> e) 
-			{
-		HashSet<Node> closed = new HashSet<Node>();
-		PriorityQueue<Double, Path<Node>> queue = new PriorityQueue<Double, Path<Node>>();
-		queue.enqueue(0.0, new Path<Node>(start));
+	public static <TNode extends IGetNeighbours<TNode> > Path<TNode> findPath(TNode start, TNode destination, IDistanceFunc<TNode> d, IEstimateFunc<TNode> e) 
+	{
+		HashSet<TNode> closed = new HashSet<TNode>();
+		PriorityQueue<Double, Path<TNode>> queue = new PriorityQueue<Double, Path<TNode>>();
+		queue.enqueue(0.0, new Path<TNode>(start));
 		while(!queue.isEmpty())
 		{
 
-			Path<Node> path = queue.dequeue();
+			Path<TNode> path = queue.dequeue();
 			if (closed.contains(path.getLastStep()))
 				continue;
 			if (path.getLastStep().equals(destination))
 				return path;
 			closed.add(path.getLastStep());
 
-			Iterator<Node> neighbours = path.getLastStep().getNeighbours();
+			Iterator<TNode> neighbours = path.getLastStep().getNeighbours();
 			while(neighbours.hasNext())
 			{
-				Node n = neighbours.next();
+				TNode n = neighbours.next();
 				double dist = d.distance(path.getLastStep(), n);
-				Path<Node> newPath = path.addStep(n, dist);
-				queue.enqueue(newPath.getTotalCost() + e.estimate(n), newPath);
+				Path<TNode> newPath = path.addStep(n, dist);
+				queue.enqueue(newPath.getTotalCost() + e.estimate(n, destination), newPath);
 			}
 		}
 		return null;
