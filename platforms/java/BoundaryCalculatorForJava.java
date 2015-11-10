@@ -31,8 +31,7 @@ implements Comparator<BoundaryCalculatorForJava.Gate>
 	}
 	private IScenePresenterFromBoundaryCalculator scene;
 	private ArrayList<Gate> gates;
-	private ArrayList<RectF> obstacles;
-	private ArrayList<PointFWithNeighbours> points;
+	private ArrayList<RectF> obstacles; 
 	private PointF cachedCalculationOfCentre;
 
 	private static String TREAT_GATE_AS_POINT = "TREAT_GATE_AS_POINT";
@@ -43,8 +42,7 @@ implements Comparator<BoundaryCalculatorForJava.Gate>
 		this.scene = master;
 		this.gates = new ArrayList<Gate>(); 
 		this.obstacles = new ArrayList<RectF>(); 
-
-		points = new ArrayList<PointFWithNeighbours>();
+ 
 
 		updateCentre();
 	}
@@ -80,9 +78,9 @@ implements Comparator<BoundaryCalculatorForJava.Gate>
 		sort();
 	}
 
-	public void addObstacleRect(double x1, double y1, double x2, double y2)
+	public void addObstacleRect(double top, double left, double bottom, double right)
 	{
-
+		obstacles.add(new RectF(top,left,bottom,right));
 	}
 
 
@@ -285,7 +283,7 @@ implements Comparator<BoundaryCalculatorForJava.Gate>
 
 	}
  
-	public void findPath()
+	public Path<PointFWithNeighbours> findPath()
 	{
 		PointFWithNeighbours start = new PointFWithNeighbours(new PointF(0,0));
 		PointFWithNeighbours end = new PointFWithNeighbours(new PointF(1,1));
@@ -354,6 +352,7 @@ implements Comparator<BoundaryCalculatorForJava.Gate>
 		}
 
 		Path<PointFWithNeighbours> result = Path.findPath(start, end, this, this); 
+		return result;
 	}
 
 	static private PointF getTopLeft(RectF rectF) {

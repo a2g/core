@@ -20,7 +20,7 @@ public interface IBoundaryCalculator {
 
 	PointF getGatePointsCentre();
 
-	void addObstacleRect(double x1, double y1, double x2, double y2);
+	void addObstacleRect(double top, double left, double bottom, double right);
 	
 	void finishedGateAndObstacleAdding();
 

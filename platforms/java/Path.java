@@ -3,7 +3,7 @@ package com.github.a2g.core.platforms.java;
 import java.util.HashSet;
 import java.util.Iterator;  
 
-class Path<TNode extends IGetNeighbours<TNode>> implements Iterable<TNode>
+public class Path<TNode extends IGetNeighbours<TNode>> implements Iterable<TNode>
 {
 	private TNode lastStep;
 	private Path<TNode> previousSteps;

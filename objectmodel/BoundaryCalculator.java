@@ -68,7 +68,7 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		sort();
 	}
 	
-	public void addObstacleRect(double x1, double y1, double x2, double y2)
+	public void addObstacleRect(double top, double left, double bottom, double right)
 	{
 		
 	}
