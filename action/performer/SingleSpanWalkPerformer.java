@@ -29,13 +29,13 @@ import com.github.a2g.core.primitive.PointF;
  * So a plain-old walk, (eg in an action) can
  * end up running over the boundary.
  */
-public class SuperWalkPerformer  
+public class SingleSpanWalkPerformer  
 {
 	MovePerformer mover;
 	WalkPerformer walker;
 	ScalePerformer scaler;
 
-	public SuperWalkPerformer(short ocode) {
+	public SingleSpanWalkPerformer(short ocode) {
 		mover = new MovePerformer(ocode);
 		mover.setToInitialAtEndForMover(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
 		walker = new WalkPerformer(ocode);

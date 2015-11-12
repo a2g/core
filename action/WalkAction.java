@@ -17,7 +17,7 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.performer.SuperWalkPerformer;
+import com.github.a2g.core.action.performer.SingleSpanWalkPerformer;
 import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
@@ -33,12 +33,12 @@ import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
  */
 public class WalkAction extends ChainableAction
 {
-	SuperWalkPerformer mover;
+	SingleSpanWalkPerformer mover;
 	 
 
 	public WalkAction(BaseAction parent, short ocode) {
 		super(parent);
-		mover = new SuperWalkPerformer(ocode);
+		mover = new SingleSpanWalkPerformer(ocode);
 		mover.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
 		
 	}
