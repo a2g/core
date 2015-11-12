@@ -1,5 +1,6 @@
 package com.github.a2g.core.platforms.java;
 
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -283,10 +284,10 @@ implements Comparator<BoundaryCalculatorForJava.Gate>
 
 	}
  
-	public Path<PointFWithNeighbours> findPath()
+	public List<PointFWithNeighbours> getNetworkOfConcaveVertices(PointF rawStart, PointF rawEnd)
 	{
-		PointFWithNeighbours start = new PointFWithNeighbours(new PointF(0,0));
-		PointFWithNeighbours end = new PointFWithNeighbours(new PointF(1,1));
+		PointFWithNeighbours start = new PointFWithNeighbours(rawStart);
+		PointFWithNeighbours end = new PointFWithNeighbours(rawEnd);
 		// we need to create a whole network of PointFWithNeighbours,
 		// with all the neighbours filled out properly.
 		// So we must first create PointFWithNeighbours for 
@@ -317,7 +318,7 @@ implements Comparator<BoundaryCalculatorForJava.Gate>
 				boolean isSecondSeeingFirst = true;
 				for(int k=0;k<obstacles.size();k++)
 				{
-					RectF smallOb = obstacles.get(k).inset();
+					RectF smallOb = getSmallerSlightlyJumbledRect(obstacles.get(k));
 					if(IsLineSegmentIntersectingTheOtherOne(first, second, getTopLeft(smallOb), getTopRight(smallOb)))
 					{
 						isSecondSeeingFirst = false;
@@ -351,9 +352,29 @@ implements Comparator<BoundaryCalculatorForJava.Gate>
 			}
 		}
 
-		Path<PointFWithNeighbours> result = Path.findPath(start, end, this, this); 
-		return result;
+		return concaveVertices;
+	
 	}
+
+	private RectF getSmallerSlightlyJumbledRect(RectF rectF) 
+	{
+		// we need to return a slightly smaller rectangle for boundary testing.
+		// otherwise there will seem like the corners of the rect can see their
+		// opposite corner, and add them as a neighbour.
+		PointF center = rectF.getCenter(); 
+		
+		// even more interesting is that we have to scale the dimensions of this
+		// inner rectangle differently, otherwise the line-of-sight line
+		// can, mathematically "thread the needle" between the two sides 
+		// that make up a corner of this rectangle, going in one corner..
+		// and out the other..and givingit a diagonal line of sight. we don't want that.
+		// TODO: this can be unit tested.
+		double newWidth = rectF.getWidth()*.99;
+		double newHeight = rectF.getWidth()*.98;
+		
+		return new RectF(center.getX()-newWidth/2, center.getY()-newHeight/2, newWidth, newHeight);
+	}
+	 
 
 	static private PointF getTopLeft(RectF rectF) {
 		return new PointF(rectF.getLeft(), rectF.getTop());
@@ -379,5 +400,9 @@ implements Comparator<BoundaryCalculatorForJava.Gate>
 	@Override
 	public double distance(PointFWithNeighbours lastStep, PointFWithNeighbours n) {
 		return Math.hypot(lastStep.getX()-n.getX(), lastStep.getY()-n.getY());
+	}
+
+	public ArrayList<RectF>  getObstacles() { 
+		return obstacles;
 	}
 }
