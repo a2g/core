@@ -1,6 +1,5 @@
 package com.github.a2g.core.platforms.java;
 
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -298,10 +297,10 @@ implements Comparator<BoundaryCalculatorForJava.Gate>
 		concaveVertices.add(end);
 		for(int i=0;i<obstacles.size();i++)
 		{
-			concaveVertices.add(new PointFWithNeighbours(getTopLeft(obstacles.get(i))));
-			concaveVertices.add(new PointFWithNeighbours(getTopRight(obstacles.get(i))));
-			concaveVertices.add(new PointFWithNeighbours(getBottomLeft(obstacles.get(i))));
-			concaveVertices.add(new PointFWithNeighbours(getBottomRight(obstacles.get(i))));
+			concaveVertices.add(new PointFWithNeighbours(obstacles.get(i).getTopLeft()));
+			concaveVertices.add(new PointFWithNeighbours(obstacles.get(i).getTopRight()));
+			concaveVertices.add(new PointFWithNeighbours(obstacles.get(i).getBottomLeft()));
+			concaveVertices.add(new PointFWithNeighbours(obstacles.get(i).getBottomRight()));
 		}
 		
 		for(int i=0;i<concaveVertices.size();i++)
@@ -319,22 +318,22 @@ implements Comparator<BoundaryCalculatorForJava.Gate>
 				for(int k=0;k<obstacles.size();k++)
 				{
 					RectF smallOb = getSmallerSlightlyJumbledRect(obstacles.get(k));
-					if(IsLineSegmentIntersectingTheOtherOne(first, second, getTopLeft(smallOb), getTopRight(smallOb)))
+					if(IsLineSegmentIntersectingTheOtherOne(first, second, smallOb.getTopLeft(), smallOb.getTopRight()))
 					{
 						isSecondSeeingFirst = false;
 						break;
 					}
-					if(IsLineSegmentIntersectingTheOtherOne(first, second, getTopRight(smallOb), getBottomRight(smallOb)))
+					if(IsLineSegmentIntersectingTheOtherOne(first, second, smallOb.getTopRight(), smallOb.getBottomRight()))
 					{
 						isSecondSeeingFirst = false;
 						break;
 					}
-					if(IsLineSegmentIntersectingTheOtherOne(first, second, getBottomRight(smallOb), getBottomLeft(smallOb)))
+					if(IsLineSegmentIntersectingTheOtherOne(first, second, smallOb.getBottomRight(), smallOb.getBottomLeft()))
 					{
 						isSecondSeeingFirst = false;
 						break;
 					}
-					if(IsLineSegmentIntersectingTheOtherOne(first, second, getBottomLeft(smallOb), getTopLeft(smallOb)))
+					if(IsLineSegmentIntersectingTheOtherOne(first, second, smallOb.getBottomLeft(),  smallOb.getTopLeft()))
 					{
 						isSecondSeeingFirst = false;
 						break;
@@ -376,19 +375,7 @@ implements Comparator<BoundaryCalculatorForJava.Gate>
 	}
 	 
 
-	static private PointF getTopLeft(RectF rectF) {
-		return new PointF(rectF.getLeft(), rectF.getTop());
-	}
-	static private PointF getTopRight(RectF rectF) {
-		return new PointF(rectF.getRight(), rectF.getTop());
-	}
-	
-	static private PointF getBottomLeft(RectF rectF) {
-		return new PointF(rectF.getLeft(), rectF.getBottom());
-	}
-	static private PointF getBottomRight(RectF rectF) {
-		return new PointF(rectF.getRight(), rectF.getBottom());
-	}
+ 
 
 	@Override
 	public double estimate(PointFWithNeighbours n, PointFWithNeighbours dest) {

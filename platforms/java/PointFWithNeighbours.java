@@ -2,8 +2,7 @@ package com.github.a2g.core.platforms.java;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator; 
-import java.util.TreeSet;
+import java.util.Iterator;  
 
 import com.github.a2g.core.primitive.PointF;
 
