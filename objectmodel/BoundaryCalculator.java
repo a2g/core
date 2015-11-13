@@ -45,7 +45,7 @@ implements Comparator<BoundaryCalculator.Gate>
 		this.scene = master;
 		this.gates = new ArrayList<Gate>(); 
 		this.obstacles = new ArrayList<RectF>(); 
- 
+
 
 		updateCentre();
 	}
@@ -285,11 +285,11 @@ implements Comparator<BoundaryCalculator.Gate>
 	public void finishedGateAndObstacleAdding() {
 
 	}
-	
+
 	public List<PointF> findPath(PointF rawStart, PointF rawEnd)
 	{
 		List<PointFWithNeighbours> verts = getNetworkOfConcaveVertices(rawStart, rawEnd);
-	
+
 		PointFWithNeighbours start = verts.get(0);
 		PointFWithNeighbours end = verts.get(1);
 
@@ -297,15 +297,23 @@ implements Comparator<BoundaryCalculator.Gate>
 		// and construct an ordered list, then its better to flip end and start
 		Path<PointFWithNeighbours> path = Path.findPath(end, start, this,this);
 		List<PointF> list = new LinkedList<PointF>();
-		list.add(path.getLastStep());
-		while(path!=null && path.getPreviousSteps()!=null)
+		if(path!=null)
 		{
-			list.add(path.getPreviousSteps().getLastStep());
-			path = path.getPreviousSteps();
+			list.add(path.getLastStep());
+			while(path!=null && path.getPreviousSteps()!=null)
+			{
+				list.add(path.getPreviousSteps().getLastStep());
+				path = path.getPreviousSteps();
+			}
+		}else
+		{
+			list.add(start);
+			list.add(end);
 		}
+
 		return list;
 	}
-	
+
 	public List<PointFWithNeighbours> getNetworkOfConcaveVertices(PointF rawStart, PointF rawEnd)
 	{
 		PointFWithNeighbours start = new PointFWithNeighbours(rawStart);
@@ -325,7 +333,7 @@ implements Comparator<BoundaryCalculator.Gate>
 			concaveVertices.add(new PointFWithNeighbours(obstacles.get(i).getBottomLeft()));
 			concaveVertices.add(new PointFWithNeighbours(obstacles.get(i).getBottomRight()));
 		}
-		
+
 		for(int i=0;i<concaveVertices.size();i++)
 		{
 			PointFWithNeighbours first = concaveVertices.get(i);
@@ -362,10 +370,10 @@ implements Comparator<BoundaryCalculator.Gate>
 						break;
 					}
 				}
-				
+
 				first.setHasNeighbourlynessBeenTested(second);
 				second.setHasNeighbourlynessBeenTested(first);
-				
+
 				if(isSecondSeeingFirst)
 				{
 					first.addNeighbour(second);
@@ -375,7 +383,7 @@ implements Comparator<BoundaryCalculator.Gate>
 		}
 
 		return concaveVertices;
-	
+
 	}
 
 	private RectF getSmallerSlightlyJumbledRect(RectF rectF) 
@@ -384,7 +392,7 @@ implements Comparator<BoundaryCalculator.Gate>
 		// otherwise there will seem like the corners of the rect can see their
 		// opposite corner, and add them as a neighbour.
 		PointF center = rectF.getCenter(); 
-		
+
 		// even more interesting is that we have to scale the dimensions of this
 		// inner rectangle differently, otherwise the line-of-sight line
 		// can, mathematically "thread the needle" between the two sides 
@@ -393,12 +401,12 @@ implements Comparator<BoundaryCalculator.Gate>
 		// TODO: this can be unit tested.
 		double newWidth = rectF.getWidth()*.99;
 		double newHeight = rectF.getWidth()*.98;
-		
+
 		return new RectF(center.getX()-newWidth/2, center.getY()-newHeight/2, newWidth, newHeight);
 	}
-	 
 
- 
+
+
 
 	@Override
 	public double estimate(PointFWithNeighbours n, PointFWithNeighbours dest) {
