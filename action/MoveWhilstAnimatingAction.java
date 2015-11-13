@@ -45,7 +45,7 @@ public class MoveWhilstAnimatingAction extends ChainableAction{
 
 	@Override
 	public void runGameAction() {
-		double duration = mover.runForMover();
+		double duration = mover.getRunningDurationForMover();
 
 		this.run((int) (duration * 1000.0));
 

@@ -51,13 +51,13 @@ public class WalkSinglePerformer
 		walker.setSceneForWalk(scene);
 	}
  
-	public double runGameAction() {
+	public double getRunningDuration() {
 		
 		scaler.runForScaler();
-		double duration = mover.runForMover();
+		double duration = mover.getRunningDurationForMover();
 		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
 		
-		return duration * 1000.0;
+		return duration;
 	}
  
 	 public void onUpdateGameAction(double progress) {
@@ -65,7 +65,6 @@ public class WalkSinglePerformer
 		PointF pt = mover.onUpdateCalculateForMover(progress);
 		mover.onUpdateCalculateForMover(progress, pt);
 		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
-		
 	}
 
 	 
@@ -88,7 +87,6 @@ public class WalkSinglePerformer
 	 
 	public void setToInitialAtEnd(boolean isSetToInitialAtEnd) {
 		mover.setToInitialAtEndForMover(isSetToInitialAtEnd);
-
 	}
 
 	public void setEndScale(double endScale) {
@@ -98,4 +96,13 @@ public class WalkSinglePerformer
 	public void setStartScale(double startScale) {
 		scaler.setStartScaleForScaler(startScale);
 	}
+
+	public void setStartX(double startX) {
+		mover.setStartXForMover(startX);
+	}
+
+	public void setStartY(double startY) {
+		mover.setStartYForMover(startY);
+	}
+	
 }

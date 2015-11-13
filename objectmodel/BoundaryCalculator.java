@@ -5,6 +5,7 @@ package com.github.a2g.core.objectmodel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
@@ -292,8 +293,10 @@ implements Comparator<BoundaryCalculator.Gate>
 		PointFWithNeighbours start = verts.get(0);
 		PointFWithNeighbours end = verts.get(1);
 
-		Path<PointFWithNeighbours> path = Path.findPath(start, end, this,this);
-		List<PointF> list = new ArrayList<PointF>();
+		//the path is returned such that if we want to dowhile over it
+		// and construct an ordered list, then its better to flip end and start
+		Path<PointFWithNeighbours> path = Path.findPath(end, start, this,this);
+		List<PointF> list = new LinkedList<PointF>();
 		list.add(path.getLastStep());
 		while(path!=null && path.getPreviousSteps()!=null)
 		{

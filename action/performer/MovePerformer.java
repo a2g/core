@@ -49,8 +49,8 @@ public class MovePerformer implements IMovePerformer
 		this.animatingDelay = 0;
 		this.endX = Double.NaN;
 		this.endY = Double.NaN;
-		this.startX = 0.0;
-		this.startY = 0.0;
+		this.startX = Double.NaN;
+		this.startY = Double.NaN;
 		this.isBackwards = false;
 		this.setToInitialAtEnd = false;
 	}
@@ -83,12 +83,14 @@ public class MovePerformer implements IMovePerformer
 	
 
 	@Override
-	public double runForMover() {
+	public double getRunningDurationForMover() {
 		String otid =  scene.getOtidByCode(ocode);
 		
 		String atid = scene.getAtidOfCurrentAnimationByOtid(otid);
-		startX = scene.getBaseMiddleXByOtid(otid);
-		startY = scene.getBaseMiddleYByOtid(otid);
+		if(startX==Double.NaN)
+			startX = scene.getBaseMiddleXByOtid(otid);
+		if(startY==Double.NaN)
+			startY = scene.getBaseMiddleYByOtid(otid);
 
 		if (endX == Double.NaN)
 			endX = startX;
@@ -118,8 +120,8 @@ public class MovePerformer implements IMovePerformer
 		// is clamped when we go from a long to a short animation.
 		scene.setCurrentAnimationByAtid(atid);
 		
-		double duration = dist / screenCoordsPerSecond;
-		return duration;
+		double durationSecs = dist / screenCoordsPerSecond;
+		return durationSecs;
 
 	}
 
@@ -183,5 +185,14 @@ public class MovePerformer implements IMovePerformer
 	public PointF getEndPtForMover() {
 		return new PointF(endX,endY);
 	}
+
+	public void setStartXForMover(double startX) {
+		this.startX = startX;
+	}
+	
+	public void setStartYForMover(double startY) {
+		this.startY = startY;
+	}
+
 
 }

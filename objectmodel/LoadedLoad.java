@@ -61,8 +61,8 @@ public class LoadedLoad {
 		}
 
 		animation.getFrameCollection().add(imageAndPos);
-		double seconds = animation.getFrameCollection().getCount() * 40*4;//as if the animation is at 25fps, but then slowed down 4 times.
-		animation.setDurationSecs(seconds/1000);
+		double milliseconds = animation.getFrameCollection().getCount() * 40*4;//as if the animation is at 25fps, but then slowed down 4 times.
+		animation.setDurationSecs(milliseconds/1000);
 	}
 
 	public SceneObjectCollection getSceneObjectCollection() {

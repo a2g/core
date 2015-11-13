@@ -3,9 +3,7 @@ package com.github.a2g.core.action.performer;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTalkPerformer;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromTalkPerformer;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromWalkMultiPerformer;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
 import com.github.a2g.core.primitive.PointF;
 
 public class WalkMultiPerformer {
@@ -13,14 +11,14 @@ public class WalkMultiPerformer {
 	double startY;
 	double endX;
 	double endY;
-	private ArrayList<WalkSinglePerformer> walkSingles;
-	private ArrayList<Double> startingTimeForEachLine;
-	
-	private double totalDurationInSeconds;
-	private IScenePresenterFromWalkMultiPerformer scene;  
+	private ArrayList<WalkSinglePerformer> singleWalks;
+	private Double[] progressPercentageForStartOfEachSingleWalk;
+	 
+	private IScenePresenterFromActions scene;  
  
 	private short ocode; 
-	private String otid; 
+	private String otid;
+	private boolean isSetToInitialAtEnd; 
 	
 	public enum NonIncrementing {
 		True, False, FromAPI
@@ -35,30 +33,28 @@ public class WalkMultiPerformer {
 		this.ocode = ocode; 
 		this.otid = "";
 
-		walkSingles = new ArrayList<WalkSinglePerformer>();
-		startingTimeForEachLine = new ArrayList<Double>();
-
-		this.totalDurationInSeconds = 0;
+		this.singleWalks = new ArrayList<WalkSinglePerformer>();
+ 
+		this.isSetToInitialAtEnd = false;
 	}
 
  
-	public void setEndXForMover(double endX) {
+	public void setEndX(double endX) {
 		this.endX = endX;
 	}
 
-	public void setEndYForMover(double endY) {
+	public void setEndY(double endY) {
 		this.endY = endY;
 	}
 
 	 
 
-	public double run() 
+	public double getRunningDuration() 
 	{
 		otid =  scene.getOtidByCode(ocode);
 
 		startX = scene.getBaseMiddleXByOtid(otid);
-		startY = scene.getBaseMiddleYByOtid(otid);
-		double screenCoordsPerSecond = scene.getScreenCoordsPerSecondByOtid(otid);
+		startY = scene.getBaseMiddleYByOtid(otid); 
 
 		if (endX == Double.NaN)
 			endX = startX;
@@ -66,37 +62,54 @@ public class WalkMultiPerformer {
 			endY = startY;
 		List<PointF> list = scene.findPath(new PointF(startX,startY), new PointF(endX,endY));
 
-		PointF firstPoint = list.get(0);
-		double rollingStartingTimeForLine = 0;
-		for (int i = 1; i < list.size(); i++) {
-			PointF secondPoint = list.get(i);
+		progressPercentageForStartOfEachSingleWalk =  new Double[list.size()];
+		progressPercentageForStartOfEachSingleWalk[0]=0.0;//first startin percentage is zero. 
+		PointF startPoint = list.get(0);
+		double totalDuration = 0;
+		for (int i =1;i<list.size();i++) {
+			PointF endPoint = list.get(i);
 			WalkSinglePerformer k = new WalkSinglePerformer(ocode);
-			k.setEndX(secondPoint.getX());
-			k.setEndX(secondPoint.getY());
+			k.setScene(scene);
+			k.setStartX(startPoint.getX());
+			k.setStartY(startPoint.getY());
+			k.setEndX(endPoint.getX());
+			k.setEndY(endPoint.getY());
 			k.setToInitialAtEnd(false);
-			walkSingles.add(k);
+			double duration = k.getRunningDuration();
+			totalDuration+=duration;
+			if(i==list.size()-1)
+			{
+				k.setToInitialAtEnd(isSetToInitialAtEnd);
+			}
+			singleWalks.add(k);
+			progressPercentageForStartOfEachSingleWalk[i] = duration;
+			startPoint = endPoint;
+		}
 
-			double dist = Math.hypot(secondPoint.getX()-firstPoint.getX(), secondPoint.getY()-firstPoint.getY());				
-			double duration = dist / screenCoordsPerSecond;
-			rollingStartingTimeForLine+=duration;
-			// set ceilings (for easy calcluation)
-			startingTimeForEachLine.add(new Double(duration));
-
-			firstPoint = secondPoint;
+		//normalize the lengths so we know when, in the progress, to jump in.
+		double rollingStartingTime = 0;
+		for(int i=0; i<progressPercentageForStartOfEachSingleWalk.length;i++)
+		{
+			double duration = progressPercentageForStartOfEachSingleWalk[i];
+			rollingStartingTime+=duration;
+			progressPercentageForStartOfEachSingleWalk[i] = rollingStartingTime/totalDuration;
 		}
  
-		return rollingStartingTimeForLine;
+		return totalDuration;
 	}
 
-	public void onUpdate(double progress) {
+	public void onUpdateGameAction(double progress) {
 
 		// update text in bubble
-		for (int i = startingTimeForEachLine.size() - 1; i >= 0; i--) {
+		for (int i = singleWalks.size() - 1; i >= 0; i--) {
 			// go backwards thru the loop to find text that should be valid
-			if (progress > startingTimeForEachLine.get(i)) {
-				double segmentProgress = startingTimeForEachLine.get(i)-progress;
-				double segmentFullLength = startingTimeForEachLine.get(i+1);
-				walkSingles.get(i).onUpdateGameAction(segmentProgress/segmentFullLength);
+			double startPercentageForWalk = progressPercentageForStartOfEachSingleWalk[i];
+			double endPercentageForWalk = progressPercentageForStartOfEachSingleWalk[i+1];
+			
+			if (progress > startPercentageForWalk) {
+				double howFarInsideThisSegmentAreWe = startPercentageForWalk-progress;
+				double fullSegmentLength = endPercentageForWalk-startPercentageForWalk;
+				singleWalks.get(i).onUpdateGameAction(howFarInsideThisSegmentAreWe/fullSegmentLength);
 				break;
 			}
 			else
@@ -107,14 +120,20 @@ public class WalkMultiPerformer {
  
 	}
 
-	public boolean onComplete() {
-		walkSingles.get(walkSingles.size()-1).onCompleteGameAction();
+	public boolean onCompleteGameAction() {
+		singleWalks.get(singleWalks.size()-1).onCompleteGameAction();
 		 
 		return false;
 	}
  
-	public void setScene(IScenePresenterFromWalkMultiPerformer scene) {
+	public void setScene(IScenePresenterFromActions scene) {
 		this.scene = scene;
+	}
+
+
+	public void setToInitialAtEnd(boolean b) {
+		isSetToInitialAtEnd = b;
+		
 	}
 
 

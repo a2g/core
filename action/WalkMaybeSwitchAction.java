@@ -60,7 +60,7 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 	public void runGameAction() {
 		switcher.runForSwitch( );
 		scaler.runForScaler();
-		double duration = mover.runForMover();
+		double duration = mover.getRunningDurationForMover();
 		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
 		this.run((int) (duration * 1000.0));
 	}

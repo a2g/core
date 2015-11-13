@@ -55,7 +55,7 @@ public class WalkAndScrollXAction extends ChainableAction{
 
 	@Override
 	public void runGameAction() {
-		double duration = mover.runForMover();
+		double duration = mover.getRunningDurationForMover();
 		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
 		scroller.runForScroll( mover.getStartPtForMover(), mover.getEndPtForMover());
 		this.run((int) (duration * 1000.0));

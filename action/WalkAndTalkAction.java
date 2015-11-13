@@ -69,7 +69,7 @@ public class WalkAndTalkAction extends ChainableAction{
 		// sets some non-walking animation..
 		// but we want the walk animation set.
 		talker.run();
-		double duration = mover.runForMover();
+		double duration = mover.getRunningDurationForMover();
 		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
 
 		this.run((int) (duration * 1000.0));

@@ -50,7 +50,7 @@ public class MoveMaybeSwitchWhilstAnimatingAction extends ChainEndAction{
 	@Override
 	public void runGameAction() {
 		switcher.runForSwitch();
-		double duration = mover.runForMover();
+		double duration = mover.getRunningDurationForMover();
 
 		this.run((int) (duration * 1000.0));
 

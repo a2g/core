@@ -20,7 +20,7 @@ import com.github.a2g.core.primitive.PointF;
 
 public interface IMovePerformer {
 
-	double runForMover();
+	double getRunningDurationForMover();
 
 	void onCompleteForMover();
 

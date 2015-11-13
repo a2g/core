@@ -17,7 +17,7 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.performer.WalkSinglePerformer;
+import com.github.a2g.core.action.performer.WalkMultiPerformer; 
 import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
@@ -33,13 +33,13 @@ import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
  */
 public class WalkAction extends ChainableAction
 {
-	WalkSinglePerformer mover;
+	WalkMultiPerformer multi;
 	 
 
 	public WalkAction(BaseAction parent, short ocode) {
 		super(parent);
-		mover = new WalkSinglePerformer(ocode);
-		mover.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
+		multi = new WalkMultiPerformer(ocode);
+		multi.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
 		
 	}
 
@@ -49,44 +49,44 @@ public class WalkAction extends ChainableAction
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory)
 	{
-		mover.setScene(scene); 
+		multi.setScene(scene); 
 	}
 
 	@Override
 	public void runGameAction() {
-		double duration = mover.runGameAction();
-		this.run((int) (duration));
+		double durationSecs = multi.getRunningDuration();
+		this.run((int) (durationSecs*1000.0));
 	}
 
 	@Override
 	protected void onUpdateGameAction(double progress) 
 	{	
-		mover.onUpdateGameAction(progress);
+		multi.onUpdateGameAction(progress);
 	}
 
 	@Override
 	// method in animation
 	protected boolean onCompleteGameAction() {
-		return mover.onCompleteGameAction();
+		return multi.onCompleteGameAction();
 	}
 	void setEndX(double endX) {
-		mover.setEndX(endX);
+		multi.setEndX(endX);
 	}
 
 	void setEndY(double endY) {
-		mover.setEndY(endY);
+		multi.setEndY(endY);
 	}
  
 
 	public void setToInitialAtEnd(boolean isSetToInitialAtEnd) {
-		mover.setToInitialAtEnd(isSetToInitialAtEnd); 
+		multi.setToInitialAtEnd(isSetToInitialAtEnd); 
 	}
 
 	public void setEndScale(double endScale) {
-		mover.setEndScale(endScale);
+		//multi.setEndScale(endScale);
 	}
 
 	public void setStartScale(double startScale) {
-		mover.setStartScale(startScale);
+		//multi.setStartScale(startScale);
 	}
 }
