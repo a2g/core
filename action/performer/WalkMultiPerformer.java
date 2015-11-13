@@ -2,11 +2,17 @@ package com.github.a2g.core.action.performer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
+import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointF;
 
 public class WalkMultiPerformer {
+	private static final Logger MULTI2 = Logger.getLogger(LogNames.MULTI);
+	private static final Logger EXECUTED = Logger.getLogger(LogNames.ACTIONS_AS_THEY_ARE_EXECUTED);
+
 	double startX;
 	double startY;
 	double endX;
@@ -107,9 +113,13 @@ public class WalkMultiPerformer {
 			double endPercentageForWalk = progressPercentageForStartOfEachSingleWalk[i+1];
 			
 			if (progress > startPercentageForWalk) {
-				double howFarInsideThisSegmentAreWe = startPercentageForWalk-progress;
+				double howFarInsideThisSegmentAreWe = progress -startPercentageForWalk;
 				double fullSegmentLength = endPercentageForWalk-startPercentageForWalk;
-				singleWalks.get(i).onUpdateGameAction(howFarInsideThisSegmentAreWe/fullSegmentLength);
+				double percent = howFarInsideThisSegmentAreWe/fullSegmentLength;
+				singleWalks.get(i).onUpdateGameAction(percent);
+				PointF from = singleWalks.get(i).mover.getStartPtForMover();
+				PointF to = singleWalks.get(i).mover.getEndPtForMover();
+				EXECUTED.log( Level.FINER, "{0} walk to-mid  from {1} {2} to {3} {4} {5}", new Object[]{i, from.getX(), from.getY(),to.getX(), to.getY(), percent} );
 				break;
 			}
 			else

@@ -35,8 +35,6 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 	private static final Logger RUNNER = Logger.getLogger(LogNames.RUNNER);
 	private static final Logger ACTIONS_EXECUTED = Logger.getLogger(LogNames.ACTIONS_AS_THEY_ARE_EXECUTED);
 	private static final Logger ACTIONS_FLATTENED_B4_EXECUTION = Logger.getLogger(LogNames.ACTIONS_FLATTENED_B4_EXECUTION);
-
-
 	private static final Logger RUNNER_REFCOUNT = Logger.getLogger(LogNames.RUNNER_REFCOUNT);
 
 	protected ArrayList<ArrayList<BaseAction>> list;

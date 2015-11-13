@@ -64,7 +64,7 @@ public class WalkSinglePerformer
 		scaler.onUpdateForScaler(progress);
 		PointF pt = mover.onUpdateCalculateForMover(progress);
 		mover.onUpdateCalculateForMover(progress, pt);
-		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
+		//walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
 	}
 
 	 
