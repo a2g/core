@@ -49,6 +49,7 @@ import com.github.a2g.core.platforms.java.panel.MasterPanelForJava;
 import com.github.a2g.core.platforms.java.panel.ScenePanelForJava;
 import com.github.a2g.core.platforms.java.panel.TitleCardPanelForJava;
 import com.github.a2g.core.platforms.java.panel.VerbsPanelForJava;
+import com.github.a2g.core.objectmodel.BoundaryCalculator;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
@@ -137,7 +138,7 @@ public class FactoryForJava implements IFactory {
 	@Override
 	public IBoundaryCalculator createBoundaryCalculator(
 			IScenePresenterFromBoundaryCalculator callbacks) {
-		return new BoundaryCalculatorForJava(callbacks);
+		return new BoundaryCalculator(callbacks);
 	}
 
 }

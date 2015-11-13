@@ -1,4 +1,4 @@
-package com.github.a2g.core.platforms.java;
+package com.github.a2g.core.objectmodel;
 
 import java.util.Iterator; 
 

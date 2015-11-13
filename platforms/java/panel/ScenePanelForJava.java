@@ -26,6 +26,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -53,6 +54,7 @@ import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectF;
 import com.github.a2g.core.platforms.java.ImageForJava;
 import com.github.a2g.core.platforms.java.PackagedImageForJava;
 import com.github.a2g.core.platforms.java.mouse.SceneMouseClickHandler;
@@ -296,24 +298,44 @@ implements IScenePanelFromScenePresenter
 		{
 			g.setColor(new Color(255,0,0));
 			// connect all the points in a big line
-			ArrayList<PointF> points = toScene.getBoundaryPoints();
+			List<PointF> points = toScene.getBoundaryPoints();
 			int size = points.size();
-			double lastX = points.get(size-1).getX()*width;
-			double lastY = points.get(size-1).getY()*height;
+			PointF lastPt = points.get(size-1);
 			for(int i=0; i<size; i++)
 			{
-				double newX = points.get(i).getX()*width;
-				double newY = points.get(i).getY()*height;
+				PointF newPt = points.get(i);
 				
-				g.drawLine((int)newX, (int)newY, (int)lastX, (int)lastY);
-				lastX = newX;
-				lastY = newY;
+				drawLine(newPt, lastPt, g);
+				lastPt = newPt;
+				
+			}
+			
+			List<RectF> obstacles = toScene.getObstacles();
+			for(int i=0;i<obstacles.size();i++)
+			{
+				RectF rect = obstacles.get(i);
+				drawLine(rect.getTopLeft(), rect.getTopRight(), g);
+				drawLine(rect.getTopRight(), rect.getBottomRight(), g);
+				drawLine(rect.getBottomRight(), rect.getBottomLeft(), g);
+				drawLine(rect.getBottomLeft(), rect.getTopLeft(), g);
 			}
 			
 			PointF c = toScene.getBoundaryPointsCentre();
 			g.drawOval((int)(c.getX()*width), (int)(c.getY()*height), 3, 3);
+			
+			
 		}
 
+	}
+	void drawLine(PointF newPt, PointF lastPt, Graphics g)
+	{
+		int width = getWidth();
+		int height = getHeight();
+		double newX = newPt.getX()*width;
+		double newY = newPt.getY()*height;
+		double lastX = lastPt.getX()*width;
+		double lastY = lastPt.getY()*height;
+		g.drawLine((int)newX, (int)newY, (int)lastX, (int)lastY);
 	}
 
 	public String getObjectUnderMouse(int x, int y)

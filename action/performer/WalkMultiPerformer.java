@@ -52,8 +52,8 @@ public class WalkMultiPerformer {
 
 	 
 
-	public double run() {
- 
+	public double run() 
+	{
 		otid =  scene.getOtidByCode(ocode);
 
 		startX = scene.getBaseMiddleXByOtid(otid);
@@ -84,9 +84,7 @@ public class WalkMultiPerformer {
 
 			firstPoint = secondPoint;
 		}
-
-
-
+ 
 		return rollingStartingTimeForLine;
 	}
 

@@ -523,8 +523,8 @@ IOnMovementBeyondAGate {
 	}
 
 	@Override
-	public void addObstacleRect(double top, double left, double bottom, double right) {
-		master.getScenePresenter().addObstacleRect(top, left, bottom, right);
+	public void addObstacleRect(double x, double y, double right, double bottom) {
+		master.getScenePresenter().addObstacleRect(x, y, right, bottom);
 		
 	}
 

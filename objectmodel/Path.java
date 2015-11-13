@@ -1,7 +1,8 @@
-package com.github.a2g.core.platforms.java;
+package com.github.a2g.core.objectmodel;
 
 import java.util.HashSet;
 import java.util.Iterator;  
+ 
 
 public class Path<TNode extends IGetNeighbours<TNode>> implements Iterable<TNode>
 {

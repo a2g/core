@@ -1,9 +1,9 @@
-package com.github.a2g.core.platforms.java;
+package com.github.a2g.core.objectmodel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;  
-
+ 
 import com.github.a2g.core.primitive.PointF;
 
 public class PointFWithNeighbours extends PointF implements IGetNeighbours<PointFWithNeighbours> 

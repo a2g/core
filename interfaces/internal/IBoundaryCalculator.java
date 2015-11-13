@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.RectF;
 
 public interface IBoundaryCalculator {
 
@@ -21,10 +22,12 @@ public interface IBoundaryCalculator {
 
 	PointF getGatePointsCentre();
 
-	void addObstacleRect(double top, double left, double bottom, double right);
+	void addObstacleRect(double x, double y, double right, double bottom);
 	
 	void finishedGateAndObstacleAdding();
 
 	List<PointF> findPath(PointF rawStart, PointF rawEnd);
+
+	ArrayList<RectF> getObstacles();
 
 }

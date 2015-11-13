@@ -380,13 +380,18 @@ implements IScenePresenter
 		return boundaryCalculator.getGatePointsCentre();
 	}
 
-	public void addObstacleRect(double top, double left, double bottom, double right) {
-		boundaryCalculator.addObstacleRect(top,left,bottom,right);
+	public void addObstacleRect(double x, double y, double right, double bottom) {
+		boundaryCalculator.addObstacleRect(x,y,right,bottom);
 		
 	}
 
 	public List<PointF> findPath(PointF rawStart, PointF rawEnd) {
 		return boundaryCalculator.findPath(rawStart, rawEnd);
+	}
+
+	@Override
+	public ArrayList<RectF> getObstacles() {
+		return boundaryCalculator.getObstacles();
 	}
 
 };
