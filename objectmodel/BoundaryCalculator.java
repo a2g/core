@@ -3,6 +3,7 @@ package com.github.a2g.core.objectmodel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
@@ -190,6 +191,11 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 	public void finishedGateAndObstacleAdding() {
 		// do nothing without a star
 		
+	}
+
+	@Override
+	public List<PointF> findPath(PointF rawStart, PointF rawEnd) {
+		return null;
 	} 
 	
 }

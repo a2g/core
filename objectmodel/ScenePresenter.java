@@ -18,6 +18,7 @@ package com.github.a2g.core.objectmodel;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
@@ -384,6 +385,8 @@ implements IScenePresenter
 		
 	}
 
-
+	public List<PointF> findPath(PointF rawStart, PointF rawEnd) {
+		return boundaryCalculator.findPath(rawStart, rawEnd);
+	}
 
 };

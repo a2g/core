@@ -26,11 +26,13 @@ public class WalkPerformer implements IWalkPerformer
 {	
 	private IScenePresenterFromWalkPerformer scene;
 	private short ocode;
-	
+
+	private String anim;
 
 
 	public WalkPerformer(short ocode) {
 		this.ocode = ocode;
+		this.anim = "";
 	}
 	
 	@Override
@@ -45,7 +47,6 @@ public class WalkPerformer implements IWalkPerformer
 		double diffY = startPt.getY() - endPt.getY();
 
 		// anim
-		String anim = "";
 		int width = scene.getSceneGuiWidth();
 		int height = scene.getSceneGuiHeight();
 
@@ -69,6 +70,10 @@ public class WalkPerformer implements IWalkPerformer
 		// we've set it up now, pass to MoveWhilstAnimatingAction to execute
 		scene.setCurrentAnimationByAtid(anim);
 
+	}
+	
+	public void onUpdateGameActionForWalk(double progress) {
+		scene.setCurrentAnimationByAtid(anim);
 	}
 
 	@Override

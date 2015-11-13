@@ -1,6 +1,7 @@
 package com.github.a2g.core.interfaces.internal;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.github.a2g.core.primitive.PointF;
 
@@ -23,5 +24,7 @@ public interface IBoundaryCalculator {
 	void addObstacleRect(double top, double left, double bottom, double right);
 	
 	void finishedGateAndObstacleAdding();
+
+	List<PointF> findPath(PointF rawStart, PointF rawEnd);
 
 }

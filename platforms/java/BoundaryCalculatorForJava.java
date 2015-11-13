@@ -282,7 +282,25 @@ implements Comparator<BoundaryCalculatorForJava.Gate>
 	public void finishedGateAndObstacleAdding() {
 
 	}
- 
+	
+	public List<PointF> findPath(PointF rawStart, PointF rawEnd)
+	{
+		List<PointFWithNeighbours> verts = getNetworkOfConcaveVertices(rawStart, rawEnd);
+	
+		PointFWithNeighbours start = verts.get(0);
+		PointFWithNeighbours end = verts.get(1);
+
+		Path<PointFWithNeighbours> path = Path.findPath(start, end, this,this);
+		List<PointF> list = new ArrayList<PointF>();
+		list.add(path.getLastStep());
+		while(path!=null && path.getPreviousSteps()!=null)
+		{
+			list.add(path.getPreviousSteps().getLastStep());
+			path = path.getPreviousSteps();
+		}
+		return list;
+	}
+	
 	public List<PointFWithNeighbours> getNetworkOfConcaveVertices(PointF rawStart, PointF rawEnd)
 	{
 		PointFWithNeighbours start = new PointFWithNeighbours(rawStart);

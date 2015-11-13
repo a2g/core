@@ -1,5 +1,7 @@
 package com.github.a2g.core.objectmodel;
 
+import java.util.List;
+
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
@@ -396,6 +398,12 @@ ITitleCardPresenterFromActions {
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
 		object.setScale(scale);
 		
+	}
+
+	@Override
+	public List<PointF> findPath(PointF rawStart, PointF rawEnd) {
+
+		return master.getScenePresenter().findPath(rawStart, rawEnd);
 	}
 
 
