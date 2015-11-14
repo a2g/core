@@ -11,14 +11,13 @@ import com.github.a2g.core.primitive.PointF;
 
 public class WalkMultiPerformer {
 	private static final  Logger MULTIWALKER = Logger.getLogger(LogNames.MULTIWALKER);
-	private static final  Logger B = Logger.getLogger(LogNames.B);
-	private static final  Logger C = Logger.getLogger(LogNames.C);
-	private static final  Logger D = Logger.getLogger(LogNames.D);
 	
 	double startX;
 	double startY;
 	double endX;
 	double endY;
+	double startScale;
+	double endScale;
 	private ArrayList<WalkSinglePerformer> singleWalks;
 	private Double[] progressPercentageForStartOfEachSingleWalk;
 	 
@@ -26,18 +25,23 @@ public class WalkMultiPerformer {
  
 	private short ocode; 
 	private String otid;
-	private boolean isSetToInitialAtEnd; 
+	private boolean isSetToInitialAtEnd;
+	private boolean isStoppedForSwitch; 
+	private boolean isToUseSwitchForChildren;
 	
 	public enum NonIncrementing {
 		True, False, FromAPI
 	}
 
-	public WalkMultiPerformer(short ocode) {
+	public WalkMultiPerformer(short ocode, boolean isToUseSwitchForChildren) {
 		this.endX = Double.NaN;
 		this.endY = Double.NaN;
-		this.startX = 0.0;
-		this.startY = 0.0;
-
+		this.startX = Double.NaN;
+		this.startY = Double.NaN;
+		this.startScale = 1.0;
+		this.endScale = 1.0;
+		this.isStoppedForSwitch = false;
+		this.isToUseSwitchForChildren = isToUseSwitchForChildren;
 		this.ocode = ocode; 
 		this.otid = "";
 
@@ -76,7 +80,14 @@ public class WalkMultiPerformer {
 		double totalDuration = 0;
 		for (int i =1;i<list.size();i++) {
 			PointF endPoint = list.get(i);
-			WalkSinglePerformer k = new WalkSinglePerformer(ocode);
+			
+			MovePerformer m = new MovePerformer(ocode);
+			WalkPerformer w = new WalkPerformer(ocode);
+			SwitchPerformer sw = isToUseSwitchForChildren? new SwitchPerformer(ocode) : null;
+			ScalePerformer sc = new ScalePerformer(ocode);
+			sc.setStartScaleForScaler(startScale);
+			sc.setStartScaleForScaler(endScale);
+			WalkSinglePerformer k = new WalkSinglePerformer( m,w,sw,sc);
 			k.setScene(scene);
 			k.setStartX(startPoint.getX());
 			k.setStartY(startPoint.getY());
@@ -108,8 +119,6 @@ public class WalkMultiPerformer {
 
 	public void onUpdateGameAction(double progress) {
 
-
-		
 		// update text in bubble
 		for (int i = singleWalks.size() - 1; i >= 0; i--) {
 			// go backwards thru the loop to find text that should be valid
@@ -121,6 +130,8 @@ public class WalkMultiPerformer {
 				double fullSegmentLength = endPercentageForWalk-startPercentageForWalk;
 				double percent = howFarInsideThisSegmentAreWe/fullSegmentLength;
 				singleWalks.get(i).onUpdateGameAction(percent);
+				if(singleWalks.get(i).isStoppedForSwitch())
+					isStoppedForSwitch = true;
 				PointF from = singleWalks.get(i).mover.getStartPtForMover();
 				PointF to = singleWalks.get(i).mover.getEndPtForMover();
 				MULTIWALKER.log( Level.ALL, "{0} walk to-mid  from {1} {2} to {3} {4} {5}", new Object[]{i, from.getX(), from.getY(),to.getX(), to.getY(), percent} );
@@ -134,21 +145,30 @@ public class WalkMultiPerformer {
  
 	}
 
-	public boolean onCompleteGameAction() {
-		singleWalks.get(singleWalks.size()-1).onCompleteGameAction();
-		 
-		return false;
+	public boolean onCompleteActionAndCheckForGateExit() {
+		boolean isExited = singleWalks.get(singleWalks.size()-1).onCompleteActionAndCheckForGateExit();
+		return isExited;
 	}
  
 	public void setScene(IScenePresenterFromActions scene) {
 		this.scene = scene;
 	}
 
-
 	public void setToInitialAtEnd(boolean b) {
 		isSetToInitialAtEnd = b;
-		
+	}
+
+	public boolean isStoppedForSwitch() {
+		return isStoppedForSwitch;
 	}
 
 
+	public void setEndScale(double endScale) {
+		this.endScale = endScale;
+		
+	}
+
+	public void setStartScale(double startScale) {
+		this.startScale = startScale;
+	}
 }

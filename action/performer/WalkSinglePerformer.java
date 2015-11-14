@@ -15,11 +15,12 @@
  */
 
 package com.github.a2g.core.action.performer;
-
-import com.github.a2g.core.action.performer.MovePerformer;
-import com.github.a2g.core.action.performer.ScalePerformer;
-import com.github.a2g.core.action.performer.WalkPerformer;
+ 
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.performer.IMovePerformer;
+import com.github.a2g.core.interfaces.performer.IScalePerformer;
+import com.github.a2g.core.interfaces.performer.ISwitchPerformer;
+import com.github.a2g.core.interfaces.performer.IWalkPerformer;
 import com.github.a2g.core.primitive.PointF;
 
 /**
@@ -31,60 +32,90 @@ import com.github.a2g.core.primitive.PointF;
  */
 public class WalkSinglePerformer  
 {
-	MovePerformer mover;
-	WalkPerformer walker;
-	ScalePerformer scaler;
+	IMovePerformer mover;
+	ISwitchPerformer switcher;
+	IWalkPerformer walker;
+	IScalePerformer scaler;
+	private boolean isStoppedForSwitch;
 
-	public WalkSinglePerformer(short ocode) {
-		mover = new MovePerformer(ocode);
+	public WalkSinglePerformer(IMovePerformer m, IWalkPerformer w, ISwitchPerformer s, IScalePerformer sc) {
+		walker = w;
+		switcher = s;
+		mover = m;
+		scaler = sc;
 		mover.setToInitialAtEndForMover(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
-		walker = new WalkPerformer(ocode);
-		scaler = new ScalePerformer(ocode);
+		isStoppedForSwitch = false;
 	}
  
-	public void setScene( 
-			IScenePresenterFromActions scene)
+	public void setScene(IScenePresenterFromActions scene)
 	{
-
 		scaler.setSceneForScaler(scene);
 		mover.setSceneForMover(scene);
-		walker.setSceneForWalk(scene);
+		walker.setSceneForWalker(scene);
+		if(switcher!=null)
+			switcher.setSceneForSwitch(scene);
 	}
  
 	public double getRunningDuration() {
-		
+		if(switcher!=null)
+			switcher.runForSwitch( );
 		scaler.runForScaler();
 		double duration = mover.getRunningDurationForMover();
-		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
-		
+		walker.runForWalker(mover.getStartPtForMover(), mover.getEndPtForMover());
 		return duration;
 	}
- 
-	 public void onUpdateGameAction(double progress) {
-		scaler.onUpdateForScaler(progress);
+
+	public void onUpdateGameAction(double progress) {
 		PointF pt = mover.onUpdateCalculateForMover(progress);
+		if(switcher!=null)
+		{
+			switcher.onUpdateForSwitch(progress);
+			// in this case the previous line could have switched scenes.
+			// or it could have run in to the no-go-zone, in which case
+			// we don't want mover updating it to a new position.
+			// or else it may access objects which are not there.
+			// In both the above cases isStoppedForSwitch is true.
+			if(switcher.isStoppedForSwitch())
+			{
+				isStoppedForSwitch = true;//this.cancel();// process onComplete immediately
+				return;//prevent mover from executing.
+			}
+		}
+		scaler.onUpdateForScaler(progress);
 		mover.onUpdateCalculateForMover(progress, pt);
-		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
+		walker.runForWalker(mover.getStartPtForMover(), mover.getEndPtForMover());
 	}
 
-	 
-	public boolean onCompleteGameAction() {
+
+	public boolean onCompleteActionAndCheckForGateExit() {
+		// we need to add an ifStoppedForSwitch here, because
+		// cancel doesn't cancel straight away, but it calls
+		// onComplete...
+		if(isStoppedForSwitch)
+			return true;
 		onUpdateGameAction(1.0);
-		scaler.onCompleteForScaler();
-		mover.onCompleteForMover();
-		
-		return false;
-	}
-	
-	public void setEndX(double endX) {
-		mover.setEndXForMover(endX);
+
+		// the next line is crucial because the previous line
+		// might have just switched scenes.
+		// If it has stopped? we still do mover.onCompleteForMover..
+		// which kist sets to initial. It doesn't update position.
+		// If scene has exited do we not do mover.onCompleteForMover
+		// because the Otids referred to in mover and switcher
+		// refer to objects in a scene that we've exited from.
+		boolean isExited = switcher!=null? switcher.isExitedThruGate() : false;
+		if(!isExited)
+		{
+			scaler.onCompleteForScaler();
+			mover.onCompleteForMover();
+			if(switcher!=null)
+			{
+				isExited = switcher.onCompleteForSwitch();
+			}
+		}
+		return isExited;
+
 	}
 
-	public void setEndY(double endY) {
-		mover.setEndYForMover(endY);
-	}
-
-	 
 	public void setToInitialAtEnd(boolean isSetToInitialAtEnd) {
 		mover.setToInitialAtEndForMover(isSetToInitialAtEnd);
 	}
@@ -99,10 +130,30 @@ public class WalkSinglePerformer
 
 	public void setStartX(double startX) {
 		mover.setStartXForMover(startX);
+		if(switcher!=null)
+			switcher.setStartXForSwitcher(startX);
 	}
 
 	public void setStartY(double startY) {
 		mover.setStartYForMover(startY);
+		if(switcher!=null)
+			switcher.setStartYForSwitcher(startY);
+	}
+	
+	void setEndX(double endX) {
+		mover.setEndXForMover(endX);
+		if(switcher!=null)
+			switcher.setEndXForSwitch(endX);
+	}
+
+	void setEndY(double endY) {
+		mover.setEndYForMover(endY);
+		if(switcher!=null)
+			switcher.setEndYForSwitch(endY);
+	}
+
+	public boolean isStoppedForSwitch() {
+		return isStoppedForSwitch;
 	}
 	
 }

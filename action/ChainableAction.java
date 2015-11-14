@@ -20,12 +20,8 @@ import com.github.a2g.core.action.PlayAnimationAction;
 import com.github.a2g.core.action.ChainToDialogAction;
 import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkAction;
-import com.github.a2g.core.action.performer.MovePerformer;
-import com.github.a2g.core.action.performer.ScalePerformer;
 import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
-import com.github.a2g.core.action.performer.SwitchPerformer;
 import com.github.a2g.core.action.performer.TalkPerformer;
-import com.github.a2g.core.action.performer.WalkPerformer;
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
@@ -333,11 +329,7 @@ implements IChainRootForScene
 	@Override
 	public ChainEndAction walkTo(PointF end) {
 		short dso = ScenePresenter.DEFAULT_SCENE_OBJECT;
-		MovePerformer m = new MovePerformer(dso);
-		WalkPerformer w = new WalkPerformer(dso);
-		SwitchPerformer sw = new SwitchPerformer(dso);
-		ScalePerformer sc = new ScalePerformer(dso);
-		WalkMaybeSwitchAction a = new WalkMaybeSwitchAction(this, m,w,sw,sc);
+		WalkMaybeSwitchAction a = new WalkMaybeSwitchAction(this,dso);
 		a.setEndX(end.getX());
 		a.setEndY(end.getY());
 		return a;

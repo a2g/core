@@ -39,7 +39,7 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 
 	abstract protected void onUpdateGameAction(double progress);
 
-	abstract protected boolean onCompleteGameAction();
+	abstract protected boolean onCompleteActionAndCheckForGateExit();
 
 	abstract public void runGameAction();
 
@@ -93,7 +93,7 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	@Override
 	// method in animation
 	public void onComplete() {
-		boolean isExitedScene = onCompleteGameAction();
+		boolean isExitedScene = onCompleteActionAndCheckForGateExit();
 
 		// callbacks can be null in a unit test
 		if(!isExitedScene && this.callbacks!=null)

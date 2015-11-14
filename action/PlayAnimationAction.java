@@ -59,7 +59,7 @@ public class PlayAnimationAction extends ChainableAction {
 	}
 
 	@Override
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 
 		onUpdateGameAction(1.0);
 

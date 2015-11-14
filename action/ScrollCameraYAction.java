@@ -62,7 +62,7 @@ public class ScrollCameraYAction extends ChainableAction {
 
 	@Override
 	// method in animation
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 		scene.setCameraY(endY);
 		return false;
 	}

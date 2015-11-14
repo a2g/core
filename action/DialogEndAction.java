@@ -46,7 +46,7 @@ public class DialogEndAction extends DialogChainEndAction{
 	}
 
 	@Override
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 		dialogTree.setActiveGuiState(GuiStateEnum.ActiveScene);
 		return false;
 	}

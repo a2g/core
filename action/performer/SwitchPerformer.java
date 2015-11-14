@@ -40,8 +40,8 @@ public class SwitchPerformer implements ISwitchPerformer
 		this.ocode = ocode;
 		this.endX = Double.NaN;
 		this.endY = Double.NaN;
-		this.startX = 0.0;
-		this.startY = 0.0;
+		this.startX = Double.NaN;
+		this.startY = Double.NaN;
 		this.isStopped = false;
 		this.isExitedThruGate = false;
 	}
@@ -55,6 +55,16 @@ public class SwitchPerformer implements ISwitchPerformer
 	@Override
 	public void setEndYForSwitch(double endY) {
 		this.endY = endY;
+	}
+	
+	@Override
+	public void setStartXForSwitcher(double startX) {
+		this.startX = startX;
+	}
+
+	@Override
+	public void setStartYForSwitcher(double startY) {
+		this.startY = startY;
 	}
 
 	double getEndX() {
@@ -77,8 +87,11 @@ public class SwitchPerformer implements ISwitchPerformer
 	@Override
 	public void runForSwitch( ) {
 		String otid = scene.getOtidByCode(ocode);
-		startX = scene.getBaseMiddleXByOtid(otid);
-		startY = scene.getBaseMiddleYByOtid(otid);
+		
+		if (startX == Double.NaN)
+			startX = scene.getBaseMiddleXByOtid(otid);
+		if (startY == Double.NaN)
+			startY = scene.getBaseMiddleYByOtid(otid);
 
 		if (endX == Double.NaN)
 			endX = startX;

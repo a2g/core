@@ -186,10 +186,12 @@ public class MovePerformer implements IMovePerformer
 		return new PointF(endX,endY);
 	}
 
+	@Override
 	public void setStartXForMover(double startX) {
 		this.startX = startX;
 	}
 	
+	@Override
 	public void setStartYForMover(double startY) {
 		this.startY = startY;
 	}

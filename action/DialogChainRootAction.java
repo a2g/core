@@ -46,7 +46,7 @@ public class DialogChainRootAction extends DialogChainableAction {
 	}
 
 	@Override
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 		dialogTree.setActiveGuiState(GuiStateEnum.DialogTree);
 		// do nothing, this is a placeholder that results in a large chained action
 		return false;

@@ -27,18 +27,16 @@ import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 /**
  * 
  * This only uses a walker and a mover NOT a switcher.
- * As a result there is no collision detection
- * So a plain-old walk, (eg in an action) can
- * end up running over the boundary.
+ * It is used in cut scenes.
+ * 
  */
 public class WalkAction extends ChainableAction
 {
 	WalkMultiPerformer multi;
-	 
-
+	
 	public WalkAction(BaseAction parent, short ocode) {
 		super(parent);
-		multi = new WalkMultiPerformer(ocode);
+		multi = new WalkMultiPerformer(ocode,false);
 		multi.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
 		
 	}
@@ -66,8 +64,8 @@ public class WalkAction extends ChainableAction
 
 	@Override
 	// method in animation
-	protected boolean onCompleteGameAction() {
-		return multi.onCompleteGameAction();
+	protected boolean onCompleteActionAndCheckForGateExit() {
+		return multi.onCompleteActionAndCheckForGateExit();
 	}
 	void setEndX(double endX) {
 		multi.setEndX(endX);
@@ -83,10 +81,10 @@ public class WalkAction extends ChainableAction
 	}
 
 	public void setEndScale(double endScale) {
-		//multi.setEndScale(endScale);
+		multi.setEndScale(endScale);
 	}
 
 	public void setStartScale(double startScale) {
-		//multi.setStartScale(startScale);
+		multi.setStartScale(startScale);
 	}
 }

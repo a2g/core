@@ -34,4 +34,7 @@ public interface ISwitchPerformer{
 	void setSceneForSwitch(IScenePresenterFromSwitchPerformer scene);
 
 	boolean isExitedThruGate();
+
+	void setStartXForSwitcher(double startX);
+	void setStartYForSwitcher(double startY);
 }

@@ -27,6 +27,12 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 import com.github.a2g.core.primitive.PointF;
 
+/**
+ * 
+ * This only uses a walk,and scroll and move NOT switch.
+ * It's just used for some cut scenes.
+ * As a result there is no collision detection.
+ */
 public class WalkAndScrollXAction extends ChainableAction{
 
 	MovePerformer mover;
@@ -48,7 +54,7 @@ public class WalkAndScrollXAction extends ChainableAction{
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory)
 	{
 		mover.setSceneForMover(scene);
-		walker.setSceneForWalk(scene);
+		walker.setSceneForWalker(scene);
 		scroller.setScene(scene);
 	}
 
@@ -56,7 +62,7 @@ public class WalkAndScrollXAction extends ChainableAction{
 	@Override
 	public void runGameAction() {
 		double duration = mover.getRunningDurationForMover();
-		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
+		walker.runForWalker(mover.getStartPtForMover(), mover.getEndPtForMover());
 		scroller.runForScroll( mover.getStartPtForMover(), mover.getEndPtForMover());
 		this.run((int) (duration * 1000.0));
 
@@ -72,7 +78,7 @@ public class WalkAndScrollXAction extends ChainableAction{
 
 	@Override
 	// method in animation
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 		onUpdateGameAction(1.0);
 		mover.onCompleteForMover();
 		scroller.onCompleteForScroll();

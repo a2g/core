@@ -54,7 +54,7 @@ public class DialogBranchAction extends DialogChainableAction {
 	}
 
 	@Override
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 		if(isOkToAdd)
 		{
 			dialogTree.addBranch(branchId, text, !isExemptFromSaidList);

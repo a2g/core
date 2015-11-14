@@ -60,7 +60,7 @@ public class TalkAction extends ChainableAction {
 	}
 
 	@Override
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 		boolean result = talker.onComplete();
 		return result;
 	}

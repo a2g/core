@@ -36,7 +36,7 @@ public class ChainRootAction extends ChainableAction {
 	}
 
 	@Override
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 		return false;
 	}
 

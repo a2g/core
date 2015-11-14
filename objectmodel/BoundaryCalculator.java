@@ -91,6 +91,7 @@ implements Comparator<BoundaryCalculator.Gate>
 
 	public void clearBoundaries() {
 		this.gates.clear();
+		this.obstacles.clear();
 	}
 
 	public boolean doSwitchIfBeyondGate(PointF tp)

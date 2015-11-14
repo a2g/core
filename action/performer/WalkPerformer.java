@@ -36,7 +36,7 @@ public class WalkPerformer implements IWalkPerformer
 	}
 	
 	@Override
-	public void runForWalk( PointF startPt, PointF endPt) 
+	public void runForWalker( PointF startPt, PointF endPt) 
 	{
 		assert(scene!=null);
 		String otid = scene.getOtidByCode(ocode);
@@ -77,7 +77,7 @@ public class WalkPerformer implements IWalkPerformer
 	}
 
 	@Override
-	public void setSceneForWalk(IScenePresenterFromWalkPerformer scene) {
+	public void setSceneForWalker(IScenePresenterFromWalkPerformer scene) {
 		this.scene = scene;
 	}
 

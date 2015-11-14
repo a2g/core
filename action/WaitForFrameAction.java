@@ -58,7 +58,7 @@ public class WaitForFrameAction extends ChainableAction {
 	}
 
 	@Override
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 		return false;
 	}
 

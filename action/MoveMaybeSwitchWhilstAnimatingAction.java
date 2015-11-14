@@ -69,7 +69,7 @@ public class MoveMaybeSwitchWhilstAnimatingAction extends ChainEndAction{
 
 	@Override
 	// method in animation
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 		onUpdateGameAction(1.0);
 		mover.onCompleteForMover();
 		boolean isExited = switcher.onCompleteForSwitch();

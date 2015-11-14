@@ -46,7 +46,7 @@ public class PlaySoundAction extends ChainableAction {
 	}
 
 	@Override
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 		master.stopSoundByStid(stid);
 		return false;
 	}

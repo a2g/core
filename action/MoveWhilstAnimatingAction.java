@@ -59,7 +59,7 @@ public class MoveWhilstAnimatingAction extends ChainableAction{
 
 	@Override
 	// method in animation
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 		onUpdateGameAction(1.0);
 		mover.onCompleteForMover();
 		return false;

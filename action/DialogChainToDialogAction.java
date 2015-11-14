@@ -47,7 +47,7 @@ public class DialogChainToDialogAction extends ChainToDialogAction {
 	}
 
 	@Override
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 		// do nothing, this is a placeholder that results in a large chained action
 		return false;
 	}

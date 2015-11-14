@@ -40,4 +40,7 @@ public interface IMovePerformer {
 
 	void setSceneForMover(IScenePresenterFromMovePerformer scene);
 
+	void setStartXForMover(double startX);
+	void setStartYForMover(double startY);
+
 }

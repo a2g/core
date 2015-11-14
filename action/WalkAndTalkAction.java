@@ -55,7 +55,7 @@ public class WalkAndTalkAction extends ChainableAction{
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory)
 	{
-		walker.setSceneForWalk(scene);
+		walker.setSceneForWalker(scene);
 		mover.setSceneForMover(scene);
 		talker.setScene(scene);
 		talker.setMaster(master);
@@ -70,7 +70,7 @@ public class WalkAndTalkAction extends ChainableAction{
 		// but we want the walk animation set.
 		talker.run();
 		double duration = mover.getRunningDurationForMover();
-		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
+		walker.runForWalker(mover.getStartPtForMover(), mover.getEndPtForMover());
 
 		this.run((int) (duration * 1000.0));
 
@@ -86,7 +86,7 @@ public class WalkAndTalkAction extends ChainableAction{
 
 	@Override
 	// method in animation
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 		onUpdateGameAction(1.0);
 		talker.onComplete();
 		mover.onCompleteForMover();

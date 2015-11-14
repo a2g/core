@@ -46,7 +46,7 @@ extends ChainableAction {
 	}
 
 	@Override
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 		return single.onComplete();
 	}
 

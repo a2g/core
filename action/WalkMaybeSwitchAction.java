@@ -17,31 +17,28 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.performer.WalkMultiPerformer;
 import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
-import com.github.a2g.core.interfaces.performer.IMovePerformer;
-import com.github.a2g.core.interfaces.performer.IScalePerformer;
-import com.github.a2g.core.interfaces.performer.ISwitchPerformer;
-import com.github.a2g.core.interfaces.performer.IWalkPerformer;
-import com.github.a2g.core.primitive.PointF;
 
+
+/**
+ * 
+ * This is the workhorse. Used for most
+ * interactive walk to commands.
+ * It triggers a path find, that occurs in WalkMulti
+ */
 public class WalkMaybeSwitchAction extends ChainEndAction
 {
-	IMovePerformer mover;
-	ISwitchPerformer switcher;
-	IWalkPerformer walker;
-	IScalePerformer scaler;
+	WalkMultiPerformer multiWalker;
 
-	public WalkMaybeSwitchAction(BaseAction parent, IMovePerformer m, IWalkPerformer w, ISwitchPerformer s, IScalePerformer sc) {
+	public WalkMaybeSwitchAction(BaseAction parent, short ocode) {
 		super(parent);
-		walker = w;
-		switcher = s;
-		mover = m;
-		scaler = sc;
-		mover.setToInitialAtEndForMover(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
+		multiWalker = new WalkMultiPerformer(ocode, true);
+		multiWalker.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
 	}
 
 	@Override
@@ -50,18 +47,12 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 			IDialogTreePresenterFromActions dialogTree,
 			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory)
 	{
-		mover.setSceneForMover(scene);
-		walker.setSceneForWalk(scene);
-		switcher.setSceneForSwitch(scene);
-		scaler.setSceneForScaler(scene);
+		multiWalker.setScene(scene);
 	}
 
 	@Override
 	public void runGameAction() {
-		switcher.runForSwitch( );
-		scaler.runForScaler();
-		double duration = mover.getRunningDurationForMover();
-		walker.runForWalk(mover.getStartPtForMover(), mover.getEndPtForMover());
+		double duration = multiWalker.getRunningDuration();
 		this.run((int) (duration * 1000.0));
 	}
 
@@ -69,50 +60,30 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		PointF pt = mover.onUpdateCalculateForMover(progress);
-		switcher.onUpdateForSwitch(progress);
+		
+		multiWalker.onUpdateGameAction(progress);
 		// in this case the previous line could have switched scenes.
 		// or it could have run in to the no-go-zone, in which case
-		// we don't want mover updating it to a new position.
-		// or else it may access objects which are not there.
-		// In both the above cases isStoppedForSwitch is true.
-		if(switcher.isStoppedForSwitch())
+		// we don't want any more updates. So we cancel immediately.
+		// This triggers onComplete
+		if(multiWalker.isStoppedForSwitch())
 		{
 			this.cancel();// process onComplete immediately
-			return;//prevent mover from executing.
 		}
-		scaler.onUpdateForScaler(progress);
-		mover.onUpdateCalculateForMover(progress, pt);
-		
 	}
 
 	@Override
-	protected boolean onCompleteGameAction() {
-		onUpdateGameAction(1.0);
-		// the next line is crucial because the previous line
-		// might have just switched scenes.
-		// If it has stopped? we still do mover.onCompleteForMover..
-		// which kist sets to initial. It doesn't update position.
-		// If scene has exited do we not do mover.onCompleteForMover
-		// because the Otids referred to in mover and switcher
-		// refer to objects in a scene that we've exited from.
-		boolean isExited = switcher.isExitedThruGate();
-		if(!isExited)
-		{
-			scaler.onCompleteForScaler();
-			mover.onCompleteForMover();
-			isExited = switcher.onCompleteForSwitch();
-		}
+	protected boolean onCompleteActionAndCheckForGateExit() {
+		
+		boolean isExited = multiWalker.onCompleteActionAndCheckForGateExit();
 		return isExited;
 	}
 
 	void setEndX(double endX) {
-		mover.setEndXForMover(endX);
-		switcher.setEndXForSwitch(endX);
+		multiWalker.setEndX(endX);
 	}
 
 	void setEndY(double endY) {
-		mover.setEndYForMover(endY);
-		switcher.setEndYForSwitch(endY);
+		multiWalker.setEndY(endY);
 	}
 }

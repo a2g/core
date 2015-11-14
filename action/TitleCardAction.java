@@ -55,7 +55,7 @@ public class TitleCardAction extends ChainableAction {
 	}
 
 	@Override
-	protected boolean onCompleteGameAction() {
+	protected boolean onCompleteActionAndCheckForGateExit() {
 		titleCard.displayTitleCard("");
 		return false;
 	}
