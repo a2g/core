@@ -3,6 +3,7 @@ package com.github.a2g.core.interfaces.internal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.a2g.core.objectmodel.PointFWithNeighbours;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.RectF;
 
@@ -29,5 +30,9 @@ public interface IBoundaryCalculator {
 	List<PointF> findPath(PointF rawStart, PointF rawEnd);
 
 	ArrayList<RectF> getObstacles();
+
+	List<PointF> getLastPath();
+
+	List<PointFWithNeighbours> getLastNetworkOfConcaveVertices();
 
 }

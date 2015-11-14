@@ -41,6 +41,7 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 import com.github.a2g.core.objectmodel.Image;
+import com.github.a2g.core.objectmodel.PointFWithNeighbours;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.internal.ICommandLinePresenterFromSceneMouseOver;
@@ -70,7 +71,7 @@ implements IScenePanelFromScenePresenter
 , ActionListener
 {
 	private static final Logger IMAGE_DUMP = Logger.getLogger(LogNames.IMAGE_DUMP);
-	
+
 	int width;
 	int height;
 	int tally;
@@ -110,31 +111,31 @@ implements IScenePanelFromScenePresenter
 
 		super.addMouseMotionListener
 		(
-			new SceneMouseOverHandler(this, bus, toScene, toCommandLine)
-		);
-		
+				new SceneMouseOverHandler(this, bus, toScene, toCommandLine)
+				);
+
 		InputMap im = getInputMap(JComponent.WHEN_FOCUSED);
-        ActionMap am = getActionMap();
+		ActionMap am = getActionMap();
 
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "onEnter");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "onEnter");
 
-        am.put("onEnter", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	isRenderBoundary = !isRenderBoundary;
-            	// this is only hit with a setfocus in paint, ie:
-            	// public void paint(Graphics g)
-            	//{
-            	//  this.requestFocus();
-            	ListIterator<Image> im = listOfAllVisibleImages.listIterator();
-            	 
-                while(im.hasNext())
-                {
-                	Image i = im.next();
-                	IMAGE_DUMP.log(Level.FINE, "image" +i.getAtid());
-                }
-            }
-        });
+		am.put("onEnter", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				isRenderBoundary = !isRenderBoundary;
+				// this is only hit with a setfocus in paint, ie:
+				// public void paint(Graphics g)
+				//{
+				//  this.requestFocus();
+				ListIterator<Image> im = listOfAllVisibleImages.listIterator();
+
+				while(im.hasNext())
+				{
+					Image i = im.next();
+					IMAGE_DUMP.log(Level.FINE, "image" +i.getAtid());
+				}
+			}
+		});
 	}
 
 
@@ -263,24 +264,24 @@ implements IScenePanelFromScenePresenter
 				int leftTopPlusX = p.getX();
 				int leftTopPlusY = p.getY();
 
-				
+
 				// img - the specified image to be drawn. This method does nothing if img is null.
 				// sx1 - the x coordinate of the first corner of the source rectangle.
 				// sy1 - the y coordinate of the first corner of the source rectangle.
 				// sx2 - the x coordinate of the second corner of the source rectangle.
 				// sy2 - the y coordinate of the second corner of the source rectangle.
-			
+
 				// dx1 - the x coordinate of the first corner of the destination rectangle.
 				// dy1 - the y coordinate of the first corner of the destination rectangle.
 				// dx2 - the x coordinate of the second corner of the destination rectangle.
 				// dy2 - the y coordinate of the second corner of the destination rectangle.
-				
+
 				// source coords: these are correct. don't change.
 				int sx1 = 0;
 				int sy1 = 0;
 				int sx2 = getImageWidth(image);
 				int sy2 = getImageHeight(image);
-				
+
 				// these are also correct, the real question
 				// lies in what is leftTopPlusY
 				// these are set with SetThingPosition
@@ -293,37 +294,79 @@ implements IScenePanelFromScenePresenter
 		}
 		//System.out.println("printed with tally " + tally +" draws "+ draws);
 		tally=0;
-		
+
 		if(isRenderBoundary)
 		{
 			g.setColor(new Color(255,0,0));
 			// connect all the points in a big line
+			List<RectF> obstacles = toScene.getObstacles();
 			List<PointF> points = toScene.getBoundaryPoints();
+			PointF centre = toScene.getBoundaryPointsCentre();
+			List<PointF> path = toScene.getLastPath();
+
 			int size = points.size();
 			PointF lastPt = points.get(size-1);
+
+			// draw boundary points
 			for(int i=0; i<size; i++)
 			{
 				PointF newPt = points.get(i);
-				
 				drawLine(newPt, lastPt, g);
 				lastPt = newPt;
-				
 			}
-			
-			List<RectF> obstacles = toScene.getObstacles();
-			for(int i=0;i<obstacles.size();i++)
+
+			// draw obstacles
+			if(false)
 			{
-				RectF rect = obstacles.get(i);
-				drawLine(rect.getTopLeft(), rect.getTopRight(), g);
-				drawLine(rect.getTopRight(), rect.getBottomRight(), g);
-				drawLine(rect.getBottomRight(), rect.getBottomLeft(), g);
-				drawLine(rect.getBottomLeft(), rect.getTopLeft(), g);
+				g.setColor(new Color(0,0,255));
+				for(int i=0;i<obstacles.size();i++)
+				{
+					RectF rect = obstacles.get(i);
+					drawLine(rect.getTopLeft(), rect.getTopRight(), g);
+					drawLine(rect.getTopRight(), rect.getBottomRight(), g);
+					drawLine(rect.getBottomRight(), rect.getBottomLeft(), g);
+					drawLine(rect.getBottomLeft(), rect.getTopLeft(), g);
+				}
 			}
-			
-			PointF c = toScene.getBoundaryPointsCentre();
-			g.drawOval((int)(c.getX()*width), (int)(c.getY()*height), 3, 3);
-			
-			
+
+			// draw network
+			g.setColor(Color.red);
+			PointF rawStart = new PointF(0,.1); 
+			PointF rawEnd = new PointF(.9,.9);
+
+			List<PointFWithNeighbours> verts = toScene.getLastNetworkOfConcaveVertices();
+			if(verts!=null)
+			{
+				for(int i=0;i<verts.size();i++)
+				{
+					PointFWithNeighbours a = verts.get(i); 
+
+					Iterator<PointFWithNeighbours> it = a.getNeighbours();
+					while(it.hasNext())
+					{
+						PointFWithNeighbours b = it.next();
+						drawLine(a,b,g);
+					}
+				}
+			}
+
+			// draw solution
+			g.setColor(new Color(0,255,0));
+			if(path!=null)
+			{
+				PointF first = path.get(0);
+				for(int i=1;i<path.size();i++)
+				{
+					PointF second = path.get(i);
+					drawLine(first,second,g);
+					first = second;
+				}
+			}
+
+
+			g.drawOval((int)(centre.getX()*width), (int)(centre.getY()*height), 3, 3);
+
+
 		}
 
 	}
@@ -409,12 +452,12 @@ implements IScenePanelFromScenePresenter
 	@Override
 	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
 			String speech, Rect pixels, Point mouth, TalkPerformer sayAction) {
-		
+
 		this.speechPopup.setVisible(isVisible);
 		this.speechPopup.setColor(talkingColor);
 		this.speechPopup.setText(speech);
 		this.speechPopup.setPopupPosition(pixels.getLeft(), pixels.getTop());
-		
+
 	}
 
 
@@ -423,7 +466,7 @@ implements IScenePanelFromScenePresenter
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 

@@ -1,7 +1,7 @@
 package com.github.a2g.core.primitive;
 
 public interface LogNames {
-	String MOVE = "MOVE";
+	String MOVE_PERFORMER = "MOVE";
 	String LOADING = "Loading";
 	String LOADING_ANIM = "LOADING_ANIM";
 	String RUNNER = "RUNNER";
@@ -14,5 +14,9 @@ public interface LogNames {
 	String ACTIONS_AS_THEY_ARE_EXECUTED = "ACTIONS_EXECUTED";
 	String KEY_ENTRY = "KEY_ENTRY";
 	String ACTIONS_FLATTENED_B4_EXECUTION = "ACTIONS_FLATTENED_B4_EXECUTION";
-	String MULTI = "MULTI";
+	String WALK_MULTI_PERFORMER = "WALK_MULTI_PERFORMER";
+	String MULTIWALKER = "A";
+	String B = "B";
+	String C = "C";
+	String D = "D";
 }

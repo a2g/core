@@ -394,4 +394,17 @@ implements IScenePresenter
 		return boundaryCalculator.getObstacles();
 	}
 
+	@Override
+	public List<PointFWithNeighbours> getLastNetworkOfConcaveVertices() 
+	{
+		return boundaryCalculator.getLastNetworkOfConcaveVertices();
+	}
+	
+	
+
+	@Override
+	public List<PointF> getLastPath() {
+		return boundaryCalculator.getLastPath();
+	}
+
 };

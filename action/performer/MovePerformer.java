@@ -27,7 +27,7 @@ import com.github.a2g.core.primitive.PointF;
 
 public class MovePerformer implements IMovePerformer
 {	
-	private static final Logger MOVE = Logger.getLogger(LogNames.MOVE);
+	private static final Logger MOVE_PERFORMER = Logger.getLogger(LogNames.MOVE_PERFORMER);
 	
 	private IScenePresenterFromMovePerformer scene;
 
@@ -135,7 +135,7 @@ public class MovePerformer implements IMovePerformer
 		double y = this.startY + progress * (this.endY - this.startY);
 
 		//MOVE.log( Level.FINER, "walk to-mid {0} {1}", new Object[]{ x,y} );
-		MOVE.log( Level.FINER, "walk to-mid can add more detail here if in java");		
+		MOVE_PERFORMER.log( Level.FINER, "walk to-mid can add more detail here if in java");		
 		return new PointF(x,y);
 	}
 	

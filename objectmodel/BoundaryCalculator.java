@@ -36,6 +36,8 @@ implements Comparator<BoundaryCalculator.Gate>
 	private ArrayList<Gate> gates;
 	private ArrayList<RectF> obstacles; 
 	private PointF cachedCalculationOfCentre;
+	private List<PointF> lastPath;
+	private List<PointFWithNeighbours> lastNetworkOfConcaveVertices;
 
 	private static String TREAT_GATE_AS_POINT = "TREAT_GATE_AS_POINT";
 
@@ -285,7 +287,8 @@ implements Comparator<BoundaryCalculator.Gate>
 	public void finishedGateAndObstacleAdding() {
 
 	}
-
+ 
+	
 	public List<PointF> findPath(PointF rawStart, PointF rawEnd)
 	{
 		List<PointFWithNeighbours> verts = getNetworkOfConcaveVertices(rawStart, rawEnd);
@@ -310,10 +313,12 @@ implements Comparator<BoundaryCalculator.Gate>
 			list.add(start);
 			list.add(end);
 		}
+		
+		lastPath = list;
 
 		return list;
 	}
-
+	
 	public List<PointFWithNeighbours> getNetworkOfConcaveVertices(PointF rawStart, PointF rawEnd)
 	{
 		PointFWithNeighbours start = new PointFWithNeighbours(rawStart);
@@ -348,7 +353,8 @@ implements Comparator<BoundaryCalculator.Gate>
 				boolean isSecondSeeingFirst = true;
 				for(int k=0;k<obstacles.size();k++)
 				{
-					RectF smallOb = getSmallerSlightlyJumbledRect(obstacles.get(k));
+					RectF smallOb = getSmallerSlightlyJumbledRect(
+							obstacles.get(k));
 					if(IsLineSegmentIntersectingTheOtherOne(first, second, smallOb.getTopLeft(), smallOb.getTopRight()))
 					{
 						isSecondSeeingFirst = false;
@@ -381,6 +387,7 @@ implements Comparator<BoundaryCalculator.Gate>
 				}
 			}
 		}
+		lastNetworkOfConcaveVertices = concaveVertices;
 
 		return concaveVertices;
 
@@ -397,12 +404,12 @@ implements Comparator<BoundaryCalculator.Gate>
 		// inner rectangle differently, otherwise the line-of-sight line
 		// can, mathematically "thread the needle" between the two sides 
 		// that make up a corner of this rectangle, going in one corner..
-		// and out the other..and givingit a diagonal line of sight. we don't want that.
+		// and out the other..and giving it a diagonal line of sight. we don't want that.
 		// TODO: this can be unit tested.
-		double newWidth = rectF.getWidth()*.99;
-		double newHeight = rectF.getWidth()*.98;
+		double newWidth = rectF.getWidth()*.5;
+		double newHeight = rectF.getWidth()*.5;
 
-		return new RectF(center.getX()-newWidth/2, center.getY()-newHeight/2, newWidth, newHeight);
+		return new RectF(rectF.getLeft()+.01, rectF.getTop()+.01, rectF.getWidth()-.02, rectF.getHeight()-.01);
 	}
 
 
@@ -423,4 +430,15 @@ implements Comparator<BoundaryCalculator.Gate>
 	public ArrayList<RectF>  getObstacles() { 
 		return obstacles;
 	}
+	
+	public List<PointF> getLastPath()
+	{
+		return lastPath;
+	}
+
+	@Override
+	public List<PointFWithNeighbours> getLastNetworkOfConcaveVertices() {
+		return lastNetworkOfConcaveVertices;
+	}
+	
 }

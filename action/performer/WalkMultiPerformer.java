@@ -10,9 +10,11 @@ import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointF;
 
 public class WalkMultiPerformer {
-	private static final Logger MULTI2 = Logger.getLogger(LogNames.MULTI);
-	private static final Logger EXECUTED = Logger.getLogger(LogNames.ACTIONS_AS_THEY_ARE_EXECUTED);
-
+	private static final  Logger MULTIWALKER = Logger.getLogger(LogNames.MULTIWALKER);
+	private static final  Logger B = Logger.getLogger(LogNames.B);
+	private static final  Logger C = Logger.getLogger(LogNames.C);
+	private static final  Logger D = Logger.getLogger(LogNames.D);
+	
 	double startX;
 	double startY;
 	double endX;
@@ -106,6 +108,8 @@ public class WalkMultiPerformer {
 
 	public void onUpdateGameAction(double progress) {
 
+
+		
 		// update text in bubble
 		for (int i = singleWalks.size() - 1; i >= 0; i--) {
 			// go backwards thru the loop to find text that should be valid
@@ -119,7 +123,7 @@ public class WalkMultiPerformer {
 				singleWalks.get(i).onUpdateGameAction(percent);
 				PointF from = singleWalks.get(i).mover.getStartPtForMover();
 				PointF to = singleWalks.get(i).mover.getEndPtForMover();
-				EXECUTED.log( Level.FINER, "{0} walk to-mid  from {1} {2} to {3} {4} {5}", new Object[]{i, from.getX(), from.getY(),to.getX(), to.getY(), percent} );
+				MULTIWALKER.log( Level.ALL, "{0} walk to-mid  from {1} {2} to {3} {4} {5}", new Object[]{i, from.getX(), from.getY(),to.getX(), to.getY(), percent} );
 				break;
 			}
 			else

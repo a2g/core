@@ -11,6 +11,7 @@ import com.github.a2g.core.interfaces.methods.action.IGetSceneObjectCount;
 import com.github.a2g.core.interfaces.methods.action.IGetVisibleByOtid;
 import com.github.a2g.core.interfaces.methods.action.IGetXByOtid;
 import com.github.a2g.core.interfaces.methods.action.IGetYByOtid; 
+import com.github.a2g.core.objectmodel.PointFWithNeighbours;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.RectF;
 
@@ -32,4 +33,6 @@ IGetYByOtid
 	ArrayList<PointF> getBoundaryPoints();
 	PointF getBoundaryPointsCentre();
 	List<RectF> getObstacles();
+	List<PointFWithNeighbours> getLastNetworkOfConcaveVertices();
+	List<PointF> getLastPath();
 }

@@ -33,7 +33,7 @@ import com.google.gwt.event.shared.EventBus;
 
 public class CommandLinePresenter implements ExecuteCommandEventHandlerAPI,
 SetRolloverEventHandlerAPI, ICommandLinePresenter {
-	private static final Logger COMMAND_MANUAL = Logger.getLogger(LogNames.COMMANDS_VIA_GUI);
+	private static final Logger COMMANDS_VIA_GUI = Logger.getLogger(LogNames.COMMANDS_VIA_GUI);
 
 	private IMasterPresenterFromCommandLine api;
 	private ICommandLinePanelFromCommandLinePresenter view;
@@ -84,7 +84,7 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 			return false;
 
 		if (isOkToExecute()) {
-			COMMAND_MANUAL.log(Level.FINE, "OnExecuteCommand::execute "+model.getSentence().getDisplayName());
+			COMMANDS_VIA_GUI.log(Level.FINE, "OnExecuteCommand::execute "+model.getSentence().getDisplayName());
 			this.execute(x, y);
 			return true;
 		}

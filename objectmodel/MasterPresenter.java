@@ -72,8 +72,8 @@ IMasterPresenterFromTitleCard,
 PropertyChangeEventHandlerAPI
 {
 	private static final Logger LOADING = Logger.getLogger(LogNames.LOADING);
-	private static final Logger COMMAND_AUTOPLAY = Logger.getLogger(LogNames.COMMANDS_AUTOPLAY);
-	private static final Logger ACTIONS_EXECUTED = Logger.getLogger(LogNames.ACTIONS_AS_THEY_ARE_EXECUTED);
+	private static final Logger COMMANDS_AUTOPLAY = Logger.getLogger(LogNames.COMMANDS_AUTOPLAY);
+	private static final Logger ACTIONS_AS_THEY_ARE_EXECUTED = Logger.getLogger(LogNames.ACTIONS_AS_THEY_ARE_EXECUTED);
 
 	MasterProxyForGameScene proxyForGameScene;
 	private CommandLinePresenter commandLinePresenter;
@@ -783,20 +783,20 @@ PropertyChangeEventHandlerAPI
 					cancelAutoplay(cmd, "Invalid branch number");
 					return;
 				}
-				COMMAND_AUTOPLAY.log(Level.FINE, "DIALOG "+branchId+" "+dialogTreePresenter.getLineOfDialogForId(branchId));
+				COMMANDS_AUTOPLAY.log(Level.FINE, "DIALOG "+branchId+" "+dialogTreePresenter.getLineOfDialogForId(branchId));
 				saySpeechAndThenExecuteBranchWithBranchId(branchId);
 			}
 			else if(cmd.getVerb()==ConstantsForAPI.SLEEP)
 			{
 				// SLEEP = sleep for 100ms
 				BaseAction sleep = MatOps.createChainRootAction().sleep(cmd.getInt1());
-				COMMAND_AUTOPLAY.log(Level.FINE, "SLEEP "+cmd.getInt1());
+				COMMANDS_AUTOPLAY.log(Level.FINE, "SLEEP "+cmd.getInt1());
 				executeActionWithDoCommandActionRunner(sleep);
 			} 
 			else if(cmd.getVerb()==ConstantsForAPI.SWITCH)
 			{
 				BaseAction switchTo = MatOps.createChainRootAction().switchTo(cmd.getString());
-				COMMAND_AUTOPLAY.log(Level.FINE, "SWITCH "+cmd.getString());
+				COMMANDS_AUTOPLAY.log(Level.FINE, "SWITCH "+cmd.getString());
 				executeActionWithDoCommandActionRunner(switchTo);
 			}
 			else if(mode==GuiStateEnum.DialogTree)
@@ -806,7 +806,7 @@ PropertyChangeEventHandlerAPI
 			}
 			else
 			{
-				COMMAND_AUTOPLAY.log(Level.FINE,"autoplay " +cmd.getVerbAsString()+" "+getSIOfObject(cmd.getInt1()).getDisplayName()+ " "+ getSIOfObject(cmd.getInt2()).getDisplayName());
+				COMMANDS_AUTOPLAY.log(Level.FINE,"autoplay " +cmd.getVerbAsString()+" "+getSIOfObject(cmd.getInt1()).getDisplayName()+ " "+ getSIOfObject(cmd.getInt2()).getDisplayName());
 
 				this.commandLinePresenter.setVerbItemItem(getSIOfVerb(cmd.getVerb()), getSIOfObject(cmd.getInt1()), getSIOfObject(cmd.getInt2()));
 
@@ -840,7 +840,7 @@ PropertyChangeEventHandlerAPI
 
 	@Override
 	public void actionChainFinished(int id) {
-		ACTIONS_EXECUTED.fine("-------------------------------------actionChainFinished!");
+		ACTIONS_AS_THEY_ARE_EXECUTED.fine("-------------------------------------actionChainFinished!");
 		if(id==2)// this used to be id==2, but will leave until this yields bugs
 		{
 			if(this.dialogTreePresenter.getNumberOfVisibleBranches()==0)
