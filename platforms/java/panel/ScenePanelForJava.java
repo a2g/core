@@ -295,14 +295,16 @@ implements IScenePanelFromScenePresenter
 		//System.out.println("printed with tally " + tally +" draws "+ draws);
 		tally=0;
 
-		if(isRenderBoundary)
+		// connect all the points in a big line
+		List<RectF> obstacles = toScene.getObstacles();
+		List<PointF> points = toScene.getBoundaryPoints();
+		PointF centre = toScene.getBoundaryPointsCentre();
+		List<PointF> path = toScene.getLastPath();
+
+		if(isRenderBoundary && points.size()>0)
 		{
 			g.setColor(new Color(255,0,0));
-			// connect all the points in a big line
-			List<RectF> obstacles = toScene.getObstacles();
-			List<PointF> points = toScene.getBoundaryPoints();
-			PointF centre = toScene.getBoundaryPointsCentre();
-			List<PointF> path = toScene.getLastPath();
+
 
 			int size = points.size();
 			PointF lastPt = points.get(size-1);
