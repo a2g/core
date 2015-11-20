@@ -66,7 +66,7 @@ public class WalkMaybeSwitchAction extends ChainEndAction
 		// or it could have run in to the no-go-zone, in which case
 		// we don't want any more updates. So we cancel immediately.
 		// This triggers onComplete
-		if(multiWalker.isStoppedForSwitch())
+		if(multiWalker.isCancelNeededDueToGateOrNoGoZone())
 		{
 			this.cancel();// process onComplete immediately
 		}

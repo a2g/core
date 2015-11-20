@@ -62,7 +62,7 @@ public class MoveMaybeSwitchWhilstAnimatingAction extends ChainEndAction{
 	protected void onUpdateGameAction(double progress) {
 		PointF pt = mover.onUpdateCalculateForMover(progress);
 		switcher.onUpdateForSwitch(progress);
-		if(switcher.isStoppedForSwitch())
+		if(switcher.isInANoGoZone())
 			return;
 		mover.onUpdateCalculateForMover(progress, pt);
 	}

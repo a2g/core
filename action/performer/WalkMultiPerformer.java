@@ -26,7 +26,7 @@ public class WalkMultiPerformer {
 	private short ocode; 
 	private String otid;
 	private boolean isSetToInitialAtEnd;
-	private boolean isStoppedForSwitch; 
+	private boolean isCancelNeededDueToGateOrNoGoZone; 
 	private boolean isToUseSwitchForChildren;
 	
 	public enum NonIncrementing {
@@ -40,7 +40,7 @@ public class WalkMultiPerformer {
 		this.startY = Double.NaN;
 		this.startScale = 1.0;
 		this.endScale = 1.0;
-		this.isStoppedForSwitch = false;
+		this.isCancelNeededDueToGateOrNoGoZone = false;
 		this.isToUseSwitchForChildren = isToUseSwitchForChildren;
 		this.ocode = ocode; 
 		this.otid = "";
@@ -130,8 +130,8 @@ public class WalkMultiPerformer {
 				double fullSegmentLength = endPercentageForWalk-startPercentageForWalk;
 				double percent = howFarInsideThisSegmentAreWe/fullSegmentLength;
 				singleWalks.get(i).onUpdateGameAction(percent);
-				if(singleWalks.get(i).isStoppedForSwitch())
-					isStoppedForSwitch = true;
+				if(singleWalks.get(i).isCancelNeededDueToGateOrNoGoZone())
+					isCancelNeededDueToGateOrNoGoZone = true;
 				PointF from = singleWalks.get(i).mover.getStartPtForMover();
 				PointF to = singleWalks.get(i).mover.getEndPtForMover();
 				MULTIWALKER.log( Level.ALL, "{0} walk to-mid  from {1} {2} to {3} {4} {5}", new Object[]{i, from.getX(), from.getY(),to.getX(), to.getY(), percent} );
@@ -158,8 +158,8 @@ public class WalkMultiPerformer {
 		isSetToInitialAtEnd = b;
 	}
 
-	public boolean isStoppedForSwitch() {
-		return isStoppedForSwitch;
+	public boolean isCancelNeededDueToGateOrNoGoZone() {
+		return isCancelNeededDueToGateOrNoGoZone;
 	}
 
 

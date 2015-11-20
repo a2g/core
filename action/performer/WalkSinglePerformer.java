@@ -35,8 +35,7 @@ public class WalkSinglePerformer
 	IMovePerformer mover;
 	ISwitchPerformer switcher;
 	IWalkPerformer walker;
-	IScalePerformer scaler;
-	private boolean isStoppedForSwitch;
+	IScalePerformer scaler; 
 
 	public WalkSinglePerformer(IMovePerformer m, IWalkPerformer w, ISwitchPerformer s, IScalePerformer sc) {
 		walker = w;
@@ -44,7 +43,6 @@ public class WalkSinglePerformer
 		mover = m;
 		scaler = sc;
 		mover.setToInitialAtEndForMover(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
-		isStoppedForSwitch = false;
 	}
  
 	public void setScene(IScenePresenterFromActions scene)
@@ -75,12 +73,14 @@ public class WalkSinglePerformer
 			// we don't want mover updating it to a new position.
 			// or else it may access objects which are not there.
 			// In both the above cases isStoppedForSwitch is true.
-			if(switcher.isStoppedForSwitch())
-			{
-				isStoppedForSwitch = true;//this.cancel();// process onComplete immediately
+			if(switcher.isInANoGoZone()||switcher.isExitedThruGate())
+			{ 
 				return;//prevent mover from executing.
 			}
+			
+			
 		}
+		
 		scaler.onUpdateForScaler(progress);
 		mover.onUpdateCalculateForMover(progress, pt);
 		walker.runForWalker(mover.getStartPtForMover(), mover.getEndPtForMover());
@@ -91,7 +91,7 @@ public class WalkSinglePerformer
 		// we need to add an ifStoppedForSwitch here, because
 		// cancel doesn't cancel straight away, but it calls
 		// onComplete...
-		if(isStoppedForSwitch)
+		if(switcher!=null && switcher.isExitedThruGate())
 			return true;
 		onUpdateGameAction(1.0);
 
@@ -102,16 +102,10 @@ public class WalkSinglePerformer
 		// If scene has exited do we not do mover.onCompleteForMover
 		// because the Otids referred to in mover and switcher
 		// refer to objects in a scene that we've exited from.
-		boolean isExited = switcher!=null? switcher.isExitedThruGate() : false;
-		if(!isExited)
-		{
+		if(switcher!=null && !switcher.isInANoGoZone())
 			scaler.onCompleteForScaler();
-			mover.onCompleteForMover();
-			if(switcher!=null)
-			{
-				isExited = switcher.onCompleteForSwitch();
-			}
-		}
+		mover.onCompleteForMover();
+		boolean isExited = switcher!=null? switcher.onCompleteForSwitch() : false; 
 		return isExited;
 
 	}
@@ -152,8 +146,8 @@ public class WalkSinglePerformer
 			switcher.setEndYForSwitch(endY);
 	}
 
-	public boolean isStoppedForSwitch() {
-		return isStoppedForSwitch;
+	public boolean isCancelNeededDueToGateOrNoGoZone() {
+		return (switcher!=null &&( switcher.isExitedThruGate() || switcher.isInANoGoZone()));
 	}
 	
 }

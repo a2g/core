@@ -32,7 +32,7 @@ public class SwitchPerformer implements ISwitchPerformer
 	private double startY;// set via setters
 
 
-	private boolean isStopped;
+	private boolean isInANoGoZone;
 	private boolean isExitedThruGate;
 
 	public SwitchPerformer(short ocode) {
@@ -42,7 +42,7 @@ public class SwitchPerformer implements ISwitchPerformer
 		this.endY = Double.NaN;
 		this.startX = Double.NaN;
 		this.startY = Double.NaN;
-		this.isStopped = false;
+		this.isInANoGoZone = false;
 		this.isExitedThruGate = false;
 	}
 
@@ -101,7 +101,7 @@ public class SwitchPerformer implements ISwitchPerformer
 
 	@Override
 	public void onUpdateForSwitch(double progress) {
-		if (isStopped)
+		if (isInANoGoZone)
 			return;
 		if (progress > 0 && progress < 1) {
 
@@ -117,7 +117,7 @@ public class SwitchPerformer implements ISwitchPerformer
 			// we don't keep letting the animation try all the points
 			// on the line to it's target, because
 			// some of these will also be behind some other gate.
-			isStopped = true;
+			isInANoGoZone = true;
 			
 			// if in a nogozone in the middle of moving
 			// then the delta(inx,y) may be small enough
@@ -133,9 +133,9 @@ public class SwitchPerformer implements ISwitchPerformer
 	public boolean onCompleteForSwitch() { 
 		
 		if (scene.isInANoGoZone(new PointF(endX, endY))) {
-			if(!isStopped)
+			if(!isInANoGoZone)
 			{
-				isStopped = true;
+				isInANoGoZone = true;
 				isExitedThruGate = scene.doSwitchIfBeyondGate(new PointF(endX, endY));
 			}
 		}
@@ -148,8 +148,8 @@ public class SwitchPerformer implements ISwitchPerformer
 	}
 
 	@Override
-	public boolean isStoppedForSwitch() {
-		return isStopped;
+	public boolean isInANoGoZone() {
+		return isInANoGoZone;
 	}
 	@Override
 	public boolean isExitedThruGate()

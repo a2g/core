@@ -25,7 +25,7 @@ public interface ISwitchPerformer{
 
 	void runForSwitch();
 
-	boolean isStoppedForSwitch();
+	boolean isInANoGoZone();
 
 	void setEndXForSwitch(double endX);
 
