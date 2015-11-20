@@ -93,6 +93,8 @@ public class WalkMultiPerformer {
 			k.setStartY(startPoint.getY());
 			k.setEndX(endPoint.getX());
 			k.setEndY(endPoint.getY());
+			k.setStartScale(startScale);
+			k.setEndScale(endScale);
 			k.setToInitialAtEnd(false);
 			double duration = k.getRunningDuration();
 			totalDuration+=duration;
