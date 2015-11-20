@@ -41,7 +41,7 @@ extends JPanel implements ITitleCardPanelFromTitleCardPresenter
 			panel = new Button();
 			panel.setFocusable(false);
 			panel.setBackground(new Color(back.r, back.g, back.b));
-			panel.setLabel("(text not set)");
+			panel.setLabel("(Title Card text not set)");
 			panel.setForeground(new Color(fore.r, fore.g, fore.b));
 			this.add(panel);
 		}

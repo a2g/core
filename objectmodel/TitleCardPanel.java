@@ -39,7 +39,7 @@ ITitleCardPanelFromTitleCardPresenter {
 			label.getElement().getStyle()
 			.setProperty("BackgroundColor", back.toString());
 
-			label.setText("Loading...");
+			label.setText("(Title Card text not set)");
 			layout.add(label);
 			layout.setWidgetLeftRight(label, 5, Unit.EM, 5, Unit.EM); // Center
 			// panel
