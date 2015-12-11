@@ -19,6 +19,7 @@ package com.github.a2g.core.action;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
 import com.github.a2g.core.action.performer.TalkPerformer;
+import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
 
 public abstract class DialogChainableAction extends DialogChainEndAction
@@ -107,6 +108,12 @@ implements IChainRootForDialog
 	@Override
 	public DialogChainableAction branchSticky(int branchId, boolean isOkToAdd, String text) {
 		DialogBranchAction a = new DialogBranchAction(this, text, branchId, isOkToAdd);
+		a.setIsExemptFromSaidList(true);
+		return a;
+	}
+	@Override
+	public DialogChainEndAction branchTheObligatoryExit(String text) {
+		DialogBranchAction a = new DialogBranchAction(this, text, ConstantsForAPI.EXIT_DLG, true);
 		a.setIsExemptFromSaidList(true);
 		return a;
 	}

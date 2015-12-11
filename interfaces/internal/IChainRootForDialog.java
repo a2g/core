@@ -19,4 +19,5 @@ public interface IChainRootForDialog {
 	DialogChainEndAction  switchTo(String string);
 	DialogChainableAction branchSticky(int branchId, String text) ;
 	DialogChainEndAction branchSticky(int nativ2, boolean b, String string);
+	DialogChainEndAction branchTheObligatoryExit(String string);
 }

@@ -77,7 +77,7 @@ implements IScenePanelFromScenePresenter
 	int tally;
 	int cameraOffsetX;
 	int cameraOffsetY;
-	boolean isRenderBoundary;
+	boolean isRenderDiagnostics;
 	IScenePresenterFromScenePanel toScene;
 	ICommandLinePresenterFromSceneMouseOver toCommandLine;
 
@@ -88,7 +88,7 @@ implements IScenePanelFromScenePresenter
 
 	public ScenePanelForJava(EventBus bus, IScenePresenterFromScenePanel toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine)
 	{
-		isRenderBoundary = true;
+		isRenderDiagnostics = false;
 		this.speechPopup = new PopupPanelForJava(toScene);
 		this.toScene = toScene;
 		this.toCommandLine = toCommandLine;
@@ -122,7 +122,7 @@ implements IScenePanelFromScenePresenter
 		am.put("onEnter", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				isRenderBoundary = !isRenderBoundary;
+				isRenderDiagnostics = !isRenderDiagnostics;
 				// this is only hit with a setfocus in paint, ie:
 				// public void paint(Graphics g)
 				//{
@@ -301,7 +301,7 @@ implements IScenePanelFromScenePresenter
 		PointF centre = toScene.getBoundaryPointsCentre();
 		List<PointF> path = toScene.getLastPath();
 
-		if(isRenderBoundary && points.size()>0)
+		if(isRenderDiagnostics && points.size()>0)
 		{
 			g.setColor(new Color(255,0,0));
 
