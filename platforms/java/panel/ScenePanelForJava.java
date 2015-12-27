@@ -23,7 +23,6 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -88,7 +87,7 @@ implements IScenePanelFromScenePresenter
 
 	public ScenePanelForJava(EventBus bus, IScenePresenterFromScenePanel toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine)
 	{
-		isRenderDiagnostics = false;
+		isRenderDiagnostics = true;
 		this.speechPopup = new PopupPanelForJava(toScene);
 		this.toScene = toScene;
 		this.toCommandLine = toCommandLine;
@@ -285,8 +284,8 @@ implements IScenePanelFromScenePresenter
 				// these are also correct, the real question
 				// lies in what is leftTopPlusY
 				// these are set with SetThingPosition
-				int dx1 = (int)(leftTopPlusX);
-				int dy1 = (int)(leftTopPlusY);
+				int dx1 = (int)(leftTopPlusX)-cameraOffsetX;
+				int dy1 = (int)(leftTopPlusY)-cameraOffsetY;
 				int dx2 = (int)(dx1 + sx2*image.getScale());
 				int dy2 = (int)(dy1 + sy2*image.getScale());
 				g.drawImage(((ImageForJava)image).getNativeImage(),  dx1,  dy1,  dx2,  dy2,  sx1,  sy1,  sx2,  sy2, this);
@@ -318,7 +317,7 @@ implements IScenePanelFromScenePresenter
 			}
 
 			// draw obstacles
-			if(false)
+			if(true)
 			{
 				g.setColor(new Color(0,0,255));
 				for(int i=0;i<obstacles.size();i++)
@@ -328,13 +327,13 @@ implements IScenePanelFromScenePresenter
 					drawLine(rect.getTopRight(), rect.getBottomRight(), g);
 					drawLine(rect.getBottomRight(), rect.getBottomLeft(), g);
 					drawLine(rect.getBottomLeft(), rect.getTopLeft(), g);
-				}
+				} 
 			}
 
 			// draw network
 			g.setColor(Color.red);
-			PointF rawStart = new PointF(0,.1); 
-			PointF rawEnd = new PointF(.9,.9);
+			//PointF rawStart = new PointF(0,.1); 
+			//PointF rawEnd = new PointF(.9,.9);
 
 			List<PointFWithNeighbours> verts = toScene.getLastNetworkOfConcaveVertices();
 			if(verts!=null)
