@@ -399,7 +399,7 @@ implements Comparator<BoundaryCalculator.Gate>
 		// we need to return a slightly smaller rectangle for boundary testing.
 		// otherwise there will seem like the corners of the rect can see their
 		// opposite corner, and add them as a neighbour.
-		PointF center = rectF.getCenter(); 
+		//PointF center = rectF.getCenter(); 
 
 		// even more interesting is that we have to scale the dimensions of this
 		// inner rectangle differently, otherwise the line-of-sight line
@@ -407,8 +407,8 @@ implements Comparator<BoundaryCalculator.Gate>
 		// that make up a corner of this rectangle, going in one corner..
 		// and out the other..and giving it a diagonal line of sight. we don't want that.
 		// TODO: this can be unit tested.
-		double newWidth = rectF.getWidth()*.5;
-		double newHeight = rectF.getWidth()*.5;
+		//double newWidth = rectF.getWidth()*.5;
+		//double newHeight = rectF.getWidth()*.5;
 
 		return new RectF(rectF.getLeft()+.01, rectF.getTop()+.01, rectF.getWidth()-.02, rectF.getHeight()-.01);
 	}

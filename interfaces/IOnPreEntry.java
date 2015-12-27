@@ -21,10 +21,11 @@ import com.github.a2g.core.interfaces.methods.game.IAddBoundaryPoint;
 import com.github.a2g.core.interfaces.methods.game.IAddObstacleRect;
 import com.github.a2g.core.interfaces.methods.game.IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
 import com.github.a2g.core.interfaces.methods.game.ICreateChainRootAction;
-import com.github.a2g.core.interfaces.methods.game.IDefaultSceneObject;
+import com.github.a2g.core.interfaces.methods.game.ISetDefaultSceneObject;
 import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleX;
 import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleY;
 import com.github.a2g.core.interfaces.methods.game.IGetCurrentScene;
+import com.github.a2g.core.interfaces.methods.game.IGetDefaultSceneObject;
 import com.github.a2g.core.interfaces.methods.game.IGetIsSayAlwaysWithoutIncrementing;
 import com.github.a2g.core.interfaces.methods.game.IGetLastScene;
 import com.github.a2g.core.interfaces.methods.game.IGetSceneGuiHeight;
@@ -127,12 +128,15 @@ ISetAnimationAsSceneTalker,
 ISetAnimationAsObjectCurrent,
 ISetAnimationDuration,
 ISetAnimationAsObjectSpecial,
-IDefaultSceneObject,
+ISetDefaultSceneObject,
 ISetAnimationAsObjectCurrentAndSetFrame,
 ISetAnimationAsSceneAsker,
 ISetAnimationAsSceneAnswerer,
-ISetAnimationMaxTalkRect
+ISetAnimationMaxTalkRect,
+IGetDefaultSceneObject
 {
+
+	
 
 }
 

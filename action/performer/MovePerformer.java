@@ -42,15 +42,15 @@ public class MovePerformer implements IMovePerformer
 	private boolean setToInitialAtEnd; // via setters
 
 	private int framesPlayedDuringMove;// set in runGameAction
-	
+	final private static double NAN = -1.1234578;
 	public MovePerformer(short ocode) 
 	{
 		this.ocode = ocode;
 		this.animatingDelay = 0;
 		this.endX = Double.NaN;
 		this.endY = Double.NaN;
-		this.startX = Double.NaN;
-		this.startY = Double.NaN;
+		this.startX = NAN;
+		this.startY = NAN;
 		this.isBackwards = false;
 		this.setToInitialAtEnd = false;
 	}
@@ -85,11 +85,10 @@ public class MovePerformer implements IMovePerformer
 	@Override
 	public double getRunningDurationForMover() {
 		String otid =  scene.getOtidByCode(ocode);
-		
 		String atid = scene.getAtidOfCurrentAnimationByOtid(otid);
-		if(startX==Double.NaN)
+		if(startX==NAN)
 			startX = scene.getBaseMiddleXByOtid(otid);
-		if(startY==Double.NaN)
+		if(startY==NAN)
 			startY = scene.getBaseMiddleYByOtid(otid);
 
 		if (endX == Double.NaN)

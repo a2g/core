@@ -20,7 +20,7 @@ import com.github.a2g.core.interfaces.methods.game.IAddBoundaryGate;
 import com.github.a2g.core.interfaces.methods.game.IAddBoundaryPoint;
 import com.github.a2g.core.interfaces.methods.game.IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
 import com.github.a2g.core.interfaces.methods.game.ICreateChainRootAction;
-import com.github.a2g.core.interfaces.methods.game.IDefaultSceneObject;
+import com.github.a2g.core.interfaces.methods.game.ISetDefaultSceneObject;
 import com.github.a2g.core.interfaces.methods.game.IGetAnimationLastFrame;
 import com.github.a2g.core.interfaces.methods.game.IGetAnimationLength;
 import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleX;
@@ -95,7 +95,7 @@ IGetCurrentAnimation,
 IGetCurrentFrame,
 ISetCurrentFrame,
 ISetDisplayName,
-IDefaultSceneObject,
+ISetDefaultSceneObject,
 
 // animation
 IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation,

@@ -196,6 +196,17 @@ IOnMovementBeyondAGate {
 		master.getScenePresenter().setOtidOfDefaultSceneObject(otid);
 
 	}
+	
+	@Override
+	public short getDefaultSceneObject() {
+		String otid = master.getScenePresenter().getOtidOfDefaultSceneObject();
+		if(otid.length()>0 && otid.length()<70)
+		{
+			short ocode = master.getScenePresenter().getCodeByOtid(otid);
+			return ocode;
+		}
+		return 0;
+	}
 
 	// /@}
 
@@ -229,8 +240,8 @@ IOnMovementBeyondAGate {
 
 	@Override
 	public void setInventoryItemDisplayName(int icode, String displayName) {
-		master.getInventoryPresenter().getInventoryItemByICode(icode)
-		.setDisplayName(displayName);
+		InventoryItem i = master.getInventoryPresenter().getInventoryItemByICode(icode);
+		i.setDisplayName(displayName);
 
 	}
 
@@ -475,7 +486,6 @@ IOnMovementBeyondAGate {
 	@Override
 	public void setInventoryItemVisible(int icode, boolean isVisible) {
 		master.getInventoryPresenter().getInventoryItemByICode(icode).setVisible(isVisible);
-
 	}
 
 	@Override
@@ -527,5 +537,7 @@ IOnMovementBeyondAGate {
 		master.getScenePresenter().addObstacleRect(x, y, right, bottom);
 		
 	}
+
+	
 
 }

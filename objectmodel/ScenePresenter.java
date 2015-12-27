@@ -407,4 +407,8 @@ implements IScenePresenter
 		return boundaryCalculator.getLastPath();
 	}
 
+	public String getOtidOfDefaultSceneObject() {
+		return defaultSceneObjectOtid;
+	}
+
 };

@@ -271,7 +271,7 @@ public class SceneObject {
 		double bmx = worldToScreenX(rawX, screenPixelWidth,
 				getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
 				.getRight(),scale);
-
+		
 		return bmx;
 	}
 
