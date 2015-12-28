@@ -19,6 +19,7 @@ package com.github.a2g.core.platforms.java.panel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -85,6 +86,11 @@ implements IScenePanelFromScenePresenter
 	private LinkedList<Image> listOfAllVisibleImages;
 	private PopupPanelForJava speechPopup;
 
+	private boolean speechVisible;
+	private ColorEnum speechColor;
+	private String speechText;
+	private Rect speechRect;
+
 	public ScenePanelForJava(EventBus bus, IScenePresenterFromScenePanel toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine)
 	{
 		isRenderDiagnostics = true;
@@ -99,9 +105,15 @@ implements IScenePanelFromScenePresenter
 		this.setBounds(0,0,320,200);
 		this.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 		this.setDoubleBuffered(true);
+		this.speechVisible = false;
+		this.speechColor = ColorEnum.Navy;
+		this.speechText = "";
+		this.speechRect = null;
+
 		cameraOffsetX=0;
 		cameraOffsetY=0;
 		tally++;
+		
 
 		super.addMouseListener
 		(
@@ -299,6 +311,19 @@ implements IScenePanelFromScenePresenter
 		List<PointF> points = toScene.getBoundaryPoints();
 		PointF centre = toScene.getBoundaryPointsCentre();
 		List<PointF> path = toScene.getLastPath();
+		
+		
+		if(speechVisible)
+		{	
+			g.setColor(Color.white);
+			g.fillRect(speechRect.getLeft(), speechRect.getTop(), speechRect.getWidth()-1, speechRect.getHeight());
+			g.setColor(new Color(speechColor.r, speechColor.g, speechColor.b));
+			g.drawRect(speechRect.getLeft()+1, speechRect.getTop()+1, speechRect.getWidth()-3, speechRect.getHeight()-2);
+			g.drawRect(speechRect.getLeft(), speechRect.getTop(), speechRect.getWidth()-1, speechRect.getHeight());
+			g.setFont(new Font("Arial",Font.BOLD,12));
+			g.drawString(speechText, speechRect.getLeft()+4, speechRect.getTop()+speechRect.getHeight()/2);
+			//g.getFontMetrics()
+		}
 
 		if(isRenderDiagnostics && points.size()>0)
 		{
@@ -452,13 +477,18 @@ implements IScenePanelFromScenePresenter
 
 	@Override
 	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
-			String speech, Rect pixels, Point mouth, TalkPerformer sayAction) {
+			String speech, Rect pixels, Point mouth, TalkPerformer sayAction) 
+	{
+		this.speechVisible = isVisible;
+		this.speechColor = talkingColor;
+		this.speechText = speech;
+		this.speechRect = pixels;
 
-		this.speechPopup.setVisible(isVisible);
-		this.speechPopup.setColor(talkingColor);
-		this.speechPopup.setText(speech);
-		this.speechPopup.setPopupPosition(pixels.getLeft(), pixels.getTop());
-
+		//this.speechPopup.setVisible(isVisible);
+		//this.speechPopup.setColor(talkingColor);
+		//this.speechPopup.setText(speech);
+		//this.speechPopup.setPopupPosition(pixels.getLeft(), pixels.getTop());
+ 
 	}
 
 

@@ -288,8 +288,7 @@ implements Comparator<BoundaryCalculator.Gate>
 	public void finishedGateAndObstacleAdding() {
 
 	}
- 
-	
+ 	
 	public List<PointF> findPath(PointF rawStart, PointF rawEnd)
 	{
 		List<PointFWithNeighbours> verts = getNetworkOfConcaveVertices(rawStart, rawEnd);
