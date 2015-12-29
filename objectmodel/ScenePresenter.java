@@ -45,9 +45,10 @@ implements IScenePresenter
 	private double cameraX;
 	private double cameraY;
 
-	private String sceneTalkerAtid;
+	
 	private String defaultSceneObjectOtid;
 	private ColorEnum talkingColorForScene;
+	private String sceneTalkerAtid;
 	private String sceneAskerAtid;
 	private String sceneAnswererAtid;
 	private IMasterPresenterFromScenePresenter master;
@@ -106,6 +107,9 @@ implements IScenePresenter
 	public void clearEverythingExceptView() {
 
 		scene.objectCollection().clear();
+		this.sceneTalkerAtid = "";
+		this.sceneAskerAtid = "";
+		this.sceneAnswererAtid = "";
 	}
 
 	public void clearView()

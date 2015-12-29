@@ -85,7 +85,7 @@ implements Comparator<BoundaryCalculator.Gate>
 
 	public void addObstacleRect(double x, double y, double right, double bottom)
 	{
-		obstacles.add(new RectF(x,y,right-x,bottom-y));
+		obstacles.add(new RectF(x,y,right,bottom));
 	}
 
 
@@ -409,7 +409,7 @@ implements Comparator<BoundaryCalculator.Gate>
 		//double newWidth = rectF.getWidth()*.5;
 		//double newHeight = rectF.getWidth()*.5;
 
-		return new RectF(rectF.getLeft()+.01, rectF.getTop()+.01, rectF.getWidth()-.02, rectF.getHeight()-.01);
+		return new RectF(rectF.getLeft()+.01, rectF.getTop()+.01, rectF.getLeft()+.01+rectF.getWidth()-.02, rectF.getTop()+.01+rectF.getHeight()-.01);
 	}
 
 

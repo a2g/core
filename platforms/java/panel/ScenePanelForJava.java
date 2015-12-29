@@ -84,7 +84,7 @@ implements IScenePanelFromScenePresenter
 	private Map<Integer,Point> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages;
-	private PopupPanelForJava speechPopup;
+	//private PopupPanelForJava speechPopup;
 
 	private boolean speechVisible;
 	private ColorEnum speechColor;
@@ -94,7 +94,7 @@ implements IScenePanelFromScenePresenter
 	public ScenePanelForJava(EventBus bus, IScenePresenterFromScenePanel toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine)
 	{
 		isRenderDiagnostics = true;
-		this.speechPopup = new PopupPanelForJava(toScene);
+		//this.speechPopup = new PopupPanelForJava(toScene);
 		this.toScene = toScene;
 		this.toCommandLine = toCommandLine;
 		this.mapOfPointsByImage = new TreeMap<Integer, Point>();
@@ -313,17 +313,7 @@ implements IScenePanelFromScenePresenter
 		List<PointF> path = toScene.getLastPath();
 		
 		
-		if(speechVisible)
-		{	
-			g.setColor(Color.white);
-			g.fillRect(speechRect.getLeft(), speechRect.getTop(), speechRect.getWidth()-1, speechRect.getHeight());
-			g.setColor(new Color(speechColor.r, speechColor.g, speechColor.b));
-			g.drawRect(speechRect.getLeft()+1, speechRect.getTop()+1, speechRect.getWidth()-3, speechRect.getHeight()-2);
-			g.drawRect(speechRect.getLeft(), speechRect.getTop(), speechRect.getWidth()-1, speechRect.getHeight());
-			g.setFont(new Font("Arial",Font.BOLD,12));
-			g.drawString(speechText, speechRect.getLeft()+4, speechRect.getTop()+speechRect.getHeight()/2);
-			//g.getFontMetrics()
-		}
+		
 
 		if(isRenderDiagnostics && points.size()>0)
 		{
@@ -393,6 +383,18 @@ implements IScenePanelFromScenePresenter
 			g.drawOval((int)(centre.getX()*width), (int)(centre.getY()*height), 3, 3);
 
 
+		}
+		
+		if(speechVisible)
+		{	
+			g.setColor(Color.white);
+			g.fillRect(speechRect.getLeft(), speechRect.getTop(), speechRect.getWidth()-1, speechRect.getHeight());
+			g.setColor(new Color(speechColor.r, speechColor.g, speechColor.b));
+			g.drawRect(speechRect.getLeft()+1, speechRect.getTop()+1, speechRect.getWidth()-3, speechRect.getHeight()-2);
+			g.drawRect(speechRect.getLeft(), speechRect.getTop(), speechRect.getWidth()-1, speechRect.getHeight());
+			g.setFont(new Font("Arial",Font.BOLD,12));
+			g.drawString(speechText, speechRect.getLeft()+4, speechRect.getTop()+speechRect.getHeight()/2);
+			//g.getFontMetrics()
 		}
 
 	}

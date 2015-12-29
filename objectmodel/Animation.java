@@ -33,7 +33,7 @@ public class Animation {
 		this.durationInSeconds = 1.0;
 		this.ownerObject = ownerSceneObject;
 		this.atid = atid;
-		this.rectForMaxSpeechBalloon = new RectF(0,.25,1.0,.5);
+		this.rectForMaxSpeechBalloon = new RectF(0,.25,1.0,.75);
 		//give it  random color, to force us to commit, and not rely on default :)
 		this.talkingColor = ColorEnum.values()[(int)(Math.random()*ColorEnum.values().length)];
 	}

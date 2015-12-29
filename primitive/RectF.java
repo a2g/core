@@ -22,14 +22,11 @@ public class RectF {
 	private double right;
 	private double bottom;
 
-	public RectF(double x, double y, double width, double height) {
+	public RectF(double x, double y, double x2, double y2) {
 		this.left = x;
 		this.top = y;
-		this.right = x + width;
-		this.bottom = y + height;
-		if (bottom < 0) {
-			this.bottom = y + height;
-		}
+		this.right = x2;
+		this.bottom = y2;
 	}
 
 	public boolean contains(double x, double y) {
