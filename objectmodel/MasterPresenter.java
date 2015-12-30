@@ -75,7 +75,7 @@ PropertyChangeEventHandlerAPI
 	private static final Logger COMMANDS_AUTOPLAY = Logger.getLogger(LogNames.COMMANDS_AUTOPLAY);
 	private static final Logger ACTIONS_AS_THEY_ARE_EXECUTED = Logger.getLogger(LogNames.ACTIONS_AS_THEY_ARE_EXECUTED);
 
-	MasterProxyForGameScene proxyForGameScene;
+	AllGameMethods proxyForGameScene;
 	private CommandLinePresenter commandLinePresenter;
 	private InventoryPresenter inventoryPresenter;
 	private VerbsPresenter verbsPresenter;
@@ -101,7 +101,7 @@ PropertyChangeEventHandlerAPI
 	private String lastSceneAsString;
 	private String switchDestination;
 	private boolean isSayNonIncremementing;
-	private MasterProxyForActions proxyForActions;
+	private AllActionMethods proxyForActions;
 	private Map<String, ISound> mapOfSounds;
 	private boolean isAutoplayCancelled;
 
@@ -112,8 +112,8 @@ PropertyChangeEventHandlerAPI
 		this.timer = null;
 		this.switchTimer = null;
 		this.host = host;
-		this.proxyForGameScene = new MasterProxyForGameScene(this);
-		this.proxyForActions = new MasterProxyForActions(this);
+		this.proxyForGameScene = new AllGameMethods(this);
+		this.proxyForActions = new AllActionMethods(this);
 		this.insertionPointCalculator = new InsertionPointCalculator();
 		mapOfSounds = new TreeMap<String,ISound>();
 

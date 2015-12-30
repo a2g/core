@@ -15,13 +15,13 @@ import com.github.a2g.core.interfaces.IOnFillLoadList;
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.primitive.PointF;
 
-public class MasterProxyForActions implements IOnFillLoadList,
+public class AllActionMethods implements IOnFillLoadList,
 IMasterPresenterFromActions, IInventoryPresenterFromActions,
 IScenePresenterFromActions, IDialogTreePresenterFromActions,
 ITitleCardPresenterFromActions {
 	private MasterPresenter master;
 
-	MasterProxyForActions(MasterPresenter master) {
+	AllActionMethods(MasterPresenter master) {
 		this.master = master;
 	}
 
@@ -193,7 +193,7 @@ ITitleCardPresenterFromActions {
 	}
 
 	@Override
-	public void setStateOfPopup(String atid, boolean isVisible, String speech,
+	public void setStateOfPopup(boolean isVisible, String speech, String atid,
 			TalkPerformer sayAction) {
 		master.getScenePresenter().setStateOfPopup(atid, isVisible, speech,
 				sayAction);

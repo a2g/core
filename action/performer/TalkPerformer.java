@@ -132,7 +132,7 @@ public class TalkPerformer {
 		}
 
 		boolean visible = true;
-		scene.setStateOfPopup(atid, visible, speech.get(0), this);
+		scene.setStateOfPopup(visible, speech.get(0), atid, this);
 		return totalDurationInSeconds;
 	}
 
@@ -147,8 +147,8 @@ public class TalkPerformer {
 			for (int i = startingTimeForEachLine.size() - 1; i >= 0; i--) {
 				// go backwards thru the loop to find text that should be valid
 				if (progress > startingTimeForEachLine.get(i)) {
-					scene.setStateOfPopup(atid, true
-							, speech.get(i),
+					scene.setStateOfPopup(true, speech.get(i)
+							, atid,
 							null);
 					break;
 				}
@@ -176,7 +176,7 @@ public class TalkPerformer {
 			}
 		}
 
-		scene.setStateOfPopup(atid, false, "", null);
+		scene.setStateOfPopup(false, "", atid, null);
 		return false;
 	}
 
