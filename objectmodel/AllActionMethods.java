@@ -6,18 +6,17 @@ import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
-import com.github.a2g.core.interfaces.internal.ILoad;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
-import com.github.a2g.core.interfaces.IOnFillLoadList;
-import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.primitive.PointF;
 
-public class AllActionMethods implements IOnFillLoadList,
-IMasterPresenterFromActions, IInventoryPresenterFromActions,
-IScenePresenterFromActions, IDialogTreePresenterFromActions,
+public class AllActionMethods implements 
+IMasterPresenterFromActions, 
+IInventoryPresenterFromActions,
+IScenePresenterFromActions, 
+IDialogTreePresenterFromActions,
 ITitleCardPresenterFromActions {
 	private MasterPresenter master;
 
@@ -38,21 +37,8 @@ ITitleCardPresenterFromActions {
 				.getItid();
 	}
 
-	@Override
-	public IGameScene getSceneByName(Object string) {
-		return master.getSceneByName(string.toString());
-	}
+	
 
-	@Override
-	public void clearAllLoadedLoads() {
-		master.getLoaderPresenter().clearAllLoadedLoads();
-	}
-
-	@Override
-	public void setContinueAfterLoad(boolean isContinueImmediately) {
-		master.getLoaderPresenter().setContinueAfterLoad(isContinueImmediately);
-
-	}
 
 	@Override
 	public void setValue(Object name, int value) {
@@ -317,22 +303,13 @@ ITitleCardPresenterFromActions {
 
 
 
-	@Override
-	public void addEssential(ILoad blah) {
-		master.addEssential(blah);
-
-	}
 
 	@Override
 	public void setScenePixelSize(int width, int height) {
 		master.setScenePixelSize(width, height);
 	}
 
-	@Override
-	public void kickStartLoading() {
-		master.kickStartLoading();
-
-	}
+	
 
 	@Override
 	public boolean isSayNonIncrementing() {
@@ -363,10 +340,7 @@ ITitleCardPresenterFromActions {
 		return master.getSoundDurationByStid(stid);
 	}
 
-	@Override
-	public void addMP3ForASoundObject(String name, String location) {
-		master.addMP3ForASoundObject(name, location);
-	}
+	
 
 	@Override
 	public void stopSoundByStid(String stid) {
@@ -405,9 +379,5 @@ ITitleCardPresenterFromActions {
 
 		return master.getScenePresenter().findPath(rawStart, rawEnd);
 	}
-
-
-
-
 
 }
