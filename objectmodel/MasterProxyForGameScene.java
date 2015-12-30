@@ -18,18 +18,18 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.RectF;
 
 /** 
- * @author Admin
+ * @brief
  * The API wants to prevent specific calls from being called inside
  * the event handlers. As a result each handler has its own interface
  * which only exposes a subset of the methods below.
  * Use this class as the reference, and discover the methods which are
  * exposed by each event handler by clicking on the links below:
- * - @ref com.github.a2g.core.interfaces.IOnFillLoadList OnFillLoadList 
- * - @ref com::github::a2g::core::interfaces::IOnEntry OnEntry 
- * - @ref com.github.a2g.core.interfaces.IOnPreEntry OnPreEntry 
- * - @ref OnEveryFrame com.github.a2g.core.interfaces.IOnEveryFrame
- * - @ref OnDoCommand com.github.a2g.core.interfaces.IOnDoCommand
- * - @ref OnDoCommand com.github.a2g.core.interfaces.IOnDialogTree
+ * - @ref com.github.a2g.core.interfaces.IOnFillLoadList "OnFillLoadList" 
+ * - @ref com::github::a2g::core::interfaces::IOnEntry "OnEntry" 
+ * - @ref com.github.a2g.core.interfaces.IOnPreEntry "OnPreEntry" 
+ * - @ref com.github.a2g.core.interfaces.IOnEveryFrame "OnEveryFrame"
+ * - @ref com.github.a2g.core.interfaces.IOnDoCommand "OnDoCommand"
+ * - @ref com.github.a2g.core.interfaces.IOnDialogTree "OnDoCommand"
  * 
  * 
  */
