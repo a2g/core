@@ -19,18 +19,16 @@ import com.github.a2g.core.primitive.RectF;
 
 /** 
  * @brief
- * The API wants to prevent specific calls from being called inside
- * the event handlers. As a result each handler has its own interface
- * which only exposes a subset of the methods below.
- * Use this class as the reference, and discover the methods which are
- * exposed by each event handler by clicking on the links below:
- * - @ref com.github.a2g.core.interfaces.IOnFillLoadList "OnFillLoadList" 
- * - @ref com::github::a2g::core::interfaces::IOnEntry "OnEntry" 
- * - @ref com.github.a2g.core.interfaces.IOnPreEntry "OnPreEntry" 
- * - @ref com.github.a2g.core.interfaces.IOnEveryFrame "OnEveryFrame"
- * - @ref com.github.a2g.core.interfaces.IOnDoCommand "OnDoCommand"
- * - @ref com.github.a2g.core.interfaces.IOnDialogTree "OnDoCommand"
+ * These are all the game methods, but these methods may or may not be available
+ * on the interface for a specific handler. Check each interface individually:
+ * @ref com.github.a2g.core.interfaces.IOnFillLoadList "IOnFillLoadList" ,
+ * @ref com::github::a2g::core::interfaces::IOnEntry "IOnEntry" , 
+ * @ref com.github.a2g.core.interfaces.IOnPreEntry "IOnPreEntry" , 
+ * @ref com.github.a2g.core.interfaces.IOnEveryFrame "IOnEveryFrame" ,
+ * @ref com.github.a2g.core.interfaces.IOnDoCommand "IOnDoCommand" ,
+ * @ref com.github.a2g.core.interfaces.IOnDialogTree "IOnDoCommand" ,
  * 
+ * The API wants to prevent specific calls from being called inside the event handlers. As a result each handler has its own interface which only exposes a subset of the methods below. Use this class as the reference, and discover the methods which are exposed by each event handler by clicking on the links below:
  * 
  */
 public class MasterProxyForGameScene implements IOnFillLoadList, IOnEntry,
