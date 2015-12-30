@@ -27,6 +27,11 @@ import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneAsker;
 import com.github.a2g.core.interfaces.methods.game.ISetValue;
 import com.github.a2g.core.interfaces.methods.game.ISwitchToScene;
 
+/**  
+ * 
+ * @author Admin
+ *
+ */
 public interface IOnDialogTree extends
 // property access methods
 IGetValue, IIsTrue, ISetValue

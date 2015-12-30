@@ -9,7 +9,7 @@ import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IOnEntry;
 import com.github.a2g.core.interfaces.IOnEveryFrame;
 import com.github.a2g.core.interfaces.IOnFillLoadList;
-import com.github.a2g.core.interfaces.IOnMovementBeyondAGate;
+
 import com.github.a2g.core.interfaces.IOnPreEntry;
 import com.github.a2g.core.interfaces.internal.ILoad;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
@@ -17,10 +17,24 @@ import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.RectF;
 
-/** MasterProxyForGameScene */
+/** 
+ * @author Admin
+ * The API wants to prevent specific calls from being called inside
+ * the event handlers. As a result each handler has its own interface
+ * which only exposes a subset of the methods below.
+ * Use this class as the reference, and discover the methods which are
+ * exposed by each event handler by clicking on the links below:
+ * - @ref com.github.a2g.core.interfaces.IOnFillLoadList OnFillLoadList 
+ * - @ref com::github::a2g::core::interfaces::IOnEntry OnEntry 
+ * - @ref com.github.a2g.core.interfaces.IOnPreEntry OnPreEntry 
+ * - @ref OnEveryFrame com.github.a2g.core.interfaces.IOnEveryFrame
+ * - @ref OnDoCommand com.github.a2g.core.interfaces.IOnDoCommand
+ * - @ref OnDoCommand com.github.a2g.core.interfaces.IOnDialogTree
+ * 
+ * 
+ */
 public class MasterProxyForGameScene implements IOnFillLoadList, IOnEntry,
-IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree,
-IOnMovementBeyondAGate {
+IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	private MasterPresenter master;
 
 	MasterProxyForGameScene(MasterPresenter master) {
@@ -28,11 +42,13 @@ IOnMovementBeyondAGate {
 	}
 
 	/**
-	 * @name SceneObject Methods All these methods have an @ref ocode as the
-	 *       first parameter. Behind the scenes they act on a @ref SceneObject.
-	 *       Don't worry about getting any of the constants mixed up these scene
-	 *       object methods all takes shorts so they can't be used with the ids
-	 *       for Animations (Strings) and InventoryItems (ints).
+	 * @name SceneObject Methods 
+	 * These methods take an @ref ocode as the
+	 * first parameter. Behind the scenes they act on a @ref SceneObject.
+	 * Don't worry about getting any of the constants mixed up: these scene
+	 * object methods all takes parameters of type @b short so they 
+	 * can't be used with the ids for Animations (which are of type @b String) 
+	 * and InventoryItems (which are of type @b int).
 	 */
 
 	@Override
@@ -89,13 +105,6 @@ IOnMovementBeyondAGate {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid)
 		.setScreenCoordsPerSecond(coordsPerSecond);
-
-	}
-
-	@Override
-	public void setAnimationTalkingColor(String atid, ColorEnum red) {
-
-		master.getScenePresenter().getAnimationByAtid(atid).setTalkingColor(red);
 
 	}
 
@@ -211,12 +220,13 @@ IOnMovementBeyondAGate {
 	// /@}
 
 	/**
-	 * @name Inventory Methods All of these methods take an @ref icode as the
-	 *       first parameter. Behind the scenes they act on an @ref
-	 *       InventoryItem. Inventory item icodes don't work as parameters to
-	 *       the Object Methods, so you'll get a compiler warning. The inventory
-	 *       item methods are similarly named, but all have "InventoryItem" in
-	 *       their names.
+	 * @name InventoryItem Methods 
+	 * These methods take an @ref icode as the
+	 * first parameter. Behind the scenes they act on an @ref
+	 * InventoryItem. Inventory item icodes don't work as parameters to
+	 * the Object Methods, so you'll get a compiler warning. The inventory
+	 * item methods are similarly named, but all have "InventoryItem" in
+	 * their names.
 	 */
 	// /@{
 	@Override
@@ -244,15 +254,68 @@ IOnMovementBeyondAGate {
 		i.setDisplayName(displayName);
 
 	}
+	
+	@Override
+	public void setInventoryItemVisible(int icode, boolean isVisible) {
+		master.getInventoryPresenter().getInventoryItemByICode(icode).setVisible(isVisible);
+	}
+
+	@Override
+	public void hideAllInventory() {
+		master.getInventoryPresenter().hideAllInventory();
+	}
 
 	// /@}
 
 	/**
-	 * @name Animation Methods All these methods have an @ref atid as the first
-	 *       parameter. Behind the scenes they act on a @ref Animation, or a @ref
-	 *       SceneObject that owns it.
+	 * @name Animation Methods 
+	 * These methods have an @ref atid as the first
+	 * parameter. Behind the scenes they act on a @ref Animation, or a @ref
+	 * SceneObject that owns it.
 	 */
 	// /@{
+
+	public String getOtidByAtid(String atid) {
+		return master.getScenePresenter().getOtidByAtid(atid);
+	}
+	@Override
+	public void setAnimationMaxTalkRect(String atid, RectF rectF) {
+		master.getScenePresenter().getAnimationByAtid(atid).setMaxSpeechBalloonRect(rectF);
+
+	}
+
+	@Override
+	public void setStateOfPopup(String atid, boolean isVisible, String speech,
+			TalkPerformer sayAction) {
+		master.getScenePresenter().setStateOfPopup(atid, isVisible, speech, sayAction);
+
+	}
+
+	@Override
+	public void setAnimationAsObjectInitial(String atid) {
+		String otid = getOtidByAtid(atid);
+		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
+		object.setInitialAnimation(atid);
+
+	}
+
+	@Override
+	public void setAnimationAsSceneTalker(String atid) {
+		master.getScenePresenter().setSceneTalkerAtid(atid);
+
+	}
+
+	@Override
+	public void setAnimationAsSceneAnswerer(String atid) {
+		master.getScenePresenter().setSceneAnswererAtid(atid);
+
+	}
+
+	@Override
+	public void setAnimationAsSceneAsker(String atid) {
+		master.getScenePresenter().setSceneAskerAtid(atid);
+	}
+
 
 	@Override
 	public void setAnimationAsObjectSpecial(String atid, Special type) {
@@ -311,13 +374,22 @@ IOnMovementBeyondAGate {
 				.getCount();
 
 	}
+	
+
+	@Override
+	public void setAnimationTalkingColor(String atid, ColorEnum red) {
+
+		master.getScenePresenter().getAnimationByAtid(atid).setTalkingColor(red);
+
+	}
 
 	// /@}
 
 	/**
-	 * @name Verb Methods These items act on the @ref VerbsPresenter object
-	 *       Behind the scenes they act on a SceneObject. They all have "Verb"
-	 *       in their names.
+	 * @name Verb Methods 
+	 * These items act on the @ref VerbsPresenter object
+	 * Behind the scenes they act on a SceneObject. They all have "Verb"
+	 * in their names.
 	 */
 	// /@{
 	@Override
@@ -335,7 +407,8 @@ IOnMovementBeyondAGate {
 	// /@}
 
 	/**
-	 * @name General Methods These are a real mixed batch
+	 * @name General Methods 
+	 * These are a real mixed batch
 	 */
 	// /@{
 
@@ -358,16 +431,6 @@ IOnMovementBeyondAGate {
 	}
 
 	@Override
-	public IGameScene getSceneByName(Object string) {
-		return master.getSceneByName(string.toString());
-	}
-
-	@Override
-	public void setValue(Object key, int value) {
-		master.setValue(key, value);
-	}
-
-	@Override
 	public void clearAllLoadedLoads() {
 		master.clearAllLoadedLoads();
 	}
@@ -377,6 +440,10 @@ IOnMovementBeyondAGate {
 		master.setContinueAfterLoad(isContinueImmediately);
 	}
 
+	@Override
+	public void setValue(Object key, int value) {
+		master.setValue(key, value);
+	}
 	@Override
 	public int getValue(Object name) {
 		return master.getValue(name);
@@ -390,6 +457,11 @@ IOnMovementBeyondAGate {
 	@Override
 	public IGameScene getCurrentScene() {
 		return master.getCurrentScene();
+	}
+
+	@Override
+	public IGameScene getSceneByName(Object string) {
+		return master.getSceneByName(string.toString());
 	}
 
 	@Override
@@ -462,20 +534,7 @@ IOnMovementBeyondAGate {
 		master.executeChainedAction(ba);
 
 	}
-	// /@}
-
-	@Override
-	public void setAnimationMaxTalkRect(String atid, RectF rectF) {
-		master.getScenePresenter().getAnimationByAtid(atid).setMaxSpeechBalloonRect(rectF);
-
-	}
-
-	@Override
-	public void setStateOfPopup(String atid, boolean isVisible, String speech,
-			TalkPerformer sayAction) {
-		master.getScenePresenter().setStateOfPopup(atid, isVisible, speech, sayAction);
-
-	}
+	
 
 	@Override
 	public void displayTitleCard(String text) {
@@ -483,49 +542,13 @@ IOnMovementBeyondAGate {
 
 	}
 
-	@Override
-	public void setInventoryItemVisible(int icode, boolean isVisible) {
-		master.getInventoryPresenter().getInventoryItemByICode(icode).setVisible(isVisible);
-	}
 
 	@Override
 	public void addMP3ForASoundObject(String name, String location) {
 		master.addMP3ForASoundObject(name, location);
 
 	}
-	public String getOtidByAtid(String atid) {
-		return master.getScenePresenter().getOtidByAtid(atid);
-	}
 
-	@Override
-	public void setAnimationAsObjectInitial(String atid) {
-		String otid = getOtidByAtid(atid);
-		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
-		object.setInitialAnimation(atid);
-
-	}
-
-	@Override
-	public void setAnimationAsSceneTalker(String atid) {
-		master.getScenePresenter().setSceneTalkerAtid(atid);
-
-	}
-
-	@Override
-	public void setAnimationAsSceneAnswerer(String atid) {
-		master.getScenePresenter().setSceneAnswererAtid(atid);
-
-	}
-
-	@Override
-	public void setAnimationAsSceneAsker(String atid) {
-		master.getScenePresenter().setSceneAskerAtid(atid);
-	}
-
-	@Override
-	public void hideAllInventory() {
-		master.getInventoryPresenter().hideAllInventory();
-	}
 
 	@Override
 	public void setTitleCard(String titlecard) {
@@ -537,6 +560,10 @@ IOnMovementBeyondAGate {
 		master.getScenePresenter().addObstacleRect(x, y, right, bottom);
 		
 	}
+	// /@}
+
+
+
 
 	
 

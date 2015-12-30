@@ -58,6 +58,11 @@ import com.github.a2g.core.interfaces.methods.game.IShow;
 import com.github.a2g.core.interfaces.methods.game.IShowInventoryItem;
 import com.github.a2g.core.interfaces.methods.game.ISwitchToScene;
 
+/**  
+ * 
+ * @author Admin
+ *
+ */
 public interface IOnDoCommand
 extends
 // property access methods

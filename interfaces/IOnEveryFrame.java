@@ -49,6 +49,11 @@ import com.github.a2g.core.interfaces.methods.game.IShow;
 import com.github.a2g.core.interfaces.methods.game.ISwitchToScene;
 import com.github.a2g.core.interfaces.methods.game.IUpdateObjectToCorrectImage;
 
+/**  
+ * 
+ * @author Admin
+ *
+ */
 public interface IOnEveryFrame
 extends
 // property access methods

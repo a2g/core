@@ -37,7 +37,11 @@ import com.github.a2g.core.interfaces.methods.game.ISetBaseMiddleY;
 import com.github.a2g.core.interfaces.methods.game.ISetInventoryItemVisible;
 import com.github.a2g.core.interfaces.methods.game.ISetValue;
 import com.github.a2g.core.interfaces.methods.game.ISwitchToScene;
-
+/**  
+ * 
+ * @author Admin
+ *
+ */
 public interface IOnEntry
 extends
 // property access methods

@@ -18,6 +18,11 @@ package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.interfaces.internal.ILoad;
 
+/**  
+ * 
+ * @author Admin
+ *
+ */
 public class IOnFillLoadListImpl {
 	IOnFillLoadList implementation;
 

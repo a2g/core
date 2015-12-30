@@ -69,6 +69,11 @@ import com.github.a2g.core.interfaces.methods.game.IShowInventoryItem;
 import com.github.a2g.core.interfaces.methods.game.ISwitchToScene;
 import com.github.a2g.core.interfaces.methods.game.IUpdateVerbUI;
 
+/**  
+ * 
+ * @author Admin
+ *
+ */
 public interface IOnPreEntry
 extends
 // property access methods
