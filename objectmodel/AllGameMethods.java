@@ -291,24 +291,19 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	 * - ObjectCurrent - the currently active animation.
 	 */
 	// /@{
-	/**
-	 * Talker is used in @ref Scene interactions
-	 */
+
 	@Override
 	public void setAnimationAsSceneTalker(String atid) {
 		master.getScenePresenter().setSceneTalkerAtid(atid);
 	}
-	/**
-	 * Asker is used only in @ref DialogTree interactions
-	 */
+	
+	
 	@Override
 	public void setAnimationAsSceneAsker(String atid) {
 		master.getScenePresenter().setSceneAskerAtid(atid);
 	}
 
-	/**
-	 * Answerer is used only in @ref DialogTree interactions 
-	 */
+	
 	@Override
 	public void setAnimationAsSceneAnswerer(String atid) {
 		master.getScenePresenter().setSceneAnswererAtid(atid);
