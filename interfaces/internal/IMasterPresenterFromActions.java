@@ -16,6 +16,11 @@
 
 package com.github.a2g.core.interfaces.internal;
 
+/**  
+ * 
+ * @author Admin
+ *
+ */
 public interface IMasterPresenterFromActions
 extends IMasterPresenterFromTalkPerformer
 ,IMasterPresenterFromSoundAction

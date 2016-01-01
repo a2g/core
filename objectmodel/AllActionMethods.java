@@ -12,18 +12,43 @@ import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.github.a2g.core.primitive.PointF;
 
+/** 
+ * @brief
+ * These are all the action methods. They generally take text ids for everything,
+ * so that the actions are easier to debug:
+ * @ref com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions "IMasterPresenterFromActions", 
+ * @ref com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions "IInventoryPresenterFromActions",
+ * @ref com.github.a2g.core.interfaces.internal.IScenePresenterFromActions "IScenePresenterFromActions", 
+ * @ref com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions "IDialogTreePresenterFromActions",
+ * @ref com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions "ITitleCardPresenterFromActions"
+ * 
+ * The API wants to prevent specific calls from being called inside the event handlers. As a result each handler has its own interface which only exposes a subset of the methods below. Use this class as the reference, and discover the methods which are exposed by each event handler by clicking on the links below:
+ * 
+ */
 public class AllActionMethods implements 
 IMasterPresenterFromActions, 
 IInventoryPresenterFromActions,
 IScenePresenterFromActions, 
 IDialogTreePresenterFromActions,
-ITitleCardPresenterFromActions {
+ITitleCardPresenterFromActions 
+{
 	private MasterPresenter master;
 
-	AllActionMethods(MasterPresenter master) {
+	public AllActionMethods(MasterPresenter master) {
 		this.master = master;
 	}
 
+
+	/**
+	 * @name Inventory Methods 
+	 * These methods take an @ref ocode as the
+	 * first parameter. Behind the scenes they act on a @ref SceneObject.
+	 * Don't worry about getting any of the constants mixed up: these scene
+	 * object methods all takes parameters of type @b short so they 
+	 * can't be used with the ids for Animations (which are of type @b String) 
+	 * and InventoryItems (which are of type @b int).
+	 */
+	// /@{
 	@Override
 	public void setVisibleByItid(String itid, boolean isVisible) {
 		master.getInventoryPresenter().getInventory().items().getByItid(itid)
@@ -36,15 +61,77 @@ ITitleCardPresenterFromActions {
 		return master.getInventoryPresenter().getInventoryItemByICode(icode)
 				.getItid();
 	}
+	
+	// /@}
+	/**
+	 * @name Master Methods 
+	 */
+	// /@{
+
+
+
+	@Override
+	public void setScenePixelSize(int width, int height) {
+		master.setScenePixelSize(width, height);
+	}
 
 	
+	@Override
+	public void displayTitleCard(String text) {
+		master.displayTitleCard(text);
+	}
+
+	@Override
+	public boolean isSayNonIncrementing() {
+		return master.isSayNonIncrementing();
+	}
+
+	@Override
+	public void playSoundByStid(String stid) {
+		master.playSoundByStid(stid);
+	}
+
+	@Override
+	public double getSoundDurationByStid(String stid) {
+		return master.getSoundDurationByStid(stid);
+	}
+
+	@Override
+	public void stopSoundByStid(String stid) {
+		master.stopSoundByStid(stid);
+	}
+
+	@Override
+	public void setActiveGuiState(GuiStateEnum state) {
+		master.setActiveGuiState(state);
+
+	}
 
 
+	
+	
 	@Override
 	public void setValue(Object name, int value) {
 		master.setValue(name, value);
 	}
 
+	//
+
+	@Override
+	public void shareWinning(String token) {
+		master.shareWinning(token);
+	}
+	
+	@Override
+	public void switchToScene(String switchToThis) {
+		master.switchToScene(switchToThis);
+	}
+	
+	// /@}
+	/**
+	 * @name Scene Methods 
+	 */
+	// /@{
 	@Override
 	public void alignBaseMiddleOfOldFrameToFrameOfThisAnimationByAtid(
 			String atid, int frame) {
@@ -53,6 +140,47 @@ ITitleCardPresenterFromActions {
 				frame, atid);
 	}
 
+
+	@Override
+	public void setSceneTalkerByAtid(String atid) {
+		master.getScenePresenter().setSceneTalkerAtid(atid);
+	}
+
+	@Override
+	public void setCurrentAnimationAndFrame(String atid, int frame) {
+		String otid = getOtidByAtid(atid);
+		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
+		object.setCurrentAnimationAndFrame(atid, frame);
+	}
+
+	
+	@Override
+	public void setAnimationAsObjectSpecial(String atid, Special type) {
+		String otid = getOtidByAtid(atid);
+		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
+		object.setSpecialAnimation(type, atid);
+	}
+
+	@Override
+	public void setAnimationAsObjectInitial(String atid) {
+		String otid = getOtidByAtid(atid);
+		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
+		object.setInitialAnimation(atid);
+	}
+
+	@Override
+	public void setScaleOnCurrentFrameByOtid(String otid, double scale) {
+		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
+		object.setScale(scale);
+		
+	}
+
+	@Override
+	public List<PointF> findPath(PointF rawStart, PointF rawEnd) {
+
+		return master.getScenePresenter().findPath(rawStart, rawEnd);
+	}
+	
 	@Override
 	public int getSceneObjectCount() {
 		return master.getScenePresenter().getSceneObjectCount();
@@ -233,21 +361,11 @@ ITitleCardPresenterFromActions {
 		master.getScenePresenter().getObjectByOtid(otid).setY(i);
 	}
 
-	//
+	
 
 	@Override
-	public void shareWinning(String token) {
-		master.shareWinning(token);
-	}
-
-	@Override
-	public boolean getVisibleByOtid(String otidB) {
-		return master.getScenePresenter().getVisibleByOtid(otidB);
-	}
-
-	@Override
-	public void switchToScene(String switchToThis) {
-		master.switchToScene(switchToThis);
+	public boolean getVisibleByOtid(String otid) {
+		return master.getScenePresenter().getVisibleByOtid(otid);
 	}
 
 	@Override
@@ -271,22 +389,20 @@ ITitleCardPresenterFromActions {
 		return o.getSpecialAnimation(type);
 	}
 
+	
+	// /@}
+	/**
+	 * @name Dialog Tree methods 
+	 */
+	// /@{
+	
+	
 	@Override
 	public void addBranch(int subBranchId, String lineOfDialog,
 			boolean isAlwaysShown) {
 		master.getDialogTreePresenter().addBranch(subBranchId, lineOfDialog,
 				isAlwaysShown);
 
-	}
-
-	@Override
-	public void displayTitleCard(String text) {
-		master.displayTitleCard(text);
-	}
-
-	@Override
-	public double getPopupDisplayDuration() {
-		return master.getTitleCardPresenter().getPopupDisplayDuration();
 	}
 
 	@Override
@@ -300,84 +416,19 @@ ITitleCardPresenterFromActions {
 		master.getDialogTreePresenter().updateDialogTree(theDialogTree);
 
 	}
-
-
-
-
-	@Override
-	public void setScenePixelSize(int width, int height) {
-		master.setScenePixelSize(width, height);
-	}
-
 	
-
-	@Override
-	public boolean isSayNonIncrementing() {
-		return master.isSayNonIncrementing();
-	}
-
-	@Override
-	public void setSceneTalkerByAtid(String atid) {
-		master.getScenePresenter().setSceneTalkerAtid(atid);
-	}
-
-	@Override
-	public void setCurrentAnimationAndFrame(String atid, int frame) {
-		String otid = getOtidByAtid(atid);
-		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
-		object.setCurrentAnimationAndFrame(atid, frame);
-	}
-
-
-
-	@Override
-	public void playSoundByStid(String stid) {
-		master.playSoundByStid(stid);
-	}
-
-	@Override
-	public double getSoundDurationByStid(String stid) {
-		return master.getSoundDurationByStid(stid);
-	}
-
+	// /@}
+		/**
+		 * @name Title Card methods 
+		 */
+		// /@{
 	
-
 	@Override
-	public void stopSoundByStid(String stid) {
-		master.stopSoundByStid(stid);
+	public double getPopupDisplayDuration() {
+		return master.getTitleCardPresenter().getPopupDisplayDuration();
 	}
 
-	@Override
-	public void setActiveGuiState(GuiStateEnum state) {
-		master.setActiveGuiState(state);
 
-	}
-
-	@Override
-	public void setAnimationAsObjectSpecial(String atid, Special type) {
-		String otid = getOtidByAtid(atid);
-		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
-		object.setSpecialAnimation(type, atid);
-	}
-
-	@Override
-	public void setAnimationAsObjectInitial(String atid) {
-		String otid = getOtidByAtid(atid);
-		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
-		object.setInitialAnimation(atid);
-	}
-
-	@Override
-	public void setScaleOnCurrentFrameByOtid(String otid, double scale) {
-		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
-		object.setScale(scale);
-		
-	}
-
-	@Override
-	public List<PointF> findPath(PointF rawStart, PointF rawEnd) {
-
-		return master.getScenePresenter().findPath(rawStart, rawEnd);
-	}
+	// /@}
 
 }
