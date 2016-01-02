@@ -577,6 +577,12 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 	// /@}
 
+	@Override
+	public void clearValuesAndSaidSpeech() {
+		master.clearValueRegistry();
+		
+	}
+
 
 
 

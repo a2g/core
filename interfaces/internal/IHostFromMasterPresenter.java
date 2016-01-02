@@ -27,6 +27,8 @@ public interface IHostFromMasterPresenter {
 	public void setValue(String name, Integer value);
 
 	public int getValue(String name);
+	
+	void clearValueRegistry();
 
 	public void instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(
 			String scene);

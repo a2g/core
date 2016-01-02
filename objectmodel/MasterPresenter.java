@@ -1033,4 +1033,11 @@ PropertyChangeEventHandlerAPI
 		mapOfSounds.get(stid).stop();
 	}
 
+
+
+	public void clearValueRegistry() {
+		host.clearValueRegistry();
+		dialogTreePresenter.resetRecordOfSaidSpeech();
+	}
+
 }
