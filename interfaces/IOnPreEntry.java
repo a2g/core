@@ -16,7 +16,8 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.interfaces.internal.IClearValuesAndSaidSpeech;
+import com.github.a2g.core.interfaces.internal.IClearSaidSpeech;
+import com.github.a2g.core.interfaces.internal.IClearValueRegistry;
 import com.github.a2g.core.interfaces.methods.game.IAddBoundaryGate;
 import com.github.a2g.core.interfaces.methods.game.IAddBoundaryPoint;
 import com.github.a2g.core.interfaces.methods.game.IAddObstacleRect;
@@ -140,7 +141,8 @@ ISetAnimationAsSceneAsker,
 ISetAnimationAsSceneAnswerer,
 ISetAnimationMaxTalkRect,
 IGetDefaultSceneObject,
-IClearValuesAndSaidSpeech
+IClearValueRegistry,
+IClearSaidSpeech
 {
 
 	

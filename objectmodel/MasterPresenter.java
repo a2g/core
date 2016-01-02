@@ -1037,7 +1037,12 @@ PropertyChangeEventHandlerAPI
 
 	public void clearValueRegistry() {
 		host.clearValueRegistry();
-		dialogTreePresenter.resetRecordOfSaidSpeech();
+	}
+
+
+
+	public void clearSaidSpeech() {
+		dialogTreePresenter.resetRecordOfSaidSpeech();	
 	}
 
 }

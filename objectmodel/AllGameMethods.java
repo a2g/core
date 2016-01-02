@@ -583,6 +583,12 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 		
 	}
 
+	@Override
+	public void clearSaidSpeech() {
+		master.clearSaidSpeech();
+		
+	}
+
 
 
 
