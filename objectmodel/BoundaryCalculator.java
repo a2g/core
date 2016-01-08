@@ -291,31 +291,43 @@ implements Comparator<BoundaryCalculator.Gate>
  	
 	public List<PointF> findPath(PointF rawStart, PointF rawEnd)
 	{
+		// first we check for whether it's a legal move or not.
+		for(int i=0;i<this.obstacles.size();i++)
+		{
+			if(this.obstacles.get(i).contains(rawEnd.getX(), rawEnd.getY()))
+			{
+				//...if its not we make it a very short walk indeed.
+				rawEnd = rawStart;
+				//break;
+				return null;
+			}
+		}
+		
 		List<PointFWithNeighbours> verts = getNetworkOfConcaveVertices(rawStart, rawEnd);
 
 		PointFWithNeighbours start = verts.get(0);
 		PointFWithNeighbours end = verts.get(1);
 
+		// create the default journey
+		List<PointF> list = new LinkedList<PointF>();
+		list.add(start);
+		list.add(end);
+		
 		//the path is returned such that if we want to dowhile over it
 		// and construct an ordered list, then its better to flip end and start
 		Path<PointFWithNeighbours> path = Path.findPath(end, start, this,this);
-		List<PointF> list = new LinkedList<PointF>();
 		if(path!=null)
 		{
+			list.clear();
 			list.add(path.getLastStep());
 			while(path!=null && path.getPreviousSteps()!=null)
 			{
 				list.add(path.getPreviousSteps().getLastStep());
 				path = path.getPreviousSteps();
 			}
-		}else
-		{
-			list.add(start);
-			list.add(end);
 		}
 		
 		lastPath = list;
-
 		return list;
 	}
 	
