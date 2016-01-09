@@ -80,8 +80,9 @@ implements IChainRootForDialog
 
 	@Override
 	public DialogChainableAction setInventoryVisible(int icode, boolean value) {
-		DialogSingleCallAction a =  new DialogSingleCallAction(this, Type.Sleep);
+		DialogSingleCallAction a =  new DialogSingleCallAction(this, Type.SetInventoryVisible);
 		a.setICode(icode);
+		a.setBoolean(value);
 		return a;
 	}
 
