@@ -288,8 +288,7 @@ PropertyChangeEventHandlerAPI
 	public void onTimer() {
 
 		if (timer != null) {
-			this.sceneHandlers.onEveryFrame(proxyForGameScene);
-			// this.checkForBoundaryCross();
+			this.sceneHandlers.onEveryFrame(proxyForGameScene); 
 		}
 		if (switchTimer != null) {
 			switchTimer.cancel();
@@ -363,6 +362,8 @@ PropertyChangeEventHandlerAPI
 		// but I've put it off til I need the microseconds.
 		cancelOnEveryFrameTimer();
 		this.dialogActionRunner.cancel();
+		this.onEveryFrameActionRunner.cancel();
+		this.doCommandActionRunner.cancel();// do we really need to cancel
 		setCameraToZero();// no scene is meant to keep camera position
 		this.host.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
 

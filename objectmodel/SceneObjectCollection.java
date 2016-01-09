@@ -83,7 +83,8 @@ public class SceneObjectCollection {
 		int i = this.theOtids.indexOf(otid);
 		if(i==-1)
 		{
-			throw new NoSuchElementException();
+			throw new NoSuchElementException(); 
+			//return new SceneObject("null", 0,0);
 		}
 		return this.getByIndex(i);
 	}
