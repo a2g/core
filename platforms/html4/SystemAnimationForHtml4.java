@@ -23,10 +23,12 @@ public class SystemAnimationForHtml4 extends
 com.google.gwt.animation.client.Animation implements ISystemAnimation {
 	boolean isEaseToAndFrom;
 	IBaseActionFromSystemAnimation callbacks;
+	private boolean isCancelled;
 
 	public SystemAnimationForHtml4(IBaseActionFromSystemAnimation callbacks) {
 		this.isEaseToAndFrom = false;
 		this.callbacks = callbacks;
+		this.isCancelled = false;
 	}
 
 	@Override
@@ -53,6 +55,18 @@ com.google.gwt.animation.client.Animation implements ISystemAnimation {
 	public void setEaseToAndFrom(boolean isEaseToAndFrom) {
 		this.isEaseToAndFrom = isEaseToAndFrom;
 
+	}
+	
+	@Override
+	public void cancel()
+	{
+		isCancelled = true;
+		super.cancel();
+	}
+
+	@Override
+	public boolean isCancelled() {
+		return isCancelled;
 	}
 
 }

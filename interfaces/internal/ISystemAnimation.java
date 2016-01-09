@@ -23,4 +23,5 @@ public interface ISystemAnimation {
 
 	void setEaseToAndFrom(boolean isEaseToAndFrom);
 
+	boolean isCancelled();
 }

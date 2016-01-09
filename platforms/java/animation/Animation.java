@@ -201,8 +201,13 @@ public abstract class Animation {
 	 * @param element the element that visually bounds the entire animation
 	 */
 	public void run(int duration, double startTime, Element element) {
-		// Cancel the animation if it is running
-		cancel();
+		// this comment used to say:
+		//    Cancel the animation if it is running
+		// but I commented out the cancelling because it breaks the use of my
+		// isCancelled property. I added this property to a class that
+		// inherits from this and had it set when cancelled is called on it.
+		// But this only works if the following line is commented out.
+		//cancel();
 
 		// Save the duration and startTime
 		isRunning = true;

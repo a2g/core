@@ -24,10 +24,12 @@ com.github.a2g.core.platforms.java.animation.Animation implements
 ISystemAnimation {
 	IBaseActionFromSystemAnimation callbacks;
 	boolean isEaseToAndFrom;
+	private boolean isCancelled;
 
 	public SystemAnimationForJava(IBaseActionFromSystemAnimation callbacks) {
 		this.isEaseToAndFrom = false;
 		this.callbacks = callbacks;
+		this.isCancelled = false;
 	}
 
 	@Override
@@ -41,8 +43,15 @@ ISystemAnimation {
 
 	@Override
 	protected void onUpdate(double progress) {
-		callbacks.onUpdate(progress);
-
+		// I'm not sure why, but this class:
+		// com.github.a2g.core.platforms.java.animation.Animation
+		// (that this inherits from, and was written by google)
+		// does not check to see if an animation was cancelled before
+		// it starts.
+		if(!isCancelled)
+		{
+			callbacks.onUpdate(progress);
+		}
 	}
 
 	@Override
@@ -54,6 +63,18 @@ ISystemAnimation {
 	public void setEaseToAndFrom(boolean isEaseToAndFrom) {
 		this.isEaseToAndFrom = isEaseToAndFrom;
 
+	}
+	
+	@Override
+	public void cancel()
+	{
+		isCancelled = true;
+		super.cancel();
+	}
+
+	@Override
+	public boolean isCancelled() {
+		return isCancelled;
 	}
 
 }
