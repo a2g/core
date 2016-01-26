@@ -337,9 +337,14 @@ implements IChainRootForScene
 
 	@Override
 	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName) {
+		return this.walkAlwaysSwitch( new PointF(x,y), sceneName);
+	}
+	
+	@Override
+	public ChainEndAction walkAlwaysSwitch(PointF p, String sceneName) {
 		WalkAction a = new WalkAction(this, ScenePresenter.DEFAULT_SCENE_OBJECT);
-		a.setEndX(x);
-		a.setEndY(y);
+		a.setEndX(p.getX());
+		a.setEndY(p.getY());
 		a.setToInitialAtEnd(false);
 
 		SingleCallAction b =  new SingleCallAction(a, Type.Switch);
@@ -347,6 +352,7 @@ implements IChainRootForScene
 
 		return b;
 	}
+	
 	
 	@Override
 	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, PointF p, String sceneName, double startScale, double endScale) {
