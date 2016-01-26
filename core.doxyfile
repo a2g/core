@@ -1663,7 +1663,7 @@ CLASS_DIAGRAMS = NO
 # the mscgen tool resides. If left empty the tool is assumed to be found in the
 # default search path.
 
-MSCGEN_PATH = e:/Program Files/mscgen/bin/
+MSCGEN_PATH = e:/ProgramFiles/mscgen/bin/
 
 # If set to YES, the inheritance and collaboration graphs will hide
 # inheritance and usage relations if the target is undocumented
@@ -1807,7 +1807,7 @@ INTERACTIVE_SVG = NO
 # The tag DOT_PATH can be used to specify the path where the dot tool can be
 # found. If left blank, it is assumed the dot tool can be found in the path.
 
-DOT_PATH = E:\Program Files\Graphviz\bin
+DOT_PATH = E:\ProgramFiles\Graphviz\bin
 
 # The DOTFILE_DIRS tag can be used to specify one or more directories that
 # contain dot files that are included in the documentation (see the

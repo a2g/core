@@ -94,10 +94,10 @@ digraph {
     {
 	fillcolor="black"
           style="filled" 
- 	URL="ExampleCode.html"
+ 	URL="_example_code.html"
 			
            node [
-	URL="ExampleCode.html"
+	URL="_example_code.html"
 	shape=box 
 	fillcolor="black"
 	width=1
@@ -115,10 +115,10 @@ digraph {
     {
 	fillcolor="black"
           style="filled" 
- 	URL="ObjectModel.html"
+ 	URL="_object_model.html"
 			
            node [
-	URL="ObjectModel.html"
+	URL="_object_model.html"
 	shape=box 
 	fillcolor="black"
 	width=1
@@ -135,10 +135,10 @@ digraph {
     {
 	fillcolor="black"
           style="filled" 
- 	URL="Panels.html"
+ 	URL="_panels.html"
 			
            node [
-	URL="Panels.html"
+	URL="_panels.html"
 	shape=box 
 	fillcolor="black"
 	width=1
