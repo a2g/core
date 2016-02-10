@@ -20,7 +20,7 @@ public interface IChainRootForScene {
 			ChainRootAction ba, int verb, SentenceItem itemA,
 			SentenceItem itemB, double x, double y);
 	public ChainEndAction subroutine(ChainEndAction orig);
-	public ChainEndAction switchTo(String sceneName);
+	public ChainEndAction switchTo(String sceneName, int arrivalSegment);
 	public ChainEndAction walkTo(double x, double y);// should not have ocode here because switching implies main character
 	public ChainEndAction walkTo(PointF point);
 	
@@ -41,10 +41,10 @@ public interface IChainRootForScene {
 	public ChainableAction walkNeverSwitch(short ocode, double x, double y);
 	public ChainableAction walkNeverSwitch(short ocode, PointF point);
 	public ChainableAction walkAndTalkNeverSwitch(short ocode, double x, double y, String speech);
-	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName);
-	public ChainEndAction walkAlwaysSwitch(PointF point, String string);
+	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int arrivalSegment);
+	public ChainEndAction walkAlwaysSwitch(PointF point, String string, int arrivalSegment);
 	public ChainEndAction walkAndScaleNeverSwitch(short ocode, PointF p, double startScale, double endScale);
-	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, PointF p, String sceneName, double startScale, double endScale);
+	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, PointF p, double startScale, double endScale, String sceneName, int arrivalSegment);
 	
 
 	public ChainableAction subroutine(ChainableAction orig);

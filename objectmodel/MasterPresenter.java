@@ -355,7 +355,7 @@ PropertyChangeEventHandlerAPI
 	//	}
 
 	@Override
-	public void switchToScene(String scene) {
+	public void switchToScene(String scene, int arrivalSegment) {
 
 		// since instantiateScene..ToIt does some asynchronous stuff,
 		// I thought maybe I could do it, then cancel the timers.
@@ -365,6 +365,7 @@ PropertyChangeEventHandlerAPI
 		this.onEveryFrameActionRunner.cancel();
 		this.doCommandActionRunner.cancel();// do we really need to cancel
 		setCameraToZero();// no scene is meant to keep camera position
+		this.scenePresenter.setArrivalSegment(arrivalSegment);
 		this.host.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
 
 	}
@@ -428,6 +429,11 @@ PropertyChangeEventHandlerAPI
 	}
 
 	public void callOnEnterScene() {
+		if(scenePresenter.getBoundaryPoints().size()>0)
+		{
+			scenePresenter.repositionDefaultObject();
+		}
+		
 		BaseAction a = this.sceneHandlers.onEntry(proxyForGameScene,
 				MatOps.createChainRootAction());
 
@@ -796,7 +802,7 @@ PropertyChangeEventHandlerAPI
 			} 
 			else if(cmd.getVerb()==ConstantsForAPI.SWITCH)
 			{
-				BaseAction switchTo = MatOps.createChainRootAction().switchTo(cmd.getString());
+				BaseAction switchTo = MatOps.createChainRootAction().switchTo(cmd.getString(), 0);
 				COMMANDS_AUTOPLAY.log(Level.FINE, "SWITCH "+cmd.getString());
 				executeActionWithDoCommandActionRunner(switchTo);
 			}

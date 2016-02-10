@@ -64,9 +64,10 @@ implements IChainRootForDialog
 	}
 
 	@Override
-	public DialogChainEndAction switchTo(String sceneName) {
+	public DialogChainEndAction switchTo(String sceneName, int arrivalSegment) {
 		DialogSingleCallAction a =  new DialogSingleCallAction(this, Type.Switch);
 		a.setString(sceneName);
+		a.setInt(arrivalSegment);
 		return a;
 	}
 

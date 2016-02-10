@@ -54,6 +54,7 @@ implements IScenePresenter
 	private IMasterPresenterFromScenePresenter master;
 
 	private IBoundaryCalculator boundaryCalculator;
+	private int arrivalSegment;
 
 	public ScenePresenter(final IHostingPanel panel,
 			IMasterPresenterFromScenePresenter master, IFactory factory) {
@@ -72,6 +73,7 @@ implements IScenePresenter
 		this.view = master.getFactory().createScenePanel(this);
 		panel.setThing(view);
 		view.setVisible(true);
+		this.arrivalSegment = -1;
 		defaultSceneObjectOtid = "ScenePresenter::getDefaultSceneObjectOtid was used before it was initialized";
 
 		talkingColorForScene = ColorEnum.Fuchsia;
@@ -350,13 +352,13 @@ implements IScenePresenter
 	}
 
 	@Override
-	public void switchToScene(String foundDest) {
-		master.switchToScene(foundDest);
+	public void switchToScene(String foundDest, int arrivalSegment) {
+		master.switchToScene(foundDest, arrivalSegment);
 	}
 
 
-	public void addBoundaryGate(double tlx,double tly, double brx,double bry, Object sceneToSwitchTo) {
-		boundaryCalculator.addBoundaryGate(sceneToSwitchTo,  new PointF(tlx,tly), new PointF(brx,bry));
+	public void addBoundaryGate(double tlx,double tly, double brx,double bry, Object sceneToSwitchTo, int arrivalSegment) {
+		boundaryCalculator.addBoundaryGate(sceneToSwitchTo,  arrivalSegment, new PointF(tlx,tly), new PointF(brx,bry));
 	}
 
 	public void addBoundaryPoint(double x, double y) {
@@ -381,7 +383,7 @@ implements IScenePresenter
 
 	@Override
 	public PointF getBoundaryPointsCentre() {
-		return boundaryCalculator.getGatePointsCentre();
+		return boundaryCalculator.getCentreOfSegments();
 	}
 
 	public void addObstacleRect(double x, double y, double right, double bottom) {
@@ -413,6 +415,27 @@ implements IScenePresenter
 
 	public String getOtidOfDefaultSceneObject() {
 		return defaultSceneObjectOtid;
+	}
+
+	public void setArrivalSegment(int arrivalSegment) {
+		this.arrivalSegment = arrivalSegment;		
+	}
+
+	public void repositionDefaultObject() {
+		ArrayList<PointF> points = boundaryCalculator.getGatePoints();
+		if(arrivalSegment>-1 && arrivalSegment < (points.size()-1))
+		{
+			PointF a = points.get(arrivalSegment);
+			PointF b = points.get(arrivalSegment+1);
+			PointF c = boundaryCalculator.getCentreOfSegments();
+			PointF mp = new PointF((a.getX()+b.getX())/2, (a.getY()+b.getY())/2);
+			// we want v, a vector starting at mp, and heading 10% towards centre.
+			PointF v = new PointF((c.getX() -mp.getX())*.1, (c.getY()-mp.getY())*.1);
+			PointF result = new PointF(mp.getX()+v.getX(), mp.getY()+v.getY());
+			SceneObject o = scene.objectCollection().getByOtid(this.getDefaultSceneObjectOtid());
+			o.setBaseMiddleX(result.getX());
+			o.setBaseMiddleY(result.getY());
+		}
 	}
 
 };

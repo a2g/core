@@ -123,8 +123,8 @@ ITitleCardPresenterFromActions
 	}
 	
 	@Override
-	public void switchToScene(String switchToThis) {
-		master.switchToScene(switchToThis);
+	public void switchToScene(String switchToThis, int arrivalSegment) {
+		master.switchToScene(switchToThis, arrivalSegment);
 	}
 	
 	// /@}

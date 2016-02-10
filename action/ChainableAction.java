@@ -287,9 +287,10 @@ implements IChainRootForScene
 	}
 
 	@Override
-	public ChainEndAction switchTo(String sceneName) {
+	public ChainEndAction switchTo(String sceneName, int arrivalSegment) {
 		SingleCallAction a =  new SingleCallAction(this, Type.Switch);
 		a.setString(sceneName);
+		a.setInt(arrivalSegment);
 		return a;
 	}
 	@Override
@@ -336,12 +337,12 @@ implements IChainRootForScene
 	}
 
 	@Override
-	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName) {
-		return this.walkAlwaysSwitch( new PointF(x,y), sceneName);
+	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int arrivalSegment) {
+		return this.walkAlwaysSwitch( new PointF(x,y), sceneName, 0);
 	}
 	
 	@Override
-	public ChainEndAction walkAlwaysSwitch(PointF p, String sceneName) {
+	public ChainEndAction walkAlwaysSwitch(PointF p, String sceneName, int arrivalSegment) {
 		WalkAction a = new WalkAction(this, ScenePresenter.DEFAULT_SCENE_OBJECT);
 		a.setEndX(p.getX());
 		a.setEndY(p.getY());
@@ -349,13 +350,14 @@ implements IChainRootForScene
 
 		SingleCallAction b =  new SingleCallAction(a, Type.Switch);
 		b.setString(sceneName);
+		b.setInt(arrivalSegment);
 
 		return b;
 	}
 	
 	
 	@Override
-	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, PointF p, String sceneName, double startScale, double endScale) {
+	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, PointF p, double startScale, double endScale, String sceneName, int arrivalSegment) {
 		WalkAction a = new WalkAction(this, ocode);
 		a.setEndX(p.getX());
 		a.setEndY(p.getY());
@@ -365,6 +367,7 @@ implements IChainRootForScene
 
 		SingleCallAction b =  new SingleCallAction(a, Type.Switch);
 		b.setString(sceneName);
+		b.setInt(arrivalSegment);
 
 		return b;
 	}

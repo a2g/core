@@ -11,7 +11,7 @@ public interface IBoundaryCalculator {
 
 	void clearBoundaries();
 
-	void addBoundaryGate(Object sceneToSwitchTo, PointF pointF, PointF pointF2);
+	void addBoundaryGate(Object sceneToSwitchTo, int arrivalSegment, PointF pointF, PointF pointF2);
 
 	void addBoundaryPoint(PointF pointF);
 
@@ -21,7 +21,7 @@ public interface IBoundaryCalculator {
 
 	ArrayList<PointF> getGatePoints();
 
-	PointF getGatePointsCentre();
+	PointF getCentreOfSegments();
 
 	void addObstacleRect(double x, double y, double right, double bottom);
 	

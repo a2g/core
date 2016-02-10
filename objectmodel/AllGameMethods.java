@@ -465,8 +465,8 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 
 	@Override
-	public void switchToScene(String scene) {
-		master.switchToScene(scene);
+	public void switchToScene(String scene, int arrivalSegment) {
+		master.switchToScene(scene, arrivalSegment);
 
 	}
 
@@ -567,8 +567,8 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 	
 	@Override
-	public void addBoundaryGate(double tlx,double tly,double brx,double bry,Object sceneToSwitchTo) {
-		master.getScenePresenter().addBoundaryGate(tlx,tly,brx,bry,sceneToSwitchTo);
+	public void addBoundaryGate(double tlx,double tly,double brx,double bry,Object sceneToSwitchTo, int arrivalSegment) {
+		master.getScenePresenter().addBoundaryGate(tlx,tly,brx,bry,sceneToSwitchTo, arrivalSegment);
 	}
 
 	@Override

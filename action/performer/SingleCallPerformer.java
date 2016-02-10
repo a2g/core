@@ -91,7 +91,7 @@ public class SingleCallPerformer
 		switch(type)
 		{
 		case Switch:
-			scene.switchToScene(stringValue);
+			scene.switchToScene(stringValue, this.intValue);
 			return true;
 		case SetBaseMiddleX:
 			otid = scene.getOtidByCode(ocode);

@@ -22,12 +22,14 @@ implements Comparator<BoundaryCalculator.Gate>
 	protected class Gate 
 	{
 		public String switchTo;
+		public int arrivalSegment;
 		public PointF a;
 		public PointF b;
 
-		public Gate(Object dest, PointF first, PointF second)
+		public Gate(Object dest, int arrivalSegment, PointF first, PointF second)
 		{
 			this.switchTo = (dest==null)? "" : dest.toString();
+			this.arrivalSegment = arrivalSegment;
 			this.a = first;
 			this.b = second;
 		}
@@ -73,13 +75,13 @@ implements Comparator<BoundaryCalculator.Gate>
 		Collections.sort(gates, this);
 	}
 
-	public void addBoundaryGate(Object switchTo, PointF a, PointF b) {
-		gates.add(new Gate(switchTo==""? null : switchTo, a, b));
+	public void addBoundaryGate(Object switchTo, int arrivalSegment, PointF a, PointF b) {
+		gates.add(new Gate(switchTo==""? null : switchTo, arrivalSegment, a, b));
 		sort();
 	}
 
 	public void addBoundaryPoint(PointF a) {
-		gates.add(new Gate(TREAT_GATE_AS_POINT,  a, new PointF(-1, -1)));
+		gates.add(new Gate(TREAT_GATE_AS_POINT,  -1, a, new PointF(-1, -1)));
 		sort();
 	}
 
@@ -104,7 +106,7 @@ implements Comparator<BoundaryCalculator.Gate>
 
 			if (isBetweenSpokesAndOnWrongSide(g.a, g.b, tp)) 
 			{
-				scene.switchToScene(g.switchTo);
+				scene.switchToScene(g.switchTo, g.arrivalSegment);
 				return true;
 			}
 		}
@@ -128,7 +130,7 @@ implements Comparator<BoundaryCalculator.Gate>
 
 
 	private boolean isBetweenSpokesAndOnWrongSide(PointF p1, PointF p2, PointF tp) {
-		PointF c = getGatePointsCentre();
+		PointF c = getCentreOfSegments();
 		PointF mp = getMidPoint(p1, p2);
 		boolean isBetweenSpokes = arePointsSameSide(c, p1, mp, tp)
 				&& arePointsSameSide(c, p2, mp, tp);
@@ -141,7 +143,7 @@ implements Comparator<BoundaryCalculator.Gate>
 	}
 
 
-	public PointF getGatePointsCentre() {
+	public PointF getCentreOfSegments() {
 		return cachedCalculationOfCentre;
 	}
 
