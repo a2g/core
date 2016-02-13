@@ -33,7 +33,7 @@ public interface IGameScene extends ConstantsForAPI {
 		<table>
 		<tr>
 		<td>
-		 @image html 2bundles.png
+		 @image html IGameScene0000.png
 		 onPreLoadList
 		</td>
 		<td>
@@ -60,7 +60,7 @@ public interface IGameScene extends ConstantsForAPI {
 	<table>
 	<tr>
 	<td>
-	 @image html 2preentry.png
+	 @image html IGameScene0001.png
 	 onPreEntry
 	</td>
 	<td>
@@ -77,7 +77,7 @@ public interface IGameScene extends ConstantsForAPI {
 		<table>
 		<tr>
 		<td>
-		 @image html 2entry.png
+		 @image html IGameScene0002.png
 		onEnterScene
 		</td>
 		<td>
@@ -94,7 +94,7 @@ public interface IGameScene extends ConstantsForAPI {
 	<table>
 	<tr>
 	<td>
-	 @image html 2everyframe.png
+	 @image html IGameScene0003.png
 	onEveryFrame
 	</td>
 	<td>
@@ -112,7 +112,7 @@ public interface IGameScene extends ConstantsForAPI {
 	<table>
 	<tr>
 	<td>
-	 @image html 2command.png
+	 @image html IGameScene0004.png
 	onDoCommand
 	</td>
 	<td>
@@ -128,7 +128,7 @@ public interface IGameScene extends ConstantsForAPI {
 	<table>
 	<tr>
 	<td>
-	 @image html 2dialog.png
+	 @image html IGameScene0005.png
 	 onDialogTree
 	</td>
 	<td>
