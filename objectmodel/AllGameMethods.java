@@ -3,7 +3,7 @@ package com.github.a2g.core.objectmodel;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
-import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
+import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.IOnDialogTree;
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IOnEntry;
@@ -317,7 +317,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 
 	@Override
-	public void setAnimationAsObjectSpecial(String atid, Special type) {
+	public void setAnimationAsObjectWalkDirection(String atid, WalkDirection type) {
 		String otid = getOtidByAtid(atid);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setSpecialAnimation(type, atid);

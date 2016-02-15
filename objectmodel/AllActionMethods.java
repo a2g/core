@@ -3,7 +3,7 @@ package com.github.a2g.core.objectmodel;
 import java.util.List;
 
 import com.github.a2g.core.action.performer.TalkPerformer;
-import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
+import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
@@ -155,7 +155,7 @@ ITitleCardPresenterFromActions
 
 	
 	@Override
-	public void setAnimationAsObjectSpecial(String atid, Special type) {
+	public void setAnimationAsObjectSpecial(String atid, WalkDirection type) {
 		String otid = getOtidByAtid(atid);
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
 		object.setSpecialAnimation(type, atid);
@@ -384,7 +384,7 @@ ITitleCardPresenterFromActions
 	}
 
 	@Override
-	public String getSpecialAnimationByOtid(String otid, Special type) {
+	public String getSpecialAnimationByOtid(String otid, WalkDirection type) {
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		return o.getSpecialAnimation(type);
 	}

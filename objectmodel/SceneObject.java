@@ -19,7 +19,7 @@ package com.github.a2g.core.objectmodel;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
+import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
@@ -294,11 +294,11 @@ public class SceneObject {
 		return new Rect(0, 0, 0, 0);
 	}
 
-	void setSpecialAnimation(Special type, String atid) {
+	void setSpecialAnimation(WalkDirection type, String atid) {
 		this.mapOfSpecialAnimations.put(type.toString(), atid);
 	}
 
-	public String getSpecialAnimation(Special type) {
+	public String getSpecialAnimation(WalkDirection type) {
 		String toReturn = this.mapOfSpecialAnimations.get(type.toString());
 		if(toReturn==null)
 			return this.getInitialAnimation();// more reliable fallback

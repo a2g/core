@@ -24,7 +24,7 @@ import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IGameScene;
-import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
+import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.internal.IChainRootForScene;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.SentenceItem;
@@ -543,7 +543,7 @@ implements IChainRootForScene
 	}
 
 	@Override
-	public ChainableAction setAnimationAsObjectSpecial(String atid, Special type)
+	public ChainableAction setAnimationAsObjectSpecial(String atid, WalkDirection type)
 	{
 		SingleCallAction s = new SingleCallAction(this, Type.SetAnimationSpecial);
 		s.setAtid(atid);

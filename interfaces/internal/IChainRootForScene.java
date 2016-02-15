@@ -5,7 +5,7 @@ import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.IOnDoCommand;
-import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
+import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.PointF;
 
@@ -144,7 +144,7 @@ public interface IChainRootForScene {
 
 	public ChainableAction playSound(String stid);
 	public ChainableAction playSoundNonBlocking(String stid);
-	public ChainableAction setAnimationAsObjectSpecial(String atid, Special type);
+	public ChainableAction setAnimationAsObjectSpecial(String atid, WalkDirection type);
 	public ChainableAction setAnimationAsSceneTalker(String atid);
 	public ChainableAction setAnimationAsObjectInitial(String atid);
 	

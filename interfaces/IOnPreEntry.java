@@ -45,7 +45,7 @@ import com.github.a2g.core.interfaces.methods.game.IRemoveVerbByCode;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectCurrent;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectCurrentAndSetFrame;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectInitial;
-import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectSpecial;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectWalkDirection;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneAnswerer;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneAsker;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneTalker;
@@ -134,7 +134,7 @@ ISetAnimationAsObjectInitial,
 ISetAnimationAsSceneTalker,
 ISetAnimationAsObjectCurrent,
 ISetAnimationDuration,
-ISetAnimationAsObjectSpecial,
+ISetAnimationAsObjectWalkDirection,
 ISetDefaultSceneObject,
 ISetAnimationAsObjectCurrentAndSetFrame,
 ISetAnimationAsSceneAsker,

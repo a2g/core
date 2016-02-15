@@ -30,7 +30,7 @@ import com.github.a2g.core.interfaces.methods.game.IIsInventoryItemVisible;
 import com.github.a2g.core.interfaces.methods.game.IIsTrue;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectCurrent;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectInitial;
-import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectSpecial;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectWalkDirection;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneTalker;
 import com.github.a2g.core.interfaces.methods.game.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.methods.game.ISetBaseMiddleY;
@@ -66,7 +66,7 @@ IGetValue
 , IGetX
 , IGetY
 // animation
-, ISetAnimationAsObjectSpecial
+, ISetAnimationAsObjectWalkDirection
 , ISetAnimationAsSceneTalker
 , ISetAnimationAsObjectInitial
 , ISetAnimationAsObjectCurrent

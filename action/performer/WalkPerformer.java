@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.action.performer;
 
-import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
+import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromWalkPerformer;
 import com.github.a2g.core.interfaces.performer.IWalkPerformer;
 import com.github.a2g.core.primitive.PointF;
@@ -53,17 +53,17 @@ public class WalkPerformer implements IWalkPerformer
 		if ((diffX * width) * (diffX * width) > (diffY * height)
 				* (diffY * height)) {
 			if (endPt.getX() < startX) {
-				anim = scene.getSpecialAnimationByOtid(otid, Special.West);
+				anim = scene.getSpecialAnimationByOtid(otid, WalkDirection.West);
 			} else {
-				anim = scene.getSpecialAnimationByOtid(otid, Special.East);
+				anim = scene.getSpecialAnimationByOtid(otid, WalkDirection.East);
 			}
 		} else {
 			if (endPt.getY() < startY) {
 				anim = scene
-						.getSpecialAnimationByOtid(otid, Special.North);
+						.getSpecialAnimationByOtid(otid, WalkDirection.North);
 			} else {
 				anim = scene
-						.getSpecialAnimationByOtid(otid, Special.South);
+						.getSpecialAnimationByOtid(otid, WalkDirection.South);
 			}
 		}
 

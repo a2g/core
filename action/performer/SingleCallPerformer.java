@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.action.performer;
 
-import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
+import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromSingleCallPerformer;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromSingleCallPerformer;
 
@@ -169,21 +169,21 @@ public class SingleCallPerformer
 			scene.setAnimationAsObjectInitial(atid);
 			return false;
 		case SetAnimationSpecial:
-			if(intValue==Special.North.toInt())
+			if(intValue==WalkDirection.North.toInt())
 			{
-				scene.setAnimationAsObjectSpecial(atid, Special.North);
-			}else if(intValue==Special.East.toInt())
+				scene.setAnimationAsObjectSpecial(atid, WalkDirection.North);
+			}else if(intValue==WalkDirection.East.toInt())
 				
 			{
-				scene.setAnimationAsObjectSpecial(atid, Special.East);
+				scene.setAnimationAsObjectSpecial(atid, WalkDirection.East);
 				
-			}else if(intValue==Special.South.toInt())
+			}else if(intValue==WalkDirection.South.toInt())
 			{
-				scene.setAnimationAsObjectSpecial(atid, Special.South);
+				scene.setAnimationAsObjectSpecial(atid, WalkDirection.South);
 				
-			}else if(intValue==Special.West.toInt())
+			}else if(intValue==WalkDirection.West.toInt())
 			{
-				scene.setAnimationAsObjectSpecial(atid, Special.West);
+				scene.setAnimationAsObjectSpecial(atid, WalkDirection.West);
 			}
 			return false;
 				
