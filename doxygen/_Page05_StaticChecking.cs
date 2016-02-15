@@ -82,9 +82,9 @@ each of the constants refers to a graphic element, or a series of graphic elemen
 as is the case with animations. If the constants were all enumerations, this would greatly
 increase the size of the javascript, when compiled with GWT. As a result, the constants
 are native types:
-- @ref InventoryItem graphics are specified using @b integer constants.
-- @ref SceneObject graphics are specified using @b short constants.
-- @ref Animation graphics specified using @b string constants.
+- @ref com.github.a2g.core.objectmodel.InventoryItem InventoryItem graphics are specified using @b integer constants.
+- @ref com.github.a2g.core.objectmodel.SceneObject SceneObject graphics are specified using @b short constants.
+- @ref com.github.a2g.core.objectmodel.Animation Animation graphics specified using @b string constants.
 
 This still provides a good level of type checking, as follows:
 

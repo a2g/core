@@ -25,7 +25,11 @@ import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.ISystemAnimation;
 import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
-
+/**
+ * documentation for BaseAction
+ * @author Admin
+ *
+ */
 public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	private ISystemAnimation systemAnimation;
 	private IActionRunnerFromBaseAction callbacks;

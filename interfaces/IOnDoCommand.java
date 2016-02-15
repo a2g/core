@@ -28,8 +28,8 @@ import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleY;
 import com.github.a2g.core.interfaces.methods.game.IGetCurrentAnimation;
 import com.github.a2g.core.interfaces.methods.game.IGetCurrentFrame;
 import com.github.a2g.core.interfaces.methods.game.IGetCurrentScene;
-import com.github.a2g.core.interfaces.methods.game.IGetIsSayAlwaysWithoutIncrementing;
-import com.github.a2g.core.interfaces.methods.game.IGetLastScene;
+import com.github.a2g.core.interfaces.methods.game.IGetIsTalkingAlwaysWithoutIncrementing;
+import com.github.a2g.core.interfaces.methods.game.IGetLastSceneName;
 import com.github.a2g.core.interfaces.methods.game.IGetValue;
 import com.github.a2g.core.interfaces.methods.game.IGetX;
 import com.github.a2g.core.interfaces.methods.game.IGetY;
@@ -49,7 +49,7 @@ import com.github.a2g.core.interfaces.methods.game.ISetCurrentFrame;
 import com.github.a2g.core.interfaces.methods.game.ISetDisplayName;
 import com.github.a2g.core.interfaces.methods.game.ISetInventoryItemDisplayName;
 import com.github.a2g.core.interfaces.methods.game.ISetInventoryItemVisible;
-import com.github.a2g.core.interfaces.methods.game.ISetIsSayAlwaysWithoutIncrementing;
+import com.github.a2g.core.interfaces.methods.game.ISetIsTalkingAlwaysWithoutIncrementing;
 import com.github.a2g.core.interfaces.methods.game.ISetValue;
 import com.github.a2g.core.interfaces.methods.game.ISetX;
 import com.github.a2g.core.interfaces.methods.game.ISetY;
@@ -73,10 +73,10 @@ ISetValue,
 // helpful for game
 IGetCurrentScene,
 ISwitchToScene,
-IGetLastScene,
+IGetLastSceneName,
 IIsInDebugMode,
-ISetIsSayAlwaysWithoutIncrementing,
-IGetIsSayAlwaysWithoutIncrementing,
+ISetIsTalkingAlwaysWithoutIncrementing,
+IGetIsTalkingAlwaysWithoutIncrementing,
 IShareWinning,
 ICreateChainRootAction,
 

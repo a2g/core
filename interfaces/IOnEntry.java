@@ -19,7 +19,7 @@ package com.github.a2g.core.interfaces;
 import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleX;
 import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleY;
 import com.github.a2g.core.interfaces.methods.game.IGetCurrentScene;
-import com.github.a2g.core.interfaces.methods.game.IGetLastScene;
+import com.github.a2g.core.interfaces.methods.game.IGetLastSceneName;
 import com.github.a2g.core.interfaces.methods.game.IGetSceneGuiHeight;
 import com.github.a2g.core.interfaces.methods.game.IGetSceneGuiWidth;
 import com.github.a2g.core.interfaces.methods.game.IGetValue;
@@ -51,7 +51,7 @@ IGetValue
 // helpful for game
 , IGetCurrentScene
 , ISwitchToScene
-, IGetLastScene
+, IGetLastSceneName
 , IIsInDebugMode
 , IGetSceneGuiWidth
 , IGetSceneGuiHeight

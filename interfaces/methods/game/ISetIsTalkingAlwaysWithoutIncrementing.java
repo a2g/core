@@ -1,5 +1,5 @@
 package com.github.a2g.core.interfaces.methods.game;
 
-public interface ISetIsSayAlwaysWithoutIncrementing {
+public interface ISetIsTalkingAlwaysWithoutIncrementing {
 	void setIsSayAlwaysWithoutIncremementing(boolean isSayWithoutIncremementing);
 }

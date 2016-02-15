@@ -23,7 +23,11 @@ import com.github.a2g.core.interfaces.ConstantsForAPI.Special;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
-
+/**
+ * 
+ * @author Admin
+ *
+ */
 public class SceneObject {
 	private String initialAnimationId;
 	private Map<String, String> mapOfSpecialAnimations;

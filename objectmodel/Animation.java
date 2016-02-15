@@ -19,6 +19,11 @@ package com.github.a2g.core.objectmodel;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.RectF;
 
+/**
+ * 
+ * @author Admin
+ *
+ */
 public class Animation {
 	private double durationInSeconds;
 	private String atid;

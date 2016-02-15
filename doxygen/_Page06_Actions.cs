@@ -16,7 +16,7 @@
  
 /*! 
 @page Actions
-Most of the classes in @ref com.github.a2g.core.action are represented here.
+Most of the subclasses of @ref com.github.a2g.core.action.BaseAction "BaseAction" are represented here.
 <br>
 
 @dot

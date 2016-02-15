@@ -18,7 +18,11 @@ package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.event.PropertyChangeEvent;
 import com.google.gwt.event.shared.EventBus;
-
+/**
+ *  
+ * @author Admin
+ *
+ */
 public class InventoryItem {
 
 	private final Image image;
