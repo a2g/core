@@ -9,7 +9,6 @@ import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IOnEntry;
 import com.github.a2g.core.interfaces.IOnEveryFrame;
 import com.github.a2g.core.interfaces.IOnFillLoadList;
-
 import com.github.a2g.core.interfaces.IOnPreEntry;
 import com.github.a2g.core.interfaces.internal.ILoad;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
@@ -455,8 +454,8 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 
 	@Override
-	public IGameScene getCurrentScene() {
-		return master.getCurrentScene();
+	public String getCurrentSceneName() {
+		return master.getCurrentSceneName();
 	}
 
 	@Override

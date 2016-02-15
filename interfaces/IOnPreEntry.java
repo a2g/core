@@ -26,7 +26,7 @@ import com.github.a2g.core.interfaces.methods.game.ICreateChainRootAction;
 import com.github.a2g.core.interfaces.methods.game.ISetDefaultSceneObject;
 import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleX;
 import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleY;
-import com.github.a2g.core.interfaces.methods.game.IGetCurrentScene;
+import com.github.a2g.core.interfaces.methods.game.IGetCurrentSceneName;
 import com.github.a2g.core.interfaces.methods.game.IGetDefaultSceneObject;
 import com.github.a2g.core.interfaces.methods.game.IGetIsTalkingAlwaysWithoutIncrementing;
 import com.github.a2g.core.interfaces.methods.game.IGetLastSceneName;
@@ -83,7 +83,7 @@ IGetValue,
 IIsTrue,
 ISetValue,
 // helpful for game
-IGetCurrentScene,
+IGetCurrentSceneName,
 ISwitchToScene,
 IGetLastSceneName,
 IIsInDebugMode,

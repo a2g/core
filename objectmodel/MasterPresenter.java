@@ -394,8 +394,9 @@ PropertyChangeEventHandlerAPI
 		}
 	}
 
-	public IGameScene getCurrentScene() {
-		return this.sceneHandlers;
+	 
+	public String getCurrentSceneName() {
+		return this.sceneHandlers.toString();
 	}
 
 	@Override

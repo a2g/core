@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.interfaces.methods.game.IGetCurrentScene;
+import com.github.a2g.core.interfaces.methods.game.IGetCurrentSceneName;
 import com.github.a2g.core.interfaces.methods.game.IGetLastSceneName;
 import com.github.a2g.core.interfaces.methods.game.IGetValue;
 import com.github.a2g.core.interfaces.methods.game.IIsInDebugMode;
@@ -39,7 +39,7 @@ IGetValue, IIsTrue, ISetValue
 , ISetAnimationAsSceneAsker
 , ISetAnimationAsSceneAnswerer
 // helpful for game
-, IGetCurrentScene, ISwitchToScene, IGetLastSceneName, IIsInDebugMode
+, IGetCurrentSceneName, ISwitchToScene, IGetLastSceneName, IIsInDebugMode
 // inventory
 , IIsInventoryItemVisible {
 

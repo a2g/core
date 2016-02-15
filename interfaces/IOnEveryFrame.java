@@ -24,7 +24,7 @@ import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleX;
 import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleY;
 import com.github.a2g.core.interfaces.methods.game.IGetCurrentAnimation;
 import com.github.a2g.core.interfaces.methods.game.IGetCurrentFrame;
-import com.github.a2g.core.interfaces.methods.game.IGetCurrentScene;
+import com.github.a2g.core.interfaces.methods.game.IGetCurrentSceneName;
 import com.github.a2g.core.interfaces.methods.game.IGetLastSceneName;
 import com.github.a2g.core.interfaces.methods.game.IGetSceneGuiWidth;
 import com.github.a2g.core.interfaces.methods.game.IGetValue;
@@ -62,7 +62,7 @@ IIsTrue,
 ISetValue
 // helpful for game
 ,
-IGetCurrentScene,
+IGetCurrentSceneName,
 ISwitchToScene,
 IGetLastSceneName,
 IIsInDebugMode,
