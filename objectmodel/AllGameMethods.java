@@ -172,9 +172,9 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 
 	@Override
-	public void updateToCorrectImage(short ocode) {
+	public void updateObjectToCorrectImage(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		master.getScenePresenter().getObjectByOtid(otid).updateToCorrectImage();
+		master.getScenePresenter().getObjectByOtid(otid).updateObjectToCorrectImage();
 	}
 
 	@Override

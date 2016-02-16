@@ -19,8 +19,8 @@
 @page GameApiCalls Game API Calls
 
 This was going to be one of those framework diagrams with 
-@ref Boundary sitting on top of @ref Walking, sitting on top
-of @ref Animation. But there are not too many dependent
+@ref Boundary "Boundary" sitting on top of @ref Walking "Walking", sitting on top
+of @ref Animation "Animation". But there are not too many dependent
 systems - so its really just a link page.
  
 @dot

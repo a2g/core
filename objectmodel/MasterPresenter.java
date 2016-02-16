@@ -194,7 +194,7 @@ PropertyChangeEventHandlerAPI
 	}
 
 	@Override
-	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix,
+	public boolean addImageForASceneObject(LoadHandler lh, int drawingOrder,
 			int x, int y, int w, int h, String otid, String atid, short ocode,
 			String objPlusAnimCode, IPackagedImage imageResource) {
 		if (this.sceneHandlers == null) {
@@ -205,16 +205,16 @@ PropertyChangeEventHandlerAPI
 				.createNewImageAndAddHandlers(lh, imageResource,
 						scenePresenter, bus, x, y, otid, ocode);
 
-		loaderPresenter.getLoaders().addToAppropriateAnimation(numberPrefix,
+		loaderPresenter.getLoaders().addToAppropriateAnimation(drawingOrder,
 				imageAndPos, otid, atid, ocode, objPlusAnimCode,
 				scenePresenter.getSceneGuiWidth(),
 				scenePresenter.getSceneGuiHeight());
 
 		// if its adding an animation to an existing object then use preceding.
-		numberPrefix = scenePresenter.getExistingPrefixIfAvailable(ocode, numberPrefix);
+		drawingOrder = scenePresenter.getExistingPrefixIfAvailable(ocode, drawingOrder);
 
-		int before = insertionPointCalculator.getIndexToInsertAt(numberPrefix);
-		insertionPointCalculator.updateTheListOfIndexesToInsertAt(numberPrefix);
+		int before = insertionPointCalculator.getIndexToInsertAt(drawingOrder);
+		insertionPointCalculator.updateTheListOfIndexesToInsertAt(drawingOrder);
 
 		// this triggers the loading
 		imageAndPos.addImageToPanel(before);

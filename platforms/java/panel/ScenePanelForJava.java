@@ -418,7 +418,7 @@ implements IScenePanelFromScenePresenter
 			String otid = toScene.getOtidByIndex(i);
 			if(toScene.getVisibleByOtid(otid))
 			{
-				//System.out.println(ob.getTextualId() + ob.getNumberPrefix());
+				//System.out.println(ob.getTextualId() + ob.getDrawingOrder());
 				int frame = toScene.getCurrentFrameByOtid(otid);
 				String atid = toScene.getAtidOfCurrentAnimationByOtid(otid);
 				Rect rect = toScene.getBoundingRectByFrameAndAtid(frame,atid);

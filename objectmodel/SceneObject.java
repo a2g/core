@@ -90,7 +90,7 @@ public class SceneObject {
 
 	public void setCurrentFrame(int i) {
 		this.fak.setCurrentFrame(i);
-		updateToCorrectImage();
+		updateObjectToCorrectImage();
 	}
 
 	public void incrementFrameWithWraparound() {
@@ -134,7 +134,7 @@ public class SceneObject {
 		}
 	}
 
-	public void updateToCorrectImage() {
+	public void updateObjectToCorrectImage() {
 		// 1. do this only when the this.currentImage != img
 		String currentAnim = fak.getCurrentAnimationAtid();
 		Animation anim = this.animationCollection.getByAtid(currentAnim);
@@ -188,7 +188,7 @@ public class SceneObject {
 	public void setVisible(boolean visible) {
 		// we always do this, we don't even check if visible!=this.visible
 		this.visible = visible;
-		updateToCorrectImage();
+		updateObjectToCorrectImage();
 	}
 
 	public boolean isVisible() {
@@ -313,7 +313,7 @@ public class SceneObject {
 
 	public void setCurrentAnimation(String atid) {
 		this.fak.setCurrentAnimationAtid(atid);
-		updateToCorrectImage();
+		updateObjectToCorrectImage();
 	}
 
 	public String getInitialAnimation() {
@@ -369,7 +369,7 @@ public class SceneObject {
 
 		setCurrentAnimationAndFrame(atid, frame);
 
-		this.updateToCorrectImage();
+		this.updateObjectToCorrectImage();
 
 		// then change position
 		setBaseMiddleX(h.getX());
@@ -394,7 +394,7 @@ public class SceneObject {
 		this.fak.setCurrentAnimationAtid(atid);
 		this.fak.setCurrentFrame(frame);
 
-		this.updateToCorrectImage();
+		this.updateObjectToCorrectImage();
 	}
 
 	public void setScale(double scale) {

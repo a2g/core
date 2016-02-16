@@ -31,7 +31,7 @@ be seen to build on the concept of @ref Walking Walking.
 Thus adding something to do boundary checking was pretty important.
 <br>
 <br>
-The @ref com.github.a2g.interfaces.methods.game.ISwitchToScene "switchToScene" method
+The @ref com.github.a2g.core.interfaces.methods.game.ISwitchToScene "switchToScene" method
 makes use of the Boundary concept by allowing the specification of a 
 second parameter which refers to the segment by which to enter the
 next scene through.  Without this, each scene would need to add its own
@@ -42,7 +42,7 @@ value.
 <br>
 <br>
 <br>
-The @ref com.github.a2g.interfaces.methods.game.ISetDefaultSceneObject "setDefaultSceneObject" 
+The @ref com.github.a2g.core.interfaces.methods.game.ISetDefaultSceneObject "setDefaultSceneObject" 
 method is only essential for the concept of switching in a new room.
 The defaultSceneObject is only otherwise used as shorthand, to reduce the amount
 of paramters in an action call: -1 as an object code ends up with the DefaultSceneObject.

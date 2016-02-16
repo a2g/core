@@ -23,27 +23,33 @@ pretty much how this animation system works. The frames of each animation are
 always the same size, and so if you have a long animation of a character moving
 from left to right, you don't need to worry about changing the character's position
 in between frames. If you want to change a characters position in between frames,
-then that's fine too. It's possible with the @ref Walking Walking system, that is 
+then that's fine too. It's possible with the @ref Walking "Walking System", that is 
 built on top of this one.
 <br>
 <br>
 Every graphical element is considered atleast a single page flickerbook.
 - eg a static background is a single page flickerbook.
+
 <br>
 <br>
-A scene is constructed with many flickerbooks, each overlayed on top of each
-other - some of them invisible (if they aren't meant to be seen)
+A scene is constructed with many flickerbooks, each displaying one image,
+and each overlayed on top of each other - some of them invisible 
+(if they aren't meant to be seen)
 <br>
 <br>
-To help manage visibility, there is a concept of a @ref SceneObject, which holds 
-and manages many flickerbooks. A SceneObject can only display one flickerbook, at
-a time, this is called the @ref CurrentAnimation.
+The class for representing the flickerbook is an @ref com.github.a2g.core.objectmodel.Animation "Animation".
+It helps to always think of an Animation as a flickerbook.  
 <br>
 <br>
-In a draw of the entire scene, SceneObject's CurrentAnimation s are drawn
-on top of each other, in the order of the @ref SceneObject::DrawingOrder 
-property - lowest first. Only one frame of the currentAnimation is drawn
-at a time - the SceneObject::CurrentFrame.
+To help manage visibility, there is a concept of a @ref com.github.a2g.core.objectmodel.SceneObject "SceneObject", which holds 
+and manages many Animations. A SceneObject can only display one animation at
+a time, this is called the @ref com.github.a2g.core.objectmodel.SceneObject.getCurrentAnimation "CurrentAnimation" property.
+<br>
+<br>
+In a draw of the entire scene, each SceneObject's CurrentAnimation s are drawn
+on top of each other, in the order of the @ref com.github.a2g.core.objectmodel.SceneObject.getDrawingOrder "DrawingOrder" property.
+property - lowest to highest. Only one frame of the currentAnimation is drawn
+at a time - the SceneObject::getCurrentFrame.
 <br>
 <br>
 Having the currentframe be a property of the SceneObject is handy when switching
@@ -53,7 +59,9 @@ you can switch the CurrentAnimation from WALKING to TALKING_WHILST_WALKING, and
 the transition will be seamless - your character won't miss a step!  
 <br>
 <br>
-The position of the each flickerbook is set with an X and Y in pixel space.
+The position of the each animation is set with an X and Y in pixel space.
+If resolution independent positioning is needed, then try the BaseMiddleX and Y 
+properties in @ref Walking.
 <br>
 <br>
 */

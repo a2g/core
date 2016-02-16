@@ -338,13 +338,13 @@ implements IScenePresenter
 		return toReturn;
 	}
 
-	public int getExistingPrefixIfAvailable(short ocode, int numberPrefix) {
+	public int getExistingPrefixIfAvailable(short ocode, int drawingOrder) {
 		SceneObject o = this.getObjectByOCode(ocode);
 		if(o!=null)
 		{
 			return o.getDrawingOrder();
 		}
-		return numberPrefix;
+		return drawingOrder;
 	}
 
 	public void clearBoundaries() {

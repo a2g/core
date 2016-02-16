@@ -87,10 +87,10 @@ public class Loader implements ILoaderPresenter {
 		master.incrementProgress();
 	}
 
-	public void addToAppropriateAnimation(int numberPrefix, Image imageAndPos,
+	public void addToAppropriateAnimation(int drawingOrder, Image imageAndPos,
 			String objectTextualId, String animationTextualId,
 			short objectCode, String objPlusAnimCode, int width, int height) {
-		theCurrentLoader.addToAppropriateAnimation(numberPrefix, imageAndPos,
+		theCurrentLoader.addToAppropriateAnimation(drawingOrder, imageAndPos,
 				objectTextualId, animationTextualId, objectCode,
 				objPlusAnimCode, width, height);
 	}

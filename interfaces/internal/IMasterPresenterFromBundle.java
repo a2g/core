@@ -43,7 +43,7 @@ public interface IMasterPresenterFromBundle {
 	 * this method method, then the ImageResource is added to the list of
 	 * animation frames for the animation specified by the ids.
 	 * 
-	 * @param numberPrefix
+	 * @param drawingOrder
 	 * 
 	 * @param x specifies the horizontal offset (in pixels) used to position the
 	 * image in its default location in the scene.
@@ -67,7 +67,7 @@ public interface IMasterPresenterFromBundle {
 	 * 
 	 * @return true on success, otherwise false.
 	 */
-	public boolean addImageForASceneObject(LoadHandler lh, int numberPrefix,
+	public boolean addImageForASceneObject(LoadHandler lh, int drawingOrder,
 			int x, int y, int w, int h, String otid,
 			String atid, short ocode, String objectPlusAnimCode,
 			IPackagedImage imageResource);

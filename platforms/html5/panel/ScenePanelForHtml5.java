@@ -300,7 +300,7 @@ ImagePanelAPI
 				String atid = toScene.getAtidOfCurrentAnimationByOtid(otid);
 				int frame = toScene.getCurrentFrameByOtid(otid);
 				Rect rect = toScene.getBoundingRectByFrameAndAtid(frame,atid);
-				//System.out.println(ob.getTextualId() + ob.getNumberPrefix());
+				//System.out.println(ob.getTextualId() + ob.getDrawingOrder());
 				
 				int adjX = x - (int)toScene.getXByOtid(otid) + cameraOffsetX;
 				int adjY = y - (int)toScene.getYByOtid(otid) + cameraOffsetY;

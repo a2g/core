@@ -9,13 +9,13 @@ public class InsertionPointCalculator {
 		clear();
 	}
 
-	public int getIndexToInsertAt(int numberPrefix) {
-		int i = theListOfIndexesToInsertAt[numberPrefix];
+	public int getIndexToInsertAt(int drawingOrder) {
+		int i = theListOfIndexesToInsertAt[drawingOrder];
 		return i==0?0:i-1;
 	}
 
-	public void updateTheListOfIndexesToInsertAt(int numberPrefix) {
-		for (int i = numberPrefix; i <= 99; i++) {
+	public void updateTheListOfIndexesToInsertAt(int drawingOrder) {
+		for (int i = drawingOrder; i <= 99; i++) {
 			theListOfIndexesToInsertAt[i]++;
 		}
 	}
