@@ -342,7 +342,7 @@ implements IScenePresenter
 		SceneObject o = this.getObjectByOCode(ocode);
 		if(o!=null)
 		{
-			return o.getNumberPrefix();
+			return o.getDrawingOrder();
 		}
 		return numberPrefix;
 	}

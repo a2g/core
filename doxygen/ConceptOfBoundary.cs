@@ -16,7 +16,7 @@
  
 /*!
 
-@page ConceptOfWalkBoundary "The Walk Boundary Concept"
+@page Boundary The Boundary Concept
 Without the concept of a boundary each scene would need to add
 logic in to the OnEveryFrame handler to detect when the SceneObject
 being controlled by the main character has walked beyond a certain point.
@@ -27,7 +27,7 @@ maths equations.
 <br>
 <br>
 It point that it checks for out-of-boundsness is the base middle, so this can
-be seen to build on the concept of @ref ConceptOfBaseMiddle "BaseMiddle".
+be seen to build on the concept of @ref Walking Walking.
 Thus adding something to do boundary checking was pretty important.
 <br>
 <br>

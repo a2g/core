@@ -18,6 +18,7 @@ import com.github.a2g.core.primitive.RectF;
 
 /** 
  * @brief
+ * @ref balooga blah blah
  * These are all the game methods, but these methods may or may not be available
  * on the interface for a specific handler. Check each interface individually:
  * @ref com.github.a2g.core.interfaces.IOnFillLoadList "IOnFillLoadList" ,
@@ -40,6 +41,8 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 
 	/**
 	 * @name SceneObject Methods 
+	 * @category stuff
+	 
 	 * These methods take an @ref ocode as the
 	 * first parameter. Behind the scenes they act on a @ref SceneObject.
 	 * Don't worry about getting any of the constants mixed up: these scene
@@ -386,6 +389,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 
 	/**
 	 * @name Verb Methods 
+	 * @anchor balooga
 	 * These items act on the @ref VerbsPresenter object
 	 * Behind the scenes they act on a SceneObject. They all have "Verb"
 	 * in their names.

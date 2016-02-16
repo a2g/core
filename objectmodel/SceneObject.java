@@ -41,7 +41,7 @@ public class SceneObject {
 	private final double screenPixelHeight;
 	private double rawY; // needed for moving image around.
 	private double rawX;
-	private int numberPrefix;
+	private int drawingOrder;
 	private short ocode;
 	private double screenCoordsPerSecond;
 	private double scale;
@@ -56,7 +56,7 @@ public class SceneObject {
 		this.screenPixelWidth = screenWidth;
 		this.screenPixelHeight = screenHeight;
 		this.mapOfSpecialAnimations = new TreeMap<String, String>();
-		this.numberPrefix = 0;
+		this.drawingOrder = 0;
 		this.initialAnimationId = otid + "_INITIAL";
 		this.scale = 1;
 
@@ -66,12 +66,12 @@ public class SceneObject {
 		this.screenCoordsPerSecond = .3;
 	}
 
-	public void setNumberPrefix(int number) {
-		this.numberPrefix = number;
+	public void setDrawingOrder(int number) {
+		this.drawingOrder = number;
 	}
 
-	public int getNumberPrefix() {
-		return this.numberPrefix;
+	public int getDrawingOrder() {
+		return this.drawingOrder;
 	}
 
 	public String getOtid() {

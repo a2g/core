@@ -569,7 +569,7 @@ PropertyChangeEventHandlerAPI
 		for (int i = 0; i < theirs.count(); i++) {
 			SceneObject srcObject = theirs.getByIndex(i);
 			String otid = srcObject.getOtid();
-			int prefix = srcObject.getNumberPrefix();
+			int prefix = srcObject.getDrawingOrder();
 			short ocode = srcObject.getOCode();
 			SceneObject destObject = null;
 			int index = ours.getIndexByOtid(otid);
@@ -581,7 +581,7 @@ PropertyChangeEventHandlerAPI
 				destObject = new SceneObject(otid,
 						scenePresenter.getSceneGuiWidth(),
 						scenePresenter.getSceneGuiHeight());
-				destObject.setNumberPrefix(prefix);
+				destObject.setDrawingOrder(prefix);
 				destObject.setOCode(ocode);
 
 				if (ocode == -1) {

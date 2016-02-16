@@ -16,9 +16,7 @@
  
 /*!
 
-@page ConceptOfBaseMiddle "The BaseMiddle Concept"
+@page Talking The Talking Concept
 
-Every animation is chained to the next one by aligning the base middles.
-It is needed to make walking around a seamless experience.
-It results in all the animation code making extra calculations. 
+ 
 */

@@ -45,7 +45,7 @@ public class LoadedLoad {
 		}else{
 			sceneObject = new SceneObject(objectTextualId, screenPixelWidth,
 					screenPixelHeight);
-			sceneObject.setNumberPrefix(prefix);
+			sceneObject.setDrawingOrder(prefix);
 			sceneObject.setOCode(objectCode);
 
 			this.getSceneObjectCollection().add(sceneObject);
