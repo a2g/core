@@ -1,0 +1,57 @@
+digraph I
+{ 
+	compound=true;
+	graph[
+		rankdir="TB"
+		, compound=true
+	];
+	
+	node [
+		shape=record
+		, fontname=arial
+		, fontsize=8
+		, style=filled 
+		, pad=0.0
+	];
+	
+	subgraph [
+		 shape=record
+		 , fontname=arial
+		 , fontsize=8
+		 , style=filled
+		 , fillcolor="blue:cyan"
+		 , gradientangle="90"   
+		 , center=false
+	];
+
+
+	subgraph cluster_Animation
+	{
+		URL="@ref AnimationSystem"
+		label="Animation System" 
+		labeljust="l"
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IGetAnimationLastFrame" label="api.getAnimationLastFrame"] IGetAnimationLastFrame;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IGetAnimationLength" label="api.getAnimationLength"] IGetAnimationLength;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IGetCurrentAnimation" label="api.getCurrentAnimation"] IGetCurrentAnimation;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IGetCurrentFrame" label="api.getCurrentFrame"] IGetCurrentFrame;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IIncremementFrameWithWraparound" label="api.IIncremementFrameWithWraparound"] IIncremementFrameWithWraparound;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IIsAnimation" label="api.isAnimation"] IIsAnimation;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IIsInDebugMode" label="api.isInDebugMode"] IIsInDebugMode;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IIsVisible" label="api.isVisible"] IIsVisible;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectCurrent" label="api.setAnimationAsObjectCurrent"] ISetAnimationAsObjectCurrent;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectCurrentAndSetFrame" label="api.setAnimationAsObjectCurrentAndSetFrame"] ISetAnimationAsObjectCurrentAndSetFrame;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectInitial" label="api.setAnimationAsObjectInitial"] ISetAnimationAsObjectInitial;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISetAnimationDuration" label="api.setAnimationDuration"] ISetAnimationDuration;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISetCurrentFrame" label="api.setCurrentFrame"] ISetCurrentFrame;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISetDisplayName" label="api.setDisplayName"] ISetDisplayName;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISetParallaxX" label="api.setParallaxX"] ISetParallaxX;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISetVisible" label="api.setVisible"] ISetVisible;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IUpdateObjectToCorrectImage" label="api.updateObjectToCorrectImage"] IUpdateObjectToCorrectImage;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IHide" label="api.hide"] IHide;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IShow" label="api.show"] IShow;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISetY" label="api.setY"] ISetY;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISetX" label="api.setX"] ISetX;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IGetY" label="api.getY"] IGetY;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IGetX" label="api.getX"] IGetX;
+	}
+}

@@ -17,7 +17,8 @@
 /*!
 
 @page Walking The Walking Concept
-
+@dotfile ChainWalking.dot
+@dotfile ApiWalking.dot
 Every animation is chained to the next one by aligning the base middles.
 It is needed to make walking around a seamless experience.
 It results in all the animation code making extra calculations. 

@@ -1,0 +1,39 @@
+digraph I
+{ 
+	compound=true;
+	graph[
+		rankdir="TB"
+		, compound=true
+	];
+	
+	node [
+		shape=record
+		, fontname=arial
+		, fontsize=8
+		, style=filled 
+		, pad=0.0
+	];
+	
+	subgraph [
+		 shape=record
+		 , fontname=arial
+		 , fontsize=8
+		 , style=filled
+		 , fillcolor="blue:cyan"
+		 , gradientangle="90"   
+		 , center=false
+	];
+	
+	subgraph cluster_Boundary
+	{
+		 
+		URL="@ref Boundary" 
+		labeljust="l"	
+		label="Boundary"
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IGetDefaultSceneObject" label="api.getDefaultSceneObject"] IGetDefaultSceneObject;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISetDefaultSceneObject" label="api.setDefaultSceneObject"] ISetDefaultSceneObject;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IAddBoundaryPoint" label="api.addBoundaryPoint"] IAddBoundaryPoint;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IAddObstacleRect" label="api.addObstacleRect"] IAddObstacleRect;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IAddBoundaryGate" label="api.addBoundaryGate"] IAddBoundaryGate;
+	}
+}

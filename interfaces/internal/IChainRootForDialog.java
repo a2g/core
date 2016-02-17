@@ -8,16 +8,16 @@ public interface IChainRootForDialog {
 	DialogChainableAction ask(String speech);
 	DialogChainableAction branchNormal(int branchId, final boolean isOkToAdd, String text);
 	DialogChainableAction branchNormal(int branchId, String text) ;
-
+	DialogChainableAction branchSticky(int branchId, String text) ;
+	DialogChainableAction branchSticky(int nativ2, boolean b, String string);
+	
 	DialogChainableAction setValue(String key, int value) ;
 	DialogChainableAction setInventoryVisible(int redNote, boolean b);
 	DialogChainableAction sleep(int milliseconds);
 	DialogChainableAction setInitialAnimation(String atid);
 
-	DialogChainEndAction  endDialogTree();
-	DialogChainEndAction  chainTo(int branchId);
-	DialogChainEndAction  switchTo(String string, int arrivalSegment);
-	DialogChainableAction branchSticky(int branchId, String text) ;
-	DialogChainEndAction branchSticky(int nativ2, boolean b, String string);
+	DialogChainEndAction endDialogTree();
+	DialogChainEndAction chainTo(int branchId);
+	DialogChainEndAction switchTo(String string, int arrivalSegment);
 	DialogChainEndAction branchTheObligatoryExit(String string);
 }

@@ -17,6 +17,8 @@
 /*!
 
 @page Animation The Animation System
+
+@dotfile ApiAnimation.dot
 You know those little flickerbooks, where each frame was a drawing, and you'd see 
 a little animation if you flicked the book through your fingers? Well that's
 pretty much how this animation system works. The frames of each animation are

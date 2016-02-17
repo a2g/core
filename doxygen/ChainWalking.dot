@@ -1,0 +1,41 @@
+digraph I
+{ 
+	compound=true;
+	graph[
+		rankdir="TB"
+		, compound=true
+	];
+	
+	node [
+		shape=ellipse
+		, fontname=arial
+		, fontsize=8
+		, style=filled 
+		, pad=0.0
+	];
+	
+	subgraph [
+		 shape=record
+		 , fontname=arial
+		 , fontsize=8
+		 , style=filled
+		 , fillcolor="red:orange"
+		 , gradientangle="90"   
+		 , center=false
+	];
+	
+	subgraph cluster_Walking
+	{
+		URL="@ref Walking" 
+		label="Walking"
+		labeljust="l"
+		
+		node [ label="chain.walkAndScaleNeverSwitch"] ISetBaseMiddleX;
+        node [ label="chain.walkAndScaleAlwaysSwitch"] IGetBaseMiddleY;
+		node [ label="chain.walkAndTalkNeverSwitch"] ISetScreenCoordsPerSecond;
+		node [ label="chain.walkNeverSwitch"] ISetAnimationAsObjectWalkDirection;
+		node [ label="chain.walkAlwaysSwitch"] ISetBaseMiddleY;
+		node [ label="chain.walkTo"] IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
+		 
+	} 
+}

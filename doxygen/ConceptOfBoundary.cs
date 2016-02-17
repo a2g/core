@@ -17,6 +17,7 @@
 /*!
 
 @page Boundary The Boundary Concept
+@dotfile ApiBoundary.dot
 Without the concept of a boundary each scene would need to add
 logic in to the OnEveryFrame handler to detect when the SceneObject
 being controlled by the main character has walked beyond a certain point.
