@@ -32,10 +32,10 @@ digraph I
 		
 		node [ label="chain.walkAndScaleNeverSwitch"] ISetBaseMiddleX;
         node [ label="chain.walkAndScaleAlwaysSwitch"] IGetBaseMiddleY;
-		node [ label="chain.walkAndTalkNeverSwitch"] ISetScreenCoordsPerSecond;
-		node [ label="chain.walkNeverSwitch"] ISetAnimationAsObjectWalkDirection;
-		node [ label="chain.walkAlwaysSwitch"] ISetBaseMiddleY;
-		node [ label="chain.walkTo"] IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
+		node [ label=".walkAndTalkNeverSwitch"] ISetScreenCoordsPerSecond;
+		node [ label=".walkNeverSwitch"] ISetAnimationAsObjectWalkDirection;
+		node [ label=".walkAlwaysSwitch"] ISetBaseMiddleY;
+		node [ label=".walkTo"] IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
 		 
 	} 
 }

@@ -30,8 +30,8 @@ digraph I
 		label="Talking"
 		labeljust="l"
 		
-		node [ label="chain.talkWithoutIncrementingFrameNonBlocking"] ISetBaseMiddleX;
+		node [ label=".talkWithoutIncrementingFrameNonBlocking"] ISetBaseMiddleX;
         node [ label="chain.talkWithoutIncrementingFrame"] IGetBaseMiddleY;
-		node [ label="chain.talk"] ISetScreenCoordsPerSecond;
+		node [ label=".talk"] ISetScreenCoordsPerSecond;
 	} 
 }
