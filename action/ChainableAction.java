@@ -338,7 +338,7 @@ implements IChainRootForScene
 
 	@Override
 	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int arrivalSegment) {
-		return this.walkAlwaysSwitch( new PointF(x,y), sceneName, 0);
+		return this.walkAlwaysSwitch( new PointF(x,y), sceneName, arrivalSegment);
 	}
 	
 	@Override
