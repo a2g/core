@@ -208,7 +208,7 @@ implements IChainRootForScene
 
 	@Override
 	public ChainableAction setBaseMiddleY(short ocode, double y) {
-		SingleCallAction a =  new SingleCallAction(this, Type.SetBaseMiddleX);
+		SingleCallAction a =  new SingleCallAction(this, Type.SetBaseMiddleY);
 		a.setOCode(ocode);
 		a.setDouble(y);
 		return a;
@@ -434,6 +434,17 @@ implements IChainRootForScene
 		a.setParallel(true);
 		return a;
 	}
+	@Override
+	public ChainableAction moveWhilstAnimatingLinear(short objId, double x,
+			double y) {
+		MoveWhilstAnimatingAction a = new MoveWhilstAnimatingAction(this,
+				objId );
+		a.setEndX(x);
+		a.setEndY(y);
+		a.setLinear(true);
+		return a;
+	}
+	
 	@Override
 	public ChainableAction moveWhilstAnimatingLinearNonBlocking(short objId, double x,
 			double y) {
