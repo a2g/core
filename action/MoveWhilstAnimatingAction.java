@@ -31,6 +31,7 @@ public class MoveWhilstAnimatingAction extends ChainableAction{
 	public MoveWhilstAnimatingAction(BaseAction parent, short ocode) {
 		super(parent);
 		mover = new MovePerformer(ocode);
+		mover.setToInitialAtEndForMover(true);// needed for B_4GateFront 
 	}
 
 
