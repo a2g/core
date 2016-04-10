@@ -169,6 +169,14 @@ ITitleCardPresenterFromActions
 	}
 
 	@Override
+	public void setInitialAnimationByAtid(String atid) {
+		String otid = getOtidByAtid(atid);
+		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
+		o.setInitialAnimation(atid);
+		;
+	}
+
+	@Override
 	public void setScaleOnCurrentFrameByOtid(String otid, double scale) {
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
 		object.setScale(scale);
@@ -343,13 +351,6 @@ ITitleCardPresenterFromActions
 
 	}
 
-	@Override
-	public void setInitialAnimationByAtid(String atid) {
-		String otid = getOtidByAtid(atid);
-		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
-		o.setInitialAnimation(atid);
-		;
-	}
 
 	@Override
 	public void setXByOtid(String otid, int i) {
