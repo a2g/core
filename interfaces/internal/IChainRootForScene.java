@@ -120,6 +120,8 @@ public interface IChainRootForScene {
 			double y);
 	public ChainableAction moveWhilstAnimatingLinearNonBlocking(short objId, double x,
 			double y);
+	public ChainableAction moveWhilstAnimatingLinear(short objId, double x, double y);
+	
 
 	public ChainableAction moveCameraToNewXPosition(double x,
 			double durationInSecs);
