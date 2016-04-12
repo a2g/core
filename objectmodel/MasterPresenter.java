@@ -104,6 +104,7 @@ PropertyChangeEventHandlerAPI
 	private AllActionMethods proxyForActions;
 	private Map<String, ISound> mapOfSounds;
 	private boolean isAutoplayCancelled;
+	ISound soundtrack;
 
 	public MasterPresenter(final IHostingPanel panel, EventBus bus,
 			IHostFromMasterPresenter host) {
@@ -1018,7 +1019,13 @@ PropertyChangeEventHandlerAPI
 	@Override
 	public void playSoundByStid(String stid) {
 		mapOfSounds.get(stid).play();
-
+	}
+	
+	 
+	public void playSoundtrack(String stid) {
+		ISound sound = mapOfSounds.get(stid);
+		soundtrack = this.getFactory().createSound(sound.getLocation());
+		soundtrack.play();
 	}
 
 	@Override

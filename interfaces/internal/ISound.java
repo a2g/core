@@ -4,4 +4,5 @@ public interface ISound {
 	void play();
 	double getDuration();
 	void stop();
+	String getLocation();
 }

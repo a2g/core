@@ -100,4 +100,9 @@ implements ISound
 			clip.stop();
 	}
 
+	@Override
+	public String getLocation() {
+		return location;
+	}
+
 }

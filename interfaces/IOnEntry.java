@@ -27,7 +27,8 @@ import com.github.a2g.core.interfaces.methods.game.IGetX;
 import com.github.a2g.core.interfaces.methods.game.IGetY;
 import com.github.a2g.core.interfaces.methods.game.IIsInDebugMode;
 import com.github.a2g.core.interfaces.methods.game.IIsInventoryItemVisible;
-import com.github.a2g.core.interfaces.methods.game.IIsTrue;
+import com.github.a2g.core.interfaces.methods.game.IIsTrue; 
+import com.github.a2g.core.interfaces.methods.game.IPlaySoundtrack;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectCurrent;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectInitial;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectWalkDirection;
@@ -70,6 +71,8 @@ IGetValue
 , ISetAnimationAsSceneTalker
 , ISetAnimationAsObjectInitial
 , ISetAnimationAsObjectCurrent
+// sound
+, IPlaySoundtrack
 {
 
 }

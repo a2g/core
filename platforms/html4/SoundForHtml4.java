@@ -6,8 +6,10 @@ import com.google.gwt.media.client.Audio;
 public class SoundForHtml4
 implements ISound{
 	Audio audio;
+	String location;
 	public SoundForHtml4(String location)
 	{
+		this.location = location;
 		audio = Audio.createIfSupported();
 		if(audio!=null)
 		{
@@ -28,6 +30,10 @@ implements ISound{
 	public void stop() {
 		audio.setCurrentTime(0.0);
 
+	}
+	@Override
+	public String getLocation() {
+		return location;
 	}
 
 }

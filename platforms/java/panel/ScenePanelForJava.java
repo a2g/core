@@ -83,8 +83,7 @@ implements IScenePanelFromScenePresenter
 
 	private Map<Integer,Point> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
-	private LinkedList<Image> listOfAllVisibleImages;
-	//private PopupPanelForJava speechPopup;
+	private LinkedList<Image> listOfAllVisibleImages; 
 
 	private boolean speechVisible;
 	private ColorEnum speechColor;
@@ -93,8 +92,7 @@ implements IScenePanelFromScenePresenter
 
 	public ScenePanelForJava(EventBus bus, IScenePresenterFromScenePanel toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine)
 	{
-		isRenderDiagnostics = true;
-		//this.speechPopup = new PopupPanelForJava(toScene);
+		isRenderDiagnostics = true; 
 		this.toScene = toScene;
 		this.toCommandLine = toCommandLine;
 		this.mapOfPointsByImage = new TreeMap<Integer, Point>();
@@ -486,11 +484,6 @@ implements IScenePanelFromScenePresenter
 		this.speechText = speech;
 		this.speechRect = pixels;
 
-		//this.speechPopup.setVisible(isVisible);
-		//this.speechPopup.setColor(talkingColor);
-		//this.speechPopup.setText(speech);
-		//this.speechPopup.setPopupPosition(pixels.getLeft(), pixels.getTop());
- 
 	}
 
 
