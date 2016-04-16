@@ -45,7 +45,7 @@ public class PackagedImageForJava implements IPackagedImage {
 			try {
 				img = ImageIO
 						.read(new File(
-								"E:/Conan/Swing/bin/com/github/a2g/core/res/leftArrow.png"));
+								"E:/a2g_core/res/leftArrow.png"));
 			} catch (IOException f) {
 				JOptionPane.showMessageDialog (null, "couldn't find 'com/github/a2g/core/leftArrow.png', so exiting.", "No Arrow!", JOptionPane.WARNING_MESSAGE);
 				System.exit(0);

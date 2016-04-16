@@ -1022,7 +1022,7 @@ PropertyChangeEventHandlerAPI
 	}
 	
 	 
-	public void playSoundtrack(String stid) {
+	public void setSoundtrack(String stid) {
 		ISound sound = mapOfSounds.get(stid);
 		soundtrack = this.getFactory().createSound(sound.getLocation());
 		soundtrack.play();

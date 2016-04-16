@@ -540,6 +540,13 @@ implements IChainRootForScene
 	}
 
 	@Override
+	public ChainableAction setSoundtrack(String stid)
+	{
+		SingleCallAction a =  new SingleCallAction(this, Type.SetSoundtrack);
+		a.setString(stid);
+		return a;
+	}
+	@Override
 	public ChainableAction playSound(String stid)
 	{
 		PlaySoundAction a =  new PlaySoundAction(this, stid);

@@ -593,8 +593,8 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 
 	@Override
-	public void playSoundtrack(String stid) {
-		master.playSoundtrack(stid);
+	public void setSoundtrack(String stid) {
+		master.setSoundtrack(stid);
 	}
 
 

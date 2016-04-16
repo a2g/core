@@ -430,6 +430,14 @@ ITitleCardPresenterFromActions
 	}
 
 
+		@Override
+		public void setSoundtrack(String stringValue) {
+			master.setSoundtrack(stringValue);
+		}
+
+
+
+
 	// /@}
 
 }

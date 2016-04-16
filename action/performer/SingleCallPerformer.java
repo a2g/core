@@ -46,6 +46,7 @@ public class SingleCallPerformer
 		, SetAnimationSpecial
 		, SetAnimationSceneTalker
 		, SetAnimationObjectInitial
+		, SetSoundtrack
 	}
 	Type type;
 	private double d;
@@ -125,6 +126,9 @@ public class SingleCallPerformer
 		case SetDisplayName:
 			otid = scene.getOtidByCode(ocode);
 			scene.setDisplayNameByOtid(otid, this.stringValue);
+			return false;
+		case SetSoundtrack:
+			scene.setSoundtrack(this.stringValue);
 			return false;
 		case SetInitialAnimation:
 			scene.setInitialAnimationByAtid(atid);
