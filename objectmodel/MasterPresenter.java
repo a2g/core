@@ -373,7 +373,7 @@ PropertyChangeEventHandlerAPI
 
 	public String getLastScene() {
 		if (lastSceneAsString != null)
-			return lastSceneAsString.toUpperCase();
+			return lastSceneAsString;
 		return "";
 	}
 
