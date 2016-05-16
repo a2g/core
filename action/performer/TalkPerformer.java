@@ -182,6 +182,11 @@ public class TalkPerformer {
 
 	double getSecondsForLine(String speech) {
 		double popupDisplayDuration = master.getPopupDisplayDuration();
+		int numberOfSpaces = 0;
+		for(int i=0;i<speech.length();i++)
+		{
+			numberOfSpaces+=(speech.charAt(i)==' ')?1:0;
+		}
 		// int delay = how;
 		// int duration = (speech.length() * (2 + delay)) * 40;
 		return  popupDisplayDuration;

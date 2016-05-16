@@ -1023,6 +1023,12 @@ PropertyChangeEventHandlerAPI
 	
 	 
 	public void setSoundtrack(String stid) {
+		if(stid==null || stid.isEmpty())
+		{
+			if(soundtrack!=null)
+				soundtrack.stop();
+			return;
+		}
 		ISound sound = mapOfSounds.get(stid);
 		soundtrack = this.getFactory().createSound(sound.getLocation());
 		soundtrack.play();
