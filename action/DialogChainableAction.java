@@ -21,6 +21,7 @@ import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
+import com.github.a2g.core.interfaces.internal.IChainRootForScene;
 
 public abstract class DialogChainableAction extends DialogChainEndAction
 implements IChainRootForDialog
@@ -52,13 +53,13 @@ implements IChainRootForDialog
 	}
 
 	@Override
-	public	DialogChainableAction answer(String speech) {
+	public	DialogChainableAction them(String speech) {
 		DialogTalkAction s = new DialogTalkAction(this, TalkPerformer.SCENE_ANSWERER, speech);
 		return s;
 	}
 
 	@Override
-	public	DialogChainableAction ask(String speech) {
+	public	DialogChainableAction us(String speech) {
 		DialogTalkAction s = new DialogTalkAction(this, TalkPerformer.SCENE_ASKER, speech);
 		return s;
 	}
@@ -95,7 +96,7 @@ implements IChainRootForDialog
 	}
 
 	@Override
-	public DialogChainableAction setInitialAnimation(String atid)
+	public DialogChainableAction setAnimationAsObjectInitial(String atid)
 	{
 		DialogSingleCallAction a =  new DialogSingleCallAction(this, Type.SetInitialAnimation);
 		a.setAtid(atid);
@@ -119,4 +120,5 @@ implements IChainRootForDialog
 		a.setIsExemptFromSaidList(true);
 		return a;
 	}
+	 
 }

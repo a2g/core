@@ -21,8 +21,13 @@ import com.github.a2g.core.interfaces.internal.IClearValueRegistry;
 import com.github.a2g.core.interfaces.methods.game.IAddBoundaryGate;
 import com.github.a2g.core.interfaces.methods.game.IAddBoundaryPoint;
 import com.github.a2g.core.interfaces.methods.game.IAddObstacleRect;
+import com.github.a2g.core.interfaces.methods.game.IAddSpeechBubble;
 import com.github.a2g.core.interfaces.methods.game.IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
 import com.github.a2g.core.interfaces.methods.game.ICreateChainRootAction;
+import com.github.a2g.core.interfaces.methods.game.IGetOCodeByAtid;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneDialoggee;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneDialogger;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationSpeechBubble;
 import com.github.a2g.core.interfaces.methods.game.ISetDefaultSceneObject;
 import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleX;
 import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleY;
@@ -46,11 +51,8 @@ import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectCurrent;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectCurrentAndSetFrame;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectInitial;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectWalkDirection;
-import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneAnswerer;
-import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneAsker;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneTalker;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationDuration;
-import com.github.a2g.core.interfaces.methods.game.ISetAnimationMaxTalkRect;
 import com.github.a2g.core.interfaces.methods.game.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.methods.game.ISetBaseMiddleY;
 import com.github.a2g.core.interfaces.methods.game.ISetDisplayName;
@@ -59,7 +61,7 @@ import com.github.a2g.core.interfaces.methods.game.ISetInventoryItemVisible;
 import com.github.a2g.core.interfaces.methods.game.ISetIsTalkingAlwaysWithoutIncrementing;
 import com.github.a2g.core.interfaces.methods.game.ISetParallaxX;
 import com.github.a2g.core.interfaces.methods.game.ISetScreenCoordsPerSecond;
-import com.github.a2g.core.interfaces.methods.game.ISetTalkingColor;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationTalkingColor;
 import com.github.a2g.core.interfaces.methods.game.ISetTitleCard;
 import com.github.a2g.core.interfaces.methods.game.ISetValue;
 import com.github.a2g.core.interfaces.methods.game.ISetVisible;
@@ -92,6 +94,8 @@ IGetIsTalkingAlwaysWithoutIncrementing,
 IShareWinning,
 ICreateChainRootAction,
 IGetSceneGuiHeight,
+IAddSpeechBubble,
+IGetOCodeByAtid,
 // boundary
 IAddBoundaryGate,
 IAddBoundaryPoint,
@@ -108,11 +112,12 @@ ISetX,
 ISetY,
 ISetDisplayName,
 ISetScreenCoordsPerSecond,
-ISetTalkingColor,
+ISetAnimationTalkingColor,
 ISetParallaxX,
 IGetX,
 IGetY,
 ISetVisible,
+ISetAnimationSpeechBubble,
 // inventory
 IShowInventoryItem,
 IHideInventoryItem,
@@ -137,9 +142,8 @@ ISetAnimationDuration,
 ISetAnimationAsObjectWalkDirection,
 ISetDefaultSceneObject,
 ISetAnimationAsObjectCurrentAndSetFrame,
-ISetAnimationAsSceneAsker,
-ISetAnimationAsSceneAnswerer,
-ISetAnimationMaxTalkRect,
+ISetAnimationAsSceneDialogger,
+ISetAnimationAsSceneDialoggee,
 IGetDefaultSceneObject,
 IClearValueRegistry,
 IClearSaidSpeech

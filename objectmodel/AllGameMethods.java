@@ -301,13 +301,13 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	
 	
 	@Override
-	public void setAnimationAsSceneAsker(String atid) {
+	public void setAnimationAsSceneDialogger(String atid) {
 		master.getScenePresenter().setSceneAskerAtid(atid);
 	}
 
 	
 	@Override
-	public void setAnimationAsSceneAnswerer(String atid) {
+	public void setAnimationAsSceneDialoggee(String atid) {
 		master.getScenePresenter().setSceneAnswererAtid(atid);
 	}
 
@@ -333,12 +333,6 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 		o.setCurrentAnimation(atid);
 	}
 	
-	@Override
-	public void setAnimationMaxTalkRect(String atid, RectF rectF) {
-		master.getScenePresenter().getAnimationByAtid(atid).setMaxSpeechBalloonRect(rectF);
-
-	}
-
 	@Override
 	public void setAnimationDuration(String atid, double secs) {
 		master.getScenePresenter().getAnimationByAtid(atid)
@@ -370,7 +364,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	@Override
 	public void setAnimationTalkingColor(String atid, ColorEnum red) {
 
-		master.getScenePresenter().getAnimationByAtid(atid).setTalkingColor(red);
+		master.getScenePresenter().getAnimationByAtid(atid).setAnimationTalkingColor(red);
 
 	}
 
@@ -597,9 +591,20 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 		master.setSoundtrack(stid);
 	}
 
+	@Override
+	public int addSpeechBubble(RectF rectF) {
+		return master.getScenePresenter().addSpeechBubble(rectF);
+	}
 
+	@Override
+	public short getOCodeByAtid(String atid) {
+		return master.getScenePresenter().getOCodeByAtid(atid);
+	}
 
-
-
-
+	@Override
+	public void setAnimationSpeechBubble(String atid, int index) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

@@ -29,7 +29,7 @@ public class Animation {
 	private String atid;
 	private ImageCollection framesCollection;
 	private SceneObject ownerObject;
-	private RectF rectForMaxSpeechBalloon;
+	private int speechBubble;
 
 	private ColorEnum talkingColor;
 
@@ -38,7 +38,7 @@ public class Animation {
 		this.durationInSeconds = 1.0;
 		this.ownerObject = ownerSceneObject;
 		this.atid = atid;
-		this.rectForMaxSpeechBalloon = new RectF(0,.25,1.0,.75);
+		this.speechBubble = 0;
 		//give it  random color, to force us to commit, and not rely on default :)
 		this.talkingColor = ColorEnum.values()[(int)(Math.random()*ColorEnum.values().length)];
 	}
@@ -86,19 +86,19 @@ public class Animation {
 		return durationInSeconds;
 	}
 
-	public RectF getMaxSpeechBalloonExtents() {
-		return this.rectForMaxSpeechBalloon;
+	public int getSpeechBubble() {
+		return this.speechBubble;
 	}
 
-	public void setMaxSpeechBalloonRect(RectF rectF) {
-		rectForMaxSpeechBalloon = rectF;
+	public void setSpeechBubble(int index) {
+		speechBubble = index;
 	}
 
 	public ColorEnum getTalkingColor() {
 		return talkingColor;
 	}
 
-	public void setTalkingColor(ColorEnum color) {
+	public void setAnimationTalkingColor(ColorEnum color) {
 		this.talkingColor = color;
 	}
 

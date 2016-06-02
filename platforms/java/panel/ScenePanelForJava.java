@@ -309,10 +309,9 @@ implements IScenePanelFromScenePresenter
 		List<PointF> points = toScene.getBoundaryPoints();
 		PointF centre = toScene.getBoundaryPointsCentre();
 		List<PointF> path = toScene.getLastPath();
+		Iterator<RectF> bubbles = toScene.getSpeechRects();
 		
 		
-		
-
 		if(isRenderDiagnostics && points.size()>0)
 		{
 			g.setColor(new Color(255,0,0));
@@ -336,6 +335,16 @@ implements IScenePanelFromScenePresenter
 				for(int i=0;i<obstacles.size();i++)
 				{
 					RectF rect = obstacles.get(i);
+					drawLine(rect.getTopLeft(), rect.getTopRight(), g);
+					drawLine(rect.getTopRight(), rect.getBottomRight(), g);
+					drawLine(rect.getBottomRight(), rect.getBottomLeft(), g);
+					drawLine(rect.getBottomLeft(), rect.getTopLeft(), g);
+				} 
+				
+				g.setColor(new Color(0,255,255));
+				while(bubbles.hasNext())
+				{
+					RectF rect = bubbles.next();
 					drawLine(rect.getTopLeft(), rect.getTopRight(), g);
 					drawLine(rect.getTopRight(), rect.getBottomRight(), g);
 					drawLine(rect.getBottomRight(), rect.getBottomLeft(), g);

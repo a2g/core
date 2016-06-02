@@ -22,8 +22,8 @@ import com.github.a2g.core.interfaces.methods.game.IGetValue;
 import com.github.a2g.core.interfaces.methods.game.IIsInDebugMode;
 import com.github.a2g.core.interfaces.methods.game.IIsInventoryItemVisible;
 import com.github.a2g.core.interfaces.methods.game.IIsTrue;
-import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneAnswerer;
-import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneAsker;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneDialoggee;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneDialogger;
 import com.github.a2g.core.interfaces.methods.game.ISetValue;
 import com.github.a2g.core.interfaces.methods.game.ISwitchToScene;
 
@@ -36,8 +36,8 @@ public interface IOnDialogTree extends
 // property access methods
 IGetValue, IIsTrue, ISetValue
 // animation
-, ISetAnimationAsSceneAsker
-, ISetAnimationAsSceneAnswerer
+, ISetAnimationAsSceneDialogger
+, ISetAnimationAsSceneDialoggee
 // helpful for game
 , IGetCurrentSceneName, ISwitchToScene, IGetLastSceneName, IIsInDebugMode
 // inventory

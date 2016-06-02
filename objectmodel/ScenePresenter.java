@@ -18,7 +18,9 @@ package com.github.a2g.core.objectmodel;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
@@ -55,6 +57,7 @@ implements IScenePresenter
 
 	private IBoundaryCalculator boundaryCalculator;
 	private int arrivalSegment;
+	private Vector<RectF> speechRects; 
 
 	public ScenePresenter(final IHostingPanel panel,
 			IMasterPresenterFromScenePresenter master, IFactory factory) {
@@ -77,6 +80,7 @@ implements IScenePresenter
 		defaultSceneObjectOtid = "ScenePresenter::getDefaultSceneObjectOtid was used before it was initialized";
 
 		talkingColorForScene = ColorEnum.Fuchsia;
+		speechRects = new Vector<RectF>(3);
 	}
 
 	private SceneObject getObjectByOCode(short ocode) {
@@ -264,7 +268,8 @@ implements IScenePresenter
 
 	public void setStateOfPopup(String atid, boolean isVisible, String speech, TalkPerformer sayAction) {
 		Animation a = this.getAnimationByAtid(atid);
-		RectF r = a.getMaxSpeechBalloonExtents();
+		int index = a.getSpeechBubble();
+		RectF r = this.speechRects.get(index);
 		Rect pixels = new Rect(
 				(int)(r.getLeft() * this.getSceneGuiWidth())
 				,	(int)(r.getTop() * this.getSceneGuiHeight())
@@ -436,6 +441,27 @@ implements IScenePresenter
 			o.setBaseMiddleX(result.getX());
 			o.setBaseMiddleY(result.getY());
 		}
+	}
+
+	@Override
+	public Iterator<RectF> getSpeechRects() {
+		return speechRects.iterator();
+	}
+
+	public int addSpeechBubble(RectF rectF) {
+		speechRects.add(rectF);
+		return speechRects.size()-1;
+	}
+
+	public short getOCodeByAtid(String atid) {
+		short toReturn = -1;
+		Animation a = getAnimationByAtid(atid);
+		if (a != null) {
+			SceneObject o = a.getObject();
+			if (o != null)
+				toReturn = o.getOCode();
+		};
+		return toReturn;
 	}
 
 };
