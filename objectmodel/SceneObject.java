@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
+import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
@@ -45,6 +46,8 @@ public class SceneObject {
 	private short ocode;
 	private double screenCoordsPerSecond;
 	private double scale;
+	private ColorEnum talkingColor;
+	private int speechBubble;
 
 	public SceneObject(String otid, int screenWidth, int screenHeight) {
 		this.currentImage = null;
@@ -59,6 +62,8 @@ public class SceneObject {
 		this.drawingOrder = 0;
 		this.initialAnimationId = otid + "_INITIAL";
 		this.scale = 1;
+		this.talkingColor = null;
+		this.speechBubble = -1;// -1 means "not set"
 
 		this.setBaseMiddleX(0);
 		this.setBaseMiddleY(0);
@@ -399,6 +404,37 @@ public class SceneObject {
 
 	public void setScale(double scale) {
 		this.scale = scale;
+	}
+
+	public ColorEnum getTalkingColor() {
+		return talkingColor;
+	}
+
+	public void setTalkingColor(ColorEnum color) {
+		this.talkingColor = color;
+		for(int i=0;i<this.animationCollection.getCount();i++)
+		{
+			if(animationCollection.getByIndex(i).getTalkingColor()!=null)
+			{
+				animationCollection.getByIndex(i).setTalkingColor(color);
+			}
+		}
+		
+	}
+
+	public void setSpeechBubble(int index) {
+		this.speechBubble = index;
+		for(int i=0;i<this.animationCollection.getCount();i++)
+		{
+			if(animationCollection.getByIndex(i).getSpeechBubble()!=-1)
+			{
+				animationCollection.getByIndex(i).setSpeechBubble(index);
+			}
+		}
+	}
+	
+	public int getSpeechBubble() {
+		return this.speechBubble;
 	}
 
 };

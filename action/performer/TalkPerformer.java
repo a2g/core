@@ -21,8 +21,8 @@ public class TalkPerformer {
 	private String fullSpeech;
 	public static String SCENE_TALKER = "SCENE_TALKER";// use animation of scene talker
 
-	public static String SCENE_ANSWERER = "SCENE_ANSWERER";
-	public static String SCENE_ASKER = "SCENE_ASKER";
+	public static String SCENE_DIALOGGEE = "SCENE_ANSWERER";
+	public static String SCENE_DIALOGGER = "SCENE_ASKER";
 	public enum NonIncrementing {
 		True, False, FromAPI
 	}
@@ -90,10 +90,10 @@ public class TalkPerformer {
 		
 		if (atid == SCENE_TALKER) {
 			atid = scene.getAtidOfSceneTalker();
-		}else if(atid == SCENE_ASKER){
-			atid = scene.getAtidOfSceneAsker();
-		}else if(atid == SCENE_ANSWERER){
-			atid = scene.getAtidOfSceneAnswerer();
+		}else if(atid == SCENE_DIALOGGER){
+			atid = scene.getAtidOfSceneDialogger();
+		}else if(atid == SCENE_DIALOGGEE){
+			atid = scene.getAtidOfSceneDialoggee();
 		}
 		
 		// only now do

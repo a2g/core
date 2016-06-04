@@ -364,7 +364,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	@Override
 	public void setAnimationTalkingColor(String atid, ColorEnum red) {
 
-		master.getScenePresenter().getAnimationByAtid(atid).setAnimationTalkingColor(red);
+		master.getScenePresenter().getAnimationByAtid(atid).setTalkingColor(red);
 
 	}
 
@@ -603,7 +603,22 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 
 	@Override
 	public void setAnimationSpeechBubble(String atid, int index) {
-		// TODO Auto-generated method stub
+		Animation a = master.getScenePresenter().getAnimationByAtid(atid);
+		a.setSpeechBubble(index);
+	}
+
+	@Override
+	public void setSpeechBubble(short ocode, int index) {
+		String otid = master.getScenePresenter().getOtidByCode(ocode);
+		SceneObject o  = master.getScenePresenter().getObjectByOtid(otid);
+		o.setSpeechBubble(index);
+	}
+
+	@Override
+	public void setTalkingColor(short ocode, ColorEnum color) {
+		String otid = master.getScenePresenter().getOtidByCode(ocode);
+		SceneObject o  = master.getScenePresenter().getObjectByOtid(otid);
+		o.setTalkingColor(color);
 		
 	}
 	

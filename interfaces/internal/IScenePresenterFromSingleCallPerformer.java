@@ -15,6 +15,7 @@ import com.github.a2g.core.interfaces.methods.action.ISetDisplayNameByOtid;
 import com.github.a2g.core.interfaces.methods.action.ISetInitialAnimationByAtid;
 import com.github.a2g.core.interfaces.methods.action.ISetSceneTalkerByAtid;
 import com.github.a2g.core.interfaces.methods.action.ISetSoundtrack;
+import com.github.a2g.core.interfaces.methods.action.ISetSpeechBubble;
 import com.github.a2g.core.interfaces.methods.action.ISetVisibleByOtid;
 import com.github.a2g.core.interfaces.methods.action.ISetXByOtid;
 import com.github.a2g.core.interfaces.methods.action.ISetYByOtid;
@@ -47,6 +48,9 @@ ISetBaseMiddleXByOtid
 , ISetAnimationAsObjectSpecial
 , ISetAnimationAsObjectInitial
 , ISetSoundtrack
+, ISetSpeechBubble
 {
 	void setSoundtrack(String stringValue);
+
+	
 }

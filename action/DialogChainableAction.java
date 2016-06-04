@@ -54,13 +54,13 @@ implements IChainRootForDialog
 
 	@Override
 	public	DialogChainableAction them(String speech) {
-		DialogTalkAction s = new DialogTalkAction(this, TalkPerformer.SCENE_ANSWERER, speech);
+		DialogTalkAction s = new DialogTalkAction(this, TalkPerformer.SCENE_DIALOGGEE, speech);
 		return s;
 	}
 
 	@Override
 	public	DialogChainableAction us(String speech) {
-		DialogTalkAction s = new DialogTalkAction(this, TalkPerformer.SCENE_ASKER, speech);
+		DialogTalkAction s = new DialogTalkAction(this, TalkPerformer.SCENE_DIALOGGER, speech);
 		return s;
 	}
 

@@ -38,9 +38,8 @@ public class Animation {
 		this.durationInSeconds = 1.0;
 		this.ownerObject = ownerSceneObject;
 		this.atid = atid;
-		this.speechBubble = 0;
-		//give it  random color, to force us to commit, and not rely on default :)
-		this.talkingColor = ColorEnum.values()[(int)(Math.random()*ColorEnum.values().length)];
+		this.speechBubble = -1;// -1 means "not set"
+		this.talkingColor = null;
 	}
 
 	public SceneObject getObject() {
@@ -98,7 +97,7 @@ public class Animation {
 		return talkingColor;
 	}
 
-	public void setAnimationTalkingColor(ColorEnum color) {
+	public void setTalkingColor(ColorEnum color) {
 		this.talkingColor = color;
 	}
 

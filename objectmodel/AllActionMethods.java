@@ -200,6 +200,12 @@ ITitleCardPresenterFromActions
 	}
 
 	@Override
+	public void setSpeechBubble(String otid, int index) {
+		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
+		object.setSpeechBubble(index);
+	}
+	
+	@Override
 	public void setVisibleByOtid(String otid, boolean isVisible) {
 
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
@@ -302,11 +308,11 @@ ITitleCardPresenterFromActions
 	}
 
 	@Override
-	public String getAtidOfSceneAsker() {
+	public String getAtidOfSceneDialogger() {
 		return master.getScenePresenter().getSceneAskerAtid();
 	}
 	@Override
-	public String getAtidOfSceneAnswerer() {
+	public String getAtidOfSceneDialoggee() {
 		return master.getScenePresenter().getSceneAnswererAtid();
 	}
 	@Override
@@ -434,6 +440,9 @@ ITitleCardPresenterFromActions
 		public void setSoundtrack(String stringValue) {
 			master.setSoundtrack(stringValue);
 		}
+
+
+		
 
 
 

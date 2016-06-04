@@ -587,6 +587,14 @@ implements IChainRootForScene
 	}
 
 	@Override
+	public ChainableAction setSpeechBubble(short ocode, int index) {
+		SingleCallAction s = new SingleCallAction(this, Type.SetSpeechBubble);
+		s.setOCode(ocode);
+		s.setInt(index);
+		return s;
+	}
+	
+	@Override
 	public ChainableAction walkAndTalkNeverSwitch(short ocode, double x, double y, String speech)
 	{
 		WalkAndTalkAction s = new WalkAndTalkAction(this, ocode, speech);
@@ -609,4 +617,5 @@ implements IChainRootForScene
 
 	}
 
+	
 }

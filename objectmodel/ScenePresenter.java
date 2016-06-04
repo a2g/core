@@ -49,7 +49,6 @@ implements IScenePresenter
 
 	
 	private String defaultSceneObjectOtid;
-	private ColorEnum talkingColorForScene;
 	private String sceneTalkerAtid;
 	private String sceneAskerAtid;
 	private String sceneAnswererAtid;
@@ -79,7 +78,6 @@ implements IScenePresenter
 		this.arrivalSegment = -1;
 		defaultSceneObjectOtid = "ScenePresenter::getDefaultSceneObjectOtid was used before it was initialized";
 
-		talkingColorForScene = ColorEnum.Fuchsia;
 		speechRects = new Vector<RectF>(3);
 	}
 
@@ -113,6 +111,7 @@ implements IScenePresenter
 	public void clearEverythingExceptView() {
 
 		scene.objectCollection().clear();
+		speechRects.clear();
 		this.sceneTalkerAtid = "";
 		this.sceneAskerAtid = "";
 		this.sceneAnswererAtid = "";
@@ -268,25 +267,37 @@ implements IScenePresenter
 
 	public void setStateOfPopup(String atid, boolean isVisible, String speech, TalkPerformer sayAction) {
 		Animation a = this.getAnimationByAtid(atid);
-		int index = a.getSpeechBubble();
-		RectF r = this.speechRects.get(index);
+	
+		int speechBubbleIndex = a.getSpeechBubble();
+		ColorEnum talkingColor = a.getTalkingColor();
+		Point mouth = new Point(0,0);
+		if(a.getSceneObject()!=null)
+		{
+			mouth = a.getSceneObject().getMouthLocation();
+			if(talkingColor==null)
+			{
+				talkingColor = a.getSceneObject().getTalkingColor();
+				if(talkingColor==null)
+				{
+					talkingColor = ColorEnum.values()[(int)(Math.random()*ColorEnum.values().length)];;
+				}
+			}
+			if(speechBubbleIndex==-1)
+			{
+				speechBubbleIndex = a.getSceneObject().getSpeechBubble();
+				if(speechBubbleIndex ==-1)
+				{
+					speechBubbleIndex = 0;//default
+				}
+			}
+		}
+		RectF r = this.speechRects.get(speechBubbleIndex);
 		Rect pixels = new Rect(
 				(int)(r.getLeft() * this.getSceneGuiWidth())
 				,	(int)(r.getTop() * this.getSceneGuiHeight())
 				, (int)(r.getWidth()* this.getSceneGuiWidth())
 				, (int)(r.getHeight()* this.getSceneGuiHeight())
 				);
-
-		ColorEnum talkingColor = a.getTalkingColor();
-		if(talkingColor==null)
-		{
-			talkingColor = this.talkingColorForScene;
-		}
-		Point mouth = new Point(0,0);
-		if(a.getSceneObject()!=null)
-		{
-			mouth = a.getSceneObject().getMouthLocation();
-		}
 		view.setStateOfPopup(isVisible, talkingColor, speech, pixels, mouth, sayAction);
 	}
 

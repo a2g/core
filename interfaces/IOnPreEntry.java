@@ -62,6 +62,8 @@ import com.github.a2g.core.interfaces.methods.game.ISetIsTalkingAlwaysWithoutInc
 import com.github.a2g.core.interfaces.methods.game.ISetParallaxX;
 import com.github.a2g.core.interfaces.methods.game.ISetScreenCoordsPerSecond;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationTalkingColor;
+import com.github.a2g.core.interfaces.methods.game.ISetSpeechBubble;
+import com.github.a2g.core.interfaces.methods.game.ISetTalkingColor;
 import com.github.a2g.core.interfaces.methods.game.ISetTitleCard;
 import com.github.a2g.core.interfaces.methods.game.ISetValue;
 import com.github.a2g.core.interfaces.methods.game.ISetVisible;
@@ -112,12 +114,12 @@ ISetX,
 ISetY,
 ISetDisplayName,
 ISetScreenCoordsPerSecond,
-ISetAnimationTalkingColor,
 ISetParallaxX,
 IGetX,
 IGetY,
 ISetVisible,
-ISetAnimationSpeechBubble,
+ISetSpeechBubble,
+ISetTalkingColor,
 // inventory
 IShowInventoryItem,
 IHideInventoryItem,
@@ -144,6 +146,8 @@ ISetDefaultSceneObject,
 ISetAnimationAsObjectCurrentAndSetFrame,
 ISetAnimationAsSceneDialogger,
 ISetAnimationAsSceneDialoggee,
+ISetAnimationSpeechBubble,
+ISetAnimationTalkingColor,
 IGetDefaultSceneObject,
 IClearValueRegistry,
 IClearSaidSpeech

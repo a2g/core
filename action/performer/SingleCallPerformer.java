@@ -16,6 +16,7 @@
 
 package com.github.a2g.core.action.performer;
 
+import com.github.a2g.core.action.SingleCallAction;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromSingleCallPerformer;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromSingleCallPerformer;
@@ -47,6 +48,7 @@ public class SingleCallPerformer
 		, SetAnimationSceneTalker
 		, SetAnimationObjectInitial
 		, SetSoundtrack
+		, SetSpeechBubble
 	}
 	Type type;
 	private double d;
@@ -171,6 +173,10 @@ public class SingleCallPerformer
 			return false;
 		case SetAnimationObjectInitial:
 			scene.setAnimationAsObjectInitial(atid);
+			return false;
+		case SetSpeechBubble:
+			otid = scene.getOtidByCode(ocode);
+			scene.setSpeechBubble(otid, intValue);
 			return false;
 		case SetAnimationSpecial:
 			if(intValue==WalkDirection.North.toInt())
