@@ -413,7 +413,7 @@ PropertyChangeEventHandlerAPI
 		{
 			this.dialogTreePresenter.addSpeechToSaidList(speech);
 		}
-		String atidOfInterviewer = this.scenePresenter.getSceneAskerAtid();
+		String atidOfInterviewer = this.scenePresenter.getSceneDialoggerAtid();
 		// This is a bit sneaky:
 		// 1. we create a TalkAction as the root of the chain.
 		// 2. we pass this to onDialogTree..

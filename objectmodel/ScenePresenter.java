@@ -312,7 +312,7 @@ implements IScenePresenter
 		this.sceneTalkerAtid = sceneTalkerAtid;
 	}
 
-	public String getSceneAskerAtid() {
+	public String getSceneDialoggerAtid() {
 		if(!sceneAskerAtid.isEmpty())
 			return sceneAskerAtid;
 		String nextBest = this.getSceneTalkerAtid();
@@ -322,7 +322,7 @@ implements IScenePresenter
 	public void setSceneAskerAtid(String sceneAskerAtid) {
 		this.sceneAskerAtid = sceneAskerAtid;
 	}
-	public String getSceneAnswererAtid() {
+	public String getSceneDialoggeeAtid() {
 		if(!sceneAnswererAtid.isEmpty())
 			return sceneAnswererAtid;
 		String nextBest = this.getSceneTalkerAtid();

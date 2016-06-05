@@ -20,10 +20,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,8 +38,10 @@ import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
+import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
@@ -90,6 +95,8 @@ implements IScenePanelFromScenePresenter
 	private String speechText;
 	private Rect speechRect;
 
+	private BufferedImage bufferedImage;
+
 	public ScenePanelForJava(EventBus bus, IScenePresenterFromScenePanel toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine)
 	{
 		isRenderDiagnostics = true; 
@@ -111,7 +118,7 @@ implements IScenePanelFromScenePresenter
 		cameraOffsetX=0;
 		cameraOffsetY=0;
 		tally++;
-		
+
 
 		super.addMouseListener
 		(
@@ -145,6 +152,7 @@ implements IScenePanelFromScenePresenter
 				}
 			}
 		});
+
 	}
 
 
@@ -310,8 +318,8 @@ implements IScenePanelFromScenePresenter
 		PointF centre = toScene.getBoundaryPointsCentre();
 		List<PointF> path = toScene.getLastPath();
 		Iterator<RectF> bubbles = toScene.getSpeechRects();
-		
-		
+
+
 		if(isRenderDiagnostics && points.size()>0)
 		{
 			g.setColor(new Color(255,0,0));
@@ -340,7 +348,7 @@ implements IScenePanelFromScenePresenter
 					drawLine(rect.getBottomRight(), rect.getBottomLeft(), g);
 					drawLine(rect.getBottomLeft(), rect.getTopLeft(), g);
 				} 
-				
+
 				g.setColor(new Color(0,255,255));
 				while(bubbles.hasNext())
 				{
@@ -391,18 +399,13 @@ implements IScenePanelFromScenePresenter
 
 
 		}
-		
-		if(speechVisible)
+
+		if(speechVisible && bufferedImage!=null)
 		{	
-			g.setColor(Color.white);
-			g.fillRect(speechRect.getLeft(), speechRect.getTop(), speechRect.getWidth()-1, speechRect.getHeight());
-			g.setColor(new Color(speechColor.r, speechColor.g, speechColor.b));
-			g.drawRect(speechRect.getLeft()+1, speechRect.getTop()+1, speechRect.getWidth()-3, speechRect.getHeight()-2);
-			g.drawRect(speechRect.getLeft(), speechRect.getTop(), speechRect.getWidth()-1, speechRect.getHeight());
-			g.setFont(new Font("Arial",Font.BOLD,12));
-			g.drawString(speechText, speechRect.getLeft()+4, speechRect.getTop()+speechRect.getHeight()/2);
-			//g.getFontMetrics()
+			g.drawImage(bufferedImage, speechRect.getLeft(), speechRect.getTop(), this);
+
 		}
+
 
 	}
 	void drawLine(PointF newPt, PointF lastPt, Graphics g)
@@ -493,6 +496,8 @@ implements IScenePanelFromScenePresenter
 		this.speechText = speech;
 		this.speechRect = pixels;
 
+		updateSpeechImage();
+
 	}
 
 
@@ -504,6 +509,72 @@ implements IScenePanelFromScenePresenter
 
 	}
 
+	void updateSpeechImage()
+	{
+		if(speechRect.getWidth()==0)
+			return;
+		bufferedImage = new BufferedImage(
+				speechRect.getWidth(),
+				speechRect.getHeight(),
+				BufferedImage.TYPE_INT_RGB);
+		Graphics2D imageGraphics = bufferedImage.createGraphics();
+		GradientPaint gp = new GradientPaint(
+				20f,
+				20f,
+				Color.red,
+				380f,
+				280f,
+				Color.orange);
+		imageGraphics.setPaint(gp);
+		imageGraphics.fillRect(0, 0, speechRect.getWidth(), speechRect.getHeight());
+
+		String html = "<html><body style='padding: 4px;"
+		//+"height: "+speechRect.getHeight()+"px;"
+        +"width: "+(speechRect.getWidth()/2)+"px; '>"
+		+ speechText;
+		JLabel textLabel = new JLabel(html);
+		//Dimension size = textLabel.getPreferredSize();
+		Dimension size = new Dimension(speechRect.getWidth(), speechRect.getHeight() );
+		textLabel.setSize(size);
+
+		Dimension d = new Dimension(speechRect.getWidth(), speechRect.getHeight() );
+		if(d.width>0)
+		{
+			BufferedImage bi = new BufferedImage(
+					d.width,
+					d.height,
+					BufferedImage.TYPE_INT_ARGB);
+			Graphics g = bi.createGraphics();
+			g.setColor(new Color(255, 255, 255, 128));//white, semi-transparent
+
+			g.fillRoundRect(
+					0,
+					0,
+					this.speechRect.getWidth(),
+					this.speechRect.getHeight(),
+					10,
+					10);
+			g.setColor(Color.black);
+			textLabel.paint(g);
+			Graphics g2 = bufferedImage.getGraphics();
+			Rect r = speechRect;
+			//g2.drawImage(bi, r.getLeft(), r.getTop(), r.getRight(), r.getBottom(), this);
+			g2.drawImage(bi, 0, 0, this);
+			//ImageIcon ii = new ImageIcon(bufferedImage);
+			//JLabel imageLabel = new JLabel(ii);
+			//this.add(imageLabel);
+		}
+		/*
+		g.setColor(Color.white);
+		g.fillRect(speechRect.getLeft(), speechRect.getTop(), speechRect.getWidth()-1, speechRect.getHeight());
+		g.setColor(new Color(speechColor.r, speechColor.g, speechColor.b));
+		g.drawRect(speechRect.getLeft()+1, speechRect.getTop()+1, speechRect.getWidth()-3, speechRect.getHeight()-2);
+		g.drawRect(speechRect.getLeft(), speechRect.getTop(), speechRect.getWidth()-1, speechRect.getHeight());
+		g.setFont(new Font("Arial",Font.BOLD,12));
+		g.drawString(speechText, speechRect.getLeft()+4, speechRect.getTop()+speechRect.getHeight()/2);
+		//g.getFontMetrics()
+		 */
+	}
 
 
 

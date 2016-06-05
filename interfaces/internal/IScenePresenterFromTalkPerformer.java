@@ -2,8 +2,8 @@ package com.github.a2g.core.interfaces.internal;
 
 import com.github.a2g.core.interfaces.methods.action.ICurrentAnimationByAtid;
 import com.github.a2g.core.interfaces.methods.action.IGetAtidOfCurrentAnimationByOtid;
-import com.github.a2g.core.interfaces.methods.action.IGetAtidOfSceneAnswerer;
-import com.github.a2g.core.interfaces.methods.action.IGetAtidOfSceneAsker;
+import com.github.a2g.core.interfaces.methods.action.IGetAtidOfSceneDialoggee;
+import com.github.a2g.core.interfaces.methods.action.IGetAtidOfSceneDialogger;
 import com.github.a2g.core.interfaces.methods.action.IGetAtidOfSceneTalker;
 import com.github.a2g.core.interfaces.methods.action.IGetCurrentFrameByOtid;
 import com.github.a2g.core.interfaces.methods.action.IGetDurationByAtid;
@@ -24,8 +24,8 @@ extends ISetStateOfPopup
 , ICurrentAnimationByAtid
 , IGetOtidByAtid
 , IGetAtidOfSceneTalker
-, IGetAtidOfSceneAsker
-, IGetAtidOfSceneAnswerer
+, IGetAtidOfSceneDialogger
+, IGetAtidOfSceneDialoggee
 , IGetAtidOfCurrentAnimationByOtid
 , IGetCurrentFrameByOtid
 
