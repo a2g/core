@@ -616,6 +616,14 @@ implements IChainRootForScene
 		return s;
 
 	}
-
 	
+	@Override
+	public ChainableAction walkNeverSwitchNonBlocking(short ocode, double x, double y)
+	{
+		WalkAction s = new WalkAction(this, ocode);
+		s.setEndX(x);
+		s.setEndY(y);
+		s.setParallel(true);
+		return s;
+	}
 }

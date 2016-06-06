@@ -511,7 +511,7 @@ implements IScenePanelFromScenePresenter
 
 	void updateSpeechImage()
 	{
-		if(speechRect.getWidth()==0)
+		if(speechRect.getWidth()<=0)
 			return;
 		bufferedImage = new BufferedImage(
 				speechRect.getWidth(),
@@ -521,16 +521,16 @@ implements IScenePanelFromScenePresenter
 		GradientPaint gp = new GradientPaint(
 				20f,
 				20f,
-				Color.red,
+				Color.white,
 				380f,
 				280f,
-				Color.orange);
+				Color.white);
 		imageGraphics.setPaint(gp);
 		imageGraphics.fillRect(0, 0, speechRect.getWidth(), speechRect.getHeight());
 
 		String html = "<html><body style='padding: 4px;"
 		//+"height: "+speechRect.getHeight()+"px;"
-        +"width: "+(speechRect.getWidth()/2)+"px; '>"
+        +"width: "+(speechRect.getWidth()*.7)+"px; '>"
 		+ speechText;
 		JLabel textLabel = new JLabel(html);
 		//Dimension size = textLabel.getPreferredSize();
@@ -560,6 +560,12 @@ implements IScenePanelFromScenePresenter
 			Rect r = speechRect;
 			//g2.drawImage(bi, r.getLeft(), r.getTop(), r.getRight(), r.getBottom(), this);
 			g2.drawImage(bi, 0, 0, this);
+			//g2.setColor(Color.white);
+			//g2.fillRect(speechRect.getLeft(), speechRect.getTop(), speechRect.getWidth()-1, speechRect.getHeight());
+			g2.setColor(new Color(speechColor.r, speechColor.g, speechColor.b));
+			g2.drawRect(0+1, 0+1, speechRect.getWidth()-3, speechRect.getHeight()-3);
+			g2.drawRect(0, 0, speechRect.getWidth()-1, speechRect.getHeight()-1);
+			
 			//ImageIcon ii = new ImageIcon(bufferedImage);
 			//JLabel imageLabel = new JLabel(ii);
 			//this.add(imageLabel);

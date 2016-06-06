@@ -20,7 +20,6 @@ public class TalkPerformer {
 	private String otid;
 	private String fullSpeech;
 	public static String SCENE_TALKER = "SCENE_TALKER";// use animation of scene talker
-
 	public static String SCENE_DIALOGGEE = "SCENE_DIALOGGEE";
 	public static String SCENE_DIALOGGER = "SCENE_DIALOGGER";
 	public enum NonIncrementing {

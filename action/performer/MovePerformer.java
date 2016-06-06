@@ -196,4 +196,10 @@ public class MovePerformer implements IMovePerformer
 	}
 
 
+
+	public boolean isInitialAtEnd() {
+		return setToInitialAtEnd;
+	}
+
+
 }

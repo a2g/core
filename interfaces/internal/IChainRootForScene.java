@@ -38,6 +38,7 @@ public interface IChainRootForScene {
 	// against unexpected results.
 	public ChainableAction walkNeverSwitch(double x, double y);
 	public ChainableAction walkNeverSwitch(PointF point);
+	public ChainableAction walkNeverSwitchNonBlocking(short ocode, double x, double y);
 	public ChainableAction walkNeverSwitch(short ocode, double x, double y);
 	public ChainableAction walkNeverSwitch(short ocode, PointF point);
 	public ChainableAction walkAndTalkNeverSwitch(short ocode, double x, double y, String speech);
@@ -46,7 +47,6 @@ public interface IChainRootForScene {
 	public ChainEndAction walkAlwaysSwitch(PointF point, String string, int arrivalSegment);
 	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, PointF p, double startScale, double endScale, String sceneName, int arrivalSegment);
 	
-
 	public ChainableAction subroutine(ChainableAction orig);
 
 	public ChainableAction doNothing();
