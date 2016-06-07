@@ -56,7 +56,6 @@ public class ChainToDialogAction extends DialogChainEndAction {
 	}
 
 
-
 	public void setBranchId(int branchId) {
 		this.branchId = branchId;
 	}
