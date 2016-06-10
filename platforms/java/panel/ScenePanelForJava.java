@@ -19,7 +19,6 @@ package com.github.a2g.core.platforms.java.panel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -38,8 +37,8 @@ import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
-import javax.swing.ImageIcon;
 import javax.swing.InputMap;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -152,6 +151,12 @@ implements IScenePanelFromScenePresenter
 				}
 			}
 		});
+		
+		//JLabel imageLabel = new JLabel("sds");
+				JButton sd = new JButton("Big long button");
+				
+				this.add(sd);
+				
 
 	}
 
@@ -557,7 +562,7 @@ implements IScenePanelFromScenePresenter
 			g.setColor(Color.black);
 			textLabel.paint(g);
 			Graphics g2 = bufferedImage.getGraphics();
-			Rect r = speechRect;
+			//Rect r = speechRect;
 			//g2.drawImage(bi, r.getLeft(), r.getTop(), r.getRight(), r.getBottom(), this);
 			g2.drawImage(bi, 0, 0, this);
 			//g2.setColor(Color.white);
@@ -584,7 +589,15 @@ implements IScenePanelFromScenePresenter
 
 
 
-
+	public void setIsDiagnosticsDisplay(boolean isDisplayed)
+	{
+		isRenderDiagnostics = isDisplayed;
+	}
+	
+	public boolean getIsDiagnosticsDisplay()
+	{
+		return isRenderDiagnostics;
+	}
 
 
 
