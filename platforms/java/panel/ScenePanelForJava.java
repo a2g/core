@@ -26,6 +26,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -65,6 +67,8 @@ import com.github.a2g.core.platforms.java.PackagedImageForJava;
 import com.github.a2g.core.platforms.java.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.java.mouse.SceneMouseOverHandler;
 import com.google.gwt.event.shared.EventBus;
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 
 @SuppressWarnings("serial")
@@ -151,17 +155,7 @@ implements IScenePanelFromScenePresenter
 				}
 			}
 		});
-		
-		//JLabel imageLabel = new JLabel("sds");
-				JButton sd = new JButton("Big long button");
-				
-				this.add(sd);
-				
-
 	}
-
-
-
 
 	public Image createNewImageAndAdddHandlers(
 			LoadHandler lh,
@@ -273,6 +267,11 @@ implements IScenePanelFromScenePresenter
 
 	@Override
 	public void paint(Graphics g)
+	{
+		render(g);
+	}
+	
+	void render(Graphics g)
 	{
 		//this.requestFocus();
 		g.clearRect(0, 0, width, height);
@@ -401,8 +400,6 @@ implements IScenePanelFromScenePresenter
 
 
 			g.drawOval((int)(centre.getX()*width), (int)(centre.getY()*height), 3, 3);
-
-
 		}
 
 		if(speechVisible && bufferedImage!=null)
@@ -597,6 +594,22 @@ implements IScenePanelFromScenePresenter
 	public boolean getIsDiagnosticsDisplay()
 	{
 		return isRenderDiagnostics;
+	}
+
+	public void saveToJPEG(String filename) {
+		int w = this.getWidth();
+	    int h = this.getHeight();
+	    BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+	    Graphics2D g = bi.createGraphics();
+	    render(g);
+	    try {
+	        OutputStream out = new FileOutputStream(filename+".jpeg");
+	        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+	        encoder.encode(bi);
+	        out.close();
+	    } catch (Exception e) {
+	        System.out.println(e);
+	    }
 	}
 
 
