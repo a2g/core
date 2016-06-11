@@ -148,4 +148,10 @@ IScenePanelFromScenePresenter {
 
 	}
 
+	@Override
+	public void onSceneEntry(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

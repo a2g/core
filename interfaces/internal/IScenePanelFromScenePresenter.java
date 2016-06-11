@@ -41,6 +41,6 @@ public interface IScenePanelFromScenePresenter
 	void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
 			String speech, Rect pixels, Point mouth, TalkPerformer sayAction);
 
-
+	void onSceneEntry(String string);
 
 }

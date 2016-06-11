@@ -439,6 +439,7 @@ PropertyChangeEventHandlerAPI
 		BaseAction a = this.sceneHandlers.onEntry(proxyForGameScene,
 				MatOps.createChainRootAction());
 
+		getScenePresenter().getView().onSceneEntry(sceneHandlers.toString());
 		BaseAction b = this.replaceChainToDialogActionWithCallToOnDialogTree(a);
 		// .. then executeBaseAction->actionRunner::runAction
 		//will add an TitleCardAction the title card

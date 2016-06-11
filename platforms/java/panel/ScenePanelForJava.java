@@ -102,7 +102,7 @@ implements IScenePanelFromScenePresenter
 
 	public ScenePanelForJava(EventBus bus, IScenePresenterFromScenePanel toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine)
 	{
-		isRenderDiagnostics = true; 
+		isRenderDiagnostics = false; 
 		this.toScene = toScene;
 		this.toCommandLine = toCommandLine;
 		this.mapOfPointsByImage = new TreeMap<Integer, Point>();
@@ -610,6 +610,12 @@ implements IScenePanelFromScenePresenter
 	    } catch (Exception e) {
 	        System.out.println(e);
 	    }
+	}
+
+	@Override
+	public void onSceneEntry(String name) {
+		//String path = "c:/";
+		this.saveToJPEG("c:/"+name);
 	}
 
 
