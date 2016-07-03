@@ -21,7 +21,6 @@ import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
-import com.github.a2g.core.interfaces.internal.IChainRootForScene;
 
 public abstract class DialogChainableAction extends DialogChainEndAction
 implements IChainRootForDialog

@@ -14,7 +14,6 @@ import com.github.a2g.core.interfaces.methods.action.IGetXByOtid;
 import com.github.a2g.core.interfaces.methods.action.IGetYByOtid; 
 import com.github.a2g.core.objectmodel.PointFWithNeighbours;
 import com.github.a2g.core.primitive.PointF;
-import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.primitive.RectF;
 
 public interface IScenePresenterFromScenePanel

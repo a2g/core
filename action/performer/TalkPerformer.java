@@ -188,7 +188,7 @@ public class TalkPerformer {
 		}
 		// int delay = how;
 		// int duration = (speech.length() * (2 + delay)) * 40;
-		return  popupDisplayDuration;
+		return  popupDisplayDuration+numberOfSpaces*0;
 	}
 
  

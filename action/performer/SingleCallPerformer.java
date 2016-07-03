@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action.performer;
 
-import com.github.a2g.core.action.SingleCallAction;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromSingleCallPerformer;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromSingleCallPerformer;

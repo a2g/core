@@ -17,7 +17,6 @@
 package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.RectF;
 
 /**
  * 
