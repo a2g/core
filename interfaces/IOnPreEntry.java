@@ -60,6 +60,7 @@ import com.github.a2g.core.interfaces.methods.game.ISetInventoryItemDisplayName;
 import com.github.a2g.core.interfaces.methods.game.ISetInventoryItemVisible;
 import com.github.a2g.core.interfaces.methods.game.ISetIsTalkingAlwaysWithoutIncrementing;
 import com.github.a2g.core.interfaces.methods.game.ISetParallaxX;
+import com.github.a2g.core.interfaces.methods.game.ISetScale;
 import com.github.a2g.core.interfaces.methods.game.ISetScreenCoordsPerSecond;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationTalkingColor;
 import com.github.a2g.core.interfaces.methods.game.ISetSpeechBubble;
@@ -150,7 +151,8 @@ ISetAnimationSpeechBubble,
 ISetAnimationTalkingColor,
 IGetDefaultSceneObject,
 IClearValueRegistry,
-IClearSaidSpeech
+IClearSaidSpeech,
+ISetScale
 {
 
 	

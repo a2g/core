@@ -621,5 +621,13 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 		o.setTalkingColor(color);
 		
 	}
+
+	@Override
+	public void setScale(short ocode, double scale) {
+		String otid = master.getScenePresenter().getOtidByCode(ocode);
+		SceneObject o  = master.getScenePresenter().getObjectByOtid(otid);
+		o.setScale(scale);
+		
+	}
 	
 }
