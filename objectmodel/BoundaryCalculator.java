@@ -71,11 +71,18 @@ implements Comparator<BoundaryCalculator.Gate>
 	void sort()
 	{
 		this.updateCentre();
-		//Collections.sort(gates, this);
 	}
 
 	public void addBoundaryGate(Object switchTo, int arrivalSegment, PointF a, PointF b) {
-		gates.add(new Gate(switchTo==""? null : switchTo, arrivalSegment, a, b));
+		if(switchTo!=null)
+		{
+			gates.add(new Gate(switchTo==""? null : switchTo, arrivalSegment, a, b));
+		
+		}else
+		{
+			gates.add(new Gate(TREAT_GATE_AS_POINT,  -1, a, new PointF(-1, -1)));
+			gates.add(new Gate(TREAT_GATE_AS_POINT,  -1, b, new PointF(-1, -1)));
+		}
 		sort();
 	}
 
