@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.objectmodel;
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -36,9 +35,8 @@ import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.primitive.RectF;
 
-public class ScenePresenter
-implements IScenePresenter
-, IScenePresenterFromBoundaryCalculator {
+public class ScenePresenter implements IScenePresenter,
+		IScenePresenterFromBoundaryCalculator {
 	public static final short DEFAULT_SCENE_OBJECT = -1;
 	private int width;
 	private int height;
@@ -47,7 +45,6 @@ implements IScenePresenter
 	private double cameraX;
 	private double cameraY;
 
-	
 	private String defaultSceneObjectOtid;
 	private String sceneTalkerAtid;
 	private String sceneAskerAtid;
@@ -56,7 +53,7 @@ implements IScenePresenter
 
 	private IBoundaryCalculator boundaryCalculator;
 	private int arrivalSegment;
-	private Vector<RectF> speechRects; 
+	private Vector<RectF> speechRects;
 
 	public ScenePresenter(final IHostingPanel panel,
 			IMasterPresenterFromScenePresenter master, IFactory factory) {
@@ -117,8 +114,7 @@ implements IScenePresenter
 		this.sceneAnswererAtid = "";
 	}
 
-	public void clearView()
-	{
+	public void clearView() {
 		view.clear();
 	}
 
@@ -165,7 +161,7 @@ implements IScenePresenter
 	}
 
 	public void addAnimation(String atid, Animation destAnimation) {
-		this.scene.objectCollection().addAnimation(atid,destAnimation);
+		this.scene.objectCollection().addAnimation(atid, destAnimation);
 	}
 
 	public void alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
@@ -188,12 +184,12 @@ implements IScenePresenter
 	@Override
 	public String getAtidOfCurrentAnimationByOtid(String otid) {
 		SceneObject o = scene.objectCollection().getByOtid(otid);
-		if(o!=null)
-		{
+		if (o != null) {
 			String a = o.getCurrentAnimation();
 			return a;
 		}
-		return "getAtidOfCurrentAnimationByOtid couldn't find otid for <"+otid+">";
+		return "getAtidOfCurrentAnimationByOtid couldn't find otid for <"
+				+ otid + ">";
 	}
 
 	public void setOtidOfDefaultSceneObject(String otid) {
@@ -227,16 +223,15 @@ implements IScenePresenter
 
 	@Override
 	public Rect getBoundingRectByFrameAndAtid(int frame, String atid) {
-		Rect toReturn = new Rect(0,0,1,1);
+		Rect toReturn = new Rect(0, 0, 1, 1);
 		Animation a = getAnimationByAtid(atid);
-		if(a!=null)
-		{
+		if (a != null) {
 			ImageCollection fc = a.getFrames();
 			Image i = fc.getByIndex(frame);
-			if(i!=null)
+			if (i != null)
 				toReturn = i.getBoundingRectPreScaling();
 			else
-				assert(false);
+				assert (false);
 		}
 		return toReturn;
 	}
@@ -245,7 +240,6 @@ implements IScenePresenter
 	public double getXByOtid(String otid) {
 		return this.scene.objectCollection().getByOtid(otid).getX();
 	}
-
 
 	@Override
 	public double getYByOtid(String otid) {
@@ -258,53 +252,51 @@ implements IScenePresenter
 	}
 
 	public String getOtidByCode(short ocode) {
-		if(ocode==-1)
+		if (ocode == DEFAULT_SCENE_OBJECT)
 			return this.getDefaultSceneObjectOtid();
-		if(getObjectByOCode(ocode)==null)
-			return "ScenePresenter::getOtidByCode recd bad ocode "+ocode;
+		if (getObjectByOCode(ocode) == null)
+			return "ScenePresenter::getOtidByCode recd bad ocode " + ocode;
 		return getObjectByOCode(ocode).getOtid();
 	}
 
-	public void setStateOfPopup(String atid, boolean isVisible, String speech, TalkPerformer sayAction) {
+	public void setStateOfPopup(String atid, boolean isVisible, String speech,
+			TalkPerformer sayAction) {
 		Animation a = this.getAnimationByAtid(atid);
-	
+
 		int speechBubbleIndex = a.getSpeechBubble();
 		ColorEnum talkingColor = a.getTalkingColor();
-		Point mouth = new Point(0,0);
-		if(a.getSceneObject()!=null)
-		{
+		Point mouth = new Point(0, 0);
+		if (a.getSceneObject() != null) {
 			mouth = a.getSceneObject().getMouthLocation();
-			if(talkingColor==null)
-			{
+			if (talkingColor == null) {
 				talkingColor = a.getSceneObject().getTalkingColor();
-				if(talkingColor==null)
-				{
-					talkingColor = ColorEnum.values()[(int)(Math.random()*ColorEnum.values().length)];;
+				if (talkingColor == null) {
+					talkingColor = ColorEnum.values()[(int) (Math.random() * ColorEnum
+							.values().length)];
+					;
 				}
 			}
-			if(speechBubbleIndex==-1)
-			{
+			if (speechBubbleIndex == -1) {
 				speechBubbleIndex = a.getSceneObject().getSpeechBubble();
-				if(speechBubbleIndex ==-1)
-				{
-					speechBubbleIndex = 0;//default
+				if (speechBubbleIndex == -1) {
+					speechBubbleIndex = 0;// default
 				}
 			}
 		}
 		RectF r = this.speechRects.get(speechBubbleIndex);
-		Rect pixels = new Rect(
-				(int)(r.getLeft() * this.getSceneGuiWidth())
-				,	(int)(r.getTop() * this.getSceneGuiHeight())
-				, (int)(r.getWidth()* this.getSceneGuiWidth())
-				, (int)(r.getHeight()* this.getSceneGuiHeight())
-				);
-		view.setStateOfPopup(isVisible, talkingColor, speech, pixels, mouth, sayAction);
+		Rect pixels = new Rect((int) (r.getLeft() * this.getSceneGuiWidth()),
+				(int) (r.getTop() * this.getSceneGuiHeight()),
+				(int) (r.getWidth() * this.getSceneGuiWidth()),
+				(int) (r.getHeight() * this.getSceneGuiHeight()));
+		view.setStateOfPopup(isVisible, talkingColor, speech, pixels, mouth,
+				sayAction);
 	}
 
 	public String getSceneTalkerAtid() {
-		if(!sceneTalkerAtid.isEmpty())
+		if (!sceneTalkerAtid.isEmpty())
 			return sceneTalkerAtid;
-		String defaultInitial = this.getObjectByOtid(defaultSceneObjectOtid).getInitialAnimation();
+		String defaultInitial = this.getObjectByOtid(defaultSceneObjectOtid)
+				.getInitialAnimation();
 		return defaultInitial;
 	}
 
@@ -313,7 +305,7 @@ implements IScenePresenter
 	}
 
 	public String getSceneDialoggerAtid() {
-		if(!sceneAskerAtid.isEmpty())
+		if (!sceneAskerAtid.isEmpty())
 			return sceneAskerAtid;
 		String nextBest = this.getSceneTalkerAtid();
 		return nextBest;
@@ -322,8 +314,9 @@ implements IScenePresenter
 	public void setSceneAskerAtid(String sceneAskerAtid) {
 		this.sceneAskerAtid = sceneAskerAtid;
 	}
+
 	public String getSceneDialoggeeAtid() {
-		if(!sceneAnswererAtid.isEmpty())
+		if (!sceneAnswererAtid.isEmpty())
 			return sceneAnswererAtid;
 		String nextBest = this.getSceneTalkerAtid();
 		return nextBest;
@@ -332,8 +325,6 @@ implements IScenePresenter
 	public void setSceneAnswererAtid(String sceneAnswererAtid) {
 		this.sceneAnswererAtid = sceneAnswererAtid;
 	}
-
-
 
 	public String getDefaultSceneObjectOtid() {
 		return defaultSceneObjectOtid;
@@ -356,8 +347,7 @@ implements IScenePresenter
 
 	public int getExistingPrefixIfAvailable(short ocode, int drawingOrder) {
 		SceneObject o = this.getObjectByOCode(ocode);
-		if(o!=null)
-		{
+		if (o != null) {
 			return o.getDrawingOrder();
 		}
 		return drawingOrder;
@@ -372,23 +362,21 @@ implements IScenePresenter
 		master.switchToScene(foundDest, arrivalSegment);
 	}
 
-
-	public void addBoundaryGate(double tlx,double tly, double brx,double bry, Object sceneToSwitchTo, int arrivalSegment) {
-		boundaryCalculator.addBoundaryGate(sceneToSwitchTo,  arrivalSegment, new PointF(tlx,tly), new PointF(brx,bry));
+	public void addBoundaryGate(double tlx, double tly, double brx, double bry,
+			Object sceneToSwitchTo, int arrivalSegment) {
+		boundaryCalculator.addBoundaryGate(sceneToSwitchTo, arrivalSegment,
+				new PointF(tlx, tly), new PointF(brx, bry));
 	}
 
 	public void addBoundaryPoint(double x, double y) {
-		boundaryCalculator.addBoundaryPoint(new PointF(x,y));
+		boundaryCalculator.addBoundaryPoint(new PointF(x, y));
 	}
-
 
 	public boolean isInANoGoZone(PointF tp) {
 		return boundaryCalculator.isInANoGoZone(tp);
 	}
 
-
-	public boolean doSwitchIfBeyondGate(PointF tp)
-	{
+	public boolean doSwitchIfBeyondGate(PointF tp) {
 		return boundaryCalculator.doSwitchIfBeyondGate(tp);
 	}
 
@@ -403,8 +391,8 @@ implements IScenePresenter
 	}
 
 	public void addObstacleRect(double x, double y, double right, double bottom) {
-		boundaryCalculator.addObstacleRect(x,y,right,bottom);
-		
+		boundaryCalculator.addObstacleRect(x, y, right, bottom);
+
 	}
 
 	public List<PointF> findPath(PointF rawStart, PointF rawEnd) {
@@ -417,12 +405,9 @@ implements IScenePresenter
 	}
 
 	@Override
-	public List<PointFWithNeighbours> getLastNetworkOfConcaveVertices() 
-	{
+	public List<PointFWithNeighbours> getLastNetworkOfConcaveVertices() {
 		return boundaryCalculator.getLastNetworkOfConcaveVertices();
 	}
-	
-	
 
 	@Override
 	public List<PointF> getLastPath() {
@@ -434,21 +419,25 @@ implements IScenePresenter
 	}
 
 	public void setArrivalSegment(int arrivalSegment) {
-		this.arrivalSegment = arrivalSegment;		
+		this.arrivalSegment = arrivalSegment;
 	}
 
 	public void repositionDefaultObject() {
 		ArrayList<PointF> points = boundaryCalculator.getGatePoints();
-		if(arrivalSegment>-1 && arrivalSegment < (points.size()-1))
-		{
+		if (arrivalSegment > -1 && arrivalSegment < (points.size() - 1)) {
 			PointF a = points.get(arrivalSegment);
-			PointF b = points.get(arrivalSegment+1);
+			PointF b = points.get(arrivalSegment + 1);
 			PointF c = boundaryCalculator.getCentreOfSegments();
-			PointF mp = new PointF((a.getX()+b.getX())/2, (a.getY()+b.getY())/2);
-			// we want v, a vector starting at mp, and heading 10% towards centre.
-			PointF v = new PointF((c.getX() -mp.getX())*.1, (c.getY()-mp.getY())*.1);
-			PointF result = new PointF(mp.getX()+v.getX(), mp.getY()+v.getY());
-			SceneObject o = scene.objectCollection().getByOtid(this.getDefaultSceneObjectOtid());
+			PointF mp = new PointF((a.getX() + b.getX()) / 2,
+					(a.getY() + b.getY()) / 2);
+			// we want v, a vector starting at mp, and heading 10% towards
+			// centre.
+			PointF v = new PointF((c.getX() - mp.getX()) * .1,
+					(c.getY() - mp.getY()) * .1);
+			PointF result = new PointF(mp.getX() + v.getX(), mp.getY()
+					+ v.getY());
+			SceneObject o = scene.objectCollection().getByOtid(
+					this.getDefaultSceneObjectOtid());
 			o.setBaseMiddleX(result.getX());
 			o.setBaseMiddleY(result.getY());
 		}
@@ -461,7 +450,7 @@ implements IScenePresenter
 
 	public int addSpeechBubble(RectF rectF) {
 		speechRects.add(rectF);
-		return speechRects.size()-1;
+		return speechRects.size() - 1;
 	}
 
 	public short getOCodeByAtid(String atid) {
@@ -471,7 +460,8 @@ implements IScenePresenter
 			SceneObject o = a.getObject();
 			if (o != null)
 				toReturn = o.getOCode();
-		};
+		}
+		;
 		return toReturn;
 	}
 
