@@ -2,6 +2,7 @@ package com.github.a2g.core.interfaces.internal;
 
 import com.github.a2g.core.action.DialogChainEndAction;
 import com.github.a2g.core.action.DialogChainableAction;
+import com.github.a2g.core.primitive.PointF;
 
 public interface IChainRootForDialog {
 	DialogChainableAction them(String speech);
@@ -20,4 +21,8 @@ public interface IChainRootForDialog {
 	DialogChainEndAction chainTo(int branchId);
 	DialogChainEndAction switchTo(String string, int arrivalSegment);
 	DialogChainEndAction branchTheObligatoryExit(String string);
+	DialogChainEndAction walkAlwaysSwitch(PointF p, String sceneName,
+			int arrivalSegment);
+	DialogChainEndAction walkAlwaysSwitch(double x, double y, String sceneName,
+			int arrivalSegment);
 }

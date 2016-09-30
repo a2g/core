@@ -25,6 +25,7 @@ import com.github.a2g.core.interfaces.methods.game.IGetSceneGuiWidth;
 import com.github.a2g.core.interfaces.methods.game.IGetValue;
 import com.github.a2g.core.interfaces.methods.game.IGetX;
 import com.github.a2g.core.interfaces.methods.game.IGetY;
+import com.github.a2g.core.interfaces.methods.game.IHide;
 import com.github.a2g.core.interfaces.methods.game.IIsInDebugMode;
 import com.github.a2g.core.interfaces.methods.game.IIsInventoryItemVisible;
 import com.github.a2g.core.interfaces.methods.game.IIsTrue; 
@@ -37,6 +38,7 @@ import com.github.a2g.core.interfaces.methods.game.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.methods.game.ISetBaseMiddleY;
 import com.github.a2g.core.interfaces.methods.game.ISetInventoryItemVisible;
 import com.github.a2g.core.interfaces.methods.game.ISetValue;
+import com.github.a2g.core.interfaces.methods.game.IShow;
 import com.github.a2g.core.interfaces.methods.game.ISwitchToScene;
 /**  
  * 
@@ -60,6 +62,8 @@ IGetValue
 , IIsInventoryItemVisible
 , ISetInventoryItemVisible
 // object
+, IHide
+, IShow
 , IGetBaseMiddleX
 , IGetBaseMiddleY
 , ISetBaseMiddleX

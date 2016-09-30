@@ -21,6 +21,8 @@ import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
+import com.github.a2g.core.objectmodel.ScenePresenter;
+import com.github.a2g.core.primitive.PointF;
 
 public abstract class DialogChainableAction extends DialogChainEndAction
 implements IChainRootForDialog
@@ -118,6 +120,26 @@ implements IChainRootForDialog
 		DialogBranchAction a = new DialogBranchAction(this, text, ConstantsForAPI.EXIT_DLG, true);
 		a.setIsExemptFromSaidList(true);
 		return a;
+	}
+	 
+	
+	@Override
+	public DialogChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int arrivalSegment) {
+		return this.walkAlwaysSwitch( new PointF(x,y), sceneName, arrivalSegment);
+	}
+	
+	@Override
+	public DialogChainEndAction walkAlwaysSwitch(PointF p, String sceneName, int arrivalSegment) {
+		DialogWalkAction a = new DialogWalkAction(this, ScenePresenter.DEFAULT_SCENE_OBJECT);
+		a.setEndX(p.getX());
+		a.setEndY(p.getY());
+		a.setToInitialAtEnd(false);
+
+		DialogSingleCallAction b =  new DialogSingleCallAction(a, Type.Switch);
+		b.setString(sceneName);
+		b.setInt(arrivalSegment);
+
+		return b;
 	}
 	 
 }
