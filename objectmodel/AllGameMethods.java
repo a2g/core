@@ -301,13 +301,13 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	
 	
 	@Override
-	public void setAnimationAsSceneDialogger(String atid) {
+	public void setAnimationAsSceneDialogUs(String atid) {
 		master.getScenePresenter().setSceneAskerAtid(atid);
 	}
 
 	
 	@Override
-	public void setAnimationAsSceneDialoggee(String atid) {
+	public void setAnimationAsSceneDialogThem(String atid) {
 		master.getScenePresenter().setSceneAnswererAtid(atid);
 	}
 

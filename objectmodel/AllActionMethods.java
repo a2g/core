@@ -308,11 +308,11 @@ ITitleCardPresenterFromActions
 	}
 
 	@Override
-	public String getAtidOfSceneDialogger() {
+	public String getAtidOfSceneDialogUs() {
 		return master.getScenePresenter().getSceneDialoggerAtid();
 	}
 	@Override
-	public String getAtidOfSceneDialoggee() {
+	public String getAtidOfSceneDialogThem() {
 		return master.getScenePresenter().getSceneDialoggeeAtid();
 	}
 	@Override

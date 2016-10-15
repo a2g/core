@@ -25,8 +25,8 @@ import com.github.a2g.core.interfaces.methods.game.IAddSpeechBubble;
 import com.github.a2g.core.interfaces.methods.game.IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
 import com.github.a2g.core.interfaces.methods.game.ICreateChainRootAction;
 import com.github.a2g.core.interfaces.methods.game.IGetOCodeByAtid;
-import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneDialoggee;
-import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneDialogger;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneDialogThem;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneDialogUs;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationSpeechBubble;
 import com.github.a2g.core.interfaces.methods.game.ISetDefaultSceneObject;
 import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleX;
@@ -145,8 +145,8 @@ ISetAnimationDuration,
 ISetAnimationAsObjectWalkDirection,
 ISetDefaultSceneObject,
 ISetAnimationAsObjectCurrentAndSetFrame,
-ISetAnimationAsSceneDialogger,
-ISetAnimationAsSceneDialoggee,
+ISetAnimationAsSceneDialogUs,
+ISetAnimationAsSceneDialogThem,
 ISetAnimationSpeechBubble,
 ISetAnimationTalkingColor,
 IGetDefaultSceneObject,

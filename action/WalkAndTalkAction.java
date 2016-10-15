@@ -46,7 +46,8 @@ public class WalkAndTalkAction extends ChainableAction{
 		mover = new MovePerformer(ocode);
 		mover.setToInitialAtEndForMover(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false)
 		walker = new WalkPerformer(ocode);
-		talker = new TalkPerformer(TalkPerformer.SCENE_TALKER, speech);
+		//talker = new TalkPerformer(TalkPerformer.SCENE_TALKER, speech);
+		talker = new TalkPerformer(ocode, speech);
 	}
 
 	@Override

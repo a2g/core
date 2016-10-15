@@ -19,9 +19,10 @@ public class TalkPerformer {
 	private String atid;
 	private String otid;
 	private String fullSpeech;
+	private short ocode;
 	public static String SCENE_TALKER = "SCENE_TALKER";// use animation of scene talker
-	public static String SCENE_DIALOGGEE = "SCENE_DIALOGGEE";
-	public static String SCENE_DIALOGGER = "SCENE_DIALOGGER";
+	public static String SCENE_DIALOG_THEM = "SCENE_DIALOG_US";
+	public static String SCENE_DIALOG_US = "SCENE_DIALOG_THEM";
 	public enum NonIncrementing {
 		True, False, FromAPI
 	}
@@ -29,7 +30,21 @@ public class TalkPerformer {
 	public TalkPerformer(String atid, String fullSpeech) {
 		this.numberOfFramesTotal = 0;
 		this.nonIncrementing = NonIncrementing.False;
+		this.ocode = -1;
 		this.atid = atid;
+		this.otid = "";
+		this.fullSpeech = fullSpeech;
+		speech = new ArrayList<String>();
+		startingTimeForEachLine = new ArrayList<Double>();
+		
+		this.totalDurationInSeconds = 0;
+	}
+ 
+	public TalkPerformer(short ocode, String fullSpeech) {
+		this.numberOfFramesTotal = 0;
+		this.nonIncrementing = NonIncrementing.False;
+		this.ocode = ocode;
+		this.atid = "";
 		this.otid = "";
 		this.fullSpeech = fullSpeech;
 		speech = new ArrayList<String>();
@@ -87,12 +102,19 @@ public class TalkPerformer {
 			this.nonIncrementing = master.isSayNonIncrementing()? NonIncrementing.True : NonIncrementing.False;
 		}
 		
-		if (atid == SCENE_TALKER) {
+		if(ocode!=-1)
+		{
+			String otid = scene.getOtidByCode(ocode);
+			atid = scene.getAtidOfCurrentAnimationByOtid(otid);
+			// odd choice, but shouldn't make a difference - we just need any animation
+			// from that object, since api.setSpeechBubble sets all animations.
+		}
+		else if (atid == SCENE_TALKER) {
 			atid = scene.getAtidOfSceneTalker();
-		}else if(atid == SCENE_DIALOGGER){
-			atid = scene.getAtidOfSceneDialogger();
-		}else if(atid == SCENE_DIALOGGEE){
-			atid = scene.getAtidOfSceneDialoggee();
+		}else if(atid == SCENE_DIALOG_US){
+			atid = scene.getAtidOfSceneDialogUs();
+		}else if(atid == SCENE_DIALOG_THEM){
+			atid = scene.getAtidOfSceneDialogThem();
 		}
 		
 		// only now do
