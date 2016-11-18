@@ -20,6 +20,7 @@ import com.github.a2g.core.interfaces.internal.IClearSaidSpeech;
 import com.github.a2g.core.interfaces.internal.IClearValueRegistry;
 import com.github.a2g.core.interfaces.methods.game.IAddBoundaryGate;
 import com.github.a2g.core.interfaces.methods.game.IAddBoundaryPoint;
+import com.github.a2g.core.interfaces.methods.game.IAddHelperPoint;
 import com.github.a2g.core.interfaces.methods.game.IAddObstacleRect;
 import com.github.a2g.core.interfaces.methods.game.IAddSpeechBubble;
 import com.github.a2g.core.interfaces.methods.game.IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
@@ -98,6 +99,7 @@ IShareWinning,
 ICreateChainRootAction,
 IGetSceneGuiHeight,
 IAddSpeechBubble,
+IAddHelperPoint,
 IGetOCodeByAtid,
 // boundary
 IAddBoundaryGate,

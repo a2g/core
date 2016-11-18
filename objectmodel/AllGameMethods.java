@@ -14,21 +14,26 @@ import com.github.a2g.core.interfaces.internal.ILoad;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.RectF;
 
-/** 
+/**
  * @brief
- * @ref balooga blah blah
- * These are all the game methods, but these methods may or may not be available
- * on the interface for a specific handler. Check each interface individually:
+ * @ref balooga blah blah These are all the game methods, but these methods may
+ *      or may not be available on the interface for a specific handler. Check
+ *      each interface individually:
  * @ref com.github.a2g.core.interfaces.IOnFillLoadList "IOnFillLoadList" ,
- * @ref com::github::a2g::core::interfaces::IOnEntry "IOnEntry" , 
- * @ref com.github.a2g.core.interfaces.IOnPreEntry "IOnPreEntry" , 
+ * @ref com::github::a2g::core::interfaces::IOnEntry "IOnEntry" ,
+ * @ref com.github.a2g.core.interfaces.IOnPreEntry "IOnPreEntry" ,
  * @ref com.github.a2g.core.interfaces.IOnEveryFrame "IOnEveryFrame" ,
  * @ref com.github.a2g.core.interfaces.IOnDoCommand "IOnDoCommand" ,
  * @ref com.github.a2g.core.interfaces.IOnDialogTree "IOnDoCommand" ,
  * 
- * The API wants to prevent specific calls from being called inside the event handlers. As a result each handler has its own interface which only exposes a subset of the methods below. Use this class as the reference, and discover the methods which are exposed by each event handler by clicking on the links below:
+ *      The API wants to prevent specific calls from being called inside the
+ *      event handlers. As a result each handler has its own interface which
+ *      only exposes a subset of the methods below. Use this class as the
+ *      reference, and discover the methods which are exposed by each event
+ *      handler by clicking on the links below:
  * 
  */
 public class AllGameMethods implements IOnFillLoadList, IOnEntry,
@@ -627,6 +632,45 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		SceneObject o  = master.getScenePresenter().getObjectByOtid(otid);
 		o.setScale(scale);
+		
+	}
+
+	@Override
+	public int addHelperPoint(double x, double y) {
+		return master.getScenePresenter().addHelperPoint(new PointF(x,y));
+	}
+
+	@Override
+	public void addObstacleRect(double x, double y, int helperIndex) {
+		PointF p = master.getScenePresenter().getHelperPoints().get(helperIndex);
+		master.getScenePresenter().addObstacleRect(x, y, p.getX(), p.getY());
+		
+	}
+
+	@Override
+	public void addObstacleRect(int helperIndex, double x, double y) {
+		PointF p = master.getScenePresenter().getHelperPoints().get(helperIndex);
+		master.getScenePresenter().addObstacleRect( p.getX(), p.getY(), x, y);
+	
+	}
+
+	@Override
+	public void addObstacleRect(int helper1, int helper2) {
+		PointF p1 = master.getScenePresenter().getHelperPoints().get(helper1);
+		PointF p2 = master.getScenePresenter().getHelperPoints().get(helper2);
+		master.getScenePresenter().addObstacleRect( p1.getX(), p1.getY(), p2.getX(), p2.getY());
+	
+	}
+
+	@Override
+	public PointF getHelperPoint(int helperIndex) {
+		return master.getScenePresenter().getHelperPoints().get(helperIndex);
+	}
+
+	@Override
+	public void addBoundaryPoint(int helperIndex) {
+		PointF p1 = master.getScenePresenter().getHelperPoints().get(helperIndex);
+		master.getScenePresenter().addBoundaryPoint(p1.getX(), p1.getY());
 		
 	}
 	

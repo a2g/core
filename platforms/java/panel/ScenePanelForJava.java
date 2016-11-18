@@ -318,6 +318,7 @@ implements IScenePanelFromScenePresenter
 		// connect all the points in a big line
 		List<RectF> obstacles = toScene.getObstacles();
 		List<PointF> points = toScene.getBoundaryPoints();
+		List<PointF> helpers = toScene.getHelperPoints();
 		PointF centre = toScene.getBoundaryPointsCentre();
 		List<PointF> path = toScene.getLastPath();
 		Iterator<RectF> bubbles = toScene.getSpeechRects();
@@ -399,6 +400,14 @@ implements IScenePanelFromScenePresenter
 
 
 			g.drawOval((int)(centre.getX()*width), (int)(centre.getY()*height), 3, 3);
+			
+			// draw helper points.
+			g.setColor(new Color(255,200,200));
+			for(int i=0;i<helpers.size();i++)
+			{
+				g.drawOval((int)(helpers.get(i).getX()*width), (int)(helpers.get(i).getY()*height), 3, 3);
+				
+			}
 		}
 
 		if(speechVisible && bufferedImage!=null)

@@ -54,6 +54,7 @@ public class ScenePresenter implements IScenePresenter,
 	private IBoundaryCalculator boundaryCalculator;
 	private int arrivalSegment;
 	private Vector<RectF> speechRects;
+	private ArrayList<PointF> helperPoints;
 
 	public ScenePresenter(final IHostingPanel panel,
 			IMasterPresenterFromScenePresenter master, IFactory factory) {
@@ -76,6 +77,7 @@ public class ScenePresenter implements IScenePresenter,
 		defaultSceneObjectOtid = "ScenePresenter::getDefaultSceneObjectOtid was used before it was initialized";
 
 		speechRects = new Vector<RectF>(3);
+		this.helperPoints = new ArrayList<PointF>();
 	}
 
 	private SceneObject getObjectByOCode(short ocode) {
@@ -403,6 +405,12 @@ public class ScenePresenter implements IScenePresenter,
 	public ArrayList<RectF> getObstacles() {
 		return boundaryCalculator.getObstacles();
 	}
+	
+	@Override
+	public ArrayList<PointF> getHelperPoints() {
+		return helperPoints;
+	}
+	
 
 	@Override
 	public List<PointFWithNeighbours> getLastNetworkOfConcaveVertices() {
@@ -448,9 +456,15 @@ public class ScenePresenter implements IScenePresenter,
 		return speechRects.iterator();
 	}
 
+	
 	public int addSpeechBubble(RectF rectF) {
 		speechRects.add(rectF);
 		return speechRects.size() - 1;
+	}
+	
+	public int addHelperPoint(PointF pointF) {
+		helperPoints.add(pointF);
+		return helperPoints.size() - 1;
 	}
 
 	public short getOCodeByAtid(String atid) {

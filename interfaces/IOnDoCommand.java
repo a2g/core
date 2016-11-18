@@ -16,10 +16,13 @@
 
 package com.github.a2g.core.interfaces;
 
+import java.awt.Component;
+
 import com.github.a2g.core.interfaces.methods.game.IAddBoundaryGate;
 import com.github.a2g.core.interfaces.methods.game.IAddBoundaryPoint;
 import com.github.a2g.core.interfaces.methods.game.IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
 import com.github.a2g.core.interfaces.methods.game.ICreateChainRootAction;
+import com.github.a2g.core.interfaces.methods.game.IGetHelperPoint;
 import com.github.a2g.core.interfaces.methods.game.ISetDefaultSceneObject;
 import com.github.a2g.core.interfaces.methods.game.IGetAnimationLastFrame;
 import com.github.a2g.core.interfaces.methods.game.IGetAnimationLength;
@@ -83,6 +86,8 @@ ICreateChainRootAction,
 // boundary
 IAddBoundaryGate,
 IAddBoundaryPoint,
+IGetHelperPoint,
+
 
 // object
 IHide,
@@ -121,5 +126,7 @@ ISetInventoryItemVisible
 
 	@Override
 	void setDefaultSceneObject(short harry2);
+
+	
 
 }

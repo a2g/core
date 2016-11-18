@@ -16,6 +16,8 @@
 
 package com.github.a2g.core.interfaces;
 
+import java.awt.Component;
+
 import com.github.a2g.core.interfaces.methods.action.ISetStateOfPopup;
 import com.github.a2g.core.interfaces.methods.game.ICreateChainRootAction;
 import com.github.a2g.core.interfaces.methods.game.IDisplayTitleCard;
@@ -25,6 +27,7 @@ import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleY;
 import com.github.a2g.core.interfaces.methods.game.IGetCurrentAnimation;
 import com.github.a2g.core.interfaces.methods.game.IGetCurrentFrame;
 import com.github.a2g.core.interfaces.methods.game.IGetCurrentSceneName;
+import com.github.a2g.core.interfaces.methods.game.IGetHelperPoint;
 import com.github.a2g.core.interfaces.methods.game.IGetLastSceneName;
 import com.github.a2g.core.interfaces.methods.game.IGetSceneGuiWidth;
 import com.github.a2g.core.interfaces.methods.game.IGetValue;
@@ -85,8 +88,9 @@ IUpdateObjectToCorrectImage, IGetCurrentFrame, ISetCurrentFrame,
 ISetBaseMiddleX, ISetBaseMiddleY, IGetBaseMiddleX, IGetBaseMiddleY,
 IGetCurrentAnimation, ISetX, ISetY, IGetX, IGetY, IIsVisible
 // animation
-, IIsAnimation, ISetAnimationAsObjectCurrent
-
+, IIsAnimation
+, ISetAnimationAsObjectCurrent
+, IGetHelperPoint
 {
 
 	@Override
@@ -95,4 +99,5 @@ IGetCurrentAnimation, ISetX, ISetY, IGetX, IGetY, IIsVisible
 	@Override
 	boolean isVisible(short orangeHutDoorOpen);
 
+	 
 }

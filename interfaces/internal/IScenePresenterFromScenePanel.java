@@ -37,4 +37,5 @@ IGetYByOtid
 	List<PointFWithNeighbours> getLastNetworkOfConcaveVertices();
 	List<PointF> getLastPath();
 	Iterator<RectF> getSpeechRects();
+	List<PointF> getHelperPoints();
 }

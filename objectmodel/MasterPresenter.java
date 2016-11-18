@@ -547,8 +547,11 @@ PropertyChangeEventHandlerAPI
 		clearMapOfSounds();
 
 		// then in the scene the user can overwrite this.
-		this.sceneHandlers
-		.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene));
+		if(null ==	this.sceneHandlers
+		.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene)))
+		{
+			 startScene();
+		}
 	}
 
 	@Override

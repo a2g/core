@@ -83,8 +83,19 @@ public class SceneObjectCollection {
 		int i = this.theOtids.indexOf(otid);
 		if(i==-1)
 		{
-			throw new NoSuchElementException(); 
-			//return new SceneObject("null", 0,0);
+			// this actually fails in the following case. but I think its the trail
+			throw new NoSuchElementException(otid); 
+			/*
+			this actually fails in 
+			at com.github.a2g.core.objectmodel.SceneObjectCollection.getByOtid(SceneObjectCollection.java:86)
+			at com.github.a2g.core.objectmodel.ScenePresenter.getObjectByOtid(ScenePresenter.java:86)
+			at com.github.a2g.core.objectmodel.AllActionMethods.setToInitialAnimationWithoutChangingFrameByOtid(AllActionMethods.java:282)
+			at com.github.a2g.core.action.performer.MovePerformer.onCompleteForMover(MovePerformer.java:168)
+			at com.github.a2g.core.action.performer.WalkSinglePerformer.onCompleteActionAndCheckForGateExit(WalkSinglePerformer.java:107)
+			at com.github.a2g.core.action.performer.WalkMultiPerformer.onCompleteActionAndCheckForGateExit(WalkMultiPerformer.java:154)
+			at com.github.a2g.core.action.WalkMaybeSwitchAction.onCompleteActionAndCheckForGateExit(WalkMaybeSwitchAction.java:78)
+			at com.github.a2g.core.action.BaseAction.onComplete(BaseAction.java:100)
+			*/
 		}
 		return this.getByIndex(i);
 	}
