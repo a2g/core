@@ -27,4 +27,8 @@ public interface IMasterPresenterFromLoader {
 	void enableClickToContinue();
 
 	void restartReloading();
+	
+	void setInventoryImageSize(int width, int height);
+	
+	void setScenePixelSize(int width, int height);
 }

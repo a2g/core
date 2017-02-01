@@ -79,5 +79,12 @@ IDialogTreePanelFromDialogTreePresenter {
 		}
 	}
 
+	@Override
+	public void setWidthAndHeight(int width, int height) {
+		//this.width = width;
+		//this.height = height;
+		
+	}
+
 
 }

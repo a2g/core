@@ -22,5 +22,7 @@ public interface IDialogTreePanelFromDialogTreePresenter {
 	void setVisible(boolean isInDialogTreeMode);
 
 	void update(DialogTree theDialogTree);
+	
+	void setWidthAndHeight(int width, int height);
 
 }

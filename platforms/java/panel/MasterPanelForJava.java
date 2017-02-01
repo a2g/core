@@ -119,7 +119,7 @@ implements IMasterPanelFromMasterPresenter
 		}
 
 		panelForSceneStack = new JPanel();panelForSceneStack.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-		panelForSceneStack.setPreferredSize(new Dimension(320,180));
+		//panelForSceneStack.setPreferredSize(new Dimension(320,180));
 		{
 			sceneCardLayout = new CardLayout();
 			//sceneCardLayout.setHgap(0);

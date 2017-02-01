@@ -16,8 +16,6 @@
 
 package com.github.a2g.core.interfaces;
 
-import java.awt.Component;
-
 import com.github.a2g.core.interfaces.methods.action.ISetStateOfPopup;
 import com.github.a2g.core.interfaces.methods.game.ICreateChainRootAction;
 import com.github.a2g.core.interfaces.methods.game.IDisplayTitleCard;

@@ -66,7 +66,7 @@ public class ScenePresenter implements IScenePresenter,
 		this.cameraX = 0.0;
 		this.cameraY = 0.0;
 		this.width = 320;
-		this.height = 180;
+		//this.height = 180;
 		this.boundaryCalculator = factory.createBoundaryCalculator(this);
 
 		this.scene = new Scene();
@@ -103,7 +103,8 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	public void setScenePixelSize(int width, int height) {
-
+		this.width = width;
+		this.height = height;
 		this.view.setScenePixelSize(width, height);
 	}
 

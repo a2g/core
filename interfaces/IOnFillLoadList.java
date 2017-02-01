@@ -26,17 +26,10 @@ import com.github.a2g.core.interfaces.methods.game.ISetValue;
  */
 public interface IOnFillLoadList extends ISetValue {
 	void addEssential(ILoad blah);
-
-	void setScenePixelSize(int width, int height);
-
 	void kickStartLoading();
-
 	IGameScene getSceneByName(Object string);
-
 	void clearAllLoadedLoads();
-
 	void setContinueAfterLoad(boolean isContinueImmediatelyAfterLoading);
-
 	void addMP3ForASoundObject(String name, String location);
-
+	void setScenePixelSize(int width, int height);
 }

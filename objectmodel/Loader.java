@@ -11,6 +11,8 @@ import com.github.a2g.core.interfaces.internal.ILoad;
 import com.github.a2g.core.interfaces.internal.ILoaderPresenter;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoader;
+import com.github.a2g.core.primitive.LoaderEnum;
+import com.github.a2g.core.primitive.Point;
 
 public class Loader implements ILoaderPresenter {
 	private LoaderItem theCurrentLoader;
@@ -106,7 +108,7 @@ public class Loader implements ILoaderPresenter {
 		return isSameInventoryAsLastTime;
 	}
 
-	public int imagesToLoad() {
+	public int getNumberOfImagesToLoad() {
 		return numberOfImagesToLoad;
 	}
 
@@ -120,7 +122,7 @@ public class Loader implements ILoaderPresenter {
 			LoaderItem loader = iter.next();
 			String loaderName = loader.getCombinedClassAndNumber();
 
-			if (loader.isInventory()) {
+			if (loader.getLoaderEnum()==LoaderEnum.Inventory.r) {
 
 				if (loaderName.equalsIgnoreCase(this.nameOfInventoryResourceUsedLastTime)) {
 					iter.remove();
@@ -160,6 +162,21 @@ public class Loader implements ILoaderPresenter {
 		nameOfInventoryResourceUsedLastTime = "";
 		// i don't think you need this line.
 		this.isSameInventoryAsLastTime = false;
+	}
+
+	public void setSceneAndInventoryResolution() {
+		
+		Iterator<LoaderItem> iter = listOfEssentialLoaders.iterator();
+		while (iter.hasNext()) {
+			LoaderItem loader = iter.next();
+			Point res = loader.getResolution();
+			int i = loader.getLoaderEnum();
+			if(i==LoaderEnum.Main.r)
+				master.setScenePixelSize(res.getX(), res.getY());
+			else  if(i==LoaderEnum.Inventory.r)
+				master.setInventoryImageSize(res.getX(), res.getY());
+			
+		}
 	}
 
 }

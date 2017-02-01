@@ -66,8 +66,8 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 	@Override
 	public void setXYForDebugging(double x, double y) {
 		if (x != -1) {
-			this.debugX = (int) (x * 100);
-			this.debugY = (int) (y * 100);
+			this.debugX = (int) (x * 1000);
+			this.debugY = (int) (y * 1000);
 		}
 	}
 
@@ -124,7 +124,7 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 		String displayName = sentence.getDisplayName();
 
 		// ...and display it
-		view.setText("(" + debugX + "," + debugY + ")  " + displayName);
+		view.setText("(." + debugX + ",." + debugY + ")  " + displayName);
 	}
 
 	private Sentence getSentence() {

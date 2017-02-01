@@ -484,10 +484,12 @@ PropertyChangeEventHandlerAPI
 	}
 
 	public void kickStartLoading() {
-		loaderPresenter.getLoaders()
-		.calculateImagesToLoadAndOmitInventoryIfSame();
-
-		int total = loaderPresenter.getLoaders().imagesToLoad();
+		
+		loaderPresenter.getLoaders().setSceneAndInventoryResolution();
+		
+		loaderPresenter.getLoaders().calculateImagesToLoadAndOmitInventoryIfSame();
+		
+		int total = loaderPresenter.getLoaders().getNumberOfImagesToLoad();
 		boolean isSameInventory = loaderPresenter.getLoaders()
 				.isSameInventoryAsLastTime();
 
@@ -1069,5 +1071,8 @@ PropertyChangeEventHandlerAPI
 	public void clearSaidSpeech() {
 		dialogTreePresenter.resetRecordOfSaidSpeech();	
 	}
+
+
+
 
 }

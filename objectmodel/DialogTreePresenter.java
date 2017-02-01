@@ -87,7 +87,8 @@ implements IDialogTreePresenter {
 		return size;
 	}
 
-	public void setScenePixelSize(int width, int i) {
+	public void setScenePixelSize(int width, int height) {
+		view.setWidthAndHeight(width, height);
 	}
 
 	public boolean isAddableToSaidList(int branchId) {

@@ -50,7 +50,7 @@ implements IDialogTreePanelFromDialogTreePresenter
 		grid.setRows(10);
 		grid.setColumns(1);
 		this.width = 320;
-		this.height = 180;
+		//this.height = 180;
 		this.master = master;
 
 		this.fore = fore;
@@ -101,6 +101,12 @@ implements IDialogTreePanelFromDialogTreePresenter
 
 		validate();
 		repaint();
+	}
+
+	@Override
+	public void setWidthAndHeight(int width, int height) {
+		this.width = width;
+		this.height = height;
 	}
 
 

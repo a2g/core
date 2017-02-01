@@ -20,6 +20,8 @@ import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.interfaces.internal.ILoad;
 import com.github.a2g.core.interfaces.internal.ILoaderPresenterFromLoaderItem;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
+import com.github.a2g.core.primitive.LoaderEnum;
+import com.github.a2g.core.primitive.Point;
 import com.google.gwt.event.dom.client.LoadEvent;
 
 public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
@@ -103,10 +105,14 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 		return result;
 	}
 
-	public boolean isInventory() {
-		boolean isInventory = bundle.isInventory();
-		return isInventory;
-
+	public int getLoaderEnum() {
+		int loaderEnum = bundle.getLoaderEnum();
+		return loaderEnum;
+	}
+	
+	public Point getResolution() {
+		Point p = new Point(bundle.getImageWidth(), bundle.getImageHeight());
+		return p;
 	}
 
 	public int getBundleNumber() {
@@ -114,7 +120,7 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	}
 
 	public LoadedLoad getSceneObjectCollection() {
-		return theCurrentCacheObject;// .getSceneObjectCollection();
+		return theCurrentCacheObject;
 	}
 
 	@Override
