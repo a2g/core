@@ -420,11 +420,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 
 	}
 
-	@Override
-	public void setScenePixelSize(int width, int height) {
-		master.setScenePixelSize(width, height);
-
-	}
+	
 
 	@Override
 	public void kickStartLoading() {

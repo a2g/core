@@ -20,7 +20,6 @@ import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.interfaces.internal.ILoad;
 import com.github.a2g.core.interfaces.internal.ILoaderPresenterFromLoaderItem;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
-import com.github.a2g.core.primitive.LoaderEnum;
 import com.github.a2g.core.primitive.Point;
 import com.google.gwt.event.dom.client.LoadEvent;
 

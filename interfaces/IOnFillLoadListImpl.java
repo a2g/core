@@ -34,10 +34,6 @@ public class IOnFillLoadListImpl {
 		this.implementation.addEssential(imageBundle);
 	}
 
-	public void setScenePixelSize(int width, int height) {
-		this.implementation.setScenePixelSize(width, height);
-	}
-
 	public LoadKickStarter createLoadKickStarter() {
 		this.implementation.kickStartLoading();
 		return new LoadKickStarter();
