@@ -25,6 +25,7 @@ import com.github.a2g.core.interfaces.methods.game.IAddObstacleRect;
 import com.github.a2g.core.interfaces.methods.game.IAddSpeechBubble;
 import com.github.a2g.core.interfaces.methods.game.IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
 import com.github.a2g.core.interfaces.methods.game.ICreateChainRootAction;
+import com.github.a2g.core.interfaces.methods.game.IGetAnimationLength;
 import com.github.a2g.core.interfaces.methods.game.IGetOCodeByAtid;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneDialogThem;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneDialogUs;
@@ -151,6 +152,7 @@ ISetAnimationAsSceneDialogUs,
 ISetAnimationAsSceneDialogThem,
 ISetAnimationSpeechBubble,
 ISetAnimationTalkingColor,
+IGetAnimationLength,
 IGetDefaultSceneObject,
 IClearValueRegistry,
 IClearSaidSpeech,
