@@ -22,6 +22,7 @@ import com.github.a2g.core.interfaces.IOnFillLoadListImpl.LoadKickStarter;
 import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
 import com.github.a2g.core.interfaces.internal.IChainRootForScene;
 import com.github.a2g.core.objectmodel.SentenceItem;
+import com.github.a2g.core.primitive.A2gException;
 
 /**
  * Each scene  is represented by a class that implements the following 6 methods:
@@ -88,7 +89,7 @@ public interface IGameScene extends ConstantsForAPI {
 		</tr>
 		</table>
 	 */
-	public ChainEndAction onEntry(IOnEntry api, IChainRootForScene ba);
+	public ChainEndAction onEntry(IOnEntry api, IChainRootForScene ba) throws A2gException ;
 
 	/*!
 	<table>
@@ -122,7 +123,7 @@ public interface IGameScene extends ConstantsForAPI {
 	</table>
 	 */
 	public ChainEndAction onDoCommand(IOnDoCommand api, IChainRootForScene ba,
-			int verb, SentenceItem itemA, SentenceItem itemB, double x, double y);
+			int verb, SentenceItem itemA, SentenceItem itemB, double x, double y) throws A2gException ;
 
 	/*!
 	<table>
@@ -142,6 +143,6 @@ public interface IGameScene extends ConstantsForAPI {
 	</table>
 	 */
 	public DialogChainEndAction onDialogTree(IOnDialogTree api,
-			IChainRootForDialog ba, int branch);
+			IChainRootForDialog ba, int branch) throws A2gException ;
 
 }

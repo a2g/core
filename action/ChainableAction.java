@@ -16,8 +16,7 @@
 
 package com.github.a2g.core.action;
 
-import java.security.InvalidParameterException;
-
+ 
 import com.github.a2g.core.action.PlayAnimationAction;
 import com.github.a2g.core.action.ChainToDialogAction;
 import com.github.a2g.core.action.WaitForFrameAction;
@@ -30,7 +29,8 @@ import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.internal.IChainRootForScene;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.SentenceItem;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.A2gException;
+import com.github.a2g.core.primitive.PointF; 
 
 public abstract class ChainableAction extends ChainEndAction implements
 		IChainRootForScene {
@@ -256,7 +256,7 @@ public abstract class ChainableAction extends ChainEndAction implements
 	@Override
 	public ChainEndAction onDoCommand(IGameScene scene, IOnDoCommand api,
 			ChainRootAction ba, int verb, SentenceItem itemA,
-			SentenceItem itemB, double x, double y) {
+			SentenceItem itemB, double x, double y) throws A2gException {
 		ChainEndAction secondStep = scene.onDoCommand(api,
 				api.createChainRootAction(), verb, itemA, itemB, x, y);
 		return subroutine(secondStep);
@@ -343,23 +343,23 @@ public abstract class ChainableAction extends ChainEndAction implements
 	}
 
 	@Override
-	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int arrivalSegment) {
+	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int arrivalSegment) throws A2gException {
 		// best to throw this exception now, inside the Scene handler, rather
 		// than when it is executed, which might be much later at the 
 		// end of an asycnhronous animation execution chain.
 		if(sceneName==null)
-			throw new InvalidParameterException();
+			throw new A2gException ("ChainableAction::walkAlwaysSwitch");
 		return this.walkAlwaysSwitch( new PointF(x,y), sceneName, arrivalSegment);
 	}
 
 	@Override
 	public ChainEndAction walkAlwaysSwitch(PointF p, String sceneName,
-			int arrivalSegment) {
+			int arrivalSegment) throws A2gException {
 		// best to throw this exception now, inside the Scene handler, rather
 		// than when it is executed, which might be much later at the 
 		// end of an asycnhronous animation execution chain.
 		if(sceneName==null)
-			throw new InvalidParameterException();
+			throw new A2gException (sceneName);
 		WalkAction a = new WalkAction(this, ScenePresenter.DEFAULT_SCENE_OBJECT);
 		a.setEndX(p.getX());
 		a.setEndY(p.getY());
@@ -375,12 +375,12 @@ public abstract class ChainableAction extends ChainEndAction implements
 	@Override
 	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, PointF p,
 			double startScale, double endScale, String sceneName,
-			int arrivalSegment) {
+			int arrivalSegment) throws A2gException {
 		// best to throw this exception now, inside the Scene handler, rather
 		// than when it is executed, which might be much later at the 
 		// end of an asycnhronous animation execution chain.
 		if(sceneName==null)
-			throw new InvalidParameterException();
+			throw new A2gException(sceneName);
 		WalkAction a = new WalkAction(this, ocode);
 		a.setEndX(p.getX());
 		a.setEndY(p.getY());

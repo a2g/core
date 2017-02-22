@@ -21,6 +21,7 @@ import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.github.a2g.core.primitive.A2gException;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
@@ -422,11 +423,21 @@ PropertyChangeEventHandlerAPI
 		// Thus it will talk the text, and do what the user prescribes.
 
 		DialogTalkAction newTalkAction = new DialogTalkAction(MatOps.createDialogChainRootAction(), atidOfInterviewer, speech);
-		BaseAction actionChain = sceneHandlers.onDialogTree(
-				proxyForGameScene, newTalkAction, branchId);
-		BaseAction  actionChain2 = replaceChainToDialogActionWithCallToOnDialogTree(actionChain);
+		
+	 
+		try {
+			BaseAction actionChain = sceneHandlers.onDialogTree(
+					proxyForGameScene, newTalkAction, branchId);
+			BaseAction  actionChain2 = replaceChainToDialogActionWithCallToOnDialogTree(actionChain);
 
 		executeActionWithDialogActionRunner(actionChain2);
+		} catch (A2gException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	
 
 	}
 
@@ -436,14 +447,21 @@ PropertyChangeEventHandlerAPI
 			scenePresenter.repositionDefaultObject();
 		}
 		
-		BaseAction a = this.sceneHandlers.onEntry(proxyForGameScene,
-				MatOps.createChainRootAction());
+		BaseAction a;
+		try {
+			a = this.sceneHandlers.onEntry(proxyForGameScene,
+					MatOps.createChainRootAction());
 
-		getScenePresenter().getView().onSceneEntry(sceneHandlers.toString());
-		BaseAction b = this.replaceChainToDialogActionWithCallToOnDialogTree(a);
-		// .. then executeBaseAction->actionRunner::runAction
-		//will add an TitleCardAction the title card
-		executeActionWithDoCommandActionRunner(b);
+
+			getScenePresenter().getView().onSceneEntry(sceneHandlers.toString());
+			BaseAction b = this.replaceChainToDialogActionWithCallToOnDialogTree(a);
+			// .. then executeBaseAction->actionRunner::runAction
+			//will add an TitleCardAction the title card
+			executeActionWithDoCommandActionRunner(b);	
+		} catch (A2gException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 
@@ -736,7 +754,13 @@ PropertyChangeEventHandlerAPI
 			
 			int branchId = ((ChainToDialogAction) b).getBranchId();
 			DialogChainableAction d = MatOps.createDialogChainRootAction();
-			BaseAction a = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
+			BaseAction a=null;
+			try {
+				a = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
+			} catch (A2gException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if(a==null || a instanceof DoNothingAction)
 				a = new DialogEndAction(d);
 			linkUpperMostActionOfAToB(a,b);
@@ -750,11 +774,18 @@ PropertyChangeEventHandlerAPI
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration,
 			SentenceItem sentenceA, SentenceItem sentenceB, double x, double y) {
 
-		BaseAction a = this.sceneHandlers.onDoCommand(proxyForGameScene,
+		BaseAction a = null;
+		try {
+			
+		a = this.sceneHandlers.onDoCommand(proxyForGameScene,
 				MatOps.createChainRootAction(), verbAsCode, sentenceA, sentenceB, x
 				+ scenePresenter.getCameraX(),
 				y + scenePresenter.getCameraY());
-
+		 
+		} catch (A2gException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.commandLinePresenter.setMouseable(false);
 
 		a = replaceChainToDialogActionWithCallToOnDialogTree(a);
@@ -828,8 +859,14 @@ PropertyChangeEventHandlerAPI
 				//otherwise ask the sceneHanders what the outcome is.
 				SentenceItem o1 = new SentenceItem("","",cmd.getInt1());
 				SentenceItem o2 = new SentenceItem("","",cmd.getInt2());
-				BaseAction a = this.sceneHandlers.onDoCommand(proxyForGameScene,
-						MatOps.createChainRootAction(), cmd.getVerb(),o1,o2,cmd.getDouble1(),cmd.getDouble2());
+				BaseAction a=null;
+				try {
+					a = this.sceneHandlers.onDoCommand(proxyForGameScene,
+							MatOps.createChainRootAction(), cmd.getVerb(),o1,o2,cmd.getDouble1(),cmd.getDouble2());
+				} catch (A2gException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 				if (a == null || a instanceof DoNothingAction) {
 					cancelAutoplay(cmd, "onDoCommand returned do nothing");

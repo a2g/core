@@ -8,6 +8,7 @@ import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.A2gException;
 
 public interface IChainRootForScene {
 	// all the ChainEndActions can only be the last
@@ -18,7 +19,7 @@ public interface IChainRootForScene {
 	public ChainEndAction activateDialogTreeMode(int branchId);
 	public ChainEndAction onDoCommand(IGameScene scene, IOnDoCommand api,
 			ChainRootAction ba, int verb, SentenceItem itemA,
-			SentenceItem itemB, double x, double y);
+			SentenceItem itemB, double x, double y) throws A2gException;
 	public ChainEndAction subroutine(ChainEndAction orig);
 	public ChainEndAction switchTo(String sceneName, int arrivalSegment);
 	public ChainEndAction walkTo(double x, double y);// should not have ocode here because switching implies main character
@@ -43,9 +44,9 @@ public interface IChainRootForScene {
 	public ChainableAction walkNeverSwitch(short ocode, PointF point);
 	public ChainableAction walkAndTalkNeverSwitch(short ocode, double x, double y, String speech);
 	public ChainableAction walkAndScaleNeverSwitch(short ocode, PointF p, double startScale, double endScale);
-	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int arrivalSegment);
-	public ChainEndAction walkAlwaysSwitch(PointF point, String string, int arrivalSegment);
-	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, PointF p, double startScale, double endScale, String sceneName, int arrivalSegment);
+	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int arrivalSegment) throws A2gException ;
+	public ChainEndAction walkAlwaysSwitch(PointF point, String string, int arrivalSegment) throws A2gException ;
+	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, PointF p, double startScale, double endScale, String sceneName, int arrivalSegment) throws A2gException;
 	
 	public ChainableAction subroutine(ChainableAction orig);
 

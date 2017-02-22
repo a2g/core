@@ -32,7 +32,6 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	IMasterPresenterFromBundle api;
 	private LoadedLoad theCurrentCacheObject;
 
-
 	public LoaderItem(IMasterPresenterFromBundle api2,
 			ILoad bundleToCallLoadOn, int bundleNumber) {
 		this.api = api2;
@@ -68,8 +67,6 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 				origNumberOfImagesLeftToLoad, 0);
 	}
 
-
-
 	public int getNumberOfImages() {
 		int numberOfImages = bundle.getNumberOfImagesInBundle(bundleNumber);
 		return numberOfImages;
@@ -78,9 +75,8 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	@Override
 	public void onLoad(LoadEvent event) {
 		numberOfImagesLeftToLoad--;
-		//String name = this.theCurrentCacheObject.getName();
-		if (this.callbacks != null)
-		{
+		// String name = this.theCurrentCacheObject.getName();
+		if (this.callbacks != null) {
 			this.callbacks.onImageLoaded();
 
 			if (numberOfImagesLeftToLoad == 0) {
@@ -96,9 +92,9 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 
 	@Override
 	public int compareTo(LoaderItem o) {
-		int thisMain = !this.getName().contains("shared")? 1:0;
-		int thatMain = !o.getName().contains("shared")? 1:0;
-		if(thisMain!=thatMain)
+		int thisMain = !this.getName().contains("shared") ? 1 : 0;
+		int thatMain = !o.getName().contains("shared") ? 1 : 0;
+		if (thisMain != thatMain)
 			return thatMain - thisMain;
 		int result = this.bundleNumber - o.bundleNumber;
 		return result;
@@ -108,7 +104,7 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 		int loaderEnum = bundle.getLoaderEnum();
 		return loaderEnum;
 	}
-	
+
 	public Point getResolution() {
 		Point p = new Point(bundle.getImageWidth(), bundle.getImageHeight());
 		return p;
