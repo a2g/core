@@ -91,11 +91,7 @@ IGetCurrentAnimation, ISetX, ISetY, IGetX, IGetY, IIsVisible
 , IGetHelperPoint
 {
 
-	@Override
-	void setBaseMiddleY(short harry, double d);
-
-	@Override
-	boolean isVisible(short orangeHutDoorOpen);
-
+ 
+	 
 	 
 }

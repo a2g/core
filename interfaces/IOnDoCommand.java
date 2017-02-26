@@ -122,9 +122,7 @@ ISetInventoryItemDisplayName,
 ISetInventoryItemVisible
 {
 
-	@Override
-	void setDefaultSceneObject(short harry2);
-
+	
 	
 
 }

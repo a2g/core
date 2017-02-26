@@ -1,6 +1,7 @@
 package com.github.a2g.core.platforms.html4;
 
 import com.github.a2g.core.interfaces.internal.ISound;
+import com.google.gwt.dom.client.MediaElement;
 import com.google.gwt.media.client.Audio;
 
 public class SoundForHtml4
@@ -28,8 +29,9 @@ implements ISound{
 	}
 	@Override
 	public void stop() {
+		if(audio.getReadyState()!=MediaElement.HAVE_NOTHING)
 		audio.setCurrentTime(0.0);
-
+		 
 	}
 	@Override
 	public String getLocation() {

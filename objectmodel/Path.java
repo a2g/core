@@ -18,7 +18,7 @@ class PathComparator implements Comparator<Path<?>>
 }
 
 public class Path<TNode extends IGetNeighbours<TNode>> implements
-		Iterable<TNode>{
+		Iterable<TNode>, Comparable<Path<TNode>>{
 	private TNode lastStep;
 	private Path<TNode> previousSteps;
 	private double totalCost;
@@ -126,5 +126,11 @@ public class Path<TNode extends IGetNeighbours<TNode>> implements
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public int compareTo(Path<TNode> arg0) {
+		double result =  this.getPriority()*1000 - arg0.getPriority()*1000;
+		return (int)result;
 	}
 }
