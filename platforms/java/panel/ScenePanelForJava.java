@@ -171,7 +171,7 @@ implements IScenePanelFromScenePresenter
 		ImageForJava imageAndPos = new ImageForJava(img, objectTextualId, this, new Point(x, y));
 
 		// to fire image loading done.
-		lh.onLoad(null);
+		//lh.onLoad(null);
 
 		return imageAndPos;
 	}

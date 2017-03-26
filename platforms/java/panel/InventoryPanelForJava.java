@@ -236,7 +236,7 @@ implements ImagePanelAPI
 
 		// to fire image loading done.
 		// only gwt is asynch, we are swing which synchronous
-		lh.onLoad(null);
+		//lh.onLoad(null);
 
 		return imageAndPos;
 	}
