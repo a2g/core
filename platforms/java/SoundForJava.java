@@ -12,6 +12,8 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import com.github.a2g.core.interfaces.internal.ISound;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer; 
 
 public class SoundForJava
 implements ISound
@@ -19,73 +21,45 @@ implements ISound
 
 	double durationInSeconds;
 	String location;
-	Clip clip;
-
+	Media file;
+	 MediaPlayer mediaPlayer ;
+	 boolean hasLoaded;
+	 boolean wasPlayedButNotLoaded;
+	 
 	SoundForJava(String location)
 	{
+		hasLoaded = false;
+		 wasPlayedButNotLoaded = false;
 		this.location = location;
-		File file = new File(location);
-		long audioFileLength = file.length();
-		AudioInputStream audioInputStream;
-		try {
-			audioInputStream = AudioSystem.getAudioInputStream(file);
-			AudioFormat format = audioInputStream.getFormat();
+		File filestring = new File(location);
+		long audioFileLength = filestring.length();
+		
+		
+	    file = new Media(filestring.toURI().toString());  
 
-			int frameSize = format.getFrameSize();
-			float frameRate = format.getFrameRate();
-			durationInSeconds = (audioFileLength / (frameSize * frameRate));
+	   mediaPlayer = new MediaPlayer(file);
 
-		} catch (UnsupportedAudioFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	    mediaPlayer.setOnReady(new Runnable() {
 
+	        @Override
+	        public void run() {
+	        	hasLoaded = true;
+	            durationInSeconds = file.getDuration().toSeconds();
+
+	            // play if you want
+	            if(wasPlayedButNotLoaded)
+	            	mediaPlayer.play();
+	        }
+	    });
 	}
 
 	@Override
 	public void play() {
 
-		//can use this to do mp3
-		//http://stackoverflow.com/questions/3046669/how-do-i-get-a-mp3-files-total-time-in-java
-
-		// can use this if want to ship in jar file:
-		// -get the sound file as a resource out of my jar file;
-		// -the sound file must be in the same directory as this class file.
-		// -the input stream portion of this recipe comes from a javaworld.com article.
-		File file = new File(location);
-		long audioFileLength = file.length();
-		AudioInputStream audioInputStream;
-		try {
-			audioInputStream = AudioSystem.getAudioInputStream(file);
-
-			AudioFormat format = audioInputStream.getFormat();
-
-			int frameSize = format.getFrameSize();
-			float frameRate = format.getFrameRate();
-			durationInSeconds = (audioFileLength / (frameSize * frameRate));
-
-
-			Line.Info linfo = new Line.Info(Clip.class);
-			Line line = AudioSystem.getLine(linfo);
-			clip = (Clip) line;
-			//clip.addLineListener(this);
-			clip.open(audioInputStream);
-			clip.start();
-
-		} catch (UnsupportedAudioFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (LineUnavailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		if(hasLoaded)
+			mediaPlayer.play();
+		else
+			wasPlayedButNotLoaded = true;
 	}
 
 	@Override
@@ -96,8 +70,8 @@ implements ISound
 
 	@Override
 	public void stop() {
-		if(clip!=null)
-			clip.stop();
+		if(mediaPlayer!=null)
+			mediaPlayer.stop();
 	}
 
 	@Override
