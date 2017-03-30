@@ -22,16 +22,27 @@ import com.github.a2g.core.primitive.Point;
 
 public class ImageForHtml4 extends Image {
 	private final com.google.gwt.user.client.ui.Image image;
-
+	private Point originalDimensions;
 	public ImageForHtml4(final com.google.gwt.user.client.ui.Image image,
 			ImagePanelAPI panel, Point offset) {
 		super(panel, offset, "fromHtml4");
 		this.image = image;
+		this.originalDimensions = null;
 		panel.setImageVisible(this, false);
 	}
 
 	public com.google.gwt.user.client.ui.Image getNativeImage() {
 		return image;
+	}
+	
+	public Point getOriginalDimensions()
+	{
+		return originalDimensions;
+	}
+	
+	public void setOriginalDimensions(Point point)
+	{
+		originalDimensions = point;
 	}
 
 }

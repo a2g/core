@@ -27,7 +27,7 @@ public interface ImagePanelAPI {
 
 	public void remove(Image image);
 
-	public void setThingPosition(Image image, int left, int top);
+	public void setThingPosition(Image image, int left, int top, double scale);
 
 	public int getImageHeight(Image image);
 

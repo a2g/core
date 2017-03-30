@@ -17,6 +17,7 @@
 package com.github.a2g.core.objectmodel;
 
 import com.google.gwt.event.dom.client.LoadHandler;
+
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.internal.IPackagedImage;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
@@ -98,20 +99,40 @@ IScenePanelFromScenePresenter {
 	}
 
 	@Override
-	public void setThingPosition(Image image, int left, int top) {
-		super.setWidgetPosition(((ImageForHtml4) image).getNativeImage(),
+	public void setThingPosition(Image image, int left, int top, double scale) 
+	{
+		ImageForHtml4 image4 = (ImageForHtml4) image;
+		super.setWidgetPosition(image4.getNativeImage(),
 				(int) (left - cameraOffsetX * image.getParallaxX()),
 				(int) (top - cameraOffsetY * image.getParallaxY()));
+		double width = getImageWidth(image);
+		double height = getImageHeight(image);
+		if(scale!=1.0)
+		{
+			if(image4.getOriginalDimensions()!=null)
+				image4.setOriginalDimensions(new Point(image4.getNativeImage().getWidth(),image4.getNativeImage().getHeight()));
+			
+			width*=scale;
+			height*=scale;
+		}
+		((ImageForHtml4) image).getNativeImage().setPixelSize((int)width, (int)height);
+		
 	}
 
 	@Override
 	public int getImageHeight(Image image) {
-		return ((ImageForHtml4) image).getNativeImage().getHeight();
+		ImageForHtml4 image4 = (ImageForHtml4) image;
+		if(image4.getOriginalDimensions()!=null)
+			return image4.getOriginalDimensions().getY();
+		return image4.getNativeImage().getHeight();
 	}
 
 	@Override
 	public int getImageWidth(Image image) {
-		return ((ImageForHtml4) image).getNativeImage().getWidth();
+		ImageForHtml4 image4 = (ImageForHtml4) image;
+		if(image4.getOriginalDimensions()!=null)
+			return image4.getOriginalDimensions().getX();
+		return image4.getNativeImage().getWidth();
 	}
 
 	@Override

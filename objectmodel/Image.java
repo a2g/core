@@ -98,7 +98,7 @@ public abstract class Image {
 		int constXOffset = (int)(this.constOffset.getX());
 		int constYOffset = (int)(this.constOffset.getY());
 		panel.setThingPosition(this, constXOffset + xAndY.getX(),
-				constYOffset + xAndY.getY() );
+				constYOffset + xAndY.getY(), scale);
 	}
 
 	public static final com.google.gwt.user.client.ui.Image getImageFromResource(
@@ -114,6 +114,6 @@ public abstract class Image {
 	public String getAtid() {
 		return atid;
 	}
- 
+
 
 }

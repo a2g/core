@@ -189,7 +189,7 @@ ImagePanelAPI
 	}
 
 	@Override
-	public void setThingPosition(Image image, int left, int top)
+	public void setThingPosition(Image image, int left, int top, double scale)
 	{
 		this.abs.setWidgetPosition(((ImageForHtml4)image).getNativeImage(), left-cameraOffsetX, top-cameraOffsetY);
 		if(mapOfPointsByImage.containsKey(hash(image)))
