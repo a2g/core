@@ -267,7 +267,7 @@ PropertyChangeEventHandlerAPI
 	}
 
 	public void setInitialAnimationsAsCurrent() {
-		int count = this.scenePresenter.getModel().objectCollection().count();
+		int count = this.scenePresenter.getModel().objectCollection().getCount();
 		for (int i = 0; i < count; i++) {
 			SceneObject sceneObject = this.scenePresenter.getModel()
 					.objectCollection().getByIndex(i);
@@ -514,7 +514,7 @@ PropertyChangeEventHandlerAPI
 
 		// hide all visible images.
 		// (using scene's data is quicker than using scenePanel data)
-		int count = scenePresenter.getModel().objectCollection().count();
+		int count = scenePresenter.getModel().objectCollection().getCount();
 		for (int i = 0; i < count; i++) {
 			scenePresenter.getModel().objectCollection().getByIndex(i)
 			.setVisible(false);
@@ -591,7 +591,7 @@ PropertyChangeEventHandlerAPI
 		SceneObjectCollection ours = this.scenePresenter.getModel()
 				.objectCollection();
 
-		for (int i = 0; i < theirs.count(); i++) {
+		for (int i = 0; i < theirs.getCount(); i++) {
 			SceneObject srcObject = theirs.getByIndex(i);
 			String otid = srcObject.getOtid();
 			int prefix = srcObject.getDrawingOrder();

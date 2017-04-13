@@ -1,7 +1,6 @@
 package com.github.a2g.core.platforms.java;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.File; 
 
 import com.github.a2g.core.interfaces.internal.ISound;
 import javafx.scene.media.Media;
@@ -23,8 +22,7 @@ implements ISound
 		hasLoaded = false;
 		 wasPlayedButNotLoaded = false;
 		this.location = location;
-		File filestring = new File(location);
-		long audioFileLength = filestring.length();
+		File filestring = new File(location); 
 		
 		
 	    file = new Media(filestring.toURI().toString());  
