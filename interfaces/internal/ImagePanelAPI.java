@@ -32,4 +32,6 @@ public interface ImagePanelAPI {
 	public int getImageHeight(Image image);
 
 	public int getImageWidth(Image image);
+
+	public void resetScale(Image image);
 }

@@ -119,7 +119,7 @@ implements ImagePanelAPI
 	}
 
 	@Override
-	public void setThingPosition(Image image, int x, int y) {
+	public void setThingPosition(Image image, int x, int y, double scale) {
 		if(mapOfPointsByImage.containsKey(((ImageForJava)image).getNativeImage().hashCode()))
 		{
 			mapOfPointsByImage.put(((ImageForJava)image).getNativeImage().hashCode(), new Point(x,y));
@@ -264,5 +264,11 @@ implements ImagePanelAPI
 	public void setDimensionsOfPanel(int width, int height) {
 		this.width = width;
 		this.height = height;
+	}
+
+	@Override
+	public void resetScale(Image image) {
+		// TODO Auto-generated method stub
+		
 	}
 }

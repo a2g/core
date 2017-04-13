@@ -115,5 +115,10 @@ public abstract class Image {
 		return atid;
 	}
 
+	public void resetScale() {
+		panel.resetScale(this);
+		
+	}
+
 
 }

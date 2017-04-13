@@ -154,7 +154,7 @@ public class ScenePresenter implements IScenePresenter,
 		double camX = cameraX * this.width;
 		double camY = cameraY * this.height;
 		view.setCameraOffset((int) camX, (int) camY);
-		for (int i = 0; i < this.scene.objectCollection().count(); i++) {
+		for (int i = 0; i < this.scene.objectCollection().getCount(); i++) {
 			this.scene.objectCollection().getByIndex(i).updateCurrentImage();
 		}
 	}
@@ -176,7 +176,7 @@ public class ScenePresenter implements IScenePresenter,
 
 	@Override
 	public int getSceneObjectCount() {
-		return scene.objectCollection().count();
+		return scene.objectCollection().getCount();
 	}
 
 	@Override
@@ -478,6 +478,24 @@ public class ScenePresenter implements IScenePresenter,
 		}
 		;
 		return toReturn;
+	}
+
+	public void resetScaleOnAllImages() {
+		for(int i=0;i<scene.objectCollection().getCount();i++)
+		{
+			SceneObject o = scene.objectCollection().getByIndex(i);
+			o.setScale(1.0);
+			for(int j=0;j<o.getAnimations().getCount();j++)
+			{
+				Animation a = o.getAnimations().getByIndex(j);
+				for(int k=0;k<a.getFrames().getCount();k++)
+				{
+					Image im = a.getFrames().getByIndex(k);
+					im.resetScale();
+				}
+			}
+			
+		}
 	}
 
 };

@@ -182,4 +182,10 @@ ImagePanelAPI
 	public void setDimensionsOfPanel(int width, int height) {
 		this.setPixelSize(width, height);
 	}
+
+	@Override
+	public void resetScale(Image image) {
+		//inventory images aren't scaled - so do nothing.
+		
+	}
 }

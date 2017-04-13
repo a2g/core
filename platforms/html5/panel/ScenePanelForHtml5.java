@@ -329,6 +329,11 @@ ImagePanelAPI
 		// TODO Auto-generated method stub
 		
 	}
+ 
+	@Override
+	public void resetScale(Image image) {
+		// not sure how this will be implemented.
+	}
 
 
 	

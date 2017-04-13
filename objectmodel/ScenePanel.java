@@ -107,9 +107,10 @@ IScenePanelFromScenePresenter {
 				(int) (top - cameraOffsetY * image.getParallaxY()));
 		double width = getImageWidth(image);
 		double height = getImageHeight(image);
-		if(scale!=1.0)
+		if(scale<1.0)
 		{
 			if(image4.getOriginalDimensions()!=null)
+		
 				image4.setOriginalDimensions(new Point(image4.getNativeImage().getWidth(),image4.getNativeImage().getHeight()));
 			
 			width*=scale;
@@ -172,6 +173,20 @@ IScenePanelFromScenePresenter {
 	@Override
 	public void onSceneEntry(String string) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resetScale(Image image) {
+		ImageForHtml4 image4 = (ImageForHtml4) image;
+		if(image4.getOriginalDimensions()!=null)
+		{
+			Point temp = image4.getOriginalDimensions();
+			image4.getNativeImage().setPixelSize(temp.getX(),temp.getY());
+			image4.getNativeImage().setWidth("");
+			image4.getNativeImage().setHeight(""); 
+		}
+		image.setScale(1.0);
 		
 	}
 

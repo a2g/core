@@ -198,7 +198,7 @@ implements IScenePanelFromScenePresenter
 	}
 
 	@Override
-	public void setThingPosition(Image image, int x, int y) {
+	public void setThingPosition(Image image, int x, int y, double scale) {
 		if(mapOfPointsByImage.containsKey(hash(image)))
 		{
 			putPoint((ImageForJava)image, x,y);
@@ -624,6 +624,12 @@ implements IScenePanelFromScenePresenter
 	public void onSceneEntry(String name) {
 		//String path = "c:/";
 		this.saveToJPEG("c:/"+name);
+	}
+
+	@Override
+	public void resetScale(Image image) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

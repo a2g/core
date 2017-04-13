@@ -110,7 +110,7 @@ public class SceneObjectCollection {
 		return this.getByIndex(i);
 	}
 
-	public int count() {
+	public int getCount() {
 		return list.size();
 	}
 
