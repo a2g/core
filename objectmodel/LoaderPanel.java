@@ -19,29 +19,33 @@ package com.github.a2g.core.objectmodel;
 import com.github.a2g.core.interfaces.internal.ILoaderPanelFromLoaderPresenter;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class LoaderPanel extends SimplePanel implements
+public class LoaderPanel extends VerticalPanel implements
 ILoaderPanelFromLoaderPresenter {
 
 	Label progress;
-	Button reload;
-	Button clickToContinue;
+	//Button reload;
+	//Button clickToContinue;
 	IMasterPresenterFromLoaderMouse api;
 	private Grid containerGrid;
-	private final int TOTAL_NUMBER_OF_CELLS = 36;
+	final int TOTAL_NUMBER_OF_CELLS = 36;
 	private int lastNumberOfCellsFilled;
 
 	public LoaderPanel(final IMasterPresenterFromLoaderMouse api,
 			ColorEnum fore, ColorEnum back) {
 		this.api = api;
-		VerticalPanel layout = new VerticalPanel();
+
+		this.setWidth("100%");
+		this.setHeight("100%");
+		this.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		this.setVerticalAlignment(ALIGN_MIDDLE); 
+
+		FlowPanel layout = new FlowPanel();
 		{
 			progress = new Label();
 
@@ -49,65 +53,57 @@ ILoaderPanelFromLoaderPresenter {
 			.setProperty("color", fore.toString());
 			progress.getElement().getStyle()
 			.setProperty("backgroundColor", back.toString());
-
+			
 			progress.setText("Loading...");
 
 			layout.add(progress);
 		}
 		{
-			reload = new Button("Reload");
-			layout.add(reload);
-		}
-		{
-			clickToContinue = new Button("Click to continue");
-			clickToContinue.setEnabled(false);
-			layout.add(clickToContinue);
-		}
-		{
 			// Initialize the progress elements
-			containerGrid = new Grid(1, TOTAL_NUMBER_OF_CELLS);
+			containerGrid = new Grid(1, TOTAL_NUMBER_OF_CELLS );
 			containerGrid.getElement().getStyle().setProperty("margin", "0px");
 			containerGrid.getElement().getStyle()
-			.setProperty("border", "0px solid white");
+			.setProperty("border", "0px solid gray");
 			containerGrid.setCellPadding(0);
 			containerGrid.setCellSpacing(0);
 
-			for (int i = 0; i < TOTAL_NUMBER_OF_CELLS; i++) {
+			for (int i = 0; i < TOTAL_NUMBER_OF_CELLS ; i++) {
 				Grid grid = new Grid(1, 1);
 				grid.setHTML(0, 0, "");
-				grid.getElement().getStyle().setProperty("width", "5px");
-				grid.getElement().getStyle().setProperty("height", "15px");
-				grid.getElement().getStyle().setProperty("margin", "1px");
+				grid.getElement().getStyle().setProperty("width", "1px");
+				grid.getElement().getStyle().setProperty("height", "1px");
+				grid.getElement().getStyle().setProperty("margin", "0px");
 				grid.getElement().getStyle().setProperty("background", "#eee");
 				containerGrid.setWidget(0, i, grid);
 			}
 
 			layout.add(containerGrid);
 		}
-		addHandler(api);
+		addHandler(api); 
 		this.add(layout);
-
+		
 	}
 
 	void addHandler(final IMasterPresenterFromLoaderMouse api) {
-		reload.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				api.restartReloading();
-			}
-		});
-		clickToContinue.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				api.clickToContinue();
-			}
-		});
+		
+//		reload.addClickHandler(new ClickHandler() {
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				api.restartReloading();
+//			}
+//		});
+//		clickToContinue.addClickHandler(new ClickHandler() {
+//			@Override
+//			public void onClick(ClickEvent event) {
+//				api.clickToContinue();
+//			}
+//		});
+		
 	}
+	 
 
 	@Override
 	public void update(int current, int total, String name) {
-		reload.setEnabled(true);
-		clickToContinue.setEnabled(false);
 		progress.setText(" " + current + "/" + total + " " + name);
 
 		double percentage = current * 100.0 / total;
@@ -124,7 +120,7 @@ ILoaderPanelFromLoaderPresenter {
 			// Update the elements in the progress grid to
 			// reflect the status
 			int numberOfCellsFilled = (current == 1) ? 1
-					: (TOTAL_NUMBER_OF_CELLS - 1) * progress / 100 + 1;
+					: (TOTAL_NUMBER_OF_CELLS  - 1) * progress / 100 + 1;
 
 			if (numberOfCellsFilled != lastNumberOfCellsFilled) {
 				if (numberOfCellsFilled < lastNumberOfCellsFilled) {
@@ -156,7 +152,7 @@ ILoaderPanelFromLoaderPresenter {
 
 	@Override
 	public void enableClickToContinue() {
-		reload.setEnabled(false);
-		clickToContinue.setEnabled(true);
+		//reload.setEnabled(false);
+		//clickToContinue.setEnabled(true);
 	}
 }
