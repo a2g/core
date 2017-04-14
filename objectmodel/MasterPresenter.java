@@ -551,7 +551,8 @@ PropertyChangeEventHandlerAPI
 	{
 		for (Map.Entry<String, ISound> entry : mapOfSounds.entrySet())
 		{
-			entry.getValue().stop();
+			if(entry!=this.soundtrack)
+				entry.getValue().stop();
 		}
 		mapOfSounds.clear();
 	}
