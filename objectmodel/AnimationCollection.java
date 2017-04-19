@@ -19,8 +19,14 @@ package com.github.a2g.core.objectmodel;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.github.a2g.core.primitive.LogNames;
 
 public class AnimationCollection {
+	private static final Logger ANIMATIONS_AS_THEY_ARE_GOT = Logger.getLogger(LogNames.ANIMATIONS_AS_THEY_ARE_GOT);
+
 	private Map<String, Animation> theMap;
 
 	AnimationCollection() {
@@ -33,6 +39,8 @@ public class AnimationCollection {
 		String key = atid.toUpperCase();
 
 		if (theMap.containsKey(key)) {
+			
+			ANIMATIONS_AS_THEY_ARE_GOT.log(Level.FINE, "getByAtid " +atid);
 			return theMap.get(key);
 		}
 		return null;
