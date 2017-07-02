@@ -14,7 +14,7 @@ public class SceneSpeechBalloonCalculator {
 	private int borderWidth;
 	private int heightOfLeaderLine;
 
-	SceneSpeechBalloonCalculator() {
+	public SceneSpeechBalloonCalculator() {
 	}
 
 	Rect getRectInPixels(Rect max, int radius, Point mouth, int leaderWidth, int borderWidth) {
