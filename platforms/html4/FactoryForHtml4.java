@@ -26,7 +26,7 @@ import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.objectmodel.TitleCardPanel;
 import com.github.a2g.core.objectmodel.VerbsPanel;
 import com.github.a2g.core.platforms.html4.TimerForHtml4;
-import com.github.a2g.core.platforms.html5.panel.ScenePanel;
+import com.github.a2g.core.platforms.html4.panel.ScenePanelForHtml4;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
@@ -96,7 +96,7 @@ implements IFactory {
 
 	@Override
 	public IScenePanelFromScenePresenter createScenePanel(IScenePresenterFromScenePanel scenePres) {
-		return new ScenePanel(bus, master.getScenePresenter());
+		return new ScenePanelForHtml4(bus, master.getScenePresenter());
 	}
 
 	@Override

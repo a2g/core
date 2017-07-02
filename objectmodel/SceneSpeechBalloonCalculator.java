@@ -84,19 +84,19 @@ public class SceneSpeechBalloonCalculator {
 		return this.rectInPixels;
 	}
 
-	boolean isFromTop() {
+	public boolean isFromTop() {
 		return isFromTop;
 	}
 
-	boolean isPointingRight() {
+	public boolean isPointingRight() {
 		return isPointingRight;
 	}
 
-	int getLeaderLineX() {
+	public int getLeaderLineX() {
 		return xPos;
 	}
 
-	Rect getRectInPixels() {
+	public Rect getRectInPixels() {
 		return rectInPixels;
 	}
 

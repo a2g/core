@@ -1,5 +1,6 @@
-package com.github.a2g.core.objectmodel;
+package com.github.a2g.core.platforms.html4.panel;
 
+import com.github.a2g.core.objectmodel.SceneSpeechBalloonCalculator;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;

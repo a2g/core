@@ -35,10 +35,12 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
+import com.github.a2g.core.objectmodel.SceneSpeechBalloonCalculator;
 import com.github.a2g.core.platforms.html4.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
+import com.github.a2g.core.platforms.html4.panel.SceneSpeechBalloon;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -76,6 +78,10 @@ ImagePanelAPI
 	private Map<Integer,Point> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages;
+	private boolean speechVisible;
+	private ColorEnum speechColor;
+	private String speechText;
+	private Rect speechMaxRect; 
 
 	public ScenePanelForHtml5(EventBus bus, IScenePresenterFromScenePanel toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine)
 	{
@@ -270,10 +276,17 @@ ImagePanelAPI
 				backBufferContext.restore();
 			}
 		}
+		if(speechVisible )
+		{	
+			//backBufferContext.setFillStyle(fillStyleColor);
+			backBufferContext.fillText(this.speechText, this.speechMaxRect.getLeft(), this.speechMaxRect.getTop(), this.speechMaxRect.getWidth());
+		 }
 		// System.out.println("printed with tally " + tally +" draws "+ draws);
 
 		// update the front canvas
 		context.drawImage(backBufferContext.getCanvas(), 0, 0);
+		
+		
 	}
 
 	public int getWidth()
@@ -317,9 +330,13 @@ ImagePanelAPI
 
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
-			String speech, Rect pixels, Point mouth, TalkPerformer talkPerformer) {
-		// TODO Auto-generated method stub
+	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, 
+		 String speech, Rect maxBalloonRect, Point mouth, TalkPerformer sayAction) {
+		
+		this.speechVisible = isVisible;
+		this.speechColor = talkingColor;
+		this.speechText = speech;
+		this.speechMaxRect = maxBalloonRect;
 		
 	}
 
@@ -334,6 +351,8 @@ ImagePanelAPI
 	public void resetScale(Image image) {
 		// not sure how this will be implemented.
 	}
+
+ 
 
 
 	

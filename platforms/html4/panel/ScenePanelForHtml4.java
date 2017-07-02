@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.platforms.html5.panel;
+package com.github.a2g.core.platforms.html4.panel;
 
 import com.google.gwt.event.dom.client.LoadHandler;
 
@@ -25,7 +25,6 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
-import com.github.a2g.core.objectmodel.SceneSpeechBalloon;
 import com.github.a2g.core.objectmodel.SceneSpeechBalloonCalculator;
 import com.github.a2g.core.platforms.html4.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
@@ -38,14 +37,14 @@ import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
-public class ScenePanel extends AbsolutePanel implements ImagePanelAPI,
+public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI,
 IScenePanelFromScenePresenter {
 	int cameraOffsetX;
 	int cameraOffsetY;
 	SceneObjectTouchMoveHandler theTouchMoveHandler;
 	SceneSpeechBalloon speechWidget;
 
-	public ScenePanel(EventBus bus, IScenePresenterFromScenePanel api) {
+	public ScenePanelForHtml4(EventBus bus, IScenePresenterFromScenePanel api) {
 		this.getElement().setId("cwAbsolutePanel");
 		// this.addStyleName("absolutePanel");
 		this.cameraOffsetX = 0;
