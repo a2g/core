@@ -35,12 +35,10 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
-import com.github.a2g.core.objectmodel.SceneSpeechBalloonCalculator;
 import com.github.a2g.core.platforms.html4.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
-import com.github.a2g.core.platforms.html4.panel.SceneSpeechBalloon;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -278,7 +276,7 @@ ImagePanelAPI
 		}
 		if(speechVisible )
 		{	
-			//backBufferContext.setFillStyle(fillStyleColor);
+			backBufferContext.setFillStyle(this.speechColor.name());
 			backBufferContext.fillText(this.speechText, this.speechMaxRect.getLeft(), this.speechMaxRect.getTop(), this.speechMaxRect.getWidth());
 		 }
 		// System.out.println("printed with tally " + tally +" draws "+ draws);
