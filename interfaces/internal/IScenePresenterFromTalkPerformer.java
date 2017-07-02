@@ -1,6 +1,6 @@
 package com.github.a2g.core.interfaces.internal;
 
-import com.github.a2g.core.interfaces.methods.action.ICurrentAnimationByAtid;
+import com.github.a2g.core.interfaces.methods.action.ISetCurrentAnimationByAtid;
 import com.github.a2g.core.interfaces.methods.action.IGetAtidOfCurrentAnimationByOtid;
 import com.github.a2g.core.interfaces.methods.action.IGetAtidOfSceneDialogThem;
 import com.github.a2g.core.interfaces.methods.action.IGetAtidOfSceneDialogUs;
@@ -22,7 +22,7 @@ extends ISetStateOfPopup
 , ISetVisibleByOtid
 , ISetCurrentFrameByOtid
 , ISetToInitialAnimationWithoutChangingFrameByOtid
-, ICurrentAnimationByAtid
+, ISetCurrentAnimationByAtid
 , IGetOtidByAtid
 , IGetAtidOfSceneTalker
 , IGetAtidOfSceneDialogUs

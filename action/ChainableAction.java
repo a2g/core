@@ -32,8 +32,9 @@ import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.A2gException;
 import com.github.a2g.core.primitive.PointF; 
 
-public abstract class ChainableAction extends ChainEndAction implements
-		IChainRootForScene {
+public abstract class ChainableAction 
+extends ChainEndAction 
+implements IChainRootForScene {
 
 	public enum SwapType {
 		Visibility
@@ -648,6 +649,12 @@ public abstract class ChainableAction extends ChainEndAction implements
 		s.setEndX(x);
 		s.setEndY(y);
 		s.setParallel(true);
+		return s;
+	}
+	
+	@Override
+	public ChainableAction look(String atid, double duration) {
+		LookAction s = new LookAction(this, atid, duration);
 		return s;
 	}
 }

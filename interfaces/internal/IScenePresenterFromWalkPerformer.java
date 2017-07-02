@@ -1,6 +1,6 @@
 package com.github.a2g.core.interfaces.internal;
 
-import com.github.a2g.core.interfaces.methods.action.ICurrentAnimationByAtid;
+import com.github.a2g.core.interfaces.methods.action.ISetCurrentAnimationByAtid;
 import com.github.a2g.core.interfaces.methods.action.IGetOtidByCode;
 import com.github.a2g.core.interfaces.methods.action.IGetSceneGuiHeight;
 import com.github.a2g.core.interfaces.methods.action.IGetSceneGuiWidth;
@@ -11,7 +11,7 @@ extends IGetOtidByCode
 , IGetSceneGuiWidth
 , IGetSceneGuiHeight
 , IGetSpecialAnimationByOtid
-, ICurrentAnimationByAtid
+, ISetCurrentAnimationByAtid
 {
 
 }

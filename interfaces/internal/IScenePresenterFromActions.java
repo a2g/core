@@ -24,5 +24,6 @@ IScenePresenterFromMoveAction
 , IScenePresenterFromSingleCallPerformer
 , IScenePresenterFromScalePerformer
 , IScenePresenterFromWalkMultiPerformer
+, IScenePresenterFromLookPerformer
 {
 }

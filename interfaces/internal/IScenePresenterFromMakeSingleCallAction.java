@@ -1,7 +1,7 @@
 package com.github.a2g.core.interfaces.internal;
 
 import com.github.a2g.core.interfaces.methods.action.IAlignBaseMiddleOfOldFrameToFrameOfThisAnimationByAtid;
-import com.github.a2g.core.interfaces.methods.action.ICurrentAnimationByAtid;
+import com.github.a2g.core.interfaces.methods.action.ISetCurrentAnimationByAtid;
 import com.github.a2g.core.interfaces.methods.action.IGetOtidByCode;
 import com.github.a2g.core.interfaces.methods.action.IGetOtidByIndex;
 import com.github.a2g.core.interfaces.methods.action.IGetSceneObjectCount;
@@ -29,7 +29,7 @@ ISetBaseMiddleXByOtid
 , IGetOtidByIndex
 , ISetVisibleByOtid
 , IGetSceneObjectCount
-, ICurrentAnimationByAtid
+, ISetCurrentAnimationByAtid
 , ISetDisplayNameByOtid
 , ISetInitialAnimationByAtid
 , ISetXByOtid

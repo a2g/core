@@ -153,5 +153,7 @@ public interface IChainRootForScene {
 	public ChainableAction setAnimationAsObjectInitial(String atid);
 	public ChainableAction setSpeechBubble(short ocode, int index);
 	
+	public ChainableAction look(String atid, double duration);
+	
 
 }
