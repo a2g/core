@@ -17,7 +17,7 @@ public class SceneSpeechBalloonCalculator {
 	public SceneSpeechBalloonCalculator() {
 	}
 
-	Rect getRectInPixels(Rect max, int radius, Point mouth, int leaderWidth, int borderWidth) {
+	public Rect getRectInPixels(Rect max, int radius, Point mouth, int leaderWidth, int borderWidth) {
 		Point centre = max.getCenter();
 
 		// the mouth & centre coords are both relative to top left of viewport

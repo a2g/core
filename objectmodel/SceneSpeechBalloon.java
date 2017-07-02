@@ -63,7 +63,7 @@ public class SceneSpeechBalloon extends VerticalPanel
 
 	}
 
-	void setBorderColor(ColorEnum talkingColor)
+	public void setBorderColor(ColorEnum talkingColor)
 	{
 		borderColor = talkingColor;
 		if (talkingColor != null)
