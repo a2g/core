@@ -88,7 +88,7 @@ public class FactoryForHtml5 implements IFactory {
 
 	@Override
 	public IScenePanelFromScenePresenter createScenePanel(IScenePresenterFromScenePanel scenePres) {
-		return new ScenePanelForHtml5(bus, master.getScenePresenter(),
+		return new ScenePanelForHtml5(bus, scenePres,
 				master.getCommandLinePresenter());
 	}
 

@@ -58,7 +58,7 @@ ImagePanelAPI
 , IScenePanelFromScenePresenter
 {
 	//private static final Logger HTML5CANVAS = Logger.getLogger(LogNames.HTML5CANVAS);
-	
+
 	//private EventBus bus;
 	private AbsolutePanel abs;
 	private int cameraOffsetX;
@@ -278,13 +278,13 @@ ImagePanelAPI
 		{	
 			backBufferContext.setFillStyle(this.speechColor.name());
 			backBufferContext.fillText(this.speechText, this.speechMaxRect.getLeft(), this.speechMaxRect.getTop(), this.speechMaxRect.getWidth());
-		 }
+		}
 		// System.out.println("printed with tally " + tally +" draws "+ draws);
 
 		// update the front canvas
 		context.drawImage(backBufferContext.getCanvas(), 0, 0);
-		
-		
+
+
 	}
 
 	public int getWidth()
@@ -300,27 +300,33 @@ ImagePanelAPI
 
 	public String getObjectUnderMouse(int x, int y)
 	{
-		
-		//System.out.println("----------------");
-		int count = toScene.getSceneObjectCount();
-		for(int i = 0;i<count;i++)
-		{
-			String otid = toScene.getOtidByIndex(i);
-			if(toScene.getVisibleByOtid(otid))
-			{
-				String atid = toScene.getAtidOfCurrentAnimationByOtid(otid);
-				int frame = toScene.getCurrentFrameByOtid(otid);
-				Rect rect = toScene.getBoundingRectByFrameAndAtid(frame,atid);
-				//System.out.println(ob.getTextualId() + ob.getDrawingOrder());
-				
-				int adjX = x - (int)toScene.getXByOtid(otid) + cameraOffsetX;
-				int adjY = y - (int)toScene.getYByOtid(otid) + cameraOffsetY;
 
-				if(rect.contains(adjX, adjY))
+		//System.out.println("----------------");
+		if(toScene!=null)
+		{
+			int count = toScene.getSceneObjectCount();
+			for(int i = 0;i<count;i++)
+			{
+				String otid = toScene.getOtidByIndex(i);
+				if(toScene.getVisibleByOtid(otid))
 				{
-					return otid;
+					String atid = toScene.getAtidOfCurrentAnimationByOtid(otid);
+					int frame = toScene.getCurrentFrameByOtid(otid);
+					Rect rect = toScene.getBoundingRectByFrameAndAtid(frame,atid);
+					//System.out.println(ob.getTextualId() + ob.getDrawingOrder());
+
+					int adjX = x - (int)toScene.getXByOtid(otid) + cameraOffsetX;
+					int adjY = y - (int)toScene.getYByOtid(otid) + cameraOffsetY;
+
+					if(rect.contains(adjX, adjY))
+					{
+						return otid;
+					}
 				}
 			}
+		}else
+		{
+			return "ERROR!";
 		}
 
 		return "";
@@ -329,29 +335,29 @@ ImagePanelAPI
 
 	@Override
 	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, 
-		 String speech, Rect maxBalloonRect, Point mouth, TalkPerformer sayAction) {
-		
+			String speech, Rect maxBalloonRect, Point mouth, TalkPerformer sayAction) {
+
 		this.speechVisible = isVisible;
 		this.speechColor = talkingColor;
 		this.speechText = speech;
 		this.speechMaxRect = maxBalloonRect;
-		
+
 	}
 
 
 	@Override
 	public void onSceneEntry(String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
- 
+
 	@Override
 	public void resetScale(Image image) {
 		// not sure how this will be implemented.
 	}
 
- 
 
 
-	
+
+
 }

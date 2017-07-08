@@ -49,7 +49,7 @@ implements MouseMoveHandler
 		double x = event.getX()/(double)w;
 		double y  = (event.getY()+2)/(double)h;
 		String otid = scenePanel.getObjectUnderMouse(event.getX(),event.getY());
-		if(otid!="")
+		if(toScene!=null && otid!="")
 		{
 			//String atid = api.getSceneGui().getAtidOfCurrentAnimationByOtid(otid);
 			String displayName = toScene.getDisplayNameByOtid(otid);
