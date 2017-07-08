@@ -156,20 +156,20 @@ IScenePanelFromScenePresenter {
 			super.remove(speechWidget);
 		}
 
-		Rect scaleToFitRect = SceneSpeechBalloonCalculator.getRectThatFitsText(speech, maxBalloonRect);
+		Rect rectThatsScaledToFit =  maxBalloonRect;//SceneSpeechBalloonCalculator.getRectThatFitsText(speech, maxBalloonRect);
 		speechWidget.setText(speech);
 
 		speechWidget.setBorderColor(talkingColor);
 		
-		SceneSpeechBalloonCalculator calc = new SceneSpeechBalloonCalculator();
-		calc.getRectInPixels(scaleToFitRect, 30, mouth, 38, 3);
+		SceneSpeechBalloonCalculator calc = new SceneSpeechBalloonCalculator(rectThatsScaledToFit, 30, mouth, 38, 3);
+		
 
 		speechWidget.setLeaderLine(calc);
 
 		speechWidget.setVisible(isVisible);
 
 
-		super.add(speechWidget, scaleToFitRect.getLeft(),scaleToFitRect.getTop());
+		super.add(speechWidget, rectThatsScaledToFit.getLeft(), rectThatsScaledToFit.getTop());
 
 	}
 
