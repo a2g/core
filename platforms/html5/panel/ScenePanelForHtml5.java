@@ -277,6 +277,8 @@ ImagePanelAPI
 		if(speechVisible )
 		{	
 			backBufferContext.setFillStyle(this.speechColor.name());
+			//Font font = new Font();
+			backBufferContext.setFont("16px \"Times New Roman\"");
 			backBufferContext.fillText(this.speechText, this.speechMaxRect.getLeft(), this.speechMaxRect.getTop(), this.speechMaxRect.getWidth());
 		}
 		// System.out.println("printed with tally " + tally +" draws "+ draws);
