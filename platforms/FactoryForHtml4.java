@@ -14,7 +14,7 @@ p- * Copyright 2012 Anthony Cassidy
  * the License.
  */
 
-package com.github.a2g.core.platforms.html4;
+package com.github.a2g.core.platforms;
 
 import com.github.a2g.core.objectmodel.BoundaryCalculator;
 import com.github.a2g.core.objectmodel.CommandLinePanel;
@@ -25,6 +25,8 @@ import com.github.a2g.core.objectmodel.MasterPanel;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.objectmodel.TitleCardPanel;
 import com.github.a2g.core.objectmodel.VerbsPanel;
+import com.github.a2g.core.platforms.html4.SoundForHtml4;
+import com.github.a2g.core.platforms.html4.SystemAnimationForHtml4;
 import com.github.a2g.core.platforms.html4.TimerForHtml4;
 import com.github.a2g.core.platforms.html4.panel.ScenePanelForHtml4;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -72,7 +74,13 @@ implements IFactory {
 		return new CommandLinePanel(fore, back, roll);
 	}
 
+@Override
+	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
+			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore,
+			ColorEnum back, ColorEnum roll) {
+		return new DialogTreePanel(master, fore, back, roll);
 
+	}
 
 	@Override
 	public IInventoryPanelFromInventoryPresenter createInventoryPanel(
@@ -98,7 +106,22 @@ implements IFactory {
 	public IScenePanelFromScenePresenter createScenePanel(IScenePresenterFromScenePanel scenePres) {
 		return new ScenePanelForHtml4(bus, master.getScenePresenter());
 	}
+	
+	@Override
+	public ISound createSound(String url) {
+		return new SoundForHtml4(url);
+	}
 
+	@Override
+	public ISystemAnimation createSystemAnimation(
+			IBaseActionFromSystemAnimation callbacks) {
+		return new SystemAnimationForHtml4(callbacks);
+	}
+
+	@Override
+	public ITimer createSystemTimer(IMasterPresenterFromTimer cbs) {
+		return new TimerForHtml4(cbs);
+	}
 	@Override
 	public ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(
 			ColorEnum foreground, ColorEnum background) {
@@ -113,32 +136,8 @@ implements IFactory {
 				background);
 	}
 
-	@Override
-	public ISystemAnimation createSystemAnimation(
-			IBaseActionFromSystemAnimation callbacks) {
-		return new SystemAnimationForHtml4(callbacks);
-	}
-
-	@Override
-	public ITimer createSystemTimer(IMasterPresenterFromTimer cbs) {
-		return new TimerForHtml4(cbs);
-	}
-
 	public void alert(String text) {
 		Window.alert(text);
-	}
-
-	@Override
-	public ISound createSound(String url) {
-		return new SoundForHtml4(url);
-	}
-
-	@Override
-	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
-			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore,
-			ColorEnum back, ColorEnum roll) {
-		return new DialogTreePanel(master, fore, back, roll);
-
 	}
 
 	@Override

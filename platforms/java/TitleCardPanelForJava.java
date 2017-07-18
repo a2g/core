@@ -15,7 +15,7 @@
  */
 
 
-package com.github.a2g.core.platforms.java.panel;
+package com.github.a2g.core.platforms.java;
 
 import java.awt.Button;
 import java.awt.Color;

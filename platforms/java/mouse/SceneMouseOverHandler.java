@@ -24,8 +24,8 @@ import com.github.a2g.core.interfaces.internal.ICommandLinePresenterFromSceneMou
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.primitive.Rect;
-import com.github.a2g.core.platforms.java.panel.ScenePanelForJava;
 import com.github.a2g.core.objectmodel.SceneObject;
+import com.github.a2g.core.platforms.java.ScenePanelForJava;
 
 
 @SuppressWarnings("unused")

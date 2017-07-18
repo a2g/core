@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.platforms.java;
+package com.github.a2g.core.platforms.java.dependencies;
 
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;

@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.platforms.java.panel;
+package com.github.a2g.core.platforms.java;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -26,8 +26,8 @@ import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.internal.IHostingPanel;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter;
+import com.github.a2g.core.platforms.java.dependencies.HostingPanelForJava;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.platforms.java.HostingPanelForJava;
 
 
 @SuppressWarnings("serial")

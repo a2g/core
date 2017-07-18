@@ -17,7 +17,7 @@ implements ISound
 	 boolean hasLoaded;
 	 boolean wasPlayedButNotLoaded;
 	 
-	SoundForJava(String location)
+	public SoundForJava(String location)
 	{
 		hasLoaded = false;
 		 wasPlayedButNotLoaded = false;

@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.platforms.html5;
+package com.github.a2g.core.platforms;
 
 import com.github.a2g.core.interfaces.internal.IBaseActionFromSystemAnimation;
 import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
@@ -71,7 +71,20 @@ public class FactoryForHtml5 implements IFactory {
 		return new CommandLinePanel(fore, back, roll);
 	}
 
+	@Override
+	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
+			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore,
+			ColorEnum back, ColorEnum roll) {
+		return new DialogTreePanel(master, fore, back, roll);
 
+	}
+
+	@Override
+	public IInventoryPanelFromInventoryPresenter createInventoryPanel(
+			IInventoryPresenterFromInventoryPanel api, ColorEnum fore,
+			ColorEnum back, ColorEnum rollover) {
+		return new InventoryPanel(api, fore, back, rollover);
+	}
 
 	@Override
 	public ILoaderPanelFromLoaderPresenter createLoaderPanel(
@@ -92,6 +105,23 @@ public class FactoryForHtml5 implements IFactory {
 				master.getCommandLinePresenter());
 	}
 
+	
+	@Override
+	public ISystemAnimation createSystemAnimation(
+			IBaseActionFromSystemAnimation callbacks) {
+		return new SystemAnimationForHtml4(callbacks);
+	}
+
+	@Override
+	public ISound createSound(String url) {
+		return new SoundForHtml4(url);
+	}
+
+	@Override
+	public ITimer createSystemTimer(IMasterPresenterFromTimer cbs) {
+		return new TimerForHtml4(cbs);
+	}
+	
 	@Override
 	public ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(
 			ColorEnum fore, ColorEnum back) {
@@ -104,41 +134,14 @@ public class FactoryForHtml5 implements IFactory {
 		return new VerbsPanel(api, fore, back);
 	}
 
-	@Override
-	public ISystemAnimation createSystemAnimation(
-			IBaseActionFromSystemAnimation callbacks) {
-		return new SystemAnimationForHtml4(callbacks);
-	}
-
-	@Override
-	public ITimer createSystemTimer(IMasterPresenterFromTimer cbs) {
-		return new TimerForHtml4(cbs);
-	}
 
 	/*
 	 * void alert(String text) { JOptionPane.showMessageDialog(null, "alert",
 	 * text,JOptionPane.ERROR_MESSAGE); }
 	 */
 
-	@Override
-	public IInventoryPanelFromInventoryPresenter createInventoryPanel(
-			IInventoryPresenterFromInventoryPanel api, ColorEnum fore,
-			ColorEnum back, ColorEnum rollover) {
-		return new InventoryPanel(api, fore, back, rollover);
-	}
 
-	@Override
-	public ISound createSound(String url) {
-		return new SoundForHtml4(url);
-	}
-
-	@Override
-	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
-			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore,
-			ColorEnum back, ColorEnum roll) {
-		return new DialogTreePanel(master, fore, back, roll);
-
-	}
+	
 
 	@Override
 	public IBoundaryCalculator createBoundaryCalculator(

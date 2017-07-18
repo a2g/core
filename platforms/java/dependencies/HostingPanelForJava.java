@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.platforms.java;
+package com.github.a2g.core.platforms.java.dependencies;
 
 import java.awt.Color;
 import java.awt.Component;

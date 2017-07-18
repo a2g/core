@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.platforms.java;
+package com.github.a2g.core.platforms.java.dependencies;
 
 import java.io.File;
 import java.io.IOException;

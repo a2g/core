@@ -15,7 +15,7 @@
  */
 
 
-package com.github.a2g.core.platforms.java.panel;
+package com.github.a2g.core.platforms.java;
 
 
 import java.awt.Color;
@@ -43,8 +43,8 @@ import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
-import com.github.a2g.core.platforms.java.ImageForJava;
-import com.github.a2g.core.platforms.java.PackagedImageForJava;
+import com.github.a2g.core.platforms.java.dependencies.ImageForJava;
+import com.github.a2g.core.platforms.java.dependencies.PackagedImageForJava;
 import com.github.a2g.core.platforms.java.mouse.InventoryMouseClickHandler;
 import com.github.a2g.core.platforms.java.mouse.InventoryMouseOverHandler;
 import com.google.gwt.event.shared.EventBus;

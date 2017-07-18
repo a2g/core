@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.platforms.java;
+package com.github.a2g.core.platforms;
 
 import javax.swing.JOptionPane;
 
@@ -39,16 +39,17 @@ import com.github.a2g.core.interfaces.internal.ITimer;
 import com.github.a2g.core.interfaces.internal.ITitleCardPanelFromTitleCardPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
+import com.github.a2g.core.platforms.java.CommandLinePanelForJava;
+import com.github.a2g.core.platforms.java.DialogTreePanelForJava;
+import com.github.a2g.core.platforms.java.InventoryPanelForJava;
+import com.github.a2g.core.platforms.java.LoaderPanelForJava;
+import com.github.a2g.core.platforms.java.MasterPanelForJava;
+import com.github.a2g.core.platforms.java.ScenePanelForJava;
+import com.github.a2g.core.platforms.java.SoundForJava;
 import com.github.a2g.core.platforms.java.SystemAnimationForJava;
 import com.github.a2g.core.platforms.java.TimerForJava;
-import com.github.a2g.core.platforms.java.panel.CommandLinePanelForJava;
-import com.github.a2g.core.platforms.java.panel.DialogTreePanelForJava;
-import com.github.a2g.core.platforms.java.panel.InventoryPanelForJava;
-import com.github.a2g.core.platforms.java.panel.LoaderPanelForJava;
-import com.github.a2g.core.platforms.java.panel.MasterPanelForJava;
-import com.github.a2g.core.platforms.java.panel.ScenePanelForJava;
-import com.github.a2g.core.platforms.java.panel.TitleCardPanelForJava;
-import com.github.a2g.core.platforms.java.panel.VerbsPanelForJava;
+import com.github.a2g.core.platforms.java.TitleCardPanelForJava;
+import com.github.a2g.core.platforms.java.VerbsPanelForJava;
 import com.github.a2g.core.objectmodel.BoundaryCalculator;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -75,7 +76,14 @@ public class FactoryForJava implements IFactory {
 			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore, ColorEnum back, ColorEnum roll) {
 		return new DialogTreePanelForJava(master, fore, back, roll);
 	}
-
+	
+	@Override
+	public IInventoryPanelFromInventoryPresenter createInventoryPanel(
+			IInventoryPresenterFromInventoryPanel api, ColorEnum fore,
+			ColorEnum back, ColorEnum rollover) {
+		return new InventoryPanelForJava(bus, api, fore, back);
+	}
+	
 	@Override
 	public ILoaderPanelFromLoaderPresenter createLoaderPanel(
 			final IMasterPresenterFromLoaderMouse api, ColorEnum fore,
@@ -96,6 +104,22 @@ public class FactoryForJava implements IFactory {
 	}
 
 	@Override
+	public ISound createSound(String url) {
+		return new SoundForJava(url);
+	}
+	
+	@Override
+	public ISystemAnimation createSystemAnimation(
+			IBaseActionFromSystemAnimation callbacks ) {
+		return new SystemAnimationForJava(callbacks);
+	}
+	
+	@Override
+	public ITimer createSystemTimer(IMasterPresenterFromTimer cbs) {
+		return new TimerForJava(cbs);
+	}
+	
+	@Override
 	public ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(
 			ColorEnum fore, ColorEnum back) {
 		return new TitleCardPanelForJava(fore, back);
@@ -107,32 +131,9 @@ public class FactoryForJava implements IFactory {
 		return new VerbsPanelForJava(api, fore, back);
 	}
 
-	@Override
-	public ISystemAnimation createSystemAnimation(
-			IBaseActionFromSystemAnimation callbacks ) {
-		return new SystemAnimationForJava(callbacks);
-	}
-
-	@Override
-	public ITimer createSystemTimer(IMasterPresenterFromTimer cbs) {
-		return new TimerForJava(cbs);
-	}
-
 	void alert(String text) {
 		JOptionPane.showMessageDialog(null, "alert", text,
 				JOptionPane.ERROR_MESSAGE);
-	}
-
-	@Override
-	public IInventoryPanelFromInventoryPresenter createInventoryPanel(
-			IInventoryPresenterFromInventoryPanel api, ColorEnum fore,
-			ColorEnum back, ColorEnum rollover) {
-		return new InventoryPanelForJava(bus, api, fore, back);
-	}
-
-	@Override
-	public ISound createSound(String url) {
-		return new SoundForJava(url);
 	}
 
 	@Override

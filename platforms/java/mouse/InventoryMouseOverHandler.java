@@ -22,7 +22,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
-import com.github.a2g.core.platforms.java.panel.InventoryPanelForJava;
+import com.github.a2g.core.platforms.java.InventoryPanelForJava;
 
 
 public class InventoryMouseOverHandler implements MouseMotionListener

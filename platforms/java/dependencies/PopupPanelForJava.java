@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.platforms.java.panel;
+package com.github.a2g.core.platforms.java.dependencies;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.event.MouseEvent;
@@ -26,6 +26,7 @@ import javax.swing.JLabel;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromJavaPopupPanel;
+import com.github.a2g.core.platforms.java.ScenePanelForJava;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 

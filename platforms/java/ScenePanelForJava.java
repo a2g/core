@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.github.a2g.core.platforms.java.panel;
+package com.github.a2g.core.platforms.java;
 
 
 import java.awt.Color;
@@ -61,8 +61,8 @@ import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.primitive.RectF;
-import com.github.a2g.core.platforms.java.ImageForJava;
-import com.github.a2g.core.platforms.java.PackagedImageForJava;
+import com.github.a2g.core.platforms.java.dependencies.ImageForJava;
+import com.github.a2g.core.platforms.java.dependencies.PackagedImageForJava;
 import com.github.a2g.core.platforms.java.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.java.mouse.SceneMouseOverHandler;
 import com.google.gwt.event.shared.EventBus;
