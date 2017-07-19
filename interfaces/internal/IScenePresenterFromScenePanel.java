@@ -20,7 +20,7 @@ public interface IScenePresenterFromScenePanel
 extends
 IScenePresenterFromSceneMouseOver,
 IScenePresenterFromSceneTouch,
-IScenePresenterFromJavaPopupPanel,// no java stuff here, it just needs
+IScenePresenterFromSwingPopupPanel,// no java stuff here, it just needs
 // getView
 IGetSceneObjectCount,
 IGetOtidByIndex,

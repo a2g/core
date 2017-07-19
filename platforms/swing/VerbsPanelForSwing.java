@@ -36,7 +36,7 @@ import com.github.a2g.core.primitive.ColorEnum;
 
 
 @SuppressWarnings("serial")
-public class VerbsPanelForJava
+public class VerbsPanelForSwing
 extends JPanel implements IVerbsPanelFromVerbsPresenter
 {
 	Verbs verbs;
@@ -44,7 +44,7 @@ extends JPanel implements IVerbsPanelFromVerbsPresenter
 	IVerbsPresenterFromVerbsPanel mouseToPresenter;
 	private int preferredWith;
 	private int preferredHeight;
-	public VerbsPanelForJava(IVerbsPresenterFromVerbsPanel mouseToPresenter, ColorEnum fore, ColorEnum back)
+	public VerbsPanelForSwing(IVerbsPresenterFromVerbsPanel mouseToPresenter, ColorEnum fore, ColorEnum back)
 	{
 		this.mouseToPresenter = mouseToPresenter;
 		this.preferredWith = 160;

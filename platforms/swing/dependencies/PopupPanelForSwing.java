@@ -25,18 +25,18 @@ import javax.swing.JLabel;
 
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromJavaPopupPanel;
-import com.github.a2g.core.platforms.swing.ScenePanelForJava;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromSwingPopupPanel;
+import com.github.a2g.core.platforms.swing.ScenePanelForSwing;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
 
-public class PopupPanelForJava
+public class PopupPanelForSwing
 {
 	private JFrame popup;
 	private JLabel labelInPopup;
-	private IScenePresenterFromJavaPopupPanel toScene;
+	private IScenePresenterFromSwingPopupPanel toScene;
 
-	public PopupPanelForJava(IScenePresenterFromJavaPopupPanel toScene)
+	public PopupPanelForSwing(IScenePresenterFromSwingPopupPanel toScene)
 	{
 		this.toScene = toScene;
 		// create popup
@@ -59,7 +59,7 @@ public class PopupPanelForJava
 	{
 		//api.getlocationOnScreen
 		IScenePanelFromScenePresenter sv = toScene.getView();
-		ScenePanelForJava spj = (ScenePanelForJava)sv;
+		ScenePanelForSwing spj = (ScenePanelForSwing)sv;
 		Point p = spj.getTopLeft();
 		popup.setLocation(p.getX()+ x, p.getY()+y);
 	}

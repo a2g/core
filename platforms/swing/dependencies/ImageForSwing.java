@@ -16,35 +16,27 @@
 
 package com.github.a2g.core.platforms.swing.dependencies;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.FlowLayout;
+import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
+import com.github.a2g.core.objectmodel.Image;
+import com.github.a2g.core.primitive.Point;
 
-import javax.swing.JPanel;
+public class ImageForSwing extends Image {
+	private final java.awt.Image image;
+	private String objectId;
 
-import com.github.a2g.core.interfaces.internal.IHostingPanel;
-
-@SuppressWarnings("serial")
-public class HostingPanelForJava extends JPanel implements IHostingPanel
-{
-
-	public HostingPanelForJava(HostingPanelForJava another)
-	{
-		setTheOnlyLayoutNecessary();
-		this.add(another);
+	public ImageForSwing(final java.awt.Image image, String objectId,
+			ImagePanelAPI panel, Point offset) {
+		super(panel, offset, objectId);
+		this.image = image;
+		this.objectId = objectId;
+		panel.setImageVisible(this, false);
 	}
-	public HostingPanelForJava()
-	{
-		setTheOnlyLayoutNecessary();
-	}
-	private void setTheOnlyLayoutNecessary()
-	{
-		this.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
-		this.setBackground(new Color(0,0,0));
-	}
-	@Override
-	public void setThing(Object w) {
-		this.add((Component) w);
 
+	public java.awt.Image getNativeImage() {
+		return image;
+	}
+
+	public String getObjectId() {
+		return objectId;
 	}
 }

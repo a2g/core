@@ -28,13 +28,13 @@ import com.github.a2g.core.interfaces.internal.ITitleCardPanelFromTitleCardPrese
 import com.github.a2g.core.primitive.ColorEnum;
 
 @SuppressWarnings("serial")
-public class TitleCardPanelForJava
+public class TitleCardPanelForSwing
 extends JPanel implements ITitleCardPanelFromTitleCardPresenter
 {
 	Button panel;
 	int width;
 	int height;
-	public TitleCardPanelForJava(ColorEnum fore, ColorEnum back)
+	public TitleCardPanelForSwing(ColorEnum fore, ColorEnum back)
 	{
 		this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 		{

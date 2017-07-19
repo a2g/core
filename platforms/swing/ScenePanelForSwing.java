@@ -61,8 +61,8 @@ import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.primitive.RectF;
-import com.github.a2g.core.platforms.swing.dependencies.ImageForJava;
-import com.github.a2g.core.platforms.swing.dependencies.PackagedImageForJava;
+import com.github.a2g.core.platforms.swing.dependencies.ImageForSwing;
+import com.github.a2g.core.platforms.swing.dependencies.PackagedImageForSwing;
 import com.github.a2g.core.platforms.swing.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.swing.mouse.SceneMouseOverHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -71,7 +71,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 
 @SuppressWarnings("serial")
-public class ScenePanelForJava
+public class ScenePanelForSwing
 extends JPanel
 implements IScenePanelFromScenePresenter
 , ImagePanelAPI
@@ -99,7 +99,7 @@ implements IScenePanelFromScenePresenter
 
 	private BufferedImage bufferedImage;
 
-	public ScenePanelForJava(EventBus bus, IScenePresenterFromScenePanel toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine)
+	public ScenePanelForSwing(EventBus bus, IScenePresenterFromScenePanel toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine)
 	{
 		isRenderDiagnostics = false; 
 		this.toScene = toScene;
@@ -166,9 +166,9 @@ implements IScenePanelFromScenePresenter
 			short objectId)
 	{
 
-		java.awt.Image img = ((PackagedImageForJava)imageResource).unpack();
+		java.awt.Image img = ((PackagedImageForSwing)imageResource).unpack();
 
-		ImageForJava imageAndPos = new ImageForJava(img, objectTextualId, this, new Point(x, y));
+		ImageForSwing imageAndPos = new ImageForSwing(img, objectTextualId, this, new Point(x, y));
 
 		// to fire image loading done.
 		//lh.onLoad(null);
@@ -192,7 +192,7 @@ implements IScenePanelFromScenePresenter
 		return new Dimension(this.width,this.height);
 	}
 
-	void putPoint(ImageForJava image, int x,int y)
+	void putPoint(ImageForSwing image, int x,int y)
 	{
 		mapOfPointsByImage.put(hash(image), new Point(x,y));
 	}
@@ -201,7 +201,7 @@ implements IScenePanelFromScenePresenter
 	public void setThingPosition(Image image, int x, int y, double scale) {
 		if(mapOfPointsByImage.containsKey(hash(image)))
 		{
-			putPoint((ImageForJava)image, x,y);
+			putPoint((ImageForSwing)image, x,y);
 			triggerPaint();
 		}
 
@@ -226,13 +226,13 @@ implements IScenePanelFromScenePresenter
 	@Override
 	public void insert(Image image, int x, int y, int before) {
 		listOfAllVisibleImages.add(before,image);
-		putPoint((ImageForJava)image, x,y);
+		putPoint((ImageForSwing)image, x,y);
 		triggerPaint();
 	}
 
 	@Override
 	public void remove(Image image) {
-		listOfAllVisibleImages.remove(((ImageForJava)image).getNativeImage());
+		listOfAllVisibleImages.remove(((ImageForSwing)image).getNativeImage());
 		mapOfPointsByImage.remove(hash(image));
 		setImageVisible(image, false);
 		triggerPaint();
@@ -241,7 +241,7 @@ implements IScenePanelFromScenePresenter
 	@Override
 	public void add(Image image, int x, int y) {
 		listOfAllVisibleImages.add(image);
-		putPoint((ImageForJava)image, x,y);
+		putPoint((ImageForSwing)image, x,y);
 		triggerPaint();
 	}
 
@@ -260,7 +260,7 @@ implements IScenePanelFromScenePresenter
 
 	Integer hash(Image image)
 	{
-		int ocode= ((ImageForJava)image).getNativeImage().hashCode();
+		int ocode= ((ImageForSwing)image).getNativeImage().hashCode();
 		return new Integer(ocode);
 	}
 
@@ -309,7 +309,7 @@ implements IScenePanelFromScenePresenter
 				int dy1 = (int)(leftTopPlusY)-cameraOffsetY;
 				int dx2 = (int)(dx1 + sx2*image.getScale());
 				int dy2 = (int)(dy1 + sy2*image.getScale());
-				g.drawImage(((ImageForJava)image).getNativeImage(),  dx1,  dy1,  dx2,  dy2,  sx1,  sy1,  sx2,  sy2, this);
+				g.drawImage(((ImageForSwing)image).getNativeImage(),  dx1,  dy1,  dx2,  dy2,  sx1,  sy1,  sx2,  sy2, this);
 			}
 		}
 		//System.out.println("printed with tally " + tally +" draws "+ draws);
@@ -460,14 +460,14 @@ implements IScenePanelFromScenePresenter
 
 	@Override
 	public int getImageWidth(Image image) {
-		int width =  ((ImageForJava)image).getNativeImage().getWidth(this);
+		int width =  ((ImageForSwing)image).getNativeImage().getWidth(this);
 		return width;
 	}
 
 	@Override
 	public int getImageHeight(Image image)
 	{
-		int height = ((ImageForJava)image).getNativeImage().getHeight(this);
+		int height = ((ImageForSwing)image).getNativeImage().getHeight(this);
 		return height;
 	}
 
@@ -477,9 +477,9 @@ implements IScenePanelFromScenePresenter
 			IPackagedImage imageResource, IScenePresenterFromSceneMouseOver api, EventBus bus,
 			int x, int y, String objectTextualId, short objectCode)
 	{
-		java.awt.Image img = ((PackagedImageForJava)imageResource).unpack();
+		java.awt.Image img = ((PackagedImageForSwing)imageResource).unpack();
 
-		ImageForJava imageAndPos = new ImageForJava(img, objectTextualId, this, new Point(x, y));
+		ImageForSwing imageAndPos = new ImageForSwing(img, objectTextualId, this, new Point(x, y));
 		return imageAndPos;
 	}
 

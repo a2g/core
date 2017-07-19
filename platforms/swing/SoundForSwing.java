@@ -6,7 +6,7 @@ import com.github.a2g.core.interfaces.internal.ISound;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer; 
 
-public class SoundForJava
+public class SoundForSwing
 implements ISound
 {
 
@@ -17,7 +17,7 @@ implements ISound
 	 boolean hasLoaded;
 	 boolean wasPlayedButNotLoaded;
 	 
-	public SoundForJava(String location)
+	public SoundForSwing(String location)
 	{
 		hasLoaded = false;
 		 wasPlayedButNotLoaded = false;

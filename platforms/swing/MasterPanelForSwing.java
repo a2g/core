@@ -26,22 +26,22 @@ import javax.swing.JPanel;
 
 import com.github.a2g.core.interfaces.internal.IHostingPanel;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter;
-import com.github.a2g.core.platforms.swing.dependencies.HostingPanelForJava;
+import com.github.a2g.core.platforms.swing.dependencies.HostingPanelForSwing;
 import com.github.a2g.core.primitive.ColorEnum;
 
 
 @SuppressWarnings("serial")
-public class MasterPanelForJava
+public class MasterPanelForSwing
 extends JPanel
 implements IMasterPanelFromMasterPresenter
 {
-	HostingPanelForJava hostForCommandLineF;
-	HostingPanelForJava hostForInventoryF;
-	HostingPanelForJava hostForVerbsF;
-	HostingPanelForJava hostForSceneF;
-	HostingPanelForJava hostForDialogTreeF;
-	HostingPanelForJava hostForLoadingF;
-	HostingPanelForJava hostForTitleCardF;
+	HostingPanelForSwing hostForCommandLineF;
+	HostingPanelForSwing hostForInventoryF;
+	HostingPanelForSwing hostForVerbsF;
+	HostingPanelForSwing hostForSceneF;
+	HostingPanelForSwing hostForDialogTreeF;
+	HostingPanelForSwing hostForLoadingF;
+	HostingPanelForSwing hostForTitleCardF;
 	GuiStateEnum GuiStateEnum;
 
 	static final String LOADING_WIDGET = "LOADING_WIDGET";
@@ -54,28 +54,28 @@ implements IMasterPanelFromMasterPresenter
 	CardLayout dialogTreeCardLayout;
 	JPanel panelForSceneStack;
 	JPanel panelForDialogTreeStack;
-	private HostingPanelForJava sizePlaceholderForCommandLineF;
-	private HostingPanelForJava sizePlaceholderForVerbsF;
-	private HostingPanelForJava sizePlaceholderForInventoryF;
+	private HostingPanelForSwing sizePlaceholderForCommandLineF;
+	private HostingPanelForSwing sizePlaceholderForVerbsF;
+	private HostingPanelForSwing sizePlaceholderForInventoryF;
 
-	public MasterPanelForJava(int width, int height, ColorEnum back) {
+	public MasterPanelForSwing(int width, int height, ColorEnum back) {
 		this.setBackground(new Color(back.r, back.g, back.b));
 		
 	
 		// create all the host panels, that we want to arrange.
-		hostForCommandLineF = new HostingPanelForJava(); 
-		hostForInventoryF = new HostingPanelForJava(); 
-		hostForVerbsF = new HostingPanelForJava(); 
-		hostForSceneF = new HostingPanelForJava(); 
-		hostForDialogTreeF = new HostingPanelForJava(); 
-		hostForLoadingF = new HostingPanelForJava(); 
-		hostForTitleCardF = new HostingPanelForJava(); 
+		hostForCommandLineF = new HostingPanelForSwing(); 
+		hostForInventoryF = new HostingPanelForSwing(); 
+		hostForVerbsF = new HostingPanelForSwing(); 
+		hostForSceneF = new HostingPanelForSwing(); 
+		hostForDialogTreeF = new HostingPanelForSwing(); 
+		hostForLoadingF = new HostingPanelForSwing(); 
+		hostForTitleCardF = new HostingPanelForSwing(); 
 
 		
-		sizePlaceholderForCommandLineF =  new HostingPanelForJava(hostForCommandLineF);
+		sizePlaceholderForCommandLineF =  new HostingPanelForSwing(hostForCommandLineF);
 		sizePlaceholderForCommandLineF.setPreferredSize(new Dimension(320,20));
-		sizePlaceholderForVerbsF = new HostingPanelForJava(hostForVerbsF);
-		sizePlaceholderForInventoryF =  new HostingPanelForJava(hostForInventoryF);
+		sizePlaceholderForVerbsF = new HostingPanelForSwing(hostForVerbsF);
+		sizePlaceholderForInventoryF =  new HostingPanelForSwing(hostForInventoryF);
 		
 		
 		sceneCardLayout =null;
@@ -97,8 +97,8 @@ implements IMasterPanelFromMasterPresenter
 			//dialogTreeCardLayout.setVgap(0);
 
 			panelForDialogTreeStack.setLayout(dialogTreeCardLayout);
-			panelForDialogTreeStack.add(hostForDialogTreeF, MasterPanelForJava.DIALOGTREE_WIDGET);
-			panelForDialogTreeStack.add(commandLineAndVerbsAndInventoryF, MasterPanelForJava.COMMANDLINEVERBSINVENTORY_WIDGET);
+			panelForDialogTreeStack.add(hostForDialogTreeF, MasterPanelForSwing.DIALOGTREE_WIDGET);
+			panelForDialogTreeStack.add(commandLineAndVerbsAndInventoryF, MasterPanelForSwing.COMMANDLINEVERBSINVENTORY_WIDGET);
 
 			{
 				// layout the command line and the panel below it - vertically.
@@ -192,8 +192,8 @@ implements IMasterPanelFromMasterPresenter
 			this.hostForSceneF.setVisible(true);
 			this.hostForTitleCardF.setVisible(false);
 			this.hostForVerbsF.setVisible(false);
-			sceneCardLayout.show(panelForSceneStack, MasterPanelForJava.SCENE_WIDGET);
-			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForJava.DIALOGTREE_WIDGET);
+			sceneCardLayout.show(panelForSceneStack, MasterPanelForSwing.SCENE_WIDGET);
+			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForSwing.DIALOGTREE_WIDGET);
 			break;
 		case OnEnterScene:
 		case CutScene:
@@ -204,8 +204,8 @@ implements IMasterPanelFromMasterPresenter
 			this.hostForSceneF.setVisible(true);
 			this.hostForTitleCardF.setVisible(false);
 			this.hostForVerbsF.setVisible(false);
-			sceneCardLayout.show(panelForSceneStack, MasterPanelForJava.SCENE_WIDGET);
-			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForJava.LOADING_WIDGET);
+			sceneCardLayout.show(panelForSceneStack, MasterPanelForSwing.SCENE_WIDGET);
+			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForSwing.LOADING_WIDGET);
 			break;
 		case ActiveScene:
 			this.hostForCommandLineF.setVisible(true);
@@ -215,8 +215,8 @@ implements IMasterPanelFromMasterPresenter
 			this.hostForSceneF.setVisible(true);
 			this.hostForTitleCardF.setVisible(false);
 			this.hostForVerbsF.setVisible(true);
-			sceneCardLayout.show(panelForSceneStack, MasterPanelForJava.SCENE_WIDGET);
-			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForJava.COMMANDLINEVERBSINVENTORY_WIDGET);
+			sceneCardLayout.show(panelForSceneStack, MasterPanelForSwing.SCENE_WIDGET);
+			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForSwing.COMMANDLINEVERBSINVENTORY_WIDGET);
 			break;
 		case Loading:
 			this.hostForCommandLineF.setVisible(false);
@@ -226,7 +226,7 @@ implements IMasterPanelFromMasterPresenter
 			this.hostForSceneF.setVisible(false);
 			this.hostForTitleCardF.setVisible(false);
 			this.hostForVerbsF.setVisible(false);
-			sceneCardLayout.show(panelForSceneStack, MasterPanelForJava.LOADING_WIDGET);
+			sceneCardLayout.show(panelForSceneStack, MasterPanelForSwing.LOADING_WIDGET);
 			break;
 		case TitleCardOverOnEnterScene:
 		case TitleCardOverActiveScene:
@@ -240,7 +240,7 @@ implements IMasterPanelFromMasterPresenter
 			this.hostForSceneF.setVisible(false);
 			this.hostForTitleCardF.setVisible(true);
 			this.hostForVerbsF.setVisible(false);
-			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForJava.COMMANDLINEVERBSINVENTORY_WIDGET);
+			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForSwing.COMMANDLINEVERBSINVENTORY_WIDGET);
 		}
 	}
 

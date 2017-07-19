@@ -42,25 +42,25 @@ import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
 import com.github.a2g.core.objectmodel.BoundaryCalculator;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.platforms.swing.CommandLinePanelForSwing;
-import com.github.a2g.core.platforms.swing.DialogTreePanelForJava;
-import com.github.a2g.core.platforms.swing.InventoryPanelForJava;
-import com.github.a2g.core.platforms.swing.LoaderPanelForJava;
-import com.github.a2g.core.platforms.swing.MasterPanelForJava;
-import com.github.a2g.core.platforms.swing.ScenePanelForJava;
-import com.github.a2g.core.platforms.swing.SoundForJava;
-import com.github.a2g.core.platforms.swing.SystemAnimationForJava;
-import com.github.a2g.core.platforms.swing.TimerForJava;
-import com.github.a2g.core.platforms.swing.TitleCardPanelForJava;
-import com.github.a2g.core.platforms.swing.VerbsPanelForJava;
+import com.github.a2g.core.platforms.swing.DialogTreePanelForSwing;
+import com.github.a2g.core.platforms.swing.InventoryPanelForSwing;
+import com.github.a2g.core.platforms.swing.LoaderPanelForSwing;
+import com.github.a2g.core.platforms.swing.MasterPanelForSwing;
+import com.github.a2g.core.platforms.swing.ScenePanelForSwing;
+import com.github.a2g.core.platforms.swing.SoundForSwing;
+import com.github.a2g.core.platforms.swing.SystemAnimationForSwing;
+import com.github.a2g.core.platforms.swing.TimerForSwing;
+import com.github.a2g.core.platforms.swing.TitleCardPanelForSwing;
+import com.github.a2g.core.platforms.swing.VerbsPanelForSwing;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
-public class FactoryForJava implements IFactory {
+public class FactoryForSwing implements IFactory {
 
 	private EventBus bus;
 	private MasterPresenter master;
 
-	public FactoryForJava(EventBus bus, MasterPresenter master) {
+	public FactoryForSwing(EventBus bus, MasterPresenter master) {
 		this.bus = bus;
 		this.master = master;
 	}
@@ -74,61 +74,61 @@ public class FactoryForJava implements IFactory {
 	@Override
 	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
 			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore, ColorEnum back, ColorEnum roll) {
-		return new DialogTreePanelForJava(master, fore, back, roll);
+		return new DialogTreePanelForSwing(master, fore, back, roll);
 	}
 	
 	@Override
 	public IInventoryPanelFromInventoryPresenter createInventoryPanel(
 			IInventoryPresenterFromInventoryPanel api, ColorEnum fore,
 			ColorEnum back, ColorEnum rollover) {
-		return new InventoryPanelForJava(bus, api, fore, back);
+		return new InventoryPanelForSwing(bus, api, fore, back);
 	}
 	
 	@Override
 	public ILoaderPanelFromLoaderPresenter createLoaderPanel(
 			final IMasterPresenterFromLoaderMouse api, ColorEnum fore,
 			ColorEnum back) {
-		return new LoaderPanelForJava(api, fore, back);
+		return new LoaderPanelForSwing(api, fore, back);
 	}
 
 	@Override
 	public IMasterPanelFromMasterPresenter createMasterPanel(int width,
 			int height, ColorEnum back) {
-		return new MasterPanelForJava(width, height, back);
+		return new MasterPanelForSwing(width, height, back);
 	}
 
 	@Override
 	public IScenePanelFromScenePresenter createScenePanel(IScenePresenterFromScenePanel scenePres) {
-		return new ScenePanelForJava(bus, scenePres,
+		return new ScenePanelForSwing(bus, scenePres,
 				master.getCommandLinePresenter());
 	}
 
 	@Override
 	public ISound createSound(String url) {
-		return new SoundForJava(url);
+		return new SoundForSwing(url);
 	}
 	
 	@Override
 	public ISystemAnimation createSystemAnimation(
 			IBaseActionFromSystemAnimation callbacks ) {
-		return new SystemAnimationForJava(callbacks);
+		return new SystemAnimationForSwing(callbacks);
 	}
 	
 	@Override
 	public ITimer createSystemTimer(IMasterPresenterFromTimer cbs) {
-		return new TimerForJava(cbs);
+		return new TimerForSwing(cbs);
 	}
 	
 	@Override
 	public ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(
 			ColorEnum fore, ColorEnum back) {
-		return new TitleCardPanelForJava(fore, back);
+		return new TitleCardPanelForSwing(fore, back);
 	}
 
 	@Override
 	public IVerbsPanelFromVerbsPresenter createVerbsPanel(
 			IVerbsPresenterFromVerbsPanel api, ColorEnum fore, ColorEnum back) {
-		return new VerbsPanelForJava(api, fore, back);
+		return new VerbsPanelForSwing(api, fore, back);
 	}
 
 	void alert(String text) {

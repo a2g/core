@@ -33,7 +33,7 @@ import java.awt.Label;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class DialogTreePanelForJava
+public class DialogTreePanelForSwing
 extends JPanel
 implements IDialogTreePanelFromDialogTreePresenter
 {
@@ -43,7 +43,7 @@ implements IDialogTreePanelFromDialogTreePresenter
 	private int width;
 	private int height;
 	private IMasterPresenterFromDialogTreeMouse master;
-	public DialogTreePanelForJava(IMasterPresenterFromDialogTreeMouse master, ColorEnum fore, ColorEnum back, ColorEnum roll)
+	public DialogTreePanelForSwing(IMasterPresenterFromDialogTreeMouse master, ColorEnum fore, ColorEnum back, ColorEnum roll)
 	{
 		GridLayout grid = new GridLayout();
 		this.setLayout(grid);

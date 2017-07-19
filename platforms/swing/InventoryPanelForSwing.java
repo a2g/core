@@ -43,14 +43,14 @@ import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Point;
-import com.github.a2g.core.platforms.swing.dependencies.ImageForJava;
-import com.github.a2g.core.platforms.swing.dependencies.PackagedImageForJava;
+import com.github.a2g.core.platforms.swing.dependencies.ImageForSwing;
+import com.github.a2g.core.platforms.swing.dependencies.PackagedImageForSwing;
 import com.github.a2g.core.platforms.swing.mouse.InventoryMouseClickHandler;
 import com.github.a2g.core.platforms.swing.mouse.InventoryMouseOverHandler;
 import com.google.gwt.event.shared.EventBus;
 
 @SuppressWarnings("serial")
-public class InventoryPanelForJava
+public class InventoryPanelForSwing
 extends JPanel
 implements ImagePanelAPI
 , IInventoryPanelFromInventoryPresenter
@@ -72,10 +72,10 @@ implements ImagePanelAPI
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages;
 
-	ImageForJava imgLeft;
-	ImageForJava imgRight;
+	ImageForSwing imgLeft;
+	ImageForSwing imgRight;
 
-	public InventoryPanelForJava(EventBus bus, IInventoryPresenterFromInventoryPanel api2, ColorEnum fore, ColorEnum back)
+	public InventoryPanelForSwing(EventBus bus, IInventoryPresenterFromInventoryPanel api2, ColorEnum fore, ColorEnum back)
 	{
 		this.mapOfPointsByImage = new TreeMap<Integer, Point>();
 		this.listOfVisibleHashCodes = new LinkedList<Integer>();
@@ -103,8 +103,8 @@ implements ImagePanelAPI
 			java.awt.Image rawLeft = ImageIO.read(new File("E:\\a2g_core\\res\\leftArrow.png"));
 			java.awt.Image rawRight = ImageIO.read(new File("E:\\a2g_core\\res\\leftArrow.png"));
 
-			imgLeft = new ImageForJava(rawLeft, "", this, new Point(0,0));
-			imgRight = new ImageForJava(rawRight, "", this, new Point(0,0));
+			imgLeft = new ImageForSwing(rawLeft, "", this, new Point(0,0));
+			imgRight = new ImageForSwing(rawRight, "", this, new Point(0,0));
 
 		}
 		catch (IOException e) {
@@ -120,9 +120,9 @@ implements ImagePanelAPI
 
 	@Override
 	public void setThingPosition(Image image, int x, int y, double scale) {
-		if(mapOfPointsByImage.containsKey(((ImageForJava)image).getNativeImage().hashCode()))
+		if(mapOfPointsByImage.containsKey(((ImageForSwing)image).getNativeImage().hashCode()))
 		{
-			mapOfPointsByImage.put(((ImageForJava)image).getNativeImage().hashCode(), new Point(x,y));
+			mapOfPointsByImage.put(((ImageForSwing)image).getNativeImage().hashCode(), new Point(x,y));
 			triggerPaint();
 		}
 	}
@@ -130,15 +130,15 @@ implements ImagePanelAPI
 	@Override
 	public void setImageVisible(Image image, boolean visible)
 	{
-		boolean isIn = listOfVisibleHashCodes.contains(((ImageForJava)image).getNativeImage().hashCode());
+		boolean isIn = listOfVisibleHashCodes.contains(((ImageForSwing)image).getNativeImage().hashCode());
 		if(visible && !isIn)
 		{
-			listOfVisibleHashCodes.add(((ImageForJava)image).getNativeImage().hashCode());
+			listOfVisibleHashCodes.add(((ImageForSwing)image).getNativeImage().hashCode());
 			triggerPaint();
 		}
 		else if(!visible & isIn)
 		{
-			listOfVisibleHashCodes.remove(new Integer(((ImageForJava)image).getNativeImage().hashCode()));
+			listOfVisibleHashCodes.remove(new Integer(((ImageForSwing)image).getNativeImage().hashCode()));
 			triggerPaint();
 		}
 	}
@@ -146,14 +146,14 @@ implements ImagePanelAPI
 	@Override
 	public void insert(Image image, int x, int y, int before) {
 		listOfAllVisibleImages.add(before,image);
-		mapOfPointsByImage.put(((ImageForJava)image).getNativeImage().hashCode(), new Point(x,y));
+		mapOfPointsByImage.put(((ImageForSwing)image).getNativeImage().hashCode(), new Point(x,y));
 		triggerPaint();
 	}
 
 	@Override
 	public void remove(Image image) {
-		listOfAllVisibleImages.remove(((ImageForJava)image).getNativeImage());
-		mapOfPointsByImage.remove(((ImageForJava)image).getNativeImage().hashCode());
+		listOfAllVisibleImages.remove(((ImageForSwing)image).getNativeImage());
+		mapOfPointsByImage.remove(((ImageForSwing)image).getNativeImage().hashCode());
 		setImageVisible(image, false);
 		triggerPaint();
 	}
@@ -161,7 +161,7 @@ implements ImagePanelAPI
 	@Override
 	public void add(Image image, int x, int y) {
 		listOfAllVisibleImages.add(image);
-		mapOfPointsByImage.put(((ImageForJava)image).getNativeImage().hashCode(), new Point(x,y));
+		mapOfPointsByImage.put(((ImageForSwing)image).getNativeImage().hashCode(), new Point(x,y));
 		triggerPaint();
 	}
 
@@ -189,10 +189,10 @@ implements ImagePanelAPI
 		while(iter.hasNext())
 		{
 			Image image = iter.next();
-			if(listOfVisibleHashCodes.contains(((ImageForJava)image).getNativeImage().hashCode()))
+			if(listOfVisibleHashCodes.contains(((ImageForSwing)image).getNativeImage().hashCode()))
 			{
-				Point p = mapOfPointsByImage.get(((ImageForJava)image).getNativeImage().hashCode());
-				g.drawImage(((ImageForJava)image).getNativeImage(),p.getX(),p.getY(),this);
+				Point p = mapOfPointsByImage.get(((ImageForSwing)image).getNativeImage().hashCode());
+				g.drawImage(((ImageForSwing)image).getNativeImage(),p.getX(),p.getY(),this);
 			}
 		}
 
@@ -210,12 +210,12 @@ implements ImagePanelAPI
 
 	@Override
 	public int getImageWidth(Image image) {
-		return ((ImageForJava)image).getNativeImage().getWidth(this);
+		return ((ImageForSwing)image).getNativeImage().getWidth(this);
 	}
 
 	@Override
 	public int getImageHeight(Image image) {
-		return ((ImageForJava)image).getNativeImage().getHeight(this);
+		return ((ImageForSwing)image).getNativeImage().getHeight(this);
 	}
 
 	@Override
@@ -230,9 +230,9 @@ implements ImagePanelAPI
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int x, int y)
 	{
-		java.awt.Image img = ((PackagedImageForJava)imageResource).unpack();
+		java.awt.Image img = ((PackagedImageForSwing)imageResource).unpack();
 
-		ImageForJava imageAndPos = new ImageForJava(img, objectTextualId, this, new Point(0,0));
+		ImageForSwing imageAndPos = new ImageForSwing(img, objectTextualId, this, new Point(0,0));
 
 		// to fire image loading done.
 		// only gwt is asynch, we are swing which synchronous

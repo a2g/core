@@ -22,16 +22,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
-import com.github.a2g.core.platforms.swing.InventoryPanelForJava;
+import com.github.a2g.core.platforms.swing.InventoryPanelForSwing;
 
 
 public class InventoryMouseOverHandler implements MouseMotionListener
 {
 	private IInventoryPresenterFromInventoryPanel mouseToPresenter;
-	private final InventoryPanelForJava inventoryPanel;
+	private final InventoryPanelForSwing inventoryPanel;
 	static boolean isAddedAlready;
 
-	public InventoryMouseOverHandler(InventoryPanelForJava inventoryPanel, IInventoryPresenterFromInventoryPanel mouseToPresenter2) {
+	public InventoryMouseOverHandler(InventoryPanelForSwing inventoryPanel, IInventoryPresenterFromInventoryPanel mouseToPresenter2) {
 		this.mouseToPresenter = mouseToPresenter2;
 		this.inventoryPanel = inventoryPanel;
 		if(!isAddedAlready)

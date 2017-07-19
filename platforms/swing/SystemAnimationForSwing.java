@@ -19,14 +19,14 @@ package com.github.a2g.core.platforms.swing;
 import com.github.a2g.core.interfaces.internal.IBaseActionFromSystemAnimation;
 import com.github.a2g.core.interfaces.internal.ISystemAnimation;
 
-public class SystemAnimationForJava extends
+public class SystemAnimationForSwing extends
 com.github.a2g.core.platforms.swing.animation.Animation implements
 ISystemAnimation {
 	IBaseActionFromSystemAnimation callbacks;
 	boolean isEaseToAndFrom;
 	private boolean isCancelled;
 
-	public SystemAnimationForJava(IBaseActionFromSystemAnimation callbacks) {
+	public SystemAnimationForSwing(IBaseActionFromSystemAnimation callbacks) {
 		this.isEaseToAndFrom = false;
 		this.callbacks = callbacks;
 		this.isCancelled = false;

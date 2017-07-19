@@ -13,22 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+package com.github.a2g.core.interfaces.internal;
 
-package com.github.a2g.core.platforms.swing;
+import com.github.a2g.core.interfaces.methods.action.IGetSceneGuiHeight;
+import com.github.a2g.core.interfaces.methods.action.IGetSceneGuiWidth;
 
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTimer;
-import com.github.a2g.core.interfaces.internal.ITimer;
+public interface IScenePresenterFromSwingPopupPanel extends IGetSceneGuiWidth,
+IGetSceneGuiHeight {
 
-public class TimerForJava extends
-com.github.a2g.core.platforms.swing.animation.Timer implements ITimer {
-	private IMasterPresenterFromTimer callback;
-
-	public TimerForJava(IMasterPresenterFromTimer callback) {
-		this.callback = callback;
-	}
-
-	@Override
-	public void run() {
-		callback.onTimer();
-	}
+	IScenePanelFromScenePresenter getView();
 }

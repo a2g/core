@@ -25,7 +25,7 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.objectmodel.SceneObject;
-import com.github.a2g.core.platforms.swing.ScenePanelForJava;
+import com.github.a2g.core.platforms.swing.ScenePanelForSwing;
 
 
 @SuppressWarnings("unused")
@@ -33,10 +33,10 @@ public class SceneMouseOverHandler implements MouseMotionListener {
 	private final EventBus bus;
 	private IScenePresenterFromSceneMouseOver toScene;
 	private ICommandLinePresenterFromSceneMouseOver toCommandLine;
-	private final ScenePanelForJava scenePanel;
+	private final ScenePanelForSwing scenePanel;
 	static boolean isAddedAlready;
 
-	public SceneMouseOverHandler(ScenePanelForJava scenePanel, EventBus bus, IScenePresenterFromSceneMouseOver toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine) {
+	public SceneMouseOverHandler(ScenePanelForSwing scenePanel, EventBus bus, IScenePresenterFromSceneMouseOver toScene, ICommandLinePresenterFromSceneMouseOver toCommandLine) {
 		this.bus = bus;
 		this.toScene = toScene;
 		this.toCommandLine = toCommandLine;

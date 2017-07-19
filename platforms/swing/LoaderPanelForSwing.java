@@ -35,7 +35,7 @@ import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.primitive.ColorEnum;
 
 @SuppressWarnings("serial")
-public class LoaderPanelForJava
+public class LoaderPanelForSwing
 extends JPanel
 implements ILoaderPanelFromLoaderPresenter
 {
@@ -47,7 +47,7 @@ implements ILoaderPanelFromLoaderPresenter
 	int width;
 	int height;
 
-	public LoaderPanelForJava(final IMasterPresenterFromLoaderMouse api, ColorEnum fore, ColorEnum back)
+	public LoaderPanelForSwing(final IMasterPresenterFromLoaderMouse api, ColorEnum fore, ColorEnum back)
 	{
 		this.api = api;
 		this.setForeground(new Color(fore.r, fore.g, fore.b));
