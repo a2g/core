@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.objectmodel;
+package com.github.a2g.core.platforms.html4;
 
 import com.github.a2g.core.interfaces.internal.ILoaderPanelFromLoaderPresenter;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoaderMouse;
@@ -25,7 +25,7 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class LoaderPanel extends VerticalPanel implements
+public class LoaderPanelHtml4 extends VerticalPanel implements
 ILoaderPanelFromLoaderPresenter {
 
 	Label progress;
@@ -36,7 +36,7 @@ ILoaderPanelFromLoaderPresenter {
 	final int TOTAL_NUMBER_OF_CELLS = 36;
 	private int lastNumberOfCellsFilled;
 
-	public LoaderPanel(final IMasterPresenterFromLoaderMouse api,
+	public LoaderPanelHtml4(final IMasterPresenterFromLoaderMouse api,
 			ColorEnum fore, ColorEnum back) {
 		this.api = api;
 

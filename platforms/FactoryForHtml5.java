@@ -40,16 +40,16 @@ import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
 import com.github.a2g.core.objectmodel.BoundaryCalculator;
 import com.github.a2g.core.objectmodel.MasterPresenter;
-import com.github.a2g.core.objectmodel.CommandLinePanel;
-import com.github.a2g.core.objectmodel.DialogTreePanel;
-import com.github.a2g.core.objectmodel.InventoryPanel;
-import com.github.a2g.core.objectmodel.LoaderPanel;
-import com.github.a2g.core.objectmodel.MasterPanel;
-import com.github.a2g.core.objectmodel.TitleCardPanel;
-import com.github.a2g.core.objectmodel.VerbsPanel;
+import com.github.a2g.core.platforms.html4.CommandLinePanelForHtml4;
+import com.github.a2g.core.platforms.html4.DialogTreePanelForHtml4;
+import com.github.a2g.core.platforms.html4.InventoryPanelForHtml4;
+import com.github.a2g.core.platforms.html4.LoaderPanelHtml4;
+import com.github.a2g.core.platforms.html4.MasterPanelForHtml4;
 import com.github.a2g.core.platforms.html4.SoundForHtml4;
 import com.github.a2g.core.platforms.html4.SystemAnimationForHtml4;
 import com.github.a2g.core.platforms.html4.TimerForHtml4;
+import com.github.a2g.core.platforms.html4.TitleCardPanelForHtml4;
+import com.github.a2g.core.platforms.html4.VerbsPanelHtml4;
 import com.github.a2g.core.platforms.html5.panel.ScenePanelForHtml5;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
@@ -68,14 +68,14 @@ public class FactoryForHtml5 implements IFactory {
 	@Override
 	public ICommandLinePanelFromCommandLinePresenter createCommandLinePanel(
 			ColorEnum fore, ColorEnum back, ColorEnum roll) {
-		return new CommandLinePanel(fore, back, roll);
+		return new CommandLinePanelForHtml4(fore, back, roll);
 	}
 
 	@Override
 	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
 			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore,
 			ColorEnum back, ColorEnum roll) {
-		return new DialogTreePanel(master, fore, back, roll);
+		return new DialogTreePanelForHtml4(master, fore, back, roll);
 
 	}
 
@@ -83,20 +83,20 @@ public class FactoryForHtml5 implements IFactory {
 	public IInventoryPanelFromInventoryPresenter createInventoryPanel(
 			IInventoryPresenterFromInventoryPanel api, ColorEnum fore,
 			ColorEnum back, ColorEnum rollover) {
-		return new InventoryPanel(api, fore, back, rollover);
+		return new InventoryPanelForHtml4(api, fore, back, rollover);
 	}
 
 	@Override
 	public ILoaderPanelFromLoaderPresenter createLoaderPanel(
 			final IMasterPresenterFromLoaderMouse api, ColorEnum fore,
 			ColorEnum back) {
-		return new LoaderPanel(api, fore, back);
+		return new LoaderPanelHtml4(api, fore, back);
 	}
 
 	@Override
 	public IMasterPanelFromMasterPresenter createMasterPanel(int width,
 			int height, ColorEnum back) {
-		return new MasterPanel(width, height, back);
+		return new MasterPanelForHtml4(width, height, back);
 	}
 
 	@Override
@@ -125,13 +125,13 @@ public class FactoryForHtml5 implements IFactory {
 	@Override
 	public ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(
 			ColorEnum fore, ColorEnum back) {
-		return new TitleCardPanel(fore, back);
+		return new TitleCardPanelForHtml4(fore, back);
 	}
 
 	@Override
 	public IVerbsPanelFromVerbsPresenter createVerbsPanel(
 			IVerbsPresenterFromVerbsPanel api, ColorEnum fore, ColorEnum back) {
-		return new VerbsPanel(api, fore, back);
+		return new VerbsPanelHtml4(api, fore, back);
 	}
 
 

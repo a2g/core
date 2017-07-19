@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.github.a2g.core.objectmodel;
+package com.github.a2g.core.platforms.html4;
 
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -23,8 +23,9 @@ import com.github.a2g.core.interfaces.internal.IInventoryPanelFromInventoryPrese
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
 import com.github.a2g.core.interfaces.internal.IPackagedImage;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
-import com.github.a2g.core.platforms.html4.ImageForHtml4;
-import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
+import com.github.a2g.core.objectmodel.Image;
+import com.github.a2g.core.objectmodel.Inventory;
+import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.InventoryItemMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.InventoryItemMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -33,7 +34,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 
-public class InventoryPanel
+public class InventoryPanelForHtml4
 extends AbsolutePanel
 implements
 ImagePanelAPI
@@ -43,7 +44,7 @@ ImagePanelAPI
 	final FlowPanel arrowRight;
 	final IInventoryPresenterFromInventoryPanel mouseToPresenter;
 
-	public InventoryPanel(final IInventoryPresenterFromInventoryPanel mouseToPresenter, ColorEnum fore, ColorEnum back, ColorEnum rollover)
+	public InventoryPanelForHtml4(final IInventoryPresenterFromInventoryPanel mouseToPresenter, ColorEnum fore, ColorEnum back, ColorEnum rollover)
 	{
 		setVisible(true);
 		this.mouseToPresenter = mouseToPresenter;

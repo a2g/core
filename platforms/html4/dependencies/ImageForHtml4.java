@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.platforms.html4;
+package com.github.a2g.core.platforms.html4.dependencies;
 
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;

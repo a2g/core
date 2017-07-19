@@ -14,17 +14,17 @@
  * the License.
  */
 
-package com.github.a2g.core.objectmodel;
+package com.github.a2g.core.platforms.html4;
 
 import com.github.a2g.core.interfaces.internal.IHostingPanel;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter;
-import com.github.a2g.core.platforms.html4.HostingPanelForHtml4;
+import com.github.a2g.core.platforms.html4.dependencies.HostingPanelForHtml4;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class MasterPanel extends VerticalPanel implements
+public class MasterPanelForHtml4 extends VerticalPanel implements
 IMasterPanelFromMasterPresenter {
 	HostingPanelForHtml4 hostForCommandLine;
 	HostingPanelForHtml4 hostForInventory;
@@ -35,7 +35,7 @@ IMasterPanelFromMasterPresenter {
 	HostingPanelForHtml4 hostForTitleCard;
 	GuiStateEnum state;
 
-	public MasterPanel(int width, int height, ColorEnum back) {
+	public MasterPanelForHtml4(int width, int height, ColorEnum back) {
 
 		// create all the host panels, that we want to arrange.
 		hostForCommandLine = new HostingPanelForHtml4();

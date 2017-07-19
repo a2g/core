@@ -14,23 +14,25 @@
  * the License.
  */
 
-package com.github.a2g.core.objectmodel;
+package com.github.a2g.core.platforms.html4;
 
 import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
+import com.github.a2g.core.objectmodel.Verb;
+import com.github.a2g.core.objectmodel.Verbs;
 import com.github.a2g.core.platforms.html4.mouse.VerbMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.VerbMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
-public class VerbsPanel extends Grid
+public class VerbsPanelHtml4 extends Grid
 implements IVerbsPanelFromVerbsPresenter
 {
 	ColorEnum rolloverColor;
 	final IVerbsPresenterFromVerbsPanel mouseToPresenter;
 
-	public VerbsPanel(IVerbsPresenterFromVerbsPanel mouseToPresenter,
+	public VerbsPanelHtml4(IVerbsPresenterFromVerbsPanel mouseToPresenter,
 			ColorEnum fore, ColorEnum back) {
 		this.mouseToPresenter = mouseToPresenter;
 		getElement().getStyle().setProperty("color", fore.toString());

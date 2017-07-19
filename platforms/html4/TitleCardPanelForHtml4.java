@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.objectmodel;
+package com.github.a2g.core.platforms.html4;
 
 import com.github.a2g.core.interfaces.internal.ITitleCardPanelFromTitleCardPresenter;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -24,12 +24,12 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 
-public class TitleCardPanel extends SimplePanel implements
+public class TitleCardPanelForHtml4 extends SimplePanel implements
 ITitleCardPanelFromTitleCardPresenter {
 	Label label;
 	LayoutPanel layout;
 
-	public TitleCardPanel(ColorEnum fore, ColorEnum back) {
+	public TitleCardPanelForHtml4(ColorEnum fore, ColorEnum back) {
 		this.layout = new LayoutPanel();
 		this.add(layout);
 		{

@@ -14,10 +14,11 @@
  * the License.
  */
 
-package com.github.a2g.core.objectmodel;
+package com.github.a2g.core.platforms.html4;
 
 import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTreeMouse;
+import com.github.a2g.core.objectmodel.DialogTree;
 import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseOutHandler;
 import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseOverHandler;
@@ -25,13 +26,13 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
-public class DialogTreePanel extends Grid implements
+public class DialogTreePanelForHtml4 extends Grid implements
 IDialogTreePanelFromDialogTreePresenter {
 	ColorEnum rolloverColor;
 	ColorEnum foregroundColor;
 	private IMasterPresenterFromDialogTreeMouse master;
 
-	public DialogTreePanel(IMasterPresenterFromDialogTreeMouse master, ColorEnum foregroundColor,
+	public DialogTreePanelForHtml4(IMasterPresenterFromDialogTreeMouse master, ColorEnum foregroundColor,
 			ColorEnum backgroundColor, ColorEnum rolloverColor) {
 		super(4, 1);
 		this.rolloverColor = rolloverColor;

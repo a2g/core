@@ -1,4 +1,4 @@
-package com.github.a2g.core.platforms.html4.panel;
+package com.github.a2g.core.platforms.html4.dependencies;
 
 import com.github.a2g.core.objectmodel.SceneSpeechBalloonCalculator;
 import com.github.a2g.core.primitive.ColorEnum;
