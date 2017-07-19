@@ -39,19 +39,19 @@ import com.github.a2g.core.interfaces.internal.ITimer;
 import com.github.a2g.core.interfaces.internal.ITitleCardPanelFromTitleCardPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
-import com.github.a2g.core.platforms.java.CommandLinePanelForJava;
-import com.github.a2g.core.platforms.java.DialogTreePanelForJava;
-import com.github.a2g.core.platforms.java.InventoryPanelForJava;
-import com.github.a2g.core.platforms.java.LoaderPanelForJava;
-import com.github.a2g.core.platforms.java.MasterPanelForJava;
-import com.github.a2g.core.platforms.java.ScenePanelForJava;
-import com.github.a2g.core.platforms.java.SoundForJava;
-import com.github.a2g.core.platforms.java.SystemAnimationForJava;
-import com.github.a2g.core.platforms.java.TimerForJava;
-import com.github.a2g.core.platforms.java.TitleCardPanelForJava;
-import com.github.a2g.core.platforms.java.VerbsPanelForJava;
 import com.github.a2g.core.objectmodel.BoundaryCalculator;
 import com.github.a2g.core.objectmodel.MasterPresenter;
+import com.github.a2g.core.platforms.swing.CommandLinePanelForSwing;
+import com.github.a2g.core.platforms.swing.DialogTreePanelForJava;
+import com.github.a2g.core.platforms.swing.InventoryPanelForJava;
+import com.github.a2g.core.platforms.swing.LoaderPanelForJava;
+import com.github.a2g.core.platforms.swing.MasterPanelForJava;
+import com.github.a2g.core.platforms.swing.ScenePanelForJava;
+import com.github.a2g.core.platforms.swing.SoundForJava;
+import com.github.a2g.core.platforms.swing.SystemAnimationForJava;
+import com.github.a2g.core.platforms.swing.TimerForJava;
+import com.github.a2g.core.platforms.swing.TitleCardPanelForJava;
+import com.github.a2g.core.platforms.swing.VerbsPanelForJava;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
@@ -68,7 +68,7 @@ public class FactoryForJava implements IFactory {
 	@Override
 	public ICommandLinePanelFromCommandLinePresenter createCommandLinePanel(
 			ColorEnum fore, ColorEnum back, ColorEnum roll) {
-		return new CommandLinePanelForJava(fore, back, roll);
+		return new CommandLinePanelForSwing(fore, back, roll);
 	}
 
 	@Override
