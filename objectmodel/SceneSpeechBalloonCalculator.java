@@ -101,6 +101,7 @@ public class SceneSpeechBalloonCalculator {
 	{
 		Rect r = maxBalloonRect;
 		Rect toReturn = new Rect(r.getLeft(),r.getRight(),r.getWidth(),r.getHeight());
+		
 		return toReturn;
 	}
 

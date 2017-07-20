@@ -25,6 +25,7 @@ import java.util.TreeMap;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.canvas.dom.client.CssColor;
+import com.google.gwt.canvas.dom.client.TextMetrics;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.performer.TalkPerformer;
@@ -253,7 +254,17 @@ ImagePanelAPI
 		int ocode= ((ImageForHtml4)image).getNativeImage().hashCode();
 		return new Integer(ocode);
 	}
-
+	
+	static public Rect getRectGivenSpeechAndMaxRect(String speech, Rect maxRect, Context2d ctxt)
+	{
+		TextMetrics tm = ctxt.measureText(speech);
+		double width = tm.getWidth();
+		double startX = maxRect.getCenter().getX() - width/2;
+		 
+		Rect retVal = new Rect((int)startX, maxRect.getTop(), (int)width, maxRect.getHeight() );
+		return retVal;
+	}
+	
 	public void paint()
 	{
 		Iterator<Image> iter = listOfAllVisibleImages.iterator();
@@ -268,21 +279,22 @@ ImagePanelAPI
 
 				backBufferContext.save();
 				backBufferContext.translate(x, y);
-				//backBufferContext.rotate(rot);
 				ImageElement imageElement = (ImageElement)( ((ImageForHtml4)image).getNativeImage().getElement().cast());
 				backBufferContext.drawImage(imageElement, 0, 0);
 				backBufferContext.restore();
 			}
 		}
+		
 		if(speechVisible )
 		{	
-			backBufferContext.setFillStyle(this.speechColor.name());
-			//Font font = new Font();
+			backBufferContext.setFillStyle(ColorEnum.White.toString());
 			backBufferContext.setFont("16px \"Times New Roman\"");
-			backBufferContext.fillText(this.speechText, this.speechMaxRect.getLeft(), this.speechMaxRect.getTop(), this.speechMaxRect.getWidth());
+			Rect r  = getRectGivenSpeechAndMaxRect(this.speechText, this.speechMaxRect, backBufferContext);
+			backBufferContext.fillRect(r.getLeft(), r.getTop(), r.getWidth(), r.getHeight());
+			backBufferContext.setFillStyle(this.speechColor.name());
+			backBufferContext.fillText(this.speechText, r.getLeft(), r.getTop(), r.getWidth());
 		}
-		// System.out.println("printed with tally " + tally +" draws "+ draws);
-
+	 
 		// update the front canvas
 		context.drawImage(backBufferContext.getCanvas(), 0, 0);
 
