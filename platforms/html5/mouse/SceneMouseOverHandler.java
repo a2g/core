@@ -22,7 +22,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.internal.ICommandLinePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver;
-import com.github.a2g.core.platforms.html5.panel.ScenePanelForHtml5;
+import com.github.a2g.core.platforms.html5.ScenePanelForHtml5;
 
 
 public class SceneMouseOverHandler

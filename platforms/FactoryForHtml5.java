@@ -33,7 +33,7 @@ import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ISound;
-import com.github.a2g.core.interfaces.internal.ISystemAnimation;
+import com.github.a2g.core.interfaces.internal.IAnimation;
 import com.github.a2g.core.interfaces.internal.ITimer;
 import com.github.a2g.core.interfaces.internal.ITitleCardPanelFromTitleCardPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
@@ -46,11 +46,11 @@ import com.github.a2g.core.platforms.html4.InventoryPanelForHtml4;
 import com.github.a2g.core.platforms.html4.LoaderPanelHtml4;
 import com.github.a2g.core.platforms.html4.MasterPanelForHtml4;
 import com.github.a2g.core.platforms.html4.SoundForHtml4;
-import com.github.a2g.core.platforms.html4.SystemAnimationForHtml4;
+import com.github.a2g.core.platforms.html4.AnimationForHtml4;
 import com.github.a2g.core.platforms.html4.TimerForHtml4;
 import com.github.a2g.core.platforms.html4.TitleCardPanelForHtml4;
 import com.github.a2g.core.platforms.html4.VerbsPanelHtml4;
-import com.github.a2g.core.platforms.html5.panel.ScenePanelForHtml5;
+import com.github.a2g.core.platforms.html5.ScenePanelForHtml5;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 
@@ -65,11 +65,20 @@ public class FactoryForHtml5 implements IFactory {
 		this.master = master;
 	}
 
+
+	@Override
+	public IAnimation createAnimation(
+			IBaseActionFromSystemAnimation callbacks) {
+		return new AnimationForHtml4(callbacks);
+	}
+	                                                                                                                                           
 	@Override
 	public ICommandLinePanelFromCommandLinePresenter createCommandLinePanel(
 			ColorEnum fore, ColorEnum back, ColorEnum roll) {
 		return new CommandLinePanelForHtml4(fore, back, roll);
 	}
+	
+	
 
 	@Override
 	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
@@ -105,12 +114,7 @@ public class FactoryForHtml5 implements IFactory {
 				master.getCommandLinePresenter());
 	}
 
-	
-	@Override
-	public ISystemAnimation createSystemAnimation(
-			IBaseActionFromSystemAnimation callbacks) {
-		return new SystemAnimationForHtml4(callbacks);
-	}
+
 
 	@Override
 	public ISound createSound(String url) {
@@ -118,7 +122,7 @@ public class FactoryForHtml5 implements IFactory {
 	}
 
 	@Override
-	public ITimer createSystemTimer(IMasterPresenterFromTimer cbs) {
+	public ITimer createTimer(IMasterPresenterFromTimer cbs) {
 		return new TimerForHtml4(cbs);
 	}
 	

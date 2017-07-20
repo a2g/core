@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.platforms.html5.panel;
+package com.github.a2g.core.platforms.html5;
 
 
 import java.util.Iterator;

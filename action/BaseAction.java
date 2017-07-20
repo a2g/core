@@ -23,7 +23,7 @@ import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.internal.ISystemAnimation;
+import com.github.a2g.core.interfaces.internal.IAnimation;
 import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 /**
  * documentation for BaseAction
@@ -31,7 +31,7 @@ import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
  *
  */
 public abstract class BaseAction implements IBaseActionFromSystemAnimation {
-	private ISystemAnimation systemAnimation;
+	private IAnimation systemAnimation;
 	private IActionRunnerFromBaseAction callbacks;
 	protected BaseAction parent;
 	private boolean isLinear;
@@ -69,7 +69,7 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 		return isParallel;
 	}
 
-	void setSystemAnimation(ISystemAnimation systemAnimation) {
+	void setSystemAnimation(IAnimation systemAnimation) {
 		this.systemAnimation = systemAnimation;
 		this.systemAnimation.setEaseToAndFrom(!isLinear);
 	}

@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.platforms.html5;
+package com.github.a2g.core.platforms.html5.dependencies;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.user.client.ui.IsWidget;

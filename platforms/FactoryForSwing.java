@@ -34,7 +34,7 @@ import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ISound;
-import com.github.a2g.core.interfaces.internal.ISystemAnimation;
+import com.github.a2g.core.interfaces.internal.IAnimation;
 import com.github.a2g.core.interfaces.internal.ITimer;
 import com.github.a2g.core.interfaces.internal.ITitleCardPanelFromTitleCardPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
@@ -48,7 +48,7 @@ import com.github.a2g.core.platforms.swing.LoaderPanelForSwing;
 import com.github.a2g.core.platforms.swing.MasterPanelForSwing;
 import com.github.a2g.core.platforms.swing.ScenePanelForSwing;
 import com.github.a2g.core.platforms.swing.SoundForSwing;
-import com.github.a2g.core.platforms.swing.SystemAnimationForSwing;
+import com.github.a2g.core.platforms.swing.AnimationForSwing;
 import com.github.a2g.core.platforms.swing.TimerForSwing;
 import com.github.a2g.core.platforms.swing.TitleCardPanelForSwing;
 import com.github.a2g.core.platforms.swing.VerbsPanelForSwing;
@@ -65,6 +65,12 @@ public class FactoryForSwing implements IFactory {
 		this.master = master;
 	}
 
+	@Override
+	public IAnimation createAnimation(
+			IBaseActionFromSystemAnimation callbacks ) {
+		return new AnimationForSwing(callbacks);
+	}
+	
 	@Override
 	public ICommandLinePanelFromCommandLinePresenter createCommandLinePanel(
 			ColorEnum fore, ColorEnum back, ColorEnum roll) {
@@ -107,15 +113,9 @@ public class FactoryForSwing implements IFactory {
 	public ISound createSound(String url) {
 		return new SoundForSwing(url);
 	}
-	
+
 	@Override
-	public ISystemAnimation createSystemAnimation(
-			IBaseActionFromSystemAnimation callbacks ) {
-		return new SystemAnimationForSwing(callbacks);
-	}
-	
-	@Override
-	public ITimer createSystemTimer(IMasterPresenterFromTimer cbs) {
+	public ITimer createTimer(IMasterPresenterFromTimer cbs) {
 		return new TimerForSwing(cbs);
 	}
 	

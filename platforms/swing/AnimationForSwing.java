@@ -14,18 +14,19 @@
  * the License.
  */
 
-package com.github.a2g.core.platforms.html4;
+package com.github.a2g.core.platforms.swing;
 
 import com.github.a2g.core.interfaces.internal.IBaseActionFromSystemAnimation;
-import com.github.a2g.core.interfaces.internal.ISystemAnimation;
+import com.github.a2g.core.interfaces.internal.IAnimation;
 
-public class SystemAnimationForHtml4 extends
-com.google.gwt.animation.client.Animation implements ISystemAnimation {
-	boolean isEaseToAndFrom;
+public class AnimationForSwing extends
+com.github.a2g.core.platforms.swing.animation.GoogleAnimation implements
+IAnimation {
 	IBaseActionFromSystemAnimation callbacks;
+	boolean isEaseToAndFrom;
 	private boolean isCancelled;
 
-	public SystemAnimationForHtml4(IBaseActionFromSystemAnimation callbacks) {
+	public AnimationForSwing(IBaseActionFromSystemAnimation callbacks) {
 		this.isEaseToAndFrom = false;
 		this.callbacks = callbacks;
 		this.isCancelled = false;
@@ -34,7 +35,7 @@ com.google.gwt.animation.client.Animation implements ISystemAnimation {
 	@Override
 	protected double interpolate(double progress) {
 		if (isEaseToAndFrom)
-			return (1 + Math.cos(Math.PI + progress * Math.PI)) / 2;
+			return super.interpolate(progress);
 		else
 			return progress;
 
@@ -42,8 +43,15 @@ com.google.gwt.animation.client.Animation implements ISystemAnimation {
 
 	@Override
 	protected void onUpdate(double progress) {
-		callbacks.onUpdate(progress);
-
+		// I'm not sure why, but this class:
+		// com.github.a2g.core.platforms.java.animation.Animation
+		// (that this inherits from, and was written by google)
+		// does not check to see if an animation was cancelled before
+		// it starts.
+		if(!isCancelled)
+		{
+			callbacks.onUpdate(progress);
+		}
 	}
 
 	@Override

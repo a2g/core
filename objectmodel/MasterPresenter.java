@@ -385,7 +385,7 @@ PropertyChangeEventHandlerAPI
 	public void startCallingOnEveryFrame() {
 		if(timer!=null)
 			timer.cancel();
-		timer = getFactory().createSystemTimer(this);
+		timer = getFactory().createTimer(this);
 		timer.scheduleRepeating(40);
 	}
 

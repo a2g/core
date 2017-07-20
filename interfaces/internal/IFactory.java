@@ -18,9 +18,9 @@ public interface IFactory {
 	IVerbsPanelFromVerbsPresenter createVerbsPanel(
 			IVerbsPresenterFromVerbsPanel api, ColorEnum fore, ColorEnum back);
 
-	ISystemAnimation createSystemAnimation(IBaseActionFromSystemAnimation cbs);
+	IAnimation createAnimation(IBaseActionFromSystemAnimation cbs);
 
-	ITimer createSystemTimer(IMasterPresenterFromTimer cbs);
+	ITimer createTimer(IMasterPresenterFromTimer cbs);
 
 	IMasterPanelFromMasterPresenter createMasterPanel(int width, int height,
 			ColorEnum color);

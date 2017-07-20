@@ -149,7 +149,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 			ACTIONS_EXECUTED.log(Level.FINE, name);
 			a.setCallbacks(this);
 
-			a.setSystemAnimation(factory.createSystemAnimation(a));
+			a.setSystemAnimation(factory.createAnimation(a));
 			a.setAll(master, scene, dt, tc, inv);
 			
 			a.runGameAction();

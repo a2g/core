@@ -38,10 +38,10 @@ import com.github.a2g.core.platforms.swing.animation.AnimationScheduler.Animatio
 import com.github.a2g.core.platforms.swing.animation.AnimationScheduler.AnimationHandle;
 
 /**
- * An {@link Animation} is a continuous event that updates progressively over
+ * An {@link GoogleAnimation} is a continuous event that updates progressively over
  * time at a non-fixed frame rate.
  */
-public abstract class Animation {
+public abstract class GoogleAnimation {
 
 	private final AnimationCallback callback = new AnimationCallback() {
 		@Override
@@ -56,7 +56,7 @@ public abstract class Animation {
 	};
 
 	/**
-	 * The duration of the {@link Animation} in milliseconds.
+	 * The duration of the {@link GoogleAnimation} in milliseconds.
 	 */
 	private int duration = -1;
 
@@ -71,7 +71,7 @@ public abstract class Animation {
 	private boolean isRunning = false;
 
 	/**
-	 * Has the {@link Animation} actually started.
+	 * Has the {@link GoogleAnimation} actually started.
 	 */
 	private boolean isStarted = false;
 
@@ -89,7 +89,7 @@ public abstract class Animation {
 	private final AnimationScheduler scheduler;
 
 	/**
-	 * The start time of the {@link Animation}.
+	 * The start time of the {@link GoogleAnimation}.
 	 */
 	private double startTime = -1;
 
@@ -99,9 +99,9 @@ public abstract class Animation {
 	private boolean wasStarted = false;
 
 	/**
-	 * Construct a new {@link Animation}.
+	 * Construct a new {@link GoogleAnimation}.
 	 */
-	public Animation() {
+	public GoogleAnimation() {
 		this(AnimationScheduler.get());
 	}
 
@@ -111,7 +111,7 @@ public abstract class Animation {
 	 * 
 	 * @param scheduler an {@link AnimationScheduler} instance
 	 */
-	protected Animation(AnimationScheduler scheduler) {
+	protected GoogleAnimation(AnimationScheduler scheduler) {
 		this.scheduler = scheduler;
 	}
 
@@ -224,7 +224,7 @@ public abstract class Animation {
 	/**
 	 * Interpolate the linear progress into a more natural easing function.
 	 * 
-	 * Depending on the {@link Animation}, the return value of this method can be
+	 * Depending on the {@link GoogleAnimation}, the return value of this method can be
 	 * less than 0.0 or greater than 1.0.
 	 * 
 	 * @param progress the linear progress, between 0.0 and 1.0
@@ -282,7 +282,7 @@ public abstract class Animation {
 	}
 
 	/**
-	 * Update the {@link Animation}.
+	 * Update the {@link GoogleAnimation}.
 	 * 
 	 * @param curTime the current time
 	 * @return true if the animation should run again, false if it is complete
