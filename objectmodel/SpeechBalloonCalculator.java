@@ -1,9 +1,13 @@
 package com.github.a2g.core.objectmodel;
 
+import java.util.ArrayList;
+
+import com.github.a2g.core.interfaces.internal.IContext2d;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
+import com.google.gwt.canvas.dom.client.Context2d;
 
-public class SceneSpeechBalloonCalculator {
+public class SpeechBalloonCalculator {
 	private boolean isFromTop;
 	private boolean isPointingRight;
 	private int xPos;
@@ -14,7 +18,7 @@ public class SceneSpeechBalloonCalculator {
 	private int borderWidth;
 	private int heightOfLeaderLine;
 
-	public SceneSpeechBalloonCalculator(Rect max, int radius, Point mouth, int leaderWidth, int borderWidth)
+	public SpeechBalloonCalculator(Rect max, int radius, Point mouth, int leaderWidth, int borderWidth)
 	{
 		Point centre = max.getCenter();
 
@@ -103,6 +107,37 @@ public class SceneSpeechBalloonCalculator {
 		Rect toReturn = new Rect(r.getLeft(),r.getRight(),r.getWidth(),r.getHeight());
 		
 		return toReturn;
+	}
+	
+	static public ArrayList<String>  splitLines(IContext2d ctx, double maxWidthBeforeWrapping, String font, String speech) 
+	{
+		// We give a little "padding"
+		// This should probably be an input param
+		// but for the sake of simplicity we will keep it
+		// this way
+		maxWidthBeforeWrapping = maxWidthBeforeWrapping - 10;
+		// We setup the text font to the context (if not already)
+		ctx.setFont( font);
+		// We split the text by words 
+		String[] words = speech.split(" ");
+		String new_line = words[0];
+		ArrayList<String> lines = new ArrayList<String>();
+		for(int i = 1; i < words.length; ++i) {
+			String nextBit = new_line + " " + words[i];
+			double width = ctx.measureTextWidth(nextBit);
+			if (width < maxWidthBeforeWrapping) {
+				new_line += " " + words[i];
+			} else {
+				lines.add(new_line);
+				new_line = words[i];
+			}
+		}
+		lines.add(new_line);
+		// DEBUG 
+		// for(var j = 0; j < lines.length; ++j) {
+		//    console.log("line[" + j + "]=" + lines[j]);
+		// }
+		return lines;
 	}
 
 }

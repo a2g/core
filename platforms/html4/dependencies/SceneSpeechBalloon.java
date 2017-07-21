@@ -1,6 +1,6 @@
 package com.github.a2g.core.platforms.html4.dependencies;
 
-import com.github.a2g.core.objectmodel.SceneSpeechBalloonCalculator;
+import com.github.a2g.core.objectmodel.SpeechBalloonCalculator;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -95,7 +95,7 @@ public class SceneSpeechBalloon extends VerticalPanel
 
 
 
-	public void setLeaderLine(SceneSpeechBalloonCalculator c) {
+	public void setLeaderLine(SpeechBalloonCalculator c) {
 
 
 		//warning: if these 'border's are not set first, the visual result is weird

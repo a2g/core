@@ -25,7 +25,7 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
-import com.github.a2g.core.objectmodel.SceneSpeechBalloonCalculator;
+import com.github.a2g.core.objectmodel.SpeechBalloonCalculator;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.SceneSpeechBalloon;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
@@ -161,7 +161,7 @@ IScenePanelFromScenePresenter {
 
 		speechWidget.setBorderColor(talkingColor);
 		
-		SceneSpeechBalloonCalculator calc = new SceneSpeechBalloonCalculator(rectThatsScaledToFit, 30, mouth, 38, 3);
+		SpeechBalloonCalculator calc = new SpeechBalloonCalculator(rectThatsScaledToFit, 30, mouth, 38, 3);
 		
 
 		speechWidget.setLeaderLine(calc);
