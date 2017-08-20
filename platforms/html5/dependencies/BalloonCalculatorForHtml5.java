@@ -17,10 +17,14 @@ public class BalloonCalculatorForHtml5 {
 	ArrayList<Point> points;
 	  public BalloonCalculatorForHtml5(String speechText, Rect maxRect, int fontHeight, IContext2d context)
       {
-    	  int x = maxRect.getLeft();
-			int y = maxRect.getTop();
-			int w = maxRect.getWidth();
-			int h = maxRect.getHeight();
+		  int marginTop = 5;
+		  int marginLeft = 5;
+		  int marginRight = 5;
+		  int marginBottom = 5;
+    	  int x = maxRect.getLeft()+marginLeft;
+			int y = maxRect.getTop()+marginTop;
+			int w = maxRect.getWidth()-marginLeft-marginRight;
+			int h = maxRect.getHeight()-marginTop-marginBottom;
 			int lineSpacing = 3; 
 			int ygjsetc = 5;
 
@@ -61,7 +65,7 @@ public class BalloonCalculatorForHtml5 {
 				}
 				
 				
-				oliveRect = new Rect((int)lowestX-5,(int)lowestY-5, (int)largestWidth+10, (int)both+10);
+				oliveRect = new Rect((int)lowestX-marginLeft,(int)lowestY-marginTop, (int)largestWidth+marginLeft+marginRight, (int)both+marginTop+marginBottom);
 				// now 
 				
 				yellowRect = new Rect((int)lowestX,(int)lowestY, (int)largestWidth, (int)both);
