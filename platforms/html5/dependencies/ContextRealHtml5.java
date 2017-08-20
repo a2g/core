@@ -1,14 +1,14 @@
-package com.github.a2g.core.objectmodel;
+package com.github.a2g.core.platforms.html5.dependencies;
 
 import com.github.a2g.core.interfaces.internal.IContext2d;
 import com.google.gwt.canvas.dom.client.Context2d;
 
-public class ContextRealHtml4 
+public class ContextRealHtml5 
 implements IContext2d
 {
 	private Context2d context;
 
-	ContextRealHtml4(Context2d context)
+	public ContextRealHtml5(Context2d context)
 	{
 		this.context = context;
 	}
