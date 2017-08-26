@@ -26,7 +26,7 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
-import com.github.a2g.core.platforms.html4.dependencies.SceneSpeechBalloon;
+import com.github.a2g.core.platforms.html4.dependencies.SceneSpeechBalloonPanelForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.SpeechBalloonCalculatorForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
@@ -42,7 +42,7 @@ IScenePanelFromScenePresenter {
 	int cameraOffsetX;
 	int cameraOffsetY;
 	SceneObjectTouchMoveHandler theTouchMoveHandler;
-	SceneSpeechBalloon speechWidget;
+	SceneSpeechBalloonPanelForHtml4 speechWidget;
 
 	public ScenePanelForHtml4(EventBus bus, IScenePresenterFromScenePanel api) {
 		this.getElement().setId("cwAbsolutePanel");
@@ -50,7 +50,7 @@ IScenePanelFromScenePresenter {
 		this.cameraOffsetX = 0;
 		this.cameraOffsetY = 0;
 		this.theTouchMoveHandler = new SceneObjectTouchMoveHandler(api);
-		this.speechWidget = new SceneSpeechBalloon();
+		this.speechWidget = new SceneSpeechBalloonPanelForHtml4();
 	}
 
 	@Override

@@ -20,14 +20,14 @@ class MyPanel extends SimplePanel
 	}
 }
 
-public class SceneSpeechBalloon extends VerticalPanel
+public class SceneSpeechBalloonPanelForHtml4 extends VerticalPanel
 {
 	private FlowPanel before;
 	private MyPanel  pe;
 	private FlowPanel after;
 	private ColorEnum borderColor;
 
-	public SceneSpeechBalloon() {
+	public SceneSpeechBalloonPanelForHtml4() {
 		this.borderColor = ColorEnum.Red;
 
 		before = new FlowPanel();
