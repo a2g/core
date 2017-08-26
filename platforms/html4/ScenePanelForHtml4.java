@@ -25,9 +25,9 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
-import com.github.a2g.core.objectmodel.SpeechBalloonCalculator;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.SceneSpeechBalloon;
+import com.github.a2g.core.platforms.html4.dependencies.SpeechBalloonCalculatorForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectTouchMoveHandler;
@@ -156,12 +156,13 @@ IScenePanelFromScenePresenter {
 			super.remove(speechWidget);
 		}
 
-		Rect rectThatsScaledToFit =  maxBalloonRect;//SceneSpeechBalloonCalculator.getRectThatFitsText(speech, maxBalloonRect);
+		SpeechBalloonCalculatorForHtml4 calc = new SpeechBalloonCalculatorForHtml4(speech, maxBalloonRect, 30, mouth, 38, 3);
+		
+		Rect rectThatsScaledToFit =  calc.getRectInPixels();
+		
 		speechWidget.setText(speech);
-
 		speechWidget.setBorderColor(talkingColor);
 		
-		SpeechBalloonCalculator calc = new SpeechBalloonCalculator(rectThatsScaledToFit, 30, mouth, 38, 3);
 		
 
 		speechWidget.setLeaderLine(calc);

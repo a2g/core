@@ -1,21 +1,19 @@
-package com.github.a2g.core.platforms.html5.dependencies;
+package com.github.a2g.core.objectmodel;
 
 import java.util.ArrayList;
 
 import com.github.a2g.core.interfaces.internal.IContext2d;
-import com.github.a2g.core.objectmodel.SpeechBalloonCalculator;
-import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.platforms.html4.dependencies.SpeechBalloonCalculatorForHtml4;
 import com.github.a2g.core.primitive.Rect;
-import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.touch.client.Point;
 
-public class BalloonCalculatorForHtml5 {
+public class SpeechRectangleCalculatorForAll {
 	 private Rect strokeRect;
 	private Rect oliveRect;
 	private Rect yellowRect;
 	ArrayList<String> lines;
 	ArrayList<Point> points;
-	  public BalloonCalculatorForHtml5(String speechText, Rect maxRect, int fontHeight, IContext2d context)
+	  public SpeechRectangleCalculatorForAll(String speechText, Rect maxRect, int fontHeight, IContext2d context)
       {
 		  int marginTop = 5;
 		  int marginLeft = 5;
@@ -31,7 +29,7 @@ public class BalloonCalculatorForHtml5 {
 		
 			strokeRect = new Rect(x,y,maxRect.getWidth(), maxRect.getHeight());
 			// Paint text
-			lines = SpeechBalloonCalculator.splitLines(context, w, "arial", speechText);
+			lines = SpeechBalloonCalculatorForHtml4.splitLines(context, w, "arial", speechText);
 			points = new ArrayList<Point>();
 			
 			// Block of text height
@@ -75,11 +73,11 @@ public class BalloonCalculatorForHtml5 {
 			}
       }
 
-	public Rect getOliveRect() {
+	public Rect getOuterRect() {
 		return oliveRect;
 	}
 
-	public Rect getYellowRect() {
+	public Rect getInnerRect() {
 		// TODO Auto-generated method stub
 		return yellowRect;
 	}

@@ -1,13 +1,15 @@
-package com.github.a2g.core.objectmodel;
+package com.github.a2g.core.platforms.html4.dependencies;
 
 import java.util.ArrayList;
 
 import com.github.a2g.core.interfaces.internal.IContext2d;
+import com.github.a2g.core.objectmodel.SpeechRectangleCalculatorForAll;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.canvas.dom.client.Context2d;
 
-public class SpeechBalloonCalculator {
+public class SpeechBalloonCalculatorForHtml4 implements IContext2d{
+	SpeechRectangleCalculatorForAll fittedRect;
 	private boolean isFromTop;
 	private boolean isPointingRight;
 	private int xPos;
@@ -18,8 +20,12 @@ public class SpeechBalloonCalculator {
 	private int borderWidth;
 	private int heightOfLeaderLine;
 
-	public SpeechBalloonCalculator(Rect max, int radius, Point mouth, int leaderWidth, int borderWidth)
+	public SpeechBalloonCalculatorForHtml4(String speech, Rect maxRect, int radius, Point mouth, int leaderWidth, int borderWidth)
 	{
+
+		int fontHeight = 10;
+		fittedRect = new SpeechRectangleCalculatorForAll(speech, maxRect, fontHeight, this);
+		Rect max = fittedRect.getOuterRect();
 		Point centre = max.getCenter();
 
 		// the mouth & centre coords are both relative to top left of viewport
@@ -138,6 +144,18 @@ public class SpeechBalloonCalculator {
 		//    console.log("line[" + j + "]=" + lines[j]);
 		// }
 		return lines;
+	}
+
+	@Override
+	public void setFont(String font) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public double measureTextWidth(String text) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

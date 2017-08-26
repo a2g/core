@@ -36,9 +36,9 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
-import com.github.a2g.core.objectmodel.SpeechBalloonCalculator;
 import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
+import com.github.a2g.core.platforms.html4.dependencies.SpeechBalloonCalculatorForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html5.dependencies.ContextRealHtml5;
@@ -268,7 +268,7 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 			backBufferContext.strokeRect(x, y, w, h);
 
 			// Paint text
-			ArrayList<String> lines = SpeechBalloonCalculator.splitLines(new ContextRealHtml5(backBufferContext), w,
+			ArrayList<String> lines = SpeechBalloonCalculatorForHtml4.splitLines(new ContextRealHtml5(backBufferContext), w,
 					"arial", speechText);
 			// Block of text height
 			int both = lines.size() * (fontHeight + lineSpacing);
