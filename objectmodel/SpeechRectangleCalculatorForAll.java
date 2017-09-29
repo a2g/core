@@ -8,7 +8,7 @@ import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.touch.client.Point;
 
 public class SpeechRectangleCalculatorForAll {
-	 private Rect strokeRect;
+	 private Rect debugRect;
 	private Rect oliveRect;
 	private Rect yellowRect;
 	ArrayList<String> lines;
@@ -27,7 +27,7 @@ public class SpeechRectangleCalculatorForAll {
 			int ygjsetc = 5;
 
 		
-			strokeRect = new Rect(x,y,maxRect.getWidth(), maxRect.getHeight());
+			debugRect = new Rect(x,y,maxRect.getWidth(), maxRect.getHeight());
 			// Paint text
 			lines = SpeechBalloonCalculatorForHtml4.splitLines(context, w, "arial", speechText);
 			points = new ArrayList<Point>();
@@ -78,8 +78,13 @@ public class SpeechRectangleCalculatorForAll {
 	}
 
 	public Rect getInnerRect() {
-		// TODO Auto-generated method stub
+	 
 		return yellowRect;
+	}
+	
+	public Rect getDebugRect() {
+		 
+		return debugRect;
 	}
 
 	public ArrayList<String> getLines() {

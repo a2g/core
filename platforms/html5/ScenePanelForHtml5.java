@@ -66,12 +66,8 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 	private IScenePresenterFromScenePanel toScene;
 	// private ICommandLineFromSceneMouseOver toCommandLine;
 
-	private Canvas canvas;
-	private Canvas backBuffer;
 	@SuppressWarnings("unused")
 	private final CssColor redrawColor = CssColor.make("rgba(255,0,0,0.6)");
-	private Context2d context;
-	private Context2d backBufferContext;
 	private Map<Integer, Point> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages;
@@ -79,6 +75,7 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 	private ColorEnum speechColor;
 	private String speechText;
 	private Rect speechMaxRect;
+	private ContextRealHtml5 canvas;
 
 	public ScenePanelForHtml5(EventBus bus, IScenePresenterFromScenePanel toScene,
 			ICommandLinePresenterFromSceneMouseOver toCommandLine) {
@@ -93,15 +90,10 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 		this.mapOfPointsByImage = new TreeMap<Integer, Point>();
 		this.listOfVisibleHashCodes = new LinkedList<Integer>();
 		this.listOfAllVisibleImages = new LinkedList<Image>();
-		canvas = Canvas.createIfSupported();
-		backBuffer = Canvas.createIfSupported();
-		if (canvas == null) {
-			// RootPanel.get(holderId).add(new Label(upgradeMessage));
-			return;
-		}
+		canvas = new ContextRealHtml5("");
 		canvas.addMouseMoveHandler(new SceneMouseOverHandler(this, bus, toScene, toCommandLine));
 		canvas.addClickHandler(new SceneMouseClickHandler(bus, canvas));
-		this.add(canvas);
+		
 		this.add(abs);
 	}
 
@@ -189,19 +181,8 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 
 	@Override
 	public void setScenePixelSize(int width, int height) {
-		this.remove(canvas);
 
 		this.setSize("" + width + "px", "" + height + "px");
-		canvas.setSize("" + width + "px", "" + height + "px");
-		canvas.setCoordinateSpaceWidth(width);
-		canvas.setCoordinateSpaceHeight(height);
-		backBuffer.setCoordinateSpaceWidth(width);
-		backBuffer.setCoordinateSpaceHeight(height);
-
-		this.add(canvas);
-
-		context = canvas.getContext2d();
-		backBufferContext = backBuffer.getContext2d();
 
 	}
 
@@ -238,23 +219,22 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 				int x = p.getX();
 				int y = p.getY();
 
-				backBufferContext.save();
-				backBufferContext.translate(x, y);
+				
 				ImageElement imageElement = (ImageElement) (((ImageForHtml4) image).getNativeImage().getElement()
 						.cast());
-				backBufferContext.drawImage(imageElement, 0, 0);
-				backBufferContext.restore();
+				canvas.translateAndDraw(x,y,imageElement);
+			
 			}
 		}
 
 		if (speechVisible) {
-			backBufferContext.setFillStyle(ColorEnum.White.toString());
-			backBufferContext.setFont("16px \"Times New Roman\"");
+			canvas.setFillStyle(ColorEnum.White.toString());
+			canvas.setFont("16px \"Times New Roman\"");
 			Rect r = speechMaxRect;// getRectGivenSpeechAndMaxRect(this.speechText,
 									// this.speechMaxRect, backBufferContext);
-			backBufferContext.fillRect(r.getLeft(), r.getTop(), r.getWidth(), r.getHeight());
-			backBufferContext.setFillStyle(this.speechColor.name());
-			backBufferContext.fillText(this.speechText, r.getLeft(), r.getTop(), r.getWidth());
+			canvas.fillRect(r.getLeft(), r.getTop(), r.getWidth(), r.getHeight());
+			canvas.setFillStyle(this.speechColor.name());
+			canvas.fillText(this.speechText, r.getLeft(), r.getTop(), r.getWidth());
 
 			int x = r.getLeft();
 			int y = r.getTop();
@@ -263,13 +243,16 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 			int lineSpacing = 3;
 			int fontHeight = 10;
 
-			backBufferContext.setLineWidth(1);
-			backBufferContext.setStrokeStyle("black");
-			backBufferContext.strokeRect(x, y, w, h);
+			canvas.setLineWidth(1);
+			canvas.setStrokeStyle("black");
+			canvas.strokeRect(x, y, w, h);
 
 			// Paint text
-			ArrayList<String> lines = SpeechBalloonCalculatorForHtml4.splitLines(new ContextRealHtml5(backBufferContext), w,
-					"arial", speechText);
+			ArrayList<String> lines = SpeechBalloonCalculatorForHtml4.splitLines(
+					canvas, 
+					w,
+					"arial", 
+					speechText);
 			// Block of text height
 			int both = lines.size() * (fontHeight + lineSpacing);
 			if (both >= h) {
@@ -283,17 +266,17 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 				for (int j = 0; j < lines.size(); ++j, ly += fontHeight + lineSpacing) {
 					// We continue to centralize the lines
 					String line = lines.get(j);
-					lx = (x + w) / 2 - (backBufferContext.measureText(line).getWidth()) / 2;
+					lx = (x + w) / 2 - (canvas.measureTextWidth(line)) / 2;
 					// DEBUG
 					// console.log("ctx2d.fillText('"+ lines[j] +"', "+ lx +", "
 					// + ly + ")");
-					backBufferContext.fillText(line, lx, ly);
+					canvas.fillText(line, lx, ly);
 				}
 			}
 		}
 
 		// update the front canvas
-		context.drawImage(backBufferContext.getCanvas(), 0, 0);
+		canvas.copyBackBufferToFront();
 
 		/*
 		 * 

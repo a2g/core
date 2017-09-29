@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import com.github.a2g.core.interfaces.internal.IContext2d;
 import com.github.a2g.core.objectmodel.SpeechRectangleCalculatorForAll;
+import com.github.a2g.core.platforms.html5.dependencies.ContextRealHtml5;
 import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.user.client.ui.Panel;
 
-public class SpeechBalloonCalculatorForHtml4 implements IContext2d{
+public class SpeechBalloonCalculatorForHtml4 {
 	SpeechRectangleCalculatorForAll fittedRect;
 	private boolean isFromTop;
 	private boolean isPointingRight;
@@ -20,11 +22,13 @@ public class SpeechBalloonCalculatorForHtml4 implements IContext2d{
 	private int borderWidth;
 	private int heightOfLeaderLine;
 
-	public SpeechBalloonCalculatorForHtml4(String speech, Rect maxRect, int radius, Point mouth, int leaderWidth, int borderWidth)
+	public SpeechBalloonCalculatorForHtml4(String speech, Rect maxRect, int radius, Point mouth, int leaderWidth, int borderWidth, Panel panel)
 	{
 
 		int fontHeight = 10;
-		fittedRect = new SpeechRectangleCalculatorForAll(speech, maxRect, fontHeight, this);
+		ContextRealHtml5 canvas = new ContextRealHtml5("");
+		canvas.setScenePixelSize(10, 10, panel);
+		fittedRect = new SpeechRectangleCalculatorForAll(speech, maxRect, fontHeight, canvas);
 		Rect max = fittedRect.getOuterRect();
 		Point centre = max.getCenter();
 
@@ -146,17 +150,6 @@ public class SpeechBalloonCalculatorForHtml4 implements IContext2d{
 		return lines;
 	}
 
-	@Override
-	public void setFont(String font) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public double measureTextWidth(String text) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
 
 }

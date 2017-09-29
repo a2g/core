@@ -156,7 +156,7 @@ IScenePanelFromScenePresenter {
 			super.remove(speechWidget);
 		}
 
-		SpeechBalloonCalculatorForHtml4 calc = new SpeechBalloonCalculatorForHtml4(speech, maxBalloonRect, 30, mouth, 38, 3);
+		SpeechBalloonCalculatorForHtml4 calc = new SpeechBalloonCalculatorForHtml4(speech, maxBalloonRect, 30, mouth, 38, 3, speechWidget);
 		
 		Rect rectThatsScaledToFit =  calc.getRectInPixels();
 		

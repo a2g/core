@@ -18,6 +18,7 @@ package com.github.a2g.core.platforms.html5.mouse;
 
 
 import com.github.a2g.core.event.ExecuteCommandEvent;
+import com.github.a2g.core.platforms.html5.dependencies.ContextRealHtml5;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -26,9 +27,9 @@ import com.google.web.bindery.event.shared.EventBus;
 
 public class SceneMouseClickHandler implements ClickHandler {
 	private final EventBus bus;
-	private final Canvas canvas;
+	private final ContextRealHtml5 canvas;
 
-	public SceneMouseClickHandler(EventBus bus, Canvas canvas) {
+	public SceneMouseClickHandler(EventBus bus, ContextRealHtml5 canvas) {
 		this.bus = bus;
 		this.canvas = canvas;
 	}

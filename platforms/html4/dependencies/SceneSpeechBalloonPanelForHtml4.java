@@ -1,6 +1,7 @@
 package com.github.a2g.core.platforms.html4.dependencies;
 
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ParagraphElement;
@@ -104,10 +105,11 @@ public class SceneSpeechBalloonPanelForHtml4 extends VerticalPanel
 
 
 		// first do rectangle
-		pe.getPE().getStyle().setProperty("top", "" +(c.getRectInPixels().getTop())+"px");
-		pe.getPE().getStyle().setProperty("left", "" +(c.getRectInPixels().getLeft())+"px");
-		pe.getPE().getStyle().setProperty("width", "" +(c.getRectInPixels().getWidth()-1)+"px");
-		pe.getPE().getStyle().setProperty("height", ""+(c.getRectInPixels().getHeight()-1)+"px");
+		Rect r = c.getRectInPixels();
+		pe.getPE().getStyle().setProperty("top", "" +(r.getTop())+"px");
+		pe.getPE().getStyle().setProperty("left", "" +(r.getLeft())+"px");
+		pe.getPE().getStyle().setProperty("width", "" +(r.getWidth()-1)+"px");
+		pe.getPE().getStyle().setProperty("height", ""+(r.getHeight()-1)+"px");
 		pe.getPE().getStyle().setProperty("WebkitBorderRadius", c.getRadius() +"px");
 		pe.getPE().getStyle().setProperty("MozBorderRadius", c.getRadius() +"px");
 		pe.getPE().getStyle().setProperty("borderRadius", c.getRadius() +"px");
