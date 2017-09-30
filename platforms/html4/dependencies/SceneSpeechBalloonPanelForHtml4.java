@@ -127,12 +127,18 @@ public class SceneSpeechBalloonPanelForHtml4 extends VerticalPanel
 		before.getElement().getStyle().setProperty("borderColor", getColor1(!isFromTop)+getColor1(isPointingRight)+getColor1(isFromTop)+getColor1(!isPointingRight));
 		before.getElement().getStyle().setProperty("left", left + "px");
 		before.getElement().getStyle().setProperty("top", top + "px");
+		before.getElement().getStyle().setProperty("borderWidth", 25+"px");
+		before.getElement().getStyle().setProperty("borderStyle", "solid");
 
 
 		// after
 		after.getElement().getStyle().setProperty("borderColor", getColor2(!isFromTop)+getColor2(isPointingRight)+getColor2(isFromTop)+getColor2(!isPointingRight));
 		after.getElement().getStyle().setProperty("left", (left+(isPointingRight?5:3))+ "px");
 		after.getElement().getStyle().setProperty("top", (top+(isFromTop?8:0))+ "px");
+		after.getElement().getStyle().setProperty("borderWidth", 23+"px");
+		after.getElement().getStyle().setProperty("borderStyle", "solid");
+
+
 
 
 	}

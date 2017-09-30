@@ -111,13 +111,7 @@ public class SpeechBalloonCalculatorForHtml4 {
 		return heightOfLeaderLine;
 	}
 
-	public static Rect getRectThatFitsText(String speech, Rect maxBalloonRect) 
-	{
-		Rect r = maxBalloonRect;
-		Rect toReturn = new Rect(r.getLeft(),r.getRight(),r.getWidth(),r.getHeight());
-		
-		return toReturn;
-	}
+	 
 	
 	static public ArrayList<String>  splitLines(IContext2d ctx, double maxWidthBeforeWrapping, String font, String speech) 
 	{
