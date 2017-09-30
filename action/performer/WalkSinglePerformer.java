@@ -21,7 +21,7 @@ import com.github.a2g.core.interfaces.performer.IMovePerformer;
 import com.github.a2g.core.interfaces.performer.IScalePerformer;
 import com.github.a2g.core.interfaces.performer.ISwitchPerformer;
 import com.github.a2g.core.interfaces.performer.IWalkPerformer;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 
 /**
  * 
@@ -64,7 +64,7 @@ public class WalkSinglePerformer
 	}
 
 	public void onUpdateGameAction(double progress) {
-		PointF pt = mover.onUpdateCalculateForMover(progress);
+		Point pt = mover.onUpdateCalculateForMover(progress);
 		if(switcher!=null)
 		{
 			switcher.onUpdateForSwitch(progress);

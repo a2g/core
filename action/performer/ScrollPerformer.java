@@ -18,7 +18,7 @@ package com.github.a2g.core.action.performer;
 
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScrollPerformer;
 import com.github.a2g.core.interfaces.performer.IScrollPerformer;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 
 
 public class ScrollPerformer implements IScrollPerformer
@@ -29,7 +29,7 @@ public class ScrollPerformer implements IScrollPerformer
 	public ScrollPerformer() {}
 
 	@Override
-	public void runForScroll(PointF start, PointF end) {
+	public void runForScroll(Point start, Point end) {
 		startCameraX = scene.getCameraX();
 		endXMinusStartX = end.getX() - start.getX();
 	}

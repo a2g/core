@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 
 public class WalkMultiPerformer {
 	//private static final  Logger MULTIWALKER = Logger.getLogger(LogNames.MULTIWALKER);
@@ -69,15 +69,15 @@ public class WalkMultiPerformer {
 			endX = startX;
 		if (endY == Double.NaN)
 			endY = startY;
-		List<PointF> list = scene.findPath(new PointF(startX,startY), new PointF(endX,endY));
+		List<Point> list = scene.findPath(new Point(startX,startY), new Point(endX,endY));
 		if(list== null)
 			return 0;
 		progressPercentageForStartOfEachSingleWalk =  new Double[list.size()];
 		progressPercentageForStartOfEachSingleWalk[0]=0.0;//first startin percentage is zero. 
-		PointF startPoint = list.get(0);
+		Point startPoint = list.get(0);
 		double totalDuration = 0;
 		for (int i =1;i<list.size();i++) {
-			PointF endPoint = list.get(i);
+			Point endPoint = list.get(i);
 
 			MovePerformer m = new MovePerformer(ocode);
 			WalkPerformer w = new WalkPerformer(ocode);

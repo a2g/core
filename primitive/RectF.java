@@ -68,24 +68,24 @@ public class RectF {
 		return getBottom() - getTop();
 	}
 
-	public PointF getCenter() {
-		return new PointF(left+(getWidth()/2),top+(getHeight()/2));
+	public Point getCenter() {
+		return new Point(left+(getWidth()/2),top+(getHeight()/2));
 	}
 
-	public PointF getTopLeft() {
-		return new PointF(left, top);
+	public Point getTopLeft() {
+		return new Point(left, top);
 	}
 
-	public PointF getTopRight() {
-		return new PointF(right, top);
+	public Point getTopRight() {
+		return new Point(right, top);
 	}
 
-	public PointF getBottomLeft() {
-		return new PointF(left, bottom);
+	public Point getBottomLeft() {
+		return new Point(left, bottom);
 	}
 
-	public PointF getBottomRight() {
-		return new PointF(right, bottom);
+	public Point getBottomRight() {
+		return new Point(right, bottom);
 	}
 
 	

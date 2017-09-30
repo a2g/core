@@ -18,20 +18,20 @@ package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
-import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.dom.client.LoadHandler;
 
 public abstract class Image {
 
 	private final ImagePanelAPI panel;
-	private final Point constOffset;
+	private final PointI constOffset;
 	private double parallaxX;
 	private double parallaxY;
 	private double scale;
 	String atid;
 
-	public Image(ImagePanelAPI panel, Point offset, String atid) {
+	public Image(ImagePanelAPI panel, PointI offset, String atid) {
 		this.constOffset = offset;
 		this.panel = panel;
 		this.parallaxX = 1.0;
@@ -49,7 +49,7 @@ public abstract class Image {
 		panel.remove(this);
 	}
 
-	public void setLeftTop(Point leftTop) {
+	public void setLeftTop(PointI leftTop) {
 		update(leftTop);
 	}
 	
@@ -63,7 +63,7 @@ public abstract class Image {
 		return scale;
 	}
 
-	public void setVisible(boolean visible, Point position) {
+	public void setVisible(boolean visible, PointI position) {
 		panel.setImageVisible(this, visible);
 		update(position);
 	}
@@ -91,7 +91,7 @@ public abstract class Image {
 		return this.parallaxY;
 	}
 
-	private void update(Point xAndY) {
+	private void update(PointI xAndY) {
 
 		//this should be alright because we deduct the constOffset
 		// when calculating x & y

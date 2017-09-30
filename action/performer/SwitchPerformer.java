@@ -18,7 +18,7 @@ package com.github.a2g.core.action.performer;
 
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromSwitchPerformer;
 import com.github.a2g.core.interfaces.performer.ISwitchPerformer;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 
 public class SwitchPerformer implements ISwitchPerformer
 {
@@ -111,7 +111,7 @@ public class SwitchPerformer implements ISwitchPerformer
 		double y = this.startY + progress * (this.endY - this.startY);
 
 
-		if (scene.isInANoGoZone(new PointF(x, y))) {
+		if (scene.isInANoGoZone(new Point(x, y))) {
 
 			// and we make sure we only do this once
 			// we don't keep letting the animation try all the points
@@ -123,7 +123,7 @@ public class SwitchPerformer implements ISwitchPerformer
 			// then the delta(inx,y) may be small enough
 			// for us to tell they have moved between two
 			// gate points. And if so, then we can fire
-			isExitedThruGate = scene.doSwitchIfBeyondGate(new PointF(x, y));
+			isExitedThruGate = scene.doSwitchIfBeyondGate(new Point(x, y));
 
 		}
 
@@ -132,11 +132,11 @@ public class SwitchPerformer implements ISwitchPerformer
 	@Override
 	public boolean onCompleteForSwitch() { 
 		
-		if (scene.isInANoGoZone(new PointF(endX, endY))) {
+		if (scene.isInANoGoZone(new Point(endX, endY))) {
 			if(!isInANoGoZone)
 			{
 				isInANoGoZone = true;
-				isExitedThruGate = scene.doSwitchIfBeyondGate(new PointF(endX, endY));
+				isExitedThruGate = scene.doSwitchIfBeyondGate(new Point(endX, endY));
 			}
 		}
 		return isExitedThruGate;

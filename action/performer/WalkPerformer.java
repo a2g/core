@@ -19,7 +19,7 @@ package com.github.a2g.core.action.performer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromWalkPerformer;
 import com.github.a2g.core.interfaces.performer.IWalkPerformer;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 
 
 public class WalkPerformer implements IWalkPerformer
@@ -36,7 +36,7 @@ public class WalkPerformer implements IWalkPerformer
 	}
 	
 	@Override
-	public void runForWalker( PointF startPt, PointF endPt) 
+	public void runForWalker( Point startPt, Point endPt) 
 	{
 		assert(scene!=null);
 		String otid = scene.getOtidByCode(ocode);

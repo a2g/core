@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromMovePerformer;
 import com.github.a2g.core.interfaces.performer.IMovePerformer;
 import com.github.a2g.core.primitive.LogNames;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 
 
 public class MovePerformer implements IMovePerformer
@@ -125,7 +125,7 @@ public class MovePerformer implements IMovePerformer
 	}
 
 	@Override
-	public PointF onUpdateCalculateForMover(double progress) {
+	public Point onUpdateCalculateForMover(double progress) {
 		if (progress > 0 && progress < 1) {
 
 			progress = progress * 1.0;
@@ -135,11 +135,11 @@ public class MovePerformer implements IMovePerformer
 
 		//MOVE.log( Level.FINER, "walk to-mid {0} {1}", new Object[]{ x,y} );
 		MOVE_PERFORMER.log( Level.FINER, "walk to-mid can add more detail here if in java");		
-		return new PointF(x,y);
+		return new Point(x,y);
 	}
 	
 	@Override
-	public void onUpdateCalculateForMover(double progress, PointF pt) {
+	public void onUpdateCalculateForMover(double progress, Point pt) {
 		String otid = scene.getOtidByCode(ocode);
 		String atid = scene.getAtidOfCurrentAnimationByOtid(otid);
 		
@@ -176,13 +176,13 @@ public class MovePerformer implements IMovePerformer
 	}
 
 	@Override
-	public PointF getStartPtForMover() {
-		return new PointF(startX,startY);
+	public Point getStartPtForMover() {
+		return new Point(startX,startY);
 	}
 
 	@Override
-	public PointF getEndPtForMover() {
-		return new PointF(endX,endY);
+	public Point getEndPtForMover() {
+		return new Point(endX,endY);
 	}
 
 	@Override

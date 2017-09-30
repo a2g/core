@@ -21,8 +21,8 @@ import java.util.TreeMap;
 
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Point;
-import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
 /**
  * 
@@ -208,8 +208,8 @@ public class SceneObject {
 		this.displayName = displayName;
 	}
 
-	Point getRawLeftTop() {
-		return new Point((int) this.rawX, (int) this.rawY);
+	PointI getRawLeftTop() {
+		return new PointI((int) this.rawX, (int) this.rawY);
 	}
 
 	static double worldToScreenX(double intX, double screenSpan,
@@ -347,7 +347,7 @@ public class SceneObject {
 		}
 	}
 
-	PointF getBaseMiddleXY() {
+	Point getBaseMiddleXY() {
 		double left = this.getX();
 		double right = this.getY();
 		Rect r = this.getCurrentBoundingRect();
@@ -355,22 +355,22 @@ public class SceneObject {
 		double lowerYPos = right + r.getBottom();
 		double x = averageXPos / screenPixelWidth;
 		double y = lowerYPos / screenPixelHeight;
-		return new PointF(x, y);
+		return new Point(x, y);
 	}
 
-	public Point getMouthLocation() {
+	public PointI getMouthLocation() {
 		double left = this.getX();
 		double top = this.getY();
 		Rect r = this.getCurrentBoundingRect();
 		double x = left + (r.getLeft() + r.getRight()) / 2.0;
 		double y = top + r.getTop();
 
-		return new Point((int)x,(int)y);
+		return new PointI((int)x,(int)y);
 	}
 
 	public void alignBaseMiddleOfOldFrameToFrameOfNewAnimation(String atid,
 			int frame) {
-		PointF h = getBaseMiddleXY();
+		Point h = getBaseMiddleXY();
 
 		setCurrentAnimationAndFrame(atid, frame);
 

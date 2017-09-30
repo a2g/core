@@ -20,7 +20,7 @@ import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.interfaces.internal.ILoad;
 import com.github.a2g.core.interfaces.internal.ILoaderPresenterFromLoaderItem;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
-import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.event.dom.client.LoadEvent;
 
 public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
@@ -105,8 +105,8 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 		return loaderEnum;
 	}
 
-	public Point getResolution() {
-		Point p = new Point(bundle.getImageWidth(), bundle.getImageHeight());
+	public PointI getResolution() {
+		PointI p = new PointI(bundle.getImageWidth(), bundle.getImageHeight());
 		return p;
 	}
 

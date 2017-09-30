@@ -29,7 +29,7 @@ import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.InventoryItemMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.InventoryItemMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -120,7 +120,7 @@ ImagePanelAPI
 		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource(
 				(PackagedImageForHtml4) imageResource, lh);
 
-		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new Point(0, 0));
+		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new PointI(0, 0));
 
 		imageAndPos.getNativeImage().addMouseMoveHandler(
 				new InventoryItemMouseOverHandler(bus, mouseToPresenter, otid,

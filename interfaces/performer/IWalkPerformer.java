@@ -16,12 +16,12 @@
 package com.github.a2g.core.interfaces.performer;
 
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromWalkPerformer;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 
 public interface IWalkPerformer
 {
 
-	void runForWalker(PointF startPt, PointF endPt);
+	void runForWalker(Point startPt, Point endPt);
  
 	void setSceneForWalker(IScenePresenterFromWalkPerformer scene);
 

@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.RectF;
 
 public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, IBoundaryCalculator,
@@ -15,10 +15,10 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 	protected class Gate {
 		public String switchTo;
 		public int arrivalSegment;
-		public PointF a;
-		public PointF b;
+		public Point a;
+		public Point b;
 
-		public Gate(Object dest, int arrivalSegment, PointF first, PointF second) {
+		public Gate(Object dest, int arrivalSegment, Point first, Point second) {
 			this.switchTo = (dest == null) ? "" : dest.toString();
 			this.arrivalSegment = arrivalSegment;
 			this.a = first;
@@ -29,8 +29,8 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 	private IScenePresenterFromBoundaryCalculator scene;
 	private ArrayList<Gate> gates;
 	private ArrayList<RectF> obstacles;
-	private PointF cachedCalculationOfCentre;
-	private List<PointF> lastPath;
+	private Point cachedCalculationOfCentre;
+	private List<Point> lastPath;
 	private List<PointFWithNeighbours> lastNetworkOfConcaveVertices;
 
 	private static String TREAT_GATE_AS_POINT = "TREAT_GATE_AS_POINT";
@@ -43,8 +43,8 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		updateCentre();
 	}
 
-	public ArrayList<PointF> getGatePoints() {
-		ArrayList<PointF> toReturn = new ArrayList<PointF>();
+	public ArrayList<Point> getGatePoints() {
+		ArrayList<Point> toReturn = new ArrayList<Point>();
 		for (int i = 0; i < gates.size(); i++) {
 			toReturn.add(gates.get(i).a);// always add first
 			if (gates.get(i).switchTo != TREAT_GATE_AS_POINT) {
@@ -59,19 +59,19 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		this.updateCentre();
 	}
 
-	public void addBoundaryGate(Object switchTo, int arrivalSegment, PointF a, PointF b) {
+	public void addBoundaryGate(Object switchTo, int arrivalSegment, Point a, Point b) {
 		if (switchTo != null) {
 			gates.add(new Gate(switchTo == "" ? null : switchTo, arrivalSegment, a, b));
 
 		} else {
-			gates.add(new Gate(TREAT_GATE_AS_POINT, -1, a, new PointF(-1, -1)));
-			gates.add(new Gate(TREAT_GATE_AS_POINT, -1, b, new PointF(-1, -1)));
+			gates.add(new Gate(TREAT_GATE_AS_POINT, -1, a, new Point(-1, -1)));
+			gates.add(new Gate(TREAT_GATE_AS_POINT, -1, b, new Point(-1, -1)));
 		}
 		sort();
 	}
 
-	public void addBoundaryPoint(PointF a) {
-		gates.add(new Gate(TREAT_GATE_AS_POINT, -1, a, new PointF(-1, -1)));
+	public void addBoundaryPoint(Point a) {
+		gates.add(new Gate(TREAT_GATE_AS_POINT, -1, a, new Point(-1, -1)));
 		sort();
 	}
 
@@ -84,7 +84,7 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		this.obstacles.clear();
 	}
 
-	public boolean doSwitchIfBeyondGate(PointF tp) {
+	public boolean doSwitchIfBeyondGate(Point tp) {
 		int size = gates.size();
 		for (int i = 0; i < size; i++) {
 			Gate g = gates.get(i);
@@ -99,12 +99,12 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		return false;
 	}
 
-	public boolean isInANoGoZone(PointF tp) {
-		ArrayList<PointF> a = getGatePoints();
+	public boolean isInANoGoZone(Point tp) {
+		ArrayList<Point> a = getGatePoints();
 		if (a.size() < 3)// need 3 to form an area
 			return false;
 
-		PointF previousPoint = a.get(a.size() - 1);
+		Point previousPoint = a.get(a.size() - 1);
 		for (int i = 0; i < a.size(); i++) {
 			if (isBetweenSpokesAndOnWrongSide(previousPoint, a.get(i), tp))
 				return true;
@@ -113,9 +113,9 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		return false;
 	}
 
-	private boolean isBetweenSpokesAndOnWrongSide(PointF p1, PointF p2, PointF tp) {
-		PointF c = getCentreOfSegments();
-		PointF mp = getMidPoint(p1, p2);
+	private boolean isBetweenSpokesAndOnWrongSide(Point p1, Point p2, Point tp) {
+		Point c = getCentreOfSegments();
+		Point mp = getMidPoint(p1, p2);
 		boolean isBetweenSpokes = arePointsSameSide(c, p1, mp, tp) && arePointsSameSide(c, p2, mp, tp);
 		if (!isBetweenSpokes)
 			return false;
@@ -125,13 +125,13 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		return true;
 	}
 
-	public PointF getCentreOfSegments() {
+	public Point getCentreOfSegments() {
 		return cachedCalculationOfCentre;
 	}
 
 	public void updateCentre() {
-		cachedCalculationOfCentre = new PointF(.5, .5);
-		ArrayList<PointF> a = getGatePoints();
+		cachedCalculationOfCentre = new Point(.5, .5);
+		ArrayList<Point> a = getGatePoints();
 		if (a.size() > 0) {
 			double maxX = a.get(0).getX();
 			double minX = a.get(0).getX();
@@ -145,15 +145,15 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 				minY = Math.min(minY, y);
 				maxY = Math.max(maxY, y);
 			}
-			cachedCalculationOfCentre = new PointF(.5 * minX + .5 * maxX, .5 * minY + .5 * maxY);
+			cachedCalculationOfCentre = new Point(.5 * minX + .5 * maxX, .5 * minY + .5 * maxY);
 		}
 	}
 
-	private PointF getMidPoint(PointF a, PointF b) {
-		return new PointF(a.getX() / 2 + b.getX() / 2, a.getY() / 2 + b.getY() / 2);
+	private Point getMidPoint(Point a, Point b) {
+		return new Point(a.getX() / 2 + b.getX() / 2, a.getY() / 2 + b.getY() / 2);
 	}
 
-	private boolean arePointsSameSide(PointF A, PointF B, PointF tp, PointF c) {
+	private boolean arePointsSameSide(Point A, Point B, Point tp, Point c) {
 		// if a point is on a line the result will be zero, when substituted
 		// in to the line equation
 		// if two points are on the same side, they will have the same sign..
@@ -174,14 +174,14 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		return (int) (a1 - a2);
 	}
 
-	public static double getSomeScalarMeasureMentOfAngle(PointF p1, PointF p2) {
+	public static double getSomeScalarMeasureMentOfAngle(Point p1, Point p2) {
 		double deltaX = p2.getX() - p1.getX();
 		double deltaY = p2.getY() - p1.getY();
 		return Math.toDegrees(Math.atan2(deltaY, deltaX));
 		// http://stackoverflow.com/questions/7586063/how-to-calculate-the-angle-between-a-line-and-the-horizontal-axis
 	}
 
-	public static boolean IsLineSegmentIntersectingTheOtherOne(PointF a, PointF b, PointF c, PointF d) {
+	public static boolean IsLineSegmentIntersectingTheOtherOne(Point a, Point b, Point c, Point d) {
 		double denominator = ((b.getX() - a.getX()) * (d.getY() - c.getY()))
 				- ((b.getY() - a.getY()) * (d.getX() - c.getX()));
 
@@ -205,21 +205,21 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		return (r > 0 && r < 1) && (s > 0 && s < 1);
 	}
 
-	public static boolean IsAConcaveVertex(List<PointF> vertices, int vertex) {
-		PointF current = vertices.get(vertex);
-		PointF next = vertices.get((vertex + 1) % vertices.size());
-		PointF previous = vertices.get(vertex == 0 ? vertices.size() - 1 : vertex - 1);
+	public static boolean IsAConcaveVertex(List<Point> vertices, int vertex) {
+		Point current = vertices.get(vertex);
+		Point next = vertices.get((vertex + 1) % vertices.size());
+		Point previous = vertices.get(vertex == 0 ? vertices.size() - 1 : vertex - 1);
 
-		PointF left = new PointF(current.getX() - previous.getX(), current.getY() - previous.getY());
-		PointF right = new PointF(next.getX() - current.getX(), next.getY() - current.getY());
+		Point left = new Point(current.getX() - previous.getX(), current.getY() - previous.getY());
+		Point right = new Point(next.getX() - current.getX(), next.getY() - current.getY());
 
 		double cross = (left.getX() * right.getY()) - (left.getY() * right.getX());
 
 		return cross < 0;
 	}
 
-	public static boolean IsInside(List<PointF> polygon, PointF position, boolean toleranceOnOutside) {
-		PointF point = position;
+	public static boolean IsInside(List<Point> polygon, Point position, boolean toleranceOnOutside) {
+		Point point = position;
 
 		final float epsilon = 0.5f;
 
@@ -229,19 +229,19 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		if (polygon.size() < 3)
 			return false;
 
-		PointF oldPoint = polygon.get(polygon.size() - 1);
-		double oldSqDist = PointF.DistanceSquared(oldPoint, point);
+		Point oldPoint = polygon.get(polygon.size() - 1);
+		double oldSqDist = Point.DistanceSquared(oldPoint, point);
 
 		for (int i = 0; i < polygon.size(); i++) {
-			PointF newPoint = polygon.get(i);
-			double newSqDist = PointF.DistanceSquared(newPoint, point);
+			Point newPoint = polygon.get(i);
+			double newSqDist = Point.DistanceSquared(newPoint, point);
 
 			if (oldSqDist + newSqDist + 2.0f * Math.sqrt(oldSqDist * newSqDist)
-					- PointF.DistanceSquared(newPoint, oldPoint) < epsilon)
+					- Point.DistanceSquared(newPoint, oldPoint) < epsilon)
 				return toleranceOnOutside;
 
-			PointF left;
-			PointF right;
+			Point left;
+			Point right;
 			if (newPoint.getX() > oldPoint.getX()) {
 				left = oldPoint;
 				right = newPoint;
@@ -266,7 +266,7 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 
 	}
 
-	public List<PointF> findPath(PointF rawStart, PointF rawEnd) {
+	public List<Point> findPath(Point rawStart, Point rawEnd) {
 		// first we check for whether it's a legal move or not.
 		for (int i = 0; i < this.obstacles.size(); i++) {
 			if (this.obstacles.get(i).contains(rawEnd.getX(), rawEnd.getY())) {
@@ -283,7 +283,7 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		PointFWithNeighbours end = verts.get(1);
 
 		// create the default journey
-		List<PointF> list = new LinkedList<PointF>();
+		List<Point> list = new LinkedList<Point>();
 		list.add(start);
 		list.add(end);
 
@@ -303,7 +303,7 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		return list;
 	}
 
-	public List<PointFWithNeighbours> getNetworkOfConcaveVertices(PointF rawStart, PointF rawEnd) {
+	public List<PointFWithNeighbours> getNetworkOfConcaveVertices(Point rawStart, Point rawEnd) {
 		PointFWithNeighbours start = new PointFWithNeighbours(rawStart);
 		PointFWithNeighbours end = new PointFWithNeighbours(rawEnd);
 		// we need to create a whole network of PointFWithNeighbours,
@@ -407,7 +407,7 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		return obstacles;
 	}
 
-	public List<PointF> getLastPath() {
+	public List<Point> getLastPath() {
 		return lastPath;
 	}
 

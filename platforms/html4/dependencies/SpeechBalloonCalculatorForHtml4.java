@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.github.a2g.core.interfaces.internal.IContext2d;
 import com.github.a2g.core.objectmodel.SpeechRectangleCalculatorForAll;
 import com.github.a2g.core.platforms.html5.dependencies.ContextRealHtml5;
-import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.user.client.ui.Panel;
@@ -22,7 +22,7 @@ public class SpeechBalloonCalculatorForHtml4 {
 	private int borderWidth;
 	private int heightOfLeaderLine;
 
-	public SpeechBalloonCalculatorForHtml4(String speech, Rect maxRect, int radius, Point mouth, int leaderWidth, int borderWidth, Panel panel)
+	public SpeechBalloonCalculatorForHtml4(String speech, Rect maxRect, int radius, PointI mouth, int leaderWidth, int borderWidth, Panel panel)
 	{
 
 		int fontHeight = 10;
@@ -30,7 +30,7 @@ public class SpeechBalloonCalculatorForHtml4 {
 		canvas.setScenePixelSize(10, 10, panel);
 		fittedRect = new SpeechRectangleCalculatorForAll(speech, maxRect, fontHeight, canvas);
 		Rect max = fittedRect.getOuterRect();
-		Point centre = max.getCenter();
+		PointI centre = max.getCenter();
 
 		// the mouth & centre coords are both relative to top left of viewport
 		isFromTop = mouth.getY() < centre.getY();

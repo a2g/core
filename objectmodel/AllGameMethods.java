@@ -14,7 +14,7 @@ import com.github.a2g.core.interfaces.internal.ILoad;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.RectF;
 
 /**
@@ -633,39 +633,39 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 
 	@Override
 	public int addHelperPoint(double x, double y) {
-		return master.getScenePresenter().addHelperPoint(new PointF(x,y));
+		return master.getScenePresenter().addHelperPoint(new Point(x,y));
 	}
 
 	@Override
 	public void addObstacleRect(double x, double y, int helperIndex) {
-		PointF p = master.getScenePresenter().getHelperPoints().get(helperIndex);
+		Point p = master.getScenePresenter().getHelperPoints().get(helperIndex);
 		master.getScenePresenter().addObstacleRect(x, y, p.getX(), p.getY());
 		
 	}
 
 	@Override
 	public void addObstacleRect(int helperIndex, double x, double y) {
-		PointF p = master.getScenePresenter().getHelperPoints().get(helperIndex);
+		Point p = master.getScenePresenter().getHelperPoints().get(helperIndex);
 		master.getScenePresenter().addObstacleRect( p.getX(), p.getY(), x, y);
 	
 	}
 
 	@Override
 	public void addObstacleRect(int helper1, int helper2) {
-		PointF p1 = master.getScenePresenter().getHelperPoints().get(helper1);
-		PointF p2 = master.getScenePresenter().getHelperPoints().get(helper2);
+		Point p1 = master.getScenePresenter().getHelperPoints().get(helper1);
+		Point p2 = master.getScenePresenter().getHelperPoints().get(helper2);
 		master.getScenePresenter().addObstacleRect( p1.getX(), p1.getY(), p2.getX(), p2.getY());
 	
 	}
 
 	@Override
-	public PointF getHelperPoint(int helperIndex) {
+	public Point getHelperPoint(int helperIndex) {
 		return master.getScenePresenter().getHelperPoints().get(helperIndex);
 	}
 
 	@Override
 	public void addBoundaryPoint(int helperIndex) {
-		PointF p1 = master.getScenePresenter().getHelperPoints().get(helperIndex);
+		Point p1 = master.getScenePresenter().getHelperPoints().get(helperIndex);
 		master.getScenePresenter().addBoundaryPoint(p1.getX(), p1.getY());
 		
 	}

@@ -10,7 +10,7 @@ import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 
 /** 
  * @brief
@@ -184,7 +184,7 @@ ITitleCardPresenterFromActions
 	}
 
 	@Override
-	public List<PointF> findPath(PointF rawStart, PointF rawEnd) {
+	public List<Point> findPath(Point rawStart, Point rawEnd) {
 
 		return master.getScenePresenter().findPath(rawStart, rawEnd);
 	}
@@ -242,12 +242,12 @@ ITitleCardPresenterFromActions
 	}
 
 	@Override
-	public boolean isInANoGoZone(PointF point) {
+	public boolean isInANoGoZone(Point point) {
 		return master.getScenePresenter().isInANoGoZone(point);
 	}
 
 	@Override
-	public boolean doSwitchIfBeyondGate(PointF point) {
+	public boolean doSwitchIfBeyondGate(Point point) {
 		return master.getScenePresenter().doSwitchIfBeyondGate(point);
 	}
 

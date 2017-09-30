@@ -13,37 +13,32 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package com.github.a2g.core.primitive;
 
-public class PointF {
-	private double x;
-	private double y;
+public class PointI {
+	private int x;
+	private int y;
 
-	public PointF(double x, double y) {
+	public PointI(int x, int y) {
 		this.setX(x);
-		this.setY(y);
-	}
-
-	public void setX(double x) {
-		this.x = x;
-	}
-
-	public void setY(double y) {
 		this.y = y;
 	}
 
-	public double getX() {
+	public int getX() {
 		return x;
 	}
 
-	public double getY() {
+	public int getY() {
 		return y;
 	}
 
-	public static double DistanceSquared(PointF oldPoint, PointF point) {
-		double xdiff = oldPoint.getX()-point.getX();
-		double ydiff = oldPoint.getY()-point.getY();
-		return xdiff*xdiff+ydiff*ydiff;
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 
 }

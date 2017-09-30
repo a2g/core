@@ -15,11 +15,11 @@
  */
 package com.github.a2g.core.interfaces.performer;
 
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 
 public interface IScrollPerformer {
 
-	void runForScroll(PointF start, PointF end);
+	void runForScroll(Point start, Point end);
 
 	void onUpdateForScroll(double progress);
 

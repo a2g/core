@@ -7,7 +7,7 @@ import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.objectmodel.SentenceItem;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.A2gException;
 
 public interface IChainRootForScene {
@@ -23,7 +23,7 @@ public interface IChainRootForScene {
 	public ChainEndAction subroutine(ChainEndAction orig);
 	public ChainEndAction switchTo(String sceneName, int arrivalSegment);
 	public ChainEndAction walkTo(double x, double y);// should not have ocode here because switching implies main character
-	public ChainEndAction walkTo(PointF point);
+	public ChainEndAction walkTo(Point point);
 	
 	// there's 2 choices
 	// 1) BaseAction walkSwitch and ChainAbleAction walkTo
@@ -38,15 +38,15 @@ public interface IChainRootForScene {
 	// Thus 2 is better, because it protects the user
 	// against unexpected results.
 	public ChainableAction walkNeverSwitch(double x, double y);
-	public ChainableAction walkNeverSwitch(PointF point);
+	public ChainableAction walkNeverSwitch(Point point);
 	public ChainableAction walkNeverSwitchNonBlocking(short ocode, double x, double y);
 	public ChainableAction walkNeverSwitch(short ocode, double x, double y);
-	public ChainableAction walkNeverSwitch(short ocode, PointF point);
+	public ChainableAction walkNeverSwitch(short ocode, Point point);
 	public ChainableAction walkAndTalkNeverSwitch(short ocode, double x, double y, String speech);
-	public ChainableAction walkAndScaleNeverSwitch(short ocode, PointF p, double startScale, double endScale);
+	public ChainableAction walkAndScaleNeverSwitch(short ocode, Point p, double startScale, double endScale);
 	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int arrivalSegment) throws A2gException ;
-	public ChainEndAction walkAlwaysSwitch(PointF point, String string, int arrivalSegment) throws A2gException ;
-	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, PointF p, double startScale, double endScale, String sceneName, int arrivalSegment) throws A2gException;
+	public ChainEndAction walkAlwaysSwitch(Point point, String string, int arrivalSegment) throws A2gException ;
+	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, Point p, double startScale, double endScale, String sceneName, int arrivalSegment) throws A2gException;
 	
 	public ChainableAction subroutine(ChainableAction orig);
 

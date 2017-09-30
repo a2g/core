@@ -18,13 +18,13 @@ package com.github.a2g.core.platforms.html4.dependencies;
 
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
-import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.PointI;
 
 public class ImageForHtml4 extends Image {
 	private final com.google.gwt.user.client.ui.Image image;
-	private Point originalDimensions;
+	private PointI originalDimensions;
 	public ImageForHtml4(final com.google.gwt.user.client.ui.Image image,
-			ImagePanelAPI panel, Point offset) {
+			ImagePanelAPI panel, PointI offset) {
 		super(panel, offset, "fromHtml4");
 		this.image = image;
 		this.originalDimensions = null;
@@ -35,12 +35,12 @@ public class ImageForHtml4 extends Image {
 		return image;
 	}
 	
-	public Point getOriginalDimensions()
+	public PointI getOriginalDimensions()
 	{
 		return originalDimensions;
 	}
 	
-	public void setOriginalDimensions(Point point)
+	public void setOriginalDimensions(PointI point)
 	{
 		originalDimensions = point;
 	}

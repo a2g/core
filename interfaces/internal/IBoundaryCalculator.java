@@ -4,34 +4,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.a2g.core.objectmodel.PointFWithNeighbours;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.RectF;
 
 public interface IBoundaryCalculator {
 
 	void clearBoundaries();
 
-	void addBoundaryGate(Object sceneToSwitchTo, int arrivalSegment, PointF pointF, PointF pointF2);
+	void addBoundaryGate(Object sceneToSwitchTo, int arrivalSegment, Point pointF, Point pointF2);
 
-	void addBoundaryPoint(PointF pointF);
+	void addBoundaryPoint(Point pointF);
 
-	boolean isInANoGoZone(PointF tp);
+	boolean isInANoGoZone(Point tp);
 
-	boolean doSwitchIfBeyondGate(PointF tp);
+	boolean doSwitchIfBeyondGate(Point tp);
 
-	ArrayList<PointF> getGatePoints();
+	ArrayList<Point> getGatePoints();
 
-	PointF getCentreOfSegments();
+	Point getCentreOfSegments();
 
 	void addObstacleRect(double x, double y, double right, double bottom);
 	
 	void finishedGateAndObstacleAdding();
 
-	List<PointF> findPath(PointF rawStart, PointF rawEnd);
+	List<Point> findPath(Point rawStart, Point rawEnd);
 
 	ArrayList<RectF> getObstacles();
 
-	List<PointF> getLastPath();
+	List<Point> getLastPath();
 
 	List<PointFWithNeighbours> getLastNetworkOfConcaveVertices();
 

@@ -22,7 +22,7 @@ import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
 import com.github.a2g.core.objectmodel.ScenePresenter;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 
 public abstract class DialogChainableAction extends DialogChainEndAction
 implements IChainRootForDialog
@@ -125,11 +125,11 @@ implements IChainRootForDialog
 	
 	@Override
 	public DialogChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int arrivalSegment) {
-		return this.walkAlwaysSwitch( new PointF(x,y), sceneName, arrivalSegment);
+		return this.walkAlwaysSwitch( new Point(x,y), sceneName, arrivalSegment);
 	}
 	
 	@Override
-	public DialogChainEndAction walkAlwaysSwitch(PointF p, String sceneName, int arrivalSegment) {
+	public DialogChainEndAction walkAlwaysSwitch(Point p, String sceneName, int arrivalSegment) {
 		DialogWalkAction a = new DialogWalkAction(this, ScenePresenter.DEFAULT_SCENE_OBJECT);
 		a.setEndX(p.getX());
 		a.setEndY(p.getY());

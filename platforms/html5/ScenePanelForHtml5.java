@@ -45,7 +45,7 @@ import com.github.a2g.core.platforms.html5.dependencies.ContextRealHtml5;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -68,7 +68,7 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 
 	@SuppressWarnings("unused")
 	private final CssColor redrawColor = CssColor.make("rgba(255,0,0,0.6)");
-	private Map<Integer, Point> mapOfPointsByImage;
+	private Map<Integer, PointI> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages;
 	private boolean speechVisible;
@@ -87,7 +87,7 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 		this.abs = new AbsolutePanel();
 		this.toScene = toScene;
 		// this.toCommandLine = toCommandLine;
-		this.mapOfPointsByImage = new TreeMap<Integer, Point>();
+		this.mapOfPointsByImage = new TreeMap<Integer, PointI>();
 		this.listOfVisibleHashCodes = new LinkedList<Integer>();
 		this.listOfAllVisibleImages = new LinkedList<Image>();
 		canvas = new ContextRealHtml5("");
@@ -98,7 +98,7 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 	}
 
 	void putPoint(ImageForHtml4 image, int x, int y) {
-		mapOfPointsByImage.put(hash(image), new Point(x, y));
+		mapOfPointsByImage.put(hash(image), new PointI(x, y));
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource((PackagedImageForHtml4) imageResource,
 				lh);
 
-		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new Point(x, y));
+		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new PointI(x, y));
 
 		// add gwt mouse handlers
 		imageAndPos.getNativeImage()
@@ -215,7 +215,7 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 		while (iter.hasNext()) {
 			Image image = iter.next();
 			if (listOfVisibleHashCodes.contains(hash(image))) {
-				Point p = mapOfPointsByImage.get(hash(image));
+				PointI p = mapOfPointsByImage.get(hash(image));
 				int x = p.getX();
 				int y = p.getY();
 
@@ -347,7 +347,7 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 
 	@Override
 	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, String speech, Rect maxBalloonRect,
-			Point mouth, TalkPerformer sayAction) {
+			PointI mouth, TalkPerformer sayAction) {
 
 		this.speechVisible = isVisible;
 		this.speechColor = talkingColor;

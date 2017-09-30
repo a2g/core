@@ -32,7 +32,7 @@ import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectTouchMoveHandler;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -62,7 +62,7 @@ IScenePanelFromScenePresenter {
 		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource(
 				(PackagedImageForHtml4) imageResource, lh);
 
-		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new Point(x,
+		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new PointI(x,
 				y));
 
 		// add gwt mouse handlers
@@ -113,7 +113,7 @@ IScenePanelFromScenePresenter {
 		{
 			if(image4.getOriginalDimensions()!=null)
 		
-				image4.setOriginalDimensions(new Point(image4.getNativeImage().getWidth(),image4.getNativeImage().getHeight()));
+				image4.setOriginalDimensions(new PointI(image4.getNativeImage().getWidth(),image4.getNativeImage().getHeight()));
 			
 			width*=scale;
 			height*=scale;
@@ -151,7 +151,7 @@ IScenePanelFromScenePresenter {
 
 	@Override
 	public void setStateOfPopup(boolean isVisible,
-			ColorEnum talkingColor, String speech, Rect maxBalloonRect, Point mouth, TalkPerformer sayAction) {
+			ColorEnum talkingColor, String speech, Rect maxBalloonRect, PointI mouth, TalkPerformer sayAction) {
 		if (!isVisible) {
 			super.remove(speechWidget);
 		}
@@ -185,7 +185,7 @@ IScenePanelFromScenePresenter {
 		ImageForHtml4 image4 = (ImageForHtml4) image;
 		if(image4.getOriginalDimensions()!=null)
 		{
-			Point temp = image4.getOriginalDimensions();
+			PointI temp = image4.getOriginalDimensions();
 			image4.getNativeImage().setPixelSize(temp.getX(),temp.getY());
 			image4.getNativeImage().setWidth("");
 			image4.getNativeImage().setHeight(""); 

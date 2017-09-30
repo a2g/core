@@ -18,7 +18,7 @@ package com.github.a2g.core.interfaces.internal;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -39,7 +39,7 @@ public interface IScenePanelFromScenePresenter
 	void setCameraOffset(int x, int y);
 
 	void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
-			String speech, Rect pixels, Point mouth, TalkPerformer sayAction);
+			String speech, Rect pixels, PointI mouth, TalkPerformer sayAction);
 
 	void onSceneEntry(String string);
 

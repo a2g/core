@@ -27,7 +27,7 @@ import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromMoveAction;
 import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 
 /**
  * 
@@ -79,7 +79,7 @@ public class WalkAndTalkAction extends ChainableAction{
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		PointF pt = mover.onUpdateCalculateForMover(progress);
+		Point pt = mover.onUpdateCalculateForMover(progress);
 		mover.onUpdateCalculateForMover(progress, pt);
 		//talker.onUpdate(progress);
 

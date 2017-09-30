@@ -5,14 +5,14 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import com.github.a2g.core.interfaces.internal.IGetNeighbours;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 
-public class PointFWithNeighbours extends PointF implements IGetNeighbours<PointFWithNeighbours> 
+public class PointFWithNeighbours extends Point implements IGetNeighbours<PointFWithNeighbours> 
 {
 	ArrayList<PointFWithNeighbours> neighbours;
 	private HashSet<PointFWithNeighbours> tested;
 
-	PointFWithNeighbours(PointF thePoint)
+	PointFWithNeighbours(Point thePoint)
 	{
 		super(thePoint.getX(), thePoint.getY());
 		neighbours = new ArrayList<PointFWithNeighbours>();

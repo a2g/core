@@ -12,7 +12,7 @@ import com.github.a2g.core.interfaces.internal.ILoaderPresenter;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoader;
 import com.github.a2g.core.primitive.LoaderEnum;
-import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.PointI;
 
 public class Loader implements ILoaderPresenter {
 	private LoaderItem theCurrentLoader;
@@ -169,7 +169,7 @@ public class Loader implements ILoaderPresenter {
 		Iterator<LoaderItem> iter = listOfEssentialLoaders.iterator();
 		while (iter.hasNext()) {
 			LoaderItem loader = iter.next();
-			Point res = loader.getResolution();
+			PointI res = loader.getResolution();
 			int i = loader.getLoaderEnum();
 			if(i==LoaderEnum.Main.r)
 				master.setScenePixelSize(res.getX(), res.getY());

@@ -30,8 +30,8 @@ import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Point;
-import com.github.a2g.core.primitive.PointF;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.primitive.RectF;
 
@@ -54,7 +54,7 @@ public class ScenePresenter implements IScenePresenter,
 	private IBoundaryCalculator boundaryCalculator;
 	private int arrivalSegment;
 	private Vector<RectF> speechRects;
-	private ArrayList<PointF> helperPoints;
+	private ArrayList<Point> helperPoints;
 
 	public ScenePresenter(final IHostingPanel panel,
 			IMasterPresenterFromScenePresenter master, IFactory factory) {
@@ -77,7 +77,7 @@ public class ScenePresenter implements IScenePresenter,
 		defaultSceneObjectOtid = "ScenePresenter::getDefaultSceneObjectOtid was used before it was initialized";
 
 		speechRects = new Vector<RectF>(3);
-		this.helperPoints = new ArrayList<PointF>();
+		this.helperPoints = new ArrayList<Point>();
 	}
 
 	private SceneObject getObjectByOCode(short ocode) {
@@ -268,7 +268,7 @@ public class ScenePresenter implements IScenePresenter,
 
 		int speechBubbleIndex = a.getSpeechBubble();
 		ColorEnum talkingColor = a.getTalkingColor();
-		Point mouth = new Point(0, 0);
+		PointI mouth = new PointI(0, 0);
 		if (a.getSceneObject() != null) {
 			mouth = a.getSceneObject().getMouthLocation();
 			if (talkingColor == null) {
@@ -368,28 +368,28 @@ public class ScenePresenter implements IScenePresenter,
 	public void addBoundaryGate(double tlx, double tly, double brx, double bry,
 			Object sceneToSwitchTo, int arrivalSegment) {
 		boundaryCalculator.addBoundaryGate(sceneToSwitchTo, arrivalSegment,
-				new PointF(tlx, tly), new PointF(brx, bry));
+				new Point(tlx, tly), new Point(brx, bry));
 	}
 
 	public void addBoundaryPoint(double x, double y) {
-		boundaryCalculator.addBoundaryPoint(new PointF(x, y));
+		boundaryCalculator.addBoundaryPoint(new Point(x, y));
 	}
 
-	public boolean isInANoGoZone(PointF tp) {
+	public boolean isInANoGoZone(Point tp) {
 		return boundaryCalculator.isInANoGoZone(tp);
 	}
 
-	public boolean doSwitchIfBeyondGate(PointF tp) {
+	public boolean doSwitchIfBeyondGate(Point tp) {
 		return boundaryCalculator.doSwitchIfBeyondGate(tp);
 	}
 
 	@Override
-	public ArrayList<PointF> getBoundaryPoints() {
+	public ArrayList<Point> getBoundaryPoints() {
 		return boundaryCalculator.getGatePoints();
 	}
 
 	@Override
-	public PointF getBoundaryPointsCentre() {
+	public Point getBoundaryPointsCentre() {
 		return boundaryCalculator.getCentreOfSegments();
 	}
 
@@ -398,7 +398,7 @@ public class ScenePresenter implements IScenePresenter,
 
 	}
 
-	public List<PointF> findPath(PointF rawStart, PointF rawEnd) {
+	public List<Point> findPath(Point rawStart, Point rawEnd) {
 		return boundaryCalculator.findPath(rawStart, rawEnd);
 	}
 
@@ -408,7 +408,7 @@ public class ScenePresenter implements IScenePresenter,
 	}
 	
 	@Override
-	public ArrayList<PointF> getHelperPoints() {
+	public ArrayList<Point> getHelperPoints() {
 		return helperPoints;
 	}
 	
@@ -419,7 +419,7 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	@Override
-	public List<PointF> getLastPath() {
+	public List<Point> getLastPath() {
 		return boundaryCalculator.getLastPath();
 	}
 
@@ -432,18 +432,18 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	public void repositionDefaultObject() {
-		ArrayList<PointF> points = boundaryCalculator.getGatePoints();
+		ArrayList<Point> points = boundaryCalculator.getGatePoints();
 		if (arrivalSegment > -1 && arrivalSegment < (points.size() - 1)) {
-			PointF a = points.get(arrivalSegment);
-			PointF b = points.get(arrivalSegment + 1);
-			PointF c = boundaryCalculator.getCentreOfSegments();
-			PointF mp = new PointF((a.getX() + b.getX()) / 2,
+			Point a = points.get(arrivalSegment);
+			Point b = points.get(arrivalSegment + 1);
+			Point c = boundaryCalculator.getCentreOfSegments();
+			Point mp = new Point((a.getX() + b.getX()) / 2,
 					(a.getY() + b.getY()) / 2);
 			// we want v, a vector starting at mp, and heading 10% towards
 			// centre.
-			PointF v = new PointF((c.getX() - mp.getX()) * .1,
+			Point v = new Point((c.getX() - mp.getX()) * .1,
 					(c.getY() - mp.getY()) * .1);
-			PointF result = new PointF(mp.getX() + v.getX(), mp.getY()
+			Point result = new Point(mp.getX() + v.getX(), mp.getY()
 					+ v.getY());
 			SceneObject o = scene.objectCollection().getByOtid(
 					this.getDefaultSceneObjectOtid());
@@ -463,7 +463,7 @@ public class ScenePresenter implements IScenePresenter,
 		return speechRects.size() - 1;
 	}
 	
-	public int addHelperPoint(PointF pointF) {
+	public int addHelperPoint(Point pointF) {
 		helperPoints.add(pointF);
 		return helperPoints.size() - 1;
 	}

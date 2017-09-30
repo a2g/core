@@ -1,8 +1,8 @@
 package com.github.a2g.core.interfaces.methods.action;
 
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 
 public interface IDoSwitchIfBeyondGate {
-	      boolean doSwitchIfBeyondGate(PointF pointF);
+	      boolean doSwitchIfBeyondGate(Point pointF);
 
 }

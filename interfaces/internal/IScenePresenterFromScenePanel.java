@@ -13,7 +13,7 @@ import com.github.a2g.core.interfaces.methods.action.IGetVisibleByOtid;
 import com.github.a2g.core.interfaces.methods.action.IGetXByOtid;
 import com.github.a2g.core.interfaces.methods.action.IGetYByOtid; 
 import com.github.a2g.core.objectmodel.PointFWithNeighbours;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 import com.github.a2g.core.primitive.RectF;
 
 public interface IScenePresenterFromScenePanel
@@ -31,11 +31,11 @@ IGetBoundingRectByFrameAndAtid,
 IGetXByOtid,
 IGetYByOtid
 {
-	ArrayList<PointF> getBoundaryPoints();
-	PointF getBoundaryPointsCentre();
+	ArrayList<Point> getBoundaryPoints();
+	Point getBoundaryPointsCentre();
 	List<RectF> getObstacles();
 	List<PointFWithNeighbours> getLastNetworkOfConcaveVertices();
-	List<PointF> getLastPath();
+	List<Point> getLastPath();
 	Iterator<RectF> getSpeechRects();
-	List<PointF> getHelperPoints();
+	List<Point> getHelperPoints();
 }

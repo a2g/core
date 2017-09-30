@@ -25,7 +25,7 @@ import com.github.a2g.core.interfaces.internal.IInventoryPresenter;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromInventory;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.Point;
+import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.shared.EventBus;
 
@@ -129,7 +129,7 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 	void hideImage(Image image) {
 		if (image != null)// null is valid in the case of unit test
 		{
-			image.setVisible(false, new Point(-width, -height));
+			image.setVisible(false, new PointI(-width, -height));
 		}
 	}
 
@@ -156,7 +156,7 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 					{
 						Rect rect = rectsForSlots.get(currentSlot);
 						image.setVisible(true,
-								new Point(rect.getLeft(), rect.getTop()));
+								new PointI(rect.getLeft(), rect.getTop()));
 					}
 					currentSlot++;
 				} else {

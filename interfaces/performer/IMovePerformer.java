@@ -16,7 +16,7 @@
 package com.github.a2g.core.interfaces.performer;
 
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromMovePerformer;
-import com.github.a2g.core.primitive.PointF;
+import com.github.a2g.core.primitive.Point;
 
 public interface IMovePerformer {
 
@@ -26,13 +26,13 @@ public interface IMovePerformer {
 
 	void setToInitialAtEndForMover(boolean isSetToInitialAtEnd);
 
-	PointF getEndPtForMover();
+	Point getEndPtForMover();
 
-	PointF getStartPtForMover();
+	Point getStartPtForMover();
 
-	PointF onUpdateCalculateForMover(double progress);
+	Point onUpdateCalculateForMover(double progress);
 
-	void onUpdateCalculateForMover(double progress, PointF pt);
+	void onUpdateCalculateForMover(double progress, Point pt);
 
 	void setEndXForMover(double endX);
 

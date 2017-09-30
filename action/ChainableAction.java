@@ -30,7 +30,7 @@ import com.github.a2g.core.interfaces.internal.IChainRootForScene;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.A2gException;
-import com.github.a2g.core.primitive.PointF; 
+import com.github.a2g.core.primitive.Point; 
 
 public abstract class ChainableAction 
 extends ChainEndAction 
@@ -318,11 +318,11 @@ implements IChainRootForScene {
 
 	@Override
 	public ChainableAction walkNeverSwitch(double x, double y) {
-		return walkNeverSwitch(new PointF(x, y));
+		return walkNeverSwitch(new Point(x, y));
 	}
 
 	@Override
-	public ChainableAction walkNeverSwitch(PointF end) {
+	public ChainableAction walkNeverSwitch(Point end) {
 		WalkAction a = new WalkAction(this, ScenePresenter.DEFAULT_SCENE_OBJECT);
 		a.setEndX(end.getX());
 		a.setEndY(end.getY());
@@ -331,11 +331,11 @@ implements IChainRootForScene {
 
 	@Override
 	public ChainEndAction walkTo(double x, double y) {
-		return walkTo(new PointF(x, y));
+		return walkTo(new Point(x, y));
 	}
 
 	@Override
-	public ChainEndAction walkTo(PointF end) {
+	public ChainEndAction walkTo(Point end) {
 		short dso = ScenePresenter.DEFAULT_SCENE_OBJECT;
 		WalkMaybeSwitchAction a = new WalkMaybeSwitchAction(this, dso);
 		a.setEndX(end.getX());
@@ -350,11 +350,11 @@ implements IChainRootForScene {
 		// end of an asycnhronous animation execution chain.
 		if(sceneName==null)
 			throw new A2gException ("ChainableAction::walkAlwaysSwitch");
-		return this.walkAlwaysSwitch( new PointF(x,y), sceneName, arrivalSegment);
+		return this.walkAlwaysSwitch( new Point(x,y), sceneName, arrivalSegment);
 	}
 
 	@Override
-	public ChainEndAction walkAlwaysSwitch(PointF p, String sceneName,
+	public ChainEndAction walkAlwaysSwitch(Point p, String sceneName,
 			int arrivalSegment) throws A2gException {
 		// best to throw this exception now, inside the Scene handler, rather
 		// than when it is executed, which might be much later at the 
@@ -374,7 +374,7 @@ implements IChainRootForScene {
 	}
 
 	@Override
-	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, PointF p,
+	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, Point p,
 			double startScale, double endScale, String sceneName,
 			int arrivalSegment) throws A2gException {
 		// best to throw this exception now, inside the Scene handler, rather
@@ -398,11 +398,11 @@ implements IChainRootForScene {
 
 	@Override
 	public ChainableAction walkNeverSwitch(short ocode, double x, double y) {
-		return walkNeverSwitch(ocode, new PointF(x, y));
+		return walkNeverSwitch(ocode, new Point(x, y));
 	}
 
 	@Override
-	public ChainableAction walkNeverSwitch(short ocode, PointF end) {
+	public ChainableAction walkNeverSwitch(short ocode, Point end) {
 		WalkAction a = new WalkAction(this, ocode);
 		a.setEndX(end.getX());
 		a.setEndY(end.getY());
@@ -631,7 +631,7 @@ implements IChainRootForScene {
 	}
 
 	@Override
-	public ChainableAction walkAndScaleNeverSwitch(short ocode, PointF p,
+	public ChainableAction walkAndScaleNeverSwitch(short ocode, Point p,
 			double startScale, double endScale) {
 		WalkAction s = new WalkAction(this, ocode);
 		s.setEndX(p.getX());
