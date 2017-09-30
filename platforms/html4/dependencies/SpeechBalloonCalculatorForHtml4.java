@@ -67,8 +67,8 @@ public class SpeechBalloonCalculatorForHtml4 {
 		// css styles, in chrome atleast, seem to draw the border
 		// outside of the viewport if I don't factor in the border below
 		this.rectInPixels = new Rect(
-				max.getTop(),
 				max.getLeft(),
+				max.getTop(),
 				max.getWidth()-2*borderWidth+1,
 				max.getHeight()-2*borderWidth+1);
 	}
