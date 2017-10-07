@@ -1,17 +1,16 @@
-package com.github.a2g.core.platforms.html4.dependencies;
+package com.github.a2g.core.objectmodel;
 
 import java.util.ArrayList;
 
 import com.github.a2g.core.interfaces.internal.IContext2d;
-import com.github.a2g.core.objectmodel.SpeechRectangleCalculatorForAll;
 import com.github.a2g.core.platforms.html5.dependencies.ContextRealHtml5;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.user.client.ui.Panel;
 
-public class SpeechBalloonCalculatorForHtml4 {
-	SpeechRectangleCalculatorForAll fittedRect;
+public class SpeechCalculatorOuterForAll {
+	SpeechCalculatorInnerForAll fittedRect;
 	private boolean isFromTop;
 	private boolean isPointingRight;
 	private int xPos;
@@ -22,13 +21,12 @@ public class SpeechBalloonCalculatorForHtml4 {
 	private int borderWidth;
 	private int heightOfLeaderLine;
 
-	public SpeechBalloonCalculatorForHtml4(String speech, Rect maxRect, int radius, PointI mouth, int leaderWidth, int borderWidth, Panel panel)
+	public SpeechCalculatorOuterForAll(String speech, Rect maxRect, int radius, PointI mouth, int leaderWidth, int borderWidth, IContext2d context)
 	{
 
 		int fontHeight = 10;
-		ContextRealHtml5 canvas = new ContextRealHtml5("");
-		canvas.setScenePixelSize(10, 10, panel);
-		fittedRect = new SpeechRectangleCalculatorForAll(speech, maxRect, fontHeight, canvas);
+		
+		fittedRect = new SpeechCalculatorInnerForAll(speech, maxRect, fontHeight, context);
 		Rect max = fittedRect.getOuterRect();
 		PointI centre = max.getCenter();
 

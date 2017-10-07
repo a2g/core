@@ -36,9 +36,9 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
+import com.github.a2g.core.objectmodel.SpeechCalculatorOuterForAll;
 import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
-import com.github.a2g.core.platforms.html4.dependencies.SpeechBalloonCalculatorForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html5.dependencies.ContextRealHtml5;
@@ -248,7 +248,7 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 			canvas.strokeRect(x, y, w, h);
 
 			// Paint text
-			ArrayList<String> lines = SpeechBalloonCalculatorForHtml4.splitLines(
+			ArrayList<String> lines = SpeechCalculatorOuterForAll.splitLines(
 					canvas, 
 					w,
 					"arial", 

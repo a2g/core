@@ -25,12 +25,13 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
+import com.github.a2g.core.objectmodel.SpeechCalculatorOuterForAll;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.SceneSpeechBalloonPanelForHtml4;
-import com.github.a2g.core.platforms.html4.dependencies.SpeechBalloonCalculatorForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectTouchMoveHandler;
+import com.github.a2g.core.platforms.html5.dependencies.ContextRealHtml5;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
@@ -156,7 +157,9 @@ IScenePanelFromScenePresenter {
 			super.remove(speechWidget);
 		}
 
-		SpeechBalloonCalculatorForHtml4 calc = new SpeechBalloonCalculatorForHtml4(speech, maxBalloonRect, 30, mouth, 38, 3, speechWidget);
+		ContextRealHtml5 canvas = new ContextRealHtml5("");
+		canvas.setScenePixelSize(10, 10, this);
+		SpeechCalculatorOuterForAll calc = new SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3, canvas);
 		
 		Rect rectThatsScaledToFit =  calc.getRectInPixels();
 		
