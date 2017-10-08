@@ -18,7 +18,7 @@ package com.github.a2g.core.platforms.swing.dependencies;
 
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
-import com.github.a2g.core.primitive.Point;
+import com.google.gwt.touch.client.Point;
 
 public class ImageForSwing extends Image {
 	private final java.awt.Image image;

@@ -57,6 +57,7 @@ import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneTalker;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationDuration;
 import com.github.a2g.core.interfaces.methods.game.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.methods.game.ISetBaseMiddleY;
+import com.github.a2g.core.interfaces.methods.game.ISetClumpWithPrevious;
 import com.github.a2g.core.interfaces.methods.game.ISetDisplayName;
 import com.github.a2g.core.interfaces.methods.game.ISetInventoryItemDisplayName;
 import com.github.a2g.core.interfaces.methods.game.ISetInventoryItemVisible;
@@ -124,6 +125,8 @@ IGetY,
 ISetVisible,
 ISetSpeechBubble,
 ISetTalkingColor,
+ISetClumpWithPrevious,
+
 // inventory
 IShowInventoryItem,
 IHideInventoryItem,

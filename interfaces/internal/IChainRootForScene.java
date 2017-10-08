@@ -7,7 +7,7 @@ import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.objectmodel.SentenceItem;
-import com.github.a2g.core.primitive.Point;
+import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.A2gException;
 
 public interface IChainRootForScene {

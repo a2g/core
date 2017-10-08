@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.a2g.core.objectmodel.PointFWithNeighbours;
-import com.github.a2g.core.primitive.Point;
+import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.RectF;
 
 public interface IBoundaryCalculator {

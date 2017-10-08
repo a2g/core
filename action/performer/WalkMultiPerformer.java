@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
-import com.github.a2g.core.primitive.Point;
+import com.google.gwt.touch.client.Point;
 
 public class WalkMultiPerformer {
 	//private static final  Logger MULTIWALKER = Logger.getLogger(LogNames.MULTIWALKER);

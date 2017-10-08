@@ -21,7 +21,7 @@ import com.github.a2g.core.interfaces.performer.IMovePerformer;
 import com.github.a2g.core.interfaces.performer.IScalePerformer;
 import com.github.a2g.core.interfaces.performer.ISwitchPerformer;
 import com.github.a2g.core.interfaces.performer.IWalkPerformer;
-import com.github.a2g.core.primitive.Point;
+import com.google.gwt.touch.client.Point;
 
 /**
  * 

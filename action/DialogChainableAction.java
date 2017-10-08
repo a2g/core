@@ -22,7 +22,7 @@ import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
 import com.github.a2g.core.objectmodel.ScenePresenter;
-import com.github.a2g.core.primitive.Point;
+import com.google.gwt.touch.client.Point;
 
 public abstract class DialogChainableAction extends DialogChainEndAction
 implements IChainRootForDialog

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import com.github.a2g.core.interfaces.internal.IGetNeighbours;
-import com.github.a2g.core.primitive.Point;
+import com.google.gwt.touch.client.Point;
 
 public class PointFWithNeighbours extends Point implements IGetNeighbours<PointFWithNeighbours> 
 {

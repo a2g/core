@@ -13,7 +13,7 @@ import com.github.a2g.core.interfaces.methods.action.IGetVisibleByOtid;
 import com.github.a2g.core.interfaces.methods.action.IGetXByOtid;
 import com.github.a2g.core.interfaces.methods.action.IGetYByOtid; 
 import com.github.a2g.core.objectmodel.PointFWithNeighbours;
-import com.github.a2g.core.primitive.Point;
+import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.RectF;
 
 public interface IScenePresenterFromScenePanel

@@ -30,7 +30,7 @@ import com.github.a2g.core.interfaces.internal.IChainRootForScene;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.A2gException;
-import com.github.a2g.core.primitive.Point; 
+import com.google.gwt.touch.client.Point; 
 
 public abstract class ChainableAction 
 extends ChainEndAction 

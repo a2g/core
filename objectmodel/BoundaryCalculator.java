@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
-import com.github.a2g.core.primitive.Point;
+import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.RectF;
 
 public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, IBoundaryCalculator,
@@ -181,19 +181,19 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		// http://stackoverflow.com/questions/7586063/how-to-calculate-the-angle-between-a-line-and-the-horizontal-axis
 	}
 
-	public static boolean IsLineSegmentIntersectingTheOtherOne(Point a, Point b, Point c, Point d) {
-		double denominator = ((b.getX() - a.getX()) * (d.getY() - c.getY()))
-				- ((b.getY() - a.getY()) * (d.getX() - c.getX()));
+	public static boolean IsLineSegmentIntersectingTheOtherOne(Point a, Point b, Point point, Point point2) {
+		double denominator = ((b.getX() - a.getX()) * (point2.getY() - point.getY()))
+				- ((b.getY() - a.getY()) * (point2.getX() - point.getX()));
 
 		if (denominator == 0) {
 			return false;
 		}
 
-		double numerator1 = ((a.getY() - c.getY()) * (d.getX() - c.getX()))
-				- ((a.getX() - c.getX()) * (d.getY() - c.getY()));
+		double numerator1 = ((a.getY() - point.getY()) * (point2.getX() - point.getX()))
+				- ((a.getX() - point.getX()) * (point2.getY() - point.getY()));
 
-		double numerator2 = ((a.getY() - c.getY()) * (b.getX() - a.getX()))
-				- ((a.getX() - c.getX()) * (b.getY() - a.getY()));
+		double numerator2 = ((a.getY() - point.getY()) * (b.getX() - a.getX()))
+				- ((a.getX() - point.getX()) * (b.getY() - a.getY()));
 
 		if (numerator1 == 0 || numerator2 == 0) {
 			return false;
@@ -230,14 +230,14 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 			return false;
 
 		Point oldPoint = polygon.get(polygon.size() - 1);
-		double oldSqDist = Point.DistanceSquared(oldPoint, point);
+		double oldSqDist = distanceSquared(oldPoint, point);
 
 		for (int i = 0; i < polygon.size(); i++) {
 			Point newPoint = polygon.get(i);
-			double newSqDist = Point.DistanceSquared(newPoint, point);
+			double newSqDist = distanceSquared(newPoint, point);
 
 			if (oldSqDist + newSqDist + 2.0f * Math.sqrt(oldSqDist * newSqDist)
-					- Point.DistanceSquared(newPoint, oldPoint) < epsilon)
+					- distanceSquared(newPoint, oldPoint) < epsilon)
 				return toleranceOnOutside;
 
 			Point left;
@@ -259,6 +259,12 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		}
 
 		return inside;
+	}
+
+	private static double distanceSquared(Point oldPoint, Point point) {
+		double xdiff = oldPoint.getX()-point.getX();
+		double ydiff = oldPoint.getY()-point.getY();
+		return xdiff*xdiff+ydiff*ydiff;
 	}
 
 	@Override
@@ -374,7 +380,7 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		// we need to return a slightly smaller rectangle for boundary testing.
 		// otherwise there will seem like the corners of the rect can see their
 		// opposite corner, and add them as a neighbour.
-		// PointF center = rectF.getCenter();
+		// Point center = rectF.getCenter();
 
 		// even more interesting is that we have to scale the dimensions of this
 		// inner rectangle differently, otherwise the line-of-sight line

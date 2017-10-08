@@ -57,8 +57,8 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
-import com.github.a2g.core.primitive.Point;
-import com.github.a2g.core.primitive.PointF;
+import com.google.gwt.touch.client.Point;
+import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.primitive.RectF;
 import com.github.a2g.core.platforms.swing.dependencies.ImageForSwing;
@@ -317,10 +317,10 @@ implements IScenePanelFromScenePresenter
 
 		// connect all the points in a big line
 		List<RectF> obstacles = toScene.getObstacles();
-		List<PointF> points = toScene.getBoundaryPoints();
-		List<PointF> helpers = toScene.getHelperPoints();
-		PointF centre = toScene.getBoundaryPointsCentre();
-		List<PointF> path = toScene.getLastPath();
+		List<Point> points = toScene.getBoundaryPoints();
+		List<Point> helpers = toScene.getHelperPoints();
+		Point centre = toScene.getBoundaryPointsCentre();
+		List<Point> path = toScene.getLastPath();
 		Iterator<RectF> bubbles = toScene.getSpeechRects();
 
 
@@ -330,12 +330,12 @@ implements IScenePanelFromScenePresenter
 
 
 			int size = points.size();
-			PointF lastPt = points.get(size-1);
+			Point lastPt = points.get(size-1);
 
 			// draw boundary points
 			for(int i=0; i<size; i++)
 			{
-				PointF newPt = points.get(i);
+				Point newPt = points.get(i);
 				drawLine(newPt, lastPt, g);
 				lastPt = newPt;
 			}
@@ -366,8 +366,8 @@ implements IScenePanelFromScenePresenter
 
 			// draw network
 			g.setColor(Color.red);
-			//PointF rawStart = new PointF(0,.1); 
-			//PointF rawEnd = new PointF(.9,.9);
+			//Point rawStart = new Point(0,.1); 
+			//Point rawEnd = new Point(.9,.9);
 
 			List<PointFWithNeighbours> verts = toScene.getLastNetworkOfConcaveVertices();
 			if(verts!=null)
@@ -389,10 +389,10 @@ implements IScenePanelFromScenePresenter
 			g.setColor(new Color(0,255,0));
 			if(path!=null)
 			{
-				PointF first = path.get(0);
+				Point first = path.get(0);
 				for(int i=1;i<path.size();i++)
 				{
-					PointF second = path.get(i);
+					Point second = path.get(i);
 					drawLine(first,second,g);
 					first = second;
 				}
@@ -418,7 +418,7 @@ implements IScenePanelFromScenePresenter
 
 
 	}
-	void drawLine(PointF newPt, PointF lastPt, Graphics g)
+	void drawLine(Point newPt, Point lastPt, Graphics g)
 	{
 		int width = getWidth();
 		int height = getHeight();

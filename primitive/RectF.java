@@ -16,6 +16,8 @@
 
 package com.github.a2g.core.primitive;
 
+import com.google.gwt.touch.client.Point;
+
 public class RectF {
 	private double left;
 	private double top;

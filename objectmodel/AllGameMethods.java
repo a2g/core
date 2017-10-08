@@ -14,7 +14,7 @@ import com.github.a2g.core.interfaces.internal.ILoad;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.Point;
+import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.RectF;
 
 /**
@@ -667,6 +667,13 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	public void addBoundaryPoint(int helperIndex) {
 		Point p1 = master.getScenePresenter().getHelperPoints().get(helperIndex);
 		master.getScenePresenter().addBoundaryPoint(p1.getX(), p1.getY());
+		
+	}
+
+	@Override
+	public void setClumpWithPrevious(short ocode, boolean isClump) {
+		String otid = master.getScenePresenter().getOtidByCode(ocode);
+		master.getScenePresenter().getObjectByOtid(otid).setClumpWithPrevious(isClump);
 		
 	}
 	
