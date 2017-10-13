@@ -28,6 +28,7 @@ import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromSwingPopupPanel;
 import com.github.a2g.core.platforms.swing.ScenePanelForSwing;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.touch.client.Point;
 
 public class PopupPanelForSwing
@@ -60,7 +61,7 @@ public class PopupPanelForSwing
 		//api.getlocationOnScreen
 		IScenePanelFromScenePresenter sv = toScene.getView();
 		ScenePanelForSwing spj = (ScenePanelForSwing)sv;
-		Point p = spj.getTopLeft();
+		PointI p = spj.getTopLeft();
 		popup.setLocation(p.getX()+ x, p.getY()+y);
 	}
 	public void setText(String string)

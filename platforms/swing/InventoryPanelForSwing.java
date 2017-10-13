@@ -42,6 +42,7 @@ import com.github.a2g.core.interfaces.internal.IPackagedImage;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.platforms.swing.dependencies.ImageForSwing;
 import com.github.a2g.core.platforms.swing.dependencies.PackagedImageForSwing;
@@ -68,7 +69,7 @@ implements ImagePanelAPI
 	int width;
 	int height;
 
-	private Map<Integer,Point> mapOfPointsByImage;
+	private Map<Integer,PointI> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages;
 
@@ -77,7 +78,7 @@ implements ImagePanelAPI
 
 	public InventoryPanelForSwing(EventBus bus, IInventoryPresenterFromInventoryPanel api2, ColorEnum fore, ColorEnum back)
 	{
-		this.mapOfPointsByImage = new TreeMap<Integer, Point>();
+		this.mapOfPointsByImage = new TreeMap<Integer, PointI>();
 		this.listOfVisibleHashCodes = new LinkedList<Integer>();
 		this.listOfAllVisibleImages = new LinkedList<Image>();
 		this.width = 200;
@@ -100,11 +101,11 @@ implements ImagePanelAPI
 
 		try
 		{
-			java.awt.Image rawLeft = ImageIO.read(new File("E:\\a2g_core\\res\\leftArrow.png"));
-			java.awt.Image rawRight = ImageIO.read(new File("E:\\a2g_core\\res\\leftArrow.png"));
+			java.awt.Image rawLeft = ImageIO.read(new File("C:\\a2g_core\\res\\leftArrow.png"));
+			java.awt.Image rawRight = ImageIO.read(new File("C:\\a2g_core\\res\\leftArrow.png"));
 
-			imgLeft = new ImageForSwing(rawLeft, "", this, new Point(0,0));
-			imgRight = new ImageForSwing(rawRight, "", this, new Point(0,0));
+			imgLeft = new ImageForSwing(rawLeft, "", this, new PointI(0,0));
+			imgRight = new ImageForSwing(rawRight, "", this, new PointI(0,0));
 
 		}
 		catch (IOException e) {
@@ -122,7 +123,7 @@ implements ImagePanelAPI
 	public void setThingPosition(Image image, int x, int y, double scale) {
 		if(mapOfPointsByImage.containsKey(((ImageForSwing)image).getNativeImage().hashCode()))
 		{
-			mapOfPointsByImage.put(((ImageForSwing)image).getNativeImage().hashCode(), new Point(x,y));
+			mapOfPointsByImage.put(((ImageForSwing)image).getNativeImage().hashCode(), new PointI(x,y));
 			triggerPaint();
 		}
 	}
@@ -146,7 +147,7 @@ implements ImagePanelAPI
 	@Override
 	public void insert(Image image, int x, int y, int before) {
 		listOfAllVisibleImages.add(before,image);
-		mapOfPointsByImage.put(((ImageForSwing)image).getNativeImage().hashCode(), new Point(x,y));
+		mapOfPointsByImage.put(((ImageForSwing)image).getNativeImage().hashCode(), new PointI(x,y));
 		triggerPaint();
 	}
 
@@ -161,7 +162,7 @@ implements ImagePanelAPI
 	@Override
 	public void add(Image image, int x, int y) {
 		listOfAllVisibleImages.add(image);
-		mapOfPointsByImage.put(((ImageForSwing)image).getNativeImage().hashCode(), new Point(x,y));
+		mapOfPointsByImage.put(((ImageForSwing)image).getNativeImage().hashCode(), new PointI(x,y));
 		triggerPaint();
 	}
 
@@ -191,7 +192,7 @@ implements ImagePanelAPI
 			Image image = iter.next();
 			if(listOfVisibleHashCodes.contains(((ImageForSwing)image).getNativeImage().hashCode()))
 			{
-				Point p = mapOfPointsByImage.get(((ImageForSwing)image).getNativeImage().hashCode());
+				PointI p = mapOfPointsByImage.get(((ImageForSwing)image).getNativeImage().hashCode());
 				g.drawImage(((ImageForSwing)image).getNativeImage(),p.getX(),p.getY(),this);
 			}
 		}
@@ -232,7 +233,7 @@ implements ImagePanelAPI
 	{
 		java.awt.Image img = ((PackagedImageForSwing)imageResource).unpack();
 
-		ImageForSwing imageAndPos = new ImageForSwing(img, objectTextualId, this, new Point(0,0));
+		ImageForSwing imageAndPos = new ImageForSwing(img, objectTextualId, this, new PointI(0,0));
 
 		// to fire image loading done.
 		// only gwt is asynch, we are swing which synchronous
@@ -250,13 +251,13 @@ implements ImagePanelAPI
 
 	@Override
 	public void setLeftArrowVisible(boolean visible) {
-		imgLeft.setVisible(visible, new Point(0,0));
+		imgLeft.setVisible(visible, new PointI(0,0));
 		triggerPaint();
 	}
 
 	@Override
 	public void setRightArrowVisible(boolean visible) {
-		imgRight.setVisible(visible, new Point(50,0));
+		imgRight.setVisible(visible, new PointI(50,0));
 		triggerPaint();
 	}
 

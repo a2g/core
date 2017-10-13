@@ -57,6 +57,7 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
+import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.touch.client.Point;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.Rect;
@@ -88,7 +89,7 @@ implements IScenePanelFromScenePresenter
 	IScenePresenterFromScenePanel toScene;
 	ICommandLinePresenterFromSceneMouseOver toCommandLine;
 
-	private Map<Integer,Point> mapOfPointsByImage;
+	private Map<Integer,PointI> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages; 
 
@@ -104,7 +105,7 @@ implements IScenePanelFromScenePresenter
 		isRenderDiagnostics = false; 
 		this.toScene = toScene;
 		this.toCommandLine = toCommandLine;
-		this.mapOfPointsByImage = new TreeMap<Integer, Point>();
+		this.mapOfPointsByImage = new TreeMap<Integer, PointI>();
 		this.listOfVisibleHashCodes = new LinkedList<Integer>();
 		this.listOfAllVisibleImages = new LinkedList<Image>();
 		this.width = 200;
@@ -168,7 +169,7 @@ implements IScenePanelFromScenePresenter
 
 		java.awt.Image img = ((PackagedImageForSwing)imageResource).unpack();
 
-		ImageForSwing imageAndPos = new ImageForSwing(img, objectTextualId, this, new Point(x, y));
+		ImageForSwing imageAndPos = new ImageForSwing(img, objectTextualId, this, new PointI(x, y));
 
 		// to fire image loading done.
 		//lh.onLoad(null);
@@ -194,7 +195,7 @@ implements IScenePanelFromScenePresenter
 
 	void putPoint(ImageForSwing image, int x,int y)
 	{
-		mapOfPointsByImage.put(hash(image), new Point(x,y));
+		mapOfPointsByImage.put(hash(image), new PointI(x,y));
 	}
 
 	@Override
@@ -280,7 +281,7 @@ implements IScenePanelFromScenePresenter
 			Image image = iter.next();
 			if(listOfVisibleHashCodes.contains(hash(image)))
 			{
-				Point p = mapOfPointsByImage.get(hash(image));
+				PointI p = mapOfPointsByImage.get(hash(image));
 				int leftTopPlusX = p.getX();
 				int leftTopPlusY = p.getY();
 
@@ -479,7 +480,7 @@ implements IScenePanelFromScenePresenter
 	{
 		java.awt.Image img = ((PackagedImageForSwing)imageResource).unpack();
 
-		ImageForSwing imageAndPos = new ImageForSwing(img, objectTextualId, this, new Point(x, y));
+		ImageForSwing imageAndPos = new ImageForSwing(img, objectTextualId, this, new PointI(x, y));
 		return imageAndPos;
 	}
 
@@ -492,14 +493,14 @@ implements IScenePanelFromScenePresenter
 
 
 
-	public Point getTopLeft() {
-		return new Point(0,0);
+	public PointI getTopLeft() {
+		return new PointI(0,0);
 		//return new Point(this.getLocationOnScreen().x,this.getLocationOnScreen().y );
 	}
 
 	@Override
 	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
-			String speech, Rect pixels, Point mouth, TalkPerformer sayAction) 
+			String speech, Rect pixels, PointI mouth, TalkPerformer sayAction) 
 	{
 		this.speechVisible = isVisible;
 		this.speechColor = talkingColor;

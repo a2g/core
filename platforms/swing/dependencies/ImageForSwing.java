@@ -18,6 +18,7 @@ package com.github.a2g.core.platforms.swing.dependencies;
 
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
+import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.touch.client.Point;
 
 public class ImageForSwing extends Image {
@@ -25,7 +26,7 @@ public class ImageForSwing extends Image {
 	private String objectId;
 
 	public ImageForSwing(final java.awt.Image image, String objectId,
-			ImagePanelAPI panel, Point offset) {
+			ImagePanelAPI panel, PointI offset) {
 		super(panel, offset, objectId);
 		this.image = image;
 		this.objectId = objectId;
