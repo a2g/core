@@ -4,11 +4,15 @@ import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
+import com.github.a2g.core.interfaces.Game;
+import com.github.a2g.core.interfaces.IAuxGameScene;
 import com.github.a2g.core.interfaces.IOnDialogTree;
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IOnEntry;
 import com.github.a2g.core.interfaces.IOnEveryFrame;
 import com.github.a2g.core.interfaces.IOnFillLoadList;
+import com.github.a2g.core.interfaces.IOnFillLoadListImpl;
+import com.github.a2g.core.interfaces.IOnFillLoadListImpl.LoadKickStarter;
 import com.github.a2g.core.interfaces.IOnPreEntry;
 import com.github.a2g.core.interfaces.internal.ILoad;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
@@ -423,8 +427,8 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	
 
 	@Override
-	public void kickStartLoading() {
-		master.kickStartLoading();
+	public void setSceneAsActiveAndKickStartLoading(Game scene) {
+		master.setSceneAsActiveAndKickStartLoading(scene);
 
 	}
 
@@ -457,10 +461,6 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 		return master.getCurrentSceneName();
 	}
 
-	@Override
-	public IGameScene getSceneByName(Object string) {
-		return master.getSceneByName(string.toString());
-	}
 
 	@Override
 	public void switchToScene(String scene, int arrivalSegment) {
@@ -676,5 +676,12 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 		master.getScenePresenter().getObjectByOtid(otid).setClumpWithPrevious(isClump);
 		
 	}
+
+	@Override
+	public IAuxGameScene queueResourcesAndReturnWrappedScene(Object name, IOnFillLoadListImpl api) {
+		return master.queueResourcesAndReturnWrappedScene(name,api);
+	}
+
+	 
 	
 }

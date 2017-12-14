@@ -38,6 +38,8 @@ import com.github.a2g.core.event.PropertyChangeEvent;
 import com.github.a2g.core.event.PropertyChangeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
+import com.github.a2g.core.interfaces.Game;
+import com.github.a2g.core.interfaces.IAuxGameScene;
 import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.internal.IFactory;
 import com.github.a2g.core.interfaces.internal.IHostFromMasterPresenter;
@@ -86,6 +88,7 @@ PropertyChangeEventHandlerAPI
 	private TitleCardPresenter titleCardPresenter;
 
 	private IGameScene sceneHandlers;
+	private IAuxGameScene sceneHandlers2;
 
 	private EventBus bus;
 	private IHostFromMasterPresenter host;
@@ -283,14 +286,14 @@ PropertyChangeEventHandlerAPI
 	}
 
 	public void callOnPreEntry() {
-		this.sceneHandlers.onPreEntry(proxyForGameScene);
+		this.sceneHandlers2.onPreEntry(proxyForGameScene);
 	}
 
 	@Override
 	public void onTimer() {
 
 		if (timer != null) {
-			this.sceneHandlers.onEveryFrame(proxyForGameScene); 
+			this.sceneHandlers2.onEveryFrame(proxyForGameScene); 
 		}
 		if (switchTimer != null) {
 			switchTimer.cancel();
@@ -426,7 +429,7 @@ PropertyChangeEventHandlerAPI
 		
 	 
 		try {
-			BaseAction actionChain = sceneHandlers.onDialogTree(
+			BaseAction actionChain = sceneHandlers2.onDialogTree(
 					proxyForGameScene, newTalkAction, branchId);
 			BaseAction  actionChain2 = replaceChainToDialogActionWithCallToOnDialogTree(actionChain);
 
@@ -449,7 +452,7 @@ PropertyChangeEventHandlerAPI
 		
 		BaseAction a;
 		try {
-			a = this.sceneHandlers.onEntry(proxyForGameScene,
+			a = this.sceneHandlers2.onEntry(proxyForGameScene,
 					MatOps.createChainRootAction());
 
 
@@ -501,8 +504,8 @@ PropertyChangeEventHandlerAPI
 		loaderPresenter.getLoaders().addEssential(blah, this);
 	}
 
-	public void kickStartLoading() {
-		
+	public void setSceneAsActiveAndKickStartLoading(IAuxGameScene scene) {
+		this.sceneHandlers2 = scene;
 		loaderPresenter.getLoaders().setSceneAndInventoryResolution();
 		
 		loaderPresenter.getLoaders().calculateImagesToLoadAndOmitInventoryIfSame();
@@ -757,7 +760,7 @@ PropertyChangeEventHandlerAPI
 			DialogChainableAction d = MatOps.createDialogChainRootAction();
 			BaseAction a=null;
 			try {
-				a = this.sceneHandlers.onDialogTree(proxyForGameScene, d, branchId);
+				a = this.sceneHandlers2.onDialogTree(proxyForGameScene, d, branchId);
 			} catch (A2gException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -778,7 +781,7 @@ PropertyChangeEventHandlerAPI
 		BaseAction a = null;
 		try {
 			
-		a = this.sceneHandlers.onDoCommand(proxyForGameScene,
+		a = this.sceneHandlers2.onDoCommand(proxyForGameScene,
 				MatOps.createChainRootAction(), verbAsCode, sentenceA, sentenceB, x
 				+ scenePresenter.getCameraX(),
 				y + scenePresenter.getCameraY());
@@ -862,7 +865,7 @@ PropertyChangeEventHandlerAPI
 				SentenceItem o2 = new SentenceItem("","",cmd.getInt2());
 				BaseAction a=null;
 				try {
-					a = this.sceneHandlers.onDoCommand(proxyForGameScene,
+					a = this.sceneHandlers2.onDoCommand(proxyForGameScene,
 							MatOps.createChainRootAction(), cmd.getVerb(),o1,o2,cmd.getDouble1(),cmd.getDouble2());
 				} catch (A2gException e) {
 					// TODO Auto-generated catch block
@@ -1108,6 +1111,14 @@ PropertyChangeEventHandlerAPI
 
 	public void clearSaidSpeech() {
 		dialogTreePresenter.resetRecordOfSaidSpeech();	
+	}
+
+
+
+	public IAuxGameScene queueResourcesAndReturnWrappedScene(Object name, IOnFillLoadListImpl api) {
+		IGameScene blah = this.host.getSceneViaCache(name.toString());
+		IAuxGameScene blah2 = blah.onFillLoadList(api);
+		return blah2;
 	}
 
 
