@@ -51,6 +51,7 @@ import com.github.a2g.core.interfaces.methods.game.ISetDisplayName;
 import com.github.a2g.core.interfaces.methods.game.ISetInventoryItemDisplayName;
 import com.github.a2g.core.interfaces.methods.game.ISetInventoryItemVisible;
 import com.github.a2g.core.interfaces.methods.game.ISetIsTalkingAlwaysWithoutIncrementing;
+import com.github.a2g.core.interfaces.methods.game.ISetScreenCoordsPerSecond;
 import com.github.a2g.core.interfaces.methods.game.ISetValue;
 import com.github.a2g.core.interfaces.methods.game.ISetX;
 import com.github.a2g.core.interfaces.methods.game.ISetY;
@@ -104,6 +105,7 @@ IGetCurrentFrame,
 ISetCurrentFrame,
 ISetDisplayName,
 ISetDefaultSceneObject,
+ISetScreenCoordsPerSecond,
 
 // animation
 IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation,
