@@ -18,7 +18,6 @@ package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.DialogChainEndAction;
-import com.github.a2g.core.interfaces.IOnFillLoadListImpl.LoadKickStarter;
 import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
 import com.github.a2g.core.interfaces.internal.IChainRootForScene;
 import com.github.a2g.core.objectmodel.SentenceItem;

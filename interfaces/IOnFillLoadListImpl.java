@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.appmissionwebandswing.SceneEnumB;
 import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.DialogChainEndAction;
 import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
@@ -38,16 +37,16 @@ public class IOnFillLoadListImpl {
 	}
 
 	public void addEssential(ILoad imageBundle) {
-		this.implementation.addEssential(imageBundle);
+		this.implementation.queueSingleBundle(imageBundle);
 	}
 
-	public LoadKickStarter createLoadKickStarter(Game scene) {
+	public LoadKickStarter createMainReturnObject(Game scene) {
 		this.implementation.setSceneAsActiveAndKickStartLoading(scene);
 		return new LoadKickStarter(null);
 	}
 	
-	public LoadKickStarter createReturnObjectForSharedScenes(Game gameSceneHandlers) {
-		return new LoadKickStarter(gameSceneHandlers);
+	public LoadKickStarter createSharedSceneReturnObject(Game scene) {
+		return new LoadKickStarter(scene);
 	}
 
 	// making the creation methods (above) as the only way to create the 
@@ -76,14 +75,14 @@ public class IOnFillLoadListImpl {
 		}
 		@Override
 		public ChainEndAction onDoCommand(IOnDoCommand api, IChainRootForScene ba, int verb, SentenceItem itemA,
-				SentenceItem itemB, double x, double y) throws A2gException {
-			// TODO Auto-generated method stub
+				SentenceItem itemB, double x, double y) throws A2gException 
+		{
 			return wrapped.onDoCommand(api, ba, verb, itemA, itemB, x, y);
 		}
 		@Override
 		public DialogChainEndAction onDialogTree(IOnDialogTree api, IChainRootForDialog ba, int branch)
-				throws A2gException {
-			// TODO Auto-generated method stub
+				throws A2gException 
+		{
 			return wrapped.onDialogTree(api, ba, branch);
 		};
 
@@ -99,16 +98,15 @@ public class IOnFillLoadListImpl {
 
 	public void setContinueAfterLoad(boolean isContinueImmediately) {
 		this.implementation.setContinueAfterLoad(isContinueImmediately);
-
 	}
 
-	public void addMP3ForASoundObject(String name, String location)
+	public void queueMP3ForASoundObject(String name, String location)
 	{
-		this.implementation.addMP3ForASoundObject(name, location);
+		this.implementation.queueMP3ForASoundObject(name, location);
 	}
 
-	public IAuxGameScene queueResourcesAndReturnWrappedScene(Object name, IOnFillLoadListImpl api) {
-		return this.implementation.queueResourcesAndReturnWrappedScene(name, api);
+	public IAuxGameScene queueEntireSceneAndReturnScene(Object name, IOnFillLoadListImpl api) {
+		return this.implementation.queueEntireSceneAndReturnScene(name, api);
 	}
 
 }

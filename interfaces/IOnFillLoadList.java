@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.interfaces.IOnFillLoadListImpl.LoadKickStarter;
 import com.github.a2g.core.interfaces.internal.ILoad;
 import com.github.a2g.core.interfaces.methods.game.ISetValue;
 
@@ -25,13 +24,14 @@ import com.github.a2g.core.interfaces.methods.game.ISetValue;
  * @author Admin
  *
  */
-public interface IOnFillLoadList extends ISetValue {
-	void addEssential(ILoad blah);
-	void setSceneAsActiveAndKickStartLoading(Game scene); 
-	void clearAllLoadedLoads();
-	void setContinueAfterLoad(boolean isContinueImmediatelyAfterLoading);
-	void addMP3ForASoundObject(String name, String location);
-	IAuxGameScene queueResourcesAndReturnWrappedScene(Object name, IOnFillLoadListImpl api);
-	//LoadKickStarter createLoadKickStarter(Game scene);
-	//LoadKickStarter createReturnObjectForSharedScenes(Game scene);
+public interface IOnFillLoadList extends ISetValue 
+{
+	IAuxGameScene 	queueEntireSceneAndReturnScene(Object name, IOnFillLoadListImpl api);
+	void 			queueSingleBundle(ILoad blah);
+	void 			queueMP3ForASoundObject(String name, String location);
+
+	void 			setSceneAsActiveAndKickStartLoading(IAuxGameScene scene); 
+	void 			clearAllLoadedLoads();
+	void 			setContinueAfterLoad(boolean isContinueImmediatelyAfterLoading);
+		
 }

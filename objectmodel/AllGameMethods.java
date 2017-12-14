@@ -419,7 +419,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	// /@{
 
 	@Override
-	public void addEssential(ILoad load) {
+	public void queueSingleBundle(ILoad load) {
 		master.addEssential(load);
 
 	}
@@ -427,7 +427,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	
 
 	@Override
-	public void setSceneAsActiveAndKickStartLoading(Game scene) {
+	public void setSceneAsActiveAndKickStartLoading(IAuxGameScene scene) {
 		master.setSceneAsActiveAndKickStartLoading(scene);
 
 	}
@@ -532,7 +532,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 
 
 	@Override
-	public void addMP3ForASoundObject(String name, String location) {
+	public void queueMP3ForASoundObject(String name, String location) {
 		master.addMP3ForASoundObject(name, location);
 
 	}
@@ -678,7 +678,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 
 	@Override
-	public IAuxGameScene queueResourcesAndReturnWrappedScene(Object name, IOnFillLoadListImpl api) {
+	public IAuxGameScene queueEntireSceneAndReturnScene(Object name, IOnFillLoadListImpl api) {
 		return master.queueResourcesAndReturnWrappedScene(name,api);
 	}
 
