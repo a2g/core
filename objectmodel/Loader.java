@@ -98,7 +98,7 @@ public class Loader implements ILoaderPresenter {
 	}
 
 	public void addEssential(ILoad blah, IMasterPresenterFromBundle api) {
-
+		
 		for (int i = 0; i < blah.getNumberOfBundles(); i++) {
 			listOfEssentialLoaders.add(new LoaderItem(api, blah, i));
 		}

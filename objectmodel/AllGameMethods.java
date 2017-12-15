@@ -4,7 +4,7 @@ import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
-import com.github.a2g.core.interfaces.Game;
+import com.github.a2g.core.interfaces.IAuxGameScene;
 import com.github.a2g.core.interfaces.IAuxGameScene;
 import com.github.a2g.core.interfaces.IOnDialogTree;
 import com.github.a2g.core.interfaces.IOnDoCommand;

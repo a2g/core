@@ -36,17 +36,38 @@ public class IOnFillLoadListImpl {
 		this.implementation = impl;
 	}
 
-	public void addEssential(ILoad imageBundle) {
+	public void queueSingleLoader(ILoad imageBundle) {
 		this.implementation.queueSingleBundle(imageBundle);
 	}
 
-	public LoadKickStarter createMainReturnObject(Game scene) {
+	public void queueMP3ForASoundObject(String name, String location)
+	{
+		this.implementation.queueMP3ForASoundObject(name, location);
+	}
+
+	public IAuxGameScene queueEntireSceneAndReturnScene(Object name, IOnFillLoadListImpl api) {
+		return this.implementation.queueEntireSceneAndReturnScene(name, api);
+	}
+	
+	public LoadKickStarter createMainReturnObject(IAuxGameScene scene) {
 		this.implementation.setSceneAsActiveAndKickStartLoading(scene);
 		return new LoadKickStarter(null);
 	}
 	
-	public LoadKickStarter createSharedSceneReturnObject(Game scene) {
+	public LoadKickStarter createSharedSceneReturnObject(IAuxGameScene scene) {
 		return new LoadKickStarter(scene);
+	}
+
+	public void setValue(Object string, int value) {
+		this.implementation.setValue(string, value);
+	}
+
+	public void setContinueAfterLoad(boolean isContinueImmediately) {
+		this.implementation.setContinueAfterLoad(isContinueImmediately);
+	}
+	
+	public void clearAllLoadedLoads() {
+		this.implementation.clearAllLoadedLoads();
 	}
 
 	// making the creation methods (above) as the only way to create the 
@@ -58,7 +79,7 @@ public class IOnFillLoadListImpl {
 	// Note: a lazy person could return null, but that's asking for trouble.
 	public class LoadKickStarter implements IAuxGameScene{
 		IAuxGameScene wrapped;
-		private LoadKickStarter(Game wrapped) {
+		private LoadKickStarter(IAuxGameScene wrapped) {
 			this.wrapped = wrapped;
 		}
 		@Override
@@ -85,28 +106,13 @@ public class IOnFillLoadListImpl {
 		{
 			return wrapped.onDialogTree(api, ba, branch);
 		};
+		
+		@Override
+		public String toString()
+		{
+			return wrapped.toString();
+		};
 
-	}
-
-	public void setValue(Object string, int value) {
-		this.implementation.setValue(string, value);
-	}
-
-	public void clearAllLoadedLoads() {
-		this.implementation.clearAllLoadedLoads();
-	}
-
-	public void setContinueAfterLoad(boolean isContinueImmediately) {
-		this.implementation.setContinueAfterLoad(isContinueImmediately);
-	}
-
-	public void queueMP3ForASoundObject(String name, String location)
-	{
-		this.implementation.queueMP3ForASoundObject(name, location);
-	}
-
-	public IAuxGameScene queueEntireSceneAndReturnScene(Object name, IOnFillLoadListImpl api) {
-		return this.implementation.queueEntireSceneAndReturnScene(name, api);
 	}
 
 }

@@ -38,7 +38,7 @@ import com.github.a2g.core.event.PropertyChangeEvent;
 import com.github.a2g.core.event.PropertyChangeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
-import com.github.a2g.core.interfaces.Game;
+import com.github.a2g.core.interfaces.IAuxGameScene;
 import com.github.a2g.core.interfaces.IAuxGameScene;
 import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.internal.IFactory;

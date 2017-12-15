@@ -31,7 +31,7 @@ public interface IOnFillLoadList extends ISetValue
 	void 			queueMP3ForASoundObject(String name, String location);
 
 	void 			setSceneAsActiveAndKickStartLoading(IAuxGameScene scene); 
-	void 			clearAllLoadedLoads();
 	void 			setContinueAfterLoad(boolean isContinueImmediatelyAfterLoading);
-		
+	
+	void 			clearAllLoadedLoads();		
 }
