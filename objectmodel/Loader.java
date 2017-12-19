@@ -6,13 +6,16 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.github.a2g.core.interfaces.internal.ILoad;
 import com.github.a2g.core.interfaces.internal.ILoaderPresenter;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoader;
 import com.github.a2g.core.primitive.LoaderEnum;
-import com.github.a2g.core.primitive.PointI;
+import com.github.a2g.core.primitive.LogNames;
+import com.github.a2g.core.primitive.PointI; 
 
 public class Loader implements ILoaderPresenter {
 	private LoaderItem theCurrentLoader;
@@ -23,6 +26,7 @@ public class Loader implements ILoaderPresenter {
 	private String nameOfInventoryResourceUsedLastTime;
 	private boolean isSameInventoryAsLastTime;
 	private int numberOfImagesToLoad;
+	private static final Logger LOADNEXT = Logger.getLogger(LogNames.LOADNEXT);
 
 	public Loader(IMasterPresenterFromLoader callbacks) {
 		this.theCurrentLoader = null;
@@ -55,6 +59,7 @@ public class Loader implements ILoaderPresenter {
 	}
 
 	void loadNext() {
+		
 		if (!listOfEssentialLoaders.isEmpty()) {
 			theCurrentLoader = this.listOfEssentialLoaders.get(0);
 		} else {
@@ -63,6 +68,7 @@ public class Loader implements ILoaderPresenter {
 		}
 
 		String nameAndNum = theCurrentLoader.getCombinedClassAndNumber();
+		LOADNEXT.log( Level.FINE, "LOADNEXT "+nameAndNum );  
 		if (objectCache.containsKey(nameAndNum)) {
 			master.mergeWithScene(objectCache.get(nameAndNum));
 

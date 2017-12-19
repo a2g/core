@@ -20,4 +20,5 @@ public interface LogNames {
 	String C = "C";
 	String D = "D";
 	String ANIMATIONS_AS_THEY_ARE_GOT = "ANIMATIONS_AS_THEY_ARE_INDEXED";
+	String LOADNEXT = "LOADNEXT";
 }
