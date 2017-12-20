@@ -9,7 +9,7 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.github.a2g.core.interfaces.internal.ILoad;
+import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.interfaces.internal.ILoaderPresenter;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoader;
@@ -103,7 +103,7 @@ public class Loader implements ILoaderPresenter {
 				objPlusAnimCode, width, height);
 	}
 
-	public void addEssential(ILoad blah, IMasterPresenterFromBundle api) {
+	public void addEssential(IBundleLoader blah, IMasterPresenterFromBundle api) {
 		
 		for (int i = 0; i < blah.getNumberOfBundles(); i++) {
 			listOfEssentialLoaders.add(new LoaderItem(api, blah, i));

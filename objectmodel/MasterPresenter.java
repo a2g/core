@@ -43,7 +43,7 @@ import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePre
 import com.github.a2g.core.interfaces.internal.IFactory;
 import com.github.a2g.core.interfaces.internal.IHostFromMasterPresenter;
 import com.github.a2g.core.interfaces.internal.IHostingPanel;
-import com.github.a2g.core.interfaces.internal.ILoad;
+import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActionRunner;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
@@ -457,7 +457,7 @@ public class MasterPresenter
 
 	}
 
-	public void addEssential(ILoad blah) {
+	public void addEssential(IBundleLoader blah) {
 		loaderPresenter.getLoaders().addEssential(blah, this);
 	}
 

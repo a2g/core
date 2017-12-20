@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.interfaces.internal.ILoad;
+import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.interfaces.methods.game.ISetValue;
 
 /**  
@@ -27,7 +27,7 @@ import com.github.a2g.core.interfaces.methods.game.ISetValue;
 public interface IOnQueueResources extends ISetValue 
 {
 	IAuxGameScene 	queueMixinStuffAndReturnScene(IMixin loader, IOnQueueResourcesImpl api);
-	void 			queueSingleBundle(ILoad blah);
+	void 			queueBundleLoader(IBundleLoader blah);
 	void 			queueMP3ForASoundObject(String name, String location);
 
 	void 			setSceneAsActiveAndKickStartLoading(IAuxGameScene scene); 

@@ -17,7 +17,7 @@
 package com.github.a2g.core.objectmodel;
 
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.interfaces.internal.ILoad;
+import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.interfaces.internal.ILoaderPresenterFromLoaderItem;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
 import com.github.a2g.core.primitive.PointI;
@@ -25,7 +25,7 @@ import com.google.gwt.event.dom.client.LoadEvent;
 
 public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	private ILoaderPresenterFromLoaderItem callbacks;
-	ILoad bundle;
+	IBundleLoader bundle;
 	int bundleNumber;
 	int numberOfImagesLeftToLoad;
 	int origNumberOfImagesLeftToLoad;
@@ -33,7 +33,7 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	private LoadedLoad theCurrentCacheObject;
 
 	public LoaderItem(IMasterPresenterFromBundle api2,
-			ILoad bundleToCallLoadOn, int bundleNumber) {
+			IBundleLoader bundleToCallLoadOn, int bundleNumber) {
 		this.api = api2;
 		this.bundle = bundleToCallLoadOn;
 		this.bundleNumber = bundleNumber;

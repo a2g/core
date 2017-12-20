@@ -12,7 +12,7 @@ import com.github.a2g.core.interfaces.IOnEveryFrame;
 import com.github.a2g.core.interfaces.IOnQueueResources;
 import com.github.a2g.core.interfaces.IOnQueueResourcesImpl;
 import com.github.a2g.core.interfaces.IOnPreEntry;
-import com.github.a2g.core.interfaces.internal.ILoad;
+import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.github.a2g.core.interfaces.IMixin;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -417,8 +417,8 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	// /@{
 
 	@Override
-	public void queueSingleBundle(ILoad load) {
-		master.addEssential(load);
+	public void queueBundleLoader(IBundleLoader bundleLoader) {
+		master.addEssential(bundleLoader);
 
 	}
 

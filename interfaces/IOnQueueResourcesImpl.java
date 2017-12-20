@@ -20,7 +20,7 @@ import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.DialogChainEndAction;
 import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
 import com.github.a2g.core.interfaces.internal.IChainRootForScene;
-import com.github.a2g.core.interfaces.internal.ILoad;
+import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.A2gException; 
 
@@ -36,8 +36,8 @@ public class IOnQueueResourcesImpl {
 		this.implementation = impl;
 	}
 
-	public void queueMixinResources(ILoad imageBundle) {
-		this.implementation.queueSingleBundle(imageBundle);
+	public void queueLoader(IBundleLoader imageBundle) {
+		this.implementation.queueBundleLoader(imageBundle);
 	}
 
 	public void queueMP3ForASoundObject(String name, String location)
