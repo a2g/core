@@ -61,8 +61,9 @@ import com.github.a2g.core.interfaces.internal.IPackagedImage;
 import com.github.a2g.core.interfaces.internal.ISound;
 import com.github.a2g.core.interfaces.internal.ITimer;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
-import com.github.a2g.core.interfaces.IOnFillLoadListImpl;
+import com.github.a2g.core.interfaces.IOnQueueResourcesImpl;
 import com.github.a2g.core.interfaces.IGameScene;
+import com.github.a2g.core.interfaces.IMixin;
 import com.google.gwt.event.shared.EventBus;
 
 public class MasterPresenter
@@ -524,7 +525,7 @@ public class MasterPresenter
 		clearMapOfSounds();
 
 		// then in the scene the user can overwrite this.
-		if (null == this.sceneHandlers.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene))) {
+		if (null == this.sceneHandlers.onFillLoadList(new IOnQueueResourcesImpl(proxyForGameScene))) {
 			startScene();
 		}
 	}
@@ -533,7 +534,7 @@ public class MasterPresenter
 	public void restartReloading() {
 		loaderPresenter.getLoaders().clearLoaders();
 
-		this.sceneHandlers.onFillLoadList(new IOnFillLoadListImpl(proxyForGameScene));
+		this.sceneHandlers.onFillLoadList(new IOnQueueResourcesImpl(proxyForGameScene));
 	}
 
 	@Override
@@ -1011,9 +1012,8 @@ public class MasterPresenter
 		dialogTreePresenter.resetRecordOfSaidSpeech();
 	}
 
-	public IAuxGameScene queueResourcesAndReturnWrappedScene(Object name, IOnFillLoadListImpl api) {
-		IGameScene blah = this.host.getSceneViaCache(name.toString());
-		IAuxGameScene blah2 = blah.onFillLoadList(api);
+	public IAuxGameScene queueMixinAndReturnScene(IMixin loader, IOnQueueResourcesImpl api) {
+		IAuxGameScene blah2 = loader.onFillLoadList(api);
 		return blah2;
 	}
 

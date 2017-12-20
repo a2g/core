@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.interfaces.IOnFillLoadListImpl.LoadKickStarter;
+import com.github.a2g.core.interfaces.IOnQueueResourcesImpl.LoadKickStarter;
 
 /**
  * Each scene  is represented by a class that implements the following 6 methods:
@@ -49,6 +49,6 @@ public interface IGameScene extends ConstantsForAPI {
 		</table>
 	 */
 
-	public LoadKickStarter onFillLoadList(IOnFillLoadListImpl api);
+	public LoadKickStarter onFillLoadList(IOnQueueResourcesImpl api);
 
 }

@@ -10,13 +10,14 @@ import com.github.a2g.core.interfaces.IOnDialogTree;
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IOnEntry;
 import com.github.a2g.core.interfaces.IOnEveryFrame;
-import com.github.a2g.core.interfaces.IOnFillLoadList;
-import com.github.a2g.core.interfaces.IOnFillLoadListImpl;
-import com.github.a2g.core.interfaces.IOnFillLoadListImpl.LoadKickStarter;
+import com.github.a2g.core.interfaces.IOnQueueResources;
+import com.github.a2g.core.interfaces.IOnQueueResourcesImpl;
+import com.github.a2g.core.interfaces.IOnQueueResourcesImpl.LoadKickStarter;
 import com.github.a2g.core.interfaces.IOnPreEntry;
 import com.github.a2g.core.interfaces.internal.ILoad;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.github.a2g.core.interfaces.IGameScene;
+import com.github.a2g.core.interfaces.IMixin;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.RectF;
@@ -40,7 +41,7 @@ import com.github.a2g.core.primitive.RectF;
  *      handler by clicking on the links below:
  * 
  */
-public class AllGameMethods implements IOnFillLoadList, IOnEntry,
+public class AllGameMethods implements IOnQueueResources, IOnEntry,
 IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	private MasterPresenter master;
 
@@ -678,8 +679,8 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 
 	@Override
-	public IAuxGameScene queueEntireSceneAndReturnScene(Object name, IOnFillLoadListImpl api) {
-		return master.queueResourcesAndReturnWrappedScene(name,api);
+	public IAuxGameScene queueMixinStuffAndReturnScene(IMixin mixin, IOnQueueResourcesImpl api) {
+		return master.queueMixinAndReturnScene(mixin,api);
 	}
 
 	 
