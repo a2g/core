@@ -36,7 +36,7 @@ public class IOnQueueResourcesImpl {
 		this.implementation = impl;
 	}
 
-	public void queueLoader(IBundleLoader imageBundle) {
+	public void queueBundleLoader(IBundleLoader imageBundle) {
 		this.implementation.queueBundleLoader(imageBundle);
 	}
 
