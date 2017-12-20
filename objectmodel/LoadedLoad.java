@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 import com.github.a2g.core.primitive.LogNames;
 
 public class LoadedLoad {
-	private static final Logger LOADING_ANIM = Logger.getLogger(LogNames.LOADING_ANIM);
+	private static final Logger LOADING_ANIM = Logger.getLogger(LogNames.LOADING_ANIM.toString());
 
 	private SceneObjectCollection sceneObjectCollection;
 	private String name;

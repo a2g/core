@@ -27,7 +27,7 @@ import com.google.gwt.touch.client.Point;
 
 public class MovePerformer implements IMovePerformer
 {	
-	private static final Logger MOVE_PERFORMER = Logger.getLogger(LogNames.MOVE_PERFORMER);
+	private static final Logger MOVE_PERFORMER = Logger.getLogger(LogNames.MOVE_PERFORMER.toString());
 	
 	private IScenePresenterFromMovePerformer scene;
 

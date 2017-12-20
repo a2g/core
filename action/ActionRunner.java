@@ -32,10 +32,10 @@ import com.github.a2g.core.primitive.LogNames;
 
 public class ActionRunner implements IActionRunnerFromBaseAction {
 
-	private static final Logger RUNNER = Logger.getLogger(LogNames.RUNNER);
-	private static final Logger ACTIONS_EXECUTED = Logger.getLogger(LogNames.ACTIONS_AS_THEY_ARE_EXECUTED);
-	private static final Logger ACTIONS_FLATTENED_B4_EXECUTION = Logger.getLogger(LogNames.ACTIONS_FLATTENED_B4_EXECUTION);
-	private static final Logger RUNNER_REFCOUNT = Logger.getLogger(LogNames.RUNNER_REFCOUNT);
+	private static final Logger RUNNER = Logger.getLogger(LogNames.RUNNER.toString());
+	private static final Logger ACTIONS_EXECUTED = Logger.getLogger(LogNames.ACTIONS_AS_THEY_ARE_EXECUTED.toString());
+	private static final Logger ACTIONS_FLATTENED_B4_EXECUTION = Logger.getLogger(LogNames.ACTIONS_FLATTENED_B4_EXECUTION.toString());
+	private static final Logger RUNNER_REFCOUNT = Logger.getLogger(LogNames.RUNNER_REFCOUNT.toString());
 
 	protected ArrayList<ArrayList<BaseAction>> list;
 	private ArrayList<BaseAction> parallelActionsToWaitFor;

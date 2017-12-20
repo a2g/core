@@ -26,7 +26,7 @@ public class Loader implements ILoaderPresenter {
 	private String nameOfInventoryResourceUsedLastTime;
 	private boolean isSameInventoryAsLastTime;
 	private int numberOfImagesToLoad;
-	private static final Logger LOADNEXT = Logger.getLogger(LogNames.LOADNEXT);
+	private static final Logger LOADNEXT = Logger.getLogger(LogNames.LOADNEXT.toString());
 
 	public Loader(IMasterPresenterFromLoader callbacks) {
 		this.theCurrentLoader = null;

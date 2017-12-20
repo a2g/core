@@ -70,9 +70,9 @@ public class MasterPresenter
 		IMasterPresenterFromTimer, IMasterPresenterFromBundle, IMasterPresenterFromLoader,
 		IMasterPresenterFromCommandLine, IMasterPresenterFromActionRunner, IMasterPresenterFromInventory,
 		IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHandlerAPI {
-	private static final Logger LOADING = Logger.getLogger(LogNames.LOADING);
-	private static final Logger COMMANDS_AUTOPLAY = Logger.getLogger(LogNames.COMMANDS_AUTOPLAY);
-	private static final Logger ACTIONS_AS_THEY_ARE_EXECUTED = Logger.getLogger(LogNames.ACTIONS_AS_THEY_ARE_EXECUTED);
+	private static final Logger LOADING = Logger.getLogger(LogNames.LOADING.toString());
+	private static final Logger COMMANDS_AUTOPLAY = Logger.getLogger(LogNames.COMMANDS_AUTOPLAY.toString());
+	private static final Logger ACTIONS_AS_THEY_ARE_EXECUTED = Logger.getLogger(LogNames.ACTIONS_AS_THEY_ARE_EXECUTED.toString());
 
 	AllGameMethods proxyForGameScene;
 	private CommandLinePresenter commandLinePresenter;

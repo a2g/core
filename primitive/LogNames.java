@@ -1,24 +1,50 @@
 package com.github.a2g.core.primitive;
 
-public interface LogNames {
-	String MOVE_PERFORMER = "MOVE";
-	String LOADING = "Loading";
-	String LOADING_ANIM = "LOADING_ANIM";
-	String RUNNER = "RUNNER";
-	String RUNNER_REFCOUNT = "RUNNER_REFCOUNT";
-	String COMMANDS_VIA_GUI = "COMMAND_MANUAL";
-	String COMMANDS_AUTOPLAY = "COMMAND_AUTOPLAY";
-	String HTML5CANVAS = "HTML5CANVAS";
-	String ADDING_ANIM_TO_SOC_MAP = "ADDING_ANIM_TO_SOC_MAP";
-	String IMAGE_DUMP = "IMAGE_DUMP";
-	String ACTIONS_AS_THEY_ARE_EXECUTED = "ACTIONS_EXECUTED";
-	String KEY_ENTRY = "KEY_ENTRY";
-	String ACTIONS_FLATTENED_B4_EXECUTION = "ACTIONS_FLATTENED_B4_EXECUTION";
-	String WALK_MULTI_PERFORMER = "WALK_MULTI_PERFORMER";
-	String MULTIWALKER = "A";
-	String B = "B";
-	String C = "C";
-	String D = "D";
-	String ANIMATIONS_AS_THEY_ARE_GOT = "ANIMATIONS_AS_THEY_ARE_INDEXED";
-	String LOADNEXT = "LOADNEXT";
-}
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public enum LogNames 
+{
+	MOVE_PERFORMER(true), // = "MOVE";
+	LOADING(false),// = "Loading";
+	LOADING_ANIM(false),// = "LOADING_ANIM";
+	RUNNER(false), // = "RUNNER";
+	RUNNER_REFCOUNT(false),// = "RUNNER_REFCOUNT";
+	COMMANDS_VIA_GUI(false),// = "COMMAND_MANUAL";
+	COMMANDS_AUTOPLAY(false),// = "COMMAND_AUTOPLAY";
+	HTML5CANVAS(false),// = "HTML5CANVAS";
+	ADDING_ANIM_TO_SOC_MAP(true),// = "ADDING_ANIM_TO_SOC_MAP";
+	IMAGE_DUMP(false),// = "IMAGE_DUMP";
+	ACTIONS_AS_THEY_ARE_EXECUTED(false),// = "ACTIONS_EXECUTED";
+	KEY_ENTRY(false),// = "KEY_ENTRY";
+	ACTIONS_FLATTENED_B4_EXECUTION(false),// = "ACTIONS_FLATTENED_B4_EXECUTION";
+	WALK_MULTI_PERFORMER(false),// = "WALK_MULTI_PERFORMER";
+	MULTIWALKER(false),// = "A";
+	B(false),// = "B";
+	C(false),// = "C";
+	D(false),// = "D";
+	ANIMATIONS_AS_THEY_ARE_GOT(true),// = "ANIMATIONS_AS_THEY_ARE_INDEXED";
+	LOADNEXT(true);// = "LOADNEXT";
+
+	public final boolean isOn;
+	LogNames(boolean isOn)
+	{
+		this.isOn = isOn;
+	}
+
+	public static void registerLoggers() {
+		for (LogNames d : LogNames.values()) {
+			if(d.isOn)
+			{
+				final Logger log = Logger.getLogger(d.toString());
+				log.setLevel(Level.ALL);
+
+				//ConsoleHandler handler = new ConsoleHandler();
+				//handler.setLevel(Level.ALL);
+				//Formatter f = new SimpleFormatter();
+				//handler.setFormatter(f);
+				//log.addHandler(handler);
+			}
+		}
+	}
+};

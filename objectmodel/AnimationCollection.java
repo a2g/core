@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 import com.github.a2g.core.primitive.LogNames;
 
 public class AnimationCollection {
-	private static final Logger ANIMATIONS_AS_THEY_ARE_GOT = Logger.getLogger(LogNames.ANIMATIONS_AS_THEY_ARE_GOT);
+	private static final Logger ANIMATIONS_AS_THEY_ARE_GOT = Logger.getLogger(LogNames.ANIMATIONS_AS_THEY_ARE_GOT.toString().toString());
 
 	private Map<String, Animation> theMap;
 

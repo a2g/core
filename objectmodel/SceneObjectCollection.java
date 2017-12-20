@@ -30,7 +30,7 @@ import com.github.a2g.core.primitive.LogNames;
 
 
 public class SceneObjectCollection {
-	private static final Logger ADDING_ANIM_TO_SOC_MAP = Logger.getLogger(LogNames.ADDING_ANIM_TO_SOC_MAP);
+	private static final Logger ADDING_ANIM_TO_SOC_MAP = Logger.getLogger(LogNames.ADDING_ANIM_TO_SOC_MAP.toString());
 
 	private List<String> theOtids;
 	private List<Short> theOCodes;
