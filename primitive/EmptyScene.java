@@ -1,19 +1,9 @@
 package com.github.a2g.core.primitive;
 
 
-import com.github.a2g.core.action.ChainEndAction;
-import com.github.a2g.core.action.DialogChainEndAction;
 import com.github.a2g.core.interfaces.IGameScene;
-import com.github.a2g.core.interfaces.IOnDialogTree;
-import com.github.a2g.core.interfaces.IOnDoCommand;
-import com.github.a2g.core.interfaces.IOnEntry;
-import com.github.a2g.core.interfaces.IOnEveryFrame;
 import com.github.a2g.core.interfaces.IOnQueueResourcesImpl;
 import com.github.a2g.core.interfaces.IOnQueueResourcesImpl.LoadKickStarter;
-import com.github.a2g.core.interfaces.IOnPreEntry;
-import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
-import com.github.a2g.core.interfaces.internal.IChainRootForScene;
-import com.github.a2g.core.objectmodel.SentenceItem;
 
 
 

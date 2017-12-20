@@ -48,8 +48,6 @@ public class SceneObject {
 	private double scale;
 	private ColorEnum talkingColor;
 	private int speechBubble;
-	private boolean isClumpWithPrevious;
-
 	public SceneObject(String otid, int screenWidth, int screenHeight) {
 		this.currentImage = null;
 		this.otid = otid;
@@ -70,7 +68,6 @@ public class SceneObject {
 		this.setBaseMiddleY(0);
 
 		this.screenCoordsPerSecond = .3;
-		this.isClumpWithPrevious = false;
 	}
 
 	public void setDrawingOrder(int number) {
@@ -440,7 +437,6 @@ public class SceneObject {
 	}
 
 	public void setClumpWithPrevious(boolean isClump) {
-		this.isClumpWithPrevious = isClump;
 	}
 
 };

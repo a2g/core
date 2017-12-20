@@ -19,7 +19,6 @@ package com.github.a2g.core.platforms.html5.mouse;
 
 import com.github.a2g.core.event.ExecuteCommandEvent;
 import com.github.a2g.core.platforms.html5.dependencies.ContextRealHtml5;
-import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.web.bindery.event.shared.EventBus;

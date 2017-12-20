@@ -22,8 +22,7 @@ import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
 import com.github.a2g.core.interfaces.internal.IChainRootForScene;
 import com.github.a2g.core.interfaces.internal.ILoad;
 import com.github.a2g.core.objectmodel.SentenceItem;
-import com.github.a2g.core.primitive.A2gException;
-import com.scenes.mission.B.SharedBrightHeroB;
+import com.github.a2g.core.primitive.A2gException; 
 
 /**  
  * 

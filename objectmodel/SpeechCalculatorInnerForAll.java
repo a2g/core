@@ -21,7 +21,7 @@ public class SpeechCalculatorInnerForAll {
     	  int x = maxRect.getLeft()+marginLeft;
 			int y = maxRect.getTop()+marginTop;
 			int w = maxRect.getWidth()-marginLeft-marginRight;
-			int h = maxRect.getHeight()-marginTop-marginBottom;
+			maxRect.getHeight();
 			int lineSpacing = 3; 
 			int ygjsetc = 5;
 

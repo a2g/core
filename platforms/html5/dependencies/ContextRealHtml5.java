@@ -1,20 +1,15 @@
 package com.github.a2g.core.platforms.html5.dependencies;
 
 import com.github.a2g.core.interfaces.internal.IContext2d;
-import com.github.a2g.core.platforms.html5.mouse.SceneMouseClickHandler;
-import com.github.a2g.core.platforms.html5.mouse.SceneMouseOverHandler;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.google.gwt.event.dom.client.MouseOverHandler;
-import com.google.gwt.touch.client.Point;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 public class ContextRealHtml5 
 implements IContext2d

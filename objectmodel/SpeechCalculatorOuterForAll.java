@@ -3,11 +3,8 @@ package com.github.a2g.core.objectmodel;
 import java.util.ArrayList;
 
 import com.github.a2g.core.interfaces.internal.IContext2d;
-import com.github.a2g.core.platforms.html5.dependencies.ContextRealHtml5;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
-import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.user.client.ui.Panel;
 
 public class SpeechCalculatorOuterForAll {
 	SpeechCalculatorInnerForAll fittedRect;
