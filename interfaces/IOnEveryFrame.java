@@ -29,6 +29,7 @@ import com.github.a2g.core.interfaces.methods.game.IGetHelperPoint;
 import com.github.a2g.core.interfaces.methods.game.IGetLastSceneName;
 import com.github.a2g.core.interfaces.methods.game.IGetSceneGuiWidth;
 import com.github.a2g.core.interfaces.methods.game.IGetValue;
+import com.github.a2g.core.interfaces.methods.game.IGetViewportWidth;
 import com.github.a2g.core.interfaces.methods.game.IGetX;
 import com.github.a2g.core.interfaces.methods.game.IGetY;
 import com.github.a2g.core.interfaces.methods.game.IHide;
@@ -89,7 +90,10 @@ IGetCurrentAnimation, ISetX, ISetY, IGetX, IGetY, IIsVisible
 , IIsAnimation
 , ISetAnimationAsObjectCurrent
 , IGetHelperPoint
+, IGetViewportWidth
 {
+
+	
 
  
 	 

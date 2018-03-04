@@ -4,17 +4,18 @@ import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
-import com.github.a2g.core.interfaces.IAuxGameScene;
+import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.IOnDialogTree;
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IOnEntry;
 import com.github.a2g.core.interfaces.IOnEveryFrame;
-import com.github.a2g.core.interfaces.IOnQueueResources;
-import com.github.a2g.core.interfaces.IOnQueueResourcesImpl;
+import com.github.a2g.core.interfaces.IOnEnqueueResources;
+import com.github.a2g.core.interfaces.IOnEnqueueResourcesImpl;
 import com.github.a2g.core.interfaces.IOnPreEntry;
 import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
-import com.github.a2g.core.interfaces.IMixin;
+import com.github.a2g.core.interfaces.internal.ISingleBundle;
+import com.github.a2g.core.interfaces.IExtendsIGameScene;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.RectF;
@@ -38,7 +39,7 @@ import com.github.a2g.core.primitive.RectF;
  *      handler by clicking on the links below:
  * 
  */
-public class AllGameMethods implements IOnQueueResources, IOnEntry,
+public class AllGameMethods implements IOnEnqueueResources, IOnEntry,
 IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	private MasterPresenter master;
 
@@ -417,17 +418,21 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	// /@{
 
 	@Override
-	public void queueBundleLoader(IBundleLoader bundleLoader) {
-		master.addEssential(bundleLoader);
-
+	public void queueEntireBundleLoader(IBundleLoader bundleLoader) {
+		master.queueEntireBundleLoader(bundleLoader);
 	}
-
 	
 
 	@Override
-	public void setSceneAsActiveAndKickStartLoading(IAuxGameScene scene) {
-		master.setSceneAsActiveAndKickStartLoading(scene);
+	public void queueSingleBundle(ISingleBundle loader) {
+		master.queueSingleBundle(loader);
+		
+	}
 
+
+	@Override
+	public void setSceneAsActiveAndKickStartLoading(IGameScene scene) {
+		master.setSceneAsActiveAndKickStartLoading(scene);
 	}
 
 	@Override
@@ -676,10 +681,13 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 
 	@Override
-	public IAuxGameScene queueMixinStuffAndReturnScene(IMixin mixin, IOnQueueResourcesImpl api) {
-		return master.queueMixinAndReturnScene(mixin,api);
+	public IGameScene queueMixinStuffAndReturnScene(IExtendsIGameScene extendsIGameScene, IOnEnqueueResourcesImpl api) {
+		return master.queueMixinAndReturnScene(extendsIGameScene,api);
 	}
 
-	 
-	
+	@Override
+	public int getViewportWidth() {
+		return master.getScenePresenter().getSceneGuiWidth();
+	}
+
 }

@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 import com.github.a2g.core.primitive.LogNames;
 
 public class AnimationCollection {
-	private static final Logger ANIMATIONS_AS_THEY_ARE_GOT = Logger.getLogger(LogNames.ANIMATIONS_AS_THEY_ARE_GOT.toString().toString());
+	private static final Logger GETBYATID = Logger.getLogger(LogNames.GETBYATID.toString().toString());
 
 	private Map<String, Animation> theMap;
 
@@ -40,7 +40,7 @@ public class AnimationCollection {
 
 		if (theMap.containsKey(key)) {
 			
-			ANIMATIONS_AS_THEY_ARE_GOT.log(Level.FINE, "getByAtid " +atid);
+			GETBYATID.log(Level.FINE, "getByAtid " +atid);
 			return theMap.get(key);
 		}
 		return null;

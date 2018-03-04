@@ -21,24 +21,6 @@ import com.google.gwt.event.dom.client.LoadHandler;
 public interface IMasterPresenterFromBundle {
 
 	/*
-	 * ! If the same itid had already been used in a previous call to this
-	 * method method, then the call will fail, and return false.
-	 * 
-	 * @param itid this specifies which inventory item the
-	 * image represents (see @ref itids).
-	 * 
-	 * @param icode this code is registered as the code for the
-	 * inventory item (see @ref Codes).
-	 * 
-	 * @param imageResource the image to add.
-	 * 
-	 * @return true on success, otherwise false.
-	 */
-	public boolean addImageForAnInventoryItem(LoadHandler lh,
-			String itid, int icode,
-			IPackagedImage imageResource);
-
-	/*
 	 * ! If the same textualIds have already been used in a previous call to
 	 * this method method, then the ImageResource is added to the list of
 	 * animation frames for the animation specified by the ids.
@@ -67,7 +49,7 @@ public interface IMasterPresenterFromBundle {
 	 * 
 	 * @return true on success, otherwise false.
 	 */
-	public boolean addImageForASceneObject(LoadHandler lh, int drawingOrder,
+	public boolean addImageForEitherInventoryOrScene(LoadHandler lh, int drawingOrder,
 			int x, int y, int w, int h, String otid,
 			String atid, short ocode, String objectPlusAnimCode,
 			IPackagedImage imageResource);

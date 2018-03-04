@@ -16,39 +16,106 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.interfaces.IOnQueueResourcesImpl.LoadKickStarter;
+import com.github.a2g.core.action.ChainEndAction;
+import com.github.a2g.core.action.DialogChainEndAction;
+import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
+import com.github.a2g.core.interfaces.internal.IChainRootForScene;
+import com.github.a2g.core.objectmodel.SentenceItem;
+import com.github.a2g.core.primitive.A2gException;
 
 /**
  * Each scene  is represented by a class that implements the following 6 methods:
  * @author Admin
  *
  */
-public interface IGameScene extends ConstantsForAPI {
-	/*! 
+public interface IGameScene
+{
+	/*!
+	<table>
+	<tr>
+	<td>
+	 @image html IGameScene0001.png
+	 onPreEntry
+	</td>
+	<td>
+	 Next up is our last chance to change things before the lights are turned on and
+	 everything is displayed. So here you should hide the things you don't want to be
+	 seen. And set the display names of all the objects.
+	</td>
+	</tr>
+	</table>
+	 */
+	public abstract void onPreEntry(IOnPreEntry api);
+
+	/*!
 		<table>
 		<tr>
 		<td>
-		 @image html IGameScene0000.png
-		 onPreLoadList
+		 @image html IGameScene0002.png
+		onEnterScene
 		</td>
 		<td>
-	      Is there to load resources. You're may wonder why it's not made so  
-	      the list of resources to load is specified by whatever this methods returns. 
-	      The reason is because classes that implement this interface (ie Scenes) generally 
-	      benefit from @ref code-splitting. And any calls to methods on code-split classes will
-	      just return null and keep processing. And the code inside the method will get executed
-	      during a free cycle, and any return value will be be lost. So instead of passing back control
-	      via returning, it's done via a method called setSceneAsActiveAndKickStartLoading. 
-	      Now, it's highly likely that at one time or another, a user will forget to call 
-	      that method. So the method is made to return a special
-	      class (in this case LoadKickStarter ) and which can only be created by calling
-	      the method createLoadKickStarter().
-	      It's a bit mean, but it ensures users won't forget to call this method.
+		onEnterScene is for the cut-scenes to be performed at the start of the scene.
+		There isn't really a provision for cut scenes, in the middle of the scene. So
+		this is as good as it gets.
 		</td>
 		</tr>
 		</table>
 	 */
+	public abstract ChainEndAction onEntry(IOnEntry api, IChainRootForScene ba) throws A2gException ;
 
-	public LoadKickStarter onFillLoadList(IOnQueueResourcesImpl api);
+	/*!
+	<table>
+	<tr>
+	<td>
+	 @image html IGameScene0003.png
+	onEveryFrame
+	</td>
+	<td>
+	 This is called just after the lights go on, and then 25 times per second for the rest
+	 of the duration of the @ref Scene. It is the place where you perform animation.  
+	</td>
+	</tr>
+	</table>
+	 */
+
+	public abstract void onEveryFrame(IOnEveryFrame api);
+
+	/*!
+
+	<table>
+	<tr>
+	<td>
+	 @image html IGameScene0004.png
+	onDoCommand
+	</td>
+	<td>
+	onDoCommand is executed when the user constructs a @ref Sentence and executes it 
+	</td>
+	</tr>
+	</table>
+	 */
+	public abstract ChainEndAction onDoCommand(IOnDoCommand api, IChainRootForScene ba,
+			int verb, SentenceItem itemA, SentenceItem itemB, double x, double y) throws A2gException ;
+
+	/*!
+	<table>
+	<tr>
+	<td>
+	 @image html IGameScene0005.png
+	 onDialogTree
+	</td>
+	<td>
+	A2g uses the term @ref DialogTree to refer to a conversation tree.
+	This method is triggered by calling @ref doDialogBranch, with the id of the branch.
+	Since this method is typically holds cases for all the branches, this method is called @ref onDialogTree.
+	A2g also uses the term "sub-branch" to refer to one of the multiple options presenter to the user at a given branch.
+
+	</td>
+	</tr>
+	</table>
+	 */
+	public abstract DialogChainEndAction onDialogTree(IOnDialogTree api,
+			IChainRootForDialog ba, int branch) throws A2gException ;
 
 }

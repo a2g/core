@@ -43,7 +43,6 @@ import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
-import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.platforms.swing.dependencies.ImageForSwing;
 import com.github.a2g.core.platforms.swing.dependencies.PackagedImageForSwing;
 import com.github.a2g.core.platforms.swing.mouse.InventoryMouseClickHandler;

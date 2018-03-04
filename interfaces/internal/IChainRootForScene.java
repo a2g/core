@@ -5,7 +5,7 @@ import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction; 
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
-import com.github.a2g.core.interfaces.IAuxGameScene;
+import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.A2gException;
@@ -17,7 +17,7 @@ public interface IChainRootForScene {
 	// and ChainableAction version of it.
 	public ChainEndAction doBoth(ChainableAction a, ChainableAction b);
 	public ChainEndAction activateDialogTreeMode(int branchId);
-	public ChainEndAction onDoCommand(IAuxGameScene scene, IOnDoCommand api,
+	public ChainEndAction onDoCommand(IGameScene scene, IOnDoCommand api,
 			ChainRootAction ba, int verb, SentenceItem itemA,
 			SentenceItem itemB, double x, double y) throws A2gException;
 	public ChainEndAction subroutine(ChainEndAction orig);

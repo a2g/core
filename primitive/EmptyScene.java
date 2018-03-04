@@ -1,17 +1,17 @@
 package com.github.a2g.core.primitive;
 
 
-import com.github.a2g.core.interfaces.IGameScene;
-import com.github.a2g.core.interfaces.IOnQueueResourcesImpl;
-import com.github.a2g.core.interfaces.IOnQueueResourcesImpl.LoadKickStarter;
+import com.github.a2g.core.interfaces.IGameSceneLoader;
+import com.github.a2g.core.interfaces.IOnEnqueueResourcesImpl;
+import com.github.a2g.core.interfaces.IOnEnqueueResourcesImpl.LoadKickStarter;
 
 
 
 
-public class EmptyScene implements IGameScene
+public class EmptyScene implements IGameSceneLoader
 {
 	@Override
-	public LoadKickStarter onFillLoadList(IOnQueueResourcesImpl api) {
+	public LoadKickStarter onEnqueueResources(IOnEnqueueResourcesImpl api) {
 		// TODO Auto-generated method stub
 		return null;
 	}

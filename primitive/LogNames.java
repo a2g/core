@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 public enum LogNames 
 {
-	MOVE_PERFORMER(true), // = "MOVE";
+	MOVE_PERFORMER(false), // = "MOVE";
 	LOADING(false),// = "Loading";
 	LOADING_ANIM(false),// = "LOADING_ANIM";
 	RUNNER(false), // = "RUNNER";
@@ -13,7 +13,7 @@ public enum LogNames
 	COMMANDS_VIA_GUI(false),// = "COMMAND_MANUAL";
 	COMMANDS_AUTOPLAY(false),// = "COMMAND_AUTOPLAY";
 	HTML5CANVAS(false),// = "HTML5CANVAS";
-	ADDING_ANIM_TO_SOC_MAP(true),// = "ADDING_ANIM_TO_SOC_MAP";
+	ADDANIMATION(true),// = "ADDING_ANIM_TO_SOC_MAP";
 	IMAGE_DUMP(false),// = "IMAGE_DUMP";
 	ACTIONS_AS_THEY_ARE_EXECUTED(false),// = "ACTIONS_EXECUTED";
 	KEY_ENTRY(false),// = "KEY_ENTRY";
@@ -23,8 +23,10 @@ public enum LogNames
 	B(false),// = "B";
 	C(false),// = "C";
 	D(false),// = "D";
-	ANIMATIONS_AS_THEY_ARE_GOT(true),// = "ANIMATIONS_AS_THEY_ARE_INDEXED";
-	LOADNEXT(true);// = "LOADNEXT";
+	GETBYATID(false),// = "ANIMATIONS_AS_THEY_ARE_INDEXED";
+	LOADNEXT(false),// = "LOADNEXT";
+	ADD_SCENEOBJECT(false),
+	MERGEWITHSCENE(false);
 
 	public final boolean isOn;
 	LogNames(boolean isOn)
@@ -39,11 +41,6 @@ public enum LogNames
 				final Logger log = Logger.getLogger(d.toString());
 				log.setLevel(Level.ALL);
 
-				//ConsoleHandler handler = new ConsoleHandler();
-				//handler.setLevel(Level.ALL);
-				//Formatter f = new SimpleFormatter();
-				//handler.setFormatter(f);
-				//log.addHandler(handler);
 			}
 		}
 	}

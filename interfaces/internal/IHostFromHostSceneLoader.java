@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.interfaces.internal;
 
-import com.github.a2g.core.interfaces.IGameScene;
+import com.github.a2g.core.interfaces.IGameSceneLoader;
 
 public interface IHostFromHostSceneLoader {
-	void returnScene(IGameScene sceneToLoad);
+	void returnScene(IGameSceneLoader sceneToLoad);
 }

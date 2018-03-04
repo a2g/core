@@ -13,9 +13,11 @@ import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.interfaces.internal.ILoaderPresenter;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoader;
+import com.github.a2g.core.interfaces.internal.ISingleBundle;
 import com.github.a2g.core.primitive.LoaderEnum;
 import com.github.a2g.core.primitive.LogNames;
-import com.github.a2g.core.primitive.PointI; 
+import com.github.a2g.core.primitive.PointI;
+import com.google.gwt.dev.util.collect.HashMap; 
 
 public class Loader implements ILoaderPresenter {
 	private LoaderItem theCurrentLoader;
@@ -87,7 +89,7 @@ public class Loader implements ILoaderPresenter {
 			// a) be removed from the list
 			// b) loadNext
 		}
-
+		return;
 	}
 
 	@Override
@@ -103,13 +105,6 @@ public class Loader implements ILoaderPresenter {
 				objPlusAnimCode, width, height);
 	}
 
-	public void addEssential(IBundleLoader blah, IMasterPresenterFromBundle api) {
-		
-		for (int i = 0; i < blah.getNumberOfBundles(); i++) {
-			listOfEssentialLoaders.add(new LoaderItem(api, blah, i));
-		}
-	}
-
 	public boolean isSameInventoryAsLastTime() {
 		return isSameInventoryAsLastTime;
 	}
@@ -121,7 +116,7 @@ public class Loader implements ILoaderPresenter {
 	public void calculateImagesToLoadAndOmitInventoryIfSame() {
 		numberOfImagesToLoad = 0;
 		// get totals
-		Collections.sort(listOfEssentialLoaders);
+		//Collections.sort(listOfEssentialLoaders);
 
 		Iterator<LoaderItem> iter = listOfEssentialLoaders.iterator();
 		while (iter.hasNext()) {
@@ -183,6 +178,18 @@ public class Loader implements ILoaderPresenter {
 				master.setInventoryImageSize(res.getX(), res.getY());
 			
 		}
+	}
+
+	public void queueEntireBundleLoader(IBundleLoader bundleLoader, IMasterPresenterFromBundle api) {
+		
+		for (int i = 0; i < bundleLoader.getNumberOfBundles(); i++) {
+			listOfEssentialLoaders.add(new LoaderItem(api, bundleLoader.getSingleBundle(i)));
+		}
+	}
+
+	public void queueSingleBundle(ISingleBundle loader, IMasterPresenterFromBundle api) {
+	   
+		listOfEssentialLoaders.add(new LoaderItem(api, loader));
 	}
 
 }

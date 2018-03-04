@@ -59,7 +59,6 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.touch.client.Point;
-import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.primitive.RectF;
 import com.github.a2g.core.platforms.swing.dependencies.ImageForSwing;
@@ -78,7 +77,7 @@ implements IScenePanelFromScenePresenter
 , ImagePanelAPI
 , ActionListener
 {
-	private static final Logger IMAGE_DUMP = Logger.getLogger(LogNames.IMAGE_DUMP);
+	private static final Logger IMAGE_DUMP = Logger.getLogger(LogNames.IMAGE_DUMP.toString());
 
 	int width;
 	int height;

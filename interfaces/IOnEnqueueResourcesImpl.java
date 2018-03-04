@@ -20,45 +20,53 @@ import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.DialogChainEndAction;
 import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
 import com.github.a2g.core.interfaces.internal.IChainRootForScene;
+import com.github.a2g.core.interfaces.internal.ISingleBundle;
 import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.objectmodel.SentenceItem;
-import com.github.a2g.core.primitive.A2gException; 
+import com.github.a2g.core.primitive.A2gException;
 
-/**  
+/**
  * 
  * @author Admin
  *
  */
-public class IOnQueueResourcesImpl {
-	IOnQueueResources implementation;
+public class IOnEnqueueResourcesImpl {
+	IOnEnqueueResources implementation;
 
-	public IOnQueueResourcesImpl(IOnQueueResources impl) {
+	public IOnEnqueueResourcesImpl(IOnEnqueueResources impl) {
 		this.implementation = impl;
 	}
 
-	public void queueBundleLoader(IBundleLoader imageBundle) {
-		this.implementation.queueBundleLoader(imageBundle);
+	public void queueEntireBundleLoader(IBundleLoader imageBundle) {
+		this.implementation.queueEntireBundleLoader(imageBundle);
 	}
 
-	public void queueMP3ForASoundObject(String name, String location)
-	{
+	public void queueSingleBundle(ISingleBundle bundle) {
+		this.implementation.queueSingleBundle(bundle);
+	}
+	
+	public IGameScene queueSharedSceneAndReturnScene(IExtendsIGameScene loader) {
+		IGameScene scene = this.implementation.queueSharedSceneAndReturnScene(loader);
+		return scene;
+	}
+
+
+	public void queueMP3ForASoundObject(String name, String location) {
 		this.implementation.queueMP3ForASoundObject(name, location);
 	}
 
-	public IAuxGameScene queueMixinStuffAndReturnScene(IMixin loader, IOnQueueResourcesImpl api) {
-		IAuxGameScene scene =  this.implementation.queueMixinStuffAndReturnScene(loader, api);
-		return scene;
-	}
 	
-	public LoadKickStarter createMainReturnObject(IAuxGameScene scene) {
+	// create methods
+	public LoadKickStarter createMainReturnObject(IGameScene scene) {
 		this.implementation.setSceneAsActiveAndKickStartLoading(scene);
 		return new LoadKickStarter(null);
 	}
-	
-	public LoadKickStarter createSharedSceneReturnObject(IAuxGameScene scene) {
+
+	public LoadKickStarter createSharedSceneReturnObject(IGameScene scene) {
 		return new LoadKickStarter(scene);
 	}
 
+	// utlity methods
 	public void setValue(Object string, int value) {
 		this.implementation.setValue(string, value);
 	}
@@ -66,53 +74,58 @@ public class IOnQueueResourcesImpl {
 	public void setContinueAfterLoad(boolean isContinueImmediately) {
 		this.implementation.setContinueAfterLoad(isContinueImmediately);
 	}
-	
+
 	public void clearAllLoadedLoads() {
 		this.implementation.clearAllLoadedLoads();
 	}
 
-	// making the creation methods (above) as the only way to create the 
+	// making the creation methods (above) as the only way to create the
 	// class with the private constructor (below)
 	// and then making the user return an object of that class
 	// is a neat trick that enables us to ensure that a particular method
 	// is called just before the method returns
-	// Note: we only need to do this because GWT's split points mean the return value is ignored.
+	// Note: we only need to do this because GWT's split points mean the return
+	// value is ignored.
 	// Note: a lazy person could return null, but that's asking for trouble.
-	public class LoadKickStarter implements IAuxGameScene{
-		IAuxGameScene wrapped;
-		private LoadKickStarter(IAuxGameScene wrapped) {
+	public class LoadKickStarter implements IGameScene {
+		IGameScene wrapped;
+
+		private LoadKickStarter(IGameScene wrapped) {
 			this.wrapped = wrapped;
 		}
+
 		@Override
 		public void onPreEntry(IOnPreEntry api) {
 			wrapped.onPreEntry(api);
 		}
+
 		@Override
 		public ChainEndAction onEntry(IOnEntry api, IChainRootForScene ba) throws A2gException {
 			return wrapped.onEntry(api, ba);
 		}
+
 		@Override
 		public void onEveryFrame(IOnEveryFrame api) {
 			wrapped.onEveryFrame(api);
 		}
+
 		@Override
 		public ChainEndAction onDoCommand(IOnDoCommand api, IChainRootForScene ba, int verb, SentenceItem itemA,
-				SentenceItem itemB, double x, double y) throws A2gException 
-		{
+				SentenceItem itemB, double x, double y) throws A2gException {
 			return wrapped.onDoCommand(api, ba, verb, itemA, itemB, x, y);
 		}
+
 		@Override
 		public DialogChainEndAction onDialogTree(IOnDialogTree api, IChainRootForDialog ba, int branch)
-				throws A2gException 
-		{
+				throws A2gException {
 			return wrapped.onDialogTree(api, ba, branch);
 		};
-		
+
 		@Override
-		public String toString()
-		{
+		public String toString() {
 			return wrapped.toString();
 		};
 
 	}
+
 }

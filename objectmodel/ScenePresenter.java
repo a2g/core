@@ -81,7 +81,12 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	private SceneObject getObjectByOCode(short ocode) {
-		return this.scene.objectCollection().getByOCode(ocode);
+		SceneObject toReturn =  this.scene.objectCollection().getByOCode(ocode);
+		if(toReturn== null)
+		{
+			return null; //"ScenePresenter::getOtidByCode recd bad ocode " + ocode;
+		}
+		return toReturn;
 	}
 
 	public SceneObject getObjectByOtid(String otid) {
@@ -160,7 +165,7 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	public void addSceneObject(SceneObject destObject) {
-		this.scene.objectCollection().add(destObject);
+		this.scene.objectCollection().addSceneObject(destObject);
 	}
 
 	public void addAnimation(String atid, Animation destAnimation) {
@@ -348,12 +353,20 @@ public class ScenePresenter implements IScenePresenter,
 		return toReturn;
 	}
 
-	public int getExistingPrefixIfAvailable(short ocode, int drawingOrder) {
-		SceneObject o = this.getObjectByOCode(ocode);
-		if (o != null) {
-			return o.getDrawingOrder();
+	public int getExistingPrefixIfAvailable(short ocode, int defaultDrawingOrder) 
+	{
+		int index = this.scene.objectCollection().getIndexByOCode(ocode);
+		if(index==-1)
+		{
+			return defaultDrawingOrder;
 		}
-		return drawingOrder;
+		SceneObject o = this.scene.objectCollection().getByIndex(index);
+		if(o==null)
+		{
+			return defaultDrawingOrder;
+		}
+		
+		return o.getDrawingOrder();
 	}
 
 	public void clearBoundaries() {

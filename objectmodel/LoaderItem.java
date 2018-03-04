@@ -17,33 +17,33 @@
 package com.github.a2g.core.objectmodel;
 
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.interfaces.internal.ILoaderPresenterFromLoaderItem;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
+import com.github.a2g.core.interfaces.internal.ISingleBundle;
 import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.event.dom.client.LoadEvent;
 
 public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	private ILoaderPresenterFromLoaderItem callbacks;
-	IBundleLoader bundle;
-	int bundleNumber;
+	ISingleBundle singleBundle; 
 	int numberOfImagesLeftToLoad;
 	int origNumberOfImagesLeftToLoad;
 	IMasterPresenterFromBundle api;
 	private LoadedLoad theCurrentCacheObject;
 
 	public LoaderItem(IMasterPresenterFromBundle api2,
-			IBundleLoader bundleToCallLoadOn, int bundleNumber) {
+			ISingleBundle bundleToCallLoadOn) {
 		this.api = api2;
-		this.bundle = bundleToCallLoadOn;
-		this.bundleNumber = bundleNumber;
+		this.singleBundle = bundleToCallLoadOn;
+		 
 		numberOfImagesLeftToLoad = 0;
 		origNumberOfImagesLeftToLoad = 0;
 		theCurrentCacheObject = new LoadedLoad(this.getCombinedClassAndNumber());
 	}
+ 
 
 	String getName() {
-		return bundle.toString();
+		return singleBundle.toString();
 	}
 
 	public void setCallbacks(ILoaderPresenterFromLoaderItem callbacks) {
@@ -55,20 +55,18 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	}
 
 	public void runLoader() {
-		numberOfImagesLeftToLoad = origNumberOfImagesLeftToLoad = bundle
-				.getNumberOfImagesInBundle(bundleNumber);
-		bundle.loadImageBundle(getLoadHandler(), api, bundleNumber, 1, 0);
+		numberOfImagesLeftToLoad = origNumberOfImagesLeftToLoad = singleBundle.getSize();
+		singleBundle.loadImageBundle(getLoadHandler(), api);
 	}
 
 	public void runLoaderAfterItsBeenLoaded() {
-		numberOfImagesLeftToLoad = origNumberOfImagesLeftToLoad = bundle
-				.getNumberOfImagesInBundle(bundleNumber);
-		bundle.loadImageBundle(getLoadHandler(), api, bundleNumber,
-				origNumberOfImagesLeftToLoad, 0);
+		numberOfImagesLeftToLoad = origNumberOfImagesLeftToLoad = singleBundle.getSize();
+		//bundle.loadImageBundle(getLoadHandler(), api, bundleNumber, origNumberOfImagesLeftToLoad);
+		singleBundle.loadImageBundle(getLoadHandler(), api);
 	}
 
 	public int getNumberOfImages() {
-		int numberOfImages = bundle.getNumberOfImagesInBundle(bundleNumber);
+		int numberOfImages = singleBundle.getSize();
 		return numberOfImages;
 	}
 
@@ -90,29 +88,27 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 
 	}
 
+	// controls the order they are loaded.
 	@Override
 	public int compareTo(LoaderItem o) {
 		int thisMain = !this.getName().contains("shared") ? 1 : 0;
 		int thatMain = !o.getName().contains("shared") ? 1 : 0;
 		if (thisMain != thatMain)
 			return thatMain - thisMain;
-		int result = this.bundleNumber - o.bundleNumber;
+		int result = this.getLoaderEnum() - o.getLoaderEnum();
 		return result;
 	}
 
 	public int getLoaderEnum() {
-		int loaderEnum = bundle.getLoaderEnum();
+		int loaderEnum = singleBundle.getLoaderEnum();
 		return loaderEnum;
 	}
 
 	public PointI getResolution() {
-		PointI p = new PointI(bundle.getImageWidth(), bundle.getImageHeight());
+		PointI p = singleBundle.getImageResolution();
 		return p;
 	}
-
-	public int getBundleNumber() {
-		return bundleNumber;
-	}
+ 
 
 	public LoadedLoad getSceneObjectCollection() {
 		return theCurrentCacheObject;
@@ -124,10 +120,10 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	}
 
 	public String getCombinedClassAndNumber() {
-		String name = bundle.toString();
+		String name = singleBundle.toString();
 		int len = name.indexOf("@");
-		String loaderName = name.substring(0, len);
-		return loaderName + bundleNumber;
+		String loaderName = name.substring(0, len>0? len : (name.length()));
+		return loaderName;
 	}
 
 	public void addToAppropriateAnimation(int prefix, Image imageAndPos,

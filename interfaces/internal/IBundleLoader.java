@@ -16,19 +16,17 @@
 
 package com.github.a2g.core.interfaces.internal;
 
-import com.google.gwt.event.dom.client.LoadHandler;
-
 public interface IBundleLoader {
 	public int getNumberOfBundles();
 
 	public int getNumberOfImagesInBundle(int bundleNumber);
 
-	public int loadImageBundle(final LoadHandler individualImageCallback,
-			final IMasterPresenterFromBundle api, final int bundleNumber,
-			final int CHUNK, final int milliseconds);
-	
+	ISingleBundle getSingleBundle(int n);
+
 	public int getLoaderEnum();
+
 	public int getImageWidth();
+
 	public int getImageHeight();
 
 }

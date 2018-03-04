@@ -17,7 +17,7 @@
 package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
-import com.github.a2g.core.platforms.html4.PackagedImageForHtml4;
+import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.dom.client.LoadHandler;

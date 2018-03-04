@@ -26,6 +26,7 @@ import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
+import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.InventoryItemMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.InventoryItemMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;

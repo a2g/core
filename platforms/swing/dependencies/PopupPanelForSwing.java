@@ -29,7 +29,6 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromSwingPopupPane
 import com.github.a2g.core.platforms.swing.ScenePanelForSwing;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
-import com.google.gwt.touch.client.Point;
 
 public class PopupPanelForSwing
 {

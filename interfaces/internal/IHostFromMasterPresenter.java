@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.interfaces.internal;
 
-import com.github.a2g.core.interfaces.IGameScene;
+import com.github.a2g.core.interfaces.IGameSceneLoader;
 import com.github.a2g.core.interfaces.IOnPreEntry;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.objectmodel.AutoplayCommand;
@@ -39,7 +39,7 @@ public interface IHostFromMasterPresenter {
 
 	IFactory getFactory(EventBus bus, MasterPresenter mp);
 
-	public IGameScene getSceneViaCache(String string);
+	public IGameSceneLoader getSceneViaCache(String string);
 
 	void shareWinning(String token);
 

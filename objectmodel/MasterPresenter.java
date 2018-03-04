@@ -33,12 +33,14 @@ import com.github.a2g.core.action.DialogTalkAction;
 import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
+import com.github.a2g.core.primitive.STARTING_ODD_INVENTORY_CODE;
+import com.github.a2g.core.primitive.STARTING_ODD_OBJECTS_CODE;
 import com.github.a2g.core.action.DialogChainableAction;
 import com.github.a2g.core.event.PropertyChangeEvent;
 import com.github.a2g.core.event.PropertyChangeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
-import com.github.a2g.core.interfaces.IAuxGameScene;
+import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.internal.IFactory;
 import com.github.a2g.core.interfaces.internal.IHostFromMasterPresenter;
@@ -57,12 +59,13 @@ import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTimer;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTitleCard;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromVerbs;
 import com.github.a2g.core.interfaces.internal.IPackagedImage;
+import com.github.a2g.core.interfaces.internal.ISingleBundle;
 import com.github.a2g.core.interfaces.internal.ISound;
 import com.github.a2g.core.interfaces.internal.ITimer;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
-import com.github.a2g.core.interfaces.IOnQueueResourcesImpl;
-import com.github.a2g.core.interfaces.IGameScene;
-import com.github.a2g.core.interfaces.IMixin;
+import com.github.a2g.core.interfaces.IOnEnqueueResourcesImpl;
+import com.github.a2g.core.interfaces.IGameSceneLoader;
+import com.github.a2g.core.interfaces.IExtendsIGameScene;
 import com.google.gwt.event.shared.EventBus;
 
 public class MasterPresenter
@@ -71,6 +74,7 @@ public class MasterPresenter
 		IMasterPresenterFromCommandLine, IMasterPresenterFromActionRunner, IMasterPresenterFromInventory,
 		IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHandlerAPI {
 	private static final Logger LOADING = Logger.getLogger(LogNames.LOADING.toString());
+	private static final Logger MERGEWITHSCENE = Logger.getLogger(LogNames.MERGEWITHSCENE.toString());
 	private static final Logger COMMANDS_AUTOPLAY = Logger.getLogger(LogNames.COMMANDS_AUTOPLAY.toString());
 	private static final Logger ACTIONS_AS_THEY_ARE_EXECUTED = Logger.getLogger(LogNames.ACTIONS_AS_THEY_ARE_EXECUTED.toString());
 
@@ -83,8 +87,8 @@ public class MasterPresenter
 	private LoaderPresenter loaderPresenter;
 	private TitleCardPresenter titleCardPresenter;
 
-	private IGameScene sceneHandlers;
-	private IAuxGameScene sceneHandlers2;
+	private IGameSceneLoader sceneHandlers;
+	private IGameScene sceneHandlers2;
 
 	private EventBus bus;
 	private IHostFromMasterPresenter host;
@@ -142,7 +146,7 @@ public class MasterPresenter
 		this.masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
 	}
 
-	public void setCallbacks(IGameScene callbacks) {
+	public void setCallbacks(IGameSceneLoader callbacks) {
 		if (this.sceneHandlers != null) {
 			lastSceneAsString = this.sceneHandlers.toString();
 		}
@@ -155,35 +159,32 @@ public class MasterPresenter
 	}
 
 	@Override
-	public boolean addImageForAnInventoryItem(LoadHandler lh, String itid, int icode, IPackagedImage imageResource) {
-		if (this.sceneHandlers == null) {
-			return true;
-		}
-		InventoryItem item = this.getInventoryPresenter().getInventory().items().getByItid(itid);
-		boolean result = true;
-
-		if (item == null) {
-
-			Image imageAndPos = getInventoryPresenter().getView().createNewImageAndAdddHandlers(imageResource, lh, bus,
-					itid, icode, 0, 0);
-
-			imageAndPos.addImageToPanel(0);
-
-			boolean initiallyVisible = false;
-			result = getInventoryPresenter().addInventory(itid, icode, initiallyVisible, imageAndPos);
-
-		}
-
-		return result;
-	}
-
-	@Override
-	public boolean addImageForASceneObject(LoadHandler lh, int drawingOrder, int x, int y, int w, int h, String otid,
+	public boolean addImageForEitherInventoryOrScene(LoadHandler lh, int drawingOrder, int x, int y, int w, int h, String textId,
 			String atid, short ocode, String objPlusAnimCode, IPackagedImage imageResource) {
 		if (this.sceneHandlers == null) {
 			return true;
 		}
+		if(ocode>=STARTING_ODD_INVENTORY_CODE.STARTING_ODD_INVENTORY_CODE)
+		{
+			InventoryItem item = this.getInventoryPresenter().getInventory().items().getByItid(textId);
 
+			if (item == null) {
+
+				int icode = ocode;
+				String itid = textId;
+				Image imageAndPos = getInventoryPresenter().getView().createNewImageAndAdddHandlers(imageResource, lh, bus,
+						itid, icode, 0, 0);
+
+				imageAndPos.addImageToPanel(0);
+
+				boolean initiallyVisible = false;
+				boolean result = getInventoryPresenter().addInventory(itid, icode, initiallyVisible, imageAndPos);
+				return result;
+			}
+			return true;
+		}
+		String otid = textId;
+		
 		Image imageAndPos = this.scenePresenter.getView().createNewImageAndAddHandlers(lh, imageResource,
 				scenePresenter, bus, x, y, otid, ocode);
 
@@ -457,11 +458,9 @@ public class MasterPresenter
 
 	}
 
-	public void addEssential(IBundleLoader blah) {
-		loaderPresenter.getLoaders().addEssential(blah, this);
-	}
+	
 
-	public void setSceneAsActiveAndKickStartLoading(IAuxGameScene scene) {
+	public void setSceneAsActiveAndKickStartLoading(IGameScene scene) {
 		this.sceneHandlers2 = scene;
 		loaderPresenter.getLoaders().setSceneAndInventoryResolution();
 
@@ -513,7 +512,7 @@ public class MasterPresenter
 		mapOfSounds.clear();
 	}
 
-	public void setScene(IGameScene scene) {
+	public void setScene(IGameSceneLoader scene) {
 
 		setCallbacks(scene);
 
@@ -524,7 +523,7 @@ public class MasterPresenter
 		clearMapOfSounds();
 
 		// then in the scene the user can overwrite this.
-		if (null == this.sceneHandlers.onFillLoadList(new IOnQueueResourcesImpl(proxyForGameScene))) {
+		if (null == this.sceneHandlers.onEnqueueResources(new IOnEnqueueResourcesImpl(proxyForGameScene))) {
 			startScene();
 		}
 	}
@@ -533,13 +532,13 @@ public class MasterPresenter
 	public void restartReloading() {
 		loaderPresenter.getLoaders().clearLoaders();
 
-		this.sceneHandlers.onFillLoadList(new IOnQueueResourcesImpl(proxyForGameScene));
+		this.sceneHandlers.onEnqueueResources(new IOnEnqueueResourcesImpl(proxyForGameScene));
 	}
 
 	@Override
 	public void mergeWithScene(LoadedLoad s) {
 		String name = s.getName();
-		LOADING.log(Level.FINE, "merge with scene " + name);
+		MERGEWITHSCENE.log(Level.FINE, "merge with scene " + name);
 
 		SceneObjectCollection theirs = s.getSceneObjectCollection();
 		SceneObjectCollection ours = this.scenePresenter.getModel().objectCollection();
@@ -565,7 +564,7 @@ public class MasterPresenter
 					return;
 				}
 
-				ours.add(destObject);
+				ours.addSceneObject(destObject);
 				scenePresenter.addSceneObject(destObject);
 				LOADING.log(Level.FINE, "new object " + otid + " " + ocode);
 
@@ -857,7 +856,7 @@ public class MasterPresenter
 		this.getInventoryPresenter().updateInventory();
 	}
 
-	public IGameScene getSceneByName(String string) {
+	public IGameSceneLoader getSceneByName(String string) {
 		return this.host.getSceneViaCache(string);
 	}
 
@@ -1011,9 +1010,20 @@ public class MasterPresenter
 		dialogTreePresenter.resetRecordOfSaidSpeech();
 	}
 
-	public IAuxGameScene queueMixinAndReturnScene(IMixin loader, IOnQueueResourcesImpl api) {
-		IAuxGameScene blah2 = loader.onFillLoadList(api);
+	public IGameScene queueMixinAndReturnScene(IExtendsIGameScene loader, IOnEnqueueResourcesImpl api) {
+		IGameScene blah2 = loader.onEnqueueResources(api);
+
 		return blah2;
 	}
+	
+	public void queueEntireBundleLoader(IBundleLoader bundleLoader) {
+		loaderPresenter.getLoaders().queueEntireBundleLoader(bundleLoader, this);
+	}
+	
+	public void queueSingleBundle(ISingleBundle loader)
+	{
+		loaderPresenter.getLoaders().queueSingleBundle(loader, this);
+	}
+	
 
 }

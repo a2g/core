@@ -23,6 +23,7 @@ import com.github.a2g.core.primitive.LogNames;
 
 public class LoadedLoad {
 	private static final Logger LOADING_ANIM = Logger.getLogger(LogNames.LOADING_ANIM.toString());
+	private static final Logger ADD_SCENEOBJECT = Logger.getLogger(LogNames.ADD_SCENEOBJECT.toString());
 
 	private SceneObjectCollection sceneObjectCollection;
 	private String name;
@@ -37,8 +38,7 @@ public class LoadedLoad {
 			short objectCode, String objPlusAnimCode, int screenPixelWidth,
 			int screenPixelHeight) {
 		// objects and animations
-		int index = this.getSceneObjectCollection().getIndexByOtid(
-				objectTextualId);
+		int index = this.getSceneObjectCollection().getIndexByOtid(objectTextualId);
 		SceneObject sceneObject = null;
 		if (index != -1) {
 			sceneObject = getSceneObjectCollection().getByIndex(index);
@@ -48,7 +48,8 @@ public class LoadedLoad {
 			sceneObject.setDrawingOrder(prefix);
 			sceneObject.setOCode(objectCode);
 
-			this.getSceneObjectCollection().add(sceneObject);
+			ADD_SCENEOBJECT.fine("NEWSCENEOBJECTADDED "+objectTextualId);
+			this.getSceneObjectCollection().addSceneObject(sceneObject);
 		}
 
 		Animation animation = sceneObject.getAnimations().getByAtid(

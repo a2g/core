@@ -30,7 +30,8 @@ import com.github.a2g.core.primitive.LogNames;
 
 
 public class SceneObjectCollection {
-	private static final Logger ADDING_ANIM_TO_SOC_MAP = Logger.getLogger(LogNames.ADDING_ANIM_TO_SOC_MAP.toString());
+	private static final Logger ADDING_ANIM_TO_SOC_MAP = Logger.getLogger(LogNames.ADDANIMATION.toString());
+	private static final Logger ADD_SCENEOBJECT = Logger.getLogger(LogNames.ADD_SCENEOBJECT.toString());
 
 	private List<String> theOtids;
 	private List<Short> theOCodes;
@@ -52,21 +53,24 @@ public class SceneObjectCollection {
 		theAtidMap.clear();
 	}
 
-	public void add(SceneObject sceneObject) {
+	public void addSceneObject(SceneObject sceneObject) {
 		list.add(sceneObject);
+		
 		Collections.sort(list, new Comparator<SceneObject>() {
 			@Override
 			public int compare(SceneObject o1, SceneObject o2) {
 				return o1.getDrawingOrder() - o2.getDrawingOrder();
 			}
 		});
-
+		
 		theOtids.clear();
 		theOCodes.clear();
 		for (int i = 0; i < list.size(); i++) {
 			theOtids.add(list.get(i).getOtid());
 			theOCodes.add(list.get(i).getOCode());
 		}
+		assert(theOtids.size()==list.size());
+		assert(theOCodes.size()==list.size());
 
 	}
 
@@ -105,8 +109,16 @@ public class SceneObjectCollection {
 		return index;
 	}
 
+	public int getIndexByOCode(short ocode) {
+		int i = this.theOCodes.indexOf(ocode);
+		return i;
+	}
 	public SceneObject getByOCode(Short ocode) {
 		int i = this.theOCodes.indexOf(ocode);
+		if(i==-1)
+		{
+			return null;//"ScenePresenter::getOtidByCode recd bad ocode " + ocode;
+		}
 		return this.getByIndex(i);
 	}
 
@@ -131,8 +143,9 @@ public class SceneObjectCollection {
 	public void addAnimation(String atid, Animation destAnimation) {
 		if (theAtidMap.get(atid) == null) {
 			// System.out.println("ScenePresenter::added " + animTextualId);
-			this.theAtidMap.put(atid, destAnimation);
+
 			ADDING_ANIM_TO_SOC_MAP.log(Level.FINE, "addAnimation " +atid);
+			this.theAtidMap.put(atid, destAnimation);
 		}
 	}
 
