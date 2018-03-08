@@ -17,8 +17,8 @@
 package com.github.a2g.core.primitive;
 
 public enum LoaderEnum {
-	Main(0),
-	Shared(1),
+	Shared(0),
+	Main(1),
 	Inventory(2);
 	
 	

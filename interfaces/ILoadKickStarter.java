@@ -17,11 +17,12 @@
 package com.github.a2g.core.interfaces;
 
 
-/**  
- * 
+/**
+ * Each scene  is represented by a class that implements the following 6 methods:
  * @author Admin
  *
  */
-public interface IExtendsIGameScene extends IGameSceneLoader
+public interface ILoadKickStarter extends IGameScene
 {
+	
 }

@@ -5,17 +5,18 @@ import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.IGameScene;
+import com.github.a2g.core.interfaces.ILoadKickStarter;
 import com.github.a2g.core.interfaces.IOnDialogTree;
 import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.IOnEntry;
 import com.github.a2g.core.interfaces.IOnEveryFrame;
 import com.github.a2g.core.interfaces.IOnEnqueueResources;
-import com.github.a2g.core.interfaces.IOnEnqueueResourcesImpl;
+
 import com.github.a2g.core.interfaces.IOnPreEntry;
 import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.github.a2g.core.interfaces.internal.ISingleBundle;
-import com.github.a2g.core.interfaces.IExtendsIGameScene;
+import com.github.a2g.core.interfaces.IExtendsGameSceneLoader;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.RectF;
@@ -429,20 +430,9 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 		
 	}
 
-
-	@Override
-	public void setSceneAsActiveAndKickStartLoading(IGameScene scene) {
-		master.setSceneAsActiveAndKickStartLoading(scene);
-	}
-
 	@Override
 	public void clearAllLoadedLoads() {
 		master.clearAllLoadedLoads();
-	}
-
-	@Override
-	public void setContinueAfterLoad(boolean isContinueImmediately) {
-		master.setContinueAfterLoad(isContinueImmediately);
 	}
 
 	@Override
@@ -536,7 +526,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 
 	@Override
 	public void queueMP3ForASoundObject(String name, String location) {
-		master.addMP3ForASoundObject(name, location);
+		master.queueMP3ForASoundObject(name, location);
 
 	}
 
@@ -681,13 +671,19 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 
 	@Override
-	public IGameScene queueMixinStuffAndReturnScene(IExtendsIGameScene extendsIGameScene, IOnEnqueueResourcesImpl api) {
-		return master.queueMixinAndReturnScene(extendsIGameScene,api);
+	public int getViewportWidth() {
+		return master.getScenePresenter().getSceneGuiWidth();
 	}
 
 	@Override
-	public int getViewportWidth() {
-		return master.getScenePresenter().getSceneGuiWidth();
+	public IGameScene queueSharedSceneAndReturnScene(IExtendsGameSceneLoader loader) {
+		return master.queueSharedSceneAndReturnScene(loader);
+	}
+
+	@Override
+	public ILoadKickStarter createReturnObject(IGameScene scene) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -33,6 +33,7 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 
 	public LoaderItem(IMasterPresenterFromBundle api2,
 			ISingleBundle bundleToCallLoadOn) {
+		assert(bundleToCallLoadOn!=null);
 		this.api = api2;
 		this.singleBundle = bundleToCallLoadOn;
 		 

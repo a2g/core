@@ -53,7 +53,9 @@ public class SceneObjectCollection {
 		theAtidMap.clear();
 	}
 
-	public void addSceneObject(SceneObject sceneObject) {
+	public void addSceneObject(SceneObject sceneObject) 
+	{
+		ADD_SCENEOBJECT.log(Level.FINE, "added " + sceneObject.getOtid());
 		list.add(sceneObject);
 		
 		Collections.sort(list, new Comparator<SceneObject>() {

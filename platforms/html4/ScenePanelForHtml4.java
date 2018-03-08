@@ -39,8 +39,7 @@ import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
-public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI,
-IScenePanelFromScenePresenter {
+public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, IScenePanelFromScenePresenter {
 	int cameraOffsetX;
 	int cameraOffsetY;
 	SceneObjectTouchMoveHandler theTouchMoveHandler;
@@ -56,24 +55,20 @@ IScenePanelFromScenePresenter {
 	}
 
 	@Override
-	public Image createNewImageAndAddHandlers(LoadHandler lh,
-			IPackagedImage imageResource,
-			IScenePresenterFromSceneMouseOver api, EventBus bus, int x, int y,
-			String objectTextualId, short objectCode) {
+	public Image createNewImageAndAddHandlers(LoadHandler lh, IPackagedImage imageResource,
+			IScenePresenterFromSceneMouseOver api, EventBus bus, int x, int y, String objectTextualId,
+			short objectCode) {
 
-		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource(
-				(PackagedImageForHtml4) imageResource, lh);
+		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource((PackagedImageForHtml4) imageResource,
+				lh);
 
-		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new PointI(x,
-				y));
+		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new PointI(x, y));
 
 		// add gwt mouse handlers
-		imageAndPos.getNativeImage().addMouseMoveHandler(
-				new SceneObjectMouseOverHandler(bus, api, objectTextualId,
-						objectCode));
+		imageAndPos.getNativeImage()
+				.addMouseMoveHandler(new SceneObjectMouseOverHandler(bus, api, objectTextualId, objectCode));
 
-		imageAndPos.getNativeImage().addClickHandler(
-				new ImageMouseClickHandler(bus, this));
+		imageAndPos.getNativeImage().addClickHandler(new ImageMouseClickHandler(bus, this));
 
 		imageAndPos.getNativeImage().addTouchMoveHandler(theTouchMoveHandler);
 
@@ -82,8 +77,7 @@ IScenePanelFromScenePresenter {
 
 	@Override
 	public void setImageVisible(Image image, boolean visible) {
-		super.setVisible(((ImageForHtml4) image).getNativeImage().getElement(),
-				visible);
+		super.setVisible(((ImageForHtml4) image).getNativeImage().getElement(), visible);
 	}
 
 	@Override
@@ -93,8 +87,7 @@ IScenePanelFromScenePresenter {
 
 	@Override
 	public void insert(Image image, int x, int y, int before) {
-		super.insert(((ImageForHtml4) image).getNativeImage(), x
-				- cameraOffsetX, y - cameraOffsetY, before);
+		super.insert(((ImageForHtml4) image).getNativeImage(), x - cameraOffsetX, y - cameraOffsetY, before);
 	}
 
 	@Override
@@ -103,31 +96,28 @@ IScenePanelFromScenePresenter {
 	}
 
 	@Override
-	public void setThingPosition(Image image, int left, int top, double scale) 
-	{
+	public void setThingPosition(Image image, int left, int top, double scale) {
 		ImageForHtml4 image4 = (ImageForHtml4) image;
-		super.setWidgetPosition(image4.getNativeImage(),
-				(int) (left - cameraOffsetX * image.getParallaxX()),
+		super.setWidgetPosition(image4.getNativeImage(), (int) (left - cameraOffsetX * image.getParallaxX()),
 				(int) (top - cameraOffsetY * image.getParallaxY()));
 		double width = getImageWidth(image);
 		double height = getImageHeight(image);
-		if(scale<1.0)
-		{
-			if(image4.getOriginalDimensions()!=null)
-		
-				image4.setOriginalDimensions(new PointI(image4.getNativeImage().getWidth(),image4.getNativeImage().getHeight()));
-			
-			width*=scale;
-			height*=scale;
+		if (scale < 1.0) {
+			if (image4.getOriginalDimensions() != null)
+
+				image4.setOriginalDimensions(
+						new PointI(image4.getNativeImage().getWidth(), image4.getNativeImage().getHeight()));
+
+			width *= scale;
+			height *= scale;
 		}
-		((ImageForHtml4) image).getNativeImage().setPixelSize((int)width, (int)height);
-		
+		((ImageForHtml4) image).getNativeImage().setPixelSize((int) width, (int) height);
 	}
 
 	@Override
 	public int getImageHeight(Image image) {
 		ImageForHtml4 image4 = (ImageForHtml4) image;
-		if(image4.getOriginalDimensions()!=null)
+		if (image4.getOriginalDimensions() != null)
 			return image4.getOriginalDimensions().getY();
 		return image4.getNativeImage().getHeight();
 	}
@@ -135,7 +125,7 @@ IScenePanelFromScenePresenter {
 	@Override
 	public int getImageWidth(Image image) {
 		ImageForHtml4 image4 = (ImageForHtml4) image;
-		if(image4.getOriginalDimensions()!=null)
+		if (image4.getOriginalDimensions() != null)
 			return image4.getOriginalDimensions().getX();
 		return image4.getNativeImage().getWidth();
 	}
@@ -152,27 +142,25 @@ IScenePanelFromScenePresenter {
 	}
 
 	@Override
-	public void setStateOfPopup(boolean isVisible,
-			ColorEnum talkingColor, String speech, Rect maxBalloonRect, PointI mouth, TalkPerformer sayAction) {
+	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, String speech, Rect maxBalloonRect,
+			PointI mouth, TalkPerformer sayAction) {
 		if (!isVisible) {
 			super.remove(speechWidget);
 		}
 
 		ContextRealHtml5 canvas = new ContextRealHtml5("");
 		canvas.setScenePixelSize(10, 10, this);
-		SpeechCalculatorOuterForAll calc = new SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3, canvas);
-		
-		Rect rectThatsScaledToFit =  calc.getRectInPixels();
-		
+		SpeechCalculatorOuterForAll calc = new SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3,
+				canvas);
+
+		Rect rectThatsScaledToFit = calc.getRectInPixels();
+
 		speechWidget.setText(speech);
 		speechWidget.setBorderColor(talkingColor);
-		
-		
 
 		speechWidget.setLeaderLine(calc);
 
 		speechWidget.setVisible(isVisible);
-
 
 		super.add(speechWidget, rectThatsScaledToFit.getLeft(), rectThatsScaledToFit.getTop());
 
@@ -181,21 +169,20 @@ IScenePanelFromScenePresenter {
 	@Override
 	public void onSceneEntry(String string) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resetScale(Image image) {
 		ImageForHtml4 image4 = (ImageForHtml4) image;
-		if(image4.getOriginalDimensions()!=null)
-		{
+		if (image4.getOriginalDimensions() != null) {
 			PointI temp = image4.getOriginalDimensions();
-			image4.getNativeImage().setPixelSize(temp.getX(),temp.getY());
+			image4.getNativeImage().setPixelSize(temp.getX(), temp.getY());
 			image4.getNativeImage().setWidth("");
-			image4.getNativeImage().setHeight(""); 
+			image4.getNativeImage().setHeight("");
 		}
 		image.setScale(1.0);
-		
+
 	}
 
 }

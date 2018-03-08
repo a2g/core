@@ -17,23 +17,11 @@
 package com.github.a2g.core.interfaces;
 
 
-import com.github.a2g.core.interfaces.internal.IBundleLoader;
-import com.github.a2g.core.interfaces.internal.ISingleBundle;
-import com.github.a2g.core.interfaces.methods.game.ISetValue;
-
 /**  
  * 
  * @author Admin
  *
  */
-public interface IOnEnqueueResources extends ISetValue 
+public interface IExtendsGameSceneLoader extends IGameSceneLoader
 {
-	void 				queueEntireBundleLoader(IBundleLoader blah);
-	void 				queueSingleBundle(ISingleBundle bundle);
-	void 				queueMP3ForASoundObject(String name, String location);
-	IGameScene 	    	queueSharedSceneAndReturnScene(IExtendsGameSceneLoader loader);
- 	void 				clearAllLoadedLoads();
-    ILoadKickStarter 	createReturnObject(IGameScene scene); 
-    	
-    
 }

@@ -22,6 +22,7 @@ import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
 import com.github.a2g.core.interfaces.internal.IChainRootForScene;
 import com.github.a2g.core.interfaces.internal.ISingleBundle;
 import com.github.a2g.core.interfaces.internal.IBundleLoader;
+import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.A2gException;
 
@@ -30,12 +31,22 @@ import com.github.a2g.core.primitive.A2gException;
  * @author Admin
  *
  */
-public class IOnEnqueueResourcesImpl {
-	IOnEnqueueResources implementation;
+public class OnEnqueueResourcesEffectiveImpl implements IOnEnqueueResources
+{
+	MasterPresenter implementation;
 
-	public IOnEnqueueResourcesImpl(IOnEnqueueResources impl) {
+	// constructor 
+	public OnEnqueueResourcesEffectiveImpl(MasterPresenter impl) {
 		this.implementation = impl;
 	}
+	
+	// create method
+	public ILoadKickStarter createReturnObject(IGameScene scene) {
+		this.implementation.setSceneAsActiveAndKickStartLoading(scene);
+		return new LoadKickStarter(null);
+	}
+	
+	// queue methods
 
 	public void queueEntireBundleLoader(IBundleLoader imageBundle) {
 		this.implementation.queueEntireBundleLoader(imageBundle);
@@ -44,26 +55,14 @@ public class IOnEnqueueResourcesImpl {
 	public void queueSingleBundle(ISingleBundle bundle) {
 		this.implementation.queueSingleBundle(bundle);
 	}
-	
-	public IGameScene queueSharedSceneAndReturnScene(IExtendsIGameScene loader) {
+
+	public IGameScene queueSharedSceneAndReturnScene(IExtendsGameSceneLoader loader) {
 		IGameScene scene = this.implementation.queueSharedSceneAndReturnScene(loader);
 		return scene;
 	}
 
-
 	public void queueMP3ForASoundObject(String name, String location) {
 		this.implementation.queueMP3ForASoundObject(name, location);
-	}
-
-	
-	// create methods
-	public LoadKickStarter createMainReturnObject(IGameScene scene) {
-		this.implementation.setSceneAsActiveAndKickStartLoading(scene);
-		return new LoadKickStarter(null);
-	}
-
-	public LoadKickStarter createSharedSceneReturnObject(IGameScene scene) {
-		return new LoadKickStarter(scene);
 	}
 
 	// utlity methods
@@ -87,7 +86,7 @@ public class IOnEnqueueResourcesImpl {
 	// Note: we only need to do this because GWT's split points mean the return
 	// value is ignored.
 	// Note: a lazy person could return null, but that's asking for trouble.
-	public class LoadKickStarter implements IGameScene {
+	public class LoadKickStarter implements ILoadKickStarter{
 		IGameScene wrapped;
 
 		private LoadKickStarter(IGameScene wrapped) {

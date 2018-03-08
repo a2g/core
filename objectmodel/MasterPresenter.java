@@ -34,12 +34,12 @@ import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.STARTING_ODD_INVENTORY_CODE;
-import com.github.a2g.core.primitive.STARTING_ODD_OBJECTS_CODE;
 import com.github.a2g.core.action.DialogChainableAction;
 import com.github.a2g.core.event.PropertyChangeEvent;
 import com.github.a2g.core.event.PropertyChangeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
+import com.github.a2g.core.interfaces.IExtendsGameSceneLoader;
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
 import com.github.a2g.core.interfaces.internal.IFactory;
@@ -63,9 +63,10 @@ import com.github.a2g.core.interfaces.internal.ISingleBundle;
 import com.github.a2g.core.interfaces.internal.ISound;
 import com.github.a2g.core.interfaces.internal.ITimer;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
-import com.github.a2g.core.interfaces.IOnEnqueueResourcesImpl;
+
 import com.github.a2g.core.interfaces.IGameSceneLoader;
-import com.github.a2g.core.interfaces.IExtendsIGameScene;
+import com.github.a2g.core.interfaces.OnEnqueueResourcesDummyImpl;
+import com.github.a2g.core.interfaces.OnEnqueueResourcesEffectiveImpl;
 import com.google.gwt.event.shared.EventBus;
 
 public class MasterPresenter
@@ -523,7 +524,7 @@ public class MasterPresenter
 		clearMapOfSounds();
 
 		// then in the scene the user can overwrite this.
-		if (null == this.sceneHandlers.onEnqueueResources(new IOnEnqueueResourcesImpl(proxyForGameScene))) {
+		if (null == this.sceneHandlers.onEnqueueResources(new OnEnqueueResourcesEffectiveImpl(this))) {
 			startScene();
 		}
 	}
@@ -531,8 +532,7 @@ public class MasterPresenter
 	@Override
 	public void restartReloading() {
 		loaderPresenter.getLoaders().clearLoaders();
-
-		this.sceneHandlers.onEnqueueResources(new IOnEnqueueResourcesImpl(proxyForGameScene));
+		this.sceneHandlers.onEnqueueResources(new OnEnqueueResourcesEffectiveImpl(this));
 	}
 
 	@Override
@@ -990,7 +990,7 @@ public class MasterPresenter
 	}
 
 	@Override
-	public boolean addMP3ForASoundObject(String name, String location) {
+	public boolean queueMP3ForASoundObject(String name, String location) {
 		ISound sound = this.getFactory().createSound(location);
 		this.mapOfSounds.put(name, sound);
 
@@ -1010,9 +1010,8 @@ public class MasterPresenter
 		dialogTreePresenter.resetRecordOfSaidSpeech();
 	}
 
-	public IGameScene queueMixinAndReturnScene(IExtendsIGameScene loader, IOnEnqueueResourcesImpl api) {
-		IGameScene blah2 = loader.onEnqueueResources(api);
-
+	public IGameScene queueSharedSceneAndReturnScene(IExtendsGameSceneLoader loader) {
+		IGameScene blah2 = loader.onEnqueueResources(new OnEnqueueResourcesDummyImpl(this));
 		return blah2;
 	}
 	

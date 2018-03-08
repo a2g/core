@@ -1,6 +1,6 @@
 package com.github.a2g.core.objectmodel;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -17,11 +17,11 @@ import com.github.a2g.core.interfaces.internal.ISingleBundle;
 import com.github.a2g.core.primitive.LoaderEnum;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointI;
-import com.google.gwt.dev.util.collect.HashMap; 
 
 public class Loader implements ILoaderPresenter {
 	private LoaderItem theCurrentLoader;
 	private LoaderItemCollection listOfEssentialLoaders;
+	private HashSet<String> setOfEssentialLoaderNames;
 	private Set<String> setOfCompletedLoaders;
 	private Map<String, LoadedLoad> objectCache;
 	private IMasterPresenterFromLoader master;
@@ -37,6 +37,7 @@ public class Loader implements ILoaderPresenter {
 		this.objectCache = new TreeMap<String, LoadedLoad>();
 		this.master = callbacks;
 		this.nameOfInventoryResourceUsedLastTime  ="";
+		this.setOfEssentialLoaderNames = new HashSet<String>();
 	}
 
 	@Override
@@ -147,6 +148,7 @@ public class Loader implements ILoaderPresenter {
 		// can we have the same inventory as last time?
 		// A: yes
 		// so we can't set it to false here.
+		setOfEssentialLoaderNames.clear();
 
 	}
 
@@ -187,9 +189,12 @@ public class Loader implements ILoaderPresenter {
 		}
 	}
 
-	public void queueSingleBundle(ISingleBundle loader, IMasterPresenterFromBundle api) {
-	   
-		listOfEssentialLoaders.add(new LoaderItem(api, loader));
+	public void queueSingleBundle(ISingleBundle bundle, IMasterPresenterFromBundle api) {
+	   if(!setOfEssentialLoaderNames.contains(bundle.toString()))
+	   {
+		listOfEssentialLoaders.add(new LoaderItem(api, bundle));
+		setOfEssentialLoaderNames.add(bundle.toString());
+	   }
 	}
 
 }
