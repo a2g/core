@@ -14,26 +14,27 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class ContextRealHtml5 
 implements IContext2d
 {
-	
+
 	private Canvas canvasA;
 	private Canvas canvasB;
 	private Context2d contextA;
 	private Context2d contextB;
-	
+
 	public ContextRealHtml5(String styleNameMustMAtchDivTag)
 	{
-		   canvasA = Canvas.createIfSupported();
-		   if (canvasA == null) {
-	              RootPanel.get().add(new Label("Sorry, your browser doesn't support the HTML5 Canvas element"));
-	              return;
-	        }
-			canvasB = Canvas.createIfSupported();
-	        if (canvasB == null) {
-	              RootPanel.get().add(new Label("Sorry, your browser doesn't support two Canvas elements"));
-	              return;
-	        }
-	         
-	        canvasA.setStyleName(styleNameMustMAtchDivTag);     // *** must match the div tag in CanvasExample.html ***
+		canvasA = Canvas.createIfSupported();
+		if (canvasA == null) {
+			RootPanel.get().add(new Label("Sorry, your browser doesn't support the HTML5 Canvas element"));
+			return;
+		}
+		canvasB = Canvas.createIfSupported();
+		if (canvasB == null) {
+			RootPanel.get().add(new Label("Sorry, your browser doesn't support two Canvas elements"));
+			return;
+		}
+
+		canvasA.setStyleName(styleNameMustMAtchDivTag);     // *** must match the div tag in CanvasExample.html ***
+		canvasB.setStyleName(styleNameMustMAtchDivTag);
 	}
 
 	@Override
@@ -53,7 +54,7 @@ implements IContext2d
 		contextA = canvasA.getContext2d();
 		contextB = canvasB.getContext2d();
 	}
-	
+
 	public void setFillStyle(String color)
 	{
 		contextB.setFillStyle(color);
@@ -78,11 +79,11 @@ implements IContext2d
 	{
 		contextB.strokeRect(left, top, w, h);
 	}
-	
+
 	public void setScenePixelSize(int width, int height, Panel w) {
 		w.remove(canvasA);
 
-		
+
 		canvasA.setSize("" + width + "px", "" + height + "px");
 		canvasA.setCoordinateSpaceWidth(width);
 		canvasA.setCoordinateSpaceHeight(height);
@@ -94,12 +95,12 @@ implements IContext2d
 
 		contextA = canvasA.getContext2d();
 		contextB = canvasB.getContext2d();
-		
+
 	}
 	public void addMouseMoveHandler(MouseMoveHandler handler) {
 		canvasA.addMouseMoveHandler(handler);
 	}
-	
+
 	public void addClickHandler(ClickHandler handler)
 	{
 		canvasA.addClickHandler(handler);
@@ -116,11 +117,12 @@ implements IContext2d
 	{
 		return canvasA.getElement();
 	}
-	
+
 	public double getOffsetHeight(){ return this.canvasA.getOffsetHeight(); }
 	public double getOffsetWidth(){ return this.canvasA.getOffsetWidth(); }
 
 	public void copyBackBufferToFront() {
+		
 		contextA.drawImage(contextB.getCanvas(), 0, 0);
 	}
 
@@ -131,7 +133,7 @@ implements IContext2d
 	public int getCoordinateSpaceWidth() {
 		return canvasA.getCoordinateSpaceWidth();
 	}
-	
+
 	public int getCoordinateSpaceHeight() {
 		return canvasA.getCoordinateSpaceHeight();
 	}

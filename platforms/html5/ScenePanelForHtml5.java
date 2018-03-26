@@ -182,7 +182,7 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 	public void setScenePixelSize(int width, int height) {
 
 		this.setSize("" + width + "px", "" + height + "px");
-
+		canvas.setScenePixelSize(width, height, this);
 	}
 
 	@Override
