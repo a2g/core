@@ -65,7 +65,8 @@ public class Loader implements ILoaderPresenter {
 		
 		if (!listOfEssentialLoaders.isEmpty()) {
 			theCurrentLoader = this.listOfEssentialLoaders.get(0);
-		} else {
+		} else {//we 've loaded everything
+			setOfEssentialLoaderNames.clear();
 			master.enableClickToContinue();
 			return;
 		}
@@ -174,11 +175,13 @@ public class Loader implements ILoaderPresenter {
 			LoaderItem loader = iter.next();
 			PointI res = loader.getResolution();
 			int i = loader.getLoaderEnum();
-			if(i==LoaderEnum.Main.r)
-				master.setScenePixelSize(res.getX(), res.getY());
-			else  if(i==LoaderEnum.Inventory.r)
+			if(i==LoaderEnum.Inventory.r)
 				master.setInventoryImageSize(res.getX(), res.getY());
-			
+			else
+			{
+			    master.setScenePixelSize(res.getX(), res.getY());
+				break;
+			}
 		}
 	}
 

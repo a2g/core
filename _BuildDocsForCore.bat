@@ -1,7 +1,7 @@
 @echo off
-SET MSCPATH=e:/ProgramFiles/mscgen/bin/
+SET MSCPATH=C:\SapDev\ViewerWin\Releases\9.0\Tools\mscgen\bin\
 echo %MSCPATH%
-SET DOTPATH=e:\ProgramFiles\Graphviz\bin\
+SET DOTPATH=C:\SapDev\ViewerWin\Releases\9.0\Tools\Doxygen1.8.3.1\bin\
 echo %DOTPATH%
 
 echo 0. set the code generator color to blue, so we can tell cmd windows apart
@@ -16,7 +16,7 @@ for /f %%i in ('cd') do set CWD=%%i
 echo Outputting doxygen to doxygen_processing_log.txt ...
 echo ...
 echo Please wait whilst any Warnings/Errors are dumped to this screen.
-"e:/ProgramFiles/Doxygen/bin/doxygen.exe" E:\Conan\appSwingVillage\src\com\github\a2g\core\core.doxyfile > doxygen_processing_log.txt
+"C:\SapDev\ViewerWin\Releases\9.0\Tools\Doxygen1.8.3.1\bin\doxygen.exe" c:\a2g_core\core.doxyfile > doxygen_processing_log.txt
 
   
 pause
