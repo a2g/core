@@ -107,7 +107,7 @@ public class TalkPerformer {
 			String otid = scene.getOtidByCode(ocode);
 			atid = scene.getAtidOfCurrentAnimationByOtid(otid);
 			// odd choice, but shouldn't make a difference - we just need any animation
-			// from that object, since api.setSpeechBubble sets all animations.
+			// from that object, since api.setSpeechRect sets all animations.
 		}
 		else if (atid == SCENE_TALKER) {
 			atid = scene.getAtidOfSceneTalker();

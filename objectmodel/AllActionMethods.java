@@ -200,9 +200,9 @@ ITitleCardPresenterFromActions
 	}
 
 	@Override
-	public void setSpeechBubble(String otid, int index) {
+	public void setSpeechRect(String otid, int index) {
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
-		object.setSpeechBubble(index);
+		object.setSpeechRect(index);
 	}
 	
 	@Override

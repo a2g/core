@@ -47,7 +47,7 @@ public class SceneObject {
 	private double screenCoordsPerSecond;
 	private double scale;
 	private ColorEnum talkingColor;
-	private int speechBubble;
+	private int speechRect;
 	public SceneObject(String otid, int screenWidth, int screenHeight) {
 		this.currentImage = null;
 		this.otid = otid;
@@ -62,7 +62,7 @@ public class SceneObject {
 		this.initialAnimationId = otid + "_INITIAL";
 		this.scale = 1;
 		this.talkingColor = null;
-		this.speechBubble = -1;// -1 means "not set"
+		this.speechRect = -1;// -1 means "not set"
 
 		this.setBaseMiddleX(0);
 		this.setBaseMiddleY(0);
@@ -421,19 +421,19 @@ public class SceneObject {
 		
 	}
 
-	public void setSpeechBubble(int index) {
-		this.speechBubble = index;
+	public void setSpeechRect(int index) {
+		this.speechRect = index;
 		for(int i=0;i<this.animationCollection.getCount();i++)
 		{
-			if(animationCollection.getByIndex(i).getSpeechBubble()!=-1)
+			if(animationCollection.getByIndex(i).getSpeechRect()!=-1)
 			{
-				animationCollection.getByIndex(i).setSpeechBubble(index);
+				animationCollection.getByIndex(i).setSpeechRect(index);
 			}
 		}
 	}
 	
-	public int getSpeechBubble() {
-		return this.speechBubble;
+	public int getSpeechRect() {
+		return this.speechRect;
 	}
 
 	public void setClumpWithPrevious(boolean isClump) {

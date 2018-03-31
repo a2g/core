@@ -586,8 +586,8 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 
 	@Override
-	public int addSpeechBubble(RectF rectF) {
-		return master.getScenePresenter().addSpeechBubble(rectF);
+	public int addSpeechRect(RectF rectF) {
+		return master.getScenePresenter().addSpeechRect(rectF);
 	}
 
 	@Override
@@ -596,16 +596,16 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 
 	@Override
-	public void setAnimationSpeechBubble(String atid, int index) {
+	public void setAnimationSpeechRect(String atid, int index) {
 		Animation a = master.getScenePresenter().getAnimationByAtid(atid);
-		a.setSpeechBubble(index);
+		a.setSpeechRect(index);
 	}
 
 	@Override
-	public void setSpeechBubble(short ocode, int index) {
+	public void setSpeechRect(short ocode, int index) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		SceneObject o  = master.getScenePresenter().getObjectByOtid(otid);
-		o.setSpeechBubble(index);
+		o.setSpeechRect(index);
 	}
 
 	@Override

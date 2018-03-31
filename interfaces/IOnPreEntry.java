@@ -22,14 +22,14 @@ import com.github.a2g.core.interfaces.methods.game.IAddBoundaryGate;
 import com.github.a2g.core.interfaces.methods.game.IAddBoundaryPoint;
 import com.github.a2g.core.interfaces.methods.game.IAddHelperPoint;
 import com.github.a2g.core.interfaces.methods.game.IAddObstacleRect;
-import com.github.a2g.core.interfaces.methods.game.IAddSpeechBubble;
+import com.github.a2g.core.interfaces.methods.game.IAddSpeechRect;
 import com.github.a2g.core.interfaces.methods.game.IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
 import com.github.a2g.core.interfaces.methods.game.ICreateChainRootAction;
 import com.github.a2g.core.interfaces.methods.game.IGetAnimationLength;
 import com.github.a2g.core.interfaces.methods.game.IGetOCodeByAtid;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneDialogThem;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneDialogUs;
-import com.github.a2g.core.interfaces.methods.game.ISetAnimationSpeechBubble;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationSpeechRect;
 import com.github.a2g.core.interfaces.methods.game.ISetDefaultSceneObject;
 import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleX;
 import com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleY;
@@ -66,7 +66,7 @@ import com.github.a2g.core.interfaces.methods.game.ISetParallaxX;
 import com.github.a2g.core.interfaces.methods.game.ISetScale;
 import com.github.a2g.core.interfaces.methods.game.ISetScreenCoordsPerSecond;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationTalkingColor;
-import com.github.a2g.core.interfaces.methods.game.ISetSpeechBubble;
+import com.github.a2g.core.interfaces.methods.game.ISetSpeechRect;
 import com.github.a2g.core.interfaces.methods.game.ISetTalkingColor;
 import com.github.a2g.core.interfaces.methods.game.ISetTitleCard;
 import com.github.a2g.core.interfaces.methods.game.ISetValue;
@@ -100,7 +100,7 @@ IGetIsTalkingAlwaysWithoutIncrementing,
 IShareWinning,
 ICreateChainRootAction,
 IGetSceneGuiHeight,
-IAddSpeechBubble,
+IAddSpeechRect,
 IAddHelperPoint,
 IGetOCodeByAtid,
 // boundary
@@ -123,7 +123,7 @@ ISetParallaxX,
 IGetX,
 IGetY,
 ISetVisible,
-ISetSpeechBubble,
+ISetSpeechRect,
 ISetTalkingColor,
 ISetClumpWithPrevious,
 
@@ -153,7 +153,7 @@ ISetDefaultSceneObject,
 ISetAnimationAsObjectCurrentAndSetFrame,
 ISetAnimationAsSceneDialogUs,
 ISetAnimationAsSceneDialogThem,
-ISetAnimationSpeechBubble,
+ISetAnimationSpeechRect,
 ISetAnimationTalkingColor,
 IGetAnimationLength,
 IGetDefaultSceneObject,

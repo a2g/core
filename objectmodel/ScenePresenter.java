@@ -271,7 +271,7 @@ public class ScenePresenter implements IScenePresenter,
 			TalkPerformer sayAction) {
 		Animation a = this.getAnimationByAtid(atid);
 
-		int speechBubbleIndex = a.getSpeechBubble();
+		int speechRectIndex = a.getSpeechRect();
 		ColorEnum talkingColor = a.getTalkingColor();
 		PointI mouth = new PointI(0, 0);
 		if (a.getSceneObject() != null) {
@@ -284,14 +284,14 @@ public class ScenePresenter implements IScenePresenter,
 					;
 				}
 			}
-			if (speechBubbleIndex == -1) {
-				speechBubbleIndex = a.getSceneObject().getSpeechBubble();
-				if (speechBubbleIndex == -1) {
-					speechBubbleIndex = 0;// default
+			if (speechRectIndex == -1) {
+				speechRectIndex = a.getSceneObject().getSpeechRect();
+				if (speechRectIndex == -1) {
+					speechRectIndex = 0;// default
 				}
 			}
 		}
-		RectF r = this.speechRects.get(speechBubbleIndex);
+		RectF r = this.speechRects.get(speechRectIndex);
 		Rect pixels = new Rect((int) (r.getLeft() * this.getSceneGuiWidth()),
 				(int) (r.getTop() * this.getSceneGuiHeight()),
 				(int) (r.getWidth() * this.getSceneGuiWidth()),
@@ -471,7 +471,7 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	
-	public int addSpeechBubble(RectF rectF) {
+	public int addSpeechRect(RectF rectF) {
 		speechRects.add(rectF);
 		return speechRects.size() - 1;
 	}

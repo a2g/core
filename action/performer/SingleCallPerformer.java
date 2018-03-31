@@ -47,7 +47,7 @@ public class SingleCallPerformer
 		, SetAnimationSceneTalker
 		, SetAnimationObjectInitial
 		, SetSoundtrack
-		, SetSpeechBubble
+		, SetSpeechRect
 	}
 	Type type;
 	private double d;
@@ -173,9 +173,9 @@ public class SingleCallPerformer
 		case SetAnimationObjectInitial:
 			scene.setAnimationAsObjectInitial(atid);
 			return false;
-		case SetSpeechBubble:
+		case SetSpeechRect:
 			otid = scene.getOtidByCode(ocode);
-			scene.setSpeechBubble(otid, intValue);
+			scene.setSpeechRect(otid, intValue);
 			return false;
 		case SetAnimationSpecial:
 			if(intValue==WalkDirection.North.toInt())
