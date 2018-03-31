@@ -25,7 +25,6 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
-import com.github.a2g.core.objectmodel.SpeechCalculatorOuterForAll;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.SceneSpeechBalloonPanelForHtml4;
@@ -36,6 +35,7 @@ import com.github.a2g.core.platforms.html5.dependencies.ContextRealHtml5;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
@@ -142,23 +142,22 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 	}
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, String speech, Rect maxBalloonRect,
-			PointI mouth, TalkPerformer sayAction) {
+	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, String speech, RectAndLeaderLine rectAndLeaderLine,
+			TalkPerformer sayAction) {
 		if (!isVisible) {
 			super.remove(speechWidget);
 		}
 
-		ContextRealHtml5 canvas = new ContextRealHtml5("");
-		canvas.setScenePixelSize(10, 10, this);
-		SpeechCalculatorOuterForAll calc = new SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3,
-				canvas);
+	
+		//SpeechCalculatorOuterForAll calc = new SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3,
+			//	canvas);
 
-		Rect rectThatsScaledToFit = calc.getRectInPixels();
+		Rect rectThatsScaledToFit = rectAndLeaderLine.rectInPixels;
 
 		speechWidget.setText(speech);
 		speechWidget.setBorderColor(talkingColor);
 
-		speechWidget.setLeaderLine(calc);
+		speechWidget.setLeaderLine(rectAndLeaderLine);
 
 		speechWidget.setVisible(isVisible);
 
@@ -183,6 +182,14 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 		}
 		image.setScale(1.0);
 
+	}
+
+	@Override
+	public double measureTextWidth(String text) {
+		ContextRealHtml5 canvas = new ContextRealHtml5("");
+		canvas.setScenePixelSize(10, 10, this);
+		canvas.setFont("arial");
+		return canvas.measureTextWidth(text);
 	}
 
 }

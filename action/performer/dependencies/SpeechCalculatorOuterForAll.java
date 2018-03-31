@@ -1,35 +1,28 @@
-package com.github.a2g.core.objectmodel;
+package com.github.a2g.core.action.performer.dependencies;
 
 import java.util.ArrayList;
 
 import com.github.a2g.core.interfaces.internal.IContext2d;
+import com.github.a2g.core.interfaces.internal.IMeasureTextWidth;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectAndLeaderLine;
 
 public class SpeechCalculatorOuterForAll {
-	SpeechCalculatorInnerForAll fittedRect;
-	private boolean isFromTop;
-	private boolean isPointingRight;
-	private int xPos;
-	private Rect rectInPixels;
-	private int radius;
-	private int halfWidthOfLeaderLine;
-	private int afterBorderWidth;
-	private int borderWidth;
-	private int heightOfLeaderLine;
-
-	public SpeechCalculatorOuterForAll(String speech, Rect maxRect, int radius, PointI mouth, int leaderWidth, int borderWidth, IContext2d context)
+	
+ 
+	static public RectAndLeaderLine calculate(String speech, Rect maxRect, int radius, PointI mouth, int leaderWidth, int borderWidth, IMeasureTextWidth context)
 	{
-
+		RectAndLeaderLine ret = new RectAndLeaderLine();
 		int fontHeight = 10;
 		
-		fittedRect = new SpeechCalculatorInnerForAll(speech, maxRect, fontHeight, context);
+		SpeechCalculatorInnerForAll fittedRect = new SpeechCalculatorInnerForAll(speech, maxRect, fontHeight, context);
 		Rect max = fittedRect.getOuterRect();
 		PointI centre = max.getCenter();
 
 		// the mouth & centre coords are both relative to top left of viewport
-		isFromTop = mouth.getY() < centre.getY();
-		isPointingRight = mouth.getX() > centre.getX();
+		ret.isFromTop = mouth.getY() < centre.getY();
+		ret.isPointingRight = mouth.getX() > centre.getX();
 
 		// with the way I've set up the DOM, it seems that
 		// the paragraph ignores its top and left style value,
@@ -40,75 +33,38 @@ public class SpeechCalculatorOuterForAll {
 		// to get to the starting point of the leader line.
 		// same with max/minimumStartOfLeaderLine
 
-		xPos = mouth.getX()-max.getLeft();
+		ret.xPos = mouth.getX()-max.getLeft();
 		//the xPos should be where the leaderline starts so that the perpendicular
 		// edge of the leaderline points to the mouth..
 		// but if its pointing right, the straight line is a whole leaderwidth away.
 		// so we need to adjust for this.
-		xPos-=(isPointingRight?leaderWidth:0);
+		ret.xPos-=(ret.isPointingRight?leaderWidth:0);
 		int minimumStartOfLeaderLine = radius-6;// <-- trial and error see how close to the corner we can position our leader
 		int maximumStartOfLeaderLine = max.getWidth()-radius-leaderWidth+11;// <-- trial and error see how close to the corner we can position our leader
-		if(xPos>maximumStartOfLeaderLine)
-			xPos = maximumStartOfLeaderLine;
-		if(xPos<minimumStartOfLeaderLine)
-			xPos = minimumStartOfLeaderLine;
+		if(ret.xPos>maximumStartOfLeaderLine)
+			ret.xPos = maximumStartOfLeaderLine;
+		if(ret.xPos<minimumStartOfLeaderLine)
+			ret.xPos = minimumStartOfLeaderLine;
 
-		this.halfWidthOfLeaderLine = (leaderWidth/2);
-		this.heightOfLeaderLine = 2*halfWidthOfLeaderLine;// since they are always square
-		this.afterBorderWidth = halfWidthOfLeaderLine - borderWidth -1;// the -1 just looks better,
-		this.borderWidth = borderWidth;
-		this.radius = radius;
+		ret.halfWidthOfLeaderLine = (leaderWidth/2);
+		ret.heightOfLeaderLine = 2*ret.halfWidthOfLeaderLine;// since they are always square
+		ret.afterBorderWidth = ret.halfWidthOfLeaderLine - borderWidth -1;// the -1 just looks better,
+		ret.borderWidth = borderWidth;
+		ret.radius = radius;
 
 		// css styles, in chrome atleast, seem to draw the border
 		// outside of the viewport if I don't factor in the border below
-		this.rectInPixels = new Rect(
+		ret.rectInPixels = new Rect(
 				max.getLeft(),
 				max.getTop(),
 				max.getWidth()-2*borderWidth+1,
 				max.getHeight()-2*borderWidth+1);
-	}
-
-	public boolean isFromTop() {
-		return isFromTop;
-	}
-
-	public boolean isPointingRight() {
-		return isPointingRight;
-	}
-
-	public int getLeaderLineX() {
-		return xPos;
-	}
-
-	public Rect getRectInPixels() {
-		return rectInPixels;
-	}
-
-	public int getRadius() {
-		return radius;
-	}
-
-	public int getHalfWidthOfLeaderLine() {
-		return halfWidthOfLeaderLine;
-
-	}
-
-	public int getAfterBorderWidth() {
-		return afterBorderWidth;
-	}
-
-	public int getBorderWidth() {
-		return borderWidth;
-
-	}
-
-	public int getHeightOfLeaderLine() {
-		return heightOfLeaderLine;
+		return ret;
 	}
 
 	 
 	
-	static public ArrayList<String>  splitLines(IContext2d ctx, double maxWidthBeforeWrapping, String font, String speech) 
+	static public ArrayList<String>  splitLines(IMeasureTextWidth ctx, double maxWidthBeforeWrapping, String speech) 
 	{
 		// We give a little "padding"
 		// This should probably be an input param
@@ -116,7 +72,7 @@ public class SpeechCalculatorOuterForAll {
 		// this way
 		maxWidthBeforeWrapping = maxWidthBeforeWrapping - 10;
 		// We setup the text font to the context (if not already)
-		ctx.setFont( font);
+	 
 		// We split the text by words 
 		String[] words = speech.split(" ");
 		String new_line = words[0];

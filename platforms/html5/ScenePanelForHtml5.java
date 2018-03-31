@@ -28,6 +28,7 @@ import com.google.gwt.canvas.dom.client.TextMetrics;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.performer.TalkPerformer;
+import com.github.a2g.core.action.performer.dependencies.SpeechCalculatorOuterForAll;
 import com.github.a2g.core.interfaces.internal.ICommandLinePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.internal.IPackagedImage;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
@@ -35,7 +36,6 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
-import com.github.a2g.core.objectmodel.SpeechCalculatorOuterForAll;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
@@ -46,6 +46,7 @@ import com.github.a2g.core.platforms.html5.mouse.SceneMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.UIObject;
@@ -250,7 +251,6 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 			ArrayList<String> lines = SpeechCalculatorOuterForAll.splitLines(
 					canvas, 
 					w,
-					"arial", 
 					speechText);
 			// Block of text height
 			int both = lines.size() * (fontHeight + lineSpacing);
@@ -345,13 +345,13 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 	}
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, String speech, Rect maxBalloonRect,
-			PointI mouth, TalkPerformer sayAction) {
+	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, String speech, RectAndLeaderLine maxBalloonRect,
+			TalkPerformer sayAction) {
 
 		this.speechVisible = isVisible;
 		this.speechColor = talkingColor;
 		this.speechText = speech;
-		this.speechMaxRect = maxBalloonRect;
+		this.speechMaxRect = maxBalloonRect.rectInPixels;
 
 	}
 
@@ -364,6 +364,12 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 	@Override
 	public void resetScale(Image image) {
 		// not sure how this will be implemented.
+	}
+
+	@Override
+	public double measureTextWidth(String text) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

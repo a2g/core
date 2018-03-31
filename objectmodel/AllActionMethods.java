@@ -9,6 +9,9 @@ import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
+import com.github.a2g.core.primitive.PointI;
+import com.github.a2g.core.primitive.RectAndLeaderLine;
+import com.github.a2g.core.primitive.RectF;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.google.gwt.touch.client.Point;
 
@@ -322,9 +325,8 @@ ITitleCardPresenterFromActions
 
 	@Override
 	public void setStateOfPopup(boolean isVisible, String speech, String atid,
-			TalkPerformer sayAction) {
-		master.getScenePresenter().setStateOfPopup(atid, isVisible, speech,
-				sayAction);
+			RectAndLeaderLine rectAndLeaderLine, TalkPerformer sayAction) {
+		master.getScenePresenter().setStateOfPopup(atid, isVisible, speech, rectAndLeaderLine, sayAction);
 	}
 
 	@Override
@@ -395,7 +397,26 @@ ITitleCardPresenterFromActions
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		return o.getSpecialAnimation(type);
 	}
+	@Override
+	public double measureTextWidth(String text) {
+		return master.getScenePresenter().measureTextWidth(text);
+	}
 
+
+	@Override
+	public PointI GetMouthLocationByOtid(String otid) {
+		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
+		return o.getMouthLocation();
+	}
+
+
+	@Override
+	public RectF getSpeechRectUsingContingencies(String atid) {
+		return master.getScenePresenter().getSpeechRectUsingContingencies(atid);
+	}
+
+
+	
 	
 	// /@}
 	/**

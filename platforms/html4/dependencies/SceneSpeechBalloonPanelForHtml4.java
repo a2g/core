@@ -1,8 +1,8 @@
 package com.github.a2g.core.platforms.html4.dependencies;
 
-import com.github.a2g.core.objectmodel.SpeechCalculatorOuterForAll;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ParagraphElement;
@@ -96,33 +96,33 @@ public class SceneSpeechBalloonPanelForHtml4 extends VerticalPanel
 
 
 
-	public void setLeaderLine(SpeechCalculatorOuterForAll c) {
+	public void setLeaderLine(RectAndLeaderLine c) {
 
 
 		//warning: if these 'border's are not set first, the visual result is weird
-		before.getElement().getStyle().setProperty("border", ""+c.getHalfWidthOfLeaderLine()+"px solid");
-		after.getElement().getStyle().setProperty("border", ""+c.getAfterBorderWidth() +"px solid");
-		pe.getPE().getStyle().setProperty("border", ""+c.getBorderWidth()+"px solid "+borderColor.toString().toLowerCase());
+		before.getElement().getStyle().setProperty("border", ""+c.halfWidthOfLeaderLine+"px solid");
+		after.getElement().getStyle().setProperty("border", ""+c.afterBorderWidth +"px solid");
+		pe.getPE().getStyle().setProperty("border", ""+c.borderWidth+"px solid "+borderColor.toString().toLowerCase());
 
 
 		// first do rectangle
-		Rect r = c.getRectInPixels();
+		Rect r = c.rectInPixels;
 		pe.getPE().getStyle().setProperty("top", "" +(r.getTop())+"px");
 		pe.getPE().getStyle().setProperty("left", "" +(r.getLeft())+"px");
 		pe.getPE().getStyle().setProperty("width", "" +(r.getWidth()-1)+"px");
 		pe.getPE().getStyle().setProperty("height", ""+(r.getHeight()-1)+"px");
-		pe.getPE().getStyle().setProperty("WebkitBorderRadius", c.getRadius() +"px");
-		pe.getPE().getStyle().setProperty("MozBorderRadius", c.getRadius() +"px");
-		pe.getPE().getStyle().setProperty("borderRadius", c.getRadius() +"px");
+		pe.getPE().getStyle().setProperty("WebkitBorderRadius", c.radius +"px");
+		pe.getPE().getStyle().setProperty("MozBorderRadius", c.radius +"px");
+		pe.getPE().getStyle().setProperty("borderRadius", c.radius +"px");
 
-		boolean isFromTop = c.isFromTop();
-		boolean isPointingRight = c.isPointingRight();
-		int heightInPixels = c.getRectInPixels().getHeight();
+		boolean isFromTop = c.isFromTop;
+		boolean isPointingRight = c.isPointingRight;
+		int heightInPixels = c.rectInPixels.getHeight();
 
-		int top = c.isFromTop()? -c.getHeightOfLeaderLine() : heightInPixels-1;
-		top+=+c.getBorderWidth();
+		int top = c.isFromTop? -c.heightOfLeaderLine : heightInPixels-1;
+		top+=+c.borderWidth;
 
-		int left = c.getLeaderLineX();
+		int left = c.leaderLineX;
 
 		// before
 		before.getElement().getStyle().setProperty("borderColor", getColor1(!isFromTop)+getColor1(isPointingRight)+getColor1(isFromTop)+getColor1(!isPointingRight));

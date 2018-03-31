@@ -3,7 +3,9 @@ package com.github.a2g.core.action.performer;
 import java.util.ArrayList;
 
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTalkPerformer;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromTalkPerformer;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromTalkPerformer; 
+import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectF;
 
 public class TalkPerformer {
 	private ArrayList<String> speech;
@@ -79,6 +81,13 @@ public class TalkPerformer {
 	}
 
 	public double run() {
+		
+		RectF r = scene.getSpeechRectUsingContingencies(atid);
+		Rect rectInPixels = new Rect((int) (r.getLeft() * scene.getSceneGuiWidth()),
+				(int) (r.getTop() * scene.getSceneGuiHeight()),
+				(int) (r.getWidth() * scene.getSceneGuiWidth()),
+				(int) (r.getHeight() * scene.getSceneGuiHeight()));
+		
 		String[] lines = fullSpeech.split("\n");
 		
 		for (int i = 0; i < lines.length; i++) {
@@ -153,7 +162,7 @@ public class TalkPerformer {
 		}
 
 		boolean visible = true;
-		scene.setStateOfPopup(visible, speech.get(0), atid, this);
+		scene.setStateOfPopup(visible, speech.get(0), atid, null, this);
 		return totalDurationInSeconds;
 	}
 
@@ -170,7 +179,7 @@ public class TalkPerformer {
 				if (progress > startingTimeForEachLine.get(i)) {
 					scene.setStateOfPopup(true, speech.get(i)
 							, atid,
-							null);
+							null, null);
 					break;
 				}
 			}
@@ -197,7 +206,7 @@ public class TalkPerformer {
 			}
 		}
 
-		scene.setStateOfPopup(false, "", atid, null);
+		scene.setStateOfPopup(false, "", atid, null, null);
 		return false;
 	}
 

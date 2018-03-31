@@ -30,9 +30,9 @@ import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.github.a2g.core.primitive.RectF;
 
 public class ScenePresenter implements IScenePresenter,
@@ -77,6 +77,7 @@ public class ScenePresenter implements IScenePresenter,
 		defaultSceneObjectOtid = "ScenePresenter::getDefaultSceneObjectOtid was used before it was initialized";
 
 		speechRects = new Vector<RectF>(3);
+		this.addSpeechRect(new RectF(0,0,1.0,1.0));// this is for getSpeechRectUsingContingencies, it relies on there always being a zero element
 		this.helperPoints = new ArrayList<Point>();
 	}
 
@@ -267,37 +268,12 @@ public class ScenePresenter implements IScenePresenter,
 		return getObjectByOCode(ocode).getOtid();
 	}
 
-	public void setStateOfPopup(String atid, boolean isVisible, String speech,
-			TalkPerformer sayAction) {
-		Animation a = this.getAnimationByAtid(atid);
-
-		int speechRectIndex = a.getSpeechRect();
-		ColorEnum talkingColor = a.getTalkingColor();
-		PointI mouth = new PointI(0, 0);
-		if (a.getSceneObject() != null) {
-			mouth = a.getSceneObject().getMouthLocation();
-			if (talkingColor == null) {
-				talkingColor = a.getSceneObject().getTalkingColor();
-				if (talkingColor == null) {
-					talkingColor = ColorEnum.values()[(int) (Math.random() * ColorEnum
-							.values().length)];
-					;
-				}
-			}
-			if (speechRectIndex == -1) {
-				speechRectIndex = a.getSceneObject().getSpeechRect();
-				if (speechRectIndex == -1) {
-					speechRectIndex = 0;// default
-				}
-			}
-		}
-		RectF r = this.speechRects.get(speechRectIndex);
-		Rect pixels = new Rect((int) (r.getLeft() * this.getSceneGuiWidth()),
-				(int) (r.getTop() * this.getSceneGuiHeight()),
-				(int) (r.getWidth() * this.getSceneGuiWidth()),
-				(int) (r.getHeight() * this.getSceneGuiHeight()));
-		view.setStateOfPopup(isVisible, talkingColor, speech, pixels, mouth,
-				sayAction);
+	public void setStateOfPopup(String atid, boolean isVisible, String speech, 
+			RectAndLeaderLine rectAndLeaderLine, TalkPerformer sayAction) 
+	{
+		ColorEnum talkingColor = getTalkingColorUsingContingencies(atid);
+		
+		view.setStateOfPopup(isVisible, talkingColor, speech, rectAndLeaderLine, sayAction);
 	}
 
 	public String getSceneTalkerAtid() {
@@ -509,6 +485,57 @@ public class ScenePresenter implements IScenePresenter,
 			}
 			
 		}
+	}
+	
+ 
+	RectF getSpeechRectUsingContingencies(String atid)
+	{
+		Animation a = this.getAnimationByAtid(atid);
+		
+		// 1. prefer rect from animation..
+		int speechRectIndex = a.getSpeechRect();
+		
+		// 2. if none, then choose sceneObject speech rect
+		if (speechRectIndex == -1) 
+		{
+			speechRectIndex = a.getSceneObject().getSpeechRect();
+			
+			// 3. if still none, then choose the first speech rect
+			if (speechRectIndex == -1) 
+			{
+				speechRectIndex = 0;// default ( a fullscreen one is always added)
+			}
+		}
+		RectF r = this.speechRects.get(speechRectIndex);
+		
+		return r;
+	}
+	
+	ColorEnum getTalkingColorUsingContingencies(String atid)
+	{
+		Animation a = this.getAnimationByAtid(atid);
+
+		// 1. prefer talking color from animation..
+		ColorEnum talkingColor = a.getTalkingColor();
+		
+		// 2. if none, then choose sceneObject talking color
+		if (talkingColor == null) 
+		{
+			talkingColor = a.getSceneObject().getTalkingColor();
+			
+			// 3. if still none, then choose random
+			if (talkingColor == null) 
+			{
+				talkingColor = ColorEnum.values()[(int) (Math.random() * ColorEnum.values().length)];
+			}
+		}
+
+		return talkingColor;
+	}
+
+	public double measureTextWidth(String text) {
+		// TODO Auto-generated method stub
+		return this.getView().measureTextWidth(text);
 	}
 
 };

@@ -18,6 +18,7 @@ import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.G
 import com.github.a2g.core.interfaces.internal.ISingleBundle;
 import com.github.a2g.core.interfaces.IExtendsGameSceneLoader;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.RectF;
 
@@ -40,8 +41,8 @@ import com.github.a2g.core.primitive.RectF;
  *      handler by clicking on the links below:
  * 
  */
-public class AllGameMethods implements IOnEnqueueResources, IOnEntry,
-IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
+public class AllGameMethods
+		implements IOnEnqueueResources, IOnEntry, IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	private MasterPresenter master;
 
 	AllGameMethods(MasterPresenter master) {
@@ -49,15 +50,15 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 
 	/**
-	 * @name SceneObject Methods 
+	 * @name SceneObject Methods
 	 * @category stuff
-	 
-	 * These methods take an @ref ocode as the
-	 * first parameter. Behind the scenes they act on a @ref SceneObject.
-	 * Don't worry about getting any of the constants mixed up: these scene
-	 * object methods all takes parameters of type @b short so they 
-	 * can't be used with the ids for Animations (which are of type @b String) 
-	 * and InventoryItems (which are of type @b int).
+	 * 
+	 *           These methods take an @ref ocode as the first parameter. Behind
+	 *           the scenes they act on a @ref SceneObject. Don't worry about
+	 *           getting any of the constants mixed up: these scene object
+	 *           methods all takes parameters of type @b short so they can't be
+	 *           used with the ids for Animations (which are of type @b String)
+	 *           and InventoryItems (which are of type @b int).
 	 */
 
 	@Override
@@ -103,8 +104,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	public void setDisplayName(short ocode, String displayName) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		master.getScenePresenter().getObjectByOtid(otid)
-		.setDisplayName(displayName);
+		master.getScenePresenter().getObjectByOtid(otid).setDisplayName(displayName);
 
 	}
 
@@ -112,8 +112,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	public void setScreenCoordsPerSecond(short ocode, double coordsPerSecond) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		master.getScenePresenter().getObjectByOtid(otid)
-		.setScreenCoordsPerSecond(coordsPerSecond);
+		master.getScenePresenter().getObjectByOtid(otid).setScreenCoordsPerSecond(coordsPerSecond);
 
 	}
 
@@ -134,29 +133,25 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	@Override
 	public double getBaseMiddleX(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		return master.getScenePresenter().getObjectByOtid(otid)
-				.getBaseMiddleX();
+		return master.getScenePresenter().getObjectByOtid(otid).getBaseMiddleX();
 	}
 
 	@Override
 	public double getBaseMiddleY(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		return master.getScenePresenter().getObjectByOtid(otid)
-				.getBaseMiddleY();
+		return master.getScenePresenter().getObjectByOtid(otid).getBaseMiddleY();
 	}
 
 	@Override
 	public void setBaseMiddleX(short ocode, double baseMiddleX) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		master.getScenePresenter().getObjectByOtid(otid)
-		.setBaseMiddleX(baseMiddleX);
+		master.getScenePresenter().getObjectByOtid(otid).setBaseMiddleX(baseMiddleX);
 	}
 
 	@Override
 	public void setBaseMiddleY(short ocode, double baseMiddleY) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		master.getScenePresenter().getObjectByOtid(otid)
-		.setBaseMiddleY(baseMiddleY);
+		master.getScenePresenter().getObjectByOtid(otid).setBaseMiddleY(baseMiddleY);
 	}
 
 	@Override
@@ -176,8 +171,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	@Override
 	public void incrementFrameWithWraparound(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		master.getScenePresenter().getObjectByOtid(otid)
-		.incrementFrameWithWraparound();
+		master.getScenePresenter().getObjectByOtid(otid).incrementFrameWithWraparound();
 	}
 
 	@Override
@@ -190,8 +184,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	public int getCurrentFrame(short ocode) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		return master.getScenePresenter().getObjectByOtid(otid)
-				.getCurrentFrame();
+		return master.getScenePresenter().getObjectByOtid(otid).getCurrentFrame();
 	}
 
 	@Override
@@ -218,8 +211,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	@Override
 	public short getDefaultSceneObject() {
 		String otid = master.getScenePresenter().getOtidOfDefaultSceneObject();
-		if(otid.length()>0 && otid.length()<70)
-		{
+		if (otid.length() > 0 && otid.length() < 70) {
 			short ocode = master.getScenePresenter().getCodeByOtid(otid);
 			return ocode;
 		}
@@ -229,24 +221,23 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	// /@}
 
 	/**
-	 * @name InventoryItem Methods 
+	 * @name InventoryItem Methods
 	 * 
-	 * All of these have "InventoryItem" as the second word, so when thinking
-	 * about setting a property of an animation, you need only worry about
-	 * methods that have InventoryItem as the second word and no others.
+	 *       All of these have "InventoryItem" as the second word, so when
+	 *       thinking about setting a property of an animation, you need only
+	 *       worry about methods that have InventoryItem as the second word and
+	 *       no others.
 	 *
-	 * These methods take an @ref icode as the
-	 * first parameter. Behind the scenes they act on an @ref
-	 * InventoryItem. Inventory item icodes don't work as parameters to
-	 * the Object Methods, so you'll get a compiler warning. The inventory
-	 * item methods are similarly named, but all have "InventoryItem" in
-	 * their names.
+	 *       These methods take an @ref icode as the first parameter. Behind the
+	 *       scenes they act on an @ref InventoryItem. Inventory item icodes
+	 *       don't work as parameters to the Object Methods, so you'll get a
+	 *       compiler warning. The inventory item methods are similarly named,
+	 *       but all have "InventoryItem" in their names.
 	 */
 	// /@{
 	@Override
 	public boolean isInventoryItemVisible(int icode) {
-		return master.getInventoryPresenter().getInventoryItemByICode(icode)
-				.isVisible();
+		return master.getInventoryPresenter().getInventoryItemByICode(icode).isVisible();
 	}
 
 	@Override
@@ -257,8 +248,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 
 	@Override
 	public void hideInventoryItem(int icode) {
-		master.getInventoryPresenter().getInventoryItemByICode(icode)
-		.setVisible(false);
+		master.getInventoryPresenter().getInventoryItemByICode(icode).setVisible(false);
 
 	}
 
@@ -282,24 +272,23 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	// /@}
 
 	/**
-	 * @name Animation Methods 
-	 * All of these have "Animation" as the second word, so when thinking
-	 * about setting a property of an animation, you need only worry about
-	 * methods that have Animation as the second word - no more.
+	 * @name Animation Methods All of these have "Animation" as the second word,
+	 *       so when thinking about setting a property of an animation, you need
+	 *       only worry about methods that have Animation as the second word -
+	 *       no more.
 	 * 
-	 * These methods have an @ref atid as the first
-	 * parameter. Behind the scenes they act on a @ref Animation, or a @ref
-	 * SceneObject that owns it.
+	 *       These methods have an @ref atid as the first parameter. Behind the
+	 *       scenes they act on a @ref Animation, or a @ref SceneObject that
+	 *       owns it.
 	 * 
-	 * Scene categorizations:
-	 * - The SceneTalker is used only in @ref Scene interactions.
-	 * - The SceneAsker is used only in @ref DialogTree interactions.
-	 * - The SceneAnswerer is used only in @ref DialogTree interactions.
+	 *       Scene categorizations: - The SceneTalker is used only in @ref Scene
+	 *       interactions. - The SceneAsker is used only in @ref DialogTree
+	 *       interactions. - The SceneAnswerer is used only in @ref DialogTree
+	 *       interactions.
 	 * 
-	 * Object categorizations:
-	 * - ObjectInitial - the animation most often defaulted to.
-	 * - ObjectSpecial - the method used to set N,E,S,W.
-	 * - ObjectCurrent - the currently active animation.
+	 *       Object categorizations: - ObjectInitial - the animation most often
+	 *       defaulted to. - ObjectSpecial - the method used to set N,E,S,W. -
+	 *       ObjectCurrent - the currently active animation.
 	 */
 	// /@{
 
@@ -307,14 +296,12 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	public void setAnimationAsSceneTalker(String atid) {
 		master.getScenePresenter().setSceneTalkerAtid(atid);
 	}
-	
-	
+
 	@Override
 	public void setAnimationAsSceneDialogUs(String atid) {
 		master.getScenePresenter().setSceneAskerAtid(atid);
 	}
 
-	
 	@Override
 	public void setAnimationAsSceneDialogThem(String atid) {
 		master.getScenePresenter().setSceneAnswererAtid(atid);
@@ -341,11 +328,10 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setCurrentAnimation(atid);
 	}
-	
+
 	@Override
 	public void setAnimationDuration(String atid, double secs) {
-		master.getScenePresenter().getAnimationByAtid(atid)
-		.setDurationSecs(secs);
+		master.getScenePresenter().getAnimationByAtid(atid).setDurationSecs(secs);
 
 	}
 
@@ -358,17 +344,14 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 
 	@Override
 	public int getAnimationLastFrame(String atid) {
-		return master.getScenePresenter().getAnimationByAtid(atid).getFrames()
-				.getCount();
+		return master.getScenePresenter().getAnimationByAtid(atid).getFrames().getCount();
 	}
 
 	@Override
 	public int getAnimationLength(String atid) {
-		return master.getScenePresenter().getAnimationByAtid(atid).getFrames()
-				.getCount();
+		return master.getScenePresenter().getAnimationByAtid(atid).getFrames().getCount();
 
 	}
-
 
 	@Override
 	public void setAnimationTalkingColor(String atid, ColorEnum red) {
@@ -377,25 +360,22 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 
 	}
 
-
 	@Override
 	public boolean isAnimation(String atid) {
-		return master.getScenePresenter().getAnimationByAtid(atid).getFrames()
-				.getCount() > 0;
+		return master.getScenePresenter().getAnimationByAtid(atid).getFrames().getCount() > 0;
 	}
-	
+
 	public String getOtidByAtid(String atid) {
 		return master.getScenePresenter().getOtidByAtid(atid);
 	}
-	
+
 	// /@}
 
 	/**
-	 * @name Verb Methods 
-	 * @anchor balooga
-	 * These items act on the @ref VerbsPresenter object
-	 * Behind the scenes they act on a SceneObject. They all have "Verb"
-	 * in their names.
+	 * @name Verb Methods
+	 * @anchor balooga These items act on the @ref VerbsPresenter object Behind
+	 *         the scenes they act on a SceneObject. They all have "Verb" in
+	 *         their names.
 	 */
 	// /@{
 	@Override
@@ -413,8 +393,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	// /@}
 
 	/**
-	 * @name General Methods 
-	 * These are a real mixed batch
+	 * @name General Methods These are a real mixed batch
 	 */
 	// /@{
 
@@ -422,12 +401,11 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	public void queueEntireBundleLoader(IBundleLoader bundleLoader) {
 		master.queueEntireBundleLoader(bundleLoader);
 	}
-	
 
 	@Override
 	public void queueSingleBundle(ISingleBundle loader) {
 		master.queueSingleBundle(loader);
-		
+
 	}
 
 	@Override
@@ -439,6 +417,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	public void setValue(Object key, int value) {
 		master.setValue(key, value);
 	}
+
 	@Override
 	public int getValue(Object name) {
 		return master.getValue(name);
@@ -453,7 +432,6 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	public String getCurrentSceneName() {
 		return master.getCurrentSceneName();
 	}
-
 
 	@Override
 	public void switchToScene(String scene, int arrivalSegment) {
@@ -482,8 +460,7 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 
 	@Override
-	public void setIsSayAlwaysWithoutIncremementing(
-			boolean isSayWithoutIncremementing) {
+	public void setIsSayAlwaysWithoutIncremementing(boolean isSayWithoutIncremementing) {
 		master.setIsSayAlwaysWithoutIncremementing(isSayWithoutIncremementing);
 
 	}
@@ -509,20 +486,18 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 		master.executeChainedAction(ba);
 
 	}
-	
+
 	@Override
 	public void setActiveGuiState(GuiStateEnum state) {
 		master.setActiveGuiState(state);
 
 	}
 
-
 	@Override
 	public void displayTitleCard(String text) {
 		master.displayTitleCard(text);
 
 	}
-
 
 	@Override
 	public void queueMP3ForASoundObject(String name, String location) {
@@ -531,53 +506,51 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	}
 
 	@Override
-	public void alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation(
-			int frame, String atid) {
-		master.getScenePresenter()
-		.alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
-				frame, atid);
+	public void alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation(int frame, String atid) {
+		master.getScenePresenter().alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(frame, atid);
 
 	}
-	
+
 	@Override
-	public void setStateOfPopup(boolean isVisible, String speech, String atid,
+	public void setStateOfPopup(boolean isVisible, String speech, String atid, RectAndLeaderLine rectAndLeaderLine,
 			TalkPerformer sayAction) {
-		master.getScenePresenter().setStateOfPopup(atid, isVisible, speech, sayAction);
+		master.getScenePresenter().setStateOfPopup(atid, isVisible, speech, rectAndLeaderLine, sayAction);
 
 	}
-	
+
 	@Override
 	public void setTitleCard(String titlecard) {
 		master.getTitleCardPresenter().setText(titlecard);
 	}
-	
+
 	@Override
 	public void addObstacleRect(double x, double y, double right, double bottom) {
 		master.getScenePresenter().addObstacleRect(x, y, right, bottom);
 
 	}
-	
+
 	@Override
-	public void addBoundaryGate(double tlx,double tly,double brx,double bry,Object sceneToSwitchTo, int arrivalSegment) {
-		master.getScenePresenter().addBoundaryGate(tlx,tly,brx,bry,sceneToSwitchTo, arrivalSegment);
+	public void addBoundaryGate(double tlx, double tly, double brx, double bry, Object sceneToSwitchTo,
+			int arrivalSegment) {
+		master.getScenePresenter().addBoundaryGate(tlx, tly, brx, bry, sceneToSwitchTo, arrivalSegment);
 	}
 
 	@Override
-	public void addBoundaryPoint(double  x, double y) {
-		master.getScenePresenter().addBoundaryPoint(x,y);
+	public void addBoundaryPoint(double x, double y) {
+		master.getScenePresenter().addBoundaryPoint(x, y);
 	}
 	// /@}
 
 	@Override
 	public void clearValuesAndSaidSpeech() {
 		master.clearValueRegistry();
-		
+
 	}
 
 	@Override
 	public void clearSaidSpeech() {
 		master.clearSaidSpeech();
-		
+
 	}
 
 	@Override
@@ -604,51 +577,51 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	@Override
 	public void setSpeechRect(short ocode, int index) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		SceneObject o  = master.getScenePresenter().getObjectByOtid(otid);
+		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setSpeechRect(index);
 	}
 
 	@Override
 	public void setTalkingColor(short ocode, ColorEnum color) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		SceneObject o  = master.getScenePresenter().getObjectByOtid(otid);
+		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setTalkingColor(color);
-		
+
 	}
 
 	@Override
 	public void setScale(short ocode, double scale) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		SceneObject o  = master.getScenePresenter().getObjectByOtid(otid);
+		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setScale(scale);
-		
+
 	}
 
 	@Override
 	public int addHelperPoint(double x, double y) {
-		return master.getScenePresenter().addHelperPoint(new Point(x,y));
+		return master.getScenePresenter().addHelperPoint(new Point(x, y));
 	}
 
 	@Override
 	public void addObstacleRect(double x, double y, int helperIndex) {
 		Point p = master.getScenePresenter().getHelperPoints().get(helperIndex);
 		master.getScenePresenter().addObstacleRect(x, y, p.getX(), p.getY());
-		
+
 	}
 
 	@Override
 	public void addObstacleRect(int helperIndex, double x, double y) {
 		Point p = master.getScenePresenter().getHelperPoints().get(helperIndex);
-		master.getScenePresenter().addObstacleRect( p.getX(), p.getY(), x, y);
-	
+		master.getScenePresenter().addObstacleRect(p.getX(), p.getY(), x, y);
+
 	}
 
 	@Override
 	public void addObstacleRect(int helper1, int helper2) {
 		Point p1 = master.getScenePresenter().getHelperPoints().get(helper1);
 		Point p2 = master.getScenePresenter().getHelperPoints().get(helper2);
-		master.getScenePresenter().addObstacleRect( p1.getX(), p1.getY(), p2.getX(), p2.getY());
-	
+		master.getScenePresenter().addObstacleRect(p1.getX(), p1.getY(), p2.getX(), p2.getY());
+
 	}
 
 	@Override
@@ -660,14 +633,14 @@ IOnPreEntry, IOnEveryFrame, IOnDoCommand, IOnDialogTree {
 	public void addBoundaryPoint(int helperIndex) {
 		Point p1 = master.getScenePresenter().getHelperPoints().get(helperIndex);
 		master.getScenePresenter().addBoundaryPoint(p1.getX(), p1.getY());
-		
+
 	}
 
 	@Override
 	public void setClumpWithPrevious(short ocode, boolean isClump) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setClumpWithPrevious(isClump);
-		
+
 	}
 
 	@Override
