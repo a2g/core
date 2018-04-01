@@ -2,6 +2,8 @@ package com.github.a2g.core.primitive;
 
 public class RectAndLeaderLine 
 {
+	public String speeech;
+	public String atid;
 	public boolean isFromTop;
 
 	public boolean isPointingRight;
@@ -19,5 +21,5 @@ public class RectAndLeaderLine
 	public int borderWidth;
 
 	public int heightOfLeaderLine;
-public int xPos;
+    public int xPos;
 }

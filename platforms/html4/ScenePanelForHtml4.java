@@ -142,7 +142,7 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 	}
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, String speech, RectAndLeaderLine rectAndLeaderLine,
+	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, RectAndLeaderLine rectAndLeaderLine,
 			TalkPerformer sayAction) {
 		if (!isVisible) {
 			super.remove(speechWidget);
@@ -154,7 +154,7 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 
 		Rect rectThatsScaledToFit = rectAndLeaderLine.rectInPixels;
 
-		speechWidget.setText(speech);
+		speechWidget.setText(rectAndLeaderLine.speeech);
 		speechWidget.setBorderColor(talkingColor);
 
 		speechWidget.setLeaderLine(rectAndLeaderLine);

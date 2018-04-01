@@ -2,7 +2,6 @@ package com.github.a2g.core.action.performer.dependencies;
 
 import java.util.ArrayList;
 
-import com.github.a2g.core.interfaces.internal.IContext2d;
 import com.github.a2g.core.interfaces.internal.IMeasureTextWidth;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.touch.client.Point;
@@ -29,7 +28,7 @@ public class SpeechCalculatorInnerForAll {
 		
 			debugRect = new Rect(x,y,maxRect.getWidth(), maxRect.getHeight());
 			// Paint text
-			lines = SpeechCalculatorOuterForAll.splitLines(context, w, speechText);
+			lines = SplitLines.splitLines(context, w, speechText);
 			points = new ArrayList<Point>();
 			
 			// Block of text height

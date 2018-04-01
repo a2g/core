@@ -2,13 +2,17 @@ package com.github.a2g.core.action.performer;
 
 import java.util.ArrayList;
 
+import com.github.a2g.core.action.performer.dependencies.SpeechCalculatorOuterForAll;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTalkPerformer;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromTalkPerformer; 
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromTalkPerformer;
+import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.github.a2g.core.primitive.RectF;
 
 public class TalkPerformer {
-	private ArrayList<String> speech;
+	private ArrayList<RectAndLeaderLine> returnObjects;
+	
 	private ArrayList<Double> startingTimeForEachLine;
 	private double totalDurationInSeconds;
 	private IScenePresenterFromTalkPerformer scene;
@@ -36,7 +40,6 @@ public class TalkPerformer {
 		this.atid = atid;
 		this.otid = "";
 		this.fullSpeech = fullSpeech;
-		speech = new ArrayList<String>();
 		startingTimeForEachLine = new ArrayList<Double>();
 		
 		this.totalDurationInSeconds = 0;
@@ -49,7 +52,7 @@ public class TalkPerformer {
 		this.atid = "";
 		this.otid = "";
 		this.fullSpeech = fullSpeech;
-		speech = new ArrayList<String>();
+		returnObjects = new ArrayList<RectAndLeaderLine>();
 		startingTimeForEachLine = new ArrayList<Double>();
 		
 		this.totalDurationInSeconds = 0;
@@ -82,21 +85,26 @@ public class TalkPerformer {
 
 	public double run() {
 		
-		RectF r = scene.getSpeechRectUsingContingencies(atid);
-		Rect rectInPixels = new Rect((int) (r.getLeft() * scene.getSceneGuiWidth()),
-				(int) (r.getTop() * scene.getSceneGuiHeight()),
-				(int) (r.getWidth() * scene.getSceneGuiWidth()),
-				(int) (r.getHeight() * scene.getSceneGuiHeight()));
-		
+	
+		// first split based on authored breaks
 		String[] lines = fullSpeech.split("\n");
 		
+
+		ArrayList<String> speech = new ArrayList<String>();
 		for (int i = 0; i < lines.length; i++) {
 			String line = lines[i];
 			speech.add(line);
 			double secondsForLine = getSecondsForLine(line);
 			totalDurationInSeconds = totalDurationInSeconds + secondsForLine;
 		}
-
+		
+		RectF maxRectF = scene.getSpeechRectUsingContingencies(atid);
+		Rect maxRectI = translateRect(maxRectF);
+		PointI mouth = scene.GetMouthLocationByOtid(otid);
+		returnObjects = SpeechCalculatorOuterForAll.calculate(lines, maxRectI, 30, mouth, 38, 3, scene);
+		//SpeechCalculatorOuterForAll calc = new SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3,
+		//	canvas);
+		
 		// set ceilings (for easy calcluation)
 		double rollingStartingTimeForLine = 0;
 		for (int i = 0; i < lines.length; i++) {
@@ -161,8 +169,10 @@ public class TalkPerformer {
 			}
 		}
 
+		
+		
 		boolean visible = true;
-		scene.setStateOfPopup(visible, speech.get(0), atid, null, this);
+		scene.setStateOfPopup(visible, returnObjects.get(0), this);
 		return totalDurationInSeconds;
 	}
 
@@ -177,9 +187,7 @@ public class TalkPerformer {
 			for (int i = startingTimeForEachLine.size() - 1; i >= 0; i--) {
 				// go backwards thru the loop to find text that should be valid
 				if (progress > startingTimeForEachLine.get(i)) {
-					scene.setStateOfPopup(true, speech.get(i)
-							, atid,
-							null, null);
+					scene.setStateOfPopup(true, returnObjects.get(i), null);
 					break;
 				}
 			}
@@ -196,6 +204,15 @@ public class TalkPerformer {
 		}
 	}
 
+	Rect translateRect(RectF r)
+	{
+
+		Rect rectInPixels = new Rect((int) (r.getLeft() * scene.getSceneGuiWidth()),
+				(int) (r.getTop() * scene.getSceneGuiHeight()),
+				(int) (r.getWidth() * scene.getSceneGuiWidth()),
+				(int) (r.getHeight() * scene.getSceneGuiHeight()));
+		return rectInPixels;
+	}
 	public boolean onComplete() {
 
 		if (this.otid != "") {
@@ -206,7 +223,7 @@ public class TalkPerformer {
 			}
 		}
 
-		scene.setStateOfPopup(false, "", atid, null, null);
+		scene.setStateOfPopup(false, null, null);
 		return false;
 	}
 

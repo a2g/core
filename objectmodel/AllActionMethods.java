@@ -324,9 +324,8 @@ ITitleCardPresenterFromActions
 	}
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, String speech, String atid,
-			RectAndLeaderLine rectAndLeaderLine, TalkPerformer sayAction) {
-		master.getScenePresenter().setStateOfPopup(atid, isVisible, speech, rectAndLeaderLine, sayAction);
+	public void setStateOfPopup(boolean isVisible, RectAndLeaderLine rectAndLeaderLine, TalkPerformer sayAction) {
+		master.getScenePresenter().setStateOfPopup(isVisible, rectAndLeaderLine, sayAction);
 	}
 
 	@Override

@@ -37,8 +37,7 @@ public interface IScenePanelFromScenePresenter
 
 	void setCameraOffset(int x, int y);
 
-	void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
-			String speech, RectAndLeaderLine pixels, TalkPerformer sayAction);
+	void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, RectAndLeaderLine rectAndLeaderLine, TalkPerformer sayAction);
 
 	void onSceneEntry(String string);
 

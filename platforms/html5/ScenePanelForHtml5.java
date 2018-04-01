@@ -28,7 +28,7 @@ import com.google.gwt.canvas.dom.client.TextMetrics;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.performer.TalkPerformer;
-import com.github.a2g.core.action.performer.dependencies.SpeechCalculatorOuterForAll;
+import com.github.a2g.core.action.performer.dependencies.SplitLines;
 import com.github.a2g.core.interfaces.internal.ICommandLinePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.internal.IPackagedImage;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
@@ -248,7 +248,7 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 			canvas.strokeRect(x, y, w, h);
 
 			// Paint text
-			ArrayList<String> lines = SpeechCalculatorOuterForAll.splitLines(
+			ArrayList<String> lines = SplitLines.splitLines(
 					canvas, 
 					w,
 					speechText);
@@ -345,13 +345,13 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 	}
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, String speech, RectAndLeaderLine maxBalloonRect,
+	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, RectAndLeaderLine c,
 			TalkPerformer sayAction) {
 
 		this.speechVisible = isVisible;
 		this.speechColor = talkingColor;
-		this.speechText = speech;
-		this.speechMaxRect = maxBalloonRect.rectInPixels;
+		this.speechText = c.speeech;
+		this.speechMaxRect = c.rectInPixels;
 
 	}
 

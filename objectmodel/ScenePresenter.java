@@ -268,12 +268,10 @@ public class ScenePresenter implements IScenePresenter,
 		return getObjectByOCode(ocode).getOtid();
 	}
 
-	public void setStateOfPopup(String atid, boolean isVisible, String speech, 
-			RectAndLeaderLine rectAndLeaderLine, TalkPerformer sayAction) 
+	public void setStateOfPopup(boolean isVisible, RectAndLeaderLine rectAndLeaderLine, TalkPerformer sayAction) 
 	{
-		ColorEnum talkingColor = getTalkingColorUsingContingencies(atid);
-		
-		view.setStateOfPopup(isVisible, talkingColor, speech, rectAndLeaderLine, sayAction);
+		ColorEnum talkingColor = this.getTalkingColorUsingContingencies(rectAndLeaderLine.atid);
+		view.setStateOfPopup(isVisible, talkingColor, rectAndLeaderLine, sayAction);
 	}
 
 	public String getSceneTalkerAtid() {
@@ -510,27 +508,29 @@ public class ScenePresenter implements IScenePresenter,
 		
 		return r;
 	}
-	
+
 	ColorEnum getTalkingColorUsingContingencies(String atid)
 	{
-		Animation a = this.getAnimationByAtid(atid);
-
-		// 1. prefer talking color from animation..
-		ColorEnum talkingColor = a.getTalkingColor();
-		
-		// 2. if none, then choose sceneObject talking color
-		if (talkingColor == null) 
+		if(atid!=null)
 		{
-			talkingColor = a.getSceneObject().getTalkingColor();
-			
-			// 3. if still none, then choose random
-			if (talkingColor == null) 
+			Animation a = this.getAnimationByAtid(atid);
+
+			if(a!=null)
 			{
-				talkingColor = ColorEnum.values()[(int) (Math.random() * ColorEnum.values().length)];
+				// 1. prefer talking color from animation..
+				ColorEnum talkingColor = a.getTalkingColor();
+				if(talkingColor!=null)
+					return talkingColor;
+
+				// 2. if none, then choose sceneObject talking color
+				talkingColor = a.getSceneObject().getTalkingColor();
+				if(talkingColor!=null)
+					return talkingColor;
 			}
 		}
 
-		return talkingColor;
+		// 3. if still none, then choose random
+		return ColorEnum.values()[(int) (Math.random() * ColorEnum.values().length)];
 	}
 
 	public double measureTextWidth(String text) {

@@ -512,9 +512,9 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, String speech, String atid, RectAndLeaderLine rectAndLeaderLine,
+	public void setStateOfPopup(boolean isVisible, RectAndLeaderLine rectAndLeaderLine,
 			TalkPerformer sayAction) {
-		master.getScenePresenter().setStateOfPopup(atid, isVisible, speech, rectAndLeaderLine, sayAction);
+		master.getScenePresenter().setStateOfPopup( isVisible, rectAndLeaderLine, sayAction);
 
 	}
 
