@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Anthony Cassidy
+ `* Copyright 2012 Anthony Cassidy
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,7 +19,8 @@ package com.github.a2g.core.platforms.swing;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GradientPaint;
+import java.awt.Font;
+import java.awt.FontMetrics; 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -60,8 +61,11 @@ import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.github.a2g.core.primitive.RectF;
 import com.github.a2g.core.platforms.swing.dependencies.ImageForSwing;
+import com.github.a2g.core.platforms.swing.dependencies.MakeSpeechSwing;
+import com.github.a2g.core.platforms.swing.dependencies.DrawSpeechSwingLabel;
 import com.github.a2g.core.platforms.swing.dependencies.PackagedImageForSwing;
 import com.github.a2g.core.platforms.swing.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.swing.mouse.SceneMouseOverHandler;
@@ -92,10 +96,9 @@ implements IScenePanelFromScenePresenter
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages; 
 
-	private boolean speechVisible;
-	private ColorEnum speechColor;
-	private String speechText;
+	private boolean isSpeechVisible;
 	private Rect speechRect;
+	private JLabel textLabel;
 
 	private BufferedImage bufferedImage;
 
@@ -109,13 +112,14 @@ implements IScenePanelFromScenePresenter
 		this.listOfAllVisibleImages = new LinkedList<Image>();
 		this.width = 200;
 		this.height = 200;
+		this.textLabel = new JLabel();
 		this.setBounds(0,0,320,200);
 		this.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 		this.setDoubleBuffered(true);
-		this.speechVisible = false;
-		this.speechColor = ColorEnum.Navy;
-		this.speechText = "";
-		this.speechRect = null;
+		//this.speechVisible = false;
+		//this.speechColor = ColorEnum.Navy;
+		//this.speechText = "";
+		//this.speechRect = null;
 
 		cameraOffsetX=0;
 		cameraOffsetY=0;
@@ -410,7 +414,7 @@ implements IScenePanelFromScenePresenter
 			}
 		}
 
-		if(speechVisible && bufferedImage!=null)
+		if(isSpeechVisible && bufferedImage!=null)
 		{	
 			g.drawImage(bufferedImage, speechRect.getLeft(), speechRect.getTop(), this);
 
@@ -498,100 +502,11 @@ implements IScenePanelFromScenePresenter
 	}
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
-			String speech, Rect pixels, PointI mouth, TalkPerformer sayAction) 
-	{
-		this.speechVisible = isVisible;
-		this.speechColor = talkingColor;
-		this.speechText = speech;
-		this.speechRect = pixels;
-
-		updateSpeechImage();
-
-	}
-
-
-
-
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 
 	}
-
-	void updateSpeechImage()
-	{
-		if(speechRect.getWidth()<=0)
-			return;
-		bufferedImage = new BufferedImage(
-				speechRect.getWidth(),
-				speechRect.getHeight(),
-				BufferedImage.TYPE_INT_RGB);
-		Graphics2D imageGraphics = bufferedImage.createGraphics();
-		GradientPaint gp = new GradientPaint(
-				20f,
-				20f,
-				Color.white,
-				380f,
-				280f,
-				Color.white);
-		imageGraphics.setPaint(gp);
-		imageGraphics.fillRect(0, 0, speechRect.getWidth(), speechRect.getHeight());
-
-		String html = "<html><body style='padding: 4px;"
-		//+"height: "+speechRect.getHeight()+"px;"
-        +"width: "+(speechRect.getWidth()*.7)+"px; '>"
-		+ speechText;
-		JLabel textLabel = new JLabel(html);
-		//Dimension size = textLabel.getPreferredSize();
-		Dimension size = new Dimension(speechRect.getWidth(), speechRect.getHeight() );
-		textLabel.setSize(size);
-
-		Dimension d = new Dimension(speechRect.getWidth(), speechRect.getHeight() );
-		if(d.width>0)
-		{
-			BufferedImage bi = new BufferedImage(
-					d.width,
-					d.height,
-					BufferedImage.TYPE_INT_ARGB);
-			Graphics g = bi.createGraphics();
-			g.setColor(new Color(255, 255, 255, 128));//white, semi-transparent
-
-			g.fillRoundRect(
-					0,
-					0,
-					this.speechRect.getWidth(),
-					this.speechRect.getHeight(),
-					10,
-					10);
-			g.setColor(Color.black);
-			textLabel.paint(g);
-			Graphics g2 = bufferedImage.getGraphics();
-			//Rect r = speechRect;
-			//g2.drawImage(bi, r.getLeft(), r.getTop(), r.getRight(), r.getBottom(), this);
-			g2.drawImage(bi, 0, 0, this);
-			//g2.setColor(Color.white);
-			//g2.fillRect(speechRect.getLeft(), speechRect.getTop(), speechRect.getWidth()-1, speechRect.getHeight());
-			g2.setColor(new Color(speechColor.r, speechColor.g, speechColor.b));
-			g2.drawRect(0+1, 0+1, speechRect.getWidth()-3, speechRect.getHeight()-3);
-			g2.drawRect(0, 0, speechRect.getWidth()-1, speechRect.getHeight()-1);
-			
-			//ImageIcon ii = new ImageIcon(bufferedImage);
-			//JLabel imageLabel = new JLabel(ii);
-			//this.add(imageLabel);
-		}
-		/*
-		g.setColor(Color.white);
-		g.fillRect(speechRect.getLeft(), speechRect.getTop(), speechRect.getWidth()-1, speechRect.getHeight());
-		g.setColor(new Color(speechColor.r, speechColor.g, speechColor.b));
-		g.drawRect(speechRect.getLeft()+1, speechRect.getTop()+1, speechRect.getWidth()-3, speechRect.getHeight()-2);
-		g.drawRect(speechRect.getLeft(), speechRect.getTop(), speechRect.getWidth()-1, speechRect.getHeight());
-		g.setFont(new Font("Arial",Font.BOLD,12));
-		g.drawString(speechText, speechRect.getLeft()+4, speechRect.getTop()+speechRect.getHeight()/2);
-		//g.getFontMetrics()
-		 */
-	}
-
+	
 
 
 	public void setIsDiagnosticsDisplay(boolean isDisplayed)
@@ -630,6 +545,29 @@ implements IScenePanelFromScenePresenter
 	public void resetScale(Image image) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Point measureTextWidthAndHeight(String text) {
+		textLabel.setFont(new Font("Arial",Font.BOLD,12));
+		FontMetrics fm = textLabel.getFontMetrics(textLabel.getFont()); // or another font
+		
+		double stringWidthInPixels = 18+fm.stringWidth(text);
+		return new Point(stringWidthInPixels, 12);
+	}
+	
+	
+	@Override
+	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor,
+			RectAndLeaderLine rectAndLeaderLine, TalkPerformer sayAction) 
+	{
+		this.isSpeechVisible = isVisible;
+		ColorEnum speechColor = talkingColor;
+	
+		if(rectAndLeaderLine.rectTextAndMarginsInOlive.getWidth()<=0)
+			return;
+		
+		this.bufferedImage = DrawSpeechSwingLabel.draw(/*textLabel, */rectAndLeaderLine, speechColor, new PointI(width,height));
 	}
 
 

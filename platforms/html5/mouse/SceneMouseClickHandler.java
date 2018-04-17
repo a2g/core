@@ -18,7 +18,7 @@ package com.github.a2g.core.platforms.html5.mouse;
 
 
 import com.github.a2g.core.event.ExecuteCommandEvent;
-import com.github.a2g.core.platforms.html5.dependencies.ContextRealHtml5;
+import com.github.a2g.core.platforms.html5.dependencies.CanvasEtcHtml5;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.web.bindery.event.shared.EventBus;
@@ -26,11 +26,11 @@ import com.google.web.bindery.event.shared.EventBus;
 
 public class SceneMouseClickHandler implements ClickHandler {
 	private final EventBus bus;
-	private final ContextRealHtml5 canvas;
+	private final CanvasEtcHtml5 canvasEtcHtml5;
 
-	public SceneMouseClickHandler(EventBus bus, ContextRealHtml5 canvas) {
+	public SceneMouseClickHandler(EventBus bus, CanvasEtcHtml5 canvasEtcHtml5) {
 		this.bus = bus;
-		this.canvas = canvas;
+		this.canvasEtcHtml5 = canvasEtcHtml5;
 	}
 
 	@Override
@@ -38,13 +38,13 @@ public class SceneMouseClickHandler implements ClickHandler {
 		double x = -1;
 		double y = -1;
 
-		if (this.canvas != null) {
+		if (this.canvasEtcHtml5 != null) {
 			x = event.getRelativeX(
-					this.canvas.getElement());
+					this.canvasEtcHtml5.getElement());
 			y = event.getRelativeY(
-					this.canvas.getElement());
-			y /= this.canvas.getOffsetHeight();
-			x /= this.canvas.getOffsetWidth();
+					this.canvasEtcHtml5.getElement());
+			y /= this.canvasEtcHtml5.getOffsetHeight();
+			x /= this.canvasEtcHtml5.getOffsetWidth();
 		}
 		bus.fireEvent(
 				new ExecuteCommandEvent(x, y));

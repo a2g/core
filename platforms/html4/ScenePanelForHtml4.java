@@ -31,12 +31,13 @@ import com.github.a2g.core.platforms.html4.dependencies.SceneSpeechBalloonPanelF
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectTouchMoveHandler;
-import com.github.a2g.core.platforms.html5.dependencies.ContextRealHtml5;
+import com.github.a2g.core.platforms.html5.dependencies.CanvasEtcHtml5;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.touch.client.Point;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
 public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, IScenePanelFromScenePresenter {
@@ -148,13 +149,8 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 			super.remove(speechWidget);
 		}
 
-	
-		//SpeechCalculatorOuterForAll calc = new SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3,
-			//	canvas);
+		Rect rectThatsScaledToFit = rectAndLeaderLine.rectTextAndMarginsInOlive;
 
-		Rect rectThatsScaledToFit = rectAndLeaderLine.rectInPixels;
-
-		speechWidget.setText(rectAndLeaderLine.speeech);
 		speechWidget.setBorderColor(talkingColor);
 
 		speechWidget.setLeaderLine(rectAndLeaderLine);
@@ -185,11 +181,12 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 	}
 
 	@Override
-	public double measureTextWidth(String text) {
-		ContextRealHtml5 canvas = new ContextRealHtml5("");
-		canvas.setScenePixelSize(10, 10, this);
-		canvas.setFont("arial");
-		return canvas.measureTextWidth(text);
+	public Point measureTextWidthAndHeight(String text) {
+		CanvasEtcHtml5 contextHtml5 = new CanvasEtcHtml5("");
+		contextHtml5.setScenePixelSize(10, 10, this);
+		contextHtml5.setFont("arial");
+		Point d = contextHtml5.measureTextWidthAndHeight(text);
+		return d;
 	}
 
 }

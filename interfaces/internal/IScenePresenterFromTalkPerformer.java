@@ -34,7 +34,7 @@ extends ISetStateOfPopup
 , IGetAtidOfCurrentAnimationByOtid
 , IGetCurrentFrameByOtid
 , IGetOtidByCode
-, IMeasureTextWidth
+, IMeasureTextWidthAndHeight
 , IGetMouthLocationByOtid
 , IGetSceneGuiWidth
 , IGetSceneGuiHeight

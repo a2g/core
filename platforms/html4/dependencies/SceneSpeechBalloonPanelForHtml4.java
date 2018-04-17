@@ -106,7 +106,7 @@ public class SceneSpeechBalloonPanelForHtml4 extends VerticalPanel
 
 
 		// first do rectangle
-		Rect r = c.rectInPixels;
+		Rect r = c.rectTextAndMarginsInOlive;
 		pe.getPE().getStyle().setProperty("top", "" +(r.getTop())+"px");
 		pe.getPE().getStyle().setProperty("left", "" +(r.getLeft())+"px");
 		pe.getPE().getStyle().setProperty("width", "" +(r.getWidth()-1)+"px");
@@ -117,7 +117,7 @@ public class SceneSpeechBalloonPanelForHtml4 extends VerticalPanel
 
 		boolean isFromTop = c.isFromTop;
 		boolean isPointingRight = c.isPointingRight;
-		int heightInPixels = c.rectInPixels.getHeight();
+		int heightInPixels = c.rectTextAndMarginsInOlive.getHeight();
 
 		int top = c.isFromTop? -c.heightOfLeaderLine : heightInPixels-1;
 		top+=+c.borderWidth;

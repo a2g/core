@@ -27,8 +27,7 @@ import com.google.gwt.canvas.dom.client.CssColor;
 import com.google.gwt.canvas.dom.client.TextMetrics;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.action.performer.TalkPerformer;
-import com.github.a2g.core.action.performer.dependencies.SplitLines;
+import com.github.a2g.core.action.performer.TalkPerformer; 
 import com.github.a2g.core.interfaces.internal.ICommandLinePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.internal.IPackagedImage;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
@@ -40,7 +39,8 @@ import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
-import com.github.a2g.core.platforms.html5.dependencies.ContextRealHtml5;
+import com.github.a2g.core.platforms.html5.dependencies.CanvasEtcHtml5;
+import com.github.a2g.core.platforms.html5.dependencies.DrawSpeechHtml5;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -48,6 +48,7 @@ import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.touch.client.Point;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -73,9 +74,8 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 	private LinkedList<Image> listOfAllVisibleImages;
 	private boolean speechVisible;
 	private ColorEnum speechColor;
-	private String speechText;
-	private Rect speechMaxRect;
-	private ContextRealHtml5 canvas;
+	private RectAndLeaderLine speechRectAndLeaderLine;
+	private CanvasEtcHtml5 canvasEtcHtml5;
 
 	public ScenePanelForHtml5(EventBus bus, IScenePresenterFromScenePanel toScene,
 			ICommandLinePresenterFromSceneMouseOver toCommandLine) {
@@ -90,9 +90,9 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 		this.mapOfPointsByImage = new TreeMap<Integer, PointI>();
 		this.listOfVisibleHashCodes = new LinkedList<Integer>();
 		this.listOfAllVisibleImages = new LinkedList<Image>();
-		canvas = new ContextRealHtml5("");
-		canvas.addMouseMoveHandler(new SceneMouseOverHandler(this, bus, toScene, toCommandLine));
-		canvas.addClickHandler(new SceneMouseClickHandler(bus, canvas));
+		canvasEtcHtml5 = new CanvasEtcHtml5("");
+		canvasEtcHtml5.addMouseMoveHandler(new SceneMouseOverHandler(this, bus, toScene, toCommandLine));
+		canvasEtcHtml5.addClickHandler(new SceneMouseClickHandler(bus, canvasEtcHtml5));
 		
 		this.add(abs);
 	}
@@ -183,7 +183,7 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 	public void setScenePixelSize(int width, int height) {
 
 		this.setSize("" + width + "px", "" + height + "px");
-		canvas.setScenePixelSize(width, height, this);
+		canvasEtcHtml5.setScenePixelSize(width, height, this);
 	}
 
 	@Override
@@ -222,60 +222,17 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 				
 				ImageElement imageElement = (ImageElement) (((ImageForHtml4) image).getNativeImage().getElement()
 						.cast());
-				canvas.translateAndDraw(x,y,imageElement);
+				canvasEtcHtml5.translateAndDraw(x,y,imageElement);
 			
 			}
 		}
 
 		if (speechVisible) {
-			canvas.setFillStyle(ColorEnum.White.toString());
-			canvas.setFont("16px \"Times New Roman\"");
-			Rect r = speechMaxRect;// getRectGivenSpeechAndMaxRect(this.speechText,
-									// this.speechMaxRect, backBufferContext);
-			canvas.fillRect(r.getLeft(), r.getTop(), r.getWidth(), r.getHeight());
-			canvas.setFillStyle(this.speechColor.name());
-			canvas.fillText(this.speechText, r.getLeft(), r.getTop(), r.getWidth());
-
-			int x = r.getLeft();
-			int y = r.getTop();
-			int w = r.getWidth();
-			int h = r.getHeight();
-			int lineSpacing = 3;
-			int fontHeight = 10;
-
-			canvas.setLineWidth(1);
-			canvas.setStrokeStyle("black");
-			canvas.strokeRect(x, y, w, h);
-
-			// Paint text
-			ArrayList<String> lines = SplitLines.splitLines(
-					canvas, 
-					w,
-					speechText);
-			// Block of text height
-			int both = lines.size() * (fontHeight + lineSpacing);
-			if (both >= h) {
-				// We won't be able to wrap the text inside the area
-				// the area is too small. We should inform the user
-				// about this in a meaningful way
-			} else {
-				// We determine the y of the first line
-				int ly = (h - both) / 2 + y + lineSpacing * lines.size();
-				double lx = 0;
-				for (int j = 0; j < lines.size(); ++j, ly += fontHeight + lineSpacing) {
-					// We continue to centralize the lines
-					String line = lines.get(j);
-					lx = (x + w) / 2 - (canvas.measureTextWidth(line)) / 2;
-					// DEBUG
-					// console.log("ctx2d.fillText('"+ lines[j] +"', "+ lx +", "
-					// + ly + ")");
-					canvas.fillText(line, lx, ly);
-				}
-			}
+			DrawSpeechHtml5.make(canvasEtcHtml5, speechRectAndLeaderLine, speechColor);
 		}
 
 		// update the front canvas
-		canvas.copyBackBufferToFront();
+		canvasEtcHtml5.copyBackBufferToFront();
 
 		/*
 		 * 
@@ -308,11 +265,11 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 	}
 
 	public int getWidth() {
-		return canvas.getCoordinateSpaceWidth();
+		return canvasEtcHtml5.getCoordinateSpaceWidth();
 	}
 
 	public int getHeight() {
-		return canvas.getCoordinateSpaceHeight();
+		return canvasEtcHtml5.getCoordinateSpaceHeight();
 	}
 
 	public String getObjectUnderMouse(int x, int y) {
@@ -350,8 +307,7 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 
 		this.speechVisible = isVisible;
 		this.speechColor = talkingColor;
-		this.speechText = c.speeech;
-		this.speechMaxRect = c.rectInPixels;
+		this.speechRectAndLeaderLine = c;
 
 	}
 
@@ -367,9 +323,8 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 	}
 
 	@Override
-	public double measureTextWidth(String text) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Point measureTextWidthAndHeight(String text) {
+		return canvasEtcHtml5.measureTextWidthAndHeight(text);
 	}
 
 }

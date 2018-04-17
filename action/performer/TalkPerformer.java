@@ -2,7 +2,7 @@ package com.github.a2g.core.action.performer;
 
 import java.util.ArrayList;
 
-import com.github.a2g.core.action.performer.dependencies.SpeechCalculatorOuterForAll;
+import com.github.a2g.core.action.performer.dependencies.SpeechCalculator;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTalkPerformer;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromTalkPerformer;
 import com.github.a2g.core.primitive.PointI;
@@ -101,7 +101,7 @@ public class TalkPerformer {
 		RectF maxRectF = scene.getSpeechRectUsingContingencies(atid);
 		Rect maxRectI = translateRect(maxRectF);
 		PointI mouth = scene.GetMouthLocationByOtid(otid);
-		returnObjects = SpeechCalculatorOuterForAll.calculate(lines, maxRectI, 30, mouth, 38, 3, scene);
+		returnObjects = SpeechCalculator.calculate(lines, maxRectI, 30, mouth, 38, 3, scene);
 		//SpeechCalculatorOuterForAll calc = new SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3,
 		//	canvas);
 		

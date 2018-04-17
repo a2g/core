@@ -22,7 +22,7 @@ import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
 
-public interface IScenePanelFromScenePresenter
+public interface IScenePanelFromScenePresenter extends IMeasureTextWidthAndHeight
 {
 	void clear();
 
@@ -39,8 +39,6 @@ public interface IScenePanelFromScenePresenter
 
 	void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, RectAndLeaderLine rectAndLeaderLine, TalkPerformer sayAction);
 
-	void onSceneEntry(String string);
-
-	double measureTextWidth(String text);
+	void onSceneEntry(String string); 
 
 }

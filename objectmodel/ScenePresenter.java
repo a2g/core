@@ -533,9 +533,9 @@ public class ScenePresenter implements IScenePresenter,
 		return ColorEnum.values()[(int) (Math.random() * ColorEnum.values().length)];
 	}
 
-	public double measureTextWidth(String text) {
+	public Point measureTextWidthAndHeight(String text) {
 		// TODO Auto-generated method stub
-		return this.getView().measureTextWidth(text);
+		return this.getView().measureTextWidthAndHeight(text);
 	}
 
 };

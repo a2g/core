@@ -397,8 +397,8 @@ ITitleCardPresenterFromActions
 		return o.getSpecialAnimation(type);
 	}
 	@Override
-	public double measureTextWidth(String text) {
-		return master.getScenePresenter().measureTextWidth(text);
+	public Point measureTextWidthAndHeight(String text) {
+		return master.getScenePresenter().measureTextWidthAndHeight(text);
 	}
 
 

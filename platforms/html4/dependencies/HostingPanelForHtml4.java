@@ -24,6 +24,5 @@ com.google.gwt.user.client.ui.SimplePanel implements IHostingPanel {
 	@Override
 	public void setThing(Object w) {
 		this.add((IsWidget) w);
-
 	}
 }

@@ -6,12 +6,13 @@ import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
+import com.google.gwt.touch.client.Point;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
 
-public class ContextRealHtml5 
+public class CanvasEtcHtml5 
 implements IContext2d
 {
 
@@ -20,7 +21,7 @@ implements IContext2d
 	private Context2d contextA;
 	private Context2d contextB;
 
-	public ContextRealHtml5(String styleNameMustMAtchDivTag)
+	public CanvasEtcHtml5(String styleNameMustMatchDivTag)
 	{
 		canvasA = Canvas.createIfSupported();
 		if (canvasA == null) {
@@ -33,8 +34,8 @@ implements IContext2d
 			return;
 		}
 
-		canvasA.setStyleName(styleNameMustMAtchDivTag);     // *** must match the div tag in CanvasExample.html ***
-		canvasB.setStyleName(styleNameMustMAtchDivTag);
+		canvasA.setStyleName(styleNameMustMatchDivTag);     // *** must match the div tag in CanvasExample.html ***
+		canvasB.setStyleName(styleNameMustMatchDivTag);
 	}
 
 	@Override
@@ -43,9 +44,9 @@ implements IContext2d
 	}
 
 	@Override
-	public double measureTextWidth(String text) {
+	public Point measureTextWidthAndHeight(String text) {
 		double d = contextB.measureText(text).getWidth();
-		return d;
+		return new Point(d,10);
 	}
 
 	public void addItselfToPanel(RootPanel rootPanel) {

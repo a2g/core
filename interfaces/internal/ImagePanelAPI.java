@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.interfaces.internal;
 
-import com.github.a2g.core.objectmodel.Image;
+import com.github.a2g.core.objectmodel.Image; 
 
 public interface ImagePanelAPI {
 	public void setImageVisible(Image image, boolean visible);
@@ -34,4 +34,5 @@ public interface ImagePanelAPI {
 	public int getImageWidth(Image image);
 
 	public void resetScale(Image image);
+
 }
