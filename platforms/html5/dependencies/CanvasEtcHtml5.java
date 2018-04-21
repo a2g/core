@@ -1,6 +1,9 @@
 package com.github.a2g.core.platforms.html5.dependencies;
 
+import com.github.a2g.core.action.performer.dependencies.CommonDraw;
 import com.github.a2g.core.interfaces.internal.IContext2d;
+import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.ImageElement;
@@ -13,7 +16,7 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
 
 public class CanvasEtcHtml5 
-implements IContext2d
+implements IContext2d 
 {
 
 	private Canvas canvasA;
@@ -38,10 +41,7 @@ implements IContext2d
 		canvasB.setStyleName(styleNameMustMatchDivTag);
 	}
 
-	@Override
-	public void setFont(String font) {
-		contextB.setFont(font);
-	}
+	
 
 	@Override
 	public Point measureTextWidthAndHeight(String text) {
@@ -56,28 +56,10 @@ implements IContext2d
 		contextB = canvasB.getContext2d();
 	}
 
-	public void setFillStyle(String color)
+ 
+	public void drawSinglePixelRect(int left, int top, int w , int h )
 	{
-		contextB.setFillStyle(color);
-	}
-	public void fillRect(int left, int top, int width, int height)
-	{
-		contextB.fillRect(left, top, width, height);
-	}
-	public void fillText(String text, double x, double y)
-	{
-		contextB.fillText(text,  x, y);
-	}
-	public void setLineWidth(double width)
-	{
-		contextB.setLineWidth(width);
-	}
-	public void setStrokeStyle(String s)
-	{
-		contextB.setStrokeStyle(s);
-	}
-	public void strokeRect(int left, int top, int w , int h )
-	{
+		contextB.setLineWidth(1);
 		contextB.strokeRect(left, top, w, h);
 	}
 
@@ -126,10 +108,7 @@ implements IContext2d
 		
 		contextA.drawImage(contextB.getCanvas(), 0, 0);
 	}
-
-	public void fillText(String text, int x, int y, int width) {
-		contextB.fillText(text, x, y, width);
-	}
+ 
 
 	public int getCoordinateSpaceWidth() {
 		return canvasA.getCoordinateSpaceWidth();
@@ -138,4 +117,15 @@ implements IContext2d
 	public int getCoordinateSpaceHeight() {
 		return canvasA.getCoordinateSpaceHeight();
 	}
+
+	public void drawSpeech(RectAndLeaderLine speechRectAndLeaderLine, ColorEnum speechColor) 
+	{
+		CommonDraw.drawSpeech(new Html5CanvasExposingIDrawSpeech(contextB), speechRectAndLeaderLine, speechColor);
+	}
+	
+	public void setFontNameAndHeightUsedInHtml4(String fontName, int fontHeight) {
+		 
+		contextB.setFont(""+fontHeight+"px \""+fontName+"\"");
+	}
+
 }

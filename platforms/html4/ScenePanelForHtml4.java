@@ -184,7 +184,7 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 	public Point measureTextWidthAndHeight(String text) {
 		CanvasEtcHtml5 contextHtml5 = new CanvasEtcHtml5("");
 		contextHtml5.setScenePixelSize(10, 10, this);
-		contextHtml5.setFont("arial");
+		contextHtml5.setFontNameAndHeightUsedInHtml4("arial",10);
 		Point d = contextHtml5.measureTextWidthAndHeight(text);
 		return d;
 	}

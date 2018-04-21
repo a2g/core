@@ -27,7 +27,8 @@ import com.google.gwt.canvas.dom.client.CssColor;
 import com.google.gwt.canvas.dom.client.TextMetrics;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.action.performer.TalkPerformer; 
+import com.github.a2g.core.action.performer.TalkPerformer;
+import com.github.a2g.core.action.performer.dependencies.CommonDraw;
 import com.github.a2g.core.interfaces.internal.ICommandLinePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.internal.IPackagedImage;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
@@ -40,7 +41,6 @@ import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html5.dependencies.CanvasEtcHtml5;
-import com.github.a2g.core.platforms.html5.dependencies.DrawSpeechHtml5;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -228,7 +228,7 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 		}
 
 		if (speechVisible) {
-			DrawSpeechHtml5.make(canvasEtcHtml5, speechRectAndLeaderLine, speechColor);
+		    canvasEtcHtml5.drawSpeech(speechRectAndLeaderLine, speechColor);
 		}
 
 		// update the front canvas

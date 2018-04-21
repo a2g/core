@@ -64,8 +64,7 @@ import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.github.a2g.core.primitive.RectF;
 import com.github.a2g.core.platforms.swing.dependencies.ImageForSwing;
-import com.github.a2g.core.platforms.swing.dependencies.MakeSpeechSwing;
-import com.github.a2g.core.platforms.swing.dependencies.DrawSpeechSwingLabel;
+import com.github.a2g.core.platforms.swing.dependencies.DrawSpeechSwing;
 import com.github.a2g.core.platforms.swing.dependencies.PackagedImageForSwing;
 import com.github.a2g.core.platforms.swing.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.swing.mouse.SceneMouseOverHandler;
@@ -567,7 +566,7 @@ implements IScenePanelFromScenePresenter
 		if(rectAndLeaderLine.rectTextAndMarginsInOlive.getWidth()<=0)
 			return;
 		
-		this.bufferedImage = DrawSpeechSwingLabel.draw(/*textLabel, */rectAndLeaderLine, speechColor, new PointI(width,height));
+		this.bufferedImage = DrawSpeechSwing.draw(/*textLabel, */rectAndLeaderLine, speechColor, new PointI(width,height));
 	}
 
 
