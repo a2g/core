@@ -128,4 +128,10 @@ implements IContext2d
 		contextB.setFont(""+fontHeight+"px \""+fontName+"\"");
 	}
 
+
+
+	public Context2d getContextB() {// used for test harness, otherwise not used.
+		return contextB;
+	}
+
 }

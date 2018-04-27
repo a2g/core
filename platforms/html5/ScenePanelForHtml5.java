@@ -64,11 +64,7 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 	private int cameraOffsetX;
 	private int cameraOffsetY;
 
-	private IScenePresenterFromScenePanel toScene;
-	// private ICommandLineFromSceneMouseOver toCommandLine;
-
-	@SuppressWarnings("unused")
-	private final CssColor redrawColor = CssColor.make("rgba(255,0,0,0.6)");
+	private IScenePresenterFromScenePanel toScene; 
 	private Map<Integer, PointI> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages;
