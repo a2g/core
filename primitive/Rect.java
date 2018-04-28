@@ -23,6 +23,12 @@ public class Rect {
 	private int bottom;
 
 	public Rect(int x, int y, int width, int height) {
+		init(x,y,width,height);
+	}
+	public Rect(double x, double y, double width, double height) {
+		init((int)x,(int)y,(int)width,(int)height);
+	}
+	private void init(int x, int y, int width, int height) {
 		this.left = x;
 		this.top = y;
 		this.right = x + width;
@@ -30,6 +36,19 @@ public class Rect {
 		if (bottom < 0) {
 			this.bottom = y + height;
 		}
+		
+	}
+	
+	public void collateInPlace(Rect b)
+	{
+		if(b.left < this.left)
+			this.left=b.left;
+		if(b.right > this.right)
+			this.right=b.right;
+		if(b.top < this.top)
+			this.top = b.top;
+		if(b.bottom > this.bottom)
+			this.bottom = b.bottom;
 	}
 
 	public boolean contains(int x, int y) {

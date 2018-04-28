@@ -1,4 +1,4 @@
-package com.github.a2g.core.action.performer.dependencies;
+package com.github.a2g.core.primitive;
 
 import java.util.ArrayList;
 

@@ -2,25 +2,27 @@ package com.github.a2g.core.objectmodel;
 
 import java.util.ArrayList;
 
-import com.github.a2g.core.action.performer.dependencies.LinesAndMaxWidth.LineAndPos;
-import com.github.a2g.core.interfaces.performer.IDrawSpeech;
+import com.github.a2g.core.interfaces.internal.IMeasureTextWidthAndHeight;
+import com.github.a2g.core.interfaces.performer.ISpeechCommonMainDraw;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.primitive.RectAndLeaderLine;
+import com.github.a2g.core.primitive.LinesAndMaxWidth.LineAndPos;
 
 public class SpeechCommon 
 {
-
-	public static void drawSpeech(IDrawSpeech canvas, RectAndLeaderLine all, ColorEnum speechColor ) 
+/*
+ *  @Remarks: mainDraw must never change the font, since the data it processes has been calculated based on an existing font type and size
+ */
+	public static void mainDraw(ISpeechCommonMainDraw canvas, RectAndLeaderLine all, ColorEnum speechColor ) 
 	{
 		int x = all.rectBubble.getLeft();
 		int y = all.rectBubble.getTop();
 		int w = all.rectBubble.getWidth();
 		int h = all.rectBubble.getHeight();		
 
-		canvas.fillRect(x, y, w, h, ColorEnum.White);
-		canvas.setFontNameAndHeight("arial", 15);
+		canvas.fillRect(x, y, w, h, ColorEnum.White); 
 
 		// red rect
 		{
@@ -36,13 +38,12 @@ public class SpeechCommon
 			LineAndPos l  = all.lines.lines.get(i);
 			canvas.drawText(l.x, l.y, l.line,  speechColor);
 		}
-		
-	
-
 	}
+	
+	
 	public final static ColorEnum INPUT_RECT_COLOR = ColorEnum.Red;
 
-	public static ArrayList<RectAndLeaderLine> getDebugLeaderLines(ColorEnum theColor, PointI resolution) {
+	public static ArrayList<RectAndLeaderLine> getDebugLeaderLines(ColorEnum theColor, PointI resolution, IMeasureTextWidthAndHeight measurer) {
 		ArrayList<RectAndLeaderLine> toReturn = new ArrayList<RectAndLeaderLine>();
 
 		{
@@ -54,18 +55,20 @@ public class SpeechCommon
 			l.rectPurelyTextBoundsInYellow = new Rect (20,20,200,200);
 			l.rectBubble = new Rect (20,20,190,190);
 			l.rectInputInRed = new Rect (10,10,300,300);
+			l.generateSampleBubbleRectFromText(measurer);
 			l.populateXAndYPointsFromBubbleRect(resolution);
 			toReturn.add(l);
 		}
 		{
 			RectAndLeaderLine l = new RectAndLeaderLine(); 
 			l.lines.addLine(240, 45,"To be ");
-			l.lines.addLine(240, 60,"Or not:");
-			l.lines.addLine(240, 75,"tobe");
+			l.lines.addLine(240, 60,"..or not..extra");
+			l.lines.addLine(240, 75,"..to be");
 			l.rectPurelyTextBoundsInYellow = new Rect (20,20,200,200);
 			l.rectBubble = new Rect (230,25,100,100);
 			l.rectInputInRed = new Rect (10,10,300,300);
 			l.isPointingRight = true;
+			l.generateSampleBubbleRectFromText(measurer);
 			l.populateXAndYPointsFromBubbleRect(resolution);
 			toReturn.add(l);
 		}

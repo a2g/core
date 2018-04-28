@@ -3,17 +3,16 @@ package com.github.a2g.core.platforms.swing.dependencies;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import com.github.a2g.core.interfaces.performer.IDrawSpeech;
+import com.github.a2g.core.interfaces.performer.ISpeechCommonExpandedSet;
 import com.github.a2g.core.primitive.ColorEnum;
 
-public class SwingCanvasExposingIDrawSpeech implements IDrawSpeech
+public class SpeechSwingImplementation implements ISpeechCommonExpandedSet
 { 
 	Graphics2D graphics; 
 	
-	public SwingCanvasExposingIDrawSpeech(Graphics2D g)
+	public SpeechSwingImplementation(Graphics2D g)
 	{
 		this.graphics = g;
 	}

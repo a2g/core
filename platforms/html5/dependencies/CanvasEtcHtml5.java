@@ -120,7 +120,7 @@ implements IContext2d
 
 	public void drawSpeech(RectAndLeaderLine speechRectAndLeaderLine, ColorEnum speechColor) 
 	{
-		SpeechCommon.drawSpeech(new SpeechHtml5Implementation(contextB), speechRectAndLeaderLine, speechColor);
+		SpeechCommon.mainDraw(new SpeechHtml5Implementation(contextB), speechRectAndLeaderLine, speechColor);
 	}
 	
 	public void setFontNameAndHeightUsedInHtml4(String fontName, int fontHeight) {
