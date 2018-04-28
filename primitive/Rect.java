@@ -72,7 +72,19 @@ public class Rect {
 	}
 
 	public PointI getCenter() {
-		return new PointI(left+getWidth()/2,top+getHeight()/2);
+		return PointI.getMidway(getTopLeft(), getBottomRight());
 	}
-
+	
+	public PointI getTopRight(){
+		return new PointI(right, top);
+	}
+	public PointI getBottomRight(){
+		return new PointI(right, bottom);
+	}
+	public PointI getTopLeft(){
+		return new PointI(left, top);
+	}
+	public PointI getBottomLeft(){
+		return new PointI(left, bottom);
+	}
 }

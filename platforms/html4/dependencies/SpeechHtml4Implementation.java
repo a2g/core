@@ -22,14 +22,14 @@ class MyPanel extends SimplePanel
 	}
 }
 
-public class SceneSpeechBalloonPanelForHtml4 extends VerticalPanel
+public class SpeechHtml4Implementation extends VerticalPanel
 {
 	private FlowPanel before;
 	private MyPanel  pe;
 	private FlowPanel after;
 	private ColorEnum borderColor;
 
-	public SceneSpeechBalloonPanelForHtml4() {
+	public SpeechHtml4Implementation() {
 		this.borderColor = ColorEnum.Red;
 
 		before = new FlowPanel();
@@ -106,7 +106,7 @@ public class SceneSpeechBalloonPanelForHtml4 extends VerticalPanel
 
 
 		// first do rectangle
-		Rect r = c.rectTextAndMarginsInOlive;
+		Rect r = c.rectBubble;
 		pe.getPE().getStyle().setProperty("top", "" +(r.getTop())+"px");
 		pe.getPE().getStyle().setProperty("left", "" +(r.getLeft())+"px");
 		pe.getPE().getStyle().setProperty("width", "" +(r.getWidth()-1)+"px");
@@ -117,7 +117,7 @@ public class SceneSpeechBalloonPanelForHtml4 extends VerticalPanel
 
 		boolean isFromTop = c.isFromTop;
 		boolean isPointingRight = c.isPointingRight;
-		int heightInPixels = c.rectTextAndMarginsInOlive.getHeight();
+		int heightInPixels = c.rectBubble.getHeight();
 
 		int top = c.isFromTop? -c.heightOfLeaderLine : heightInPixels-1;
 		top+=+c.borderWidth;

@@ -64,7 +64,7 @@ public class SpeechCalculator
 			{
 				// We continue to centralize the lines
 				LineAndPos line = page.lines.lines.get(j);
-				String speech = line.line;
+				//String speech = line.line;
 				//double widthOfText = context.measureTextWidthAndHeight(line).getX();
 				//lx = x+(w/2)  - widthOfText/2;
 				// DEBUG 
@@ -81,11 +81,11 @@ public class SpeechCalculator
 
 			page.rectInputInRed = new Rect(x,y,maxRectI.getWidth(), maxRectI.getHeight());
 			page.rectPurelyTextBoundsInYellow = new Rect((int)lowestX,(int)lowestY, (int)largestWidth, (int)both);
-			page.rectTextAndMarginsInOlive = new Rect((int)lowestX-marginLeft,(int)lowestY-marginTop, (int)largestWidth+marginLeft+marginRight, (int)both+marginTop+marginBottom);
+			page.rectBubble = new Rect((int)lowestX-marginLeft,(int)lowestY-marginTop, (int)largestWidth+marginLeft+marginRight, (int)both+marginTop+marginBottom);
 			// now 
 
 			// generate leader lines
-			Rect max = page.rectTextAndMarginsInOlive;
+			Rect max = page.rectBubble;
 			PointI centre = max.getCenter();
 
 			// the mouth & centre coords are both relative to top left of viewport

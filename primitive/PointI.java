@@ -20,8 +20,12 @@ public class PointI {
 	private int x;
 	private int y;
 
+	public PointI(double x, double y) {
+		this.x = (int)x;
+		this.y = (int)y;
+	}
 	public PointI(int x, int y) {
-		this.setX(x);
+		this.x = x;
 		this.y = y;
 	}
 
@@ -39,6 +43,10 @@ public class PointI {
 
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	static public PointI getMidway(PointI a, PointI b) {
+		return new PointI(a.getX()*.5+b.getX()*.5, a.getY()*.5+b.getY()*.5 );
 	}
 
 }

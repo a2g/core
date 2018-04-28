@@ -1,16 +1,19 @@
 package com.github.a2g.core.platforms.swing.dependencies;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import com.github.a2g.core.interfaces.performer.IDrawSpeech;
 import com.github.a2g.core.primitive.ColorEnum;
 
 public class SwingCanvasExposingIDrawSpeech implements IDrawSpeech
 { 
-	Graphics graphics; 
+	Graphics2D graphics; 
 	
-	public SwingCanvasExposingIDrawSpeech(Graphics g)
+	public SwingCanvasExposingIDrawSpeech(Graphics2D g)
 	{
 		this.graphics = g;
 	}
@@ -34,10 +37,19 @@ public class SwingCanvasExposingIDrawSpeech implements IDrawSpeech
 	}
 
 	@Override
-	public void fillText(double x, double y, String line, ColorEnum textColor, ColorEnum fillColor) {
+	public void drawText(double x, double y, String line, ColorEnum textColor) {
 		graphics.setColor(new Color(textColor.r, textColor.g, textColor.b));
 		graphics.drawString(line, (int)x, (int)y);
 		
+	}
+
+	@Override
+	public void drawPolygon(int[] xPoints, int[] yPoints, int nPoints, ColorEnum fillColor, ColorEnum lineColor) {
+		graphics.setColor(new Color(fillColor.r, fillColor.g, fillColor.b));
+		graphics.fillPolygon(xPoints, yPoints, nPoints);
+		graphics.setColor(new Color(lineColor.r, lineColor.g, lineColor.b));
+		graphics.setStroke(new BasicStroke(3F));
+		graphics.drawPolygon(xPoints, yPoints, nPoints);		
 	}
 	
 }

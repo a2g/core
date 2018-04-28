@@ -1,7 +1,7 @@
 package com.github.a2g.core.platforms.html5.dependencies;
 
-import com.github.a2g.core.action.performer.dependencies.CommonDraw;
 import com.github.a2g.core.interfaces.internal.IContext2d;
+import com.github.a2g.core.objectmodel.SpeechCommon;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.google.gwt.canvas.client.Canvas;
@@ -120,7 +120,7 @@ implements IContext2d
 
 	public void drawSpeech(RectAndLeaderLine speechRectAndLeaderLine, ColorEnum speechColor) 
 	{
-		CommonDraw.drawSpeech(new Html5CanvasExposingIDrawSpeech(contextB), speechRectAndLeaderLine, speechColor);
+		SpeechCommon.drawSpeech(new SpeechHtml5Implementation(contextB), speechRectAndLeaderLine, speechColor);
 	}
 	
 	public void setFontNameAndHeightUsedInHtml4(String fontName, int fontHeight) {

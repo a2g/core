@@ -12,7 +12,7 @@ public class DrawSpeechSwing
 {
 	// to use BufferedImage bufferedImage = new BufferedImage(	resolution.getX(),	resolution.getY(),	BufferedImage.TYPE_INT_RGB);
 
-	public static BufferedImage draw(RectAndLeaderLine all, ColorEnum speechColor, PointI resolution) 
+	public static BufferedImage draw(RectAndLeaderLine rectEtc, ColorEnum speechColor, PointI resolution) 
 	{
 		BufferedImage img = new BufferedImage(resolution.getX(), resolution.getY(), BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = img.createGraphics();
@@ -22,7 +22,7 @@ public class DrawSpeechSwing
 		g2d.drawRect(0, 0, resolution.getX(), resolution.getY());
 
 		SwingCanvasExposingIDrawSpeech adapter = new SwingCanvasExposingIDrawSpeech(g2d);
-		CommonDraw.drawSpeech(adapter, all, speechColor);
+		CommonDraw.drawSpeech(adapter, rectEtc, speechColor);
 
 		g2d.dispose();
 		return img;

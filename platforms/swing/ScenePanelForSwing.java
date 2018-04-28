@@ -563,7 +563,7 @@ implements IScenePanelFromScenePresenter
 		this.isSpeechVisible = isVisible;
 		ColorEnum speechColor = talkingColor;
 	
-		if(rectAndLeaderLine.rectTextAndMarginsInOlive.getWidth()<=0)
+		if(rectAndLeaderLine.rectBubble.getWidth()<=0)
 			return;
 		
 		this.bufferedImage = DrawSpeechSwing.draw(/*textLabel, */rectAndLeaderLine, speechColor, new PointI(width,height));

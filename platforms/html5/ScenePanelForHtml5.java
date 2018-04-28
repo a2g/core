@@ -16,19 +16,16 @@
 
 package com.github.a2g.core.platforms.html5;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
 import com.google.gwt.canvas.dom.client.Context2d;
-import com.google.gwt.canvas.dom.client.CssColor;
 import com.google.gwt.canvas.dom.client.TextMetrics;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.performer.TalkPerformer;
-import com.github.a2g.core.action.performer.dependencies.CommonDraw;
 import com.github.a2g.core.interfaces.internal.ICommandLinePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.internal.IPackagedImage;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;

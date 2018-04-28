@@ -27,7 +27,7 @@ import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
-import com.github.a2g.core.platforms.html4.dependencies.SceneSpeechBalloonPanelForHtml4;
+import com.github.a2g.core.platforms.html4.dependencies.SpeechHtml4Implementation;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectTouchMoveHandler;
@@ -44,7 +44,7 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 	int cameraOffsetX;
 	int cameraOffsetY;
 	SceneObjectTouchMoveHandler theTouchMoveHandler;
-	SceneSpeechBalloonPanelForHtml4 speechWidget;
+	SpeechHtml4Implementation speechWidget;
 
 	public ScenePanelForHtml4(EventBus bus, IScenePresenterFromScenePanel api) {
 		this.getElement().setId("cwAbsolutePanel");
@@ -52,7 +52,7 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 		this.cameraOffsetX = 0;
 		this.cameraOffsetY = 0;
 		this.theTouchMoveHandler = new SceneObjectTouchMoveHandler(api);
-		this.speechWidget = new SceneSpeechBalloonPanelForHtml4();
+		this.speechWidget = new SpeechHtml4Implementation();
 	}
 
 	@Override
@@ -149,7 +149,7 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 			super.remove(speechWidget);
 		}
 
-		Rect rectThatsScaledToFit = rectAndLeaderLine.rectTextAndMarginsInOlive;
+		Rect rectThatsScaledToFit = rectAndLeaderLine.rectBubble;
 
 		speechWidget.setBorderColor(talkingColor);
 
