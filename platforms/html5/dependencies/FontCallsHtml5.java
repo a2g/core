@@ -1,10 +1,10 @@
 package com.github.a2g.core.platforms.html5.dependencies;
 
-import com.github.a2g.core.interfaces.internal.IFontMethods;
+import com.github.a2g.core.interfaces.internal.IFontCalls;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.touch.client.Point;
 
-public class FontCallsHtml5 implements IFontMethods{
+public class FontCallsHtml5 implements IFontCalls{
 
 	Context2d context;
 	int fontHeight;

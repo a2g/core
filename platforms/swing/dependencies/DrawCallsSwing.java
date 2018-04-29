@@ -1,27 +1,20 @@
 package com.github.a2g.core.platforms.swing.dependencies;
 
 import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.Color; 
 import java.awt.Graphics2D;
 
-import com.github.a2g.core.interfaces.performer.ISpeechCommonExpandedSet;
+import com.github.a2g.core.interfaces.internal.IDrawCalls;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.google.gwt.touch.client.Point;
+ 
 
-public class DrawCallsSwing implements ISpeechCommonExpandedSet
+public class DrawCallsSwing implements IDrawCalls
 { 
 	Graphics2D graphics; 
 	
 	public DrawCallsSwing(Graphics2D g)
 	{
 		this.graphics = g;
-	}
-
-	@Override
-	public void setFontNameAndHeight(String name, int pixelHeight) {
-		graphics.setFont(new Font(name, Font.BOLD, pixelHeight));
-		
 	}
 
 	@Override
@@ -52,13 +45,6 @@ public class DrawCallsSwing implements ISpeechCommonExpandedSet
 		graphics.drawPolygon(xPoints, yPoints, nPoints);		
 	}
 
-	@Override
-	public Point measureTextWidthAndHeight(String text) {
-		 
-			double d = graphics.getFontMetrics().stringWidth(text);
-			return new Point(d,graphics.getFontMetrics().getHeight());
-
-	}
 	
 }
 /*

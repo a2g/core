@@ -1,10 +1,10 @@
 package com.github.a2g.core.platforms.html5.dependencies;
 
-import com.github.a2g.core.interfaces.performer.ISpeechCommonMainDraw;
+import com.github.a2g.core.interfaces.internal.IDrawCalls;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.canvas.dom.client.Context2d;
 
-public class DrawCallsHtml5 implements ISpeechCommonMainDraw
+public class DrawCallsHtml5 implements IDrawCalls
 {
 	Context2d context; 
 

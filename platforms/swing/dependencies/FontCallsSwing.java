@@ -3,10 +3,11 @@ package com.github.a2g.core.platforms.swing.dependencies;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
-import com.github.a2g.core.interfaces.internal.IFontMethods;
+import com.github.a2g.core.interfaces.internal.IFontCalls;
 import com.google.gwt.touch.client.Point;
 
-public class FontCallsSwing implements IFontMethods
+public class FontCallsSwing 
+implements IFontCalls
 { 
 	Graphics2D graphics; 
 
@@ -20,14 +21,23 @@ public class FontCallsSwing implements IFontMethods
 		graphics.setFont(new Font(name, Font.BOLD, pixelHeight));
 	}
 
-
 	@Override
 	public Point measureTextWidthAndHeight(String text) {
 		double d = graphics.getFontMetrics().stringWidth(text);
 		return new Point(d,graphics.getFontMetrics().getHeight());
 	}
 }
+
 /*
+ * 
+	@Override
+	public Point measureTextWidthAndHeight(String text) {
+		 
+			double d = graphics.getFontMetrics().stringWidth(text);
+			return new Point(d,graphics.getFontMetrics().getHeight());
+
+	}
+ 
 g.fillRoundRect(
 		0,
 		0,
