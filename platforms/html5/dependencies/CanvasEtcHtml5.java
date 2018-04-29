@@ -1,6 +1,5 @@
 package com.github.a2g.core.platforms.html5.dependencies;
 
-import com.github.a2g.core.interfaces.internal.IContext2d;
 import com.github.a2g.core.objectmodel.SpeechCommon;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.RectAndLeaderLine;
@@ -9,14 +8,12 @@ import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.google.gwt.touch.client.Point;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
 
-public class CanvasEtcHtml5 
-implements IContext2d 
+public class CanvasEtcHtml5  
 {
 
 	private Canvas canvasA;
@@ -43,12 +40,7 @@ implements IContext2d
 
 	
 
-	@Override
-	public Point measureTextWidthAndHeight(String text) {
-		double d = contextB.measureText(text).getWidth();
-		return new Point(d,10);
-	}
-
+	
 	public void addItselfToPanel(RootPanel rootPanel) {
 		rootPanel.add(canvasA);
 		rootPanel.add(canvasB);
@@ -120,12 +112,14 @@ implements IContext2d
 
 	public void drawSpeech(RectAndLeaderLine speechRectAndLeaderLine, ColorEnum speechColor) 
 	{
-		SpeechCommon.mainDraw(new SpeechHtml5Implementation(contextB), speechRectAndLeaderLine, speechColor);
+		SpeechCommon.mainDraw(new DrawCallsHtml5(contextB), speechRectAndLeaderLine, speechColor);
 	}
 	
 	public void setFontNameAndHeightUsedInHtml4(String fontName, int fontHeight) {
 		 
 		contextB.setFont(""+fontHeight+"px \""+fontName+"\"");
+		
+		
 	}
 
 

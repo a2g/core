@@ -7,12 +7,13 @@ import java.awt.Graphics2D;
 
 import com.github.a2g.core.interfaces.performer.ISpeechCommonExpandedSet;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.google.gwt.touch.client.Point;
 
-public class SpeechSwingImplementation implements ISpeechCommonExpandedSet
+public class DrawCallsSwing implements ISpeechCommonExpandedSet
 { 
 	Graphics2D graphics; 
 	
-	public SpeechSwingImplementation(Graphics2D g)
+	public DrawCallsSwing(Graphics2D g)
 	{
 		this.graphics = g;
 	}
@@ -49,6 +50,14 @@ public class SpeechSwingImplementation implements ISpeechCommonExpandedSet
 		graphics.setColor(new Color(lineColor.r, lineColor.g, lineColor.b));
 		graphics.setStroke(new BasicStroke(3F));
 		graphics.drawPolygon(xPoints, yPoints, nPoints);		
+	}
+
+	@Override
+	public Point measureTextWidthAndHeight(String text) {
+		 
+			double d = graphics.getFontMetrics().stringWidth(text);
+			return new Point(d,graphics.getFontMetrics().getHeight());
+
 	}
 	
 }

@@ -22,7 +22,9 @@ import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
 
-public interface IScenePanelFromScenePresenter extends IMeasureTextWidthAndHeight
+public interface IScenePanelFromScenePresenter 
+extends IMeasureTextWidthAndHeight
+, ISetFontNameAndHeight
 {
 	void clear();
 

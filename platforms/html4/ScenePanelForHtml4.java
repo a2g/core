@@ -27,11 +27,12 @@ import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
-import com.github.a2g.core.platforms.html4.dependencies.SpeechHtml4Implementation;
+import com.github.a2g.core.platforms.html4.dependencies.DrawCallsHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectTouchMoveHandler;
 import com.github.a2g.core.platforms.html5.dependencies.CanvasEtcHtml5;
+import com.github.a2g.core.platforms.html5.dependencies.FontCallsHtml5;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
@@ -44,7 +45,7 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 	int cameraOffsetX;
 	int cameraOffsetY;
 	SceneObjectTouchMoveHandler theTouchMoveHandler;
-	SpeechHtml4Implementation speechWidget;
+	DrawCallsHtml4 speechWidget;
 
 	public ScenePanelForHtml4(EventBus bus, IScenePresenterFromScenePanel api) {
 		this.getElement().setId("cwAbsolutePanel");
@@ -52,7 +53,7 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 		this.cameraOffsetX = 0;
 		this.cameraOffsetY = 0;
 		this.theTouchMoveHandler = new SceneObjectTouchMoveHandler(api);
-		this.speechWidget = new SpeechHtml4Implementation();
+		this.speechWidget = new DrawCallsHtml4();
 	}
 
 	@Override
@@ -185,8 +186,15 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 		CanvasEtcHtml5 contextHtml5 = new CanvasEtcHtml5("");
 		contextHtml5.setScenePixelSize(10, 10, this);
 		contextHtml5.setFontNameAndHeightUsedInHtml4("arial",10);
-		Point d = contextHtml5.measureTextWidthAndHeight(text);
-		return d;
+		FontCallsHtml5 fm = new FontCallsHtml5(contextHtml5.getContextB());
+		return fm.measureTextWidthAndHeight(text);
 	}
+
+	@Override
+	public void setFontNameAndHeight(String name, int height) {
+	// do nothing. 
+		
+	}
+	
 
 }

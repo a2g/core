@@ -38,6 +38,7 @@ import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html5.dependencies.CanvasEtcHtml5;
+import com.github.a2g.core.platforms.html5.dependencies.FontCallsHtml5;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -52,7 +53,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 //commandLineAndVerbsAndInventory = new VerticalPanel();
 
-public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, IScenePanelFromScenePresenter {
+public class ScenePanelForHtml5 
+extends VerticalPanel 
+implements ImagePanelAPI, 
+IScenePanelFromScenePresenter {
 	// private static final Logger HTML5CANVAS =
 	// Logger.getLogger(LogNames.HTML5CANVAS);
 
@@ -317,7 +321,14 @@ public class ScenePanelForHtml5 extends VerticalPanel implements ImagePanelAPI, 
 
 	@Override
 	public Point measureTextWidthAndHeight(String text) {
-		return canvasEtcHtml5.measureTextWidthAndHeight(text);
+		FontCallsHtml5 fm = new FontCallsHtml5(this.canvasEtcHtml5.getContextB());
+		return fm.measureTextWidthAndHeight(text);
+	}
+
+	@Override
+	public void setFontNameAndHeight(String fontName, int fontHeight) {
+		FontCallsHtml5 fm = new FontCallsHtml5(this.canvasEtcHtml5.getContextB());
+		fm.setFontNameAndHeight(fontName, fontHeight);
 	}
 
 }

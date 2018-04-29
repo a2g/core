@@ -1,6 +1,10 @@
 package com.github.a2g.core.interfaces.performer;
 
-public interface ISpeechCommonExpandedSet extends ISpeechCommonMainDraw
+import com.github.a2g.core.interfaces.internal.IMeasureTextWidthAndHeight;
+
+public interface ISpeechCommonExpandedSet 
+extends ISpeechCommonMainDraw, 
+IMeasureTextWidthAndHeight
 {
 	
 	public void setFontNameAndHeight(String name, int pixelHeight);

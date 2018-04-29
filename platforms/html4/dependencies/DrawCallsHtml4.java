@@ -22,14 +22,14 @@ class MyPanel extends SimplePanel
 	}
 }
 
-public class SpeechHtml4Implementation extends VerticalPanel
+public class DrawCallsHtml4 extends VerticalPanel
 {
 	private FlowPanel before;
 	private MyPanel  pe;
 	private FlowPanel after;
 	private ColorEnum borderColor;
 
-	public SpeechHtml4Implementation() {
+	public DrawCallsHtml4() {
 		this.borderColor = ColorEnum.Red;
 
 		before = new FlowPanel();

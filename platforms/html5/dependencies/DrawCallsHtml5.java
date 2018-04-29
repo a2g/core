@@ -1,14 +1,14 @@
 package com.github.a2g.core.platforms.html5.dependencies;
 
-import com.github.a2g.core.interfaces.performer.ISpeechCommonExpandedSet;
+import com.github.a2g.core.interfaces.performer.ISpeechCommonMainDraw;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.canvas.dom.client.Context2d;
 
-public class SpeechHtml5Implementation implements ISpeechCommonExpandedSet
+public class DrawCallsHtml5 implements ISpeechCommonMainDraw
 {
 	Context2d context; 
 
-	public SpeechHtml5Implementation(Context2d g)
+	public DrawCallsHtml5(Context2d g)
 	{
 		this.context = g;
 	}
@@ -38,11 +38,7 @@ public class SpeechHtml5Implementation implements ISpeechCommonExpandedSet
 		context.closePath();
 	}
 	
-	@Override
-	public void setFontNameAndHeight(String fontName, int fontHeight) {
- 
-		context.setFont(""+fontHeight+"px \""+fontName+"\"");
-	}
+
 	@Override
 	public void drawPolygon(int[] xPoints, int[] yPoints, int nPoints, ColorEnum fillColor, ColorEnum lineColor) {
 		// https://www.kirupa.com/html5/drawing_triangles_on_the_canvas.htm
@@ -69,5 +65,4 @@ public class SpeechHtml5Implementation implements ISpeechCommonExpandedSet
 		context.setFillStyle(fillColor.toString().toLowerCase());
 		context.fill();
 	}
-	 
 }
