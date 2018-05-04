@@ -403,8 +403,9 @@ ITitleCardPresenterFromActions
 
 
 	@Override
-	public PointI GetMouthLocationByOtid(String otid) {
-		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
+	public PointI getMouthLocationByAtid(String atid) {
+		Animation a = master.getScenePresenter().getAnimationByAtid(atid);
+		SceneObject o = a.getObject();
 		return o.getMouthLocation();
 	}
 

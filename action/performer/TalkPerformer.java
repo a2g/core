@@ -10,14 +10,14 @@ import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.github.a2g.core.primitive.RectF;
 
 public class TalkPerformer {
-	private ArrayList<RectAndLeaderLine> returnObjects;
+	private ArrayList<RectAndLeaderLine> pages;
 	
-	private ArrayList<Double> startingTimeForEachLine;
 	private double totalDurationInSeconds;
 	private IScenePresenterFromTalkPerformer scene;
 	private IMasterPresenterFromTalkPerformer master;
 	private int numberOfFramesTotal;
 	private NonIncrementing nonIncrementing;
+	
 	private String atidOfWhatItWasBeforeTalking;
 	private int frameOfWhatItWasBeforeTalking;
 	
@@ -38,8 +38,7 @@ public class TalkPerformer {
 		this.ocode = -1;
 		this.atid = atid;
 		this.otid = "";
-		this.fullSpeech = fullSpeech;
-		startingTimeForEachLine = new ArrayList<Double>();
+		this.fullSpeech = fullSpeech; 
 		
 		this.totalDurationInSeconds = 0;
 	}
@@ -51,8 +50,7 @@ public class TalkPerformer {
 		this.atid = "";
 		this.otid = "";
 		this.fullSpeech = fullSpeech;
-		returnObjects = new ArrayList<RectAndLeaderLine>();
-		startingTimeForEachLine = new ArrayList<Double>();
+		pages = new ArrayList<RectAndLeaderLine>();
 		
 		this.totalDurationInSeconds = 0;
 	}
@@ -83,44 +81,23 @@ public class TalkPerformer {
 	}
 
 	public double run() {
-		
-	
-		// first split based on authored breaks
-		String[] lines = fullSpeech.split("\n");
-		
+				
+
+		// 1. first split based on authored breaks
+		String[] splitByNewline = fullSpeech.split("\n");
 
 		ArrayList<String> speech = new ArrayList<String>();
-		for (int i = 0; i < lines.length; i++) {
-			String line = lines[i];
-			speech.add(line);
-			double secondsForLine = getSecondsForLine(line);
+		for (int i = 0; i < splitByNewline.length; i++) {
+			String page = splitByNewline[i];
+			double secondsForLine = getSecondsForLine(page);
 			totalDurationInSeconds = totalDurationInSeconds + secondsForLine;
+			speech.add(page);
 		}
 		
-		RectF maxRectF = scene.getSpeechRectUsingContingencies(atid);
-		Rect maxRectI = translateRect(maxRectF);
-		PointI mouth = scene.GetMouthLocationByOtid(otid);
-		returnObjects = RectAndLeaderLine.calculateLeaderLines(lines, maxRectI, 30, mouth, 38, 3, scene);
-		//SpeechCalculatorOuterForAll calc = new SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3,
-		//	canvas);
-		
-		// set ceilings (for easy calcluation)
-		double rollingStartingTimeForLine = 0;
-		for (int i = 0; i < lines.length; i++) {
-			startingTimeForEachLine.add(new Double(rollingStartingTimeForLine
-					/ totalDurationInSeconds));
-			String line = lines[i];
-			rollingStartingTimeForLine += getSecondsForLine(line);
-		}
-		
-		if(this.nonIncrementing==TalkPerformer.NonIncrementing.FromAPI)
-		{
-			this.nonIncrementing = master.isSayNonIncrementing()? NonIncrementing.True : NonIncrementing.False;
-		}
-		
+		// 2. get atid using contingengies
 		if(ocode!=-1)
 		{
-			String otid = scene.getOtidByCode(ocode);
+			otid = scene.getOtidByCode(ocode);
 			atid = scene.getAtidOfCurrentAnimationByOtid(otid);
 			// odd choice, but shouldn't make a difference - we just need any animation
 			// from that object, since api.setSpeechRect sets all animations.
@@ -132,6 +109,33 @@ public class TalkPerformer {
 		}else if(atid == SCENE_DIALOG_THEM){
 			atid = scene.getAtidOfSceneDialogThem();
 		}
+	
+		// 3. get speech rectangle using contingencies - that's a lot of contingencies
+		RectF maxRectF = scene.getSpeechRectUsingContingencies(atid);
+		Rect maxRectI = translateRect(maxRectF);
+		PointI mouth = scene.getMouthLocationByAtid(atid);
+		pages = RectAndLeaderLine.calculateLeaderLines(splitByNewline, maxRectI, 30, mouth, 38, 3, scene);
+		//SpeechCalculatorOuterForAll calc = new SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3,
+		//	canvas);
+
+		// set ceilings (for easy calcluation)
+		double rollingStartingTimeForLine = 0;
+		for (int i = 0; i < pages.size(); i++) 
+		{
+			for (int j = 0; j < pages.get(i).lines.lines.size(); j++) 
+			{
+				pages.get(i).lines.lines.get(j).startingTime = rollingStartingTimeForLine/ totalDurationInSeconds;
+				String line = pages.get(i).lines.lines.get(j).toString();
+				rollingStartingTimeForLine += getSecondsForLine(line);
+			}
+			pages.get(i).atid = atid;
+		}
+		
+		if(this.nonIncrementing==TalkPerformer.NonIncrementing.FromAPI)
+		{
+			this.nonIncrementing = master.isSayNonIncrementing()? NonIncrementing.True : NonIncrementing.False;
+		}
+
 		
 		// only now do
 		if (atid == "") {
@@ -171,7 +175,7 @@ public class TalkPerformer {
 		
 		
 		boolean visible = true;
-		scene.setStateOfPopup(visible, returnObjects.get(0), this);
+		scene.setStateOfPopup(visible, pages.get(0), this);
 		return totalDurationInSeconds;
 	}
 
@@ -183,11 +187,13 @@ public class TalkPerformer {
 			}
 
 			// update text in bubble
-			for (int i = startingTimeForEachLine.size() - 1; i >= 0; i--) {
-				// go backwards thru the loop to find text that should be valid
-				if (progress > startingTimeForEachLine.get(i)) {
-					scene.setStateOfPopup(true, returnObjects.get(i), null);
-					break;
+			for (int i = pages.size() - 1; i >= 0; i--) {
+				for(int j= pages.get(i).lines.lines.size()-1; j>=0;j--){
+					// go backwards thru the loop to find text that should be valid
+					if (progress > pages.get(i).lines.lines.get(j).startingTime) {
+						scene.setStateOfPopup(true, pages.get(i), null);
+						break;
+					}
 				}
 			}
 

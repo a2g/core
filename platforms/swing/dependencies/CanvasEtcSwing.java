@@ -26,6 +26,7 @@ public class CanvasEtcSwing
 	public  BufferedImage draw(RectAndLeaderLine rectEtc, ColorEnum speechColor, PointI resolution) 
 	{
 		// draw resolution rect
+		g2d.setBackground(new Color(0, 0, 0, 0));
 		g2d.clearRect(0, 0, img.getWidth(), img.getHeight());
 		g2d.setColor(new Color(0,255,0));
 		g2d.drawRect(0, 0, resolution.getX(), resolution.getY());

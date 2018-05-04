@@ -270,7 +270,7 @@ public class ScenePresenter implements IScenePresenter,
 
 	public void setStateOfPopup(boolean isVisible, RectAndLeaderLine rectAndLeaderLine, TalkPerformer sayAction) 
 	{
-		ColorEnum talkingColor = this.getTalkingColorUsingContingencies(rectAndLeaderLine.atid);
+		ColorEnum talkingColor = rectAndLeaderLine!=null? this.getTalkingColorUsingContingencies(rectAndLeaderLine.atid) : null;
 		view.setStateOfPopup(isVisible, talkingColor, rectAndLeaderLine, sayAction);
 	}
 

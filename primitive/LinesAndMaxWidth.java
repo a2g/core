@@ -19,10 +19,12 @@ public class LinesAndMaxWidth
 			this.y = y;
 			this.lineWidth = 0;
 		}
+		
 		public String line;
 		public int x;
 		public int y;
 		public double lineWidth;
+		public double startingTime;
 	}
 	
 	public LinesAndMaxWidth()
@@ -34,6 +36,7 @@ public class LinesAndMaxWidth
 	public void addLine(String line, double width)
 	{
 		lines.add(new LineAndPos(line, width));
+		this.maxWidth = Math.max(this.maxWidth,  width);
 	}
 	public LineAndPos addLine(int x, int y, String string)
 	{
@@ -48,7 +51,7 @@ public class LinesAndMaxWidth
 		toAdd.x = x;
 		toAdd.y = y;
 		lines.add(toAdd);
-		
+		this.maxWidth = Math.max(this.maxWidth,  width);
 	}
 	public ArrayList<LineAndPos> lines;
 	public double maxWidth;

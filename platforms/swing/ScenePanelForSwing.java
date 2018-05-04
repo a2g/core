@@ -486,15 +486,17 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, RectAndLeaderLine rectAndLeaderLine,
+	public void setStateOfPopup(boolean isVisible, ColorEnum speechColor, RectAndLeaderLine rectAndLeaderLine,
 			TalkPerformer sayAction) {
 		this.isSpeechVisible = isVisible;
-		ColorEnum speechColor = talkingColor;
+
+		if(rectAndLeaderLine == null)
+			return; 
 
 		if (rectAndLeaderLine.rectBubble.getWidth() <= 0)
 			return;
 
-		this.speechCanvas.draw(/* textLabel, */rectAndLeaderLine, speechColor, new PointI(width, height));
+		this.speechCanvas.draw(rectAndLeaderLine, speechColor, new PointI(width, height));
 	}
 
 	@Override

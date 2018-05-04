@@ -26,7 +26,7 @@ public class RectAndLeaderLine
 	}
 	
 	public LinesAndMaxWidth lines;
-	 
+	public double secondsForPage; 
 	public String atid;
 	public boolean isFromTop;
 
@@ -126,7 +126,6 @@ public class RectAndLeaderLine
 			setPoint(5, rectBubble.getBottomRight());
 			setPoint(6, rectBubble.getTopRight());
 		}
-		
 	}
 	
 
@@ -140,63 +139,44 @@ public class RectAndLeaderLine
 		int maxWidthBeforeWrapping = maxRectI.getWidth()-MARGIN_LEFT-MARGIN_RIGHT;
 
 		// 3. first do one iteration to find the longest textwidth
-		double maxWidth = 0;
+		double maxTextWidth = 0;
+		int theMostLines = 0;
 		for(int i=0;i<pages.length;i++)
 		{
 			LinesAndMaxWidth lines = LinesAndMaxWidth.getArrayOfLinesSplitOnSpaceAndWidth(context, maxWidthBeforeWrapping, pages[i]);
 			RectAndLeaderLine pageOfSpeech = new RectAndLeaderLine();
 			pageOfSpeech.lines = lines;
-			if(lines.maxWidth>maxWidth)
-				maxWidth = lines.maxWidth;
+			if( lines.lines.size()>theMostLines)
+				theMostLines = lines.lines.size();
+			if(lines.maxWidth>maxTextWidth)
+				maxTextWidth = lines.maxWidth;
 			toReturn.add(pageOfSpeech);
 		}
-			
-		// 4. calc starting x,y
-		int x = maxRectI.getLeft()+MARGIN_LEFT;
-		int y = maxRectI.getTop()+MARGIN_TOP;
-		maxRectI.getHeight();
-		int lineSpacing = 3; 
-		int ygjsetc = 5;
-		// Block of text height
+		
+		// 4. caculate line height
+		int lineSpacing = 3;  
 		int fontHeight = (int)context.measureTextWidthAndHeight("blah").getY();
-	
-		// 4. calc x,y for all pages
+		int heightPerLine = fontHeight + lineSpacing;
+		
+		// 5. calculate largest centred rect to hold all pages
+		Rect minToHoldAllPages = new Rect (maxRectI.getCenter().getX() - maxTextWidth/2, maxRectI.getTop(), maxTextWidth, theMostLines*heightPerLine);
+				
+		// 6. calc x,y for all pages
 		for(int i=0;i<toReturn.size();i++)
 		{
-			double lowestY = y;
-			double lowestX = 10000;
-			double largestWidth = 0;
-
-			// We determine the y of the first line
-			int ly = y+=fontHeight+lineSpacing;
-			double lx = 0;
-
 			RectAndLeaderLine page = toReturn.get(i);
-			int both = page.lines.lines.size() * (fontHeight + lineSpacing + ygjsetc);
-
-			for (int j = 0 ; j < page.lines.lines.size(); ++j, ly+=fontHeight+lineSpacing) 
+			for (int j = 0 ; j < page.lines.lines.size(); ++j) 
 			{
-				// We continue to centralize the lines
+				// fill in x and y for all the pages.
 				LineAndPos line = page.lines.lines.get(j);
-				//String speech = line.line;
-				//double widthOfText = context.measureTextWidthAndHeight(line).getX();
-				//lx = x+(w/2)  - widthOfText/2;
-				// DEBUG 
-				//console.log("ctx2d.fillText('"+ lines[j] +"', "+ lx +", " + ly + ")");
-
-				line.x = (int)lx;
-				line.y = ly; 
-
-				if(lx<lowestX)
-					lowestX = lx;
-				if(line.lineWidth>largestWidth)
-					largestWidth = line.lineWidth;
+				line.x = (int)minToHoldAllPages.getLeft();
+				line.y = (int)minToHoldAllPages.getTop()+(fontHeight+lineSpacing)*j+fontHeight; 
 			}
-
-			page.rectInputInRed = new Rect(x,y,maxRectI.getWidth(), maxRectI.getHeight());
-			page.rectPurelyTextBoundsInYellow = new Rect((int)lowestX,(int)lowestY, (int)largestWidth, (int)both);
-			page.rectBubble = new Rect((int)lowestX-MARGIN_LEFT,(int)lowestY-MARGIN_TOP, (int)largestWidth+MARGIN_LEFT+MARGIN_RIGHT, (int)both+MARGIN_TOP+MARGIN_BOTTOM);
-			// now 
+			
+			page.rectInputInRed = new Rect(maxRectI.getLeft(),maxRectI.getTop(),maxRectI.getWidth(), maxRectI.getHeight());
+			page.rectPurelyTextBoundsInYellow = minToHoldAllPages;
+			page.rectBubble = new Rect(minToHoldAllPages.getLeft()-MARGIN_LEFT,(int)minToHoldAllPages.getTop()-MARGIN_TOP, (int)minToHoldAllPages.getWidth()+MARGIN_LEFT+MARGIN_RIGHT, (int)minToHoldAllPages.getHeight()+MARGIN_TOP+MARGIN_BOTTOM);
+		
 
 			// generate leader lines
 			Rect max = page.rectBubble;
@@ -242,9 +222,12 @@ public class RectAndLeaderLine
 			//		max.getWidth()-2*borderWidth+1,
 			//		max.getHeight()-2*borderWidth+1);
 			
-			toReturn.add(page);
+			//toReturn.add(page);
 		}
 		return toReturn;
+	}
+	public static String[] getDebugStrings() {
+		return new String[]{ "to be or not to be", "This sentence has larger words"};
 	}
 	 
 }
