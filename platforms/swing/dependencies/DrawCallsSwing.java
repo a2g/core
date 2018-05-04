@@ -37,7 +37,7 @@ public class DrawCallsSwing implements IDrawCalls
 	}
 
 	@Override
-	public void drawPolygon(int[] xPoints, int[] yPoints, int nPoints, ColorEnum fillColor, ColorEnum lineColor) {
+	public void drawPolygon(int[] xPoints, int[] yPoints, int nPoints, ColorEnum fillColor, ColorEnum lineColor, int brushWidth) {
 		graphics.setColor(new Color(fillColor.r, fillColor.g, fillColor.b));
 		graphics.fillPolygon(xPoints, yPoints, nPoints);
 		graphics.setColor(new Color(lineColor.r, lineColor.g, lineColor.b));

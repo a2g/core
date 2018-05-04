@@ -31,7 +31,7 @@ public class SpeechCommon
 		}
 		//canvas.drawSinglePixelRect(x, y, w, h, speechColor);
 		//canvas.drawSinglePixelRect(x-1, y-1, w+2, h+2, speechColor);
-		canvas.drawPolygon(all.xPoints, all.yPoints,  all.yPoints.length, ColorEnum.White, speechColor);
+		canvas.drawPolygon(all.xPoints, all.yPoints,  all.yPoints.length, ColorEnum.White, speechColor, all.bubbleOutlineWidth);
 
 		for(int i=0;i<all.lines.lines.size();i++)
 		{

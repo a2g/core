@@ -23,6 +23,7 @@ import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.GuiConstants;
 
 public class VerbsPresenter implements IVerbsPresenterFromVerbsPanel,
 IVerbsPresenter {
@@ -37,7 +38,7 @@ IVerbsPresenter {
 		this.callback = callback;
 		this.theVerbs = new Verbs();
 		this.view = callback.getFactory().createVerbsPanel(this,
-				ColorEnum.Purple, ColorEnum.Black);
+				GuiConstants.TEXT_NORMAL, GuiConstants.BACKGROUND_FILL);
 		panel.setThing(view);
 		this.view.setVerbs(theVerbs);
 		this.widthOfScene = 0;

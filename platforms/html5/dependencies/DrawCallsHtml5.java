@@ -40,7 +40,7 @@ public class DrawCallsHtml5 implements IDrawCalls
 	
 
 	@Override
-	public void drawPolygon(int[] xPoints, int[] yPoints, int nPoints, ColorEnum fillColor, ColorEnum lineColor) {
+	public void drawPolygon(int[] xPoints, int[] yPoints, int nPoints, ColorEnum fillColor, ColorEnum lineColor, int brushWidth) {
 		// https://www.kirupa.com/html5/drawing_triangles_on_the_canvas.htm
 		context.beginPath();
 		
@@ -57,7 +57,7 @@ public class DrawCallsHtml5 implements IDrawCalls
 		context.closePath();
 		
 		// the outline
-		context.setLineWidth(10);
+		context.setLineWidth(brushWidth);
 		context.setStrokeStyle(lineColor.toString().toLowerCase());
 		context.stroke();
 		 

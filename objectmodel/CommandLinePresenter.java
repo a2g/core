@@ -28,6 +28,7 @@ import com.github.a2g.core.interfaces.internal.ICommandLinePresenter;
 import com.github.a2g.core.interfaces.internal.IHostingPanel;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromCommandLine;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.GuiConstants;
 import com.github.a2g.core.primitive.LogNames;
 import com.google.gwt.event.shared.EventBus;
 
@@ -45,8 +46,8 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 			IMasterPresenterFromCommandLine api) {
 		this.model = new CommandLine(api);
 		this.api = api;
-		this.view = api.getFactory().createCommandLinePanel(ColorEnum.Purple,
-				ColorEnum.Black, ColorEnum.Red);
+		this.view = api.getFactory().createCommandLinePanel(GuiConstants.TEXT_NORMAL,
+				GuiConstants.BACKGROUND_FILL, GuiConstants.TEXT_HIGHLIGHT);
 		panel.setThing(view);
 
 		bus.addHandler(ExecuteCommandEvent.TYPE, this);

@@ -23,6 +23,7 @@ import com.github.a2g.core.interfaces.internal.ILoaderPanelFromLoaderPresenter;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoader;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.GuiConstants;
 import com.google.gwt.event.shared.EventBus;
 
 public class LoaderPresenter implements IMasterPresenterFromLoaderMouse {
@@ -40,8 +41,8 @@ public class LoaderPresenter implements IMasterPresenterFromLoaderMouse {
 		this.isContinueAfterLoad = true;
 		this.loader = new Loader(master);
 		this.name = "";
-		this.view = factory.createLoaderPanel(this, ColorEnum.Purple,
-				ColorEnum.Black);
+		this.view = factory.createLoaderPanel(this, GuiConstants.TEXT_NORMAL,
+				GuiConstants.BACKGROUND_FILL);
 		panel.setThing(view);
 		this.current = 0;
 		this.total = 0;

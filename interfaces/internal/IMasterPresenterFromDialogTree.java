@@ -12,5 +12,5 @@ public interface IMasterPresenterFromDialogTree
 extends IMasterPresenterFromDialogTreeMouse
 {
 	IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(EventBus bus,
-			ColorEnum purple, ColorEnum black, ColorEnum red);
+			ColorEnum textNormal, ColorEnum textBackground, ColorEnum textHighlight);
 }

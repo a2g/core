@@ -114,7 +114,7 @@ public class TalkPerformer {
 		RectF maxRectF = scene.getSpeechRectUsingContingencies(atid);
 		Rect maxRectI = translateRect(maxRectF);
 		PointI mouth = scene.getMouthLocationByAtid(atid);
-		pages = RectAndLeaderLine.calculateLeaderLines(splitByNewline, maxRectI, 30, mouth, 38, 3, scene);
+		pages = RectAndLeaderLine.calculateLeaderLines(new PointI(scene.getSceneGuiWidth(), scene.getSceneGuiHeight()), splitByNewline, maxRectI, mouth, scene);
 		//SpeechCalculatorOuterForAll calc = new SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3,
 		//	canvas);
 

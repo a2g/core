@@ -102,7 +102,7 @@ public class DrawCallsHtml4 extends VerticalPanel
 		//warning: if these 'border's are not set first, the visual result is weird
 		before.getElement().getStyle().setProperty("border", ""+c.halfWidthOfLeaderLine+"px solid");
 		after.getElement().getStyle().setProperty("border", ""+c.afterBorderWidth +"px solid");
-		pe.getPE().getStyle().setProperty("border", ""+c.borderWidth+"px solid "+borderColor.toString().toLowerCase());
+		pe.getPE().getStyle().setProperty("border", ""+c.bubbleOutlineWidth+"px solid "+borderColor.toString().toLowerCase());
 
 
 		// first do rectangle
@@ -115,12 +115,12 @@ public class DrawCallsHtml4 extends VerticalPanel
 		pe.getPE().getStyle().setProperty("MozBorderRadius", c.radius +"px");
 		pe.getPE().getStyle().setProperty("borderRadius", c.radius +"px");
 
-		boolean isFromTop = c.isFromTop;
+		boolean isFromTop = c.isPointingDown;
 		boolean isPointingRight = c.isPointingRight;
 		int heightInPixels = c.rectBubble.getHeight();
 
-		int top = c.isFromTop? -c.heightOfLeaderLine : heightInPixels-1;
-		top+=+c.borderWidth;
+		int top = c.isPointingDown? -c.heightOfLeaderLine : heightInPixels-1;
+		top+=+c.bubbleOutlineWidth;
 
 		int left = c.leaderLineX;
 

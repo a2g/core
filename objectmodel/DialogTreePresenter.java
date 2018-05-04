@@ -24,6 +24,7 @@ import com.github.a2g.core.interfaces.internal.IDialogTreePresenter;
 import com.github.a2g.core.interfaces.internal.IHostingPanel;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTree;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.GuiConstants;
 import com.google.gwt.event.shared.EventBus;
 
 public class DialogTreePresenter
@@ -35,8 +36,8 @@ implements IDialogTreePresenter {
 	public DialogTreePresenter(final IHostingPanel panel, EventBus bus,
 			IMasterPresenterFromDialogTree callbacks) {
 		this.theDialogTree = new DialogTree();
-		this.view = callbacks.createDialogTreePanel(bus, ColorEnum.Purple,
-				ColorEnum.Black, ColorEnum.Red);
+		this.view = callbacks.createDialogTreePanel(bus, GuiConstants.TEXT_NORMAL,
+				GuiConstants.BACKGROUND_FILL, GuiConstants.TEXT_HIGHLIGHT);
 		panel.setThing(view);
 		recordOfSaidSpeech = new HashSet<String>();
 	}

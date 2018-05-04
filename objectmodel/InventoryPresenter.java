@@ -25,6 +25,7 @@ import com.github.a2g.core.interfaces.internal.IInventoryPresenter;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromInventory;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.GuiConstants;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.Rect;
 import com.google.gwt.event.shared.EventBus;
@@ -58,7 +59,9 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 		this.theInventory = new Inventory();
 		this.callback = api;
 		this.view = api.getFactory().createInventoryPanel(this,
-				ColorEnum.Purple, ColorEnum.Black, ColorEnum.Fuchsia);
+				GuiConstants.TEXT_NORMAL,
+				GuiConstants.BACKGROUND_FILL,
+				GuiConstants.TEXT_HIGHLIGHT);
 
 		panel.setThing(view);
 		this.mapOfInventoryByICode = new TreeMap<Integer, InventoryItem>();
