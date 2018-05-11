@@ -400,6 +400,10 @@ public class MasterPresenter
 
 		try {
 			BaseAction actionChain = sceneHandlers2.onDialogTree(proxyForGameScene, newTalkAction, branchId);
+			// for the case where we pass in an action which says the chosen line...
+			///...and then the script lazily returns null!
+			if(actionChain==null)
+				actionChain = newTalkAction;
 			BaseAction actionChain2 = replaceChainToDialogActionWithCallToOnDialogTree(actionChain);
 
 			executeActionWithDialogActionRunner(actionChain2);

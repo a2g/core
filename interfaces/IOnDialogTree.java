@@ -22,6 +22,7 @@ import com.github.a2g.core.interfaces.methods.game.IGetValue;
 import com.github.a2g.core.interfaces.methods.game.IIsInDebugMode;
 import com.github.a2g.core.interfaces.methods.game.IIsInventoryItemVisible;
 import com.github.a2g.core.interfaces.methods.game.IIsTrue;
+import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectInitial;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneDialogThem;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsSceneDialogUs;
 import com.github.a2g.core.interfaces.methods.game.ISetValue;
@@ -38,6 +39,7 @@ IGetValue, IIsTrue, ISetValue
 // animation
 , ISetAnimationAsSceneDialogUs
 , ISetAnimationAsSceneDialogThem
+, ISetAnimationAsObjectInitial
 // helpful for game
 , IGetCurrentSceneName, ISwitchToScene, IGetLastSceneName, IIsInDebugMode
 // inventory

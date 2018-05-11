@@ -326,6 +326,7 @@ public class SceneObject {
 
 	public void setInitialAnimation(String initialAnimation) {
 		this.initialAnimationId = initialAnimation;
+		updateObjectToCorrectImage();
 	}
 
 	public void setOCode(short ocode) {

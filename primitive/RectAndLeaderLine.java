@@ -33,7 +33,7 @@ public class RectAndLeaderLine
 
 	public boolean isPointingRight;
 	public boolean isPointingLeft;
-
+	public double startingTime;
 	public int leaderLineX;
 
 	public int radius;

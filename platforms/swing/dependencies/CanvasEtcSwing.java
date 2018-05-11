@@ -34,7 +34,6 @@ public class CanvasEtcSwing
 		DrawCallsSwing adapter = new DrawCallsSwing(g2d);
 		SpeechCommon.mainDraw(adapter, rectEtc, speechColor);
 
-		g2d.dispose();
 		return img;
 	}
 
