@@ -10,6 +10,7 @@ import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 import com.github.a2g.core.primitive.PointI;
+import com.github.a2g.core.primitive.Rect;
 import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.github.a2g.core.primitive.RectF;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
@@ -403,10 +404,10 @@ ITitleCardPresenterFromActions
 
 
 	@Override
-	public PointI getMouthLocationByAtid(String atid) {
+	public Rect getMouthLocationByAtid(String atid) {
 		Animation a = master.getScenePresenter().getAnimationByAtid(atid);
 		SceneObject o = a.getObject();
-		return o.getMouthLocation();
+		return o.getHeadRect();
 	}
 
 

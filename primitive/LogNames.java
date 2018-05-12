@@ -26,7 +26,8 @@ public enum LogNames
 	GETBYATID(true),// = "ANIMATIONS_AS_THEY_ARE_INDEXED";
 	LOADNEXT(true),// = "LOADNEXT";
 	ADD_SCENEOBJECT(true),
-	MERGEWITHSCENE(false);
+	MERGEWITHSCENE(false), 
+	HEAD_RECT_PROBLEMS(true);
 
 	public final boolean isOn;
 	LogNames(boolean isOn)

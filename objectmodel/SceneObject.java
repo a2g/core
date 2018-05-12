@@ -18,9 +18,11 @@ package com.github.a2g.core.objectmodel;
 
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.Rect;
@@ -30,6 +32,9 @@ import com.github.a2g.core.primitive.Rect;
  *
  */
 public class SceneObject {
+	
+
+	private static final Logger HEAD_RECT_PROBLEMS  = Logger.getLogger(LogNames.HEAD_RECT_PROBLEMS.toString());
 	private String initialAnimationId;
 	private Map<String, String> mapOfSpecialAnimations;
 	private final String otid;
@@ -358,14 +363,14 @@ public class SceneObject {
 		return new Point(x, y);
 	}
 
-	public PointI getMouthLocation() {
-		double left = this.getX();
-		double top = this.getY();
+	public Rect getHeadRect() {
+		//right now head rect is biased toward tall thin characters whose height ends at the tip of their heads, with spherical heads as wide as their bodies.
+		double x = this.getBaseMiddleX()*screenPixelWidth;
+		
 		Rect r = this.getCurrentBoundingRect();
-		double x = left + (r.getLeft() + r.getRight()) / 2.0;
-		double y = top + r.getTop();
-
-		return new PointI((int)x,(int)y);
+		double width = (r.getRight() -r.getLeft())/2;
+		HEAD_RECT_PROBLEMS.fine("HEAD RECT " + this.displayName + " "+r.getLeft() + " "+r.getTop()+" "+r.getWidth() +" "+ r.getHeight());
+		return new Rect((int)(x-width/2.0), r.getTop(), width, width);
 	}
 
 	public void alignBaseMiddleOfOldFrameToFrameOfNewAnimation(String atid,

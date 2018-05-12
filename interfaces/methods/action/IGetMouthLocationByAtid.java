@@ -1,7 +1,7 @@
 package com.github.a2g.core.interfaces.methods.action;
 
-import com.github.a2g.core.primitive.PointI;
+import com.github.a2g.core.primitive.Rect;
 
 public interface IGetMouthLocationByAtid {
-	PointI getMouthLocationByAtid(String atid);
+	Rect getMouthLocationByAtid(String atid);
 }

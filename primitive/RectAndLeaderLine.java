@@ -67,6 +67,7 @@ public class RectAndLeaderLine
 	static final int BUFFER_RIGHT = MARGIN_RIGHT + bubbleLineWidth;
 	static final int BUFFER_BOTTOM = MARGIN_BOTTOM + bubbleLineWidth;
 
+	static final int LEADERLINE_FRACTION_DEONOMINATOR = 8;
 	private void setPoint(int index, PointI point)
 	{
 		xPoints[index] = point.getX();
@@ -91,7 +92,7 @@ public class RectAndLeaderLine
 
 	public void populateXAndYPointsFromBubbleRect(PointI resolution) {
 		int halfThicknessOfLeaderLine = (int)(resolution.getX()/64.0);
-		int lengthOfLeaderLine = (int)(resolution.getX()/16.0);
+		int lengthOfLeaderLine = (int)(resolution.getY()/LEADERLINE_FRACTION_DEONOMINATOR);
 		if(isVerticallyOriented)
 		{
 			if(isPointingRight)
@@ -197,7 +198,7 @@ public class RectAndLeaderLine
 	}
 
 
-	static public ArrayList<RectAndLeaderLine> calculateLeaderLines(PointI resolution, String[] pages, Rect maxRectI, PointI mouth, IMeasureTextWidthAndHeight context)
+	static public ArrayList<RectAndLeaderLine> calculateLeaderLines(PointI resolution, String[] pages, Rect maxRectI, IMeasureTextWidthAndHeight context, Rect headRect)
 	{
 
 		// 1. create return value
@@ -227,7 +228,11 @@ public class RectAndLeaderLine
 		int heightPerLine = fontHeight + lineSpacing;
 
 		// 5. calculate largest centred rect to hold all pages
-		Rect minToHoldAllPages = new Rect (maxRectI.getCenter().getX() - maxTextWidth/2, maxRectI.getTop()+BUFFER_TOP, maxTextWidth, theMostLines*heightPerLine);
+		int headRadius = headRect.getWidth()/4 + headRect.getHeight()/4;
+		PointI headCentre = headRect.getCenter();
+		Rect minToHoldAllPages = new Rect (headRect.getCenter().getX() - maxTextWidth/2, headCentre.getY()-headRadius- theMostLines*heightPerLine-BUFFER_BOTTOM, maxTextWidth, theMostLines*heightPerLine);
+		if(minToHoldAllPages.getLeft()<0)
+			minToHoldAllPages = new Rect (0, minToHoldAllPages.getBottom(), minToHoldAllPages.getWidth(), minToHoldAllPages.getHeight());
 
 		// 6. calc x,y for all pages
 		for(int i=0;i<toReturn.size();i++)
@@ -253,9 +258,9 @@ public class RectAndLeaderLine
 
 				// the mouth & centre coords are both relative to top left of viewport
 				page.isVerticallyOriented = maxRectI.getHeight() > maxRectI.getWidth();
-				page.isPointingDown = mouth.getY() > centre.getY();
-				page.isPointingRight = mouth.getX() > centre.getX()-(resolution.getX()/4);
-				page.isPointingLeft = mouth.getX() < centre.getX()+(resolution.getX()/4);;
+				page.isPointingDown = headCentre.getY() > centre.getY();
+				page.isPointingRight = (headCentre.getX() > centre.getX()+2);//+(resolution.getX()/4);
+				page.isPointingLeft = (headCentre.getX() < centre.getX()-3);//-(resolution.getX()/4);;
 			}
 
 			// with the way I've set up the DOM, it seems that
@@ -267,7 +272,7 @@ public class RectAndLeaderLine
 			// to get to the starting point of the leader line.
 			// same with max/minimumStartOfLeaderLine
 
-			page.xPos = mouth.getX()-max.getLeft();
+			page.xPos = headCentre.getX()-max.getLeft();
 			//the xPos should be where the leaderline starts so that the perpendicular
 			// edge of the leaderline points to the mouth..
 			// but if its pointing right, the straight line is a whole leaderwidth away.

@@ -31,7 +31,10 @@ public enum ColorEnum {
 	Olive(128, 128, 0),
 	Yellow(255, 255, 0)	,
 	Silver(192, 192, 192),
-	White(255, 255, 255);
+	White(255, 255, 255), 
+	MediumVioletRed(199,  21, 133),
+	PaleVioletRed(219, 112, 147)
+	;
 
 	public final int r;
 	public final int g;
