@@ -110,9 +110,9 @@ public class CanvasEtcHtml5
 		return canvasA.getCoordinateSpaceHeight();
 	}
 
-	public void drawSpeech(RectAndLeaderLine speechRectAndLeaderLine, ColorEnum speechColor) 
+	public void drawSpeech(RectAndLeaderLine rectAndLeaderLine, ColorEnum speechColor) 
 	{
-		SpeechCommon.mainDraw(new DrawCallsHtml5(contextB), speechRectAndLeaderLine, speechColor);
+		SpeechCommon.mainDraw(new DrawCallsHtml5(contextB), rectAndLeaderLine, speechColor);
 	}
 	
 	public void setFontNameAndHeightUsedInHtml4(String fontName, int fontHeight) {

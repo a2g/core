@@ -232,7 +232,9 @@ public class RectAndLeaderLine
 		PointI headCentre = headRect.getCenter();
 		Rect minToHoldAllPages = new Rect (headRect.getCenter().getX() - maxTextWidth/2, headCentre.getY()-headRadius- theMostLines*heightPerLine-BUFFER_BOTTOM, maxTextWidth, theMostLines*heightPerLine);
 		if(minToHoldAllPages.getLeft()<0)
-			minToHoldAllPages = new Rect (0, minToHoldAllPages.getBottom(), minToHoldAllPages.getWidth(), minToHoldAllPages.getHeight());
+			minToHoldAllPages = new Rect (BUFFER_LEFT, minToHoldAllPages.getTop(), minToHoldAllPages.getWidth(), minToHoldAllPages.getHeight());
+		if(minToHoldAllPages.getRight()>resolution.getX());
+			minToHoldAllPages = new Rect (resolution.getX() - BUFFER_RIGHT-minToHoldAllPages.getWidth(), minToHoldAllPages.getTop(), minToHoldAllPages.getWidth(), minToHoldAllPages.getHeight());
 
 		// 6. calc x,y for all pages
 		for(int i=0;i<toReturn.size();i++)
@@ -258,7 +260,7 @@ public class RectAndLeaderLine
 
 				// the mouth & centre coords are both relative to top left of viewport
 				page.isVerticallyOriented = maxRectI.getHeight() > maxRectI.getWidth();
-				page.isPointingDown = headCentre.getY() > centre.getY();
+				page.isPointingDown = true;//headCentre.getY() > centre.getY();
 				page.isPointingRight = (headCentre.getX() > centre.getX()+2);//+(resolution.getX()/4);
 				page.isPointingLeft = (headCentre.getX() < centre.getX()-3);//-(resolution.getX()/4);;
 			}

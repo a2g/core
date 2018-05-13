@@ -17,6 +17,8 @@
 package com.github.a2g.core.primitive;
 
 public enum ColorEnum {
+	// the names below must be html named constants
+	// get them from here: https://en.wikipedia.org/wiki/Web_colors
 	Black(0, 0, 0),
 	Gray(128, 128, 128),
 	Navy(0, 0, 128),

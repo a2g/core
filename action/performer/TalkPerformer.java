@@ -100,7 +100,7 @@ public class TalkPerformer {
 			atid = scene.getAtidOfCurrentAnimationByOtid(otid);
 			// odd choice, but shouldn't make a difference - we just need any
 			// animation
-			// from that object, since api.setSpeechRect sets all animations.
+			// from that object, since api.setSpeechRectangleIndex sets all animations.
 		} else if (atid == SCENE_TALKER) {
 			atid = scene.getAtidOfSceneTalker();
 		} else if (atid == SCENE_DIALOG_US) {
@@ -111,11 +111,11 @@ public class TalkPerformer {
 
 		// 3. get speech rectangle using contingencies - that's a lot of
 		// contingencies
-		RectF maxRectF = scene.getSpeechRectUsingContingencies(atid);
-		Rect maxRectI = translateRect(maxRectF);
+		RectF headRectF = scene.getHeadRectangleUsingContingencies(atid);
+		Rect headRectI = translateRect(headRectF);
 		Rect headRect = scene.getMouthLocationByAtid(atid);
 		pages = RectAndLeaderLine.calculateLeaderLines(new PointI(scene.getSceneGuiWidth(), scene.getSceneGuiHeight()),
-				splitByNewline, maxRectI, scene, headRect);
+				splitByNewline, headRectI, scene, headRect);
 		// SpeechCalculatorOuterForAll calc = new
 		// SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3,
 		// canvas);

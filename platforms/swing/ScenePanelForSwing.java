@@ -105,10 +105,7 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 		this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 		this.setDoubleBuffered(true);
 		this.speechCanvas = new CanvasEtcSwing();
-		// this.speechVisible = false;
-		// this.speechColor = ColorEnum.Navy;
-		// this.speechText = "";
-		// this.speechRect = null;
+
 
 		cameraOffsetX = 0;
 		cameraOffsetY = 0;
@@ -293,7 +290,7 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 		List<Point> helpers = toScene.getHelperPoints();
 		Point centre = toScene.getBoundaryPointsCentre();
 		List<Point> path = toScene.getLastPath();
-		Iterator<RectF> bubbles = toScene.getSpeechRects();
+		Iterator<RectF> bubbles = toScene.getHeadRectagles();
 
 		if (isRenderDiagnostics && points.size() > 0) {
 			g.setColor(new Color(255, 0, 0));

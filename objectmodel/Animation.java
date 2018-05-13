@@ -28,7 +28,7 @@ public class Animation {
 	private String atid;
 	private ImageCollection framesCollection;
 	private SceneObject ownerObject;
-	private int speechRect;
+	private int headRectIndex;
 
 	private ColorEnum talkingColor;
 
@@ -37,7 +37,7 @@ public class Animation {
 		this.durationInSeconds = 1.0;
 		this.ownerObject = ownerSceneObject;
 		this.atid = atid;
-		this.speechRect = -1;// -1 means "not set"
+		this.headRectIndex = -1;// -1 means "not set"
 		this.talkingColor = null;
 	}
 
@@ -84,12 +84,12 @@ public class Animation {
 		return durationInSeconds;
 	}
 
-	public int getSpeechRect() {
-		return this.speechRect;
+	public int getHeadRectangleIndex() {
+		return this.headRectIndex;
 	}
 
-	public void setSpeechRect(int index) {
-		speechRect = index;
+	public void setHeadRectangleIndex(int index) {
+		headRectIndex = index;
 	}
 
 	public ColorEnum getTalkingColor() {

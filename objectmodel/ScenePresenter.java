@@ -53,7 +53,7 @@ public class ScenePresenter implements IScenePresenter,
 
 	private IBoundaryCalculator boundaryCalculator;
 	private int arrivalSegment;
-	private Vector<RectF> speechRects;
+	private Vector<RectF> rectangles;
 	private ArrayList<Point> helperPoints;
 
 	public ScenePresenter(final IHostingPanel panel,
@@ -76,8 +76,8 @@ public class ScenePresenter implements IScenePresenter,
 		this.arrivalSegment = -1;
 		defaultSceneObjectOtid = "ScenePresenter::getDefaultSceneObjectOtid was used before it was initialized";
 
-		speechRects = new Vector<RectF>(3);
-		this.addSpeechRect(new RectF(0,0,1.0,1.0));// this is for getSpeechRectUsingContingencies, it relies on there always being a zero element
+		rectangles = new Vector<RectF>(3);
+		this.addRectangle(new RectF(0,0,1.0,1.0));// this is for getSpeechRectUsingContingencies, it relies on there always being a zero element
 		this.helperPoints = new ArrayList<Point>();
 	}
 
@@ -117,7 +117,7 @@ public class ScenePresenter implements IScenePresenter,
 	public void clearEverythingExceptView() {
 
 		scene.objectCollection().clear();
-		speechRects.clear();
+		rectangles.clear();
 		this.sceneTalkerAtid = "";
 		this.sceneAskerAtid = "";
 		this.sceneAnswererAtid = "";
@@ -440,14 +440,14 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	@Override
-	public Iterator<RectF> getSpeechRects() {
-		return speechRects.iterator();
+	public Iterator<RectF> getHeadRectagles() {
+		return rectangles.iterator();
 	}
 
 	
-	public int addSpeechRect(RectF rectF) {
-		speechRects.add(rectF);
-		return speechRects.size() - 1;
+	public int addRectangle(RectF rectF) {
+		rectangles.add(rectF);
+		return rectangles.size() - 1;
 	}
 	
 	public int addHelperPoint(Point pointF) {
@@ -486,25 +486,25 @@ public class ScenePresenter implements IScenePresenter,
 	}
 	
  
-	RectF getSpeechRectUsingContingencies(String atid)
+	RectF getHeadRectangleUsingContingencies(String atid)
 	{
 		Animation a = this.getAnimationByAtid(atid);
 		
 		// 1. prefer rect from animation..
-		int speechRectIndex = a.getSpeechRect();
+		int headRectIndex = a.getHeadRectangleIndex();
 		
 		// 2. if none, then choose sceneObject speech rect
-		if (speechRectIndex == -1) 
+		if (headRectIndex == -1) 
 		{
-			speechRectIndex = a.getSceneObject().getSpeechRect();
+			headRectIndex = a.getSceneObject().getHeadRectangleIndex();
 			
 			// 3. if still none, then choose the first speech rect
-			if (speechRectIndex == -1) 
+			if (headRectIndex == -1) 
 			{
-				speechRectIndex = 0;// default ( a fullscreen one is always added)
+				headRectIndex = 0;// default ( a fullscreen one is always added)
 			}
 		}
-		RectF r = this.speechRects.get(speechRectIndex);
+		RectF r = this.rectangles.get(headRectIndex);
 		
 		return r;
 	}

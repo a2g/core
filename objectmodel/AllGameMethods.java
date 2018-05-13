@@ -559,8 +559,8 @@ public class AllGameMethods
 	}
 
 	@Override
-	public int addSpeechRect(RectF rectF) {
-		return master.getScenePresenter().addSpeechRect(rectF);
+	public int addRectangle(RectF rectF) {
+		return master.getScenePresenter().addRectangle(rectF);
 	}
 
 	@Override
@@ -569,16 +569,16 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setAnimationSpeechRect(String atid, int index) {
+	public void setHeadRectangleForAnimation(String atid, int index) {
 		Animation a = master.getScenePresenter().getAnimationByAtid(atid);
-		a.setSpeechRect(index);
+		a.setHeadRectangleIndex(index);
 	}
 
 	@Override
-	public void setSpeechRect(short ocode, int index) {
+	public void setHeadRectangleForObject(short ocode, int index) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
-		o.setSpeechRect(index);
+		o.setHeadRectangleByIndex(index);
 	}
 
 	@Override

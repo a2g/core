@@ -612,8 +612,8 @@ implements IChainRootForScene {
 	}
 
 	@Override
-	public ChainableAction setSpeechRect(short ocode, int index) {
-		SingleCallAction s = new SingleCallAction(this, Type.SetSpeechRect);
+	public ChainableAction setHeadRectangle(short ocode, int index) {
+		SingleCallAction s = new SingleCallAction(this, Type.SetHeadRectangle);
 		s.setOCode(ocode);
 		s.setInt(index);
 		return s;

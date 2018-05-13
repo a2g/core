@@ -151,7 +151,7 @@ public interface IChainRootForScene {
 	public ChainableAction setAnimationAsObjectSpecial(String atid, WalkDirection type);
 	public ChainableAction setAnimationAsSceneTalker(String atid);
 	public ChainableAction setAnimationAsObjectInitial(String atid);
-	public ChainableAction setSpeechRect(short ocode, int index);
+	public ChainableAction setHeadRectangle(short ocode, int index);
 	
 	public ChainableAction look(String atid, double duration);
 	

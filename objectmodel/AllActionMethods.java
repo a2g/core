@@ -204,9 +204,9 @@ ITitleCardPresenterFromActions
 	}
 
 	@Override
-	public void setSpeechRect(String otid, int index) {
+	public void setHeadRectangleByIndex(String otid, int index) {
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
-		object.setSpeechRect(index);
+		object.setHeadRectangleByIndex(index);
 	}
 	
 	@Override
@@ -412,8 +412,8 @@ ITitleCardPresenterFromActions
 
 
 	@Override
-	public RectF getSpeechRectUsingContingencies(String atid) {
-		return master.getScenePresenter().getSpeechRectUsingContingencies(atid);
+	public RectF getHeadRectangleUsingContingencies(String atid) {
+		return master.getScenePresenter().getHeadRectangleUsingContingencies(atid);
 	}
 
 

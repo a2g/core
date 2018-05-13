@@ -13,7 +13,7 @@ import com.github.a2g.core.interfaces.methods.action.IGetOtidByAtid;
 import com.github.a2g.core.interfaces.methods.action.IGetOtidByCode;
 import com.github.a2g.core.interfaces.methods.action.IGetSceneGuiHeight;
 import com.github.a2g.core.interfaces.methods.action.IGetSceneGuiWidth;
-import com.github.a2g.core.interfaces.methods.action.IGetSpeechRectUsingContingencies;
+import com.github.a2g.core.interfaces.methods.action.IGetHeadRectangleUsingContingencies;
 import com.github.a2g.core.interfaces.methods.action.ISetCurrentFrameByOtid;
 import com.github.a2g.core.interfaces.methods.action.ISetStateOfPopup;
 import com.github.a2g.core.interfaces.methods.action.ISetToInitialAnimationWithoutChangingFrameByOtid;
@@ -38,7 +38,7 @@ extends ISetStateOfPopup
 , IGetMouthLocationByAtid
 , IGetSceneGuiWidth
 , IGetSceneGuiHeight
-, IGetSpeechRectUsingContingencies
+, IGetHeadRectangleUsingContingencies
 {
 
 	
