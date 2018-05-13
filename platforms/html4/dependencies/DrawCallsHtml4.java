@@ -1,7 +1,7 @@
 package com.github.a2g.core.platforms.html4.dependencies;
 
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -106,7 +106,7 @@ public class DrawCallsHtml4 extends VerticalPanel
 
 
 		// first do rectangle
-		Rect r = c.rectBubble;
+		RectI r = c.rectBubble;
 		pe.getPE().getStyle().setProperty("top", "" +(r.getTop())+"px");
 		pe.getPE().getStyle().setProperty("left", "" +(r.getLeft())+"px");
 		pe.getPE().getStyle().setProperty("width", "" +(r.getWidth()-1)+"px");

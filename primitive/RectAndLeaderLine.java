@@ -48,9 +48,9 @@ public class RectAndLeaderLine
 	public int heightOfLeaderLine;
 	public int xPos;
 
-	public Rect rectInputInRed;
-	public Rect rectBubble;
-	public Rect rectPurelyTextBoundsInYellow;
+	public RectI rectInputInRed;
+	public RectI rectBubble;
+	public RectI rectPurelyTextBoundsInYellow;
 
 	public int[] xPoints;
 	public int[] yPoints;
@@ -77,17 +77,17 @@ public class RectAndLeaderLine
 	{
 		LineAndPos line0 = lines.lines.get(0);
 		Point dim0 = measurer.measureTextWidthAndHeight(line0.line);
-		Rect r = new Rect(line0.x*1.0, line0.y-dim0.getY(), dim0.getX(), dim0.getY());
+		RectI r = new RectI(line0.x*1.0, line0.y-dim0.getY(), dim0.getX(), dim0.getY());
 
 		for(int i=1;i<lines.lines.size();i++)
 		{
 			LineAndPos line = lines.lines.get(i);
 			Point dim = measurer.measureTextWidthAndHeight(line.line);
-			r.collateInPlace(new Rect(line.x*1.0, line.y-dim.getY(), dim.getX(), dim.getY()));
+			r.collateInPlace(new RectI(line.x*1.0, line.y-dim.getY(), dim.getX(), dim.getY()));
 		}
 		this.rectPurelyTextBoundsInYellow = r;
-		this.rectBubble = new Rect(r.getLeft()-BUFFER_LEFT, r.getTop()-BUFFER_TOP, r.getWidth()+BUFFER_LEFT+BUFFER_RIGHT, r.getHeight()+BUFFER_TOP+BUFFER_BOTTOM);
-		this.rectInputInRed = new Rect(r.getLeft()-2*BUFFER_LEFT, r.getTop()-2*BUFFER_TOP, r.getWidth()+2*BUFFER_LEFT+2*BUFFER_RIGHT, r.getHeight()+2*BUFFER_TOP+2*BUFFER_BOTTOM);
+		this.rectBubble = new RectI(r.getLeft()-BUFFER_LEFT, r.getTop()-BUFFER_TOP, r.getWidth()+BUFFER_LEFT+BUFFER_RIGHT, r.getHeight()+BUFFER_TOP+BUFFER_BOTTOM);
+		this.rectInputInRed = new RectI(r.getLeft()-2*BUFFER_LEFT, r.getTop()-2*BUFFER_TOP, r.getWidth()+2*BUFFER_LEFT+2*BUFFER_RIGHT, r.getHeight()+2*BUFFER_TOP+2*BUFFER_BOTTOM);
 	}
 
 	public void populateXAndYPointsFromBubbleRect(PointI resolution) {
@@ -198,7 +198,7 @@ public class RectAndLeaderLine
 	}
 
 
-	static public ArrayList<RectAndLeaderLine> calculateLeaderLines(PointI resolution, String[] pages, Rect maxRectI, IMeasureTextWidthAndHeight context, Rect headRect)
+	static public ArrayList<RectAndLeaderLine> calculateLeaderLines(PointI resolution, String[] pages, RectI maxRectI, IMeasureTextWidthAndHeight context, RectI headRect)
 	{
 
 		// 1. create return value
@@ -230,11 +230,11 @@ public class RectAndLeaderLine
 		// 5. calculate largest centred rect to hold all pages
 		int headRadius = headRect.getWidth()/4 + headRect.getHeight()/4;
 		PointI headCentre = headRect.getCenter();
-		Rect minToHoldAllPages = new Rect (headRect.getCenter().getX() - maxTextWidth/2, headCentre.getY()-headRadius- theMostLines*heightPerLine-BUFFER_BOTTOM, maxTextWidth, theMostLines*heightPerLine);
+		RectI minToHoldAllPages = new RectI (headRect.getCenter().getX() - maxTextWidth/2, headCentre.getY()-headRadius- theMostLines*heightPerLine-BUFFER_BOTTOM, maxTextWidth, theMostLines*heightPerLine);
 		if(minToHoldAllPages.getLeft()<0)
-			minToHoldAllPages = new Rect (BUFFER_LEFT, minToHoldAllPages.getTop(), minToHoldAllPages.getWidth(), minToHoldAllPages.getHeight());
+			minToHoldAllPages = new RectI (BUFFER_LEFT, minToHoldAllPages.getTop(), minToHoldAllPages.getWidth(), minToHoldAllPages.getHeight());
 		if(minToHoldAllPages.getRight()>resolution.getX());
-			minToHoldAllPages = new Rect (resolution.getX() - BUFFER_RIGHT-minToHoldAllPages.getWidth(), minToHoldAllPages.getTop(), minToHoldAllPages.getWidth(), minToHoldAllPages.getHeight());
+			minToHoldAllPages = new RectI (resolution.getX() - BUFFER_RIGHT-minToHoldAllPages.getWidth(), minToHoldAllPages.getTop(), minToHoldAllPages.getWidth(), minToHoldAllPages.getHeight());
 
 		// 6. calc x,y for all pages
 		for(int i=0;i<toReturn.size();i++)
@@ -248,13 +248,13 @@ public class RectAndLeaderLine
 				line.y = (int)minToHoldAllPages.getTop()+(fontHeight+lineSpacing)*j+fontHeight; 
 			}
 
-			page.rectInputInRed = new Rect(maxRectI.getLeft(),maxRectI.getTop(),maxRectI.getWidth(), maxRectI.getHeight());
+			page.rectInputInRed = new RectI(maxRectI.getLeft(),maxRectI.getTop(),maxRectI.getWidth(), maxRectI.getHeight());
 			page.rectPurelyTextBoundsInYellow = minToHoldAllPages;
-			page.rectBubble = new Rect(minToHoldAllPages.getLeft()-MARGIN_LEFT,(int)minToHoldAllPages.getTop()-MARGIN_TOP, (int)minToHoldAllPages.getWidth()+MARGIN_LEFT+MARGIN_RIGHT, (int)minToHoldAllPages.getHeight()+MARGIN_TOP+MARGIN_BOTTOM);
+			page.rectBubble = new RectI(minToHoldAllPages.getLeft()-MARGIN_LEFT,(int)minToHoldAllPages.getTop()-MARGIN_TOP, (int)minToHoldAllPages.getWidth()+MARGIN_LEFT+MARGIN_RIGHT, (int)minToHoldAllPages.getHeight()+MARGIN_TOP+MARGIN_BOTTOM);
 			page.bubbleOutlineWidth = bubbleLineWidth;
 
 			// generate leader lines
-			Rect max = page.rectBubble;
+			RectI max = page.rectBubble;
 			{
 				PointI centre = minToHoldAllPages.getCenter();
 

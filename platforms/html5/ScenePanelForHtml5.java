@@ -43,7 +43,7 @@ import com.github.a2g.core.platforms.html5.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
-import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.touch.client.Point;
@@ -198,12 +198,12 @@ IScenePanelFromScenePresenter {
 		return new Integer(ocode);
 	}
 
-	static public Rect getRectGivenSpeechAndMaxRect(String speech, Rect maxRect, Context2d ctxt) {
+	static public RectI getRectGivenSpeechAndMaxRect(String speech, RectI maxRect, Context2d ctxt) {
 		TextMetrics tm = ctxt.measureText(speech);
 		double width = tm.getWidth();
 		double startX = maxRect.getCenter().getX() - width / 2;
 
-		Rect retVal = new Rect((int) startX, maxRect.getTop(), (int) width, maxRect.getHeight());
+		RectI retVal = new RectI((int) startX, maxRect.getTop(), (int) width, maxRect.getHeight());
 		return retVal;
 	}
 
@@ -279,7 +279,7 @@ IScenePanelFromScenePresenter {
 				if (toScene.getVisibleByOtid(otid)) {
 					String atid = toScene.getAtidOfCurrentAnimationByOtid(otid);
 					int frame = toScene.getCurrentFrameByOtid(otid);
-					Rect rect = toScene.getBoundingRectByFrameAndAtid(frame, atid);
+					RectI rect = toScene.getBoundingRectByFrameAndAtid(frame, atid);
 					// System.out.println(ob.getTextualId() +
 					// ob.getDrawingOrder());
 

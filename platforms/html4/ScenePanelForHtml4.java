@@ -35,7 +35,7 @@ import com.github.a2g.core.platforms.html5.dependencies.CanvasEtcHtml5;
 import com.github.a2g.core.platforms.html5.dependencies.FontCallsHtml5;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
-import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.touch.client.Point;
@@ -150,7 +150,7 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 			super.remove(speechWidget);
 		}
 
-		Rect rectThatsScaledToFit = rectAndLeaderLine.rectBubble;
+		RectI rectThatsScaledToFit = rectAndLeaderLine.rectBubble;
 
 		speechWidget.setBorderColor(talkingColor);
 

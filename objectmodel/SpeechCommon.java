@@ -6,7 +6,7 @@ import com.github.a2g.core.interfaces.internal.IDrawCalls;
 import com.github.a2g.core.interfaces.internal.IMeasureTextWidthAndHeight;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
-import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.github.a2g.core.primitive.LinesAndMaxWidth.LineAndPos;
 
@@ -26,7 +26,7 @@ public class SpeechCommon
 
 		// red rect
 		{
-			Rect r = all.rectInputInRed;
+			RectI r = all.rectInputInRed;
 			canvas.drawSinglePixelRect(r.getLeft(), r.getTop(), r.getWidth(), r.getHeight(), INPUT_RECT_COLOR);
 		}
 		//canvas.drawSinglePixelRect(x, y, w, h, speechColor);
@@ -52,9 +52,9 @@ public class SpeechCommon
 			l.lines.addLine(40, 60,"draws this rect:");
 			l.lines.addLine(40, 75,"input rect should be " + INPUT_RECT_COLOR.toString());
 			l.lines.addLine(40, 90,"this text should be " + theColor.toString());
-			l.rectPurelyTextBoundsInYellow = new Rect (20,20,200,200);
-			l.rectBubble = new Rect (20,20,190,190);
-			l.rectInputInRed = new Rect (10,10,300,300);
+			l.rectPurelyTextBoundsInYellow = new RectI (20,20,200,200);
+			l.rectBubble = new RectI (20,20,190,190);
+			l.rectInputInRed = new RectI (10,10,300,300);
 			l.generateSampleBubbleRectFromText(measurer);
 			l.populateXAndYPointsFromBubbleRect(resolution);
 			toReturn.add(l);
@@ -64,9 +64,9 @@ public class SpeechCommon
 			l.lines.addLine(240, 45,"To be ");
 			l.lines.addLine(240, 60,"..or not..extra");
 			l.lines.addLine(240, 75,"..to be");
-			l.rectPurelyTextBoundsInYellow = new Rect (20,20,200,200);
-			l.rectBubble = new Rect (230,25,100,100);
-			l.rectInputInRed = new Rect (10,10,300,300);
+			l.rectPurelyTextBoundsInYellow = new RectI (20,20,200,200);
+			l.rectBubble = new RectI (230,25,100,100);
+			l.rectInputInRed = new RectI (10,10,300,300);
 			l.isPointingRight = true;
 			l.generateSampleBubbleRectFromText(measurer);
 			l.populateXAndYPointsFromBubbleRect(resolution);

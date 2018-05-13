@@ -19,7 +19,7 @@ package com.github.a2g.core.objectmodel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
 import com.github.a2g.core.primitive.PointI;
-import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectI;
 import com.google.gwt.event.dom.client.LoadHandler;
 
 public abstract class Image {
@@ -68,8 +68,8 @@ public abstract class Image {
 		update(position);
 	}
 
-	public Rect getBoundingRectPreScaling() {
-		return new Rect(this.constOffset.getX(), 
+	public RectI getBoundingRectPreScaling() {
+		return new RectI(this.constOffset.getX(), 
 						this.constOffset.getY(),
 						(int)(panel.getImageWidth(this)), 
 						(int)(panel.getImageHeight(this)));

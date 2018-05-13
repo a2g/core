@@ -27,7 +27,7 @@ import com.github.a2g.core.interfaces.internal.IMasterPresenterFromInventory;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.GuiConstants;
 import com.github.a2g.core.primitive.PointI;
-import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectI;
 import com.google.gwt.event.shared.EventBus;
 
 public class InventoryPresenter implements
@@ -40,11 +40,11 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 	IMasterPresenterFromInventory callback;
 	private int width;
 	private int height;
-	ArrayList<Rect> rectsForSlots;
+	ArrayList<RectI> rectsForSlots;
 	ArrayList<InventoryItem> itemsForSlots;
 	int netRightArrowClicks;
-	private Rect leftArrowRect;
-	private Rect rightArrowRect;
+	private RectI leftArrowRect;
+	private RectI rightArrowRect;
 	private int mousePosX;
 	private int mousePosY;
 	private final int WIDTH_OF_LEFT_ARROW = 20;
@@ -52,7 +52,7 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 
 	public InventoryPresenter(final IHostingPanel panel, EventBus bus,
 			IMasterPresenterFromInventory api) {
-		rectsForSlots = new ArrayList<Rect>();
+		rectsForSlots = new ArrayList<RectI>();
 		itemsForSlots = new ArrayList<InventoryItem>();
 		this.netRightArrowClicks = 0;
 		this.eventBus = bus;
@@ -157,7 +157,7 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 					itemsForSlots.set(currentSlot, item);
 					if (image != null)// null is valid in the case of unit test
 					{
-						Rect rect = rectsForSlots.get(currentSlot);
+						RectI rect = rectsForSlots.get(currentSlot);
 						image.setVisible(true,
 								new PointI(rect.getLeft(), rect.getTop()));
 					}
@@ -190,12 +190,12 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 		this.width = 2 * w + la + ra;
 		this.height = 2 * h;
 		this.rectsForSlots.clear();
-		rectsForSlots.add(new Rect(la, 0, w, h));
-		rectsForSlots.add(new Rect(la, h, w, h));
-		rectsForSlots.add(new Rect(la + w, 0, w, h));
-		rectsForSlots.add(new Rect(la + w, h, w, h));
-		leftArrowRect = new Rect(0, 0, la, h * 2);
-		rightArrowRect = new Rect(la + 2 * w, 0, ra, h * 2);
+		rectsForSlots.add(new RectI(la, 0, w, h));
+		rectsForSlots.add(new RectI(la, h, w, h));
+		rectsForSlots.add(new RectI(la + w, 0, w, h));
+		rectsForSlots.add(new RectI(la + w, h, w, h));
+		leftArrowRect = new RectI(0, 0, la, h * 2);
+		rightArrowRect = new RectI(la + 2 * w, 0, ra, h * 2);
 
 		view.setDimensionsOfPanel(width, height);
 	}

@@ -23,7 +23,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.github.a2g.core.interfaces.internal.ICommandLinePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver;
 import com.github.a2g.core.event.SetRolloverEvent;
-import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.objectmodel.SceneObject;
 import com.github.a2g.core.platforms.swing.ScenePanelForSwing;
 

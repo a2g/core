@@ -31,7 +31,7 @@ import com.github.a2g.core.interfaces.internal.IScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.touch.client.Point;
-import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.github.a2g.core.primitive.RectF;
 
@@ -231,8 +231,8 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	@Override
-	public Rect getBoundingRectByFrameAndAtid(int frame, String atid) {
-		Rect toReturn = new Rect(0, 0, 1, 1);
+	public RectI getBoundingRectByFrameAndAtid(int frame, String atid) {
+		RectI toReturn = new RectI(0, 0, 1, 1);
 		Animation a = getAnimationByAtid(atid);
 		if (a != null) {
 			ImageCollection fc = a.getFrames();

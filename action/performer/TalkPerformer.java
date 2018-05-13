@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTalkPerformer;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromTalkPerformer;
 import com.github.a2g.core.primitive.PointI;
-import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.github.a2g.core.primitive.RectF;
 
@@ -112,8 +112,8 @@ public class TalkPerformer {
 		// 3. get speech rectangle using contingencies - that's a lot of
 		// contingencies
 		RectF headRectF = scene.getHeadRectangleUsingContingencies(atid);
-		Rect headRectI = translateRect(headRectF);
-		Rect headRect = scene.getMouthLocationByAtid(atid);
+		RectI headRectI = translateRect(headRectF);
+		RectI headRect = scene.getMouthLocationByAtid(atid);
 		pages = RectAndLeaderLine.calculateLeaderLines(new PointI(scene.getSceneGuiWidth(), scene.getSceneGuiHeight()),
 				splitByNewline, headRectI, scene, headRect);
 		// SpeechCalculatorOuterForAll calc = new
@@ -206,9 +206,9 @@ public class TalkPerformer {
 		}
 	}
 
-	Rect translateRect(RectF r) {
+	RectI translateRect(RectF r) {
 
-		Rect rectInPixels = new Rect((int) (r.getLeft() * scene.getSceneGuiWidth()),
+		RectI rectInPixels = new RectI((int) (r.getLeft() * scene.getSceneGuiWidth()),
 				(int) (r.getTop() * scene.getSceneGuiHeight()), (int) (r.getWidth() * scene.getSceneGuiWidth()),
 				(int) (r.getHeight() * scene.getSceneGuiHeight()));
 		return rectInPixels;

@@ -56,7 +56,7 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.touch.client.Point;
-import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.primitive.RectAndLeaderLine;
 import com.github.a2g.core.primitive.RectF;
 import com.github.a2g.core.platforms.swing.dependencies.ImageForSwing;
@@ -390,7 +390,7 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 				// System.out.println(ob.getTextualId() + ob.getDrawingOrder());
 				int frame = toScene.getCurrentFrameByOtid(otid);
 				String atid = toScene.getAtidOfCurrentAnimationByOtid(otid);
-				Rect rect = toScene.getBoundingRectByFrameAndAtid(frame, atid);
+				RectI rect = toScene.getBoundingRectByFrameAndAtid(frame, atid);
 				int obx = (int) toScene.getXByOtid(otid);
 				int oby = (int) toScene.getYByOtid(otid);
 

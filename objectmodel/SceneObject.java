@@ -25,7 +25,7 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.touch.client.Point;
-import com.github.a2g.core.primitive.Rect;
+import com.github.a2g.core.primitive.RectI;
 /**
  * 
  * @author Admin
@@ -296,11 +296,11 @@ public class SceneObject {
 		return bmy;
 	}
 
-	public Rect getCurrentBoundingRect() {
+	public RectI getCurrentBoundingRect() {
 		if (currentImage != null) {
 			return currentImage.getBoundingRectPreScaling();
 		}
-		return new Rect(0, 0, 0, 0);
+		return new RectI(0, 0, 0, 0);
 	}
 
 	void setSpecialAnimation(WalkDirection type, String atid) {
@@ -355,7 +355,7 @@ public class SceneObject {
 	Point getBaseMiddleXY() {
 		double left = this.getX();
 		double right = this.getY();
-		Rect r = this.getCurrentBoundingRect();
+		RectI r = this.getCurrentBoundingRect();
 		double averageXPos = left + (r.getLeft() + r.getRight()) / 2.0;
 		double lowerYPos = right + r.getBottom();
 		double x = averageXPos / screenPixelWidth;
@@ -363,14 +363,14 @@ public class SceneObject {
 		return new Point(x, y);
 	}
 
-	public Rect getHeadRect() {
+	public RectI getHeadRect() {
 		//right now head rect is biased toward tall thin characters whose height ends at the tip of their heads, with spherical heads as wide as their bodies.
 		double x = this.getBaseMiddleX()*screenPixelWidth;
 		
-		Rect r = this.getCurrentBoundingRect();
+		RectI r = this.getCurrentBoundingRect();
 		double width = (r.getRight() -r.getLeft())/2;
 		HEAD_RECT_PROBLEMS.fine("HEAD RECT " + this.displayName + " "+r.getLeft() + " "+r.getTop()+" "+r.getWidth() +" "+ r.getHeight());
-		return new Rect((int)(x-width/2.0), r.getTop(), width, width);
+		return new RectI((int)(x-width/2.0), r.getTop(), width, width);
 	}
 
 	public void alignBaseMiddleOfOldFrameToFrameOfNewAnimation(String atid,
