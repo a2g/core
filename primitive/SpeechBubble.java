@@ -198,14 +198,14 @@ public class SpeechBubble
 	}
 
 
-	static public ArrayList<SpeechBubble> calculateLeaderLines(PointI resolution, String[] pages, RectI maxRectI, IMeasureTextWidthAndHeight context, RectI headRect)
+	static public ArrayList<SpeechBubble> calculateLeaderLines(PointI resolution, String[] pages, IMeasureTextWidthAndHeight context, RectI headRect)
 	{
 
 		// 1. create return value
 		ArrayList<SpeechBubble> toReturn = new ArrayList<SpeechBubble>();
 
 		// 2. set up maxWidthBeforeWrapping 
-		int maxWidthBeforeWrapping = maxRectI.getWidth()-BUFFER_LEFT-BUFFER_RIGHT;
+		int maxWidthBeforeWrapping = resolution.getX()/3;
 
 		// 3. first do one iteration to find the longest textwidth
 		double maxTextWidth = 0;
@@ -215,10 +215,8 @@ public class SpeechBubble
 			LinesAndMaxWidth lines = LinesAndMaxWidth.getArrayOfLinesSplitOnSpaceAndWidth(context, maxWidthBeforeWrapping, pages[i]);
 			SpeechBubble pageOfSpeech = new SpeechBubble();
 			pageOfSpeech.lines = lines;
-			if( lines.lines.size()>theMostLines)
-				theMostLines = lines.lines.size();
-			if(lines.maximumWidthOfOneOfOurLines>maxTextWidth)
-				maxTextWidth = lines.maximumWidthOfOneOfOurLines;
+			theMostLines = Math.max(theMostLines, lines.lines.size());
+			maxTextWidth = Math.max(maxTextWidth, lines.maximumWidthOfOneOfOurLines);
 			toReturn.add(pageOfSpeech);
 		}
 
@@ -228,12 +226,13 @@ public class SpeechBubble
 		int heightPerLine = fontHeight + lineSpacing;
 
 		// 5. calculate largest centred rect to hold all pages
-		int headRadius = headRect.getWidth()/4 + headRect.getHeight()/4;
-		PointI headCentre = headRect.getCenter();
-		RectI minToHoldAllPages = new RectI (headRect.getCenter().getX() - maxTextWidth/2, headCentre.getY()-headRadius- theMostLines*heightPerLine-BUFFER_BOTTOM, maxTextWidth, theMostLines*heightPerLine);
+		int lengthOfLeaderLine = (int)(resolution.getY()/LEADERLINE_FRACTION_DEONOMINATOR);
+		int avoidSharpPinToHead = lengthOfLeaderLine + (int)(resolution.getY()/90.0);
+		PointI headMP = headRect.getCenter();
+		RectI minToHoldAllPages = new RectI (headMP.getX() - (maxTextWidth/2), headRect.getTop()-theMostLines*heightPerLine-BUFFER_BOTTOM-avoidSharpPinToHead, maxTextWidth, theMostLines*heightPerLine);
 		if(minToHoldAllPages.getLeft()<0)
 			minToHoldAllPages = new RectI (BUFFER_LEFT, minToHoldAllPages.getTop(), minToHoldAllPages.getWidth(), minToHoldAllPages.getHeight());
-		if(minToHoldAllPages.getRight()>resolution.getX());
+		if(minToHoldAllPages.getRight()>resolution.getX())
 			minToHoldAllPages = new RectI (resolution.getX() - BUFFER_RIGHT-minToHoldAllPages.getWidth(), minToHoldAllPages.getTop(), minToHoldAllPages.getWidth(), minToHoldAllPages.getHeight());
 
 		// 6. calc x,y for all pages
@@ -248,7 +247,7 @@ public class SpeechBubble
 				line.y = (int)minToHoldAllPages.getTop()+(fontHeight+lineSpacing)*j+fontHeight; 
 			}
 
-			page.rectInputInRed = new RectI(maxRectI.getLeft(),maxRectI.getTop(),maxRectI.getWidth(), maxRectI.getHeight());
+			page.rectInputInRed = new RectI(headRect.getLeft(),headRect.getTop(),headRect.getWidth(), headRect.getHeight());
 			page.rectPurelyTextBoundsInYellow = minToHoldAllPages;
 			page.rectBubble = new RectI(minToHoldAllPages.getLeft()-MARGIN_LEFT,(int)minToHoldAllPages.getTop()-MARGIN_TOP, (int)minToHoldAllPages.getWidth()+MARGIN_LEFT+MARGIN_RIGHT, (int)minToHoldAllPages.getHeight()+MARGIN_TOP+MARGIN_BOTTOM);
 			page.bubbleOutlineWidth = bubbleLineWidth;
@@ -259,10 +258,10 @@ public class SpeechBubble
 				PointI centre = minToHoldAllPages.getCenter();
 
 				// the mouth & centre coords are both relative to top left of viewport
-				page.isVerticallyOriented = maxRectI.getHeight() > maxRectI.getWidth();
+				page.isVerticallyOriented = false;
 				page.isPointingDown = true;//headCentre.getY() > centre.getY();
-				page.isPointingRight = (headCentre.getX() > centre.getX()+2);//+(resolution.getX()/4);
-				page.isPointingLeft = (headCentre.getX() < centre.getX()-3);//-(resolution.getX()/4);;
+				page.isPointingRight = (headMP.getX() > centre.getX()+2);//+(resolution.getX()/4);
+				page.isPointingLeft = (headMP.getX() < centre.getX()-3);//-(resolution.getX()/4);;
 			}
 
 			// with the way I've set up the DOM, it seems that
@@ -274,7 +273,7 @@ public class SpeechBubble
 			// to get to the starting point of the leader line.
 			// same with max/minimumStartOfLeaderLine
 
-			page.xPos = headCentre.getX()-max.getLeft();
+			page.xPos = headMP.getX()-max.getLeft();
 			//the xPos should be where the leaderline starts so that the perpendicular
 			// edge of the leaderline points to the mouth..
 			// but if its pointing right, the straight line is a whole leaderwidth away.

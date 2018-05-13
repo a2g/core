@@ -501,7 +501,7 @@ public class ScenePresenter implements IScenePresenter,
 			// 3. if still none, then choose the first speech rect
 			if (headRectIndex == -1) 
 			{
-				headRectIndex = 0;// default ( a fullscreen one is always added)
+				return a.getSceneObject().calculateHeadRect();
 			}
 		}
 		RectF r = this.rectangles.get(headRectIndex);

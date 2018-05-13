@@ -113,9 +113,8 @@ public class TalkPerformer {
 		// contingencies
 		RectF headRectF = scene.getHeadRectangleUsingContingencies(atid);
 		RectI headRectI = translateRect(headRectF);
-		RectI headRect = scene.getMouthLocationByAtid(atid);
 		pages = SpeechBubble.calculateLeaderLines(new PointI(scene.getSceneGuiWidth(), scene.getSceneGuiHeight()),
-				splitByNewline, headRectI, scene, headRect);
+				splitByNewline, scene, headRectI);
 		// SpeechCalculatorOuterForAll calc = new
 		// SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3,
 		// canvas);
@@ -208,8 +207,10 @@ public class TalkPerformer {
 
 	RectI translateRect(RectF r) {
 
-		RectI rectInPixels = new RectI((int) (r.getLeft() * scene.getSceneGuiWidth()),
-				(int) (r.getTop() * scene.getSceneGuiHeight()), (int) (r.getWidth() * scene.getSceneGuiWidth()),
+		RectI rectInPixels = new RectI(
+				(int) (r.getLeft() * scene.getSceneGuiWidth()),
+				(int) (r.getTop() * scene.getSceneGuiHeight()), 
+				(int) (r.getWidth() * scene.getSceneGuiWidth()),
 				(int) (r.getHeight() * scene.getSceneGuiHeight()));
 		return rectInPixels;
 	}

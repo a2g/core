@@ -25,13 +25,20 @@ public class RectF {
 	private double right;
 	private double bottom;
 
-	public RectF(double x, double y, double x2, double y2) {
-		this.left = x;
-		this.top = y;
-		this.right = x2;
-		this.bottom = y2;
+	public RectF(double x, double y, double width, double height) {
+		init(x,y,width,height);
 	}
 
+	private void init(double x, double y, double width,  double height) {
+		this.left = x;
+		this.top = y;
+		this.right = x + width;
+		this.bottom = y + height;
+		if (bottom < 0) {
+			this.bottom = y + height;
+		}
+		
+	}
 	public boolean contains(double x, double y) {
 		if (x >= left && x <= right) {
 			if (y >= top && y <= bottom) {

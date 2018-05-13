@@ -24,6 +24,7 @@ import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointI;
+import com.github.a2g.core.primitive.RectF;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.RectI;
 /**
@@ -53,6 +54,7 @@ public class SceneObject {
 	private double scale;
 	private ColorEnum talkingColor;
 	private int headRectIndex;
+	
 	public SceneObject(String otid, int screenWidth, int screenHeight) {
 		this.currentImage = null;
 		this.otid = otid;
@@ -363,16 +365,16 @@ public class SceneObject {
 		return new Point(x, y);
 	}
 
-	public RectI getHeadRect() {
+	public RectF calculateHeadRect()
+	{
 		//right now head rect is biased toward tall thin characters whose height ends at the tip of their heads, with spherical heads as wide as their bodies.
-		double x = this.getBaseMiddleX()*screenPixelWidth;
+		double bmx = this.getBaseMiddleX();
 		
 		RectI r = this.getCurrentBoundingRect();
-		double width = (r.getRight() -r.getLeft())/2;
+		double width = (r.getRight() -r.getLeft())/screenPixelWidth;
 		HEAD_RECT_PROBLEMS.fine("HEAD RECT " + this.displayName + " "+r.getLeft() + " "+r.getTop()+" "+r.getWidth() +" "+ r.getHeight());
-		return new RectI((int)(x-width/2.0), r.getTop(), width, width);
+		return new RectF(bmx-width/2.0, (this.getY()+r.getTop())/screenPixelHeight, width, width);
 	}
-
 	public void alignBaseMiddleOfOldFrameToFrameOfNewAnimation(String atid,
 			int frame) {
 		Point h = getBaseMiddleXY();

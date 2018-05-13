@@ -392,8 +392,11 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		// double newWidth = rectF.getWidth()*.5;
 		// double newHeight = rectF.getWidth()*.5;
 
-		return new RectF(rectF.getLeft() + .01, rectF.getTop() + .01, rectF.getLeft() + .01 + rectF.getWidth() - .02,
-				rectF.getTop() + .01 + rectF.getHeight() - .01);
+		// this rect is minorly inside the input rectF.
+		return new RectF(rectF.getLeft() + .01, 
+				rectF.getTop() + .01, 
+				rectF.getWidth() - .02,
+				 rectF.getHeight() - .02);
 	}
 
 	@Override

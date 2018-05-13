@@ -402,15 +402,6 @@ ITitleCardPresenterFromActions
 		return master.getScenePresenter().measureTextWidthAndHeight(text);
 	}
 
-
-	@Override
-	public RectI getMouthLocationByAtid(String atid) {
-		Animation a = master.getScenePresenter().getAnimationByAtid(atid);
-		SceneObject o = a.getObject();
-		return o.getHeadRect();
-	}
-
-
 	@Override
 	public RectF getHeadRectangleUsingContingencies(String atid) {
 		return master.getScenePresenter().getHeadRectangleUsingContingencies(atid);

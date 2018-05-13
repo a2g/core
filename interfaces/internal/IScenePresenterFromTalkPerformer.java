@@ -7,7 +7,6 @@ import com.github.a2g.core.interfaces.methods.action.IGetAtidOfSceneDialogUs;
 import com.github.a2g.core.interfaces.methods.action.IGetAtidOfSceneTalker;
 import com.github.a2g.core.interfaces.methods.action.IGetCurrentFrameByOtid;
 import com.github.a2g.core.interfaces.methods.action.IGetDurationByAtid;
-import com.github.a2g.core.interfaces.methods.action.IGetMouthLocationByAtid;
 import com.github.a2g.core.interfaces.methods.action.IGetNumberOfFramesByAtid;
 import com.github.a2g.core.interfaces.methods.action.IGetOtidByAtid;
 import com.github.a2g.core.interfaces.methods.action.IGetOtidByCode;
@@ -34,8 +33,7 @@ extends ISetStateOfPopup
 , IGetAtidOfCurrentAnimationByOtid
 , IGetCurrentFrameByOtid
 , IGetOtidByCode
-, IMeasureTextWidthAndHeight
-, IGetMouthLocationByAtid
+, IMeasureTextWidthAndHeight 
 , IGetSceneGuiWidth
 , IGetSceneGuiHeight
 , IGetHeadRectangleUsingContingencies
