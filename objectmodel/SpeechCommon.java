@@ -7,7 +7,7 @@ import com.github.a2g.core.interfaces.internal.IMeasureTextWidthAndHeight;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectI;
-import com.github.a2g.core.primitive.RectAndLeaderLine;
+import com.github.a2g.core.primitive.SpeechBubble;
 import com.github.a2g.core.primitive.LinesAndMaxWidth.LineAndPos;
 
 public class SpeechCommon 
@@ -15,7 +15,7 @@ public class SpeechCommon
 /*
  *  @Remarks: mainDraw must never change the font, since the data it processes has been calculated based on an existing font type and size
  */
-	public static void mainDraw(IDrawCalls canvas, RectAndLeaderLine all, ColorEnum speechColor ) 
+	public static void mainDraw(IDrawCalls canvas, SpeechBubble all, ColorEnum speechColor ) 
 	{
 		int x = all.rectBubble.getLeft();
 		int y = all.rectBubble.getTop();
@@ -43,11 +43,11 @@ public class SpeechCommon
 	
 	public final static ColorEnum INPUT_RECT_COLOR = ColorEnum.Red;
 
-	public static ArrayList<RectAndLeaderLine> getDebugLeaderLines(ColorEnum theColor, PointI resolution, IMeasureTextWidthAndHeight measurer) {
-		ArrayList<RectAndLeaderLine> toReturn = new ArrayList<RectAndLeaderLine>();
+	public static ArrayList<SpeechBubble> getDebugLeaderLines(ColorEnum theColor, PointI resolution, IMeasureTextWidthAndHeight measurer) {
+		ArrayList<SpeechBubble> toReturn = new ArrayList<SpeechBubble>();
 
 		{
-			RectAndLeaderLine l = new RectAndLeaderLine(); 
+			SpeechBubble l = new SpeechBubble(); 
 			l.lines.addLine(40, 45,"When CommonDraw ");
 			l.lines.addLine(40, 60,"draws this rect:");
 			l.lines.addLine(40, 75,"input rect should be " + INPUT_RECT_COLOR.toString());
@@ -60,7 +60,7 @@ public class SpeechCommon
 			toReturn.add(l);
 		}
 		{
-			RectAndLeaderLine l = new RectAndLeaderLine(); 
+			SpeechBubble l = new SpeechBubble(); 
 			l.lines.addLine(240, 45,"To be ");
 			l.lines.addLine(240, 60,"..or not..extra");
 			l.lines.addLine(240, 75,"..to be");

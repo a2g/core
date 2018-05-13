@@ -57,7 +57,7 @@ import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.RectI;
-import com.github.a2g.core.primitive.RectAndLeaderLine;
+import com.github.a2g.core.primitive.SpeechBubble;
 import com.github.a2g.core.primitive.RectF;
 import com.github.a2g.core.platforms.swing.dependencies.ImageForSwing;
 import com.github.a2g.core.platforms.swing.dependencies.CanvasEtcSwing;
@@ -484,7 +484,7 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, ColorEnum speechColor, RectAndLeaderLine rectAndLeaderLine,
+	public void setStateOfPopup(boolean isVisible, ColorEnum speechColor, SpeechBubble rectAndLeaderLine,
 			TalkPerformer sayAction) {
 		this.isSpeechVisible = isVisible;
 

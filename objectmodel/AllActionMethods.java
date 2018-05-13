@@ -11,7 +11,7 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectI;
-import com.github.a2g.core.primitive.RectAndLeaderLine;
+import com.github.a2g.core.primitive.SpeechBubble;
 import com.github.a2g.core.primitive.RectF;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
 import com.google.gwt.touch.client.Point;
@@ -325,7 +325,7 @@ ITitleCardPresenterFromActions
 	}
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, RectAndLeaderLine rectAndLeaderLine, TalkPerformer sayAction) {
+	public void setStateOfPopup(boolean isVisible, SpeechBubble rectAndLeaderLine, TalkPerformer sayAction) {
 		master.getScenePresenter().setStateOfPopup(isVisible, rectAndLeaderLine, sayAction);
 	}
 

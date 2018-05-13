@@ -7,13 +7,13 @@ import com.github.a2g.core.interfaces.internal.IMeasureTextWidthAndHeight;
 import com.github.a2g.core.primitive.LinesAndMaxWidth.LineAndPos;
 import com.google.gwt.touch.client.Point;
 
-public class RectAndLeaderLine 
+public class SpeechBubble 
 {
-	public RectAndLeaderLine(int x, int y, String string) {
+	public SpeechBubble(int x, int y, String string) {
 		init();
 		lines.addLine(string, 1.0,x,y);
 	}
-	public RectAndLeaderLine() {
+	public SpeechBubble() {
 		init();
 	}
 
@@ -198,11 +198,11 @@ public class RectAndLeaderLine
 	}
 
 
-	static public ArrayList<RectAndLeaderLine> calculateLeaderLines(PointI resolution, String[] pages, RectI maxRectI, IMeasureTextWidthAndHeight context, RectI headRect)
+	static public ArrayList<SpeechBubble> calculateLeaderLines(PointI resolution, String[] pages, RectI maxRectI, IMeasureTextWidthAndHeight context, RectI headRect)
 	{
 
 		// 1. create return value
-		ArrayList<RectAndLeaderLine> toReturn = new ArrayList<RectAndLeaderLine>();
+		ArrayList<SpeechBubble> toReturn = new ArrayList<SpeechBubble>();
 
 		// 2. set up maxWidthBeforeWrapping 
 		int maxWidthBeforeWrapping = maxRectI.getWidth()-BUFFER_LEFT-BUFFER_RIGHT;
@@ -213,12 +213,12 @@ public class RectAndLeaderLine
 		for(int i=0;i<pages.length;i++)
 		{
 			LinesAndMaxWidth lines = LinesAndMaxWidth.getArrayOfLinesSplitOnSpaceAndWidth(context, maxWidthBeforeWrapping, pages[i]);
-			RectAndLeaderLine pageOfSpeech = new RectAndLeaderLine();
+			SpeechBubble pageOfSpeech = new SpeechBubble();
 			pageOfSpeech.lines = lines;
 			if( lines.lines.size()>theMostLines)
 				theMostLines = lines.lines.size();
-			if(lines.maxWidth>maxTextWidth)
-				maxTextWidth = lines.maxWidth;
+			if(lines.maximumWidthOfOneOfOurLines>maxTextWidth)
+				maxTextWidth = lines.maximumWidthOfOneOfOurLines;
 			toReturn.add(pageOfSpeech);
 		}
 
@@ -239,7 +239,7 @@ public class RectAndLeaderLine
 		// 6. calc x,y for all pages
 		for(int i=0;i<toReturn.size();i++)
 		{
-			RectAndLeaderLine page = toReturn.get(i);
+			SpeechBubble page = toReturn.get(i);
 			for (int j = 0 ; j < page.lines.lines.size(); ++j) 
 			{
 				// fill in x and y for all the pages.

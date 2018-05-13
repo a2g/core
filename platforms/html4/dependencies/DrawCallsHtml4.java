@@ -2,7 +2,7 @@ package com.github.a2g.core.platforms.html4.dependencies;
 
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.RectI;
-import com.github.a2g.core.primitive.RectAndLeaderLine;
+import com.github.a2g.core.primitive.SpeechBubble;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ParagraphElement;
@@ -96,7 +96,7 @@ public class DrawCallsHtml4 extends VerticalPanel
 
 
 
-	public void setLeaderLine(RectAndLeaderLine c) {
+	public void setLeaderLine(SpeechBubble c) {
 
 
 		//warning: if these 'border's are not set first, the visual result is weird

@@ -32,7 +32,7 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalcul
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.RectI;
-import com.github.a2g.core.primitive.RectAndLeaderLine;
+import com.github.a2g.core.primitive.SpeechBubble;
 import com.github.a2g.core.primitive.RectF;
 
 public class ScenePresenter implements IScenePresenter,
@@ -268,7 +268,7 @@ public class ScenePresenter implements IScenePresenter,
 		return getObjectByOCode(ocode).getOtid();
 	}
 
-	public void setStateOfPopup(boolean isVisible, RectAndLeaderLine rectAndLeaderLine, TalkPerformer sayAction) 
+	public void setStateOfPopup(boolean isVisible, SpeechBubble rectAndLeaderLine, TalkPerformer sayAction) 
 	{
 		ColorEnum talkingColor = rectAndLeaderLine!=null? this.getTalkingColorUsingContingencies(rectAndLeaderLine.atid) : null;
 		view.setStateOfPopup(isVisible, talkingColor, rectAndLeaderLine, sayAction);

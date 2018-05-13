@@ -6,11 +6,11 @@ import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTalkPerformer
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromTalkPerformer;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectI;
-import com.github.a2g.core.primitive.RectAndLeaderLine;
+import com.github.a2g.core.primitive.SpeechBubble;
 import com.github.a2g.core.primitive.RectF;
 
 public class TalkPerformer {
-	private ArrayList<RectAndLeaderLine> pages;
+	private ArrayList<SpeechBubble> pages;
 
 	private double totalDurationInSeconds;
 	private IScenePresenterFromTalkPerformer scene;
@@ -52,7 +52,7 @@ public class TalkPerformer {
 		this.atid = "";
 		this.otid = "";
 		this.fullSpeech = fullSpeech;
-		pages = new ArrayList<RectAndLeaderLine>();
+		pages = new ArrayList<SpeechBubble>();
 
 		this.totalDurationInSeconds = 0;
 	}
@@ -114,7 +114,7 @@ public class TalkPerformer {
 		RectF headRectF = scene.getHeadRectangleUsingContingencies(atid);
 		RectI headRectI = translateRect(headRectF);
 		RectI headRect = scene.getMouthLocationByAtid(atid);
-		pages = RectAndLeaderLine.calculateLeaderLines(new PointI(scene.getSceneGuiWidth(), scene.getSceneGuiHeight()),
+		pages = SpeechBubble.calculateLeaderLines(new PointI(scene.getSceneGuiWidth(), scene.getSceneGuiHeight()),
 				splitByNewline, headRectI, scene, headRect);
 		// SpeechCalculatorOuterForAll calc = new
 		// SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3,
@@ -123,7 +123,7 @@ public class TalkPerformer {
 		// set ceilings (for easy calcluation)
 		double rollingStartingTimeForLine = 0;
 		for (int i = 0; i < pages.size(); i++) {
-			RectAndLeaderLine page = pages.get(i);
+			SpeechBubble page = pages.get(i);
 			page.startingTime = rollingStartingTimeForLine / totalDurationInSeconds;
 			for (int j = 0; j < pages.get(i).lines.lines.size(); j++) {
 				page.lines.lines.get(j).startingTime = rollingStartingTimeForLine / totalDurationInSeconds;
@@ -182,7 +182,7 @@ public class TalkPerformer {
 
 			// update text in bubble
 			for (int i = pages.size() - 1; i >= 0; i--) {
-				RectAndLeaderLine page = pages.get(i);
+				SpeechBubble page = pages.get(i);
 				if (progress > page.startingTime) {
 					scene.setStateOfPopup(true, page, this);
 					break;

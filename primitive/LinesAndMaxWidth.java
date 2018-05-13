@@ -30,13 +30,13 @@ public class LinesAndMaxWidth
 	public LinesAndMaxWidth()
 	{
 		this.lines = new ArrayList<LineAndPos>();
-		this.maxWidth = 0;
+		this.maximumWidthOfOneOfOurLines = 0;
 	}
 	
 	public void addLine(String line, double width)
 	{
 		lines.add(new LineAndPos(line, width));
-		this.maxWidth = Math.max(this.maxWidth,  width);
+		this.maximumWidthOfOneOfOurLines = Math.max(this.maximumWidthOfOneOfOurLines,  width);
 	}
 	public LineAndPos addLine(int x, int y, String string)
 	{
@@ -51,17 +51,13 @@ public class LinesAndMaxWidth
 		toAdd.x = x;
 		toAdd.y = y;
 		lines.add(toAdd);
-		this.maxWidth = Math.max(this.maxWidth,  width);
+		this.maximumWidthOfOneOfOurLines = Math.max(this.maximumWidthOfOneOfOurLines,  width);
 	}
 	public ArrayList<LineAndPos> lines;
-	public double maxWidth;
+	public double maximumWidthOfOneOfOurLines;
 	 
 	static public LinesAndMaxWidth  getArrayOfLinesSplitOnSpaceAndWidth(IMeasureTextWidthAndHeight ctx, double maxWidthBeforeWrapping, String speech) 
 	{
-		// We give a little "padding"
-		// This should probably be an input param
-		// but for the sake of simplicity we will keep it
-		// this way
 		maxWidthBeforeWrapping = maxWidthBeforeWrapping - 10;
 		// We setup the text font to the context (if not already)
 	 
@@ -81,8 +77,8 @@ public class LinesAndMaxWidth
 				lastWidth = testWidth;
 			} else {
 				
-				if(lastWidth > toReturn.maxWidth )
-					toReturn.maxWidth = lastWidth;
+				if(lastWidth > toReturn.maximumWidthOfOneOfOurLines )
+					toReturn.maximumWidthOfOneOfOurLines = lastWidth;
 				toReturn.addLine(lastLine, lastWidth);
 				lastLine = words[i];
 			}

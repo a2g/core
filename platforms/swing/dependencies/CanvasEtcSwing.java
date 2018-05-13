@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import com.github.a2g.core.objectmodel.SpeechCommon;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
-import com.github.a2g.core.primitive.RectAndLeaderLine;
+import com.github.a2g.core.primitive.SpeechBubble;
 
 public class CanvasEtcSwing  
 {
@@ -23,7 +23,7 @@ public class CanvasEtcSwing
 		g2d = img.createGraphics();
 	}	 
 
-	public  BufferedImage draw(RectAndLeaderLine rectEtc, ColorEnum speechColor, PointI resolution) 
+	public  BufferedImage draw(SpeechBubble rectEtc, ColorEnum speechColor, PointI resolution) 
 	{
 		// draw resolution rect
 		g2d.setBackground(new Color(0, 0, 0, 0));

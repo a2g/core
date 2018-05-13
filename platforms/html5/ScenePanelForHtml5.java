@@ -44,7 +44,7 @@ import com.github.a2g.core.platforms.html5.mouse.SceneMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectI;
-import com.github.a2g.core.primitive.RectAndLeaderLine;
+import com.github.a2g.core.primitive.SpeechBubble;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.touch.client.Point;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -71,7 +71,7 @@ IScenePanelFromScenePresenter {
 	private LinkedList<Image> listOfAllVisibleImages;
 	private boolean speechVisible;
 	private ColorEnum speechColor;
-	private RectAndLeaderLine speechRectAndLeaderLine;
+	private SpeechBubble speechRectAndLeaderLine;
 	private CanvasEtcHtml5 canvasEtcHtml5;
 
 	public ScenePanelForHtml5(EventBus bus, IScenePresenterFromScenePanel toScene,
@@ -299,7 +299,7 @@ IScenePanelFromScenePresenter {
 	}
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, RectAndLeaderLine c,
+	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, SpeechBubble c,
 			TalkPerformer sayAction) {
 
 		this.speechVisible = isVisible;

@@ -18,7 +18,7 @@ package com.github.a2g.core.interfaces.internal;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.RectAndLeaderLine;
+import com.github.a2g.core.primitive.SpeechBubble;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.EventBus;
 
@@ -39,7 +39,7 @@ extends IMeasureTextWidthAndHeight
 
 	void setCameraOffset(int x, int y);
 
-	void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, RectAndLeaderLine rectAndLeaderLine, TalkPerformer sayAction);
+	void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, SpeechBubble rectAndLeaderLine, TalkPerformer sayAction);
 
 	void onSceneEntry(String string); 
 

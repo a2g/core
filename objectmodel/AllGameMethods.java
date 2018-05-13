@@ -18,7 +18,7 @@ import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.G
 import com.github.a2g.core.interfaces.internal.ISingleBundle;
 import com.github.a2g.core.interfaces.IExtendsGameSceneLoader;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.RectAndLeaderLine;
+import com.github.a2g.core.primitive.SpeechBubble;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.RectF;
 
@@ -512,7 +512,7 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, RectAndLeaderLine rectAndLeaderLine,
+	public void setStateOfPopup(boolean isVisible, SpeechBubble rectAndLeaderLine,
 			TalkPerformer sayAction) {
 		master.getScenePresenter().setStateOfPopup( isVisible, rectAndLeaderLine, sayAction);
 

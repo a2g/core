@@ -36,7 +36,7 @@ import com.github.a2g.core.platforms.html5.dependencies.FontCallsHtml5;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectI;
-import com.github.a2g.core.primitive.RectAndLeaderLine;
+import com.github.a2g.core.primitive.SpeechBubble;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.touch.client.Point;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -144,7 +144,7 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 	}
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, RectAndLeaderLine rectAndLeaderLine,
+	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, SpeechBubble rectAndLeaderLine,
 			TalkPerformer sayAction) {
 		if (!isVisible) {
 			super.remove(speechWidget);

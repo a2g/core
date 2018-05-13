@@ -2,7 +2,7 @@ package com.github.a2g.core.platforms.html5.dependencies;
 
 import com.github.a2g.core.objectmodel.SpeechCommon;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.RectAndLeaderLine;
+import com.github.a2g.core.primitive.SpeechBubble;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.ImageElement;
@@ -110,7 +110,7 @@ public class CanvasEtcHtml5
 		return canvasA.getCoordinateSpaceHeight();
 	}
 
-	public void drawSpeech(RectAndLeaderLine rectAndLeaderLine, ColorEnum speechColor) 
+	public void drawSpeech(SpeechBubble rectAndLeaderLine, ColorEnum speechColor) 
 	{
 		SpeechCommon.mainDraw(new DrawCallsHtml5(contextB), rectAndLeaderLine, speechColor);
 	}
