@@ -23,7 +23,6 @@ import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePre
 import com.github.a2g.core.interfaces.internal.IDialogTreePresenter;
 import com.github.a2g.core.interfaces.internal.IHostingPanel;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTree;
-import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.GuiConstants;
 import com.google.gwt.event.shared.EventBus;
 

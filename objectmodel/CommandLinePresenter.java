@@ -27,7 +27,6 @@ import com.github.a2g.core.interfaces.internal.ICommandLinePanelFromCommandLineP
 import com.github.a2g.core.interfaces.internal.ICommandLinePresenter;
 import com.github.a2g.core.interfaces.internal.IHostingPanel;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromCommandLine;
-import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.GuiConstants;
 import com.github.a2g.core.primitive.LogNames;
 import com.google.gwt.event.shared.EventBus;

@@ -22,7 +22,6 @@ import com.github.a2g.core.interfaces.internal.IHostingPanel;
 import com.github.a2g.core.interfaces.internal.ILoaderPanelFromLoaderPresenter;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoader;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoaderMouse;
-import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.GuiConstants;
 import com.google.gwt.event.shared.EventBus;
 

@@ -24,7 +24,6 @@ import com.github.a2g.core.interfaces.internal.IInventoryPanelFromInventoryPrese
 import com.github.a2g.core.interfaces.internal.IInventoryPresenter;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromInventory;
-import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.GuiConstants;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectI;

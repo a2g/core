@@ -76,7 +76,7 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 	}
 
 	public void addObstacleRect(double x, double y, double right, double bottom) {
-		obstacles.add(new RectF(x, y, right, bottom));
+		obstacles.add(new RectF(x, y, right-x, bottom-y));
 	}
 
 	public void clearBoundaries() {
