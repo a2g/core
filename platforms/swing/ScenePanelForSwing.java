@@ -388,8 +388,8 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 			String otid = toScene.getOtidByIndex(i);
 			if (toScene.getVisibleByOtid(otid)) {
 				// System.out.println(ob.getTextualId() + ob.getDrawingOrder());
-				int frame = toScene.getCurrentFrameByOtid(otid);
 				String atid = toScene.getAtidOfCurrentAnimationByOtid(otid);
+				int frame = toScene.getCurrentFrameByOtid(otid);
 				RectI rect = toScene.getBoundingRectByFrameAndAtid(frame, atid);
 				int obx = (int) toScene.getXByOtid(otid);
 				int oby = (int) toScene.getYByOtid(otid);

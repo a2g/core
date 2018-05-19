@@ -274,17 +274,17 @@ IScenePanelFromScenePresenter {
 		// System.out.println("----------------");
 		if (toScene != null) {
 			int count = toScene.getSceneObjectCount();
-			for (int i = 0; i < count; i++) {
+			for (int i = count - 1; i >= 0; i--) {
 				String otid = toScene.getOtidByIndex(i);
-				if (toScene.getVisibleByOtid(otid)) {
+				if (toScene.getVisibleByOtid(otid)) 	{
 					String atid = toScene.getAtidOfCurrentAnimationByOtid(otid);
 					int frame = toScene.getCurrentFrameByOtid(otid);
 					RectI rect = toScene.getBoundingRectByFrameAndAtid(frame, atid);
-					// System.out.println(ob.getTextualId() +
-					// ob.getDrawingOrder());
+					int obx = (int) toScene.getXByOtid(otid);
+					int oby = (int) toScene.getYByOtid(otid);
 
-					int adjX = x - (int) toScene.getXByOtid(otid) + cameraOffsetX;
-					int adjY = y - (int) toScene.getYByOtid(otid) + cameraOffsetY;
+					int adjX = x - obx + cameraOffsetX;
+					int adjY = y - oby + cameraOffsetY;
 
 					if (rect.contains(adjX, adjY)) {
 						return otid;

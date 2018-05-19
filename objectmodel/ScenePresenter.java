@@ -236,6 +236,8 @@ public class ScenePresenter implements IScenePresenter,
 		Animation a = getAnimationByAtid(atid);
 		if (a != null) {
 			ImageCollection fc = a.getFrames();
+			if(frame>=fc.getCount())
+				frame=fc.getCount()-1;// just like in SceneObject::updateObjectToCorrectImage
 			Image i = fc.getByIndex(frame);
 			if (i != null)
 				toReturn = i.getBoundingRectPreScaling();
