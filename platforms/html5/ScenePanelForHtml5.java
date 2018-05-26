@@ -208,6 +208,7 @@ IScenePanelFromScenePresenter {
 	}
 
 	public void paint() {
+		//canvasEtcHtml5.getContextB().clearRect(0,0, this.getWidth(), this.getHeight());
 		Iterator<Image> iter = listOfAllVisibleImages.iterator();
 		while (iter.hasNext()) {
 			Image image = iter.next();
@@ -220,7 +221,6 @@ IScenePanelFromScenePresenter {
 				ImageElement imageElement = (ImageElement) (((ImageForHtml4) image).getNativeImage().getElement()
 						.cast());
 				canvasEtcHtml5.translateAndDraw(x,y,imageElement);
-			
 			}
 		}
 
@@ -231,34 +231,6 @@ IScenePanelFromScenePresenter {
 		// update the front canvas
 		canvasEtcHtml5.copyBackBufferToFront();
 
-		/*
-		 * 
-		 * 
-		 * for (var j = 0, ly; j w) { if(j==0) { //ctx2d.translate((x - w) ,ly +
-		 * h); ctx2d.save(); ctx2d.translate(x,y + h);
-		 * ctx2d.rotate(-0.5*Math.PI);
-		 * 
-		 * }
-		 * 
-		 * // We continue to centralize the lines 320,90,35,100" ly = (w -
-		 * (parseInt(fh) +parseInt(spl)))/2 + ((parseInt(fh) +parseInt(spl)) *
-		 * (j)) ; lx = (h - ctx2d.measureText(lines[j]).width)/2;
-		 * 
-		 * // DEBUG console.log("ctx2d.fillText('"+ lines[j] +"', "+ lx +", " +
-		 * ly + ")"); ctx2d.textBaseline = "middle";
-		 * 
-		 * ctx2d.fillStyle = "white";
-		 * 
-		 * 
-		 * ctx2d.fillText(lines[j], lx,ly);
-		 * 
-		 * } else { lx = x+w/2-ctx2d.measureText(lines[j]).width/2;
-		 * 
-		 * console.log("ctx2d.fillText('"+ lines[j] +"', "+ lx +", " + ly +
-		 * ")"); ctx2d.textBaseline = "middle"; ctx2d.fillText(lines[j], lx,
-		 * ly); ly+=parseInt(fh)+parseInt(spl); }
-		 * 
-		 */
 	}
 
 	public int getWidth() {
