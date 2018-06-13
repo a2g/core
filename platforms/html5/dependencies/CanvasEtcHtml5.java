@@ -81,11 +81,19 @@ public class CanvasEtcHtml5
 		canvasA.addClickHandler(handler);
 	}
 
-	public void translateAndDraw(int x, int y, ImageElement imageElement) 
+	public void drawAtXY(int x, int y, ImageElement imageElement) 
 	{
 		contextB.save();
 		contextB.translate(x, y);
 		contextB.drawImage(imageElement, 0, 0);
+		contextB.restore();
+	}
+	
+
+	public void drawAtXYScaled(ImageElement imageElement, int sx, int sy, int sw, int sh, int dx, int dy, int dw, int dh) 
+	{
+		contextB.save();
+		contextB.drawImage(imageElement, sx, sy, sw, sh, dx, dy, dw, dh);
 		contextB.restore();
 	}
 	public Element getElement()
@@ -127,5 +135,9 @@ public class CanvasEtcHtml5
 	public Context2d getContextB() {// used for test harness, otherwise not used.
 		return contextB;
 	}
+
+
+
+
 
 }

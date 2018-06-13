@@ -68,6 +68,11 @@ public class SpeechBubble
 	static final int BUFFER_BOTTOM = MARGIN_BOTTOM + bubbleLineWidth;
 
 	static final int LEADERLINE_FRACTION_DEONOMINATOR = 8;
+	
+	public String toString() { 
+	    return ""+this.startingTime + this.lines.toString();
+	} 
+	
 	private void setPoint(int index, PointI point)
 	{
 		xPoints[index] = point.getX();
@@ -198,7 +203,7 @@ public class SpeechBubble
 	}
 
 
-	static public ArrayList<SpeechBubble> calculateLeaderLines(PointI resolution, String[] pages, IMeasureTextWidthAndHeight context, RectI headRect)
+	static public ArrayList<SpeechBubble> calculateWordWrappedPages(PointI resolution, String[] pages, IMeasureTextWidthAndHeight context, RectI headRect)
 	{
 
 		// 1. create return value

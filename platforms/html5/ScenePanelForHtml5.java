@@ -214,13 +214,55 @@ IScenePanelFromScenePresenter {
 			Image image = iter.next();
 			if (listOfVisibleHashCodes.contains(hash(image))) {
 				PointI p = mapOfPointsByImage.get(hash(image));
-				int x = p.getX();
-				int y = p.getY();
-
-				
+				int leftTopPlusX = p.getX();
+				int leftTopPlusY = p.getY();
 				ImageElement imageElement = (ImageElement) (((ImageForHtml4) image).getNativeImage().getElement()
 						.cast());
-				canvasEtcHtml5.translateAndDraw(x,y,imageElement);
+				if(image.getScale()==1)
+				{
+					canvasEtcHtml5.drawAtXY(leftTopPlusX, leftTopPlusY, imageElement);
+				}
+				else
+				{
+				
+					// img - the specified image to be drawn. This method does
+					// nothing if img is null.
+					// sx1 - the x coordinate of the first corner of the source
+					// rectangle.
+					// sy1 - the y coordinate of the first corner of the source
+					// rectangle.
+					// sx2 - the x coordinate of the second corner of the source
+					// rectangle.
+					// sy2 - the y coordinate of the second corner of the source
+					// rectangle.
+
+					// dx1 - the x coordinate of the first corner of the destination
+					// rectangle.
+					// dy1 - the y coordinate of the first corner of the destination
+					// rectangle.
+					// dx2 - the x coordinate of the second corner of the
+					// destination rectangle.
+					// dy2 - the y coordinate of the second corner of the
+					// destination rectangle.
+
+					// source coords: these are correct. don't change.
+					int sx = 0;
+					int sy = 0;
+					int sw = getImageWidth(image);
+					int sh = getImageHeight(image);
+
+					// these are also correct, the real question
+					// lies in what is leftTopPlusY
+					// these are set with SetThingPosition
+					int dx = (int) (leftTopPlusX) - cameraOffsetX;
+					int dy = (int) (leftTopPlusY) - cameraOffsetY;
+					int dw = (int) (sw * image.getScale());
+					int dh = (int) (sh * image.getScale());
+					
+					
+					canvasEtcHtml5.drawAtXYScaled(imageElement, sx,sy,sw,sh,dx,dy,dw,dh);
+				}
+				
 			}
 		}
 
@@ -277,6 +319,7 @@ IScenePanelFromScenePresenter {
 		this.speechVisible = isVisible;
 		this.speechColor = talkingColor;
 		this.speechRectAndLeaderLine = c;
+		this.triggerPaint();
 
 	}
 

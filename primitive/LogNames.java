@@ -27,7 +27,8 @@ public enum LogNames
 	LOADNEXT(true),// = "LOADNEXT";
 	ADD_SCENEOBJECT(true),
 	MERGEWITHSCENE(false), 
-	HEAD_RECT_PROBLEMS(true);
+	HEAD_RECT_PROBLEMS(true),
+    SET_STATE_OF_POPUP(true);
 
 	public final boolean isOn;
 	LogNames(boolean isOn)

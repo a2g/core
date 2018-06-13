@@ -33,6 +33,16 @@ public class LinesAndMaxWidth
 		this.maximumWidthOfOneOfOurLines = 0;
 	}
 	
+	public String toString() { 
+		switch(this.lines.size())
+		{
+		case 0: return "<blank speech>";
+		case 1: return this.lines.get(0).line;
+		case 2: return this.lines.get(0).line + this.lines.get(1).line;
+		}
+		return"<too many lines>"; 
+	}
+	
 	public void addLine(String line, double width)
 	{
 		lines.add(new LineAndPos(line, width));

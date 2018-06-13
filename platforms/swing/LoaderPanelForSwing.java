@@ -21,6 +21,7 @@ import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -57,7 +58,7 @@ implements ILoaderPanelFromLoaderPresenter
 
 			{
 				progress = new Label();
-
+				progress.setFont(new Font("Arial", 0, 20));
 				this.add(progress);
 			}
 			{

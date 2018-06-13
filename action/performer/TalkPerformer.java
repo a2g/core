@@ -113,7 +113,7 @@ public class TalkPerformer {
 		// contingencies
 		RectF headRectF = scene.getHeadRectangleUsingContingencies(atid);
 		RectI headRectI = translateRect(headRectF);
-		pages = SpeechBubble.calculateLeaderLines(new PointI(scene.getSceneGuiWidth(), scene.getSceneGuiHeight()),
+		pages = SpeechBubble.calculateWordWrappedPages(new PointI(scene.getSceneGuiWidth(), scene.getSceneGuiHeight()),
 				splitByNewline, scene, headRectI);
 		// SpeechCalculatorOuterForAll calc = new
 		// SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3,
@@ -124,7 +124,7 @@ public class TalkPerformer {
 		for (int i = 0; i < pages.size(); i++) {
 			SpeechBubble page = pages.get(i);
 			page.startingTime = rollingStartingTimeForLine / totalDurationInSeconds;
-			for (int j = 0; j < pages.get(i).lines.lines.size(); j++) {
+			for (int j = 0; j < page.lines.lines.size(); j++) {
 				page.lines.lines.get(j).startingTime = rollingStartingTimeForLine / totalDurationInSeconds;
 				String line = page.lines.lines.get(j).toString();
 				rollingStartingTimeForLine += getSecondsForLine(line);

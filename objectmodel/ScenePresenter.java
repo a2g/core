@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Logger;
 
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
@@ -30,6 +31,7 @@ import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.LogNames;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.primitive.SpeechBubble;
@@ -38,6 +40,8 @@ import com.github.a2g.core.primitive.RectF;
 public class ScenePresenter implements IScenePresenter,
 		IScenePresenterFromBoundaryCalculator {
 	public static final short DEFAULT_SCENE_OBJECT = -1;
+	private static final Logger SET_STATE_OF_POPUP = Logger.getLogger(LogNames.SET_STATE_OF_POPUP.toString());
+
 	private int width;
 	private int height;
 	private Scene scene;
@@ -270,10 +274,12 @@ public class ScenePresenter implements IScenePresenter,
 		return getObjectByOCode(ocode).getOtid();
 	}
 
-	public void setStateOfPopup(boolean isVisible, SpeechBubble rectAndLeaderLine, TalkPerformer sayAction) 
+	public void setStateOfPopup(boolean isVisible, SpeechBubble speechBubble, TalkPerformer sayAction) 
 	{
-		ColorEnum talkingColor = rectAndLeaderLine!=null? this.getTalkingColorUsingContingencies(rectAndLeaderLine.atid) : null;
-		view.setStateOfPopup(isVisible, talkingColor, rectAndLeaderLine, sayAction);
+		SET_STATE_OF_POPUP.fine("SETSTATEOFPOPUP " + (isVisible? speechBubble.toString() : "NOT VISIBLE"));
+		ColorEnum talkingColor = speechBubble!=null? this.getTalkingColorUsingContingencies(speechBubble.atid) : null;
+		
+		view.setStateOfPopup(isVisible, talkingColor, speechBubble, sayAction);
 	}
 
 	public String getSceneTalkerAtid() {
