@@ -145,9 +145,6 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 
 		ImageForSwing imageAndPos = new ImageForSwing(img, objectTextualId, this, new PointI(x, y));
 
-		// to fire image loading done.
-		// lh.onLoad(null);
-
 		return imageAndPos;
 	}
 

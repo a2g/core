@@ -70,7 +70,7 @@ implements ImagePanelAPI
 
 	private Map<Integer,PointI> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
-	private LinkedList<Image> listOfAllVisibleImages;
+	private LinkedList<Image> listOfAllAvailableImages;
 
 	ImageForSwing imgLeft;
 	ImageForSwing imgRight;
@@ -79,7 +79,7 @@ implements ImagePanelAPI
 	{
 		this.mapOfPointsByImage = new TreeMap<Integer, PointI>();
 		this.listOfVisibleHashCodes = new LinkedList<Integer>();
-		this.listOfAllVisibleImages = new LinkedList<Image>();
+		this.listOfAllAvailableImages = new LinkedList<Image>();
 		this.width = 200;
 		this.height = 200;
 		this.setDoubleBuffered(true);
@@ -145,14 +145,14 @@ implements ImagePanelAPI
 
 	@Override
 	public void insert(Image image, int x, int y, int before) {
-		listOfAllVisibleImages.add(before,image);
+		listOfAllAvailableImages.add(before,image);
 		mapOfPointsByImage.put(((ImageForSwing)image).getNativeImage().hashCode(), new PointI(x,y));
 		triggerPaint();
 	}
 
 	@Override
 	public void remove(Image image) {
-		listOfAllVisibleImages.remove(((ImageForSwing)image).getNativeImage());
+		listOfAllAvailableImages.remove(((ImageForSwing)image).getNativeImage());
 		mapOfPointsByImage.remove(((ImageForSwing)image).getNativeImage().hashCode());
 		setImageVisible(image, false);
 		triggerPaint();
@@ -160,14 +160,14 @@ implements ImagePanelAPI
 
 	@Override
 	public void add(Image image, int x, int y) {
-		listOfAllVisibleImages.add(image);
+		listOfAllAvailableImages.add(image);
 		mapOfPointsByImage.put(((ImageForSwing)image).getNativeImage().hashCode(), new PointI(x,y));
 		triggerPaint();
 	}
 
 	@Override
 	public void clear() {
-		listOfAllVisibleImages.clear();
+		listOfAllAvailableImages.clear();
 		mapOfPointsByImage.clear();
 		listOfVisibleHashCodes.clear();
 	}
@@ -185,7 +185,7 @@ implements ImagePanelAPI
 		g.clearRect(0, 0, r.width,r.height);
 		g.setColor(new Color(0,0,0));
 		g.fillRect(0, 0, width, height);
-		Iterator<Image> iter = listOfAllVisibleImages.iterator();
+		Iterator<Image> iter = listOfAllAvailableImages.iterator();
 		while(iter.hasNext())
 		{
 			Image image = iter.next();
@@ -233,10 +233,6 @@ implements ImagePanelAPI
 		java.awt.Image img = ((PackagedImageForSwing)imageResource).unpack();
 
 		ImageForSwing imageAndPos = new ImageForSwing(img, objectTextualId, this, new PointI(0,0));
-
-		// to fire image loading done.
-		// only gwt is asynch, we are swing which synchronous
-		//lh.onLoad(null);
 
 		return imageAndPos;
 	}

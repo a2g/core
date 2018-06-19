@@ -33,6 +33,7 @@ import com.github.a2g.core.action.DialogTalkAction;
 import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
+import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.primitive.STARTING_ODD_INVENTORY_CODE;
 import com.github.a2g.core.action.DialogChainableAction;
 import com.github.a2g.core.event.PropertyChangeEvent;
@@ -177,6 +178,13 @@ public class MasterPresenter
 						itid, icode, 0, 0);
 
 				imageAndPos.addImageToPanel(0);
+
+				// on first run, set the size of the inventory to that of the first image
+				if(this.getInventoryPresenter().getInventory().items().getCount()==0)
+				{
+					RectI rect = imageAndPos.getBoundingRectPreScaling();
+					this.setInventoryImageSize(rect.getWidth(), rect.getHeight());
+				}
 
 				boolean initiallyVisible = false;
 				boolean result = getInventoryPresenter().addInventory(itid, icode, initiallyVisible, imageAndPos);
