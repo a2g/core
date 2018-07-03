@@ -23,7 +23,7 @@ public class CanvasEtcSwing
 		g2d = img.createGraphics();
 	}	 
 
-	public  BufferedImage draw(SpeechBubble rectEtc, ColorEnum speechColor, PointI resolution) 
+	public  BufferedImage draw(SpeechBubble rectEtc, ColorEnum speechColor, PointI resolution, boolean isDiagnosticsDisplayed) 
 	{
 		// draw resolution rect
 		g2d.setBackground(new Color(0, 0, 0, 0));
@@ -32,7 +32,7 @@ public class CanvasEtcSwing
 		g2d.drawRect(0, 0, resolution.getX(), resolution.getY());
 
 		DrawCallsSwing adapter = new DrawCallsSwing(g2d);
-		SpeechCommon.mainDraw(adapter, rectEtc, speechColor);
+		SpeechCommon.mainDraw(adapter, rectEtc, speechColor, isDiagnosticsDisplayed);
 
 		return img;
 	}

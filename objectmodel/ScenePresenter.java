@@ -448,7 +448,7 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	@Override
-	public Iterator<RectF> getHeadRectagles() {
+	public Iterator<RectF> getHeadRectangles() {
 		return rectangles.iterator();
 	}
 

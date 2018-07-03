@@ -36,6 +36,6 @@ IGetYByOtid
 	List<RectF> getObstacles();
 	List<PointFWithNeighbours> getLastNetworkOfConcaveVertices();
 	List<Point> getLastPath();
-	Iterator<RectF> getHeadRectagles();
+	Iterator<RectF> getHeadRectangles();
 	List<Point> getHelperPoints();
 }

@@ -105,10 +105,8 @@ public class CanvasEtcHtml5
 	public double getOffsetWidth(){ return this.canvasA.getOffsetWidth(); }
 
 	public void copyBackBufferToFront() {
-		
 		contextA.drawImage(contextB.getCanvas(), 0, 0);
 	}
- 
 
 	public int getCoordinateSpaceWidth() {
 		return canvasA.getCoordinateSpaceWidth();
@@ -118,19 +116,14 @@ public class CanvasEtcHtml5
 		return canvasA.getCoordinateSpaceHeight();
 	}
 
-	public void drawSpeech(SpeechBubble rectAndLeaderLine, ColorEnum speechColor) 
+	public void drawSpeech(SpeechBubble rectAndLeaderLine, ColorEnum speechColor, boolean isDiagnosticsDisplayed) 
 	{
-		SpeechCommon.mainDraw(new DrawCallsHtml5(contextB), rectAndLeaderLine, speechColor);
+		SpeechCommon.mainDraw(new DrawCallsHtml5(contextB), rectAndLeaderLine, speechColor, isDiagnosticsDisplayed);
 	}
 	
 	public void setFontNameAndHeightUsedInHtml4(String fontName, int fontHeight) {
-		 
 		contextB.setFont(""+fontHeight+"px \""+fontName+"\"");
-		
-		
 	}
-
-
 
 	public Context2d getContextB() {// used for test harness, otherwise not used.
 		return contextB;

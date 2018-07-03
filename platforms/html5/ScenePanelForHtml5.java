@@ -262,12 +262,12 @@ IScenePanelFromScenePresenter {
 					
 					canvasEtcHtml5.drawAtXYScaled(imageElement, sx,sy,sw,sh,dx,dy,dw,dh);
 				}
-				
 			}
 		}
 
 		if (speechVisible) {
-		    canvasEtcHtml5.drawSpeech(speechRectAndLeaderLine, speechColor);
+			boolean isDiagnosticsDisplayed = false;
+		    canvasEtcHtml5.drawSpeech(speechRectAndLeaderLine, speechColor, isDiagnosticsDisplayed);
 		}
 
 		// update the front canvas

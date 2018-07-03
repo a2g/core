@@ -287,7 +287,7 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 		List<Point> helpers = toScene.getHelperPoints();
 		Point centre = toScene.getBoundaryPointsCentre();
 		List<Point> path = toScene.getLastPath();
-		Iterator<RectF> bubbles = toScene.getHeadRectagles();
+		Iterator<RectF> bubbles = toScene.getHeadRectangles();
 
 		if (isRenderDiagnostics && points.size() > 0) {
 			g.setColor(new Color(255, 0, 0));
@@ -447,7 +447,7 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 		isRenderDiagnostics = isDisplayed;
 	}
 
-	public boolean getIsDiagnosticsDisplay() {
+	public boolean getIsDiagnosticsDisplayed() {
 		return isRenderDiagnostics;
 	}
 
@@ -491,7 +491,7 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 		if (rectAndLeaderLine.rectBubble.getWidth() <= 0)
 			return;
 
-		this.speechCanvas.draw(rectAndLeaderLine, speechColor, new PointI(width, height));
+		this.speechCanvas.draw(rectAndLeaderLine, speechColor, new PointI(width, height), this.getIsDiagnosticsDisplayed());
 	}
 
 	@Override
