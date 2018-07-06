@@ -345,6 +345,7 @@ public class MasterPresenter
 		// since instantiateScene..ToIt does some asynchronous stuff,
 		// I thought maybe I could do it, then cancel the timers.
 		// but I've put it off til I need the microseconds.
+		masterPanel.setActiveState(GuiStateEnum.Loading);
 		cancelOnEveryFrameTimer();
 		this.dialogActionRunner.cancel();
 		this.onEveryFrameActionRunner.cancel();
@@ -474,8 +475,14 @@ public class MasterPresenter
 	
 
 	public void setSceneAsActiveAndKickStartLoading(IGameScene scene) {
+
 		this.sceneHandlers2 = scene;
 		loaderPresenter.getLoaders().setSceneAndInventoryResolution();
+		// set gui to blank
+		masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
+		titleCardPresenter.clear();
+				
+	
 
 		loaderPresenter.getLoaders().calculateImagesToLoadAndOmitInventoryIfSame();
 
@@ -491,8 +498,6 @@ public class MasterPresenter
 
 		scenePresenter.reset();
 
-		// set gui to blank
-		masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
 		scenePresenter.clearEverythingExceptView(); // something like caching
 													// doesn't work if this is
 													// on.

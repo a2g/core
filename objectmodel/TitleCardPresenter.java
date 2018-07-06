@@ -45,6 +45,7 @@ public class TitleCardPresenter implements ITitleCardPresenter {
 
 	public void clear() {
 		text = "";
+		view.setText("");
 	}
 
 	public void setScenePixelSize(int width, int height) {
