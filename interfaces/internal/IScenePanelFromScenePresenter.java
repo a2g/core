@@ -43,4 +43,7 @@ extends IMeasureTextWidthAndHeight
 
 	void onSceneEntry(String string); 
 
+	void incrementFont();
+	
+	void decrementFont();
 }

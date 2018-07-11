@@ -73,10 +73,14 @@ IScenePanelFromScenePresenter {
 	private ColorEnum speechColor;
 	private SpeechBubble speechRectAndLeaderLine;
 	private CanvasEtcHtml5 canvasEtcHtml5;
+	private String fontName;
+	private int fontHeight;
 
 	public ScenePanelForHtml5(EventBus bus, IScenePresenterFromScenePanel toScene,
 			ICommandLinePresenterFromSceneMouseOver toCommandLine) {
 		// this.bus = bus;
+		this.fontName = "arial";
+		this.fontHeight = 10;
 		this.getElement().setId("cwAbsolutePanel");
 		this.addStyleName("absolutePanel");
 		this.cameraOffsetX = 0;
@@ -345,5 +349,20 @@ IScenePanelFromScenePresenter {
 		FontCallsHtml5 fm = new FontCallsHtml5(this.canvasEtcHtml5.getContextB());
 		fm.setFontNameAndHeight(fontName, fontHeight);
 	}
+	
+	@Override
+	public void incrementFont()
+	{
+		fontHeight++;
+		setFontNameAndHeight(fontName, fontHeight);
+	}
+	
+	@Override
+	public void decrementFont()
+	{
+		fontHeight--;
+		setFontNameAndHeight(fontName, fontHeight);
+	}
+	
 
 }

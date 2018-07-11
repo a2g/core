@@ -87,13 +87,16 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 	private LinkedList<Image> listOfAllVisibleImages;
 
 	private boolean isSpeechVisible;
-
 	CanvasEtcSwing speechCanvas;
+	int fontHeight;
+	String fontName;
 
 	public ScenePanelForSwing(EventBus bus, IScenePresenterFromScenePanel toScene,
 			ICommandLinePresenterFromSceneMouseOver toCommandLine) {
 		isRenderDiagnostics = false;
 
+		this.fontHeight = 10;
+		this.fontName = "arial"
 		this.toScene = toScene;
 		this.toCommandLine = toCommandLine;
 		this.mapOfPointsByImage = new TreeMap<Integer, PointI>();
@@ -105,7 +108,7 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 		this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 		this.setDoubleBuffered(true);
 		this.speechCanvas = new CanvasEtcSwing();
-
+	
 
 		cameraOffsetX = 0;
 		cameraOffsetY = 0;
@@ -504,6 +507,20 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 	public Point measureTextWidthAndHeight(String text) {
 		FontCallsSwing fm = new FontCallsSwing(speechCanvas.getGraphics());
 		return fm.measureTextWidthAndHeight(text);
+	}
+	
+	@Override
+	public void incrementFont()
+	{
+		fontHeight++;
+		setFontNameAndHeight(fontName, fontHeight);
+	}
+	
+	@Override
+	public void decrementFont()
+	{
+		fontHeight--;
+		setFontNameAndHeight(fontName, fontHeight);
 	}
 
 }

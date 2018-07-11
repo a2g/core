@@ -46,6 +46,8 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 	int cameraOffsetY;
 	SceneObjectTouchMoveHandler theTouchMoveHandler;
 	DrawCallsHtml4 speechWidget;
+	String fontName;
+	int fontHeight;
 
 	public ScenePanelForHtml4(EventBus bus, IScenePresenterFromScenePanel api) {
 		this.getElement().setId("cwAbsolutePanel");
@@ -54,6 +56,8 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 		this.cameraOffsetY = 0;
 		this.theTouchMoveHandler = new SceneObjectTouchMoveHandler(api);
 		this.speechWidget = new DrawCallsHtml4();
+		this.fontName = "arial";
+		this.fontHeight = 10;
 	}
 
 	@Override
@@ -185,16 +189,27 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 	public Point measureTextWidthAndHeight(String text) {
 		CanvasEtcHtml5 contextHtml5 = new CanvasEtcHtml5("");
 		contextHtml5.setScenePixelSize(10, 10, this);
-		contextHtml5.setFontNameAndHeightUsedInHtml4("arial",10);
+		contextHtml5.setFontNameAndHeightUsedInHtml4(fontName,fontHeight);
 		FontCallsHtml5 fm = new FontCallsHtml5(contextHtml5.getContextB());
 		return fm.measureTextWidthAndHeight(text);
 	}
 
 	@Override
 	public void setFontNameAndHeight(String name, int height) {
-	// do nothing. 
+	 
 		
 	}
+
+	@Override
+	public void incrementFont()
+	{
+		fontHeight++;
+	}
 	
+	@Override
+	public void decrementFont()
+	{
+		fontHeight--;
+	}
 
 }

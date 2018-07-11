@@ -1040,6 +1040,13 @@ public class MasterPresenter
 	{
 		loaderPresenter.getLoaders().queueSingleBundle(loader, this);
 	}
-	
 
+	public void incrementFont() {
+		scenePresenter.getView().incrementFont();
+	}
+	
+	public void decrementFont() {
+		scenePresenter.getView().decrementFont();
+		
+	}
 }
