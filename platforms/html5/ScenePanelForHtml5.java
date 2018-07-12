@@ -341,27 +341,30 @@ IScenePanelFromScenePresenter {
 	@Override
 	public Point measureTextWidthAndHeight(String text) {
 		FontCallsHtml5 fm = new FontCallsHtml5(this.canvasEtcHtml5.getContextB());
+		fm.setFontNameAndHeight(fontName,fontHeight);
 		return fm.measureTextWidthAndHeight(text);
 	}
-
+/*
 	@Override
 	public void setFontNameAndHeight(String fontName, int fontHeight) {
 		FontCallsHtml5 fm = new FontCallsHtml5(this.canvasEtcHtml5.getContextB());
 		fm.setFontNameAndHeight(fontName, fontHeight);
-	}
+	}*/
 	
 	@Override
 	public void incrementFont()
 	{
 		fontHeight++;
-		setFontNameAndHeight(fontName, fontHeight);
+		FontCallsHtml5 fm = new FontCallsHtml5(this.canvasEtcHtml5.getContextB());
+		fm.setFontNameAndHeight(fontName, fontHeight);
 	}
 	
 	@Override
 	public void decrementFont()
 	{
 		fontHeight--;
-		setFontNameAndHeight(fontName, fontHeight);
+		FontCallsHtml5 fm = new FontCallsHtml5(this.canvasEtcHtml5.getContextB());
+		fm.setFontNameAndHeight(fontName, fontHeight);
 	}
 	
 

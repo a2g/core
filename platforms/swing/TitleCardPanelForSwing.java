@@ -41,7 +41,7 @@ extends JPanel implements ITitleCardPanelFromTitleCardPresenter
 		this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 		{
 			panel = new Button();
-			panel.setFont(new Font("Times New Roman",0,20));
+			panel.setFont(new Font("Arial",0,20));
 			panel.setFocusable(false);
 			panel.setBackground(new Color(back.r, back.g, back.b));
 			panel.setLabel(NOT_SET);

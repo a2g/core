@@ -24,7 +24,6 @@ import com.google.gwt.event.shared.EventBus;
 
 public interface IScenePanelFromScenePresenter 
 extends IMeasureTextWidthAndHeight
-, ISetFontNameAndHeight
 {
 	void clear();
 

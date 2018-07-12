@@ -193,12 +193,7 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 		FontCallsHtml5 fm = new FontCallsHtml5(contextHtml5.getContextB());
 		return fm.measureTextWidthAndHeight(text);
 	}
-
-	@Override
-	public void setFontNameAndHeight(String name, int height) {
-	 
-		
-	}
+ 
 
 	@Override
 	public void incrementFont()
