@@ -1043,10 +1043,11 @@ public class MasterPresenter
 
 	public void incrementFont() {
 		scenePresenter.getView().incrementFont();
+		verbsPresenter.getView().incrementFontSize();
 	}
 	
 	public void decrementFont() {
 		scenePresenter.getView().decrementFont();
-		
+		verbsPresenter.getView().decrementFontSize();
 	}
 }

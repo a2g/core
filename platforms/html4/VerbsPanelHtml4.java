@@ -23,6 +23,7 @@ import com.github.a2g.core.objectmodel.Verbs;
 import com.github.a2g.core.platforms.html4.mouse.VerbMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.VerbMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
@@ -31,17 +32,40 @@ implements IVerbsPanelFromVerbsPresenter
 {
 	ColorEnum rolloverColor;
 	final IVerbsPresenterFromVerbsPanel mouseToPresenter;
-
+	private int fontSize;
+	private Verbs verbs;
 	public VerbsPanelHtml4(IVerbsPresenterFromVerbsPanel mouseToPresenter,
 			ColorEnum fore, ColorEnum back) {
+		this.fontSize = 12;
 		this.mouseToPresenter = mouseToPresenter;
 		getElement().getStyle().setProperty("color", fore.toString());
 		getElement().getStyle().setProperty("backgroundColor", back.toString());
+		this.verbs = verbs;
 
 	}
 
 	@Override
 	public void setVerbs(Verbs verbs) {
+		this.verbs = verbs;
+		update();
+	}
+	
+	@Override
+	public void incrementFontSize()
+	{
+		fontSize++;
+		update();
+	}
+	
+	@Override
+	public void decrementFontSize()
+	{
+		fontSize--;
+		update();
+	}
+	
+	@Override
+	public void update() {
 		int rows = verbs.getNumberOfRows();
 		int columns = verbs.getNumberOfColumns();
 		this.resize(rows, columns);
@@ -56,6 +80,7 @@ implements IVerbsPanelFromVerbsPresenter
 			String displayText = verb.getdisplayText();
 			int vcode = verb.getVCode();
 			Label widget = new Label(vtid);
+			widget.getElement().getStyle().setFontSize(fontSize, Unit.PX);
 
 			this.setWidget(row, column, widget);
 			widget.addMouseMoveHandler(new VerbMouseOverHandler(
@@ -64,12 +89,8 @@ implements IVerbsPanelFromVerbsPresenter
 					displayText, vtid, vcode));
 		}
 	}
-
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
+	
+	
 
 	@Override
 	public void setWidth(int i) {

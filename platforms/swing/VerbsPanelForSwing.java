@@ -20,6 +20,7 @@ package com.github.a2g.core.platforms.swing;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Label;
 
@@ -44,6 +45,8 @@ extends JPanel implements IVerbsPanelFromVerbsPresenter
 	IVerbsPresenterFromVerbsPanel mouseToPresenter;
 	private int preferredWith;
 	private int preferredHeight;
+	int fontHeight;
+	String fontName;
 	public VerbsPanelForSwing(IVerbsPresenterFromVerbsPanel mouseToPresenter, ColorEnum fore, ColorEnum back)
 	{
 		this.mouseToPresenter = mouseToPresenter;
@@ -51,7 +54,8 @@ extends JPanel implements IVerbsPanelFromVerbsPresenter
 		this.preferredHeight = 80;
 		this.setForeground(new Color(fore.r, fore.g, fore.b));
 		this.setBackground(new Color(back.r, back.g, back.b));
-		
+		fontHeight = 12;
+		fontName = "arial";
 	}
 
 	@Override
@@ -95,6 +99,7 @@ extends JPanel implements IVerbsPanelFromVerbsPresenter
 				String vtid = v.getVtid();
 				Label label = new Label(vtid);
 				String displayText = v.getdisplayText();
+				label.setFont(new Font("arial",0, fontHeight));
 
 
 				label.addMouseListener
@@ -116,5 +121,20 @@ extends JPanel implements IVerbsPanelFromVerbsPresenter
 		this.preferredWith = i;
 		this.preferredHeight = 80;
 	}
+
+	@Override
+	public void incrementFontSize()
+	{
+		fontHeight++;
+		update();
+	}
+	
+	@Override
+	public void decrementFontSize()
+	{
+		fontHeight--;
+		update();
+	}
+	
 
 }

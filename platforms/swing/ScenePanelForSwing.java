@@ -95,8 +95,8 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 			ICommandLinePresenterFromSceneMouseOver toCommandLine) {
 		isRenderDiagnostics = false;
 
-		this.fontHeight = 10;
-		this.fontName = "arial"
+		this.fontHeight = 16;
+		this.fontName = "arial";
 		this.toScene = toScene;
 		this.toCommandLine = toCommandLine;
 		this.mapOfPointsByImage = new TreeMap<Integer, PointI>();
@@ -497,16 +497,17 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 		this.speechCanvas.draw(rectAndLeaderLine, speechColor, new PointI(width, height), this.getIsDiagnosticsDisplayed());
 	}
 
-	@Override
-	public void setFontNameAndHeight(String name, int height) {
-		FontCallsSwing fm = new FontCallsSwing(speechCanvas.getGraphics());
-		fm.setFontNameAndHeight(name, height);
-	}
 
 	@Override
 	public Point measureTextWidthAndHeight(String text) {
 		FontCallsSwing fm = new FontCallsSwing(speechCanvas.getGraphics());
 		return fm.measureTextWidthAndHeight(text);
+	}
+	
+ 
+	public void setFontNameAndHeight(String name, int height) {
+		FontCallsSwing fm = new FontCallsSwing(speechCanvas.getGraphics());
+		fm.setFontNameAndHeight(name, height);
 	}
 	
 	@Override

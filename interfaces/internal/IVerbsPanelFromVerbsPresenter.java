@@ -25,4 +25,7 @@ public interface IVerbsPanelFromVerbsPresenter {
 	void update();
 
 	void setWidth(int i);
+
+	void incrementFontSize();
+	void decrementFontSize();
 }
