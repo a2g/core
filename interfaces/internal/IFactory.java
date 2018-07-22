@@ -12,8 +12,6 @@ public interface IFactory {
 
 	IScenePanelFromScenePresenter createScenePanel(IScenePresenterFromScenePanel scenePres);
 
-	ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(ColorEnum fore,
-			ColorEnum back);
 
 	IVerbsPanelFromVerbsPresenter createVerbsPanel(
 			IVerbsPresenterFromVerbsPanel api, ColorEnum fore, ColorEnum back);

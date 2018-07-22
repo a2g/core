@@ -44,15 +44,12 @@ implements IMasterPanelFromMasterPresenter
 	HostingPanelForSwing hostForTitleCardF;
 	GuiStateEnum GuiStateEnum;
 
-	enum SceneStackEnum
-	{
-		LOADING_WIDGET, SCENE_WIDGET, TITLECARD_WIDGET;
-	}
+	static final String LOADING_WIDGET = "LOADING_WIDGET";
+	static final String SCENE_WIDGET = "SCENE_WIDGET";
+	static final String TITLECARD_WIDGET = "TITLECARD_WIDGET";
+	static final String DIALOGTREE_WIDGET = "TITLECARD_WIDGET";
+	static final String COMMANDLINEVERBSINVENTORY_WIDGET = "COMMANDLINEVERBSINVENTORY_WIDGET";
 
-	enum DialogTreeStackEnum
-	{
-	 DIALOGTREE_WIDGET, COMMANDLINEVERBSINVENTORY_WIDGET;
-	}
 	CardLayout sceneCardLayout;
 	CardLayout dialogTreeCardLayout;
 	JPanel panelForSceneStack;
@@ -100,8 +97,8 @@ implements IMasterPanelFromMasterPresenter
 			//dialogTreeCardLayout.setVgap(0);
 
 			panelForDialogTreeStack.setLayout(dialogTreeCardLayout);
-			panelForDialogTreeStack.add(hostForDialogTreeF, DialogTreeStackEnum.DIALOGTREE_WIDGET.toString());
-			panelForDialogTreeStack.add(commandLineAndVerbsAndInventoryF, DialogTreeStackEnum.COMMANDLINEVERBSINVENTORY_WIDGET.toString());
+			panelForDialogTreeStack.add(hostForDialogTreeF, MasterPanelForSwing.DIALOGTREE_WIDGET);
+			panelForDialogTreeStack.add(commandLineAndVerbsAndInventoryF, MasterPanelForSwing.COMMANDLINEVERBSINVENTORY_WIDGET);
 
 			{
 				// layout the command line and the panel below it - vertically.
@@ -129,9 +126,9 @@ implements IMasterPanelFromMasterPresenter
 			//sceneCardLayout.setVgap(0);
 
 			panelForSceneStack.setLayout(sceneCardLayout);
-			panelForSceneStack.add(hostForSceneF, SceneStackEnum.SCENE_WIDGET.toString());
-			panelForSceneStack.add(hostForLoadingF, SceneStackEnum.LOADING_WIDGET.toString());
-			panelForSceneStack.add(hostForTitleCardF, SceneStackEnum.TITLECARD_WIDGET.toString());
+			panelForSceneStack.add(hostForSceneF, SCENE_WIDGET);
+			panelForSceneStack.add(hostForLoadingF, LOADING_WIDGET);
+			panelForSceneStack.add(hostForTitleCardF, TITLECARD_WIDGET);
 		}
 
 		// layout the scene at the top, and the rest at te bottom.
@@ -188,20 +185,18 @@ implements IMasterPanelFromMasterPresenter
 		switch(state)
 		{
 		case DialogTree:
-			/*
 			this.hostForCommandLineF.setVisible(false);
 			this.hostForDialogTreeF.setVisible(true);
 			this.hostForInventoryF.setVisible(false);
 			this.hostForLoadingF.setVisible(false);
 			this.hostForSceneF.setVisible(true);
 			this.hostForTitleCardF.setVisible(false);
-			this.hostForVerbsF.setVisible(false);*/
-			sceneCardLayout.show(panelForSceneStack, SceneStackEnum.SCENE_WIDGET.toString());
-			dialogTreeCardLayout.show(panelForDialogTreeStack, DialogTreeStackEnum.DIALOGTREE_WIDGET.toString());
+			this.hostForVerbsF.setVisible(false);
+			sceneCardLayout.show(panelForSceneStack, MasterPanelForSwing.SCENE_WIDGET);
+			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForSwing.DIALOGTREE_WIDGET);
 			break;
 		case OnEnterScene:
 		case CutScene:
-			/*
 			this.hostForCommandLineF.setVisible(false);
 			this.hostForDialogTreeF.setVisible(false);
 			this.hostForInventoryF.setVisible(true);
@@ -209,45 +204,43 @@ implements IMasterPanelFromMasterPresenter
 			this.hostForSceneF.setVisible(true);
 			this.hostForTitleCardF.setVisible(false);
 			this.hostForVerbsF.setVisible(false);
-			*/
-			sceneCardLayout.show(panelForSceneStack, SceneStackEnum.SCENE_WIDGET.toString());
-			 
+			sceneCardLayout.show(panelForSceneStack, MasterPanelForSwing.SCENE_WIDGET);
+			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForSwing.LOADING_WIDGET);
 			break;
-		case ActiveScene:/*
+		case ActiveScene:
 			this.hostForCommandLineF.setVisible(true);
 			this.hostForDialogTreeF.setVisible(false);
 			this.hostForInventoryF.setVisible(true);
 			this.hostForLoadingF.setVisible(false);
 			this.hostForSceneF.setVisible(true);
 			this.hostForTitleCardF.setVisible(false);
-			this.hostForVerbsF.setVisible(true);*/
-			sceneCardLayout.show(panelForSceneStack, SceneStackEnum.SCENE_WIDGET.toString());
-			dialogTreeCardLayout.show(panelForDialogTreeStack, DialogTreeStackEnum.COMMANDLINEVERBSINVENTORY_WIDGET.toString());
+			this.hostForVerbsF.setVisible(true);
+			sceneCardLayout.show(panelForSceneStack, MasterPanelForSwing.SCENE_WIDGET);
+			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForSwing.COMMANDLINEVERBSINVENTORY_WIDGET);
 			break;
-		case Loading:/*
+		case Loading:
 			this.hostForCommandLineF.setVisible(false);
 			this.hostForDialogTreeF.setVisible(false);
 			this.hostForInventoryF.setVisible(false);
 			this.hostForLoadingF.setVisible(true);
 			this.hostForSceneF.setVisible(false);
 			this.hostForTitleCardF.setVisible(false);
-			this.hostForVerbsF.setVisible(false);*/
-			sceneCardLayout.show(panelForSceneStack, SceneStackEnum.LOADING_WIDGET.toString());
+			this.hostForVerbsF.setVisible(false);
+			sceneCardLayout.show(panelForSceneStack, MasterPanelForSwing.LOADING_WIDGET);
 			break;
 		case TitleCardOverOnEnterScene:
 		case TitleCardOverActiveScene:
 		case TitleCardOverCutScene:
 		case TitleCardOverDialogTree:
 		case TitleCardOverLoading:
-			/*
 			this.hostForCommandLineF.setVisible(false);
 			this.hostForDialogTreeF.setVisible(false);
 			this.hostForInventoryF.setVisible(false);
 			this.hostForLoadingF.setVisible(false);
 			this.hostForSceneF.setVisible(false);
 			this.hostForTitleCardF.setVisible(true);
-			this.hostForVerbsF.setVisible(false);*/
-			sceneCardLayout.show(panelForSceneStack, SceneStackEnum.TITLECARD_WIDGET.toString());
+			this.hostForVerbsF.setVisible(false);
+			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForSwing.COMMANDLINEVERBSINVENTORY_WIDGET);
 		}
 	}
 

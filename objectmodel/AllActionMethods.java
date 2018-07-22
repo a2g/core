@@ -443,7 +443,7 @@ ITitleCardPresenterFromActions
 	
 	@Override
 	public double getPopupDisplayDuration() {
-		return master.getTitleCardPresenter().getPopupDisplayDuration();
+		return master.getScenePresenter().getPopupDisplayDuration();
 	}
 
 

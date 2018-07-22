@@ -520,7 +520,7 @@ public class AllGameMethods
 
 	@Override
 	public void setTitleCard(String titlecard) {
-		master.getTitleCardPresenter().setText(titlecard);
+		master.getScenePresenter().setTitleCard(titlecard);
 	}
 
 	@Override

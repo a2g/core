@@ -125,12 +125,7 @@ public class FactoryForHtml5 implements IFactory {
 	public ITimer createTimer(IMasterPresenterFromTimer cbs) {
 		return new TimerForHtml4(cbs);
 	}
-	
-	@Override
-	public ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(
-			ColorEnum fore, ColorEnum back) {
-		return new TitleCardPanelForHtml4(fore, back);
-	}
+ 
 
 	@Override
 	public IVerbsPanelFromVerbsPresenter createVerbsPanel(

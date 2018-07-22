@@ -122,11 +122,7 @@ implements IFactory {
 	public ITimer createTimer(IMasterPresenterFromTimer cbs) {
 		return new TimerForHtml4(cbs);
 	}
-	@Override
-	public ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(
-			ColorEnum foreground, ColorEnum background) {
-		return new TitleCardPanelForHtml4(foreground, background);
-	}
+ 
 
 	@Override
 	public IVerbsPanelFromVerbsPresenter createVerbsPanel(

@@ -50,7 +50,6 @@ import com.github.a2g.core.platforms.swing.ScenePanelForSwing;
 import com.github.a2g.core.platforms.swing.SoundForSwing;
 import com.github.a2g.core.platforms.swing.AnimationForSwing;
 import com.github.a2g.core.platforms.swing.TimerForSwing;
-import com.github.a2g.core.platforms.swing.TitleCardPanelForSwing;
 import com.github.a2g.core.platforms.swing.VerbsPanelForSwing;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
@@ -118,12 +117,7 @@ public class FactoryForSwing implements IFactory {
 	public ITimer createTimer(IMasterPresenterFromTimer cbs) {
 		return new TimerForSwing(cbs);
 	}
-	
-	@Override
-	public ITitleCardPanelFromTitleCardPresenter createTitleCardPanel(
-			ColorEnum fore, ColorEnum back) {
-		return new TitleCardPanelForSwing(fore, back);
-	}
+ 
 
 	@Override
 	public IVerbsPanelFromVerbsPresenter createVerbsPanel(

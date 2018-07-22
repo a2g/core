@@ -86,9 +86,7 @@ public class MasterPresenter
 	private VerbsPresenter verbsPresenter;
 	private ScenePresenter scenePresenter;
 	private DialogTreePresenter dialogTreePresenter;
-	private LoaderPresenter loaderPresenter;
-	private TitleCardPresenter titleCardPresenter;
-
+	private LoaderPresenter loaderPresenter; 
 	private IGameSceneLoader sceneHandlers;
 	private IGameScene sceneHandlers2;
 
@@ -143,8 +141,7 @@ public class MasterPresenter
 		this.scenePresenter = new ScenePresenter(masterPanel.getHostForScene(), this, factory);
 		this.verbsPresenter = new VerbsPresenter(masterPanel.getHostForVerbs(), bus, this);
 		this.loaderPresenter = new LoaderPresenter(masterPanel.getHostForLoading(), bus, this, host, factory);
-		this.titleCardPresenter = new TitleCardPresenter(masterPanel.getHostForTitleCard(), bus, this, factory);
-
+	 
 		this.masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
 	}
 
@@ -345,7 +342,6 @@ public class MasterPresenter
 		// since instantiateScene..ToIt does some asynchronous stuff,
 		// I thought maybe I could do it, then cancel the timers.
 		// but I've put it off til I need the microseconds.
-		masterPanel.setActiveState(GuiStateEnum.Loading);
 		cancelOnEveryFrameTimer();
 		this.dialogActionRunner.cancel();
 		this.onEveryFrameActionRunner.cancel();
@@ -475,14 +471,8 @@ public class MasterPresenter
 	
 
 	public void setSceneAsActiveAndKickStartLoading(IGameScene scene) {
-
 		this.sceneHandlers2 = scene;
 		loaderPresenter.getLoaders().setSceneAndInventoryResolution();
-		// set gui to blank
-		masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
-		titleCardPresenter.clear();
-				
-	
 
 		loaderPresenter.getLoaders().calculateImagesToLoadAndOmitInventoryIfSame();
 
@@ -498,6 +488,8 @@ public class MasterPresenter
 
 		scenePresenter.reset();
 
+		// set gui to blank
+		masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
 		scenePresenter.clearEverythingExceptView(); // something like caching
 													// doesn't work if this is
 													// on.
@@ -516,7 +508,6 @@ public class MasterPresenter
 	@Override
 	public void setScenePixelSize(int width, int height) {
 		this.scenePresenter.setScenePixelSize(width, height);
-		this.titleCardPresenter.setScenePixelSize(width, height);
 		this.loaderPresenter.setScenePixelSize(width, height);
 		this.dialogTreePresenter.setScenePixelSize(width, height >> 1);
 		this.verbsPresenter.setWidthOfScene(width);
@@ -648,7 +639,7 @@ public class MasterPresenter
 	public void displayTitleCard(String text) {
 		boolean isEntering = text.length() > 0;
 		if (isEntering) {
-			titleCardPresenter.setText(text);
+			scenePresenter.setTitleCard(text);
 		}
 		IMasterPanelFromMasterPresenter.GuiStateEnum state = masterPanel.getActiveState();
 		state = isEntering ? getStateIfEntering(state) : getStateIfExiting(state);
@@ -965,10 +956,7 @@ public class MasterPresenter
 	DialogTreePresenter getDialogTreePresenter() {
 		return dialogTreePresenter;
 	}
-
-	TitleCardPresenter getTitleCardPresenter() {
-		return titleCardPresenter;
-	}
+ 
 
 	LoaderPresenter getLoaderPresenter() {
 		return loaderPresenter;
@@ -976,7 +964,7 @@ public class MasterPresenter
 
 	@Override
 	public double getPopupDisplayDuration() {
-		return titleCardPresenter.getPopupDisplayDuration();
+		return scenePresenter.getPopupDisplayDuration();
 	}
 
 	@Override

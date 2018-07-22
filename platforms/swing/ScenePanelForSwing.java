@@ -461,10 +461,10 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 		Graphics2D g = bi.createGraphics();
 		render(g);
 		try {
-			OutputStream out = new FileOutputStream(filename + ".jpeg");
-			JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-			encoder.encode(bi);
-			out.close();
+			//OutputStream out = new FileOutputStream(filename + ".jpeg");
+			//JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+			//encoder.encode(bi);
+			//out.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}

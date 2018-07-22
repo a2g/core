@@ -542,8 +542,17 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	public Point measureTextWidthAndHeight(String text) {
-		// TODO Auto-generated method stub
 		return this.getView().measureTextWidthAndHeight(text);
+	}
+
+	public void setTitleCard(String titlecard) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public double getPopupDisplayDuration() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 };
