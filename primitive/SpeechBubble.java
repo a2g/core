@@ -17,7 +17,7 @@ public class SpeechBubble
 		init();
 	}
 
-	void init()
+	private void init()
 	{
 		xPoints = new int[7];
 		yPoints = new int[7];

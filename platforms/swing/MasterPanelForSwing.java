@@ -228,19 +228,7 @@ implements IMasterPanelFromMasterPresenter
 			this.hostForVerbsF.setVisible(false);
 			sceneCardLayout.show(panelForSceneStack, MasterPanelForSwing.LOADING_WIDGET);
 			break;
-		case TitleCardOverOnEnterScene:
-		case TitleCardOverActiveScene:
-		case TitleCardOverCutScene:
-		case TitleCardOverDialogTree:
-		case TitleCardOverLoading:
-			this.hostForCommandLineF.setVisible(false);
-			this.hostForDialogTreeF.setVisible(false);
-			this.hostForInventoryF.setVisible(false);
-			this.hostForLoadingF.setVisible(false);
-			this.hostForSceneF.setVisible(false);
-			this.hostForTitleCardF.setVisible(true);
-			this.hostForVerbsF.setVisible(false);
-			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForSwing.COMMANDLINEVERBSINVENTORY_WIDGET);
+	
 		}
 	}
 

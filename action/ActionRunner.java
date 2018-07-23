@@ -81,14 +81,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 			a = a.getParent();
 		}
 
-		
-		// ensure titlecard at start
-		if (toReturn.size() == 0
-				|| toReturn.get(0).getClass() != TitleCardAction.class) {
-			toReturn.add(0, new TitleCardAction(a, ""));
-		}
-		
-
+ 
 		return toReturn;
 	}
 

@@ -69,9 +69,10 @@ IScenePanelFromScenePresenter {
 	private Map<Integer, PointI> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllVisibleImages;
-	private boolean speechVisible;
+	private boolean isSpeechVisible;
 	private ColorEnum speechColor;
-	private SpeechBubble speechRectAndLeaderLine;
+	private ColorEnum backgroundColor;
+	private SpeechBubble speechBubbleEtc;
 	private CanvasEtcHtml5 canvasEtcHtml5;
 	private String fontName;
 	private int fontHeight;
@@ -269,9 +270,9 @@ IScenePanelFromScenePresenter {
 			}
 		}
 
-		if (speechVisible) {
+		if (isSpeechVisible) {
 			boolean isDiagnosticsDisplayed = false;
-		    canvasEtcHtml5.drawSpeech(speechRectAndLeaderLine, speechColor, isDiagnosticsDisplayed);
+		    canvasEtcHtml5.drawSpeech(speechBubbleEtc, speechColor, ColorEnum.White, isDiagnosticsDisplayed);
 		}
 
 		// update the front canvas
@@ -317,12 +318,13 @@ IScenePanelFromScenePresenter {
 	}
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, SpeechBubble c,
-			TalkPerformer sayAction) {
+	public void setStateOfSpeech(boolean isVisible, ColorEnum speechColor, ColorEnum backgroundColor,
+			SpeechBubble c, TalkPerformer sayAction) {
 
-		this.speechVisible = isVisible;
-		this.speechColor = talkingColor;
-		this.speechRectAndLeaderLine = c;
+		this.isSpeechVisible = isVisible;
+		this.speechColor = speechColor;
+		this.backgroundColor = ColorEnum.White;
+		this.speechBubbleEtc = c;
 		this.triggerPaint();
 
 	}
@@ -365,6 +367,17 @@ IScenePanelFromScenePresenter {
 		fontHeight--;
 		FontCallsHtml5 fm = new FontCallsHtml5(this.canvasEtcHtml5.getContextB());
 		fm.setFontNameAndHeight(fontName, fontHeight);
+	}
+
+	@Override
+	public void setTitleCard(String titlecard) {
+		this.isSpeechVisible = (titlecard.length()>0);
+
+		this.speechBubbleEtc = new SpeechBubble(0, 0, "titleCard");
+		this.speechBubbleEtc.rectBubble = new RectI(0,0, 639, 359);
+		this.speechBubbleEtc.xPoints = new int[0];
+		this.speechBubbleEtc.yPoints = new int[0];
+		this.backgroundColor = ColorEnum.Black;
 	}
 	
 

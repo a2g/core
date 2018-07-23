@@ -463,7 +463,7 @@ public class MasterPresenter
 		callOnPreEntry();
 
 		startCallingOnEveryFrame();
-		this.masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverOnEnterScene);
+		this.masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.OnEnterScene);
 		callOnEnterScene();
 
 	}
@@ -604,16 +604,6 @@ public class MasterPresenter
 	IMasterPanelFromMasterPresenter.GuiStateEnum getStateIfEntering(
 			IMasterPanelFromMasterPresenter.GuiStateEnum state) {
 		switch (state) {
-		case OnEnterScene:
-			return IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverOnEnterScene;
-		case DialogTree:
-			return IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverDialogTree;
-		case CutScene:
-			return IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverCutScene;
-		case ActiveScene:
-			return IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverActiveScene;
-		case Loading:
-			return IMasterPanelFromMasterPresenter.GuiStateEnum.TitleCardOverLoading;
 		default:
 			return state;
 		}
@@ -621,29 +611,13 @@ public class MasterPresenter
 
 	IMasterPanelFromMasterPresenter.GuiStateEnum getStateIfExiting(IMasterPanelFromMasterPresenter.GuiStateEnum state) {
 		switch (state) {
-		case TitleCardOverOnEnterScene:
-			return IMasterPanelFromMasterPresenter.GuiStateEnum.OnEnterScene;
-		case TitleCardOverDialogTree:
-			return IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree;
-		case TitleCardOverCutScene:
-			return IMasterPanelFromMasterPresenter.GuiStateEnum.CutScene;
-		case TitleCardOverActiveScene:
-			return IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene;
-		case TitleCardOverLoading:
-			return IMasterPanelFromMasterPresenter.GuiStateEnum.Loading;
 		default:
 			return state;
 		}
 	}
 
 	public void displayTitleCard(String text) {
-		boolean isEntering = text.length() > 0;
-		if (isEntering) {
-			scenePresenter.setTitleCard(text);
-		}
-		IMasterPanelFromMasterPresenter.GuiStateEnum state = masterPanel.getActiveState();
-		state = isEntering ? getStateIfEntering(state) : getStateIfExiting(state);
-		masterPanel.setActiveState(state);
+		scenePresenter.setTitleCard(text);
 	}
 
 	@Override

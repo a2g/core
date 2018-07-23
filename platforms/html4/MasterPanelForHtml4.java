@@ -157,43 +157,7 @@ IMasterPanelFromMasterPresenter {
 			hostForDialogTree.setVisible(false);
 			hostForTitleCard.setVisible(false);
 			break;
-		case TitleCardOverActiveScene:
-			hostForTitleCard.setVisible(true);
-			hostForCommandLine.setVisible(true);
-			hostForInventory.setVisible(true);
-			hostForVerbs.setVisible(true);
-			hostForDialogTree.setVisible(false);
-			hostForScene.setVisible(false);
-			hostForLoading.setVisible(false);
-			break;
-		case TitleCardOverCutScene:
-			hostForTitleCard.setVisible(true);
-			hostForCommandLine.setVisible(false);
-			hostForInventory.setVisible(false);
-			hostForVerbs.setVisible(false);
-			hostForDialogTree.setVisible(false);
-			hostForScene.setVisible(false);
-			hostForLoading.setVisible(false);
-			break;
-		case TitleCardOverOnEnterScene:
-		case TitleCardOverDialogTree:
-			hostForDialogTree.setVisible(true);
-			hostForTitleCard.setVisible(true);
-			hostForCommandLine.setVisible(false);
-			hostForInventory.setVisible(false);
-			hostForVerbs.setVisible(false);
-			hostForScene.setVisible(false);
-			hostForLoading.setVisible(false);
-			break;
-		case TitleCardOverLoading:
-			hostForTitleCard.setVisible(true);
-			hostForLoading.setVisible(false);
-			hostForDialogTree.setVisible(false);
-			hostForCommandLine.setVisible(false);
-			hostForInventory.setVisible(false);
-			hostForVerbs.setVisible(false);
-			hostForScene.setVisible(false);
-			break;
+	
 		default:
 			break;
 		}

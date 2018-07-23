@@ -105,7 +105,7 @@ public interface IChainRootForScene {
 	public ChainableAction setInitialAnimation(String atid);
 
 
-	public ChainableAction showTitleCard(String text);
+	public ChainableAction showTitleCard(String text, double duratoinInSecs);
 
 
 	public ChainableAction playAnimationNonBlockingHoldLastFrame(

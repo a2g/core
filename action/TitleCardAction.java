@@ -28,25 +28,19 @@ import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromSingleCall
 public class TitleCardAction extends ChainableAction {
 	private ITitleCardPresenterFromSingleCallPerformer titleCard;
 	String stringValue;
-
-	public TitleCardAction(BaseAction parent, String text) {
+	double durationInSecs;
+	public TitleCardAction(BaseAction parent, String text, double durationInSecs) {
 		super(parent);
 		this.stringValue = text;
+		this.durationInSecs = durationInSecs;
 	}
 
 	@Override
 	public void runGameAction() {
+		double totalInMilliseconds = durationInSecs * 1000;
 
-		if (stringValue.length() > 0) {
-			double totalInMilliseconds = 4 * titleCard
-					.getPopupDisplayDuration() * 1000;
-
-			titleCard.displayTitleCard(stringValue);
-			this.run( (int) totalInMilliseconds);
-		} else {
-			titleCard.displayTitleCard("");
-			this.run(1);
-		}
+		titleCard.displayTitleCard(stringValue);
+		this.run( (int) totalInMilliseconds);
 	}
 
 	@Override
@@ -56,7 +50,7 @@ public class TitleCardAction extends ChainableAction {
 
 	@Override
 	protected boolean onCompleteActionAndCheckForGateExit() {
-		titleCard.displayTitleCard("");
+ 		titleCard.displayTitleCard("");
 		return false;
 	}
 

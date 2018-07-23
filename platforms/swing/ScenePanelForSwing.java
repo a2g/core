@@ -26,6 +26,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -53,6 +54,7 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.LinesAndMaxWidth.LineAndPos;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.touch.client.Point;
@@ -95,7 +97,7 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 			ICommandLinePresenterFromSceneMouseOver toCommandLine) {
 		isRenderDiagnostics = false;
 
-		this.fontHeight = 16;
+		this.fontHeight = 26;
 		this.fontName = "arial";
 		this.toScene = toScene;
 		this.toCommandLine = toCommandLine;
@@ -108,7 +110,6 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 		this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 		this.setDoubleBuffered(true);
 		this.speechCanvas = new CanvasEtcSwing();
-	
 
 		cameraOffsetX = 0;
 		cameraOffsetY = 0;
@@ -216,6 +217,7 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 		listOfAllVisibleImages.clear();
 		mapOfPointsByImage.clear();
 		listOfVisibleHashCodes.clear();
+		this.isSpeechVisible = false; 
 	}
 
 	public void triggerPaint() {
@@ -461,10 +463,10 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 		Graphics2D g = bi.createGraphics();
 		render(g);
 		try {
-			//OutputStream out = new FileOutputStream(filename + ".jpeg");
-			//JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-			//encoder.encode(bi);
-			//out.close();
+			// OutputStream out = new FileOutputStream(filename + ".jpeg");
+			// JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+			// encoder.encode(bi);
+			// out.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -482,46 +484,60 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 
 	}
 
-
-	@Override
-	public void setStateOfPopup(boolean isVisible, ColorEnum speechColor, SpeechBubble rectAndLeaderLine,
-			TalkPerformer sayAction) {
-		this.isSpeechVisible = isVisible;
-
-		if(rectAndLeaderLine == null)
-			return; 
-
-		if (rectAndLeaderLine.rectBubble.getWidth() <= 0)
-			return;
-
-		this.speechCanvas.draw(rectAndLeaderLine, speechColor, new PointI(width, height), this.getIsDiagnosticsDisplayed());
-	}
-
-
 	@Override
 	public Point measureTextWidthAndHeight(String text) {
 		FontCallsSwing fm = new FontCallsSwing(speechCanvas.getGraphics());
 		return fm.measureTextWidthAndHeight(text);
 	}
-	
- 
+
 	public void setFontNameAndHeight(String name, int height) {
 		FontCallsSwing fm = new FontCallsSwing(speechCanvas.getGraphics());
 		fm.setFontNameAndHeight(name, height);
 	}
-	
+
 	@Override
-	public void incrementFont()
-	{
+	public void incrementFont() {
 		fontHeight++;
 		setFontNameAndHeight(fontName, fontHeight);
 	}
-	
+
 	@Override
-	public void decrementFont()
-	{
+	public void decrementFont() {
 		fontHeight--;
 		setFontNameAndHeight(fontName, fontHeight);
+	}
+
+	@Override
+	public void setTitleCard(String titlecard) {
+		this.isSpeechVisible = (titlecard.length() > 0); 
+ 
+		String[] splitByNewline = titlecard.split("\n");
+		ArrayList<SpeechBubble> pages = SpeechBubble.calculateWordWrappedPages(new PointI(width, height),
+				splitByNewline, this, new RectI(318, 178, 4, 4));
+		pages.get(0).rectBubble = new RectI(0, 0, width, height);
+		pages.get(0).yPoints = new int[0];
+		this.speechCanvas.draw(pages.get(0), ColorEnum.Red, ColorEnum.Black, new PointI(width, height),
+				this.getIsDiagnosticsDisplayed());
+	}
+
+	@Override
+	public void setStateOfSpeech(boolean isVisible, ColorEnum speechColor, ColorEnum backgroundColor,
+			SpeechBubble rectAndLeaderLine, TalkPerformer sayAction) {
+		this.isSpeechVisible = isVisible;
+		 if(isVisible==false)
+		 {
+			 if(isVisible){};
+		 }
+
+		if (rectAndLeaderLine == null)
+			return;
+
+		if (rectAndLeaderLine.rectBubble.getWidth() <= 0)
+			return;
+
+		this.speechCanvas.draw(rectAndLeaderLine, speechColor, ColorEnum.White, new PointI(width, height),
+				this.getIsDiagnosticsDisplayed());
+
 	}
 
 }

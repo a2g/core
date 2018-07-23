@@ -148,15 +148,15 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 	}
 
 	@Override
-	public void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, SpeechBubble rectAndLeaderLine,
-			TalkPerformer sayAction) {
+	public void setStateOfSpeech(boolean isVisible, ColorEnum speechColor, ColorEnum backgroundColor,
+			SpeechBubble rectAndLeaderLine, TalkPerformer sayAction) {
 		if (!isVisible) {
 			super.remove(speechWidget);
 		}
 
 		RectI rectThatsScaledToFit = rectAndLeaderLine.rectBubble;
 
-		speechWidget.setBorderColor(talkingColor);
+		speechWidget.setBorderColor(speechColor);
 
 		speechWidget.setLeaderLine(rectAndLeaderLine);
 
@@ -205,6 +205,21 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 	public void decrementFont()
 	{
 		fontHeight--;
+	}
+
+	@Override
+	public void setTitleCard(String titlecard) {
+		/*
+		this.isSpeechVisible = (titlecard.length()>0);
+
+		SpeechBubble speechBubble= new SpeechBubble(0, 0, "titleCard");
+		speechBubble.rectBubble = new RectI(0,0, width, height);
+		speechBubble.xPoints = new int[0];
+		speechBubble.yPoints = new int[0];
+	 
+		this.speechCanvas.draw(speechBubble, ColorEnum.Red, ColorEnum.Black, new PointI(width, height), this.getIsDiagnosticsDisplayed());
+*/
+		
 	}
 
 }

@@ -279,7 +279,7 @@ public class ScenePresenter implements IScenePresenter,
 		SET_STATE_OF_POPUP.fine("SETSTATEOFPOPUP " + (isVisible? speechBubble.toString() : "NOT VISIBLE"));
 		ColorEnum talkingColor = speechBubble!=null? this.getTalkingColorUsingContingencies(speechBubble.atid) : null;
 		
-		view.setStateOfPopup(isVisible, talkingColor, speechBubble, sayAction);
+		view.setStateOfSpeech(isVisible, talkingColor, null, speechBubble, sayAction);
 	}
 
 	public String getSceneTalkerAtid() {
@@ -546,13 +546,11 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	public void setTitleCard(String titlecard) {
-		// TODO Auto-generated method stub
-		
+		this.getView().setTitleCard(titlecard);
 	}
 
 	public double getPopupDisplayDuration() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 };

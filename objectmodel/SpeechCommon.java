@@ -15,14 +15,14 @@ public class SpeechCommon
 /*
  *  @Remarks: mainDraw must never change the font, since the data it processes has been calculated based on an existing font type and size
  */
-	public static void mainDraw(IDrawCalls canvas, SpeechBubble all, ColorEnum speechColor, boolean isDiagnosticsDisplayed ) 
+	public static void mainDraw(IDrawCalls canvas, SpeechBubble all, ColorEnum speechColor, ColorEnum backgroundColor, boolean isDiagnosticsDisplayed ) 
 	{
 		int x = all.rectBubble.getLeft();
 		int y = all.rectBubble.getTop();
 		int w = all.rectBubble.getWidth();
 		int h = all.rectBubble.getHeight();		
 
-		canvas.fillRect(x, y, w, h, ColorEnum.White); 
+		canvas.fillRect(x, y, w, h, backgroundColor); 
 
 		// red rect
 		if(isDiagnosticsDisplayed){
@@ -31,7 +31,7 @@ public class SpeechCommon
 		}
 		//canvas.drawSinglePixelRect(x, y, w, h, speechColor);
 		//canvas.drawSinglePixelRect(x-1, y-1, w+2, h+2, speechColor);
-		canvas.drawPolygon(all.xPoints, all.yPoints,  all.yPoints.length, ColorEnum.White, speechColor, all.bubbleOutlineWidth);
+		canvas.drawPolygon(all.xPoints, all.yPoints,  all.yPoints.length, backgroundColor, speechColor, all.bubbleOutlineWidth);
 
 		for(int i=0;i<all.lines.lines.size();i++)
 		{

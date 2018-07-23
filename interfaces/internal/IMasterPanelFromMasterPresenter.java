@@ -36,7 +36,7 @@ public interface IMasterPanelFromMasterPresenter {
 	GuiStateEnum getActiveState();
 
 	public enum GuiStateEnum {
-		DialogTree, OnEnterScene, CutScene, ActiveScene, Loading, TitleCardOverOnEnterScene, TitleCardOverDialogTree, TitleCardOverCutScene, TitleCardOverActiveScene, TitleCardOverLoading
+		DialogTree, OnEnterScene, CutScene, ActiveScene, Loading
 	};
 
 }

@@ -38,11 +38,13 @@ extends IMeasureTextWidthAndHeight
 
 	void setCameraOffset(int x, int y);
 
-	void setStateOfPopup(boolean isVisible, ColorEnum talkingColor, SpeechBubble rectAndLeaderLine, TalkPerformer sayAction);
+	void setStateOfSpeech(boolean isVisible, ColorEnum speechColor, ColorEnum backgroundColor, SpeechBubble rectAndLeaderLine, TalkPerformer sayAction);
 
 	void onSceneEntry(String string); 
 
 	void incrementFont();
 	
 	void decrementFont();
+
+	void setTitleCard(String titlecard);
 }

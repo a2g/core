@@ -410,8 +410,8 @@ implements IChainRootForScene {
 	}
 
 	@Override
-	public ChainableAction showTitleCard(String text) {
-		return new TitleCardAction(this, text);
+	public ChainableAction showTitleCard(String text, double durationInSecs) {
+		return new TitleCardAction(this, text, durationInSecs);
 	}
 
 	@Override
