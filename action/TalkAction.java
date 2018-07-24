@@ -24,7 +24,6 @@ import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTalkPerformer;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromTalkPerformer;
-import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.action.performer.TalkPerformer.NonIncrementing;
@@ -40,7 +39,7 @@ public class TalkAction extends ChainableAction {
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory)
+			IInventoryPresenterFromActions inventory)
 	{
 		talker.setMaster(master);
 		talker.setScene(scene);

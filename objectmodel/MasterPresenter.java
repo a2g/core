@@ -122,11 +122,11 @@ public class MasterPresenter
 
 		IFactory factory = host.getFactory(bus, this);
 		this.doCommandActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions, proxyForActions,
-				proxyForActions, proxyForActions, this, 1);
+				proxyForActions, this, 1);
 		this.dialogActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions, proxyForActions,
-				proxyForActions, proxyForActions, this, 2);
+				proxyForActions, this, 2);
 		this.onEveryFrameActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions, proxyForActions,
-				proxyForActions, proxyForActions, this, 3);
+				proxyForActions, this, 3);
 		insertionPointCalculator.clear();
 
 		bus.addHandler(PropertyChangeEvent.TYPE, this);

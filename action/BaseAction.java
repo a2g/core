@@ -24,7 +24,6 @@ import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IAnimation;
-import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 /**
  * documentation for BaseAction
  * @author Admin
@@ -51,7 +50,7 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 			IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory);
+			IInventoryPresenterFromActions inventory);
 
 	protected BaseAction(BaseAction parent) {
 		this.parent = parent;

@@ -24,7 +24,6 @@ import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 import com.google.gwt.touch.client.Point;
 
 /**
@@ -51,7 +50,7 @@ public class WalkAndScrollXAction extends ChainableAction{
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory)
+			IInventoryPresenterFromActions inventory)
 	{
 		mover.setSceneForMover(scene);
 		walker.setSceneForWalker(scene);

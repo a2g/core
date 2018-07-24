@@ -27,7 +27,6 @@ import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActionRunner;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 import com.github.a2g.core.primitive.LogNames;
 
 public class ActionRunner implements IActionRunnerFromBaseAction {
@@ -44,8 +43,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 	final private int id;
 	private IMasterPresenterFromActions master;
 	private IScenePresenterFromActions scene;
-	private IDialogTreePresenterFromActions dt;
-	private ITitleCardPresenterFromActions tc;
+	private IDialogTreePresenterFromActions dt; 
 	private IInventoryPresenterFromActions inv;
 
 	private IFactory factory;
@@ -54,7 +52,6 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 			IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dt,
-			ITitleCardPresenterFromActions tc,
 			IInventoryPresenterFromActions inv,
 			IMasterPresenterFromActionRunner callback, int id) {
 		this.id = id;
@@ -62,8 +59,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 		this.callback = callback;
 		this.scene = scene;
 		this.inv = inv;
-		this.dt = dt;
-		this.tc = tc;
+		this.dt = dt; 
 		this.factory = factory;
 		list = new ArrayList<ArrayList<BaseAction>>();
 		parallelActionsToWaitFor = new ArrayList<BaseAction>();
@@ -143,7 +139,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 			a.setCallbacks(this);
 
 			a.setSystemAnimation(factory.createAnimation(a));
-			a.setAll(master, scene, dt, tc, inv);
+			a.setAll(master, scene, dt, inv);
 			
 			a.runGameAction();
 		}

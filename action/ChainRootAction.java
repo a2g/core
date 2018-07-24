@@ -20,7 +20,6 @@ import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 
 /*
  * ChainRootAction is identified by having a null parent.
@@ -51,7 +50,7 @@ public class ChainRootAction extends ChainableAction {
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+			IInventoryPresenterFromActions inventory) {
 		return;// the chain root doesn't need them
 
 	}

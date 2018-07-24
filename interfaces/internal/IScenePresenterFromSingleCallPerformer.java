@@ -20,6 +20,7 @@ import com.github.a2g.core.interfaces.methods.action.ISetVisibleByOtid;
 import com.github.a2g.core.interfaces.methods.action.ISetXByOtid;
 import com.github.a2g.core.interfaces.methods.action.ISetYByOtid;
 import com.github.a2g.core.interfaces.methods.action.IShareWinning;
+import com.github.a2g.core.interfaces.methods.game.IDisplayTitleCard;
 import com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectInitial;
 import com.github.a2g.core.interfaces.methods.game.ISetValue;
 import com.github.a2g.core.interfaces.methods.game.ISwitchToScene;
@@ -49,8 +50,9 @@ ISetBaseMiddleXByOtid
 , ISetAnimationAsObjectInitial
 , ISetSoundtrack
 , ISetHeadRectangleByIndex
+, IDisplayTitleCard
 {
-	void setSoundtrack(String stringValue);
+	 
 
 	
 }

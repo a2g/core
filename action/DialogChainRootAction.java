@@ -21,7 +21,6 @@ import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromDoBranchA
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
 
 public class DialogChainRootAction extends DialogChainableAction {
@@ -60,7 +59,7 @@ public class DialogChainRootAction extends DialogChainableAction {
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+			IInventoryPresenterFromActions inventory) {
 		setDialogTree(dialogTree);
 
 	}

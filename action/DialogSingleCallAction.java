@@ -21,7 +21,6 @@ import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 import com.github.a2g.core.action.performer.SingleCallPerformer;
 
 public class DialogSingleCallAction
@@ -52,7 +51,7 @@ extends DialogChainableAction {
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+			IInventoryPresenterFromActions inventory) {
 		single.setScene(scene);
 		single.setInventory(inventory);
 	}

@@ -27,7 +27,6 @@ import com.github.a2g.core.platforms.html4.ScenePanelForHtml4;
 import com.github.a2g.core.platforms.html4.SoundForHtml4;
 import com.github.a2g.core.platforms.html4.AnimationForHtml4;
 import com.github.a2g.core.platforms.html4.TimerForHtml4;
-import com.github.a2g.core.platforms.html4.TitleCardPanelForHtml4;
 import com.github.a2g.core.platforms.html4.VerbsPanelHtml4;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
@@ -51,7 +50,6 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ISound;
 import com.github.a2g.core.interfaces.internal.IAnimation;
 import com.github.a2g.core.interfaces.internal.ITimer;
-import com.github.a2g.core.interfaces.internal.ITitleCardPanelFromTitleCardPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
 

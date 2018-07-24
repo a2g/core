@@ -8,7 +8,6 @@ import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 import com.github.a2g.core.primitive.SpeechBubble;
 import com.github.a2g.core.primitive.RectF;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
@@ -31,9 +30,7 @@ public class AllActionMethods implements
 IMasterPresenterFromActions, 
 IInventoryPresenterFromActions,
 IScenePresenterFromActions, 
-IDialogTreePresenterFromActions,
-ITitleCardPresenterFromActions 
-{
+IDialogTreePresenterFromActions {
 	private MasterPresenter master;
 
 	public AllActionMethods(MasterPresenter master) {

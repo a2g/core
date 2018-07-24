@@ -23,7 +23,6 @@ import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromWaitAction;
-import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
 
 public class WaitForFrameAction extends ChainableAction {
 	private IScenePresenterFromWaitAction scene;
@@ -76,7 +75,7 @@ public class WaitForFrameAction extends ChainableAction {
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
+			IInventoryPresenterFromActions inventory) {
 		setScene(scene);
 
 	}

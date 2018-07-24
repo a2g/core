@@ -36,7 +36,6 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ISound;
 import com.github.a2g.core.interfaces.internal.IAnimation;
 import com.github.a2g.core.interfaces.internal.ITimer;
-import com.github.a2g.core.interfaces.internal.ITitleCardPanelFromTitleCardPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
 import com.github.a2g.core.objectmodel.BoundaryCalculator;

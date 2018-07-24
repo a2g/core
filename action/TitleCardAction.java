@@ -22,11 +22,10 @@ import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromActions;
-import com.github.a2g.core.interfaces.internal.ITitleCardPresenterFromSingleCallPerformer;
+import com.github.a2g.core.interfaces.internal.IScenePresenterFromSingleCallPerformer; 
 
 public class TitleCardAction extends ChainableAction {
-	private ITitleCardPresenterFromSingleCallPerformer titleCard;
+	private IScenePresenterFromSingleCallPerformer titleCard;
 	String stringValue;
 	double durationInSecs;
 	public TitleCardAction(BaseAction parent, String text, double durationInSecs) {
@@ -56,7 +55,7 @@ public class TitleCardAction extends ChainableAction {
 
 
 
-	public void setTitleCard(ITitleCardPresenterFromSingleCallPerformer titleCard) {
+	public void setScene(IScenePresenterFromSingleCallPerformer titleCard) {
 		this.titleCard = titleCard;
 	}
 
@@ -64,8 +63,8 @@ public class TitleCardAction extends ChainableAction {
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			ITitleCardPresenterFromActions titleCard, IInventoryPresenterFromActions inventory) {
-		setTitleCard(titleCard);
+			IInventoryPresenterFromActions inventory) {
+		setScene(scene);
 
 	}
 

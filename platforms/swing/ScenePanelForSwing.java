@@ -24,8 +24,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -54,7 +52,6 @@ import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.LinesAndMaxWidth.LineAndPos;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.touch.client.Point;
@@ -68,8 +65,6 @@ import com.github.a2g.core.platforms.swing.dependencies.PackagedImageForSwing;
 import com.github.a2g.core.platforms.swing.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.swing.mouse.SceneMouseOverHandler;
 import com.google.gwt.event.shared.EventBus;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 @SuppressWarnings("serial")
 public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePresenter, ImagePanelAPI, ActionListener {
@@ -490,7 +485,7 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 		return fm.measureTextWidthAndHeight(text);
 	}
 
-	public void setFontNameAndHeight(String name, int height) {
+	private void setFontNameAndHeight(String name, int height) {
 		FontCallsSwing fm = new FontCallsSwing(speechCanvas.getGraphics());
 		fm.setFontNameAndHeight(name, height);
 	}
