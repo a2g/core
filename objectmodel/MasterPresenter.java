@@ -601,25 +601,6 @@ public class MasterPresenter
 		}
 	}
 
-	IMasterPanelFromMasterPresenter.GuiStateEnum getStateIfEntering(
-			IMasterPanelFromMasterPresenter.GuiStateEnum state) {
-		switch (state) {
-		default:
-			return state;
-		}
-	}
-
-	IMasterPanelFromMasterPresenter.GuiStateEnum getStateIfExiting(IMasterPanelFromMasterPresenter.GuiStateEnum state) {
-		switch (state) {
-		default:
-			return state;
-		}
-	}
-
-	public void displayTitleCard(String text) {
-		scenePresenter.setTitleCard(text);
-	}
-
 	@Override
 	public void incrementProgress() {
 		loaderPresenter.incrementProgress();

@@ -495,7 +495,7 @@ public class AllGameMethods
 
 	@Override
 	public void displayTitleCard(String text) {
-		master.displayTitleCard(text);
+		master.getScenePresenter().setTitleCard(text);
 
 	}
 

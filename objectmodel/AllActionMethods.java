@@ -77,7 +77,7 @@ IDialogTreePresenterFromActions {
 	
 	@Override
 	public void displayTitleCard(String text) {
-		master.displayTitleCard(text);
+		master.getScenePresenter().setTitleCard(text);
 	}
 
 	@Override
