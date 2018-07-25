@@ -20,7 +20,7 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
-import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
+import com.github.a2g.core.interfaces.methods.IChainRootForDialog;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.google.gwt.touch.client.Point;
 
@@ -82,7 +82,7 @@ implements IChainRootForDialog
 	}
 
 	@Override
-	public DialogChainableAction setInventoryVisible(int icode, boolean value) {
+	public DialogChainableAction setInventoryItemVisible(int icode, boolean value) {
 		DialogSingleCallAction a =  new DialogSingleCallAction(this, Type.SetInventoryVisible);
 		a.setICode(icode);
 		a.setBoolean(value);

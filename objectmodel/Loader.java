@@ -9,10 +9,10 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.interfaces.internal.ILoaderPresenter;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoader;
+import com.github.a2g.core.interfaces.platform.IBundleLoader;
 import com.github.a2g.core.interfaces.platform.IPlatformResourceBundle;
 import com.github.a2g.core.primitive.TypeOfLoaderEnum;
 import com.github.a2g.core.primitive.LogNames;

@@ -20,8 +20,8 @@ package com.github.a2g.core.interfaces.methods;
 import com.github.a2g.core.interfaces.IExtendsGameSceneLoader;
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.ILoadKickStarter;
-import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.interfaces.methods.direct.ISetValue;
+import com.github.a2g.core.interfaces.platform.IBundleLoader;
 import com.github.a2g.core.interfaces.platform.IPlatformResourceBundle;
 
 /**  

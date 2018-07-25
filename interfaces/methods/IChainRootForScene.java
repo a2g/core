@@ -1,0 +1,160 @@
+package com.github.a2g.core.interfaces.methods;
+
+import com.github.a2g.core.action.ChainEndAction;
+import com.github.a2g.core.action.ChainRootAction;
+import com.github.a2g.core.action.ChainableAction;
+import com.github.a2g.core.interfaces.methods.direct.IAlignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation;
+import com.github.a2g.core.interfaces.methods.direct.IAlignBaseMiddleOfOldFrameToLastFrameOfNewAnimation;
+import com.github.a2g.core.interfaces.methods.direct.IAlignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation;
+import com.github.a2g.core.interfaces.methods.direct.ISetAnimationAsObjectCurrent;
+import com.github.a2g.core.interfaces.methods.direct.ISetAnimationAsObjectCurrentAndSetFrame;
+import com.github.a2g.core.interfaces.methods.direct.ISetAnimationAsObjectInitial;
+import com.github.a2g.core.interfaces.methods.direct.ISetAnimationAsObjectWalkDirection;
+import com.github.a2g.core.interfaces.methods.direct.ISetAnimationAsSceneTalker;
+import com.github.a2g.core.interfaces.methods.direct.ISetBaseMiddleX;
+import com.github.a2g.core.interfaces.methods.direct.ISetBaseMiddleY;
+import com.github.a2g.core.interfaces.methods.direct.ISetCurrentFrame;
+import com.github.a2g.core.interfaces.methods.direct.ISetDisplayName;
+import com.github.a2g.core.interfaces.methods.direct.ISetHeadRectangleForObject;
+import com.github.a2g.core.interfaces.methods.direct.ISetInventoryItemVisible;
+import com.github.a2g.core.interfaces.methods.direct.ISetSoundtrack;
+import com.github.a2g.core.interfaces.methods.direct.ISetValue;
+import com.github.a2g.core.interfaces.methods.direct.ISetVisible;
+import com.github.a2g.core.interfaces.methods.direct.IShareWinning;
+import com.github.a2g.core.interfaces.IGameScene;
+import com.github.a2g.core.objectmodel.SentenceItem;
+import com.google.gwt.touch.client.Point;
+import com.github.a2g.core.primitive.A2gException;
+
+public interface IChainRootForScene extends 
+ISetVisible
+, ISetAnimationAsObjectInitial
+, ISetAnimationAsSceneTalker 
+, ISetHeadRectangleForObject 
+, ISetAnimationAsObjectWalkDirection
+, ISetSoundtrack 
+, IShareWinning
+, IAlignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation
+, IAlignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation
+, IAlignBaseMiddleOfOldFrameToLastFrameOfNewAnimation
+, ISetValue
+, ISetAnimationAsObjectCurrent 
+, ISetAnimationAsObjectCurrentAndSetFrame 
+, ISetBaseMiddleX 
+, ISetBaseMiddleY 
+, ISetCurrentFrame 
+, ISetDisplayName 
+, ISetInventoryItemVisible 
+{
+	// all the ChainEndActions can only be the last
+	// action in a chain.
+	// subroutine is an exeption since there is both a ChainEndAction
+	// and ChainableAction version of it.
+	public ChainEndAction doBoth(ChainableAction a, ChainableAction b);
+	public ChainEndAction activateDialogTreeMode(int branchId);
+	public ChainEndAction onDoCommand(IGameScene scene, IOnDoCommand api,
+			ChainRootAction ba, int verb, SentenceItem itemA,
+			SentenceItem itemB, double x, double y) throws A2gException;
+	public ChainEndAction subroutine(ChainEndAction orig);
+	public ChainEndAction switchTo(String sceneName, int arrivalSegment);
+	public ChainEndAction walkTo(double x, double y);// should not have ocode here because switching implies main character
+	public ChainEndAction walkTo(Point point);
+	
+	// there's 2 choices
+	// 1) BaseAction walkSwitch and ChainAbleAction walkTo
+	// 2) BaseAction walkTo, and ChainableAction walkWithNoSwitch
+	// client is likely to code with walkTo
+	// in case 1, using walkTo in its wrong scenario (as
+	// a terminator) would not be picked up by compiler.
+	// since a chainableAction would pass as a baseAction.
+	// in case 2, using walkTo in its wrong scenario (in
+	// the middle of a chain) where client expects it not
+	// to switch, WOULD generate a compiler error.
+	// Thus 2 is better, because it protects the user
+	// against unexpected results.
+	public ChainableAction walkNeverSwitch(double x, double y);
+	public ChainableAction walkNeverSwitch(Point point);
+	public ChainableAction walkNeverSwitchNonBlocking(short ocode, double x, double y);
+	public ChainableAction walkNeverSwitch(short ocode, double x, double y);
+	public ChainableAction walkNeverSwitch(short ocode, Point point);
+	public ChainableAction walkAndTalkNeverSwitch(short ocode, double x, double y, String speech);
+	public ChainableAction walkAndScaleNeverSwitch(short ocode, Point p, double startScale, double endScale);
+	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int arrivalSegment) throws A2gException ;
+	public ChainEndAction walkAlwaysSwitch(Point point, String string, int arrivalSegment) throws A2gException ;
+	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, Point p, double startScale, double endScale, String sceneName, int arrivalSegment) throws A2gException;
+	
+	public ChainableAction subroutine(ChainableAction orig);
+
+	public ChainableAction doNothing();
+
+	// plain..
+	public ChainableAction playAnimation(String animationCode);
+
+	// simple backwards
+	public ChainableAction playAnimationBackwards(String animationCode);
+
+	// simple hold last frame
+	public ChainableAction playAnimationHoldLastFrame(String animationCode);
+
+	// simple non blocking
+	public ChainableAction playAnimationNonBlocking(String animationCode);
+
+	// double combo1of3: backwards + hold last frame
+	public ChainableAction playAnimationBackwardsHoldLastFrame(
+			String animationCode);
+
+	// double combo2of3: backwards + nonblocking
+	public ChainableAction playAnimationBackwardsNonBlocking(String animationCode);
+
+	// double combo2of3: holdLastFrame + nonblocking
+	public ChainableAction playAnimationHoldLastFrameNonBlocking(
+			String animationCode);
+	public ChainableAction playAnimationNonBlockingHoldLastFrame(
+			String animationCode);
+	
+	// ..and one method with the whole lot!
+	public ChainableAction playAnimationBackwardsHoldLastFrameNonBlocking(
+			String animationCode);
+	
+	
+	// talking methods
+	public ChainableAction talk(String animCode, String speech);
+	public ChainableAction talk(String speech);
+	public ChainableAction talkWithoutIncrementingFrame(String animCode, String speech);
+	public ChainableAction talkWithoutIncrementingFrameNonBlocking(String animCode, String speech);
+	public ChainableAction talkWithoutIncrementingFrame(String speech);
+	public ChainableAction talkWithoutIncrementingFrameNonBlocking(String speech);
+	
+	// move whilst animating - less animation frame hungry way of moving
+	public ChainableAction moveWhilstAnimating(short objId, double x, double y);
+	public ChainableAction moveWhilstAnimatingInY(short objId, double y);
+	public ChainableAction moveWhilstAnimatingNonBlocking(short objId, double x,double y);
+	public ChainableAction moveWhilstAnimatingLinearNonBlocking(short objId, double x,double y);
+	public ChainableAction moveWhilstAnimatingLinear(short objId, double x, double y);
+	
+	// move camera..
+	public ChainableAction moveCameraToNewXPosition(double x,double durationInSecs);
+	public ChainableAction moveCameraToNewXPositionNonBlocking(double x,double durationInSecs);
+	public ChainableAction moveCameraToNewYPosition(double y,double durationInSecs);
+	public ChainableAction moveCameraToNewYPositionNonBlocking(double y,double durationInSecs);
+	
+	// I added "look" a new verb that just takes the first frame of the animation
+	public ChainableAction look(String atid, double duration);
+	
+	// play as opposed to setTitleCard in the direct api
+	public ChainableAction playTitleCard(String text, double durationInSecs);
+	
+	// other play commands
+	public ChainableAction playSound(String stid);
+	public ChainableAction playSoundNonBlocking(String stid);
+			
+	// commands that seem direct, but all have a temporal aspect
+	public ChainableAction sleep(int milliseconds);
+	public ChainableAction swapVisibility(short ocodeA, short ocodeB);
+	public ChainableAction waitForFrame(short ocode, int frame);
+
+	// ones that really should be in the direct api
+	public ChainableAction hideAll();
+	public ChainableAction setToInitialPosition(short ocode) ;
+
+}

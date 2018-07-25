@@ -46,7 +46,6 @@ import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePre
 import com.github.a2g.core.interfaces.internal.IFactory;
 import com.github.a2g.core.interfaces.internal.IHostFromMasterPresenter;
 import com.github.a2g.core.interfaces.internal.IHostingPanel;
-import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActionRunner;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
@@ -60,6 +59,7 @@ import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTimer;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTitleCard;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromVerbs;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
+import com.github.a2g.core.interfaces.platform.IBundleLoader;
 import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
 import com.github.a2g.core.interfaces.platform.IPlatformResourceBundle;
 import com.github.a2g.core.interfaces.platform.IPlatformSound;

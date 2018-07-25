@@ -25,7 +25,7 @@ import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.IGameScene;
-import com.github.a2g.core.interfaces.internal.IChainRootForScene;
+import com.github.a2g.core.interfaces.methods.IChainRootForScene;
 import com.github.a2g.core.interfaces.methods.IOnDoCommand;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.SentenceItem;

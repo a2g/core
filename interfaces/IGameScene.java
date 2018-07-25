@@ -18,8 +18,8 @@ package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.DialogChainEndAction;
-import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
-import com.github.a2g.core.interfaces.internal.IChainRootForScene;
+import com.github.a2g.core.interfaces.methods.IChainRootForDialog;
+import com.github.a2g.core.interfaces.methods.IChainRootForScene;
 import com.github.a2g.core.interfaces.methods.IOnDialogTree;
 import com.github.a2g.core.interfaces.methods.IOnDoCommand;
 import com.github.a2g.core.interfaces.methods.IOnEntry;
