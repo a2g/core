@@ -1,14 +1,14 @@
 package com.github.a2g.core.interfaces.internal;
 
-import com.github.a2g.core.interfaces.methods.action.ISetCurrentAnimationByAtid;
-import com.github.a2g.core.interfaces.methods.action.IGetBaseMiddleXByOtid;
-import com.github.a2g.core.interfaces.methods.action.IGetBaseMiddleYByOtid;
-import com.github.a2g.core.interfaces.methods.action.IGetOtidByCode;
-import com.github.a2g.core.interfaces.methods.action.IGetOtidOfDefaultSceneObject;
-import com.github.a2g.core.interfaces.methods.action.IGetSceneGuiHeight;
-import com.github.a2g.core.interfaces.methods.action.IGetSceneGuiWidth;
-import com.github.a2g.core.interfaces.methods.action.IGetSpecialAnimationByOtid;
-import com.github.a2g.core.interfaces.methods.action.ISetToInitialAnimationWithoutChangingFrameByOtid;
+import com.github.a2g.core.interfaces.methods.internal.IGetBaseMiddleXByOtid;
+import com.github.a2g.core.interfaces.methods.internal.IGetBaseMiddleYByOtid;
+import com.github.a2g.core.interfaces.methods.internal.IGetOtidByCode;
+import com.github.a2g.core.interfaces.methods.internal.IGetOtidOfDefaultSceneObject;
+import com.github.a2g.core.interfaces.methods.internal.IGetSceneGuiHeight;
+import com.github.a2g.core.interfaces.methods.internal.IGetSceneGuiWidth;
+import com.github.a2g.core.interfaces.methods.internal.IGetSpecialAnimationByOtid;
+import com.github.a2g.core.interfaces.methods.internal.ISetCurrentAnimationByAtid;
+import com.github.a2g.core.interfaces.methods.internal.ISetToInitialAnimationWithoutChangingFrameByOtid;
 
 public interface IScenePresenterFromWalkAction
 extends IGetBaseMiddleXByOtid,

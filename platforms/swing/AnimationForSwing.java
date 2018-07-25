@@ -17,11 +17,11 @@
 package com.github.a2g.core.platforms.swing;
 
 import com.github.a2g.core.interfaces.internal.IBaseActionFromSystemAnimation;
-import com.github.a2g.core.interfaces.internal.IAnimation;
+import com.github.a2g.core.interfaces.platform.IPlatformAnimation;
 
 public class AnimationForSwing extends
 com.github.a2g.core.platforms.swing.animation.GoogleAnimation implements
-IAnimation {
+IPlatformAnimation {
 	IBaseActionFromSystemAnimation callbacks;
 	boolean isEaseToAndFrom;
 	private boolean isCancelled;

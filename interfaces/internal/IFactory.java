@@ -1,5 +1,8 @@
 package com.github.a2g.core.interfaces.internal;
 
+import com.github.a2g.core.interfaces.platform.IPlatformAnimation;
+import com.github.a2g.core.interfaces.platform.IPlatformSound;
+import com.github.a2g.core.interfaces.platform.IPlatformTimer;
 import com.github.a2g.core.primitive.ColorEnum;
 
 public interface IFactory {
@@ -16,9 +19,9 @@ public interface IFactory {
 	IVerbsPanelFromVerbsPresenter createVerbsPanel(
 			IVerbsPresenterFromVerbsPanel api, ColorEnum fore, ColorEnum back);
 
-	IAnimation createAnimation(IBaseActionFromSystemAnimation cbs);
+	IPlatformAnimation createAnimation(IBaseActionFromSystemAnimation cbs);
 
-	ITimer createTimer(IMasterPresenterFromTimer cbs);
+	IPlatformTimer createTimer(IMasterPresenterFromTimer cbs);
 
 	IMasterPanelFromMasterPresenter createMasterPanel(int width, int height,
 			ColorEnum color);
@@ -30,7 +33,7 @@ public interface IFactory {
 	ILoaderPanelFromLoaderPresenter createLoaderPanel(
 			IMasterPresenterFromLoaderMouse api, ColorEnum fore, ColorEnum back);
 
-	ISound createSound(String url);
+	IPlatformSound createSound(String url);
 	
 	IBoundaryCalculator createBoundaryCalculator(IScenePresenterFromBoundaryCalculator callbacks);
 }

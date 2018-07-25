@@ -16,6 +16,7 @@
 
 package com.github.a2g.core.interfaces.internal;
 
+import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
 import com.google.gwt.event.dom.client.LoadHandler;
 
 public interface IMasterPresenterFromBundle {
@@ -52,7 +53,7 @@ public interface IMasterPresenterFromBundle {
 	public boolean addImageForEitherInventoryOrScene(LoadHandler lh, int drawingOrder,
 			int x, int y, int w, int h, String otid,
 			String atid, short ocode, String objectPlusAnimCode,
-			IPackagedImage imageResource);
+			IPlatformPackagedImage imageResource);
 
 	public void setScenePixelSize(int width, int height);
 

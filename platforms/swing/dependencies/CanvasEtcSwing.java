@@ -31,7 +31,7 @@ public class CanvasEtcSwing
 		g2d.setColor(new Color(0,255,0));
 		g2d.drawRect(0, 0, resolution.getX(), resolution.getY());
 
-		DrawCallsSwing adapter = new DrawCallsSwing(g2d);
+		PlatformDrawCallsSwing adapter = new PlatformDrawCallsSwing(g2d);
 		SpeechCommon.mainDraw(adapter, rectEtc, speechColor, backgroundColor, isDiagnosticsDisplayed);
 
 		return img;

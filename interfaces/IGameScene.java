@@ -20,6 +20,11 @@ import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.DialogChainEndAction;
 import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
 import com.github.a2g.core.interfaces.internal.IChainRootForScene;
+import com.github.a2g.core.interfaces.methods.IOnDialogTree;
+import com.github.a2g.core.interfaces.methods.IOnDoCommand;
+import com.github.a2g.core.interfaces.methods.IOnEntry;
+import com.github.a2g.core.interfaces.methods.IOnEveryFrame;
+import com.github.a2g.core.interfaces.methods.IOnPreEntry;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.A2gException;
 

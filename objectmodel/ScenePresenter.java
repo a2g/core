@@ -177,7 +177,7 @@ public class ScenePresenter implements IScenePresenter,
 		this.scene.objectCollection().addAnimation(atid, destAnimation);
 	}
 
-	public void alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
+	public void alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimationByAtid(
 			int frame, String atid) {
 		String otid = getOtidByAtid(atid);
 		SceneObject o = getObjectByOtid(otid);

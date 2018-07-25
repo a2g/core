@@ -13,8 +13,8 @@ import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.interfaces.internal.ILoaderPresenter;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoader;
-import com.github.a2g.core.interfaces.internal.ISingleBundle;
-import com.github.a2g.core.primitive.LoaderEnum;
+import com.github.a2g.core.interfaces.platform.IPlatformResourceBundle;
+import com.github.a2g.core.primitive.TypeOfLoaderEnum;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointI;
 
@@ -125,7 +125,7 @@ public class Loader implements ILoaderPresenter {
 			LoaderItem loader = iter.next();
 			String loaderName = loader.getCombinedClassAndNumber();
 
-			if (loader.getLoaderEnum()==LoaderEnum.Inventory.r) {
+			if (loader.getLoaderEnum()==TypeOfLoaderEnum.Inventory.r) {
 
 				if (loaderName.equalsIgnoreCase(this.nameOfInventoryResourceUsedLastTime)) {
 					iter.remove();
@@ -175,7 +175,7 @@ public class Loader implements ILoaderPresenter {
 			LoaderItem loader = iter.next();
 			PointI res = loader.getResolution();
 			int i = loader.getLoaderEnum();
-			if(i==LoaderEnum.Inventory.r)
+			if(i==TypeOfLoaderEnum.Inventory.r)
 				master.setInventoryImageSize(res.getX(), res.getY());
 			else
 			{
@@ -192,7 +192,7 @@ public class Loader implements ILoaderPresenter {
 		}
 	}
 
-	public void queueSingleBundle(ISingleBundle bundle, IMasterPresenterFromBundle api) {
+	public void queueSingleBundle(IPlatformResourceBundle bundle, IMasterPresenterFromBundle api) {
 	   if(!setOfEssentialLoaderNames.contains(bundle.toString()))
 	   {
 		listOfEssentialLoaders.add(new LoaderItem(api, bundle));

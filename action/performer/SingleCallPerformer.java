@@ -44,7 +44,7 @@ public class SingleCallPerformer
 		, SwapVisibility
 		, Switch
 		, SetAnimationSpecial
-		, SetAnimationSceneTalker
+		, SetAnimationAsSceneTalker
 		, SetAnimationObjectInitial
 		, SetSoundtrack
 		, SetHeadRectangle
@@ -167,7 +167,7 @@ public class SingleCallPerformer
 			scene.setVisibleByOtid(otidB, newB);
 			return false;
 		
-		case SetAnimationSceneTalker:
+		case SetAnimationAsSceneTalker:
 			scene.setSceneTalkerByAtid(atid);
 			return false;
 		case SetAnimationObjectInitial:

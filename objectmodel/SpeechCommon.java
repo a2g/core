@@ -2,8 +2,8 @@ package com.github.a2g.core.objectmodel;
 
 import java.util.ArrayList;
 
-import com.github.a2g.core.interfaces.internal.IDrawCalls;
 import com.github.a2g.core.interfaces.internal.IMeasureTextWidthAndHeight;
+import com.github.a2g.core.interfaces.platform.IPlatformDrawCalls;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectI;
@@ -15,7 +15,7 @@ public class SpeechCommon
 /*
  *  @Remarks: mainDraw must never change the font, since the data it processes has been calculated based on an existing font type and size
  */
-	public static void mainDraw(IDrawCalls canvas, SpeechBubble all, ColorEnum speechColor, ColorEnum backgroundColor, boolean isDiagnosticsDisplayed ) 
+	public static void mainDraw(IPlatformDrawCalls canvas, SpeechBubble all, ColorEnum speechColor, ColorEnum backgroundColor, boolean isDiagnosticsDisplayed ) 
 	{
 		int x = all.rectBubble.getLeft();
 		int y = all.rectBubble.getTop();

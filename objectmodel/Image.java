@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
+import com.github.a2g.core.interfaces.internal.IImagePanel;
 import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectI;
@@ -24,14 +24,14 @@ import com.google.gwt.event.dom.client.LoadHandler;
 
 public abstract class Image {
 
-	private final ImagePanelAPI panel;
+	private final IImagePanel panel;
 	private final PointI constOffset;
 	private double parallaxX;
 	private double parallaxY;
 	private double scale;
 	String atid;
 
-	public Image(ImagePanelAPI panel, PointI offset, String atid) {
+	public Image(IImagePanel panel, PointI offset, String atid) {
 		this.constOffset = offset;
 		this.panel = panel;
 		this.parallaxX = 1.0;

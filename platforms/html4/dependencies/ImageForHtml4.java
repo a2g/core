@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.platforms.html4.dependencies;
 
-import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
+import com.github.a2g.core.interfaces.internal.IImagePanel;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.primitive.PointI;
 
@@ -24,7 +24,7 @@ public class ImageForHtml4 extends Image {
 	private final com.google.gwt.user.client.ui.Image image;
 	private PointI originalDimensions;
 	public ImageForHtml4(final com.google.gwt.user.client.ui.Image image,
-			ImagePanelAPI panel, PointI offset) {
+			IImagePanel panel, PointI offset) {
 		super(panel, offset, "fromHtml4");
 		this.image = image;
 		this.originalDimensions = null;

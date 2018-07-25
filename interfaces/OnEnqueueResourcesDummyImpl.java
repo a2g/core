@@ -17,10 +17,17 @@
 package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.action.ChainEndAction;
+import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.DialogChainEndAction;
 import com.github.a2g.core.interfaces.internal.IChainRootForDialog;
 import com.github.a2g.core.interfaces.internal.IChainRootForScene;
-import com.github.a2g.core.interfaces.internal.ISingleBundle;
+import com.github.a2g.core.interfaces.methods.IOnDialogTree;
+import com.github.a2g.core.interfaces.methods.IOnDoCommand;
+import com.github.a2g.core.interfaces.methods.IOnEnqueueResources;
+import com.github.a2g.core.interfaces.methods.IOnEntry;
+import com.github.a2g.core.interfaces.methods.IOnEveryFrame;
+import com.github.a2g.core.interfaces.methods.IOnPreEntry;
+import com.github.a2g.core.interfaces.platform.IPlatformResourceBundle;
 import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.objectmodel.SentenceItem;
@@ -53,7 +60,7 @@ public class OnEnqueueResourcesDummyImpl implements IOnEnqueueResources
 	}
 
 	@Override
-	public void queueSingleBundle(ISingleBundle bundle) {
+	public void queueSingleBundle(IPlatformResourceBundle bundle) {
 		this.implementation.queueSingleBundle(bundle);
 	}
 	
@@ -69,8 +76,9 @@ public class OnEnqueueResourcesDummyImpl implements IOnEnqueueResources
 	}
 
 	// utlity methods
-	public void setValue(Object string, int value) {
+	public ChainableAction setValue(Object string, int value) {
 		this.implementation.setValue(string, value);
+		return null;
 	}
  
 	public void clearAllLoadedLoads() {

@@ -19,20 +19,20 @@ package com.github.a2g.core.objectmodel;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.interfaces.internal.ILoaderPresenterFromLoaderItem;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
-import com.github.a2g.core.interfaces.internal.ISingleBundle;
+import com.github.a2g.core.interfaces.platform.IPlatformResourceBundle;
 import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.event.dom.client.LoadEvent;
 
 public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	private ILoaderPresenterFromLoaderItem callbacks;
-	ISingleBundle singleBundle; 
+	IPlatformResourceBundle singleBundle; 
 	int numberOfImagesLeftToLoad;
 	int origNumberOfImagesLeftToLoad;
 	IMasterPresenterFromBundle api;
 	private LoadedLoad theCurrentCacheObject;
 
 	public LoaderItem(IMasterPresenterFromBundle api2,
-			ISingleBundle bundleToCallLoadOn) {
+			IPlatformResourceBundle bundleToCallLoadOn) {
 		assert(bundleToCallLoadOn!=null);
 		this.api = api2;
 		this.singleBundle = bundleToCallLoadOn;
@@ -101,7 +101,7 @@ public class LoaderItem implements LoadHandler, Comparable<LoaderItem> {
 	}
 
 	public int getLoaderEnum() {
-		int loaderEnum = singleBundle.getLoaderEnum();
+		int loaderEnum = singleBundle.getTypeOfLoader();
 		return loaderEnum;
 	}
 

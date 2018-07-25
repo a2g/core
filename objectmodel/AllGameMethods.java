@@ -6,16 +6,15 @@ import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.ILoadKickStarter;
-import com.github.a2g.core.interfaces.IOnDialogTree;
-import com.github.a2g.core.interfaces.IOnDoCommand;
-import com.github.a2g.core.interfaces.IOnEntry;
-import com.github.a2g.core.interfaces.IOnEveryFrame;
-import com.github.a2g.core.interfaces.IOnEnqueueResources;
-
-import com.github.a2g.core.interfaces.IOnPreEntry;
 import com.github.a2g.core.interfaces.internal.IBundleLoader;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
-import com.github.a2g.core.interfaces.internal.ISingleBundle;
+import com.github.a2g.core.interfaces.methods.IOnDialogTree;
+import com.github.a2g.core.interfaces.methods.IOnDoCommand;
+import com.github.a2g.core.interfaces.methods.IOnEnqueueResources;
+import com.github.a2g.core.interfaces.methods.IOnEntry;
+import com.github.a2g.core.interfaces.methods.IOnEveryFrame;
+import com.github.a2g.core.interfaces.methods.IOnPreEntry;
+import com.github.a2g.core.interfaces.platform.IPlatformResourceBundle;
 import com.github.a2g.core.interfaces.IExtendsGameSceneLoader;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.SpeechBubble;
@@ -101,11 +100,11 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setDisplayName(short ocode, String displayName) {
+	public ChainableAction setDisplayName(short ocode, String displayName) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setDisplayName(displayName);
-
+		return null;
 	}
 
 	@Override
@@ -124,10 +123,11 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setVisible(short ocode, boolean visible) {
+	public ChainableAction setVisible(short ocode, boolean visible) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setVisible(visible);
+		return null;
 	}
 
 	@Override
@@ -143,15 +143,17 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setBaseMiddleX(short ocode, double baseMiddleX) {
+	public ChainableAction setBaseMiddleX(short ocode, double baseMiddleX) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setBaseMiddleX(baseMiddleX);
+		return null;
 	}
 
 	@Override
-	public void setBaseMiddleY(short ocode, double baseMiddleY) {
+	public ChainableAction setBaseMiddleY(short ocode, double baseMiddleY) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setBaseMiddleY(baseMiddleY);
+		return null;
 	}
 
 	@Override
@@ -188,11 +190,11 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setCurrentFrame(short ocode, int i) {
+	public ChainableAction setCurrentFrame(short ocode, int i) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setCurrentFrame(i);
-
+		return null;
 	}
 
 	@Override
@@ -260,8 +262,9 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setInventoryItemVisible(int icode, boolean isVisible) {
+	public ChainableAction setInventoryItemVisible(int icode, boolean isVisible) {
 		master.getInventoryPresenter().getInventoryItemByICode(icode).setVisible(isVisible);
+		return null;
 	}
 
 	@Override
@@ -293,8 +296,9 @@ public class AllGameMethods
 	// /@{
 
 	@Override
-	public void setAnimationAsSceneTalker(String atid) {
+	public ChainableAction setAnimationAsSceneTalker(String atid) {
 		master.getScenePresenter().setSceneTalkerAtid(atid);
+		return null;
 	}
 
 	@Override
@@ -308,25 +312,27 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setAnimationAsObjectInitial(String atid) {
+	public ChainableAction setAnimationAsObjectInitial(String atid) {
 		String otid = getOtidByAtid(atid);
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
 		object.setInitialAnimation(atid);
-
+		return null;
 	}
 
 	@Override
-	public void setAnimationAsObjectWalkDirection(String atid, WalkDirection type) {
+	public ChainableAction setAnimationAsObjectWalkDirection(String atid, WalkDirection type) {
 		String otid = getOtidByAtid(atid);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setSpecialAnimation(type, atid);
+		return null;
 	}
 
 	@Override
-	public void setAnimationAsObjectCurrent(String atid) {
+	public ChainableAction setAnimationAsObjectCurrent(String atid) {
 		String otid = getOtidByAtid(atid);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setCurrentAnimation(atid);
+		return null;
 	}
 
 	@Override
@@ -336,10 +342,11 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setAnimationAsObjectCurrentAndSetFrame(String atid, int frame) {
+	public ChainableAction setAnimationAsObjectCurrentAndSetFrame(String atid, int frame) {
 		String otid = getOtidByAtid(atid);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setCurrentAnimationAndFrame(atid, frame);
+		return null;
 	}
 
 	@Override
@@ -403,7 +410,7 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void queueSingleBundle(ISingleBundle loader) {
+	public void queueSingleBundle(IPlatformResourceBundle loader) {
 		master.queueSingleBundle(loader);
 
 	}
@@ -414,8 +421,9 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setValue(Object key, int value) {
+	public ChainableAction setValue(Object key, int value) {
 		master.setValue(key, value);
+		return null;
 	}
 
 	@Override
@@ -471,9 +479,9 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void shareWinning(String token) {
+	public ChainableAction shareWinning(String token) {
 		master.shareWinning(token);
-
+		return null;
 	}
 
 	@Override
@@ -505,12 +513,7 @@ public class AllGameMethods
 
 	}
 
-	@Override
-	public void alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation(int frame, String atid) {
-		master.getScenePresenter().alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(frame, atid);
-
-	}
-
+	
 	@Override
 	public void setStateOfPopup(boolean isVisible, SpeechBubble rectAndLeaderLine,
 			TalkPerformer sayAction) {
@@ -554,8 +557,9 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setSoundtrack(String stid) {
+	public ChainableAction setSoundtrack(String stid) {
 		master.setSoundtrack(stid);
+		return null;
 	}
 
 	@Override
@@ -575,10 +579,11 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setHeadRectangleForObject(short ocode, int index) {
+	public ChainableAction setHeadRectangleForObject(short ocode, int index) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setHeadRectangleByIndex(index);
+		return null;
 	}
 
 	@Override
@@ -658,5 +663,13 @@ public class AllGameMethods
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ChainableAction alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation(String atid, int frame) {
+		master.getScenePresenter().alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimationByAtid(frame, atid);
+		return null;
+	}
+	 
+
 
 }

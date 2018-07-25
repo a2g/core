@@ -16,6 +16,7 @@
 
 package com.github.a2g.core.interfaces.internal;
 
+import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.google.gwt.event.dom.client.LoadHandler;
@@ -29,7 +30,7 @@ public interface IInventoryPanelFromInventoryPresenter {
 
 	void clear();
 
-	Image createNewImageAndAdddHandlers(IPackagedImage imageResource,
+	Image createNewImageAndAdddHandlers(IPlatformPackagedImage imageResource,
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int i, int j);
 

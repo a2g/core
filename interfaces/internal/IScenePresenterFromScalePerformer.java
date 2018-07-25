@@ -1,7 +1,7 @@
 package com.github.a2g.core.interfaces.internal;
 
-import com.github.a2g.core.interfaces.methods.action.IGetOtidByCode;
-import com.github.a2g.core.interfaces.methods.action.ISetScaleOnCurrentFrameByOtid;
+import com.github.a2g.core.interfaces.methods.internal.IGetOtidByCode;
+import com.github.a2g.core.interfaces.methods.internal.ISetScaleOnCurrentFrameByOtid;
 
 public interface IScenePresenterFromScalePerformer
 extends IGetOtidByCode

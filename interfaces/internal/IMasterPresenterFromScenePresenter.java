@@ -1,6 +1,6 @@
 package com.github.a2g.core.interfaces.internal;
 
-import com.github.a2g.core.interfaces.methods.game.ISwitchToScene;
+import com.github.a2g.core.interfaces.methods.direct.ISwitchToScene;
 
 public interface IMasterPresenterFromScenePresenter
 extends ISwitchToScene

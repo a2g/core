@@ -1,7 +1,7 @@
 package com.github.a2g.core.interfaces.internal;
 
 import com.github.a2g.core.interfaces.ConstantsForAPI;
-import com.github.a2g.core.interfaces.IOnPreEntry;
+import com.github.a2g.core.interfaces.methods.IOnPreEntry;
 import com.github.a2g.core.objectmodel.AutoplayCommand;
 
 public interface ISolution

@@ -59,12 +59,11 @@ import com.github.a2g.core.interfaces.internal.IMasterPresenterFromScenePresente
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTimer;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTitleCard;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromVerbs;
-import com.github.a2g.core.interfaces.internal.IPackagedImage;
-import com.github.a2g.core.interfaces.internal.ISingleBundle;
-import com.github.a2g.core.interfaces.internal.ISound;
-import com.github.a2g.core.interfaces.internal.ITimer;
 import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
-
+import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
+import com.github.a2g.core.interfaces.platform.IPlatformResourceBundle;
+import com.github.a2g.core.interfaces.platform.IPlatformSound;
+import com.github.a2g.core.interfaces.platform.IPlatformTimer;
 import com.github.a2g.core.interfaces.IGameSceneLoader;
 import com.github.a2g.core.interfaces.OnEnqueueResourcesDummyImpl;
 import com.github.a2g.core.interfaces.OnEnqueueResourcesEffectiveImpl;
@@ -92,8 +91,8 @@ public class MasterPresenter
 
 	private EventBus bus;
 	private IHostFromMasterPresenter host;
-	private ITimer timer;
-	private ITimer switchTimer;
+	private IPlatformTimer timer;
+	private IPlatformTimer switchTimer;
 	private IMasterPanelFromMasterPresenter masterPanel;
 	private ActionRunner dialogActionRunner;
 	private ActionRunner doCommandActionRunner;
@@ -105,9 +104,9 @@ public class MasterPresenter
 	private String switchDestination;
 	private boolean isSayNonIncremementing;
 	private AllActionMethods proxyForActions;
-	private Map<String, ISound> mapOfSounds;
+	private Map<String, IPlatformSound> mapOfSounds;
 	private boolean isAutoplayCancelled;
-	ISound soundtrack;
+	IPlatformSound soundtrack;
 
 	public MasterPresenter(final IHostingPanel panel, EventBus bus, IHostFromMasterPresenter host) {
 		this.bus = bus;
@@ -118,7 +117,7 @@ public class MasterPresenter
 		this.proxyForGameScene = new AllGameMethods(this);
 		this.proxyForActions = new AllActionMethods(this);
 		this.insertionPointCalculator = new InsertionPointCalculator();
-		mapOfSounds = new TreeMap<String, ISound>();
+		mapOfSounds = new TreeMap<String, IPlatformSound>();
 
 		IFactory factory = host.getFactory(bus, this);
 		this.doCommandActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions, proxyForActions,
@@ -159,7 +158,7 @@ public class MasterPresenter
 
 	@Override
 	public boolean addImageForEitherInventoryOrScene(LoadHandler lh, int drawingOrder, int x, int y, int w, int h, String textId,
-			String atid, short ocode, String objPlusAnimCode, IPackagedImage imageResource) {
+			String atid, short ocode, String objPlusAnimCode, IPlatformPackagedImage imageResource) {
 		if (this.sceneHandlers == null) {
 			return true;
 		}
@@ -514,7 +513,7 @@ public class MasterPresenter
 	}
 
 	void clearMapOfSounds() {
-		for (Map.Entry<String, ISound> entry : mapOfSounds.entrySet()) {
+		for (Map.Entry<String, IPlatformSound> entry : mapOfSounds.entrySet()) {
 			if (entry != this.soundtrack)
 				entry.getValue().stop();
 		}
@@ -938,7 +937,7 @@ public class MasterPresenter
 				soundtrack.stop();
 			return;
 		}
-		ISound sound = mapOfSounds.get(stid);
+		IPlatformSound sound = mapOfSounds.get(stid);
 		soundtrack = this.getFactory().createSound(sound.getLocation());
 		soundtrack.play();
 	}
@@ -951,7 +950,7 @@ public class MasterPresenter
 
 	@Override
 	public boolean queueMP3ForASoundObject(String name, String location) {
-		ISound sound = this.getFactory().createSound(location);
+		IPlatformSound sound = this.getFactory().createSound(location);
 		this.mapOfSounds.put(name, sound);
 
 		return false;
@@ -979,7 +978,7 @@ public class MasterPresenter
 		loaderPresenter.getLoaders().queueEntireBundleLoader(bundleLoader, this);
 	}
 	
-	public void queueSingleBundle(ISingleBundle loader)
+	public void queueSingleBundle(IPlatformResourceBundle loader)
 	{
 		loaderPresenter.getLoaders().queueSingleBundle(loader, this);
 	}

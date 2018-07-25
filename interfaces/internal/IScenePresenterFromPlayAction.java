@@ -1,12 +1,12 @@
 package com.github.a2g.core.interfaces.internal;
 
-import com.github.a2g.core.interfaces.methods.action.ISetCurrentAnimationByAtid;
-import com.github.a2g.core.interfaces.methods.action.IGetDurationByAtid;
-import com.github.a2g.core.interfaces.methods.action.IGetNumberOfFramesByAtid;
-import com.github.a2g.core.interfaces.methods.action.IGetOtidByAtid;
-import com.github.a2g.core.interfaces.methods.action.ISetCurrentFrameByOtid;
-import com.github.a2g.core.interfaces.methods.action.ISetToInitialAnimationWithoutChangingFrameByOtid;
-import com.github.a2g.core.interfaces.methods.action.ISetVisibleByOtid;
+import com.github.a2g.core.interfaces.methods.internal.IGetDurationByAtid;
+import com.github.a2g.core.interfaces.methods.internal.IGetNumberOfFramesByAtid;
+import com.github.a2g.core.interfaces.methods.internal.IGetOtidByAtid;
+import com.github.a2g.core.interfaces.methods.internal.ISetCurrentAnimationByAtid;
+import com.github.a2g.core.interfaces.methods.internal.ISetCurrentFrameByOtid;
+import com.github.a2g.core.interfaces.methods.internal.ISetToInitialAnimationWithoutChangingFrameByOtid;
+import com.github.a2g.core.interfaces.methods.internal.ISetVisibleByOtid;
 
 public interface IScenePresenterFromPlayAction extends
 IGetNumberOfFramesByAtid, IGetOtidByAtid, IGetDurationByAtid,

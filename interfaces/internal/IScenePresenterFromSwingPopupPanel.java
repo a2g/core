@@ -15,8 +15,8 @@
  */
 package com.github.a2g.core.interfaces.internal;
 
-import com.github.a2g.core.interfaces.methods.action.IGetSceneGuiHeight;
-import com.github.a2g.core.interfaces.methods.action.IGetSceneGuiWidth;
+import com.github.a2g.core.interfaces.methods.internal.IGetSceneGuiHeight;
+import com.github.a2g.core.interfaces.methods.internal.IGetSceneGuiWidth;
 
 public interface IScenePresenterFromSwingPopupPanel extends IGetSceneGuiWidth,
 IGetSceneGuiHeight {

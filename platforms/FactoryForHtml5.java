@@ -32,11 +32,11 @@ import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTimer;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
-import com.github.a2g.core.interfaces.internal.ISound;
-import com.github.a2g.core.interfaces.internal.IAnimation;
-import com.github.a2g.core.interfaces.internal.ITimer;
 import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
+import com.github.a2g.core.interfaces.platform.IPlatformAnimation;
+import com.github.a2g.core.interfaces.platform.IPlatformSound;
+import com.github.a2g.core.interfaces.platform.IPlatformTimer;
 import com.github.a2g.core.objectmodel.BoundaryCalculator;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.platforms.html4.CommandLinePanelForHtml4;
@@ -44,9 +44,9 @@ import com.github.a2g.core.platforms.html4.DialogTreePanelForHtml4;
 import com.github.a2g.core.platforms.html4.InventoryPanelForHtml4;
 import com.github.a2g.core.platforms.html4.LoaderPanelHtml4;
 import com.github.a2g.core.platforms.html4.MasterPanelForHtml4;
-import com.github.a2g.core.platforms.html4.SoundForHtml4;
-import com.github.a2g.core.platforms.html4.AnimationForHtml4;
-import com.github.a2g.core.platforms.html4.TimerForHtml4;
+import com.github.a2g.core.platforms.html4.PlatformSoundForHtml4;
+import com.github.a2g.core.platforms.html4.PlatformAnimationForHtml4;
+import com.github.a2g.core.platforms.html4.PlatformTimerForHtml4;
 import com.github.a2g.core.platforms.html4.VerbsPanelHtml4;
 import com.github.a2g.core.platforms.html5.ScenePanelForHtml5;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -65,9 +65,9 @@ public class FactoryForHtml5 implements IFactory {
 
 
 	@Override
-	public IAnimation createAnimation(
+	public IPlatformAnimation createAnimation(
 			IBaseActionFromSystemAnimation callbacks) {
-		return new AnimationForHtml4(callbacks);
+		return new PlatformAnimationForHtml4(callbacks);
 	}
 	                                                                                                                                           
 	@Override
@@ -115,13 +115,13 @@ public class FactoryForHtml5 implements IFactory {
 
 
 	@Override
-	public ISound createSound(String url) {
-		return new SoundForHtml4(url);
+	public IPlatformSound createSound(String url) {
+		return new PlatformSoundForHtml4(url);
 	}
 
 	@Override
-	public ITimer createTimer(IMasterPresenterFromTimer cbs) {
-		return new TimerForHtml4(cbs);
+	public IPlatformTimer createTimer(IMasterPresenterFromTimer cbs) {
+		return new PlatformTimerForHtml4(cbs);
 	}
  
 

@@ -33,11 +33,11 @@ import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTimer;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
-import com.github.a2g.core.interfaces.internal.ISound;
-import com.github.a2g.core.interfaces.internal.IAnimation;
-import com.github.a2g.core.interfaces.internal.ITimer;
 import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
 import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
+import com.github.a2g.core.interfaces.platform.IPlatformAnimation;
+import com.github.a2g.core.interfaces.platform.IPlatformSound;
+import com.github.a2g.core.interfaces.platform.IPlatformTimer;
 import com.github.a2g.core.objectmodel.BoundaryCalculator;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.platforms.swing.CommandLinePanelForSwing;
@@ -46,9 +46,9 @@ import com.github.a2g.core.platforms.swing.InventoryPanelForSwing;
 import com.github.a2g.core.platforms.swing.LoaderPanelForSwing;
 import com.github.a2g.core.platforms.swing.MasterPanelForSwing;
 import com.github.a2g.core.platforms.swing.ScenePanelForSwing;
-import com.github.a2g.core.platforms.swing.SoundForSwing;
+import com.github.a2g.core.platforms.swing.PlatformSoundForSwing;
 import com.github.a2g.core.platforms.swing.AnimationForSwing;
-import com.github.a2g.core.platforms.swing.TimerForSwing;
+import com.github.a2g.core.platforms.swing.PlatformTimerForSwing;
 import com.github.a2g.core.platforms.swing.VerbsPanelForSwing;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
@@ -64,7 +64,7 @@ public class FactoryForSwing implements IFactory {
 	}
 
 	@Override
-	public IAnimation createAnimation(
+	public IPlatformAnimation createAnimation(
 			IBaseActionFromSystemAnimation callbacks ) {
 		return new AnimationForSwing(callbacks);
 	}
@@ -108,13 +108,13 @@ public class FactoryForSwing implements IFactory {
 	}
 
 	@Override
-	public ISound createSound(String url) {
-		return new SoundForSwing(url);
+	public IPlatformSound createSound(String url) {
+		return new PlatformSoundForSwing(url);
 	}
 
 	@Override
-	public ITimer createTimer(IMasterPresenterFromTimer cbs) {
-		return new TimerForSwing(cbs);
+	public IPlatformTimer createTimer(IMasterPresenterFromTimer cbs) {
+		return new PlatformTimerForSwing(cbs);
 	}
  
 

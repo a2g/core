@@ -2,6 +2,7 @@ package com.github.a2g.core.objectmodel;
 
 import java.util.List;
 
+import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
@@ -105,16 +106,12 @@ IDialogTreePresenterFromActions {
 		master.setActiveGuiState(state);
 
 	}
-
-
-	
 	
 	@Override
-	public void setValue(Object name, int value) {
+	public ChainableAction setValue(Object name, int value) {
 		master.setValue(name, value);
+		return null;
 	}
-
-	//
 
 	@Override
 	public void shareWinning(String token) {
@@ -135,7 +132,7 @@ IDialogTreePresenterFromActions {
 	public void alignBaseMiddleOfOldFrameToFrameOfThisAnimationByAtid(
 			String atid, int frame) {
 		master.getScenePresenter()
-		.alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimationByAtid(
+		.alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimationByAtid(
 				frame, atid);
 	}
 
@@ -161,10 +158,11 @@ IDialogTreePresenterFromActions {
 	}
 
 	@Override
-	public void setAnimationAsObjectInitial(String atid) {
+	public ChainableAction setAnimationAsObjectInitial(String atid) {
 		String otid = getOtidByAtid(atid);
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
 		object.setInitialAnimation(atid);
+		return null;
 	}
 
 	@Override

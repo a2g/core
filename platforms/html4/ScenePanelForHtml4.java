@@ -19,20 +19,20 @@ package com.github.a2g.core.platforms.html4;
 import com.google.gwt.event.dom.client.LoadHandler;
 
 import com.github.a2g.core.action.performer.TalkPerformer;
-import com.github.a2g.core.interfaces.internal.IPackagedImage;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
-import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
+import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
+import com.github.a2g.core.interfaces.internal.IImagePanel;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
-import com.github.a2g.core.platforms.html4.dependencies.DrawCallsHtml4;
+import com.github.a2g.core.platforms.html4.dependencies.PlatformDrawCallsHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectTouchMoveHandler;
 import com.github.a2g.core.platforms.html5.dependencies.CanvasEtcHtml5;
-import com.github.a2g.core.platforms.html5.dependencies.FontCallsHtml5;
+import com.github.a2g.core.platforms.html5.dependencies.PlatformFontCallsHtml5;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectI;
@@ -41,11 +41,11 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.touch.client.Point;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 
-public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, IScenePanelFromScenePresenter {
+public class ScenePanelForHtml4 extends AbsolutePanel implements IImagePanel, IScenePanelFromScenePresenter {
 	int cameraOffsetX;
 	int cameraOffsetY;
 	SceneObjectTouchMoveHandler theTouchMoveHandler;
-	DrawCallsHtml4 speechWidget;
+	PlatformDrawCallsHtml4 speechWidget;
 	String fontName;
 	int fontHeight;
 
@@ -55,13 +55,13 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 		this.cameraOffsetX = 0;
 		this.cameraOffsetY = 0;
 		this.theTouchMoveHandler = new SceneObjectTouchMoveHandler(api);
-		this.speechWidget = new DrawCallsHtml4();
+		this.speechWidget = new PlatformDrawCallsHtml4();
 		this.fontName = "arial";
 		this.fontHeight = 10;
 	}
 
 	@Override
-	public Image createNewImageAndAddHandlers(LoadHandler lh, IPackagedImage imageResource,
+	public Image createNewImageAndAddHandlers(LoadHandler lh, IPlatformPackagedImage imageResource,
 			IScenePresenterFromSceneMouseOver api, EventBus bus, int x, int y, String objectTextualId,
 			short objectCode) {
 
@@ -190,7 +190,7 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements ImagePanelAPI, 
 		CanvasEtcHtml5 contextHtml5 = new CanvasEtcHtml5("");
 		contextHtml5.setScenePixelSize(10, 10, this);
 		contextHtml5.setFontNameAndHeightUsedInHtml4(fontName,fontHeight);
-		FontCallsHtml5 fm = new FontCallsHtml5(contextHtml5.getContextB());
+		PlatformFontCallsHtml5 fm = new PlatformFontCallsHtml5(contextHtml5.getContextB());
 		return fm.measureTextWidthAndHeight(text);
 	}
  

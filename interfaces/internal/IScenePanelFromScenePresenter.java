@@ -16,6 +16,7 @@
 package com.github.a2g.core.interfaces.internal;
 
 import com.github.a2g.core.action.performer.TalkPerformer;
+import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.SpeechBubble;
@@ -28,7 +29,7 @@ extends IMeasureTextWidthAndHeight
 	void clear();
 
 	Image createNewImageAndAddHandlers(LoadHandler lh,
-			IPackagedImage imageResource,
+			IPlatformPackagedImage imageResource,
 			IScenePresenterFromSceneMouseOver api, EventBus bus, int x, int y,
 			String objectTextualId, short objectCode);
 

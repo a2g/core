@@ -16,12 +16,14 @@
 
 package com.github.a2g.core.interfaces.internal;
 
+import com.github.a2g.core.interfaces.platform.IPlatformResourceBundle;
+
 public interface IBundleLoader {
 	public int getNumberOfBundles();
 
 	public int getNumberOfImagesInBundle(int bundleNumber);
 
-	ISingleBundle getSingleBundle(int n);
+	IPlatformResourceBundle getSingleBundle(int n);
 
 	public int getLoaderEnum();
 

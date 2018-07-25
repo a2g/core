@@ -21,8 +21,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.interfaces.internal.IInventoryPanelFromInventoryPresenter;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
-import com.github.a2g.core.interfaces.internal.IPackagedImage;
-import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
+import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
+import com.github.a2g.core.interfaces.internal.IImagePanel;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
@@ -38,7 +38,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 public class InventoryPanelForHtml4
 extends AbsolutePanel
 implements
-ImagePanelAPI
+IImagePanel
 , IInventoryPanelFromInventoryPresenter
 {
 	final FlowPanel arrowLeft;
@@ -114,7 +114,7 @@ ImagePanelAPI
 
 
 	@Override
-	public Image createNewImageAndAdddHandlers(IPackagedImage imageResource,
+	public Image createNewImageAndAdddHandlers(IPlatformPackagedImage imageResource,
 			LoadHandler lh, EventBus bus, String otid,
 			int ocode, int i, int j) {
 

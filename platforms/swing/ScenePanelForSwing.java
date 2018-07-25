@@ -46,11 +46,11 @@ import com.github.a2g.core.objectmodel.PointFWithNeighbours;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.internal.ICommandLinePresenterFromSceneMouseOver;
-import com.github.a2g.core.interfaces.internal.IPackagedImage;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
-import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
+import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
+import com.github.a2g.core.interfaces.internal.IImagePanel;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointI;
@@ -60,14 +60,14 @@ import com.github.a2g.core.primitive.SpeechBubble;
 import com.github.a2g.core.primitive.RectF;
 import com.github.a2g.core.platforms.swing.dependencies.ImageForSwing;
 import com.github.a2g.core.platforms.swing.dependencies.CanvasEtcSwing;
-import com.github.a2g.core.platforms.swing.dependencies.FontCallsSwing;
-import com.github.a2g.core.platforms.swing.dependencies.PackagedImageForSwing;
+import com.github.a2g.core.platforms.swing.dependencies.PlatformFontCallsSwing;
+import com.github.a2g.core.platforms.swing.dependencies.PlatformPackagedImageForSwing;
 import com.github.a2g.core.platforms.swing.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.swing.mouse.SceneMouseOverHandler;
 import com.google.gwt.event.shared.EventBus;
 
 @SuppressWarnings("serial")
-public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePresenter, ImagePanelAPI, ActionListener {
+public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePresenter, IImagePanel, ActionListener {
 	private static final Logger IMAGE_DUMP = Logger.getLogger(LogNames.IMAGE_DUMP.toString());
 
 	int width;
@@ -137,10 +137,10 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 		});
 	}
 
-	public Image createNewImageAndAdddHandlers(LoadHandler lh, IPackagedImage imageResource, EventBus bus, int x, int y,
+	public Image createNewImageAndAdddHandlers(LoadHandler lh, IPlatformPackagedImage imageResource, EventBus bus, int x, int y,
 			String objectTextualId, short objectId) {
 
-		java.awt.Image img = ((PackagedImageForSwing) imageResource).unpack();
+		java.awt.Image img = ((PlatformPackagedImageForSwing) imageResource).unpack();
 
 		ImageForSwing imageAndPos = new ImageForSwing(img, objectTextualId, this, new PointI(x, y));
 
@@ -416,10 +416,10 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 	}
 
 	@Override
-	public Image createNewImageAndAddHandlers(final LoadHandler lh, IPackagedImage imageResource,
+	public Image createNewImageAndAddHandlers(final LoadHandler lh, IPlatformPackagedImage imageResource,
 			IScenePresenterFromSceneMouseOver api, EventBus bus, int x, int y, String objectTextualId,
 			short objectCode) {
-		java.awt.Image img = ((PackagedImageForSwing) imageResource).unpack();
+		java.awt.Image img = ((PlatformPackagedImageForSwing) imageResource).unpack();
 
 		ImageForSwing imageAndPos = new ImageForSwing(img, objectTextualId, this, new PointI(x, y));
 		return imageAndPos;
@@ -481,12 +481,12 @@ public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePr
 
 	@Override
 	public Point measureTextWidthAndHeight(String text) {
-		FontCallsSwing fm = new FontCallsSwing(speechCanvas.getGraphics());
+		PlatformFontCallsSwing fm = new PlatformFontCallsSwing(speechCanvas.getGraphics());
 		return fm.measureTextWidthAndHeight(text);
 	}
 
 	private void setFontNameAndHeight(String name, int height) {
-		FontCallsSwing fm = new FontCallsSwing(speechCanvas.getGraphics());
+		PlatformFontCallsSwing fm = new PlatformFontCallsSwing(speechCanvas.getGraphics());
 		fm.setFontNameAndHeight(name, height);
 	}
 

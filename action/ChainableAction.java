@@ -23,10 +23,10 @@ import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkAction;
 import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
 import com.github.a2g.core.action.performer.TalkPerformer;
-import com.github.a2g.core.interfaces.IOnDoCommand;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.interfaces.internal.IChainRootForScene;
+import com.github.a2g.core.interfaces.methods.IOnDoCommand;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.A2gException;
@@ -182,7 +182,7 @@ implements IChainRootForScene {
 	}
 
 	@Override
-	public ChainableAction setCurrentAnimation(String atid) {
+	public ChainableAction setAnimationAsObjectCurrent(String atid) {
 		SingleCallAction a = new SingleCallAction(this,
 				Type.SetCurrentAnimation);
 		a.setAtid(atid);
@@ -190,7 +190,7 @@ implements IChainRootForScene {
 	}
 
 	@Override
-	public ChainableAction setCurrentAnimationAndFrame(String atid, int frame) {
+	public ChainableAction setAnimationAsObjectCurrentAndSetFrame(String atid, int frame) {
 		SingleCallAction a = new SingleCallAction(this,
 				Type.SetCurrentAnimationAndFrame);
 		a.setAtid(atid);
@@ -231,7 +231,7 @@ implements IChainRootForScene {
 	}
 
 	@Override
-	public ChainableAction setInventoryVisible(int icode, boolean isVisible) {
+	public ChainableAction setInventoryItemVisible(int icode, boolean isVisible) {
 		SingleCallAction a = new SingleCallAction(this,
 				Type.SetInventoryVisible);
 		a.setICode(icode);
@@ -308,13 +308,6 @@ implements IChainRootForScene {
 		return new WaitForFrameAction(this, ocode, frame);
 	}
 
-	@Override
-	public ChainableAction setInitialAnimation(String atid) {
-		SingleCallAction a = new SingleCallAction(this,
-				Type.SetInitialAnimation);
-		a.setAtid(atid);
-		return a;
-	}
 
 	@Override
 	public ChainableAction walkNeverSwitch(double x, double y) {
@@ -410,7 +403,7 @@ implements IChainRootForScene {
 	}
 
 	@Override
-	public ChainableAction showTitleCard(String text, double durationInSecs) {
+	public ChainableAction playTitleCard(String text, double durationInSecs) {
 		return new TitleCardAction(this, text, durationInSecs);
 	}
 
@@ -424,9 +417,9 @@ implements IChainRootForScene {
 	}
 
 	@Override
-	public ChainableAction setValue(String string, int i) {
+	public ChainableAction setValue(Object object, int i) {
 		SingleCallAction a = new SingleCallAction(this, Type.SetValue);
-		a.setString(string);
+		a.setString(object.toString());
 		a.setInt(i);
 		return a;
 	}
@@ -523,8 +516,9 @@ implements IChainRootForScene {
 		return a;
 	}
 
+	
 	@Override
-	public ChainableAction alignBaseMiddleOfOldFrameToFrameOfNewAnimation(
+	public ChainableAction alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation(
 			String atid, int frame) {
 		SingleCallAction a = new SingleCallAction(this, Type.AlignBaseMiddle);
 		a.setAtid(atid);
@@ -551,18 +545,13 @@ implements IChainRootForScene {
 	}
 
 	@Override
-	public ChainableAction share(String string) {
+	public ChainableAction shareWinning(String string) {
 		SingleCallAction a = new SingleCallAction(this, Type.ShareWinning);
 		a.setString(string);
 		return a;
 	}
 
-	@Override
-	public ChainableAction setSceneTalker(String atid) {
-		SingleCallAction a = new SingleCallAction(this, Type.SetSceneTalker);
-		a.setAtid(atid);
-		return a;
-	}
+
 
 	@Override
 	public ChainableAction setSoundtrack(String stid) {
@@ -585,7 +574,7 @@ implements IChainRootForScene {
 	}
 
 	@Override
-	public ChainableAction setAnimationAsObjectSpecial(String atid,
+	public ChainableAction setAnimationAsObjectWalkDirection(String atid,
 			WalkDirection type) {
 		SingleCallAction s = new SingleCallAction(this,
 				Type.SetAnimationSpecial);
@@ -598,7 +587,7 @@ implements IChainRootForScene {
 	@Override
 	public ChainableAction setAnimationAsSceneTalker(String atid) {
 		SingleCallAction s = new SingleCallAction(this,
-				Type.SetAnimationSceneTalker);
+				Type.SetAnimationAsSceneTalker);
 		s.setAtid(atid);
 		return s;
 	}
@@ -612,7 +601,7 @@ implements IChainRootForScene {
 	}
 
 	@Override
-	public ChainableAction setHeadRectangle(short ocode, int index) {
+	public ChainableAction setHeadRectangleForObject(short ocode, int index) {
 		SingleCallAction s = new SingleCallAction(this, Type.SetHeadRectangle);
 		s.setOCode(ocode);
 		s.setInt(index);

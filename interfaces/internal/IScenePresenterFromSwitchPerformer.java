@@ -1,10 +1,10 @@
 package com.github.a2g.core.interfaces.internal;
 
-import com.github.a2g.core.interfaces.methods.action.IDoSwitchIfBeyondGate;
-import com.github.a2g.core.interfaces.methods.action.IGetBaseMiddleXByOtid;
-import com.github.a2g.core.interfaces.methods.action.IGetBaseMiddleYByOtid;
-import com.github.a2g.core.interfaces.methods.action.IGetOtidByCode;
-import com.github.a2g.core.interfaces.methods.action.IIsInANoGoZone;
+import com.github.a2g.core.interfaces.methods.internal.IDoSwitchIfBeyondGate;
+import com.github.a2g.core.interfaces.methods.internal.IGetBaseMiddleXByOtid;
+import com.github.a2g.core.interfaces.methods.internal.IGetBaseMiddleYByOtid;
+import com.github.a2g.core.interfaces.methods.internal.IGetOtidByCode;
+import com.github.a2g.core.interfaces.methods.internal.IIsInANoGoZone;
 
 public interface IScenePresenterFromSwitchPerformer
 extends

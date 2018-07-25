@@ -38,13 +38,13 @@ import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.interfaces.internal.IInventoryPanelFromInventoryPresenter;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
-import com.github.a2g.core.interfaces.internal.IPackagedImage;
-import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
+import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
+import com.github.a2g.core.interfaces.internal.IImagePanel;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.platforms.swing.dependencies.ImageForSwing;
-import com.github.a2g.core.platforms.swing.dependencies.PackagedImageForSwing;
+import com.github.a2g.core.platforms.swing.dependencies.PlatformPackagedImageForSwing;
 import com.github.a2g.core.platforms.swing.mouse.InventoryMouseClickHandler;
 import com.github.a2g.core.platforms.swing.mouse.InventoryMouseOverHandler;
 import com.google.gwt.event.shared.EventBus;
@@ -52,7 +52,7 @@ import com.google.gwt.event.shared.EventBus;
 @SuppressWarnings("serial")
 public class InventoryPanelForSwing
 extends JPanel
-implements ImagePanelAPI
+implements IImagePanel
 , IInventoryPanelFromInventoryPresenter
 , ActionListener
 {
@@ -226,11 +226,11 @@ implements ImagePanelAPI
 
 	// this is the one that gets called.
 	@Override
-	public Image createNewImageAndAdddHandlers(IPackagedImage imageResource,
+	public Image createNewImageAndAdddHandlers(IPlatformPackagedImage imageResource,
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int x, int y)
 	{
-		java.awt.Image img = ((PackagedImageForSwing)imageResource).unpack();
+		java.awt.Image img = ((PlatformPackagedImageForSwing)imageResource).unpack();
 
 		ImageForSwing imageAndPos = new ImageForSwing(img, objectTextualId, this, new PointI(0,0));
 

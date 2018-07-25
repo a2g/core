@@ -23,14 +23,14 @@ import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IAnimation;
+import com.github.a2g.core.interfaces.platform.IPlatformAnimation;
 /**
  * documentation for BaseAction
  * @author Admin
  *
  */
 public abstract class BaseAction implements IBaseActionFromSystemAnimation {
-	private IAnimation systemAnimation;
+	private IPlatformAnimation systemAnimation;
 	private IActionRunnerFromBaseAction callbacks;
 	protected BaseAction parent;
 	private boolean isLinear;
@@ -68,7 +68,7 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 		return isParallel;
 	}
 
-	void setSystemAnimation(IAnimation systemAnimation) {
+	void setSystemAnimation(IPlatformAnimation systemAnimation) {
 		this.systemAnimation = systemAnimation;
 		this.systemAnimation.setEaseToAndFrom(!isLinear);
 	}

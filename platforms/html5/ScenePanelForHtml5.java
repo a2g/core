@@ -27,18 +27,18 @@ import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.internal.ICommandLinePresenterFromSceneMouseOver;
-import com.github.a2g.core.interfaces.internal.IPackagedImage;
 import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
-import com.github.a2g.core.interfaces.internal.ImagePanelAPI;
+import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
+import com.github.a2g.core.interfaces.internal.IImagePanel;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html5.dependencies.CanvasEtcHtml5;
-import com.github.a2g.core.platforms.html5.dependencies.FontCallsHtml5;
+import com.github.a2g.core.platforms.html5.dependencies.PlatformFontCallsHtml5;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -55,7 +55,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class ScenePanelForHtml5 
 extends VerticalPanel 
-implements ImagePanelAPI, 
+implements IImagePanel, 
 IScenePanelFromScenePresenter {
 	// private static final Logger HTML5CANVAS =
 	// Logger.getLogger(LogNames.HTML5CANVAS);
@@ -104,7 +104,7 @@ IScenePanelFromScenePresenter {
 	}
 
 	@Override
-	public Image createNewImageAndAddHandlers(LoadHandler lh, IPackagedImage imageResource,
+	public Image createNewImageAndAddHandlers(LoadHandler lh, IPlatformPackagedImage imageResource,
 			IScenePresenterFromSceneMouseOver api, EventBus bus, int x, int y, String objectTextualId,
 			short objectCode) {
 		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource((PackagedImageForHtml4) imageResource,
@@ -342,7 +342,7 @@ IScenePanelFromScenePresenter {
 
 	@Override
 	public Point measureTextWidthAndHeight(String text) {
-		FontCallsHtml5 fm = new FontCallsHtml5(this.canvasEtcHtml5.getContextB());
+		PlatformFontCallsHtml5 fm = new PlatformFontCallsHtml5(this.canvasEtcHtml5.getContextB());
 		fm.setFontNameAndHeight(fontName,fontHeight);
 		return fm.measureTextWidthAndHeight(text);
 	}
@@ -357,7 +357,7 @@ IScenePanelFromScenePresenter {
 	public void incrementFont()
 	{
 		fontHeight++;
-		FontCallsHtml5 fm = new FontCallsHtml5(this.canvasEtcHtml5.getContextB());
+		PlatformFontCallsHtml5 fm = new PlatformFontCallsHtml5(this.canvasEtcHtml5.getContextB());
 		fm.setFontNameAndHeight(fontName, fontHeight);
 	}
 	
@@ -365,7 +365,7 @@ IScenePanelFromScenePresenter {
 	public void decrementFont()
 	{
 		fontHeight--;
-		FontCallsHtml5 fm = new FontCallsHtml5(this.canvasEtcHtml5.getContextB());
+		PlatformFontCallsHtml5 fm = new PlatformFontCallsHtml5(this.canvasEtcHtml5.getContextB());
 		fm.setFontNameAndHeight(fontName, fontHeight);
 	}
 

@@ -2,15 +2,51 @@ package com.github.a2g.core.interfaces.internal;
 
 import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.ChainRootAction;
-import com.github.a2g.core.action.ChainableAction; 
-import com.github.a2g.core.interfaces.IOnDoCommand;
-import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
+import com.github.a2g.core.action.ChainableAction;
+import com.github.a2g.core.interfaces.methods.IOnDoCommand;
+import com.github.a2g.core.interfaces.methods.direct.IAlignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation;
+import com.github.a2g.core.interfaces.methods.direct.IAlignBaseMiddleOfOldFrameToLastFrameOfNewAnimation;
+import com.github.a2g.core.interfaces.methods.direct.IAlignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation;
+import com.github.a2g.core.interfaces.methods.direct.ISetAnimationAsObjectCurrent;
+import com.github.a2g.core.interfaces.methods.direct.ISetAnimationAsObjectCurrentAndSetFrame;
+import com.github.a2g.core.interfaces.methods.direct.ISetAnimationAsObjectInitial;
+import com.github.a2g.core.interfaces.methods.direct.ISetAnimationAsObjectWalkDirection;
+import com.github.a2g.core.interfaces.methods.direct.ISetAnimationAsSceneTalker;
+import com.github.a2g.core.interfaces.methods.direct.ISetBaseMiddleX;
+import com.github.a2g.core.interfaces.methods.direct.ISetBaseMiddleY;
+import com.github.a2g.core.interfaces.methods.direct.ISetCurrentFrame;
+import com.github.a2g.core.interfaces.methods.direct.ISetDisplayName;
+import com.github.a2g.core.interfaces.methods.direct.ISetHeadRectangleForObject;
+import com.github.a2g.core.interfaces.methods.direct.ISetInventoryItemVisible;
+import com.github.a2g.core.interfaces.methods.direct.ISetSoundtrack;
+import com.github.a2g.core.interfaces.methods.direct.ISetValue;
+import com.github.a2g.core.interfaces.methods.direct.ISetVisible;
+import com.github.a2g.core.interfaces.methods.direct.IShareWinning;
 import com.github.a2g.core.interfaces.IGameScene;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.A2gException;
 
-public interface IChainRootForScene {
+public interface IChainRootForScene extends 
+ISetVisible
+, ISetAnimationAsObjectInitial
+, ISetAnimationAsSceneTalker 
+, ISetHeadRectangleForObject 
+, ISetAnimationAsObjectWalkDirection
+, ISetSoundtrack 
+, IShareWinning
+, IAlignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation
+, IAlignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation
+, IAlignBaseMiddleOfOldFrameToLastFrameOfNewAnimation
+, ISetValue
+, ISetAnimationAsObjectCurrent 
+, ISetAnimationAsObjectCurrentAndSetFrame 
+, ISetBaseMiddleX 
+, ISetBaseMiddleY 
+, ISetCurrentFrame 
+, ISetDisplayName 
+, ISetInventoryItemVisible 
+{
 	// all the ChainEndActions can only be the last
 	// action in a chain.
 	// subroutine is an exeption since there is both a ChainEndAction
@@ -74,86 +110,52 @@ public interface IChainRootForScene {
 	// double combo2of3: holdLastFrame + nonblocking
 	public ChainableAction playAnimationHoldLastFrameNonBlocking(
 			String animationCode);
+	public ChainableAction playAnimationNonBlockingHoldLastFrame(
+			String animationCode);
+	
 	// ..and one method with the whole lot!
 	public ChainableAction playAnimationBackwardsHoldLastFrameNonBlocking(
 			String animationCode);
+	
+	
+	// talking methods
 	public ChainableAction talk(String animCode, String speech);
 	public ChainableAction talk(String speech);
-	public ChainableAction talkWithoutIncrementingFrame(String animCode,
-			String speech);
-	public ChainableAction talkWithoutIncrementingFrameNonBlocking(
-			String animCode, String speech);
+	public ChainableAction talkWithoutIncrementingFrame(String animCode, String speech);
+	public ChainableAction talkWithoutIncrementingFrameNonBlocking(String animCode, String speech);
 	public ChainableAction talkWithoutIncrementingFrame(String speech);
 	public ChainableAction talkWithoutIncrementingFrameNonBlocking(String speech);
-	public ChainableAction setCurrentAnimation(String atid);
-	public ChainableAction setCurrentAnimationAndFrame(String atid, int frame);
-	public ChainableAction setCurrentFrame(short ocode, int frame);
-	public ChainableAction setBaseMiddleX(short ocode, double x);
-	public ChainableAction setBaseMiddleY(short ocode, double y);
-
-
-	public ChainableAction setDisplayName(short ocode, String displayName);
-	public ChainableAction setInventoryVisible(int inventoryId, boolean isVisible);
-	public ChainableAction setVisible(short ocode, boolean isVisible);
-
-	public ChainableAction sleep(int milliseconds);
-
-	public ChainableAction swapVisibility(short ocodeA, short ocodeB);
-
-	public ChainableAction waitForFrame(short ocode, int frame);
-
-	public ChainableAction setInitialAnimation(String atid);
-
-
-	public ChainableAction showTitleCard(String text, double duratoinInSecs);
-
-
-	public ChainableAction playAnimationNonBlockingHoldLastFrame(
-			String animationCode);
-
-	public ChainableAction setValue(String string, int i);
-
+	
+	// move whilst animating - less animation frame hungry way of moving
 	public ChainableAction moveWhilstAnimating(short objId, double x, double y);
-
 	public ChainableAction moveWhilstAnimatingInY(short objId, double y);
-
-	public ChainableAction moveWhilstAnimatingNonBlocking(short objId, double x,
-			double y);
-	public ChainableAction moveWhilstAnimatingLinearNonBlocking(short objId, double x,
-			double y);
+	public ChainableAction moveWhilstAnimatingNonBlocking(short objId, double x,double y);
+	public ChainableAction moveWhilstAnimatingLinearNonBlocking(short objId, double x,double y);
 	public ChainableAction moveWhilstAnimatingLinear(short objId, double x, double y);
 	
-
-	public ChainableAction moveCameraToNewXPosition(double x,
-			double durationInSecs);
-
-	public ChainableAction moveCameraToNewXPositionNonBlocking(double x,
-			double durationInSecs);
-
-	public ChainableAction moveCameraToNewYPosition(double y,
-			double durationInSecs);
-
-	public ChainableAction moveCameraToNewYPositionNonBlocking(double y,
-			double durationInSecs);
-
-	public ChainableAction hideAll();
-	public ChainableAction setToInitialPosition(short ocode) ;
-	public ChainableAction alignBaseMiddleOfOldFrameToFrameOfNewAnimation(
-			String atid, int frame);
-	public ChainableAction alignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation(String atid);
-	public ChainableAction alignBaseMiddleOfOldFrameToLastFrameOfNewAnimation(String atid);
-	public ChainableAction share(String string);
-	public ChainableAction setSceneTalker(String atid);
-
-	public ChainableAction playSound(String stid);
-	public ChainableAction playSoundNonBlocking(String stid);
-	public ChainableAction setSoundtrack(String stid);
-	public ChainableAction setAnimationAsObjectSpecial(String atid, WalkDirection type);
-	public ChainableAction setAnimationAsSceneTalker(String atid);
-	public ChainableAction setAnimationAsObjectInitial(String atid);
-	public ChainableAction setHeadRectangle(short ocode, int index);
+	// move camera..
+	public ChainableAction moveCameraToNewXPosition(double x,double durationInSecs);
+	public ChainableAction moveCameraToNewXPositionNonBlocking(double x,double durationInSecs);
+	public ChainableAction moveCameraToNewYPosition(double y,double durationInSecs);
+	public ChainableAction moveCameraToNewYPositionNonBlocking(double y,double durationInSecs);
 	
+	// I added "look" a new verb that just takes the first frame of the animation
 	public ChainableAction look(String atid, double duration);
 	
+	// play as opposed to setTitleCard in the direct api
+	public ChainableAction playTitleCard(String text, double durationInSecs);
+	
+	// other play commands
+	public ChainableAction playSound(String stid);
+	public ChainableAction playSoundNonBlocking(String stid);
+			
+	// commands that seem direct, but all have a temporal aspect
+	public ChainableAction sleep(int milliseconds);
+	public ChainableAction swapVisibility(short ocodeA, short ocodeB);
+	public ChainableAction waitForFrame(short ocode, int frame);
+
+	// ones that really should be in the direct api
+	public ChainableAction hideAll();
+	public ChainableAction setToInitialPosition(short ocode) ;
 
 }
