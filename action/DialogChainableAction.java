@@ -74,9 +74,9 @@ implements IChainRootForDialog
 	}
 
 	@Override
-	public DialogChainableAction setValue(String key, int value) {
+	public DialogChainableAction setValue(Object key, int value) {
 		DialogSingleCallAction a =  new DialogSingleCallAction(this, Type.SetValue);
-		a.setString(key);
+		a.setString(key.toString());
 		a.setInt(value);
 		return a;
 	}

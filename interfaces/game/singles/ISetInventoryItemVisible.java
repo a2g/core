@@ -1,8 +1,9 @@
 package com.github.a2g.core.interfaces.game.singles;
 
-import com.github.a2g.core.action.ChainableAction;
+ 
+import com.github.a2g.core.interfaces.game.IChainRootCommon;
 
 public interface ISetInventoryItemVisible {
-	ChainableAction setInventoryItemVisible(int icode, boolean isVisible);
+	IChainRootCommon setInventoryItemVisible(int icode, boolean isVisible);
 
 }

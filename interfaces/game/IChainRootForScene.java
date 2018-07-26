@@ -22,12 +22,13 @@ import com.github.a2g.core.interfaces.game.singles.ISetSoundtrack;
 import com.github.a2g.core.interfaces.game.singles.ISetValue;
 import com.github.a2g.core.interfaces.game.singles.ISetVisible;
 import com.github.a2g.core.interfaces.game.singles.IShareWinning;
+import com.github.a2g.core.interfaces.game.singles.ISleep;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.A2gException;
 
-public interface IChainRootForScene extends 
-ISetVisible
+public interface IChainRootForScene extends IChainRootCommon
+, ISetVisible
 , ISetAnimationAsObjectInitial
 , ISetAnimationAsSceneTalker 
 , ISetHeadRectangleForObject 
@@ -45,6 +46,7 @@ ISetVisible
 , ISetCurrentFrame 
 , ISetDisplayName 
 , ISetInventoryItemVisible 
+, ISleep
 {
 	// all the ChainEndActions can only be the last
 	// action in a chain.
@@ -149,7 +151,7 @@ ISetVisible
 	public ChainableAction playSoundNonBlocking(String stid);
 			
 	// commands that seem direct, but all have a temporal aspect
-	public ChainableAction sleep(int milliseconds);
+	@Override public ChainableAction sleep(int milliseconds);
 	public ChainableAction swapVisibility(short ocodeA, short ocodeB);
 	public ChainableAction waitForFrame(short ocode, int frame);
 
