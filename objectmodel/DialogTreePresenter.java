@@ -19,17 +19,17 @@ package com.github.a2g.core.objectmodel;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
-import com.github.a2g.core.interfaces.internal.IDialogTreePresenter;
-import com.github.a2g.core.interfaces.internal.IHostingPanel;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTree;
+import com.github.a2g.core.interfaces.nongame.IHostingPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformDialogTreePanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenter;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromDialogTree;
 import com.github.a2g.core.primitive.GuiConstants;
 import com.google.gwt.event.shared.EventBus;
 
 public class DialogTreePresenter
 implements IDialogTreePresenter {
 	private DialogTree theDialogTree;
-	private IDialogTreePanelFromDialogTreePresenter view;
+	private IPlatformDialogTreePanel view;
 	private Set<String> recordOfSaidSpeech;
 
 	public DialogTreePresenter(final IHostingPanel panel, EventBus bus,
@@ -50,7 +50,7 @@ implements IDialogTreePresenter {
 		recordOfSaidSpeech.clear();
 	}
 
-	public IDialogTreePanelFromDialogTreePresenter getView() {
+	public IPlatformDialogTreePanel getView() {
 		return view;
 	}
 

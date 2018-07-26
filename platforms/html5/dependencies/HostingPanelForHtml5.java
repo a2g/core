@@ -16,9 +16,9 @@
 
 package com.github.a2g.core.platforms.html5.dependencies;
 
+import com.github.a2g.core.interfaces.nongame.IHostingPanel;
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.github.a2g.core.interfaces.internal.IHostingPanel;
 
 public class HostingPanelForHtml5 extends
 com.google.gwt.user.client.ui.SimplePanel implements IHostingPanel {

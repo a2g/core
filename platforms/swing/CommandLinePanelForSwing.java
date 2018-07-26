@@ -19,14 +19,14 @@ import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 
-import com.github.a2g.core.interfaces.internal.ICommandLinePanelFromCommandLinePresenter;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformCommandLinePanel;
 import com.github.a2g.core.primitive.ColorEnum;
 
 
 @SuppressWarnings("serial")
 public class CommandLinePanelForSwing
 extends java.awt.Label
-implements ICommandLinePanelFromCommandLinePresenter
+implements IPlatformCommandLinePanel
 {
 
 	public CommandLinePanelForSwing(ColorEnum fore, ColorEnum back, ColorEnum roll) {

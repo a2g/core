@@ -3,7 +3,7 @@ package com.github.a2g.core.action.performer;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 import com.google.gwt.touch.client.Point;
 
 public class WalkMultiPerformer {

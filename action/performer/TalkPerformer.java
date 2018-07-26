@@ -2,8 +2,8 @@ package com.github.a2g.core.action.performer;
 
 import java.util.ArrayList;
 
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTalkPerformer;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromTalkPerformer;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromTalkPerformer;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromTalkPerformer;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.primitive.SpeechBubble;

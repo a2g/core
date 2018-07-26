@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
-import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformVerbsPanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IVerbsPresenterFromVerbsPanel;
 import com.github.a2g.core.objectmodel.Verb;
 import com.github.a2g.core.objectmodel.Verbs;
 import com.github.a2g.core.platforms.html4.mouse.VerbMouseClickHandler;
@@ -28,7 +28,7 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
 public class VerbsPanelHtml4 extends Grid
-implements IVerbsPanelFromVerbsPresenter
+implements IPlatformVerbsPanel
 {
 	ColorEnum rolloverColor;
 	final IVerbsPresenterFromVerbsPanel mouseToPresenter;

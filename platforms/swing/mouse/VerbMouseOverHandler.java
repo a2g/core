@@ -20,7 +20,7 @@ package com.github.a2g.core.platforms.swing.mouse;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IVerbsPresenterFromVerbsPanel;
 
 
 public class VerbMouseOverHandler extends MouseAdapter

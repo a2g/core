@@ -42,28 +42,28 @@ import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
 import com.github.a2g.core.interfaces.IExtendsGameSceneLoader;
 import com.github.a2g.core.interfaces.IGameScene;
-import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
-import com.github.a2g.core.interfaces.internal.IFactory;
-import com.github.a2g.core.interfaces.internal.IHostFromMasterPresenter;
-import com.github.a2g.core.interfaces.internal.IHostingPanel;
-import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActionRunner;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromCommandLine;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTree;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromInventory;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoader;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromScenePresenter;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTimer;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTitleCard;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromVerbs;
-import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
-import com.github.a2g.core.interfaces.platform.IBundleLoader;
-import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
-import com.github.a2g.core.interfaces.platform.IPlatformResourceBundle;
-import com.github.a2g.core.interfaces.platform.IPlatformSound;
-import com.github.a2g.core.interfaces.platform.IPlatformTimer;
+import com.github.a2g.core.interfaces.nongame.IFactory;
+import com.github.a2g.core.interfaces.nongame.IHostFromMasterPresenter;
+import com.github.a2g.core.interfaces.nongame.IHostingPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IBundleLoader;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformDialogTreePanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformPackagedImage;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformResourceBundle;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformSound;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformTimer;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel.GuiStateEnum;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActionRunner;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromBundle;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromCommandLine;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromDialogTree;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromInventory;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromLoader;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromScenePresenter;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromTimer;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromTitleCard;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromVerbs;
 import com.github.a2g.core.interfaces.IGameSceneLoader;
 import com.github.a2g.core.interfaces.OnEnqueueResourcesDummyImpl;
 import com.github.a2g.core.interfaces.OnEnqueueResourcesEffectiveImpl;
@@ -93,7 +93,7 @@ public class MasterPresenter
 	private IHostFromMasterPresenter host;
 	private IPlatformTimer timer;
 	private IPlatformTimer switchTimer;
-	private IMasterPanelFromMasterPresenter masterPanel;
+	private IPlatformMasterPanel masterPanel;
 	private ActionRunner dialogActionRunner;
 	private ActionRunner doCommandActionRunner;
 	private ActionRunner onEveryFrameActionRunner;
@@ -141,7 +141,7 @@ public class MasterPresenter
 		this.verbsPresenter = new VerbsPresenter(masterPanel.getHostForVerbs(), bus, this);
 		this.loaderPresenter = new LoaderPresenter(masterPanel.getHostForLoading(), bus, this, host, factory);
 	 
-		this.masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
+		this.masterPanel.setActiveState(IPlatformMasterPanel.GuiStateEnum.Loading);
 	}
 
 	public void setCallbacks(IGameSceneLoader callbacks) {
@@ -438,7 +438,7 @@ public class MasterPresenter
 		}
 	}
 
-	public IMasterPanelFromMasterPresenter getMasterPanel() {
+	public IPlatformMasterPanel getMasterPanel() {
 		return masterPanel;
 	}
 
@@ -449,7 +449,7 @@ public class MasterPresenter
 
 	@Override
 	public void startScene() {
-		masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
+		masterPanel.setActiveState(IPlatformMasterPanel.GuiStateEnum.Loading);
 		loadInventoryFromAPI();
 		setInitialAnimationsAsCurrent();
 		scenePresenter.clearBoundaries();
@@ -462,7 +462,7 @@ public class MasterPresenter
 		callOnPreEntry();
 
 		startCallingOnEveryFrame();
-		this.masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.OnEnterScene);
+		this.masterPanel.setActiveState(IPlatformMasterPanel.GuiStateEnum.OnEnterScene);
 		callOnEnterScene();
 
 	}
@@ -488,7 +488,7 @@ public class MasterPresenter
 		scenePresenter.reset();
 
 		// set gui to blank
-		masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.Loading);
+		masterPanel.setActiveState(IPlatformMasterPanel.GuiStateEnum.Loading);
 		scenePresenter.clearEverythingExceptView(); // something like caching
 													// doesn't work if this is
 													// on.
@@ -782,12 +782,12 @@ public class MasterPresenter
 		this.commandLinePresenter.setMouseable(true);
 		this.commandLinePresenter.clear();
 
-		if (masterPanel.getActiveState() == IMasterPanelFromMasterPresenter.GuiStateEnum.OnEnterScene) {
-			this.masterPanel.setActiveState(IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene);
+		if (masterPanel.getActiveState() == IPlatformMasterPanel.GuiStateEnum.OnEnterScene) {
+			this.masterPanel.setActiveState(IPlatformMasterPanel.GuiStateEnum.ActiveScene);
 		}
-		IMasterPanelFromMasterPresenter.GuiStateEnum state = masterPanel.getActiveState();
-		if (state == IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene
-				|| state == IMasterPanelFromMasterPresenter.GuiStateEnum.DialogTree) {
+		IPlatformMasterPanel.GuiStateEnum state = masterPanel.getActiveState();
+		if (state == IPlatformMasterPanel.GuiStateEnum.ActiveScene
+				|| state == IPlatformMasterPanel.GuiStateEnum.DialogTree) {
 			if (this.host.isAutoplay() && !isAutoplayCancelled) {
 				ProcessAutoplayCommand(id);
 			}
@@ -825,7 +825,7 @@ public class MasterPresenter
 	@Override
 	public boolean isCommandLineActive() {
 		boolean isCommandLineActive = masterPanel
-				.getActiveState() == IMasterPanelFromMasterPresenter.GuiStateEnum.ActiveScene;
+				.getActiveState() == IPlatformMasterPanel.GuiStateEnum.ActiveScene;
 		return isCommandLineActive;
 	}
 
@@ -886,7 +886,7 @@ public class MasterPresenter
 	}
 
 	@Override
-	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(EventBus bus, ColorEnum fore, ColorEnum back,
+	public IPlatformDialogTreePanel createDialogTreePanel(EventBus bus, ColorEnum fore, ColorEnum back,
 			ColorEnum rollover) {
 		return host.getFactory(bus, this).createDialogTreePanel(this, fore, back, rollover);
 	}

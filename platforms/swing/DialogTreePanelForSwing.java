@@ -20,8 +20,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTreeMouse;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformDialogTreePanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromDialogTreeMouse;
 import com.github.a2g.core.objectmodel.DialogTree;
 import com.github.a2g.core.platforms.swing.mouse.DialogTreeMouseClickHandler;
 import com.github.a2g.core.platforms.swing.mouse.DialogTreeMouseOutHandler;
@@ -35,7 +35,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class DialogTreePanelForSwing
 extends JPanel
-implements IDialogTreePanelFromDialogTreePresenter
+implements IPlatformDialogTreePanel
 {
 	ColorEnum fore;
 	ColorEnum back;

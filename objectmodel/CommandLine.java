@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromCommandLine;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromCommandLine;
 import com.github.a2g.core.primitive.CodesForVerbs;
 
 public class CommandLine {

@@ -5,13 +5,13 @@ import java.util.List;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
-import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
 import com.github.a2g.core.primitive.SpeechBubble;
 import com.github.a2g.core.primitive.RectF;
-import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel.GuiStateEnum;
+import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 import com.google.gwt.touch.client.Point;
 
 /** 

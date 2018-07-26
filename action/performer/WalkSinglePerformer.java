@@ -16,11 +16,11 @@
 
 package com.github.a2g.core.action.performer;
  
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.performer.IMovePerformer;
-import com.github.a2g.core.interfaces.performer.IScalePerformer;
-import com.github.a2g.core.interfaces.performer.ISwitchPerformer;
-import com.github.a2g.core.interfaces.performer.IWalkPerformer;
+import com.github.a2g.core.interfaces.nongame.performer.IMovePerformer;
+import com.github.a2g.core.interfaces.nongame.performer.IScalePerformer;
+import com.github.a2g.core.interfaces.nongame.performer.ISwitchPerformer;
+import com.github.a2g.core.interfaces.nongame.performer.IWalkPerformer;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 import com.google.gwt.touch.client.Point;
 
 /**

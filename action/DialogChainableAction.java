@@ -20,7 +20,7 @@ import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.ConstantsForAPI;
-import com.github.a2g.core.interfaces.methods.IChainRootForDialog;
+import com.github.a2g.core.interfaces.game.IChainRootForDialog;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.google.gwt.touch.client.Point;
 

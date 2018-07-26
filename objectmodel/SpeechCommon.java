@@ -2,8 +2,8 @@ package com.github.a2g.core.objectmodel;
 
 import java.util.ArrayList;
 
-import com.github.a2g.core.interfaces.internal.IMeasureTextWidthAndHeight;
-import com.github.a2g.core.interfaces.platform.IPlatformDrawCalls;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformDrawCalls;
+import com.github.a2g.core.interfaces.nongame.platform.singles.IMeasureTextWidthAndHeight;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectI;

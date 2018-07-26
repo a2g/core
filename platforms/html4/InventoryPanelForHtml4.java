@@ -19,10 +19,10 @@ import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.interfaces.internal.IInventoryPanelFromInventoryPresenter;
-import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
-import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
-import com.github.a2g.core.interfaces.internal.IImagePanel;
+import com.github.a2g.core.interfaces.nongame.IImagePanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformInventoryPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformPackagedImage;
+import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromInventoryPanel;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
@@ -39,7 +39,7 @@ public class InventoryPanelForHtml4
 extends AbsolutePanel
 implements
 IImagePanel
-, IInventoryPanelFromInventoryPresenter
+, IPlatformInventoryPanel
 {
 	final FlowPanel arrowLeft;
 	final FlowPanel arrowRight;

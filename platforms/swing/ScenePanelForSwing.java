@@ -45,12 +45,12 @@ import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.objectmodel.PointFWithNeighbours;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.performer.TalkPerformer;
-import com.github.a2g.core.interfaces.internal.ICommandLinePresenterFromSceneMouseOver;
-import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
-import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
-import com.github.a2g.core.interfaces.internal.IImagePanel;
+import com.github.a2g.core.interfaces.nongame.IImagePanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformPackagedImage;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformScenePanel;
+import com.github.a2g.core.interfaces.nongame.presenter.ICommandLinePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromScenePanel;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointI;
@@ -67,7 +67,7 @@ import com.github.a2g.core.platforms.swing.mouse.SceneMouseOverHandler;
 import com.google.gwt.event.shared.EventBus;
 
 @SuppressWarnings("serial")
-public class ScenePanelForSwing extends JPanel implements IScenePanelFromScenePresenter, IImagePanel, ActionListener {
+public class ScenePanelForSwing extends JPanel implements IPlatformScenePanel, IImagePanel, ActionListener {
 	private static final Logger IMAGE_DUMP = Logger.getLogger(LogNames.IMAGE_DUMP.toString());
 
 	int width;

@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTreeMouse;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformDialogTreePanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromDialogTreeMouse;
 import com.github.a2g.core.objectmodel.DialogTree;
 import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.DialogTreeMouseOutHandler;
@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 
 public class DialogTreePanelForHtml4 extends Grid implements
-IDialogTreePanelFromDialogTreePresenter {
+IPlatformDialogTreePanel {
 	ColorEnum rolloverColor;
 	ColorEnum foregroundColor;
 	private IMasterPresenterFromDialogTreeMouse master;

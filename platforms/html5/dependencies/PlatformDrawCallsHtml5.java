@@ -1,6 +1,6 @@
 package com.github.a2g.core.platforms.html5.dependencies;
 
-import com.github.a2g.core.interfaces.platform.IPlatformDrawCalls;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformDrawCalls;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.canvas.dom.client.Context2d;
 

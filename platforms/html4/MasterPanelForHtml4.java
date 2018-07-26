@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.internal.IHostingPanel;
-import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter;
+import com.github.a2g.core.interfaces.nongame.IHostingPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel;
 import com.github.a2g.core.platforms.html4.dependencies.HostingPanelForHtml4;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -25,7 +25,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MasterPanelForHtml4 extends VerticalPanel implements
-IMasterPanelFromMasterPresenter {
+IPlatformMasterPanel {
 	HostingPanelForHtml4 hostForCommandLine;
 	HostingPanelForHtml4 hostForInventory;
 	HostingPanelForHtml4 hostForVerbs;

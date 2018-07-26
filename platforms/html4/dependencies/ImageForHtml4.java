@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.platforms.html4.dependencies;
 
-import com.github.a2g.core.interfaces.internal.IImagePanel;
+import com.github.a2g.core.interfaces.nongame.IImagePanel;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.primitive.PointI;
 

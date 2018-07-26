@@ -17,13 +17,13 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.performer.SingleCallPerformer;
-import com.github.a2g.core.interfaces.internal.IActionRunnerFromBaseAction;
-import com.github.a2g.core.interfaces.internal.IBaseActionFromSystemAnimation;
-import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.platform.IPlatformAnimation;
+import com.github.a2g.core.interfaces.nongame.IActionRunnerFromBaseAction;
+import com.github.a2g.core.interfaces.nongame.IBaseActionFromSystemAnimation;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformAnimation;
+import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 /**
  * documentation for BaseAction
  * @author Admin

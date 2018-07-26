@@ -22,7 +22,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
-import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformPackagedImage;
 
 public class PlatformPackagedImageForSwing implements IPlatformPackagedImage {
 	String imagePath;

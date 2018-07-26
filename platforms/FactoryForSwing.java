@@ -18,26 +18,26 @@ package com.github.a2g.core.platforms;
 
 import javax.swing.JOptionPane;
 
-import com.github.a2g.core.interfaces.internal.IBaseActionFromSystemAnimation;
-import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
-import com.github.a2g.core.interfaces.internal.ICommandLinePanelFromCommandLinePresenter;
-import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
-import com.github.a2g.core.interfaces.internal.IFactory;
-import com.github.a2g.core.interfaces.internal.IInventoryPanelFromInventoryPresenter;
-import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
-import com.github.a2g.core.interfaces.internal.ILoaderPanelFromLoaderPresenter;
-import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTreeMouse;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoaderMouse;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTimer;
-import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
-import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
-import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
-import com.github.a2g.core.interfaces.platform.IPlatformAnimation;
-import com.github.a2g.core.interfaces.platform.IPlatformSound;
-import com.github.a2g.core.interfaces.platform.IPlatformTimer;
+import com.github.a2g.core.interfaces.nongame.IBaseActionFromSystemAnimation;
+import com.github.a2g.core.interfaces.nongame.IBoundaryCalculator;
+import com.github.a2g.core.interfaces.nongame.IFactory;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformAnimation;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformCommandLinePanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformDialogTreePanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformInventoryPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformLoaderPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformScenePanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformSound;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformTimer;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformVerbsPanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromInventoryPanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromDialogTreeMouse;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromLoaderMouse;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromTimer;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromBoundaryCalculator;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromScenePanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IVerbsPresenterFromVerbsPanel;
 import com.github.a2g.core.objectmodel.BoundaryCalculator;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.platforms.swing.CommandLinePanelForSwing;
@@ -70,39 +70,39 @@ public class FactoryForSwing implements IFactory {
 	}
 	
 	@Override
-	public ICommandLinePanelFromCommandLinePresenter createCommandLinePanel(
+	public IPlatformCommandLinePanel createCommandLinePanel(
 			ColorEnum fore, ColorEnum back, ColorEnum roll) {
 		return new CommandLinePanelForSwing(fore, back, roll);
 	}
 
 	@Override
-	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
+	public IPlatformDialogTreePanel createDialogTreePanel(
 			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore, ColorEnum back, ColorEnum roll) {
 		return new DialogTreePanelForSwing(master, fore, back, roll);
 	}
 	
 	@Override
-	public IInventoryPanelFromInventoryPresenter createInventoryPanel(
+	public IPlatformInventoryPanel createInventoryPanel(
 			IInventoryPresenterFromInventoryPanel api, ColorEnum fore,
 			ColorEnum back, ColorEnum rollover) {
 		return new InventoryPanelForSwing(bus, api, fore, back);
 	}
 	
 	@Override
-	public ILoaderPanelFromLoaderPresenter createLoaderPanel(
+	public IPlatformLoaderPanel createLoaderPanel(
 			final IMasterPresenterFromLoaderMouse api, ColorEnum fore,
 			ColorEnum back) {
 		return new LoaderPanelForSwing(api, fore, back);
 	}
 
 	@Override
-	public IMasterPanelFromMasterPresenter createMasterPanel(int width,
+	public IPlatformMasterPanel createMasterPanel(int width,
 			int height, ColorEnum back) {
 		return new MasterPanelForSwing(width, height, back);
 	}
 
 	@Override
-	public IScenePanelFromScenePresenter createScenePanel(IScenePresenterFromScenePanel scenePres) {
+	public IPlatformScenePanel createScenePanel(IScenePresenterFromScenePanel scenePres) {
 		return new ScenePanelForSwing(bus, scenePres,
 				master.getCommandLinePresenter());
 	}
@@ -119,7 +119,7 @@ public class FactoryForSwing implements IFactory {
  
 
 	@Override
-	public IVerbsPanelFromVerbsPresenter createVerbsPanel(
+	public IPlatformVerbsPanel createVerbsPanel(
 			IVerbsPresenterFromVerbsPanel api, ColorEnum fore, ColorEnum back) {
 		return new VerbsPanelForSwing(api, fore, back);
 	}
@@ -129,10 +129,6 @@ public class FactoryForSwing implements IFactory {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
-	@Override
-	public IBoundaryCalculator createBoundaryCalculator(
-			IScenePresenterFromBoundaryCalculator callbacks) {
-		return new BoundaryCalculator(callbacks);
-	}
+
 
 }

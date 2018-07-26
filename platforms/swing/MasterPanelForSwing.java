@@ -24,8 +24,8 @@ import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.internal.IHostingPanel;
-import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter;
+import com.github.a2g.core.interfaces.nongame.IHostingPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel;
 import com.github.a2g.core.platforms.swing.dependencies.HostingPanelForSwing;
 import com.github.a2g.core.primitive.ColorEnum;
 
@@ -33,7 +33,7 @@ import com.github.a2g.core.primitive.ColorEnum;
 @SuppressWarnings("serial")
 public class MasterPanelForSwing
 extends JPanel
-implements IMasterPanelFromMasterPresenter
+implements IPlatformMasterPanel
 {
 	HostingPanelForSwing hostForCommandLineF;
 	HostingPanelForSwing hostForInventoryF;

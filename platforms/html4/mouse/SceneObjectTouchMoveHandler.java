@@ -17,13 +17,13 @@
 package com.github.a2g.core.platforms.html4.mouse;
 
 
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromSceneTouch;
 import com.google.gwt.animation.client.Animation;
 import com.google.gwt.dom.client.Touch;
 import com.google.gwt.event.dom.client.TouchMoveEvent;
 import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.dom.client.TouchStartHandler;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneTouch;
 
 class CustomAnimation extends Animation
 {

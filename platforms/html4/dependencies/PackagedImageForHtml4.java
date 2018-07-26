@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.platforms.html4.dependencies;
 
-import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformPackagedImage;
 
 public class PackagedImageForHtml4 implements IPlatformPackagedImage {
 	com.google.gwt.resources.client.ImageResource img;

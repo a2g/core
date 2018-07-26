@@ -20,13 +20,13 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.github.a2g.core.interfaces.internal.IActionRunnerFromBaseAction;
-import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IFactory;
-import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActionRunner;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.IActionRunnerFromBaseAction;
+import com.github.a2g.core.interfaces.nongame.IFactory;
+import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActionRunner;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 import com.github.a2g.core.primitive.LogNames;
 
 public class ActionRunner implements IActionRunnerFromBaseAction {

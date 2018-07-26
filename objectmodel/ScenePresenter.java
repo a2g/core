@@ -23,13 +23,13 @@ import java.util.Vector;
 import java.util.logging.Logger;
 
 import com.github.a2g.core.action.performer.TalkPerformer;
-import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
-import com.github.a2g.core.interfaces.internal.IFactory;
-import com.github.a2g.core.interfaces.internal.IHostingPanel;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromScenePresenter;
-import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
-import com.github.a2g.core.interfaces.internal.IScenePresenter;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
+import com.github.a2g.core.interfaces.nongame.IBoundaryCalculator;
+import com.github.a2g.core.interfaces.nongame.IFactory;
+import com.github.a2g.core.interfaces.nongame.IHostingPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformScenePanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromScenePresenter;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenter;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
 import com.google.gwt.touch.client.Point;
@@ -45,7 +45,7 @@ public class ScenePresenter implements IScenePresenter,
 	private int width;
 	private int height;
 	private Scene scene;
-	private IScenePanelFromScenePresenter view;
+	private IPlatformScenePanel view;
 	private double cameraX;
 	private double cameraY;
 
@@ -71,7 +71,7 @@ public class ScenePresenter implements IScenePresenter,
 		this.cameraY = 0.0;
 		this.width = 320;
 		//this.height = 180;
-		this.boundaryCalculator = factory.createBoundaryCalculator(this);
+		this.boundaryCalculator = new BoundaryCalculator(this);
 
 		this.scene = new Scene();
 		this.view = master.getFactory().createScenePanel(this);
@@ -104,11 +104,11 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	@Override
-	public IScenePanelFromScenePresenter getView() {
+	public IPlatformScenePanel getView() {
 		return view;
 	}
 
-	public void setView(IScenePanelFromScenePresenter view) {
+	public void setView(IPlatformScenePanel view) {
 		this.view = view;
 	}
 
@@ -551,6 +551,11 @@ public class ScenePresenter implements IScenePresenter,
 
 	public double getPopupDisplayDuration() {
 		return 1;
+	}
+
+	@Override
+	public IBoundaryCalculator getBoundaryCalculator() {
+		return this.boundaryCalculator;
 	}
 
 };

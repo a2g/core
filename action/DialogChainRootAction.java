@@ -16,12 +16,12 @@
 
 package com.github.a2g.core.action;
 
-import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IDialogTreePresenterFromDoBranchAction;
-import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromActions;
-import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter.GuiStateEnum;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel.GuiStateEnum;
+import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromDoBranchAction;
+import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 
 public class DialogChainRootAction extends DialogChainableAction {
 

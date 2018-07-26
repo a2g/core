@@ -17,9 +17,9 @@
 package com.github.a2g.core.objectmodel;
 
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.interfaces.internal.ILoaderPresenterFromLoaderItem;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromBundle;
-import com.github.a2g.core.interfaces.platform.IPlatformResourceBundle;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformResourceBundle;
+import com.github.a2g.core.interfaces.nongame.presenter.ILoaderPresenterFromLoaderItem;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromBundle;
 import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.event.dom.client.LoadEvent;
 

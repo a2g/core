@@ -36,10 +36,10 @@ import javax.swing.JPanel;
 
 import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.interfaces.internal.IInventoryPanelFromInventoryPresenter;
-import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
-import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
-import com.github.a2g.core.interfaces.internal.IImagePanel;
+import com.github.a2g.core.interfaces.nongame.IImagePanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformInventoryPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformPackagedImage;
+import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromInventoryPanel;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
@@ -53,7 +53,7 @@ import com.google.gwt.event.shared.EventBus;
 public class InventoryPanelForSwing
 extends JPanel
 implements IImagePanel
-, IInventoryPanelFromInventoryPresenter
+, IPlatformInventoryPanel
 , ActionListener
 {
 	class Structure

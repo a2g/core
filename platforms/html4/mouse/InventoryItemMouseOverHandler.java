@@ -21,7 +21,7 @@ import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.web.bindery.event.shared.EventBus;
 import com.github.a2g.core.event.SetRolloverEvent;
-import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryMouseOver;
+import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromInventoryMouseOver;
 
 
 public class InventoryItemMouseOverHandler implements MouseMoveHandler {

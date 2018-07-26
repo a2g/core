@@ -19,11 +19,11 @@ package com.github.a2g.core.objectmodel;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-import com.github.a2g.core.interfaces.internal.IHostingPanel;
-import com.github.a2g.core.interfaces.internal.IInventoryPanelFromInventoryPresenter;
-import com.github.a2g.core.interfaces.internal.IInventoryPresenter;
-import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromInventory;
+import com.github.a2g.core.interfaces.nongame.IHostingPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformInventoryPanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenter;
+import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromInventoryPanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromInventory;
 import com.github.a2g.core.primitive.GuiConstants;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectI;
@@ -33,7 +33,7 @@ public class InventoryPresenter implements
 IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 
 	private Inventory theInventory;
-	private IInventoryPanelFromInventoryPresenter view;
+	private IPlatformInventoryPanel view;
 	EventBus eventBus;
 	private TreeMap<Integer, InventoryItem> mapOfInventoryByICode;
 	IMasterPresenterFromInventory callback;
@@ -179,7 +179,7 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 		view.clear();
 	}
 
-	public IInventoryPanelFromInventoryPresenter getView() {
+	public IPlatformInventoryPanel getView() {
 		return view;
 	}
 

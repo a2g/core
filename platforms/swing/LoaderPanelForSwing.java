@@ -31,14 +31,14 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.border.Border;
 
-import com.github.a2g.core.interfaces.internal.ILoaderPanelFromLoaderPresenter;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoaderMouse;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformLoaderPanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.primitive.ColorEnum;
 
 @SuppressWarnings("serial")
 public class LoaderPanelForSwing
 extends JPanel
-implements ILoaderPanelFromLoaderPresenter
+implements IPlatformLoaderPanel
 {
 	Label progress;
 	Button reload;

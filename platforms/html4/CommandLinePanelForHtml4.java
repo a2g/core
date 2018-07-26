@@ -16,13 +16,13 @@
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.internal.ICommandLinePanelFromCommandLinePresenter;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformCommandLinePanel;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.UIObject;
 
 public class CommandLinePanelForHtml4 extends Label implements
-ICommandLinePanelFromCommandLinePresenter {
+IPlatformCommandLinePanel {
 	public CommandLinePanelForHtml4(ColorEnum fore, ColorEnum back, ColorEnum roll) {
 		this.setText(" ");
 		this.getElement().getStyle().setProperty("color", fore.toString());

@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.internal.IBaseActionFromSystemAnimation;
-import com.github.a2g.core.interfaces.platform.IPlatformAnimation;
+import com.github.a2g.core.interfaces.nongame.IBaseActionFromSystemAnimation;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformAnimation;
 
 public class PlatformAnimationForHtml4 extends
 com.google.gwt.animation.client.Animation implements IPlatformAnimation {

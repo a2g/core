@@ -5,8 +5,8 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
+import com.github.a2g.core.interfaces.nongame.IBoundaryCalculator;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromBoundaryCalculator;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.RectF;
 

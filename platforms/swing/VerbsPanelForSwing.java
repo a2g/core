@@ -26,8 +26,8 @@ import java.awt.Label;
 
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
-import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformVerbsPanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IVerbsPresenterFromVerbsPanel;
 import com.github.a2g.core.objectmodel.Verb;
 import com.github.a2g.core.objectmodel.Verbs;
 import com.github.a2g.core.platforms.swing.mouse.VerbMouseClickHandler;
@@ -38,7 +38,7 @@ import com.github.a2g.core.primitive.ColorEnum;
 
 @SuppressWarnings("serial")
 public class VerbsPanelForSwing
-extends JPanel implements IVerbsPanelFromVerbsPresenter
+extends JPanel implements IPlatformVerbsPanel
 {
 	Verbs verbs;
 	GridLayout grid;

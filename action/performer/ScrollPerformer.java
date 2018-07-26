@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.action.performer;
 
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromScrollPerformer;
-import com.github.a2g.core.interfaces.performer.IScrollPerformer;
+import com.github.a2g.core.interfaces.nongame.performer.IScrollPerformer;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromScrollPerformer;
 import com.google.gwt.touch.client.Point;
 
 

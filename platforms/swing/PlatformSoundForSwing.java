@@ -2,7 +2,7 @@ package com.github.a2g.core.platforms.swing;
 
 import java.io.File;
 
-import com.github.a2g.core.interfaces.platform.IPlatformSound;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformSound;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer; 

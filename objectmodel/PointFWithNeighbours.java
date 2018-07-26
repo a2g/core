@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import com.github.a2g.core.interfaces.internal.IGetNeighbours;
+import com.github.a2g.core.interfaces.nongame.IGetNeighbours;
 import com.google.gwt.touch.client.Point;
 
 public class PointFWithNeighbours extends Point implements IGetNeighbours<PointFWithNeighbours> 

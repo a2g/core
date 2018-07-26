@@ -1,6 +1,6 @@
 package com.github.a2g.core.platforms.html5.dependencies;
 
-import com.github.a2g.core.interfaces.platform.IPlatformFontCalls;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformFontCalls;
 import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.touch.client.Point;
 

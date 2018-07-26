@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import com.github.a2g.core.interfaces.internal.IGetNeighbours;
+import com.github.a2g.core.interfaces.nongame.IGetNeighbours;
 
 
 class PathComparator implements Comparator<Path<?>>

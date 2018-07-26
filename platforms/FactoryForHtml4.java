@@ -31,27 +31,27 @@ import com.github.a2g.core.platforms.html4.VerbsPanelHtml4;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
-import com.github.a2g.core.interfaces.internal.IBaseActionFromSystemAnimation;
-import com.github.a2g.core.interfaces.internal.IBoundaryCalculator;
-import com.github.a2g.core.interfaces.internal.ICommandLinePanelFromCommandLinePresenter;
-import com.github.a2g.core.interfaces.internal.IDialogTreePanelFromDialogTreePresenter;
-import com.github.a2g.core.interfaces.internal.IFactory;
-import com.github.a2g.core.interfaces.internal.IHostFromMasterPresenter;
-import com.github.a2g.core.interfaces.internal.IInventoryPanelFromInventoryPresenter;
-import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
-import com.github.a2g.core.interfaces.internal.ILoaderPanelFromLoaderPresenter;
-import com.github.a2g.core.interfaces.internal.IMasterPanelFromMasterPresenter;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromDialogTreeMouse;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoaderMouse;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTimer;
-import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromBoundaryCalculator;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
-import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
-import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
-import com.github.a2g.core.interfaces.platform.IPlatformAnimation;
-import com.github.a2g.core.interfaces.platform.IPlatformSound;
-import com.github.a2g.core.interfaces.platform.IPlatformTimer;
+import com.github.a2g.core.interfaces.nongame.IBaseActionFromSystemAnimation;
+import com.github.a2g.core.interfaces.nongame.IBoundaryCalculator;
+import com.github.a2g.core.interfaces.nongame.IFactory;
+import com.github.a2g.core.interfaces.nongame.IHostFromMasterPresenter;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformAnimation;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformCommandLinePanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformDialogTreePanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformInventoryPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformLoaderPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformScenePanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformSound;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformTimer;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformVerbsPanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromInventoryPanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromDialogTreeMouse;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromLoaderMouse;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromTimer;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromBoundaryCalculator;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromScenePanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IVerbsPresenterFromVerbsPanel;
 
 public class FactoryForHtml4
 implements IFactory {
@@ -73,13 +73,13 @@ implements IFactory {
 	}
 	
 	@Override
-	public ICommandLinePanelFromCommandLinePresenter createCommandLinePanel(
+	public IPlatformCommandLinePanel createCommandLinePanel(
 			ColorEnum fore, ColorEnum back, ColorEnum roll) {
 		return new CommandLinePanelForHtml4(fore, back, roll);
 	}
 
 @Override
-	public IDialogTreePanelFromDialogTreePresenter createDialogTreePanel(
+	public IPlatformDialogTreePanel createDialogTreePanel(
 			IMasterPresenterFromDialogTreeMouse master, ColorEnum fore,
 			ColorEnum back, ColorEnum roll) {
 		return new DialogTreePanelForHtml4(master, fore, back, roll);
@@ -87,27 +87,27 @@ implements IFactory {
 	}
 
 	@Override
-	public IInventoryPanelFromInventoryPresenter createInventoryPanel(
+	public IPlatformInventoryPanel createInventoryPanel(
 			IInventoryPresenterFromInventoryPanel api, ColorEnum fore,
 			ColorEnum back, ColorEnum rollover) {
 		return new InventoryPanelForHtml4(api, fore, back, rollover);
 	}
 
 	@Override
-	public ILoaderPanelFromLoaderPresenter createLoaderPanel(
+	public IPlatformLoaderPanel createLoaderPanel(
 			final IMasterPresenterFromLoaderMouse api, ColorEnum fore,
 			ColorEnum back) {
 		return new LoaderPanelHtml4(api, fore, back);
 	}
 
 	@Override
-	public IMasterPanelFromMasterPresenter createMasterPanel(int width,
+	public IPlatformMasterPanel createMasterPanel(int width,
 			int height, ColorEnum back) {
 		return new MasterPanelForHtml4(width, height, back);
 	}
 
 	@Override
-	public IScenePanelFromScenePresenter createScenePanel(IScenePresenterFromScenePanel scenePres) {
+	public IPlatformScenePanel createScenePanel(IScenePresenterFromScenePanel scenePres) {
 		return new ScenePanelForHtml4(bus, master.getScenePresenter());
 	}
 	
@@ -123,7 +123,7 @@ implements IFactory {
  
 
 	@Override
-	public IVerbsPanelFromVerbsPresenter createVerbsPanel(
+	public IPlatformVerbsPanel createVerbsPanel(
 			IVerbsPresenterFromVerbsPanel api, ColorEnum foreground,
 			ColorEnum background) {
 		return new VerbsPanelHtml4(api, foreground,
@@ -134,10 +134,5 @@ implements IFactory {
 		Window.alert(text);
 	}
 
-	@Override
-	public IBoundaryCalculator createBoundaryCalculator(
-			IScenePresenterFromBoundaryCalculator callbacks) {
-		return new BoundaryCalculator(callbacks);
-	}
 
 }

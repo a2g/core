@@ -17,8 +17,8 @@
 package com.github.a2g.core.platforms.html4.mouse;
 
 
-import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.github.a2g.core.interfaces.nongame.presenter.IVerbsPresenterFromVerbsPanel;
 import com.google.gwt.event.dom.client.ClickEvent;
 
 

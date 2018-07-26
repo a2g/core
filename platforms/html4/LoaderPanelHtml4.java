@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.internal.ILoaderPanelFromLoaderPresenter;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoaderMouse;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformLoaderPanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Grid;
@@ -26,7 +26,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class LoaderPanelHtml4 extends VerticalPanel implements
-ILoaderPanelFromLoaderPresenter {
+IPlatformLoaderPanel {
 
 	Label progress;
 	//Button reload;

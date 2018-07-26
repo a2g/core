@@ -3,7 +3,7 @@ package com.github.a2g.core.platforms.swing.dependencies;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
-import com.github.a2g.core.interfaces.platform.IPlatformFontCalls;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformFontCalls;
 import com.google.gwt.touch.client.Point;
 
 public class PlatformFontCallsSwing 

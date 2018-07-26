@@ -1,6 +1,6 @@
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.platform.IPlatformSound;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformSound;
 import com.google.gwt.dom.client.MediaElement;
 import com.google.gwt.media.client.Audio;
 

@@ -21,7 +21,7 @@ import java.awt.event.MouseAdapter;
 
 import javax.swing.JPanel;
 
-import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromInventoryPanel;
 
 
 public class InventoryMouseClickHandler extends MouseAdapter

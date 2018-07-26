@@ -17,17 +17,17 @@
 package com.github.a2g.core.objectmodel;
 
 import com.google.gwt.event.shared.EventBus;
-import com.github.a2g.core.interfaces.internal.IHostingPanel;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromVerbs;
-import com.github.a2g.core.interfaces.internal.IVerbsPanelFromVerbsPresenter;
-import com.github.a2g.core.interfaces.internal.IVerbsPresenter;
-import com.github.a2g.core.interfaces.internal.IVerbsPresenterFromVerbsPanel;
+import com.github.a2g.core.interfaces.nongame.IHostingPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformVerbsPanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromVerbs;
+import com.github.a2g.core.interfaces.nongame.presenter.IVerbsPresenter;
+import com.github.a2g.core.interfaces.nongame.presenter.IVerbsPresenterFromVerbsPanel;
 import com.github.a2g.core.primitive.GuiConstants;
 
 public class VerbsPresenter implements IVerbsPresenterFromVerbsPanel,
 IVerbsPresenter {
 	private Verbs theVerbs;
-	private IVerbsPanelFromVerbsPresenter view;
+	private IPlatformVerbsPanel view;
 	private int widthOfScene;
 	private int widthOfInventory;
 	IMasterPresenterFromVerbs callback;
@@ -53,7 +53,7 @@ IVerbsPresenter {
 		return theVerbs;
 	}
 
-	public IVerbsPanelFromVerbsPresenter getView() {
+	public IPlatformVerbsPanel getView() {
 		return view;
 	}
 

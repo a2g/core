@@ -19,8 +19,8 @@ package com.github.a2g.core.action.performer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromMovePerformer;
-import com.github.a2g.core.interfaces.performer.IMovePerformer;
+import com.github.a2g.core.interfaces.nongame.performer.IMovePerformer;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromMovePerformer;
 import com.github.a2g.core.primitive.LogNames;
 import com.google.gwt.touch.client.Point;
 

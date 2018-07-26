@@ -3,7 +3,7 @@ package com.github.a2g.core.primitive;
 
 import java.util.ArrayList;
 
-import com.github.a2g.core.interfaces.internal.IMeasureTextWidthAndHeight;
+import com.github.a2g.core.interfaces.nongame.platform.singles.IMeasureTextWidthAndHeight;
 import com.github.a2g.core.primitive.LinesAndMaxWidth.LineAndPos;
 import com.google.gwt.touch.client.Point;
 

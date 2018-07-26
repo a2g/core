@@ -23,10 +23,10 @@ import com.github.a2g.core.event.ExecuteCommandEvent;
 import com.github.a2g.core.event.ExecuteCommandEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
 import com.github.a2g.core.event.SetRolloverEventHandlerAPI;
-import com.github.a2g.core.interfaces.internal.ICommandLinePanelFromCommandLinePresenter;
-import com.github.a2g.core.interfaces.internal.ICommandLinePresenter;
-import com.github.a2g.core.interfaces.internal.IHostingPanel;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromCommandLine;
+import com.github.a2g.core.interfaces.nongame.IHostingPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformCommandLinePanel;
+import com.github.a2g.core.interfaces.nongame.presenter.ICommandLinePresenter;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromCommandLine;
 import com.github.a2g.core.primitive.GuiConstants;
 import com.github.a2g.core.primitive.LogNames;
 import com.google.gwt.event.shared.EventBus;
@@ -36,7 +36,7 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 	private static final Logger COMMANDS_VIA_GUI = Logger.getLogger(LogNames.COMMANDS_VIA_GUI.toString());
 
 	private IMasterPresenterFromCommandLine api;
-	private ICommandLinePanelFromCommandLinePresenter view;
+	private IPlatformCommandLinePanel view;
 	private CommandLine model;
 	private double debugX;
 	private double debugY;
@@ -161,7 +161,7 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 
 	}
 
-	public ICommandLinePanelFromCommandLinePresenter getView() {
+	public IPlatformCommandLinePanel getView() {
 		return view;
 	}
 

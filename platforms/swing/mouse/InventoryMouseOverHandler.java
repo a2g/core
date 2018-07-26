@@ -21,7 +21,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
-import com.github.a2g.core.interfaces.internal.IInventoryPresenterFromInventoryPanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromInventoryPanel;
 import com.github.a2g.core.platforms.swing.InventoryPanelForSwing;
 
 

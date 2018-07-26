@@ -4,7 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color; 
 import java.awt.Graphics2D;
 
-import com.github.a2g.core.interfaces.platform.IPlatformDrawCalls;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformDrawCalls;
 import com.github.a2g.core.primitive.ColorEnum;
  
 

@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.action.performer;
 
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromScalePerformer;
-import com.github.a2g.core.interfaces.performer.IScalePerformer;
+import com.github.a2g.core.interfaces.nongame.performer.IScalePerformer;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromScalePerformer;
 
 
 public class ScalePerformer implements IScalePerformer

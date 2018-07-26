@@ -16,18 +16,18 @@ inve * Copyright 2012 Anthony Cassidy
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.internal.IFactory;
-import com.github.a2g.core.interfaces.internal.IHostFromMasterPresenter;
-import com.github.a2g.core.interfaces.internal.IHostingPanel;
-import com.github.a2g.core.interfaces.internal.ILoaderPanelFromLoaderPresenter;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoader;
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromLoaderMouse;
+import com.github.a2g.core.interfaces.nongame.IFactory;
+import com.github.a2g.core.interfaces.nongame.IHostFromMasterPresenter;
+import com.github.a2g.core.interfaces.nongame.IHostingPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformLoaderPanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromLoader;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.primitive.GuiConstants;
 import com.google.gwt.event.shared.EventBus;
 
 public class LoaderPresenter implements IMasterPresenterFromLoaderMouse {
 	private Loader loader;
-	private ILoaderPanelFromLoaderPresenter view;
+	private IPlatformLoaderPanel view;
 	int current;
 	int total;
 	private String name;
@@ -79,7 +79,7 @@ public class LoaderPresenter implements IMasterPresenterFromLoaderMouse {
 		return loader;
 	}
 
-	public ILoaderPanelFromLoaderPresenter getView() {
+	public IPlatformLoaderPanel getView() {
 		return view;
 	}
 

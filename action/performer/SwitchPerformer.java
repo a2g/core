@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.action.performer;
 
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromSwitchPerformer;
-import com.github.a2g.core.interfaces.performer.ISwitchPerformer;
+import com.github.a2g.core.interfaces.nongame.performer.ISwitchPerformer;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromSwitchPerformer;
 import com.google.gwt.touch.client.Point;
 
 public class SwitchPerformer implements ISwitchPerformer

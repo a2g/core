@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.interfaces;
 
-import com.github.a2g.core.interfaces.methods.IOnEnqueueResources;
+import com.github.a2g.core.interfaces.game.IOnEnqueueResources;
 
 /**
  * Each scene  is represented by a class that implements the following 6 methods:

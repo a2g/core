@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.platforms.html4;
 
-import com.github.a2g.core.interfaces.internal.IMasterPresenterFromTimer;
-import com.github.a2g.core.interfaces.platform.IPlatformTimer;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformTimer;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromTimer;
 
 public class PlatformTimerForHtml4 extends com.google.gwt.user.client.Timer implements
 IPlatformTimer {

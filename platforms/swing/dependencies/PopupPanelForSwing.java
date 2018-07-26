@@ -24,8 +24,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromSwingPopupPanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformScenePanel;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromSwingPopupPanel;
 import com.github.a2g.core.platforms.swing.ScenePanelForSwing;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
@@ -58,7 +58,7 @@ public class PopupPanelForSwing
 	public void setPopupPosition(int x, int y)
 	{
 		//api.getlocationOnScreen
-		IScenePanelFromScenePresenter sv = toScene.getView();
+		IPlatformScenePanel sv = toScene.getView();
 		ScenePanelForSwing spj = (ScenePanelForSwing)sv;
 		PointI p = spj.getTopLeft();
 		popup.setLocation(p.getX()+ x, p.getY()+y);

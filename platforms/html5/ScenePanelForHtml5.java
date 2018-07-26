@@ -26,12 +26,12 @@ import com.google.gwt.canvas.dom.client.TextMetrics;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.performer.TalkPerformer;
-import com.github.a2g.core.interfaces.internal.ICommandLinePresenterFromSceneMouseOver;
-import com.github.a2g.core.interfaces.internal.IScenePanelFromScenePresenter;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromSceneMouseOver;
-import com.github.a2g.core.interfaces.internal.IScenePresenterFromScenePanel;
-import com.github.a2g.core.interfaces.platform.IPlatformPackagedImage;
-import com.github.a2g.core.interfaces.internal.IImagePanel;
+import com.github.a2g.core.interfaces.nongame.IImagePanel;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformPackagedImage;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformScenePanel;
+import com.github.a2g.core.interfaces.nongame.presenter.ICommandLinePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromSceneMouseOver;
+import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromScenePanel;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
@@ -56,7 +56,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class ScenePanelForHtml5 
 extends VerticalPanel 
 implements IImagePanel, 
-IScenePanelFromScenePresenter {
+IPlatformScenePanel {
 	// private static final Logger HTML5CANVAS =
 	// Logger.getLogger(LogNames.HTML5CANVAS);
 
