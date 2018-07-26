@@ -73,7 +73,7 @@ public class LinesAndMaxWidth
 	 
 		// We split the text by words 
 		String[] words = speech.split(" ");
-		String lastLine = words[0];
+		String lastLine = words.length>0? words[0] :" ";
 		double lastWidth = ctx.measureTextWidthAndHeight(lastLine).getX();
 	
 		LinesAndMaxWidth toReturn = new LinesAndMaxWidth();

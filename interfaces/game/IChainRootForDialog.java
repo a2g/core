@@ -14,7 +14,7 @@ public interface IChainRootForDialog extends IChainRootCommon
 , ISetInventoryItemVisible
 , ISetAnimationAsObjectInitial
 {
-	// dialog only stuff
+	// Start with dialog only stuff
 	DialogChainableAction them(String speech);
 	DialogChainableAction us(String speech);
 	DialogChainableAction branchNormal(int branchId, final boolean isOkToAdd, String text);
@@ -22,7 +22,7 @@ public interface IChainRootForDialog extends IChainRootCommon
 	DialogChainableAction branchSticky(int branchId, String text) ;
 	DialogChainableAction branchSticky(int nativ2, boolean b, String string);
 	
-	// a bunch of methods also found on the scene chains....
+	// include a bunch of methods also found on the scene chains....
 	@Override DialogChainableAction setValue(Object key, int value) ;
 	@Override DialogChainableAction setInventoryItemVisible(int redNote, boolean b);
 	@Override DialogChainableAction setAnimationAsObjectInitial(String atid);

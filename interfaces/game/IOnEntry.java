@@ -37,6 +37,7 @@ import com.github.a2g.core.interfaces.game.singles.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.singles.ISetBaseMiddleY;
 import com.github.a2g.core.interfaces.game.singles.ISetInventoryItemVisible;
 import com.github.a2g.core.interfaces.game.singles.ISetSoundtrack;
+import com.github.a2g.core.interfaces.game.singles.ISetTitleCard;
 import com.github.a2g.core.interfaces.game.singles.ISetValue;
 import com.github.a2g.core.interfaces.game.singles.IShow;
 import com.github.a2g.core.interfaces.game.singles.ISwitchToScene;
@@ -77,6 +78,7 @@ IGetValue
 , ISetAnimationAsObjectCurrent
 // sound
 , ISetSoundtrack
+, ISetTitleCard
 {
 
 }
