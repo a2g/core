@@ -149,5 +149,13 @@ public class WalkSinglePerformer
 	public boolean isCancelNeededDueToGateOrNoGoZone() {
 		return (switcher!=null &&( switcher.isExitedThruGate() || switcher.isInANoGoZone()));
 	}
+
+	public void inchBackIfInNoGoZone() {
+		if(switcher.isInANoGoZone())
+		{
+			mover.inchBack();
+		}
+		
+	}
 	
 }

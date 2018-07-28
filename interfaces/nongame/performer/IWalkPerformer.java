@@ -25,4 +25,5 @@ public interface IWalkPerformer
  
 	void setSceneForWalker(IScenePresenterFromWalkPerformer scene);
 
+
 }

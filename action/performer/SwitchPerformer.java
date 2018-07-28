@@ -111,7 +111,7 @@ public class SwitchPerformer implements ISwitchPerformer
 		double y = this.startY + progress * (this.endY - this.startY);
 
 
-		if (scene.isInANoGoZone(new Point(x, y))) {
+		if (progress>.01 && scene.isInANoGoZone(new Point(x, y))) {
 
 			// and we make sure we only do this once
 			// we don't keep letting the animation try all the points

@@ -148,7 +148,9 @@ public class WalkMultiPerformer {
 		boolean isExited = false;
 		if(progressPercentageForStartOfEachSingleWalk!=null && !singleWalks.isEmpty())
 		{
+			
 			isExited = singleWalks.get(singleWalks.size()-1).onCompleteActionAndCheckForGateExit();
+			singleWalks.get(singleWalks.size()-1).inchBackIfInNoGoZone();
 		}
 		return isExited;
 	}
