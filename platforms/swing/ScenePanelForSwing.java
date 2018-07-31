@@ -297,6 +297,7 @@ public class ScenePanelForSwing extends JPanel implements IPlatformScenePanel, I
 
 			// draw boundary points
 			for (int i = 0; i < size; i++) {
+				g.setColor((i&1)>0? new Color(0, 0, 255) : new Color(255, 0, 0));
 				Point newPt = points.get(i);
 				drawLine(newPt, lastPt, g);
 				lastPt = newPt;

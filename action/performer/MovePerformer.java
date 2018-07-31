@@ -205,13 +205,14 @@ public class MovePerformer implements IMovePerformer
 
 	@Override
 	public void inchBack() {
+		final double FRACTION_OF_PROGRESS_TO_INCH_BACK=0.01; 
 		String otid =  scene.getOtidByCode(ocode);
 		double currX = scene.getBaseMiddleXByOtid(otid);
 		double currY = scene.getBaseMiddleYByOtid(otid);
 		double deltaX = currX - startX;
 		double deltaY = currY - startY;
-		scene.setBaseMiddleXByOtid(otid, currX- deltaX*.01);
-		scene.setBaseMiddleYByOtid(otid, currY- deltaY*.01);
+		scene.setBaseMiddleXByOtid(otid, currX- deltaX*FRACTION_OF_PROGRESS_TO_INCH_BACK);
+		scene.setBaseMiddleYByOtid(otid, currY- deltaY*FRACTION_OF_PROGRESS_TO_INCH_BACK);
 		
 	}
 

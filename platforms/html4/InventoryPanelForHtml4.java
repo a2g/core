@@ -26,7 +26,7 @@ import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromI
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
-import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
+import com.github.a2g.core.platforms.html4.dependencies.PlatformPackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.InventoryItemMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.InventoryItemMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
@@ -119,7 +119,7 @@ IImagePanel
 			int ocode, int i, int j) {
 
 		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource(
-				(PackagedImageForHtml4) imageResource, lh);
+				(PlatformPackagedImageForHtml4) imageResource, lh);
 
 		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new PointI(0, 0));
 

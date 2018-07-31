@@ -17,7 +17,7 @@
 package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.interfaces.nongame.IImagePanel;
-import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
+import com.github.a2g.core.platforms.html4.dependencies.PlatformPackagedImageForHtml4;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectI;
 import com.google.gwt.event.dom.client.LoadHandler;
@@ -102,7 +102,7 @@ public abstract class Image {
 	}
 
 	public static final com.google.gwt.user.client.ui.Image getImageFromResource(
-			PackagedImageForHtml4 imageResource, LoadHandler lh) {
+			PlatformPackagedImageForHtml4 imageResource, LoadHandler lh) {
 		final com.google.gwt.user.client.ui.Image image = new com.google.gwt.user.client.ui.Image(
 				imageResource.getNative().getSafeUri());
 		if (lh != null) {

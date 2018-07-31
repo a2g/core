@@ -34,7 +34,7 @@ import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromScene
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromScenePanel;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
-import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
+import com.github.a2g.core.platforms.html4.dependencies.PlatformPackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html5.dependencies.CanvasEtcHtml5;
@@ -107,7 +107,7 @@ IPlatformScenePanel {
 	public Image createNewImageAndAddHandlers(LoadHandler lh, IPlatformPackagedImage imageResource,
 			IScenePresenterFromSceneMouseOver api, EventBus bus, int x, int y, String objectTextualId,
 			short objectCode) {
-		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource((PackagedImageForHtml4) imageResource,
+		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource((PlatformPackagedImageForHtml4) imageResource,
 				lh);
 
 		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new PointI(x, y));
@@ -378,6 +378,7 @@ IPlatformScenePanel {
 		this.speechBubbleEtc.xPoints = new int[0];
 		this.speechBubbleEtc.yPoints = new int[0];
 		this.backgroundColor = ColorEnum.Black;
+		this.speechColor = ColorEnum.Red;
 	}
 	
 

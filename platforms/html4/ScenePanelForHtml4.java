@@ -26,7 +26,7 @@ import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromScene
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromScenePanel;
 import com.github.a2g.core.objectmodel.Image;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
-import com.github.a2g.core.platforms.html4.dependencies.PackagedImageForHtml4;
+import com.github.a2g.core.platforms.html4.dependencies.PlatformPackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.PlatformDrawCallsHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
 import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
@@ -65,7 +65,7 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements IImagePanel, IP
 			IScenePresenterFromSceneMouseOver api, EventBus bus, int x, int y, String objectTextualId,
 			short objectCode) {
 
-		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource((PackagedImageForHtml4) imageResource,
+		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource((PlatformPackagedImageForHtml4) imageResource,
 				lh);
 
 		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new PointI(x, y));

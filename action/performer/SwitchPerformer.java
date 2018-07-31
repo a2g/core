@@ -110,8 +110,8 @@ public class SwitchPerformer implements ISwitchPerformer
 		double x = this.startX + progress * (this.endX - this.startX);
 		double y = this.startY + progress * (this.endY - this.startY);
 
-
-		if (progress>.01 && scene.isInANoGoZone(new Point(x, y))) {
+		final double FRACTION_OF_PROGRESS_TO_IGNORE_COLLISION_DETECTION = .01;
+		if (progress>FRACTION_OF_PROGRESS_TO_IGNORE_COLLISION_DETECTION && scene.isInANoGoZone(new Point(x, y))) {
 
 			// and we make sure we only do this once
 			// we don't keep letting the animation try all the points

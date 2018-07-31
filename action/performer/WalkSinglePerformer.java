@@ -151,7 +151,7 @@ public class WalkSinglePerformer
 	}
 
 	public void inchBackIfInNoGoZone() {
-		if(switcher.isInANoGoZone())
+		if(switcher!=null && switcher.isInANoGoZone())
 		{
 			mover.inchBack();
 		}
