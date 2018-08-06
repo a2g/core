@@ -16,11 +16,11 @@
 
 package com.github.a2g.core.interfaces.game;
 
-import com.github.a2g.core.interfaces.game.singles.IAddBoundaryGate;
-import com.github.a2g.core.interfaces.game.singles.IAddBoundaryPoint;
+import com.github.a2g.core.interfaces.game.singles.IAddEdgeSpan;
+import com.github.a2g.core.interfaces.game.singles.IAddEdgePoint;
 import com.github.a2g.core.interfaces.game.singles.IAddHelperPoint;
-import com.github.a2g.core.interfaces.game.singles.IAddObstacleRect;
-import com.github.a2g.core.interfaces.game.singles.IAddRectangle;
+import com.github.a2g.core.interfaces.game.singles.IAddEdgeRectangle;
+import com.github.a2g.core.interfaces.game.singles.IAddHelperRectangle;
 import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation;
 import com.github.a2g.core.interfaces.game.singles.IClearSaidSpeech;
 import com.github.a2g.core.interfaces.game.singles.IClearValueRegistry;
@@ -100,13 +100,13 @@ IGetIsTalkingAlwaysWithoutIncrementing,
 IShareWinning,
 ICreateChainRootAction,
 IGetSceneGuiHeight,
-IAddRectangle,
+IAddHelperRectangle,
 IAddHelperPoint,
 IGetOCodeByAtid,
 // boundary
-IAddBoundaryGate,
-IAddBoundaryPoint,
-IAddObstacleRect,
+IAddEdgeSpan,
+IAddEdgePoint,
+IAddEdgeRectangle,
 // object
 IHide,
 IShow,

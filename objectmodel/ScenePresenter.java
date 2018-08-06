@@ -360,9 +360,9 @@ public class ScenePresenter implements IScenePresenter,
 		master.switchToScene(foundDest, arrivalSegment);
 	}
 
-	public void addBoundaryGate(double tlx, double tly, double brx, double bry,
+	public void addEdgeSpan(double tlx, double tly, double brx, double bry,
 			Object sceneToSwitchTo, int arrivalSegment) {
-		boundaryCalculator.addBoundaryGate(sceneToSwitchTo, arrivalSegment,
+		boundaryCalculator.addEdgeSpan(sceneToSwitchTo, arrivalSegment,
 				new Point(tlx, tly), new Point(brx, bry));
 	}
 
@@ -388,8 +388,8 @@ public class ScenePresenter implements IScenePresenter,
 		return boundaryCalculator.getCentreOfSegments();
 	}
 
-	public void addObstacleRect(double x, double y, double right, double bottom) {
-		boundaryCalculator.addObstacleRect(x, y, right, bottom);
+	public void addEdgeRectangle(double x, double y, double right, double bottom) {
+		boundaryCalculator.addEdgeRectangle(x, y, right, bottom);
 
 	}
 

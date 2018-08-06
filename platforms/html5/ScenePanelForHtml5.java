@@ -16,6 +16,7 @@
 
 package com.github.a2g.core.platforms.html5;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -81,7 +82,7 @@ IPlatformScenePanel {
 			ICommandLinePresenterFromSceneMouseOver toCommandLine) {
 		// this.bus = bus;
 		this.fontName = "arial";
-		this.fontHeight = 10;
+		this.fontHeight = 14;
 		this.getElement().setId("cwAbsolutePanel");
 		this.addStyleName("absolutePanel");
 		this.cameraOffsetX = 0;
@@ -272,7 +273,7 @@ IPlatformScenePanel {
 
 		if (isSpeechVisible) {
 			boolean isDiagnosticsDisplayed = false;
-		    canvasEtcHtml5.drawSpeech(speechBubbleEtc, speechColor, ColorEnum.White, isDiagnosticsDisplayed);
+		    canvasEtcHtml5.drawSpeech(speechBubbleEtc, speechColor, backgroundColor, isDiagnosticsDisplayed);
 		}
 
 		// update the front canvas
@@ -372,11 +373,16 @@ IPlatformScenePanel {
 	@Override
 	public void setTitleCard(String titlecard) {
 		this.isSpeechVisible = (titlecard.length()>0);
-
-		this.speechBubbleEtc = new SpeechBubble(0, 0, "titleCard");
-		this.speechBubbleEtc.rectBubble = new RectI(0,0, 639, 359);
-		this.speechBubbleEtc.xPoints = new int[0];
-		this.speechBubbleEtc.yPoints = new int[0];
+		 
+		String[] splitByNewline = titlecard.split("\n");
+		ArrayList<SpeechBubble> pages = SpeechBubble.calculateWordWrappedPages(new PointI(640, 360),
+				splitByNewline, this, new RectI(318, 178, 4, 4));
+		pages.get(0).rectBubble = new RectI(0, 0, 640,360);
+		pages.get(0).yPoints = new int[0];
+		pages.get(0).xPoints = new int[0];
+		 
+		
+		this.speechBubbleEtc = pages.get(0); 
 		this.backgroundColor = ColorEnum.Black;
 		this.speechColor = ColorEnum.Red;
 	}

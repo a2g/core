@@ -527,19 +527,19 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void addObstacleRect(double x, double y, double right, double bottom) {
-		master.getScenePresenter().addObstacleRect(x, y, right, bottom);
+	public void addEdgeRectangle(double x, double y, double right, double bottom) {
+		master.getScenePresenter().addEdgeRectangle(x, y, right, bottom);
 
 	}
 
 	@Override
-	public void addBoundaryGate(double tlx, double tly, double brx, double bry, Object sceneToSwitchTo,
+	public void addEdgeSpan(double tlx, double tly, double brx, double bry, Object sceneToSwitchTo,
 			int arrivalSegment) {
-		master.getScenePresenter().addBoundaryGate(tlx, tly, brx, bry, sceneToSwitchTo, arrivalSegment);
+		master.getScenePresenter().addEdgeSpan(tlx, tly, brx, bry, sceneToSwitchTo, arrivalSegment);
 	}
 
 	@Override
-	public void addBoundaryPoint(double x, double y) {
+	public void addEdgePoint(double x, double y) {
 		master.getScenePresenter().addBoundaryPoint(x, y);
 	}
 	// /@}
@@ -563,7 +563,7 @@ public class AllGameMethods
 	}
 
 	@Override
-	public int addRectangle(RectF rectF) {
+	public int addHelperRectangle(RectF rectF) {
 		return master.getScenePresenter().addRectangle(rectF);
 	}
 
@@ -608,24 +608,24 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void addObstacleRect(double x, double y, int helperIndex) {
+	public void addEdgeRectangle(double x, double y, int helperIndex) {
 		Point p = master.getScenePresenter().getHelperPoints().get(helperIndex);
-		master.getScenePresenter().addObstacleRect(x, y, p.getX(), p.getY());
+		master.getScenePresenter().addEdgeRectangle(x, y, p.getX(), p.getY());
 
 	}
 
 	@Override
-	public void addObstacleRect(int helperIndex, double x, double y) {
+	public void addEdgeRectangle(int helperIndex, double x, double y) {
 		Point p = master.getScenePresenter().getHelperPoints().get(helperIndex);
-		master.getScenePresenter().addObstacleRect(p.getX(), p.getY(), x, y);
+		master.getScenePresenter().addEdgeRectangle(p.getX(), p.getY(), x, y);
 
 	}
 
 	@Override
-	public void addObstacleRect(int helper1, int helper2) {
+	public void addEdgeRectangle(int helper1, int helper2) {
 		Point p1 = master.getScenePresenter().getHelperPoints().get(helper1);
 		Point p2 = master.getScenePresenter().getHelperPoints().get(helper2);
-		master.getScenePresenter().addObstacleRect(p1.getX(), p1.getY(), p2.getX(), p2.getY());
+		master.getScenePresenter().addEdgeRectangle(p1.getX(), p1.getY(), p2.getX(), p2.getY());
 
 	}
 
@@ -635,7 +635,7 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void addBoundaryPoint(int helperIndex) {
+	public void addEdgePoint(int helperIndex) {
 		Point p1 = master.getScenePresenter().getHelperPoints().get(helperIndex);
 		master.getScenePresenter().addBoundaryPoint(p1.getX(), p1.getY());
 

@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.interfaces.game;
 
-import com.github.a2g.core.interfaces.game.singles.IAddBoundaryGate;
-import com.github.a2g.core.interfaces.game.singles.IAddBoundaryPoint;
+import com.github.a2g.core.interfaces.game.singles.IAddEdgeSpan;
+import com.github.a2g.core.interfaces.game.singles.IAddEdgePoint;
 import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation;
 import com.github.a2g.core.interfaces.game.singles.ICreateChainRootAction;
 import com.github.a2g.core.interfaces.game.singles.IGetAnimationLastFrame;
@@ -83,8 +83,8 @@ IShareWinning,
 ICreateChainRootAction,
 
 // boundary
-IAddBoundaryGate,
-IAddBoundaryPoint,
+IAddEdgeSpan,
+IAddEdgePoint,
 IGetHelperPoint,
 
 
