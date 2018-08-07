@@ -17,8 +17,23 @@
 /*!
 
 @page ExampleCode
+The system works as follows:
+- There are five handlers that describe a scene - they live in the interfaces.game.handlers package.
+- The game logic writer uses ids to manipulate the underlying scene inside the handlers.
+- But there needs to be a way to ensure the ids that are valid- we must ensure the resources that the ids represent are loaded.
+But How?
+<br><br>
+The solution used here is that an IGameSceneLoader has a single implementation for queuing resources: the onEnqueueResources method.
+And inside that method's implementation, the methods that actually queue specific resources, will return ids to those resources.
+Then these ids can be referred to by the five handlers, by making the five handlers be implemented as an anonymous inner class, that is instantiated just after we've got the ids from queuing resources, inside the onEnqueueResources method
+<br><br>
+See the example below. The interfaces and class visibility is done in such a way to help the system along.
+- The IGameScene interface only has one method that must be implemented: onEnqueueResources. 
+- This method has a return value of ILoadKickStarter. 
+- The only way to get something that implements ILoadKickStarter is to use the method createReturnObject, that is available on the api object that is passed in to onEnqueueResources.
+- createReturnObject takes an IGameScene parameter
+- the only way to properly create an IGameScene parameter is to implement the five handlers.
 
-For example, a basic authored scene might start out like this:
 
 @dot
 digraph G {
@@ -26,7 +41,7 @@ digraph G {
     subgraph cluster_one 
     {
         fillcolor="blue:cyan" 
-label="public class MyClass implements IGameSceneLoader {                                                                                                                               \l{\l" 
+label="public class MyClass implements IGameSceneLoader {                                                                                                                  \l{\l" 
         fontcolor="black" 
         style="filled" 
         gradientangle="90"
