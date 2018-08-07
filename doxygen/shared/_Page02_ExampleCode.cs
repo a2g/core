@@ -26,22 +26,34 @@ digraph G {
     subgraph cluster_one 
     {
         fillcolor="blue:cyan" 
-label="public class MyScene implements  SceneAPI                                                                                        \l{\l" 
+label="public class MyClass implements IGameSceneLoader {                                                                                                                               \l{\l" 
         fontcolor="black" 
         style="filled" 
         gradientangle="90"
         fontname=Courier
         fontsize=10
 			
-           node [
-label="public MyScene(){                                                                                                                     \l   \l}\l"
-shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180  fontname=Courier  fontsize=10
-         ] anode;
-            node [
-label="public LoadKickStarter onFillLoadList(IOnFillLoadListImpl api){                                                                     \l   // Click here for how to implement this method.\l}\l"  
-shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180  fontname=Courier  fontsize=10
-URL="@ref how-to-implement-onFillLoadList"
-            ] cnode;
+     subgraph cluster_two 
+    {
+        fillcolor="blue:cyan" 
+label="public ILoadKickStarter onEnqueueResources(IOnEnqueueResources api)                                                                                         \l{\l" 
+        fontcolor="black" 
+        style="filled" 
+        gradientangle="90"
+        fontname=Courier
+        fontsize=10
+			
+ 
+    subgraph cluster_four 
+    {
+        fillcolor="blue:cyan" 
+label="return api.createReturnObject(new IGameScene()                                                                                         \l{\l" 
+        fontcolor="black" 
+        style="filled" 
+        gradientangle="90"
+        fontname=Courier
+        fontsize=10
+
             node [
 label="public void onPreEntry(IOnPreEntry api){                                                                                            \l   // Click here for how to implement this method.\l}\l"  
 shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180 fontname=Courier  fontsize=10
@@ -52,24 +64,29 @@ label="public void onEveryFrame(IOnEveryFrame api){                             
 shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180 fontname=Courier  fontsize=10
 URL="@ref how-to-implement-onEveryFrame"
            ] fnode;
+
            node [
 label="public BaseAction onEntry(IOnEntry api, BaseAction ba){                                                                             \l   // Click here for how to implement this method.\l   return doNothing();\l}\l"
 shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180 fontname=Courier  fontsize=10
 URL="@ref how-to-implement-onEntry"
-           ] gnode;         
+           ] gnode;    
+     
            node [
 label="public BaseAction onDoCommand(IOnDoCommand api, BaseAction ba, int verb, SentenceItem objA, SentenceItem objB,  double x, double y){\l   // Click here for how to implement this method.\l   return doNothing();\l}\l" 
 shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180  fontname=Courier  fontsize=10
 URL="@ref how-to-implement-onDoCommand"
             ]
-             hnode;         
+             hnode;   
+      
            node [
 label="public BaseDialogTreeAction onDialogTree(IOnDialogTree api, BaseAction ba, int branchId) {                                          \l   // Click here for how to implement this method.\l   return null;\l}\l" 
 shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180 fontname=Courier  fontsize=10
 URL="@ref how-to-implement-onDialogTree"
-            ] inode;         	
-    }
+            ] inode;  
 
+       	}
+       }
+   }
  }
 @enddot
 

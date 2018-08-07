@@ -8,6 +8,7 @@ import com.github.a2g.core.interfaces.game.singles.ISetValue;
 import com.github.a2g.core.interfaces.game.singles.ISleep;
 import com.google.gwt.touch.client.Point;
 
+/** @brief This facilitates the returning of the chain in @ref IOnDialogTree */
 public interface IChainRootForDialog extends IChainRootCommon
 , ISleep
 , ISetValue
