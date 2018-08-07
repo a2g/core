@@ -1,0 +1,41 @@
+digraph I
+{ 
+	compound=true;
+	graph[
+		rankdir="TB"
+		, compound=true
+	];
+	
+	node [
+		shape=record
+		, fontname=arial
+		, fontsize=8
+		, style=filled 
+		, pad=0.0
+	];
+	
+	subgraph [
+		 shape=record
+		 , fontname=arial
+		 , fontsize=8
+		 , style=filled
+		 , fillcolor="blue:cyan"
+		 , gradientangle="90"   
+		 , center=false
+	];
+	
+	subgraph cluster_Walking
+	{
+		URL="@ref Walking" 
+		label="Walking"
+		labeljust="l"
+		
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation" label="api.alignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation"] IAlignBaseMiddleOfOldFrameToFrameOfSpecifiedAnimation;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISetAnimationAsObjectWalkDirection" label="api.setAnimationAsObjectWalkDirection"] ISetAnimationAsObjectWalkDirection;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISetScreenCoordsPerSecond" label="api.setScreenCoordsPerSecond"] ISetScreenCoordsPerSecond;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISetBaseMiddleY" label="api.setBaseMiddleY"] ISetBaseMiddleY;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISetBaseMiddleX" label="api.setBaseMiddleX"] ISetBaseMiddleX;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleY" label="api.getBaseMiddleY"] IGetBaseMiddleY;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IGetBaseMiddleX" label="api.getBaseMiddleX"] IGetBaseMiddleX;
+	} 
+}

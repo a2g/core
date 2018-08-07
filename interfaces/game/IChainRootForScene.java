@@ -68,7 +68,7 @@ public interface IChainRootForScene extends IChainRootCommon
 	
 	
 	/** @name End-of-chain-only Walk using edge detection 
-	 * These use the scene walker so need to otid 
+	 * These use the scene walker so they don't need any otid.
 	 */
 	//@{
 	public ChainEndAction walkTo(double x, double y); 

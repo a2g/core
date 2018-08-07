@@ -1,0 +1,37 @@
+digraph I
+{ 
+	compound=true;
+	graph[
+		rankdir="TB"
+		, compound=true
+	];
+	
+	node [
+		shape=ellipse
+		, fontname=arial
+		, fontsize=8
+		, style=filled 
+		, pad=0.0
+	];
+	
+	subgraph [
+		 shape=record
+		 , fontname=arial
+		 , fontsize=8
+		 , style=filled
+		 , fillcolor="red:orange"
+		 , gradientangle="90"   
+		 , center=false
+	];
+	
+	subgraph cluster_Talking
+	{
+		URL="@ref Talking" 
+		label="Talking"
+		labeljust="l"
+		
+		node [ label=".talkWithoutIncrementingFrameNonBlocking"] ISetBaseMiddleX;
+        node [ label="chain.talkWithoutIncrementingFrame"] IGetBaseMiddleY;
+		node [ label=".talk"] ISetScreenCoordsPerSecond;
+	} 
+}

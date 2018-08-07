@@ -1,0 +1,35 @@
+digraph I
+{ 
+	compound=true;
+	graph[
+		rankdir="TB"
+		, compound=true
+	];
+	
+	node [
+		shape=record
+		, fontname=arial
+		, fontsize=8
+		, style=filled 
+		, pad=0.0
+	];
+	
+	subgraph [
+		 shape=record
+		 , fontname=arial
+		 , fontsize=8
+		 , style=filled
+		 , fillcolor="blue:cyan"
+		 , gradientangle="90"   
+		 , center=false
+	];
+	
+	subgraph cluster_SceneSwitching
+	{
+		URL="@ref SceneSwitching"
+		label="SceneSwitching"
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.ISwitchToScene" label="api.switchToScene"] ISwitchToScene;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IGetLastSceneName" label="api.getLastSceneName"] IGetLastSceneName;
+		node [URL="@ref com.github.a2g.core.interfaces.methods.game.IGetCurrentSceneName" label="api.getCurrentSceneName"] IGetCurrentSceneName;
+	}
+}
