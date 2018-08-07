@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.interfaces.game;
+package com.github.a2g.core.interfaces.game.handlers;
 
 
 import com.github.a2g.core.interfaces.IExtendsGameSceneLoader;

@@ -18,13 +18,13 @@ package com.github.a2g.core.interfaces;
 
 import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.DialogChainEndAction;
-import com.github.a2g.core.interfaces.game.IChainRootForDialog;
-import com.github.a2g.core.interfaces.game.IChainRootForScene;
-import com.github.a2g.core.interfaces.game.IOnDialogTree;
-import com.github.a2g.core.interfaces.game.IOnDoCommand;
-import com.github.a2g.core.interfaces.game.IOnEntry;
-import com.github.a2g.core.interfaces.game.IOnEveryFrame;
-import com.github.a2g.core.interfaces.game.IOnPreEntry;
+import com.github.a2g.core.interfaces.game.chainables.IChainRootForDialog;
+import com.github.a2g.core.interfaces.game.chainables.IChainRootForScene;
+import com.github.a2g.core.interfaces.game.handlers.IOnDialogTree;
+import com.github.a2g.core.interfaces.game.handlers.IOnDoCommand;
+import com.github.a2g.core.interfaces.game.handlers.IOnEntry;
+import com.github.a2g.core.interfaces.game.handlers.IOnEveryFrame;
+import com.github.a2g.core.interfaces.game.handlers.IOnPreEntry;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.github.a2g.core.primitive.A2gException;
 

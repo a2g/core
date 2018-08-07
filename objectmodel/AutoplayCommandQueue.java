@@ -1,6 +1,6 @@
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.game.IOnPreEntry;
+import com.github.a2g.core.interfaces.game.handlers.IOnPreEntry;
 import com.github.a2g.core.interfaces.nongame.ISolution;
 
 import java.util.ArrayDeque;

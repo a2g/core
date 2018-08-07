@@ -1,4 +1,4 @@
-package com.github.a2g.core.interfaces.game;
+package com.github.a2g.core.interfaces.game.chainables;
 
 import com.github.a2g.core.action.DialogChainEndAction;
 import com.github.a2g.core.action.DialogChainableAction;

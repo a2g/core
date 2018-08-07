@@ -17,7 +17,7 @@
 package com.github.a2g.core.interfaces.nongame;
 
 import com.github.a2g.core.interfaces.IGameSceneLoader;
-import com.github.a2g.core.interfaces.game.IOnPreEntry;
+import com.github.a2g.core.interfaces.game.handlers.IOnPreEntry;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.objectmodel.AutoplayCommand;
 import com.google.gwt.event.shared.EventBus;
