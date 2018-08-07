@@ -16,9 +16,9 @@
  
 /*!
 
-@page Boundary The Boundary Concept
-@dotfile ApiBoundary.dot
-Without the concept of a boundary each scene would need to add
+@page Boundary The EdgeDetection Concept
+@dotfile ApiEdgeDetection.dot
+Without the concept of edge-detection each scene would need to add
 logic in to the OnEveryFrame handler to detect when the SceneObject
 being controlled by the main character has walked beyond a certain point.
 And the coordinates would need to be there in the code. 
@@ -29,11 +29,11 @@ maths equations.
 <br>
 It point that it checks for out-of-boundsness is the base middle, so this can
 be seen to build on the concept of @ref Walking Walking.
-Thus adding something to do boundary checking was pretty important.
+Thus adding edge detection was pretty important.
 <br>
 <br>
 The @ref com.github.a2g.core.interfaces.methods.game.ISwitchToScene "switchToScene" method
-makes use of the Boundary concept by allowing the specification of a 
+makes use of the Edgedetection concept by allowing the specification of a 
 second parameter which refers to the segment by which to enter the
 next scene through.  Without this, each scene would need to add its own
 positioning code in every OnPreEntry handler that checked what the 
