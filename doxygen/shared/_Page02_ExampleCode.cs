@@ -47,40 +47,42 @@ label="public ILoadKickStarter onEnqueueResources(IOnEnqueueResources api)      
     subgraph cluster_four 
     {
         fillcolor="blue:cyan" 
-label="return api.createReturnObject(new IGameScene()                                                                                         \l{\l" 
+label="final IGameScene inv = api.queueSharedSceneAndReturnScene(new SharedInventoryC());\lfinal IGameScene oh = api.queueSharedSceneAndReturnScene(new SharedBrightHeroC());\lfinal IGameScene map = api.queueSharedSceneAndReturnScene(new SharedFireMapC());\lreturn api.createReturnObject(new IGameScene()                                                                                                     \l{\l" 
         fontcolor="black" 
         style="filled" 
         gradientangle="90"
         fontname=Courier
         fontsize=10
+	margin=0
+ 
 
             node [
-label="public void onPreEntry(IOnPreEntry api){                                                                                            \l   // Click here for how to implement this method.\l}\l"  
-shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180 fontname=Courier  fontsize=10
+label="    public void onPreEntry(IOnPreEntry api){                                                                                                        \l       // Click here for how to implement this method.\l    }\l"  
+shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180 fontname=Courier  fontsize=10 margin=0
 URL="@ref how-to-implement-onPreEntry"
 ] dnode;
            node [
-label="public void onEveryFrame(IOnEveryFrame api){                                                                                        \l   // Click here for how to implement this method.\l}\l"
-shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180 fontname=Courier  fontsize=10
+label="    public void onEveryFrame(IOnEveryFrame api){                                                                                                    \l       // Click here for how to implement this method.\l    }\l"
+shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180 fontname=Courier  fontsize=10 margin=0
 URL="@ref how-to-implement-onEveryFrame"
            ] fnode;
 
            node [
-label="public BaseAction onEntry(IOnEntry api, BaseAction ba){                                                                             \l   // Click here for how to implement this method.\l   return doNothing();\l}\l"
-shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180 fontname=Courier  fontsize=10
+label="    public ChainEndAction onEntry(IOnEntry api, IChainRootForScene ch){                                                                             \l       // Click here for how to implement this method.\l       return doNothing();\l    }\l"
+shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180 fontname=Courier  fontsize=10 margin=0
 URL="@ref how-to-implement-onEntry"
            ] gnode;    
      
            node [
-label="public BaseAction onDoCommand(IOnDoCommand api, BaseAction ba, int verb, SentenceItem objA, SentenceItem objB,  double x, double y){\l   // Click here for how to implement this method.\l   return doNothing();\l}\l" 
-shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180  fontname=Courier  fontsize=10
+label="    public ChainEndAction onDoCommand(IOnDoCommand api, IChainRootForScene ch, int verb, SentenceItem objA, SentenceItem objB,  double x, double y){\l       // Click here for how to implement this method.\l       return doNothing();\l    }\l" 
+shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180  fontname=Courier  fontsize=10 margin=0
 URL="@ref how-to-implement-onDoCommand"
             ]
              hnode;   
       
            node [
-label="public BaseDialogTreeAction onDialogTree(IOnDialogTree api, BaseAction ba, int branchId) {                                          \l   // Click here for how to implement this method.\l   return null;\l}\l" 
-shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180 fontname=Courier  fontsize=10
+label="    public DialogChainEndAction onDialogTree(IOnDialogTree api, IChainRootForDialog ch, int branchId) {                                             \l       // Click here for how to implement this method.\l       return null;\l    }\l" 
+shape=box fillcolor="#eec87f:#f4e9bb" style="filled" gradientangle=180 fontname=Courier  fontsize=10 margin=0
 URL="@ref how-to-implement-onDialogTree"
             ] inode;  
 
