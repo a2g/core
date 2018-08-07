@@ -19,7 +19,7 @@ package com.github.a2g.core.objectmodel;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.a2g.core.interfaces.ConstantsForAPI;
+import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI;
 
 public class VerbCollection {
 	private List<Verb> verbs;

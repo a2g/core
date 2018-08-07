@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.interfaces;
+package com.github.a2g.core.interfaces.game.scene;
 
 import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.DialogChainEndAction;

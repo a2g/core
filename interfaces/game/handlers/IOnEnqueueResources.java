@@ -17,9 +17,9 @@
 package com.github.a2g.core.interfaces.game.handlers;
 
 
-import com.github.a2g.core.interfaces.IExtendsGameSceneLoader;
-import com.github.a2g.core.interfaces.IGameScene;
-import com.github.a2g.core.interfaces.ILoadKickStarter;
+import com.github.a2g.core.interfaces.game.scene.IExtendsGameSceneLoader;
+import com.github.a2g.core.interfaces.game.scene.IGameScene;
+import com.github.a2g.core.interfaces.game.scene.ILoadKickStarter;
 import com.github.a2g.core.interfaces.game.singles.ISetValue;
 import com.github.a2g.core.interfaces.nongame.platform.IBundleLoader;
 import com.github.a2g.core.interfaces.nongame.platform.IPlatformResourceBundle;

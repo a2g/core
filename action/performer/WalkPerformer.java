@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.action.performer;
 
-import com.github.a2g.core.interfaces.ConstantsForAPI.WalkDirection;
+import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.nongame.performer.IWalkPerformer;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromWalkPerformer;
 import com.google.gwt.touch.client.Point;

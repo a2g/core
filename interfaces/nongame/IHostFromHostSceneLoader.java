@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.interfaces.nongame;
 
-import com.github.a2g.core.interfaces.IGameSceneLoader;
+import com.github.a2g.core.interfaces.game.scene.IGameSceneLoader;
 
 public interface IHostFromHostSceneLoader {
 	void returnScene(IGameSceneLoader sceneToLoad);

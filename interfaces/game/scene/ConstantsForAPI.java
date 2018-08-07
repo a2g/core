@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.interfaces;
+package com.github.a2g.core.interfaces.game.scene;
 
 public interface ConstantsForAPI {
 	public static final int MAX_OBJS = 32; // if you want a large range of

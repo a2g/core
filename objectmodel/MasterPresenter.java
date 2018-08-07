@@ -39,9 +39,12 @@ import com.github.a2g.core.action.DialogChainableAction;
 import com.github.a2g.core.event.PropertyChangeEvent;
 import com.github.a2g.core.event.PropertyChangeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
-import com.github.a2g.core.interfaces.ConstantsForAPI;
-import com.github.a2g.core.interfaces.IExtendsGameSceneLoader;
-import com.github.a2g.core.interfaces.IGameScene;
+import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI;
+import com.github.a2g.core.interfaces.game.scene.IExtendsGameSceneLoader;
+import com.github.a2g.core.interfaces.game.scene.IGameScene;
+import com.github.a2g.core.interfaces.game.scene.IGameSceneLoader;
+import com.github.a2g.core.interfaces.game.scene.OnEnqueueResourcesDummyImpl;
+import com.github.a2g.core.interfaces.game.scene.OnEnqueueResourcesEffectiveImpl;
 import com.github.a2g.core.interfaces.nongame.IFactory;
 import com.github.a2g.core.interfaces.nongame.IHostFromMasterPresenter;
 import com.github.a2g.core.interfaces.nongame.IHostingPanel;
@@ -64,9 +67,6 @@ import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromScen
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromTimer;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromTitleCard;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromVerbs;
-import com.github.a2g.core.interfaces.IGameSceneLoader;
-import com.github.a2g.core.interfaces.OnEnqueueResourcesDummyImpl;
-import com.github.a2g.core.interfaces.OnEnqueueResourcesEffectiveImpl;
 import com.google.gwt.event.shared.EventBus;
 
 public class MasterPresenter

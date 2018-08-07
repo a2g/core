@@ -16,7 +16,7 @@
 
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.interfaces.ConstantsForAPI;
+import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI;
 
 public class Sentence {
 

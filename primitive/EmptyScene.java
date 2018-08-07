@@ -1,9 +1,9 @@
 package com.github.a2g.core.primitive;
 
 
-import com.github.a2g.core.interfaces.IGameSceneLoader;
-import com.github.a2g.core.interfaces.ILoadKickStarter;
 import com.github.a2g.core.interfaces.game.handlers.IOnEnqueueResources;
+import com.github.a2g.core.interfaces.game.scene.IGameSceneLoader;
+import com.github.a2g.core.interfaces.game.scene.ILoadKickStarter;
 
 
 
