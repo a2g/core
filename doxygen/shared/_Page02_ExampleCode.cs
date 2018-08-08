@@ -16,10 +16,10 @@
  
 /*!
 
-@page ExampleCode
+@page ExampleCode Example Code
 The system works as follows:
 - There are five handlers that describe a scene - they live in the interfaces.game.handlers package.
-- The game logic writer uses ids to manipulate the underlying scene inside the handlers.
+- The game author uses ids to manipulate the underlying scene inside the handlers.
 - But there needs to be a way to ensure the ids that are valid- we must ensure the resources that the ids represent are loaded.
 But How?
 <br><br>

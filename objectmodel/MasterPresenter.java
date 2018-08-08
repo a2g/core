@@ -969,16 +969,16 @@ public class MasterPresenter
 		dialogTreePresenter.resetRecordOfSaidSpeech();
 	}
 
-	public IGameScene queueSharedSceneAndReturnScene(IExtendsGameSceneLoader loader) {
+	public IGameScene enqueueSharedSceneAndReturnScene(IExtendsGameSceneLoader loader) {
 		IGameScene blah2 = loader.onEnqueueResources(new OnEnqueueResourcesDummyImpl(this));
 		return blah2;
 	}
 	
-	public void queueEntireBundleLoader(IBundleLoader bundleLoader) {
+	public void enqueueEntireBundleLoader(IBundleLoader bundleLoader) {
 		loaderPresenter.getLoaders().queueEntireBundleLoader(bundleLoader, this);
 	}
 	
-	public void queueSingleBundle(IPlatformResourceBundle loader)
+	public void enqueueSingleBundle(IPlatformResourceBundle loader)
 	{
 		loaderPresenter.getLoaders().queueSingleBundle(loader, this);
 	}

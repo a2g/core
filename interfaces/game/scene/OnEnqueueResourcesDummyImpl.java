@@ -55,23 +55,23 @@ public class OnEnqueueResourcesDummyImpl implements IOnEnqueueResources
 
 	// queue methods
 	@Override
-	public void queueEntireBundleLoader(IBundleLoader imageBundle) {
-		this.implementation.queueEntireBundleLoader(imageBundle);
+	public void enqueueEntireBundleLoader(IBundleLoader imageBundle) {
+		this.implementation.enqueueEntireBundleLoader(imageBundle);
 	}
 
 	@Override
-	public void queueSingleBundle(IPlatformResourceBundle bundle) {
-		this.implementation.queueSingleBundle(bundle);
+	public void enqueueSingleBundle(IPlatformResourceBundle bundle) {
+		this.implementation.enqueueSingleBundle(bundle);
 	}
 	
 	@Override
-	public IGameScene queueSharedSceneAndReturnScene(IExtendsGameSceneLoader loader) {
-		IGameScene scene = this.implementation.queueSharedSceneAndReturnScene(loader);
+	public IGameScene enqueueSharedSceneAndReturnScene(IExtendsGameSceneLoader loader) {
+		IGameScene scene = this.implementation.enqueueSharedSceneAndReturnScene(loader);
 		return scene;
 	}
 
 	@Override
-	public void queueMP3ForASoundObject(String name, String location) {
+	public void enqueueMP3ForASoundObject(String name, String location) {
 		this.implementation.queueMP3ForASoundObject(name, location);
 	}
 

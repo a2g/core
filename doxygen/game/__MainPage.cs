@@ -18,9 +18,7 @@
 @mainpage
 <table border="0">
 <tr>
-<td><img width=120 height=120 src="dot_inline_dotgraph_1.png" border="0" usemap="#dot_inline_dotgraph_5.map"/><td>
-<td><img width=120 height=120 src="dot_inline_dotgraph_2.png" border="0" usemap="#dot_inline_dotgraph_6.map"/><td>
-<td><img width=120 height=120 src="dot_inline_dotgraph_3.png" border="0" usemap="#dot_inline_dotgraph_7.map"/><td>
+<td><img width=120 height=120 src="dot_inline_dotgraph_1.png" border="0" usemap="#dot_inline_dotgraph_3.map"/><td> 
 </tr>
 </table>
 
@@ -109,45 +107,5 @@ digraph {
  }
 @enddot
 
-@dot
-digraph {
-    subgraph cluster_one 
-    {
-	fillcolor="black"
-          style="filled" 
- 	URL="_object_model.html"
-			
-           node [
-	URL="_object_model.html"
-	shape=box 
-	fillcolor="black"
-	width=1
-	height=1
-	] ObjectModel;
-         
-    }
-
- }
-@enddot
-@dot
-digraph {
-    subgraph cluster_one 
-    {
-	fillcolor="black"
-          style="filled" 
- 	URL="_panels.html"
-			
-           node [
-	URL="_panels.html"
-	shape=box 
-	fillcolor="black"
-	width=1
-	height=1
-	] Panels;
-         
-    }
-
- }
-
-@enddot
+ 
 */

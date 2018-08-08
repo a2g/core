@@ -405,13 +405,13 @@ public class AllGameMethods
 	// /@{
 
 	@Override
-	public void queueEntireBundleLoader(IBundleLoader bundleLoader) {
-		master.queueEntireBundleLoader(bundleLoader);
+	public void enqueueEntireBundleLoader(IBundleLoader bundleLoader) {
+		master.enqueueEntireBundleLoader(bundleLoader);
 	}
 
 	@Override
-	public void queueSingleBundle(IPlatformResourceBundle loader) {
-		master.queueSingleBundle(loader);
+	public void enqueueSingleBundle(IPlatformResourceBundle loader) {
+		master.enqueueSingleBundle(loader);
 
 	}
 
@@ -508,7 +508,7 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void queueMP3ForASoundObject(String name, String location) {
+	public void enqueueMP3ForASoundObject(String name, String location) {
 		master.queueMP3ForASoundObject(name, location);
 
 	}
@@ -654,8 +654,8 @@ public class AllGameMethods
 	}
 
 	@Override
-	public IGameScene queueSharedSceneAndReturnScene(IExtendsGameSceneLoader loader) {
-		return master.queueSharedSceneAndReturnScene(loader);
+	public IGameScene enqueueSharedSceneAndReturnScene(IExtendsGameSceneLoader loader) {
+		return master.enqueueSharedSceneAndReturnScene(loader);
 	}
 
 	@Override

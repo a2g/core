@@ -28,7 +28,7 @@ import com.github.a2g.core.objectmodel.SentenceItem;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.A2gException;
 
-/** @brief This interface lists all the methods you string together as a big return object from either @ref IOnEntry or @ref IOnDoCommand */
+/** @brief This facilitates the returning of chains in @ref IOnEntry or @ref IOnDoCommand */
 public interface IChainRootForScene extends IChainRootCommon
 , ISetVisible
 , ISetAnimationAsObjectInitial
