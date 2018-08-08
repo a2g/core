@@ -5,6 +5,7 @@ import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.game.handlers.IOnDoCommand;
 import com.github.a2g.core.interfaces.game.scene.IGameScene;
+import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation;
 import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToLastFrameOfNewAnimation;
 import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation;
@@ -29,7 +30,7 @@ import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.A2gException;
 
 /** @brief This facilitates the returning of chains in @ref IOnEntry or @ref IOnDoCommand */
-public interface IChainRootForScene extends IChainRootCommon
+public interface IChainRootForScene extends IChainBase
 , ISetVisible
 , ISetAnimationAsObjectInitial
 , ISetAnimationAsSceneTalker 
@@ -146,7 +147,7 @@ public interface IChainRootForScene extends IChainRootCommon
 	//@{
 	public ChainableAction playSound(String stid);
 	public ChainableAction playSoundNonBlocking(String stid);
-	/**  play as opposed to setTitleCard in the direct api */
+	/**  playTitleCard has a duration, as opposed to setTitleCard in the direct api, which doesn't  */
 	public ChainableAction playTitleCard(String text, double durationInSecs);
 	//@}
 	
@@ -203,15 +204,37 @@ public interface IChainRootForScene extends IChainRootCommon
 	public ChainableAction doNothing();
 	//@}
 	
+	/** @name Methods shared with direct api */
+	//@{
+	@Override ChainableAction  setVisible(short ocode, boolean isVisible);
+	@Override ChainableAction  setAnimationAsObjectInitial(String atid);
+	@Override ChainableAction  setAnimationAsSceneTalker (String atid);
+	@Override ChainableAction  setHeadRectangleForObject(short ocode, int index);
+	@Override ChainableAction  setAnimationAsObjectWalkDirection(String atid, WalkDirection type);
+	@Override ChainableAction  setSoundtrack(String stid) ;
+	@Override ChainableAction  shareWinning(String token);
+	
+	@Override ChainableAction  alignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation(String atid);
+	@Override ChainableAction  alignBaseMiddleOfOldFrameToLastFrameOfNewAnimation(String atid);
+	@Override ChainableAction  alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation(String atid, int frame);
+	@Override ChainableAction  setValue(Object key, int value);
+	@Override ChainableAction  setAnimationAsObjectCurrent (String atid);
+	@Override ChainableAction  setAnimationAsObjectCurrentAndSetFrame(String atid, int frame); 
+	@Override ChainableAction  setBaseMiddleX(short ocode, double bmx); 
+	@Override ChainableAction  setBaseMiddleY(short ocode, double bmy); 
+	@Override ChainableAction  setCurrentFrame(short ocode, int frame) ;
+	@Override ChainableAction  setDisplayName(short ocode, String displayName); 
+	@Override ChainableAction  setInventoryItemVisible(int icode, boolean isVisible); 
+	//@}
+	
 
-/** @name Direct API commands
- *  All the methods in the interfaces below are also available.
- *  The methods are named the same as the interfaces they are included within.
- *  They are done like this so that when the Direct API methods change, these change too. 
+/** @name Interfaces
+ *  @if(nongame) 
+ *   The methods are named the same as the interfaces they are included within.
+ *  If a direct -api method is to be shared, then this is done by inheriting from direct-api interfaces and overriding.
+ *  This means that when direct api methods are renamed in the interfaces, the methods overriding those interfaces are renamed too.
+ *  @endif
  */
-///@{
-	@Override
-	public ChainableAction 	setVisible(short ocode, boolean visible);
-///@}
+
  
 }

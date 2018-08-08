@@ -1,5 +1,7 @@
 package com.github.a2g.core.interfaces.game.singles;
 
+import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+
 public interface IShowInventoryItem {
-	void showInventoryItem(int icode);
+	IChainBase showInventoryItem(int icode);
 }

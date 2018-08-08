@@ -38,18 +38,18 @@ public class TitleCardAction extends ChainableAction {
 	public void runGameAction() {
 		double totalInMilliseconds = durationInSecs * 1000;
 
-		titleCard.displayTitleCard(stringValue);
+		titleCard.setTitleCard(stringValue);
 		this.run( (int) totalInMilliseconds);
 	}
 
 	@Override
 	protected void onUpdateGameAction(double progress) {
-		titleCard.displayTitleCard(stringValue);
+		titleCard.setTitleCard(stringValue);
 	}
 
 	@Override
 	protected boolean onCompleteActionAndCheckForGateExit() {
- 		titleCard.displayTitleCard("");
+ 		titleCard.setTitleCard("");
 		return false;
 	}
 

@@ -1,9 +1,5 @@
 package com.github.a2g.core.interfaces.nongame.presenter;
 
-import com.github.a2g.core.interfaces.game.singles.IDisplayTitleCard;
-import com.github.a2g.core.interfaces.game.singles.ISetAnimationAsObjectInitial;
-import com.github.a2g.core.interfaces.game.singles.ISetValue;
-import com.github.a2g.core.interfaces.game.singles.ISwitchToScene;
 import com.github.a2g.core.interfaces.nongame.action.IAlignBaseMiddleOfOldFrameToFrameOfThisAnimationByAtid;
 import com.github.a2g.core.interfaces.nongame.action.IGetOtidByCode;
 import com.github.a2g.core.interfaces.nongame.action.IGetOtidByIndex;
@@ -24,6 +20,10 @@ import com.github.a2g.core.interfaces.nongame.action.ISetVisibleByOtid;
 import com.github.a2g.core.interfaces.nongame.action.ISetXByOtid;
 import com.github.a2g.core.interfaces.nongame.action.ISetYByOtid;
 import com.github.a2g.core.interfaces.nongame.action.IShareWinning;
+import com.github.a2g.core.interfaces.nongame.action.ISetValue;
+import com.github.a2g.core.interfaces.nongame.action.ISwitchToScene;
+import com.github.a2g.core.interfaces.nongame.action.ISetAnimationAsObjectInitial;
+import com.github.a2g.core.interfaces.nongame.action.ISetTitleCard;
 
 public interface IScenePresenterFromSingleCallPerformer
 extends
@@ -50,7 +50,7 @@ ISetBaseMiddleXByOtid
 , ISetAnimationAsObjectInitial
 , ISetSoundtrack
 , ISetHeadRectangleByIndex
-, IDisplayTitleCard
+, ISetTitleCard
 {
 	 
 

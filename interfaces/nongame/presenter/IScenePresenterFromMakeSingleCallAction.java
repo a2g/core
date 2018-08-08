@@ -1,6 +1,5 @@
 package com.github.a2g.core.interfaces.nongame.presenter;
 
-import com.github.a2g.core.interfaces.game.singles.ISetValue;
 import com.github.a2g.core.interfaces.nongame.action.IAlignBaseMiddleOfOldFrameToFrameOfThisAnimationByAtid;
 import com.github.a2g.core.interfaces.nongame.action.IGetOtidByCode;
 import com.github.a2g.core.interfaces.nongame.action.IGetOtidByIndex;
@@ -14,6 +13,7 @@ import com.github.a2g.core.interfaces.nongame.action.ISetCurrentFrameByOtid;
 import com.github.a2g.core.interfaces.nongame.action.ISetDisplayNameByOtid;
 import com.github.a2g.core.interfaces.nongame.action.ISetInitialAnimationByAtid;
 import com.github.a2g.core.interfaces.nongame.action.ISetSceneTalkerByAtid;
+import com.github.a2g.core.interfaces.nongame.action.ISetValue;
 import com.github.a2g.core.interfaces.nongame.action.ISetVisibleByOtid;
 import com.github.a2g.core.interfaces.nongame.action.ISetXByOtid;
 import com.github.a2g.core.interfaces.nongame.action.ISetYByOtid;

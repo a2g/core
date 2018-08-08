@@ -1,7 +1,7 @@
 package com.github.a2g.core.interfaces.game.singles;
 
-import com.github.a2g.core.action.ChainableAction;
+import com.github.a2g.core.interfaces.game.chainables.IChainBase;
 
 public interface ISetVisible {
-	ChainableAction setVisible(short ocode, boolean visible);
+	IChainBase setVisible(short ocode, boolean visible);
 }

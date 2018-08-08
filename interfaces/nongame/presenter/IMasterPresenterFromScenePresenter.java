@@ -1,7 +1,7 @@
 package com.github.a2g.core.interfaces.nongame.presenter;
-
-import com.github.a2g.core.interfaces.game.singles.ISwitchToScene;
+ 
 import com.github.a2g.core.interfaces.nongame.IFactory;
+import com.github.a2g.core.interfaces.nongame.action.ISwitchToScene;
 
 public interface IMasterPresenterFromScenePresenter
 extends ISwitchToScene

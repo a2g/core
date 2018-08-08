@@ -2,7 +2,6 @@ package com.github.a2g.core.objectmodel;
 
 import java.util.List;
 
-import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.primitive.SpeechBubble;
 import com.github.a2g.core.primitive.RectF;
@@ -77,7 +76,7 @@ IDialogTreePresenterFromActions {
 
 	
 	@Override
-	public void displayTitleCard(String text) {
+	public void setTitleCard(String text) {
 		master.getScenePresenter().setTitleCard(text);
 	}
 
@@ -108,9 +107,8 @@ IDialogTreePresenterFromActions {
 	}
 	
 	@Override
-	public ChainableAction setValue(Object name, int value) {
+	public void setValue(Object name, int value) {
 		master.setValue(name, value);
-		return null;
 	}
 
 	@Override
@@ -119,7 +117,7 @@ IDialogTreePresenterFromActions {
 	}
 	
 	@Override
-	public void switchToScene(String switchToThis, int arrivalSegment) {
+	public void  switchToScene(String switchToThis, int arrivalSegment) {
 		master.switchToScene(switchToThis, arrivalSegment);
 	}
 	
@@ -158,11 +156,10 @@ IDialogTreePresenterFromActions {
 	}
 
 	@Override
-	public ChainableAction setAnimationAsObjectInitial(String atid) {
+	public void setAnimationAsObjectInitial(String atid) {
 		String otid = getOtidByAtid(atid);
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
 		object.setInitialAnimation(atid);
-		return null;
 	}
 
 	@Override

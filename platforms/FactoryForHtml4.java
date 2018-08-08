@@ -16,7 +16,6 @@ p- * Copyright 2012 Anthony Cassidy
 
 package com.github.a2g.core.platforms;
 
-import com.github.a2g.core.objectmodel.BoundaryCalculator;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.platforms.html4.CommandLinePanelForHtml4;
 import com.github.a2g.core.platforms.html4.DialogTreePanelForHtml4;
@@ -32,7 +31,6 @@ import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.github.a2g.core.interfaces.nongame.IBaseActionFromSystemAnimation;
-import com.github.a2g.core.interfaces.nongame.IBoundaryCalculator;
 import com.github.a2g.core.interfaces.nongame.IFactory;
 import com.github.a2g.core.interfaces.nongame.IHostFromMasterPresenter;
 import com.github.a2g.core.interfaces.nongame.platform.IPlatformAnimation;
@@ -49,7 +47,6 @@ import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromI
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromDialogTreeMouse;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromTimer;
-import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.nongame.presenter.IVerbsPresenterFromVerbsPanel;
 

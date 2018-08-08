@@ -16,6 +16,9 @@
 
 package com.github.a2g.core.interfaces.game.handlers;
 
+ 
+import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.game.singles.IGetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.singles.IGetBaseMiddleY;
 import com.github.a2g.core.interfaces.game.singles.IGetCurrentSceneName;
@@ -43,7 +46,9 @@ import com.github.a2g.core.interfaces.game.singles.IShow;
 import com.github.a2g.core.interfaces.game.singles.ISwitchToScene;
 /**  
  * 
- * @author Admin
+ * @brief All the methods you could possibly need in the IOnEntry handler. 
+ * This method gives you the chance to return a chain, so there's plenty
+ * of other ways to get stuff done through through the return value.
  *
  */
 public interface IOnEntry
@@ -80,5 +85,52 @@ IGetValue
 , ISetSoundtrack
 , ISetTitleCard
 {
+	/**   @name Property access methods */
+	//@{
+	@Override int getValue(Object key);
+	@Override boolean isTrue(Object key);
+	@Override IChainBase setValue(Object key, int value);
+	//@}
 
+	/**   @name Helpful for game */
+	//@{
+	@Override String getCurrentSceneName();
+	@Override IChainBase switchToScene(String name, int arrivalSegment);
+	@Override String getLastSceneName();
+	@Override boolean isInDebugMode();
+	@Override double getSceneGuiWidth();
+	@Override double getSceneGuiHeight();
+	//@}
+
+	/**   @name Inventory */
+	//@{
+	@Override boolean isInventoryItemVisible(int icode);
+	@Override IChainBase setInventoryItemVisible(int icode, boolean isVisible);
+	//@}
+
+	/**   @name Object */
+	//@{
+	@Override IChainBase show(short ocode);
+	@Override IChainBase hide(short ocode);
+	@Override IChainBase setBaseMiddleX(short ocode, double bmx);
+	@Override IChainBase setBaseMiddleY(short ocode, double bmy);
+	@Override double getBaseMiddleX(short ocode);
+	@Override double getBaseMiddleY(short ocode);
+	@Override int getX(short ocode);
+	@Override int getY(short ocode);
+	//@}
+
+	/**   @name Animation */
+	//@{
+	@Override IChainBase setAnimationAsObjectWalkDirection(String atid, WalkDirection type);
+	@Override IChainBase  setAnimationAsSceneTalker(String atid);
+	@Override IChainBase  setAnimationAsObjectInitial(String atid);
+	@Override IChainBase  setAnimationAsObjectCurrent (String atid);
+	//@}
+
+	/**   @name Sound */
+	//@{
+	@Override IChainBase  setSoundtrack(String stid) ;
+	@Override IChainBase  setTitleCard(String stid) ;
+	//@}
 }

@@ -40,9 +40,7 @@ implements IPlatformVerbsPanel
 		this.mouseToPresenter = mouseToPresenter;
 		getElement().getStyle().setProperty("color", fore.toString());
 		getElement().getStyle().setProperty("backgroundColor", back.toString());
-		this.verbs = verbs;
-
-	}
+  	}
 
 	@Override
 	public void setVerbs(Verbs verbs) {

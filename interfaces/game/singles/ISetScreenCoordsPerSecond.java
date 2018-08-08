@@ -1,6 +1,8 @@
 package com.github.a2g.core.interfaces.game.singles;
 
+import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+
 public interface ISetScreenCoordsPerSecond {
 
-	void setScreenCoordsPerSecond(short ocode, double coordsPerSecond);
+	IChainBase  setScreenCoordsPerSecond(short ocode, double coordsPerSecond);
 }

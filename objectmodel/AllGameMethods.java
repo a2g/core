@@ -3,6 +3,7 @@ package com.github.a2g.core.objectmodel;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
+import com.github.a2g.core.interfaces.game.chainables.IChainBase;
 import com.github.a2g.core.interfaces.game.handlers.IOnDialogTree;
 import com.github.a2g.core.interfaces.game.handlers.IOnDoCommand;
 import com.github.a2g.core.interfaces.game.handlers.IOnEnqueueResources;
@@ -61,18 +62,19 @@ public class AllGameMethods
 	 */
 
 	@Override
-	public void hide(short ocode) {
+	public IChainBase  hide(short ocode) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setVisible(false);
-
+		return null;
 	}
 
 	@Override
-	public void show(short ocode) {
+	public IChainBase  show(short ocode) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setVisible(true);
+		return null;
 
 	}
 
@@ -84,18 +86,20 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setX(short ocode, double x) {
+	public IChainBase  setX(short ocode, double x) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setX(x);
+		return null;
 
 	}
 
 	@Override
-	public void setY(short ocode, double y) {
+	public IChainBase setY(short ocode, double y) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setY(y);
+		return null;
 
 	}
 
@@ -108,18 +112,19 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setScreenCoordsPerSecond(short ocode, double coordsPerSecond) {
+	public IChainBase  setScreenCoordsPerSecond(short ocode, double coordsPerSecond) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setScreenCoordsPerSecond(coordsPerSecond);
-
+return null;
 	}
 
 	@Override
-	public void setParallaxX(short ocode, double x) {
+	public IChainBase  setParallaxX(short ocode, double x) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setParallaxX(x);
+		return null;
 	}
 
 	@Override
@@ -177,9 +182,10 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void updateObjectToCorrectImage(short ocode) {
+	public IChainBase  updateObjectToCorrectImage(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).updateObjectToCorrectImage();
+		return null;
 	}
 
 	@Override
@@ -204,9 +210,10 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setDefaultSceneObject(short ocode) {
+	public IChainBase  setDefaultSceneObject(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().setOtidOfDefaultSceneObject(otid);
+		return null;
 
 	}
 
@@ -243,9 +250,9 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void showInventoryItem(int icode) {
+	public IChainBase  showInventoryItem(int icode) {
 		master.getInventoryPresenter().getInventoryItemByICode(icode).setVisible(true);
-
+		return null;
 	}
 
 	@Override
@@ -255,9 +262,10 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setInventoryItemDisplayName(int icode, String displayName) {
+	public IChainBase setInventoryItemDisplayName(int icode, String displayName) {
 		InventoryItem i = master.getInventoryPresenter().getInventoryItemByICode(icode);
 		i.setDisplayName(displayName);
+		return null;
 
 	}
 
@@ -302,13 +310,15 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setAnimationAsSceneDialogUs(String atid) {
+	public IChainBase  setAnimationAsSceneDialogUs(String atid) {
 		master.getScenePresenter().setSceneAskerAtid(atid);
+		return null;
 	}
 
 	@Override
-	public void setAnimationAsSceneDialogThem(String atid) {
+	public IChainBase  setAnimationAsSceneDialogThem(String atid) {
 		master.getScenePresenter().setSceneAnswererAtid(atid);
+		return null;
 	}
 
 	@Override
@@ -336,8 +346,9 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setAnimationDuration(String atid, double secs) {
+	public IChainBase  setAnimationDuration(String atid, double secs) {
 		master.getScenePresenter().getAnimationByAtid(atid).setDurationSecs(secs);
+		return null;
 
 	}
 
@@ -361,9 +372,10 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setAnimationTalkingColor(String atid, ColorEnum red) {
+	public IChainBase  setAnimationTalkingColor(String atid, ColorEnum red) {
 
 		master.getScenePresenter().getAnimationByAtid(atid).setTalkingColor(red);
+		return null;
 
 	}
 
@@ -392,8 +404,9 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void updateVerbUI() {
+	public IChainBase  updateVerbUI() {
 		master.getVerbsPresenter().updateVerbs();
+		return null;
 
 	}
 
@@ -421,7 +434,7 @@ public class AllGameMethods
 	}
 
 	@Override
-	public ChainableAction setValue(Object key, int value) {
+	public IChainBase setValue(Object key, int value) {
 		master.setValue(key, value);
 		return null;
 	}
@@ -442,13 +455,13 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void switchToScene(String scene, int arrivalSegment) {
+	public IChainBase switchToScene(String scene, int arrivalSegment) {
 		master.switchToScene(scene, arrivalSegment);
-
+		return null;
 	}
 
 	@Override
-	public String getLastScene() {
+	public String getLastSceneName() {
 		return master.getLastScene();
 	}
 
@@ -463,14 +476,14 @@ public class AllGameMethods
 	}
 
 	@Override
-	public int getSceneGuiHeight() {
+	public double getSceneGuiHeight() {
 		return master.getScenePresenter().getSceneGuiHeight();
 	}
 
 	@Override
-	public void setIsSayAlwaysWithoutIncremementing(boolean isSayWithoutIncremementing) {
+	public IChainBase  setIsSayAlwaysWithoutIncremementing(boolean isSayWithoutIncremementing) {
 		master.setIsSayAlwaysWithoutIncremementing(isSayWithoutIncremementing);
-
+		return null;
 	}
 
 	@Override
@@ -496,9 +509,9 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setActiveGuiState(GuiStateEnum state) {
+	public IChainBase  setActiveGuiState(GuiStateEnum state) {
 		master.setActiveGuiState(state);
-
+return null;
 	}
 
 	@Override
@@ -522,8 +535,9 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setTitleCard(String titlecard) {
+	public IChainBase  setTitleCard(String titlecard) {
 		master.getScenePresenter().setTitleCard(titlecard);
+		return null;
 	}
 
 	@Override
@@ -573,9 +587,10 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setHeadRectangleForAnimation(String atid, int index) {
+	public IChainBase  setHeadRectangleForAnimation(String atid, int index) {
 		Animation a = master.getScenePresenter().getAnimationByAtid(atid);
 		a.setHeadRectangleIndex(index);
+		return null;
 	}
 
 	@Override
@@ -587,19 +602,20 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setTalkingColor(short ocode, ColorEnum color) {
+	public IChainBase  setTalkingColor(short ocode, ColorEnum color) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setTalkingColor(color);
+		return null;
 
 	}
 
 	@Override
-	public void setScale(short ocode, double scale) {
+	public IChainBase  setScale(short ocode, double scale) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setScale(scale);
-
+		return null;
 	}
 
 	@Override
@@ -642,9 +658,10 @@ public class AllGameMethods
 	}
 
 	@Override
-	public void setClumpWithPrevious(short ocode, boolean isClump) {
+	public IChainBase  setClumpWithPrevious(short ocode, boolean isClump) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setClumpWithPrevious(isClump);
+		return null;
 
 	}
 

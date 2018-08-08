@@ -103,6 +103,7 @@ IGetSceneGuiHeight,
 IAddHelperRectangle,
 IAddHelperPoint,
 IGetOCodeByAtid,
+ISetTitleCard,
 // boundary
 IAddEdgeSpan,
 IAddEdgePoint,
@@ -134,10 +135,7 @@ ISetInventoryItemDisplayName,
 IIsInventoryItemVisible,
 ISetInventoryItemVisible,
 IHideAllInventory,
-
-//titlecard
-ISetTitleCard,
-
+ 
 // verb
 IRemoveVerbByCode,
 IUpdateVerbUI,
