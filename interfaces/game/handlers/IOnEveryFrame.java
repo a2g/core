@@ -74,28 +74,39 @@ IGetSceneGuiWidth
 // handler
 ,
 ICreateChainRootAction,
-IExecuteChainedAction
+IExecuteChainedAction,
 // helper
-,
 
-IShareWinning
-, ISetStateOfPopup
-, IDisplayTitleCard
+
+IShareWinning,
+ISetStateOfPopup,
+IDisplayTitleCard,
 // object
-, IShow, IHide, IIncremementFrameWithWraparound,
-IUpdateObjectToCorrectImage, IGetCurrentFrame, ISetCurrentFrame,
-ISetBaseMiddleX, ISetBaseMiddleY, IGetBaseMiddleX, IGetBaseMiddleY,
-IGetCurrentAnimation, ISetX, ISetY, IGetX, IGetY, IIsVisible
+IShow, 
+IHide, 
+IIncremementFrameWithWraparound,
+IUpdateObjectToCorrectImage, 
+IGetCurrentFrame, 
+ISetCurrentFrame,
+ISetBaseMiddleX, 
+ISetBaseMiddleY, 
+IGetBaseMiddleX, 
+IGetBaseMiddleY,
+IGetCurrentAnimation, 
+ISetX, 
+ISetY, 
+IGetX, 
+IGetY, 
+IIsVisible,
+
 // animation
-, IIsAnimation
-, ISetAnimationAsObjectCurrent
-, IGetHelperPoint
-, IGetViewportWidth
+IIsAnimation,
+ISetAnimationAsObjectCurrent,
+IGetHelperPoint,
+IGetViewportWidth
 {
 
 	
-
  
-	 
 	 
 }

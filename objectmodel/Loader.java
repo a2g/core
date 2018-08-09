@@ -192,7 +192,7 @@ public class Loader implements ILoaderPresenter {
 		}
 	}
 
-	public void queueSingleBundle(IPlatformResourceBundle bundle, IMasterPresenterFromBundle api) {
+	public void enqueueSingleBundle(IPlatformResourceBundle bundle, IMasterPresenterFromBundle api) {
 	   if(!setOfEssentialLoaderNames.contains(bundle.toString()))
 	   {
 		listOfEssentialLoaders.add(new LoaderItem(api, bundle));

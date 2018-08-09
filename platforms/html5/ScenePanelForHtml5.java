@@ -385,6 +385,7 @@ IPlatformScenePanel {
 		this.speechBubbleEtc = pages.get(0); 
 		this.backgroundColor = ColorEnum.Black;
 		this.speechColor = ColorEnum.Red;
+		this.triggerPaint();
 	}
 	
 

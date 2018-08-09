@@ -81,7 +81,7 @@ public class ScenePresenter implements IScenePresenter,
 		defaultSceneObjectOtid = "ScenePresenter::getDefaultSceneObjectOtid was used before it was initialized";
 
 		rectangles = new Vector<RectF>(3);
-		this.addRectangle(new RectF(0,0,1.0,1.0));// this is for getSpeechRectUsingContingencies, it relies on there always being a zero element
+		this.addHelperRectangle(new RectF(0,0,1.0,1.0));// this is for getSpeechRectUsingContingencies, it relies on there always being a zero element
 		this.helperPoints = new ArrayList<Point>();
 	}
 
@@ -125,6 +125,7 @@ public class ScenePresenter implements IScenePresenter,
 		this.sceneTalkerAtid = "";
 		this.sceneAskerAtid = "";
 		this.sceneAnswererAtid = "";
+		this.getView().setTitleCard("");
 	}
 
 	public void clearView() {
@@ -453,9 +454,13 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	
-	public int addRectangle(RectF rectF) {
+	public int addHelperRectangle(RectF rectF) {
 		rectangles.add(rectF);
 		return rectangles.size() - 1;
+	}
+	
+	public RectF getHelperRectangle(int index) {
+		return rectangles.get(index);
 	}
 	
 	public int addHelperPoint(Point pointF) {

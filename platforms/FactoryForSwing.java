@@ -19,7 +19,6 @@ package com.github.a2g.core.platforms;
 import javax.swing.JOptionPane;
 
 import com.github.a2g.core.interfaces.nongame.IBaseActionFromSystemAnimation;
-import com.github.a2g.core.interfaces.nongame.IBoundaryCalculator;
 import com.github.a2g.core.interfaces.nongame.IFactory;
 import com.github.a2g.core.interfaces.nongame.platform.IPlatformAnimation;
 import com.github.a2g.core.interfaces.nongame.platform.IPlatformCommandLinePanel;
@@ -35,10 +34,8 @@ import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromI
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromDialogTreeMouse;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromLoaderMouse;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromTimer;
-import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromScenePanel;
 import com.github.a2g.core.interfaces.nongame.presenter.IVerbsPresenterFromVerbsPanel;
-import com.github.a2g.core.objectmodel.BoundaryCalculator;
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.platforms.swing.CommandLinePanelForSwing;
 import com.github.a2g.core.platforms.swing.DialogTreePanelForSwing;

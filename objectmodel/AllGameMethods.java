@@ -256,8 +256,9 @@ return null;
 	}
 
 	@Override
-	public void hideInventoryItem(int icode) {
+	public IChainBase hideInventoryItem(int icode) {
 		master.getInventoryPresenter().getInventoryItemByICode(icode).setVisible(false);
+		return null;
 
 	}
 
@@ -276,8 +277,9 @@ return null;
 	}
 
 	@Override
-	public void hideInventoryItemsAllOfThem() {
+	public IChainBase hideInventoryItemsAllOfThem() {
 		master.getInventoryPresenter().hideAllInventory();
+		return null;
 	}
 
 	// /@}
@@ -547,13 +549,13 @@ return null;
 	}
 
 	@Override
-	public void addEdgeSpan(double tlx, double tly, double brx, double bry, Object sceneToSwitchTo,
+	public void addEdgeSpanToPerimeter(double tlx, double tly, double brx, double bry, Object sceneToSwitchTo,
 			int arrivalSegment) {
 		master.getScenePresenter().addEdgeSpan(tlx, tly, brx, bry, sceneToSwitchTo, arrivalSegment);
 	}
 
 	@Override
-	public void addEdgePoint(double x, double y) {
+	public void addEdgePointToPerimeter(double x, double y) {
 		master.getScenePresenter().addBoundaryPoint(x, y);
 	}
 	// /@}
@@ -578,7 +580,7 @@ return null;
 
 	@Override
 	public int addHelperRectangle(RectF rectF) {
-		return master.getScenePresenter().addRectangle(rectF);
+		return master.getScenePresenter().addHelperRectangle(rectF);
 	}
 
 	@Override
@@ -651,7 +653,7 @@ return null;
 	}
 
 	@Override
-	public void addEdgePoint(int helperIndex) {
+	public void addEdgePointToPerimeter(int helperIndex) {
 		Point p1 = master.getScenePresenter().getHelperPoints().get(helperIndex);
 		master.getScenePresenter().addBoundaryPoint(p1.getX(), p1.getY());
 
@@ -685,6 +687,11 @@ return null;
 	public ChainableAction alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation(String atid, int frame) {
 		master.getScenePresenter().alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimationByAtid(frame, atid);
 		return null;
+	}
+
+	@Override
+	public RectF getHelperRectangle(int index) {
+		return master.getScenePresenter().getHelperRectangle(index);
 	}
 	 
 

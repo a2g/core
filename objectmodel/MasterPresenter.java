@@ -980,7 +980,7 @@ public class MasterPresenter
 	
 	public void enqueueSingleBundle(IPlatformResourceBundle loader)
 	{
-		loaderPresenter.getLoaders().queueSingleBundle(loader, this);
+		loaderPresenter.getLoaders().enqueueSingleBundle(loader, this);
 	}
 
 	public void incrementFont() {

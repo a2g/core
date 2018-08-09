@@ -16,9 +16,14 @@
 
 package com.github.a2g.core.interfaces.game.handlers;
 
-import com.github.a2g.core.interfaces.game.singles.IAddEdgeSpan;
-import com.github.a2g.core.interfaces.game.singles.IAddEdgePoint;
+import com.github.a2g.core.interfaces.game.singles.IAddEdgeSpanToPerimeter;
+import com.github.a2g.core.interfaces.game.singles.IAddHelperPoint;
+import com.github.a2g.core.interfaces.game.singles.IAddHelperRectangle;
+import com.github.a2g.core.action.ChainRootAction;
+import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+import com.github.a2g.core.interfaces.game.singles.IAddEdgePointToPerimeter;
 import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation;
+import com.github.a2g.core.interfaces.game.singles.IClearValuesAndSaidSpeech;
 import com.github.a2g.core.interfaces.game.singles.ICreateChainRootAction;
 import com.github.a2g.core.interfaces.game.singles.IGetAnimationLastFrame;
 import com.github.a2g.core.interfaces.game.singles.IGetAnimationLength;
@@ -28,6 +33,7 @@ import com.github.a2g.core.interfaces.game.singles.IGetCurrentAnimation;
 import com.github.a2g.core.interfaces.game.singles.IGetCurrentFrame;
 import com.github.a2g.core.interfaces.game.singles.IGetCurrentSceneName;
 import com.github.a2g.core.interfaces.game.singles.IGetHelperPoint;
+import com.github.a2g.core.interfaces.game.singles.IGetHelperRectangle;
 import com.github.a2g.core.interfaces.game.singles.IGetIsTalkingAlwaysWithoutIncrementing;
 import com.github.a2g.core.interfaces.game.singles.IGetLastSceneName;
 import com.github.a2g.core.interfaces.game.singles.IGetValue;
@@ -59,6 +65,7 @@ import com.github.a2g.core.interfaces.game.singles.IShareWinning;
 import com.github.a2g.core.interfaces.game.singles.IShow;
 import com.github.a2g.core.interfaces.game.singles.IShowInventoryItem;
 import com.github.a2g.core.interfaces.game.singles.ISwitchToScene;
+import com.github.a2g.core.primitive.RectF;
 
 /**  
  * 
@@ -71,6 +78,7 @@ extends
 IGetValue,
 IIsTrue,
 ISetValue,
+IClearValuesAndSaidSpeech,
 
 // helpful for game
 IGetCurrentSceneName,
@@ -82,10 +90,13 @@ IGetIsTalkingAlwaysWithoutIncrementing,
 IShareWinning,
 ICreateChainRootAction,
 
-// boundary
-IAddEdgeSpan,
-IAddEdgePoint,
+// boundary and helper
+IAddEdgeSpanToPerimeter,
+IAddEdgePointToPerimeter,
 IGetHelperPoint,
+IAddHelperPoint,
+IGetHelperRectangle,
+IAddHelperRectangle,
 
 
 // object
@@ -124,6 +135,73 @@ ISetInventoryItemDisplayName,
 ISetInventoryItemVisible
 {
 
+	/**   @name Property access methods */
+	//@{
+	@Override int getValue(Object key);
+	@Override boolean isTrue(Object key);
+	@Override IChainBase setValue(Object key, int value);
+	@Override  void clearValuesAndSaidSpeech();
+	//@}
+
+	/**   @name Helpful for game */
+	//@{
+	@Override String getCurrentSceneName();
+	@Override IChainBase switchToScene(String name, int arrivalSegment);
+	@Override boolean isInDebugMode();
+	@Override String getLastSceneName();
+	@Override IChainBase shareWinning(String string);
+	ChainRootAction createChainRootAction();
+	//@}
+
+	/** @name EdgeDetection and Helper */
+	//@{
+	@Override void addEdgeSpanToPerimeter(double tlx, double tly, double blx, double bly, Object toStringIsCalledOnThisToDetermineTheNameToSwitchToWhenGateIsEntered, int arrivalSegment);
+	@Override void addEdgePointToPerimeter(double tlx, double tly);
+	@Override int addHelperPoint(double x, double y);
+	@Override int addHelperRectangle(RectF rectF);
+	//@}
+	
+	/**   @name Inventory */
+	//@{
+	@Override IChainBase showInventoryItem(int icode);
+	@Override IChainBase hideInventoryItem(int icode);
+	@Override boolean isInventoryItemVisible(int code);
+	@Override IChainBase setInventoryItemDisplayName(int icode, String displayName);
+	@Override IChainBase setInventoryItemVisible(int icode, boolean isVisible);
+	//@}
+
+	/**   @name Object */
+	//@{
+	@Override IChainBase show(short ocode);
+	@Override IChainBase hide(short ocode);
+	@Override IChainBase setBaseMiddleX(short ocode, double bmx);
+	@Override IChainBase setBaseMiddleY(short ocode, double bmy);
+	@Override double getBaseMiddleX(short ocode);
+	@Override double getBaseMiddleY(short ocode);
+	@Override int getX(short ocode);
+	@Override int getY(short ocode);
+	@Override IChainBase setX(short ocode, double x);
+	@Override IChainBase setY(short ocode, double y);
+	@Override boolean isVisible(short ocode);
+	@Override String getCurrentAnimation(short ocode);
+	@Override int getCurrentFrame(short ocode);
+	@Override IChainBase setCurrentFrame(short ocode, int frame);
+	@Override IChainBase setDisplayName(short ocode, String displayName);
+	@Override IChainBase setDefaultSceneObject(short ocode);
+	@Override IChainBase setScreenCoordsPerSecond(short ocode, double coordsPerSecond);
+	//@}
+
+	/**   @name Animation */
+	//@{
+	@Override IChainBase setAnimationAsSceneTalker(String atid);
+	@Override IChainBase setAnimationAsObjectInitial(String atid);
+	@Override IChainBase setAnimationAsObjectCurrent (String atid);
+	@Override IChainBase alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation(String atid, int frame);
+	@Override int getAnimationLastFrame(String atid);
+	@Override int getAnimationLength(String atid);
+	@Override IChainBase setAnimationDuration(String atid, double duration);
+	//@}
+ 
 	
 	
 

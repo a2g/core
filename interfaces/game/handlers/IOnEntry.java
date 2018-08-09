@@ -100,6 +100,7 @@ IGetValue
 	@Override boolean isInDebugMode();
 	@Override double getSceneGuiWidth();
 	@Override double getSceneGuiHeight();
+	@Override IChainBase setTitleCard(String textToDisplay) ;
 	//@}
 
 	/**   @name Inventory */
@@ -131,6 +132,5 @@ IGetValue
 	/**   @name Sound */
 	//@{
 	@Override IChainBase  setSoundtrack(String stid) ;
-	@Override IChainBase  setTitleCard(String stid) ;
 	//@}
 }
