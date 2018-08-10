@@ -59,7 +59,7 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		this.updateCentre();
 	}
 
-	public void addEdgeSpan(Object switchTo, int arrivalSegment, Point a, Point b) {
+	public void addEdgeSpanToPerimeter(Object switchTo, int arrivalSegment, Point a, Point b) {
 		if (switchTo != null) {
 			gates.add(new Gate(switchTo == "" ? null : switchTo, arrivalSegment, a, b));
 

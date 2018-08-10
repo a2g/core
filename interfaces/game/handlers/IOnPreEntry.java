@@ -16,11 +16,11 @@
 
 package com.github.a2g.core.interfaces.game.handlers;
 
-import com.github.a2g.core.interfaces.game.singles.IAddEdgeSpanToPerimeter;
+import com.github.a2g.core.interfaces.game.singles.IAddEdgeSpanToPerimeter ;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.interfaces.game.chainables.IChainBase;
 import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI.WalkDirection;
-import com.github.a2g.core.interfaces.game.singles.IAddEdgePointToPerimeter;
+import com.github.a2g.core.interfaces.game.singles.IAddEdgePointToPerimeter ;
 import com.github.a2g.core.interfaces.game.singles.IAddHelperPoint;
 import com.github.a2g.core.interfaces.game.singles.IAddEdgeRectangle;
 import com.github.a2g.core.interfaces.game.singles.IAddHelperRectangle;
@@ -117,8 +117,8 @@ IClearSaidSpeech,
 
 
 // boundary and helper
-IAddEdgeSpanToPerimeter,
-IAddEdgePointToPerimeter,
+IAddEdgeSpanToPerimeter ,
+IAddEdgePointToPerimeter ,
 IAddEdgeRectangle,
 IAddHelperRectangle,
 IAddHelperPoint,

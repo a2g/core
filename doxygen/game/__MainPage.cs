@@ -25,21 +25,20 @@
 So .....an Adventure games API!
 
 <br>
-You think about Verbs, InventoryItems, and whole heap  SceneObjects - oh and Animations.
+Adventure games should conjure up concepts of Verbs, InventoryItems, and whole heap  SceneObjects .. and Animations if you're lucky.
 And an API is a Whole Bunch of Methods"
+So naturally, this API is a whole lot of methods dealing with verbs, inventory items
 
-This one focuses a bit on static type checking, so in the methods:
+In the method calls of this API:
 - Verbs are represented by an @a @b enum.
 - InventoryItems are represented by an @a @b int.
 - SceneObjects get a @a @b short
 - and Animations get a @a @b  String.
 
-This helps static type checking.
-is one big switch, this helps you decide in what clumps and what groups you want to handle
-different combinations.
-This is better than having to fill out a different handler for each verb I think.
-The way the types are arranged means that you still get static type checking.
-For example.
+This helps static type checking - helping prevent methods arne't used with the wrong ids.
+In addition, they help the handlers that handle all the verb\noun combinations.
+The verb/inventoryitem/sceneobject ones are integers because the main verb/noun handler is just a big switch that handles a whole bunch
+of verb*object and object*object numerics.
 
 A whole bunch of methods. See docuemntation for AllGameMethods.cpp
 

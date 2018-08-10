@@ -361,9 +361,9 @@ public class ScenePresenter implements IScenePresenter,
 		master.switchToScene(foundDest, arrivalSegment);
 	}
 
-	public void addEdgeSpan(double tlx, double tly, double brx, double bry,
+	public void addEdgeSpanToPerimeter(double tlx, double tly, double brx, double bry,
 			Object sceneToSwitchTo, int arrivalSegment) {
-		boundaryCalculator.addEdgeSpan(sceneToSwitchTo, arrivalSegment,
+		boundaryCalculator.addEdgeSpanToPerimeter(sceneToSwitchTo, arrivalSegment,
 				new Point(tlx, tly), new Point(brx, bry));
 	}
 

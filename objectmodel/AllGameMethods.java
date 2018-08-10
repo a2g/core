@@ -551,7 +551,7 @@ return null;
 	@Override
 	public void addEdgeSpanToPerimeter(double tlx, double tly, double brx, double bry, Object sceneToSwitchTo,
 			int arrivalSegment) {
-		master.getScenePresenter().addEdgeSpan(tlx, tly, brx, bry, sceneToSwitchTo, arrivalSegment);
+		master.getScenePresenter().addEdgeSpanToPerimeter(tlx, tly, brx, bry, sceneToSwitchTo, arrivalSegment);
 	}
 
 	@Override

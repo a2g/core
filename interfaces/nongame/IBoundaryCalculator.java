@@ -11,7 +11,7 @@ public interface IBoundaryCalculator {
 
 	void clearBoundaries();
 
-	void addEdgeSpan(Object sceneToSwitchTo, int arrivalSegment, Point pointF, Point pointF2);
+	void addEdgeSpanToPerimeter(Object sceneToSwitchTo, int arrivalSegment, Point pointF, Point pointF2);
 
 	void addBoundaryPoint(Point pointF);
 

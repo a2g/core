@@ -91,8 +91,8 @@ IShareWinning,
 ICreateChainRootAction,
 
 // boundary and helper
-IAddEdgeSpanToPerimeter,
-IAddEdgePointToPerimeter,
+IAddEdgeSpanToPerimeter ,
+IAddEdgePointToPerimeter ,
 IGetHelperPoint,
 IAddHelperPoint,
 IGetHelperRectangle,
