@@ -22,87 +22,57 @@
 </tr>
 </table>
 
-a2g is a @ref  simple @ref Maniac-Mansion-style adventure @ref game-engine. 
+So .....an Adventure games API!
+
 <br>
-Some of it's highlights include:
-- support for both online delivery via @ref GWT and desktop delivery via @ref Swing.
-- game scripts with @ref lots-of-static-checking, which means less errors.
-- supports @ref arbitrary-resolutions simultaneously.
-- efficient @ref loading-of-images
-- efficient @ref loading-of-scene-files.
-- @ref easy-debugging by using using standard Java debugging.
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-@dot
-digraph {
-    subgraph cluster_one 
-    {
-	fillcolor="black"
-          style="filled" 
- 	URL="_example_code.html"
-			
-           node [
-	URL="_example_code.html"
-	shape=box 
-	fillcolor="black"
-	width=1
-	height=1
-	] ExampleCode;
-         
-    }
+You think about Verbs, InventoryItems, and whole heap  SceneObjects - oh and Animations.
+And an API is a Whole Bunch of Methods"
+
+This one focuses a bit on static type checking, so in the methods:
+- Verbs are represented by an @a @b enum.
+- InventoryItems are represented by an @a @b int.
+- SceneObjects get a @a @b short
+- and Animations get a @a @b  String.
+
+This helps static type checking.
+is one big switch, this helps you decide in what clumps and what groups you want to handle
+different combinations.
+This is better than having to fill out a different handler for each verb I think.
+The way the types are arranged means that you still get static type checking.
+For example.
+
+A whole bunch of methods. See docuemntation for AllGameMethods.cpp
+
+The 5 Handlers.
+All those methods need a place to run. 
+These are the five handlers.
+
+Some methods are not allowed to be called in some handlers, because of this each handler has
+its own api with their own restricted set of methods. each handler is called with the api object as the first parameter.
+
+you may have noticed the methods refer to systems - s
+Now you might want to check out these systems.
+Otherwise, you may want to check out what happens in each of the handlers. 
+
+
+
+
+The five handlers.
+the methods available in each of the five handlers
+The systems that each of the methods relate to.
+
+
+As you can see, the methods influence various s
+
+
+
+========================
+Back on page one I said that animations are the other object type
+Each scene is just like a big collection of flicker books. Even the smallest are single page flicker books.
+For example, a person walking is just  a person animating on the spot, on a flicker book that is being moved along x axis.  giving the illusion of walking.
+On the other hand, if you don;t want the person to slide, and want proper foot placement, then you can do a flicker book of a person taking a two steps and this time not stay on the spot, so moving from the left edge to the right edge of a flicker book. then for the next two steps you can jump the flicker book position by the distance those two steps covered, and repeat the same animation. This will give the illusion of non sliding walking.
+You can use methods like
+AlignXXXX to facilitate this.
 
  }
 @enddot

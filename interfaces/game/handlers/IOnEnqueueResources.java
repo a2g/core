@@ -31,12 +31,12 @@ import com.github.a2g.core.interfaces.nongame.platform.IPlatformResourceBundle;
  */
 public interface IOnEnqueueResources extends ISetValue 
 {
-	void 				enqueueEntireBundleLoader(IBundleLoader blah);
-	void 				enqueueSingleBundle(IPlatformResourceBundle bundle);
-	void 				enqueueMP3ForASoundObject(String name, String location);
+	void 			enqueueEntireBundleLoader(IBundleLoader blah);
+	void 			enqueueSingleBundle(IPlatformResourceBundle bundle);
+	void 			enqueueMP3ForASoundObject(String name, String location);
 	IGameScene 	    	enqueueSharedSceneAndReturnScene(IExtendsGameSceneLoader loader);
- 	void 				clearAllLoadedLoads();
-    ILoadKickStarter 	createReturnObject(IGameScene scene); 
+ 	void 			clearAllLoadedLoads();
+        ILoadKickStarter 	createReturnObject(IGameScene scene); 
     	
     
 }

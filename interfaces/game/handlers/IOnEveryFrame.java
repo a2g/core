@@ -16,6 +16,10 @@
 
 package com.github.a2g.core.interfaces.game.handlers;
 
+import com.github.a2g.core.action.ChainRootAction;
+import com.github.a2g.core.action.ChainableAction;
+import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.game.singles.ICreateChainRootAction;
 import com.github.a2g.core.interfaces.game.singles.IDisplayTitleCard;
 import com.github.a2g.core.interfaces.game.singles.IExecuteChainedAction;
@@ -26,6 +30,7 @@ import com.github.a2g.core.interfaces.game.singles.IGetCurrentFrame;
 import com.github.a2g.core.interfaces.game.singles.IGetCurrentSceneName;
 import com.github.a2g.core.interfaces.game.singles.IGetHelperPoint;
 import com.github.a2g.core.interfaces.game.singles.IGetLastSceneName;
+import com.github.a2g.core.interfaces.game.singles.IGetSceneGuiHeight;
 import com.github.a2g.core.interfaces.game.singles.IGetSceneGuiWidth;
 import com.github.a2g.core.interfaces.game.singles.IGetValue;
 import com.github.a2g.core.interfaces.game.singles.IGetViewportWidth;
@@ -59,54 +64,94 @@ import com.github.a2g.core.interfaces.nongame.action.ISetStateOfPopup;
 public interface IOnEveryFrame
 extends
 // property access methods
-IGetValue,
-IIsTrue,
-ISetValue
+IGetValue
+, IIsTrue
+, ISetValue
 // helpful for game
-,
-IGetCurrentSceneName,
-ISwitchToScene,
-IGetLastSceneName,
-IIsInDebugMode,
-ISetActiveGuiState,
-IGetSceneGuiWidth
+
+, IGetCurrentSceneName
+, ISwitchToScene
+, IGetLastSceneName
+, IIsInDebugMode
+, ISetActiveGuiState
+, IGetSceneGuiWidth
+, IGetSceneGuiHeight
+
 // these two are needed for starting animations in the onEveryFrame
 // handler
-,
-ICreateChainRootAction,
-IExecuteChainedAction,
+, ICreateChainRootAction
+, IExecuteChainedAction
+
 // helper
+, IShareWinning
+, ISetStateOfPopup
+, IDisplayTitleCard
+, IGetHelperPoint
+, IGetViewportWidth
 
-
-IShareWinning,
-ISetStateOfPopup,
-IDisplayTitleCard,
 // object
-IShow, 
-IHide, 
-IIncremementFrameWithWraparound,
-IUpdateObjectToCorrectImage, 
-IGetCurrentFrame, 
-ISetCurrentFrame,
-ISetBaseMiddleX, 
-ISetBaseMiddleY, 
-IGetBaseMiddleX, 
-IGetBaseMiddleY,
-IGetCurrentAnimation, 
-ISetX, 
-ISetY, 
-IGetX, 
-IGetY, 
-IIsVisible,
+, IShow 
+, IHide
+, IIncremementFrameWithWraparound
+, IUpdateObjectToCorrectImage 
+, IGetCurrentFrame 
+, ISetCurrentFrame
+, ISetBaseMiddleX 
+, ISetBaseMiddleY 
+, IGetBaseMiddleX 
+, IGetBaseMiddleY
+, IGetCurrentAnimation 
+, ISetX 
+, ISetY 
+, IGetX 
+, IGetY
+, IIsVisible
 
 // animation
-IIsAnimation,
-ISetAnimationAsObjectCurrent,
-IGetHelperPoint,
-IGetViewportWidth
-{
+, IIsAnimation
+, ISetAnimationAsObjectCurrent
 
-	
- 
-	 
+{
+	/**   @name Property access methods */
+	//@{
+	@Override int getValue(Object key);
+	@Override boolean isTrue(Object key);
+	@Override IChainBase setValue(Object key, int value);
+	//@}
+
+	/**   @name Helpful for game */
+	//@{
+	@Override IChainBase switchToScene(String name, int arrivalSegment);
+	@Override boolean isInDebugMode();
+	@Override double getSceneGuiWidth();
+	@Override double getSceneGuiHeight();
+	@Override String getLastSceneName();
+	@Override IChainBase shareWinning(String string);
+	@Override ChainRootAction createChainRootAction();
+	@Override String getCurrentSceneName();
+	@Override void executeChainedAction(ChainableAction ba);
+	//@}
+
+	/**   @name Object */
+	//@{
+	@Override IChainBase show(short ocode);
+	@Override IChainBase hide(short ocode);
+	@Override IChainBase setBaseMiddleX(short ocode, double bmx);
+	@Override IChainBase setBaseMiddleY(short ocode, double bmy);
+	@Override double getBaseMiddleX(short ocode);
+	@Override double getBaseMiddleY(short ocode);
+	@Override int getX(short ocode);
+	@Override int getY(short ocode);
+	@Override IChainBase setX(short ocode, double x);
+	@Override IChainBase setY(short ocode, double y);
+	@Override boolean isVisible(short ocode);
+	//@}
+
+
+	/**   @name Animation */
+	//@{
+	@Override IChainBase setAnimationAsObjectCurrent(String atid);
+	boolean isAnimation(String atid);
+	//@}
+
 }

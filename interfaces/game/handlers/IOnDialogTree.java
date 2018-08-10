@@ -16,6 +16,7 @@
 
 package com.github.a2g.core.interfaces.game.handlers;
 
+import com.github.a2g.core.interfaces.game.chainables.IChainBase;
 import com.github.a2g.core.interfaces.game.singles.IGetCurrentSceneName;
 import com.github.a2g.core.interfaces.game.singles.IGetLastSceneName;
 import com.github.a2g.core.interfaces.game.singles.IGetValue;
@@ -35,14 +36,46 @@ import com.github.a2g.core.interfaces.game.singles.ISwitchToScene;
  */
 public interface IOnDialogTree extends
 // property access methods
-IGetValue, IIsTrue, ISetValue
+IGetValue
+, IIsTrue
+, ISetValue
 // animation
 , ISetAnimationAsSceneDialogUs
 , ISetAnimationAsSceneDialogThem
 , ISetAnimationAsObjectInitial
+//inventory
+, IIsInventoryItemVisible 
 // helpful for game
-, IGetCurrentSceneName, ISwitchToScene, IGetLastSceneName, IIsInDebugMode
-// inventory
-, IIsInventoryItemVisible {
+, IGetCurrentSceneName
+, ISwitchToScene
+, IGetLastSceneName
+, IIsInDebugMode
 
+{
+	/**   @name Property access methods */
+	//@{
+	@Override int getValue(Object key);
+	@Override boolean isTrue(Object key);
+	@Override IChainBase setValue(Object key, int value);
+	//@}
+
+	/**   @name Inventory */
+	//@{
+	@Override boolean isInventoryItemVisible(int icode);
+	//@}
+
+	/**   @name Animation */
+	//@{
+	@Override IChainBase setAnimationAsObjectInitial(String atid); 
+	@Override IChainBase setAnimationAsSceneDialogUs(String atid);
+	@Override IChainBase setAnimationAsSceneDialogThem(String atid);
+	//@}
+ 
+	/**   @name Helpful for game */
+	//@{
+	@Override IChainBase switchToScene(String name, int arrivalSegment);
+	@Override boolean isInDebugMode();
+	@Override String getLastSceneName();
+	@Override String getCurrentSceneName();
+	//@}
 }
