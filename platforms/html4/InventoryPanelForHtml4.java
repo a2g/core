@@ -43,12 +43,12 @@ IImagePanel
 {
 	final FlowPanel arrowLeft;
 	final FlowPanel arrowRight;
-	final IInventoryPresenterFromInventoryPanel mouseToPresenter;
+	final IInventoryPresenterFromInventoryPanel toInventory;
 
-	public InventoryPanelForHtml4(final IInventoryPresenterFromInventoryPanel mouseToPresenter, ColorEnum fore, ColorEnum back, ColorEnum rollover)
+	public InventoryPanelForHtml4(final IInventoryPresenterFromInventoryPanel toInventory, ColorEnum fore, ColorEnum back, ColorEnum rollover)
 	{
 		setVisible(true);
-		this.mouseToPresenter = mouseToPresenter;
+		this.toInventory = toInventory;
 
 		getElement().getStyle().setProperty("color", fore.toString());
 		getElement().getStyle().setProperty("backgroundColor", back.toString());
@@ -90,8 +90,8 @@ IImagePanel
 				{	@Override
 					public void onClick(ClickEvent event)
 				{
-					mouseToPresenter.setMouseOver(.05, .5);
-					mouseToPresenter.doClick();
+					toInventory.setMouseOver(.05, .5);
+					toInventory.doClick();
 				}
 				}, ClickEvent.getType());
 		arrowRight.addDomHandler(
@@ -99,8 +99,8 @@ IImagePanel
 				{	@Override
 					public void onClick(ClickEvent event)
 				{
-					mouseToPresenter.setMouseOver(.95, .5);
-					mouseToPresenter.doClick();
+					toInventory.setMouseOver(.95, .5);
+					toInventory.doClick();
 				}
 
 				}, ClickEvent.getType());
@@ -124,11 +124,11 @@ IImagePanel
 		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new PointI(0, 0));
 
 		imageAndPos.getNativeImage().addMouseMoveHandler(
-				new InventoryItemMouseOverHandler(bus, mouseToPresenter, otid,
+				new InventoryItemMouseOverHandler(bus, toInventory, otid,
 						ocode));
 
 		imageAndPos.getNativeImage().addClickHandler(
-				new InventoryItemMouseClickHandler(this, mouseToPresenter));
+				new InventoryItemMouseClickHandler(this, toInventory));
 
 		return imageAndPos;
 	}
