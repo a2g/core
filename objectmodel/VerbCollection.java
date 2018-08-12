@@ -34,8 +34,7 @@ public class VerbCollection {
 		verbs.add(new Verb("Grab", "Grab AAA", ConstantsForAPI.GRAB));
 		verbs.add(new Verb("Swing", "Swing on AAA", ConstantsForAPI.SWING));
 		verbs.add(new Verb("Turn on", "Turn on AAA", ConstantsForAPI.TURN_ON));
-		verbs.add(new Verb("Use", "Use AAA|Use AAA with BBB",
-				ConstantsForAPI.USE));
+		verbs.add(new Verb("Use", "Use AAA|Use AAA with BBB", ConstantsForAPI.USE));
 		verbs.add(new Verb("Push", "Push AAA", ConstantsForAPI.PUSH));
 		verbs.add(new Verb("Pull", "Pull AAA", ConstantsForAPI.PULL));
 		verbs.add(new Verb("Throw", "Throw AAA|Throw AAA at BBB",

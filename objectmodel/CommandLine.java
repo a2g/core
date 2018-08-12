@@ -68,21 +68,11 @@ public class CommandLine {
 			text.setAAA(lockedInObject);
 			typeOfRollover = "V";
 		} else if (isLockedInVerb) {
-			if (isLockedInVerbATwoForm)
-			{
-				if(isObjectALockedIn) 
-				{
-					text.setVerb(lockedInVerb, true);
-					text.setAAA(lockedInObject);
-					text.setBBB(rolledOverItem);
-					typeOfRollover = "B";
-					
-				}else
-				{
-					text.setVerb(lockedInVerb, false);
-					text.setAAA(rolledOverItem);
-					typeOfRollover = "B";
-				}
+			if (isLockedInVerbATwoForm && isObjectALockedIn) {
+				text.setVerb(lockedInVerb, true);
+				text.setAAA(lockedInObject);
+				text.setBBB(rolledOverItem);
+				typeOfRollover = "B";
 			} else {
 				text.setVerb(lockedInVerb, false);
 				text.setAAA(rolledOverItem);
@@ -119,19 +109,9 @@ public class CommandLine {
 			this.rolledOverItem = new SentenceItem();
 			this.typeOfRollover = "";
 		} else if (this.typeOfRollover == "V") {
-			int rolloverCode = this.rolledOverItem.getCode();
-			boolean isRolledOverAVerb = CodesForVerbs.isAVerb(rolloverCode);
-			if(isRolledOverAVerb)
-			{
-				this.lockedInVerb = this.rolledOverItem;
-				this.rolledOverItem = new SentenceItem();
-				this.typeOfRollover = "";
-			}else
-			{
-				this.lockedInObject = this.rolledOverItem;
-				this.rolledOverItem = new SentenceItem();
-				this.typeOfRollover = "";
-			}
+			this.lockedInVerb = this.rolledOverItem;
+			this.rolledOverItem = new SentenceItem();
+			this.typeOfRollover = "";
 		}
 	}
 

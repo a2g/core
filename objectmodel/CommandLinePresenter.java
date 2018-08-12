@@ -31,8 +31,8 @@ import com.github.a2g.core.primitive.GuiConstants;
 import com.github.a2g.core.primitive.LogNames;
 import com.google.gwt.event.shared.EventBus;
 
-public class CommandLinePresenter implements ExecuteCommandEventHandlerAPI,
-SetRolloverEventHandlerAPI, ICommandLinePresenter {
+public class CommandLinePresenter
+		implements ExecuteCommandEventHandlerAPI, SetRolloverEventHandlerAPI, ICommandLinePresenter {
 	private static final Logger COMMANDS_VIA_GUI = Logger.getLogger(LogNames.COMMANDS_VIA_GUI.toString());
 
 	private IMasterPresenterFromCommandLine api;
@@ -41,12 +41,11 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 	private double debugX;
 	private double debugY;
 
-	public CommandLinePresenter(final IHostingPanel panel, EventBus bus,
-			IMasterPresenterFromCommandLine api) {
+	public CommandLinePresenter(final IHostingPanel panel, EventBus bus, IMasterPresenterFromCommandLine api) {
 		this.model = new CommandLine(api);
 		this.api = api;
-		this.view = api.getFactory().createCommandLinePanel(GuiConstants.TEXT_NORMAL,
-				GuiConstants.BACKGROUND_FILL, GuiConstants.TEXT_HIGHLIGHT);
+		this.view = api.getFactory().createCommandLinePanel(GuiConstants.TEXT_NORMAL, GuiConstants.BACKGROUND_FILL,
+				GuiConstants.TEXT_HIGHLIGHT);
 		panel.setThing(view);
 
 		bus.addHandler(ExecuteCommandEvent.TYPE, this);
@@ -72,8 +71,7 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 	}
 
 	@Override
-	public void setCommandLineMouseOver(String displayName, String otid,
-			int code) {
+	public void setCommandLineMouseOver(String displayName, String otid, int code) {
 		model.setMouseOver(displayName, otid, code);
 		update();
 	}
@@ -84,7 +82,7 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 			return false;
 
 		if (isOkToExecute()) {
-			COMMANDS_VIA_GUI.log(Level.FINE, "OnExecuteCommand::execute "+model.getSentence().getDisplayName());
+			COMMANDS_VIA_GUI.log(Level.FINE, "OnExecuteCommand::execute " + model.getSentence().getDisplayName());
 			this.execute(x, y);
 			return true;
 		}
@@ -154,8 +152,7 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 			if (y < 0.0)
 				y = 0.0;
 
-			api.doCommand(verbAsCode, getSentence().getVerbAsVerbEnumeration(),
-					sentenceA, sentenceB, x, y);
+			api.doCommand(verbAsCode, getSentence().getVerbAsVerbEnumeration(), sentenceA, sentenceB, x, y);
 
 		}
 
@@ -170,9 +167,8 @@ SetRolloverEventHandlerAPI, ICommandLinePresenter {
 		return displayName;
 	}
 
-	public void setVerbItemItem(SentenceItem verb, SentenceItem fullItem,
-			SentenceItem fullItem2) {
-		model.setVerbItemItem(verb,fullItem,fullItem2);
+	public void setVerbItemItem(SentenceItem verb, SentenceItem fullItem, SentenceItem fullItem2) {
+		model.setVerbItemItem(verb, fullItem, fullItem2);
 		update();
 	}
 

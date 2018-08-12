@@ -29,7 +29,7 @@ public interface IPlatformInventoryPanel {
 
 	void clear();
 
-	Image createNewImageAndAdddHandlers(IPlatformPackagedImage imageResource,
+	Image createNewImageAndAddHandlers(IPlatformPackagedImage imageResource,
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int i, int j);
 

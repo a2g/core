@@ -114,7 +114,7 @@ IImagePanel
 
 
 	@Override
-	public Image createNewImageAndAdddHandlers(IPlatformPackagedImage imageResource,
+	public Image createNewImageAndAddHandlers(IPlatformPackagedImage imageResource,
 			LoadHandler lh, EventBus bus, String otid,
 			int ocode, int i, int j) {
 

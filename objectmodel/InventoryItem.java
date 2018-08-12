@@ -49,8 +49,7 @@ public class InventoryItem {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
-		bus.fireEvent(new PropertyChangeEvent("CARRYING_" + itid, icode,
-				visible ? 1 : 0));
+		//bus.fireEvent(new PropertyChangeEvent("CARRYING_" + itid, icode,visible ? 1 : 0));
 	}
 
 	public boolean isVisible() {

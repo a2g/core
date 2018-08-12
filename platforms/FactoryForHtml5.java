@@ -45,6 +45,7 @@ import com.github.a2g.core.platforms.html4.PlatformSoundForHtml4;
 import com.github.a2g.core.platforms.html4.PlatformAnimationForHtml4;
 import com.github.a2g.core.platforms.html4.PlatformTimerForHtml4;
 import com.github.a2g.core.platforms.html4.VerbsPanelHtml4;
+import com.github.a2g.core.platforms.html5.InventoryPanelForHtml5;
 import com.github.a2g.core.platforms.html5.ScenePanelForHtml5;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.google.gwt.event.shared.EventBus;
@@ -87,7 +88,7 @@ public class FactoryForHtml5 implements IFactory {
 	public IPlatformInventoryPanel createInventoryPanel(
 			IInventoryPresenterFromInventoryPanel api, ColorEnum fore,
 			ColorEnum back, ColorEnum rollover) {
-		return new InventoryPanelForHtml4(api, fore, back, rollover);
+		return new InventoryPanelForHtml5(bus, api, fore, back, rollover);
 	}
 
 	@Override

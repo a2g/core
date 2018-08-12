@@ -170,7 +170,7 @@ public class MasterPresenter
 
 				int icode = ocode;
 				String itid = textId;
-				Image imageAndPos = getInventoryPresenter().getView().createNewImageAndAdddHandlers(imageResource, lh, bus,
+				Image imageAndPos = getInventoryPresenter().getView().createNewImageAndAddHandlers(imageResource, lh, bus,
 						itid, icode, 0, 0);
 
 				imageAndPos.addImageToPanel(0);

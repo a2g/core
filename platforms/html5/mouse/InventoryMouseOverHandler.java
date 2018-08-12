@@ -19,48 +19,31 @@ package com.github.a2g.core.platforms.html5.mouse;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
 import com.google.web.bindery.event.shared.EventBus;
-import com.github.a2g.core.event.SetRolloverEvent;
-import com.github.a2g.core.interfaces.nongame.presenter.ICommandLinePresenterFromSceneMouseOver;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromInventoryMouseOver;
-import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromSceneMouseOver;
 import com.github.a2g.core.platforms.html5.InventoryPanelForHtml5;
-import com.github.a2g.core.platforms.html5.ScenePanelForHtml5;
 
 
 public class InventoryMouseOverHandler
 implements MouseMoveHandler
 {
 	private final EventBus bus;
-	private final IInventoryPresenterFromInventoryMouseOver toInv;
-	private final ICommandLinePresenterFromSceneMouseOver toCommandLine;
-	private final InventoryPanelForHtml5 scenePanel;
+	private final IInventoryPresenterFromInventoryMouseOver toPresenter; 
+	private final InventoryPanelForHtml5 invPanel;
 
-	public InventoryMouseOverHandler(InventoryPanelForHtml5 scenePanel, EventBus bus, IInventoryPresenterFromInventoryMouseOver toInv, ICommandLinePresenterFromSceneMouseOver toCommandLine)
+	public InventoryMouseOverHandler(InventoryPanelForHtml5 invPanel, EventBus bus, IInventoryPresenterFromInventoryMouseOver toPresenter)
 	{
 		this.bus = bus;
-		this.toInv = toInv;
-		this.toCommandLine = toCommandLine;
-		this.scenePanel = scenePanel;
+		this.toPresenter = toPresenter; 
+		this.invPanel = invPanel;
 	}
 
 	@Override
 	public void onMouseMove(MouseMoveEvent event)
 	{
-		int w = scenePanel.getWidth();
-		int h = scenePanel.getHeight();
-		double x = event.getX()/(double)w;
-		double y  = (event.getY()+2)/(double)h;
-		String otid = scenePanel.getObjectUnderMouse(event.getX(),event.getY());
-		if(toInv!=null && otid!="")
-		{
-			//String atid = api.getSceneGui().getAtidOfCurrentAnimationByOtid(otid);
-			//String displayName = toInv.getDisplayNameByOtid(otid);
-			//short ocode = toInv.getCodeByOtid(otid);
-			
-	 
-			//toCommandLine.setXYForDebugging(x+camx, y+camy);
-			//toCommandLine.setCommandLineMouseOver(displayName, otid, ocode);
-			//bus.fireEvent(	new SetRolloverEvent(displayName,otid,	ocode));
-		}
+		double x = event.getX();
+		double y = event.getY();
+		x/=invPanel.getOffsetWidth();
+		y/=invPanel.getOffsetHeight();
+		toPresenter.setMouseOver(x,y);
 	}
 }
