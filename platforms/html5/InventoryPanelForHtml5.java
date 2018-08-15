@@ -55,8 +55,9 @@ import com.github.a2g.core.platforms.html5.mouse.SceneMouseClickHandler;
 import com.github.a2g.core.platforms.html5.mouse.SceneMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
- 
+import com.github.a2g.core.primitive.RectI;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.touch.client.Point;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -86,7 +87,8 @@ implements IImagePanel
 	private IInventoryPresenterFromInventoryPanel toInvPres;
 	private boolean isLeftArrowVisible;
 	private boolean isRightArrowVisible;
-	private EventBus eventBus;
+	private ColorEnum fore;
+	private ColorEnum back;
 	 
 	public InventoryPanelForHtml5(EventBus bus, IInventoryPresenterFromInventoryPanel toInvPres, ColorEnum fore, ColorEnum back, ColorEnum rollover)
 	{
@@ -96,10 +98,11 @@ implements IImagePanel
 		this.mapOfPointsByImage = new TreeMap<Integer, PointI>();
 		this.listOfVisibleHashCodes = new LinkedList<Integer>();
 		this.listOfAllAvailableImages = new LinkedList<Image>();
-		this.width = 200;
+		this.width = 400;
 		this.height = 200;
-		this.eventBus = bus;
 		this.toInvPres = toInvPres;
+		this.fore = fore;
+		this.back = back;
 		tally++;
 		
  
@@ -143,6 +146,7 @@ implements IImagePanel
 			listOfVisibleHashCodes.remove(hash(image));
 			triggerPaint();
 		}
+		triggerPaint();
 	}
 
 	@Override
@@ -184,7 +188,21 @@ implements IImagePanel
 	
 	public void paint()
 	{
- 
+		// red background
+		canvasEtcHtml5.getContextB().setFillStyle("red");
+		canvasEtcHtml5.getContextB().fillRect(0, 0, width, height);
+		
+		// blue rectangles
+		for(RectI r : toInvPres.getRects())
+		{
+			//String style = fillColor.toString().toLowerCase();
+			canvasEtcHtml5.getContextB().beginPath();
+			canvasEtcHtml5.getContextB().setFillStyle("blue");
+			canvasEtcHtml5.getContextB().fillRect(r.getLeft(), r.getTop(), r.getWidth(), r.getHeight());
+			canvasEtcHtml5.getContextB().closePath();
+		}
+		
+		// now actual inventory images.
 		Iterator<Image> iter = listOfAllAvailableImages.iterator();
 		while(iter.hasNext())
 		{
@@ -197,16 +215,40 @@ implements IImagePanel
 				canvasEtcHtml5.drawAtXY(p.getX(), p.getY(),  imageElement );
 			}
 		}
-/*
-		if(isLeftArrowVisible))
+		
+
+
+		if(isLeftArrowVisible)
 		{
-			g.drawImage(imgLeft.getNativeImage(),0,0,this);
+
+			int[] xPoints = new int[3];
+			int[] yPoints = new int[3];
+			xPoints[0]=(int)(.05*width);
+			xPoints[1]=(int)(.25*width);
+			xPoints[2]=(int)(.25*width);
+			
+			yPoints[0]=(int)(.50*height);
+			yPoints[1]=(int)(.01*height);
+			yPoints[2]=(int)(.09*height);
+			 
+			canvasEtcHtml5.drawFilledTriangle(xPoints,yPoints,3, fore, back,1);
 		}
-		if(isLRightArrowVisible)
+		if(isRightArrowVisible)
 		{
-			g.drawImage(imgRight.getNativeImage(),84,0,this);
+			int[] xPoints = new int[3];
+			int[] yPoints = new int[3];
+			xPoints[0]=(int)(.95*width);
+			xPoints[1]=(int)(.75*width);
+			xPoints[2]=(int)(.75*width);
+			
+			yPoints[0]=(int)(.50*height);
+			yPoints[1]=(int)(.01*height);
+			yPoints[2]=(int)(.09*height);
+			 
+			canvasEtcHtml5.drawFilledTriangle(xPoints,yPoints,3, fore, back,1);
+			 
 		}
-*/
+
 		tally=0;
 		// update the front canvas
 		canvasEtcHtml5.copyBackBufferToFront();
@@ -222,26 +264,6 @@ implements IImagePanel
 	public int getImageWidth(Image image) {
 		return ((ImageForHtml4) image).getNativeImage().getWidth();
 	}
-
-	/*
-	@Override
-	public Image createNewImageAndAddHandlers(LoadHandler lh, IPlatformPackagedImage imageResource,
-			IScenePresenterFromSceneMouseOver api, EventBus bus, int x, int y, String objectTextualId,
-			short objectCode) {
-		com.google.gwt.user.client.ui.Image image = Image.getImageFromResource((PlatformPackagedImageForHtml4) imageResource,
-				lh);
-
-		ImageForHtml4 imageAndPos = new ImageForHtml4(image, this, new PointI(x, y));
-
-		// add gwt mouse handlers
-		imageAndPos.getNativeImage()
-				.addMouseMoveHandler(new SceneObjectMouseOverHandler(bus, api, objectTextualId, objectCode));
-
-		imageAndPos.getNativeImage().addClickHandler(new ImageMouseClickHandler(bus, this.abs));
-		image.setVisible(false);
-		return imageAndPos;
-	}
- */
 
 	// this is the one that gets called.
 	@Override

@@ -252,12 +252,14 @@ return null;
 	@Override
 	public IChainBase  showInventoryItem(int icode) {
 		master.getInventoryPresenter().getInventoryItemByICode(icode).setVisible(true);
+		master.getInventoryPresenter().updateInventory();
 		return null;
 	}
 
 	@Override
 	public IChainBase hideInventoryItem(int icode) {
 		master.getInventoryPresenter().getInventoryItemByICode(icode).setVisible(false);
+		master.getInventoryPresenter().updateInventory();
 		return null;
 
 	}
@@ -273,12 +275,14 @@ return null;
 	@Override
 	public ChainableAction setInventoryItemVisible(int icode, boolean isVisible) {
 		master.getInventoryPresenter().getInventoryItemByICode(icode).setVisible(isVisible);
+		master.getInventoryPresenter().updateInventory();
 		return null;
 	}
 
 	@Override
 	public IChainBase hideInventoryItemsAllOfThem() {
 		master.getInventoryPresenter().hideAllInventory();
+		master.getInventoryPresenter().updateInventory();
 		return null;
 	}
 

@@ -17,6 +17,7 @@
 package com.github.a2g.core.objectmodel;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.TreeMap;
 
 import com.github.a2g.core.interfaces.nongame.IHostingPanel;
@@ -255,6 +256,11 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 			InventoryItem item = inv.getByIndex(i);
 			item.setVisible(false);
 		}
+	}
+
+	@Override
+	public Collection<RectI> getRects() {
+		return rectsForSlots;
 	}
 
 }

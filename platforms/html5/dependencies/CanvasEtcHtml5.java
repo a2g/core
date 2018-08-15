@@ -8,6 +8,7 @@ import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.MouseMoveHandler;
+import com.google.gwt.touch.client.Point;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
@@ -127,6 +128,12 @@ public class CanvasEtcHtml5
 
 	public Context2d getContextB() {// used for test harness, otherwise not used.
 		return contextB;
+	}
+
+	public void drawFilledTriangle(int[] xPoints, int[] yPoints, int nPoints, ColorEnum fillColor, ColorEnum lineColor, int brushWidth) {
+		PlatformDrawCallsHtml5 draw = new PlatformDrawCallsHtml5(contextB);
+		draw.drawPolygon(xPoints, yPoints, nPoints, fillColor, lineColor, brushWidth);
+		
 	}
 
 

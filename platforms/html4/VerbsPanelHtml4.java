@@ -36,7 +36,7 @@ implements IPlatformVerbsPanel
 	private Verbs verbs;
 	public VerbsPanelHtml4(IVerbsPresenterFromVerbsPanel mouseToPresenter,
 			ColorEnum fore, ColorEnum back) {
-		this.fontSize = 12;
+		this.fontSize = 14;
 		this.mouseToPresenter = mouseToPresenter;
 		getElement().getStyle().setProperty("color", fore.toString());
 		getElement().getStyle().setProperty("backgroundColor", back.toString());

@@ -29,8 +29,7 @@ public class SpeechCommon
 			RectI r = all.rectInputInRed;
 			canvas.drawSinglePixelRect(r.getLeft(), r.getTop(), r.getWidth(), r.getHeight(), INPUT_RECT_COLOR);
 		}
-		//canvas.drawSinglePixelRect(x, y, w, h, speechColor);
-		//canvas.drawSinglePixelRect(x-1, y-1, w+2, h+2, speechColor);
+ 
 		canvas.drawPolygon(all.xPoints, all.yPoints,  all.yPoints.length, backgroundColor, speechColor, all.bubbleOutlineWidth);
 
 		for(int i=0;i<all.lines.lines.size();i++)

@@ -52,7 +52,7 @@ IDialogTreePresenterFromActions {
 	public void setVisibleByItid(String itid, boolean isVisible) {
 		master.getInventoryPresenter().getInventory().items().getByItid(itid)
 		.setVisible(isVisible);
-
+		master.getInventoryPresenter().updateInventory();
 	}
 
 	@Override

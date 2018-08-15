@@ -15,6 +15,11 @@
  */
 package com.github.a2g.core.interfaces.nongame.presenter;
 
+
+import java.util.Collection;
+
+import com.github.a2g.core.primitive.RectI;
+
 public interface IInventoryPresenterFromInventoryPanel extends
 IInventoryPresenterFromInventoryMouseOver {
 	void setMouseOver(double x, double y);
@@ -26,4 +31,6 @@ IInventoryPresenterFromInventoryMouseOver {
 	// you'll get the click, but the mouseover gets dropped as an optimisation.
 	// The parameterless doClick is still needed for tests, however.
 	void doClick(double x, double y);
+
+	Collection<RectI> getRects();
 }
