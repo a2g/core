@@ -42,14 +42,10 @@ public class PlatformPackagedImageForSwing implements IPlatformPackagedImage {
 			String path = this.getPath();
 			img = ImageIO.read(new File(path));
 		} catch (IOException e) {
-			try {
-				img = ImageIO
-						.read(new File(
-								"c:/a2g_core/res/leftArrow.png"));
-			} catch (IOException f) {
-				JOptionPane.showMessageDialog (null, "couldn't find 'com/github/a2g/core/leftArrow.png', so exiting.", "No Arrow!", JOptionPane.WARNING_MESSAGE);
+ 
+				JOptionPane.showMessageDialog (null, "couldn't find "+getPath()+" so exiting.", "No Arrow!", JOptionPane.WARNING_MESSAGE);
 				System.exit(0);
-			}
+ 
 		}
 		return img;
 	}

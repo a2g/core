@@ -71,9 +71,12 @@ implements IImagePanel
 	private Map<Integer,PointI> mapOfPointsByImage;
 	private LinkedList<Integer> listOfVisibleHashCodes;
 	private LinkedList<Image> listOfAllAvailableImages;
+	private boolean isLeftArrowVisible;
+	private boolean isRightArrowVisible;
+	private ColorEnum fore;
+	private ColorEnum back;
 
-	ImageForSwing imgLeft;
-	ImageForSwing imgRight;
+ 
 
 	public InventoryPanelForSwing(EventBus bus, IInventoryPresenterFromInventoryPanel api2, ColorEnum fore, ColorEnum back)
 	{
@@ -82,6 +85,10 @@ implements IImagePanel
 		this.listOfAllAvailableImages = new LinkedList<Image>();
 		this.width = 200;
 		this.height = 200;
+		this.isLeftArrowVisible = false;
+		this.isRightArrowVisible = false;
+		this.fore = fore;
+		this.back = back;
 		this.setDoubleBuffered(true);
 		tally++;
 
@@ -98,18 +105,7 @@ implements IImagePanel
 				new InventoryMouseOverHandler(this, api2)
 				);
 
-		try
-		{
-			java.awt.Image rawLeft = ImageIO.read(new File("C:\\a2g_core\\res\\leftArrow.png"));
-			java.awt.Image rawRight = ImageIO.read(new File("C:\\a2g_core\\res\\leftArrow.png"));
-
-			imgLeft = new ImageForSwing(rawLeft, "", this, new PointI(0,0));
-			imgRight = new ImageForSwing(rawRight, "", this, new PointI(0,0));
-
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+		 
 	}
 
 	@Override
@@ -196,13 +192,36 @@ implements IImagePanel
 			}
 		}
 
-		if(listOfVisibleHashCodes.contains(imgLeft.getNativeImage().hashCode()))
+		if(isLeftArrowVisible)
 		{
-			g.drawImage(imgLeft.getNativeImage(),0,0,this);
+
+			int[] xPoints = new int[3];
+			int[] yPoints = new int[3];
+			xPoints[0]=(int)(.05*width);
+			xPoints[1]=(int)(.25*width);
+			xPoints[2]=(int)(.25*width);
+			
+			yPoints[0]=(int)(.50*height);
+			yPoints[1]=(int)(.01*height);
+			yPoints[2]=(int)(.09*height);
+			 
+			g.setColor(new Color(fore.r, fore.g, fore.b));
+			g.fillPolygon(xPoints,yPoints,3 );
 		}
-		if(listOfVisibleHashCodes.contains(imgRight.getNativeImage().hashCode()))
+		if(isRightArrowVisible)
 		{
-			g.drawImage(imgRight.getNativeImage(),84,0,this);
+			int[] xPoints = new int[3];
+			int[] yPoints = new int[3];
+			xPoints[0]=(int)(.95*width);
+			xPoints[1]=(int)(.75*width);
+			xPoints[2]=(int)(.75*width);
+			
+			yPoints[0]=(int)(.50*height);
+			yPoints[1]=(int)(.01*height);
+			yPoints[2]=(int)(.09*height);
+			 
+			g.setColor(new Color(fore.r, fore.g, fore.b));
+			g.fillPolygon(xPoints,yPoints,3 ); 
 		}
 
 		tally=0;
@@ -226,7 +245,7 @@ implements IImagePanel
 
 	// this is the one that gets called.
 	@Override
-	public Image createNewImageAndAdddHandlers(IPlatformPackagedImage imageResource,
+	public Image createNewImageAndAddHandlers(IPlatformPackagedImage imageResource,
 			LoadHandler lh, EventBus bus, String objectTextualId,
 			int objectCode, int x, int y)
 	{
@@ -246,13 +265,13 @@ implements IImagePanel
 
 	@Override
 	public void setLeftArrowVisible(boolean visible) {
-		imgLeft.setVisible(visible, new PointI(0,0));
+		isLeftArrowVisible = visible;
 		triggerPaint();
 	}
 
 	@Override
 	public void setRightArrowVisible(boolean visible) {
-		imgRight.setVisible(visible, new PointI(50,0));
+		isRightArrowVisible = visible;
 		triggerPaint();
 	}
 
