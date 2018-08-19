@@ -46,8 +46,8 @@ public class SceneObject {
 	private boolean visible;
 	private final double screenPixelWidth;
 	private final double screenPixelHeight;
-	private double rawY; // needed for moving image around.
-	private double rawX;
+	private double bmY; // needed for moving image around.
+	private double bmX;
 	private int drawingOrder;
 	private short ocode;
 	private double screenCoordsPerSecond;
@@ -141,7 +141,7 @@ public class SceneObject {
 
 	public void updateCurrentImage() {
 		if (currentImage != null) {
-			currentImage.setLeftTop(getRawLeftTop());
+			currentImage.setLeftTop(getPointILeftTop());
 		}
 	}
 
@@ -184,7 +184,7 @@ public class SceneObject {
 			// breakpoints...
 			if (current != null) {
 				if (this.currentImage != null) {
-					this.currentImage.setVisible(false, getRawLeftTop());
+					this.currentImage.setVisible(false, getPointILeftTop());
 				}
 				this.currentImage = current;
 			}
@@ -192,7 +192,7 @@ public class SceneObject {
 		// 2, but do this always
 		if (this.currentImage != null) {
 			this.currentImage.setScale(scale);
-			this.currentImage.setVisible(this.visible, getRawLeftTop());
+			this.currentImage.setVisible(this.visible, getPointILeftTop());
 		}
 	}
  
@@ -214,9 +214,7 @@ public class SceneObject {
 		this.displayName = displayName;
 	}
 
-	PointI getRawLeftTop() {
-		return new PointI((int) this.rawX, (int) this.rawY);
-	}
+
 
 	static double worldToScreenX(double intX, double screenSpan,
 			int lowerBound, int upperBound, double scale) {
@@ -247,55 +245,63 @@ public class SceneObject {
 	}
 
 	public void setX(double rawX) {
-		this.rawX = rawX;
-		if (currentImage != null) {
-			this.currentImage.setLeftTop(getRawLeftTop());
-		}
-	}
-
-	public void setY(double rawY) {
-		this.rawY = rawY;
-		if (currentImage != null) {
-			this.currentImage.setLeftTop(getRawLeftTop());
-		}
-	}
-
-	public double getX() {
-		return this.rawX;
-	}
-
-	public double getY() {
-		return this.rawY;
-	}
-
-	public void setBaseMiddleX(double baseMiddleX) {
-		double rawX = screenToWorldX(baseMiddleX, screenPixelWidth,
-				getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
-				.getRight(),scale);
-		setX(rawX);
-	}
-
-	public void setBaseMiddleY(double baseMiddleY) {
-		double rawY = screenToWorldY(baseMiddleY, screenPixelHeight,
-				getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
-				.getBottom(),scale);
-		setY(rawY);
-	}
-
-	public double getBaseMiddleX() {
 		double bmx = worldToScreenX(rawX, screenPixelWidth,
 				getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
 				.getRight(),scale);
-		
-		return bmx;
+		setBaseMiddleX(bmx);
 	}
 
-	public double getBaseMiddleY() {
+	public void setY(double rawY) {
 		double bmy = worldToScreenY(rawY, screenPixelHeight,
 				getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
 				.getBottom(),scale);
 
-		return bmy;
+		setBaseMiddleY(bmy);
+	}
+
+	public double getX() {
+		double rawX = screenToWorldX(this.bmX, screenPixelWidth,
+				getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
+				.getRight(),scale);
+		return rawX;
+	}
+
+	public double getY() {
+		double rawY =  screenToWorldY(this.bmY, screenPixelHeight,
+				getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
+				.getBottom(),scale);
+		return rawY;
+	}
+	
+	PointI getPointILeftTop() {
+		return new PointI((int) getX(), (int) getY());
+	}
+
+	public void setBaseMiddleX(double baseMiddleX) 
+	{
+		this.bmX = baseMiddleX;
+		if (currentImage != null) {
+			this.currentImage.setLeftTop(getPointILeftTop());
+		}
+	}
+
+	public void setBaseMiddleY(double baseMiddleY) 
+	{
+		this.bmY = baseMiddleY;
+		if (currentImage != null) {
+			this.currentImage.setLeftTop(getPointILeftTop());
+		}
+		
+	}
+
+	public double getBaseMiddleX() {
+ 
+		return this.bmX;
+	}
+
+	public double getBaseMiddleY() {
+ 
+		return this.bmY;
 	}
 
 	public RectI getCurrentBoundingRect() {
