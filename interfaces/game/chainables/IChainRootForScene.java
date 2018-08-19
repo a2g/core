@@ -21,6 +21,7 @@ import com.github.a2g.core.interfaces.game.singles.ISetDisplayName;
 import com.github.a2g.core.interfaces.game.singles.ISetHeadRectangleForObject;
 import com.github.a2g.core.interfaces.game.singles.ISetInventoryItemVisible;
 import com.github.a2g.core.interfaces.game.singles.ISetSoundtrack;
+import com.github.a2g.core.interfaces.game.singles.ISetTitleCard;
 import com.github.a2g.core.interfaces.game.singles.ISetValue;
 import com.github.a2g.core.interfaces.game.singles.ISetVisible;
 import com.github.a2g.core.interfaces.game.singles.IShareWinning;
@@ -49,6 +50,7 @@ public interface IChainRootForScene extends IChainBase
 , ISetCurrentFrame 
 , ISetDisplayName 
 , ISetInventoryItemVisible 
+, ISetTitleCard
 , ISleep
 {
 	
@@ -213,6 +215,8 @@ public interface IChainRootForScene extends IChainBase
 	@Override ChainableAction  setAnimationAsObjectWalkDirection(String atid, WalkDirection type);
 	@Override ChainableAction  setSoundtrack(String stid) ;
 	@Override ChainableAction  shareWinning(String token);
+	@Override ChainableAction  setTitleCard(String text);
+	
 	
 	@Override ChainableAction  alignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation(String atid);
 	@Override ChainableAction  alignBaseMiddleOfOldFrameToLastFrameOfNewAnimation(String atid);

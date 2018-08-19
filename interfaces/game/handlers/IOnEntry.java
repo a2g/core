@@ -17,6 +17,7 @@
 package com.github.a2g.core.interfaces.game.handlers;
 
  
+import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.interfaces.game.chainables.IChainBase;
 import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.game.singles.IGetBaseMiddleX;
@@ -95,7 +96,7 @@ IGetValue
 	/**   @name Helpful for game */
 	//@{
 	@Override String getCurrentSceneName();
-	@Override IChainBase switchToScene(String name, int arrivalSegment);
+	@Override ChainEndAction switchToScene(String name, int arrivalSegment);
 	@Override String getLastSceneName();
 	@Override boolean isInDebugMode();
 	@Override double getSceneGuiWidth();

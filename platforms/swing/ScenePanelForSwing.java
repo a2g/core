@@ -514,6 +514,7 @@ public class ScenePanelForSwing extends JPanel implements IPlatformScenePanel, I
 		pages.get(0).yPoints = new int[0];
 		this.speechCanvas.draw(pages.get(0), ColorEnum.Red, ColorEnum.Black, new PointI(width, height),
 				this.getIsDiagnosticsDisplayed());
+		triggerPaint();
 	}
 
 	@Override
@@ -533,6 +534,8 @@ public class ScenePanelForSwing extends JPanel implements IPlatformScenePanel, I
 
 		this.speechCanvas.draw(rectAndLeaderLine, speechColor, ColorEnum.White, new PointI(width, height),
 				this.getIsDiagnosticsDisplayed());
+		
+		triggerPaint();
 
 	}
 

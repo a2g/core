@@ -17,6 +17,7 @@
 package com.github.a2g.core.interfaces.game.handlers;
 
 import com.github.a2g.core.interfaces.game.singles.IAddEdgeSpanToPerimeter ;
+import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.interfaces.game.chainables.IChainBase;
 import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI.WalkDirection;
@@ -182,7 +183,7 @@ IGetAnimationLength
 
 	/**   @name Helpful for game */
 	//@{
-	@Override IChainBase switchToScene(String name, int arrivalSegment);
+	@Override ChainEndAction switchToScene(String name, int arrivalSegment);
 	@Override boolean isInDebugMode();
 	@Override double getSceneGuiWidth();
 	@Override double getSceneGuiHeight();
@@ -194,7 +195,7 @@ IGetAnimationLength
 	@Override void clearSaidSpeech();
 	@Override String getCurrentSceneName();
 	@Override short getOCodeByAtid(String atid);
-	@Override IChainBase  setTitleCard(String stid) ;
+	@Override IChainBase setTitleCard(String stid) ;
 	//@}
 
 

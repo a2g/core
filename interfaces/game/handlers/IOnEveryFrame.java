@@ -16,6 +16,7 @@
 
 package com.github.a2g.core.interfaces.game.handlers;
 
+import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.game.chainables.IChainBase;
@@ -121,7 +122,7 @@ IGetValue
 
 	/**   @name Helpful for game */
 	//@{
-	@Override IChainBase switchToScene(String name, int arrivalSegment);
+	@Override ChainEndAction switchToScene(String name, int arrivalSegment);
 	@Override boolean isInDebugMode();
 	@Override double getSceneGuiWidth();
 	@Override double getSceneGuiHeight();

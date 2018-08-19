@@ -48,6 +48,7 @@ public class SingleCallPerformer
 		, SetAnimationObjectInitial
 		, SetSoundtrack
 		, SetHeadRectangle
+		, SetTitleCard
 	}
 	Type type;
 	private double d;
@@ -136,6 +137,9 @@ public class SingleCallPerformer
 			return false;
 		case SetValue:
 			scene.setValue(stringValue, intValue);
+			return false;
+		case SetTitleCard:
+			scene.setTitleCard(stringValue);
 			return false;
 		case ShareWinning:
 			scene.shareWinning(stringValue);

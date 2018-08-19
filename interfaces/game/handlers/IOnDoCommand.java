@@ -19,6 +19,7 @@ package com.github.a2g.core.interfaces.game.handlers;
 import com.github.a2g.core.interfaces.game.singles.IAddEdgeSpanToPerimeter;
 import com.github.a2g.core.interfaces.game.singles.IAddHelperPoint;
 import com.github.a2g.core.interfaces.game.singles.IAddHelperRectangle;
+import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.interfaces.game.chainables.IChainBase;
 import com.github.a2g.core.interfaces.game.singles.IAddEdgePointToPerimeter;
@@ -146,11 +147,12 @@ ISetInventoryItemVisible
 	/**   @name Helpful for game */
 	//@{
 	@Override String getCurrentSceneName();
-	@Override IChainBase switchToScene(String name, int arrivalSegment);
+	@Override ChainEndAction switchToScene(String name, int arrivalSegment);
 	@Override boolean isInDebugMode();
 	@Override String getLastSceneName();
 	@Override IChainBase shareWinning(String string);
-	ChainRootAction createChainRootAction();
+	@Override ChainRootAction createChainRootAction();
+	
 	//@}
 
 	/** @name EdgeDetection and Helper */

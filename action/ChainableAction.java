@@ -408,6 +408,13 @@ implements IChainRootForScene {
 	}
 
 	@Override
+	public ChainableAction setTitleCard(String text) {
+		SingleCallAction s=  new SingleCallAction(parent, Type.SetTitleCard);
+		s.setString(text);
+		return s;
+	}
+	
+	@Override
 	public ChainableAction playAnimationNonBlockingHoldLastFrame(String atid) {
 		PlayAnimationAction a = new PlayAnimationAction(this, atid);
 

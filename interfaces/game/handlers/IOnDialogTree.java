@@ -16,6 +16,7 @@
 
 package com.github.a2g.core.interfaces.game.handlers;
 
+import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.interfaces.game.chainables.IChainBase;
 import com.github.a2g.core.interfaces.game.singles.IGetCurrentSceneName;
 import com.github.a2g.core.interfaces.game.singles.IGetLastSceneName;
@@ -73,7 +74,7 @@ IGetValue
  
 	/**   @name Helpful for game */
 	//@{
-	@Override IChainBase switchToScene(String name, int arrivalSegment);
+	@Override ChainEndAction switchToScene(String name, int arrivalSegment);
 	@Override boolean isInDebugMode();
 	@Override String getLastSceneName();
 	@Override String getCurrentSceneName();

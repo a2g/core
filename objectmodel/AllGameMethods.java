@@ -1,5 +1,6 @@
 package com.github.a2g.core.objectmodel;
 
+import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
@@ -461,7 +462,7 @@ return null;
 	}
 
 	@Override
-	public IChainBase switchToScene(String scene, int arrivalSegment) {
+	public ChainEndAction switchToScene(String scene, int arrivalSegment) {
 		master.switchToScene(scene, arrivalSegment);
 		return null;
 	}
@@ -697,7 +698,7 @@ return null;
 	public RectF getHelperRectangle(int index) {
 		return master.getScenePresenter().getHelperRectangle(index);
 	}
-	 
+
 
 
 }
