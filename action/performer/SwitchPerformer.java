@@ -113,6 +113,8 @@ public class SwitchPerformer implements ISwitchPerformer
 		final double FRACTION_OF_PROGRESS_TO_IGNORE_COLLISION_DETECTION = .01;
 		if (progress>FRACTION_OF_PROGRESS_TO_IGNORE_COLLISION_DETECTION && scene.isInANoGoZone(new Point(x, y))) {
 
+		if (scene.isInANoGoZone(new Point(x, y))) {
+
 			// and we make sure we only do this once
 			// we don't keep letting the animation try all the points
 			// on the line to it's target, because

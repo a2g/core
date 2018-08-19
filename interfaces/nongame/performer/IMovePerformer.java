@@ -43,6 +43,4 @@ public interface IMovePerformer {
 	void setStartXForMover(double startX);
 	void setStartYForMover(double startY);
 
-	void inchBack();
-
 }
