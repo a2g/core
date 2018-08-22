@@ -216,28 +216,28 @@ public class SceneObject {
 
 
 
-	static double worldToScreenX(double intX, double screenSpan,
+	static double bmxToScreen(double intX, double screenSpan,
 			int lowerBound, int upperBound, double scale) {
 		double rectSpan = (upperBound - lowerBound)*scale;
 		double doubleX = (intX + .5 * rectSpan + lowerBound) / screenSpan;
 		return doubleX;
 	}
 
-	static double worldToScreenY(double intY, double screenSpan,
+	static double bmyToScreen(double intY, double screenSpan,
 			int lowerBound, int upperBound, double scale) {
 		double rectSpan = (upperBound - lowerBound)*scale;
 		double doubleY = (intY + rectSpan + lowerBound) / screenSpan;
 		return doubleY;
 	}
 
-	static double screenToWorldX(double doubleX, double screenSpan,
+	static double screenToBMX(double doubleX, double screenSpan,
 			int lowerBound, int upperBound, double scale) {
 		double rectSpan = (upperBound - lowerBound)*scale;
 		double rawX = doubleX * screenSpan - .5 * rectSpan - lowerBound;
 		return rawX;
 	}
 
-	static double screenToWorldY(double doubleY, double screenSpan,
+	static double screenToBMY(double doubleY, double screenSpan,
 			int lowerBound, int upperBound, double scale) {
 		double rectSpan = (upperBound - lowerBound)*scale;
 		double rawY = doubleY * screenSpan - rectSpan - lowerBound;
@@ -245,14 +245,14 @@ public class SceneObject {
 	}
 
 	public void setX(double rawX) {
-		double bmx = worldToScreenX(rawX, screenPixelWidth,
+		double bmx = bmxToScreen(rawX, screenPixelWidth,
 				getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
 				.getRight(),scale);
 		setBaseMiddleX(bmx);
 	}
 
 	public void setY(double rawY) {
-		double bmy = worldToScreenY(rawY, screenPixelHeight,
+		double bmy = bmyToScreen(rawY, screenPixelHeight,
 				getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
 				.getBottom(),scale);
 
@@ -260,14 +260,14 @@ public class SceneObject {
 	}
 
 	public double getX() {
-		double rawX = screenToWorldX(this.bmX, screenPixelWidth,
+		double rawX = screenToBMX(this.bmX, screenPixelWidth,
 				getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
 				.getRight(),scale);
 		return rawX;
 	}
 
 	public double getY() {
-		double rawY =  screenToWorldY(this.bmY, screenPixelHeight,
+		double rawY =  screenToBMY(this.bmY, screenPixelHeight,
 				getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
 				.getBottom(),scale);
 		return rawY;
