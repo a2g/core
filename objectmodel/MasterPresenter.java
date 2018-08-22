@@ -179,7 +179,7 @@ public class MasterPresenter
 				if(this.getInventoryPresenter().getInventory().items().getCount()==0)
 				{
 					RectI rect = imageAndPos.getBoundingRectPreScaling();
-					this.setInventoryImageSize(rect.getWidth()/5, rect.getHeight()/5);
+					this.setInventoryImageSize(rect.getWidth()/10, rect.getHeight()/10);
 				}
 
 				boolean initiallyVisible = false;

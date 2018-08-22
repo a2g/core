@@ -40,6 +40,7 @@ import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromI
 import com.github.a2g.core.objectmodel.Inventory;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
+import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.platforms.swing.dependencies.ImageForSwing;
 import com.github.a2g.core.platforms.swing.dependencies.PlatformPackagedImageForSwing;
 import com.github.a2g.core.platforms.swing.mouse.InventoryMouseClickHandler;
@@ -71,7 +72,8 @@ implements IImagePanel
 	private boolean isLeftArrowVisible;
 	private boolean isRightArrowVisible;
 	private ColorEnum fore;
-	//private ColorEnum back;
+	 
+	private IInventoryPresenterFromInventoryPanel presenter;
 
  
 
@@ -85,7 +87,7 @@ implements IImagePanel
 		this.isLeftArrowVisible = false;
 		this.isRightArrowVisible = false;
 		this.fore = fore;
-		//this.back = back;
+		this.presenter = api2;
 		this.setDoubleBuffered(true);
 		tally++;
 
@@ -178,14 +180,52 @@ implements IImagePanel
 		g.clearRect(0, 0, r.width,r.height);
 		g.setColor(new Color(0,0,0));
 		g.fillRect(0, 0, width, height);
-		Iterator<Image> iter = listOfAllAvailableImages.iterator();
-		while(iter.hasNext())
+		Iterator<Image> imageIter = listOfAllAvailableImages.iterator();
+		int i=0;
+		Iterator<RectI> rectIter = presenter.getRects().iterator();
+		while(imageIter.hasNext() && rectIter.hasNext())
 		{
-			Image image = iter.next();
+			Image image = imageIter.next();
 			if(listOfVisibleHashCodes.contains(((ImageForSwing)image).getNativeImage().hashCode()))
 			{
-				PointI p = mapOfPointsByImage.get(((ImageForSwing)image).getNativeImage().hashCode());
-				g.drawImage(((ImageForSwing)image).getNativeImage(),p.getX(),p.getY(),this);
+				RectI imageRect = image.getBoundingRectPreScaling();
+				RectI destRect = rectIter.next();
+			 
+
+				// img - the specified image to be drawn. This method does
+				// nothing if img is null.
+				// sx1 - the x coordinate of the first corner of the source
+				// rectangle.
+				// sy1 - the y coordinate of the first corner of the source
+				// rectangle.
+				// sx2 - the x coordinate of the second corner of the source
+				// rectangle.
+				// sy2 - the y coordinate of the second corner of the source
+				// rectangle.
+
+				// dx1 - the x coordinate of the first corner of the destination
+				// rectangle.
+				// dy1 - the y coordinate of the first corner of the destination
+				// rectangle.
+				// dx2 - the x coordinate of the second corner of the
+				// destination rectangle.
+				// dy2 - the y coordinate of the second corner of the
+				// destination rectangle.
+
+				// source coords: these are correct. don't change.
+				int sx1 = 0;
+				int sy1 = 0;
+				int sx2 = imageRect.getWidth();
+				int sy2 = imageRect.getHeight();
+
+				// these are also correct, the real question
+				// lies in what is leftTopPlusY
+				// these are set with SetThingPosition
+				int dx1 = (int) (destRect.getLeft());
+				int dy1 = (int) (destRect.getTop());
+				int dx2 = (int) (destRect.getWidth());
+				int dy2 = (int) (destRect.getHeight());
+				g.drawImage(((ImageForSwing) image).getNativeImage(), dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, this);
 			}
 		}
 

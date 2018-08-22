@@ -54,7 +54,7 @@ public class SceneObject {
 	private double scale;
 	private ColorEnum talkingColor;
 	private int headRectIndex;
-	private boolean isUsingBaseMiddle;
+	private boolean isUsingBaseMiddleForAnimation;
 
 	public SceneObject(String otid, int screenWidth, int screenHeight) {
 		this.currentImage = null;
@@ -76,7 +76,7 @@ public class SceneObject {
 		this.setBaseMiddleY(0);
 
 		this.screenCoordsPerSecond = .3;
-		this.isUsingBaseMiddle = false;
+		this.isUsingBaseMiddleForAnimation = false;
 	}
 
 	public void setDrawingOrder(int number) {
@@ -248,7 +248,7 @@ public class SceneObject {
 
 	public void setX(double rawX) 
 	{
-		if(isUsingBaseMiddle)
+		if(isUsingBaseMiddleForAnimation)
 		{
 			double bmx = bmxToScreen(rawX, screenPixelWidth,
 					getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
@@ -266,7 +266,7 @@ public class SceneObject {
 
 	public void setY(double rawY) 
 	{
-		if(isUsingBaseMiddle)
+		if(isUsingBaseMiddleForAnimation)
 		{
 			double bmy = bmyToScreen(rawY, screenPixelHeight,
 					getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
@@ -284,7 +284,7 @@ public class SceneObject {
 
 	public double getX() 
 	{
-		if(isUsingBaseMiddle)
+		if(isUsingBaseMiddleForAnimation)
 		{
 			double rawX = screenToBMX(this.bmX, screenPixelWidth,
 					getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
@@ -299,7 +299,7 @@ public class SceneObject {
 
 	public double getY() 
 	{
-		if(isUsingBaseMiddle)
+		if(isUsingBaseMiddleForAnimation)
 		{
 			double rawY =  screenToBMY(this.bmY, screenPixelHeight,
 					getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
@@ -317,7 +317,7 @@ public class SceneObject {
 
 	public void setBaseMiddleX(double baseMiddleX) 
 	{
-		if(isUsingBaseMiddle)
+		if(isUsingBaseMiddleForAnimation)
 		{
 			this.bmX = baseMiddleX;
 			if (currentImage != null) {
@@ -334,7 +334,7 @@ public class SceneObject {
 
 	public void setBaseMiddleY(double baseMiddleY) 
 	{
-		if(isUsingBaseMiddle)
+		if(isUsingBaseMiddleForAnimation)
 		{
 			this.bmY = baseMiddleY;
 			if (currentImage != null) {
@@ -350,7 +350,7 @@ public class SceneObject {
 	}
 
 	public double getBaseMiddleX() {
-		if(isUsingBaseMiddle)
+		if(isUsingBaseMiddleForAnimation)
 		{
 			return this.bmX;
 		}else
@@ -364,7 +364,7 @@ public class SceneObject {
 	}
 
 	public double getBaseMiddleY() {
-		if(isUsingBaseMiddle)
+		if(isUsingBaseMiddleForAnimation)
 		{
 			return this.bmY;
 		}else
@@ -523,6 +523,11 @@ public class SceneObject {
 	}
 
 	public void setClumpWithPrevious(boolean isClump) {
+	}
+
+	public void setUseBaseMiddleForAnimation(boolean isUsingBaseMiddleForAnimation) {
+		this.isUsingBaseMiddleForAnimation = isUsingBaseMiddleForAnimation;
+		
 	}
 
 };
