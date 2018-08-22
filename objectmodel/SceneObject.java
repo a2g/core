@@ -33,7 +33,7 @@ import com.github.a2g.core.primitive.RectI;
  *
  */
 public class SceneObject {
-	
+
 
 	private static final Logger HEAD_RECT_PROBLEMS  = Logger.getLogger(LogNames.HEAD_RECT_PROBLEMS.toString());
 	private String initialAnimationId;
@@ -54,7 +54,8 @@ public class SceneObject {
 	private double scale;
 	private ColorEnum talkingColor;
 	private int headRectIndex;
-	
+	private boolean isUsingBaseMiddle;
+
 	public SceneObject(String otid, int screenWidth, int screenHeight) {
 		this.currentImage = null;
 		this.otid = otid;
@@ -75,6 +76,7 @@ public class SceneObject {
 		this.setBaseMiddleY(0);
 
 		this.screenCoordsPerSecond = .3;
+		this.isUsingBaseMiddle = false;
 	}
 
 	public void setDrawingOrder(int number) {
@@ -195,7 +197,7 @@ public class SceneObject {
 			this.currentImage.setVisible(this.visible, getPointILeftTop());
 		}
 	}
- 
+
 	public void setVisible(boolean visible) {
 		// we always do this, we don't even check if visible!=this.visible
 		this.visible = visible;
@@ -244,64 +246,134 @@ public class SceneObject {
 		return rawY;
 	}
 
-	public void setX(double rawX) {
-		double bmx = bmxToScreen(rawX, screenPixelWidth,
-				getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
-				.getRight(),scale);
-		setBaseMiddleX(bmx);
+	public void setX(double rawX) 
+	{
+		if(isUsingBaseMiddle)
+		{
+			double bmx = bmxToScreen(rawX, screenPixelWidth,
+					getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
+					.getRight(),scale);
+			setBaseMiddleX(bmx);
+		}
+		else
+		{
+			this.bmX = rawX; 
+			if (currentImage != null) {
+				this.currentImage.setLeftTop(getPointILeftTop());
+			}
+		}
 	}
 
-	public void setY(double rawY) {
-		double bmy = bmyToScreen(rawY, screenPixelHeight,
-				getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
-				.getBottom(),scale);
+	public void setY(double rawY) 
+	{
+		if(isUsingBaseMiddle)
+		{
+			double bmy = bmyToScreen(rawY, screenPixelHeight,
+					getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
+					.getBottom(),scale);
 
-		setBaseMiddleY(bmy);
+			setBaseMiddleY(bmy);
+		}else
+		{
+			this.bmY = rawY;
+			if (currentImage != null) {
+				this.currentImage.setLeftTop(getPointILeftTop());
+			}
+		}
 	}
 
-	public double getX() {
-		double rawX = screenToBMX(this.bmX, screenPixelWidth,
-				getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
-				.getRight(),scale);
-		return rawX;
+	public double getX() 
+	{
+		if(isUsingBaseMiddle)
+		{
+			double rawX = screenToBMX(this.bmX, screenPixelWidth,
+					getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
+					.getRight(),scale);
+			return rawX;
+		}
+		else
+		{
+			return this.bmX;
+		}
 	}
 
-	public double getY() {
-		double rawY =  screenToBMY(this.bmY, screenPixelHeight,
-				getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
-				.getBottom(),scale);
-		return rawY;
+	public double getY() 
+	{
+		if(isUsingBaseMiddle)
+		{
+			double rawY =  screenToBMY(this.bmY, screenPixelHeight,
+					getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
+					.getBottom(),scale);
+			return rawY;
+		}else
+		{
+			return this.bmY;
+		}
 	}
-	
+
 	PointI getPointILeftTop() {
 		return new PointI((int) getX(), (int) getY());
 	}
 
 	public void setBaseMiddleX(double baseMiddleX) 
 	{
-		this.bmX = baseMiddleX;
-		if (currentImage != null) {
-			this.currentImage.setLeftTop(getPointILeftTop());
+		if(isUsingBaseMiddle)
+		{
+			this.bmX = baseMiddleX;
+			if (currentImage != null) {
+				this.currentImage.setLeftTop(getPointILeftTop());
+			}
+		}else
+		{
+			double rawX = screenToBMX(baseMiddleX, screenPixelWidth,
+					getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
+					.getRight(),scale);
+			setX(rawX);
 		}
 	}
 
 	public void setBaseMiddleY(double baseMiddleY) 
 	{
-		this.bmY = baseMiddleY;
-		if (currentImage != null) {
-			this.currentImage.setLeftTop(getPointILeftTop());
+		if(isUsingBaseMiddle)
+		{
+			this.bmY = baseMiddleY;
+			if (currentImage != null) {
+				this.currentImage.setLeftTop(getPointILeftTop());
+			}
+		}else
+		{
+			double rawY = screenToBMY(baseMiddleY, screenPixelHeight,
+					getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
+					.getBottom(),scale);
+			setY(rawY);
 		}
-		
 	}
 
 	public double getBaseMiddleX() {
- 
-		return this.bmX;
+		if(isUsingBaseMiddle)
+		{
+			return this.bmX;
+		}else
+		{
+			double bmx = bmxToScreen(this.bmX, screenPixelWidth,
+					getCurrentBoundingRect().getLeft(), getCurrentBoundingRect()
+					.getRight(),scale);
+
+			return bmx;
+		}
 	}
 
 	public double getBaseMiddleY() {
- 
-		return this.bmY;
+		if(isUsingBaseMiddle)
+		{
+			return this.bmY;
+		}else
+		{
+			double bmy = bmyToScreen(this.bmY, screenPixelHeight,
+					getCurrentBoundingRect().getTop(), getCurrentBoundingRect()
+					.getBottom(),scale);
+			return bmy;
+		}
 	}
 
 	public RectI getCurrentBoundingRect() {
@@ -375,7 +447,7 @@ public class SceneObject {
 	{
 		//right now head rect is biased toward tall thin characters whose height ends at the tip of their heads, with spherical heads as wide as their bodies.
 		double bmx = this.getBaseMiddleX();
-		
+
 		RectI r = this.getCurrentBoundingRect();
 		double width = (r.getRight() -r.getLeft())/screenPixelWidth;
 		HEAD_RECT_PROBLEMS.fine("HEAD RECT " + this.displayName + " "+r.getLeft() + " "+r.getTop()+" "+r.getWidth() +" "+ r.getHeight());
@@ -432,7 +504,7 @@ public class SceneObject {
 				animationCollection.getByIndex(i).setTalkingColor(color);
 			}
 		}
-		
+
 	}
 
 	public void setHeadRectangleByIndex(int index) {
@@ -445,7 +517,7 @@ public class SceneObject {
 			}
 		}
 	}
-	
+
 	public int getHeadRectangleIndex() {
 		return this.headRectIndex;
 	}
