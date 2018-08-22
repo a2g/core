@@ -505,16 +505,22 @@ public class ScenePanelForSwing extends JPanel implements IPlatformScenePanel, I
 
 	@Override
 	public void setTitleCard(String titlecard) {
-		this.isSpeechVisible = (titlecard.length() > 0); 
- 
-		String[] splitByNewline = titlecard.split("\n");
-		ArrayList<SpeechBubble> pages = SpeechBubble.calculateWordWrappedPages(new PointI(width, height),
-				splitByNewline, this, new RectI(318, 178, 4, 4));
-		pages.get(0).rectBubble = new RectI(0, 0, width, height);
-		pages.get(0).yPoints = new int[0];
-		this.speechCanvas.draw(pages.get(0), ColorEnum.Red, ColorEnum.Black, new PointI(width, height),
-				this.getIsDiagnosticsDisplayed());
-		triggerPaint();
+		if( titlecard.length() > 0)
+		{
+			this.isSpeechVisible = true;
+			String[] splitByNewline = titlecard.split("\n");
+			ArrayList<SpeechBubble> pages = SpeechBubble.calculateWordWrappedPages(new PointI(width, height),
+					splitByNewline, this, new RectI(318, 178, 4, 4));
+			pages.get(0).rectBubble = new RectI(0, 0, width, height);
+			pages.get(0).yPoints = new int[0];
+			this.speechCanvas.draw(pages.get(0), ColorEnum.Red, ColorEnum.Black, new PointI(width, height),
+					this.getIsDiagnosticsDisplayed());
+			triggerPaint();
+		}else
+		{
+			this.isSpeechVisible = false;
+		}
+		
 	}
 
 	@Override
