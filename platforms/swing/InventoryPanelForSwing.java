@@ -24,14 +24,11 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import com.github.a2g.core.objectmodel.Image;
@@ -74,7 +71,7 @@ implements IImagePanel
 	private boolean isLeftArrowVisible;
 	private boolean isRightArrowVisible;
 	private ColorEnum fore;
-	private ColorEnum back;
+	//private ColorEnum back;
 
  
 
@@ -88,7 +85,7 @@ implements IImagePanel
 		this.isLeftArrowVisible = false;
 		this.isRightArrowVisible = false;
 		this.fore = fore;
-		this.back = back;
+		//this.back = back;
 		this.setDoubleBuffered(true);
 		tally++;
 

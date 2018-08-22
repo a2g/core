@@ -26,13 +26,11 @@ import com.github.a2g.core.platforms.html5.InventoryPanelForHtml5;
 public class InventoryMouseOverHandler
 implements MouseMoveHandler
 {
-	private final EventBus bus;
 	private final IInventoryPresenterFromInventoryMouseOver toPresenter; 
 	private final InventoryPanelForHtml5 invPanel;
 
 	public InventoryMouseOverHandler(InventoryPanelForHtml5 invPanel, EventBus bus, IInventoryPresenterFromInventoryMouseOver toPresenter)
 	{
-		this.bus = bus;
 		this.toPresenter = toPresenter; 
 		this.invPanel = invPanel;
 	}

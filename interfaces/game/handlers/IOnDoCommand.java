@@ -19,6 +19,8 @@ package com.github.a2g.core.interfaces.game.handlers;
 import com.github.a2g.core.interfaces.game.singles.IAddEdgeSpanToPerimeter;
 import com.github.a2g.core.interfaces.game.singles.IAddHelperPoint;
 import com.github.a2g.core.interfaces.game.singles.IAddHelperRectangle;
+import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation;
+import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToLastFrameOfNewAnimation;
 import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.interfaces.game.chainables.IChainBase;
@@ -121,6 +123,8 @@ ISetScreenCoordsPerSecond,
 
 // animation
 IAlignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation,
+IAlignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation,
+IAlignBaseMiddleOfOldFrameToLastFrameOfNewAnimation,
 ISetAnimationAsObjectInitial,
 ISetAnimationAsSceneTalker,
 ISetAnimationAsObjectCurrent,
@@ -199,6 +203,8 @@ ISetInventoryItemVisible
 	@Override IChainBase setAnimationAsObjectInitial(String atid);
 	@Override IChainBase setAnimationAsObjectCurrent (String atid);
 	@Override IChainBase alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation(String atid, int frame);
+	@Override IChainBase alignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation(String atid);
+	@Override IChainBase alignBaseMiddleOfOldFrameToLastFrameOfNewAnimation(String atid);
 	@Override int getAnimationLastFrame(String atid);
 	@Override int getAnimationLength(String atid);
 	@Override IChainBase setAnimationDuration(String atid, double duration);

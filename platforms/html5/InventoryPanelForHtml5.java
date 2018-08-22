@@ -18,21 +18,10 @@
 package com.github.a2g.core.platforms.html5;
 
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.TreeMap;
-
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
 import com.github.a2g.core.objectmodel.Image;
 import com.google.gwt.dom.client.ImageElement;
@@ -40,29 +29,23 @@ import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.interfaces.nongame.IImagePanel;
 import com.github.a2g.core.interfaces.nongame.platform.IPlatformInventoryPanel;
 import com.github.a2g.core.interfaces.nongame.platform.IPlatformPackagedImage;
-import com.github.a2g.core.interfaces.nongame.platform.IPlatformScenePanel;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromInventoryPanel;
-import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromSceneMouseOver;
 import com.github.a2g.core.objectmodel.Inventory;
 import com.github.a2g.core.platforms.html4.dependencies.ImageForHtml4;
 import com.github.a2g.core.platforms.html4.dependencies.PlatformPackagedImageForHtml4;
 import com.github.a2g.core.platforms.html4.mouse.ImageMouseClickHandler;
-import com.github.a2g.core.platforms.html4.mouse.SceneObjectMouseOverHandler;
 import com.github.a2g.core.platforms.html5.dependencies.CanvasEtcHtml5;
 import com.github.a2g.core.platforms.html5.mouse.InventoryMouseClickHandler;
 import com.github.a2g.core.platforms.html5.mouse.InventoryMouseOverHandler;
-import com.github.a2g.core.platforms.html5.mouse.SceneMouseClickHandler;
-import com.github.a2g.core.platforms.html5.mouse.SceneMouseOverHandler;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectI;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.touch.client.Point;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-@SuppressWarnings("serial")
+ 
 public class InventoryPanelForHtml5
 extends VerticalPanel 
 implements IImagePanel

@@ -38,7 +38,6 @@ import com.github.a2g.core.interfaces.nongame.presenter.IVerbsPresenterFromVerbs
 import com.github.a2g.core.objectmodel.MasterPresenter;
 import com.github.a2g.core.platforms.html4.CommandLinePanelForHtml4;
 import com.github.a2g.core.platforms.html4.DialogTreePanelForHtml4;
-import com.github.a2g.core.platforms.html4.InventoryPanelForHtml4;
 import com.github.a2g.core.platforms.html4.LoaderPanelHtml4;
 import com.github.a2g.core.platforms.html4.MasterPanelForHtml4;
 import com.github.a2g.core.platforms.html4.PlatformSoundForHtml4;

@@ -20,7 +20,6 @@ import com.github.a2g.core.action.ChainEndAction;
 import com.github.a2g.core.action.ChainRootAction;
 import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.game.chainables.IChainBase;
-import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.game.singles.ICreateChainRootAction;
 import com.github.a2g.core.interfaces.game.singles.IDisplayTitleCard;
 import com.github.a2g.core.interfaces.game.singles.IExecuteChainedAction;

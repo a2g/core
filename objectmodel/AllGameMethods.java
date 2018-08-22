@@ -683,12 +683,6 @@ return null;
 	}
 
 	@Override
-	public ILoadKickStarter createReturnObject(IGameScene scene) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public ChainableAction alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation(String atid, int frame) {
 		master.getScenePresenter().alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimationByAtid(frame, atid);
 		return null;
@@ -697,6 +691,27 @@ return null;
 	@Override
 	public RectF getHelperRectangle(int index) {
 		return master.getScenePresenter().getHelperRectangle(index);
+	}
+
+	@Override
+	public IChainBase alignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation(String atid) {
+		master.getScenePresenter()
+		.alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimationByAtid(0, atid);
+		return null;
+	}
+
+	@Override
+	public IChainBase alignBaseMiddleOfOldFrameToLastFrameOfNewAnimation(String atid) {
+		int lastFrame = master.getScenePresenter().getAnimationByAtid(atid).getLastFrame();
+		master.getScenePresenter()
+		.alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimationByAtid(lastFrame, atid);
+		return null;
+	}
+
+	@Override
+	public ILoadKickStarter createReturnObject(IGameScene scene) {
+		assert("This should never be called".length()<0);
+		return null;
 	}
 
 
