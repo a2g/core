@@ -223,8 +223,8 @@ implements IImagePanel
 				// these are set with SetThingPosition
 				int dx1 = (int) (destRect.getLeft());
 				int dy1 = (int) (destRect.getTop());
-				int dx2 = (int) (destRect.getWidth());
-				int dy2 = (int) (destRect.getHeight());
+				int dx2 = (int) (destRect.getRight());
+				int dy2 = (int) (destRect.getBottom());
 				g.drawImage(((ImageForSwing) image).getNativeImage(), dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, this);
 			}
 		}

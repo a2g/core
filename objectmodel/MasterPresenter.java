@@ -263,9 +263,7 @@ public class MasterPresenter
 
 	}
 
-	public void callOnPreEntry() {
-		this.sceneHandlers2.onPreEntry(proxyForGameScene);
-	}
+	
 
 	@Override
 	public void onTimer() {
@@ -453,13 +451,13 @@ public class MasterPresenter
 		loadInventoryFromAPI();
 		setInitialAnimationsAsCurrent();
 		scenePresenter.clearBoundaries();
+		scenePresenter.clearDisplayNames();
 
 		// setAllObjectsToVisible();
 		// it is reasonable for a person to set current animations in pre-entry
 		// and expect them to stay current, so we set cuurentAnimations before
 		// pre-entry.
-
-		callOnPreEntry();
+		this.sceneHandlers2.onPreEntry(proxyForGameScene);
 
 		startCallingOnEveryFrame();
 		this.masterPanel.setActiveState(IPlatformMasterPanel.GuiStateEnum.OnEnterScene);

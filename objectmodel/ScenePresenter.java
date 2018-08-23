@@ -323,6 +323,9 @@ public class ScenePresenter implements IScenePresenter,
 
 	public void setDefaultSceneObjectOtid(String otid) {
 		this.defaultSceneObjectOtid = otid;
+		SceneObject o = this.getObjectByOtid(otid);
+		if(o!=null)
+			o.setUseBaseMiddleForAnimation(true);
 	}
 
 	public String getOtidByAtid(String atid) {
@@ -561,6 +564,14 @@ public class ScenePresenter implements IScenePresenter,
 	@Override
 	public IBoundaryCalculator getBoundaryCalculator() {
 		return this.boundaryCalculator;
+	}
+
+	public void clearDisplayNames() {
+		for(int i=0;i<scene.objectCollection().getCount();i++)
+		{
+			SceneObject o = scene.objectCollection().getByIndex(i);
+			o.setDisplayName("");
+		}
 	}
 
 };

@@ -527,7 +527,6 @@ public class SceneObject {
 
 	public void setUseBaseMiddleForAnimation(boolean isUsingBaseMiddleForAnimation) {
 		this.isUsingBaseMiddleForAnimation = isUsingBaseMiddleForAnimation;
-		
 	}
 
 };
