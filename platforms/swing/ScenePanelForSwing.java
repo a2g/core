@@ -276,8 +276,10 @@ public class ScenePanelForSwing extends JPanel implements IPlatformScenePanel, I
 				int dx2 = (int) (dx1 + sx2 * image.getScale());
 				int dy2 = (int) (dy1 + sy2 * image.getScale());
 				g.drawImage(((ImageForSwing) image).getNativeImage(), dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, this);
+				g.drawRect(dx1, dy1, dx2-dx1, dy2-dy1);
 			}
 		}
+
 		// System.out.println("printed with tally " + tally +" draws "+ draws);
 		tally = 0;
 

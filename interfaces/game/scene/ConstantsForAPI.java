@@ -16,6 +16,8 @@
 
 package com.github.a2g.core.interfaces.game.scene;
 
+ 
+
 public interface ConstantsForAPI {
 	public static final int MAX_OBJS = 32; // if you want a large range of
 	// consecutive odd numbers that
@@ -27,6 +29,47 @@ public interface ConstantsForAPI {
 
 	public static final int VERB_MULTIPLIER = (MAX_OBJS * 2 + STARTING_ODD)
 			* (MAX_OBJS * 2 + STARTING_ODD);
+
+	public enum Verb
+	{
+		Walk(0 * VERB_MULTIPLIER),
+		Talk ( 1 * VERB_MULTIPLIER),
+		Examine ( 2 * VERB_MULTIPLIER),
+		Grab ( 3 * VERB_MULTIPLIER),
+		Cut ( 4 * VERB_MULTIPLIER),
+		Swing ( 5 * VERB_MULTIPLIER),
+		TurnOn ( 6 * VERB_MULTIPLIER),
+		Use ( 7 * VERB_MULTIPLIER),
+		Push ( 8 * VERB_MULTIPLIER),
+		Pull ( 9 * VERB_MULTIPLIER),
+		Throw ( 10 * VERB_MULTIPLIER),
+		Eat ( 11 * VERB_MULTIPLIER),
+		;
+		public int code;        
+		Verb(int code) {
+			this.code=code;        
+		}
+	
+	    public static Verb getEnum(int value)
+	    {                               
+	        switch(value)               
+	        {                           
+	        case 0 * VERB_MULTIPLIER: return Walk;
+	        case ( 1 * VERB_MULTIPLIER): return Talk;
+	        case ( 2 * VERB_MULTIPLIER): return Examine;
+	        case ( 3 * VERB_MULTIPLIER): return Grab;
+	        case ( 4 * VERB_MULTIPLIER): return Cut;
+	        case ( 5 * VERB_MULTIPLIER): return Swing;
+	        case ( 6 * VERB_MULTIPLIER): return TurnOn;
+	        case ( 7 * VERB_MULTIPLIER): return Use;
+	        case ( 8 * VERB_MULTIPLIER): return Push;
+	        case ( 9 * VERB_MULTIPLIER): return Pull;
+	        case ( 10 * VERB_MULTIPLIER): return Throw;
+	        case ( 11 * VERB_MULTIPLIER): return Eat;
+	        };
+	        return null;
+	    }
+	}
 
 	public static final int WALK = 0 * VERB_MULTIPLIER;
 	public static final int TALK = 1 * VERB_MULTIPLIER;

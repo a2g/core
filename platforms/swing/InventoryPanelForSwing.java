@@ -200,6 +200,7 @@ implements IImagePanel
 				// rectangle.
 				// sx2 - the x coordinate of the second corner of the source
 				// rectangle.
+			
 				// sy2 - the y coordinate of the second corner of the source
 				// rectangle.
 
