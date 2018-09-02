@@ -33,7 +33,7 @@ import com.github.a2g.core.primitive.A2gException;
  * @author Admin
  *
  */
-public interface IGameScene
+public interface IGameScene extends ConstantsForAPI
 {
 	/*!
 	<table>

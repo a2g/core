@@ -407,6 +407,7 @@ return null;
 	@Override
 	public void removeVerbByCode(int vcode) {
 		master.getVerbsPresenter().removeByCode(vcode);
+		master.getVerbsPresenter().updateVerbs();
 
 	}
 
