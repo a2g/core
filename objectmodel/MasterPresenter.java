@@ -39,6 +39,8 @@ import com.github.a2g.core.action.DialogChainableAction;
 import com.github.a2g.core.event.PropertyChangeEvent;
 import com.github.a2g.core.event.PropertyChangeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
+import com.github.a2g.core.interfaces.game.chainables.IChainRootForScene;
+import com.github.a2g.core.interfaces.game.handlers.IOnDoCommand;
 import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI;
 import com.github.a2g.core.interfaces.game.scene.IExtendsGameSceneLoader;
 import com.github.a2g.core.interfaces.game.scene.IGameScene;
@@ -663,20 +665,30 @@ public class MasterPresenter
 		return b;
 	}
 
+	BaseAction executeOnDoCommand(IOnDoCommand p1, IChainRootForScene p2, int p3, SentenceItem p4, SentenceItem p5, double p6, double p7)
+	{
+		BaseAction a = null;
+		try {
+			// always put inventory second, so then we can say "I can't use the <SCENEOBJECT>
+			if(p4.isInventory())
+				a = this.sceneHandlers2.onDoCommand(p1, p2, p3, p5, p4, p6, p7); 
+			else
+				a = this.sceneHandlers2.onDoCommand(p1, p2, p3, p4, p5, p6, p7); 
+
+		} catch (A2gException e) {
+ 			e.printStackTrace();
+		}
+		return a;
+	}
+	
 	@Override
 	public void doCommand(int verbAsCode, int verbAsVerbEnumeration, SentenceItem sentenceA, SentenceItem sentenceB,
 			double x, double y) {
 
-		BaseAction a = null;
-		try {
-
-			a = this.sceneHandlers2.onDoCommand(proxyForGameScene, MatOps.createChainRootAction(), verbAsCode,
+		BaseAction a = executeOnDoCommand(proxyForGameScene, MatOps.createChainRootAction(), verbAsCode,
 					sentenceA, sentenceB, x + scenePresenter.getCameraX(), y + scenePresenter.getCameraY());
 
-		} catch (A2gException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		 
 		this.commandLinePresenter.setMouseable(false);
 
 		a = replaceChainToDialogActionWithCallToOnDialogTree(a);
@@ -738,14 +750,7 @@ public class MasterPresenter
 				// otherwise ask the sceneHanders what the outcome is.
 				SentenceItem o1 = new SentenceItem("", "", cmd.getInt1());
 				SentenceItem o2 = new SentenceItem("", "", cmd.getInt2());
-				BaseAction a = null;
-				try {
-					a = this.sceneHandlers2.onDoCommand(proxyForGameScene, MatOps.createChainRootAction(),
-							cmd.getVerb(), o1, o2, cmd.getDouble1(), cmd.getDouble2());
-				} catch (A2gException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				BaseAction a = executeOnDoCommand(proxyForGameScene, MatOps.createChainRootAction(),cmd.getVerb(), o1, o2, cmd.getDouble1(), cmd.getDouble2());
 
 				if (a == null || a instanceof DoNothingAction) {
 					cancelAutoplay(cmd, "onDoCommand returned do nothing");
