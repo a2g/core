@@ -567,10 +567,12 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	public void clearDisplayNames() {
+		
 		for(int i=0;i<scene.objectCollection().getCount();i++)
 		{
 			SceneObject o = scene.objectCollection().getByIndex(i);
-			o.setDisplayName("");
+			if(!o.getDisplayName().endsWith("_"))
+				o.setDisplayName("");
 		}
 	}
 

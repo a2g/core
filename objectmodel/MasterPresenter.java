@@ -418,7 +418,7 @@ public class MasterPresenter
 
 	}
 
-	public void callOnEnterScene() {
+	public void executeOnEnterScene() {
 		if (scenePresenter.getBoundaryPoints().size() > 0) {
 			scenePresenter.repositionDefaultObject();
 		}
@@ -463,7 +463,7 @@ public class MasterPresenter
 
 		startCallingOnEveryFrame();
 		this.masterPanel.setActiveState(IPlatformMasterPanel.GuiStateEnum.OnEnterScene);
-		callOnEnterScene();
+		executeOnEnterScene();
 
 	}
 
