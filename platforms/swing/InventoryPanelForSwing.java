@@ -317,6 +317,10 @@ implements IImagePanel
 	public void setDimensionsOfPanel(int width, int height) {
 		this.width = width;
 		this.height = height;
+		switch(width)
+		{
+		
+		}
 	}
 
 	@Override

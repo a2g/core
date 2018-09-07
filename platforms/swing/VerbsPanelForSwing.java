@@ -54,7 +54,7 @@ extends JPanel implements IPlatformVerbsPanel
 		this.preferredHeight = 80;
 		this.setForeground(new Color(fore.r, fore.g, fore.b));
 		this.setBackground(new Color(back.r, back.g, back.b));
-		fontHeight = 12;
+		fontHeight = 16;
 		fontName = "arial";
 	}
 
@@ -117,9 +117,15 @@ extends JPanel implements IPlatformVerbsPanel
 	}
 
 	@Override
-	public void setWidth(int i) {
-		this.preferredWith = i;
+	public void setWidth(int width) {
+		this.preferredWith = width;
 		this.preferredHeight = 80;
+		switch(width)
+		{
+		case 320: 
+			fontHeight = 30; break;
+		}
+		update();
 	}
 
 	@Override

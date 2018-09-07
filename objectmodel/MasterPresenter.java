@@ -508,8 +508,9 @@ public class MasterPresenter
 	public void setScenePixelSize(int width, int height) {
 		this.scenePresenter.setScenePixelSize(width, height);
 		this.loaderPresenter.setScenePixelSize(width, height);
-		this.dialogTreePresenter.setScenePixelSize(width, height >> 1);
-		this.verbsPresenter.setWidthOfScene(width);
+		this.dialogTreePresenter.setScenePixelSize(width, height);
+		this.verbsPresenter.setScenePixelSize(width, height);
+		this.inventoryPresenter.setScenePixelSize(width, height);
 	}
 
 	void clearMapOfSounds() {
@@ -800,7 +801,7 @@ public class MasterPresenter
 	@Override
 	public void setInventoryImageSize(int width, int height) {
 		this.getInventoryPresenter().setSizeOfSingleInventoryImage(width, height);
-		this.verbsPresenter.setWidthOfInventory(getInventoryPresenter().getWidth());
+		//this.verbsPresenter.setWidthOfInventory(getInventoryPresenter().getWidth());
 	}
 
 	@Override

@@ -38,4 +38,5 @@ public interface IPlatformInventoryPanel {
 	void setLeftArrowVisible(boolean visible);
 
 	void setRightArrowVisible(boolean visible);
+
 }

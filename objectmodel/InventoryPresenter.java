@@ -47,8 +47,7 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 	private RectI rightArrowRect;
 	private int mousePosX;
 	private int mousePosY;
-	private final int WIDTH_OF_LEFT_ARROW = 20;
-	private final int WIDTH_OF_RIGHT_ARROW = 20;
+	private int arrowWidth;
 
 	public InventoryPresenter(final IHostingPanel panel, EventBus bus,
 			IMasterPresenterFromInventory api) {
@@ -58,6 +57,7 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 		this.eventBus = bus;
 		this.theInventory = new Inventory();
 		this.callback = api;
+		this.arrowWidth =0;
 		this.view = api.getFactory().createInventoryPanel(this,
 				GuiConstants.TEXT_NORMAL,
 				GuiConstants.BACKGROUND_FILL,
@@ -65,10 +65,6 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 
 		panel.setThing(view);
 		this.mapOfInventoryByICode = new TreeMap<Integer, InventoryItem>();
-		// give it a default size - helps out the unit tests
-		final int DEFAULT_INVENTORY_IMAGE_SIZE = 20;
-		setSizeOfSingleInventoryImage(DEFAULT_INVENTORY_IMAGE_SIZE,
-				DEFAULT_INVENTORY_IMAGE_SIZE);
 	}
 
 	public Inventory getInventory() {
@@ -184,20 +180,37 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 		return view;
 	}
 
-	public void setSizeOfSingleInventoryImage(int w, int h) {
-		int la = this.WIDTH_OF_LEFT_ARROW;
-		int ra = this.WIDTH_OF_RIGHT_ARROW;
-		this.width = 2 * w + la + ra;
-		this.height = 2 * h;
-		this.rectsForSlots.clear();
-		rectsForSlots.add(new RectI(la, 0, w, h));
-		rectsForSlots.add(new RectI(la, h, w, h));
-		rectsForSlots.add(new RectI(la + w, 0, w, h));
-		rectsForSlots.add(new RectI(la + w, h, w, h));
-		leftArrowRect = new RectI(0, 0, la, h * 2);
-		rightArrowRect = new RectI(la + 2 * w, 0, ra, h * 2);
 
-		view.setDimensionsOfPanel(width, height);
+
+	public void setScenePixelSize(int width , int height ) 
+	{
+		this.width = width/2;
+		this.height = height/2;
+		int destinationSlotWidth= 64;
+		int destinationSlotHeight = 32;
+		switch(width)
+		{
+		case 320: destinationSlotWidth = 128; destinationSlotHeight=64; break;
+		}
+
+		this.arrowWidth = (width-2*destinationSlotWidth)/2;
+
+		{
+			// some temp variablesfor easy of reading
+			int la = arrowWidth;
+			int ra = arrowWidth;
+			int w = destinationSlotWidth;
+			int h = destinationSlotHeight;
+
+			this.rectsForSlots.clear();
+			rectsForSlots.add(new RectI(la, 0, w, h));
+			rectsForSlots.add(new RectI(la, h, w, h));
+			rectsForSlots.add(new RectI(la + w, 0, w, h));
+			rectsForSlots.add(new RectI(la + w, h, w, h));
+			leftArrowRect = new RectI(0, 0, la, h * 2);
+			rightArrowRect = new RectI(la + 2 * w, 0, ra, h * 2);
+		}
+		view.setDimensionsOfPanel(width/2, height/2);
 	}
 
 	InventoryItem getItemForRect(int i) {
@@ -261,6 +274,11 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 	@Override
 	public Collection<RectI> getRects() {
 		return rectsForSlots;
+	}
+
+	public void setSizeOfSingleInventoryImage(int width2, int height2) {
+		//view.setSizeOfSingleInventoryImage(width2, height2); 
+		
 	}
 
 }

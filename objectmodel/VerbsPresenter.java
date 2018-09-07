@@ -27,9 +27,7 @@ import com.github.a2g.core.primitive.GuiConstants;
 public class VerbsPresenter implements IVerbsPresenterFromVerbsPanel,
 IVerbsPresenter {
 	private Verbs theVerbs;
-	private IPlatformVerbsPanel view;
-	private int widthOfScene;
-	private int widthOfInventory;
+	private IPlatformVerbsPanel view; 
 	IMasterPresenterFromVerbs callback;
 
 	public VerbsPresenter(final IHostingPanel panel, EventBus bus,
@@ -40,9 +38,7 @@ IVerbsPresenter {
 				GuiConstants.TEXT_NORMAL, GuiConstants.BACKGROUND_FILL);
 		panel.setThing(view);
 		this.view.setVerbs(theVerbs);
-		this.widthOfScene = 0;
-		this.widthOfInventory = 0;
-	}
+ 	}
 
 	public void clear() {
 		// doesn't change.
@@ -62,15 +58,10 @@ IVerbsPresenter {
 		view.update();
 	}
 
-	public void setWidthOfScene(int width) {
-		this.widthOfScene = width;
-		view.setWidth(widthOfScene - widthOfInventory);
+	public void setScenePixelSize(int width, int height) {
+		view.setWidth(width/2);
 	}
 
-	public void setWidthOfInventory(int width) {
-		this.widthOfInventory = width;
-		view.setWidth(widthOfScene - widthOfInventory);
-	}
 
 	@Override
 	public void setMouseOver(String displayName, String vtid, int vcode) {
