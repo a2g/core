@@ -261,7 +261,16 @@ implements IImagePanel
 			g.setColor(new Color(fore.r, fore.g, fore.b));
 			g.fillPolygon(xPoints,yPoints,3 ); 
 		}
-
+		
+		g.setColor(new Color(255,0,0));
+		
+		Iterator<RectI> rectIter2 = presenter.getRects().iterator();
+		while(rectIter2.hasNext())
+		{
+			RectI rect = rectIter2.next();
+			g.drawRect(rect.getLeft(), rect.getTop(), rect.getWidth(), rect.getHeight());
+		}
+		g.drawRect(0,0, this.width-1, this.height-1);
 		tally=0;
 	}
 

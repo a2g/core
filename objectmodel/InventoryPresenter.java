@@ -182,10 +182,10 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 
 
 
-	public void setScenePixelSize(int width , int height ) 
+	public void setScenePixelSize(int sceneWidth , int sceneHeight ) 
 	{
-		this.width = width/2;
-		this.height = height/2;
+		this.width = sceneWidth/2;
+		this.height = sceneHeight/2;
 		int destinationSlotWidth= 64;
 		int destinationSlotHeight = 32;
 		switch(width)
@@ -210,7 +210,7 @@ IInventoryPresenterFromInventoryPanel, IInventoryPresenter {
 			leftArrowRect = new RectI(0, 0, la, h * 2);
 			rightArrowRect = new RectI(la + 2 * w, 0, ra, h * 2);
 		}
-		view.setDimensionsOfPanel(width/2, height/2);
+		view.setDimensionsOfPanel(width, height);
 	}
 
 	InventoryItem getItemForRect(int i) {
