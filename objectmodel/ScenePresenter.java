@@ -431,6 +431,9 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	public void repositionDefaultObject() {
+		SceneObject o = scene.objectCollection().getByOtid(
+				this.getDefaultSceneObjectOtid());
+		
 		ArrayList<Point> points = boundaryCalculator.getGatePoints();
 		if (arrivalSegment > -1 && arrivalSegment < (points.size() - 1)) {
 			Point a = points.get(arrivalSegment);
@@ -444,10 +447,15 @@ public class ScenePresenter implements IScenePresenter,
 					(c.getY() - mp.getY()) * .1);
 			Point result = new Point(mp.getX() + v.getX(), mp.getY()
 					+ v.getY());
-			SceneObject o = scene.objectCollection().getByOtid(
-					this.getDefaultSceneObjectOtid());
+			
 			o.setBaseMiddleX(result.getX());
 			o.setBaseMiddleY(result.getY());
+		}
+		else
+		{
+			Point c = boundaryCalculator.getCentreOfSegments();
+			o.setBaseMiddleX(c.getX());
+			o.setBaseMiddleY(c.getY());
 		}
 	}
 
