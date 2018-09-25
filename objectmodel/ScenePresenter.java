@@ -56,7 +56,7 @@ public class ScenePresenter implements IScenePresenter,
 	private IMasterPresenterFromScenePresenter master;
 
 	private IBoundaryCalculator boundaryCalculator;
-	private int arrivalSegment;
+	private int entrySegment;
 	private Vector<RectF> rectangles;
 	private ArrayList<Point> helperPoints;
 
@@ -77,7 +77,7 @@ public class ScenePresenter implements IScenePresenter,
 		this.view = master.getFactory().createScenePanel(this);
 		panel.setThing(view);
 		view.setVisible(true);
-		this.arrivalSegment = -1;
+		this.entrySegment = -1;
 		defaultSceneObjectOtid = "ScenePresenter::getDefaultSceneObjectOtid was used before it was initialized";
 
 		rectangles = new Vector<RectF>(3);
@@ -360,13 +360,13 @@ public class ScenePresenter implements IScenePresenter,
 	}
 
 	@Override
-	public void switchToScene(String foundDest, int arrivalSegment) {
-		master.switchToScene(foundDest, arrivalSegment);
+	public void switchToScene(String foundDest, int entrySegment) {
+		master.switchToScene(foundDest, entrySegment);
 	}
 
 	public void addEdgeSpanToPerimeter(double tlx, double tly, double brx, double bry,
-			Object sceneToSwitchTo, int arrivalSegment) {
-		boundaryCalculator.addEdgeSpanToPerimeter(sceneToSwitchTo, arrivalSegment,
+			Object sceneToSwitchTo, int entrySegment) {
+		boundaryCalculator.addEdgeSpanToPerimeter(sceneToSwitchTo, entrySegment,
 				new Point(tlx, tly), new Point(brx, bry));
 	}
 
@@ -426,8 +426,8 @@ public class ScenePresenter implements IScenePresenter,
 		return defaultSceneObjectOtid;
 	}
 
-	public void setArrivalSegment(int arrivalSegment) {
-		this.arrivalSegment = arrivalSegment;
+	public void setEntrySegment(int entrySegment) {
+		this.entrySegment = entrySegment;
 	}
 
 	public void repositionDefaultObject() {
@@ -435,9 +435,9 @@ public class ScenePresenter implements IScenePresenter,
 				this.getDefaultSceneObjectOtid());
 		
 		ArrayList<Point> points = boundaryCalculator.getGatePoints();
-		if (arrivalSegment > -1 && arrivalSegment < (points.size() - 1)) {
-			Point a = points.get(arrivalSegment);
-			Point b = points.get(arrivalSegment + 1);
+		if (entrySegment > -1 && entrySegment < (points.size() - 1)) {
+			Point a = points.get(entrySegment);
+			Point b = points.get(entrySegment + 1);
 			Point c = boundaryCalculator.getCentreOfSegments();
 			Point mp = new Point((a.getX() + b.getX()) / 2,
 					(a.getY() + b.getY()) / 2);

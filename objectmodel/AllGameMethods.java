@@ -463,8 +463,8 @@ return null;
 	}
 
 	@Override
-	public ChainEndAction switchToScene(String scene, int arrivalSegment) {
-		master.switchToScene(scene, arrivalSegment);
+	public ChainEndAction switchToScene(String scene, int entrySegment) {
+		master.switchToScene(scene, entrySegment);
 		return null;
 	}
 
@@ -556,8 +556,8 @@ return null;
 
 	@Override
 	public void addEdgeSpanToPerimeter(double tlx, double tly, double brx, double bry, Object sceneToSwitchTo,
-			int arrivalSegment) {
-		master.getScenePresenter().addEdgeSpanToPerimeter(tlx, tly, brx, bry, sceneToSwitchTo, arrivalSegment);
+			int entrySegment) {
+		master.getScenePresenter().addEdgeSpanToPerimeter(tlx, tly, brx, bry, sceneToSwitchTo, entrySegment);
 	}
 
 	@Override

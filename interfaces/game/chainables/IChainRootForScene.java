@@ -67,7 +67,7 @@ public interface IChainRootForScene extends IChainBase
 			ChainRootAction ba, int verb, SentenceItem itemA,
 			SentenceItem itemB, double x, double y) throws A2gException;
 	public ChainEndAction subroutine(ChainEndAction orig);
-	public ChainEndAction switchTo(String sceneName, int arrivalSegment);
+	public ChainEndAction switchTo(String sceneName, int entrySegment);
 	//@}
 	
 	
@@ -83,9 +83,9 @@ public interface IChainRootForScene extends IChainBase
 	 *  These all take a parameter for the "sceneName" that they switch to upon termination.
 	 */
 	//@{
-	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int arrivalSegment) throws A2gException ;
-	public ChainEndAction walkAlwaysSwitch(Point point, String sceneName, int arrivalSegment) throws A2gException ;
-	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, Point p, double startScale, double endScale, String sceneName, int arrivalSegment) throws A2gException;
+	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int entrySegment) throws A2gException ;
+	public ChainEndAction walkAlwaysSwitch(Point point, String sceneName, int entrySegment) throws A2gException ;
+	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, Point p, double startScale, double endScale, String sceneName, int entrySegment) throws A2gException;
 	//@}
 	
 	/**  @name Walk with no edge detection

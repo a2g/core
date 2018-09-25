@@ -96,7 +96,7 @@ IGetValue
 	/**   @name Helpful for game */
 	//@{
 	@Override String getCurrentSceneName();
-	@Override ChainEndAction switchToScene(String name, int arrivalSegment);
+	@Override ChainEndAction switchToScene(String name, int entrySegment);
 	@Override String getLastSceneName();
 	@Override boolean isInDebugMode();
 	@Override double getSceneGuiWidth();

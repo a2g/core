@@ -37,9 +37,9 @@ public interface IChainRootForDialog extends IChainBase
 	//@{
 	DialogChainEndAction endDialogTree();
 	DialogChainEndAction chainTo(int branchId);
-	DialogChainEndAction switchTo(String string, int arrivalSegment);
+	DialogChainEndAction switchTo(String string, int entrySegment);
 	DialogChainEndAction branchTheObligatoryExit(String string);
-	DialogChainEndAction walkAlwaysSwitch(Point p, String sceneName, int arrivalSegment);
-	DialogChainEndAction walkAlwaysSwitch(double x, double y, String sceneName,	int arrivalSegment);
+	DialogChainEndAction walkAlwaysSwitch(Point p, String sceneName, int entrySegment);
+	DialogChainEndAction walkAlwaysSwitch(double x, double y, String sceneName,	int entrySegment);
 	//@}
 }

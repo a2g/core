@@ -151,7 +151,7 @@ ISetInventoryItemVisible
 	/**   @name Helpful for game */
 	//@{
 	@Override String getCurrentSceneName();
-	@Override ChainEndAction switchToScene(String name, int arrivalSegment);
+	@Override ChainEndAction switchToScene(String name, int entrySegment);
 	@Override boolean isInDebugMode();
 	@Override String getLastSceneName();
 	@Override IChainBase shareWinning(String string);
@@ -161,7 +161,7 @@ ISetInventoryItemVisible
 
 	/** @name EdgeDetection and Helper */
 	//@{
-	@Override void addEdgeSpanToPerimeter(double tlx, double tly, double blx, double bly, Object toStringIsCalledOnThisToDetermineTheNameToSwitchToWhenGateIsEntered, int arrivalSegment);
+	@Override void addEdgeSpanToPerimeter(double tlx, double tly, double blx, double bly, Object toStringIsCalledOnThisToDetermineTheNameToSwitchToWhenGateIsEntered, int entrySegment);
 	@Override void addEdgePointToPerimeter(double tlx, double tly);
 	@Override int addHelperPoint(double x, double y);
 	@Override int addHelperRectangle(RectF rectF);

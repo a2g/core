@@ -17,7 +17,7 @@
 package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.primitive.CodesForVerbs;
-import com.github.a2g.core.primitive.STARTING_ODD_INVENTORY_CODE;
+import com.github.a2g.core.primitive.IsInventory;
 import com.github.a2g.core.primitive.STARTING_ODD_OBJECTS_CODE;
 
 public class SentenceItem {
@@ -83,20 +83,13 @@ public class SentenceItem {
 		return false;
 	}
 
-	static public boolean isInventory(int code) {
-		final int FIRST_INV = STARTING_ODD_INVENTORY_CODE.STARTING_ODD_INVENTORY_CODE;
-	
-		boolean isInventory = code >= FIRST_INV ;
-		return isInventory;
-	}
-
 	public boolean isEmpty() {
 		boolean isEmpty = code == 1;
 		return isEmpty;
 	}
 
 	public boolean isInventory() {
-		return isInventory(this.getCode());
+		return IsInventory.isInventory(this.getCode());
 	}
 
 }

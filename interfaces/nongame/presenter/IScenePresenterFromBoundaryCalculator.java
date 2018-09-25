@@ -17,5 +17,5 @@ package com.github.a2g.core.interfaces.nongame.presenter;
 
 public interface IScenePresenterFromBoundaryCalculator {
 
-	void switchToScene(String foundDest, int arrivalSegment);
+	void switchToScene(String foundDest, int entrySegment);
 }

@@ -66,10 +66,10 @@ implements IChainRootForDialog
 	}
 
 	@Override
-	public DialogChainEndAction switchTo(String sceneName, int arrivalSegment) {
+	public DialogChainEndAction switchTo(String sceneName, int entrySegment) {
 		DialogSingleCallAction a =  new DialogSingleCallAction(this, Type.Switch);
 		a.setString(sceneName);
-		a.setInt(arrivalSegment);
+		a.setInt(entrySegment);
 		return a;
 	}
 
@@ -124,12 +124,12 @@ implements IChainRootForDialog
 	 
 	
 	@Override
-	public DialogChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int arrivalSegment) {
-		return this.walkAlwaysSwitch( new Point(x,y), sceneName, arrivalSegment);
+	public DialogChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int entrySegment) {
+		return this.walkAlwaysSwitch( new Point(x,y), sceneName, entrySegment);
 	}
 	
 	@Override
-	public DialogChainEndAction walkAlwaysSwitch(Point p, String sceneName, int arrivalSegment) {
+	public DialogChainEndAction walkAlwaysSwitch(Point p, String sceneName, int entrySegment) {
 		DialogWalkAction a = new DialogWalkAction(this, ScenePresenter.DEFAULT_SCENE_OBJECT);
 		a.setEndX(p.getX());
 		a.setEndY(p.getY());
@@ -137,7 +137,7 @@ implements IChainRootForDialog
 
 		DialogSingleCallAction b =  new DialogSingleCallAction(a, Type.Switch);
 		b.setString(sceneName);
-		b.setInt(arrivalSegment);
+		b.setInt(entrySegment);
 
 		return b;
 	}

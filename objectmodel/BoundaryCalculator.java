@@ -14,13 +14,13 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		Path.IDistanceFunc<PointFWithNeighbours>, Path.IEstimateFunc<PointFWithNeighbours> {
 	protected class Gate {
 		public String switchTo;
-		public int arrivalSegment;
+		public int entrySegment;
 		public Point a;
 		public Point b;
 
-		public Gate(Object dest, int arrivalSegment, Point first, Point second) {
+		public Gate(Object dest, int entrySegment, Point first, Point second) {
 			this.switchTo = (dest == null) ? "" : dest.toString();
-			this.arrivalSegment = arrivalSegment;
+			this.entrySegment = entrySegment;
 			this.a = first;
 			this.b = second;
 		}
@@ -59,9 +59,9 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 		this.updateCentre();
 	}
 
-	public void addEdgeSpanToPerimeter(Object switchTo, int arrivalSegment, Point a, Point b) {
+	public void addEdgeSpanToPerimeter(Object switchTo, int entrySegment, Point a, Point b) {
 		if (switchTo != null) {
-			gates.add(new Gate(switchTo == "" ? null : switchTo, arrivalSegment, a, b));
+			gates.add(new Gate(switchTo == "" ? null : switchTo, entrySegment, a, b));
 
 		} else {
 			gates.add(new Gate(TREAT_GATE_AS_POINT, -1, a, new Point(-1, -1)));
@@ -92,7 +92,7 @@ public class BoundaryCalculator implements Comparator<BoundaryCalculator.Gate>, 
 				continue;
 
 			if (isBetweenSpokesAndOnWrongSide(g.a, g.b, tp)) {
-				scene.switchToScene(g.switchTo, g.arrivalSegment);
+				scene.switchToScene(g.switchTo, g.entrySegment);
 				return true;
 			}
 		}

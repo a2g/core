@@ -183,7 +183,7 @@ IGetAnimationLength
 
 	/**   @name Helpful for game */
 	//@{
-	@Override ChainEndAction switchToScene(String name, int arrivalSegment);
+	@Override ChainEndAction switchToScene(String name, int entrySegment);
 	@Override boolean isInDebugMode();
 	@Override double getSceneGuiWidth();
 	@Override double getSceneGuiHeight();
@@ -205,7 +205,7 @@ IGetAnimationLength
 	@Override void addEdgeRectangle(double x, double y, int helper);
 	@Override void addEdgeRectangle(int helper, double x, double y);
 	@Override void addEdgeRectangle(int helper, int helper2);
-	@Override void addEdgeSpanToPerimeter(double tlx, double tly, double blx, double bly, Object toStringIsCalledOnThisToDetermineTheNameToSwitchToWhenGateIsEntered, int arrivalSegment);
+	@Override void addEdgeSpanToPerimeter(double tlx, double tly, double blx, double bly, Object toStringIsCalledOnThisToDetermineTheNameToSwitchToWhenGateIsEntered, int entrySegment);
 	@Override void addEdgePointToPerimeter(double tlx, double tly);
 	@Override int addHelperPoint(double x, double y);
 	@Override int addHelperRectangle(RectF rectF);

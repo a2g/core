@@ -32,6 +32,7 @@ import com.github.a2g.core.action.DialogEndAction;
 import com.github.a2g.core.action.DialogTalkAction;
 import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.IsInventory;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.primitive.STARTING_ODD_INVENTORY_CODE;
@@ -336,7 +337,7 @@ public class MasterPresenter
 	// }
 
 	@Override
-	public void switchToScene(String scene, int arrivalSegment) {
+	public void switchToScene(String scene, int entrySegment) {
 
 		// since instantiateScene..ToIt does some asynchronous stuff,
 		// I thought maybe I could do it, then cancel the timers.
@@ -346,7 +347,7 @@ public class MasterPresenter
 		this.onEveryFrameActionRunner.cancel();
 		this.doCommandActionRunner.cancel();// do we really need to cancel
 		setCameraToZero();// no scene is meant to keep camera position
-		this.scenePresenter.setArrivalSegment(arrivalSegment);
+		this.scenePresenter.setEntrySegment(entrySegment);
 		this.host.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
 
 	}
@@ -614,7 +615,7 @@ public class MasterPresenter
 	SentenceItem getSIOfObject(int code) {
 		if (code == 1)
 			return new SentenceItem();
-		if (SentenceItem.isInventory(code)) {
+		if (IsInventory.isInventory(code)) {
 			InventoryItem i = this.getInventoryPresenter().getInventoryItemByICode(code);
 			return new SentenceItem(i.getDisplayName(), i.getItid(), code);
 		}

@@ -296,10 +296,10 @@ implements IChainRootForScene {
 	}
 
 	@Override
-	public ChainEndAction switchTo(String sceneName, int arrivalSegment) {
+	public ChainEndAction switchTo(String sceneName, int entrySegment) {
 		SingleCallAction a = new SingleCallAction(this, Type.Switch);
 		a.setString(sceneName);
-		a.setInt(arrivalSegment);
+		a.setInt(entrySegment);
 		return a;
 	}
 
@@ -337,18 +337,18 @@ implements IChainRootForScene {
 	}
 
 	@Override
-	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int arrivalSegment) throws A2gException {
+	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int entrySegment) throws A2gException {
 		// best to throw this exception now, inside the Scene handler, rather
 		// than when it is executed, which might be much later at the 
 		// end of an asycnhronous animation execution chain.
 		if(sceneName==null)
 			throw new A2gException ("ChainableAction::walkAlwaysSwitch");
-		return this.walkAlwaysSwitch( new Point(x,y), sceneName, arrivalSegment);
+		return this.walkAlwaysSwitch( new Point(x,y), sceneName, entrySegment);
 	}
 
 	@Override
 	public ChainEndAction walkAlwaysSwitch(Point p, String sceneName,
-			int arrivalSegment) throws A2gException {
+			int entrySegment) throws A2gException {
 		// best to throw this exception now, inside the Scene handler, rather
 		// than when it is executed, which might be much later at the 
 		// end of an asycnhronous animation execution chain.
@@ -361,7 +361,7 @@ implements IChainRootForScene {
 
 		SingleCallAction b = new SingleCallAction(a, Type.Switch);
 		b.setString(sceneName);
-		b.setInt(arrivalSegment);
+		b.setInt(entrySegment);
 
 		return b;
 	}
@@ -369,7 +369,7 @@ implements IChainRootForScene {
 	@Override
 	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, Point p,
 			double startScale, double endScale, String sceneName,
-			int arrivalSegment) throws A2gException {
+			int entrySegment) throws A2gException {
 		// best to throw this exception now, inside the Scene handler, rather
 		// than when it is executed, which might be much later at the 
 		// end of an asycnhronous animation execution chain.
@@ -384,7 +384,7 @@ implements IChainRootForScene {
 
 		SingleCallAction b = new SingleCallAction(a, Type.Switch);
 		b.setString(sceneName);
-		b.setInt(arrivalSegment);
+		b.setInt(entrySegment);
 
 		return b;
 	}

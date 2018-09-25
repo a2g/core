@@ -117,8 +117,8 @@ IDialogTreePresenterFromActions {
 	}
 	
 	@Override
-	public void  switchToScene(String switchToThis, int arrivalSegment) {
-		master.switchToScene(switchToThis, arrivalSegment);
+	public void  switchToScene(String switchToThis, int entrySegment) {
+		master.switchToScene(switchToThis, entrySegment);
 	}
 	
 	// /@}
