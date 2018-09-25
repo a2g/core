@@ -85,9 +85,8 @@ public class SentenceItem {
 
 	static public boolean isInventory(int code) {
 		final int FIRST_INV = STARTING_ODD_INVENTORY_CODE.STARTING_ODD_INVENTORY_CODE;
-		final int FIRST_OBJ = STARTING_ODD_OBJECTS_CODE.STARTING_ODD_OBJECTS_CODE;
-
-		boolean isInventory = code >= FIRST_INV && code <= FIRST_OBJ;
+	
+		boolean isInventory = code >= FIRST_INV ;
 		return isInventory;
 	}
 
