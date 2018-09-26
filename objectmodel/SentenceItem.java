@@ -18,7 +18,6 @@ package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.primitive.CodesForVerbs;
 import com.github.a2g.core.primitive.IsInventory;
-import com.github.a2g.core.primitive.STARTING_ODD_OBJECTS_CODE;
 
 public class SentenceItem {
 

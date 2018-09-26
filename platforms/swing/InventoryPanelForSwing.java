@@ -181,7 +181,7 @@ implements IImagePanel
 		g.setColor(new Color(0,0,0));
 		g.fillRect(0, 0, width, height);
 		Iterator<Image> imageIter = listOfAllAvailableImages.iterator();
-		int i=0;
+  
 		Iterator<RectI> rectIter = presenter.getRects().iterator();
 		while(imageIter.hasNext() && rectIter.hasNext())
 		{
