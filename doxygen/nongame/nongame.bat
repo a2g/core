@@ -16,7 +16,7 @@ for /f %%i in ('cd') do set CWD=%%i
 echo Outputting doxygen to doxygen_processing_log.txt ...
 echo ...
 echo Please wait whilst any Warnings/Errors are dumped to this screen.
-"C:\Program Files (x86)\_Doxygen1.8.3.1\bin\doxygen.exe" g:\a2g_core\nongame.doxyfile > nongame_log.txt
+"C:\Program Files (x86)\_Doxygen1.8.3.1\bin\doxygen.exe" g:\a2g_core\doxygen\nongame\nongame.doxyfile > nongame_log.txt
 
   
 pause

@@ -10,21 +10,21 @@ public class LinesAndMaxWidth
 	{
 		public LineAndPos(String line, double lineWidth)
 		{
-			this.line = line;
+			this.lineText = line;
 			this.lineWidth = lineWidth;
 		}
 		public LineAndPos(int x, int y, String string) {
-			this.line = string;
+			this.lineText = string;
 			this.x = x;
 			this.y = y;
 			this.lineWidth = 0;
 		}
 		
-		public String line;
+		public String lineText;
 		public int x;
 		public int y;
 		public double lineWidth;
-		public double startingTime;
+		public double startingProgress;
 	}
 	
 	public LinesAndMaxWidth()
@@ -37,8 +37,8 @@ public class LinesAndMaxWidth
 		switch(this.lines.size())
 		{
 		case 0: return "<blank speech>";
-		case 1: return this.lines.get(0).line;
-		case 2: return this.lines.get(0).line + this.lines.get(1).line;
+		case 1: return this.lines.get(0).lineText;
+		case 2: return this.lines.get(0).lineText + this.lines.get(1).lineText;
 		}
 		return"<too many lines>"; 
 	}

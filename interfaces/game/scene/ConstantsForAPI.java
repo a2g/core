@@ -105,8 +105,8 @@ public interface ConstantsForAPI {
 	 * 
 	 * -1 should never be used as a magic number
 	 */
-	public static final int EXIT_DLG = -1;
-	public static final int ROOT_DLG = 0;
+	public static final int DIALOG_HANDLER_EXIT = -1;
+	public static final int DIALOG_HANDLER_ROOT = 0;
 
 	public static enum WalkDirection {
 		North(1), East(2), South(3), West(4);

@@ -1,15 +1,22 @@
 package com.github.a2g.core.action.performer;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromTalkPerformer;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromTalkPerformer;
+import com.github.a2g.core.primitive.LinesAndMaxWidth.LineAndPos;
+import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.primitive.SpeechBubble;
 import com.github.a2g.core.primitive.RectF;
 
 public class TalkPerformer {
+    public static String SCENE_TALKER = "SCENE_TALKER";// use animation of scene
+    public static String SCENE_DIALOG_THEM = "SCENE_DIALOG_US";
+    public static String SCENE_DIALOG_US = "SCENE_DIALOG_THEM";
+
 	private ArrayList<SpeechBubble> pages;
 
 	private double totalDurationInSeconds;
@@ -25,10 +32,8 @@ public class TalkPerformer {
 	private String otid;
 	private String fullSpeech;
 	private short ocode;
-	public static String SCENE_TALKER = "SCENE_TALKER";// use animation of scene
-														// talker
-	public static String SCENE_DIALOG_THEM = "SCENE_DIALOG_US";
-	public static String SCENE_DIALOG_US = "SCENE_DIALOG_THEM";
+
+	   private static final Logger SET_STATE_OF_POPUP = Logger.getLogger(LogNames.SET_STATE_OF_POPUP.toString());
 
 	public enum NonIncrementing {
 		True, False, FromAPI
@@ -89,8 +94,6 @@ public class TalkPerformer {
 		ArrayList<String> speech = new ArrayList<String>();
 		for (int i = 0; i < splitByNewline.length; i++) {
 			String page = splitByNewline[i];
-			double secondsForLine = getSecondsForLine(page);
-			totalDurationInSeconds = totalDurationInSeconds + secondsForLine;
 			speech.add(page);
 		}
 
@@ -109,25 +112,33 @@ public class TalkPerformer {
 			atid = scene.getAtidOfSceneDialogThem();
 		}
 
-		// 3. get speech rectangle using contingencies - that's a lot of
-		// contingencies
+		// 3. get speech rectangle using contingencies
+		// ..and that's a lot of contingencies
 		RectF headRectF = scene.getHeadRectangleUsingContingencies(atid);
 		RectI headRectI = translateRect(headRectF);
 		pages = SpeechBubble.calculateWordWrappedPages(new PointI(scene.getSceneGuiWidth(), scene.getSceneGuiHeight()),
-				splitByNewline, scene, headRectI);
-		// SpeechCalculatorOuterForAll calc = new
-		// SpeechCalculatorOuterForAll(speech, maxBalloonRect, 30, mouth, 38, 3,
-		// canvas);
-
-		// set ceilings (for easy calcluation)
+				splitByNewline, scene, headRectI); 
+		
+ 
+        // get total duration
+		totalDurationInSeconds = 0;//sanity
+        for (int i = 0; i < pages.size(); i++) {
+            SpeechBubble page = pages.get(i);
+            for (int j = 0; j < page.lines.lines.size(); j++) {
+                LineAndPos line = page.lines.lines.get(j);
+                totalDurationInSeconds += getSecondsForLine(line.lineText);
+            }
+        }
+        
+		// set ceilings (for easy calculation)
 		double rollingStartingTimeForLine = 0;
 		for (int i = 0; i < pages.size(); i++) {
 			SpeechBubble page = pages.get(i);
 			page.startingTime = rollingStartingTimeForLine / totalDurationInSeconds;
 			for (int j = 0; j < page.lines.lines.size(); j++) {
-				page.lines.lines.get(j).startingTime = rollingStartingTimeForLine / totalDurationInSeconds;
-				String line = page.lines.lines.get(j).toString();
-				rollingStartingTimeForLine += getSecondsForLine(line);
+			    LineAndPos line = page.lines.lines.get(j);
+				line.startingProgress = rollingStartingTimeForLine / totalDurationInSeconds;
+				rollingStartingTimeForLine += getSecondsForLine(line.lineText);
 			}
 			page.atid = atid;
 		}
@@ -183,6 +194,7 @@ public class TalkPerformer {
 			for (int i = pages.size() - 1; i >= 0; i--) {
 				SpeechBubble page = pages.get(i);
 				if (progress > page.startingTime) {
+				    SET_STATE_OF_POPUP.fine("SETSTATEOFPOPUP " + (progress)+" " + page.toString());
 					scene.setStateOfPopup(true, page, this);
 					break;
 				}

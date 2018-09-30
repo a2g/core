@@ -81,13 +81,13 @@ public class SpeechBubble
 	public void generateSampleBubbleRectFromText( IMeasureTextWidthAndHeight measurer)
 	{
 		LineAndPos line0 = lines.lines.get(0);
-		Point dim0 = measurer.measureTextWidthAndHeight(line0.line);
+		Point dim0 = measurer.measureTextWidthAndHeight(line0.lineText);
 		RectI r = new RectI(line0.x*1.0, line0.y-dim0.getY(), dim0.getX(), dim0.getY());
 
 		for(int i=1;i<lines.lines.size();i++)
 		{
 			LineAndPos line = lines.lines.get(i);
-			Point dim = measurer.measureTextWidthAndHeight(line.line);
+			Point dim = measurer.measureTextWidthAndHeight(line.lineText);
 			r.collateInPlace(new RectI(line.x*1.0, line.y-dim.getY(), dim.getX(), dim.getY()));
 		}
 		this.rectPurelyTextBoundsInYellow = r;

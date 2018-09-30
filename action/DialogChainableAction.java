@@ -117,7 +117,7 @@ implements IChainRootForDialog
 	}
 	@Override
 	public DialogChainEndAction branchTheObligatoryExit(String text) {
-		DialogBranchAction a = new DialogBranchAction(this, text, ConstantsForAPI.EXIT_DLG, true);
+		DialogBranchAction a = new DialogBranchAction(this, text, ConstantsForAPI.DIALOG_HANDLER_EXIT, true);
 		a.setIsExemptFromSaidList(true);
 		return a;
 	}

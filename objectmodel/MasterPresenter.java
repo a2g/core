@@ -389,7 +389,7 @@ public class MasterPresenter
 		this.dialogTreePresenter.clearBranches();
 
 		// mark speech as said, but not the escape phrase, that is golden.
-		if (branchId != ConstantsForAPI.EXIT_DLG && isAddableToSaidList) {
+		if (branchId != ConstantsForAPI.DIALOG_HANDLER_EXIT && isAddableToSaidList) {
 			this.dialogTreePresenter.addSpeechToSaidList(speech);
 		}
 		String atidOfInterviewer = this.scenePresenter.getSceneDialoggerAtid();
@@ -454,7 +454,7 @@ public class MasterPresenter
 		loadInventoryFromAPI();
 		setInitialAnimationsAsCurrent();
 		scenePresenter.clearBoundaries();
-		scenePresenter.clearDisplayNames();
+		//scenePresenter.clearDisplayNames();
 
 		// setAllObjectsToVisible();
 		// it is reasonable for a person to set current animations in pre-entry
@@ -722,7 +722,7 @@ public class MasterPresenter
 				boolean isValid = dialogTreePresenter.isBranchValid(branchId);
 
 				// getLineOfDialog
-				if (!isValid && branchId != ConstantsForAPI.EXIT_DLG) {
+				if (!isValid && branchId != ConstantsForAPI.DIALOG_HANDLER_EXIT) {
 					cancelAutoplay(cmd, "Invalid branch number");
 					return;
 				}

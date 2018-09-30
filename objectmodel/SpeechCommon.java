@@ -35,7 +35,7 @@ public class SpeechCommon
 		for(int i=0;i<all.lines.lines.size();i++)
 		{
 			LineAndPos l  = all.lines.lines.get(i);
-			canvas.drawText(l.x, l.y, l.line,  speechColor);
+			canvas.drawText(l.x, l.y, l.lineText,  speechColor);
 		}
 	}
 	

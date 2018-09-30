@@ -277,7 +277,7 @@ public class ScenePresenter implements IScenePresenter,
 
 	public void setStateOfPopup(boolean isVisible, SpeechBubble speechBubble, TalkPerformer sayAction) 
 	{
-		SET_STATE_OF_POPUP.fine("SETSTATEOFPOPUP " + (isVisible? speechBubble.toString() : "NOT VISIBLE"));
+		//SET_STATE_OF_POPUP.fine("SETSTATEOFPOPUP " + (isVisible? speechBubble.toString() : "NOT VISIBLE"));
 		ColorEnum talkingColor = speechBubble!=null? this.getTalkingColorUsingContingencies(speechBubble.atid) : null;
 		
 		view.setStateOfSpeech(isVisible, talkingColor, null, speechBubble, sayAction);
