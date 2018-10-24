@@ -105,6 +105,7 @@ public class ScenePanelForSwing extends JPanel implements IPlatformScenePanel, I
 		this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 		this.setDoubleBuffered(true);
 		this.speechCanvas = new CanvasEtcSwing();
+		this.speechCanvas.setScenePixelSize(320, 180);// the default
 
 		cameraOffsetX = 0;
 		cameraOffsetY = 0;

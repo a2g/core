@@ -206,9 +206,11 @@ public class ScenePresenter implements IScenePresenter,
 				+ otid + ">";
 	}
 
-	public void setOtidOfDefaultSceneObject(String otid) {
-		setDefaultSceneObjectOtid(otid);
+	public void setOtidOfDefaultSceneObject(String otid, boolean isUsingEdgeDetection) {
+		setDefaultSceneObjectOtid(otid, isUsingEdgeDetection);
 	}
+	
+	
 
 	@Override
 	public boolean getVisibleByOtid(String otid) {
@@ -277,7 +279,7 @@ public class ScenePresenter implements IScenePresenter,
 
 	public void setStateOfPopup(boolean isVisible, SpeechBubble speechBubble, TalkPerformer sayAction) 
 	{
-		//SET_STATE_OF_POPUP.fine("SETSTATEOFPOPUP " + (isVisible? speechBubble.toString() : "NOT VISIBLE"));
+		SET_STATE_OF_POPUP.fine("SETSTATEOFPOPUP " + (isVisible? speechBubble.toString() : "NOT VISIBLE"));
 		ColorEnum talkingColor = speechBubble!=null? this.getTalkingColorUsingContingencies(speechBubble.atid) : null;
 		
 		view.setStateOfSpeech(isVisible, talkingColor, null, speechBubble, sayAction);
@@ -321,11 +323,11 @@ public class ScenePresenter implements IScenePresenter,
 		return defaultSceneObjectOtid;
 	}
 
-	public void setDefaultSceneObjectOtid(String otid) {
+	public void setDefaultSceneObjectOtid(String otid, boolean isUsingEdgeDetection) {
 		this.defaultSceneObjectOtid = otid;
 		SceneObject o = this.getObjectByOtid(otid);
-		if(o!=null)
-			o.setUseBaseMiddleForAnimation(true);
+		if(o!=null && isUsingEdgeDetection==true)
+		    o.setUseBaseMiddleForAnimation(isUsingEdgeDetection);
 	}
 
 	public String getOtidByAtid(String atid) {

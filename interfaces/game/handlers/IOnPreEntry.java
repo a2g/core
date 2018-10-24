@@ -242,7 +242,7 @@ IGetAnimationLength
 	@Override IChainBase setY(short ocode, double y);
 	@Override boolean isVisible(short ocode);
 	@Override IChainBase setDisplayName(short ocode, String displayName);
-	@Override IChainBase setDefaultSceneObject(short ocode);
+	@Override IChainBase setDefaultSceneObject(short ocode, boolean isUsingEdgePerimeterDetection);
 	@Override IChainBase setScreenCoordsPerSecond(short ocode, double coordsPerSecond);
 	@Override IChainBase setParallaxX(short ocode, double parallaxInX);
 	@Override IChainBase setVisible(short ocode, boolean isVisible);

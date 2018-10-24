@@ -9,6 +9,16 @@ import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation;
 import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToLastFrameOfNewAnimation;
 import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation;
+import com.github.a2g.core.interfaces.game.singles.IDoNothing;
+import com.github.a2g.core.interfaces.game.singles.IHideAll;
+import com.github.a2g.core.interfaces.game.singles.ILook;
+import com.github.a2g.core.interfaces.game.singles.IMoveCamera;
+import com.github.a2g.core.interfaces.game.singles.ITalkWithoutIncrementingFrame;
+import com.github.a2g.core.interfaces.game.singles.IWaitForFrame;
+import com.github.a2g.core.interfaces.game.singles.IMoveWhilstAnimating;
+import com.github.a2g.core.interfaces.game.singles.IPlayAnimation;
+import com.github.a2g.core.interfaces.game.singles.IPlaySound;
+import com.github.a2g.core.interfaces.game.singles.IPlayTitleCard;
 import com.github.a2g.core.interfaces.game.singles.ISetAnimationAsObjectCurrent;
 import com.github.a2g.core.interfaces.game.singles.ISetAnimationAsObjectCurrentAndSetFrame;
 import com.github.a2g.core.interfaces.game.singles.ISetAnimationAsObjectInitial;
@@ -22,10 +32,18 @@ import com.github.a2g.core.interfaces.game.singles.ISetHeadRectangleForObject;
 import com.github.a2g.core.interfaces.game.singles.ISetInventoryItemVisible;
 import com.github.a2g.core.interfaces.game.singles.ISetSoundtrack;
 import com.github.a2g.core.interfaces.game.singles.ISetTitleCard;
+import com.github.a2g.core.interfaces.game.singles.ISetToInitialPosition;
 import com.github.a2g.core.interfaces.game.singles.ISetValue;
 import com.github.a2g.core.interfaces.game.singles.ISetVisible;
 import com.github.a2g.core.interfaces.game.singles.IShareWinning;
 import com.github.a2g.core.interfaces.game.singles.ISleep;
+import com.github.a2g.core.interfaces.game.singles.ISwapVisibility;
+import com.github.a2g.core.interfaces.game.singles.ITalk;
+import com.github.a2g.core.interfaces.game.singles.IWalkAlwaysSwitch;
+import com.github.a2g.core.interfaces.game.singles.IWalkAndScale;
+import com.github.a2g.core.interfaces.game.singles.IWalkAndTalk;
+import com.github.a2g.core.interfaces.game.singles.IWalkNeverSwitch;
+import com.github.a2g.core.interfaces.game.singles.IWalkTo;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.A2gException;
@@ -52,6 +70,24 @@ public interface IChainRootForScene extends IChainBase
 , ISetInventoryItemVisible 
 , ISetTitleCard
 , ISleep
+, IWalkTo
+, IWalkAlwaysSwitch
+, IDoNothing
+, ISetToInitialPosition
+, ILook
+, IHideAll
+, IMoveWhilstAnimating
+, ITalkWithoutIncrementingFrame
+, ITalk
+, IMoveCamera
+, IPlayAnimation
+, IPlaySound
+, IPlayTitleCard
+, ISwapVisibility
+, IWaitForFrame
+, IWalkAndTalk
+, IWalkAndScale
+, IWalkNeverSwitch
 {
 	
 	/**   @name End-of-chain-only methods that return ChainEndActions 
@@ -75,135 +111,136 @@ public interface IChainRootForScene extends IChainBase
 	 * These use the scene walker so they don't need any otid.
 	 */
 	//@{
-	public ChainEndAction walkTo(double x, double y); 
-	public ChainEndAction walkTo(Point point);
+	@Override ChainEndAction walkTo(double x, double y); 
+	@Override ChainEndAction walkTo(Point point);
 	//@}
 
 	/** @name End-of-chain-only Walk, but no edge detection 
 	 *  These all take a parameter for the "sceneName" that they switch to upon termination.
 	 */
 	//@{
-	public ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int entrySegment) throws A2gException ;
-	public ChainEndAction walkAlwaysSwitch(Point point, String sceneName, int entrySegment) throws A2gException ;
-	public ChainEndAction walkAndScaleAlwaysSwitch(short ocode, Point p, double startScale, double endScale, String sceneName, int entrySegment) throws A2gException;
+	@Override ChainEndAction walkAlwaysSwitch(double x, double y, String sceneName, int entrySegment) throws A2gException ;
+	@Override ChainEndAction walkAlwaysSwitch(Point point, String sceneName, int entrySegment) throws A2gException ;
+	@Override ChainEndAction walkAndScaleAlwaysSwitch(short ocode, Point p, double startScale, double endScale, String sceneName, int entrySegment) throws A2gException;
 	//@}
 	
 	/**  @name Walk with no edge detection
 	 * All the methods from this point on can be positioned in the start, end, or middle of method chains.
      */
 	//@{
-	public ChainableAction walkNeverSwitch(double x, double y);
-	public ChainableAction walkNeverSwitch(Point point);
-	public ChainableAction walkNeverSwitchNonBlocking(short ocode, double x, double y);
-	public ChainableAction walkNeverSwitch(short ocode, double x, double y);
-	public ChainableAction walkNeverSwitch(short ocode, Point point);
-	public ChainableAction walkAndTalkNeverSwitch(short ocode, double x, double y, String speech);
-	public ChainableAction walkAndScaleNeverSwitch(short ocode, Point p, double startScale, double endScale);
+	@Override ChainableAction walkNeverSwitch(double x, double y);
+	@Override ChainableAction walkNeverSwitch(Point point);
+	@Override ChainableAction walkNeverSwitchNonBlocking(short ocode, double x, double y);
+	@Override ChainableAction walkNeverSwitch(short ocode, double x, double y);
+	@Override ChainableAction walkNeverSwitch(short ocode, Point point);
+	@Override ChainableAction walkAndTalkNeverSwitch(short ocode, double x, double y, String speech);
+	@Override ChainableAction walkAndScaleNeverSwitch(short ocode, Point p, double startScale, double endScale);
 	//@}
 	
 
 	/** @name Play animation methods starting with plain.. */
 	//@{
-	public ChainableAction playAnimation(String animationCode);
+	@Override ChainableAction playAnimation(String animationCode);
 	//@}
 
 	/** @name ..simple backwards ...*/
 	//@{
-	public ChainableAction playAnimationBackwards(String animationCode);
+	@Override ChainableAction playAnimationBackwards(String animationCode);
 	//@}
 
 	/** @name ..simple hold last frame ... */
 	//@{
-	public ChainableAction playAnimationHoldLastFrame(String animationCode);
+	@Override ChainableAction playAnimationHoldLastFrame(String animationCode);
 	//@}
 
 	/** @name ... simple non blocking ... */
 	//@{
-	public ChainableAction playAnimationNonBlocking(String animationCode);
+	@Override ChainableAction playAnimationNonBlocking(String animationCode);
 	//@}
 
 	/** @name ... double combo1of3: backwards + hold last frame ... */
 	//@{
-	public ChainableAction playAnimationBackwardsHoldLastFrame(String animationCode);
+	@Override ChainableAction playAnimationBackwardsHoldLastFrame(String animationCode);
 	//@}
 
 	/** @name ... double combo2of3: backwards + nonblocking ... */
 	//@{
-	public ChainableAction playAnimationBackwardsNonBlocking(String animationCode);
+	@Override ChainableAction playAnimationBackwardsNonBlocking(String animationCode);
 	//@}
 	
 	/** @name ... double combo2of3: holdLastFrame + nonblocking ... */
 	//@{
-	public ChainableAction playAnimationHoldLastFrameNonBlocking(String animationCode);
-	public ChainableAction playAnimationNonBlockingHoldLastFrame(String animationCode);
+	@Override ChainableAction playAnimationHoldLastFrameNonBlocking(String animationCode);
+	@Override ChainableAction playAnimationNonBlockingHoldLastFrame(String animationCode);
 	//@}
 	
     /** @name ..and one method with the whole lot! */
 	//@{
-	public ChainableAction playAnimationBackwardsHoldLastFrameNonBlocking(String animationCode);
+	@Override ChainableAction playAnimationBackwardsHoldLastFrameNonBlocking(String animationCode);
 	//@}
 
 
 	 
 	/** @name Play commands that don't take animation ids*/
 	//@{
-	public ChainableAction playSound(String stid);
-	public ChainableAction playSoundNonBlocking(String stid);
+	@Override ChainableAction playSound(String stid);
+	@Override ChainableAction playSoundNonBlocking(String stid);
+	
 	/**  playTitleCard has a duration, as opposed to setTitleCard in the direct api, which doesn't  */
-	public ChainableAction playTitleCard(String text, double durationInSecs);
+	@Override ChainableAction playTitleCard(String text, double durationInSecs);
 	//@}
 	
 	/** @name Talk methods */
 	//@{
-	public ChainableAction talk(String animCode, String speech);
-	public ChainableAction talk(String speech);
-	public ChainableAction talkWithoutIncrementingFrame(String animCode, String speech);
-	public ChainableAction talkWithoutIncrementingFrameNonBlocking(String animCode, String speech);
-	public ChainableAction talkWithoutIncrementingFrame(String speech);
-	public ChainableAction talkWithoutIncrementingFrameNonBlocking(String speech);
+	@Override ChainableAction talk(String animCode, String speech);
+	@Override ChainableAction talk(String speech);
+	@Override ChainableAction talkWithoutIncrementingFrame(String animCode, String speech);
+	@Override ChainableAction talkWithoutIncrementingFrameNonBlocking(String animCode, String speech);
+	@Override ChainableAction talkWithoutIncrementingFrame(String speech);
+	@Override ChainableAction talkWithoutIncrementingFrameNonBlocking(String speech);
 	//@}
 	
 	/** @name Move-whilst-animating - less animation frame hungry way of moving */
 	//@{
-	public ChainableAction moveWhilstAnimating(short objId, double x, double y);
-	public ChainableAction moveWhilstAnimatingInY(short objId, double y);
-	public ChainableAction moveWhilstAnimatingNonBlocking(short objId, double x,double y);
-	public ChainableAction moveWhilstAnimatingLinearNonBlocking(short objId, double x,double y);
-	public ChainableAction moveWhilstAnimatingLinear(short objId, double x, double y);
+	@Override ChainableAction moveWhilstAnimating(short objId, double x, double y);
+	@Override ChainableAction moveWhilstAnimatingInY(short objId, double y);
+	@Override ChainableAction moveWhilstAnimatingNonBlocking(short objId, double x,double y);
+	@Override ChainableAction moveWhilstAnimatingLinearNonBlocking(short objId, double x,double y);
+	@Override ChainableAction moveWhilstAnimatingLinear(short objId, double x, double y);
 	//@}
 	
 	/** @name  Move camera... */
 	//@{
-	public ChainableAction moveCameraToNewXPosition(double x,double durationInSecs);
-	public ChainableAction moveCameraToNewXPositionNonBlocking(double x,double durationInSecs);
-	public ChainableAction moveCameraToNewYPosition(double y,double durationInSecs);
-	public ChainableAction moveCameraToNewYPositionNonBlocking(double y,double durationInSecs);
+	@Override ChainableAction moveCameraToNewXPosition(double x,double durationInSecs);
+	@Override ChainableAction moveCameraToNewXPositionNonBlocking(double x,double durationInSecs);
+	@Override ChainableAction moveCameraToNewYPosition(double y,double durationInSecs);
+	@Override ChainableAction moveCameraToNewYPositionNonBlocking(double y,double durationInSecs);
 	//@}
 	
 	/** @name Look */
 	//@{
 	/** I added "look" a new verb that just takes the first frame of the animation*/
-	public ChainableAction look(String atid, double duration);
+	@Override ChainableAction look(String atid, double duration);
 	//@}
 	
 	/** @name Commands that seem direct, but all have a temporal aspect */
 	//@{
-	@Override public ChainableAction sleep(int milliseconds);
-	public ChainableAction swapVisibility(short ocodeA, short ocodeB);
-	public ChainableAction waitForFrame(short ocode, int frame);
+	@Override ChainableAction sleep(int milliseconds);
+	@Override ChainableAction swapVisibility(short ocodeA, short ocodeB);
+	@Override ChainableAction waitForFrame(short ocode, int frame);
 	//@}
 	
 	/** @name Direct api candidates! 
 	 * these should really be in the direct api */
 	//@{
-	public ChainableAction hideAll();
-	public ChainableAction setToInitialPosition(short ocode) ;
+	@Override ChainableAction hideAll();
+	@Override ChainableAction setToInitialPosition(short ocode) ;
 	//@}
 	
 	/** @name Utility methods */
 	//@{
 	public ChainableAction subroutine(ChainableAction orig);
-	public ChainableAction doNothing();
+	@Override ChainableAction doNothing();
 	//@}
 	
 	/** @name Methods shared with direct api */

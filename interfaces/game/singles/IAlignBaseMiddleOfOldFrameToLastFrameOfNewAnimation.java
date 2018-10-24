@@ -6,4 +6,5 @@ public interface IAlignBaseMiddleOfOldFrameToLastFrameOfNewAnimation {
   IChainBase alignBaseMiddleOfOldFrameToLastFrameOfNewAnimation(
 			  String atid);
 
+
 }

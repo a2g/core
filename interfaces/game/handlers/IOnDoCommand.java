@@ -193,7 +193,7 @@ ISetInventoryItemVisible
 	@Override int getCurrentFrame(short ocode);
 	@Override IChainBase setCurrentFrame(short ocode, int frame);
 	@Override IChainBase setDisplayName(short ocode, String displayName);
-	@Override IChainBase setDefaultSceneObject(short ocode);
+	@Override IChainBase setDefaultSceneObject(short ocode, boolean isUsingEdgePerimeterDetection);
 	@Override IChainBase setScreenCoordsPerSecond(short ocode, double coordsPerSecond);
 	//@}
 

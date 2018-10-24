@@ -15,7 +15,9 @@
  */
 package com.github.a2g.core.interfaces.nongame;
 
-public interface IBaseActionFromSystemAnimation {
+import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+
+public interface IBaseActionFromSystemAnimation extends IChainBase{
 	void onComplete();
 
 	void onUpdate(double progress);

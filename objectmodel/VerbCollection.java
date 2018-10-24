@@ -37,8 +37,7 @@ public class VerbCollection {
 		verbs.add(new Verb("Use", "Use AAA|Use AAA with BBB", ConstantsForAPI.USE));
 		verbs.add(new Verb("Push", "Push AAA", ConstantsForAPI.PUSH));
 		verbs.add(new Verb("Pull", "Pull AAA", ConstantsForAPI.PULL));
-		verbs.add(new Verb("Throw", "Throw AAA|Throw AAA at BBB",
-				ConstantsForAPI.THROW));
+		verbs.add(new Verb("Throw", "Throw AAA|Throw AAA at BBB", ConstantsForAPI.THROW));
 
 		//verbs.add(new Verb("Eat", "Eat AAA", ConstantsForAPI.EAT));
 		//verbs.add(new Verb("Cut", "Cut AAA|Cut AAA with BBB", ConstantsForAPI.CUT));

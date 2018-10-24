@@ -25,7 +25,7 @@ import com.github.a2g.core.primitive.RectF;
 
 /**
  * @brief
- * @ref balooga blah blah These are all the game methods, but these methods may
+ * @ref These are all the game methods, but these methods may
  *      or may not be available on the interface for a specific handler. Check
  *      each interface individually:
  * @ref com.github.a2g.core.interfaces.IOnFillLoadList "IOnFillLoadList" ,
@@ -211,16 +211,22 @@ return null;
 	}
 
 	@Override
+	public IChainBase  setDefaultSceneObject(short ocode, boolean isUsingEdgeDetection) {
+	    String otid = master.getScenePresenter().getOtidByCode(ocode);
+	    master.getScenePresenter().setOtidOfDefaultSceneObject(otid, isUsingEdgeDetection);
+	    return null;
+	}
+	
+	@Override
 	public IChainBase  setDefaultSceneObject(short ocode) {
-		String otid = master.getScenePresenter().getOtidByCode(ocode);
-		master.getScenePresenter().setOtidOfDefaultSceneObject(otid);
-		return null;
-
+	    String otid = master.getScenePresenter().getOtidByCode(ocode);
+	    master.getScenePresenter().setOtidOfDefaultSceneObject(otid, false);
+	    return null;
 	}
 
 	@Override
 	public short getDefaultSceneObject() {
-		String otid = master.getScenePresenter().getOtidOfDefaultSceneObject();
+	    String otid = master.getScenePresenter().getOtidOfDefaultSceneObject();
 		if (otid.length() > 0 && otid.length() < 70) {
 			short ocode = master.getScenePresenter().getCodeByOtid(otid);
 			return ocode;
@@ -715,6 +721,9 @@ return null;
 		return null;
 	}
 
+   
 
+   
+ 
 
 }
