@@ -439,7 +439,7 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
     public void startScene()  {
         // 
         // 1. clean up stuff from last tim
-        masterPanel.setActiveState(IPlatformMasterPanel.GuiStateEnum.Loading);
+        masterPanel.setActiveState(GuiStateEnum.Loading);
         scenePresenter.clearBoundaries();
         scenePresenter.clearDefaultObject();
         //scenePresenter.clearDisplayNames();
@@ -451,38 +451,43 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
         // 3. initialize inventory
         loadInventoryFromAPI();
 
-        // 4. this positions the player object near the door
-        scenePresenter.repositionDefaultObjectIfNeeded();
 
-        // 5. we predeclare the base action, so that in the event of an exception, we can still inspect the action chain
-        BaseAction a;
-
-        // 6. set up the gui 
-        this.masterPanel.setActiveState(IPlatformMasterPanel.GuiStateEnum.OnEnterScene);
-
-
+        // 4. we declare the base action here, so that in the event of an exception, we can still inspect the action chain
+        BaseAction a = null;
 
         try
         {
             // a.  onPreEntry
             this.sceneHandlers2.onPreEntry(proxyForGameScene);
 
-            // b. this starts the timer for onEveryFrame
-            startCallingOnEveryFrame();
+
+            // b. this relies onboundary points, so much be done after preEntry?s
+            scenePresenter.repositionDefaultObjectIfNeeded();
             
-            // c. 
+            // c. this starts the timer for onEveryFrame
+            startCallingOnEveryFrame();
+       
+            // d. onEntry
             a = this.sceneHandlers2.onEntry(proxyForGameScene, MatOps.createChainRootAction());
 
-            // d. the only thing this callback is for is taking screenshots
+            // e. lift the curtains (so far everything has happened in the dark)
+            this.masterPanel.setActiveState(GuiStateEnum.OnEnterScene);
+          
+            // f. the only thing this callback is for is taking screenshots
             getScenePresenter().getView().onSceneEntry(sceneHandlers.toString());
             
-            // e. process chain....
+            
+            // g. process chain....
             BaseAction b = this.replaceChainToDialogActionWithCallToOnDialogTree(a);
             
-            // f. .. then execute the chain
+            // h. .. then execute the chain
             executeActionWithDoCommandActionRunner(b);
             
+            
         } catch (A2gException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -509,7 +514,7 @@ public void setSceneAsActiveAndKickStartLoading(IGameScene scene) {
     scenePresenter.reset();
 
     // set gui to blank
-    masterPanel.setActiveState(IPlatformMasterPanel.GuiStateEnum.Loading);
+    masterPanel.setActiveState(GuiStateEnum.Loading);
     scenePresenter.clearEverythingExceptView(); // something like caching
     // doesn't work if this is
     // on.

@@ -26,6 +26,7 @@ import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectF;
 import com.google.gwt.touch.client.Point;
+import com.visuals.mission.runway.O;
 import com.github.a2g.core.primitive.RectI;
 /**
  * 
@@ -489,6 +490,9 @@ public class SceneObject {
 
 	public void setScale(double scale) {
 		this.scale = scale;
+		// without the following two lines (visibility toggle), I get a flicker of fullsized frame during walkandscale action
+        setVisible(!this.isVisible());
+        setVisible(!this.isVisible());
 	}
 
 	public ColorEnum getTalkingColor() {

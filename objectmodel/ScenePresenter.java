@@ -438,7 +438,9 @@ IScenePresenterFromBoundaryCalculator {
         // not needed if not using boundary
         if (getBoundaryPoints().size() == 0)
             return;
-        
+        // -1 doesn't set position, so leaeves it up to the onPreEntry to provide position
+        if(entrySegment<0)
+            return;
         // not needed if no default scene object
         String defaultSceneObjectOtid = this.getDefaultSceneObjectOtid();
         if(defaultSceneObjectOtid==UNINITIALIZED)
@@ -463,12 +465,7 @@ IScenePresenterFromBoundaryCalculator {
             o.setBaseMiddleX(result.getX());
             o.setBaseMiddleY(result.getY());
         }
-        else
-        {
-            Point c = boundaryCalculator.getCentreOfSegments();
-            o.setBaseMiddleX(c.getX());
-            o.setBaseMiddleY(c.getY());
-        }
+        
     }
 
     @Override
