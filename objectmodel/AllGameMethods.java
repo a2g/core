@@ -227,7 +227,7 @@ return null;
 	@Override
 	public short getDefaultSceneObject() {
 	    String otid = master.getScenePresenter().getOtidOfDefaultSceneObject();
-		if (otid.length() > 0 && otid.length() < 70) {
+		if (otid.length() > 0 && otid.length() < 70 && otid!=ScenePresenter.UNINITIALIZED) {
 			short ocode = master.getScenePresenter().getCodeByOtid(otid);
 			return ocode;
 		}
