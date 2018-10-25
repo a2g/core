@@ -90,7 +90,7 @@ public class SceneObjectCollection {
 		if(i==-1)
 		{
 			// this actually fails in the following case. but I think its the trail
-			throw new NoSuchElementException(""+otid+" not present in theOtids of size "+theOtids.size()); 
+			throw new NoSuchElementException("'"+otid+"' not present in theOtids of size "+theOtids.size()); 
 			/*
 			this actually fails in 
 			at com.github.a2g.core.objectmodel.SceneObjectCollection.getByOtid(SceneObjectCollection.java:86)

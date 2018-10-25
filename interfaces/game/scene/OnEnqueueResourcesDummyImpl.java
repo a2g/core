@@ -102,7 +102,7 @@ public class OnEnqueueResourcesDummyImpl implements IOnEnqueueResources
 		}
 
 		@Override
-		public void onPreEntry(IOnPreEntry api) {
+		public void onPreEntry(IOnPreEntry api) throws A2gException {
 			wrapped.onPreEntry(api);
 		}
 
@@ -112,7 +112,7 @@ public class OnEnqueueResourcesDummyImpl implements IOnEnqueueResources
 		}
 
 		@Override
-		public void onEveryFrame(IOnEveryFrame api) {
+		public void onEveryFrame(IOnEveryFrame api) throws A2gException {
 			wrapped.onEveryFrame(api);
 		}
 

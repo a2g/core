@@ -45,6 +45,7 @@ import com.github.a2g.core.interfaces.game.singles.ISetTitleCard;
 import com.github.a2g.core.interfaces.game.singles.ISetValue;
 import com.github.a2g.core.interfaces.game.singles.IShow;
 import com.github.a2g.core.interfaces.game.singles.ISwitchToScene;
+import com.github.a2g.core.primitive.ColorEnum;
 /**  
  * 
  * @brief All the methods you could possibly need in the IOnEntry handler. 
@@ -134,4 +135,8 @@ IGetValue
 	//@{
 	@Override IChainBase  setSoundtrack(String stid) ;
 	//@}
+    IChainBase setDefaultSceneObject(short hero, boolean b);
+    IChainBase setAnimationAsSceneDialogUs(String atid);
+    IChainBase setAnimationTalkingColor(String atid, ColorEnum color);
+    IChainBase setAnimationDuration(String atid, double durationInSecs);
 }

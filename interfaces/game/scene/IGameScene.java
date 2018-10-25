@@ -50,7 +50,7 @@ public interface IGameScene extends ConstantsForAPI
 	</tr>
 	</table>
 	 */
-	public abstract void onPreEntry(IOnPreEntry api);
+	public abstract void onPreEntry(IOnPreEntry api) throws A2gException ;
 
 	/*!
 		<table>
@@ -84,7 +84,7 @@ public interface IGameScene extends ConstantsForAPI
 	</table>
 	 */
 
-	public abstract void onEveryFrame(IOnEveryFrame api);
+	public abstract void onEveryFrame(IOnEveryFrame api) throws A2gException ;
 
 	/*!
 
