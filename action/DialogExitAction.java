@@ -16,20 +16,18 @@
 
 package com.github.a2g.core.action;
 
+import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel.GuiStateEnum;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
-import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromDoBranchAction;
+import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromEndAction;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 
-public class ChainToDialogAction extends BaseAction {
+public class DialogExitAction extends BaseAction{
+	private IDialogTreePresenterFromEndAction dialogTree;
 
-	private int branchId;
-	private IDialogTreePresenterFromDoBranchAction dialogTree;
-
-	public ChainToDialogAction(int branchId) {
-		this.branchId = branchId;
+	public DialogExitAction() {
 	}
 
 	@Override
@@ -42,31 +40,18 @@ public class ChainToDialogAction extends BaseAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) 
-	{
+	protected void onUpdateGameAction(double progress) {
 	}
 
 	@Override
-	protected boolean onCompleteActionAndCheckForGateExit() 
-	{
-		dialogTree.setActiveGuiState(GuiStateEnum.DialogTree);
-		// do nothing, this is a placeholder that results in a large chained action
+	protected boolean onCompleteActionAndCheckForGateExit() {
+		dialogTree.setActiveGuiState(GuiStateEnum.ActiveScene);
 		return false;
 	}
 
 
-	public void setBranchId(int branchId) 
-	{
-		this.branchId = branchId;
-	}
 
-	public int getBranchId() 
-	{
-		return branchId;
-	}
-
-	public void setDialogTree(IDialogTreePresenterFromDoBranchAction dialogTree) 
-	{
+	public void setDialogTree(IDialogTreePresenterFromEndAction dialogTree) {
 		this.dialogTree = dialogTree;
 	}
 
@@ -74,8 +59,8 @@ public class ChainToDialogAction extends BaseAction {
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			IInventoryPresenterFromActions inventory) 
-	{
+			IInventoryPresenterFromActions inventory) {
 		setDialogTree(dialogTree);
 	}
+
 }

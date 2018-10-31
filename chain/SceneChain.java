@@ -19,13 +19,10 @@ package com.github.a2g.core.chain;
 
 import com.github.a2g.core.action.Actions;
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainToDialogAction;
-import com.github.a2g.core.action.PlayAnimationAction;
+import com.github.a2g.core.action.DialogEnterAction;
 import com.github.a2g.core.action.SingleCallAction;
-import com.github.a2g.core.action.WaitForFrameAction;
 import com.github.a2g.core.action.WalkAction;
 import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
-import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.interfaces.game.chainables.ISceneChain;
 import com.github.a2g.core.interfaces.game.chainables.ISceneChainEnd;
 import com.github.a2g.core.interfaces.game.chainables.ISceneChainRoot;
@@ -56,7 +53,7 @@ implements ISceneChain {
 
     @Override
     public ISceneChainEnd activateDialogTreeMode(int branchId) {
-        return new SceneChainEnd(this, new ChainToDialogAction(branchId));
+        return new SceneChainEnd(this, new DialogEnterAction(branchId));
     }
     
     @Override

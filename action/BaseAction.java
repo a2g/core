@@ -23,6 +23,7 @@ import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFrom
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
+import com.github.a2g.core.objectmodel.ChainRunner;
 /**
  * documentation for BaseAction
  * @author Admin
@@ -67,7 +68,7 @@ implements IBaseActionFromSystemAnimation {
 		return isParallel;
 	}
 
-	void setSystemAnimation(IPlatformAnimation systemAnimation) {
+	public void setSystemAnimation(IPlatformAnimation systemAnimation) {
 		this.systemAnimation = systemAnimation;
 		this.systemAnimation.setEaseToAndFrom(!isLinear);
 	}
@@ -105,7 +106,7 @@ implements IBaseActionFromSystemAnimation {
 		}
 	}
 
-	public void setCallbacks(ActionRunner callbacks) {
+	public void setCallbacks(ChainRunner callbacks) {
 		this.callbacks = callbacks;
 	}
 }

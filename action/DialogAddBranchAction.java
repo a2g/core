@@ -1,5 +1,5 @@
 /*
-   * Copyright 2012 Anthony Cassidy
+ * Copyright 2012 Anthony Cassidy
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,18 +16,25 @@
 
 package com.github.a2g.core.action;
 
-import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel.GuiStateEnum;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
-import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromDoBranchAction;
+import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromBranchAction;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 
-public class DialogChainRootAction extends BaseAction {
+public class DialogAddBranchAction extends BaseAction {
 
-	private IDialogTreePresenterFromDoBranchAction dialogTree;
+	private String text;
+	private int branchId;
+	private boolean isExemptFromSaidList;
+	private IDialogTreePresenterFromBranchAction dialogTree;
+	private boolean isOkToAdd;
 
-	public DialogChainRootAction() {
+	public DialogAddBranchAction(String text, int branchId, boolean isOkToAdd) {
+		this.isOkToAdd = isOkToAdd;
+		this.setBranchId(branchId);
+		this.setText(text);
+		isExemptFromSaidList = false;
 	}
 
 	@Override
@@ -45,12 +52,36 @@ public class DialogChainRootAction extends BaseAction {
 
 	@Override
 	protected boolean onCompleteActionAndCheckForGateExit() {
-		dialogTree.setActiveGuiState(GuiStateEnum.DialogTree);
-		// do nothing, this is a placeholder that results in a large chained action
+		if(isOkToAdd)
+		{
+			dialogTree.addBranch(branchId, text, !isExemptFromSaidList);
+		}
 		return false;
 	}
 
-	public void setDialogTree(IDialogTreePresenterFromDoBranchAction dialogTree) {
+
+
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
+	}
+
+	public int getBranchId() {
+		return branchId;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setIsExemptFromSaidList(boolean isExemptFromSaidList) {
+		this.isExemptFromSaidList = isExemptFromSaidList;
+	}
+
+	public void setDialogTree(IDialogTreePresenterFromBranchAction dialogTree) {
 		this.dialogTree = dialogTree;
 	}
 
@@ -60,7 +91,6 @@ public class DialogChainRootAction extends BaseAction {
 			IDialogTreePresenterFromActions dialogTree,
 			IInventoryPresenterFromActions inventory) {
 		setDialogTree(dialogTree);
-
 	}
 
 }

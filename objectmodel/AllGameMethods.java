@@ -2,6 +2,7 @@ package com.github.a2g.core.objectmodel;
 
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.chain.SceneChainEnd;
+import com.github.a2g.core.chain.SceneChainRoot;
 import com.github.a2g.core.chain.DialogChain;
 import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 import com.github.a2g.core.interfaces.game.chainables.IDialogChain;
@@ -515,12 +516,12 @@ return null;
 
 	@Override
 	public ISceneChainRoot createChainRootAction() {
-		return MatOps.createChainRootAction();
+		return new SceneChainRoot();
 	}
 
 	@Override
 	public void executeSceneChain(ISceneChain ba) {
-		//master.executeSceneChain(ba);
+		master.executeSceneChain(ba);
 	}
 
 	@Override

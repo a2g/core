@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.github.a2g.core.action;
+package com.github.a2g.core.objectmodel;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -29,9 +29,11 @@ import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActi
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 import com.github.a2g.core.primitive.LogNames;
+import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.action.SingleCallAction;
 import com.github.a2g.core.chain.BaseChain;
 
-public class ActionRunner implements IActionRunnerFromBaseAction {
+public class ChainRunner implements IActionRunnerFromBaseAction {
 
 	private static final Logger RUNNER = Logger.getLogger(LogNames.RUNNER.toString());
 	private static final Logger ACTIONS_EXECUTED = Logger.getLogger(LogNames.ACTIONS_AS_THEY_ARE_EXECUTED.toString());
@@ -50,7 +52,7 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 
 	private IFactory factory;
 
-	public ActionRunner(IFactory factory,
+	public ChainRunner(IFactory factory,
 			IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dt,

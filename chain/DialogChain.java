@@ -18,9 +18,9 @@ package com.github.a2g.core.chain;
 
 import com.github.a2g.core.action.Actions;
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainToDialogAction;
-import com.github.a2g.core.action.DialogBranchAction;
-import com.github.a2g.core.action.DialogEndAction;
+import com.github.a2g.core.action.DialogEnterAction;
+import com.github.a2g.core.action.DialogAddBranchAction;
+import com.github.a2g.core.action.DialogExitAction;
 import com.github.a2g.core.action.SingleCallAction;
 import com.github.a2g.core.action.TalkAction;
 import com.github.a2g.core.action.WalkAction;
@@ -64,21 +64,21 @@ implements IDialogChain
     @Override
     public IDialogChain branchNormal(int branchId, boolean isOkToAdd, String text) 
     {
-        return new DialogChain(this, new DialogBranchAction( text, branchId, isOkToAdd));
+        return new DialogChain(this, new DialogAddBranchAction( text, branchId, isOkToAdd));
     }
     @Override
     public IDialogChain branchNormal(int branchId, String text) {
-        return new DialogChain(this, new DialogBranchAction( text, branchId, true));
+        return new DialogChain(this, new DialogAddBranchAction( text, branchId, true));
     }
 
     // dialog - end methods.
     @Override
     public IDialogChainEnd endDialogTree() {
-        return new DialogChain( this, new DialogEndAction());
+        return new DialogChain( this, new DialogExitAction());
     }
     @Override
     public IDialogChainEnd chainTo(int branchId) {
-        return new DialogChain(this, new ChainToDialogAction( branchId));
+        return new DialogChain(this, new DialogEnterAction( branchId));
     }
     @Override
     public IDialogChainEnd switchTo(String sceneName, int entrySegment) {
@@ -146,7 +146,7 @@ implements IDialogChain
     }
     @Override
     public IDialogChain branchSticky(int branchId, String text) {
-        DialogBranchAction a = new DialogBranchAction( text, branchId, true);
+        DialogAddBranchAction a = new DialogAddBranchAction( text, branchId, true);
         a.setIsExemptFromSaidList(true);
         
         DialogChain chain = new DialogChain(this, a);
@@ -155,7 +155,7 @@ implements IDialogChain
     
     @Override
     public IDialogChain branchSticky(int branchId, boolean isOkToAdd, String text) {
-        DialogBranchAction a = new DialogBranchAction( text, branchId, isOkToAdd);
+        DialogAddBranchAction a = new DialogAddBranchAction( text, branchId, isOkToAdd);
         a.setIsExemptFromSaidList(true);
         
         DialogChain chain = new DialogChain(this, a);
@@ -164,7 +164,7 @@ implements IDialogChain
     
     @Override
     public IDialogChainEnd branchTheObligatoryExit(String text) {
-        DialogBranchAction a = new DialogBranchAction( text, ConstantsForAPI.DIALOG_HANDLER_EXIT, true);
+        DialogAddBranchAction a = new DialogAddBranchAction( text, ConstantsForAPI.DIALOG_HANDLER_EXIT, true);
         a.setIsExemptFromSaidList(true);
         
         DialogChain chain = new DialogChain(this, a);

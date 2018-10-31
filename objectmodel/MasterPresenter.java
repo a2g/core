@@ -23,14 +23,11 @@ import java.util.logging.Logger;
 
 import com.github.a2g.core.primitive.A2gException;
 import com.google.gwt.event.dom.client.LoadHandler;
-import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainToDialogAction;
-import com.github.a2g.core.action.DialogChainToDialogAction;
-import com.github.a2g.core.action.DialogEndAction;
+import com.github.a2g.core.action.DialogEnterAction;
+import com.github.a2g.core.action.DialogExitAction;
 import com.github.a2g.core.action.DoNothingAction;
 import com.github.a2g.core.action.TalkAction;
-import com.github.a2g.core.chain.BaseChain;
 import com.github.a2g.core.chain.DialogChain;
 import com.github.a2g.core.chain.DialogChainRoot;
 import com.github.a2g.core.chain.SceneChain;
@@ -103,9 +100,9 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
     private IPlatformTimer timer;
     private IPlatformTimer switchTimer;
     private IPlatformMasterPanel masterPanel;
-    private ActionRunner dialogActionRunner;
-    private ActionRunner doCommandActionRunner;
-    private ActionRunner onEveryFrameActionRunner;
+    private ChainRunner dialogActionRunner;
+    private ChainRunner doCommandChainRunner;
+    private ChainRunner onEveryFrameChainRunner;
 
     private InsertionPointCalculator insertionPointCalculator;
 
@@ -129,11 +126,11 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
         mapOfSounds = new TreeMap<String, IPlatformSound>();
 
         IFactory factory = host.getFactory(bus, this);
-        this.doCommandActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions, proxyForActions,
+        this.doCommandChainRunner = new ChainRunner(factory, proxyForActions, proxyForActions, proxyForActions,
                 proxyForActions, this, 1);
-        this.dialogActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions, proxyForActions,
+        this.dialogActionRunner = new ChainRunner(factory, proxyForActions, proxyForActions, proxyForActions,
                 proxyForActions, this, 2);
-        this.onEveryFrameActionRunner = new ActionRunner(factory, proxyForActions, proxyForActions, proxyForActions,
+        this.onEveryFrameChainRunner = new ChainRunner(factory, proxyForActions, proxyForActions, proxyForActions,
                 proxyForActions, this, 3);
         insertionPointCalculator.clear();
 
@@ -217,10 +214,10 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
         return true;
     }
 
-    public void executeActionWithDialogActionRunner(IBaseChain a) {
-        if (a == null||a.getAction()==null) {
+    public void executeWithDialogChainRunner(IBaseChain chain) {
+        if (chain == null||chain.getAction()==null) {
             // null must get turned in to
-            // a DialogTreeEndAction
+            // a DialogExitAction
             // since
             // a) when it falls thru the switch
             // we want it to exit the dialog..
@@ -234,23 +231,23 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
             // IGameScene is implemented
             // is null..
             // ... thus null must be interpreted
-            // as DialogTreeEndAction
-            a = new DialogChain(null, new DialogEndAction());
+            // as DialogExitAction
+            chain = new DialogChain(null, new DialogExitAction());
         }
 
-        dialogActionRunner.runChain(a);
+        dialogActionRunner.runChain(chain);
     }
 
-    public void executeActionWithDoCommandActionRunner(IBaseChain b) {
-        doCommandActionRunner.runChain(b);
+    public void executeWithDoCommandChainRunner(IBaseChain chain) {
+        doCommandChainRunner.runChain(chain);
     }
 
-    public void executeActionWithOnEveryFrameActionRunner(ISceneChain ba) {
-        if (ba == null) {
-            ba = new SceneChain(null, new DoNothingAction());
+    public void executeActionWithOnEveryFrameChainRunner(ISceneChain chain) {
+        if (chain == null) {
+            chain = new SceneChain(null, new DoNothingAction());
         }
 
-        onEveryFrameActionRunner.runChain(ba);
+        onEveryFrameChainRunner.runChain(chain);
     }
 
     public void skip() {
@@ -355,8 +352,8 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
         // but I've put it off til I need the microseconds.
         cancelOnEveryFrameTimer();
         this.dialogActionRunner.cancel();
-        this.onEveryFrameActionRunner.cancel();
-        this.doCommandActionRunner.cancel();// do we really need to cancel
+        this.onEveryFrameChainRunner.cancel();
+        this.doCommandChainRunner.cancel();// do we really need to cancel
         setCameraToZero();// no scene is meant to keep camera position
         this.scenePresenter.setEntrySegment(entrySegment);
         this.host.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
@@ -419,9 +416,9 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
             ///...and then the script lazily returns null!
             if(actionChain==null)
                 actionChain = newTalkAction;
-            IBaseChain actionChain2 = replaceChainToDialogActionWithCallToOnDialogTree(actionChain);
+            IBaseChain actionChain2 = replaceEnterActionWithCallToOnDialogTree(actionChain);
 
-            executeActionWithDialogActionRunner(actionChain2);
+            executeWithDialogChainRunner(actionChain2);
         } catch (A2gException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -483,10 +480,10 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
             
             
             // g. process chain....
-            IBaseChain b = this.replaceChainToDialogActionWithCallToOnDialogTree(a);
+            IBaseChain b = this.replaceEnterActionWithCallToOnDialogTree(a);
             
             // h. .. then execute the chain
-            executeActionWithDoCommandActionRunner(b);
+            executeWithDoCommandChainRunner(b);
             
             
         } catch (A2gException e) {
@@ -674,10 +671,11 @@ void linkUpperMostActionOfAToB(IBaseChain a, IBaseChain b) {
     a.setParent(b);
 }
 
-IBaseChain replaceChainToDialogActionWithCallToOnDialogTree(IBaseChain a2) {
-    if (a2 instanceof DialogChainToDialogAction || a2 instanceof ChainToDialogAction) {
+IBaseChain replaceEnterActionWithCallToOnDialogTree(IBaseChain chain) {
+    BaseAction a2 = chain.getAction();
+    if (a2 instanceof DialogEnterAction) {
 
-        int branchId = ((ChainToDialogAction) a2).getBranchId();
+        int branchId = ((DialogEnterAction) a2).getBranchId();
         DialogChainRoot d = new DialogChainRoot();
         IBaseChain a = null;
         try {
@@ -687,12 +685,15 @@ IBaseChain replaceChainToDialogActionWithCallToOnDialogTree(IBaseChain a2) {
             e.printStackTrace();
         }
         if (a == null || a.getAction() instanceof DoNothingAction)
-            d.setAction( new DialogEndAction() );
-        linkUpperMostActionOfAToB(d, a2);
+        {
+            a = new DialogChain(null, new DialogExitAction() );
+        }
+        linkUpperMostActionOfAToB(a, chain);
         return a;
     }
-    return a2;
+    return chain;
 }
+
 
 IBaseChain executeOnDoCommand(IOnDoCommand p1, ISceneChainRoot p2, int p3, SentenceItem p4, SentenceItem p5, double p6, double p7)
 {
@@ -710,17 +711,25 @@ IBaseChain executeOnDoCommand(IOnDoCommand p1, ISceneChainRoot p2, int p3, Sente
     return a;
 }
 
+
+public void executeSceneChain(IBaseChain chain) {
+    chain = replaceEnterActionWithCallToOnDialogTree(chain);
+
+    executeWithDoCommandChainRunner(chain);
+
+}
+
 @Override
 public void doCommand(int verbAsCode, int verbAsVerbEnumeration, SentenceItem sentenceA, SentenceItem sentenceB, double x, double y) {
 
-    IBaseChain a = executeOnDoCommand(proxyForGameScene, new SceneChainRoot(), verbAsCode,
+    IBaseChain chain = executeOnDoCommand(proxyForGameScene, new SceneChainRoot(), verbAsCode,
             sentenceA, sentenceB, x + scenePresenter.getCameraX(), y + scenePresenter.getCameraY());
 
     this.commandLinePresenter.setMouseable(false);
 
-    a = replaceChainToDialogActionWithCallToOnDialogTree(a);
+    chain = replaceEnterActionWithCallToOnDialogTree(chain);
 
-    executeActionWithDoCommandActionRunner(a);
+    executeWithDoCommandChainRunner(chain);
 
     host.setLastCommand(x, y, verbAsVerbEnumeration, sentenceA.getTextualId(), sentenceB.getTextualId());
 
@@ -758,11 +767,11 @@ void ProcessAutoplayCommand(int id) {
             // SLEEP = sleep for 100ms
             IBaseChain sleep = new SceneChainRoot().sleep(cmd.getInt1());
             COMMANDS_AUTOPLAY.log(Level.FINE, "SLEEP " + cmd.getInt1());
-            executeActionWithDoCommandActionRunner(sleep);
+            executeWithDoCommandChainRunner(sleep);
         } else if (cmd.getVerb() == ConstantsForAPI.SWITCH) {
             IBaseChain switchTo = new SceneChainRoot().switchTo(cmd.getString(), 0);
             COMMANDS_AUTOPLAY.log(Level.FINE, "SWITCH " + cmd.getString());
-            executeActionWithDoCommandActionRunner(switchTo);
+            executeWithDoCommandChainRunner(switchTo);
         } else if (mode == GuiStateEnum.DialogTree) {
             // mode was dialog verb wasn't dialog or sleep
             cancelAutoplay(cmd, "mode was dialog verb wasn't dialog or sleep");
@@ -784,9 +793,9 @@ void ProcessAutoplayCommand(int id) {
                 return;
             }
 
-            a = replaceChainToDialogActionWithCallToOnDialogTree(a);
+            a = replaceEnterActionWithCallToOnDialogTree(a);
             this.commandLinePresenter.setMouseable(false);
-            executeActionWithDoCommandActionRunner(a);
+            executeWithDoCommandChainRunner(a);
         }
     }
 }
@@ -877,7 +886,7 @@ public void setActiveGuiState(GuiStateEnum state) {
 }
 
 public void executeChainedAction(ISceneChain ba) {
-    executeActionWithOnEveryFrameActionRunner(ba);
+    executeActionWithOnEveryFrameChainRunner(ba);
 }
 
 @Override
@@ -1022,4 +1031,5 @@ public void decrementFont() {
     scenePresenter.getView().decrementFont();
     verbsPresenter.getView().decrementFontSize();
 }
+
 }

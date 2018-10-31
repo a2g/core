@@ -17,7 +17,6 @@
 package com.github.a2g.core.chain;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 import com.github.a2g.core.interfaces.game.chainables.ISceneChainEnd;
 
 public class SceneChainEnd extends BaseChain implements ISceneChainEnd

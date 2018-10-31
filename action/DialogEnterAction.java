@@ -16,19 +16,20 @@
 
 package com.github.a2g.core.action;
 
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel.GuiStateEnum;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
+import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromDoBranchAction;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 
-/**
- * Needs to be it's own class because it gets searched
- * for explicitly (see MasterPresenter)
- */
-public class DialogChainToDialogAction extends ChainToDialogAction {
+public class DialogEnterAction extends BaseAction {
 
-	public DialogChainToDialogAction(int branchId) {
-	    super(branchId);
+	private int branchId;
+	private IDialogTreePresenterFromDoBranchAction dialogTree;
+
+	public DialogEnterAction(int branchId) {
+		this.branchId = branchId;
 	}
 
 	@Override
@@ -41,21 +42,40 @@ public class DialogChainToDialogAction extends ChainToDialogAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {
+	protected void onUpdateGameAction(double progress) 
+	{
 	}
 
 	@Override
-	protected boolean onCompleteActionAndCheckForGateExit() {
-		// do nothing, this is a placeholder that results in a large chained action
+	protected boolean onCompleteActionAndCheckForGateExit() 
+	{
+		dialogTree.setActiveGuiState(GuiStateEnum.DialogTree);
+		// When this placeholder is encountered in MasterPresenter, it is replaced by what is returned by onDialogTree when it is called with the branchId
 		return false;
+	}
+
+
+	public void setBranchId(int branchId) 
+	{
+		this.branchId = branchId;
+	}
+
+	public int getBranchId() 
+	{
+		return branchId;
+	}
+
+	public void setDialogTree(IDialogTreePresenterFromDoBranchAction dialogTree) 
+	{
+		this.dialogTree = dialogTree;
 	}
 
 	@Override
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			IInventoryPresenterFromActions inventory) {
-
+			IInventoryPresenterFromActions inventory) 
+	{
+		setDialogTree(dialogTree);
 	}
-
 }
