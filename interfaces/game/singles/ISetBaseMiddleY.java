@@ -1,8 +1,8 @@
 package com.github.a2g.core.interfaces.game.singles;
 
-import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 
 public interface ISetBaseMiddleY {
-	IChainBase setBaseMiddleY(short ocode, double baseMiddleY);
+	IBaseChain setBaseMiddleY(short ocode, double baseMiddleY);
 
 }

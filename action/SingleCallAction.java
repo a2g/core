@@ -17,20 +17,17 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainableAction;
-import com.github.a2g.core.action.performer.SingleCallPerformer;
+import com.github.a2g.core.action.performer.SingleCallPerformer; 
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 
-public class SingleCallAction
-extends ChainableAction {
+public class SingleCallAction extends BaseAction {
 
 	SingleCallPerformer single;
 
-	protected SingleCallAction(BaseAction parent, SingleCallPerformer.Type type) {
-		super(parent);
+	public SingleCallAction(  SingleCallPerformer.Type type) {
 		single = new SingleCallPerformer(type);
 	}
 
@@ -68,5 +65,7 @@ extends ChainableAction {
 	public void setInt(int intValue){ single.setInt(intValue);}
 	public void setICode(int icode) {single.setICode(icode);}
 	public void setOCode2(short ocode2) {single.setOCode2(ocode2);}
+
+
 
 }

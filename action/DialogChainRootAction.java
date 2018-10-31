@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Anthony Cassidy
+   * Copyright 2012 Anthony Cassidy
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,12 +23,11 @@ import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromA
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 
-public class DialogChainRootAction extends DialogChainableAction {
+public class DialogChainRootAction extends BaseAction {
 
 	private IDialogTreePresenterFromDoBranchAction dialogTree;
 
 	public DialogChainRootAction() {
-		super(null);
 	}
 
 	@Override

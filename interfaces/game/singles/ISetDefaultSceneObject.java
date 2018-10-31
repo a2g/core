@@ -1,8 +1,8 @@
 package com.github.a2g.core.interfaces.game.singles;
 
-import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 
 public interface ISetDefaultSceneObject {
-    IChainBase  setDefaultSceneObject(short ocode);
-    IChainBase  setDefaultSceneObject(short ocode, boolean isUsingEdgePerimeterDetection);
+    IBaseChain  setDefaultSceneObject(short ocode);
+    IBaseChain  setDefaultSceneObject(short ocode, boolean isUsingEdgePerimeterDetection);
 }

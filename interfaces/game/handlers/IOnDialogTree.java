@@ -16,8 +16,8 @@
 
 package com.github.a2g.core.interfaces.game.handlers;
 
-import com.github.a2g.core.action.ChainEndAction;
-import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+import com.github.a2g.core.chain.SceneChainEnd;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 import com.github.a2g.core.interfaces.game.singles.IGetCurrentSceneName;
 import com.github.a2g.core.interfaces.game.singles.IGetLastSceneName;
 import com.github.a2g.core.interfaces.game.singles.IGetValue;
@@ -57,7 +57,7 @@ IGetValue
 	//@{
 	@Override int getValue(Object key);
 	@Override boolean isTrue(Object key);
-	@Override IChainBase setValue(Object key, int value);
+	@Override IBaseChain setValue(Object key, int value);
 	//@}
 
 	/**   @name Inventory */
@@ -67,14 +67,14 @@ IGetValue
 
 	/**   @name Animation */
 	//@{
-	@Override IChainBase setAnimationAsObjectInitial(String atid); 
-	@Override IChainBase setAnimationAsSceneDialogUs(String atid);
-	@Override IChainBase setAnimationAsSceneDialogThem(String atid);
+	@Override IBaseChain setAnimationAsObjectInitial(String atid); 
+	@Override IBaseChain setAnimationAsSceneDialogUs(String atid);
+	@Override IBaseChain setAnimationAsSceneDialogThem(String atid);
 	//@}
  
 	/**   @name Helpful for game */
 	//@{
-	@Override ChainEndAction switchToScene(String name, int entrySegment);
+	@Override SceneChainEnd switchToScene(String name, int entrySegment);
 	@Override boolean isInDebugMode();
 	@Override String getLastSceneName();
 	@Override String getCurrentSceneName();

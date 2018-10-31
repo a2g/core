@@ -35,15 +35,15 @@ import com.google.gwt.touch.client.Point;
  * So a walk-talk (eg in an action), can
  * end up running over the boundary.
  */
-public class WalkAndTalkAction extends ChainableAction{
+public class WalkAndTalkAction extends BaseAction{
 
 	MovePerformer mover;
 	WalkPerformer walker;
 	TalkPerformer talker;
-	public WalkAndTalkAction(BaseAction parent, short ocode, String speech) {
-		super(parent);
+	
+	public WalkAndTalkAction(short ocode, String speech) {
 		mover = new MovePerformer(ocode);
-		mover.setToInitialAtEndForMover(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false)
+		mover.setToInitialAtEndForMover(true);// only ISceneChain::walkAndSwitch sets setToInitialAtEnd(false)
 		walker = new WalkPerformer(ocode);
 		//talker = new TalkPerformer(TalkPerformer.SCENE_TALKER, speech);
 		talker = new TalkPerformer(ocode, speech);

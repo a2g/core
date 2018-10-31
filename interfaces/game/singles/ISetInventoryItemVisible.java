@@ -1,9 +1,9 @@
 package com.github.a2g.core.interfaces.game.singles;
 
  
-import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 
 public interface ISetInventoryItemVisible {
-	IChainBase setInventoryItemVisible(int icode, boolean isVisible);
+	IBaseChain setInventoryItemVisible(int icode, boolean isVisible);
 
 }

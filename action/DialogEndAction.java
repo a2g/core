@@ -24,11 +24,10 @@ import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromA
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 
-public class DialogEndAction extends DialogChainEndAction{
+public class DialogEndAction extends BaseAction{
 	private IDialogTreePresenterFromEndAction dialogTree;
 
-	public DialogEndAction(BaseAction parent) {
-		super(parent );
+	public DialogEndAction() {
 	}
 
 	@Override

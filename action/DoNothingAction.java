@@ -17,16 +17,14 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 
-public class DoNothingAction extends ChainableAction {
+public class DoNothingAction extends BaseAction {
 
-	public DoNothingAction(BaseAction parent) {
-		super(parent );
+	public DoNothingAction() {
 	}
 
 	@Override

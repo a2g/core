@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
@@ -28,8 +27,8 @@ import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActio
  */
 public class DialogChainToDialogAction extends ChainToDialogAction {
 
-	public DialogChainToDialogAction(BaseAction parent, int branchId) {
-		super(parent, branchId);
+	public DialogChainToDialogAction(int branchId) {
+	    super(branchId);
 	}
 
 	@Override

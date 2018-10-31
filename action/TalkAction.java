@@ -18,7 +18,6 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.action.performer.TalkPerformer.NonIncrementing;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
@@ -28,11 +27,10 @@ import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromTalk
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromTalkPerformer;
 
-public class TalkAction extends ChainableAction {
+public class TalkAction extends BaseAction {
 	TalkPerformer talker;
 
-	public TalkAction(BaseAction parent, String atid, String fullSpeech) {
-		super(parent);
+	public TalkAction( String atid, String fullSpeech) {
 		talker = new TalkPerformer(atid, fullSpeech);
 	}
 	@Override

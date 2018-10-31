@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 import com.github.a2g.core.interfaces.nongame.IActionRunnerFromBaseAction;
 import com.github.a2g.core.interfaces.nongame.IFactory;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
@@ -28,6 +29,7 @@ import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActi
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 import com.github.a2g.core.primitive.LogNames;
+import com.github.a2g.core.chain.BaseChain;
 
 public class ActionRunner implements IActionRunnerFromBaseAction {
 
@@ -66,17 +68,16 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 		numberOfParallelActionsToWaitFor = 0;
 	}
 
-	static ArrayList<BaseAction> flattenChainAndEnsureTitleCardAtStart(
-			BaseAction grandChildOfActionChain) {
+	static ArrayList<BaseAction> flattenChainAndEnsureTitleCardAtStart(IBaseChain grandChildOfActionChain) 
+	{
 		ArrayList<BaseAction> toReturn = new ArrayList<BaseAction>();
-		BaseAction a = grandChildOfActionChain;
+		IBaseChain a = grandChildOfActionChain;
 
 		// flatten chain
-		while (a != null) {
-			toReturn.add(0, a);
+		while (a != null && a.getAction()!=null) {
+			toReturn.add(0, a.getAction());
 			a = a.getParent();
 		}
-
  
 		return toReturn;
 	}
@@ -105,8 +106,8 @@ public class ActionRunner implements IActionRunnerFromBaseAction {
 
 
 
-	public int runAction(BaseAction grandChildOfActionChain) {
-		ArrayList<BaseAction> flatlist = flattenChainAndEnsureTitleCardAtStart(grandChildOfActionChain);
+	public int runChain(IBaseChain a) {
+		ArrayList<BaseAction> flatlist = flattenChainAndEnsureTitleCardAtStart(a);
 		String list = "";
 		for(int i=0;i<flatlist.size();i++)
 		{

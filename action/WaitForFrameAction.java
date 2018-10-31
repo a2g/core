@@ -17,21 +17,19 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromWaitAction;
 
-public class WaitForFrameAction extends ChainableAction {
+public class WaitForFrameAction extends BaseAction {
 	private IScenePresenterFromWaitAction scene;
 	private int frame;
 	private short ocode;
 	private String otid;
 
-	public WaitForFrameAction(BaseAction parent, short ocode, int frame) {
-		super(parent);
+	public WaitForFrameAction(short ocode, int frame) {
 		this.frame = frame;
 		this.ocode = ocode;
 	}

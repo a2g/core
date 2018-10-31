@@ -17,14 +17,13 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromScrollAction;
 
-public class ScrollCameraXAction extends ChainableAction {
+public class ScrollCameraXAction extends BaseAction {
 	private IScenePresenterFromScrollAction scene;
 	private String obj;// set in constructor
 
@@ -32,8 +31,7 @@ public class ScrollCameraXAction extends ChainableAction {
 	private double startX;// set via setters
 	private double duration;
 
-	public ScrollCameraXAction(BaseAction parent, double endX, double duration) {
-		super(parent);
+	public ScrollCameraXAction(double endX, double duration) {
 		this.endX = endX;
 		this.duration = duration;
 	}

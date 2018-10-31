@@ -29,14 +29,13 @@ import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActio
  * It is used in cut scenes.
  * 
  */
-public class WalkAction extends ChainableAction
+public class WalkAction extends BaseAction
 {
 	WalkMultiPerformer multi;
 	
-	public WalkAction(BaseAction parent, short ocode) {
-		super(parent);
+	public WalkAction(short ocode) {
 		multi = new WalkMultiPerformer(ocode,false);
-		multi.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
+		multi.setToInitialAtEnd(true);// only ISceneChain::walkAndSwitch sets setToInitialAtEnd(false);
 		
 	}
 
@@ -66,11 +65,11 @@ public class WalkAction extends ChainableAction
 	protected boolean onCompleteActionAndCheckForGateExit() {
 		return multi.onCompleteActionAndCheckForGateExit();
 	}
-	void setEndX(double endX) {
+	public void setEndX(double endX) {
 		multi.setEndX(endX);
 	}
 
-	void setEndY(double endY) {
+	public void setEndY(double endY) {
 		multi.setEndY(endY);
 	}
  

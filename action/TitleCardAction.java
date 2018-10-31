@@ -17,19 +17,17 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromSingleCallPerformer; 
 
-public class TitleCardAction extends ChainableAction {
+public class TitleCardAction extends BaseAction {
 	private IScenePresenterFromSingleCallPerformer titleCard;
 	String stringValue;
 	double durationInSecs;
-	public TitleCardAction(BaseAction parent, String text, double durationInSecs) {
-		super(parent);
+	public TitleCardAction(String text, double durationInSecs) {
 		this.stringValue = text;
 		this.durationInSecs = durationInSecs;
 	}

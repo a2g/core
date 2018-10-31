@@ -17,22 +17,20 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromPlayAction;
 
-public class PlayAnimationAction extends ChainableAction {
+public class PlayAnimationAction extends BaseAction {
 	private String atid;
 	private String otid;
 	private boolean isBackwards;
 	private boolean holdLastFrame;
 	private IScenePresenterFromPlayAction scene;
 
-	public PlayAnimationAction(BaseAction parent, String atid) {
-		super(parent);
+	public PlayAnimationAction(String atid) {
 		this.isBackwards = false;
 		this.holdLastFrame = false;
 		this.atid = atid;

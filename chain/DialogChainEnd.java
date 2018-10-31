@@ -14,15 +14,15 @@
  * the License.
  */
 
-package com.github.a2g.core.action;
+package com.github.a2g.core.chain;
 
 import com.github.a2g.core.action.BaseAction;
 
-public abstract class DialogChainEndAction extends ChainEndAction
+public class DialogChainEnd extends BaseChain
 {
 
-	DialogChainEndAction(BaseAction parent) {
-		super(parent);
+	DialogChainEnd(BaseChain chain, BaseAction parent) {
+		super(chain, parent);
 
 	}
 }

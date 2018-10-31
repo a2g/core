@@ -1,7 +1,7 @@
 package com.github.a2g.core.interfaces.game.singles;
 
-import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 
 public interface IPlayTitleCard {
-  IChainBase playTitleCard(String text, double duration);
+  IBaseChain playTitleCard(String text, double duration);
 }

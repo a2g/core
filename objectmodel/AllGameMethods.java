@@ -1,10 +1,12 @@
 package com.github.a2g.core.objectmodel;
 
-import com.github.a2g.core.action.ChainEndAction;
-import com.github.a2g.core.action.ChainRootAction;
-import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.TalkPerformer;
-import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+import com.github.a2g.core.chain.SceneChainEnd;
+import com.github.a2g.core.chain.DialogChain;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
+import com.github.a2g.core.interfaces.game.chainables.IDialogChain;
+import com.github.a2g.core.interfaces.game.chainables.ISceneChain;
+import com.github.a2g.core.interfaces.game.chainables.ISceneChainRoot;
 import com.github.a2g.core.interfaces.game.handlers.IOnDialogTree;
 import com.github.a2g.core.interfaces.game.handlers.IOnDoCommand;
 import com.github.a2g.core.interfaces.game.handlers.IOnEnqueueResources;
@@ -63,7 +65,7 @@ public class AllGameMethods
 	 */
 
 	@Override
-	public IChainBase  hide(short ocode) {
+	public IBaseChain  hide(short ocode) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setVisible(false);
@@ -71,7 +73,7 @@ public class AllGameMethods
 	}
 
 	@Override
-	public IChainBase  show(short ocode) {
+	public IBaseChain  show(short ocode) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setVisible(true);
@@ -87,7 +89,7 @@ public class AllGameMethods
 	}
 
 	@Override
-	public IChainBase  setX(short ocode, double x) {
+	public IBaseChain  setX(short ocode, double x) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setX(x);
@@ -96,7 +98,7 @@ public class AllGameMethods
 	}
 
 	@Override
-	public IChainBase setY(short ocode, double y) {
+	public IBaseChain setY(short ocode, double y) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setY(y);
@@ -105,7 +107,7 @@ public class AllGameMethods
 	}
 
 	@Override
-	public ChainableAction setDisplayName(short ocode, String displayName) {
+	public IBaseChain setDisplayName(short ocode, String displayName) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setDisplayName(displayName);
@@ -113,7 +115,7 @@ public class AllGameMethods
 	}
 
 	@Override
-	public IChainBase  setScreenCoordsPerSecond(short ocode, double coordsPerSecond) {
+	public IBaseChain  setScreenCoordsPerSecond(short ocode, double coordsPerSecond) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setScreenCoordsPerSecond(coordsPerSecond);
@@ -121,7 +123,7 @@ return null;
 	}
 
 	@Override
-	public IChainBase  setParallaxX(short ocode, double x) {
+	public IBaseChain  setParallaxX(short ocode, double x) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setParallaxX(x);
@@ -129,7 +131,7 @@ return null;
 	}
 
 	@Override
-	public ChainableAction setVisible(short ocode, boolean visible) {
+	public IBaseChain setVisible(short ocode, boolean visible) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setVisible(visible);
@@ -149,14 +151,14 @@ return null;
 	}
 
 	@Override
-	public ChainableAction setBaseMiddleX(short ocode, double baseMiddleX) {
+	public IBaseChain setBaseMiddleX(short ocode, double baseMiddleX) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setBaseMiddleX(baseMiddleX);
 		return null;
 	}
 
 	@Override
-	public ChainableAction setBaseMiddleY(short ocode, double baseMiddleY) {
+	public IBaseChain setBaseMiddleY(short ocode, double baseMiddleY) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setBaseMiddleY(baseMiddleY);
 		return null;
@@ -183,7 +185,7 @@ return null;
 	}
 
 	@Override
-	public IChainBase  updateObjectToCorrectImage(short ocode) {
+	public IBaseChain  updateObjectToCorrectImage(short ocode) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).updateObjectToCorrectImage();
 		return null;
@@ -197,7 +199,7 @@ return null;
 	}
 
 	@Override
-	public ChainableAction setCurrentFrame(short ocode, int i) {
+	public IBaseChain setCurrentFrame(short ocode, int i) {
 
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setCurrentFrame(i);
@@ -211,14 +213,14 @@ return null;
 	}
 
 	@Override
-	public IChainBase  setDefaultSceneObject(short ocode, boolean isUsingEdgeDetection) {
+	public IBaseChain  setDefaultSceneObject(short ocode, boolean isUsingEdgeDetection) {
 	    String otid = master.getScenePresenter().getOtidByCode(ocode);
 	    master.getScenePresenter().setOtidOfDefaultSceneObject(otid, isUsingEdgeDetection);
 	    return null;
 	}
 	
 	@Override
-	public IChainBase  setDefaultSceneObject(short ocode) {
+	public IBaseChain  setDefaultSceneObject(short ocode) {
 	    String otid = master.getScenePresenter().getOtidByCode(ocode);
 	    master.getScenePresenter().setOtidOfDefaultSceneObject(otid, false);
 	    return null;
@@ -257,14 +259,14 @@ return null;
 	}
 
 	@Override
-	public IChainBase  showInventoryItem(int icode) {
+	public IBaseChain  showInventoryItem(int icode) {
 		master.getInventoryPresenter().getInventoryItemByICode(icode).setVisible(true);
 		master.getInventoryPresenter().updateInventory();
 		return null;
 	}
 
 	@Override
-	public IChainBase hideInventoryItem(int icode) {
+	public IBaseChain hideInventoryItem(int icode) {
 		master.getInventoryPresenter().getInventoryItemByICode(icode).setVisible(false);
 		master.getInventoryPresenter().updateInventory();
 		return null;
@@ -272,7 +274,7 @@ return null;
 	}
 
 	@Override
-	public IChainBase setInventoryItemDisplayName(int icode, String displayName) {
+	public IBaseChain setInventoryItemDisplayName(int icode, String displayName) {
 		InventoryItem i = master.getInventoryPresenter().getInventoryItemByICode(icode);
 		i.setDisplayName(displayName);
 		return null;
@@ -280,14 +282,14 @@ return null;
 	}
 
 	@Override
-	public ChainableAction setInventoryItemVisible(int icode, boolean isVisible) {
+	public IBaseChain setInventoryItemVisible(int icode, boolean isVisible) {
 		master.getInventoryPresenter().getInventoryItemByICode(icode).setVisible(isVisible);
 		master.getInventoryPresenter().updateInventory();
 		return null;
 	}
 
 	@Override
-	public IChainBase hideInventoryItemsAllOfThem() {
+	public IBaseChain hideInventoryItemsAllOfThem() {
 		master.getInventoryPresenter().hideAllInventory();
 		master.getInventoryPresenter().updateInventory();
 		return null;
@@ -317,25 +319,25 @@ return null;
 	// /@{
 
 	@Override
-	public ChainableAction setAnimationAsSceneTalker(String atid) {
+	public IBaseChain setAnimationAsSceneTalker(String atid) {
 		master.getScenePresenter().setSceneTalkerAtid(atid);
 		return null;
 	}
 
 	@Override
-	public IChainBase  setAnimationAsSceneDialogUs(String atid) {
+	public IBaseChain  setAnimationAsSceneDialogUs(String atid) {
 		master.getScenePresenter().setSceneAskerAtid(atid);
 		return null;
 	}
 
 	@Override
-	public IChainBase  setAnimationAsSceneDialogThem(String atid) {
+	public IBaseChain  setAnimationAsSceneDialogThem(String atid) {
 		master.getScenePresenter().setSceneAnswererAtid(atid);
 		return null;
 	}
 
 	@Override
-	public ChainableAction setAnimationAsObjectInitial(String atid) {
+	public IBaseChain setAnimationAsObjectInitial(String atid) {
 		String otid = getOtidByAtid(atid);
 		SceneObject object = master.getScenePresenter().getObjectByOtid(otid);
 		object.setInitialAnimation(atid);
@@ -343,7 +345,7 @@ return null;
 	}
 
 	@Override
-	public ChainableAction setAnimationAsObjectWalkDirection(String atid, WalkDirection type) {
+	public IBaseChain setAnimationAsObjectWalkDirection(String atid, WalkDirection type) {
 		String otid = getOtidByAtid(atid);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setSpecialAnimation(type, atid);
@@ -351,7 +353,7 @@ return null;
 	}
 
 	@Override
-	public ChainableAction setAnimationAsObjectCurrent(String atid) {
+	public IBaseChain setAnimationAsObjectCurrent(String atid) {
 		String otid = getOtidByAtid(atid);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setCurrentAnimation(atid);
@@ -359,14 +361,14 @@ return null;
 	}
 
 	@Override
-	public IChainBase  setAnimationDuration(String atid, double secs) {
+	public IBaseChain  setAnimationDuration(String atid, double secs) {
 		master.getScenePresenter().getAnimationByAtid(atid).setDurationSecs(secs);
 		return null;
 
 	}
 
 	@Override
-	public ChainableAction setAnimationAsObjectCurrentAndSetFrame(String atid, int frame) {
+	public IBaseChain setAnimationAsObjectCurrentAndSetFrame(String atid, int frame) {
 		String otid = getOtidByAtid(atid);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setCurrentAnimationAndFrame(atid, frame);
@@ -385,7 +387,7 @@ return null;
 	}
 
 	@Override
-	public IChainBase  setAnimationTalkingColor(String atid, ColorEnum red) {
+	public IBaseChain  setAnimationTalkingColor(String atid, ColorEnum red) {
 
 		master.getScenePresenter().getAnimationByAtid(atid).setTalkingColor(red);
 		return null;
@@ -418,7 +420,7 @@ return null;
 	}
 
 	@Override
-	public IChainBase  updateVerbUI() {
+	public IBaseChain  updateVerbUI() {
 		master.getVerbsPresenter().updateVerbs();
 		return null;
 
@@ -448,7 +450,7 @@ return null;
 	}
 
 	@Override
-	public IChainBase setValue(Object key, int value) {
+	public IBaseChain setValue(Object key, int value) {
 		master.setValue(key, value);
 		return null;
 	}
@@ -469,7 +471,7 @@ return null;
 	}
 
 	@Override
-	public ChainEndAction switchToScene(String scene, int entrySegment) {
+	public SceneChainEnd switchToScene(String scene, int entrySegment) {
 		master.switchToScene(scene, entrySegment);
 		return null;
 	}
@@ -495,7 +497,7 @@ return null;
 	}
 
 	@Override
-	public IChainBase  setIsSayAlwaysWithoutIncremementing(boolean isSayWithoutIncremementing) {
+	public IBaseChain  setIsSayAlwaysWithoutIncremementing(boolean isSayWithoutIncremementing) {
 		master.setIsSayAlwaysWithoutIncremementing(isSayWithoutIncremementing);
 		return null;
 	}
@@ -506,24 +508,23 @@ return null;
 	}
 
 	@Override
-	public ChainableAction shareWinning(String token) {
+	public IBaseChain shareWinning(String token) {
 		master.shareWinning(token);
 		return null;
 	}
 
 	@Override
-	public ChainRootAction createChainRootAction() {
+	public ISceneChainRoot createChainRootAction() {
 		return MatOps.createChainRootAction();
 	}
 
 	@Override
-	public void executeChainedAction(ChainableAction ba) {
-		master.executeChainedAction(ba);
-
+	public void executeSceneChain(ISceneChain ba) {
+		//master.executeSceneChain(ba);
 	}
 
 	@Override
-	public IChainBase  setActiveGuiState(GuiStateEnum state) {
+	public IBaseChain  setActiveGuiState(GuiStateEnum state) {
 		master.setActiveGuiState(state);
 return null;
 	}
@@ -549,7 +550,7 @@ return null;
 	}
 
 	@Override
-	public IChainBase  setTitleCard(String titlecard) {
+	public IBaseChain  setTitleCard(String titlecard) {
 		master.getScenePresenter().setTitleCard(titlecard);
 		return null;
 	}
@@ -585,7 +586,7 @@ return null;
 	}
 
 	@Override
-	public ChainableAction setSoundtrack(String stid) {
+	public IBaseChain setSoundtrack(String stid) {
 		master.setSoundtrack(stid);
 		return null;
 	}
@@ -601,14 +602,14 @@ return null;
 	}
 
 	@Override
-	public IChainBase  setHeadRectangleForAnimation(String atid, int index) {
+	public IBaseChain  setHeadRectangleForAnimation(String atid, int index) {
 		Animation a = master.getScenePresenter().getAnimationByAtid(atid);
 		a.setHeadRectangleIndex(index);
 		return null;
 	}
 
 	@Override
-	public ChainableAction setHeadRectangleForObject(short ocode, int index) {
+	public IBaseChain setHeadRectangleForObject(short ocode, int index) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setHeadRectangleByIndex(index);
@@ -616,7 +617,7 @@ return null;
 	}
 
 	@Override
-	public IChainBase  setTalkingColor(short ocode, ColorEnum color) {
+	public IBaseChain  setTalkingColor(short ocode, ColorEnum color) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setTalkingColor(color);
@@ -625,7 +626,7 @@ return null;
 	}
 
 	@Override
-	public IChainBase  setScale(short ocode, double scale) {
+	public IBaseChain  setScale(short ocode, double scale) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		SceneObject o = master.getScenePresenter().getObjectByOtid(otid);
 		o.setScale(scale);
@@ -672,7 +673,7 @@ return null;
 	}
 
 	@Override
-	public IChainBase  setClumpWithPrevious(short ocode, boolean isClump) {
+	public IBaseChain  setClumpWithPrevious(short ocode, boolean isClump) {
 		String otid = master.getScenePresenter().getOtidByCode(ocode);
 		master.getScenePresenter().getObjectByOtid(otid).setClumpWithPrevious(isClump);
 		return null;
@@ -690,7 +691,7 @@ return null;
 	}
 
 	@Override
-	public ChainableAction alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation(String atid, int frame) {
+	public IBaseChain alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation(String atid, int frame) {
 		master.getScenePresenter().alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimationByAtid(frame, atid);
 		return null;
 	}
@@ -701,14 +702,14 @@ return null;
 	}
 
 	@Override
-	public IChainBase alignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation(String atid) {
+	public IBaseChain alignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation(String atid) {
 		master.getScenePresenter()
 		.alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimationByAtid(0, atid);
 		return null;
 	}
 
 	@Override
-	public IChainBase alignBaseMiddleOfOldFrameToLastFrameOfNewAnimation(String atid) {
+	public IBaseChain alignBaseMiddleOfOldFrameToLastFrameOfNewAnimation(String atid) {
 		int lastFrame = master.getScenePresenter().getAnimationByAtid(atid).getLastFrame();
 		master.getScenePresenter()
 		.alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimationByAtid(lastFrame, atid);

@@ -25,22 +25,28 @@ import com.github.a2g.core.primitive.A2gException;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.github.a2g.core.action.ActionRunner;
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.ChainToDialogAction;
 import com.github.a2g.core.action.DialogChainToDialogAction;
 import com.github.a2g.core.action.DialogEndAction;
-import com.github.a2g.core.action.DialogTalkAction;
 import com.github.a2g.core.action.DoNothingAction;
+import com.github.a2g.core.action.TalkAction;
+import com.github.a2g.core.chain.BaseChain;
+import com.github.a2g.core.chain.DialogChain;
+import com.github.a2g.core.chain.DialogChainRoot;
+import com.github.a2g.core.chain.SceneChain;
+import com.github.a2g.core.chain.SceneChainRoot;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.IsInventory;
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.primitive.STARTING_ODD_INVENTORY_CODE;
-import com.github.a2g.core.action.DialogChainableAction;
 import com.github.a2g.core.event.PropertyChangeEvent;
 import com.github.a2g.core.event.PropertyChangeEventHandlerAPI;
 import com.github.a2g.core.event.SetRolloverEvent;
-import com.github.a2g.core.interfaces.game.chainables.IChainRootForScene;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
+import com.github.a2g.core.interfaces.game.chainables.IDialogChainEnd;
+import com.github.a2g.core.interfaces.game.chainables.ISceneChain;
+import com.github.a2g.core.interfaces.game.chainables.ISceneChainRoot;
 import com.github.a2g.core.interfaces.game.handlers.IOnDoCommand;
 import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI;
 import com.github.a2g.core.interfaces.game.scene.IExtendsGameSceneLoader;
@@ -211,8 +217,8 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
         return true;
     }
 
-    public void executeActionWithDialogActionRunner(BaseAction a) {
-        if (a == null) {
+    public void executeActionWithDialogActionRunner(IBaseChain a) {
+        if (a == null||a.getAction()==null) {
             // null must get turned in to
             // a DialogTreeEndAction
             // since
@@ -229,22 +235,22 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
             // is null..
             // ... thus null must be interpreted
             // as DialogTreeEndAction
-            a = new DialogEndAction(MatOps.createDialogChainRootAction());
+            a = new DialogChain(null, new DialogEndAction());
         }
 
-        dialogActionRunner.runAction(a);
+        dialogActionRunner.runChain(a);
     }
 
-    public void executeActionWithDoCommandActionRunner(BaseAction a) {
-        doCommandActionRunner.runAction(a);
+    public void executeActionWithDoCommandActionRunner(IBaseChain b) {
+        doCommandActionRunner.runChain(b);
     }
 
-    public void executeActionWithOnEveryFrameActionRunner(BaseAction a) {
-        if (a == null) {
-            a = new DoNothingAction(MatOps.createChainRootAction());
+    public void executeActionWithOnEveryFrameActionRunner(ISceneChain ba) {
+        if (ba == null) {
+            ba = new SceneChain(null, new DoNothingAction());
         }
 
-        onEveryFrameActionRunner.runAction(a);
+        onEveryFrameActionRunner.runChain(ba);
     }
 
     public void skip() {
@@ -405,16 +411,15 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
         // 4. Then we execute it
         // Thus it will talk the text, and do what the user prescribes.
 
-        DialogTalkAction newTalkAction = new DialogTalkAction(MatOps.createDialogChainRootAction(), atidOfInterviewer,
-                speech);
+        DialogChainRoot newTalkAction = new DialogChainRoot(new TalkAction( atidOfInterviewer, speech));
 
         try {
-            BaseAction actionChain = sceneHandlers2.onDialogTree(proxyForGameScene, newTalkAction, branchId);
+            IDialogChainEnd actionChain = sceneHandlers2.onDialogTree(proxyForGameScene, newTalkAction, branchId);
             // for the case where we pass in an action which says the chosen line...
             ///...and then the script lazily returns null!
             if(actionChain==null)
                 actionChain = newTalkAction;
-            BaseAction actionChain2 = replaceChainToDialogActionWithCallToOnDialogTree(actionChain);
+            IBaseChain actionChain2 = replaceChainToDialogActionWithCallToOnDialogTree(actionChain);
 
             executeActionWithDialogActionRunner(actionChain2);
         } catch (A2gException e) {
@@ -453,7 +458,7 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
 
 
         // 4. we declare the base action here, so that in the event of an exception, we can still inspect the action chain
-        BaseAction a = null;
+        IBaseChain a = null;
 
         try
         {
@@ -468,7 +473,7 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
             startCallingOnEveryFrame();
        
             // d. onEntry
-            a = this.sceneHandlers2.onEntry(proxyForGameScene, MatOps.createChainRootAction());
+            a = this.sceneHandlers2.onEntry(proxyForGameScene, new SceneChainRoot());
 
             // e. lift the curtains (so far everything has happened in the dark)
             this.masterPanel.setActiveState(GuiStateEnum.OnEnterScene);
@@ -478,16 +483,13 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
             
             
             // g. process chain....
-            BaseAction b = this.replaceChainToDialogActionWithCallToOnDialogTree(a);
+            IBaseChain b = this.replaceChainToDialogActionWithCallToOnDialogTree(a);
             
             // h. .. then execute the chain
             executeActionWithDoCommandActionRunner(b);
             
             
         } catch (A2gException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -660,7 +662,7 @@ SentenceItem getSIOfVerb(int vcode) {
     return new SentenceItem(v.getdisplayText(), v.getVtid(), vcode);
 }
 
-void linkUpperMostActionOfAToB(BaseAction a, BaseAction b) {
+void linkUpperMostActionOfAToB(IBaseChain a, IBaseChain b) {
     // a and b should be valid here.
     for (;;) {
         if (a.getParent() == null)
@@ -672,29 +674,29 @@ void linkUpperMostActionOfAToB(BaseAction a, BaseAction b) {
     a.setParent(b);
 }
 
-BaseAction replaceChainToDialogActionWithCallToOnDialogTree(BaseAction b) {
-    if (b instanceof DialogChainToDialogAction || b instanceof ChainToDialogAction) {
+IBaseChain replaceChainToDialogActionWithCallToOnDialogTree(IBaseChain a2) {
+    if (a2 instanceof DialogChainToDialogAction || a2 instanceof ChainToDialogAction) {
 
-        int branchId = ((ChainToDialogAction) b).getBranchId();
-        DialogChainableAction d = MatOps.createDialogChainRootAction();
-        BaseAction a = null;
+        int branchId = ((ChainToDialogAction) a2).getBranchId();
+        DialogChainRoot d = new DialogChainRoot();
+        IBaseChain a = null;
         try {
             a = this.sceneHandlers2.onDialogTree(proxyForGameScene, d, branchId);
         } catch (A2gException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        if (a == null || a instanceof DoNothingAction)
-            a = new DialogEndAction(d);
-        linkUpperMostActionOfAToB(a, b);
+        if (a == null || a.getAction() instanceof DoNothingAction)
+            d.setAction( new DialogEndAction() );
+        linkUpperMostActionOfAToB(d, a2);
         return a;
     }
-    return b;
+    return a2;
 }
 
-BaseAction executeOnDoCommand(IOnDoCommand p1, IChainRootForScene p2, int p3, SentenceItem p4, SentenceItem p5, double p6, double p7)
+IBaseChain executeOnDoCommand(IOnDoCommand p1, ISceneChainRoot p2, int p3, SentenceItem p4, SentenceItem p5, double p6, double p7)
 {
-    BaseAction a = null;
+    IBaseChain a = null;
     try {
         // always put inventory second, so then we can say "I can't use the <SCENEOBJECT>
         if(p4.isInventory())
@@ -709,12 +711,10 @@ BaseAction executeOnDoCommand(IOnDoCommand p1, IChainRootForScene p2, int p3, Se
 }
 
 @Override
-public void doCommand(int verbAsCode, int verbAsVerbEnumeration, SentenceItem sentenceA, SentenceItem sentenceB,
-        double x, double y) {
+public void doCommand(int verbAsCode, int verbAsVerbEnumeration, SentenceItem sentenceA, SentenceItem sentenceB, double x, double y) {
 
-    BaseAction a = executeOnDoCommand(proxyForGameScene, MatOps.createChainRootAction(), verbAsCode,
+    IBaseChain a = executeOnDoCommand(proxyForGameScene, new SceneChainRoot(), verbAsCode,
             sentenceA, sentenceB, x + scenePresenter.getCameraX(), y + scenePresenter.getCameraY());
-
 
     this.commandLinePresenter.setMouseable(false);
 
@@ -756,11 +756,11 @@ void ProcessAutoplayCommand(int id) {
             saySpeechAndThenExecuteBranchWithBranchId(branchId);
         } else if (cmd.getVerb() == ConstantsForAPI.SLEEP) {
             // SLEEP = sleep for 100ms
-            BaseAction sleep = MatOps.createChainRootAction().sleep(cmd.getInt1());
+            IBaseChain sleep = new SceneChainRoot().sleep(cmd.getInt1());
             COMMANDS_AUTOPLAY.log(Level.FINE, "SLEEP " + cmd.getInt1());
             executeActionWithDoCommandActionRunner(sleep);
         } else if (cmd.getVerb() == ConstantsForAPI.SWITCH) {
-            BaseAction switchTo = MatOps.createChainRootAction().switchTo(cmd.getString(), 0);
+            IBaseChain switchTo = new SceneChainRoot().switchTo(cmd.getString(), 0);
             COMMANDS_AUTOPLAY.log(Level.FINE, "SWITCH " + cmd.getString());
             executeActionWithDoCommandActionRunner(switchTo);
         } else if (mode == GuiStateEnum.DialogTree) {
@@ -777,7 +777,7 @@ void ProcessAutoplayCommand(int id) {
             // otherwise ask the sceneHanders what the outcome is.
             SentenceItem o1 = new SentenceItem("", "", cmd.getInt1());
             SentenceItem o2 = new SentenceItem("", "", cmd.getInt2());
-            BaseAction a = executeOnDoCommand(proxyForGameScene, MatOps.createChainRootAction(),cmd.getVerb(), o1, o2, cmd.getDouble1(), cmd.getDouble2());
+            IBaseChain a = executeOnDoCommand(proxyForGameScene, new SceneChainRoot(), cmd.getVerb(), o1, o2, cmd.getDouble1(), cmd.getDouble2());
 
             if (a == null || a instanceof DoNothingAction) {
                 cancelAutoplay(cmd, "onDoCommand returned do nothing");
@@ -876,7 +876,7 @@ public void setActiveGuiState(GuiStateEnum state) {
 
 }
 
-public void executeChainedAction(ChainableAction ba) {
+public void executeChainedAction(ISceneChain ba) {
     executeActionWithOnEveryFrameActionRunner(ba);
 }
 

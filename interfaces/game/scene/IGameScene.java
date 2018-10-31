@@ -16,10 +16,10 @@
 
 package com.github.a2g.core.interfaces.game.scene;
 
-import com.github.a2g.core.action.ChainEndAction;
-import com.github.a2g.core.action.DialogChainEndAction;
-import com.github.a2g.core.interfaces.game.chainables.IChainRootForDialog;
-import com.github.a2g.core.interfaces.game.chainables.IChainRootForScene;
+import com.github.a2g.core.interfaces.game.chainables.IDialogChainEnd;
+import com.github.a2g.core.interfaces.game.chainables.IDialogChainRoot;
+import com.github.a2g.core.interfaces.game.chainables.ISceneChainEnd;
+import com.github.a2g.core.interfaces.game.chainables.ISceneChainRoot;
 import com.github.a2g.core.interfaces.game.handlers.IOnDialogTree;
 import com.github.a2g.core.interfaces.game.handlers.IOnDoCommand;
 import com.github.a2g.core.interfaces.game.handlers.IOnEntry;
@@ -67,7 +67,7 @@ public interface IGameScene extends ConstantsForAPI
 		</tr>
 		</table>
 	 */
-	public abstract ChainEndAction onEntry(IOnEntry api, IChainRootForScene ba) throws A2gException ;
+	public abstract ISceneChainEnd onEntry(IOnEntry api, ISceneChainRoot ba) throws A2gException ;
 
 	/*!
 	<table>
@@ -100,7 +100,7 @@ public interface IGameScene extends ConstantsForAPI
 	</tr>
 	</table>
 	 */
-	public abstract ChainEndAction onDoCommand(IOnDoCommand api, IChainRootForScene ba,
+	public abstract ISceneChainEnd onDoCommand(IOnDoCommand api, ISceneChainRoot chain,
 			int verb, SentenceItem itemA, SentenceItem itemB, double x, double y) throws A2gException ;
 
 	/*!
@@ -120,7 +120,6 @@ public interface IGameScene extends ConstantsForAPI
 	</tr>
 	</table>
 	 */
-	public abstract DialogChainEndAction onDialogTree(IOnDialogTree api,
-			IChainRootForDialog ba, int branch) throws A2gException ;
+	public abstract IDialogChainEnd onDialogTree(IOnDialogTree api, IDialogChainRoot ba, int branch) throws A2gException ;
 
 }

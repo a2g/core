@@ -17,19 +17,17 @@
 package com.github.a2g.core.action;
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromSoundAction;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 
-public class PlaySoundAction extends ChainableAction {
+public class PlaySoundAction extends BaseAction {
 	private String stid;
 	private IMasterPresenterFromSoundAction master;
 
-	public PlaySoundAction(BaseAction parent, String stid) {
-		super(parent);
+	public PlaySoundAction( String stid) {
 		this.stid = stid;
 	}
 

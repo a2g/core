@@ -42,7 +42,7 @@ public class WalkSinglePerformer
 		switcher = s;
 		mover = m;
 		scaler = sc;
-		mover.setToInitialAtEndForMover(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
+		mover.setToInitialAtEndForMover(true);// only ISceneChain::walkAndSwitch sets setToInitialAtEnd(false);
 	}
  
 	public void setScene(IScenePresenterFromActions scene)

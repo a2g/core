@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel.GuiStateEnum;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromDoBranchAction;
@@ -24,13 +23,12 @@ import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromA
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 
-public class ChainToDialogAction extends DialogChainEndAction {
+public class ChainToDialogAction extends BaseAction {
 
 	private int branchId;
 	private IDialogTreePresenterFromDoBranchAction dialogTree;
 
-	public ChainToDialogAction(BaseAction parent, int branchId) {
-		super(parent);
+	public ChainToDialogAction(int branchId) {
 		this.branchId = branchId;
 	}
 
@@ -44,26 +42,31 @@ public class ChainToDialogAction extends DialogChainEndAction {
 	}
 
 	@Override
-	protected void onUpdateGameAction(double progress) {
+	protected void onUpdateGameAction(double progress) 
+	{
 	}
 
 	@Override
-	protected boolean onCompleteActionAndCheckForGateExit() {
+	protected boolean onCompleteActionAndCheckForGateExit() 
+	{
 		dialogTree.setActiveGuiState(GuiStateEnum.DialogTree);
 		// do nothing, this is a placeholder that results in a large chained action
 		return false;
 	}
 
 
-	public void setBranchId(int branchId) {
+	public void setBranchId(int branchId) 
+	{
 		this.branchId = branchId;
 	}
 
-	public int getBranchId() {
+	public int getBranchId() 
+	{
 		return branchId;
 	}
 
-	public void setDialogTree(IDialogTreePresenterFromDoBranchAction dialogTree) {
+	public void setDialogTree(IDialogTreePresenterFromDoBranchAction dialogTree) 
+	{
 		this.dialogTree = dialogTree;
 	}
 
@@ -71,9 +74,8 @@ public class ChainToDialogAction extends DialogChainEndAction {
 	public void setAll(IMasterPresenterFromActions master,
 			IScenePresenterFromActions scene,
 			IDialogTreePresenterFromActions dialogTree,
-			IInventoryPresenterFromActions inventory) {
+			IInventoryPresenterFromActions inventory) 
+	{
 		setDialogTree(dialogTree);
-
 	}
-
 }

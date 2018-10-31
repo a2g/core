@@ -16,11 +16,15 @@
 
 package com.github.a2g.core.interfaces.game.scene;
 
-import com.github.a2g.core.action.ChainEndAction;
-import com.github.a2g.core.action.ChainableAction;
-import com.github.a2g.core.action.DialogChainEndAction;
-import com.github.a2g.core.interfaces.game.chainables.IChainRootForDialog;
-import com.github.a2g.core.interfaces.game.chainables.IChainRootForScene;
+import com.github.a2g.core.chain.SceneChainEnd;
+import com.github.a2g.core.chain.DialogChainEnd;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
+import com.github.a2g.core.interfaces.game.chainables.IDialogChain;
+import com.github.a2g.core.interfaces.game.chainables.IDialogChainEnd;
+import com.github.a2g.core.interfaces.game.chainables.IDialogChainRoot;
+import com.github.a2g.core.interfaces.game.chainables.ISceneChain;
+import com.github.a2g.core.interfaces.game.chainables.ISceneChainEnd;
+import com.github.a2g.core.interfaces.game.chainables.ISceneChainRoot;
 import com.github.a2g.core.interfaces.game.handlers.IOnDialogTree;
 import com.github.a2g.core.interfaces.game.handlers.IOnDoCommand;
 import com.github.a2g.core.interfaces.game.handlers.IOnEnqueueResources;
@@ -76,7 +80,7 @@ public class OnEnqueueResourcesDummyImpl implements IOnEnqueueResources
 	}
 
 	// utlity methods
-	public ChainableAction setValue(Object string, int value) {
+	public IBaseChain setValue(Object string, int value) {
 		this.implementation.setValue(string, value);
 		return null;
 	}
@@ -107,7 +111,7 @@ public class OnEnqueueResourcesDummyImpl implements IOnEnqueueResources
 		}
 
 		@Override
-		public ChainEndAction onEntry(IOnEntry api, IChainRootForScene ba) throws A2gException {
+		public ISceneChainEnd onEntry(IOnEntry api, ISceneChainRoot ba) throws A2gException {
 			return wrapped.onEntry(api, ba);
 		}
 
@@ -117,13 +121,13 @@ public class OnEnqueueResourcesDummyImpl implements IOnEnqueueResources
 		}
 
 		@Override
-		public ChainEndAction onDoCommand(IOnDoCommand api, IChainRootForScene ba, int verb, SentenceItem itemA,
+		public ISceneChainEnd onDoCommand(IOnDoCommand api, ISceneChainRoot ba, int verb, SentenceItem itemA,
 				SentenceItem itemB, double x, double y) throws A2gException {
 			return wrapped.onDoCommand(api, ba, verb, itemA, itemB, x, y);
 		}
 
 		@Override
-		public DialogChainEndAction onDialogTree(IOnDialogTree api, IChainRootForDialog ba, int branch)
+		public IDialogChainEnd onDialogTree(IOnDialogTree api, IDialogChainRoot ba, int branch)
 				throws A2gException {
 			return wrapped.onDialogTree(api, ba, branch);
 		};

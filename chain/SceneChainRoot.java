@@ -14,15 +14,15 @@
  * the License.
  */
 
-package com.github.a2g.core.action;
+package com.github.a2g.core.chain;
 
-import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.interfaces.game.chainables.ISceneChainEnd;
+import com.github.a2g.core.interfaces.game.chainables.ISceneChainRoot;
 
-public abstract class ChainEndAction extends BaseAction
+public class SceneChainRoot extends SceneChain implements ISceneChainRoot
 {
 
-	ChainEndAction(BaseAction parent) {
-		super(parent);
-
+	public SceneChainRoot() {
+	    super(null, null);
 	}
 }

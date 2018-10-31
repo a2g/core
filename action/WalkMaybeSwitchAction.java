@@ -30,14 +30,13 @@ import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActio
  * interactive walk to commands.
  * It triggers a path find, that occurs in WalkMulti
  */
-public class WalkMaybeSwitchAction extends ChainEndAction
+public class WalkMaybeSwitchAction extends BaseAction
 {
 	WalkMultiPerformer multiWalker;
 
-	public WalkMaybeSwitchAction(BaseAction parent, short ocode) {
-		super(parent);
+	public WalkMaybeSwitchAction(short ocode) {
 		multiWalker = new WalkMultiPerformer(ocode, true);
-		multiWalker.setToInitialAtEnd(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false);
+		multiWalker.setToInitialAtEnd(true);// only ISceneChain::walkAndSwitch sets setToInitialAtEnd(false);
 	}
 
 	@Override

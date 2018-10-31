@@ -1,8 +1,8 @@
 package com.github.a2g.core.interfaces.game.singles;
 
-import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 
 public interface IPlaySound {
-    IChainBase playSound(String stid);
-    IChainBase playSoundNonBlocking(String stid);
+    IBaseChain playSound(String stid);
+    IBaseChain playSoundNonBlocking(String stid);
 }

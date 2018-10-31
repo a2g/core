@@ -17,8 +17,8 @@
 package com.github.a2g.core.interfaces.game.handlers;
 
  
-import com.github.a2g.core.action.ChainEndAction;
-import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+import com.github.a2g.core.chain.SceneChainEnd;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.game.singles.IGetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.singles.IGetBaseMiddleY;
@@ -91,32 +91,32 @@ IGetValue
 	//@{
 	@Override int getValue(Object key);
 	@Override boolean isTrue(Object key);
-	@Override IChainBase setValue(Object key, int value);
+	@Override IBaseChain setValue(Object key, int value);
 	//@}
 
 	/**   @name Helpful for game */
 	//@{
 	@Override String getCurrentSceneName();
-	@Override ChainEndAction switchToScene(String name, int entrySegment);
+	@Override SceneChainEnd switchToScene(String name, int entrySegment);
 	@Override String getLastSceneName();
 	@Override boolean isInDebugMode();
 	@Override double getSceneGuiWidth();
 	@Override double getSceneGuiHeight();
-	@Override IChainBase setTitleCard(String textToDisplay) ;
+	@Override IBaseChain setTitleCard(String textToDisplay) ;
 	//@}
 
 	/**   @name Inventory */
 	//@{
 	@Override boolean isInventoryItemVisible(int icode);
-	@Override IChainBase setInventoryItemVisible(int icode, boolean isVisible);
+	@Override IBaseChain setInventoryItemVisible(int icode, boolean isVisible);
 	//@}
 
 	/**   @name Object */
 	//@{
-	@Override IChainBase show(short ocode);
-	@Override IChainBase hide(short ocode);
-	@Override IChainBase setBaseMiddleX(short ocode, double bmx);
-	@Override IChainBase setBaseMiddleY(short ocode, double bmy);
+	@Override IBaseChain show(short ocode);
+	@Override IBaseChain hide(short ocode);
+	@Override IBaseChain setBaseMiddleX(short ocode, double bmx);
+	@Override IBaseChain setBaseMiddleY(short ocode, double bmy);
 	@Override double getBaseMiddleX(short ocode);
 	@Override double getBaseMiddleY(short ocode);
 	@Override int getX(short ocode);
@@ -125,18 +125,18 @@ IGetValue
 
 	/**   @name Animation */
 	//@{
-	@Override IChainBase setAnimationAsObjectWalkDirection(String atid, WalkDirection type);
-	@Override IChainBase  setAnimationAsSceneTalker(String atid);
-	@Override IChainBase  setAnimationAsObjectInitial(String atid);
-	@Override IChainBase  setAnimationAsObjectCurrent (String atid);
+	@Override IBaseChain setAnimationAsObjectWalkDirection(String atid, WalkDirection type);
+	@Override IBaseChain  setAnimationAsSceneTalker(String atid);
+	@Override IBaseChain  setAnimationAsObjectInitial(String atid);
+	@Override IBaseChain  setAnimationAsObjectCurrent (String atid);
 	//@}
 
 	/**   @name Sound */
 	//@{
-	@Override IChainBase  setSoundtrack(String stid) ;
+	@Override IBaseChain  setSoundtrack(String stid) ;
 	//@}
-    IChainBase setDefaultSceneObject(short hero, boolean b);
-    IChainBase setAnimationAsSceneDialogUs(String atid);
-    IChainBase setAnimationTalkingColor(String atid, ColorEnum color);
-    IChainBase setAnimationDuration(String atid, double durationInSecs);
+    IBaseChain setDefaultSceneObject(short hero, boolean b);
+    IBaseChain setAnimationAsSceneDialogUs(String atid);
+    IBaseChain setAnimationTalkingColor(String atid, ColorEnum color);
+    IBaseChain setAnimationDuration(String atid, double durationInSecs);
 }

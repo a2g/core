@@ -18,7 +18,6 @@ package com.github.a2g.core.action;
 
 
 import com.github.a2g.core.action.BaseAction;
-import com.github.a2g.core.action.ChainableAction;
 import com.github.a2g.core.action.performer.LookPerformer;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
@@ -26,11 +25,10 @@ import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActi
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromLookPerformer;
 
-public class LookAction extends ChainableAction {
+public class LookAction extends BaseAction {
 	LookPerformer looker;
 
-	public LookAction(BaseAction parent, String atid, double durationInSeconds) {
-		super(parent);
+	public LookAction(String atid, double durationInSeconds) {
 		looker = new LookPerformer(atid, durationInSeconds);
 	}
 	@Override

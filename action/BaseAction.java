@@ -16,7 +16,6 @@
 
 package com.github.a2g.core.action;
 
-import com.github.a2g.core.action.performer.SingleCallPerformer;
 import com.github.a2g.core.interfaces.nongame.IActionRunnerFromBaseAction;
 import com.github.a2g.core.interfaces.nongame.IBaseActionFromSystemAnimation;
 import com.github.a2g.core.interfaces.nongame.platform.IPlatformAnimation;
@@ -29,7 +28,8 @@ import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActio
  * @author Admin
  *
  */
-public abstract class BaseAction implements IBaseActionFromSystemAnimation {
+public abstract class BaseAction 
+implements IBaseActionFromSystemAnimation {
 	private IPlatformAnimation systemAnimation;
 	private IActionRunnerFromBaseAction callbacks;
 	protected BaseAction parent;
@@ -52,8 +52,7 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 			IDialogTreePresenterFromActions dialogTree,
 			IInventoryPresenterFromActions inventory);
 
-	protected BaseAction(BaseAction parent) {
-		this.parent = parent;
+	protected BaseAction() {
 		this.callbacks = null;// initd in setcallbacks
 		this.systemAnimation = null;// initd in setFactory
 		this.isParallel = false;
@@ -78,21 +77,6 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 		this.isLinear = isLinear;
 	}
 
-
-	public BaseAction doBoth(ChainableAction a, ChainableAction b) {
-		return a.subroutine(b);
-	}
-
-	public ChainableAction doNothing() {
-		DoNothingAction a =  new DoNothingAction(this);
-		return a;
-	}
-
-	public BaseAction getParent() {
-		return this.parent;
-	}
-
-
 	@Override
 	// method in animation
 	public void onComplete() {
@@ -110,26 +94,8 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 		onUpdateGameAction(progress);
 	}
 
-	public void setParent(BaseAction parent) {
-		this.parent = parent;
-	}
-
-
-
-	public ChainableAction setVisible(short ocode, boolean isVisible) {
-		SingleCallAction a =  new SingleCallAction(this, SingleCallPerformer.Type.SetVisible);
-		a.setOCode(ocode);
-		a.setBoolean(isVisible);
-		return a;
-	}
-
-
-
-
-
 	public void cancel() {
 		systemAnimation.cancel();
-
 	}
 
 	public void run(int i) {
@@ -142,7 +108,4 @@ public abstract class BaseAction implements IBaseActionFromSystemAnimation {
 	public void setCallbacks(ActionRunner callbacks) {
 		this.callbacks = callbacks;
 	}
-
-
-
 }

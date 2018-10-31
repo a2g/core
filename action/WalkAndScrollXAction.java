@@ -32,15 +32,14 @@ import com.google.gwt.touch.client.Point;
  * It's just used for some cut scenes.
  * As a result there is no collision detection.
  */
-public class WalkAndScrollXAction extends ChainableAction{
+public class WalkAndScrollXAction extends BaseAction{
 
 	MovePerformer mover;
 	WalkPerformer walker;
 	ScrollPerformer scroller;
-	public WalkAndScrollXAction(BaseAction parent, short ocode) {
-		super(parent);
+	public WalkAndScrollXAction(short ocode) {
 		mover = new MovePerformer(ocode);
-		mover.setToInitialAtEndForMover(true);// only ChainableAction::walkAndSwitch sets setToInitialAtEnd(false)
+		mover.setToInitialAtEndForMover(true);// only ISceneChain::walkAndSwitch sets setToInitialAtEnd(false)
 
 		walker = new WalkPerformer(ocode);
 		scroller = new ScrollPerformer();

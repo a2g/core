@@ -24,11 +24,10 @@ import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActi
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 import com.google.gwt.touch.client.Point;
 
-public class MoveWhilstAnimatingAction extends ChainableAction{
+public class MoveWhilstAnimatingAction extends BaseAction{
 
 	MovePerformer mover;
-	public MoveWhilstAnimatingAction(BaseAction parent, short ocode) {
-		super(parent);
+	public MoveWhilstAnimatingAction(short ocode) {
 		mover = new MovePerformer(ocode);
 	}
 

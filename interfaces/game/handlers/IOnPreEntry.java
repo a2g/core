@@ -17,9 +17,10 @@
 package com.github.a2g.core.interfaces.game.handlers;
 
 import com.github.a2g.core.interfaces.game.singles.IAddEdgeSpanToPerimeter ;
-import com.github.a2g.core.action.ChainEndAction;
-import com.github.a2g.core.action.ChainRootAction;
-import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+import com.github.a2g.core.chain.SceneChainEnd;
+import com.github.a2g.core.chain.DialogChain;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
+import com.github.a2g.core.interfaces.game.chainables.ISceneChainRoot;
 import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.game.singles.IAddEdgePointToPerimeter ;
 import com.github.a2g.core.interfaces.game.singles.IAddHelperPoint;
@@ -178,24 +179,24 @@ IGetAnimationLength
 	//@{
 	@Override int getValue(Object key);
 	@Override boolean isTrue(Object key);
-	@Override IChainBase setValue(Object key, int value);
+	@Override IBaseChain setValue(Object key, int value);
 	//@}
 
 	/**   @name Helpful for game */
 	//@{
-	@Override ChainEndAction switchToScene(String name, int entrySegment);
+	@Override SceneChainEnd switchToScene(String name, int entrySegment);
 	@Override boolean isInDebugMode();
 	@Override double getSceneGuiWidth();
 	@Override double getSceneGuiHeight();
 	@Override String getLastSceneName();
-	@Override IChainBase shareWinning(String string);
-	@Override ChainRootAction createChainRootAction();
+	@Override IBaseChain shareWinning(String string);
+	@Override ISceneChainRoot createChainRootAction();
 	@Override short getDefaultSceneObject();
 	@Override void clearValuesAndSaidSpeech();
 	@Override void clearSaidSpeech();
 	@Override String getCurrentSceneName();
 	@Override short getOCodeByAtid(String atid);
-	@Override IChainBase setTitleCard(String stid) ;
+	@Override IBaseChain setTitleCard(String stid) ;
 	//@}
 
 
@@ -213,61 +214,61 @@ IGetAnimationLength
 
 	/**   @name Inventory */
 	//@{
-	@Override IChainBase showInventoryItem(int icode);
-	@Override IChainBase hideInventoryItem(int code);
-	@Override IChainBase setInventoryItemDisplayName(int icode, String displayName);
+	@Override IBaseChain showInventoryItem(int icode);
+	@Override IBaseChain hideInventoryItem(int code);
+	@Override IBaseChain setInventoryItemDisplayName(int icode, String displayName);
 	@Override boolean isInventoryItemVisible(int icode);
-	@Override IChainBase setInventoryItemVisible(int icode, boolean isVisible);
-	@Override IChainBase hideInventoryItemsAllOfThem();
+	@Override IBaseChain setInventoryItemVisible(int icode, boolean isVisible);
+	@Override IBaseChain hideInventoryItemsAllOfThem();
 	//@}
 
 	/**   @name Object */
 	//@{
 	@Override void removeVerbByCode(int vcode);
-	@Override IChainBase updateVerbUI();
+	@Override IBaseChain updateVerbUI();
 	//@}
 
 
 	/**   @name Object */
 	//@{
-	@Override IChainBase show(short ocode);
-	@Override IChainBase hide(short ocode);
-	@Override IChainBase setBaseMiddleX(short ocode, double bmx);
-	@Override IChainBase setBaseMiddleY(short ocode, double bmy);
+	@Override IBaseChain show(short ocode);
+	@Override IBaseChain hide(short ocode);
+	@Override IBaseChain setBaseMiddleX(short ocode, double bmx);
+	@Override IBaseChain setBaseMiddleY(short ocode, double bmy);
 	@Override double getBaseMiddleX(short ocode);
 	@Override double getBaseMiddleY(short ocode);
 	@Override int getX(short ocode);
 	@Override int getY(short ocode);
-	@Override IChainBase setX(short ocode, double x);
-	@Override IChainBase setY(short ocode, double y);
+	@Override IBaseChain setX(short ocode, double x);
+	@Override IBaseChain setY(short ocode, double y);
 	@Override boolean isVisible(short ocode);
-	@Override IChainBase setDisplayName(short ocode, String displayName);
-	@Override IChainBase setDefaultSceneObject(short ocode, boolean isUsingEdgePerimeterDetection);
-	@Override IChainBase setScreenCoordsPerSecond(short ocode, double coordsPerSecond);
-	@Override IChainBase setParallaxX(short ocode, double parallaxInX);
-	@Override IChainBase setVisible(short ocode, boolean isVisible);
-	@Override IChainBase setHeadRectangleForObject(short ocode, int helperIndex);
-	@Override IChainBase setTalkingColor(short ocode, ColorEnum talkingColor);
-	@Override IChainBase setClumpWithPrevious(short ocode, boolean clumpWithPrevious);
-	@Override IChainBase setScale(short ocode, double scale);
+	@Override IBaseChain setDisplayName(short ocode, String displayName);
+	@Override IBaseChain setDefaultSceneObject(short ocode, boolean isUsingEdgePerimeterDetection);
+	@Override IBaseChain setScreenCoordsPerSecond(short ocode, double coordsPerSecond);
+	@Override IBaseChain setParallaxX(short ocode, double parallaxInX);
+	@Override IBaseChain setVisible(short ocode, boolean isVisible);
+	@Override IBaseChain setHeadRectangleForObject(short ocode, int helperIndex);
+	@Override IBaseChain setTalkingColor(short ocode, ColorEnum talkingColor);
+	@Override IBaseChain setClumpWithPrevious(short ocode, boolean clumpWithPrevious);
+	@Override IBaseChain setScale(short ocode, double scale);
 
 	//@}
 
 
 	/**   @name Animation */
 	//@{
-	@Override IChainBase setAnimationAsObjectWalkDirection(String atid, WalkDirection type);
-	@Override IChainBase setAnimationAsSceneTalker(String atid);
-	@Override IChainBase setAnimationAsObjectInitial(String atid); 
-	@Override IChainBase alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation(String atid, int frame);
+	@Override IBaseChain setAnimationAsObjectWalkDirection(String atid, WalkDirection type);
+	@Override IBaseChain setAnimationAsSceneTalker(String atid);
+	@Override IBaseChain setAnimationAsObjectInitial(String atid); 
+	@Override IBaseChain alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation(String atid, int frame);
 	@Override int getAnimationLength(String atid);
-	@Override IChainBase setAnimationDuration(String atid, double duration);
-	@Override IChainBase setAnimationAsObjectCurrent(String atid);
-	@Override IChainBase setAnimationAsObjectCurrentAndSetFrame(String atid, int frame);
-	@Override IChainBase setAnimationAsSceneDialogUs(String atid);
-	@Override IChainBase setAnimationAsSceneDialogThem(String atid);
-	@Override IChainBase setHeadRectangleForAnimation(String atid, int index);
-	@Override IChainBase setAnimationTalkingColor(String atid, ColorEnum color);
+	@Override IBaseChain setAnimationDuration(String atid, double duration);
+	@Override IBaseChain setAnimationAsObjectCurrent(String atid);
+	@Override IBaseChain setAnimationAsObjectCurrentAndSetFrame(String atid, int frame);
+	@Override IBaseChain setAnimationAsSceneDialogUs(String atid);
+	@Override IBaseChain setAnimationAsSceneDialogThem(String atid);
+	@Override IBaseChain setHeadRectangleForAnimation(String atid, int index);
+	@Override IBaseChain setAnimationTalkingColor(String atid, ColorEnum color);
 	//@}
  
 

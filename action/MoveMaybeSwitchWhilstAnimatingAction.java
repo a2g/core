@@ -25,13 +25,12 @@ import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActi
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 import com.google.gwt.touch.client.Point;
 
-public class MoveMaybeSwitchWhilstAnimatingAction extends ChainEndAction{
+public class MoveMaybeSwitchWhilstAnimatingAction extends BaseAction{
 
 	MovePerformer mover;
 	SwitchPerformer switcher;
 
-	public MoveMaybeSwitchWhilstAnimatingAction(BaseAction parent, short ocode) {
-		super(parent);
+	public MoveMaybeSwitchWhilstAnimatingAction(  short ocode) {
 		mover = new MovePerformer(ocode );
 		switcher = new SwitchPerformer(ocode );
 	}

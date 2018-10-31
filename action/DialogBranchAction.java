@@ -16,14 +16,14 @@
 
 package com.github.a2g.core.action;
 
-import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.chain.DialogChain;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IDialogTreePresenterFromBranchAction;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromActions;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActions;
 
-public class DialogBranchAction extends DialogChainableAction {
+public class DialogBranchAction extends BaseAction {
 
 	private String text;
 	private int branchId;
@@ -31,8 +31,7 @@ public class DialogBranchAction extends DialogChainableAction {
 	private IDialogTreePresenterFromBranchAction dialogTree;
 	private boolean isOkToAdd;
 
-	public DialogBranchAction(BaseAction parent, String text, int branchId, boolean isOkToAdd) {
-		super(parent);
+	public DialogBranchAction(String text, int branchId, boolean isOkToAdd) {
 		this.isOkToAdd = isOkToAdd;
 		this.setBranchId(branchId);
 		this.setText(text);

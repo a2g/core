@@ -16,10 +16,11 @@
 
 package com.github.a2g.core.interfaces.game.handlers;
 
-import com.github.a2g.core.action.ChainEndAction;
-import com.github.a2g.core.action.ChainRootAction;
-import com.github.a2g.core.action.ChainableAction;
-import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+import com.github.a2g.core.chain.SceneChainEnd;
+import com.github.a2g.core.chain.DialogChain;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
+import com.github.a2g.core.interfaces.game.chainables.ISceneChain;
+import com.github.a2g.core.interfaces.game.chainables.ISceneChainRoot;
 import com.github.a2g.core.interfaces.game.singles.ICreateChainRootAction;
 import com.github.a2g.core.interfaces.game.singles.IDisplayTitleCard;
 import com.github.a2g.core.interfaces.game.singles.IExecuteChainedAction;
@@ -116,41 +117,41 @@ IGetValue
 	//@{
 	@Override int getValue(Object key);
 	@Override boolean isTrue(Object key);
-	@Override IChainBase setValue(Object key, int value);
+	@Override IBaseChain setValue(Object key, int value);
 	//@}
 
 	/**   @name Helpful for game */
 	//@{
-	@Override ChainEndAction switchToScene(String name, int entrySegment);
+	@Override SceneChainEnd switchToScene(String name, int entrySegment);
 	@Override boolean isInDebugMode();
 	@Override double getSceneGuiWidth();
 	@Override double getSceneGuiHeight();
 	@Override String getLastSceneName();
-	@Override IChainBase shareWinning(String string);
-	@Override ChainRootAction createChainRootAction();
+	@Override IBaseChain shareWinning(String string);
+	@Override ISceneChainRoot createChainRootAction();
 	@Override String getCurrentSceneName();
-	@Override void executeChainedAction(ChainableAction ba);
+	@Override void executeSceneChain(ISceneChain ba);
 	//@}
 
 	/**   @name Object */
 	//@{
-	@Override IChainBase show(short ocode);
-	@Override IChainBase hide(short ocode);
-	@Override IChainBase setBaseMiddleX(short ocode, double bmx);
-	@Override IChainBase setBaseMiddleY(short ocode, double bmy);
+	@Override IBaseChain show(short ocode);
+	@Override IBaseChain hide(short ocode);
+	@Override IBaseChain setBaseMiddleX(short ocode, double bmx);
+	@Override IBaseChain setBaseMiddleY(short ocode, double bmy);
 	@Override double getBaseMiddleX(short ocode);
 	@Override double getBaseMiddleY(short ocode);
 	@Override int getX(short ocode);
 	@Override int getY(short ocode);
-	@Override IChainBase setX(short ocode, double x);
-	@Override IChainBase setY(short ocode, double y);
+	@Override IBaseChain setX(short ocode, double x);
+	@Override IBaseChain setY(short ocode, double y);
 	@Override boolean isVisible(short ocode);
 	//@}
 
 
 	/**   @name Animation */
 	//@{
-	@Override IChainBase setAnimationAsObjectCurrent(String atid);
+	@Override IBaseChain setAnimationAsObjectCurrent(String atid);
 	boolean isAnimation(String atid);
 	//@}
 

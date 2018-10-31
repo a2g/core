@@ -21,9 +21,10 @@ import com.github.a2g.core.interfaces.game.singles.IAddHelperPoint;
 import com.github.a2g.core.interfaces.game.singles.IAddHelperRectangle;
 import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation;
 import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToLastFrameOfNewAnimation;
-import com.github.a2g.core.action.ChainEndAction;
-import com.github.a2g.core.action.ChainRootAction;
-import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+import com.github.a2g.core.chain.SceneChainEnd;
+import com.github.a2g.core.chain.DialogChain;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
+import com.github.a2g.core.interfaces.game.chainables.ISceneChainRoot;
 import com.github.a2g.core.interfaces.game.singles.IAddEdgePointToPerimeter;
 import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation;
 import com.github.a2g.core.interfaces.game.singles.IClearValuesAndSaidSpeech;
@@ -144,18 +145,18 @@ ISetInventoryItemVisible
 	//@{
 	@Override int getValue(Object key);
 	@Override boolean isTrue(Object key);
-	@Override IChainBase setValue(Object key, int value);
+	@Override IBaseChain setValue(Object key, int value);
 	@Override  void clearValuesAndSaidSpeech();
 	//@}
 
 	/**   @name Helpful for game */
 	//@{
 	@Override String getCurrentSceneName();
-	@Override ChainEndAction switchToScene(String name, int entrySegment);
+	@Override SceneChainEnd switchToScene(String name, int entrySegment);
 	@Override boolean isInDebugMode();
 	@Override String getLastSceneName();
-	@Override IChainBase shareWinning(String string);
-	@Override ChainRootAction createChainRootAction();
+	@Override IBaseChain shareWinning(String string);
+	@Override ISceneChainRoot createChainRootAction();
 	
 	//@}
 
@@ -169,45 +170,45 @@ ISetInventoryItemVisible
 	
 	/**   @name Inventory */
 	//@{
-	@Override IChainBase showInventoryItem(int icode);
-	@Override IChainBase hideInventoryItem(int icode);
+	@Override IBaseChain showInventoryItem(int icode);
+	@Override IBaseChain hideInventoryItem(int icode);
 	@Override boolean isInventoryItemVisible(int code);
-	@Override IChainBase setInventoryItemDisplayName(int icode, String displayName);
-	@Override IChainBase setInventoryItemVisible(int icode, boolean isVisible);
+	@Override IBaseChain setInventoryItemDisplayName(int icode, String displayName);
+	@Override IBaseChain setInventoryItemVisible(int icode, boolean isVisible);
 	//@}
 
 	/**   @name Object */
 	//@{
-	@Override IChainBase show(short ocode);
-	@Override IChainBase hide(short ocode);
-	@Override IChainBase setBaseMiddleX(short ocode, double bmx);
-	@Override IChainBase setBaseMiddleY(short ocode, double bmy);
+	@Override IBaseChain show(short ocode);
+	@Override IBaseChain hide(short ocode);
+	@Override IBaseChain setBaseMiddleX(short ocode, double bmx);
+	@Override IBaseChain setBaseMiddleY(short ocode, double bmy);
 	@Override double getBaseMiddleX(short ocode);
 	@Override double getBaseMiddleY(short ocode);
 	@Override int getX(short ocode);
 	@Override int getY(short ocode);
-	@Override IChainBase setX(short ocode, double x);
-	@Override IChainBase setY(short ocode, double y);
+	@Override IBaseChain setX(short ocode, double x);
+	@Override IBaseChain setY(short ocode, double y);
 	@Override boolean isVisible(short ocode);
 	@Override String getCurrentAnimation(short ocode);
 	@Override int getCurrentFrame(short ocode);
-	@Override IChainBase setCurrentFrame(short ocode, int frame);
-	@Override IChainBase setDisplayName(short ocode, String displayName);
-	@Override IChainBase setDefaultSceneObject(short ocode, boolean isUsingEdgePerimeterDetection);
-	@Override IChainBase setScreenCoordsPerSecond(short ocode, double coordsPerSecond);
+	@Override IBaseChain setCurrentFrame(short ocode, int frame);
+	@Override IBaseChain setDisplayName(short ocode, String displayName);
+	@Override IBaseChain setDefaultSceneObject(short ocode, boolean isUsingEdgePerimeterDetection);
+	@Override IBaseChain setScreenCoordsPerSecond(short ocode, double coordsPerSecond);
 	//@}
 
 	/**   @name Animation */
 	//@{
-	@Override IChainBase setAnimationAsSceneTalker(String atid);
-	@Override IChainBase setAnimationAsObjectInitial(String atid);
-	@Override IChainBase setAnimationAsObjectCurrent (String atid);
-	@Override IChainBase alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation(String atid, int frame);
-	@Override IChainBase alignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation(String atid);
-	@Override IChainBase alignBaseMiddleOfOldFrameToLastFrameOfNewAnimation(String atid);
+	@Override IBaseChain setAnimationAsSceneTalker(String atid);
+	@Override IBaseChain setAnimationAsObjectInitial(String atid);
+	@Override IBaseChain setAnimationAsObjectCurrent (String atid);
+	@Override IBaseChain alignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation(String atid, int frame);
+	@Override IBaseChain alignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation(String atid);
+	@Override IBaseChain alignBaseMiddleOfOldFrameToLastFrameOfNewAnimation(String atid);
 	@Override int getAnimationLastFrame(String atid);
 	@Override int getAnimationLength(String atid);
-	@Override IChainBase setAnimationDuration(String atid, double duration);
+	@Override IBaseChain setAnimationDuration(String atid, double duration);
 	//@}
  
 	

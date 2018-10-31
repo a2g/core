@@ -1,7 +1,7 @@
 package com.github.a2g.core.interfaces.game.singles;
 
-import com.github.a2g.core.action.ChainEndAction; 
+import com.github.a2g.core.chain.SceneChainEnd; 
 
 public interface ISwitchToScene {
-	ChainEndAction switchToScene(String scene, int entrySegment);
+	SceneChainEnd switchToScene(String scene, int entrySegment);
 }

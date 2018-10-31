@@ -14,10 +14,10 @@
  * the License.
  */
 package com.github.a2g.core.interfaces.nongame;
+ 
 
-import com.github.a2g.core.interfaces.game.chainables.IChainBase;
-
-public interface IBaseActionFromSystemAnimation extends IChainBase{
+public interface IBaseActionFromSystemAnimation  
+{
 	void onComplete();
 
 	void onUpdate(double progress);

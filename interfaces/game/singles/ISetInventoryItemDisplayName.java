@@ -1,8 +1,8 @@
 package com.github.a2g.core.interfaces.game.singles;
 
-import com.github.a2g.core.interfaces.game.chainables.IChainBase;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 
 public interface ISetInventoryItemDisplayName {
-	IChainBase setInventoryItemDisplayName(int icode, String displayName);
+	IBaseChain setInventoryItemDisplayName(int icode, String displayName);
 
 }
