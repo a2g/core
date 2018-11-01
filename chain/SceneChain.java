@@ -257,17 +257,17 @@ implements ISceneChain {
         // end of an asycnhronous animation execution chain.
         if(sceneName==null)
             throw new A2gException (sceneName);
-        WalkAction walk = new WalkAction( ScenePresenter.DEFAULT_SCENE_OBJECT);
-        walk.setEndX(p.getX());
-        walk.setEndY(p.getY());
-        walk.setToInitialAtEnd(false);
+        WalkAction walkAction = new WalkAction( ScenePresenter.DEFAULT_SCENE_OBJECT);
+        walkAction.setEndX(p.getX());
+        walkAction.setEndY(p.getY());
+        walkAction.setToInitialAtEnd(false);
 
-        SingleCallAction single = new SingleCallAction(Type.Switch);
-        single.setString(sceneName);
-        single.setInt(entrySegment);
+        SingleCallAction switchAction = new SingleCallAction(Type.Switch);
+        switchAction.setString(sceneName);
+        switchAction.setInt(entrySegment);
 
-        SceneChain a = new SceneChain(this, walk);
-        SceneChain b = new SceneChain(a, walk);
+        SceneChain a = new SceneChain(this, walkAction);
+        SceneChain b = new SceneChain(a, switchAction);
         return b;
     }
 

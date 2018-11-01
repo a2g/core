@@ -119,6 +119,7 @@ public class WalkMultiPerformer {
 
 	public void onUpdateGameAction(double progress) {
 
+	    assert(singleWalks.size()>1);
 		if(progressPercentageForStartOfEachSingleWalk!=null)
 		{
 			for (int i = singleWalks.size() - 1; i >= 0; i--) {
