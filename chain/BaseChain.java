@@ -33,8 +33,8 @@ public class BaseChain implements IBaseChain
 	    this.action = null;
 	} 
 	
-	protected BaseChain(BaseChain parent, BaseAction action) {
-	    this.parent = parent;
+	protected BaseChain(IBaseChain chain, BaseAction action) {
+	    this.parent = chain;
 	    this.action = action;
 	} 
 

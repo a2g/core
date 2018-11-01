@@ -31,7 +31,6 @@ import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromActio
 import com.github.a2g.core.primitive.LogNames;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.SingleCallAction;
-import com.github.a2g.core.chain.BaseChain;
 
 public class ChainRunner implements IActionRunnerFromBaseAction {
 

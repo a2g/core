@@ -3,6 +3,7 @@ package com.github.a2g.core.action;
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
 import com.github.a2g.core.chain.DialogChain;
+import com.github.a2g.core.chain.SceneChain;
 import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 import com.github.a2g.core.interfaces.game.chainables.ISceneChain;
 import com.github.a2g.core.interfaces.game.chainables.ISceneChainEnd;
@@ -272,7 +273,13 @@ public class Actions {
     }
 
     
-    public static BaseAction switchTo(String sceneName, int entrySegment) {
+    public static BaseAction switchTo(String sceneName, int entrySegment) throws A2gException {
+        // best to throw this exception now, inside the Scene handler, rather
+        // than when it is executed, which might be much later at the 
+        // end of an asycnhronous animation execution chain.
+        if(sceneName==null)
+            throw new A2gException(sceneName);
+        
         SingleCallAction a = new SingleCallAction( Type.Switch);
         a.setString(sceneName);
         a.setInt(entrySegment);
@@ -573,14 +580,16 @@ public class Actions {
         a.setEndY(end.getY());
         return a;
     }
-
-    /*
     
-    public static BaseAction walkNeverSwitch(short ocode, double x, double y) {
-        return walkNeverSwitch(ocode, new Point(x, y));
+    public static IBaseChain getChainForWalkAndScaleAction(SceneChain thisChain, short ocode, Point p, double startScale, double endScale) {
+        WalkAction walk = new WalkAction(ocode);
+        walk.setEndX(p.getX());
+        walk.setEndY(p.getY());
+        walk.setStartScale(startScale);
+        walk.setEndScale(endScale);
+        walk.setToInitialAtEnd(false);
+    
+        SceneChain a = new SceneChain(thisChain, walk);
+        return a;
     }
-*/
-
-
-  
 }

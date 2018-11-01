@@ -672,8 +672,10 @@ void linkUpperMostActionOfAToB(IBaseChain a, IBaseChain b) {
 }
 
 IBaseChain replaceEnterActionWithCallToOnDialogTree(IBaseChain chain) {
+    if(chain==null)
+        return null;
     BaseAction a2 = chain.getAction();
-    if (a2 instanceof DialogEnterAction) {
+    if(a2 instanceof DialogEnterAction) {
 
         int branchId = ((DialogEnterAction) a2).getBranchId();
         DialogChainRoot d = new DialogChainRoot();
@@ -769,7 +771,15 @@ void ProcessAutoplayCommand(int id) {
             COMMANDS_AUTOPLAY.log(Level.FINE, "SLEEP " + cmd.getInt1());
             executeWithDoCommandChainRunner(sleep);
         } else if (cmd.getVerb() == ConstantsForAPI.SWITCH) {
-            IBaseChain switchTo = new SceneChainRoot().switchTo(cmd.getString(), 0);
+            
+            IBaseChain switchTo = null;
+            try {
+                switchTo = new SceneChainRoot().switchTo(cmd.getString(), 0);
+            } catch (A2gException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return;
+            }
             COMMANDS_AUTOPLAY.log(Level.FINE, "SWITCH " + cmd.getString());
             executeWithDoCommandChainRunner(switchTo);
         } else if (mode == GuiStateEnum.DialogTree) {

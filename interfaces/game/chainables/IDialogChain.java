@@ -1,7 +1,5 @@
 package com.github.a2g.core.interfaces.game.chainables;
 
-import com.github.a2g.core.chain.DialogChainEnd;
-import com.github.a2g.core.chain.DialogChain;
 import com.github.a2g.core.interfaces.game.singles.IDoNothing;
 import com.github.a2g.core.interfaces.game.singles.IMoveCamera;
 import com.github.a2g.core.interfaces.game.singles.IPlayAnimation;

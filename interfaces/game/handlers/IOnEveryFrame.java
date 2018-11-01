@@ -17,7 +17,6 @@
 package com.github.a2g.core.interfaces.game.handlers;
 
 import com.github.a2g.core.chain.SceneChainEnd;
-import com.github.a2g.core.chain.DialogChain;
 import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 import com.github.a2g.core.interfaces.game.chainables.ISceneChain;
 import com.github.a2g.core.interfaces.game.chainables.ISceneChainRoot;

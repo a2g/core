@@ -100,7 +100,7 @@ public interface ISceneChain extends ISceneChainEnd
 			ISceneChainRoot ba, int verb, SentenceItem itemA,
 			SentenceItem itemB, double x, double y) throws A2gException;
 	public ISceneChain  subroutine(ISceneChain b);
-	public ISceneChainEnd  switchTo(String sceneName, int entrySegment);
+	public ISceneChainEnd  switchTo(String sceneName, int entrySegment) throws A2gException;
 	//@}
 	
 	

@@ -17,12 +17,13 @@
 package com.github.a2g.core.chain;
 
 import com.github.a2g.core.action.BaseAction;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 import com.github.a2g.core.interfaces.game.chainables.ISceneChainEnd;
 
 public class SceneChainEnd extends BaseChain implements ISceneChainEnd
 {
-	public SceneChainEnd(BaseChain parent, BaseAction action) {
-		super(parent, action);
+	public SceneChainEnd(IBaseChain chain, BaseAction action) {
+		super(chain, action);
 
 	}
 

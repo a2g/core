@@ -20,9 +20,7 @@ package com.github.a2g.core.chain;
 import com.github.a2g.core.action.Actions;
 import com.github.a2g.core.action.BaseAction;
 import com.github.a2g.core.action.DialogEnterAction;
-import com.github.a2g.core.action.SingleCallAction;
-import com.github.a2g.core.action.WalkAction;
-import com.github.a2g.core.action.performer.SingleCallPerformer.Type;
+import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 import com.github.a2g.core.interfaces.game.chainables.ISceneChain;
 import com.github.a2g.core.interfaces.game.chainables.ISceneChainEnd;
 import com.github.a2g.core.interfaces.game.chainables.ISceneChainRoot;
@@ -42,8 +40,8 @@ implements ISceneChain {
         Visibility
     }
 
-    public SceneChain(BaseChain parent, BaseAction action) {
-        super(parent, action);
+    public SceneChain(IBaseChain chain, BaseAction action) {
+        super(chain, action);
     }
 
     @Override
@@ -62,7 +60,7 @@ implements ISceneChain {
     }
     
     @Override
-    public ISceneChainEnd switchTo(String sceneName, int entrySegment) {
+    public ISceneChainEnd switchTo(String sceneName, int entrySegment) throws A2gException {
         return new SceneChainEnd(this, Actions.switchTo(sceneName, entrySegment));
     }
 
@@ -78,7 +76,6 @@ implements ISceneChain {
         ISceneChainEnd secondStep = scene.onDoCommand(api,  api.createChainRootAction(), verb, itemA, itemB, x, y);
         return Actions.subroutine(this, secondStep);
     }
-
 
     // simple backwards
     @Override
@@ -242,56 +239,17 @@ implements ISceneChain {
 
     @Override
     public ISceneChainEnd walkAlwaysSwitch(double x, double y, String sceneName, int entrySegment) throws A2gException {
-        // best to throw this exception now, inside the Scene handler, rather
-        // than when it is executed, which might be much later at the 
-        // end of an asycnhronous animation execution chain.
-        if(sceneName==null)
-            throw new A2gException ("ISceneChain::walkAlwaysSwitch");
         return walkAlwaysSwitch( new Point(x,y), sceneName, entrySegment);
     }
     
     @Override
     public ISceneChainEnd walkAlwaysSwitch(Point p, String sceneName, int entrySegment) throws A2gException {
-        // best to throw this exception now, inside the Scene handler, rather
-        // than when it is executed, which might be much later at the 
-        // end of an asycnhronous animation execution chain.
-        if(sceneName==null)
-            throw new A2gException (sceneName);
-        WalkAction walkAction = new WalkAction( ScenePresenter.DEFAULT_SCENE_OBJECT);
-        walkAction.setEndX(p.getX());
-        walkAction.setEndY(p.getY());
-        walkAction.setToInitialAtEnd(false);
-
-        SingleCallAction switchAction = new SingleCallAction(Type.Switch);
-        switchAction.setString(sceneName);
-        switchAction.setInt(entrySegment);
-
-        SceneChain a = new SceneChain(this, walkAction);
-        SceneChain b = new SceneChain(a, switchAction);
-        return b;
+        return new SceneChain(Actions.getChainForWalkAndScaleAction(this, ScenePresenter.DEFAULT_SCENE_OBJECT, p, 1.0, 1.0), Actions.switchTo(sceneName, entrySegment));
     }
-
+    
     @Override
     public ISceneChainEnd walkAndScaleAlwaysSwitch(short ocode, Point p, double startScale, double endScale, String sceneName, int entrySegment) throws A2gException {
-        // best to throw this exception now, inside the Scene handler, rather
-        // than when it is executed, which might be much later at the 
-        // end of an asycnhronous animation execution chain.
-        if(sceneName==null)
-            throw new A2gException(sceneName);
-        WalkAction walk = new WalkAction(ocode);
-        walk.setEndX(p.getX());
-        walk.setEndY(p.getY());
-        walk.setStartScale(startScale);
-        walk.setEndScale(endScale);
-        walk.setToInitialAtEnd(false);
-
-        SingleCallAction single = new SingleCallAction(Type.Switch);
-        single.setString(sceneName);
-        single.setInt(entrySegment);
-
-        SceneChain a = new SceneChain(this, walk);
-        SceneChain b = new SceneChain(a, single);
-        return b;
+        return new SceneChain(Actions.getChainForWalkAndScaleAction(this, ocode, p, startScale, endScale), Actions.switchTo(sceneName, entrySegment));
     }
  
     @Override

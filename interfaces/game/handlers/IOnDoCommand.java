@@ -22,7 +22,6 @@ import com.github.a2g.core.interfaces.game.singles.IAddHelperRectangle;
 import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToFirstFrameOfNewAnimation;
 import com.github.a2g.core.interfaces.game.singles.IAlignBaseMiddleOfOldFrameToLastFrameOfNewAnimation;
 import com.github.a2g.core.chain.SceneChainEnd;
-import com.github.a2g.core.chain.DialogChain;
 import com.github.a2g.core.interfaces.game.chainables.IBaseChain;
 import com.github.a2g.core.interfaces.game.chainables.ISceneChainRoot;
 import com.github.a2g.core.interfaces.game.singles.IAddEdgePointToPerimeter;
