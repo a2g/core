@@ -683,7 +683,6 @@ IBaseChain replaceEnterActionWithCallToOnDialogTree(IBaseChain chain) {
         try {
             a = this.sceneHandlers2.onDialogTree(proxyForGameScene, d, branchId);
         } catch (A2gException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         if (a == null || a.getAction() instanceof DoNothingAction)

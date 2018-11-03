@@ -85,6 +85,7 @@ public interface ISceneChain extends ISceneChainEnd
 , IWalkAndTalk
 , IWalkAndScale
 , IWalkNeverSwitch
+
 {
 	
 	/**   @name End-of-chain-only methods that return ChainEndActions 
@@ -96,11 +97,9 @@ public interface ISceneChain extends ISceneChainEnd
 	//@{
 	public ISceneChainEnd doBoth(ISceneChain a, ISceneChain b);
 	public ISceneChainEnd activateDialogTreeMode(int branchId);
-	public ISceneChainEnd onDoCommand(IGameScene scene, IOnDoCommand api,
-			ISceneChainRoot ba, int verb, SentenceItem itemA,
-			SentenceItem itemB, double x, double y) throws A2gException;
-	public ISceneChain  subroutine(ISceneChain b);
-	public ISceneChainEnd  switchTo(String sceneName, int entrySegment) throws A2gException;
+	public ISceneChainEnd onDoCommand(IGameScene scene, IOnDoCommand api,ISceneChainRoot ba, int verb, SentenceItem itemA,SentenceItem itemB, double x, double y) throws A2gException;
+	public ISceneChain subroutine(ISceneChain b);
+	public ISceneChainEnd switchTo(String sceneName, int entrySegment) throws A2gException;
 	//@}
 	
 	

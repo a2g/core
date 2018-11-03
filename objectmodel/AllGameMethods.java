@@ -721,6 +721,11 @@ return null;
 		return null;
 	}
 
+    @Override
+    public void addEdgeRectangle(Point topLeft, Point bottomRight) {
+        this.addEdgeRectangle(topLeft.getX(), topLeft.getY(), bottomRight.getX(), bottomRight.getY());
+    }
+
    
 
    
