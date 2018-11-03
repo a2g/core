@@ -97,8 +97,7 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
 
     private EventBus bus;
     private IHostFromMasterPresenter host;
-    private IPlatformTimer timer;
-    private IPlatformTimer switchTimer;
+    private IPlatformTimer timerForEveryFrame;
     private IPlatformMasterPanel masterPanel;
     private ChainRunner dialogActionRunner;
     private ChainRunner doCommandChainRunner;
@@ -107,7 +106,6 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
     private InsertionPointCalculator insertionPointCalculator;
 
     private String lastSceneAsString;
-    private String switchDestination;
     private boolean isSayNonIncremementing;
     private AllActionMethods proxyForActions;
     private Map<String, IPlatformSound> mapOfSounds;
@@ -117,8 +115,7 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
     public MasterPresenter(final IHostingPanel panel, EventBus bus, IHostFromMasterPresenter host) {
         this.bus = bus;
         isAutoplayCancelled = false;
-        this.timer = null;
-        this.switchTimer = null;
+        this.timerForEveryFrame = null;
         this.host = host;
         this.proxyForGameScene = new AllGameMethods(this);
         this.proxyForActions = new AllActionMethods(this);
@@ -274,7 +271,7 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
     @Override
     public void onTimer(){
 
-        if (timer != null) {
+        if (timerForEveryFrame != null) {
             try{
                 this.sceneHandlers2.onEveryFrame(proxyForGameScene);
             }
@@ -282,6 +279,9 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
             {
             }
         }
+        /*
+         * pretty sure this isn't used anymore: the switchDestination was only ever set to "" in constructor, 
+         * when I commented this out
         if (switchTimer != null) {
             switchTimer.cancel();
             switchTimer = null;
@@ -289,22 +289,46 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
             this.host.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(switchDestination);
             switchDestination = "";
         }
+        */
     }
+    
+    // @Override
+    // public void switchToSceneFromAction(String scene) {
+    // cancelOnEveryFrameTimer();
+    // this.dialogActionRunner.cancel();
+    //
+    // // now wait for the last onEveryFrame to execute
+    // // .. which is about 40 milliseconds
+    // // (an onEveryFrame can go more than
+    // // this, but usually not).
+    // switchTimer = getFactory().createSystemTimer(this);
+    // switchDestination = scene;
+    // switchTimer.scheduleRepeating(40);
+    // }
 
-    public void loadInventoryFromAPI() {
-
-        getInventoryPresenter().updateInventory();
-    }
-
+    /*
+     * Set carrying status of ALL inventory, whether its being carried or not.
+     */
     public void saveInventoryToAPI() {
         InventoryItemCollection items = this.getInventoryPresenter().getInventory().items();
 
         for (int i = 0; i < items.getCount(); i++) {
             String name = items.getByIndex(i).getItid();
-
             int isCarrying = items.getByIndex(i).isVisible() ? 1 : 0;
-
             setValue("CARRYING_" + name.toUpperCase(), isCarrying);
+        }
+    }
+    
+    /*
+     * Extract carrying status of ALL current inventory, even if its not currently found.
+     */
+    public void loadInventoryFromAPI() {
+        InventoryItemCollection items = this.getInventoryPresenter().getInventory().items();
+
+        for (int i = 0; i < items.getCount(); i++) {
+            String name = items.getByIndex(i).getItid();
+            boolean isCarrying = isTrue("CARRYING_" + name.toUpperCase());
+            items.getByIndex(i).setVisible(isCarrying);
         }
     }
 
@@ -330,20 +354,6 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
         return property != 0;
     }
 
-    // @Override
-    // public void switchToSceneFromAction(String scene) {
-    // cancelOnEveryFrameTimer();
-    // this.dialogActionRunner.cancel();
-    //
-    // // now wait for the last onEveryFrame to execute
-    // // .. which is about 40 milliseconds
-    // // (an onEveryFrame can go more than
-    // // this, but usually not).
-    // switchTimer = getFactory().createSystemTimer(this);
-    // switchDestination = scene;
-    // switchTimer.scheduleRepeating(40);
-    // }
-
     @Override
     public void switchToScene(String scene, int entrySegment) {
 
@@ -354,11 +364,14 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
         this.dialogActionRunner.cancel();
         this.onEveryFrameChainRunner.cancel();
         this.doCommandChainRunner.cancel();// do we really need to cancel
+        this.saveInventoryToAPI();
         setCameraToZero();// no scene is meant to keep camera position
         this.scenePresenter.setEntrySegment(entrySegment);
         this.host.instantiateSceneAndCallSetSceneBackOnTheMasterPresenter(scene);
 
     }
+
+
 
     public String getLastScene() {
         if (lastSceneAsString != null)
@@ -371,16 +384,16 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
     }
 
     public void startCallingOnEveryFrame() {
-        if (timer != null)
-            timer.cancel();
-        timer = getFactory().createTimer(this);
-        timer.scheduleRepeating(40);
+        if (timerForEveryFrame != null)
+            timerForEveryFrame.cancel();
+        timerForEveryFrame = getFactory().createTimer(this);
+        timerForEveryFrame.scheduleRepeating(40);
     }
 
     public void cancelOnEveryFrameTimer() {
-        if (this.timer != null) {
-            this.timer.cancel();
-            timer = null;
+        if (this.timerForEveryFrame != null) {
+            this.timerForEveryFrame.cancel();
+            timerForEveryFrame = null;
         }
     }
 
