@@ -38,7 +38,7 @@ public interface IPlatformMasterPanel {
 	GuiStateEnum getActiveState();
 
 	public enum GuiStateEnum {
-		DialogTree, OnEnterScene, CutScene, ActiveScene, Loading
+		OnDialogTree, OnEntry, CutScene, ActiveScene, Loading, OnEntryButWithInventory
 	};
 
 }

@@ -523,8 +523,8 @@ return null;
 	}
 
 	@Override
-	public IBaseChain  setActiveGuiState(GuiStateEnum state) {
-		master.setActiveGuiState(state);
+	public IBaseChain  setGuiState(GuiStateEnum state) {
+		master.setGuiState(state);
 return null;
 	}
 

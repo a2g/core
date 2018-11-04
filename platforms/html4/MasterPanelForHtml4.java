@@ -120,7 +120,7 @@ IPlatformMasterPanel {
 		this.state = state;
 
 		switch (state) {
-		case DialogTree:
+		case OnDialogTree:
 			hostForDialogTree.setVisible(true);
 			hostForScene.setVisible(true);
 			hostForLoading.setVisible(false);
@@ -130,7 +130,7 @@ IPlatformMasterPanel {
 			hostForVerbs.setVisible(false);
 			break;
 		case CutScene:
-		case OnEnterScene:
+		case OnEntry:
 			hostForScene.setVisible(true);
 			hostForDialogTree.setVisible(false);
 			hostForLoading.setVisible(false);

@@ -17,7 +17,9 @@
 package com.github.a2g.core.action.performer;
 
 import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI.WalkDirection;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel.GuiStateEnum;
 import com.github.a2g.core.interfaces.nongame.presenter.IInventoryPresenterFromSingleCallPerformer;
+import com.github.a2g.core.interfaces.nongame.presenter.IMasterPresenterFromSingleCallPerformer;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromSingleCallPerformer;
 
 
@@ -49,6 +51,7 @@ public class SingleCallPerformer
 		, SetSoundtrack
 		, SetHeadRectangle
 		, SetTitleCard
+		, SetGuiState
 	}
 	Type type;
 	private double d;
@@ -61,6 +64,7 @@ public class SingleCallPerformer
 	private int intValue;
 	private IScenePresenterFromSingleCallPerformer scene;
 	private IInventoryPresenterFromSingleCallPerformer inventory;
+	private IMasterPresenterFromSingleCallPerformer master;
 
 	public SingleCallPerformer( Type type) {
 		this.type = type;
@@ -199,7 +203,9 @@ public class SingleCallPerformer
 				scene.setAnimationAsObjectSpecial(atid, WalkDirection.West);
 			}
 			return false;
-				
+		case SetGuiState:
+		    GuiStateEnum e=GuiStateEnum.valueOf(stringValue);
+			master.setGuiState(e);
 		 default:
 			break;
 		}
@@ -209,9 +215,13 @@ public class SingleCallPerformer
 	public void setScene(IScenePresenterFromSingleCallPerformer scene) {
 		this.scene = scene;
 	}
-	
+
 	public void setInventory(IInventoryPresenterFromSingleCallPerformer inventory) {
-		this.inventory = inventory;
+	    this.inventory = inventory;
+	}
+
+	public void setMaster(IMasterPresenterFromSingleCallPerformer master) {
+	    this.master = master;
 	}
 
 	public Type getType(){ return type;}

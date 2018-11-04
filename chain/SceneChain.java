@@ -26,6 +26,7 @@ import com.github.a2g.core.interfaces.game.chainables.ISceneChainEnd;
 import com.github.a2g.core.interfaces.game.chainables.ISceneChainRoot;
 import com.github.a2g.core.interfaces.game.handlers.IOnDoCommand;
 import com.github.a2g.core.interfaces.game.scene.IGameScene;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel.GuiStateEnum;
 import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.SentenceItem;
@@ -413,5 +414,9 @@ implements ISceneChain {
         return new SceneChain(this, Actions.look( atid, duration));
     }
 
+    @Override
+    public ISceneChain setGuiState(GuiStateEnum state) {
+        return new SceneChain(this, Actions.setGuiState(state));
+    }
 
 }

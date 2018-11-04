@@ -53,6 +53,7 @@ public class SingleCallAction extends BaseAction {
 			IInventoryPresenterFromActions inventory) {
 		single.setScene(scene);
 		single.setInventory(inventory);
+		single.setMaster(master);
 	}
 
 	public SingleCallPerformer.Type getType(){ return single.getType();}

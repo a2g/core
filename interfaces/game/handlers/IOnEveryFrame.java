@@ -42,7 +42,7 @@ import com.github.a2g.core.interfaces.game.singles.IIsAnimation;
 import com.github.a2g.core.interfaces.game.singles.IIsInDebugMode;
 import com.github.a2g.core.interfaces.game.singles.IIsTrue;
 import com.github.a2g.core.interfaces.game.singles.IIsVisible;
-import com.github.a2g.core.interfaces.game.singles.ISetActiveGuiState;
+import com.github.a2g.core.interfaces.game.singles.ISetGuiState;
 import com.github.a2g.core.interfaces.game.singles.ISetAnimationAsObjectCurrent;
 import com.github.a2g.core.interfaces.game.singles.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.singles.ISetBaseMiddleY;
@@ -73,7 +73,7 @@ IGetValue
 , ISwitchToScene
 , IGetLastSceneName
 , IIsInDebugMode
-, ISetActiveGuiState
+, ISetGuiState
 , IGetSceneGuiWidth
 , IGetSceneGuiHeight
 

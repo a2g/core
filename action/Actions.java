@@ -9,6 +9,7 @@ import com.github.a2g.core.interfaces.game.chainables.ISceneChain;
 import com.github.a2g.core.interfaces.game.chainables.ISceneChainEnd;
 import com.github.a2g.core.interfaces.game.handlers.IOnDoCommand;
 import com.github.a2g.core.interfaces.game.scene.IGameScene;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel.GuiStateEnum;
 import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.objectmodel.ScenePresenter;
 import com.github.a2g.core.objectmodel.SentenceItem;
@@ -590,6 +591,13 @@ public class Actions {
         walk.setToInitialAtEnd(false);
     
         SceneChain a = new SceneChain(thisChain, walk);
+        return a;
+    }
+
+
+    public static BaseAction setGuiState(GuiStateEnum state) {
+        SingleCallAction a = new SingleCallAction( Type.SetGuiState);
+        a.setString(state.toString());
         return a;
     }
 }

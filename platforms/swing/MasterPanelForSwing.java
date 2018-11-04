@@ -184,7 +184,7 @@ implements IPlatformMasterPanel
 		this.GuiStateEnum = state;
 		switch(state)
 		{
-		case DialogTree:
+		case OnDialogTree:
 			this.hostForCommandLineF.setVisible(false);
 			this.hostForDialogTreeF.setVisible(true);
 			this.hostForInventoryF.setVisible(false);
@@ -195,11 +195,12 @@ implements IPlatformMasterPanel
 			sceneCardLayout.show(panelForSceneStack, MasterPanelForSwing.SCENE_WIDGET);
 			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForSwing.DIALOGTREE_WIDGET);
 			break;
-		case OnEnterScene:
+		
 		case CutScene:
+		case OnEntry:
 			this.hostForCommandLineF.setVisible(false);
 			this.hostForDialogTreeF.setVisible(false);
-			this.hostForInventoryF.setVisible(true);
+			this.hostForInventoryF.setVisible(false);
 			this.hostForLoadingF.setVisible(false);
 			this.hostForSceneF.setVisible(true);
 			this.hostForTitleCardF.setVisible(false);
@@ -207,6 +208,17 @@ implements IPlatformMasterPanel
 			sceneCardLayout.show(panelForSceneStack, MasterPanelForSwing.SCENE_WIDGET);
 			dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForSwing.LOADING_WIDGET);
 			break;
+		case OnEntryButWithInventory:
+            this.hostForCommandLineF.setVisible(false);
+            this.hostForDialogTreeF.setVisible(false);
+            this.hostForInventoryF.setVisible(true);
+            this.hostForLoadingF.setVisible(false);
+            this.hostForSceneF.setVisible(true);
+            this.hostForTitleCardF.setVisible(false);
+            this.hostForVerbsF.setVisible(false);
+            sceneCardLayout.show(panelForSceneStack, MasterPanelForSwing.SCENE_WIDGET);
+            dialogTreeCardLayout.show(panelForDialogTreeStack, MasterPanelForSwing.LOADING_WIDGET);
+            break;
 		case ActiveScene:
 			this.hostForCommandLineF.setVisible(true);
 			this.hostForDialogTreeF.setVisible(false);

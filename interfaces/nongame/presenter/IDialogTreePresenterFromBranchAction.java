@@ -6,6 +6,6 @@ public interface IDialogTreePresenterFromBranchAction {
 
 	void addBranch(int subBranchId, String lineOfDialog,
 			boolean isAddableAsSaidSpeech);
-	void setActiveGuiState(GuiStateEnum dialogtree);
+	void setGuiState(GuiStateEnum dialogtree);
 
 }

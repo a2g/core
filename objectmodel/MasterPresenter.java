@@ -486,7 +486,7 @@ IMasterPresenterFromVerbs, IMasterPresenterFromTitleCard, PropertyChangeEventHan
             a = this.sceneHandlers2.onEntry(proxyForGameScene, new SceneChainRoot());
 
             // e. lift the curtains (so far everything has happened in the dark)
-            this.masterPanel.setActiveState(GuiStateEnum.OnEnterScene);
+            this.masterPanel.setActiveState(GuiStateEnum.OnEntry);
           
             // f. the only thing this callback is for is taking screenshots
             getScenePresenter().getView().onSceneEntry(sceneHandlers.toString());
@@ -761,7 +761,7 @@ void ProcessAutoplayCommand(int id) {
 
         GuiStateEnum mode = masterPanel.getActiveState();
         if (cmd.getVerb() == ConstantsForAPI.DIALOG) {
-            if (mode != GuiStateEnum.DialogTree) {
+            if (mode != GuiStateEnum.OnDialogTree) {
                 // verb was dialog, mode wasn't
                 cancelAutoplay(cmd, "verb was dialog, mode wasn't");
                 return;
@@ -794,7 +794,7 @@ void ProcessAutoplayCommand(int id) {
             }
             COMMANDS_AUTOPLAY.log(Level.FINE, "SWITCH " + cmd.getString());
             executeWithDoCommandChainRunner(switchTo);
-        } else if (mode == GuiStateEnum.DialogTree) {
+        } else if (mode == GuiStateEnum.OnDialogTree) {
             // mode was dialog verb wasn't dialog or sleep
             cancelAutoplay(cmd, "mode was dialog verb wasn't dialog or sleep");
         } else {
@@ -836,19 +836,19 @@ public void actionChainFinished(int id) {
         // bugs
     {
         if (this.dialogTreePresenter.getNumberOfVisibleBranches() == 0) {
-            setActiveGuiState(GuiStateEnum.ActiveScene);
+            setGuiState(GuiStateEnum.ActiveScene);
         }
     }
     // must be in this order, because clear does't work unless mousable
     this.commandLinePresenter.setMouseable(true);
     this.commandLinePresenter.clear();
 
-    if (masterPanel.getActiveState() == IPlatformMasterPanel.GuiStateEnum.OnEnterScene) {
+    if (masterPanel.getActiveState() == IPlatformMasterPanel.GuiStateEnum.OnEntry) {
         this.masterPanel.setActiveState(IPlatformMasterPanel.GuiStateEnum.ActiveScene);
     }
     IPlatformMasterPanel.GuiStateEnum state = masterPanel.getActiveState();
     if (state == IPlatformMasterPanel.GuiStateEnum.ActiveScene
-            || state == IPlatformMasterPanel.GuiStateEnum.DialogTree) {
+            || state == IPlatformMasterPanel.GuiStateEnum.OnDialogTree) {
         if (this.host.isAutoplay() && !isAutoplayCancelled) {
             ProcessAutoplayCommand(id);
         }
@@ -902,7 +902,7 @@ public void clearAllLoadedLoads() {
     this.insertionPointCalculator.clear();
 }
 
-public void setActiveGuiState(GuiStateEnum state) {
+public void setGuiState(GuiStateEnum state) {
     this.masterPanel.setActiveState(state);
 
 }

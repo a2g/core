@@ -25,6 +25,7 @@ import com.github.a2g.core.interfaces.game.singles.ISetBaseMiddleX;
 import com.github.a2g.core.interfaces.game.singles.ISetBaseMiddleY;
 import com.github.a2g.core.interfaces.game.singles.ISetCurrentFrame;
 import com.github.a2g.core.interfaces.game.singles.ISetDisplayName;
+import com.github.a2g.core.interfaces.game.singles.ISetGuiState;
 import com.github.a2g.core.interfaces.game.singles.ISetHeadRectangleForObject;
 import com.github.a2g.core.interfaces.game.singles.ISetInventoryItemVisible;
 import com.github.a2g.core.interfaces.game.singles.ISetSoundtrack;
@@ -41,6 +42,7 @@ import com.github.a2g.core.interfaces.game.singles.IWalkAndScale;
 import com.github.a2g.core.interfaces.game.singles.IWalkAndTalk;
 import com.github.a2g.core.interfaces.game.singles.IWalkNeverSwitch;
 import com.github.a2g.core.interfaces.game.singles.IWalkTo;
+import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel.GuiStateEnum;
 import com.github.a2g.core.objectmodel.SentenceItem;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.A2gException;
@@ -85,6 +87,7 @@ public interface ISceneChain extends ISceneChainEnd
 , IWalkAndTalk
 , IWalkAndScale
 , IWalkNeverSwitch
+, ISetGuiState
 
 {
 	
@@ -236,6 +239,7 @@ public interface ISceneChain extends ISceneChainEnd
 	/** @name Utility methods */
 	//@{
 	@Override ISceneChain doNothing();
+	@Override ISceneChain setGuiState(GuiStateEnum state);
 	//@}
 	
 	/** @name Methods shared with direct api */

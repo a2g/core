@@ -49,7 +49,7 @@ public class DialogEnterAction extends BaseAction {
 	@Override
 	protected boolean onCompleteActionAndCheckForGateExit() 
 	{
-		dialogTree.setActiveGuiState(GuiStateEnum.DialogTree);
+		dialogTree.setGuiState(GuiStateEnum.OnDialogTree);
 		// When this placeholder is encountered in MasterPresenter, it is replaced by what is returned by onDialogTree when it is called with the branchId
 		return false;
 	}

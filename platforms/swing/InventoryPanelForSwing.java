@@ -182,6 +182,7 @@ implements IImagePanel
 		g.fillRect(0, 0, width, height);
 		Iterator<Image> imageIter = listOfAllAvailableImages.iterator();
   
+		int picHeight =0;
 		Iterator<RectI> rectIter = presenter.getRects().iterator();
 		while(imageIter.hasNext() && rectIter.hasNext())
 		{
@@ -190,7 +191,7 @@ implements IImagePanel
 			{
 				RectI imageRect = image.getBoundingRectPreScaling();
 				RectI destRect = rectIter.next();
-			 
+				picHeight = destRect.getHeight();
 
 				// img - the specified image to be drawn. This method does
 				// nothing if img is null.
@@ -235,13 +236,13 @@ implements IImagePanel
 
 			int[] xPoints = new int[3];
 			int[] yPoints = new int[3];
-			xPoints[0]=(int)(.05*width);
-			xPoints[1]=(int)(.25*width);
-			xPoints[2]=(int)(.25*width);
+			xPoints[0]=(int)(.01*getWidth());
+			xPoints[1]=(int)(.09*getWidth());
+			xPoints[2]=(int)(.09*getWidth());
 			
-			yPoints[0]=(int)(.50*height);
-			yPoints[1]=(int)(.01*height);
-			yPoints[2]=(int)(.09*height);
+			yPoints[0]=(int)(.50*2*picHeight);
+			yPoints[1]=(int)(.05*2*picHeight);
+			yPoints[2]=(int)(.95*2*picHeight);
 			 
 			g.setColor(new Color(fore.r, fore.g, fore.b));
 			g.fillPolygon(xPoints,yPoints,3 );
@@ -250,13 +251,13 @@ implements IImagePanel
 		{
 			int[] xPoints = new int[3];
 			int[] yPoints = new int[3];
-			xPoints[0]=(int)(.95*width);
-			xPoints[1]=(int)(.75*width);
-			xPoints[2]=(int)(.75*width);
+			xPoints[0]=(int)(.99*getWidth());
+			xPoints[1]=(int)(.91*getWidth());
+			xPoints[2]=(int)(.91*getWidth());
 			
-			yPoints[0]=(int)(.50*height);
-			yPoints[1]=(int)(.01*height);
-			yPoints[2]=(int)(.09*height);
+			yPoints[0]=(int)(.50*2*picHeight);
+			yPoints[1]=(int)(.05*2*picHeight);
+			yPoints[2]=(int)(.95*2*picHeight);
 			 
 			g.setColor(new Color(fore.r, fore.g, fore.b));
 			g.fillPolygon(xPoints,yPoints,3 ); 

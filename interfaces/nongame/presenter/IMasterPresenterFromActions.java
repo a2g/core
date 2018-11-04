@@ -24,6 +24,7 @@ package com.github.a2g.core.interfaces.nongame.presenter;
 public interface IMasterPresenterFromActions
 extends IMasterPresenterFromTalkPerformer
 ,IMasterPresenterFromSoundAction
+,IMasterPresenterFromSingleCallPerformer
 {
 
 

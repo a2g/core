@@ -101,8 +101,8 @@ IDialogTreePresenterFromActions {
     }
 
     @Override
-    public void setActiveGuiState(GuiStateEnum state) {
-        master.setActiveGuiState(state);
+    public void setGuiState(GuiStateEnum state) {
+        master.setGuiState(state);
 
     }
 
@@ -443,9 +443,6 @@ IDialogTreePresenterFromActions {
     public void setSoundtrack(String stringValue) {
         master.setSoundtrack(stringValue);
     }
-
-
-
 
 
 

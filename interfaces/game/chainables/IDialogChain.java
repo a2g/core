@@ -67,4 +67,5 @@ public interface IDialogChain extends IDialogChainEnd
 	
 	@Override IDialogChain setAnimationAsObjectCurrent(String atid);
 	@Override IDialogChain playSound(String sid);
+	@Override IDialogChain playSoundNonBlocking(String sid);
 }

@@ -45,7 +45,7 @@ public class DialogExitAction extends BaseAction{
 
 	@Override
 	protected boolean onCompleteActionAndCheckForGateExit() {
-		dialogTree.setActiveGuiState(GuiStateEnum.ActiveScene);
+		dialogTree.setGuiState(GuiStateEnum.ActiveScene);
 		return false;
 	}
 
