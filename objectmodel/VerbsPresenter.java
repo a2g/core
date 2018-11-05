@@ -84,4 +84,10 @@ IVerbsPresenter {
 		this.theVerbs.items().removeByCode(vcode);
 
 	}
+
+    public void resetVerbs() {
+        this.theVerbs = new Verbs();
+        this.view.setVerbs(theVerbs);
+        this.updateVerbs();
+    }
 }

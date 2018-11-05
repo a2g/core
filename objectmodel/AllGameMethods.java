@@ -412,17 +412,31 @@ return null;
 	 */
 	// /@{
 	@Override
-	public void removeVerbByCode(int vcode) {
+	public IBaseChain removeVerbByCode(int vcode) {
 		master.getVerbsPresenter().removeByCode(vcode);
 		master.getVerbsPresenter().updateVerbs();
+		return null;
 
 	}
+	
+	   /**
+     * @name Reset Methods
+     * @anchor balooga These items act on the @ref VerbsPresenter object Behind
+     *         the scenes they act on a SceneObject. They all have "Verb" in
+     *         their names.
+     */
+    // /@{
+    @Override
+    public IBaseChain resetVerbs() {
+        master.getVerbsPresenter().resetVerbs();
+        return null;
+
+    }
 
 	@Override
 	public IBaseChain  updateVerbUI() {
 		master.getVerbsPresenter().updateVerbs();
 		return null;
-
 	}
 
 	// /@}

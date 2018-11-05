@@ -8,7 +8,7 @@ public enum LogNames
 	MOVE_PERFORMER(false), // = "MOVE";
 	LOADING(false),// = "Loading";
 	LOADING_ANIM(false),// = "LOADING_ANIM";
-	RUNNER(false), // = "RUNNER";
+	RUNNER(true), // = "RUNNER";
 	RUNNER_REFCOUNT(false),// = "RUNNER_REFCOUNT";
 	COMMANDS_VIA_GUI(false),// = "COMMAND_MANUAL";
 	COMMANDS_AUTOPLAY(false),// = "COMMAND_AUTOPLAY";

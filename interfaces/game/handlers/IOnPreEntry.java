@@ -50,6 +50,7 @@ import com.github.a2g.core.interfaces.game.singles.IIsInventoryItemVisible;
 import com.github.a2g.core.interfaces.game.singles.IIsTrue;
 import com.github.a2g.core.interfaces.game.singles.IIsVisible;
 import com.github.a2g.core.interfaces.game.singles.IRemoveVerbByCode;
+import com.github.a2g.core.interfaces.game.singles.IResetVerbs;
 import com.github.a2g.core.interfaces.game.singles.ISetAnimationAsObjectCurrent;
 import com.github.a2g.core.interfaces.game.singles.ISetAnimationAsObjectCurrentAndSetFrame;
 import com.github.a2g.core.interfaces.game.singles.ISetAnimationAsObjectInitial;
@@ -156,6 +157,7 @@ IHideInventoryItemsAllOfThem,
 // verb
 IRemoveVerbByCode,
 IUpdateVerbUI,
+IResetVerbs,
 
 // animation
 IAlignBaseMiddleOfOldFrameToSpecifiedFrameOfNewAnimation,
@@ -223,8 +225,9 @@ IGetAnimationLength
 
 	/**   @name Object */
 	//@{
-	@Override void removeVerbByCode(int vcode);
+	@Override IBaseChain removeVerbByCode(int vcode);
 	@Override IBaseChain updateVerbUI();
+	@Override IBaseChain resetVerbs();
 	//@}
 
 

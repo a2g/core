@@ -44,7 +44,7 @@ public interface IDialogChain extends IDialogChainEnd
 	IDialogChain branchNormal(int branchId, final boolean isOkToAdd, String text);
 	IDialogChain branchNormal(int branchId, String text) ;
 	IDialogChain branchSticky(int branchId, String text) ;
-	IDialogChain branchSticky(int nativ2, boolean b, String string);
+	IDialogChain branchSticky(int branchId, boolean isOkToAdd, String text);
 	//@}
 	
 	/**   @name include a bunch of methods also found on the scene chains.... */
