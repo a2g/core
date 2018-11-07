@@ -73,6 +73,8 @@ import com.github.a2g.core.interfaces.game.singles.ISetIsTalkingAlwaysWithoutInc
 import com.github.a2g.core.interfaces.game.singles.ISetParallaxX;
 import com.github.a2g.core.interfaces.game.singles.ISetScale;
 import com.github.a2g.core.interfaces.game.singles.ISetScreenCoordsPerSecond;
+import com.github.a2g.core.interfaces.game.singles.ISetSpeechBubbleOffsetForDownwardTail;
+import com.github.a2g.core.interfaces.game.singles.ISetSpeechBubbleOffsetForUpwardTail;
 import com.github.a2g.core.interfaces.game.singles.ISetTalkingColor;
 import com.github.a2g.core.interfaces.game.singles.ISetTitleCard;
 import com.github.a2g.core.interfaces.game.singles.ISetValue;
@@ -85,7 +87,9 @@ import com.github.a2g.core.interfaces.game.singles.IShowInventoryItem;
 import com.github.a2g.core.interfaces.game.singles.ISwitchToScene;
 import com.github.a2g.core.interfaces.game.singles.IUpdateVerbUI;
 import com.github.a2g.core.primitive.ColorEnum;
+import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectF;
+import com.google.gwt.touch.client.Point;
 
 /**  
  * 
@@ -145,6 +149,8 @@ ISetHeadRectangleForObject,
 ISetTalkingColor,
 ISetClumpWithPrevious,
 ISetScale,
+ISetSpeechBubbleOffsetForDownwardTail,
+ISetSpeechBubbleOffsetForUpwardTail,
 
 // inventory
 IShowInventoryItem,
@@ -250,6 +256,8 @@ IGetAnimationLength
 	@Override IBaseChain setParallaxX(short ocode, double parallaxInX);
 	@Override IBaseChain setVisible(short ocode, boolean isVisible);
 	@Override IBaseChain setHeadRectangleForObject(short ocode, int helperIndex);
+	@Override IBaseChain setSpeechBubbleOffsetForUpwardTail(short ocode, Point offset);
+	@Override IBaseChain setSpeechBubbleOffsetForDownwardTail(short ocode, Point offset);
 	@Override IBaseChain setTalkingColor(short ocode, ColorEnum talkingColor);
 	@Override IBaseChain setClumpWithPrevious(short ocode, boolean clumpWithPrevious);
 	@Override IBaseChain setScale(short ocode, double scale);

@@ -12,12 +12,15 @@ import com.github.a2g.core.interfaces.nongame.action.IGetOtidByAtid;
 import com.github.a2g.core.interfaces.nongame.action.IGetOtidByCode;
 import com.github.a2g.core.interfaces.nongame.action.IGetSceneGuiHeight;
 import com.github.a2g.core.interfaces.nongame.action.IGetSceneGuiWidth;
+import com.github.a2g.core.interfaces.nongame.action.IGetSpeechBubbleOffsetForDownwardTail;
+import com.github.a2g.core.interfaces.nongame.action.IGetSpeechBubbleOffsetForUpwardTail;
 import com.github.a2g.core.interfaces.nongame.action.ISetCurrentAnimationByAtid;
 import com.github.a2g.core.interfaces.nongame.action.ISetCurrentFrameByOtid;
 import com.github.a2g.core.interfaces.nongame.action.ISetStateOfPopup;
 import com.github.a2g.core.interfaces.nongame.action.ISetToInitialAnimationWithoutChangingFrameByOtid;
 import com.github.a2g.core.interfaces.nongame.action.ISetVisibleByOtid;
 import com.github.a2g.core.interfaces.nongame.platform.singles.IMeasureTextWidthAndHeight;
+import com.github.a2g.core.primitive.PointI;
 
 public interface IScenePresenterFromTalkPerformer
 extends ISetStateOfPopup
@@ -38,8 +41,11 @@ extends ISetStateOfPopup
 , IGetSceneGuiWidth
 , IGetSceneGuiHeight
 , IGetHeadRectangleUsingContingencies
+, IGetSpeechBubbleOffsetForDownwardTail
+, IGetSpeechBubbleOffsetForUpwardTail
 {
 
+  
 	
 
 }

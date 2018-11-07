@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.github.a2g.core.action.performer.TalkPerformer;
 import com.github.a2g.core.primitive.SpeechBubble;
+import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectF;
 import com.github.a2g.core.interfaces.game.scene.ConstantsForAPI.WalkDirection;
 import com.github.a2g.core.interfaces.nongame.platform.IPlatformMasterPanel.GuiStateEnum;
@@ -445,7 +446,24 @@ IDialogTreePresenterFromActions {
     }
 
 
+    @Override
+    public PointI getSpeechBubbleOffsetForDownwardTail(String  atid) {
+        SceneObject o = master.getScenePresenter().getAnimationByAtid(atid).getObject();
+        int h = master.getScenePresenter().getSceneGuiHeight();
+        int w = master.getScenePresenter().getSceneGuiWidth();
+        Point offset = o.getSpeechBubbleOffsetForDownwardTail();
+        return new PointI(offset.getX()*w, offset.getY()*h);
+    }
 
+
+    @Override
+    public PointI getSpeechBubbleOffsetForUpwardTail(String atid) {
+        SceneObject o = master.getScenePresenter().getAnimationByAtid(atid).getObject();
+        int h = master.getScenePresenter().getSceneGuiHeight();
+        int w = master.getScenePresenter().getSceneGuiWidth();
+        Point offset = o.getSpeechBubbleOffsetForUpwardTail();
+        return new PointI(offset.getX()*w, offset.getY()*h);
+    }
 
     // /@}
 

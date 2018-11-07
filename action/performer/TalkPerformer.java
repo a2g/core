@@ -44,7 +44,6 @@ public class TalkPerformer {
 		this.nonIncrementing = NonIncrementing.False;
 		this.ocode = -1;
 		this.atid = atid;
-		this.otid = "";
 		this.fullSpeech = fullSpeech;
 
 		this.totalDurationInSeconds = 0;
@@ -55,7 +54,6 @@ public class TalkPerformer {
 		this.nonIncrementing = NonIncrementing.False;
 		this.ocode = ocode;
 		this.atid = "";
-		this.otid = "";
 		this.fullSpeech = fullSpeech;
 		pages = new ArrayList<SpeechBubble>();
 
@@ -99,7 +97,7 @@ public class TalkPerformer {
 
 		// 2. get atid using contingengies
 		if (ocode != -1) {
-			otid = scene.getOtidByCode(ocode);
+			String otid = scene.getOtidByCode(ocode);
 			atid = scene.getAtidOfCurrentAnimationByOtid(otid);
 			// odd choice, but shouldn't make a difference - we just need any
 			// animation
@@ -116,8 +114,10 @@ public class TalkPerformer {
 		// ..and that's a lot of contingencies
 		RectF headRectF = scene.getHeadRectangleUsingContingencies(atid);
 		RectI headRectI = translateRect(headRectF);
+		PointI downwardTailOffset = scene.getSpeechBubbleOffsetForDownwardTail(atid);
+		PointI upwardTailOffset = scene.getSpeechBubbleOffsetForUpwardTail(atid);
 		pages = SpeechBubble.calculateWordWrappedPages(new PointI(scene.getSceneGuiWidth(), scene.getSceneGuiHeight()),
-				splitByNewline, scene, headRectI); 
+				splitByNewline, scene, headRectI, downwardTailOffset, upwardTailOffset); 
 		
  
         // get total duration

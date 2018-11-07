@@ -55,6 +55,8 @@ public class SceneObject {
 	private ColorEnum talkingColor;
 	private int headRectIndex;
 	private boolean isUsingBaseMiddleForAnimation;
+    private Point speechBubbleOffsetForDownwardTail;
+    private Point speechBubbleOffsetForUpwardTail;
 
 	public SceneObject(String otid, int screenWidth, int screenHeight) {
 		this.currentImage = null;
@@ -77,6 +79,9 @@ public class SceneObject {
 
 		this.screenCoordsPerSecond = .3;
 		this.isUsingBaseMiddleForAnimation = false;
+		this.speechBubbleOffsetForDownwardTail = new Point(0,0);
+	    this.speechBubbleOffsetForUpwardTail = new Point(0,0);
+		
 	}
 
 	public void setDrawingOrder(int number) {
@@ -531,5 +536,23 @@ public class SceneObject {
 	public void setUseBaseMiddleForAnimation(boolean isUsingBaseMiddleForAnimation) {
 		this.isUsingBaseMiddleForAnimation = isUsingBaseMiddleForAnimation;
 	}
+
+
+
+    public Point getSpeechBubbleOffsetForDownwardTail() {
+        return speechBubbleOffsetForDownwardTail;
+    }
+    
+    public Point getSpeechBubbleOffsetForUpwardTail() {
+        return speechBubbleOffsetForUpwardTail;
+    }
+
+    public void setSpeechBubbleOffsetForDownwardTail(Point pt) {
+        speechBubbleOffsetForDownwardTail = pt;
+    }
+    
+    public void setSpeechBubbleOffsetForUpwardTail(Point pt) {
+        speechBubbleOffsetForUpwardTail = pt;
+    }
 
 };

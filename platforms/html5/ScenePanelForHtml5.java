@@ -376,7 +376,7 @@ IPlatformScenePanel {
 		 
 		String[] splitByNewline = titlecard.split("\n");
 		ArrayList<SpeechBubble> pages = SpeechBubble.calculateWordWrappedPages(new PointI(640, 360),
-				splitByNewline, this, new RectI(318, 178, 4, 4));
+				splitByNewline, this, new RectI(318, 178, 4, 4), new PointI(0,0), new PointI(0,0));
 		pages.get(0).rectBubble = new RectI(0, 0, 640,360);
 		pages.get(0).yPoints = new int[0];
 		pages.get(0).xPoints = new int[0];

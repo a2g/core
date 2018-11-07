@@ -36,7 +36,8 @@ public enum ColorEnum {
 	White(255, 255, 255), 
 	MediumVioletRed(199,  21, 133),
 	PaleVioletRed(219, 112, 147),
-	SteelBlue(70, 130, 180)
+	SteelBlue(70, 130, 180),
+	SaddleBrown(139,  69,  19),
 	;
 
 	public final int r;

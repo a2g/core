@@ -740,6 +740,20 @@ return null;
         this.addEdgeRectangle(topLeft.getX(), topLeft.getY(), bottomRight.getX(), bottomRight.getY());
     }
 
+    @Override
+    public IBaseChain setSpeechBubbleOffsetForUpwardTail(short ocode, Point  pt) {
+        String otid = master.getScenePresenter().getOtidByCode(ocode);
+        master.getScenePresenter().getObjectByOtid(otid).setSpeechBubbleOffsetForUpwardTail(pt);
+        return null;
+    }
+
+    @Override
+    public IBaseChain setSpeechBubbleOffsetForDownwardTail(short ocode, Point pt) {
+        String otid = master.getScenePresenter().getOtidByCode(ocode);
+        master.getScenePresenter().getObjectByOtid(otid).setSpeechBubbleOffsetForDownwardTail(pt);
+        return null;
+    }
+
    
 
    
