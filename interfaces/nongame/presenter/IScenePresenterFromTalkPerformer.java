@@ -20,7 +20,6 @@ import com.github.a2g.core.interfaces.nongame.action.ISetStateOfPopup;
 import com.github.a2g.core.interfaces.nongame.action.ISetToInitialAnimationWithoutChangingFrameByOtid;
 import com.github.a2g.core.interfaces.nongame.action.ISetVisibleByOtid;
 import com.github.a2g.core.interfaces.nongame.platform.singles.IMeasureTextWidthAndHeight;
-import com.github.a2g.core.primitive.PointI;
 
 public interface IScenePresenterFromTalkPerformer
 extends ISetStateOfPopup

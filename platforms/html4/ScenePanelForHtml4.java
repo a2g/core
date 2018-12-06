@@ -149,20 +149,22 @@ public class ScenePanelForHtml4 extends AbsolutePanel implements IImagePanel, IP
 
 	@Override
 	public void setStateOfSpeech(boolean isVisible, ColorEnum speechColor, ColorEnum backgroundColor,
-			SpeechBubble rectAndLeaderLine, TalkPerformer sayAction) {
-		if (!isVisible) {
-			super.remove(speechWidget);
-		}
+	        SpeechBubble rectAndLeaderLine, TalkPerformer sayAction) {
+	    if (!isVisible) {
+	        super.remove(speechWidget);
+	    }
 
-		RectI rectThatsScaledToFit = rectAndLeaderLine.rectBubble;
+	    speechWidget.setVisible(isVisible);
+	    if(rectAndLeaderLine==null)
+	        return;
 
-		speechWidget.setBorderColor(speechColor);
+	    RectI rectThatsScaledToFit = rectAndLeaderLine.rectBubble;
 
-		speechWidget.setLeaderLine(rectAndLeaderLine);
+	    speechWidget.setBorderColor(speechColor);
 
-		speechWidget.setVisible(isVisible);
+	    speechWidget.setLeaderLine(rectAndLeaderLine);
 
-		super.add(speechWidget, rectThatsScaledToFit.getLeft(), rectThatsScaledToFit.getTop());
+	    super.add(speechWidget, rectThatsScaledToFit.getLeft(), rectThatsScaledToFit.getTop());
 
 	}
 

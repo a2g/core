@@ -87,7 +87,6 @@ import com.github.a2g.core.interfaces.game.singles.IShowInventoryItem;
 import com.github.a2g.core.interfaces.game.singles.ISwitchToScene;
 import com.github.a2g.core.interfaces.game.singles.IUpdateVerbUI;
 import com.github.a2g.core.primitive.ColorEnum;
-import com.github.a2g.core.primitive.PointI;
 import com.github.a2g.core.primitive.RectF;
 import com.google.gwt.touch.client.Point;
 

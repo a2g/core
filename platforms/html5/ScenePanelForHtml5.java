@@ -373,6 +373,8 @@ IPlatformScenePanel {
 	@Override
 	public void setTitleCard(String titlecard) {
 		this.isSpeechVisible = (titlecard.length()>0);
+		if(!isSpeechVisible)
+		    return;
 		 
 		String[] splitByNewline = titlecard.split("\n");
 		ArrayList<SpeechBubble> pages = SpeechBubble.calculateWordWrappedPages(new PointI(640, 360),

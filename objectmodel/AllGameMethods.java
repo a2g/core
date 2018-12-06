@@ -221,7 +221,7 @@ return null;
 	@Override
 	public IBaseChain  setDefaultSceneObject(short ocode) {
 	    String otid = master.getScenePresenter().getOtidByCode(ocode);
-	    master.getScenePresenter().setOtidOfDefaultSceneObject(otid, false);
+	    master.getScenePresenter().setOtidOfDefaultSceneObject(otid, true);
 	    return null;
 	}
 

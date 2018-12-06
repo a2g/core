@@ -8,16 +8,16 @@ public enum LogNames
 	MOVE_PERFORMER(false), // = "MOVE";
 	LOADING(false),// = "Loading";
 	LOADING_ANIM(false),// = "LOADING_ANIM";
-	RUNNER(true), // = "RUNNER";
+	RUNNER(false), // = "RUNNER";
 	RUNNER_REFCOUNT(false),// = "RUNNER_REFCOUNT";
 	COMMANDS_VIA_GUI(false),// = "COMMAND_MANUAL";
 	COMMANDS_AUTOPLAY(false),// = "COMMAND_AUTOPLAY";
 	HTML5CANVAS(false),// = "HTML5CANVAS";
 	ADDANIMATION(false),// = "ADDING_ANIM_TO_SOC_MAP";
 	IMAGE_DUMP(false),// = "IMAGE_DUMP";
-	ACTIONS_AS_THEY_ARE_EXECUTED(true),// = "ACTIONS_EXECUTED";
+	ACTIONS_AS_THEY_ARE_EXECUTED(false),// = "ACTIONS_EXECUTED";
 	KEY_ENTRY(false),// = "KEY_ENTRY";
-	ACTIONS_FLATTENED_B4_EXECUTION(true),// = "ACTIONS_FLATTENED_B4_EXECUTION";
+	ACTIONS_FLATTENED_B4_EXECUTION(false),// = "ACTIONS_FLATTENED_B4_EXECUTION";
 	WALK_MULTI_PERFORMER(false),// = "WALK_MULTI_PERFORMER";
 	MULTIWALKER(false),// = "A";
 	B(false),// = "B";
@@ -28,7 +28,7 @@ public enum LogNames
 	ADD_SCENEOBJECT(false),
 	MERGEWITHSCENE(false), 
 	HEAD_RECT_PROBLEMS(false),
-    SET_STATE_OF_POPUP(true);
+    SET_STATE_OF_POPUP(false);
 
 	public final boolean isOn;
 	LogNames(boolean isOn)

@@ -32,7 +32,6 @@ import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenter;
 import com.github.a2g.core.interfaces.nongame.presenter.IScenePresenterFromBoundaryCalculator;
 import com.github.a2g.core.primitive.ColorEnum;
 import com.github.a2g.core.primitive.LogNames;
-import com.github.a2g.core.primitive.PointI;
 import com.google.gwt.touch.client.Point;
 import com.github.a2g.core.primitive.RectI;
 import com.github.a2g.core.primitive.SpeechBubble;
@@ -61,10 +60,7 @@ IScenePresenterFromBoundaryCalculator {
     private int entrySegment;
     private Vector<RectF> rectangles;
     private ArrayList<Point> helperPoints;
-    private PointI speechBubbleOffsetForUpwardTail;
-
-    public ScenePresenter(final IHostingPanel panel,
-            IMasterPresenterFromScenePresenter master, IFactory factory) {
+    public ScenePresenter(final IHostingPanel panel, IMasterPresenterFromScenePresenter master, IFactory factory) {
         this.master = master;
         this.sceneTalkerAtid = "";
         this.sceneAskerAtid = "";
